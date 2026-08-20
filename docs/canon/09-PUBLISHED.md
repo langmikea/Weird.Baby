@@ -1,0 +1,401 @@
+# 09 · THE PUBLISHED RECORD — what a visitor has already read
+
+**EVERYTHING ON THIS PAGE MARKED `PUBLISHED` IS FROZEN. It cannot be changed —
+only built on.**
+
+That is not a style rule. A visitor read it; the museum does not edit what it has
+already shown. **A correction is a later Record that discovers something, not an
+edit to an earlier one.** The one exception is the one Mike has already used and
+named: *"We have had no visitors"* — see [the back-post](#back-posting).
+
+---
+
+## THE THREE STATES
+<a id="the-three-states"></a>
+
+**A Record entry is in exactly one of three states, and the difference matters
+every time somebody asks *can we change this*.**
+
+| state | meaning | can it change? |
+|---|---|---|
+| **PUBLISHED** | The museum's clock has passed its posting instant. A visitor could have read it. | **No.** Build on it. |
+| **SCHEDULED** | Written, committed, **in the shipped bundle** — a visitor with devtools can read it — but the page does not draw it. | **Yes**, until it posts. |
+| **UNPUBLISHED** | Not written, or written and not committed. | Yes. |
+
+**THE HONEST DESCRIPTION OF THE FILTER IS *"the Record does not show you the
+future"*, NEVER *"the future is not there."*** `RECORD_ENTRIES` is imported
+statically, so every entry — including days that have not happened — is compiled
+into the chunk. **That is a known and accepted limit, ruled 2026-08-12**, and the
+entries move to a worker-served endpoint as their own packet. Open row `CH5-a`.
+
+**The asset half has no such hole:** `src/worker.js` refuses the FILE a future
+entry names, and a file the worker refuses is not in the page at all.
+
+---
+
+## THE CLOCK
+<a id="the-clock"></a>
+
+| | |
+|---|---|
+| **Epoch** | `RECORD_EPOCH = "2026-08-17"` — **one constant**, `src/data/artists/record-epoch.js`. A slip is that one line and nothing else. |
+| **Timezone** | `America/New_York` |
+| **Posting hour** | **17:00** — *"Records post at 17:00 America/New_York on their day. Record N becomes visible at 5pm on day N."* |
+| **Dating** | `recordDay(n)`, UTC arithmetic, counted from the epoch. **Not typed.** |
+| **Whose clock** | **The museum's, on the server.** `src/worker.js` injects `window.__WB_TODAY__` on every HTML response. **Not the browser's** — *"a browser clock belongs to the visitor: it can be wrong by accident or on purpose."* |
+
+**RECORD 001 IS THE EXCEPTION AND IT STAYS ONE.** It posted at **00:00 Monday**.
+Not backdated, not hidden. **Its own text says the site went live *"at 12:00 am
+Monday morning"* and that is canon and untouched.** `/robots` opened at 00:00
+Monday and stays open.
+
+**AND THE BOUNDARY IS READ OFF THE WALL CLOCK, NOT BY SUBTRACTING 17 HOURS.** On
+8 March 2026 a flat subtraction posts the Record an hour late, because the day is
+23 hours long. Tested on both 2026 transition days.
+
+**THERE ARE TWO REQUEST-TIME CLOCKS AND ANY DATE OVERRIDE MUST SET BOTH:**
+`todayInRecordTz()` (the **day**, `worker.js:210`) and
+`window.__WB_NOW__` (the **instant**, for the lobby countdown, `worker.js:180`).
+**Move the day and leave the instant and the lobby countdown contradicts the
+Record on the same page.**
+
+**AND A CLOCK OVERRIDE IS NOT AN AS-OF QUERY.** The museum's data carries **no
+`valid-from` and no `superseded-at`** — so a date parameter shows **today's text
+under an older date.** *Never label it as seeing the past.* The honest answer to
+*"walk the museum as it stood"* is immutable deploys, recorded and not built.
+
+---
+
+## THE FIVE ENTRIES
+<a id="entries"></a>
+
+| no | date | title | state as of the museum's 2026-08-19 |
+|---:|---|---|---|
+| **001** | 2026-08-17 | INITIAL LAUNCH - Weird.Baby Website | **PUBLISHED** |
+| **002** | 2026-08-18 | GENERAL STATUS UPDATE | **PUBLISHED** |
+| **003** | 2026-08-19 | DATA RECOVERY - LEVEL 1 - SUCCESS! | **PUBLISHED** |
+| **004** | 2026-08-20 | GENERAL STATUS UPDATE | **SCHEDULED** — posts 17:00 |
+| **005** | 2026-08-21 | GENERAL STATUS UPDATE | **SCHEDULED** |
+| **013** | — | *the prototype* | see [Record 013](#record-013) |
+
+---
+
+## RECORD 001 — PUBLISHED
+<a id="record-001"></a>
+
+**Mike's own launch report, carried VERBATIM.** The dictation instrument's rule
+holds: *everything in the form is story*, and **Ops does not tidy.**
+
+**HIS TYPOS SHIP ON PURPOSE.** `was made made` · `=  86%` · `auto containment.
+and auto alerts` are in the entry deliberately, and **a round that tidies one has
+broken the instruction.**
+
+**Facts it establishes, all frozen:**
+
+- **The Weird.Baby website went live**, on schedule, at 00:00 Monday.
+- **An incoming server load >1000× nominal**, contained. **Multi-source swarm
+  payloads precluded IP/domain blocking.**
+- **`f(Ump) = 100%`** — the museum's own recurring metric, never explained.
+- **The RX ended abruptly and coincident with the Weird.Baby launch.**
+- The Friday timeline: **15:04 first data packet · 15:58 second · 16:00
+  instantaneous sustained FULL LOAD, packet rejects = n! · 16:10 server
+  auto-shutdown, auto-containment, auto-alerts · 16:13 REACT team convened ·
+  23:30 REACT ruling — restart with 5K× incoming server resources.**
+- *"The decision to resume was determined to be low risk, reversible, and a
+  real-world stress test. The engineering team was more intrigued than concerned,
+  and not involved in the determination."*
+- The weekend: **pages of hexadecimal numbers; presumably to be compiled into
+  something of use.**
+- Monday: **00:02 the incoming data stream ends.** *"The remainder of the day was
+  completely uneventful."*
+- **`ADDED PAGE - W.B/Robots added (to track what happened, just for a few
+  days)`** — with a hash line ending `>> Complete!`
+
+**ITS INDEX ROW HAS NO SUMMARY AND THAT IS DELIBERATE.** A 477-character
+executive summary does not fit a 130-character index row, and **picking which of
+his sentences becomes the summary is an edit.** Measured: 001's row is 84px
+against 013's 157px at 390px.
+
+---
+
+## RECORD 002 — PUBLISHED
+<a id="record-002"></a>
+
+**Establishes:**
+
+- **The incoming server data assault has ceased; no impact.**
+- **All processes 6+ sigma.**
+- **`Incoming Data: ZIP file (31.4 GB) Password Protected`** — **and the figure
+  is 31.4**, the fleet's own number.
+- Manifest extraction attempted **against the stream still in flight.**
+- **THE PARTIAL MANIFEST — names only, no contents:**
+
+```
+MGK-VIIIp/MANUAL/00-FRONTMATTER.tif
+MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif
+MGK-VIIIp/MANUAL/11-VID-LINK.tif
+MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif
+PERSONNEL/CEO/
+PERSONNEL/INFORMER/
+PERSONNEL/EVERYDAY/
+PERSONNEL/GAMBLER/
+PORTAL/CH3-STANDARD/
+PORTAL/CH4-DETAIL/
+```
+
+**FOUR THINGS IN THAT MANIFEST BIND ELSEWHERE:**
+
+1. **`00-FRONTMATTER.tif` is named and has never been delivered.** It is the
+   only manual file in the manifest with no scan behind it.
+2. **The four personnel folders** — [H-01](HOLES.md#h-01).
+3. **`PORTAL/CH3-STANDARD/` and `PORTAL/CH4-DETAIL/`** are **the drum's two
+   arming channels, by their engraved names**, published before anybody has seen
+   the drum. The Portal wing is HELD; its channel numbering is
+   [an egg](06-PORTAL.md#feed-control).
+4. **`31-PARITY-BIAS`** — the scan numbers are **frame numbers from whoever
+   filmed the manual**, not page numbers. See [ruling 11](#ruling-11).
+
+**FLAGGED AND NOT CORRECTED:** the DETAILED REPORT ends *"- Appendix 01"* while
+the section heading below it reads *"ADDENDUM 01"*. **Both are Mike's, both
+carried as typed.**
+
+**AND ONE LINE WAS STRUCK FROM THIS ENTRY BEFORE IT POSTED.** The `_tmp/`
+manifest line and its marginal note promised something the museum could not show.
+See [ruling 9](#ruling-9). **A post-publication edit to this entry was missed by
+luck, not by design** — the DETAILED REPORT was rewritten at 09:51 on 18 August
+and the entry published at 17:00 the same day.
+
+---
+
+## RECORD 003 — PUBLISHED
+<a id="record-003"></a>
+
+**The first delivery. Establishes:**
+
+- *"Ops now wants an Early-Pull-Off with Confidence >> 6.28 sigma"* — **the
+  figure is `6.28`.** *(Ops observation, not canon: nothing in either repo
+  connects this figure to anything. The π motif is established elsewhere — the
+  fleet is 31.4, the ZIP is 31.4 GB, `reserved-date-3-14-65` is cut and
+  deliberately unplaced — and whether `6.28` belongs to it is Mike's to say.)*
+- **The outer layer was not password protected.**
+- **Three manual pages recovered: `SCAN 07 - POWER SYSTEM` · `SCAN 11 - VID-LINK`
+  · `SCAN 31 - PARITY BIAS`.**
+- **ADDENDUM 02 — the personnel folders, opened:**
+
+```
+THE CEO         - one page, redacted to the letterhead
+THE INFORMER    - photographs only, no text
+THE EVERYDAY    - not yet opened
+THE GAMBLER     - not yet opened
+
+  ? Four people are described in a manual for a machine. No explanation is offered.
+```
+
+**THE ATTACHMENTS — the first pages of the manual any visitor has seen:**
+
+| attachment | pages | files |
+|---|---:|---|
+| **Scan 07 - Power supply and distribution** | 2 | `scan-07-a.webp` · `scan-07-b.webp` |
+| **Scan 11 - The video link** | 2 | `scan-11-a.webp` · `scan-11-b.webp` |
+| **Scan 31 - Bias settings** | 1 | `scan-31-a.webp` |
+| **Marked copy 01 - Bias settings** | 1 | `marked-01-a.webp` — **UNCOMMITTED. Not yet published.** See [BELL-103](BELL-103.md#where-it-stands). |
+
+**SO ¶7-19, SP 7-14 AND B-1 ARE ALL PUBLISHED IN FULL.** Their text is at
+[03-ANSWERS](03-ANSWERS.md#second-kind) and
+[06-PORTAL](06-PORTAL.md#video-link). **Everything they say is frozen** —
+including *Inclination* ([K-07](CONFLICTS.md#k-07)), the *determination*
+([H-13](HOLES.md#h-13)), the *keeper* ([K-22](CONFLICTS.md#k-22)) and the *cell*
+([H-02](HOLES.md#h-02)).
+
+**AN ATTACHMENT IS THE PAGES THAT WERE FILMED TOGETHER.** *"We show the things
+that need to be shown. Each page is a page, and if we need to include a couple
+more pages, fine. Those pages were in the outer layer for a reason."* **The three
+scans are four manual pages delivered as five files — one page is in two scans**,
+because the leaf that closes the video link also opens the power supply.
+
+---
+
+## RECORD 004 — SCHEDULED, posts 17:00 on 2026-08-20
+<a id="record-004"></a>
+
+**Establishes (once it posts):**
+
+- *"Portal may be the "answer" this whole mystery."*
+- *"It appears to be an unattended remote access terminal."*
+- *"Excerpts from the Manual earlier in the week indicate a bi-directional CNC
+  Vid-Link"* — **and `CNC` appears nowhere else in either repo.**
+- *"Probably not useful to us. (Probably not meant for us...)"*
+- **The bench description** — see [06-PORTAL §7](06-PORTAL.md#the-bench). Seven
+  lines of a 1965 console, closing: **`! Nothing here postdates 1969. Everything
+  here works.`**
+
+**Its `docs` are two titles with no plates behind them yet:** *View of the portal
+screen* · *Manual ref to Portal*.
+
+---
+
+## RECORD 005 — SCHEDULED, posts 17:00 on 2026-08-21
+<a id="record-005"></a>
+
+**Establishes (once it posts):**
+
+- *"ZIP - We have reached the capability limit of brute force."*
+- *"Portal appears to function. Intended purpose unknown."*
+- *"Portal is accessible via the Robots Exhibit."* — **which the Portal wing
+  being HELD currently contradicts.** Recorded.
+- *"The launch controls are intuitive looking, but the system fails to boot."*
+- **`Error: Communications Parity Bias Setting Mismatch`**
+- *"Four toggles. Sixteen combinations. One of them is correct."*
+- *"< The Manual names the settings and declines to name the values."*
+- **ADDENDUM 01 — The Four Settings, as printed** — the four, verbatim from B-1,
+  closing:
+
+```
+  ? A period operator would have known this without being told.
+  ! We are not period operators.
+```
+
+---
+
+## RECORD 013 — the prototype
+<a id="record-013"></a>
+
+**RULED, Mike, 2026-08-07: Record 013 is a PROTOTYPE and the real Record starts
+at 001.** Not day one, no re-dating, no defending.
+
+**It is KEPT rather than retired** because it is the only thing exercising
+`RecordEntry.jsx`, the index budgets, the per-entry ledger derivation and the
+pull-back rule's one delivered picture — **the photograph of the power switch
+round the back, the single picture the pull-back rule let through onto this
+wing.**
+
+**THE PROTOTYPE MARK IS IN `reveal/ledger-declare.mjs` AND THE DICTATION PAGES
+AND NOWHERE ON THE GLASS.** Its number is untouched and open: register row `B-b`.
+
+---
+
+## THE MUSEUM'S OTHER PUBLISHED ROBOTS SURFACES
+<a id="other-surfaces"></a>
+
+### The front desk FAQ — `PUBLISHED`
+
+> **Where do I start?** — *"Finish the FAQ, then follow The Record."*
+>
+> **Is this stuff real?** — *"The hardware is; I mean you can hold it at least.
+> And it's heavier than you might expect."*
+>
+> **Does it work?** — *"See "Is this stuff real?""*
+>
+> **Can I buy one?** — *"Monitor the website for availability. Follow us on
+> social media."*
+>
+> **Can I try one?** — *"Yes."* / *"Well, not now, but soon. Hopefully. That's
+> all I can say right now."*
+
+### The two machines' faces — `PUBLISHED`
+
+Full text at [02-MACHINES §8](02-MACHINES.md#museum-albums). The load-bearing
+ones:
+
+- **MGK-NIAC's Technical Specifications** — the matrix, the bar, the outputs and
+  **the five declared rules**, including **RULE 5: *no adaptive learning — the
+  machine is forbidden, in writing, from getting to know you.***
+- **MGK-VIIIp's Technical Specifications** — *"The Record says what was found.
+  The Manual says what it was sold as. **The firmware is the only one of the three
+  that cannot be wrong about the machine, because it is the machine.**"*
+- **Both Documentation faces name `ABEAL 8P-OMI-1`** and describe it as *"Held.
+  Incomplete, assembled out of copies caught at different stages."*
+- **Both FAQs:** *"Yes. Both units power on and run their own firmware."* and
+  *"No. The shop carries what the shop carries; the machines are not stock."*
+
+### The museum's own description — `PUBLISHED`
+
+On all three description tags, one string:
+
+> **Weird.Baby Museum** — *"A free museum of weird things worth keeping. Robots
+> arriving one day at a time, music worth a listen, and a guest book that
+> remembers who got here early."*
+
+---
+
+## THE RULES THAT GOVERN WHAT A RECORD MAY SAY
+<a id="record-rules"></a>
+
+### Ruling 9 — WE DO NOT HOLD BACK WHAT WE SAY WE HAVE
+<a id="ruling-9"></a>
+
+> **"We do not hold back what we say we have. We hold back what we don't have
+> yet."**
+
+**DOCTRINE.** A Record **names only what it can produce.**
+
+**IT IS THE INVERSE OF THE PULL-BACK RULE AND THE TWO NOW MEET.** The pull-back
+rule governs a thing the museum HAS and is not showing yet. This governs a thing
+the museum does NOT have: **it may not be named as though it did.** Between them:
+**the Record may withhold, and the Record may not promise.**
+
+### Ruling 10 — WHAT'S SAID MATCHES WHAT'S SHOWN
+<a id="ruling-10"></a>
+
+> **"What's said matches what's shown."**
+
+**Ops makes it true and asks Mike for what is missing. Ops does not hedge the
+Record's wording to cover a gap.** *A sentence that says eleven while three are
+on the glass is not fixed by softening the sentence; it is fixed by showing
+eleven or by saying three.*
+
+**Applied the same hour it was made:** Record 003's DETAILED REPORT read *"Eleven
+manual pages and four personnel folders"* against three attachments. **ELEVEN
+became THREE.**
+
+### Ruling 11 — THE SCAN NUMBERS ARE NOT PAGE NUMBERS
+<a id="ruling-11"></a>
+
+**`07`, `11` and `31` are frame numbers from whoever filmed the manual.** They
+match nothing in the document and **they are not meant to.**
+
+**No renumbering anywhere.** The document keeps its own page numbering; the
+ledger keys its rows by the manual's page index; **the two never meet.**
+
+**THE PRACTICAL HALF: no public address may assert a page of the manual** —
+which is why the files are `scan-NN` and the marked copy is `marked-01` rather
+than `marked-b1`.
+
+**THE VOCABULARY WENT WITH IT: *manual pages*, never *plates*.** `PLATE 07`
+became `SCAN 07`. The museum's remaining uses of *plate* are for a **photographic**
+plate and a **maker's** plate, which is a different word, and they stand.
+
+### Ruling 14 — the museum publishes a derivative
+<a id="ruling-14"></a>
+
+**The 300-dpi PNG masters stay in the robots repo. The museum publishes
+1700×2200 WebP q82.** *"It is a measurement, not a preference"* — the source
+masters would have cost a visitor **9.02 MB to paint five 52px squares**; the
+derivative costs **0.42 MB**, and legibility was checked at 1:1.
+
+### The pull-back rule (H2)
+<a id="pull-back"></a>
+
+> **NOTHING PUBLISHES UNTIL THE RECORD DELIVERS IT.**
+
+**Mike, stating it generally:** *"this applies to images, the manual, and probably
+more. Every asset stays held until a Record entry brings it into the story, at
+which point it is placed according to that entry. The archive and the viewer stay
+built; they are simply empty until the story fills them."*
+
+**The population is "a picture of the objects", and that is the whole of the
+boundary.** The museum's own signage is not delivered by anybody and is not
+governed.
+
+**AND IT IS A LAUNCH-STATE RULE.** *"DURING DEVELOPMENT, SHOW EVERYTHING THAT IS
+PLACED, until asked to filter. Mike cannot direct what he cannot see."*
+
+### Back-posting
+<a id="back-posting"></a>
+
+**Record 003 gained a fourth attachment after it published, on Mike's ruling, and
+his reason is the whole of why it was allowed: *"We have had no visitors."***
+
+**RULING B: THE ORIGINAL SCAN STAYS.** The marked copy arrives **beside** it as a
+new attachment. **The museum does not edit what it has already shown; a page
+comes back with somebody's handwriting on it.**

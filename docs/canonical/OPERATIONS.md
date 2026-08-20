@@ -495,9 +495,9 @@ review walked past it. **THE ASYMMETRY IS THE MECHANISM:** PRECIOUS has a ceilin
 weeks; **DUMP has none, so it divides into nothing**, and `runways()` in
 `reveal/focus.mjs` is structurally unable to print one for it, because a
 symmetrical table would re-commit the original error in the other bucket.
-**`bucket` is the sixth JUDGED field on the asset table, null on all 404 rows
-(re-measured 2026-08-17; the line said 315, then 385 — the table has grown, and
-the point of it has not: still not one derived value on it), and
+**`bucket` is the sixth JUDGED field on the asset table, null on all 459 rows
+(re-measured 2026-08-19; the line said 315, then 385, then 404 — the table has
+grown, and the point of it has not: still not one derived value on it), and
 OPS DOES NOT DERIVE IT** — a heuristic calling every machine photograph precious
 would make every tracker read as ANSWERED while nothing had been answered, which
 is the void figure's own defect with better manners. So the 16 pictures behind the

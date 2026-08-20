@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — holes</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="the-holes-what-the-story-has-not-decided">THE HOLES — what the story has not decided</h1>
+<p><b>A fact that does not exist is as useful as one that does, and this page is the list of them.</b> Every row here is <b>ABSENT — not zero, not none, not &quot;no.&quot;</b> The distinction is load-bearing: <i>the cell has no stated capacity</i> is a hole; <i>the cell has no capacity</i> would be a fact, and a false one.</p>
+<p><b>Nothing here is filled in.</b> Where the corpus names a thing and never says what it is, the row says so and stops.</p>
+<p>Three kinds:</p>
+<ul><li><b>DEMANDED</b> — a document, a table position or a built surface asks for this and nothing answers. It is a gap somebody will hit.</li><li><b>UNASKED</b> — nothing needs it today. It is written down so it is not discovered as a surprise later.</li><li><b>MEASUREMENT</b> — not an authoring gap. Somebody has to go and measure the object.</li></ul>
+<p>Holes are numbered <code>H-nn</code> here. Upstream ids are printed where they exist.</p>
+<hr>
+<h2 id="the-short-list-the-holes-that-block-something-today">THE SHORT LIST — the holes that block something today</h2>
+<div class="tw"><table><thead><tr><th>id</th><th>hole</th><th>kind</th><th>blocking</th></tr></thead><tbody><tr><td><a href="#h-01">H-01</a></td><td>The four personnel folders have names and nothing else</td><td>DEMANDED</td><td>Published in Record 003; the story's next move</td></tr><tr><td><a href="#h-02">H-02</a></td><td>The cell — no capacity, voltage, chemistry, charge time, run time</td><td>MEASUREMENT</td><td>Manual Table 2-1, ¶7-19 (both published)</td></tr><tr><td><a href="#h-03">H-03</a></td><td>The far end — no count, no location, no identity</td><td>DEMANDED</td><td>Manual SP 7-14 (published); the Portal</td></tr><tr><td><a href="#h-04">H-04</a></td><td>The television itself — the corpus has no receiver</td><td>DEMANDED</td><td>The Portal's bezel and feed</td></tr><tr><td><a href="#h-05">H-05</a></td><td>AMMMS and PHVDC do not expand</td><td>DEMANDED</td><td>Manual Appendix G</td></tr><tr><td><a href="#h-06">H-06</a></td><td>Eight terms named once, nothing behind them</td><td>DEMANDED</td><td>Manual Appendix F, Table 2-2</td></tr><tr><td><a href="#h-07">H-07</a></td><td>There is no shutting-down procedure anywhere</td><td>DEMANDED</td><td>Manual ¶5-17</td></tr><tr><td><a href="#h-08">H-08</a></td><td>The response curve has no definition</td><td>DEMANDED</td><td>Manual ¶7-9 + a figure</td></tr></tbody></table></div>
+<hr>
+<h2 id="h-01-the-four-personnel-folders">H-01 · THE FOUR PERSONNEL FOLDERS</h2>
+<p><a id="h-01"></a></p>
+<p><b>THEY HAVE NAMES AND NOTHING ELSE, AND THE NAMES ARE PUBLISHED.</b></p>
+<p>Record 002 (published 2026-08-18) names four directories in the partial manifest:</p>
+<pre>PERSONNEL/CEO/
+PERSONNEL/INFORMER/
+PERSONNEL/EVERYDAY/
+PERSONNEL/GAMBLER/</pre>
+<p>Record 003 (published 2026-08-19) opens them and finds this much:</p>
+<pre>THE CEO         - one page, redacted to the letterhead
+THE INFORMER    - photographs only, no text
+THE EVERYDAY    - not yet opened
+THE GAMBLER     - not yet opened</pre>
+<p>and asks, in the museum's own voice:</p>
+<blockquote><p><code>? Four people are described in a manual for a machine. No explanation is offered.</code></p></blockquote>
+<p><b>WHAT IS ABSENT.</b> For all four: no name of a person, no dates, no photograph on file, no document text, no explanation of why personnel folders travel with a machine's manual, and <b>no statement of what a personnel folder IS in this world.</b></p>
+<p><b>WHAT EXISTS ELSEWHERE, AND IS NOT THE SAME THING.</b> The robots repo holds four <code>PERSONA_SET-*</code> documents, a registry, and answer tables. Those describe the <b>units' personas</b> — what the machine says in each voice. Nothing anywhere says the personnel folders are about the personas, the owners, the designers, or anybody else. <b>That inference is available and is not made here.</b></p>
+<p><b>WHAT THE ROBOTS CORPUS DOES HOLD ABOUT THOSE FOUR NAMES</b> — recorded so a ruling has the material in one place, and explicitly <b>not</b> offered as the folders' contents:</p>
+<div class="tw"><table><thead><tr><th>name</th><th>what the corpus holds</th><th>where</th></tr></thead><tbody><tr><td><b>THE CEO</b></td><td>−09, Deluxe, Papa's alter-ego. Sheet personality verbatim: <i>&quot;Hard working, honest, talented, capable, leader. A man's man.&quot;</i> <b>Called SAM</b> — new canon, Mike, <code>IMG_9767</code> 02:57, recorded 2026-08-04. <b>The in-fiction Record still says his name has not been discovered, and that line is untouched.</b></td><td><code>robots:docs/PERSONA_SET-ceo-20260722.md</code></td></tr><tr><td><b>THE INFORMER</b></td><td>−07, Deluxe, Spy-first, an island. The McKenna thread was <b>transplanted whole</b> to the Closer (−13, HELD, sealed) at the 2026-07-22 gate; the Blackwood file became a deliberately ambiguous unattributed corrupted record pointing at the vacated −03.</td><td><code>robots:docs/PERSONA_SET-informer-20260722.md</code>; <code>STORY_BIBLE.html</code></td></tr><tr><td><b>THE EVERYDAY</b></td><td>The 1965 roster name; the OPA master artwork is titled <code>OPA 01 The Everyday</code>. R3 (2026-07-14) ruled it canon and <i>&quot;Everyman&quot;</i> modern-layer corruption. See <a href="CONFLICTS.html#k-06">K-06</a>.</td><td><code>SPEC_INVENTORY</code> §D.7; <code>robots:docs/PERSONA_SET-everyman-20260722.md</code></td></tr><tr><td><b>THE GAMBLER</b></td><td>−21, <b>JUAN</b>, Deluxe. Twenty answers COMPLETE and gated word by word. Six things about him are <b>SEALED</b> — including how −21 came to him, which is sealed <i>by social grace</i>: the question is charmingly deflected by everyone, <b>including the record itself</b>.</td><td><code>robots:docs/PERSONA_SET-gambler-20260722.md</code>; <code>STORY_BIBLE.html</code> ch. VII</td></tr></tbody></table></div>
+<p><b>AND THREE OF THE SEALS BEAR ON WHAT A FOLDER COULD SAY.</b> A personnel folder on Juan that answered how he got the unit would break a seal that is canon.</p>
+<hr>
+<h2 id="h-02-the-cell">H-02 · THE CELL</h2>
+<p><a id="h-02"></a></p>
+<p><b>MEASUREMENT.</b> <i>Upstream: holes report <code>D-5</code> / <code>D-6</code>.</i></p>
+<p>The manual's ¶7-19 is <b>written and published</b> (<code>scan-07-a</code> / <code>scan-07-b</code>, Record 003) and it says this much:</p>
+<blockquote><p><i>&quot;The instrument carries its own cell and does not require a continuous supply to remain in service.&quot;</i> … <i>&quot;The cell is not an operator-replaceable item.&quot;</i></p></blockquote>
+<p><b>WHAT IS ABSENT — every number.</b></p>
+<div class="tw"><table><thead><tr><th>absent</th><th>where it is demanded</th></tr></thead><tbody><tr><td>Capacity</td><td>Table 2-1</td></tr><tr><td>Voltage</td><td>Table 2-1</td></tr><tr><td>Chemistry</td><td>Table 2-1, Appendix F</td></tr><tr><td>Charge time</td><td>Table 2-1; ¶7-19 says <i>&quot;place the instrument on charge&quot;</i> and never says for how long</td></tr><tr><td>Run time on the cell</td><td>Table 2-1</td></tr><tr><td>Low-charge behaviour</td><td>¶7-19's <i>&quot;attention advised&quot;</i> names the state and not the threshold</td></tr><tr><td>Mass and dimensions of the instrument</td><td>Table 2-1</td></tr><tr><td>Temperature and humidity limits</td><td>Table 2-1</td></tr></tbody></table></div>
+<p><b>THESE ARE NOT AUTHORING GAPS.</b> The retired v1 generator already said so, on 2026-08-02: <i>&quot;These are measurements, not decisions, and they belong to the bench.&quot;</i> <b>The bench has not answered.</b></p>
+<p><b>A period Table 2-1 without a mass and a size does not read as a specification</b> — which makes this hole visible on the page rather than merely missing from it.</p>
+<p><b>AND THE ONE FACT THE CORPUS DOES HOLD IS ABOUT THE PORT, NOT THE CELL</b> — the one line quoted verbatim from the record, 2022 into 2024, and it is a warning:</p>
+<blockquote><p><i>&quot;Never allow power port connections to come in contact with tongue, lips, or other fleshy appendages.&quot;</i></p></blockquote>
+<hr>
+<h2 id="h-03-the-far-end">H-03 · THE FAR END</h2>
+<p><a id="h-03"></a></p>
+<p><b>DEMANDED.</b> The manual's SP 7-14 is <b>written and published</b> (<code>scan-11-a</code> / <code>scan-11-b</code>, Record 003). It establishes that a far end exists, that it is a station in its own right drawn on its own glass, that the link is bi-directional by design, and — the instruction the whole page turns on —</p>
+<blockquote><p><b>&quot;Assume the far end is attended.&quot;</b></p></blockquote>
+<p><b>WHAT IS ABSENT.</b></p>
+<ul><li><b>How many far ends there are.</b> No figure anywhere. Not one, not several, not a network.</li><li><b>Where a far end is.</b> No location, no address, no installation.</li><li><b>Who or what attends one.</b> The manual says <i>assume attended</i>, which is an instruction to the operator and not a statement about the world.</li><li><b>What passes over the link.</b> The manual says the instrument's record <i>&quot;holds that a link was opened and for how long. It does not hold what passed over it.&quot;</i></li><li><b>What the installation record is, physically, or where it lives.</b> Named in B-1 as where the four communications values are entered. Nothing describes the object.</li><li><b>What happens at the far end when the near end is wrong.</b> See <a href="FAILURE-MODES.html">FAILURE-MODES</a>.</li></ul>
+<p><b>AND THE STORY'S OWN LAW MAKES ONE OF THESE PERMANENT.</b> <code>THE_STORY_ARC.md</code> layer 3: <i>&quot;WHO OR WHAT is on the other end is DELIBERATELY UNANSWERED. Canon never confirms autonomy, never denies presence.&quot;</i> Amendment 2 sharpens it: <i>&quot;NOBODY is at headquarters.&quot;</i> <b>So the identity of the far end is a sealed hole, not an open one.</b> The count and the location are not covered by that seal and are simply absent.</p>
+<p><b>AND RECORD 004 — WRITTEN, POSTING AT 17:00 ON 2026-08-20 — DESCRIBES A BENCH.</b> <i>&quot;Console is a single welded steel desk. No maker plate, no model number… Nothing here postdates 1969. Everything here works.&quot;</i> That is the <b>far end's furniture</b>, published, in detail — and it still does not say where it is, how many there are, or whether anybody sits at it. The Record's own summary of it is <i>&quot;It appears to be an unattended remote access terminal&quot;</i> — which is the museum's reading, and the manual says the opposite. Both are published. Neither is a ruling.</p>
+<hr>
+<h2 id="h-04-the-television">H-04 · THE TELEVISION</h2>
+<p><a id="h-04"></a></p>
+<p><b>DEMANDED.</b> <i>Upstream: robots vocabulary §8.</i></p>
+<p>The corpus has a bezel, an opening, a feed, eight engraved channels and a source dial. <b>It has no receiver.</b></p>
+<p><b>WHAT IS ABSENT:</b> nothing names the glass the feed lands on, its size, its type, its warm-up, its own controls, or its catalogue number.</p>
+<p><b>WHAT EXISTS AND IS NOT IT:</b></p>
+<ul><li><b>The bezel</b> — canon 2026-07-29: renders as its own layer above everything and takes <b>no video treatment whatsoever</b>, because it is the real world's frame.</li><li><b>The FEED CONTROL</b> — a badge bolted to a machine: <code>ABEAL · FEED CONTROL · MODEL NO. TYPE 8p</code>. <code>SER. NO.</code> and <code>DATE</code> are struck wells with nothing in them, deliberately.</li><li><b>The drum</b> — eight engraved channels, of which two arm.</li></ul>
+<p>The FEED CONTROL selects a feed. It is not the thing the feed appears on.</p>
+<hr>
+<h2 id="h-05-two-acronyms-that-do-not-expand">H-05 · TWO ACRONYMS THAT DO NOT EXPAND</h2>
+<p><a id="h-05"></a></p>
+<p><b>DEMANDED.</b> Appendix G prints <code>[ EXPANSION REQUIRED ]</code> beside both.</p>
+<ul><li><b>AMMMS.</b> Named beside BIST as maintenance messaging in the 2024 instruction manual. Never expanded, never defined, never mentioned again in four years of documents.</li><li><b>PHVDC.</b> Used as an acronym everywhere. The corpus gives its <b>behaviour</b> — pulsed high-voltage DC carrying data and power on one pair, 300 V DC nominal, data 3 kHz / 1 Mbps, an homage to Teletype Model 19 / MIL-STD-1275 — and <b>never its letters.</b></li></ul>
+<p>Also at <a href="CONFLICTS.html#k-15">K-15</a>, because Appendix G has to print something either way.</p>
+<hr>
+<h2 id="h-06-named-once-nothing-behind">H-06 · NAMED ONCE, NOTHING BEHIND</h2>
+<p><a id="h-06"></a></p>
+<p><b>DEMANDED.</b> Full list and attestations at <a href="CONFLICTS.html#k-21">K-21</a>: <b>MindsEye™ · MGK-66 · SCAT · NY8 · DYN · MGK-2.5 · MGK-65x · MIALLO™ · Noise BS · the response curve · RADIONET / Catalog No. 6710.</b></p>
+<p>Each has a table row waiting and nothing to put in it.</p>
+<hr>
+<h2 id="h-07-shutting-down">H-07 · SHUTTING DOWN</h2>
+<p><a id="h-07"></a></p>
+<p><b>DEMANDED.</b> <i>Upstream: holes report <code>D-9</code>.</i></p>
+<p>Manual <b>¶5-17</b> exists as a position titled SHUTTING DOWN. <b>No owner-facing power-off or sleep procedure exists anywhere in the corpus.</b></p>
+<p><b>WHAT EXISTS AND IS NOT IT:</b></p>
+<ul><li>¶7-19, written: <i>&quot;When the instrument is off, the power control alone remains live. No input is read, no sound is made, and no part of the display system is driven. An instrument that answers any other control while off is not off, and is to be withdrawn from service.&quot;</i> — <b>that is a test for whether it is off, not a procedure for turning it off.</b></li><li>The CRT lifecycle law (Mike, 2026-07-24): every screen-off is a CRT death — collapse to a horizontal line, then a point, then out. That is the <i>presentation</i> of an off, fleet-wide.</li><li><code>STORY_BIBLE.html</code>: <i>&quot;Sleep-return (short) is the dominant wake pattern; reboot happens sometimes.&quot;</i> — a statement about frequency, not a procedure.</li><li>The 65's SLEEP / screensaver is named in the porch capture and is not specced.</li></ul>
+<hr>
+<h2 id="h-08-the-response-curve">H-08 · THE RESPONSE CURVE</h2>
+<p><a id="h-08"></a></p>
+<p><b>DEMANDED.</b> It is on the glass — <code>RESPONSE CURVE LOADED</code>, in the twin's L2 first-run check — it has a paragraph position (¶7-9) and it has a reserved figure. <b>No definition exists anywhere in the corpus.</b></p>
+<p>The nearest thing is a 1945 line in the lore: <i>&quot;Prediction Response Curve Biasing optimized&quot;</i> (<code>SPEC_INVENTORY</code> §THE LORE, from the Storyline sheet). That names the same words in a sentence about testing. It does not say what the curve is.</p>
+<hr>
+<h2 id="h-09-replaceable-parts">H-09 · REPLACEABLE PARTS</h2>
+<p><a id="h-09"></a></p>
+<p><b>DEMANDED.</b> <i>Upstream: holes report <code>D-11</code>.</i></p>
+<p><b>Nothing exists and nothing is planned.</b> Every model of the period ends with a parts list; this one ends with an empty table. And ¶7-19 says the cell — the one part an owner would expect to replace — <b>is not an operator-replaceable item.</b></p>
+<hr>
+<h2 id="h-10-the-degradation-page-the-machine-points-at">H-10 · THE DEGRADATION PAGE THE MACHINE POINTS AT</h2>
+<p><a id="h-10"></a></p>
+<p><b>DEMANDED, and it is the only hole in this catalogue that the machine itself is built to point at.</b> <i>Upstream: holes report <code>D-10</code>.</i></p>
+<p><code>robots:docs/SPEC-health-degradation-20260724.md</code> §2 specifies a monitor line of the class <b><code>SEE MANUAL p.NN</code></b>. <b>That line points at a page that does not exist.</b></p>
+<p>The health system around it is real and built: one persisted <code>H</code>, floor 20, no death state, answers never gated; declines by power-ons, asks, uptime and glitches; recovers by the care ritual (hold still ~3 s, three clicks), gated on real IMU stillness. <code>MANUAL_STRUCTURE_FIT</code> #80 calls the maintenance routine <i>&quot;the single strongest tie between paper and machine.&quot;</i></p>
+<p><b>What is absent is the page, and its words are marked <code>[PAPA]</code>.</b></p>
+<hr>
+<h2 id="h-11-the-run-access-passcodes-are-carried-and-checked-nowhere">H-11 · THE RUN-ACCESS PASSCODES ARE CARRIED AND CHECKED NOWHERE</h2>
+<p><a id="h-11"></a></p>
+<p><b>UNASKED — recorded so it is not mistaken for a bug.</b> <i>Upstream: spec ledger <code>#12</code>.</i></p>
+<p><code>MENU_PARAMETER_TABLE</code> carries four passcode columns on <b>every one of 187 rows</b>. <code>readAccess_ENABLED</code> is honoured — <code>1</code> = visible, anything else = hidden. <b>Run-access passcodes are carried in every row and checked nowhere in firmware.</b></p>
+<p>The manual's own displayability doctrine (Appendix A-3) says a code, once accepted, is retained, and <i>&quot;a code may be accepted before its function exists and takes effect when the function arrives.&quot;</i> <b>That doctrine describes exactly this state</b>, which makes it either a designed condition or a coincidence. Nobody has said which.</p>
+<hr>
+<h2 id="h-12-what-the-three-character-sets-are">H-12 · WHAT THE THREE CHARACTER SETS ARE</h2>
+<p><a id="h-12"></a></p>
+<p><b>DEMANDED.</b> <i>Upstream: holes report <code>C-8</code>.</i></p>
+<p>The manual's Appendix F carries three set names — <b>system, density, ceremony</b> — and Table 7-2 wants a FACE and a DUTY against each.</p>
+<p><code>robots:docs/AESTHETIC_CANON-20260723.md</code> §2.1 supplies both and calls it the font-role system: <i>&quot;Fonts never mix roles: the system speaks classic, density speaks TomThumb, ceremony speaks FreeSansBold.&quot;</i></p>
+<p><b>THE MAPPING IS OPS' AND IS FLAGGED AS SUCH.</b> The three set names are in the manual's own glossary list; <b>nothing in the corpus states which face is which set.</b> That is one ruling, not three.</p>
+<hr>
+<h2 id="h-13-determination-is-a-coined-word">H-13 · &quot;DETERMINATION&quot; IS A COINED WORD</h2>
+<p><a id="h-13"></a></p>
+<p><b>UNASKED, and it is on a published page.</b> <i>Upstream: holes report <code>C-9</code>.</i></p>
+<p>The manual calls the machine's output a <b>determination</b>, throughout, and in its glossary. <b>The word appears in no source before the manual generator.</b> It is a good word and it may well be the right one; it is also a coined term, which the DRAFTING LAW reserves to Mike (<i>&quot;agents assemble from established canon ONLY — no coined catchphrases, signatures, gags, or terminology. All flavor is Papa's.&quot;</i>).</p>
+<p><b>It is now published</b>: ¶7-19's <i>&quot;Charging has no effect upon the determination&quot;</i> is on <code>scan-07-a</code>.</p>
+<hr>
+<h2 id="h-14-what-register-the-manual-is-in">H-14 · WHAT REGISTER THE MANUAL IS IN</h2>
+<p><a id="h-14"></a></p>
+<p><b>DEMANDED, structurally settled, never stated.</b> <i>Upstream: holes report <code>C-10</code>.</i></p>
+<p><code>OWNERS_MANUAL-draft1-20260723.md</code> is an <b>owner's</b> manual with a Welcome letter. <code>manual_structure_build.py</code> is an <b>engineering</b> manual with paragraph-4.3.2 deadpan. They are the same document at two dates and they address two different readers.</p>
+<p>The period model settles it structurally — an <i>Operating and Maintenance Instructions</i> is written to a technician, and no period model has a Welcome section — <b>but nobody has said so</b>, and the welcome letter (<code>[PAPA]</code> P2) is still owed to a document with no position for it.</p>
+<hr>
+<h2 id="h-15-the-seven-first-boot-questions">H-15 · THE SEVEN FIRST-BOOT QUESTIONS</h2>
+<p><a id="h-15"></a></p>
+<p><b>DEMANDED.</b> <i>Upstream: holes report <code>C-11</code>.</i></p>
+<p><code>OWNERS_MANUAL-draft1</code> raised seven (F1–F7, 2026-07-23) as blocking. <b>Sections V and VI cannot be written past their headings without F1, F2, F3, F5 and F7.</b> Two years of adjacent work has happened since; the seven are unanswered.</p>
+<hr>
+<h2 id="h-16-whether-the-manual-prints-the-redaction">H-16 · WHETHER THE MANUAL PRINTS THE REDACTION</h2>
+<p><a id="h-16"></a></p>
+<p><b>DEMANDED — a decision, not a missing fact.</b> <i>Upstream: holes report <code>D</code> 4.</i></p>
+<p>Table B-3's source is censored: the Inclination passcodes are <code>▓▓▓</code> in the 2024 manual. <code>MANUAL_STRUCTURE_FIT</code> #70 records that <b>the redaction is itself the content.</b> Reproducing a redaction is a strong period move and it is a choice nobody has made. See also <a href="CONFLICTS.html#k-07">K-07</a>.</p>
+<hr>
+<h2 id="h-17-which-access-codes-print">H-17 · WHICH ACCESS CODES PRINT</h2>
+<p><a id="h-17"></a></p>
+<p><b>DEMANDED.</b> Table A-1 — <code>[PAPA]</code> P7, open since 2026-07-23.</p>
+<p><b>In evidence in the corpus:</b> <code>411</code> Advice · <code>7</code> Detectors · <code>101</code>–<code>132</code> personas · <code>2121</code> Casino · bias <code>0000</code>…<code>1111</code> · clarity <code>69 / 666 / 80085 / 1 / 123</code> · Inclination <code>▓▓▓</code>. The calculator egg class is <code>80085 / 07734</code>.</p>
+<p><b>Nobody has said which of these a 1965 manual would print</b> — and the displayability doctrine means printing one is not the same as enabling it.</p>
+<hr>
+<h2 id="h-18-the-engine-roster-s-names-and-serials">H-18 · THE ENGINE ROSTER'S NAMES AND SERIALS</h2>
+<p><a id="h-18"></a></p>
+<p><b>DEMANDED.</b> Appendix C is blocked on the naming/lock pass. See <a href="CONFLICTS.html#k-05">K-05</a> and <a href="CONFLICTS.html#k-12">K-12</a>.</p>
+<hr>
+<h2 id="h-19-a-correction-the-tree-does-not-carry">H-19 · A CORRECTION THE TREE DOES NOT CARRY</h2>
+<p><a id="h-19"></a></p>
+<p><b>UNASKED — recorded because it is a CLASS, not an instance.</b> <i>Upstream: holes report <code>A-17</code>.</i></p>
+<p><a href="CONFLICTS.html#k-20">K-20</a> is a documented correction that never landed. <code>MENU_MAP_v3</code> flag 1, <code>SPEC_INVENTORY</code> ledger #7 and <code>BLOCK_DICTIONARY</code> D1–D12 are all live <i>known and unfixed</i> markers.</p>
+<p><b>None of them is wrong to exist. The risk is that a document built from these sources inherits the marker rather than the fact.</b></p>
+<hr>
+<h2 id="h-20-the-gap">H-20 · THE GAP</h2>
+<p><a id="h-20"></a></p>
+<p><b>SEALED — and it is a hole the story has decided to keep.</b></p>
+<p>What happened between ABEAL's end in 1965 and the crates arriving at Weird.Baby. <code>STORY_BIBLE.html</code>, CANON, Job One 2026-07-19:</p>
+<blockquote><p><i>&quot;THE GAP IS CANON: what happened between ABEAL's end and our obtaining the units — we don't know, we're interested ourselves, and if we ever learn it we'll decide whether we ever tell.&quot;</i></p></blockquote>
+<p><b>It is listed with the sealed rooms and not with the open questions.</b> The other seals are at <a href="08-PEOPLE.html#the-sealed-rooms">PEOPLE</a>.</p>
+<hr>
+<h2 id="h-21-the-serial-and-the-date-on-the-feed-control-s-badge">H-21 · THE SERIAL AND THE DATE ON THE FEED CONTROL'S BADGE</h2>
+<p><a id="h-21"></a></p>
+<p><b>DEMANDED, and deliberately empty.</b></p>
+<p>The nameplate carries three stamped fields. <code>MODEL NO.</code> reads <code>TYPE 8p</code>. <code>SER. NO.</code> and <code>DATE</code> render as <b>struck wells with nothing in them</b> — which is what an unstamped plate looks like, and which is deliberate: a plausible serial is exactly the failure the museum's Doctrine 12 names.</p>
+<p><b>The day Mike hands over a serial it is one value</b>, and it has a register row (<code>P-a</code>).</p>
+<hr>
+<h2 id="h-22-the-engraved-drum-legends-are-ops-words">H-22 · THE ENGRAVED DRUM LEGENDS ARE OPS' WORDS</h2>
+<p><a id="h-22"></a></p>
+<p><b>DEMANDED, flagged, unspent.</b></p>
+<p>The engraved legends on the Portal's feed drum are <b>Mike's to write</b>. Ops cut <code>STANDBY</code>, <code>COLD START</code>, <code>FIRST RUN</code>, <code>LAST STATE</code>, <code>TEST BENCH</code> and <code>DETAIL</code> as period terms that fit the drum face at one line, and flagged them.</p>
+<p><b><code>DETAIL</code> is named on the register (<code>CH-a</code>) as Ops' word specifically.</b></p>
+<p><b>And one legend is wrong by one word and is knowingly left alone</b>: the drum's sub reads <code>SELECT · ONE ARMED</code> and <b>two</b> positions arm — <code>standard</code> (ch 3) and <code>idling-updated</code> (ch 4, DETAIL). Mike's ruling: fix it when the Portal is next touched, not in a round that is not about the Portal. It is the Record's own <a href="09-PUBLISHED.html#ruling-10"><i>what's said matches what's shown</i></a> rule applied to a control legend.</p>
+<hr>
+<h2 id="h-23-the-twin-has-no-in-fiction-home">H-23 · THE TWIN HAS NO IN-FICTION HOME</h2>
+<p><a id="h-23"></a></p>
+<p><b>UNASKED.</b> <code>MANUAL_STRUCTURE_FIT</code> N-2 records it: the twin has <b>no in-fiction home of any kind.</b></p>
+<p>The public-twin doctrine gives it a <i>frame</i> — <i>&quot;you are running the original vintage software used to program and test MGK-VIIIp units&quot;</i> — and the museum's own FAQ gives it a <i>description</i> — <i>&quot;It is the real firmware on shimmed hardware — the twin. The unit itself is a physical object in a room; the twin is how it is met from here.&quot;</i> <b>Neither says where in the story the twin sits, who made it, or what it is a twin of in 1965 terms.</b></p>
+<hr>
+<h2 id="h-24-where-the-story-goes-in-the-manual-if-anywhere">H-24 · WHERE THE STORY GOES IN THE MANUAL, IF ANYWHERE</h2>
+<p><a id="h-24"></a></p>
+<p><b>DEMANDED.</b> <i>Upstream: holes report <code>D</code> 3; fit report §5.3.</i></p>
+<p>An <i>Operating and Maintenance Instructions</i> is structurally hostile to sixty years of fiction, and the only precedent in the corpus is the 2022 proto-manual's one-line &quot;Background&quot; stub. <b>If the story is meant to reach the reader in this document, the document type is wrong.</b> Nobody has ruled it either way.</p>
+<hr>
+<h2 id="h-25-how-long-appendix-d-is">H-25 · HOW LONG APPENDIX D IS</h2>
+<p><a id="h-25"></a></p>
+<p><b>DEMANDED.</b> 187 rows, or the ~60 a generic unit can reach. <b>This changes the document's centre of gravity</b> (fit report §5.2).</p>
+<hr>
+<h2 id="h-26-whether-the-known-bugs-become-trouble-chart-rows">H-26 · WHETHER THE KNOWN BUGS BECOME TROUBLE-CHART ROWS</h2>
+<p><a id="h-26"></a></p>
+<p><b>UNASKED, and it is the period-true option.</b> The boot race (<a href="CONFLICTS.html#k-10">K-10</a>), the three-round spinner, the L1 double ceremony. <b>A period trouble chart is exactly where a maker put the things it had decided not to fix.</b></p>
+<hr>
+<h2 id="h-27-the-service-bulletin">H-27 · THE SERVICE BULLETIN</h2>
+<p><a id="h-27"></a></p>
+<p><b>UNASKED.</b> <code>robots:docs/ACT1_BOM-20260717.md</code> (e) 8 proposes the phrase <i>&quot;Affirmative (see service bulletin 7).&quot;</i></p>
+<p>A service bulletin is a <b>publication</b>, and Table 1-2 RELATED PUBLICATIONS is where a publication is declared to exist. <b>No bulletin exists, no numbering scheme for bulletins exists, and the manual would be the document that invents both.</b></p>
+<hr>
+<h2 id="h-28-what-the-museum-and-the-machine-are-to-each-other">H-28 · WHAT THE MUSEUM AND THE MACHINE ARE TO EACH OTHER</h2>
+<p><a id="h-28"></a></p>
+<p><b>UNASKED, and it is the oldest one on the page.</b></p>
+<p><code>robots:docs/canonical/LINEAGE.md</code>, under <i>Name collisions</i>:</p>
+<blockquote><p><i>&quot;Weird.Baby is also the brand of the museum project (<code>C:\AI\Projects\weird-baby-museum</code>) — <b>relationship undocumented</b>; Mike's call, tracked in STATE.md.&quot;</i></p></blockquote>
+<p>It has been undocumented since 2026-07-13. In the meantime the museum has published five Records in the machine's story and holds the Portal. <b>The two projects now share a fiction and nothing states what the relationship is.</b></p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/HOLES.md</code>,
+last written <b>2026-08-20 04:16 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

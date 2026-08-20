@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the machines</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="02-the-machines-lineage-models-engines-hardware-the-fleet">02 · THE MACHINES — lineage, models, engines, hardware, the fleet</h1>
+<p><b>Register key:</b> <code>STORY</code> · <code>OPS</code>. <b>Publication key:</b> <code>PUB</code> · <code>—</code>.</p>
+<hr>
+<h2 id="1-the-names-of-the-object">1 · THE NAMES OF THE OBJECT</h2>
+<p><a id="names"></a></p>
+<div class="tw"><table><thead><tr><th>term</th><th>register</th><th>pub</th><th>meaning as attested</th><th>source</th></tr></thead><tbody><tr><td><b>Instrument</b></td><td>STORY</td><td>PUB</td><td>The manual's own noun for the machine. It is used in every written sentence the manual has and <b>it never varies.</b></td><td><code>BODY_7_19</code>, <code>BODY_7_14</code>, <code>BODY_B_1</code></td></tr><tr><td><b>Unit</b></td><td>STORY</td><td>PUB</td><td>The same object, in the looser register. <b>The manual uses both nouns inside one appendix</b> — <i>&quot;The unit will not speak until all four agree.&quot;</i></td><td><code>BODY_B_1</code>; the 2022 proto-manual; the Record</td></tr><tr><td><b>MGK</b></td><td>STORY</td><td>—</td><td><b>Mainframe Generated Knowledge.</b></td><td>Manual Appendix G; the lore</td></tr><tr><td><b>MGK-NIAC</b></td><td>STORY</td><td><b>PUB</b></td><td>The mainframe. Answer engine, <b>compile date 1945</b>; the original M8B twenty and nothing else. <b>NIAC-FIRST is canon (2026-07-18): the fiction's mainframe is, and was only ever, MGK-NIAC; &quot;VIII/VIIIp&quot; is ABEAL's 1965 rebrand.</b></td><td><code>STORY_BIBLE.html</code>; <code>MENU_TABLE_SRC</code>; museum album <code>mgk-viii</code> titled <b>MGK-NIAC</b></td></tr><tr><td><b>MGK-VIII</b></td><td>STORY / OPS</td><td>—</td><td>The 2013 machine in the real lineage — Mike's own name for it: <b>&quot;Magic 8&quot;, short for Magic 8 Ball.</b> In the fiction it is the rebrand of NIAC. <b>The two uses are not the same object</b> and the museum's album id (<code>mgk-viii</code>) carries the title <code>MGK-NIAC</code>.</td><td><code>LINEAGE.md</code>; <code>STORY_BIBLE.html</code></td></tr><tr><td><b>MGK-VIIIp</b></td><td>STORY</td><td><b>PUB</b></td><td>The unit the manual documents. <b><code>MODEL MGK-VIIIp</code> on every running head.</b></td><td>everywhere</td></tr><tr><td><b>The <code>p</code></b></td><td>STORY</td><td>—</td><td><b>PORTAL.</b> Canon 2026-07-29 — <i>&quot;It was never 'portable.'&quot;</i></td><td><a href="CONFLICTS.html#k-17">K-17</a></td></tr><tr><td><b>TYPE 8p</b></td><td>STORY</td><td>—</td><td>The model number struck into the FEED CONTROL's badge.</td><td><code>museum:src/data/artists/portal.js</code></td></tr><tr><td><b>ABEAL 8P-OMI-1</b></td><td>STORY</td><td><b>PUB</b></td><td>The manual's part number, at the foot of every page.</td><td><a href="07-MANUAL.html">MANUAL</a></td></tr></tbody></table></div>
+<hr>
+<h2 id="2-the-real-lineage">2 · THE REAL LINEAGE</h2>
+<p><a id="lineage"></a></p>
+<p><b><code>OPS</code> throughout — this is the real robot line, not the fiction's.</b> Source: <code>robots:docs/canonical/LINEAGE.md</code>.</p>
+<div class="tw"><table><thead><tr><th>era</th><th>robot</th><th>note</th></tr></thead><tbody><tr><td>pre-2011</td><td><b>The Halloween props</b></td><td>Animatronics; the motion-control ancestry. <b>Not indexed anywhere, no custody location known. OPEN.</b> Mike names them twice, unprompted, on the 2021 tape.</td></tr><tr><td><b>2011</b></td><td><b>NRU-1000</b></td><td>Fortune robot, oldest generation.</td></tr><tr><td>2011–2022</td><td><b>Coin Slot Robots (CSR)</b></td><td>The coin-op business concept wrapping the early builds.</td></tr><tr><td><b>2013</b></td><td><b>MGK-VIII original build</b></td><td><i>&quot;a robot, a computer, and a wheel and output device.&quot;</i> Narrated build video 2021-03-19.</td></tr><tr><td><b>2022-12 → 2024-08</b></td><td><b>MGK-VIIIp</b></td><td>The predictive 8-Ball, 31-unit tier. <b>The <code>p</code> did not make it an 8-Ball — the VIII already was one.</b> Donor chassis: a <b>Sears Silvertone radio.</b></td></tr><tr><td>2024–2026-02</td><td><b>Weird.Baby</b></td><td>Brand umbrella; project closed 2026-02-25.</td></tr><tr><td>2026-01 → active</td><td><b>MGK-VIII flagship revival</b></td><td>Tier 1, one-of-a-kind.</td></tr></tbody></table></div>
+<p><b>Canonical tier hierarchy:</b> Tier 1 MGK-VIII flagship (active) → Tier 2 MGK-VIIIp (31 units, not active) → Tier 3 public distribution (not active). <b>Shared lore:</b> MGK-NIAC → FML technology → VIII / VIIIp.</p>
+<h3 id="the-2021-narration-is-a-dated-primary-source">THE 2021 NARRATION IS A DATED PRIMARY SOURCE</h3>
+<p><a id="the-2021-rule"></a></p>
+<p><b>Ruling, Mike, 2026-08-03.</b> <code>IMG_1526.MOV</code> (2021-03-19) is excellent evidence of <b>what Mike was building in March 2021.</b> It is not a description of any machine that exists now.</p>
+<blockquote><p><b>A 2021 sentence may be quoted as a 2021 sentence, dated and attributed. It may never be quoted as a 2026 fact.</b> If a claim about the current machine rests only on the 2021 audio, the claim is unsupported. <b>If you find a conflict, the 2021 tape is the one that loses.</b></p></blockquote>
+<h3 id="the-reel-is-out-of-the-design-entirely">THE REEL IS OUT OF THE DESIGN ENTIRELY</h3>
+<p><a id="the-reel"></a></p>
+<p><b>Mike, 2026-08-05:</b> <b><i>&quot;THE REEL IS NO LONGER PART OF THE DESIGN. Remove it from the design record and show it nowhere.&quot;</b></i></p>
+<p>The 60-stop electromechanical pinball credit reel in the 2021 video is <b>not in the current build and is not the plan.</b></p>
+<p><b>AND THE HALF THAT USED TO SURVIVE IS ALSO STRUCK.</b> LINEAGE previously kept the claim that the control room's drum descends from the wheel as an <b>idiom</b> and that <i>&quot;the idea is canon.&quot;</i> <b>That clause is struck. There is no surviving ancestry claim, no idiom, and no lineage from the credit reel to anything.</b></p>
+<p><b>WHAT THIS DOES NOT STRIKE:</b> the Portal's drum. That is a live built control on the museum's glass and it stays. What is gone is <b>the claim that it descends from the reel.</b> <i>A drum is a drum; it does not need a grandfather.</i></p>
+<hr>
+<h2 id="3-the-fleet-and-the-registry">3 · THE FLEET AND THE REGISTRY</h2>
+<p><a id="registry"></a></p>
+<p><b>RULED R1, 2026-07-14: the fleet is 31.4 units.</b> π is alluded to throughout and <b>never confirmed.</b> Unit <b>.4</b> is the prototype; <b>the missing-unit mystery orbits it.</b> Real-world release doctrine is itself lore: <b>batches and dribbles, out of numerical order.</b></p>
+<p><b>REGISTRY LAW, 2026-07-22:</b> <i>rows are amendable freely until first physical ship; <b>a shipped row freezes forever.</b></i></p>
+<p><b>The registry as rewritten at the 2026-07-22 gate</b> — <code>STORY_BIBLE.html</code> ch. II. Register STORY, <b>not published</b>; see <a href="CONFLICTS.html#k-05">K-05</a>.</p>
+<div class="tw"><table><thead><tr><th>unit</th><th>who</th><th>state</th></tr></thead><tbody><tr><td><b>−01</b></td><td><b>Housewife Nano</b> — Patient Zero</td><td>HELD (asset conservation)</td></tr><tr><td><b>−02</b></td><td><b>The Everyman</b></td><td>RELEASE 1 · Box — <a href="CONFLICTS.html#k-06">K-06</a></td></tr><tr><td><b>−03</b></td><td><b>vacated</b> — the corrupted Blackwood file points HERE</td><td>historical; deliberately ambiguous</td></tr><tr><td><b>−07</b></td><td><b>The Informer</b> (ex-Marksman row — <i>&quot;moves the target to the bullet hole&quot;</i>)</td><td>RELEASE 1 · Deluxe</td></tr><tr><td><b>−09</b></td><td><b>The CEO</b> (ex-Executive row; Papa's alter-ego)</td><td>RELEASE 1 · Deluxe</td></tr><tr><td><b>−13</b></td><td><b>The Closer</b> — carries the whole McKenna record</td><td>HELD · sealed</td></tr><tr><td><b>−21</b></td><td><b>JUAN, The Gambler</b></td><td>RELEASE 1 · Deluxe · twenty COMPLETE</td></tr><tr><td><b>−31</b></td><td><b>RESERVED-finale</b></td><td>do not assign</td></tr><tr><td>pool</td><td>23 Mattingly · 27 rock-star-danger-year · 30 declining-celebrity-seat</td><td>affirmed notes</td></tr><tr><td><b>06</b></td><td>the gambler-ghost row</td><td><b>DEAD</b>, tombstoned</td></tr></tbody></table></div>
+<p><b>RELEASE 1 IS FOUR UNITS:</b> Informer −07 · CEO −09 · JUAN −21 (Deluxe) + Everyman −02 (Box). <b>The old launch-three roster is retired.</b></p>
+<p><b>CASE TIERS: Box / Small Case / Deluxe Case</b> — the original box, or the optional-at-the-time leather accessory case with trinkets tying to story and name.</p>
+<p><b>UNITS SHIP GENERIC, AND THE REASON IS THE TRUTH:</b> all were broken, repaired, data lost; <b>the CUSTOMER performs the personality download</b> — original SOP then and now, and the reset mechanism.</p>
+<hr>
+<h2 id="4-the-answer-engines">4 · THE ANSWER ENGINES</h2>
+<p><a id="engines"></a></p>
+<div class="tw"><table><thead><tr><th>engine</th><th>compile date</th><th>what it adds</th><th>register</th><th>contested</th></tr></thead><tbody><tr><td><b>MGK-NIAC</b></td><td><b>1945</b></td><td>The original M8B twenty and nothing else. <b>The Magic 8-Ball, period — mimic as closely as possible.</b> Reveal ideal: <b>the die floating up to the window, words already on it.</b> Shake-only.</td><td>STORY</td><td></td></tr><tr><td><b>MGK-v2.0</b></td><td><b>1946</b></td><td>Adds <b>EZClick™</b> and <b>Clarity</b>. <i>Middle child:</i> BS-affected richer answers, <b>ROBOTIC voice</b> (flat synth), fonts and reveal scaling up.</td><td>STORY</td><td></td></tr><tr><td><b>MGK-65</b></td><td><b>1965</b></td><td>Adds sounds. <b>The 8-Ball through Windows 95</b> — useful AND useless enhancements like the real OS, real cool voices, rich SFX. Reveal: <b>a one-pixel diamond PORTAL at dead centre blossoming to full width or beyond</b>; if easy, shake runs the portal in REVERSE and the answer is swallowed. S.A.M. voice.</td><td>STORY</td><td><a href="CONFLICTS.html#k-03">K-03</a></td></tr><tr><td><b>MGK-Einstein · MGK-Yogi · MGK-DYK · MGK-HR</b></td><td>—</td><td>Named engine rows in the menu, hidden. <b>Status undecided.</b></td><td>STORY</td><td><a href="CONFLICTS.html#k-12">K-12</a></td></tr><tr><td><b>MGK-65x</b></td><td>1965</td><td><b>REJECTED — do not re-propose.</b></td><td>STORY</td><td></td></tr><tr><td><b>NY8 · DYN · MGK-2.5</b></td><td>1965</td><td>In the option matrix and nowhere else. <b>No status at all.</b></td><td>STORY</td><td><a href="CONFLICTS.html#k-21">K-21</a></td></tr></tbody></table></div>
+<p><b>THE EVOLUTION LAW (2026-07-24, constitutional):</b> the user <b>STARTS with NIAC only.</b> Through storyline, <b>v2.0 becomes available for download</b> (a new discovery phase; they likely never go back). Later, <b>65 arrives</b> (bells and whistles) to reinvigorate. <b>Never three side by side puzzling — an evolution in acts.</b> <i>&quot;It just happens that 2.0 is available for download right now…&quot;</i></p>
+<p><b>SAME-ONLY-DIFFERENT:</b> versions and upgrades ride the one architecture; data differs. The fiction answers <i>&quot;why A and B&quot;</i> — these are later versions and upgrades.</p>
+<p><b>Only three engines are compiled.</b> <code>M8B_AnswerTable[3][20][5][2]</code>.</p>
+<hr>
+<h2 id="5-the-hardware">5 · THE HARDWARE</h2>
+<p><a id="hardware"></a></p>
+<h3 id="the-two-glasses">The two glasses</h3>
+<div class="tw"><table><thead><tr><th></th><th>forward (front) display</th><th>upper (top) display</th></tr></thead><tbody><tr><td><b>size</b></td><td>128 × <b>32</b> — <a href="CONFLICTS.html#k-08">K-08</a></td><td>128 × 64</td></tr><tr><td><b>address</b></td><td><code>0x3D</code></td><td><code>0x3C</code></td></tr><tr><td><b>note</b></td><td></td><td><b>Mounted inverted and corrected in software</b> — <code>setRotation(2)</code></td></tr><tr><td><b>role</b></td><td><b>primary SYSTEM GUI</b></td><td><b>primary APPS GUI + detailed information</b></td></tr></tbody></table></div>
+<p><b>THE TWO-SCREEN ROLE LAW (2026-07-23, CONSTITUTIONAL):</b> <i>&quot;The resolutions were chosen for these purposes. <b>ONLY the top screen may operate in fluidic mode.</b> The front screen's rotating graphics are simple animations — not meant to fool, not meant to be important. All builds, past and future, conform.&quot;</i></p>
+<h3 id="the-controls">The controls</h3>
+<div class="tw"><table><thead><tr><th>control</th><th>firmware</th><th>the law</th></tr></thead><tbody><tr><td><b>Rotary dial</b></td><td><code>PIN_ROTARY_DIAL = D4</code></td><td><b>The dial moves and does not choose.</b> Absolute, on every surface.</td></tr><tr><td><b>Shutter</b></td><td><code>PIN_SHUTTER = D3</code></td><td><b>The shutter chooses.</b></td></tr><tr><td><b>Indicator lamp</b></td><td><code>NUM_PIXELS = 2</code></td><td>Narrates the boot <b>red → green → orange</b>. <a href="CONFLICTS.html#k-09">K-09</a></td></tr><tr><td><b>Power port</b></td><td></td><td>Carries the one quoted line in the whole document.</td></tr><tr><td><b>Power switch</b></td><td>rear metal toggle</td><td><b>PUB</b> — one photograph of it is on Record 013, the one picture the pull-back rule let through.</td></tr></tbody></table></div>
+<h3 id="inputs-and-outputs-in-the-trade-name-register">Inputs and outputs, in the trade-name register</h3>
+<div class="tw"><table><thead><tr><th>designation</th><th>what it is</th><th>real part</th></tr></thead><tbody><tr><td><b>VibroSense (VSI)</b></td><td>input</td><td></td></tr><tr><td><b>PressPulse (PPI)</b></td><td>input</td><td></td></tr><tr><td><b>GyroMotion (GMI)</b></td><td>input</td><td>a 6-axis IMU (BMI270 / BMM150)</td></tr><tr><td><b>SonicWave (SWI)</b></td><td>input</td><td>a PDM microphone at 16 kHz</td></tr><tr><td><b>ScrollControl (SCS)</b></td><td><i>&quot;Unidirectional theta-drive… muscle memory in weeks instead of months.&quot;</i></td><td>the rotary</td></tr><tr><td><b>MindsEye™</b></td><td>input</td><td><b>appears once in the whole corpus</b> — <a href="CONFLICTS.html#k-21">K-21</a></td></tr><tr><td><b>CCS — Click Control System</b></td><td>the shutter</td><td></td></tr><tr><td><b>VCS — Voice Control System</b></td><td><i>&quot;Offered as a novelty and should be treated as such&quot;</i> — derives meaning from <i>(secret)</i> rather than from words</td><td><code>HW_Rescan_MIC</code> reads the mic and <b>does nothing with it</b></td></tr><tr><td><b>ElectronScope</b></td><td>output</td><td><b>CH4 / CH3 / 8K</b></td></tr><tr><td><b>Enunciator / Voice Enunciator</b></td><td>the audible output</td><td><a href="CONFLICTS.html#k-13">K-13</a></td></tr><tr><td><b>Fluidic Suspension</b></td><td>where output is <b>redirected</b> for a determination</td><td>drawn as the bubble field on the top glass</td></tr><tr><td><b>Haptics · Caution/Warning/Alert</b></td><td>audible designations</td><td></td></tr><tr><td><b>IG — Inertial Gyroscope</b> · <b>A&amp;P — Accuracy and Precision</b></td><td>expansions known, behaviour not described</td><td>Appendix G</td></tr><tr><td><b>EED — Electronic Electronics Distributor</b></td><td><i>&quot;(yes that's its real name)… the linchpin of our endeavor.&quot;</i> A power-distribution component; <b>blamed in the Record for a boot refusal</b>, 12 April 2024, the <i>&quot;IT'S ALIVE&quot;</i> entry.</td><td></td></tr><tr><td><b>MIALLO™</b></td><td>voice generation. Trademarked in the source and <b>never explained.</b></td><td></td></tr><tr><td><b>AMMMS</b></td><td>maintenance messaging, beside BIST. <b>Never expanded.</b></td><td><a href="HOLES.html#h-05">H-05</a></td></tr></tbody></table></div>
+<h3 id="the-audio-path">The audio path</h3>
+<ul><li><b>DFPlayer</b>, SD folders <code>00</code>–<code>10</code>, <b>255 files per folder</b>, alphanumeric order matters.</li><li><code>folder = M8B_ID × 5 + clarity + 10</code> — <b>the 255-wall is a formula artifact</b> and bug d is closed by design.</li><li><b>The wall is hit at answer 19 with voices ≥ 8</b>, which is why voice ID was capped at ≤ 7. See <a href="CONFLICTS.html#k-13">K-13</a>.</li><li><b>Voice is the budget; text is nearly free.</b> Flash holds dozens of personas; the DFPlayer grid is the wall.</li></ul>
+<hr>
+<h2 id="6-the-flagship-s-declared-rules">6 · THE FLAGSHIP'S DECLARED RULES</h2>
+<p><a id="the-five-rules"></a></p>
+<p><b>PUBLISHED</b>, on the MGK-NIAC album's Technical Specifications face:</p>
+<pre>MATRIX   8 × 16 — seven rows visible, the eighth wired, driven and behind something
+BAR      1 × 64, addressed as a single chain
+OUTPUTS  2 matrix chains · 2 bar chains · 3 servos
+DECLARED five rules
+RULE 1   a numerical envelope
+RULE 2   a ceiling of eight core states
+RULE 3   mutual exclusion
+RULE 4   a reveal no faster than twelve seconds
+RULE 5   no adaptive learning — the machine is forbidden, in writing, from getting to know you</pre>
+<p><b>RULE 5 IS THE ONE THAT CARRIES WEIGHT ELSEWHERE.</b> The learning-machine reading — <i>the device secretly LEARNING its owner to optimise control</i> — is <b>HELD as a reading and never forced</b> (<code>STORY_BIBLE.html</code>), and Rule 5 is the machine's own written denial of it. The two are not reconciled anywhere. Recorded, not resolved.</p>
+<hr>
+<h2 id="7-the-twin">7 · THE TWIN</h2>
+<p><a id="the-twin"></a></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>What it is</b></td><td><b>PUB</b>, in the museum's own words: <i>&quot;It is the real firmware on shimmed hardware — the twin. The unit itself is a physical object in a room; the twin is how it is met from here.&quot;</i></td></tr><tr><td><b>The doctrine</b></td><td><i>&quot;A twin of the BASE UNIT goes freely accessible online, played as the real thing. In-fiction frame: <b>you are running the original vintage software used to program and test MGK-VIIIp units.</b>&quot;</i> Free forever, museum-exhibit grade.</td></tr><tr><td><b>The frame</b></td><td><b>The security-monitor frame (canon, A2):</b> the twin presents as a <b>B&amp;W security-monitor feed</b> of an excavation — someone hacked back to the source servers where every personality was last backed up, and the viewer watches through a camera pointed at running equipment. <b>Data resolves as more is excavated. Control of the camera is eventually gained.</b></td></tr><tr><td><b>The rule</b></td><td><b>The twin is the dev environment; the unit is the print run.</b> Physical unit outranks extraction. <b>Single-file, no-network is LAW.</b></td></tr><tr><td><b>Where</b></td><td><code>robots:tools/viiip_twin.html</code> — 10,802 lines. Served in the museum at <code>/held/robots/twin.html</code>, behind the stage door.</td></tr><tr><td><b>Hole</b></td><td><b>It has no in-fiction home of any kind</b> — <a href="HOLES.html#h-23">H-23</a></td></tr></tbody></table></div>
+<p><b>IT IS NOT AN EMULATION OF A DESCRIPTION.</b> Whole firmware modules are carried into it verbatim and marked — <code>[BIAS:29-55] exact</code>, <code>[FLASH:11-22] exact — RAM-only</code>, <code>[3_PROC_MGR.ino - exact]</code>, <code>2_data_MENU.ino</code> <b>parsed from source</b>. <code>Save_To_Flash</code> is a stub in the twin <b>because it is a stub in the firmware.</b></p>
+<p><b>THE REFERENCE PHOTOGRAPHS ARE HARDWARE REFERENCE ONLY</b> — four of them: front screen, front full, rear power switch, top monitor. <b>The firmware and screens visible in them are OUTDATED</b> (old code, months to years). <b>Never match twin behaviour to them.</b></p>
+<hr>
+<h2 id="8-the-museum-s-two-albums">8 · THE MUSEUM'S TWO ALBUMS</h2>
+<p><a id="museum-albums"></a></p>
+<p><b>What a visitor meets. <code>museum:src/data/artists/robots-units.js</code>. PUB.</b></p>
+<div class="tw"><table><thead><tr><th>album</th><th>title</th><th>year</th><th>tracks</th></tr></thead><tbody><tr><td><code>mgk-viii</code></td><td><b>MGK-NIAC</b></td><td>none</td><td>Technical Specifications · Image Archive · Documentation · FAQ</td></tr><tr><td><code>mgk-viiip</code></td><td><b>MGK-VIIIp</b></td><td><b>1965</b></td><td>Technical Specifications · Image Archive · Documentation · FAQ</td></tr></tbody></table></div>
+<p><b>Both FAQs answer the same two questions with the same two answers:</b></p>
+<blockquote><p><b>Does it still work?</b> — <i>&quot;Yes. Both units power on and run their own firmware.&quot;</i></p>
+<p><b>Can I buy one?</b> — <i>&quot;No. The shop carries what the shop carries; the machines are not stock.&quot;</i></p></blockquote>
+<p><b>The MGK-VIIIp's Documentation face names the manual and holds no pages of it:</b></p>
+<blockquote><p><i>&quot;The owner's manual · ABEAL 8P-OMI-1 · Held. Incomplete, assembled out of copies caught at different stages. No page images on file — when they are made they are photographs of the printed sheet, edges and margins included.&quot;</i></p></blockquote>
+<p><b>The MGK-NIAC's Documentation face says the cabinet has none:</b></p>
+<blockquote><p><i>&quot;No document for the mainframe is held here. The portable arrived with a manual — ABEAL 8P-OMI-1, incomplete, assembled out of copies caught at different stages — and nothing of the kind has reached this museum for the cabinet.&quot;</i></p></blockquote>
+<p><b>AND THE PORTAL IS A THIRD ALBUM AND IT IS HELD</b> — see <a href="06-PORTAL.html">THE PORTAL</a>.</p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/02-MACHINES.md</code>,
+last written <b>2026-08-20 03:58 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

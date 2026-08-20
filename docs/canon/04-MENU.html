@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the menu and the apps</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="04-the-menu-the-apps-and-the-cards">04 · THE MENU, THE APPS AND THE CARDS</h1>
+<p><b>Register key:</b> <code>STORY</code> · <code>OPS</code>. <b>Publication key:</b> <code>PUB</code> · <code>—</code>. <b>Nothing in this file is published.</b> No visitor has met the menu.</p>
+<hr>
+<h2 id="1-the-vocabulary-of-the-menu">1 · THE VOCABULARY OF THE MENU</h2>
+<p><a id="vocabulary"></a></p>
+<div class="tw"><table><thead><tr><th>term</th><th>register</th><th>meaning as attested</th></tr></thead><tbody><tr><td><b>Door</b></td><td>STORY</td><td>A top-level division. <b>Four named doors: ANSWERS · PROGRAMS · MESSAGES · SETTINGS</b>, sorted by <b>FUNCTION OVER STRUCTURE</b> — what it <i>gives</i> you. <a href="CONFLICTS.html#k-19">K-19</a></td></tr><tr><td><b>Row</b></td><td>STORY</td><td>One line of a menu table. <b>187 live rows across 28 tables.</b> Presented <b>one at a time.</b></td></tr><tr><td><b>Level</b></td><td>STORY</td><td>A menu table.</td></tr><tr><td><b>Passage</b></td><td>STORY</td><td>A row that returns to the level above.</td></tr><tr><td><b>Rows not shown</b></td><td>STORY</td><td><b><i>A row appears when the instrument has cause.</b></i> Read access decides.</td></tr><tr><td><b>Read access / run access</b></td><td>STORY</td><td>Per-row passcode columns. <code>readAccess_ENABLED</code>: <b>1 = visible, anything else = hidden.</b> <b>Run-access passcodes are carried in every row and checked nowhere in firmware</b> — <a href="HOLES.html#h-11">H-11</a>.</td></tr><tr><td><b>Access code</b></td><td>STORY</td><td>A number that reveals or runs a row. <b>A code, once accepted, is retained; a code may be accepted before its function exists and takes effect when the function arrives</b> — the <i>displayability doctrine</i>, Appendix A-3.</td></tr><tr><td><b>Functions not fitted</b></td><td>STORY</td><td>Rows that print <b>(not installed)</b> and go nowhere — Calculator, Notepad — and uninstalled personas, which show a <b>PERSONA NOT INSTALLED</b> card.</td></tr><tr><td><b><code>.end</code></b></td><td>OPS-in-source</td><td>The table terminator. Every table's last row.</td></tr></tbody></table></div>
+<p><b>THE DOOR NAMES ARE LIVE AND THE ON-GLASS POLISH IS MIKE'S</b>, at manual-print. <i>&quot;Advice&quot; was rejected as a door name — too passive for the wondrous MGK-VIIIp.</i></p>
+<hr>
+<h2 id="2-the-tree-as-built">2 · THE TREE AS BUILT</h2>
+<p><a id="tree"></a></p>
+<p><b>28 tables · 187 live rows.</b> Source: <code>robots:docs/MENU_MAP_v3-four-doors-20260724.md</code>, generated from the live twin; verbatim table data at <code>viiip_twin.html:2021</code> (<code>MENU_TABLE_SRC</code>, parsed from <code>2_data_MENU.ino</code>).</p>
+<h3 id="the-doors-root-table-26">The DOORS ROOT — table 26</h3>
+<div class="tw"><table><thead><tr><th>row</th><th>label</th><th>goes to</th></tr></thead><tbody><tr><td>0</td><td><b>Answers</b></td><td>ANSWERS door (23)</td></tr><tr><td>1</td><td><b>Programs</b></td><td>PROGRAMS door (24)</td></tr><tr><td>2</td><td><b>Messages</b></td><td>Messages (2) — direct to the legacy branch, pending the unification build</td></tr><tr><td>3</td><td><b>Settings</b></td><td>SETTINGS door (25)</td></tr></tbody></table></div>
+<h3 id="answers-table-23">ANSWERS — table 23</h3>
+<p><code>Answers</code> · <code>Advice</code> · <b><code>Excuses</code></b> · <b><code>Lines</code></b> · <code>Predictions</code> · <code>Probabilities</code> · <b><code>ELIZ [-02]</code></b> · back.</p>
+<h3 id="programs-table-24">PROGRAMS — table 24</h3>
+<p><code>Games</code> · <code>Detectors</code> · <b><code>Brain Training [-02]</code></b> · <b><code>Inkblots [-02]</code></b> · <code>Calculator (not installed)</code> · <code>Notepad (not installed)</code> · <b><code>Radio [-07]</code></b> · <b><code>Phone Tap [-07]</code></b> · <b><code>Casino [-21]</code> — code 2121</b> · back.</p>
+<h3 id="settings-table-25">SETTINGS — table 25</h3>
+<p><code>Preferences</code> · <code>User</code> · <code>Codes</code> · back.</p>
+<h3 id="the-legacy-tree-orphaned-but-intact-by-design">The legacy tree, orphaned but intact <b>by design</b></h3>
+<p>Tables <b>0</b> (Root: MGK-VIIIp / Messages / Programs / Preferences), <b>1</b> (MGK-VIIIp: Answers / Predictions / Probabilities / <b>Advice code 411</b> / <b>Detectors code 7</b>) and <b>3</b> (Programs: Games / Codes) are still there and still reachable from the dev rail (<code>devLegacyMenu()</code>).</p>
+<p><b>THIS IS A FOURTH SHAPE.</b> The bible says three doors in one chapter and four in its addendum (<a href="CONFLICTS.html#k-19">K-19</a>); the firmware's own root table is this legacy one. <b>The live tree today is the four-doors root with the legacy tree underneath it.</b></p>
+<h3 id="the-rest-of-the-tables">The rest of the tables</h3>
+<div class="tw"><table><thead><tr><th>#</th><th>table</th><th>live rows</th></tr></thead><tbody><tr><td>2</td><td>Messages</td><td>4</td></tr><tr><td>4</td><td>Preferences</td><td>6</td></tr><tr><td><b>5</b></td><td><b>Answers</b></td><td><b>40</b> — 3 visible engines, 4 hidden engines, then the 32 unit positions</td></tr><tr><td>6</td><td>Predictions — Fortune · Horoscope</td><td>3</td></tr><tr><td>7</td><td>Probabilities — Coin Flip · Pick a number · Pick a card · Roll Dice · Lottery Numbers</td><td>6</td></tr><tr><td>8</td><td>Advice — Everyday · Career Chooser · Career Advice · Office Nickname · Water Cooler · Partners · Friends &amp; Family · Inlaws and Outlaws</td><td>9</td></tr><tr><td>9</td><td>Detectors</td><td>6</td></tr><tr><td>10</td><td>Voice Msgs</td><td>8</td></tr><tr><td>11</td><td>Text Msgs</td><td>6</td></tr><tr><td>12</td><td>System Msgs</td><td>4</td></tr><tr><td>13</td><td>Games</td><td>8</td></tr><tr><td>14</td><td>Codes — Code Runner · BIST · Userdata · Checksum</td><td>5</td></tr><tr><td>15</td><td>User — Name · Security</td><td>3</td></tr><tr><td>16</td><td>Polarity Bias</td><td>3</td></tr><tr><td>17</td><td>Coarse Bias</td><td>7</td></tr><tr><td>18</td><td>Clarity</td><td>3</td></tr><tr><td>19</td><td>Clarity Setting</td><td>6</td></tr><tr><td>20</td><td>mgkModel — Classic · Large · Audio</td><td>4</td></tr><tr><td>21</td><td>Voice list</td><td>12</td></tr><tr><td>22</td><td><i>(empty, firmware padding)</i></td><td>0</td></tr><tr><td>27</td><td><b>CASINO (Juan −21)</b> — Slots · Craps · Blackjack · Roulette</td><td>5</td></tr></tbody></table></div>
+<hr>
+<h2 id="3-the-apps">3 · THE APPS</h2>
+<p><a id="apps"></a></p>
+<h3 id="detectors-k-11-conflicts-md-k-11">Detectors — <a href="CONFLICTS.html#k-11">K-11</a></h3>
+<p><b>Bullshit · Stud · Trustworthy · Attractiveness</b>, plus <b>Spy [−07]</b>.</p>
+<p><b>The Bullshit Detector is the only feature that makes the microphone real.</b> <code>The_Mic_Has_Data()</code> (RMS &gt; 30) is written and works; <code>HW_Rescan_MIC</code> consumes nothing. All four share one needle and differ only in the verdict band table.</p>
+<p><b>Spy Detector verdicts, ruled and landed: <code>SPY</code> / <code>SPY-NORMAL</code> / <code>WEIRDO</code>.</b></p>
+<h3 id="games-diversions-k-11-conflicts-md-k-11">Games / diversions — <a href="CONFLICTS.html#k-11">K-11</a></h3>
+<p><code>Tilt Drive</code> · <code>Gobble Don't Fall</code> · <code>AvoidSteroids</code> · <code>Snow Globe</code> · <code>Tic-Tac-Toe</code> · <code>Mail Run</code> · <code>Sniper [−07]</code>, plus the four-row casino behind <code>2121</code>. A 346-line <b>Space</b> game is commented out in the firmware.</p>
+<p><b>Day-one games are ruled: Snow Globe + Tic-Tac-Toe.</b> WOPR tic-tac-toe is on the egg slate.</p>
+<p><b>THE GAMES LIST IS DELIBERATELY UNSTABLE IN-FICTION</b> — <i>the AI renamed the games</i> — and that is a live egg, <code>egg.renamed-games</code>, REVEALED, LIVE.</p>
+<h3 id="the-app-pattern-engine-excuses-lines">The app-pattern engine — Excuses / Lines</h3>
+<p><b>THE UNIVERSAL APP PATTERN:</b> <code>WHO</code> / <code>WHY</code> / bias settings local-or-global / <code>INVENT-A-NAME</code> / per-field wing-it / <b>one overall WING IT button</b>. REASON-aware innuendo and sass via BS config.</p>
+<p><b>LAW C RESIDUAL (Ops-ruled, reversible):</b> the engine is a <b>UNIVERSAL carriage</b> — every unit carries it — and <b>word-lists compile per-persona.</b></p>
+<p><b>WING-IT stays SHAKE even on config cards</b> — generative inside a navigational screen.</p>
+<h3 id="persona-apps">Persona apps</h3>
+<div class="tw"><table><thead><tr><th>app</th><th>unit</th></tr></thead><tbody><tr><td><b>ELIZ</b> — the psych suite</td><td>Everyman −02</td></tr><tr><td><b>Brain Training · Inkblots</b></td><td>Everyman −02</td></tr><tr><td><b>Radio · Phone Tap · Sniper · Spy Detector</b></td><td>Informer −07</td></tr><tr><td><b>The Career Suite</b> — Career Chooser + Career Advice</td><td>CEO −09 (<b>his estate; Career is CEO-only</b>)</td></tr><tr><td><b>The Casino</b> — Slots / Craps / Blackjack / Roulette</td><td>Gambler −21</td></tr></tbody></table></div>
+<p><b>ELIZ is the predecessor of ELIZA</b> — 1965 pre-dating 1966; <b>an unreliable-record artifact.</b> The machine listens without comprehending (layer 1 holds); the act is famously mechanical one year <i>early</i>.</p>
+<p><b>CASINO DOCTRINE: ALL units get SOME casino games; only Gambler −21 gets ALL.</b></p>
+<p><b>CALC + NOTEPAD = EVERY UNIT</b> — the <i>uselessly-useful universal</i> doctrine. Both currently print <b>(not installed)</b>, honestly.</p>
+<p><b>Career Chooser's search is DELIBERATE BS THEATRE</b> — a visible match meter, a slowing approach, occasional local-minimum detection → a faster back-up → a global hunt. Deterministic-friendly. <b>SHAKE runs it, not click.</b></p>
+<p><b>OFFICE NICKNAME = EARNED EGG (canon):</b> introspective mode — <i>what they call YOU</i>; <b>NOT modifiable by BS; the truth.</b> Earn condition and nickname content are <code>[PAPA]</code>.</p>
+<h3 id="messages">Messages</h3>
+<p><b>Three branches today — Voice Msgs · Text Msgs · System Msgs — and the unification spec is ADOPTED and not built:</b> <i>messages unify into ONE inbox, senders differ, read/unread clear.</i></p>
+<p><b>THE GENERIC INBOX HOLDS EXACTLY TWO FACTORY ITEMS</b> — welcome + start-up procedure — <b>present from OS install, never &quot;sent.&quot;</b></p>
+<p><b>SYSTEM MSG 02 IS OFF-CANON.</b> It confesses a flash failure (<i>&quot;Service is not available in your region&quot;</i>). Under the persistence ruling the machine has real persistence and the server is theatre; <b>it would never file that defect. Kill or redesign at the words pass.</b></p>
+<p><b>ALL MESSAGE WORDS ARE PARKED PLACEHOLDERS.</b> <b>Message MECHANICS stand as built</b> — delivery clock, status→visibility, reader, Morse.</p>
+<h3 id="codes">Codes</h3>
+<p><code>Code Runner</code> · <code>BIST</code> · <code>Userdata</code> · <code>Checksum</code>. All four are named in the manual's Section X. <b><code>Userdata</code> ties to the ALERT egg and the 2022 usage-tracking idea — the nag itself is KILLED; the data is not.</b></p>
+<h3 id="user">User</h3>
+<p><b><code>Name</code> and <code>Security</code>. RULED (X1, 2026-07-30): <code>Preferences &gt; User &gt; Name</code> IS the user settings station and carries NAME + BIRTHDATE.</b> The name is spelled on a <b>letter ring</b> — scroll picks, click takes, <code>&lt;DEL&gt;</code> / <code>&lt;END&gt;</code> ride the ring — <i>&quot;the arcade high-score solution, which is the only one the machine's two inputs allow.&quot;</i></p>
+<p><b>THE ABSENT-NAME LAW: with no name on file, every user-reference surface says <code>&lt;NO USER NAME&gt;</code>.</b></p>
+<p><b>THE NAME EGG:</b> with a name and birthdate on file the <b>Horoscope</b> menu grows a row wearing the user's name that reads their birthdate's sign. <b>The reading itself NEVER carries the name — it is written to a sign, not to a person.</b> Live: <code>egg.name</code>, REVEALED, LIVE.</p>
+<p><b>The year is entered and no surface consumes it</b> — <a href="CONFLICTS.html#k-20">K-20</a>.</p>
+<hr>
+<h2 id="4-the-card-vocabulary">4 · THE CARD VOCABULARY</h2>
+<p><a id="cards"></a></p>
+<p><b>These are the names the SPEAKABLE INDEX gives the drawn surfaces so that a sentence about one lands everywhere it appears. All are OPS names for IN-STORY objects: the objects are on the glass, the names are not.</b></p>
+<div class="tw"><table><thead><tr><th>term</th><th>what it is</th></tr></thead><tbody><tr><td><b>The rail card</b></td><td><code>&quot; ----&lt;          &gt;----&quot;</code> with the name struck in at column 40. <b><i>&quot;It opens almost everything.&quot;</b></i> <b>An original firmware block with no function name — typed inline in two places.</b></td></tr><tr><td><b>The redirect card</b></td><td>The rail card plus <b>OUTPUT REDIRECTED TO</b> over the destination.</td></tr><tr><td><b>The test bars</b></td><td>The row of vertical bars that means <b>signal present.</b> <b>Geometry deliberately identical everywhere</b>, so <i>signal OK</i> always reads the same.</td></tr><tr><td><b>The hint zone</b></td><td>The one line of verbs at the foot of the top glass — <code>&lt;scroll back&gt;</code>, <code>&lt;shake again  scroll back&gt;</code>. <b>One band, one place, cleared before it is written.</b></td></tr><tr><td><b>The menu card</b></td><td>Header, <code>Please Select:</code>, and the current row in its brackets — <code>&gt; </code> … <code> &lt;</code>.</td></tr><tr><td><b>The panel</b></td><td>The app settings page: title with a rule, label/value rows, <code>&lt;EXIT</code> low-left and <code>GO&gt;</code> low-right.</td></tr><tr><td><b>The bracket</b></td><td><b>Mike's selection tell</b> — <code>&lt;cancel&gt;</code> against <code> cancel </code>, <code>&lt;&lt; &gt;&gt;</code> against <code>&lt; &gt;</code>. <b>The origin of the W3 bracket standard.</b></td></tr></tbody></table></div>
+<hr>
+<h2 id="5-the-input-grammar">5 · THE INPUT GRAMMAR</h2>
+<p><a id="input"></a></p>
+<p><b>Full law text at <a href="10-LAWS.html#the-input-grammar-law">LAWS</a>.</b> The shape:</p>
+<ul><li><b>SHAKE = &quot;another&quot;</b> — re-run, re-roll, next.</li><li><b>SCROLL = &quot;go back one level&quot;</b> — context-aware, always one level up.</li><li><b>CLICK = select.</b></li></ul>
+<p><b>THE TWO-CONTEXT GRAMMAR (C2, 2026-07-24, the refinement):</b></p>
+<div class="tw"><table><thead><tr><th>context</th><th>SCROLL</th><th>CLICK</th><th>SHAKE</th></tr></thead><tbody><tr><td><b>NAVIGATION</b> — menus, config cards, readers, lists</td><td>browse</td><td>drill in / select (selecting a value pops back up one level)</td><td>—</td></tr><tr><td><b>GENERATIVE</b> — answers, rolls, deals, searches, wing-it</td><td>back / exit</td><td>—</td><td>another</td></tr></tbody></table></div>
+<p><b><i>The boundary: &quot;is the machine MAKING, or am I CHOOSING?&quot;</b></i></p>
+<p><b>The config card works exactly like a NESTED MENU:</b> scroll to a field, click to enter, scroll among values, click to select-and-return.</p>
+<p><b>THE RADIO TUNING RULING (R1, 2026-07-24)</b> resolves the last grammar conflict: SCROLL <b>sweeps the dial</b> — browsing stations. While the needle moves: noise/static. <b>The pointer SNAPS TO SIGNALS, not to fraction marks</b> — the needle finds broadcasts, not geometry. <b>The push-button band-step retires.</b></p>
+<p><b>THE PANEL VERBS READ <i>&quot;dial to change, press to keep.&quot;</b></i></p>
+<hr>
+<h2 id="6-the-menu-s-own-machinery">6 · THE MENU'S OWN MACHINERY</h2>
+<p><a id="machinery"></a></p>
+<p><code>MENU_TABLE[23][41][3]</code> and <code>MENU_PARAMETER_TABLE</code> — both generated from the 8Ball Specification's <i>Menu System</i> sheet (2,683 cells). The spreadsheet <b>literally contains the C initialisers</b> that appear in <code>2_data_MENU.ino</code>.</p>
+<p><b>Parameter columns:</b> unique id · linked menu · linked line · <code>links_to_Exe</code> · then <b>four passcode columns</b> (read/run × two states).</p>
+<p><b>The states:</b> <code>MENU_SYSTEM_COLD_START</code> · <code>CHECK_FOR_INPUT</code> · <code>DETERMINE_IF_EXE</code> · <code>RUN_EXE_ST</code>.</p>
+<p><b>~111 executable leaves; 5 handlers wired in the 2024 firmware head.</b></p>
+<p><b>THE STUB LAW:</b> stub rows are <b>stripped from the menus</b> rather than shown — which is why the twin's stub rows are not <code>shown</code> in the reveal ledger.</p>
+<p><b>THE APP ENTRY GATE (D4 TEMPLATE LAW, 2026-07-27):</b> <code>App_Enter_Gate(name)</code>. Every app enters the same way.</p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/04-MENU.md</code>,
+last written <b>2026-08-20 04:01 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

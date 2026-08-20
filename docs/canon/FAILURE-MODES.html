@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the four failure modes</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="the-four-failure-modes-recorded-and-checked-against-the-machine">THE FOUR FAILURE MODES — recorded, and checked against the machine</h1>
+<blockquote><p><b>Mike's ask (A++): the Portal should fail in a way that reflects WHICH switch is wrong. Not a clue — theatre.</b></p></blockquote>
+<p><b>NOTHING IS BUILT HERE AND NOTHING IS PROPOSED AS A DESIGN.</b> This page does three things: it records Ops' reading of the four; it reports what the twin can express today, measured against the file; and it names what each one would cost.</p>
+<hr>
+<h2 id="1-the-four-as-read">1 · THE FOUR, AS READ</h2>
+<p><a id="the-four"></a></p>
+<p><b>Ops' reading, recorded for Mike to rule on.</b></p>
+<div class="tw"><table><thead><tr><th>switch</th><th>wrong</th><th>what happens</th><th>the tell</th></tr></thead><tbody><tr><td><b>PARITY</b></td><td>ODD where the far end is EVEN</td><td>Every character arrives. Every character fails its check.</td><td><b>Data flowing, none trusted.</b></td></tr><tr><td><b>DUPLEX</b></td><td>HALF where the far end is FULL</td><td>The near end echoes what it sends, and the far end echoes it back.</td><td><b>Everything doubles.</b></td></tr><tr><td><b>WORD</b></td><td>8 BIT where the far end sends 7</td><td>The receiver reads the parity bit as data.</td><td><b>Every character shifted — consistently garbled, not randomly.</b></td></tr><tr><td><b>STOP</b></td><td>2 where the far end sends 1</td><td>Framing error: the receiver looks for a stop bit, finds the next start bit, loses sync.</td><td><b>Noise after the first character.</b></td></tr></tbody></table></div>
+<p><b>THE FOUR ARE DISTINGUISHABLE BY EYE AND NONE OF THEM IS A LABEL.</b> That is the whole of the idea: a person watching learns which switch is wrong from what the glass does, and the machine never says a word about it.</p>
+<p><b>AND THE MANUAL ALREADY FORBIDS THE WORD</b>, which is what makes theatre the only honest route:</p>
+<blockquote><p><i>&quot;A disagreement in any one of the four is reported as a parity bias setting mismatch. The report names the condition and <b>does not name the setting at fault, there being no means at this end of knowing which of them is wrong.</b>&quot;</i> — <code>BODY_B_1</code>, written, published as <code>scan-31-a.webp</code></p></blockquote>
+<p>The instrument may not name the fault. <b>It may still behave differently.</b> The theatre is not a loophole in that sentence — it is the only thing the sentence leaves.</p>
+<hr>
+<h2 id="2-what-the-twin-can-express-today">2 · WHAT THE TWIN CAN EXPRESS TODAY</h2>
+<p><a id="what-the-twin-can-do"></a></p>
+<p><b>Measured against <code>robots:tools/viiip_twin.html</code>, 10,802 lines.</b></p>
+<h3 id="2-1-the-headline-none-of-it-exists">2.1 · The headline: none of it exists</h3>
+<p><b>There is no communications-settings machinery in the twin at all.</b> The strings <code>parity</code>, <code>duplex</code>, <code>stop bit</code>, <code>7 BIT</code>, <code>8 BIT</code>, <code>far end</code> and <code>Bell</code> return <b>zero matches</b> in the whole file outside three unrelated comments about a display-rate mismatch and a rasterizer bug.</p>
+<p>Concretely, all of the following are absent:</p>
+<ul><li>no PARITY / DUPLEX / WORD / STOP state, in any form;</li><li>no far-end model, no far-end identity, no far-end anything;</li><li><b>no video link.</b> The manual's SP 7-14 subsystem is not built;</li><li>no link-failure path of any kind, and no failure state that persists.</li></ul>
+<h3 id="2-2-the-nearest-existing-thing-is-a-different-link">2.2 · The nearest existing thing is a different link</h3>
+<p><code>monConn</code> is the twin's only link-shaped state, and it is a <b>download</b> connection, not the video link:</p>
+<ul><li><code>Mon_StartConnection(records)</code> sets it; it steps through <code>MON_SET4</code> and clears itself (<code>viiip_twin.html:2666-2680</code>);</li><li>while it is up, the graph window's SIGNAL is real and rides it (<code>:2738-2745</code>) — <b>which is exactly what SP 7-14 says signal does, for the wrong link</b>;</li><li>the DOS window's <code>SYNC</code> command reports <code>LINK UP</code> or <code>NO LINK</code> off it (<code>:2789</code>).</li></ul>
+<p><b>So the twin already has: a link that can be up or down, a signal graph fed by it, and a status line that reports it.</b> It is pointed at downloads. Nothing about it is parity-aware, and it has no failure state — it steps forward and finishes.</p>
+<h3 id="2-3-the-f-t-dance-is-a-handshake-that-cannot-fail">2.3 · The F/T dance is a handshake that cannot fail</h3>
+<p><a id="cannot-fail"></a></p>
+<p><code>FT_Dance()</code> (<code>:8682-8783</code>) is the closest thing in the building to a link coming up, and it is <b>authored to always succeed.</b> <code>FT_Seg_Plan()</code> (<code>:8669-8679</code>) guarantees the shape every run: six segments, <b>exactly one stalls and resumes, exactly one fails and is retried</b>, the last is always slow. Which segment does which is drawn from the seed. <b>Every path recovers.</b> There is no branch in which the two machines fail to agree.</p>
+<p>Its Act 1 is a near miss and is worth naming because it is the existing idiom for <i>nobody answered</i>: F calls <code>AUX CHANNEL OPEN 300 BAUD</code> into the dark, waits, gets <code>T_Hiss(1100,&quot;no answer&quot;)</code>, waits again, calls again — and then T stirs.</p>
+<h3 id="2-4-the-primitives-that-do-exist-and-what-each-is-good-for">2.4 · The primitives that DO exist, and what each is good for</h3>
+<div class="tw"><table><thead><tr><th>primitive</th><th>where</th><th>what it can carry</th></tr></thead><tbody><tr><td><code>printText(row,col,text)</code> → <code>OLED.print</code></td><td><code>:2248</code></td><td>Per-character rendering through a real GFX shim. <b>A string transformed before printing costs nothing.</b></td></tr><tr><td><code>T_Push(line)</code> / <code>T_Draw()</code></td><td><code>:8528</code>, <code>:8530</code></td><td>T's log — five visible lines, whole strings pushed by the author.</td></tr><tr><td><code>T_Says(line,hold,punct)</code></td><td><code>:8586</code></td><td>One log line, with a beat and a hum blip.</td></tr><tr><td><code>F_Says(action,pct,punct)</code></td><td><code>:8514</code></td><td>F's install face — one action string and a percentage.</td></tr><tr><td><code>T_Hiss(ms,label)</code></td><td><code>:8593</code></td><td><i>&quot;the empty line: static, nothing&quot;</i> — picture and sound together.</td></tr><tr><td><code>Flick_Static(ms,withSound)</code></td><td><code>:2943</code></td><td>The static generator itself.</td></tr><tr><td><code>Glitch_Punctuate(screen,strength)</code></td><td><code>:9536</code></td><td>An invert snap <b>or</b> a 6–16px horizontal band slipped 5px. <b>Whole-screen, not per-character.</b></td></tr><tr><td><code>Static_Voice_Enter/Leave/Kill</code></td><td><code>:1600-1622</code></td><td>Holds the static voice for as long as the picture is up (THE STATIC-SOUND LAW).</td></tr><tr><td><code>Hum_Strain()</code> / <code>Hum_Blip()</code> / <code>Hum_Swell()</code></td><td><code>:1738-1767</code></td><td><i>Something is not going well</i>, as a bed rather than a beep.</td></tr><tr><td><code>PORTAL_RECIPES</code></td><td><code>:10459</code></td><td><b>Named state deltas as DATA.</b> Knobs today: <code>power</code>, <code>level</code>, <code>replay</code>, <code>day</code>, <code>dev</code>, <code>resume</code>. An unknown id is chipped and ignored.</td></tr><tr><td><code>chip(kind,html)</code></td><td><code>:1512</code></td><td>The dev rail's own reporting channel.</td></tr></tbody></table></div>
+<h3 id="2-5-on-the-museum-side">2.5 · On the museum side</h3>
+<p><code>museum:src/data/artists/portal.js</code> has a <b>refusal</b> mechanism and no failure mechanism. A drum position, a switch or the dial carries <code>arms</code> / <code>armsWhen</code>; a position that will not arm carries a <code>why</code> (printed under the latch) and a switch carries a <code>held</code>. The latch reads <code>FEED ARMED</code> or <code>NOT ARMED</code>.</p>
+<p><b>That is a machine declining to open a door. It is not a machine opening a door onto a broken link</b>, which is what all four of these are.</p>
+<p><b>And Record 005 — written, committed, posting at 17:00 on 2026-08-21 — says the mismatch happens:</b></p>
+<pre>  &gt; The launch controls are intuitive looking, but the system fails to boot.
+  &gt; Error: Communications Parity Bias Setting Mismatch
+  &gt; Four toggles. Sixteen combinations. One of them is correct.</pre>
+<p><b>That is prose in the Record. Nothing in either repo produces that state.</b></p>
+<hr>
+<h2 id="3-what-each-would-cost">3 · WHAT EACH WOULD COST</h2>
+<p><a id="costs"></a></p>
+<p><b>Ranked by cost, cheapest first.</b> Every estimate names the thing it depends on, so a wrong estimate can be found.</p>
+<h3 id="3-1-duplex-the-cheapest-by-a-wide-margin">3.1 · DUPLEX — the cheapest by a wide margin</h3>
+<p><b>It is a string transform applied before print, and nothing else.</b></p>
+<p>Half-duplex local echo against a full-duplex far end is what genuinely produces <code>HHEELLLLOO</code> on a real terminal — it is the classic period tell and the most legible of the four to somebody who knows nothing about serial links.</p>
+<ul><li><b>Render:</b> double each character in the string handed to <code>T_Push</code> / <code>T_Says</code> / <code>printText</code>. No new drawing, no font work, no layout change.</li><li><b>Model:</b> none, if the far end's traffic is authored. The doubling does not need a receive path — it needs text going past.</li><li><b>Sound:</b> already right. <code>Hum_Blip</code> fires per line and would fire twice.</li><li><b>Risk:</b> line length. T's log fits five rows through <code>Fit_Row</code>, which budgets; a doubled line overflows and the existing fitter will truncate rather than wrap. <b>Legibility of a doubled line at 128px is a measurement nobody has taken.</b></li></ul>
+<h3 id="3-2-stop-two-existing-calls-in-sequence">3.2 · STOP — two existing calls in sequence</h3>
+<p><i>Noise after the first character</i> is, in the twin's own vocabulary: print one character, then <code>T_Hiss</code>.</p>
+<ul><li><b>Render:</b> <code>printText</code> a single glyph, then <code>Play_Frames(Flick_Static(...))</code> on the same glass. Both exist.</li><li><b>Sound:</b> already exactly right — <code>Static_Voice_Enter</code> holds the voice for the length of the picture, which is what THE STATIC-SOUND LAW was written for.</li><li><b>Model:</b> none, for a single beat. Sustaining it (<i>the link is up and has been producing noise for a minute</i>) needs somewhere for the state to live, which is §3.5.</li><li><b>Risk:</b> it looks like the existing <code>T_Hiss</code> beat in Act 1 of the dance, which means <i>nobody answered</i>. <b>Two different meanings on one picture</b> — and the manual is explicit that they are not the same thing: <i>&quot;Absence of signal is not in itself a fault; a far end that is not answering is not a far end that is not there.&quot;</i> The static would have to be distinguishable from silence, or the two readings collide.</li></ul>
+<h3 id="3-3-word-deterministic-and-it-hides-a-font-problem">3.3 · WORD — deterministic, and it hides a font problem</h3>
+<p><i>Every character shifted, consistently garbled</i> is a fixed mapping, which is the easiest kind to author and the easiest kind to verify.</p>
+<ul><li><b>Model:</b> a lookup or a bit operation. Trivial.</li><li><b>THE COST NOBODY WOULD ESTIMATE: the glyphs may not exist.</b> The twin's three faces are <code>FONT_TT</code> (TomThumb), the built-in <code>CLASSIC</code> 6×8, and <code>FONT_FS</code> (FreeSansBold). Their glyph tables are bitmap ranges cut for printable ASCII. <b>A garble that maps a character above 0x7F has nowhere to land</b>, and what a missing glyph draws is whatever the shim does at the end of its table — a blank, a repeat, or an index error. So the garble must either be <b>mapped back into the printable range</b> (a design choice: which wrong letter does <code>E</code> become?) or <b>the fonts must gain a high half</b> (real work, and it is asset work, not code).</li><li><b>And the mapping is a taste decision.</b> <i>Consistently garbled</i> is only legible as WORD-wrong if a reader can see that it is consistent — the same input letter always giving the same wrong letter. That is a property of the mapping, not of the render.</li></ul>
+<h3 id="3-4-parity-the-render-is-cheap-and-the-model-is-the-whole-cost">3.4 · PARITY — the render is cheap and the model is the whole cost</h3>
+<p><i>Data flowing, none trusted</i> has no existing analogue anywhere in the twin, because the twin has no notion of a check on anything it draws.</p>
+<ul><li><b>Render:</b> available. A character printed and then struck — <code>printText</code> the glyph, then a <code>drawLine</code> or a <code>fillRect</code> at the cell, or <code>invertDisplay</code> per region. The GFX shim can do it.</li><li><b>Model: this one needs a receive path.</b> The other three can be authored as theatre over text that is already going past. <i>Every character fails its check</i> requires the machine to be <b>checking</b>, which means there has to be a thing arriving with a check on it. <b>The twin has no receive path at all.</b> That is the video link (<a href="HOLES.html#h-04">H-04</a>, <a href="HOLES.html#h-03">H-03</a>) and it is not built.</li><li><b>It is also the mode that most nearly IS the manual's sentence</b>: the instrument holds its peace while data flows. <b>Which means it is the most faithful of the four and the most expensive.</b></li></ul>
+<h3 id="3-5-the-cost-all-four-share-where-does-the-state-live">3.5 · THE COST ALL FOUR SHARE — where does the state live</h3>
+<p><a id="where-state-lives"></a></p>
+<p><b>A failure mode needs something to be wrong.</b> Three candidates, and one is obviously cheapest:</p>
+<div class="tw"><table><thead><tr><th>where</th><th>cost</th><th>note</th></tr></thead><tbody><tr><td><b><code>PORTAL_RECIPES</code></b></td><td>Four new knobs and four branches in <code>Portal_Preset_Apply</code></td><td>It is already <b>data</b>, it already carries named deltas, and Mike's own ruling on it is <i>&quot;Recipes are DATA, so Mike can direct new ones in plain language.&quot;</i> The latch already puts <code>preset</code> in the URL. <b>Cheapest and already the museum's dispatch route.</b></td></tr><tr><td><b>The live menu</b></td><td>A new menu table, four rows, four parameter rows</td><td><b>And it may be wrong in-story.</b> B-1 says the values <i>&quot;are entered on the installation record at the time the link is made&quot;</i>, not set from the front panel. A menu row would contradict a published page.</td></tr><tr><td><b>A physical control on the Portal panel</b></td><td>Four positions on the museum-side panel</td><td>This is the object Record 005 describes — <i>&quot;Four toggle switches sit under a hinged guard, unlabelled&quot;</i> (Record 004, the bench, <b>published</b>) and <i>&quot;Four toggles. Sixteen combinations.&quot;</i> (Record 005, <b>published</b>). <b>The story has already put the switches at the far end's bench, not on the instrument.</b></td></tr></tbody></table></div>
+<p><b>THE THIRD ROW IS THE FINDING.</b> Two published Records place four unlabelled toggles under a hinged guard <b>on the far end's console</b>, not on the MGK-VIIIp. So the person setting them, in the story as published, is at the bench — which is where the twin's user is. That is not a cost; it is a constraint that is already decided and that a design would otherwise have to guess at.</p>
+<hr>
+<h2 id="4-the-three-laws-that-bear-on-this">4 · THE THREE LAWS THAT BEAR ON THIS</h2>
+<p><a id="laws-that-bear"></a></p>
+<p><b>Read these before designing anything, because two of them can kill a design that is otherwise finished.</b></p>
+<h3 id="4-1-the-no-dead-wood-law-and-it-is-the-big-one">4.1 · THE NO-DEAD-WOOD LAW — and it is the big one</h3>
+<blockquote><p><b>&quot;NO fake reports anywhere unless Mike specifically asks</b> — every claim the monitor/machine makes must be REAL machine truth; story-fakes only ever by explicit Papa direction.&quot; — canon, Mike, 2026-07-22 (<code>robots:STATE.md</code>; <code>STORY_BIBLE.html</code> ch. VIII). <code>TEST</code> is the one exemption, and it is Papa-placed.</p></blockquote>
+<p><b>A garble that is not driven by a real setting mismatch is a fake report.</b> So either the four settings become <b>real state</b> that the render reads, or the theatre needs Mike's explicit direction to be staged.</p>
+<p><b>This is not an obstacle to the idea — the idea already satisfies it.</b> Mike is asking for the failure to <i>reflect which switch is wrong</i>, which is the law stated forward: the picture is true because the switch is really wrong. It is recorded here because a cheaper implementation — a canned animation on a timer — would break a standing law, and would look identical in a screenshot.</p>
+<h3 id="4-2-ft8-the-glitch-law-do-not-build-this-on-the-glitch-layer">4.2 · FT8, THE GLITCH LAW — do not build this on the glitch layer</h3>
+<blockquote><p><i>&quot;Subtle tier only. Deterministic punctuation, not noise.&quot;</i> — 14 wired sites.</p></blockquote>
+<p><code>Glitch_Punctuate</code> is <b>punctuation at a change of act</b>, and it is capped there on purpose. A sustained garble built on it inherits the subtle-tier ceiling and the ambient rate, and it would make every act transition in the boot read as a link fault. <b>These four are a different animal and want their own machinery.</b></p>
+<h3 id="4-3-ft3-state-words-and-it-does-not-bite-here">4.3 · FT3, STATE-WORDS — and it does not bite here</h3>
+<blockquote><p><i>Machine self-description never asserts checkable specifics.</i></p></blockquote>
+<p>None of the four asserts anything. They are <b>behaviour, not statement</b>, which is precisely why they clear FT3 where an error message naming a setting would not. <b>The theatre is the FT3-safe route</b>, and that is worth writing down: the constraint that would block a message does not block a picture.</p>
+<hr>
+<h2 id="5-what-is-not-known">5 · WHAT IS NOT KNOWN</h2>
+<p><a id="not-known"></a></p>
+<ul><li><b>Which end is &quot;wrong&quot;.</b> All four modes above assume the near end is the one mis-set. The manual's own position is that there is <b>no means at this end of knowing which of them is wrong</b> — which is a statement about blame, not about the physics, and the physics is symmetric.</li><li><b>Whether a wrong setting produces a link at all.</b> B-1 says <i>&quot;The link opens only where the communications settings of Appendix B agree&quot;</i> and <i>&quot;the instrument does not open the link.&quot;</i> <b>Read strictly, a mismatch means no link and therefore nothing to garble</b> — the theatre would have to happen at the far end's console, which is where the published toggles are. Read loosely, the instrument attempts and fails visibly. <b>The two readings produce two different builds and nobody has ruled.</b></li><li><b>What the far end shows when the near end is wrong.</b> Absent (<a href="HOLES.html#h-03">H-03</a>).</li><li><b>Whether these are one-shot or sustained.</b> A beat and a condition are different builds.</li></ul>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/FAILURE-MODES.md</code>,
+last written <b>2026-08-20 04:12 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

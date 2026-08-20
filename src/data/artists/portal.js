@@ -250,6 +250,13 @@ export const PORTAL_ALBUM = {
           },
           drum: {
             label: "FEED",
+            /* [2026-08-19] THIS LEGEND IS WRONG BY ONE WORD AND IS LEFT ALONE
+               ON MIKE'S RULING: fix it when the Portal is next touched, not in
+               a round that is not about the Portal. TWO positions arm, not one
+               — `standard` (ch 3) and, since CH4 2026-08-12, `idling-updated`
+               (ch 4, DETAIL). Nobody has met it: the wing is HELD. It is the
+               Record's own "what's said matches what's shown" rule (ruling 10)
+               applied to a control legend, and it costs one word. */
             sub: "SELECT · ONE ARMED",
             /* positions are read in drum order, top to bottom. `arms:true`
                is the only one that lights the drum and permits the latch.

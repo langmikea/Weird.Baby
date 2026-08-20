@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — conflicts</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="the-conflicts-every-account-side-by-side-none-resolved">THE CONFLICTS — every account, side by side, none resolved</h1>
+<p><b>Nothing on this page is decided. Every row is Mike's to rule.</b></p>
+<p>Each conflict carries: <b>every account</b> with its source · <b>what depends on each</b> · <b>what a ruling costs, either way</b>. The cost column is the point of the page — it is what makes a ruling cheap in the morning, because the work a ruling creates is already counted.</p>
+<p>Conflicts are numbered <code>K-nn</code> in this catalogue. Where a conflict already carried an id in an upstream document (<code>C-n</code> in the robots vocabulary, <code>A-n</code> in the holes report, <code>#n</code> in the spec inventory's ledger) that id is printed beside it so the two can be matched.</p>
+<p><b>Ranking is deliberately absent.</b> No account here is marked likely, preferred, later, better sourced or more canonical. Where a document itself claims priority (a dated supersession, a recorded ruling) that claim is quoted as a fact about the document — it is not this page agreeing with it.</p>
+<p><b>Ordering is by blast radius, not by importance:</b> the conflicts that block sentences already written or already published come first.</p>
+<hr>
+<h2 id="the-short-list-what-is-blocked-today">THE SHORT LIST — what is blocked today</h2>
+<div class="tw"><table><thead><tr><th>id</th><th>conflict</th><th>blocking</th></tr></thead><tbody><tr><td><a href="#k-01">K-01</a></td><td>What the machine runs on — four stories</td><td>Manual ¶2-11, SP 3-8, 7-19 (7-19 is <b>written</b>), Appendix G, Table 2-1</td></tr><tr><td><a href="#k-02">K-02</a></td><td>Polarity — five or six, two scales, three double-named slots</td><td>Manual Table B-1's row count; the firmware enum; the live menu</td></tr><tr><td><a href="#k-03">K-03</a></td><td>The Portal — three objects wear the word</td><td>Manual Appendix F glossary; the museum's own Portal album</td></tr><tr><td><a href="#k-04">K-04</a></td><td>Where the answer engine lives</td><td>Manual ¶7-3 and ¶7-5</td></tr><tr><td><a href="#k-05">K-05</a></td><td>Which units are which — three registries</td><td>Manual Appendix A and Appendix C; <b>the published Record 003</b></td></tr><tr><td><a href="#k-06">K-06</a></td><td>The Everyday vs the Everyman</td><td><b>Published</b> in Record 003; the bible registry says the other</td></tr><tr><td><a href="#k-07">K-07</a></td><td>Inclination exists in specs and in no firmware</td><td>Manual SP 7-12, Table B-3</td></tr></tbody></table></div>
+<hr>
+<h2 id="k-01-what-the-machine-runs-on">K-01 · WHAT THE MACHINE RUNS ON</h2>
+<p><a id="k-01"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-1</code> · holes report <code>A-13</code> · spec ledger <code>#8</code>.</i></p>
+<p><b>FOUR ACCOUNTS.</b></p>
+<div class="tw"><table><thead><tr><th>#</th><th>account</th><th>source</th></tr></thead><tbody><tr><td>1</td><td><b>PHVDC.</b> Pulsed high-voltage DC carrying supply and data on one pair. <b>300 V DC nominal · data 3 kHz / 1 Mbps.</b></td><td><code>MGK-VIIIp Instruction manual.docx</code> (2024), summarised at <code>robots:docs/SPEC_INVENTORY-viiip-ux-20260714.md</code> §D.4</td></tr><tr><td>2</td><td><b>TAC — tricycle alternating current.</b> <i>&quot;240 volt, 60-20-30 tricycle alternating current&quot;</i>, with a charging adapter described as <i>&quot;240TAC to USB-B micro.&quot;</i></td><td><code>robots:robots/mgk-viiip/sources/2022-proto-docs/MGKVIIIp User Manual new.docx</code> (2022-12-01), summarised at <code>SPEC_INVENTORY</code> §E.1</td></tr><tr><td>3</td><td><b>An adapter of the PHVDC type</b> — <i>&quot;The adapter carries the supply and the data channel on one pair. It is matched to the instrument and no substitution is to be attempted.&quot;</i></td><td><code>robots:tools/manual_structure_build.py:105-113</code> (<code>BODY_7_19</code>) — <b>this is written prose, not a position</b></td></tr><tr><td>4</td><td><b>USB.</b> The real object charges over USB.</td><td>The object; and the Record's own restoration line (<i>&quot;upgrades the PHVDC power adapters to USB&quot;</i>, <code>SPEC_INVENTORY</code> §D.5, the 2024 blog)</td></tr></tbody></table></div>
+<p><b>AND THE MANUAL'S OWN APPENDIX G CARRIES PHVDC AND TAC AS TWO ROWS OF THE SAME ABBREVIATIONS TABLE.</b> Whichever account wins, the table currently declares two of them.</p>
+<p><b>Note that accounts 3 and 4 are not necessarily rivals.</b> Account 3 is what the 1965 document says; account 4 is what the 2024 restoration did to the object. The blog states both in one sentence. Nobody has said whether that reconciles them or whether it is a third position. Recorded, not decided.</p>
+<p><b>WHAT DEPENDS ON EACH</b></p>
+<ul><li>Manual <b>¶7-19</b> is written to account 3 and is one of only three written paragraphs in the document. It is also <b>published</b> — Record 003 delivers <code>scan-07-a.webp</code> / <code>scan-07-b.webp</code>, <i>&quot;Power supply and distribution&quot;</i>. See <a href="09-PUBLISHED.html#record-003">PUBLISHED</a>.</li><li>Manual <b>SP 3-8</b> (&quot;adapter, PHVDC type&quot;) and <b>SP 3-9</b> (&quot;adapter of the original pattern&quot;) both name the class.</li><li>Manual <b>¶2-11</b> and <b>¶3-7</b> are positions, unwritten, and both need one answer. ¶7-19 points at ¶3-7 by name (<i>&quot;the requirements of the premises are given in paragraph 3-7&quot;</i>).</li><li><b>Table 2-1</b> (the specification) needs a supply figure. It has none — see <a href="HOLES.html#h-02">HOLES</a>.</li><li>The <b>SAFETY SUMMARY</b> caution is about the power port and survives any ruling: it is about the port, not the current.</li></ul>
+<p><b>WHAT A RULING COSTS</b></p>
+<div class="tw"><table><thead><tr><th>if Mike rules…</th><th>what changes</th></tr></thead><tbody><tr><td><b>PHVDC</b></td><td>Nothing written changes. Appendix G's TAC row must be struck, or TAC must be given a reason to be in the table (a superseded standard, a different market). The 2022 proto-manual becomes a dated source that says something else, which the corpus already tolerates.</td></tr><tr><td><b>TAC</b></td><td>¶7-19 is rewritten — the one long written paragraph in the document, <b>already published as a scan</b>. Under the published-facts rule that is not a repair, it is a new page. Appendix G keeps TAC and loses PHVDC. SP 3-8's name changes.</td></tr><tr><td><b>Both, deliberately</b> (TAC 1962-ish, PHVDC 1965-ish)</td><td>Nothing is struck. Appendix G's two rows become the evidence rather than the defect. Costs one sentence somewhere placing the changeover, and that sentence does not exist.</td></tr><tr><td><b>USB, in-story</b></td><td>Contradicts a 1965 document on its own page. Would have to be a restoration note, not a manual statement — the manual cannot know about it.</td></tr></tbody></table></div>
+<hr>
+<h2 id="k-02-polarity">K-02 · POLARITY</h2>
+<p><a id="k-02"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-2</code> · holes report <code>A-12</code> · spec ledger <code>#7</code>.</i></p>
+<p><b>This is three conflicts wearing one name.</b> They are separable and are separated here.</p>
+<h3 id="k-02a-how-many-values-five-or-six">K-02a · How many values — five or six</h3>
+<div class="tw"><table><thead><tr><th>where</th><th>count</th><th>source</th></tr></thead><tbody><tr><td>Firmware <code>enum polaritySettings</code></td><td><b>5</b> (<code>Negative, Pessimistic, Neutral, Favorable, Optimistic</code>, then <code>polaritySetting_Max</code>)</td><td><code>robots:robots/mgk-viiip/firmware/MGK_VIIIp_01__20240721_WORKS/BIAS.ino:1-6</code></td></tr><tr><td>The live menu (<code>Polarity Setting</code> table)</td><td><b>6</b> — the five above plus <code>Affirmative</code></td><td><code>robots:tools/viiip_twin.html:2021</code> (<code>MENU_TABLE_SRC</code>, parsed verbatim from <code>2_data_MENU.ino</code>)</td></tr><tr><td>2024 instruction manual, Appendix 1</td><td><b>6</b> — <code>Negative · Pessimistic · Exactitude · Favorable · Optimistic · Affirmative</code>, passcodes <code>0000</code>…<code>1111</code></td><td><code>SPEC_INVENTORY</code> §D.4</td></tr><tr><td>8Ball Specification, STATUS sheet</td><td><b>6</b> — as the menu, with <code>Neutral</code> at slot 2</td><td><code>SPEC_INVENTORY</code> §D.8</td></tr></tbody></table></div>
+<p><b>The sixth setting exists as a bug and is PARKED.</b> Selecting <code>Affirmative</code> writes 5 into a 0–4 enum. Recorded harmless at <code>polarityBiasNOW = 0</code> — verified across 200 draws, zero <code>-1</code> returns — at <code>robots:STATE.md</code> open issue 10. It is also the mechanism by which the menu's sixth row is reachable at all.</p>
+<h3 id="k-02b-the-slot-2-name-neutral-or-exactitude">K-02b · The slot-2 name — Neutral or Exactitude</h3>
+<p><b>RULED 2026-07-14 (Mike, <code>SPEC_INVENTORY</code> §RULINGS R4): Neutral is canon; Exactitude is preserved as the in-fiction manual's earlier-compile name.</b> Recorded here because the <i>naming</i> is settled and the <i>cardinality</i> (K-02a) was explicitly left open in the same ruling.</p>
+<h3 id="k-02c-two-five-value-scales-sharing-indices-without-sharing-names">K-02c · TWO FIVE-VALUE SCALES SHARING INDICES WITHOUT SHARING NAMES</h3>
+<p><b>This is the part that is written down nowhere else, and it is measurable in the firmware.</b></p>
+<div class="tw"><table><thead><tr><th>index</th><th>what the keeper <b>SETS</b> (<code>polaritySettings</code>)</th><th>what an answer is <b>TAGGED</b></th></tr></thead><tbody><tr><td>0</td><td>Negative</td><td>Negative</td></tr><tr><td>1</td><td>Pessimistic</td><td>Pessimistic</td></tr><tr><td>2</td><td><b>Neutral</b></td><td><b>AskAgain</b></td></tr><tr><td>3</td><td><b>Favorable</b></td><td><b>Optimistic</b></td></tr><tr><td>4</td><td><b>Optimistic</b></td><td><b>Affirmative</b></td></tr></tbody></table></div>
+<ul><li>Setting scale: <code>BIAS.ino:1-6</code>.</li><li>Tag scale: <code>robots:docs/POLARITY_MAP-release1-20260722.md:38-39</code> and <code>robots:docs/FINDING-polarity-bias-default-20260715.md:34</code>.</li><li>The engine compares them <b>numerically</b>: <code>polarityDifference = abs(tag − polaritySettingNOW)</code>; <code>weight = constrain(100 − polarityBiasNOW × polarityDifference, 0, 100)</code> — <code>BIAS.ino:29-55</code>.</li></ul>
+<p><b>So three of five slots carry two different words for one number:</b> setting <i>Neutral</i> is matched against tag <i>AskAgain</i>, setting <i>Favorable</i> against tag <i>Optimistic</i>, setting <i>Optimistic</i> against tag <i>Affirmative</i>.</p>
+<p>The tag scale describes the <b>answer families of the classic twenty</b> (slots 0–3 of the answer table are the four <i>ask again</i> answers; 4/6/7 are the flat noes; 5/8/9 are the soft noes; 10/13/14/15 are the soft yeses; 11/12/16–19 are the flat yeses). The setting scale describes a <b>lean</b>. Nobody has said whether those are the same axis.</p>
+<p><b>WHAT DEPENDS ON EACH</b></p>
+<ul><li><b>Manual Table B-1</b> must print a row count and a set of names. It can print one scale.</li><li><b>The published Record does not touch polarity.</b> Record 003 delivers <code>scan-31-a.webp</code>, <i>&quot;Bias settings, the four communications settings&quot;</i> — that is Appendix <b>B-1</b>, the communications parity bias, which is <a href="03-ANSWERS.html#the-two-kinds-of-bias">the other kind of bias</a> and is not affected by any of this.</li><li>The <b>factory default</b> is <code>polaritySettingNOW = Neutral</code>, <code>polarityBiasNOW</code> ruled 100 → 0 (<code>STATE.md</code> open issue 10). At bias 100 with setting Neutral only the four AskAgain answers were reachable — 4 of 20 on every engine.</li></ul>
+<p><b>WHAT A RULING COSTS</b></p>
+<div class="tw"><table><thead><tr><th>if Mike rules…</th><th>what changes</th></tr></thead><tbody><tr><td><b>Five values</b></td><td>The menu loses its sixth row. <code>Affirmative</code> leaves the <code>Polarity Setting</code> table (one row in <code>2_data_MENU.ino</code>, one row in the twin's parsed copy). The parked out-of-enum bug closes by deletion. Table B-1 prints five rows.</td></tr><tr><td><b>Six values</b></td><td>The firmware enum gains a value and every <code>abs(tag − setting)</code> widens by one — the weight formula's behaviour changes at the edges, which is a bench question, not a paper one. Table B-1 prints six.</td></tr><tr><td><b>One scale, renamed</b></td><td>Whichever names lose, the losing document is a dated source. Cheapest on paper, and it is the only ruling that makes Table B-1 printable without a footnote.</td></tr><tr><td><b>Two scales, deliberately</b></td><td>Table B-1 has to print both columns and say which is which — which is a paragraph the manual does not have a position for. It also makes the numeric comparison a <i>feature</i> (a lean matched against a family) rather than a coincidence.</td></tr></tbody></table></div>
+<hr>
+<h2 id="k-03-the-portal-three-objects-wear-the-word">K-03 · THE PORTAL — THREE OBJECTS WEAR THE WORD</h2>
+<p><a id="k-03"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-5</code>.</i></p>
+<p><b>All three are canon. Nothing says whether this is one word with three uses or three words that collided.</b></p>
+<div class="tw"><table><thead><tr><th>#</th><th>the object</th><th>source</th></tr></thead><tbody><tr><td>1</td><td><b>The aperture.</b> The round window the front glass sits behind. <i>&quot;CENTERING MATTERS ON THE FRONT GLASS SPECIFICALLY BECAUSE OF THE ROUND PORTAL THE SCREEN SITS BEHIND. The glass is a rectangle but the aperture is a circle.&quot;</i></td><td><code>robots:STATE.md:3881</code>, THE PORTAL LAW, Mike, canon</td></tr><tr><td>2</td><td><b>The 65's reveal.</b> A one-pixel diamond portal at dead centre blossoming to full width or beyond; shake runs it in reverse and the answer is swallowed.</td><td><code>robots:STATE.md</code> MILESTONE 1 CANON (4), Mike 2026-07-24; <code>Portal_65()</code> in <code>robots:tools/viiip_twin.html</code></td></tr><tr><td>3</td><td><b>The doorway.</b> The <code>p</code> in MGK-VIIIp; the bezel, the feed, the museum's held album. <i>&quot;the transitional frame between the webpage's real world and a camera feed / controller arrangement arriving from an unknown source, an unknown location, and for an unknown reason.&quot;</i></td><td><code>robots:STATE.md:4078</code> THE PORTAL REVELATION, Mike, CANON 2026-07-29; <code>museum:src/data/artists/portal.js</code></td></tr></tbody></table></div>
+<p><b>WHAT DEPENDS ON EACH</b></p>
+<ul><li><b>Manual Appendix F</b> is a 35-term glossary and a glossary entry has to choose one meaning, or print three.</li><li><b>The museum's Portal album is built and held</b>, and it uses sense 3 throughout — <code>PORTAL_ALBUM</code>, <code>FEED CONTROL</code>, the drum, the latch.</li><li><b>Record 004 (SCHEDULED, posts 17:00 on 2026-08-20)</b> uses sense 3: <i>&quot;Portal may be the 'answer' this whole mystery… an unattended remote access terminal.&quot;</i></li><li>Sense 1 governs every centring decision on the front glass and is a physical constraint, not a taste.</li></ul>
+<p><b>WHAT A RULING COSTS</b></p>
+<div class="tw"><table><thead><tr><th>if Mike rules…</th><th>what changes</th></tr></thead><tbody><tr><td><b>One word, three uses</b></td><td>Nothing is renamed. Appendix F gets one entry with three senses, which is what a real glossary does.</td></tr><tr><td><b>Three words</b></td><td>Two of them need new names. Sense 1 is the cheapest to rename (it appears in <code>STATE</code> and in composition rules, nowhere a visitor reads). Sense 2 is <code>Portal_65()</code> in the twin plus the block dictionary. Sense 3 <b>cannot</b> be renamed: it is the <code>p</code> in the model number, it is published, and it is the name of a museum album.</td></tr><tr><td><b>Nothing</b></td><td>Appendix F cannot be written.</td></tr></tbody></table></div>
+<hr>
+<h2 id="k-04-where-the-answer-engine-lives">K-04 · WHERE THE ANSWER ENGINE LIVES</h2>
+<p><a id="k-04"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-4</code> · holes report <code>A-7</code> · spec ledger <code>#9</code>.</i></p>
+<div class="tw"><table><thead><tr><th>#</th><th>account</th><th>source</th></tr></thead><tbody><tr><td>1</td><td><b>Self-contained.</b> A Fluidic Nano-Matrix inside the instrument.</td><td>2024 instruction manual, <code>SPEC_INVENTORY</code> §D.4</td></tr><tr><td>2</td><td><b>Cloud-linked co-processor.</b> <i>&quot;Prediction Engine vs cloud-linked Answer Engine co-processor&quot;</i>, three working units.</td><td>The Record blog, 15 March 2024 — <code>SPEC_INVENTORY</code> §D.5</td></tr></tbody></table></div>
+<p><b>AND THE CORPUS PLAYS WITH THIS DELIBERATELY.</b> The <code>TXT_MSG</code> egg has the assistant reveal it is listening and reporting back to the cloud — <code>museum:reveal/ledger.json</code> row <code>egg.cloud-alert</code>, state HELD, build PARTIAL, delivery <i>&quot;triggers on the twentieth question&quot;</i>. <code>MANUAL_STRUCTURE_FIT</code> #65 records that the contradiction <b>may be load-bearing rather than accidental, and nobody has said which.</b></p>
+<p><b>A THIRD FRAME SITS OVER BOTH AND DOES NOT SETTLE THEM.</b> The story arc's persistence conceit (<code>robots:docs/canonical/THE_STORY_ARC.md</code>, ruled B) says real-world persistence is genuine and the <i>fiction's</i> server is completely virtual — the machine performs the network. That tells you the wire is theatre; it does not tell you which of the two the 1965 document claims.</p>
+<p><b>WHAT DEPENDS ON EACH</b> — manual <b>¶7-3</b> and <b>¶7-5</b>. They cannot both be written until this closes.</p>
+<p><b>WHAT A RULING COSTS</b></p>
+<div class="tw"><table><thead><tr><th>if Mike rules…</th><th>what changes</th></tr></thead><tbody><tr><td><b>Self-contained</b></td><td>¶7-3/7-5 write to the FNM. The blog line becomes a 2024 misreading by the restorers, which is in register for the blog. The cloud egg becomes <i>the machine lying</i>, which is a different and larger claim.</td></tr><tr><td><b>Cloud-linked</b></td><td>¶7-3/7-5 write to the co-processor. The cloud egg becomes confirmation rather than surprise, and spends itself.</td></tr><tr><td><b>Deliberately unresolved</b></td><td>Both paragraphs must be written to <i>not</i> say — passive, procedural, no signature, which is exactly the layer-3 writing discipline the arc already specifies. This is the only ruling that costs nothing anywhere else, and it is a ruling.</td></tr></tbody></table></div>
+<hr>
+<h2 id="k-05-which-units-are-which">K-05 · WHICH UNITS ARE WHICH</h2>
+<p><a id="k-05"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-15</code> · holes report <code>A-10</code> · spec ledger <code>#5</code>.</i></p>
+<p><b>THREE POSITIONS FOR THE SAME PEOPLE.</b></p>
+<div class="tw"><table><thead><tr><th>source</th><th>Everyman/Everyday</th><th>Informer</th><th>CEO</th><th>Gambler</th></tr></thead><tbody><tr><td><code>robots:docs/canonical/STORY_BIBLE.html</code>, registry rewritten at the 2026-07-22 gate</td><td><b>−02</b></td><td><b>−07</b></td><td><b>−09</b></td><td><b>−21</b></td></tr><tr><td><code>robots:docs/MENU_MAP_v3-four-doors-20260724.md</code> Table 5 — the live serial mapping</td><td>code <code>101</code></td><td>code <code>102</code></td><td>code <code>103</code></td><td>code <code>106</code></td></tr><tr><td><code>SPEC_INVENTORY</code> R2, ruled 2026-07-14</td><td>—</td><td><b>−02 canonical</b></td><td>—</td><td>—</td></tr></tbody></table></div>
+<p>Plus the pre-rewrite record: the Storyline sheet has the Informer owning <b>−03</b>; the Reference Document tags McKenna <b>SME-02</b>; the release plan had CEO at −03.</p>
+<p><b>THE 2026-07-22 GATE IS A RULING AND IT IS RECORDED AS ONE.</b> It rewrote the registry (<code>robots:STATE.md</code>, 2026-07-22, ruling 2) and it explicitly supersedes the earlier launch-three roster. <b>It does not reconcile the <code>101</code>–<code>132</code> serial mapping</b>, which MENU_MAP flags itself: <i>&quot;Answers rows 7–38 = legacy persona names/order — the registry rewrite's serials/names await the naming/lock pass.&quot;</i></p>
+<p><b>AND R2 (Informer = −02) IS EARLIER THAN THE GATE (Informer = −07).</b> The gate moved him and gave −02 to the Everyman. Both are on the record; the gate is later; nothing marks R2 superseded.</p>
+<p><b>WHAT DEPENDS ON EACH</b></p>
+<ul><li><b>Manual Appendix C</b> (the engine/unit roster) and <b>Appendix A</b> (access codes) are the first documents that have to print it.</li><li><b>Record 003 is published</b> and names four personnel folders <b>by name and not by serial</b> — <code>THE CEO</code>, <code>THE INFORMER</code>, <code>THE EVERYDAY</code>, <code>THE GAMBLER</code>. That was a good instinct: the published Record commits to no serial and is therefore not falsified by any ruling here.</li><li><code>robots:robots/mgk-viiip/content/build/units/</code> holds built content under directories <code>02</code>, <code>07</code>, <code>09</code>, <code>21</code> — the gate's numbering, on disk.</li></ul>
+<p><b>WHAT A RULING COSTS</b> — the naming/lock pass is already scheduled and is where this lands. Whichever way it goes, the cost is the same shape: the <code>101</code>–<code>132</code> read-access codes in <code>2_data_MENU.ino</code> either stay as an unrelated code space (cheap; they are codes, not serials) or are renumbered to match (187 rows, and the passcodes are <b>checked nowhere in firmware</b> — see <a href="HOLES.html#h-11">HOLES</a>).</p>
+<hr>
+<h2 id="k-06-the-everyday-or-the-everyman">K-06 · THE EVERYDAY OR THE EVERYMAN</h2>
+<p><a id="k-06"></a></p>
+<p><i>Upstream: spec ledger <code>#6</code>; ruled R3 2026-07-14; and <b>contested again by what was published</b>.</i></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>The Everyday</b> — the 1965 roster row, and the OPA master artwork is titled <code>OPA 01 The Everyday</code></td><td>Storyline sheet, <code>SPEC_INVENTORY</code> §D.7</td></tr><tr><td><b>The Everyman</b> — the blog, the release plan, the 8Ball Specification, the persona set, the bible registry row −02</td><td><code>SPEC_INVENTORY</code> §D.5/§D.8; <code>robots:docs/PERSONA_SET-everyman-20260722.md</code>; <code>STORY_BIBLE.html</code></td></tr><tr><td><b>The Homemaker</b> — a 1965 row that then vanished</td><td>Storyline sheet, <code>SPEC_INVENTORY</code> §D.7</td></tr></tbody></table></div>
+<p><b>R3 RULED (2026-07-14): The Everyday is canon; &quot;Everyman&quot; is modern-layer corruption, documented in the record as such.</b></p>
+<p><b>AND THEN THE REGISTRY REWRITE OF 2026-07-22 PRINTED <code>−02 The Everyman</code></b>, and the persona set is titled THE EVERYMAN, and the built content lives at <code>content/build/units/02/</code> under that name.</p>
+<p><b>AND THE MUSEUM PUBLISHED <code>THE EVERYDAY</code></b> — Record 003, ADDENDUM 02, on 2026-08-19. See <a href="09-PUBLISHED.html#record-003">PUBLISHED</a>.</p>
+<p><b>So the published surface follows R3 and the working corpus follows the rewrite.</b> Neither is wrong; nobody has said they are the same decision.</p>
+<p><b>WHAT A RULING COSTS</b></p>
+<div class="tw"><table><thead><tr><th>if Mike rules…</th><th>what changes</th></tr></thead><tbody><tr><td><b>The Everyday</b></td><td>The published Record is already right. The bible registry row, the persona set title, and every <code>everyman</code> filename in <code>robots/mgk-viiip/content/drafts/</code> are the in-fiction corruption — which R3 already says they are, so they can stay as artefacts. Cheapest.</td></tr><tr><td><b>The Everyman</b></td><td>Record 003 is published and says EVERYDAY. Under the published-facts rule it cannot be changed — it can only be built on: a later Record would have to be the thing that discovers the two names are one unit, which is a scene, not an edit.</td></tr><tr><td><b>Both, as the corruption</b></td><td>This is R3 as written. It costs a sentence somewhere saying so on the glass, and no such sentence exists yet.</td></tr></tbody></table></div>
+<hr>
+<h2 id="k-07-inclination">K-07 · INCLINATION</h2>
+<p><a id="k-07"></a></p>
+<p><i>Raised in the brief. Upstream: robots vocabulary §4; <code>SPEC_INVENTORY</code> §D.4.</i></p>
+<p><b>IT EXISTS IN SPECIFICATIONS AND IN NO FIRMWARE.</b></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>Inclination Bias, −2 … +2, passcodes redacted as <code>▓▓▓</code>.</b> A tilt-cheat.</td><td>2024 instruction manual, Appendix 1 — <code>SPEC_INVENTORY</code> §D.4</td></tr><tr><td><b>Inclination is one of three settings the keeper sets</b>, named in the manual's own written prose: <i>&quot;Polarity, Clarity and Inclination are set by the keeper, are enabled, set and adjusted by the procedure of paragraph B-3, and are given in Tables B-1, B-2 and B-3.&quot;</i></td><td><code>robots:tools/manual_structure_build.py:155-160</code> (<code>BODY_B_1</code>) — <b>written, and published as <code>scan-31-a.webp</code></b></td></tr><tr><td><b>Nothing.</b> No <code>inclination</code> symbol exists in the 2024 firmware head; <code>BIAS.ino</code> holds <code>polaritySettings</code> and <code>claritySettings</code> and no third enum. The live menu's <code>Preferences</code> table has <code>Polarity</code> and <code>Clarity</code> and no <code>Inclination</code> row.</td><td><code>robots:robots/mgk-viiip/firmware/MGK_VIIIp_01__20240721_WORKS/BIAS.ino</code>; <code>MENU_TABLE_SRC</code></td></tr></tbody></table></div>
+<p><b>THIS ONE IS ALREADY PUBLISHED AND IS THE MOST EXPENSIVE ROW ON THE PAGE.</b> Record 003 delivered the B-1 page as a scan on 2026-08-19. A visitor has read the sentence naming Inclination. It cannot be unpublished.</p>
+<p><b>WHAT DEPENDS ON IT</b></p>
+<ul><li><b>Manual SP 7-12 and Table B-3</b> — positions that exist because the name does.</li><li><code>MANUAL_STRUCTURE_FIT</code> #70 records that <b>the redaction is itself the content</b>: the source censors the passcodes and reproducing the censorship is a strong period move. That is a live design choice, not a defect (<a href="HOLES.html#h-16">HOLES</a>).</li><li>The manual's own doctrine of <i>displayability</i> (Appendix A-3) already covers a function named before it exists: <i>&quot;a code may be accepted before its function exists and takes effect when the function arrives.&quot;</i></li></ul>
+<p><b>WHAT A RULING COSTS</b></p>
+<div class="tw"><table><thead><tr><th>if Mike rules…</th><th>what changes</th></tr></thead><tbody><tr><td><b>Inclination is real and not fitted</b></td><td>Nothing published breaks. Table B-3 prints the −2…+2 scale and the redaction. Table C-2 (positions not fitted) is where it goes. The firmware owes nothing. This is the only ruling the published page already supports.</td></tr><tr><td><b>Inclination is built</b></td><td>Firmware work: a third enum, a third menu table, a third weight term, and a tilt input the corpus says is <code>GyroMotion (GMI)</code> / a 6-axis IMU that is already read. Table B-3 prints and the redaction has to be spent or kept.</td></tr><tr><td><b>Inclination is struck</b></td><td>The published sentence names it. It cannot be struck from a page a visitor has read.</td></tr></tbody></table></div>
+<hr>
+<h2 id="k-08-the-forward-display-s-size">K-08 · THE FORWARD DISPLAY'S SIZE</h2>
+<p><a id="k-08"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-8</code> · holes report <code>A-1</code>.</i></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>128 × 32</b></td><td><code>robots:robots/mgk-viiip/firmware/MGK_VIIIp_01__20240721_WORKS/MGK_VIIIp_01__20240721_WORKS.ino:30</code> — <code>const int FRONT_SCREEN_HEIGHT = 32;</code> and <code>:127</code>, constructed with <code>SMALL_SCREEN</code>; <code>robots:docs/AESTHETIC_CANON-20260723.md</code> §2.2 — <i>&quot;13px pitch, on the 32-row driver&quot;</i>; <code>robots:tools/viiip_twin.html:1833</code></td></tr><tr><td><b>128 × 64</b></td><td>The 2024 manual, Table 2-1</td></tr></tbody></table></div>
+<p>Two sources agree with each other and with the hardware. <b>Recorded, not resolved</b> — the manual is a document in the fiction and a document in the fiction may be wrong. Nobody has said whether this one is.</p>
+<p><b>AND DOCTRINE 18 BEARS ON THIS AND ON <a href="#k-09">K-09</a>, IN A DIRECTION THAT IS EASY TO MISS.</b> <i>&quot;The in-story manual is the authority for the in-story spec, and <b>the real firmware is not evidence about a 1965 machine at all.</b>&quot;</i> The fit report marks six rows of the manual's SPECIFICATIONS section <code>FITS</code> <b>with the real Arduino firmware cited as their source</b>, and lets the firmware WIN this class of contradiction. <b>Under Doctrine 18 that is backwards.</b> Nothing in the robots repo was changed on Ops' word; it is museum register row <b>N-i</b>.</p>
+<p><b>So &quot;the hardware agrees&quot; may not be an argument here at all</b> — which is a thing to know before ruling, and is not a ruling.</p>
+<p><b>COST:</b> if the manual is right, Table 2-1 already prints 64 and nothing on paper moves; the twin and the firmware are then describing a different, real object, which Doctrine 18 says they are. If the hardware is right, Table 2-1 prints 32 and the 2024 manual becomes a source with an error in it — a texture the corpus already uses everywhere.</p>
+<hr>
+<h2 id="k-09-how-many-lamps">K-09 · HOW MANY LAMPS</h2>
+<p><a id="k-09"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-9</code> · holes report <code>A-2</code>.</i></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>Two.</b> <code>const int NUM_PIXELS = 2;</code></td><td><code>…WORKS.ino:17</code></td></tr><tr><td><b>One multi-colour lamp.</b></td><td>The 2024 manual, Table 2-1</td></tr></tbody></table></div>
+<p>The manual's own written prose at ¶4-9 and Table 4-2 narrates a boot sequence of <b>red → green → orange</b>, which is a <i>colour</i> sequence and is silent on count.</p>
+<p><b>THIS IS THE NAMED INSTANCE IN DOCTRINE 18.</b> It is the row the museum's own doctrine cites: <i>&quot;one of them lets the firmware WIN a contradiction against the in-story manual (<code>NUM_PIXELS = 2</code> over the manual's 'one lamp'). Under this doctrine that is backwards.&quot;</i> Register row <b>N-i</b>.</p>
+<p><b>COST:</b> Table 2-1 prints a number. Nothing else in the corpus depends on it. The NeoPixel doctrine (<code>indicator day-job / egg delivery system / ambiguous sender</code>, <code>robots:docs/PORCH_CAPTURE-20260717.md</code>) works at either count.</p>
+<hr>
+<h2 id="k-10-which-glass-wakes-first">K-10 · WHICH GLASS WAKES FIRST</h2>
+<p><a id="k-10"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-10</code> · holes report <code>A-3</code>.</i></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>The front wakes first.</b></td><td><code>robots:docs/canonical/STORY_BIBLE.html</code>, CANON 2026-07-23 — <i>&quot;wake order FLIPS — FRONT first ('PLEASE WAIT' class), then top into monitor mode&quot;</i></td></tr><tr><td><b>Timing-dependent interleave.</b> The code activates TOP at <code>twin:5512</code> and FRONT at <code>5513</code> and calls <code>crtWarmStart()</code> twice <b>without await</b>.</td><td><code>robots:docs/atlas/ATLAS-boot-20260726.md</code> A2, flagged MISMATCH M1, a real race</td></tr><tr><td><b>The forward display wakes first in all three sequences.</b></td><td>The 2024 manual</td></tr></tbody></table></div>
+<p>The manual agrees with canon and disagrees with the machine. <b>Paragraph 5-1 must say one thing.</b></p>
+<p><b>COST:</b> the canon ruling is dated and explicit, so the cheap path is to fix the race and let ¶5-1 print what canon says. That is a twin change (two <code>await</code>s), not a paper one.</p>
+<hr>
+<h2 id="k-11-how-many-detectors-and-how-many-diversions">K-11 · HOW MANY DETECTORS, AND HOW MANY DIVERSIONS</h2>
+<p><a id="k-11"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-11</code> · holes report <code>A-4</code>, <code>A-5</code>.</i></p>
+<p><b>Detectors:</b> five rows in <code>MENU_MAP_v3</code> Table 9 (Bullshit, Stud, Trustworthy, Attractiveness, <b>Spy [−07]</b>) against <i>&quot;four are provided&quot;</i> in the 2024 manual. Reconcilable — Spy is persona-gated — <b>but not reconciled anywhere</b>, and the manual does not say <i>&quot;four, plus one on certain units.&quot;</i></p>
+<p><b>Diversions:</b> <b>three counts.</b></p>
+<div class="tw"><table><thead><tr><th>count</th><th>source</th></tr></thead><tbody><tr><td><b>seven</b></td><td><code>MENU_MAP_v3</code> Table 13 — Tilt Drive, Gobble Don't Fall, AvoidSteroids, Snow Globe, Tic-Tac-Toe, Mail Run, Sniper [−07]; plus a four-row Casino behind code <code>2121</code></td></tr><tr><td><b>six</b></td><td><code>robots:docs/drafts/OWNERS_MANUAL-draft1-20260723.md</code> §5.2</td></tr><tr><td><b>five</b></td><td>The 2024 manual</td></tr></tbody></table></div>
+<p><b>Two drafts of the same manual disagree with each other and both disagree with the machine.</b></p>
+<p><b>AND THERE IS AN IN-FICTION LICENCE THAT DOES NOT COVER IT.</b> <code>robots:docs/ACT1_BOM-20260717.md</code> (e) 9 makes the games list <i>deliberately</i> unstable — <i>&quot;the AI renamed the games&quot;</i>, a live egg (<code>egg.renamed-games</code>, REVEALED, LIVE, in the museum ledger). <b>That is a licence for the manual to differ from the machine. It is not a licence for the manual to differ from itself.</b></p>
+<p><b>COST:</b> one number in Table 6-1 and one in the Section VI prose. Cheap on paper; the reason it is here is that nobody has picked which of three.</p>
+<hr>
+<h2 id="k-12-how-many-engines-are-fitted">K-12 · HOW MANY ENGINES ARE FITTED</h2>
+<p><a id="k-12"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-12</code> · holes report <code>A-9</code>.</i></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>Three standard; one reserved.</b></td><td>The 2024 manual, Table 2-1</td></tr><tr><td><b>Seven named engine rows</b> — MGK-NIAC, MGK-v2.0, MGK-65 visible; MGK-Einstein, MGK-Yogi, MGK-DYK, MGK-HR hidden — before the 32 unit positions begin.</td><td><code>MENU_MAP_v3</code> Table 5; <code>MENU_TABLE_SRC</code> in the twin</td></tr><tr><td><b>Three compiled.</b> <code>M8B_AnswerTable[3][20][5][2]</code> — the Answers Compiler merges three engines and no more.</td><td><code>SPEC_INVENTORY</code> §D.8; <code>BIAS.ino:20</code></td></tr></tbody></table></div>
+<p><b>&quot;One reserved&quot; is four short.</b> Appendix C-2 has to list the positions that exist, and four of them are named engines nobody has decided the status of.</p>
+<p><b>COST:</b> Appendix C-2 is a table of positions. Ruling each of the four (Einstein, Yogi, DYK, HR) as <i>fitted</i>, <i>not fitted</i> or <i>not a position</i> is four words and nothing else moves. Nothing is blocked but the table.</p>
+<hr>
+<h2 id="k-13-how-many-voices">K-13 · HOW MANY VOICES</h2>
+<p><a id="k-13"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-6</code> · holes report <code>A-8</code> · spec ledger <code>#11</code>.</i></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>13</b> — <code>Aditi, Brian, Emma, Geraint, Joanna, Joey, Kendra, Lupe, Matthew, Penelope, Russell, Takumi, SAM c64</code>; the spec renames Brian/Joey/Matthew to Informer/Everyman/CEO and slot 13 becomes ROBOT</td><td><code>robots:robots/mgk-viiip/sources/2022-proto-docs/AUDIO NOTES.txt</code>; 8Ball Spec <code>Voice_ID</code> enum, <code>SPEC_INVENTORY</code> §D.8/§E.3</td></tr><tr><td><b>11</b> — <code>Voice 00</code> … <code>Voice 10</code></td><td><code>MENU_TABLE_SRC</code>, the live menu; <code>MENU_MAP_v3</code> Table 21</td></tr></tbody></table></div>
+<p><code>currentVoiceID</code> is hardcoded to 8. Open since 2026-07-14. <b>Table E-1 has two possible lengths.</b></p>
+<p><b>AND THE COST IS NOT ONLY A TABLE.</b> The DFPlayer's <b>255-files-per-folder</b> limit is the real wall — <code>folder = M8B_ID × 5 + clarity + 10</code> — and the limit is hit at answer 19 with voices ≥ 8 (<code>STATE.md</code>, 2026-07-14, MENU_MAP gate; voice ID capped at ≤ 7 that pass). So the count is a storage decision as well as a paper one.</p>
+<hr>
+<h2 id="k-14-whether-the-record-survives-a-power-interruption">K-14 · WHETHER THE RECORD SURVIVES A POWER INTERRUPTION</h2>
+<p><a id="k-14"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-14</code> · holes report <code>A-15</code>.</i></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>It does not.</b> <i>&quot;Correspondence is held in the instrument's own record and does not survive a supply interruption. This is a known condition of the present issue.&quot;</i></td><td>The 2024 manual (retired v1 generator)</td></tr><tr><td><b>It does — real engineering.</b> Flash persistence is <i>&quot;real engineering&quot;</i> per canon ruling B.</td><td><code>robots:docs/ACT1_BOM-20260717.md</code> M5; <code>THE_STORY_ARC.md</code> persistence conceit</td></tr><tr><td><b><code>Save_To_Flash</code> is a stub.</b> <code>Serial.println(&quot;Save to flash not implemented&quot;);</code> — the whole body.</td><td><code>robots:robots/mgk-viiip/firmware/…/FLASH.ino:11-22</code>; mirrored exactly in the twin at <code>viiip_twin.html:1938</code></td></tr><tr><td><b>The boot level does persist.</b></td><td><code>robots:docs/atlas/ATLAS-boot-20260726.md</code> P3</td></tr></tbody></table></div>
+<p><b>The manual's NOTE is true of the unbuilt half and false of the built half.</b> ¶7-21 cannot be written until the flash work is scheduled or the sentence is deliberately kept as a period defect.</p>
+<p><b>COST:</b> keeping the sentence is free and is period-true (<i>&quot;a known condition of the present issue&quot;</i> is exactly how a 1965 manual admits a defect). Striking it requires the flash work.</p>
+<hr>
+<h2 id="k-15-two-acronyms-that-do-not-expand">K-15 · TWO ACRONYMS THAT DO NOT EXPAND</h2>
+<p><a id="k-15"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-13</code> · holes report <code>C-1</code>, <code>C-3</code>. Strictly a hole rather than a disagreement — it is here because Appendix G has to print something either way. Also listed at <a href="HOLES.html#h-05">HOLES</a>.</i></p>
+<ul><li><b>AMMMS</b> — named beside BIST as maintenance messaging in the 2024 manual, and <b>never expanded, never defined, never mentioned again in four years of documents.</b></li><li><b>PHVDC</b> — used as an acronym everywhere. The corpus gives its <i>behaviour</i> and never its letters.</li></ul>
+<p>Appendix G prints <code>[ EXPANSION REQUIRED ]</code> beside both.</p>
+<hr>
+<h2 id="k-16-which-asa">K-16 · WHICH ASA</h2>
+<p><a id="k-16"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-19</code> · spec ledger <code>#3</code>.</i></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>Army Security Agency</b></td><td><code>MGK-VIIIp Reference Document.docx</code>; the Storyline sheet; <code>STORY_BIBLE.html</code> CANON</td></tr><tr><td><b>Army Signal Agency</b></td><td>The Record blog, 26 January 2024</td></tr></tbody></table></div>
+<p>The real-world ASA was <b>Security</b>. The blog is the in-fiction voice of the restorers, which is a voice allowed to be wrong.</p>
+<p><b>COST:</b> one word, in one blog entry, in a document class the corpus already treats as unreliable. It is here because the bible states one and the Record states the other, and the Record is the thing being republished.</p>
+<hr>
+<h2 id="k-17-what-the-p-means">K-17 · WHAT THE <code>p</code> MEANS</h2>
+<p><a id="k-17"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-18</code>.</i></p>
+<p><b>RULED: PORTAL, canon since 2026-07-29</b> — <code>robots:STATE.md:4080</code>, Mike: <i>&quot;It was never 'portable.'&quot;</i></p>
+<p>The retired reading (&quot;portable&quot;) survives in the 2026-07-14 50Kft capture, which keeps its <i>later / more powerful / adjustable personality</i> content and loses only the word. <b>Recorded so a reader meeting the capture does not treat it as live.</b></p>
+<hr>
+<h2 id="k-18-mk-ii-300-baud-4096-w-ft6-against-ft3">K-18 · MK.II / 300 BAUD / 4096 W — FT6 AGAINST FT3</h2>
+<p><a id="k-18"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-20</code>.</i></p>
+<p><b>FT3</b> says the machine may never assert a checkable specific about itself — use state-words. <b>FT6</b> ruled that <code>MK.II</code>, <code>300 BAUD</code> and <code>4096 W</code> stand as period furniture. They are Mike's own verbatim dance lines, and they are checkable specifics.</p>
+<p><code>robots:STATE.md</code> records the tension explicitly — <i>&quot;his call whether to state-word them&quot;</i> — and it is still his.</p>
+<p>Live in the twin at <code>viiip_twin.html:8712</code> (<code>MGK-AUX MK.II ROM FACTORY</code>), <code>:8689</code> (<code>AUX CHANNEL OPEN 300 BAUD</code>), <code>:8776</code> (<code>MEM TEST .... 4096 W OK</code>).</p>
+<p><b>COST:</b> state-wording them is three strings. Keeping them costs nothing until a later document has to agree with a number the machine printed.</p>
+<hr>
+<h2 id="k-19-three-doors-or-four">K-19 · THREE DOORS OR FOUR</h2>
+<p><a id="k-19"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-7</code> · holes report <code>A-11</code>.</i></p>
+<p><code>robots:docs/canonical/STORY_BIBLE.html</code> states the app architecture is <b>three doors</b> — ANSWERS / LINES / SPECIALIZED (ruling B, 2026-07-22) — in Chapter II, and <b>four doors</b> — ANSWERS / PROGRAMS / MESSAGES / SETTINGS (CANON 2026-07-23) — in the addendum near the end.</p>
+<p><b>The later ruling wins by date and the earlier passage is not marked superseded</b>, so a stranger reading the bible top to bottom meets the dead architecture first.</p>
+<p><b>This is a documentation defect with a ruling behind it, not an open question</b> — recorded here because the file is canonical and a reader will hit it.</p>
+<p><b>COST:</b> one strike-through in one HTML file. The live menu's root table is the LEGACY tree (<code>Root → MGK-VIIIp / Messages / Programs / Preferences</code>), which is a <i>fourth</i> shape and is what the firmware actually holds today.</p>
+<hr>
+<h2 id="k-20-the-year-on-the-digit-ring">K-20 · THE YEAR ON THE DIGIT RING</h2>
+<p><a id="k-20"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-16</code> · holes report <code>A-6</code>.</i></p>
+<p><code>robots:STATE.md</code> ~5602 records that <i>&quot;the manual's §14 was made wrong by this ruling ('The year is not requested') and was corrected in the same pass.&quot;</i> <b>The correction never landed in the tree.</b></p>
+<p>The underlying ruling (<code>STATE.md</code> ~5588) is that the year <b>is</b> entered and <b>no surface consumes it</b>.</p>
+<p><b>This is a class as well as an instance</b> — see <a href="HOLES.html#h-19">HOLES</a>, <i>a correction the tree does not carry</i>.</p>
+<hr>
+<h2 id="k-21-named-once-nothing-behind">K-21 · NAMED ONCE, NOTHING BEHIND</h2>
+<p><a id="k-21"></a></p>
+<p><i>Upstream: robots vocabulary <code>C-17</code> · holes report <code>C-2</code>, <code>C-4</code>, <code>C-5</code>, <code>C-6</code>. Also listed at <a href="HOLES.html#h-06">HOLES</a>.</i></p>
+<p>Each has a table row waiting and nothing to put in it. <b>They are not conflicts; they are single-attestation terms.</b> Listed here because Appendix F and Table 2-2 have to do something about each one.</p>
+<div class="tw"><table><thead><tr><th>term</th><th>attestation</th></tr></thead><tbody><tr><td><b>MindsEye™</b></td><td>An input option in the MGK-Options matrix. <b>Appears once in the entire corpus.</b></td></tr><tr><td><b>MGK-66</b></td><td><i>&quot;†† standard options for all MGK-66 models.&quot;</i> A designation in no lineage, no menu, no registry.</td></tr><tr><td><b>SCAT — System Configuration and Test</b></td><td>A heading in the 2022 proto-manual with nothing under it, four years running. Position 10-11 exists because the name does.</td></tr><tr><td><b>NY8 / DYN / MGK-2.5 / MGK-65x</b></td><td>Engine designations in the option matrix and nowhere else. <b>65x is explicitly REJECTED — do not re-propose</b> (<code>STORY_BIBLE.html</code>). The other three have no status at all.</td></tr><tr><td><b>MIALLO™</b></td><td>Voice generation. Trademarked in the source, never explained.</td></tr><tr><td><b>Noise BS (unsolicited) = 10</b></td><td>Named once in the 2024 manual's Appendix 1. Never explained.</td></tr><tr><td><b>Response curve</b></td><td>Named on the glass during first-run setup (<code>RESPONSE CURVE LOADED</code>), given a paragraph position (7-9) and a figure. <b>No definition exists anywhere in the corpus.</b></td></tr><tr><td><b>RADIONET</b></td><td>A whole section in the 2022 proto-manual — an internal Silvertone antenna, <i>&quot;opportunistic local reception of AOL Standard Broadcast and FM&quot;</i>, and an optional AM-FM antenna kit, <b>Catalog No. 6710</b>. The live machine has a Radio <i>program</i> gated to −07, which is not a receiver. Table 12-2 has a real catalogue number for a part of a machine that may no longer exist.</td></tr></tbody></table></div>
+<hr>
+<h2 id="k-22-keeper-and-operator-not-a-conflict">K-22 · KEEPER AND OPERATOR — <b>NOT A CONFLICT</b></h2>
+<p><a id="k-22"></a></p>
+<p><b>RULED DELIBERATE, 2026-08-19.</b> Recorded here so a later sweep does not &quot;fix&quot; it.</p>
+<p><code>keeper</code> appears <b>exactly twice in the whole robots tree</b>, both in the manual's own written prose: the caution at 7-19 (<i>&quot;The keeper is answerable for the state of the cell&quot;</i>) and B-1 (<i>&quot;set by the keeper&quot;</i>). <code>operator</code> appears six times in the structure's furniture — <b>OPERATOR ACTION</b> (Table 5-1 header), <b>THE OPERATOR RECORD</b> (6-27), <i>&quot;Record, operator&quot;</i> (Appendix F), <b>OPERATOR'S NOTES</b> (back matter), and, in the same paragraph as the caution, <i>&quot;The cell is not an operator-replaceable item.&quot;</i></p>
+<blockquote><p><i>A machine's document calling you an operator everywhere except in the line about who is to blame is better than either word used consistently.</i></p></blockquote>
+<p><b>For a writer adding to Section VI: <code>operator</code> by default, <code>keeper</code> only where responsibility is being placed.</b></p>
+<hr>
+<h2 id="k-23-acquisition-date-and-how-many-crates">K-23 · ACQUISITION DATE, AND HOW MANY CRATES</h2>
+<p><a id="k-23"></a></p>
+<p><i>Upstream: spec ledger <code>#4</code> and <code>#1</code>.</i></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>2023</b> — <i>&quot;In 2023, Weird.Baby acquired (32) MGK-VIIIp prototypes.&quot;</i></td><td>Reference Document, <code>SPEC_INVENTORY</code> §D.3</td></tr><tr><td><b>1 January 2024</b> — the three W.O. crates arrive</td><td>The Record blog, <code>SPEC_INVENTORY</code> §D.5</td></tr><tr><td><b>(3) prototypes</b></td><td>Storyline sheet, final row</td></tr><tr><td><b>17</b> — <i>&quot;the crates containing the 17 MGK-VIIIps&quot;</i></td><td>Written stories draft 8, <code>SPEC_INVENTORY</code> §D.6</td></tr><tr><td><b>31.4</b></td><td><b>RULED R1, 2026-07-14</b> — fleet = 31.4; <code>.4</code> is the prototype; the missing-unit mystery orbits it</td></tr></tbody></table></div>
+<p><b>R1 SETTLED THE FLEET AND NOT THE CRATES.</b> 31.4 is how many exist. How many arrived at Weird.Baby, and when, still has four answers, and the 2024 blog is the one the museum's own Record descends from.</p>
+<hr>
+<h2 id="k-24-the-origin-story">K-24 · THE ORIGIN STORY</h2>
+<p><a id="k-24"></a></p>
+<p><i>Upstream: spec ledger <code>#2</code>.</i></p>
+<p>Four tellings, and the bible states the corpus's own rule about them — <b>contradictions are PLACED, never inherited.</b></p>
+<div class="tw"><table><thead><tr><th>account</th><th>source</th></tr></thead><tbody><tr><td><b>ASA → CSAW → ScrapCo → ABEAL/BDS.</b> The canon spine.</td><td>Storyline sheet; Reference Document; <code>STORY_BIBLE.html</code></td></tr><tr><td><b>ASA built the VIIIp itself, uncompleted; ABEAL finished &quot;the looks.&quot;</b></td><td>The Record blog, 26 January 2024</td></tr><tr><td><b>Military ploy for the Elite; a postal truck sinks into the Hudson; divers recover the crates.</b></td><td>BackStory draft</td></tr><tr><td><b>DoD &quot;project Book Cart&quot; / IKS / CNN-t.</b></td><td>Backstories draft</td></tr></tbody></table></div>
+<p><b>AND ONE CONTRADICTION IS RULED TO SHIP.</b> DR-2, frozen as placed, 2026-07-22: the record says the company works out what it has in 1965, and the record also says Mr. ABEAL the man knew in 1964, before the gavel fell. <b>Both stand forever.</b> Mike's verdict for the record: <i>&quot;ABEAL knew it. Dirty bastard. Liar.&quot;</i></p>
+<hr>
+<h2 id="12a-recorded-and-not-conflicts">12a · RECORDED, AND NOT CONFLICTS</h2>
+<p><a id="not-conflicts"></a></p>
+<ul><li><b><a href="#k-22">K-22</a> keeper vs operator</b> — ruled deliberate.</li><li><b><a href="#k-17">K-17</a> the <code>p</code></b> — ruled PORTAL.</li><li><b><a href="#k-02">K-02b</a> the slot-2 name</b> — ruled Neutral.</li><li><b><a href="#k-24">K-24</a> DR-2</b> — ruled to ship as a contradiction.</li><li><b>Paragraph 3-14 is reserved and empty.</b> Mike wants the number; it is deferred until Section III is written (<i>&quot;I need to see section 3 to have any idea how to weave it in&quot;</i>). It is the first subordinate position under 3-13 and takes no insertion and no renumbering. <b>A subordinate paragraph added under 3-13 must start at 3-15.</b> It is π, and <code>reserved-date-3-14-65</code> is cut, indexed and deliberately not placed on the marked copy (<code>robots:tools/manual_structure_build.py:1596</code>).</li></ul>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/CONFLICTS.md</code>,
+last written <b>2026-08-20 04:12 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

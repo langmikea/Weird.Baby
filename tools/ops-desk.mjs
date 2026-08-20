@@ -191,6 +191,22 @@ const INSTRUMENTS = [
      rather than lost." It sits beside the backlog because it answers the other
      half of the same question — the backlog is what is NEXT, this is what is
      TRUE and unsaid — and neither is the register. */
+  /* ═══ [2026-08-20] THE CANON — one card for fifteen files ═══════════════════
+     MIKE: "We have TONS of facts and lore and so much of it is conflicting,
+     uncatalogued, etc… It is unusable in its current state and I cannot query
+     you because you cannot remember it all either."
+     ONE CARD, NOT FIFTEEN. The index is complete by construction — a fact that
+     cannot be found is a fact that does not exist — so it is the door and the
+     other fourteen hang off it. Fifteen cards would bury the eleven instruments
+     this desk exists to launch, which is Doctrine 25 applied to a launcher.
+     IT SITS BESIDE THE BACKLOG AND THE THREADS BECAUSE IT ANSWERS THE THIRD
+     QUESTION OF THE SAME SET: the backlog is what is NEXT, the threads are what
+     is TRUE and unsaid, and this is what is TRUE and already written down. */
+  { name: "The canon",
+    file: "canon/INDEX.html",
+    what: "Every fact about this world, with its source. Conflicts recorded, never resolved. Start at the A-Z.",
+    rebuild: "npm run desk",
+    source: "canon/INDEX.md" },
   { name: "Loose threads",
     file: "THREADS.html",
     what: "Canon that is true in the story and has not been said in a Record yet. Mike's words, verbatim.",
@@ -273,6 +289,32 @@ function renderMarkdown(md) {
     const line = raw.replace(/\s+$/, "");
 
     if (!line.trim()) { flush(); i++; continue; }
+
+    /* ═══ [2026-08-20] A FENCED BLOCK, AND THE HEADER'S OWN RULE ALLOWS IT ═══
+       The rule above says this renderer must not grow "the moment it needs a
+       feature the register does not use", and its reason is that the REGISTER
+       would then be written for the renderer. The canon catalogue is a second
+       document rendered by this function, and it quotes monospaced records —
+       a ZIP manifest, four toggle settings as printed, a typed bench
+       description. Those are quotations of a fixed-width page and their line
+       structure IS the content.
+       WITHOUT THIS, SIX BLOCKS COLLAPSED TO ONE LINE with stray backticks
+       either end, which is the failure this whole file exists to avoid: a
+       rendering that silently says something the source does not.
+       THE ALTERNATIVE WAS WORSE AND IS WHY THIS IS THE RIGHT SIDE OF THE RULE.
+       Contorting those quotations into <br>-separated code spans would be the
+       DOCUMENT written for the renderer, which is the exact inversion the rule
+       warns about. Five lines, one block kind, no nesting, no languages.
+       Revert: delete this block. */
+    if (/^```/.test(line.trim())) {
+      flush();
+      const body = [];
+      i++;
+      while (i < lines.length && !/^```/.test(lines[i].trim())) { body.push(lines[i]); i++; }
+      i++;                                    /* step over the closing fence */
+      out.push(`<pre>${esc(body.join(String.fromCharCode(10)))}</pre>`);
+      continue;
+    }
 
     /* a rule */
     if (/^-{3,}$/.test(line.trim())) { flush(); out.push("<hr>"); i++; continue; }
@@ -443,6 +485,19 @@ th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;c
  font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
 td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
 s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
 `;
 
 function page({ title, css, body, favi }) {
@@ -503,9 +558,49 @@ Ops instrument &mdash; not part of the museum, and never at a live address.</p>
    for anybody reading the markdown; left alone in the HTML it hands the browser
    a `.md`, and this file's header already says what a browser does with that.
    The source keeps its honest link; the rendering points at the rendering. */
+/* ═══ [2026-08-20] THE CANON JOINS THE SIDE PAGES, AND IT IS THE SAME RENDERER ══
+   The catalogue is fifteen markdown files under `docs/canon/`. A browser handed
+   a `.md` downloads it, which is this file's own header note one level down, so
+   they get renderings — and they get them from THIS function rather than from a
+   generator of their own. Mike's standing instruction on the threads page was
+   **"same renderer as BACKLOG — no new machine."** A second markdown renderer in
+   `tools/` would be the third copy of a thing whose header says it must not grow.
+
+   TWO THINGS THE LOOP HAD TO LEARN, AND BOTH ARE ONE LINE EACH.
+   (1) `up` — the canon pages live one directory down, so `OPS_DESK.html` and
+       `OPEN_ACTIONS.html` are `../` from them. Without it the back-link 404s,
+       which is exactly the failure the desk's own rule (2) forbids.
+   (2) SIBLING REPOINTING — the catalogue cross-links itself heavily
+       (`CONFLICTS.md#k-01`, `HOLES.md#h-02`). Left alone in the HTML those hand
+       the browser a `.md`. The SOURCE keeps its honest link and the RENDERING
+       points at the rendering, which is the rule this file already states for
+       `OPEN_ACTIONS.md`.
+   ONLY THE INDEX GETS A DESK CARD. Fourteen cards for one catalogue would bury
+   the eleven instruments; the index is complete by construction and is the door. */
+const CANON = [
+  ["INDEX",          "THE CANON — index"],
+  ["CONFLICTS",      "THE CANON — conflicts"],
+  ["HOLES",          "THE CANON — holes"],
+  ["BELL-103",       "THE CANON — the Bell 103 integration"],
+  ["FAILURE-MODES",  "THE CANON — the four failure modes"],
+  ["01-WORLD",       "THE CANON — the world"],
+  ["02-MACHINES",    "THE CANON — the machines"],
+  ["03-ANSWERS",     "THE CANON — the answer machinery"],
+  ["04-MENU",        "THE CANON — the menu and the apps"],
+  ["05-BOOT",        "THE CANON — the boot and the two machines"],
+  ["06-PORTAL",      "THE CANON — the Portal and the far end"],
+  ["07-MANUAL",      "THE CANON — the manual"],
+  ["08-PEOPLE",      "THE CANON — the people"],
+  ["09-PUBLISHED",   "THE CANON — what is published"],
+  ["10-LAWS",        "THE CANON — the laws"],
+];
+
 const SIDE_PAGES = [
   { md: "BACKLOG.md", html: "BACKLOG.html", title: "THE BACKLOG — ranked", favi: "🥇" },
   { md: "THREADS.md", html: "THREADS.html", title: "LOOSE THREADS — canon not yet said", favi: "🧵" },
+  ...CANON.map(([n, title]) => ({
+    md: `canon/${n}.md`, html: `canon/${n}.html`, title, favi: "📖", up: "../",
+  })),
 ];
 const sideWrote = [];
 const sideBroken = [];
@@ -525,16 +620,29 @@ for (const pg of SIDE_PAGES) {
     ? `<p class="foot" style="color:#9c2b1e"><b>${broken.length} link(s) point at register rows that no longer exist:</b>
        ${broken.map(esc).join(", ")}. Either the row closed and this page did not follow, or the id is a typo.</p>`
     : "";
+  const up = pg.up || "";
+  /* SIBLING REPOINTING: `Foo.md#anchor` -> `Foo.html#anchor` for any page this
+     run is writing beside it. Scoped to the known set on purpose — a blanket
+     `.md -> .html` would rewrite links to markdown files that have no
+     rendering, which is a dead link, which is the one thing this file refuses
+     to draw. */
+  const siblings = new Set(SIDE_PAGES.map(p => p.md.split("/").pop()));
+  let html = renderMarkdown(md)
+    .replace(/href="OPEN_ACTIONS\.md(#|")/g, `href="${up}OPEN_ACTIONS.html$1`)
+    .replace(/href="([A-Za-z0-9._-]+)\.md(#[^"]*)?"/g,
+             (m, name, frag) => siblings.has(name + ".md")
+               ? `href="${name}.html${frag || ""}"` : m);
   const body = `<div class="wrap">
-<p class="sub"><a href="OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="OPEN_ACTIONS.html">the full register</a></p>
+<p class="sub"><a href="${up}OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="${up}OPEN_ACTIONS.html">the full register</a></p>
 ${warn}
-${renderMarkdown(md).replace(/href="OPEN_ACTIONS\.md(#|")/g, 'href="OPEN_ACTIONS.html$1')}
+${html}
 <p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/${esc(pg.md)}</code>,
 last written <b>${esc(when)}</b>. Every register link on this page is checked against
 <code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
 </div>`;
-  fs.writeFileSync(path.join(DOCS, pg.html),
-    page({ title: pg.title, css: DOC_CSS, body, favi: pg.favi }));
+  const out = path.join(DOCS, pg.html);
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, page({ title: pg.title, css: DOC_CSS, body, favi: pg.favi }));
   sideWrote.push(pg.html);
 }
 

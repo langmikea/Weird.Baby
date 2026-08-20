@@ -125,6 +125,11 @@ const SKIP_DIR_PREFIX = ["dist.pre_", "backup_", "_MIRROR"];
    reason beside each, stay reviewable. */
 const SKIP_PATH = [
   "docs/shorts/out",   // .gitignore:60 — rendered shorts, regenerable, never committed
+  // [2026-08-19] the handwriting segmenter's --probe output: a contact sheet
+  // drawn to MEASURE the mark boxes off, regenerable on demand and gitignored
+  // in the robots repo. It is a working aid, not an asset, and a row for it
+  // would be born an orphan on the next clone — the M9 class, manufactured.
+  "robots/mgk-viiip/manual/marks/_probe",
 ];
 
 function kindOf(ext) {

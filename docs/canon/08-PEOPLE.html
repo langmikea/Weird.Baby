@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the people</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="08-the-people-the-antagonist-the-first-five-the-personas">08 · THE PEOPLE — the antagonist, the first five, the personas</h1>
+<p><b>Register key:</b> <code>STORY</code> · <code>OPS</code>. <b>Publication key:</b> <code>PUB</code> · <code>—</code>. <b>Almost nothing in this file is published.</b> What a visitor has met is four folder names — see <a href="HOLES.html#h-01">H-01</a>.</p>
+<blockquote><p><i>&quot;A patient-zero housewife who was exactly what everyone thought she was. A spy and a closer who never met. A weasel built from a kinder woman's leftovers. And Juan.&quot;</i> — <code>STORY_BIBLE.html</code> ch. VII</p></blockquote>
+<p><b>ALL CHARACTERS HAVE DAMAGE — stated as law.</b></p>
+<hr>
+<h2 id="1-x-the-antagonist">1 · X — the antagonist</h2>
+<p><a id="x"></a></p>
+<p><b>CANON, porch captures 2–3, 2026-07-18/19.</b></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>The name</b></td><td><b>X — never a real-world name.</b></td></tr><tr><td><b>The type</b></td><td><b>the self-celebrating billionaire who kept more for himself than anyone in history — the Illionaire.</b></td></tr><tr><td><b>The motive</b></td><td><b>REVENGE, bottomless. The juice is the TAKING.</b></td></tr><tr><td><b>What is canon</b></td><td><b>How he FEELS.</b></td></tr><tr><td><b>What is unwritten</b></td><td><b>How he THINKS</b> — stays unwritten until scenes need it.</td></tr><tr><td><b>SEALED forever</b></td><td><b>Ch. 0 — why so angry.</b> A forever-question.</td></tr></tbody></table></div>
+<p><b>HIS DISTRIBUTION DOCTRINE IS CANON AND IT EXPLAINS THE FLEET SIZE:</b></p>
+<blockquote><p><b>Elite-first: selected-not-sold.</b> <i>&quot;Free of charge&quot;</i> <b>removes perceived risk while removing choice</b> — <b>control without possession.</b> <i>Why only 31.4 units, never meant to scale.</i></p>
+<p><b>Phase One doctrine:</b> validate assumptions, set earliest triggers, <b>prove the KILL SWITCH first — patient zero.</b></p>
+<p><b><i>X's appetite contaminates his own protocol; grabbing-along-the-way is his installed flaw.</b></i></p></blockquote>
+<p><b>THE MESSAGING SPINE (canon):</b> <b>every owner messaged X through their unit; teammates also messaged each other</b> — <b>the correspondence is a NETWORK, and reading multiple units reveals its shape.</b> <i>The device-side story IS the mail the machines carried.</i></p>
+<p><b>AND THE FORMAT LAW GOVERNS IT:</b> <b>NO inter-persona communication, ever.</b> All messages originate from virtual servers; <b>users become aware of counterparts, never able to reach them.</b></p>
+<hr>
+<h2 id="2-the-first-five">2 · THE FIRST FIVE</h2>
+<p><a id="first-five"></a></p>
+<p><b>CANON, 2026-07-18/19.</b></p>
+<div class="tw"><table><thead><tr><th>who</th><th>what is canon</th></tr></thead><tbody><tr><td><b>X</b> (man)</td><td>above</td></tr><tr><td><b>The Housewife</b></td><td><b>Patient zero. Expendable by design. Kill-switch proof — and the ONLY clean exit.</b></td></tr><tr><td><b>The Insider</b> (man)</td><td><b>A shop worker who figured it out and chose himself — the downfall seed.</b> <i>X contains him, doesn't control him.</i></td></tr><tr><td><b>The CEO</b></td><td><b>Runs the offering as if honest — and may sincerely believe it.</b></td></tr><tr><td><b>The celebrity</b></td><td><b>A faded 1950s star.</b> Type — sports or actor — <b>OPEN, both held.</b></td></tr><tr><td><b>McKenna</b></td><td><b>Either-way by mastery; all prior he/she references simultaneously true.</b></td></tr></tbody></table></div>
+<p><b>THE CLEAN-EXIT LAW:</b> <i>only the Housewife exits clean. Everyone else is already defective or damaged by the process; <b>the CEO may be innocent and still not clean.</b></i></p>
+<hr>
+<h2 id="3-the-release-1-four">3 · THE RELEASE-1 FOUR</h2>
+<p><a id="release-1"></a></p>
+<p><b>Grid-complete, all four, 2026-07-23: the unique-20 ship gate reads × across the row.</b></p>
+<h3 id="the-everyman-02-box-tier">THE EVERYMAN — −02 · Box tier</h3>
+<p><a id="everyman"></a></p>
+<p><b>Name contested: <a href="CONFLICTS.html#k-06">K-06</a>. The published Record says <code>THE EVERYDAY</code>.</b></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>Register</b></td><td><b>WEASEL-MANAGEMENT</b> — replaced <i>workingman</i> at the sample gate. 81 verbatim cells were <b>re-read against the new register and clash-FLAGGED, not rewritten.</b></td></tr><tr><td><b>Sheet personality, verbatim</b></td><td><i>&quot;Originally planned to be The Housewife (recipes and check book). Failed miserably in market research. Still has some remnants.&quot;</i></td></tr><tr><td><b>Voice</b></td><td>Joey, slot 5 — <b>the enum slot is literally named <code>Everyman</code> already.</b></td></tr><tr><td><b>Apps</b></td><td><b>ELIZ</b> (the psych suite) · Brain Training · Inkblots</td></tr><tr><td><b>Case</b></td><td><b>BOX — the only Release-1 unit with no case.</b> Every Everyman story surface must live in-unit or website-side.</td></tr><tr><td><b>Grid</b></td><td>81/100 · <b>19 Mannerly gaps fall back to Impartial via the resolver.</b></td></tr></tbody></table></div>
+<p><b>THE COMPOUNDING-RUIN MECHANISM (canon, dinner porch 2026-07-23):</b> decades of inconsequential-bad to slightly-badder, <b>crossed over somewhere, now runaway — gravity has him.</b></p>
+<p><b>THE STATE:</b> drowning in debt; <b>nobody's hero, hardly anybody's friend, zero social</b>; yet <b>intelligent, self-aware, empathetic</b>; healthy, exercises, church, <b>calls his kind mom</b>; about to implode.</p>
+<p><b>THE EDGE (held loose):</b> maybe the social media drives him over.</p>
+<p><b>THE THEORY (canon):</b> <i>he was chosen to answer</i> <b>&quot;how far can we control them before they crack — what are the triggers and signs&quot;</b> — <b>the crack-threshold experiment.</b></p>
+<p><b>THE SOUND: <i>&quot;FUMP!&quot;</b></i> — verbatim. <b>When they hit bottom together.</b> Story-layer material; possibly his unit's final beat.</p>
+<p><b>THE ENDEARMENT TEXTURE IS RULED NO-VALUE, even for the Housewife</b> — a short keep-list of stripped frames survives; the rest empties to pen slots.</p>
+<h3 id="the-informer-07-deluxe">THE INFORMER — −07 · Deluxe</h3>
+<p><a id="informer"></a></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>Character</b></td><td><b>Spy-first. An island.</b></td></tr><tr><td><b>Voice</b></td><td>Brian, slot 1 — <b>the enum slot is named <code>Informer</code>.</b></td></tr><tr><td><b>Apps</b></td><td>Radio · Phone Tap · Sniper · <b>Spy Detector</b> (verdicts ruled: <code>SPY</code> / <code>SPY-NORMAL</code> / <code>WEIRDO</code>)</td></tr><tr><td><b>Register</b></td><td>Five clarity levels declared <b>advisory-confidence registers</b> — field-blunt → diplomatic-brief.</td></tr><tr><td><b>Case</b></td><td>Minox A camera · ~30 modified keys · phone-tap suction cup · Morse keyer · fake moustache + spirit gum</td></tr></tbody></table></div>
+<p><b>THE McKENNA THREAD MOVED WHOLE TO THE CLOSER, 2026-07-22.</b> The Informer keeps <b>nothing</b> of it.</p>
+<p><b>AND THE BLACKWOOD FILE BECAME A DELIBERATELY AMBIGUOUS, UNATTRIBUTED CORRUPTED RECORD</b> whose <code>-03</code> pointer <b>now aims at the vacated slot</b> — ruled free capital.</p>
+<h3 id="the-ceo-09-deluxe-papa-s-alter-ego">THE CEO — −09 · Deluxe · Papa's alter-ego</h3>
+<p><a id="ceo"></a></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>Sheet personality, verbatim</b></td><td><i>&quot;Hard working, honest, talented, capable, leader. A man's man.&quot;</i></td></tr><tr><td><b>Name</b></td><td><b>SAM.</b> New canon, Mike, <code>IMG_9767</code> 02:57, recorded 2026-08-04.</td></tr><tr><td><b>AND THE IN-FICTION RECORD STILL SAYS HIS NAME HAS NOT BEEN DISCOVERED</b></td><td><b>and that line is untouched. What changed is that Ops now knows it.</b></td></tr><tr><td><b>Voice</b></td><td>Matthew, slot 8</td></tr><tr><td><b>App</b></td><td><b>THE CAREER SUITE</b> — his estate. Career Chooser + Career Advice. <b>CEO-only.</b></td></tr><tr><td><b>Struck</b></td><td><i>&quot;blockchain&quot;</i> and <i>&quot;quantum computer&quot;</i> <b>KILLED</b> from the jargon pool.</td></tr><tr><td><b>Excluded</b></td><td>the Johnson-account line, <b>as invention-risk</b> — a <code>[NAME]</code>-blank template class instead.</td></tr></tbody></table></div>
+<h3 id="juan-21-the-gambler-deluxe-twenty-complete">JUAN — −21 · The Gambler · Deluxe · twenty COMPLETE</h3>
+<p><a id="juan"></a></p>
+<p><b>PORCH CANON, 2026-07-22. His twenty was completed and gated word by word the same night.</b></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>The core</b></td><td><b>Takes-a-cheater-to-know-a-cheater: he catches cheats because he IS one — but only for good. HIS good.</b></td></tr><tr><td><b>The charm</b></td><td><b>Total narcissist with mad charm powers:</b> <i>&quot;you'll cheer him on as he eviscerates you, and thank him in the end.&quot;</i></td></tr><tr><td><b>The reach</b></td><td><b>Universally known</b> — <i>&quot;JUAN!!! My friend!!!&quot;</i> — world leaders to street level, Father Padre, cops, dealers.</td></tr><tr><td><b>The legend</b></td><td><i>&quot;a man among men! Because he is? Or because…&quot;</i> — <b>SEALED, never answered.</b></td></tr><tr><td><b>The bottom</b></td><td><b>Rock bottom, then kept digging; should have died down there; seems he was trying to; couldn't, wouldn't, didn't.</b> <b>NO SPECIFICS EVER, but everybody knows. Everybody.</b></td></tr><tr><td><b>The ponies</b></td><td><i>&quot;He loves the ponies, back in the day…&quot;</i> — <b>the trailing ellipsis is CANONICAL.</b></td></tr><tr><td><b>The OPA anchor</b></td><td><b><code>Vegas.jpg</code></b> — a <b>1960s Vaseline Hair Tonic ad</b>, blackjack table: <i>&quot;He's watching a girl lose heavily at Black Jack… Hold it… deal the TOP card… You saw the top card reflected in your ring.&quot; / &quot;Some men don't miss a trick.&quot;</i> <b>Confirmed beat for beat.</b> The ad's cheat is read <b>WITHOUT TOOLS</b> — a ring reflection — rhyming with the marked-deck case item.</td></tr><tr><td><b>Case</b></td><td>Neat stacks of period silver halves and dollars + chips · <b>a marked deck READABLE WITHOUT TOOLS</b> · a vintage card-sleeve clip</td></tr><tr><td><b>Apps</b></td><td><b>The Casino</b> — Slots / Craps / Blackjack / Roulette, behind code <code>2121</code></td></tr></tbody></table></div>
+<p><b>HIS REGISTER LAWS:</b></p>
+<ul><li><b>Ethnicity = hint, not costume.</b> PR-born, stateside life; <b>the one &quot;SÍ&quot;.</b></li><li><b>Third person once per twenty</b> — survives only in <i>&quot;JUAN HAS SEEN IT.&quot;</i></li><li><b>Gambling clichés = spice, not diet.</b></li><li><b>&quot;holds&quot;-class diction preferred.</b></li><li><b>No false-confidence claims.</b></li></ul>
+<p><b>HOW −21 CAME TO HIM, AND WHAT HE USED IT FOR: SEALED BY SOCIAL GRACE</b> — a <b>new sealing mechanism class.</b> <i>The question gets charmingly deflected by everyone, including the record itself.</i></p>
+<hr>
+<h2 id="4-the-held-units">4 · THE HELD UNITS</h2>
+<p><a id="held-units"></a></p>
+<div class="tw"><table><thead><tr><th>unit</th><th>who</th><th>state</th></tr></thead><tbody><tr><td><b>−01</b></td><td><b>Housewife Nano</b> — Patient Zero</td><td><b>HELD</b>, asset conservation. <b>TBD-OPA owed someday.</b></td></tr><tr><td><b>−13</b></td><td><b>The Closer</b> — Take-Care-of-This-first, an island. <b>Carries the whole McKenna record.</b></td><td><b>HELD · sealed</b></td></tr><tr><td><b>−31</b></td><td><b>RESERVED-finale</b></td><td>do not assign</td></tr></tbody></table></div>
+<p><b>THE TWO BEST IN THE BUSINESS.</b> The Informer and the Closer <b>know OF each other; they NEVER met, talked, or dealt — the reasons are never hinted. SEALED.</b></p>
+<p><b>THE OPA ART CUSTODY:</b> the original OPA stays with <b>the Everyman −02</b> — it was made for him.</p>
+<hr>
+<h2 id="5-mckenna-and-blackwood">5 · McKENNA AND BLACKWOOD</h2>
+<p><a id="mckenna"></a></p>
+<p><b>RULED R2, 2026-07-14: ONE MAN, MANY FILES.</b> <i>Nothing discarded; the contradiction is texture.</i></p>
+<div class="tw"><table><thead><tr><th>file</th><th>what it says</th></tr></thead><tbody><tr><td><b>Reference Document</b></td><td><b>Edward Nathaniel William McKenna</b>, b. <b>1911-02-14</b>, Newark NJ. Aliases <b>&quot;Toot&quot;</b>, &quot;Enid McKeena&quot;. Tagged <i>&quot;The Informer — Initial Owner (IO) and Subject Matter Expert (SME)-02&quot;</i>.</td></tr><tr><td><b>Storyline sheet</b></td><td><b>Alexander Charles Blackwood</b>, 72. <i>&quot;69 years of experience in Industrial Espionage… started at 3 years old… wears a bow tie… lives to serve.&quot;</i> Owns <b>MGK-VIIIp-03</b>.</td></tr></tbody></table></div>
+<p><b>AND THE 2026-07-22 GATE MOVED THE WHOLE THREAD.</b> The McKenna material — identity, gender-mastery, Toot/Enid — <b>lives at the CLOSER (−13, HELD), whole.</b></p>
+<p><b>McKenna is <i>either-way by mastery; all prior he/she references simultaneously true.</b></i></p>
+<hr>
+<h2 id="6-the-persona-idea-pool">6 · THE PERSONA IDEA POOL</h2>
+<p><a id="idea-pool"></a></p>
+<p><b>IDEAS ONLY. NO COMMITMENTS.</b> Recorded 2026-07-23.</p>
+<blockquote><p>Magician · Nuclear Physicist · Fortune Teller · Medium · Hair Stylist · Shopping Agent <i>(serves both genders)</i> · UFO Investigator · Bigfoot Investigator</p></blockquote>
+<hr>
+<h2 id="7-the-other-named-people">7 · THE OTHER NAMED PEOPLE</h2>
+<p><a id="others"></a></p>
+<div class="tw"><table><thead><tr><th>who</th><th>what</th></tr></thead><tbody><tr><td><b>Carter Bookman</b></td><td>ASA. Conceives MGK in 1943. <b>= Albert C. Carter + Abe Bookman</b>, the real Magic 8 Ball inventors.</td></tr><tr><td><b>Dr. Alexis Quan · Dr. Violet Flux</b></td><td>Developed FML into the VIIIp's FNM, through <b>&quot;Incident X.&quot;</b></td></tr><tr><td><b>G. Cougar · L. Queen · T. Robin</b></td><td>BDS's three owners — from George Cogar / Lauren King / Ted Robinson.</td></tr><tr><td><b>TJM · MAL</b></td><td>The real-world frame. <b>They write themselves into the fiction</b> as the two ScrapCo/Weird.Baby staffers who unbox and reverse-document MGK-NIAC.</td></tr></tbody></table></div>
+<hr>
+<h2 id="8-the-sealed-rooms">8 · THE SEALED ROOMS</h2>
+<p><a id="the-sealed-rooms"></a></p>
+<p><b>Listed as sealed. Contents never in the bible, and never here.</b></p>
+<div class="tw"><table><thead><tr><th>room</th><th>seal class</th></tr></thead><tbody><tr><td><b>Ch. 0 — why X is so angry</b></td><td>SEALED · forever-question</td></tr><tr><td><b>What X did to the Housewife</b> (the defining act)</td><td>SEALED · deliberately unwritten</td></tr><tr><td><b>The Ending in Trust</b> — how she finishes it; the moral's full text</td><td>SEALED · Papa-gated</td></tr><tr><td><b>Informer ↔ Closer: why the two best never met, talked, or dealt</b></td><td>SEALED · never hinted</td></tr><tr><td><b>JUAN: the legend question</b></td><td>SEALED · never answered</td></tr><tr><td><b>JUAN: the bottom — what happened down there</b></td><td>SEALED · no specifics ever; everybody knows</td></tr><tr><td><b>JUAN: how −21 came to him and what he used it for</b></td><td><b>SEALED BY SOCIAL GRACE</b> — a new seal class</td></tr><tr><td><b>The gap</b> (ABEAL's end → our crates)</td><td>SEALED · <b>we don't know either</b></td></tr></tbody></table></div>
+<p><b>A SEALED ROOM IS NOT A HOLE.</b> It is a decision that a thing stays unwritten. The one entry that appears on both lists is <b>the gap</b> (<a href="HOLES.html#h-20">H-20</a>), because it is also a fact the story has not decided.</p>
+<hr>
+<h2 id="9-what-is-deliberately-open">9 · WHAT IS DELIBERATELY OPEN</h2>
+<p><a id="open"></a></p>
+<ul><li><b>The Act I mystery's content</b> — the previous owners, what happened to them, the evidence trail. <b>PAPA-AUTHORED, IN PROGRESS:</b> <i>&quot;I need to figure that out. Just as they will have to do.&quot;</i></li><li><b>Act III's connective tissue</b> — who knew whom. Emerges from Act II chapters as they are written.</li><li><b>The .4 prototype / missing unit / π thread</b> — <b>RESERVED, unassigned. No breadcrumbs until a story worthy of it.</b></li><li><b>The passcodes, deleted files, and password trail</b> — mechanics exist; their story-placement awaits the Act I mystery.</li><li><b>Good guys / bad guys</b> — <b>permanently open.</b> <i>The recovery team itself may be either.</i></li><li><b>Per-persona resolving tricks</b> — <i>what the camera move reveals.</i> <b>The slot is canonical; contents TBD per persona.</b></li><li><b>Per-owner epilogue scope</b> — <b>the sundae doctrine: every owner gets one.</b></li><li><b>−03's identity tangle</b> — CEO / Investor / Executive / &quot;Stand Alone&quot;. PARKED at L3.</li></ul>
+<hr>
+<h2 id="10-the-learning-machine-reading-held">10 · THE LEARNING-MACHINE READING — HELD</h2>
+<p><a id="learning-machine"></a></p>
+<p><b>Held as a reading, NOT forced:</b></p>
+<blockquote><p><i>The device secretly <b>LEARNING</b> its owner to optimise control — <b>why every unit answers in its owner's voice</b> — the mirrors reading; <b>a mutual death-spiral, machine and man taking each other down.</b></i></p></blockquote>
+<p><b>It feeds the Everyman theory without ever being stated.</b></p>
+<p><b>AND THE MACHINE'S OWN PUBLISHED SPECIFICATION DENIES IT IN WRITING</b> — RULE 5, on the MGK-NIAC face: <i>&quot;no adaptive learning — the machine is forbidden, in writing, from getting to know you.&quot;</i> <b>The two are not reconciled anywhere.</b> Recorded, not resolved.</p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/08-PEOPLE.md</code>,
+last written <b>2026-08-20 04:09 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

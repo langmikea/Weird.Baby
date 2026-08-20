@@ -82,6 +82,53 @@ const HELD_MAX_AGE = 60 * 60 * 24 * 30;
    worker sends, because the worker is the only thing that knows. */
 const NO_KEY_NOTE = "No key is set on this deployment. Run: npx wrangler secret put HR_KEY";
 
+/* ═══ [2026-08-20] THE DOOR REPORTS PRESENCE, NOT JUST PERMISSION ═══════════
+   MIKE: **"A door reporting 'open' with nothing behind it is why nobody caught
+   this for a week. The endpoint said true and every file 404'd into the SPA
+   fallback. Make it verifiable, not declarative."**
+
+   WHAT WENT WRONG, IN ONE LINE: `heldOpen()` answers *may this browser have the
+   held tree*, and for a week nothing anywhere answered *is the held tree here*.
+   The launch bundle had dropped all 144 files and `/api/held` went on saying
+   `open:true`.
+
+   ═══ WHY THE PROBE IS AN IMAGE AND NOT `twin.html` ═════════════════════════
+   `not_found_handling` is `single-page-application`, so a MISS returns
+   `index.html` with **200 text/html** — a status check cannot tell a hit from a
+   miss, and neither can a content-type check on an HTML file, because the
+   fallback IS HTML. An IMAGE discriminates absolutely: a real hit is
+   `image/png`, and the fallback can only ever be `text/html`.
+
+   ═══ IT NAMES THE FILE IT TESTED, AND THAT IS THE HONEST PART ══════════════
+   One probe cannot prove 144 files are present. So the answer carries `probe`
+   — the exact path checked — and claims nothing beyond it. A reader can repeat
+   it. **This is a smoke test that says which room it walked into**, not an
+   inventory.
+   IF THAT FILE IS EVER RENAMED the probe reports `served:false` on a deployment
+   that is fine. That is the loud failure direction and it is the right one: a
+   false alarm is investigated, and the fault this replaces was a false ALL-CLEAR
+   that nobody investigated for a week.
+
+   ═══ IT IS ONLY ANSWERED TO A BROWSER THAT HOLDS THE DOOR OPEN ═════════════
+   Whether held material is on this deployment is a fact about the WORK
+   (Doctrine 11), so it is `null` to everybody else. The key-holder is the only
+   party the answer is for, and the only one who can act on it. */
+const HELD_PROBE = "/held/robots/art/portal-cover.png";
+
+/** is the held tree actually ON this deployment? null when the door is shut. */
+async function heldServed(request, env) {
+  try {
+    const probe = new URL(HELD_PROBE, new URL(request.url).origin);
+    const res = await env.ASSETS.fetch(new Request(probe, { method: "GET" }));
+    if (!res.ok) return false;
+    /* the SPA fallback can only be HTML; a real hit can only be the image */
+    return (res.headers.get("Content-Type") || "").toLowerCase().startsWith("image/");
+  } catch {
+    /* a probe that could not run has not proved presence, and must not claim it */
+    return false;
+  }
+}
+
 /* ═══ [CH5 2026-08-12] THE RECORD'S CLOCK — A THIRD DOOR, FOR A THIRD REASON ══
    MIKE: Record n goes out on Day n; the site reads the clock at REQUEST time and
    serves the Records up to today; a short admin code shows him everything.
@@ -249,9 +296,19 @@ export default {
        behind a shut directory has already been answered above; this branch only
        ever sees paths a visitor is otherwise allowed to have.
        THE SCHEDULE IS BAKED AT BUILD TIME (`__WB_RECORD_ASSETS__`, vite.config)
-       from the Record's own `assets` arrays. It is EMPTY today — Record 013 was
-       the only entry that ever named a picture and it was deleted — so this
-       branch is built and unexercised, which is stated rather than discovered. */
+       from the Record's own `assets` arrays.
+       [2026-08-20] IT IS EXERCISED. This note said the schedule was EMPTY and
+       the branch "built and unexercised" — true when it was written, and
+       FALSE since Record 003 delivered on 2026-08-19. The built worker now
+       carries six real rows, all dated `2026-08-19`: the five manual scans and
+       the marked copy. They ship at PUBLIC addresses and this branch is what
+       held them until their day.
+       IT IS ALSO THE LIVE PRECEDENT FOR THE STAGE DOOR, which is why the
+       correction is worth more than tidiness: `heldOutOfLaunch` was removed on
+       the same day (vite.config.js) on the argument that shipping a file and
+       refusing it at the edge is the arrangement this museum already runs. A
+       stale comment saying the mechanism had never run would have been the
+       first thing to contradict that argument. */
     if (assetWithheld(__WB_RECORD_ASSETS__, url.pathname, recordToday)
         && !await previewOpen(request, env)) {
       return new Response("Not found", { status: 404 });
@@ -277,10 +334,17 @@ export default {
        admin page show the wing's buttons live rather than asking again every
        visit. It reports a boolean and never the key. */
     if (url.pathname === "/api/held" && request.method === "GET") {
+      const open = await heldOpen(request, env);
       return new Response(JSON.stringify({
-        open: await heldOpen(request, env),
+        open,
         configured: !!env.HR_KEY,
         note: env.HR_KEY ? null : NO_KEY_NOTE,
+        /* [2026-08-20] PRESENCE, MEASURED — see `heldServed` above for why the
+           probe is an image, why it names itself, and why it is null to anybody
+           without the key. `open && !served` is the exact state that went
+           unnoticed for a week: permission granted over an empty store. */
+        served: open ? await heldServed(request, env) : null,
+        probe: open ? HELD_PROBE : null,
         /* [V1 2026-08-06] THE STAGE IS REPORTED BY THE THING THAT ENFORCES IT.
            Mike asked for the two states to be UNAMBIGUOUS, and the honest place
            to answer that is the server: a page can only say what it was
@@ -442,6 +506,39 @@ export default {
                     expires: Date.now() + HELD_MAX_AGE * 1000 },
                   200, { "Set-Cookie": cookie });
     }
+    /* ═══ [2026-08-20] DOES THIS ENDPOINT CARRY THE SAME LIE? PARTLY. ════════
+       MIKE asked the question plainly, so here is the plain answer.
+
+       `previewing:true` grants TWO different things and they fail differently.
+
+       1. SEEING A FUTURE ENTRY'S TEXT — honest, always. The entries are static
+          in the bundle (`RECORD_ENTRIES`) and `__WB_RECORD_ALL__` just stops the
+          client filtering them. No file has to exist for this to work, so this
+          half cannot lie.
+
+       2. FETCHING A FUTURE ENTRY'S ASSET — **can lie, by the identical
+          mechanism.** The branch above skips `assetWithheld` for a previewer and
+          falls through to `env.ASSETS.fetch`. If the entry names a picture that
+          `reveal:day --place` has not yet renamed out of `public/held/`, the
+          file is not at the public path the schedule names, the store misses,
+          and `not_found_handling` returns the app HTML at 200 — the held door's
+          failure exactly.
+
+       SO IT IS THE SAME FAULT WITH A SMALLER MOUTH: `/api/held` had ONE grant
+       and it was entirely empty; this has two and only the second can be.
+
+       IT IS LATENT TODAY, AND THAT IS MEASURED RATHER THAN ASSUMED. On
+       2026-08-20 the schedule holds six paths, all dated 2026-08-19, all past,
+       and **all six are present at their public paths**. Future-dated assets:
+       ZERO. So there is no path today for which a previewer would be handed the
+       fallback.
+
+       NOT FIXED, AND DELIBERATELY. Mike ruled the probe for `/api/held` and
+       asked only for a statement here. The fix is not the same shape either: a
+       fixed probe path cannot serve an endpoint whose asset set changes per
+       entry, so the honest version walks the FUTURE-DATED half of the schedule
+       — today an empty walk, costing nothing, and on the day it is not empty
+       the previewer is exactly the person who needs the answer. One ruling. */
     if (url.pathname === "/api/record" && request.method === "GET") {
       return new Response(JSON.stringify({
         today: recordToday,

@@ -578,8 +578,15 @@ MANUAL_PAGE(33, { prod: "placed", calledBy: ["record.003"],
   note: NOTE_GENERATED });
 MANUAL_PAGE(34, { prod: "placed", calledBy: ["record.003"],
   assets: ["/robots/manual/scan-07-b.webp"], note: NOTE_GENERATED });
+/* [2026-08-19] PAGE 47 IS NOW DELIVERED TWICE, AND THE SECOND ONE IS NOT A
+   SCAN. `marked-01-a.webp` is the same manual page returned with Mike's own
+   handwriting on it - a second render of the same master, not a retouch of the
+   first file. It attaches to THIS row rather than opening a new one for the
+   same reason page 33 carries two names: the row is keyed on the MANUAL PAGE,
+   and a page may reach the museum under more than one address. */
 MANUAL_PAGE(47, { prod: "placed", calledBy: ["record.003"],
-  assets: ["/robots/manual/scan-31-a.webp"], note: NOTE_GENERATED });
+  assets: ["/robots/manual/scan-31-a.webp",
+           "/robots/manual/marked-01-a.webp"], note: NOTE_GENERATED });
 /* [R1 2026-08-05] THIS ROW IS NOW THE VOLUME, AND ONLY THE VOLUME. The entries
    have their own rows below it. The split is not tidiness: M18's twenty-seven
    questions are questions about ENTRY 013 and travel with it, while M19 — what

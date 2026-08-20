@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the boot and the two machines</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="05-the-boot-the-two-machines-and-the-sound">05 · THE BOOT, THE TWO MACHINES AND THE SOUND</h1>
+<p><b>Register key:</b> <code>STORY</code> · <code>OPS</code>. <b>Publication key:</b> <code>PUB</code> · <code>—</code>. <b>Nothing in this file is published.</b></p>
+<hr>
+<h2 id="1-the-three-starting-sequences">1 · THE THREE STARTING SEQUENCES</h2>
+<p><a id="levels"></a></p>
+<p><b>CANON, Mike, 2026-07-23.</b> <code>MANUAL_STRUCTURE_FIT</code> calls this <i>&quot;the structure's best fit anywhere&quot;</i> — three sequences, three positions, ¶5-3 / 5-5 / 5-7.</p>
+<div class="tw"><table><thead><tr><th>level</th><th>name</th><th>what happens</th></tr></thead><tbody><tr><td><b>L1</b></td><td><b>VIRGIN</b></td><td>No record. Load fails → <b>investigates</b> → <b>fresh install determined</b> → <b>OS download</b> (EST 10–15 s; the front narrates for the user, the top runs rich compelling chatter — <i>needn't make sense, must SOUND like it does</i>; <b>egg / passcode real estate</b>) → completes → <b>self-retries the boot.</b></td></tr><tr><td><b>L2</b></td><td><b>FIRST-RUN</b></td><td>File found, record not established → <b>visible setups and diagnostics</b> → the user <b>PERMITS or POSTPONES</b> the external-content download → menu.</td></tr><tr><td><b>L3</b></td><td><b>ESTABLISHED</b></td><td>Fast, sleep-like check → <b>recognises us</b> → reports → menu.</td></tr></tbody></table></div>
+<p><b>What the glass says:</b></p>
+<div class="tw"><table><thead><tr><th>level</th><th>on the glass</th></tr></thead><tbody><tr><td>L1</td><td><code>SYSTEM RECORD - NOT ON FILE</code> → <code>INVESTIGATING</code> → <code>FRESH INSTALLATION DETERMINED</code></td></tr><tr><td>L2</td><td><code>RESPONSE CURVE LOADED</code> and the rest of the first-run check</td></tr><tr><td>L3</td><td><code>USER RECORD - ON FILE</code> · <code>SYSTEM OK</code></td></tr></tbody></table></div>
+<p><b>Words are descriptive, not sacred. The bar is <i>believable for the period AND for the fiction</i>.</b></p>
+<p><b>BOOT IS MANDATORY AND IT IS A LIVING SURFACE.</b> <i>&quot;Sleep-return (short) is the dominant wake pattern; reboot happens sometimes.&quot;</i></p>
+<p><b>THE FRONT WAKES FIRST — canon, and the code disagrees.</b> <a href="CONFLICTS.html#k-10">K-10</a>.</p>
+<hr>
+<h2 id="2-external-content-transfer">2 · EXTERNAL CONTENT TRANSFER</h2>
+<p><a id="transfer"></a></p>
+<p>The offer, at L2: <b><code>EXTRA CONTENT IS AVAILABLE</code> · <code>DOWNLOAD NOW</code> · <code>DOWNLOAD LATER</code>.</b></p>
+<p><b>Permitting</b> and <b>postponing</b> are the manual's two words for it; the firmware's return values are still <code>permit</code> / <code>postpone</code>. <b>A 120-second auto-postpone guard runs on the human clock.</b></p>
+<p><b>It is never called &quot;answers.&quot;</b> <i>The fiction's fancy-speak, the calibration dance.</i></p>
+<p><b>AND IT IS THE ENGINE OF THE WHOLE REVEAL FICTION</b> — see <a href="10-LAWS.html#the-downloads-fiction">the downloads fiction</a>.</p>
+<hr>
+<h2 id="3-self-correction">3 · SELF-CORRECTION</h2>
+<p><a id="self-correction"></a></p>
+<p><b>A step errors, retries and succeeds.</b> Frequency rides condition; <b>five or more stutters fires a message.</b></p>
+<p><b>The manual has two positions for it</b> — ¶5-13, during starting, and ¶9-5, as a service matter.</p>
+<p>The monitor tracks it as <b><code>RECOVERED n</code></b>. <i>&quot;The escalation ladder past narration — alerts → messages → the system takes the credit — is BANKED; the trigger hook fires at 5. Spice, not epic.&quot;</i></p>
+<hr>
+<h2 id="4-f-and-t-the-two-machines">4 · F AND T — THE TWO MACHINES</h2>
+<p><a id="f-and-t"></a></p>
+<div class="tw"><table><thead><tr><th>term</th><th>register</th><th>meaning</th></tr></thead><tbody><tr><td><b>F</b></td><td>OPS</td><td>The front machine — the system GUI.</td></tr><tr><td><b>T</b></td><td>OPS</td><td>The top machine — apps and detail.</td></tr><tr><td><b>MGK-AUX</b></td><td>STORY</td><td>The header struck on T's own log during the boot. <b>T's own name for itself.</b></td></tr><tr><td><b>AUX LINK / IDENT / BIOS / CHECK / START / SYNC</b></td><td>STORY</td><td>The six goals that ride the rail on F's install screen, one per act.</td></tr><tr><td><b>The data bus</b></td><td>STORY</td><td>Named on the glass. States: <code>REQUESTING</code> · <code>MAIN &gt;&gt;&gt; AUX</code> · <code>AUX &gt;&gt;&gt; MAIN</code> · <code>GRANTED</code>, under a <code>C:\SYS&gt;</code> ARBITRATION line. <b>Traffic reads as a DIRECTION, not a label.</b></td></tr><tr><td><b>Segment</b></td><td>STORY</td><td>One of <b>six</b> BIOS segments.</td></tr><tr><td><b>Checksum</b></td><td>STORY</td><td>Ephemeral theatre in the boot (<b>FT3-exempt</b>); a code utility in Section X.</td></tr><tr><td><b>The ballet</b></td><td>OPS</td><td><b>The one boot.</b> <i>&quot;A boot is not a list of steps. It is the choreographed start-up of a plant.&quot;</i></td></tr><tr><td><b>Beat</b></td><td>OPS</td><td><b>Every pause in the machine is an authored, named beat.</b> ~72 named beats, ~24.5 s of authored beat time.</td></tr><tr><td><b>The stagger</b></td><td>OPS</td><td><b>F and T never both change in the same instant.</b> Conductor-enforced at a <b>110 ms floor.</b></td></tr><tr><td><b>The glitch</b></td><td>OPS</td><td><code>Glitch_Punctuate</code> — <b>subtle tier only</b>, 14 wired sites. <b><i>Punctuation, not noise.</b></i></td></tr><tr><td><b>The hum</b></td><td>OPS</td><td>A <b>60 Hz</b> mains bed with a <b>120 Hz</b> transformer bite. <b>Transmissions ride it as a dip and a swell, not as beeps over silence.</b></td></tr></tbody></table></div>
+<hr>
+<h2 id="5-the-ballet-seven-acts">5 · THE BALLET — seven acts</h2>
+<p><a id="ballet"></a></p>
+<p><code>Boot_Ballet()</code>, <code>robots:tools/viiip_twin.html:8284</code>. <b>There is no second copy of the boot</b> — the preview buttons play this same function.</p>
+<div class="tw"><table><thead><tr><th>act</th><th>what</th></tr></thead><tbody><tr><td><b>0 — POWER</b></td><td>Two beats of dark before anything earns light. <b>The one FT5 exemption, stated:</b> both glasses change in the same instant, <i>&quot;and that is CORRECT: power is ONE event on one rail, not two machines behaving.&quot;</i> Also the one exemption from the heartbeat law.</td></tr><tr><td><b>1 — THE AWAKENING</b></td><td>Both glasses race, <b>each running its own generator</b> (<code>Glass_Duet</code>, front delayed by <code>orgDesync()</code>, up to 260 ms).</td></tr><tr><td><b>2 — THE COLLISION</b></td><td><code>SELF TEST</code> on T; <code>Bus_Contend()</code>.</td></tr><tr><td><b>3 — THE CHARGE</b></td><td>F takes the mark. T keeps grinding through F's whole spinout — <b>both glasses always have something to do.</b></td></tr><tr><td><b>4 — THE DANCE</b></td><td><code>FT_Dance()</code> — see below.</td></tr><tr><td><b>5 — THE LEVEL</b></td><td><code>Boot_Level_1</code> / <code>_2</code> / <code>_3</code>.</td></tr><tr><td><b>6 — THE HANDOFF, IN TANDEM</b></td><td><code>Tandem_Finish()</code>.</td></tr></tbody></table></div>
+<h3 id="the-f-t-dance-act-by-act">The F/T dance, act by act</h3>
+<p><code>FT_Dance()</code>, <code>:8682</code>. <b>Every line is Mike's, carried verbatim.</b></p>
+<div class="tw"><table><thead><tr><th>act</th><th>what happens</th></tr></thead><tbody><tr><td><b>1 · FIRST CONTACT</b></td><td>F calls <code>AUX CHANNEL OPEN 300 BAUD</code> into the dark. <b>Nothing answers</b> — 1100 ms of hiss labelled <i>&quot;no answer&quot;</i>. <b>760 ms of yearning.</b> F tries again. T stirs. <code>CARRIER?</code></td></tr><tr><td><b>2 · THE HANDSHAKE</b></td><td><code>SYN</code> → <code>SYN-ACK</code> → <code>ACK. LINK 300 BAUD CONFIRMED</code>. <b>The hum leans in.</b> 1000 ms to let it land.</td></tr><tr><td><b>3 · IDENTIFY</b></td><td><code>AUX UNIT IDENTIFY</code> → T has to look it up → <code>MGK-AUX MK.II ROM FACTORY</code> → <code>FACTORY ROM ON FILE. PROCEED</code>.</td></tr><tr><td><b>4 · THE LOAD</b></td><td>Six segments. <b><code>LOAD BIOS SEG n/6</code>.</b></td></tr><tr><td><b>5 · THE CHECK</b></td><td><code>CHECKSUM</code> → a held breath → <code>4F2A .... PASS</code> → <code>AUX SELF-START AUTHORIZED</code>.</td></tr><tr><td><b>6 · THE BIRTH</b></td><td>T takes its own glass. <code>MGK-AUX BIOS FACTORY</code> · <code>MEM TEST .... 4096 W OK</code> · <code>VIDEO .... OK</code> · the monitor is born.</td></tr><tr><td><b>7 · REPORT</b></td><td><code>SYNC CLOCK</code> → <code>CLOCK SET 00:00:00</code> → <code>REPORT</code> → <b>the last hang</b> → <code>ALL SYSTEMS NOMINAL. LISTENING.</code></td></tr></tbody></table></div>
+<p><b>THE LOAD IS NOT A SCRIPT — <code>FT_Seg_Plan()</code>, <code>:8669</code>.</b></p>
+<blockquote><p><b>FIXED, every time:</b> six segments; <b>exactly one STALLS and resumes</b>; <b>exactly one FAILS and is retried</b>; the <b>last is always the SLOW deliberate one</b>; the rest are clean, with one QUICK relief among them.</p>
+<p><b>VARIES, per seed:</b> <i>which</i> segment stalls, <i>which</i> one fails, and where the quick one falls.</p></blockquote>
+<p>The seed is drawn fresh at every page load and is shown in the chrome, <b>so the pattern differs machine to machine and reset to reset, while staying deterministic within one run.</b></p>
+<p><b>AND EVERY PATH RECOVERS.</b> There is no branch in which the two machines fail to agree — which is the finding in <a href="FAILURE-MODES.html#cannot-fail">FAILURE-MODES</a>.</p>
+<hr>
+<h2 id="6-the-eight-f-t-laws">6 · THE EIGHT F/T LAWS</h2>
+<p><a id="ft-laws"></a></p>
+<p><b>They govern what the machine may be made to say. Three of them are vocabulary rulings.</b></p>
+<div class="tw"><table><thead><tr><th>law</th><th>ruling</th></tr></thead><tbody><tr><td><b>FT1</b></td><td><b>F and T are separate computer systems.</b> Different specs, different purposes, limited interoperability <i>&quot;for obvious reasons&quot;</i> — <b>verbatim; keep the wink.</b></td></tr><tr><td><b>FT2</b></td><td><b>The interrupt model.</b> T finishes its own boot while listening for F. <b>F's transmissions interrupt T. F has priority at all times; same in reverse.</b></td></tr><tr><td><b>FT3</b></td><td><b>No challengeable detail — fleet-wide.</b> Use <b>STATE-WORDS</b>. <b>Exempt: ephemeral theatre.</b></td></tr><tr><td><b>FT4</b></td><td><b>Egg logged, build nothing:</b> smash-DEL-to-enter-BIOS. MAYBE tier.</td></tr><tr><td><b>FT5</b></td><td><b>The stagger law.</b> One leads, the other follows by a felt beat.</td></tr><tr><td><b>FT6</b></td><td><b>Word rulings.</b> <code>MK.II</code> / <code>300 BAUD</code> / <code>4096 W</code> <b>stand</b> as period furniture. <code>98K OK</code> and <code>SEG n/12</code> are state-worded. — <a href="CONFLICTS.html#k-18">K-18</a></td></tr><tr><td><b>FT7</b></td><td><b>The dot-line law.</b> <b>The dot IS the fully collapsed line</b> — one entity, not two events, <b>exactly once per warm start.</b></td></tr><tr><td><b>FT8</b></td><td><b>Glitch on major change.</b> Subtle tier only; deterministic punctuation.</td></tr></tbody></table></div>
+<p><b>STATE-WORDS: <code>FACTORY</code> · <code>CURRENT</code> · <code>ON FILE</code>.</b> Machine self-description never asserts checkable specifics — versions, dates, counts — that could conflict with canon later. <code>&quot;98K OK&quot;</code> became <code>&quot;FACTORY OK&quot;</code>; <code>&quot;SEG n/12 OK&quot;</code> became <code>&quot;SEG .... OK&quot;</code>.</p>
+<hr>
+<h2 id="7-three-more-laws-from-the-same-night">7 · THREE MORE LAWS FROM THE SAME NIGHT</h2>
+<p><a id="night-laws"></a></p>
+<h3 id="the-heartbeat-law-mike">THE HEARTBEAT LAW (Mike)</h3>
+<p><b>ANY wait, for any reason, shows a heartbeat indicator — always. The machine never sits dead-still while it is alive.</b> The blank-screen law's scripted pauses are the <b>sole exception</b>, and <b>drama has to ask in writing</b>: <code>{still:true}</code>.</p>
+<p><b>ONE IDIOM: a pulsing cursor block, bottom-right.</b> Shopped from the DOS register the boot already speaks.</p>
+<p><b>THE SPINNER WAS THE OTHER CANDIDATE AND WAS NOT TAKEN:</b> the spinner is already spoken for as T's WORKING line, which means <i>&quot;this machine is doing a job&quot;</i> — a different statement from <i>&quot;this machine is alive and waiting.&quot;</i> <b>One mark, one meaning.</b></p>
+<h3 id="the-static-sound-law-mike">THE STATIC-SOUND LAW (Mike)</h3>
+<p><b>Static noise plays during visual static — ALWAYS AND ONLY.</b> No silent static; no static-sound over clean glass.</p>
+<p><b>ENFORCED BY REFCOUNT, NOT BY A FLAG.</b> Any generator drawing static holds a reference; the voice runs while at least one is held. <b>Two glasses showing static share one voice instead of doubling it.</b></p>
+<p><b>Three defects it found:</b> a single 0.28 s burst at the head of a 2000 ms static (five sixths of every warm start was silent static); <code>T_Hiss</code> rolled its own loop and was <b>entirely silent</b>; and <code>WhiteNoise</code> was doing double duty as a game-impact sound, <b>which is what let static-sound play over clean glass.</b></p>
+<h3 id="the-theater-law-2026-07-24-fleet-wide">THE THEATER LAW (2026-07-24, fleet-wide)</h3>
+<p><b>Screen-clears drop text colour and gamma FIRST</b> — a slight fade persistence, phosphor-decay style — <b>then clear. Everywhere clears happen.</b></p>
+<h3 id="the-crt-lifecycle-law-2026-07-24">THE CRT LIFECYCLE LAW (2026-07-24)</h3>
+<p><b>Every screen-off is a CRT death</b> — collapse to a horizontal line, then a point, then out. <b>Every screen-on is a suitable birth</b>, before static where static exists. Fluidic is treated as a standard CRT for now. <b>A universal frame around all screen transitions, including the three theatres.</b></p>
+<p><b>FT7's dot-line law is the fine grain of this:</b> the dot IS the fully collapsed line — <b>one entity, not two events.</b></p>
+<h3 id="the-click-feedback-law-2026-07-24">THE CLICK-FEEDBACK LAW (2026-07-24)</h3>
+<p><b>Every click flashes the lens/shutter LED colour</b> — the physical unit's own tell. Subtle, period-true, in the composite/unit view.</p>
+<hr>
+<h2 id="8-the-sound">8 · THE SOUND</h2>
+<p><a id="sound"></a></p>
+<div class="tw"><table><thead><tr><th>element</th><th>what</th></tr></thead><tbody><tr><td><b>The hum</b></td><td>60 Hz bed + 120 Hz bite. Wobble 0.09 Hz, drift 0.13 Hz. <code>Hum_Blip</code> (a transmission rides it) · <code>Hum_Swell</code> (the machine leans in) · <code>Hum_Strain</code> (something is not going well).</td></tr><tr><td><b>The dial-up handshake</b></td><td><b>~3 seconds of &quot;90s modem&quot;</b> — DTMF dial, answer tone, warble, static burst — narrated on the top glass as <b><code>DIALING</code> · <code>CARRIER DETECTED</code> · <code>HANDSHAKE</code> · <code>LINK UP</code>.</b> <b>Nothing may download before it finishes</b> — <i>causality absolute.</i> <b>A period mismatch is recorded at <a href="BELL-103.html#mismatch">BELL-103 §4</a>.</b></td></tr><tr><td><b>The modem screech</b></td><td><code>FX_modem</code> — carrier warble + hiss, <b>while the line is hot.</b> A different function for a different event.</td></tr><tr><td><b>The reveal</b></td><td><i>&quot;mechanical thunk + fluidic settle — organic, not synth-bright.&quot;</i></td></tr><tr><td><b>The slosh</b></td><td>Splash 0.022 · body 0.095 · tail 0.075.</td></tr><tr><td><b>The glitch's audio</b></td><td>The <b>&quot;zowt&quot;</b> — a mains-hum transient at 60 Hz sawtooth plus a noise tick. <b>Chosen over silence as the more period-true tell, and FLAGGED.</b></td></tr><tr><td><b>The voice</b></td><td>A <b>period-flat WebAudio synth shim</b> — because the real voice was never audible in the shim.</td></tr></tbody></table></div>
+<hr>
+<h2 id="9-the-glitch-doctrine">9 · THE GLITCH DOCTRINE</h2>
+<p><a id="glitch"></a></p>
+<p><b>CANON, 2026-07-23, fleet-wide.</b> <i>A very low per-instant probability of non-deterministic errors everywhere</i> — stutters, pops, screen tears, audio hiccups, and <b>boots that error and SELF-CORRECT</b> (locks transmission, retries settings, resumes). <b>Lightly applied. One tunable.</b></p>
+<blockquote><p><i>A 60-year-old repaired machine behaves like one.</i></p></blockquote>
+<p><b>Two layers, and they are not the same thing:</b></p>
+<div class="tw"><table><thead><tr><th></th><th>the ambient layer</th><th>FT8 punctuation</th></tr></thead><tbody><tr><td><b>fires</b></td><td>on probability — <code>GLITCH_RATE = 0.0006</code>, <b>scaled by health</b>: <code>× (1 + (100 − H)/25)</code></td><td><b>deterministically</b>, at a major screen change</td></tr><tr><td><b>gated by</b></td><td>the rate, and <code>bootRunning</code></td><td>neither — <i>&quot;a boot's act transitions need it most&quot;</i></td></tr><tr><td><b>kinds</b></td><td>invert · band slip · the zowt</td><td>invert snap <b>or</b> band slip</td></tr><tr><td><b>cost</b></td><td><b>real wear</b> — <code>H_GLITCH_COST</code></td><td>none</td></tr></tbody></table></div>
+<p><b>A neglected machine stutters more, and the stutter costs it condition.</b> That is a real loop, not a decoration.</p>
+<hr>
+<h2 id="10-the-system-monitor">10 · THE SYSTEM MONITOR</h2>
+<p><a id="monitor"></a></p>
+<p><b>The top glass's resting face: three outlined windows.</b> Their names are in the firmware's <code>windows[]</code> structs, and <b>the original never renders them — the boxes are mute.</b></p>
+<div class="tw"><table><thead><tr><th>window</th><th>geometry</th></tr></thead><tbody><tr><td><b>CODE</b></td><td><code>0,0 37×42</code></td></tr><tr><td><b>GRAPH</b></td><td><code>39,0 89×42</code></td></tr><tr><td><b>STATUS</b></td><td><code>0,44 128×20</code></td></tr></tbody></table></div>
+<p><b>THE CODE WINDOW RUNS A DOS PROMPT</b> — <code>Mon_DOS</code>, <i>&quot;the code window runs process commands — some tied to REAL machine work (condition, sessions, link state), some flavour; OS voice, zero personality.&quot;</i></p>
+<div class="tw"><table><thead><tr><th>command</th><th>output</th></tr></thead><tbody><tr><td><code>STAT</code></td><td><code>PROC n</code> · <code>COND n%</code></td></tr><tr><td><code>MEM</code></td><td><code>FACTORY OK</code> — <b>state-worded; was a checkable size</b></td></tr><tr><td><code>SYNC</code></td><td><code>LINK UP</code> / <code>NO LINK</code></td></tr><tr><td><code>AGE</code></td><td><code>S n</code> — sessions</td></tr><tr><td><code>CHK</code></td><td><code>1 WARN</code> if condition &lt; 40, else <code>0 ERR</code></td></tr></tbody></table></div>
+<p><b>THE GRAPH WINDOW CARRIES SIGNAL, AND IT IS REAL</b> — it rides <code>monConn</code>, the download connection. <b>Which is what the manual says signal does for the video link, on a different link entirely</b> — <a href="FAILURE-MODES.html">FAILURE-MODES §2.2</a>.</p>
+<p><b>THE GRAPH WINDOW HAS READ <code>TEST</code> SINCE THE FACTORY.</b> Completing the printed procedure completes the test. <b>Egg 1, Papa-placed — and the one exemption from the no-dead-wood law.</b> It is visible in <code>reference/photos/top_monitor.png</code>.</p>
+<p><b>MONITOR LAYOUT, ruled 2026-07-22:</b> the status line was printed <b>on</b> the box border and obscured. Re-laid out; <b>the two lines in the bottom box centre vertically.</b></p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/05-BOOT.md</code>,
+last written <b>2026-08-20 04:12 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

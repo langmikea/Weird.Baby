@@ -15271,6 +15271,20 @@
    "c": "HOUSE",
    "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
   },
+  "67a96ea2aa2fd287": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 470,
+   "t": "Marked copy 01 - Bias settings",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page label in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here. It is deliberately NOT called a scan - Record 003's published report names three scans in Mike's words, and ruling 10 would otherwise force an edit to text the museum has already shown."
+  },
+  "2c118380f18cdbc2": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 475,
+   "t": "Bias settings, returned marked",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page label in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here. It is deliberately NOT called a scan - Record 003's published report names three scans in Mike's words, and ruling 10 would otherwise force an edit to text the museum has already shown."
+  },
   "561065498eca9618": {
    "f": "src/data/artists/robots-record.js",
    "l": 371,
@@ -15417,6 +15431,41 @@
    "t": "; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0",
    "c": "HOUSE",
    "s": "cookie-attribute fragments in src/worker.js - protocol, not prose. Nothing renders them; they are the Set-Cookie header that closes the Record door."
+  },
+  "baf56784c09bf87c": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 149,
+   "t": "Held files",
+   "p": "WbAdmin{}.heldServedLabel",
+   "c": "HOUSE"
+  },
+  "42b1853163354658": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 152,
+   "t": "Served — the door has something behind it",
+   "p": "WbAdmin{}.heldServedYes",
+   "c": "HOUSE"
+  },
+  "ed9f83b205d2794f": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 153,
+   "t": "NOT ON THIS DEPLOYMENT — the door opens onto nothing",
+   "p": "WbAdmin{}.heldServedNo",
+   "c": "HOUSE"
+  },
+  "a6c5527af53ede14": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 158,
+   "t": "Probed",
+   "p": "WbAdmin{}.heldProbeLead",
+   "c": "HOUSE"
+  },
+  "a1ca791c1379fc3e": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 159,
+   "t": "and the store answered with the\n          application, not the file. Held material was not uploaded with this\n          build, so every held address will render the Lobby. Rebuild and deploy.",
+   "p": "WbAdmin{}.heldProbeNote",
+   "c": "HOUSE"
   }
  }
 }

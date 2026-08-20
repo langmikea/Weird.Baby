@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the Bell 103 integration</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="the-bell-103-integration-recorded-as-canon">THE BELL 103 INTEGRATION — recorded as canon</h1>
+<blockquote><p><b>Mike: &quot;Coordinated and meaningful richness is beautiful.&quot;</b></p></blockquote>
+<p><b>STATUS: RULED AND BUILT. NOT YET PUBLISHED</b> — see <a href="#where-it-stands">where it stands</a>. <b>Recorded here, not built here.</b> Nothing on this page is a proposal.</p>
+<hr>
+<h2 id="1-the-fact">1 · THE FACT</h2>
+<p>The four correct communications settings are</p>
+<pre>1  PARITY    EVEN
+2  DUPLEX    FULL
+3  WORD      7 BIT
+4  STOP      1</pre>
+<p><b>They are a period-correct 1962 Bell 103 link</b>, and they are stated as such at <code>robots:tools/manual_structure_build.py:1577</code>.</p>
+<p>The manual itself declines to give them. Its own written prose, <code>BODY_B_1</code>:</p>
+<blockquote><p><i>&quot;The values are not given in this manual. They are established at the far end and are entered on the installation record at the time the link is made. An instrument moved to another far end is to be set again.&quot;</i></p></blockquote>
+<p>So the answer reaches a reader <b>only through the pen</b>, on a marked copy of the same page. The pen strikes the <b>wrong</b> option in each pair and leaves the right one standing.</p>
+<p><b>MIKE'S RULING ON WHY THE PEN AND NOT SOMETHING ELSE</b> (closing register row <code>PZ-a</code>):</p>
+<blockquote><p><i>&quot;the puzzle is knowing you saw it, and even if not, you can guess in 16. I think the pen is the better puzzle; the other is confirmed guessing.&quot;</i></p></blockquote>
+<p><b>Attention is rewarded and nobody is locked out.</b></p>
+<p><b>AND THE FOUR STRIKES ARE NOT ALL IN THE SAME COLUMN</b> — first, first, second, second — <i>&quot;which is what stops four strikes reading as a pattern rather than as a hand.&quot;</i> The strike geometry is at <code>manual_structure_build.py:1602-1605</code>.</p>
+<hr>
+<h2 id="2-why-each-setting-is-the-one-it-is">2 · WHY EACH SETTING IS THE ONE IT IS</h2>
+<p><b>This is Mike's reading, recorded as canon. It is not Ops' derivation.</b></p>
+<div class="tw"><table><thead><tr><th>setting</th><th>what it means as a period fact</th><th>what it says about this machine</th></tr></thead><tbody><tr><td><b>EVEN</b></td><td>The classic ASCII teleprinter configuration: seven data bits and an even parity bit in the eighth.</td><td>The eighth bit is spent on checking rather than on carrying.</td></tr><tr><td><b>FULL</b></td><td>Both ends transmit at once; neither has to yield the line.</td><td><i>&quot;The link is bi-directional by design. Assume the far end is attended.&quot;</i></td></tr><tr><td><b>7 BIT</b></td><td>A character set with room for plain text and nothing else.</td><td>No graphics, no extended set, no escape into anything but words.</td></tr><tr><td><b>1</b></td><td>One stop bit rather than two — the faster framing, chosen when the receiving mechanism can keep up.</td><td>Built for speed, not caution.</td></tr></tbody></table></div>
+<hr>
+<h2 id="3-where-it-already-agrees-with-something-written">3 · WHERE IT ALREADY AGREES WITH SOMETHING WRITTEN</h2>
+<p><a id="agreements"></a></p>
+<p><b>This is the part of the round the brief asked for: not whether the settings are correct, but where the corpus had already, independently, said the same thing.</b> Each row below is a thing written down before, by somebody who was not thinking about Bell 103.</p>
+<h3 id="3-1-full-duplex-is-sp-7-14-in-settings">3.1 · FULL duplex is SP 7-14, in settings</h3>
+<p><b>The strongest agreement, and the one already named in the brief.</b> The manual's video-link paragraph is written and published:</p>
+<blockquote><p><i>&quot;The link is bi-directional by design. <b>Assume the far end is attended.</b>&quot;</i></p></blockquote>
+<p><i>Bi-directional by design</i> and <i>FULL</i> are the same statement in two registers. And <i>assume the far end is attended</i> is what FULL duplex is <b>for</b> — half duplex is the setting you choose when you know only one end will be talking.</p>
+<p>Source: <code>robots:tools/manual_structure_build.py:136-140</code> (<code>BODY_7_14</code>); published as <code>scan-11-a.webp</code> / <code>scan-11-b.webp</code>, Record 003.</p>
+<h3 id="3-2-300-baud-is-already-on-the-glass-verbatim-from-mike">3.2 · 300 BAUD is already on the glass, verbatim from Mike</h3>
+<p><b>Bell 103 is the 300-bit-per-second standard.</b> It is the rate, and the machine already says it — three times, in Mike's own dance lines, carried verbatim:</p>
+<pre>AUX CHANNEL OPEN 300 BAUD          F, twice, calling into the dark
+ACK. LINK 300 BAUD CONFIRMED       F, when it lands</pre>
+<p><code>robots:tools/viiip_twin.html:8689</code>, <code>:8693</code>, <code>:8704</code>.</p>
+<p><b>These were written for the front-and-top link, not for the video link</b>, and nothing says the two links run at the same rate. What they establish is that <b>300 baud is this machine's idea of what a data link is</b> — which is the rate the four settings belong to, arrived at from the other direction.</p>
+<p>They are also the subject of a live tension: <b>FT6</b> ruled <code>300 BAUD</code> stands as period furniture, <b>FT3</b> says the machine may never assert a checkable specific. See <a href="CONFLICTS.html#k-18">K-18</a>. <b>The Bell 103 finding makes <code>300 BAUD</code> a <i>checkable specific that checks out</i>, which is an argument FT3 did not have when it was written.</b> Recorded; not a ruling.</p>
+<h3 id="3-3-carrier-is-already-the-vocabulary">3.3 · CARRIER is already the vocabulary</h3>
+<p>The dial-up narration on the top glass reads</p>
+<pre>DIALING...  ·  CARRIER DETECTED  ·  HANDSHAKE  ·  LINK UP</pre>
+<p>and inside the F/T dance T answers the dark with a single word: <b><code>CARRIER?</code></b></p>
+<p><code>robots:tools/viiip_twin.html:7989-7995</code>, <code>:8697</code>.</p>
+<p><b>Carrier detect is the Bell 103 concept</b>, not a generic one — it is the thing a 103 dataset asserts on a physical pin and the thing an operator watches a lamp for. The machine already speaks it.</p>
+<h3 id="3-4-7-bit-agrees-with-everything-the-machine-can-draw">3.4 · 7 BIT agrees with everything the machine can draw</h3>
+<p>Nothing in the corpus has ever needed a character outside plain ASCII:</p>
+<ul><li>The answer tables use <b><code>_</code> as the line-break control</b> — <code>Ask again_later.</code>, <code>Concentrate_and ask again.</code> A corpus that presses an underscore into service as a control character is a corpus with no room for one. (<code>robots:tools/viiip_twin.html:1859</code>, <code>CSV_CORE</code>.)</li><li>The three character sets are a 6×8 <code>classic</code>, <code>TomThumb</code> and <code>FreeSansBold</code> — all plain-text faces, no extended set anywhere (<a href="HOLES.html#h-12">H-12</a>).</li><li>The manual is <b>typed</b>, at 12 characters per inch on a 6-lines-per-inch grid, Courier, bold by overstrike, headings underscored with the underline key. A typewriter has no eighth bit either.</li></ul>
+<h3 id="3-5-the-instrument-holding-its-peace-is-what-a-mismatch-does">3.5 · The instrument holding its peace is what a mismatch does</h3>
+<p>B-1's written prose:</p>
+<blockquote><p><i>&quot;It is not set to a preference. It is set to agree with the far end, and until it agrees <b>the instrument holds its peace.</b> Four settings. The unit will not speak until all four agree with the far end.&quot;</i></p></blockquote>
+<p>and</p>
+<blockquote><p><i>&quot;A disagreement in any one of the four is reported as a parity bias setting mismatch. The report names the condition and <b>does not name the setting at fault, there being no means at this end of knowing which of them is wrong.</b>&quot;</i></p></blockquote>
+<p><b>That last clause is period-exact.</b> A 103 dataset at one end genuinely cannot tell you which of the four the other end disagrees about — it has no channel to ask on, because the channel is the thing that is broken. The manual reasons its way to the right answer for the right reason.</p>
+<p><b>It is also the sentence that makes <a href="FAILURE-MODES.html">FAILURE-MODES</a> a design problem rather than a message problem</b>: the machine may not <i>name</i> the fault, so the fault has to be <i>shown</i>.</p>
+<h3 id="3-6-the-manual-is-a-1965-document-using-a-1962-standard">3.6 · The manual is a 1965 document using a 1962 standard</h3>
+<p><code>ABEAL 8P-OMI-1</code>, <code>MODEL MGK-VIIIp</code>, and the fiction dates the VIIIp to 1965. <b>Bell 103 is 1962.</b> A three-year-old standard is exactly what a 1965 machine would be built to — new enough to be the modern choice, old enough to have installed base at the far end.</p>
+<h3 id="3-7-the-published-record-already-frames-it-as-a-period-competence">3.7 · The published Record already frames it as a period competence</h3>
+<p>Record 005 (<code>SCHEDULED</code>, posts 17:00 on 2026-08-21), in the museum's own voice:</p>
+<pre>  ? A period operator would have known this without being told.
+  ! We are not period operators.</pre>
+<p>and</p>
+<pre>  &gt; Four toggles. Sixteen combinations. One of them is correct.</pre>
+<p><b>That is the Bell 103 fact stated as a story beat, and it was written before this page existed.</b> It is also the tightest statement of Mike's principle anywhere in the corpus: the richness is meaningful <i>because</i> a period operator would not have needed the pen.</p>
+<h3 id="3-8-dtmf-in-the-dial-sound-is-period-plausible-and-was-not-chosen-for-that">3.8 · DTMF in the dial sound is period-plausible, and was not chosen for that</h3>
+<p><code>FX_dial90()</code> opens with seven <b>DTMF</b> pairs before the answer tone. Touch-tone dialling is a 1963 Bell service — one year after 103 and two before the machine. Nothing in the code says this was the reason; the function is named for the nineties. <b>Recorded as an accidental agreement</b>, and see the mismatch below.</p>
+<hr>
+<h2 id="4-where-it-does-not-agree-one-mismatch-reported-not-fixed">4 · WHERE IT DOES <b>NOT</b> AGREE — one mismatch, reported not fixed</h2>
+<p><a id="mismatch"></a></p>
+<p><b><code>FX_dial90()</code> is a 1990s modem and the link is a 1962 one.</b></p>
+<ul><li>The function's own comment: <i>&quot;a ~3s 90s dial-up — DTMF dial, carrier handshake warble, static burst.&quot;</i></li><li><code>robots:docs/SPEAKABLE_INDEX-20260726.md</code> §The dial-up handshake: <i>&quot;The ~3-second <b>90s modem</b>: dial tones, the answer, the warble, the static.&quot;</i></li><li>What it synthesises: DTMF, then <b>1200 Hz</b> square described as <i>the answer tone</i>, then 2250 Hz and 1800 Hz warbles, then a noise burst.</li></ul>
+<p>A Bell 103 answering station marks at <b>2225 Hz</b> and spaces at 2025 Hz; an originating station marks at 1270 and spaces at 1070. <b>The 2250 Hz warble is within 25 Hz of the 103 answer mark and is called a warble; the 1200 Hz tone is called the answer tone and is not one.</b> The multi-tone warble a listener reads as &quot;modem&quot; is a rate negotiation from thirty years later — a 103 link has no rate to negotiate, because it has exactly one.</p>
+<p><b>NOTHING IS PROPOSED HERE.</b> The mismatch is recorded because it is the one place the corpus's sound and the corpus's settings disagree, and because Mike's own principle is what makes it worth knowing: a link whose settings are period-exact and whose sound is thirty years late is the coordination breaking in the one channel nobody was looking at.</p>
+<p>Related and separate: <b><code>FX_modem()</code></b> (the download screech) is a different function for a different event and is not part of this.</p>
+<hr>
+<h2 id="5-a-second-instance-of-the-same-principle-already-in-the-building">5 · A SECOND INSTANCE OF THE SAME PRINCIPLE, ALREADY IN THE BUILDING</h2>
+<p><a id="second-instance"></a></p>
+<p><b>The brief asked where else this kind of agreement already exists. There is one more, and it is already a planted egg</b>, so it is named here and <b>not explained on any glass</b>.</p>
+<p>The Portal's feed drum engraves channels <b>1–8</b>, and the two machines fall where they fall: MGK-NIAC on 1 and 2, MGK-VIIIp starting at <b>3</b>. The corpus's own output designation for the ElectronScope is <b>CH4 / CH3 / 8K</b> (<code>SPEC_INVENTORY</code> §D.8).</p>
+<p>The reason the numbering starts where it does is recorded <b>once</b>, in <code>museum:reveal/ledger.json</code> (<code>egg.channels</code>, state HELD, build LIVE), and <code>museum:src/data/artists/portal.js</code> carries Mike's instruction verbatim: <i>&quot;the reason is the egg and it must not be explained on the glass.&quot;</i></p>
+<p><b>Same shape as Bell 103</b>: a real period convention, load-bearing, planted where a person who knows it is rewarded and a person who does not is given a numbered drum.</p>
+<hr>
+<h2 id="6-where-it-stands">6 · WHERE IT STANDS</h2>
+<p><a id="where-it-stands"></a></p>
+<div class="tw"><table><thead><tr><th>thing</th><th>state</th><th>evidence</th></tr></thead><tbody><tr><td>The four values</td><td><b>RULED</b></td><td><code>manual_structure_build.py:1577</code>, in the generator's own comment block</td></tr><tr><td>The pen-strike mechanism</td><td><b>RULED</b> (<code>PZ-a</code> closed) and <b>BUILT</b></td><td><code>manual_structure_build.py:1565-1611</code></td></tr><tr><td><code>marked-01-a.webp</code></td><td><b>RENDERED, ON DISK, UNCOMMITTED</b></td><td><code>museum:public/robots/manual/marked-01-a.webp</code> — untracked in git</td></tr><tr><td>Record 003's fourth attachment</td><td><b>WRITTEN, UNCOMMITTED</b></td><td><code>museum:src/data/artists/robots-record.js</code>, working-tree change</td></tr><tr><td><b>A visitor has seen it</b></td><td><b>NO</b></td><td>Neither file is committed or deployed</td></tr></tbody></table></div>
+<p><b>It becomes published the moment that commit deploys</b>, and after that it is governed by the published-facts rule: it can be built on and it cannot be changed.</p>
+<p><b>THE MARKED PAGE IS BACK-POSTED ONTO A LIVE RECORD, ON MIKE'S RULING</b>, and his reason is recorded with it: <i>&quot;We have had no visitors.&quot;</i> The original <code>scan-31</code> is untouched and stays — <b>the museum does not edit what it has already shown; a page comes back with somebody's handwriting on it.</b></p>
+<p>Three further rulings sit on that attachment and are worth carrying:</p>
+<ul><li><b>It is deliberately not called a scan.</b> Record 003's published DETAILED REPORT names three — SCAN 07, SCAN 11, SCAN 31 — and adding a fourth would edit published text. It also happens to be true: this page was not recovered from the ZIP and was not filmed.</li><li><b>The filename asserts no page.</b> <code>marked-01</code>, not <code>marked-b1</code> — a sequence of marked copies, and nothing about the document. Mike has said this is a <b>recurring channel</b>, so it takes a number from the first one.</li><li><b>The pen is Mike's own hand.</b> He is the PEN WRITER, logged for the credits page.</li></ul>
+<p><b>AND ONE MARK ON THAT PAGE IS FLAGGED AND NOT SPENT.</b> The sheet carries two registers — a careful hand and a loose one — and <i>&quot;a page marked in both is a page two people wrote on.&quot;</i> B-1 is the careful hand throughout. The <b>monogram</b> is the one deliberate exception, taken from the loose column, <i>&quot;because a signature is the one mark a person does not vary by mood.&quot;</i> Flagged for Mike.</p>
+<p><b>HIS SPELLING STANDS.</b> The mark <code>careful-check-w-far-side-first</code> reads <b>FAR SIDE</b>; the manual says <b>FAR END</b>. He wrote it both ways on one sheet and the slip is not corrected — <i>&quot;a pen holder who gets his own document's term slightly wrong is a person, and that is the whole point of the channel.&quot;</i></p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/BELL-103.md</code>,
+last written <b>2026-08-20 04:12 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

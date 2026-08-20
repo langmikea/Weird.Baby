@@ -1,0 +1,296 @@
+# 06 · THE PORTAL, THE VIDEO LINK AND THE FAR END
+
+**Register key:** `STORY` · `OPS`. **Publication key:** `PUB` · `—`.
+
+**THREE OBJECTS WEAR THE WORD *PORTAL* AND ALL THREE ARE CANON** —
+[K-03](CONFLICTS.md#k-03). This file is about the third: **the doorway.**
+
+---
+
+## 1 · THE VIDEO LINK — the instrument's side
+<a id="video-link"></a>
+
+**This is the only subsystem in the manual whose theory is already written, and
+it is published in full as `scan-11-a.webp` / `scan-11-b.webp`, Record 003.**
+Quoted whole, because every term in it is load-bearing.
+
+> *"The upper display may be given over to a **video link** with a **far end**.
+> The link is not an extension of the upper display: the far end is a **station
+> in its own right and is drawn on its own glass.** The link is bi-directional by
+> design. **Assume the far end is attended.**"*
+>
+> *"The link opens only where the communications settings of Appendix B agree
+> with those held at the far end. Where they do not agree the instrument does not
+> open the link, and **reports the disagreement rather than the far end.**"*
+>
+> *"While the link is up, **signal is shown in the graph window of the diagnostic
+> monitor** and the upper display is not available to a program. **Absence of
+> signal is not in itself a fault; a far end that is not answering is not a far
+> end that is not there.**"*
+>
+> *"The instrument's record holds **that** a link was opened and **for how
+> long**. It does not hold **what passed over it.**"*
+
+| term | register | pub | meaning as attested |
+|---|---|---|---|
+| **Video link** | STORY | **PUB** | The manual's own name for the thing. |
+| **Far end** | STORY | **PUB** | The other station. **Attended by assumption.** [H-03](HOLES.md#h-03) |
+| **Station** | STORY | **PUB** | *"a station in its own right… drawn on its own glass."* |
+| **Signal** | STORY | **PUB** | Shown in the graph window while the link is up. |
+| **The installation record** | STORY | **PUB** | Where the four communications values are entered at the time the link is made. **The values are not given in the manual.** An instrument moved to another far end is to be set again. |
+
+**IT IS NOT BUILT.** Nothing in the twin implements a video link — see
+[FAILURE-MODES §2](FAILURE-MODES.md#what-the-twin-can-do).
+
+---
+
+## 2 · THE PORTAL — the doorway
+<a id="the-doorway"></a>
+
+**CANON, Mike, 2026-07-29 — THE PORTAL REVELATION:**
+
+> *"The bezel is the transitional frame between the webpage's real world and a
+> camera feed / controller arrangement arriving from **an unknown source, an
+> unknown location, and for an unknown reason.** The MGK-portal. **Three
+> unknowns, and they are the point — the frame does not explain itself.**"*
+
+**And it is the `p`** — [K-17](CONFLICTS.md#k-17).
+
+| term | register | meaning as attested |
+|---|---|---|
+| **The bezel** | STORY | Renders as **its own layer ABOVE everything** and takes **no video treatment whatsoever** — it is the real world's frame. **Every feed treatment applies inside the opening and nowhere else.** |
+| **Feed** | STORY | What arrives through the opening. |
+| **Channel** | STORY | An engraved number on the drum, 1–8. |
+| **Arms / armed** | STORY | A position that lights the drum and permits the latch. |
+| **Latch** | STORY | The control that opens the feed. Reads **`FEED ARMED`** or **`NOT ARMED`.** |
+
+**SIGNAL QUALITY IS WEATHER** — doctrine, recorded as canon at the Portal polish
+round, 2026-07-29.
+
+---
+
+## 3 · THE FEED CONTROL
+<a id="feed-control"></a>
+
+**`museum:src/data/artists/portal.js`.** Register STORY. **HELD — no visitor has
+seen any of it.**
+
+### The nameplate
+
+```
+ABEAL  ·  FEED CONTROL
+MODEL NO.   TYPE 8p
+SER. NO.    (blank)
+DATE        (blank)
+```
+
+**MIKE, NAMING HIS REFERENCES:** *"a raised chrome bezel; a black field with
+brushed-metal letterforms sitting PROUD of it; stamped-in-place fields (MODEL
+NO., SER. NO., DATE) with values struck into a lighter recess; an accent panel
+beside the wordmark. **It must be unmistakably a BADGE bolted to a machine — not
+a label, not a caption.**"*
+
+**TWO OF THE THREE FIELDS ARE DELIBERATELY BLANK** —
+[H-21](HOLES.md#h-21).
+
+### The drum
+
+**Legend `FEED`. Sub `SELECT · ONE ARMED` — and the sub is wrong by one word,
+knowingly** ([H-22](HOLES.md#h-22)). Positions read **top to bottom.**
+
+| ch | id | engraved | arms | what it opens |
+|---:|---|---|---|---|
+| 1 | `niac-1` | **MGK-NIAC** | no | *"This feed is not available."* |
+| 2 | `niac-2` | **MGK-NIAC** | no | *"This feed is not available."* |
+| **3** | `standard` | **STANDARD** | **yes** | the twin |
+| **4** | `idling-updated` | **DETAIL** | **yes** | `MGK-TWIN_MONITOR_CLOSE_UP.png` — the close-up |
+| 5 | `boot-playback` | **COLD START** | no | *"This feed is not available."* |
+| 6 | `off-first-boot` | **FIRST RUN** | no | *"This feed is not available."* |
+| 7 | `last-state` | **LAST STATE** | no | *"This feed is not available."* |
+| 8 | `test-bench` | **TEST BENCH** | no | *"This feed is not available."* |
+
+**THE NUMBERING IS AN EGG AND IT MUST NOT BE EXPLAINED ON THE GLASS.** Mike's
+instruction: the feed positions renumber — **MGK-NIAC takes 1 and 2 and MGK-VIIIp
+moves to 3 and 4** — and *the reason is the egg.* It is recorded **once**, in
+`museum:reveal/ledger.json` (`egg.channels`), and nowhere else.
+
+**THE NIAC POSITIONS ARE NOT INVENTED FEEDS.** Each carries the machine's name
+and nothing else — no state, no mode, no feed title, because nobody has supplied
+one. **Neither arms: the mainframe does not run on the Portal**, and the day it
+does is a ruling and a feed, not a label.
+
+**THE ENGRAVINGS ARE ENGRAVINGS.** Mike ruled that every position must be
+**deliberately obfuscated or dressed in period garb — nothing merely awkward.**
+Three of them had been the `id`s truncated until they fitted, *"which is what a
+filename looks like and not what a drum looks like."* **The `id`s did not move**
+— the `id` is the key the twin reads as `preset` in the URL.
+
+**THE REFUSAL LINES WERE CHANGED ONCE AND THE REASON IS A DOCTRINE.** They used
+to read *"held — one entry state (C3)"*, *"held — awaiting a privacy ruling"* and
+*"held — workshop entry, by URL"*: **internal decision codes, an unmade ruling,
+and the existence of an undisclosed URL, all shown to whoever rolls the drum.**
+They now say the one thing an instrument says when a position will not arm.
+
+### The switches, the dial, the latch
+
+| control | states | note |
+|---|---|---|
+| **AUTO MAINT** · `NON-INTERRUPTIBLE` | off today | Thrown up: *"Maintenance is running. The machine will not be hurried."* **The launch fortnight, as an instrument.** |
+| **AT PROMPT** · `BOOTS + UPDATES DONE` | **on** | **The entry state today.** |
+| **SOURCE** dial | **LIVE** (arms) / **SEEDED** (does not) | SEEDED: *"no seeded feed on file — the lamps read the seed, and there is nothing to read."* |
+| **LATCH** | `FEED ARMED` / `NOT ARMED` | Throws only when the panel is armed. |
+
+**THE CONTROLS TELL THE STORY; THEY ARE NOT THE STORY (Mike).** *"The same two
+lamps say both — AUTO MAINT lit + AT PROMPT dark is the launch fortnight; AUTO
+MAINT dark + AT PROMPT lit is today. Nothing about the fortnight is built; the
+panel is simply an instrument capable of reporting it, set to today."*
+
+---
+
+## 4 · THE PORTAL ALBUM
+<a id="album"></a>
+
+**Mike: *"THE PORTAL becomes ITS OWN ALBUM — it is very important and this keeps
+it top-shelf visible."*** It sits at index **1** — second in the deck — *"the only
+position that is both top-shelf and not the landing."* The two machines keep
+their canon order behind it: **the original mainframe, then the portable.**
+
+**Three tracks:** `Portal` (the door) · `Portal Feed Controller` (the panel) ·
+`FAQ`.
+
+**Its FAQ, both questions moved word for word from the public machines' FAQs:**
+
+> **Is the Portal the real machine?** — *"It is the real firmware on shimmed
+> hardware — the twin. The unit itself is a physical object in a room; the twin
+> is how it is met from here."*
+>
+> **Is the mainframe on the Portal?** — *"Not yet. Two channels are engraved for
+> it on the feed drum and neither of them arms."*
+
+**THEY WERE MOVED, NOT COPIED.** *"An FAQ on a public page answering questions
+about a held room is a listing of it."*
+
+---
+
+## 5 · THE PORTAL IS HELD
+<a id="held"></a>
+
+**MIKE'S RULING: the Portal is HELD FROM LAUNCH and development continues.**
+
+**A held thing must be UNREACHABLE BY A VISITOR** — no route, no link, no
+listing, no share tag, no crawler path.
+
+**AND THAT IS WHY THE ALBUM IS ITS OWN MODULE.** A boolean in `robots.js` would
+have stopped the RENDER and still shipped the MATERIAL — the drum's eight
+engravings, the refusal lines, the twin's address — **in a public chunk anybody
+can read.**
+
+**THE TWIN'S ADDRESS TRAVELS IN THE EVENT, NOT IN THE LISTENER.** The door's
+`src` and `title` are declared in `portal.js` and ride the dispatch, so the
+public flow component **holds no address for a held thing and no string naming
+it.**
+
+**TWO HOLDS, TWO DOORS, AND THEY MUST NEVER SHARE A LIST:**
+
+| prefix | what | opens |
+|---|---|---|
+| `/assets/locked/` + `/locked/` | **the PERMISSION hold** | never — refused in **every** stage |
+| `/assets/held/` + `/held/` | **the STAGE hold** | in development |
+
+**The Portal and the machine photographs are the STAGE hold.**
+
+---
+
+## 6 · THE PRESETS — a recipe is data
+<a id="recipes"></a>
+
+**Mike's ruling: *"Recipes are DATA, so Mike can direct new ones in plain
+language."*** The switch that used to live in code is a **row** now, and every
+row is the same handful of knobs the machine actually has.
+
+| knob | values |
+|---|---|
+| `power` | `"on"` / `"off"` — the rear switch |
+| `level` | `0` / `1` / `2` — virgin / first-run / established |
+| `replay` | `true` — Sandbox Tech replays the install |
+| `day` | `"YYYY-MM-DD"` — seed the weather from a Record date |
+| `dev` | `true` — leave the workshop showing |
+| `resume` | `true` — checked before `power` |
+
+**Anything not named is LEFT ALONE**, which is what makes these **deltas** rather
+than states. **An unknown id is chipped and ignored**, so the museum may name a
+recipe before the machine learns it and *"the failure mode is 'nothing
+happened'."*
+
+| id | recipe |
+|---|---|
+| `standard` | `resume:true, power:"on", level:2` |
+| `idling-updated` | `power:"on", level:2` |
+| `boot-playback` | `power:"on", level:2, replay:true` |
+| `off-first-boot` | `power:"off", level:0` |
+| `test-bench` | `power:"on", level:2, dev:true` |
+| `clean-boot` | carried, wired, **unexposed** |
+| `record-day` | carried, wired, **unexposed** — `day:"1965-01-01"` |
+
+**ORDER MATTERS AND IS FIXED:** the weather first (it is what the picture is
+drawn with), then the install level (it decides which boot the power-on
+performs), then power, then the replay (it is a performance and wants a machine
+to perform on).
+
+**RESUME IF THIS VISIT ALREADY HAS A MACHINE.** *"It did not stop being a machine
+when the overlay closed, and making it perform its own install again on the way
+back would be the lie, not the shortcut."*
+
+**AND THIS IS THE CHEAPEST PLACE TO PUT THE FOUR COMMUNICATIONS SETTINGS IF THEY
+ARE EVER BUILT** — [FAILURE-MODES §3.5](FAILURE-MODES.md#where-state-lives).
+
+---
+
+## 7 · THE FAR END'S OWN BENCH — written, scheduled, not yet published
+<a id="the-bench"></a>
+
+**Record 004, dated 2026-08-20, posts at 17:00 America/New_York on that day. As
+of the museum's own clock reading 2026-08-19 it is `SCHEDULED`, not `PUBLISHED`:
+it is written, committed, and in the bundle a visitor could open devtools and
+read — but the page does not draw it.** *"The Record does not show you the
+future"*, never *"the future is not there."* See
+[PUBLISHED](09-PUBLISHED.md#the-three-states).
+
+**ADDENDUM 01 — Bench Description. Mike's words:**
+
+```
+Console is a single welded steel desk. No maker plate, no model number.
+Display is a vidicon-tube monitor, long-persistence phosphor, green.
+Readouts are cold-cathode numeric tubes. Eight digits, four lit.
+Input is a light pen on a coiled cord, seated in a cradle at the right.
+There is an ashtray cast into the desk and it has been used.
+A paper-tape reader is fitted and empty. The take-up reel is full.
+Four toggle switches sit under a hinged guard, unlabelled.
+
+  ! Nothing here postdates 1969. Everything here works.
+```
+
+**THREE THINGS IN IT BEAR ON EVERYTHING ELSE IN THIS CATALOGUE:**
+
+1. **The four toggle switches under a hinged guard are the communications
+   settings, and they are at the FAR END, not on the instrument.** Record 005
+   (`SCHEDULED`, 2026-08-21) confirms it — *"Four toggles. Sixteen combinations.
+   One of them is correct."* **It is a written placement, not yet a published
+   one**, and it constrains any failure-mode design
+   ([FAILURE-MODES §3.5](FAILURE-MODES.md#where-state-lives)). **It becomes unchangeable at 17:00
+   on the 21st.**
+2. **The ashtray has been used** — the one detail on the page that says a person
+   sat there, on a console the same Record calls *"an unattended remote access
+   terminal"*, in a story whose canon says **nobody is at headquarters.**
+   Recorded; not reconciled.
+3. **`No maker plate, no model number`** — the far end's console is deliberately
+   the opposite of the FEED CONTROL, which is a badge whose whole job is to say
+   who made it.
+
+**AND THE MUSEUM'S READING AND THE MANUAL'S INSTRUCTION DISAGREE.** Record 004:
+*"It appears to be an unattended remote access terminal."* SP 7-14: *"Assume the
+far end is attended."* **The manual's line is published; the museum's reading
+posts at 17:00 on the 20th.** Neither is a ruling. **Both are Mike's, and the
+disagreement is between the 1965 document and the 2026 restorers reading it,
+which is exactly the register the corpus uses everywhere** — recorded rather than
+flagged.

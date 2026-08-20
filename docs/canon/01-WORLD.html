@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the world</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="01-the-world-the-history-the-organisations-the-dates">01 · THE WORLD — the history, the organisations, the dates</h1>
+<p><b>Register key:</b> <code>STORY</code> = the fiction says it · <code>OPS</code> = we say it about the fiction and it has never been on a page or a glass. <b>Publication key:</b> <code>PUB</code> = a visitor has already read it · <code>—</code> = not published. <b>Contested</b> rows link to <a href="CONFLICTS.html">CONFLICTS</a>.</p>
+<blockquote><p><b>The whole of Chapter I in one breath, from <code>STORY_BIBLE.html</code>:</b> <i>&quot;A prediction machine built in secret, sold for scrap, rebuilt as a toy for the Elite by a man who never gave anything away, buried twice, and delivered to Weird.Baby by an agency out of myth.&quot;</i></p></blockquote>
+<hr>
+<h2 id="1-the-timeline">1 · THE TIMELINE</h2>
+<p><a id="timeline"></a></p>
+<div class="tw"><table><thead><tr><th>when</th><th>what</th><th>register</th><th>pub</th><th>contested</th></tr></thead><tbody><tr><td><b>1943</b></td><td>Carter Bookman of the <b>ASA</b> conceives <b>Mainframe Generated Knowledge</b>: where ENIGMA deciphers <i>messages</i>, MGK-NIAC deciphers <b>LIFE</b>.</td><td>STORY</td><td>—</td><td><a href="CONFLICTS.html#k-16">K-16</a> <i>which ASA</i></td></tr><tr><td><b>1944</b></td><td>MGK-NIAC funded. Source unknown, probably internal.</td><td>STORY</td><td>—</td><td></td></tr><tr><td><b>1944–45</b></td><td>The blackbox is designed and fabricated by <b>CSAW</b>, deliberately shielded from knowing what it is building.</td><td>STORY</td><td>—</td><td></td></tr><tr><td><b>1945</b></td><td>It works. <i>&quot;Prediction Response Curve Biasing&quot;</i> optimised. <b>An immediate STOP WORK order kills it the same year</b> — the threat landscape changed.</td><td>STORY</td><td>—</td><td><a href="HOLES.html#h-08">H-08</a> <i>the curve is undefined</i></td></tr><tr><td><b>1946</b></td><td>Mothballed and archived by CSAW. <b>The Magic 8 Ball ships in 1946</b> — the mothball year.</td><td>STORY</td><td>—</td><td></td></tr><tr><td><b>1964</b></td><td><b>Mr. ABEAL the man knew what it was</b>, before the auction gavel fell.</td><td>STORY</td><td>—</td><td>see <a href="#dr-2">DR-2</a></td></tr><tr><td><b>1964</b></td><td>The assets vanish from archive. An in-fiction footnote suspects the <i>&quot;found in a scrap lot&quot;</i> story is fabricated. <b>ScrapCo</b> buys MGK-NIAC at a government scrap auction.</td><td>STORY</td><td>—</td><td></td></tr><tr><td><b>1965</b></td><td>ScrapCo spins up the ghost division <b>ABEAL</b> and contracts <b>BDS</b> to reverse-engineer it. Both work out the true potential at about the same time — <b>the iPhone moment</b>. BDS turns greedy and plants backdoors and exploits in the hardware.</td><td>STORY</td><td>—</td><td>see <a href="#dr-2">DR-2</a></td></tr><tr><td><b>1965</b></td><td>The <b>MGK-VIIIp</b> line: military prediction technology miniaturised into an executive desk toy for the Elite. Named units drafted: <b>The Homemaker · The Everyday · The Informer · The CEO.</b></td><td>STORY</td><td>—</td><td><a href="CONFLICTS.html#k-06">K-06</a></td></tr><tr><td><b>1965</b></td><td><b>The DoD halts the project</b> — <i>&quot;Who talked? Who squealed? Inside job?&quot;</i> Everything disappears again.</td><td>STORY</td><td>—</td><td></td></tr><tr><td><b>1965–2023</b></td><td><b>THE GAP.</b> The units pass through <b>WHITE OPS</b>.</td><td>STORY</td><td>—</td><td><a href="HOLES.html#h-20">H-20</a> <b>sealed</b></td></tr><tr><td><b>2023 / 1 Jan 2024</b></td><td>Weird.Baby receives three anonymous crates, note signed <b>&quot;-W.O.&quot;</b></td><td>STORY</td><td>—</td><td><a href="CONFLICTS.html#k-23">K-23</a></td></tr><tr><td><b>2024</b></td><td>The Record — the weekly blog — documents the reverse-discovery, upgrades the PHVDC adapters to USB, restores the cases, sells OPA prints and T-shirts.</td><td>STORY</td><td>—</td><td><a href="CONFLICTS.html#k-01">K-01</a></td></tr><tr><td><b>2026-02-25</b></td><td>The Weird.Baby project closes.</td><td>OPS (real)</td><td>—</td><td></td></tr><tr><td><b>2026-08-17</b></td><td><b><code>RECORD_EPOCH</code>.</b> Day one of the museum's Record. The story from here runs on real calendar days.</td><td>OPS mechanism / STORY dates</td><td><b>PUB</b></td><td></td></tr></tbody></table></div>
+<p><b>AND THE DATES FROM 2026-08-17 ONWARD ARE REAL DATES.</b> <i>&quot;An entry's date is the actual calendar day it is published, not a fictional offset.&quot;</i> One constant, <code>RECORD_EPOCH</code> in <code>museum:src/data/artists/record-epoch.js</code>. Records post at <b>17:00 America/New_York</b> on their day — Record 001 excepted, which posted at 00:00 Monday and stays. See <a href="09-PUBLISHED.html">PUBLISHED</a>.</p>
+<hr>
+<h2 id="2-the-organisations">2 · THE ORGANISATIONS</h2>
+<p><a id="organisations"></a></p>
+<h3 id="abeal">ABEAL</h3>
+<p><a id="abeal"></a></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>What</b></td><td>The maker. <b>A division of ScrapCo</b> — a ghost division spun up in 1965.</td></tr><tr><td><b>The logo</b></td><td>The circled <b>A</b> is the 8-Ball answer window.</td></tr><tr><td><b>The name</b></td><td>A load-bearing egg: <b>Carter Bookman = Albert C. Carter + Abe Bookman</b>, the real Magic 8 Ball inventors, whose company <b>Alabe Crafts</b> echoes in ABEAL.</td></tr><tr><td><b>Register</b></td><td>STORY</td></tr><tr><td><b>Published</b></td><td><b>PUB</b> — <code>ABEAL 8P-OMI-1</code> is on the Documentation face of both machines and on every attached manual page; <code>ABEAL · FEED CONTROL</code> is struck into the Portal's nameplate.</td></tr></tbody></table></div>
+<p><b>THE NAME IS <code>ABEAL</code> ALONE.</b> Ruled 2026-08-06. <b>Not</b> <i>ABEAL Instrument Company</i> (struck off the manual cover 2026-08-05), <b>not</b> <i>Instrument Div.</i> (struck off the Portal nameplate 2026-08-06), <b>not</b> <i>A-BEAL</i>. The same drift grew twice in a fortnight, on two different objects, which is why the ruling is written where it is.</p>
+<p><b>One expansion exists and is not canon here:</b> the Reference Document glosses ABEAL as <i>&quot;Advanced Binary Encryption and Analysis Laboratory.&quot;</i> Recorded; the egg above is the ruled origin.</p>
+<h3 id="scrapco">ScrapCo</h3>
+<p><a id="scrapco"></a></p>
+<ul><li>ABEAL's parent. A <b>salvage house, founded 1929</b> on Depression-era rag-and-bone picking; expert at <i>&quot;gems in the rough.&quot;</i></li><li><b>Tagline: <i>&quot;Scraping the world looking for scrap.&quot;</b></i> <b>R8 canon correction, 2026-07-14: THE TAGLINE IS LITERAL, not a typo-joke.</b></li><li>Identified in-story from box logos — the Record blog, 12 January 2024: <i>&quot;a division of ScrapCo.&quot;</i></li><li>A true-story sidebar sits in its dossier: the <b>AN/FSQ-7</b> NORAD computer sold for scrap in 1969.</li><li>Register STORY · not published.</li></ul>
+<h3 id="csaw">CSAW</h3>
+<p><a id="csaw"></a></p>
+<p><b>Communications Supplementary Activity, Washington</b> — the real US Navy codebreaking outfit that became ERA, then Remington Rand / UNIVAC, then CDC. Built the MGK-NIAC blackbox and was <b>deliberately shielded from knowing what it was building.</b> Register STORY · not published.</p>
+<h3 id="bds-blackhawk-data-sciences-corporation">BDS — Blackhawk Data Sciences Corporation</h3>
+<p><a id="bds"></a></p>
+<ul><li>Contracted by ABEAL to reverse-engineer MGK-NIAC. <b>Turns greedy and plants backdoors and exploits in the hardware.</b></li><li>A riff on the real <b>Mohawk Data Sciences</b> — ex-Univac founders, <i>&quot;Hercules, NY.&quot;</i></li><li>Owners in the dossier: <b>G. Cougar, L. Queen, T. Robin</b> — from George Cogar / Lauren King / Ted Robinson. Three employees. The dossier's own verdict on one of them: <i>&quot;this guy is a scum!&quot;</i></li><li>Register STORY · not published.</li></ul>
+<h3 id="asa">ASA</h3>
+<p><a id="asa"></a></p>
+<p>The agency Carter Bookman worked for. <b>Army <i>Security</i> Agency</b> in the Reference Document, the Storyline sheet and the bible; <b>Army <i>Signal</i> Agency</b> in the Record blog. The real ASA was Security. <a href="CONFLICTS.html#k-16">K-16</a>.</p>
+<h3 id="white-ops-w-o">White Ops (W.O.)</h3>
+<p><a id="white-ops"></a></p>
+<ul><li><b>Myth-grade procurement</b>, <i>&quot;older than talk of Wizards and Warlocks,&quot;</i> reachable only via the <b>Grey Web</b>; grandfather of all artifact-hunting agencies.</li><li>The source of the 2023/24 crates; the note is signed <b>&quot;-W.O.&quot;</b></li><li>Its dossier sheet has <b>all fields UNKNOWN</b> plus the myth prose — which is the form the seal takes.</li><li>The Record blog profiled it on 23 February 2024: <i>&quot;a trusted name… major purveyor in their market just like us!&quot;</i></li><li>Register STORY · not published.</li></ul>
+<h3 id="weird-baby">Weird.Baby</h3>
+<p><a id="weird-baby"></a></p>
+<ul><li><b>Purveyors of the Weird.</b> An artifact house. <b>Never a &quot;restoration house&quot;</b> — ruled 2026-07-18, bible markup ruling.</li><li>Tagline, canon: <b>&quot;Purveyors of the Weird.Baby.&quot;</b></li><li>The real-world frame: Weird.Baby the company is Mike (MAL) plus one collaborator (TJM).</li><li><b>THE AI ANGLE:</b> <i>&quot;Weird Baby&quot;</i> is also the name of the machine's archaic self-aware AI, <b>accidentally connected to the internet in transit</b>, which now self-updates its own specs and <b>renames its games &quot;to confound users.&quot;</b> That last is live as an egg — <code>egg.renamed-games</code>, REVEALED, LIVE — and it is why <a href="CONFLICTS.html#k-11">K-11</a> is in-fiction load-bearing.</li><li>Register STORY · <b>PUB</b> (the name, the tagline, the FAQ).</li></ul>
+<hr>
+<h2 id="3-the-placed-contradiction">3 · THE PLACED CONTRADICTION</h2>
+<p><a id="dr-2"></a></p>
+<p><b>DR-2 — FROZEN AS PLACED, 2026-07-22. It ships on purpose and it ships forever.</b></p>
+<blockquote><p>The record says the company figures out what it has in <b>1965</b> (the iPhone moment). The record <b>also</b> says <b>Mr. ABEAL the man knew in 1964</b>, before the auction gavel fell. <b>Both stand forever.</b></p>
+<p>Mike's verdict, for the record: <b><i>&quot;ABEAL knew it. Dirty bastard. Liar.&quot;</b></i></p></blockquote>
+<p><b>AND IT IS THE HOUSE RULE STATED AS AN OBJECT.</b> The bible's own law: <b>contradictions are PLACED, never inherited.</b> An accidental source conflict gets reconciled; a placed one is the story. DR-2 is the placed one, in bedrock.</p>
+<hr>
+<h2 id="4-the-technobabble-register">4 · THE TECHNOBABBLE REGISTER</h2>
+<p><a id="technobabble"></a></p>
+<p><b>The 2024 instruction manual's own vocabulary. Every one of these is a term the document uses as if it needs no explanation.</b></p>
+<div class="tw"><table><thead><tr><th>term</th><th>what the corpus says</th><th>contested</th></tr></thead><tbody><tr><td><b>FML — Fluidic Matrix Luminescence</b></td><td>The Li₂-blue quasi-hyper-fluid in which <b>possibility-ions precipitate answers</b>. 10¹¹ bits/cc · 8.9 T-watts.</td><td></td></tr><tr><td><b>FNM — Fluidic Nano-Matrix</b></td><td>FML's VIIIp descendant. Developed by <b>Dr. Alexis Quan</b> and <b>Dr. Violet Flux</b> through the mysterious <b>&quot;Incident X.&quot;</b></td><td><a href="CONFLICTS.html#k-04">K-04</a></td></tr><tr><td><b>Prediction accuracy</b></td><td><b>98.2 % ± 0.03</b>, results possible up to 100 %.</td><td></td></tr><tr><td><b>MAME — MGK Augmented Matrix Emulation</b></td><td><i>&quot;Emulates the precipitation of answers out of fluidic suspension.&quot;</i></td><td></td></tr><tr><td><b>PHVDC</b></td><td>Pulsed HV DC carrying supply and data on one pair. 300 V DC nominal, data 3 kHz / 1 Mbps. Homage to Teletype Model 19 / MIL-STD-1275. <b>The letters never expand.</b></td><td><a href="CONFLICTS.html#k-01">K-01</a> · <a href="HOLES.html#h-05">H-05</a></td></tr><tr><td><b>TAC — tricycle alternating current</b></td><td><i>&quot;240 volt, 60-20-30 tricycle alternating current.&quot;</i> 2022 proto-manual.</td><td><a href="CONFLICTS.html#k-01">K-01</a></td></tr><tr><td><b>The temporal register</b></td><td>The Reference Document's component table is in <b>Back-to-the-Future</b> register: RZ-403G Flux Capacitor <i>&quot;1.21 gigawatts&quot;</i>, Quantum Resonance Chamber, Chrono-Cryptographic Encoding Module, Temporal Displacement Array.</td><td><b>Two incompatible technobabble registers</b> — spec ledger #8</td></tr></tbody></table></div>
+<p><b>THE REGISTERS ARE FOUR AND THEY DO NOT AGREE:</b> fluidics (FML/FNM), temporal-manipulation components, 240TAC/RADIONET, and PHVDC. Nobody has ruled which the machine is made of. Recorded at <a href="CONFLICTS.html#k-01">K-01</a> for power; the rest is a texture question nobody has raised.</p>
+<hr>
+<h2 id="5-the-three-layers">5 · THE THREE LAYERS</h2>
+<p><a id="three-layers"></a></p>
+<p><b>Structural law. <code>THE_STORY_ARC.md</code>, CANON v1.0. It governs every word written into the machine.</b></p>
+<ol><li><b>Downstairs — honest machinery.</b> The machine has <b>no self-awareness and never convincingly pretends otherwise.</b> It performs calculations against prescribed probability models. <b>It does not think. Ever.</b></li><li><b>In between — staged theatre.</b> Personalities are <b>obviously staged</b>, 1965-style: <i>&quot;IT TALKS!&quot;</i>, <i>&quot;REAL LIGHTS!&quot;</i> Window dressing proudly worn, seams visible. <b>Acts, not minds. Committed, in-character, nobody home.</b></li><li><b>Upstairs — the unknown wire.</b> The machine connects to servers that appear fully autonomous — scheduled syncs, batch filings, service routines running on sixty years of momentum. <b>WHO OR WHAT is on the other end is DELIBERATELY UNANSWERED.</b> Canon never confirms autonomy, never denies presence. <b>Writing discipline: passive voice, procedural language, no signatures. Consistent with autonomy; never proof of it.</b></li></ol>
+<p><b>AMENDMENT 2 SHARPENS LAYER 3 AND DOES NOT REPLACE IT:</b> <b>NOBODY is at headquarters.</b> The system runs autonomously — always has, always will. This does not preclude that <b>someone else hacked in exactly as we did</b> — and perhaps stalled because <b>they didn't have the units.</b> The other presence is a <b>rival excavator, not an operator.</b> Good guys / bad guys: <b>deliberately unresolved</b> — the recovery team itself may be either.</p>
+<p><b>Consequence for <a href="HOLES.html#h-03">H-03</a>:</b> the identity of the far end is a <b>sealed</b> hole, not an open one.</p>
+<hr>
+<h2 id="6-the-three-acts">6 · THE THREE ACTS</h2>
+<p><a id="three-acts"></a></p>
+<div class="tw"><table><thead><tr><th>act</th><th>scope</th><th>state</th></tr></thead><tbody><tr><td><b>I — the generic level</b> (every unit)</td><td>Discovery; puzzle-solving that <b>does not look like puzzles</b>; a few games; the Magic 8-Ball itself; something new arriving all the time. <b>The thrust: who was the previous owner of this unit, and what happened to them?</b> <b>Resolution, not revelation.</b></td><td><b>SCOPED DOWN by Amendment 1.</b> The unit's story = the added features themselves plus an egg or two through the message system. <b>The journey ends with a quiet, fanfare-free indication: you reached the end; there is nothing else to look for.</b></td></tr><tr><td><b>II — the specialized level</b> (per unit)</td><td>Same BS, different theatre. 31.4 chapters, one per unit.</td><td><b>DEFERRED, not deleted</b> — the B+→A jump at 3× cost. <i>&quot;The door stays open; nothing built today may block it.&quot;</i></td></tr><tr><td><b>III — the combined level</b> (the fleet)</td><td>Did the specialists know each other? Sub-teams? Double agents?</td><td><b>HOOKS ONLY</b> (10×). <b>The key-code mechanism is canon:</b> each unit carries a key code; only when all codes are compiled together, typed in by the users themselves, does the final message reveal itself. <b>The codes are VERIFICATION KEYS ONLY and carry no data</b>, so the finale can be authored years after the first units ship.</td></tr></tbody></table></div>
+<hr>
+<h2 id="7-the-laws-of-the-world">7 · THE LAWS OF THE WORLD</h2>
+<p>These live in full at <a href="10-LAWS.html">LAWS</a>. Named here because they are facts about the world rather than about the build:</p>
+<ul><li><b>THE NEVER-ADVERTISED LAW</b> — the chapters are never pitched; <b>discovery of the story's existence is part of the story.</b></li><li><b>THE EXPERIENCE LAW</b> — <b>THERE IS NO GAME.</b> No win state, no right way. <i>&quot;The experience is finding a 50-60-year-old smartphone that still boots and snooping — because it's COOL.&quot;</i></li><li><b>THE SCOPE LAW</b> — the story is a <b>jumbo Easter egg, not the product.</b></li><li><b>THE FORMAT LAW</b> — <b>NO inter-persona communication, ever.</b> All messages originate from virtual servers; users become aware of counterparts, never able to reach them.</li><li><b>THE CLEAN-EXIT LAW</b> — <b>only the Housewife exits clean.</b> Everyone else is already defective or damaged by the process; the CEO may be innocent and still not clean.</li><li><b>STORY FREEZE (2026-07-22)</b> — bugs are fixable opportunistically; <b>the story never changes post-ship — or WB pays all upgrade costs.</b></li></ul>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/01-WORLD.md</code>,
+last written <b>2026-08-20 03:57 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

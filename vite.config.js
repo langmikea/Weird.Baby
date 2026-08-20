@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite'
-import nodeFs from "node:fs";
-import nodePath from "node:path";
+/* [2026-08-20] `node:fs` and `node:path` LEFT WITH `heldOutOfLaunch`. They were
+   imported for that plugin alone — it was the only thing in this file that
+   touched the disk — and a grep for either identifier now returns only the two
+   import lines. They go with it (Law of Subtraction), rather than sitting here
+   as two imports nothing calls. */
 import react from '@vitejs/plugin-react'
 import { cloudflare } from "@cloudflare/vite-plugin";
 import * as acorn from "acorn";
@@ -301,81 +304,70 @@ const shutDir = (chunk) => {
   return null;
 };
 
-/* ═══ [J6 2026-08-13] THE STAGE HOLD DOES NOT SHIP AT LAUNCH ════════════════
-   MIKE'S CALL: *"Hold held material out of the launch bundle. It is refused by
-   the worker anyway, so nothing is lost."*
+/* ═══ [2026-08-20] J6 IS REVERSED: THE STAGE HOLD SHIPS AGAIN ══════════════
+   MIKE: **"Ship the held files and let the worker refuse them. 190 MB per
+   deploy is the honest cost of a door that works."**
 
-   THE NUMBERS THAT MADE IT WORTH DOING. `public/held/` was 12 files and about
-   15 MB. The manual, the build recordings and the rest took it to 144 files and
-   191 MB, so every `deploy:launch` uploaded 218 MB of which 191 MB was material
-   the worker refuses on sight. A visitor never sees a byte of it either way;
-   the cost is entirely at deploy.
+   WHAT WAS HERE, named once so nobody rebuilds it (Doctrine 24): a
+   `closeBundle` plugin, `wb-held-out-of-launch`, which deleted `dist/client/
+   held/` on a LAUNCH build — 144 files, 190.0 MB — on J6's reasoning that
+   *"it is refused by the worker anyway, so nothing is lost."*
 
-   WHY THIS CANNOT BREAK A REVEAL, WHICH IS THE ONLY QUESTION THAT MATTERED.
-   The reveal mechanism does not READ from `public/held/` at request time — it
-   MOVES the file out of it beforehand. `reveal/day.mjs --place` calls
-   `fs.renameSync(held, public)` on the day a Record entry delivers an asset, so
-   by the time vite runs, a delivered picture is at `public/robots/…` and is
-   bundled by the ordinary path. Only things NO entry has delivered are still
-   under `held/`, and those are exactly what the worker refuses. Dropping them
-   removes an upload, not a route.
+   ═══ WHY IT WAS WRONG, AND IT IS WORTH THE PARAGRAPH ═══════════════════════
+   THE STAGE DOOR HAS TWO BRANCHES AND J6 REASONED ABOUT ONE. Its own note said
+   *"a visitor never sees a byte of it either way; the cost is entirely at
+   deploy."* **True of a visitor. False of the cookie holder** — and the cookie
+   holder is the only reason the door exists. Stripping the files left
+   `heldOpen()` granting permission to serve material that had never been
+   uploaded.
 
-   IT IS LAUNCH ONLY. In DEVELOPMENT the held tree is how Mike sees anything at
-   all (`reveal/stage.mjs`: he cannot direct what he cannot see), so this does
-   nothing unless the stage says launch.
+   WHAT THAT LOOKED LIKE ON THE LIVE SITE, measured 2026-08-20 with the door
+   OPEN: `/api/held` answered `{configured:true, open:true, stage:"launch"}`,
+   and every held path returned **200 text/html** — the SPA fallback
+   (`not_found_handling: "single-page-application"`), because a miss in the
+   asset store is answered with `index.html`. So the Portal album appeared (a
+   CODE chunk, and code chunks ship), its cover did not (an IMAGE, and images
+   did not), and throwing the latch fetched `twin.html`, received the
+   application, and rendered the Lobby.
 
-   IT DELETES FROM THE BUNDLE, NOT FROM THE REPO. `generateBundle` never touches
-   disk; the files stay exactly where `--place` will look for them tomorrow. */
-let heldOutDir = null, heldRoot = null;
-const heldOutOfLaunch = {
-  name: "wb-held-out-of-launch",
-  apply: "build",
-  /* THE PATHS ARE KEPT IN MODULE SCOPE AND NOT ON `this`, AND THAT WAS A REAL
-     BUG FOR ONE BUILD. Rollup binds `this` in a hook to the PLUGIN CONTEXT, not
-     to the plugin object, so `this._out` set in configResolved read `undefined`
-     in closeBundle — the hook ran, took the early return, and reported nothing.
-     The launch build still shipped 144 files and it looked like the filter had
-     simply decided there was nothing to do. */
-  configResolved(c) {
-    heldOutDir = c.build && c.build.outDir;
-    heldRoot = c.root;
-  },
-  /* IT MUST BE closeBundle AND NOT generateBundle, AND THE FIRST CUT GOT THAT
-     WRONG TOO. `public/` is copied by vite's publicDir step, which never goes
-     through rollup, so the held files are not in the `bundle` object at all and
-     deleting them from it removed nothing. They exist only once vite has
-     written the output directory, and closeBundle is the hook that waits. */
-  closeBundle() {
-    if (STAGE !== "launch" || !heldOutDir) return;
-    const dir = nodePath.resolve(heldRoot || process.cwd(), heldOutDir, "held");
+   IT HAD NEVER WORKED ON A LAUNCH DEPLOYMENT AND COULD NOT HAVE. `heldOpen()`
+   landed 2026-08-06, when every deploy was DEVELOPMENT stage — and in that
+   stage the worker never asks for the cookie at all, so the files were served
+   to everybody and the door was not the thing serving them. `deploy-guard.mjs`
+   made a launch deploy sayable on 2026-08-12. J6 removed the files on
+   2026-08-13. **The window in which the door could have worked is one day
+   wide, and no launch deploy is recorded inside it.**
 
-    /* THE GUARD, BECAUSE THIS CALL DELETES A DIRECTORY. The only thing it may
-       ever remove is the held tree INSIDE THE BUILD OUTPUT. If a future config
-       change pointed outDir at the project root, the naive version of this
-       would delete `public/held` — 191 MB of the museum's own material, holding
-       the only copy of the 240 dpi manual. So it refuses any path that is not
-       under a `dist` directory, and any path containing `public`. */
-    const p = dir.split("\\").join("/") + "/";
-    if (!p.includes("/dist/") || p.includes("/public/")) {
-      console.log(`  REFUSED to remove ${p} — not inside a dist output directory`);
-      return;
-    }
-    if (!nodeFs.existsSync(dir)) return;
-    let n = 0, bytes = 0;
-    const walk = (d) => {
-      for (const e of nodeFs.readdirSync(d, { withFileTypes: true })) {
-        const q = nodePath.join(d, e.name);
-        if (e.isDirectory()) walk(q); else { bytes += nodeFs.statSync(q).size; n++; }
-      }
-    };
-    walk(dir);
-    nodeFs.rmSync(dir, { recursive: true, force: true });
-    console.log(`  held out of the launch bundle: ${n} files, `
-      + `${(bytes / 1048576).toFixed(1)} MB. The worker refuses them in this stage, `
-      + `and reveal:day --place renames a delivered file out of held/ before the `
-      + `build, so nothing a Record delivers is affected.`);
-  },
-};
+   NEITHER ROUND MADE A MISTAKE, WHICH IS THE PART TO REMEMBER. Both did a
+   correct thing a day apart and the combination had no owner.
+
+   ═══ WHY SHIPPING THEM LEAKS NOTHING ═══════════════════════════════════════
+   `wrangler.jsonc` sets `run_worker_first: ["/*"]`, so **the worker sees every
+   request** and no `/held/*` path can reach the asset store without passing
+   `heldOpen()`. A request without the cookie gets a plain 404 — which is
+   exactly what it already got, by a different route. The precedent is not
+   theoretical: `assetWithheld` has been withholding Record 003's six manual
+   pages, which SHIP at public addresses, since 2026-08-19.
+
+   ═══ A′ WAS OFFERED AND MIKE REJECTED IT, AND THE REASON IS THE RULE ════════
+   Ops proposed shipping only the ~1.3 MB the Portal's chunk actually names.
+   **HIS RULING: no** — *"shipping only what the Portal chunk names makes the
+   door work for the Portal and silently not for anything else. That is the same
+   class of fault as the one we just spent a morning on: a mechanism that
+   appears to work and does not."*
+
+   ═══ WHAT J6 GOT RIGHT AND IS NOT LOST ═════════════════════════════════════
+   Its account of why a strip cannot break a reveal is TRUE and is kept here,
+   because it is a fact about the reveal mechanism rather than about the strip:
+   `reveal/day.mjs --place` calls `fs.renameSync(held, public)` BEFORE the
+   build, so a delivered picture is already at `public/robots/…` and is bundled
+   by the ordinary path. Only things no entry has delivered are still under
+   `held/`. Nothing a Record delivers has ever depended on this plugin.
+
+   THE COST IS REAL AND IS ACCEPTED, NOT WAVED AWAY: every `deploy:launch`
+   uploads about 190 MB the worker will refuse to anybody without the key.
+   That is deploy-time bandwidth, once per deploy, and it buys a door that
+   opens. */
 
 const heldChunkGuard = {
   name: "held-chunk-guard",
@@ -508,8 +500,12 @@ export default defineConfig({
        same reason: it names files and the day they open, never the set of what
        is being withheld. It reaches the WORKER, not the browser — the client
        never sees it and has no use for it.
-       EMPTY TODAY. `delivered()` is the empty set since Record 013 went, so
-       this is `{}` and the worker's branch is unexercised. Reported, not hidden. */
+       [2026-08-20] NO LONGER EMPTY. This said `{}` and called the worker's
+       branch unexercised, which was true until Record 003 delivered on
+       2026-08-19. It now bakes SIX rows — `scan-07-a/b`, `scan-11-a/b`,
+       `scan-31-a` and `marked-01-a` — every one dated `2026-08-19`, and the
+       worker held each of them until that day. Corrected here and at the
+       branch that reads it (`src/worker.js`). */
     __WB_RECORD_ASSETS__: JSON.stringify(
       assetSchedule(recordEntries(), (e) => (e.no == null ? null : recordDay(e.no)))),
     /* [CH6 2026-08-12] THE DAY THE WING ARRIVES, DERIVED AND NOT TYPED.
@@ -544,7 +540,7 @@ export default defineConfig({
             .filter((p) => p.status === "approved")
             .map((p) => [p.route, p.signed.at]))),
   },
-  plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldOutOfLaunch, heldChunkGuard, opsBraceGuard, react(), cloudflare()],
+  plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldChunkGuard, opsBraceGuard, react(), cloudflare()],
   build: {
     rollupOptions: {
       output: {

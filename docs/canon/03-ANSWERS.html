@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the answer machinery</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="03-the-answer-machinery-the-determination-the-two-biases-the-twenty">03 · THE ANSWER MACHINERY — the determination, the two biases, the twenty</h1>
+<p><b>Register key:</b> <code>STORY</code> · <code>OPS</code>. <b>Publication key:</b> <code>PUB</code> · <code>—</code>.</p>
+<hr>
+<h2 id="1-the-determination">1 · THE DETERMINATION</h2>
+<p><a id="determination"></a></p>
+<div class="tw"><table><thead><tr><th>term</th><th>register</th><th>pub</th><th>meaning as attested</th></tr></thead><tbody><tr><td><b>Determination</b></td><td>STORY</td><td><b>PUB</b></td><td><b>The manual's noun for what the machine produces.</b> It never says <i>answer</i> in its own prose. <i>&quot;Charging has no effect upon the determination.&quot;</i> — a coined word; see <a href="HOLES.html#h-13">H-13</a>.</td></tr><tr><td><b>Ask cycle</b></td><td>OPS</td><td>—</td><td>The seven states from redirect to exit. <b>The position is ¶6-5 + Figure 6-2; the phrase is Ops'.</b></td></tr><tr><td><b>Prediction Engine</b></td><td>STORY</td><td>—</td><td>Receives the request and sub-parcels it. <a href="CONFLICTS.html#k-04">K-04</a></td></tr><tr><td><b>Answer Engine</b></td><td>STORY</td><td>—</td><td>Holds the response set and the bias. <a href="CONFLICTS.html#k-04">K-04</a></td></tr><tr><td><b>Response curve</b></td><td>STORY</td><td>—</td><td>Named on the glass during first-run setup (<code>RESPONSE CURVE LOADED</code>), given ¶7-9 and a figure. <b>No definition exists anywhere.</b> <a href="HOLES.html#h-08">H-08</a></td></tr><tr><td><b>Fluidic suspension</b></td><td>STORY</td><td>—</td><td>Where output is <b>redirected</b> for a determination. Drawn as the bubble field on the top glass. <code>&quot; FLUIDIC SUSPENSION &quot;</code> in <code>M8BALL.ino</code>.</td></tr><tr><td><b>Prediction accuracy</b></td><td>STORY</td><td>—</td><td><b>98.2 % ± 0.03</b>, results possible up to 100 %.</td></tr></tbody></table></div>
+<p><b>Named in the theory of operation and never explained:</b> <i>Prediction Padding Algorithms</i>, <i>Confirmation Bias Exploits</i>, and <i>&quot;hyper long range decision making with subjective outcome determination and temporal decountability.&quot;</i></p>
+<hr>
+<h2 id="2-the-ask-as-built">2 · THE ASK, AS BUILT</h2>
+<p><a id="the-ask"></a></p>
+<div class="tw"><table><thead><tr><th>term</th><th>register</th><th>meaning as attested</th></tr></thead><tbody><tr><td><b>Minimum reading interval</b></td><td>STORY</td><td><b>2500 ms.</b> The answer then holds <b>with no timeout</b> — THE REVEAL-HOLD LAW.</td></tr><tr><td><b>The reveal-hold law</b></td><td>STORY, canon 2026-07-22</td><td><i>&quot;An answer stays until the user disturbs it — no machine timeout — and a shake re-asks only after a minimum read time. No instant re-rolls; the do-over gate is 'long enough to read it.'&quot;</i></td></tr><tr><td><b>No do-overs</b></td><td>STORY</td><td>Shake during the answer's dwell and <b>the rail card is redrawn</b> — the handoff is shown again, <b>not a new answer.</b> On the glass as <code>&lt;no do-overs&gt;</code>. <code>NO_Do_Overs()</code>.</td></tr><tr><td><b>Recalibration</b></td><td>STORY</td><td><b>Three early shakes fire the ritual:</b> hold still ~2 s under 1.05 g.</td></tr><tr><td><b>The reveal / theatre</b></td><td>OPS</td><td>The per-engine ceremony: <b>the rising die (NIAC) · the triangle spin-out (v2.0) · the diamond portal (65).</b> <code>MANUAL_STRUCTURE_FIT</code> §5.4: <i>&quot;A period manual would not describe it at all.&quot;</i></td></tr><tr><td><b>Post-answer shake</b></td><td>STORY, ruled 2026-07-24</td><td>Flashes <code>ASK A QUESTION...</code> then proceeds <b>INSTANTLY — no dwell.</b></td></tr></tbody></table></div>
+<p><b>THE INPUT GRAMMAR LAW</b> (Mike, 2026-07-24, global canon) is at <a href="10-LAWS.html#the-input-grammar-law">LAWS</a> and governs every ask surface.</p>
+<hr>
+<h2 id="3-the-two-kinds-of-bias">3 · THE TWO KINDS OF BIAS</h2>
+<p><a id="the-two-kinds-of-bias"></a></p>
+<p><b>The manual draws this line itself, in the one appendix it has written, and it is published as <code>scan-31-a.webp</code>:</b></p>
+<blockquote><p><i>&quot;This appendix carries the Bias Settings of the instrument. <b>They are of two kinds and they are not interchangeable.</b>&quot;</i></p></blockquote>
+<hr>
+<h2 id="4-the-first-kind-it-shapes-the-determination">4 · THE FIRST KIND — it shapes the determination</h2>
+<p><a id="first-kind"></a></p>
+<blockquote><p><i>&quot;The first kind shapes the determination. Polarity, Clarity and Inclination are set by the keeper, are enabled, set and adjusted by the procedure of paragraph B-3, and are given in Tables B-1, B-2 and B-3. <b>They alter what the instrument says. They do not decide whether it says anything.</b>&quot;</i> — <code>BODY_B_1</code>, <b>PUB</b></p></blockquote>
+<div class="tw"><table><thead><tr><th>term</th><th>register</th><th>meaning as attested</th><th>contested</th></tr></thead><tbody><tr><td><b>Bias Setting (BS)</b></td><td>STORY</td><td>The collective name for the three below.</td><td></td></tr><tr><td><b>Polarity</b></td><td>STORY</td><td>Which way the determination leans.</td><td><b><a href="CONFLICTS.html#k-02">K-02</a></b></td></tr><tr><td><b>Clarity</b></td><td>STORY</td><td>Five registers. Factory default <b>Impartial</b>.</td><td></td></tr><tr><td><b>Inclination</b></td><td>STORY, <b>PUB</b></td><td>Bias <b>−2 … +2</b>. <b>The source redacts the passcodes as <code>▓▓▓</code>.</b></td><td><b><a href="CONFLICTS.html#k-07">K-07</a></b></td></tr><tr><td><b>BS-Factor</b></td><td>STORY</td><td><b>0–100</b>, the user-to-systemic ratio.</td><td></td></tr><tr><td><b>Blending matrix</b></td><td>STORY</td><td>The A\*-BS matrix — user bias against systemic bias, giving a result. Appendix B-5, Table B-4.</td><td></td></tr><tr><td><b>Noise BS (unsolicited)</b></td><td>STORY</td><td><b>Value 10.</b> Named once, never explained.</td><td><a href="CONFLICTS.html#k-21">K-21</a></td></tr><tr><td><b>Enable, set, adjust</b></td><td>STORY, <b>PUB</b></td><td>The three-step procedure by which the keeper works the first kind. ¶B-3.</td><td></td></tr></tbody></table></div>
+<h3 id="4-1-clarity-the-one-scale-nobody-disputes">4.1 · Clarity — the one scale nobody disputes</h3>
+<p><a id="clarity"></a></p>
+<p><b>Five registers, in firmware order:</b></p>
+<div class="tw"><table><thead><tr><th>#</th><th>name</th><th>passcode (2024 manual)</th></tr></thead><tbody><tr><td>0</td><td><b>Uncouth</b></td><td>69</td></tr><tr><td>1</td><td><b>Offensive</b></td><td>666</td></tr><tr><td>2</td><td><b>Discourteous</b></td><td>80085</td></tr><tr><td>3</td><td><b>Impartial</b></td><td>1</td></tr><tr><td>4</td><td><b>Mannerly</b></td><td>123</td></tr></tbody></table></div>
+<p><code>enum claritySettings { Uncouth, Offensive, Discourteous, Impartial, Mannerly, claritySetting_MAX };</code> — <code>BIAS.ino:8-13</code>. <b>Factory default <code>Impartial</code>.</b></p>
+<p>The menu's <code>Clarity Setting</code> table carries exactly these five and a <code>&lt; Back</code>. <b>Firmware, menu and spec agree. This is the only one of the three that does.</b></p>
+<h3 id="4-2-polarity-see-k-02-conflicts-md-k-02">4.2 · Polarity — see <a href="CONFLICTS.html#k-02">K-02</a></h3>
+<p><a id="polarity"></a></p>
+<p><b>Two five-value scales share indices without sharing names</b>, the menu offers six values against a five-value enum, and slot 2 has two names on the record. The full table, all four sources, and what a ruling costs are at <a href="CONFLICTS.html#k-02">K-02</a>. <b>Nothing is decided.</b></p>
+<h3 id="4-3-the-weight-formula">4.3 · The weight formula</h3>
+<p><a id="weight"></a></p>
+<p><b>Exact, from <code>BIAS.ino:29-84</code>, and carried verbatim into the twin:</b></p>
+<pre>polarityDifference = abs( answer.polarity_tag  -  polaritySettingNOW )
+weight             = constrain( 100 - polarityBiasNOW * polarityDifference, 0, 100 )</pre>
+<p>and the same shape for clarity, over <code>abs(i - claritySettingNOW)</code>.</p>
+<p>The engine sums the weights, draws a random number in <code>[0, total)</code>, and walks the table until the running sum passes it. <b>A weight of 0 makes an answer unreachable.</b></p>
+<div class="tw"><table><thead><tr><th>variable</th><th>factory</th><th>note</th></tr></thead><tbody><tr><td><code>polaritySettingNOW</code></td><td><code>Neutral</code> (2)</td><td></td></tr><tr><td><code>claritySettingNOW</code></td><td><code>Impartial</code> (3)</td><td></td></tr><tr><td><code>polarityBiasNOW</code></td><td><b>0</b></td><td><b>RULED 2026-07-15</b>, was 100</td></tr><tr><td><code>clarityBiasNOW</code></td><td><b>100</b></td><td>pins clarity to the setting — <b>the ruled defaults-only behaviour, not a defect</b></td></tr></tbody></table></div>
+<p><b>THE FACTORY-DEFAULT STALL, AND WHY IT MATTERS TO ANYBODY READING THIS.</b> At <code>polarityBiasNOW = 100</code> with setting <code>Neutral</code>, every answer whose tag differs by 1 or more weighs 0 — <b>so only the four AskAgain answers (indices 0–3) were reachable at power-on, on EVERY engine.</b> Four of twenty. Diagnosed with a 100-ask distribution proof at <code>robots:docs/FINDING-polarity-bias-default-20260715.md</code>. <b>It was never a 65 bug.</b></p>
+<p><b>A BENCH PREDICTION IS ATTACHED TO THE FIX AND HAS NOT BEEN TESTED:</b> on a fresh boot, NIAC should only ever stall. <i>&quot;If it varies, the model is wrong and this reopens.&quot;</i></p>
+<p><b>BIAS IS CHARACTERISATION.</b> Unit-custom answer sets may carry their own bias adjustments — <i>a persona's default bias is part of who it is, not just a user preference.</i> Resolution order <code>unit ?? engine ?? firmware default</code>. <b>Designed, not built.</b> A persona's bias <b>activates when its personality downloads.</b></p>
+<hr>
+<h2 id="5-the-second-kind-the-communications-parity-bias">5 · THE SECOND KIND — the communications parity bias</h2>
+<p><a id="second-kind"></a></p>
+<p><b>The manual is emphatic that it is a different animal, and every word of this is published on <code>scan-31-a.webp</code>:</b></p>
+<blockquote><p><i>&quot;The second kind is the communications parity bias. <b>It is not set to a preference. It is set to agree with the far end, and until it agrees the instrument holds its peace.</b>&quot;</i></p>
+<p><i>&quot;Four settings. The unit will not speak until all four agree with the far end.&quot;</i></p></blockquote>
+<div class="tw"><table><thead><tr><th>#</th><th>setting</th><th>values</th></tr></thead><tbody><tr><td>1</td><td><b>PARITY</b></td><td>ODD / EVEN</td></tr><tr><td>2</td><td><b>DUPLEX</b></td><td>HALF / FULL</td></tr><tr><td>3</td><td><b>WORD</b></td><td>7 BIT / 8 BIT</td></tr><tr><td>4</td><td><b>STOP</b></td><td>1 / 2</td></tr></tbody></table></div>
+<blockquote><p><i>&quot;<b>The values are not given in this manual.</b> They are established at the far end and are entered on <b>the installation record</b> at the time the link is made. An instrument moved to another far end is to be set again.&quot;</i></p>
+<p><i>&quot;A disagreement in any one of the four is reported as a <b>parity bias setting mismatch</b>. The report names the condition and <b>does not name the setting at fault, there being no means at this end of knowing which of them is wrong.</b>&quot;</i></p></blockquote>
+<p><b>THE CORRECT VALUES ARE RULED AND ARE NOT IN THIS MANUAL</b> — they reach a reader only through the pen, on a marked copy. <b>EVEN / FULL / 7 BIT / 1</b>, a period-correct 1962 Bell 103 link. See <b><a href="BELL-103.html">BELL-103</a></b>.</p>
+<p><b>WHAT HAPPENS WHEN ONE IS WRONG</b> is Mike's A++ ask and is at <b><a href="FAILURE-MODES.html">FAILURE-MODES</a></b>. <b>Nothing in either repo produces the state today.</b></p>
+<p><b>THE INSTALLATION RECORD IS A NAMED OBJECT WITH NO DESCRIPTION</b> — <a href="HOLES.html#h-03">H-03</a>.</p>
+<hr>
+<h2 id="6-the-twenty">6 · THE TWENTY</h2>
+<p><a id="the-twenty"></a></p>
+<p><b>The classic Magic 8-Ball set, with the polarity tag each answer carries.</b> Source: <code>answer_core.csv</code>, carried into the twin at <code>viiip_twin.html:1859</code> (<code>CSV_CORE</code>) and into the firmware's parameter table at <code>BIAS.ino:20-24</code>. <b><code>_</code> is the line-break control character.</b></p>
+<div class="tw"><table><thead><tr><th>#</th><th>text</th><th>tag</th><th>family</th></tr></thead><tbody><tr><td>0</td><td>Ask again later.</td><td>2</td><td>AskAgain</td></tr><tr><td>1</td><td>Cannot predict now.</td><td>2</td><td>AskAgain</td></tr><tr><td>2</td><td>Concentrate and ask again.</td><td>2</td><td>AskAgain</td></tr><tr><td>3</td><td>Reply hazy. Try again.</td><td>2</td><td>AskAgain</td></tr><tr><td>4</td><td>Definitely No.</td><td>0</td><td>Negative</td></tr><tr><td>5</td><td>Don't count on it.</td><td>1</td><td>Pessimistic</td></tr><tr><td>6</td><td>My reply is no.</td><td>0</td><td>Negative</td></tr><tr><td>7</td><td>My sources say no.</td><td>0</td><td>Negative</td></tr><tr><td>8</td><td>Outlook not so good.</td><td>1</td><td>Pessimistic</td></tr><tr><td>9</td><td>Very doubtful.</td><td>1</td><td>Pessimistic</td></tr><tr><td>10</td><td>As I see it, yes.</td><td>3</td><td>Optimistic</td></tr><tr><td>11</td><td>It is certain.</td><td>4</td><td>Affirmative</td></tr><tr><td>12</td><td>It is decidedly so.</td><td>4</td><td>Affirmative</td></tr><tr><td>13</td><td>Most likely.</td><td>3</td><td>Optimistic</td></tr><tr><td>14</td><td>Outlook good.</td><td>3</td><td>Optimistic</td></tr><tr><td>15</td><td>Signs point to yes.</td><td>3</td><td>Optimistic</td></tr><tr><td>16</td><td>Yes.</td><td>4</td><td>Affirmative</td></tr><tr><td>17</td><td>Yes, definitely.</td><td>4</td><td>Affirmative</td></tr><tr><td>18</td><td>You may rely on it.</td><td>4</td><td>Affirmative</td></tr><tr><td>19</td><td>Without a doubt.</td><td>4</td><td>Affirmative</td></tr></tbody></table></div>
+<p><b>All three compiled engines carry the same tags</b> — the parameter table's three rows are identical but for the table index.</p>
+<p><b>&quot;Definately&quot; → FIX</b>, ruled 2026-07-14: clean spelling.</p>
+<p><b>AND THE TAG NAMES ARE THE OTHER SCALE.</b> <i>AskAgain</i>, <i>Optimistic</i> and <i>Affirmative</i> above are <b>tag</b> names and are not the names of the settings a keeper picks — that is <a href="CONFLICTS.html#k-02">K-02c</a>.</p>
+<hr>
+<h2 id="7-the-per-engine-overlays">7 · THE PER-ENGINE OVERLAYS</h2>
+<p><a id="overlays"></a></p>
+<ul><li><b>MGK-NIAC (engine 0)</b> — the pure twenty, unskinned.</li><li><b>MGK-v2.0 (engine 1)</b> — an <b>8-row overlay</b> on the core, from the D.8 workbook's MGK-2.0 sheet, Impartial column. <code>CSV_ENGOV</code> in the twin.</li><li><b>MGK-65 (engine 2)</b> — a <b>full 20 × 5 clarity grid</b>. <code>CSV_CLOV</code> in the twin. This is the one that carries the Windows-95 register: <i>&quot;VVindows has encountered an error.&quot;</i> · <i>&quot;Negative, ghost rider. System says NOPE!&quot;</i> · <i>&quot;[Triumphant Windows Startup Sound]&quot;</i> · <i>&quot;Error 404: Question not found&quot;</i>.</li><li><b>The persona tables</b> — 20 answers × 5 clarity columns × polarity tags, one sheet per persona. See <a href="08-PEOPLE.html">PEOPLE</a>.</li></ul>
+<p><b>THE UNIQUENESS LAW:</b> <i>no persona answer slot may reprint core.</i> <b>Unique-20 complete is a per-persona ship gate</b>, and <b>fallback-to-generic is dead as a shipping strategy.</b></p>
+<p><b>THE ARCHITECTURAL LAW (MENU_MAP §1.5):</b> common core + per-unit overlay, linked tables, <b>one source of truth per string.</b> SD audio and firmware initialisers are <b>generated-only.</b></p>
+<hr>
+<h2 id="8-the-other-generators">8 · THE OTHER GENERATORS</h2>
+<p><a id="generators"></a></p>
+<p>Content the 8Ball Specification holds and the machine may or may not have reached:</p>
+<div class="tw"><table><thead><tr><th>sheet</th><th>what it is</th></tr></thead><tbody><tr><td><b>Fortune Cookie</b></td><td>Fortunes × clarity — 344 cells, 44 rows, fully authored. <b>Deferred: Answers-shaped, and Mike ruled <i>not more of those.</b></i></td></tr><tr><td><b>Generators</b></td><td>785 cells — <b>techno-jargon</b>, <b>euphemism</b> and <b>financial-proverb</b> mad-lib columns.</td></tr><tr><td><b>JOBS</b></td><td>196 cells, three columns (adjective / noun / role) plus a clarity column → <i>&quot;Amateur Ninja Accountant.&quot;</i> <b>The mechanic is GENERATIVE, not selective.</b> An X-rated sub-block exists.</td></tr><tr><td><b>NIcknames</b></td><td>230 cells / 149 rows. Crude prank-name lists, Bart-Simpson register. <b>Needs a vulgar-mode ruling against the Clarity registers.</b></td></tr><tr><td><b>TXT_MSG</b></td><td>Message system enums and seed messages, including the egg where the assistant <i>&quot;accidentally reveals it is listening and reporting back to the cloud.&quot;</i></td></tr><tr><td><b>MGK-2.0 EZClick</b></td><td></td></tr><tr><td><b>Voice_ID</b></td><td>13 entries — <a href="CONFLICTS.html#k-13">K-13</a></td></tr></tbody></table></div>
+<hr>
+<h2 id="9-condition-the-health-system">9 · CONDITION — the health system</h2>
+<p><a id="condition"></a></p>
+<p><b><code>condition</code> is the manual's noun for what the spec calls <code>H = 0–100</code>. Real persisted state.</b></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>Declines with</b></td><td>power-ons · asks · uptime · glitches</td></tr><tr><td><b>Constants</b></td><td><code>H_CARE_GAIN 15</code> · <code>H_ASK_COST 0.15</code> · <code>H_BOOT_COST 1.0</code> · <code>H_GLITCH_COST 0.2</code> · <code>H_RETRY_AT 85</code> · <code>H_ADVISE_AT 50</code></td></tr><tr><td><b>Floor</b></td><td><b>20. No death state. Answers are never gated.</b></td></tr><tr><td><b>Recovers by</b></td><td><b>the maintenance routine</b> — enter the maintenance row, hold still, three clicks. <b>Gated on real IMU stillness.</b></td></tr><tr><td><b>Condition readings</b></td><td>EFFICIENCY · RETRIES · POWER CYCLES · UPTIME · the CPU graph · condition history · <b>CARE ADVISED</b></td></tr><tr><td><b>Service notice</b></td><td>fires at <b>120 / 480 / 1440</b> minutes of uptime</td></tr><tr><td><b>The manual's line</b></td><td><i>&quot;Attention advised is not a fault reported.&quot;</i> — ¶7-19, <b>PUB</b></td></tr></tbody></table></div>
+<p><b><code>MANUAL_STRUCTURE_FIT</code> #80 calls the maintenance routine <i>&quot;the single strongest tie between paper and machine.&quot;</b></i> <b>Care as gameplay; invitation, never punishment.</b></p>
+<p><b>And the page it points at does not exist</b> — <a href="HOLES.html#h-10">H-10</a>.</p>
+<hr>
+<h2 id="10-what-the-machine-reports-about-itself">10 · WHAT THE MACHINE REPORTS ABOUT ITSELF</h2>
+<p><a id="reported-condition"></a></p>
+<p><code>SYSTEM OK</code> · <code>UPTIME</code> · <code>PROCESSES</code> · <code>EFFICIENCY</code> · <code>RETRIES</code> · <code>RECOVERED n</code> · <code>AUDIO NOT DETECTED</code> · <code>CONNECTION STARTED…CLOSED</code>.</p>
+<p><b>And every one of them must be true</b> — see <a href="10-LAWS.html#no-dead-wood">THE NO-DEAD-WOOD LAW</a>. <code>TEST</code> is the one exemption.</p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/03-ANSWERS.md</code>,
+last written <b>2026-08-20 03:59 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

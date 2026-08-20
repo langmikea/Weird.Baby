@@ -33,7 +33,8 @@ function HeldDoor() {
       .then(r => r.json())
       .then(d => {
         if (gone) return;
-        setState({ open: !!d.open, configured: !!d.configured, note: d.note || null, checked: true, stage: d.stage || null });
+        setState({ open: !!d.open, configured: !!d.configured, note: d.note || null, checked: true, stage: d.stage || null,
+                   served: d.served === undefined ? null : d.served, probe: d.probe || null });
         markHeldOpen(!!d.open);
       })
       .catch(() => { if (!gone) setState(s => ({ ...s, checked: true })); });
@@ -129,6 +130,35 @@ function HeldDoor() {
           <span className="adm-held-stage-v">
             {state.stage === "launch" ? "The launch state" : "Everything placed"}
           </span>
+        </p>
+      )}
+      {/* ═══ [2026-08-20] THE DOOR SAYS WHETHER THERE IS ANYTHING BEHIND IT ═══
+          MIKE: *"A door reporting 'open' with nothing behind it is why nobody
+          caught this for a week."* For a week `/api/held` answered `open:true`
+          on a launch deployment whose 144 held files had been dropped from the
+          bundle, and this page printed the door as working.
+
+          IT IS A SEPARATE LINE FROM `Showing`, AND THAT IS THE POINT. `Showing`
+          is what the deployment BELIEVES; this is what the store actually
+          HOLDS. They are two facts and the whole failure was reading one as the
+          other. The line names the file it tested so the reading can be
+          repeated, and it only draws when the door is open, because presence is
+          answered to the key-holder alone. */}
+      {state.open && state.served !== null && state.served !== undefined && (
+        <p className={"adm-held-stage" + (state.served ? "" : " adm-held-stage--bad")}>
+          <span className="adm-held-stage-k">Held files</span>
+          <span className="adm-held-stage-v">
+            {state.served
+              ? "Served — the door has something behind it"
+              : "NOT ON THIS DEPLOYMENT — the door opens onto nothing"}
+          </span>
+        </p>
+      )}
+      {state.open && state.served === false && state.probe && (
+        <p className="adm-held-note">
+          Probed <code>{state.probe}</code> and the store answered with the
+          application, not the file. Held material was not uploaded with this
+          build, so every held address will render the Lobby. Rebuild and deploy.
         </p>
       )}
       {state.open ? (

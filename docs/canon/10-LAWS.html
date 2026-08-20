@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the laws</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="10-the-laws-story-laws-and-ops-doctrines">10 · THE LAWS — story laws and Ops doctrines</h1>
+<p><b>TWO KINDS AND THEY MUST NOT BE MIXED.</b></p>
+<ul><li><b>STORY LAWS</b> govern what is true in the world and what the machine may be made to say. Breaking one is a continuity error.</li><li><b>OPS DOCTRINES</b> govern how the museum and the repos are worked. They are <code>OPS</code> register by definition. <b>None of them may ever reach a visitor.</b></li></ul>
+<p><b>The single most consequential rule for anybody reading this catalogue is <a href="#doctrine-18">Doctrine 18</a>: roughly a third of this catalogue is OPS register and must never reach a page.</b></p>
+<hr>
+<h1 id="part-one-the-story-laws">PART ONE · THE STORY LAWS</h1>
+<h2 id="the-three-layers">THE THREE LAYERS</h2>
+<p>See <a href="01-WORLD.html#three-layers">01-WORLD §5</a>. <b>Honest machinery / obviously-staged 1965 theatre / the unknown wire. On conflict, the laws win.</b></p>
+<h2 id="story-freeze">STORY FREEZE</h2>
+<p><a id="story-freeze"></a> <b>Frozen as of 2026-07-22.</b> Bugs are fixable opportunistically; <b>the story never changes post-ship — or WB pays all upgrade costs.</b></p>
+<h2 id="the-never-advertised-law">THE NEVER-ADVERTISED LAW</h2>
+<p><a id="never-advertised"></a> <b>The chapters are NOT the reason to own the device and are NEVER pitched.</b> The device earns its keep as a genuinely fun useless thing. <b>Discovery of the story's EXISTENCE is part of the story. The deep game must never leak into the shallow one.</b></p>
+<h2 id="the-experience-law">THE EXPERIENCE LAW</h2>
+<p><a id="experience-law"></a> <b>THERE IS NO GAME.</b> No win state, no right way. <i>&quot;The experience is finding a 50-60-year-old smartphone that still boots and snooping — because it's COOL.&quot;</i></p>
+<h2 id="the-scope-law">THE SCOPE LAW</h2>
+<p><a id="scope-law"></a> <b>The story is a jumbo Easter egg, not the product.</b></p>
+<h2 id="the-format-law">THE FORMAT LAW</h2>
+<p><a id="format-law"></a> <b>NO inter-persona communication, ever.</b> All messages originate from virtual servers; <b>users become aware of counterparts, never able to reach them.</b></p>
+<h2 id="the-clean-exit-law">THE CLEAN-EXIT LAW</h2>
+<p><a id="clean-exit"></a> <b>Only the Housewife exits clean.</b> Everyone else is already defective or damaged by the process; <b>the CEO may be innocent and still not clean.</b></p>
+<h2 id="silence-means-generic">SILENCE MEANS GENERIC</h2>
+<p><a id="silence-means-generic"></a> <b>Everything is generic unless explicitly persona-reserved. All owner messages are persona-reserved.</b></p>
+<h2 id="the-drafting-law">THE DRAFTING LAW</h2>
+<p><a id="drafting-law"></a> <b>Locked after a violation was caught.</b></p>
+<blockquote><p><b>Claude-as-the-computer assembles from established canon ONLY — no coined catchphrases, signatures, gags, or terminology. ALL flavour is Papa's.</b></p></blockquote>
+<p><b>It is the rule this catalogue is built under</b>, and the reason <a href="HOLES.html#h-13">H-13</a> flags <i>determination</i> despite it being a good word.</p>
+<h2 id="the-parcel-law">THE PARCEL LAW</h2>
+<p><a id="parcel-law"></a> <b>MILESTONE 1 CANON, CONSTITUTIONAL, 2026-07-24.</b></p>
+<blockquote><p><b>Users never receive every version of every tool at once.</b> Capability parcels out in accordance with a story that at least justifies the reason. <b>The slow-walk discovery reveal is the product's SHAPE, fleet-wide, forever.</b></p></blockquote>
+<p>Existing machinery — download-more, delayed/errored/counter discoveries, earned eggs, code ceremony, the casino gate — <b>is the same law, now named.</b></p>
+<p><b>AND THE PARCEL GRAIN EXTENDS INSIDE APPS:</b> new pools and modes arrive via the same offer/download machinery.</p>
+<h2 id="the-evolution-law">THE EVOLUTION LAW</h2>
+<p><a id="evolution-law"></a> See <a href="02-MACHINES.html#engines">02-MACHINES §4</a>. **NIAC only, then v2.0 arrives, then</p>
+<ol><li>Never three side by side puzzling — an evolution in acts.**</li></ol>
+<h2 id="the-downloads-fiction">THE DOWNLOADS FICTION</h2>
+<p><a id="the-downloads-fiction"></a> <b>Ruled B.</b></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>Real world</b></td><td><b>true persistence.</b> Static RAM enables genuine state saves. <b>WS1 is real engineering.</b></td></tr><tr><td><b>Fiction world</b></td><td><b>the server is COMPLETELY VIRTUAL</b> — simulated as if the 1965 infrastructure still runs. <b>The machine performs the network.</b></td></tr></tbody></table></div>
+<p><b>FEATURE REVELATION = SIMULATED DATA DOWNLOADS.</b> Capability <b>arrives</b> as a transmission; state resumes <i>&quot;as last left on the server.&quot;</i> <b>Nothing was withheld — it simply hadn't been downloaded yet.</b></p>
+<p><b>&quot;YOU HAD IT ALL ALONG&quot; IS DEAD</b> — canon reversal, 2026-07-15.</p>
+<p><b>NO FEATURE MAY EVER ACTUALLY DEPEND ON CONNECTIVITY.</b></p>
+<p><b>CEREMONY IS PROPORTIONAL TO CARGO, and both instruments stay</b> — the quiet boot murmur AND the 8-step dial-up narration. <b>The story defines what it needs, surface by surface.</b></p>
+<h2 id="the-reveal-hold-law">THE REVEAL-HOLD LAW</h2>
+<p><a id="reveal-hold"></a> <b>An answer stays until the user disturbs it — no machine timeout — and a shake re-asks only after a minimum read time. No instant re-rolls; the do-over gate is &quot;long enough to read it.&quot;</b> NIAC is shake-only.</p>
+<h2 id="slot-machine-never-evil">SLOT-MACHINE-NEVER-EVIL</h2>
+<p><a id="never-evil"></a> <b>The machine does not chase the user.</b> No nagging, no tutorials, no onboarding, no tooltips, no <i>did you know</i>. <b>A first-time owner gets the honest classic twenty; the bias engine, the registers, the personas are FOUND.</b></p>
+<p><b>It is the reasoning behind the flat bias default</b> — the depth is all still there, waiting, <b>and nothing announces it.</b></p>
+<h2 id="the-no-dead-wood-law">THE NO-DEAD-WOOD LAW</h2>
+<p><a id="no-dead-wood"></a> <b>CANON, 2026-07-22.</b></p>
+<blockquote><p><b>NO fake reports anywhere unless Papa specifically asks</b> — every claim the monitor/machine makes must be <b>REAL machine truth</b>; story-fakes only ever by explicit Papa direction.</p></blockquote>
+<p><b><code>TEST</code> is the one exemption — Egg 1, Papa-placed.</b></p>
+<p><b>It is the biggest constraint on the failure-modes idea</b> — <a href="FAILURE-MODES.html#laws-that-bear">FAILURE-MODES §4.1</a>.</p>
+<h2 id="the-input-grammar-law">THE INPUT GRAMMAR LAW</h2>
+<p><a id="the-input-grammar-law"></a> <b>Global canon, 2026-07-24.</b> <b>SHAKE = another · SCROLL = go back one level · CLICK = select.</b> Refined by the two-context grammar — see <a href="04-MENU.html#input">04-MENU §5</a>. <b>Firmware ports inherit the law.</b></p>
+<h2 id="the-two-screen-role-law">THE TWO-SCREEN ROLE LAW</h2>
+<p><a id="two-screen"></a> <b>CONSTITUTIONAL, 2026-07-23.</b> FRONT = primary SYSTEM GUI; TOP = primary APPS GUI + detail. <b>Only the top screen may run fluidic mode.</b> All builds, past and future, conform.</p>
+<h2 id="the-centering-law">THE CENTERING LAW</h2>
+<p><a id="centering"></a> <b>Centred composition is CEREMONIAL and is reserved for the answer; everything else sits on the grid. NO APP EXEMPTION</b> — the casino recomposes to the grid; the Mail Run HUD conforms to the bottom edge.</p>
+<p><b>AND IT HAS A PHYSICAL CAUSE:</b> <i>&quot;CENTERING MATTERS ON THE FRONT GLASS SPECIFICALLY BECAUSE OF THE ROUND PORTAL THE SCREEN SITS BEHIND. The glass is a rectangle but the aperture is a circle.&quot;</i> <b>The top glass is unaffected.</b></p>
+<h2 id="the-glitch-doctrine-the-crt-lifecycle-law-the-theater-law-the-click-feedback-law-the-heartbeat-law-the-static-sound-law">THE GLITCH DOCTRINE · THE CRT LIFECYCLE LAW · THE THEATER LAW · THE CLICK-FEEDBACK LAW · THE HEARTBEAT LAW · THE STATIC-SOUND LAW</h2>
+<p>All at <a href="05-BOOT.html#night-laws">05-BOOT §7 and §9</a>.</p>
+<h2 id="the-eight-f-t-laws">THE EIGHT F/T LAWS</h2>
+<p>At <a href="05-BOOT.html#ft-laws">05-BOOT §6</a>.</p>
+<h2 id="config-everywhere">CONFIG-EVERYWHERE</h2>
+<p><a id="config-everywhere"></a> <b>Fixed phrase tables remain atomic (audio-safe); all selection, targeting and sass is config, at every level.</b> The <code>WHO / WHY / INVENT-A-NAME / WING-IT</code> pattern engine.</p>
+<h2 id="the-uniqueness-law">THE UNIQUENESS LAW</h2>
+<p><a id="uniqueness"></a> <b>No persona answer slot may reprint core. Unique-20 complete is a per-persona ship gate. Fallback-to-generic is dead as a shipping strategy.</b></p>
+<h2 id="the-architectural-law">THE ARCHITECTURAL LAW</h2>
+<p><a id="architectural-law"></a> <b>Common core + per-unit overlay, linked tables, ONE SOURCE OF TRUTH PER STRING.</b> SD audio and firmware initialisers are <b>generated-only.</b> Schema = versioned files in-repo.</p>
+<h2 id="enjoyability-outranks-period-purity">ENJOYABILITY OUTRANKS PERIOD PURITY</h2>
+<p><a id="enjoyability"></a> <b>Ruled at the doors decision. Cuts both ways and is invoked DELIBERATELY, not by default.</b></p>
+<h2 id="contradictions-are-placed-never-inherited">CONTRADICTIONS ARE PLACED, NEVER INHERITED</h2>
+<p><a id="placed"></a> <b>An accidental source conflict gets reconciled — that is the RECONCILE list.</b> <b>A placed one is the story</b> — see <a href="01-WORLD.html#dr-2">DR-2</a>.</p>
+<p><b>This catalogue's <a href="CONFLICTS.html">CONFLICTS</a> page is the inventory that ruling needs: it cannot tell you which is which, and that is exactly the judgement it refuses to make.</b></p>
+<h2 id="the-registry-law">THE REGISTRY LAW</h2>
+<p><a id="registry-law"></a> <b>Rows are amendable freely until first physical ship; a shipped row freezes forever.</b></p>
+<h2 id="the-owner-publish-mechanic">THE OWNER-PUBLISH MECHANIC</h2>
+<p><a id="owner-publish"></a> <b>An owner may read a code off the unit and enter it online to make its software world-available — or not. PER-UNIT CONSENT; the unit never knows its publication state.</b></p>
+<h2 id="the-three-code-systems-names-internal-only">THE THREE CODE SYSTEMS — names INTERNAL ONLY</h2>
+<p><a id="three-codes"></a></p>
+<div class="tw"><table><thead><tr><th>internal name</th><th>what it is</th><th>who sees it</th></tr></thead><tbody><tr><td><b>PASS codes</b></td><td>the manual's Appendix-1 landscape — <b>displayability, not access</b></td><td>every generic unit</td></tr><tr><td><b>KEY codes</b></td><td><b>Act III verification keys, zero data</b>, delivered in the quiet ending; <b>generics never get one</b></td><td>numbered units only</td></tr><tr><td><b>RELEASE codes</b></td><td>the owner-publish mechanic</td><td>owners, by choice</td></tr></tbody></table></div>
+<p><b>These are three distinct systems and the internal names never reach UX.</b></p>
+<h2 id="the-twin-is-the-dev-environment-the-unit-is-the-print-run">THE TWIN IS THE DEV ENVIRONMENT; THE UNIT IS THE PRINT RUN</h2>
+<p><a id="twin-vs-unit"></a> <b>Physical unit outranks extraction. Single-file, no-network is LAW.</b></p>
+<h2 id="the-b-doctrine">THE B+ DOCTRINE</h2>
+<p><a id="b-plus"></a> <b>Papa, 2026-07-17:</b> <b><i>&quot;This is not a museum-quality restoration.&quot;</b></i> Not excellence-at-any-cost; <b>the A costs 3× the B+ and the A+ costs 10×. Self-satisfying, somewhat contained, shipped.</b></p>
+<h2 id="the-lifetime-guarantee">THE LIFETIME GUARANTEE</h2>
+<p><a id="guarantee"></a> <b>Every unit is guaranteed for the lifetime of Weird.Baby — it never expires unless we do.</b></p>
+<hr>
+<h2 id="the-obfuscation-law">THE OBFUSCATION LAW</h2>
+<p><a id="obfuscation"></a></p>
+<p><b>CANON, adopted 2026-08-03. It governs every image, clip, still, plate, thumbnail, poster, share card and preview the museum publishes of a physical MGK unit</b> — <i>what a stranger is allowed to see.</i> <code>robots:docs/canonical/OBFUSCATION_LAW.md</code>.</p>
+<p><b>IT IS A STORY LAW BECAUSE THE REVEAL IS A STORY ASSET</b>, and it is listed here rather than with the Ops doctrines for that reason.</p>
+<div class="tw"><table><thead><tr><th>article</th><th></th></tr></thead><tbody><tr><td><b>1</b></td><td><b>NO PUBLISHED ASSET CARRIES THE UNIT'S FULL SILHOUETTE.</b> <i>&quot;This is the article that kills wide shots, and it kills them even when the wide shot is the best-looking frame in the file.&quot;</i></td></tr><tr><td><b>2</b></td><td><b>EVERY CROP IS CUT AT A JOINT, A PANEL, OR AN EDGE.</b> <i>&quot;A crop that slices through open air reads as a crop; a crop that stops at a joint reads as a CHOICE, and the machine keeps its dignity.&quot;</i></td></tr><tr><td><b>3</b></td><td><b>ENOUGH TO PROVE THE MACHINE IS REAL — NEVER ENOUGH TO SPEND THE REVEAL.</b> Two-sided and <b>both sides bind.</b> <b><i>The reveal is spent once.</b></i></td></tr><tr><td><b>4</b></td><td><b>B&amp;W IS A GLASS-LEVEL TREATMENT. IT IS NEVER BAKED.</b> <i>&quot;An asset that arrives already monochrome has thrown away information the museum cannot recover, and it is not a master — it is one styling of a master that no longer exists.&quot;</i></td></tr><tr><td><b>5</b></td><td><b>PROVENANCE MUST BE ESTABLISHABLE, OR THE ASSET DOESN'T SHIP.</b> <i>&quot;An asset nobody can trace is a rumour.&quot;</i></td></tr></tbody></table></div>
+<p><b>THE SITE-WIDE B&amp;W LAW (Mike, 2026-08-04):</b> <i>&quot;EVERYTHING is B&amp;W except a few colour Polaroid-quality <b>family shots</b>.&quot;</i> <b>It does not amend Article 4; it is what Article 4 is FOR.</b> Together: <b>colour at capture, B&amp;W at delivery.</b> The colour render must stay <b>one flag away, and that flag kept working.</b></p>
+<p><b>THE ROOM IS NOT THE MACHINE, as amended:</b></p>
+<blockquote><p><b>THE POSTERS ARE FAIR GAME. THE FACE IS NOT.</b> Poster art is art, and it is his own wall. <b>An identifiable PHOTOGRAPHIC PORTRAIT of a real person stays OUT of anything published</b> — <i>&quot;A real face is not ours to publish.&quot;</i></p>
+<p><b>The distinction is photographic likeness, not subject matter.</b> Wall, floor and window are unchanged, and <b>privacy wins every tie.</b></p>
+<p><b>B&amp;W DOES NOT CURE A PORTRAIT.</b></p></blockquote>
+<p><b>RE-ENCODE, ALWAYS.</b> The 2021 source files carry a GPS tag — a home address to ~65 m. <b>A source <code>.MOV</code> or camera-original <code>.JPG</code> is never published, under any circumstance, as any asset class.</b> Strip metadata explicitly.</p>
+<p><b>THE ONE SCOPE RULING:</b> <b><i>&quot;THE CROPS ARE TOO DEEP — SHOW THE WHOLE ROBOT.&quot;</b></i> The 2021 Magic 8 footage is carved out — <i>&quot;this footage is Mike's own, of his own build, and he wants it seen.&quot;</i> <b>It does not repeal Article 1</b> for anything the museum publishes of a unit. <b>Article 3 is the live question there and is a per-asset call Mike has not made.</b></p>
+<p><b>REVIEW CUTS ARE EXEMPT, ON TWO MANDATORY CONDITIONS:</b> delivered <b>outside</b> any published path, and <b>marked</b> as a review cut with a per-shot statement of which articles it would fail. <b>A review cut is never promoted by being copied — it is re-derived under the law or it does not ship.</b></p>
+<hr>
+<h1 id="part-two-the-ops-doctrines">PART TWO · THE OPS DOCTRINES</h1>
+<p><b><code>OPS</code> register throughout. Canonical text: <code>museum:docs/canonical/OPERATIONS.md</code> §7. Numbered as they are numbered there.</b></p>
+<h2 id="doctrine-11-the-law-of-the-visible-line">Doctrine 11 · THE LAW OF THE VISIBLE LINE</h2>
+<p><a id="doctrine-11"></a></p>
+<blockquote><p><b>If a line describes the work rather than doing the work, it does not ship.</b></p></blockquote>
+<p><b>THE TEST IS THE LINE'S SUBJECT, not its tone or its truth.</b></p>
+<p><b>FAILS:</b> the drafting, the research, the revision history, what a round did, the form a page takes and why, the typography, the renderers, unwritten-content plans, any builder named on the glass, internal decision codes, <code>· v1</code> draft stamps.</p>
+<p><b>SHIPS:</b> the objects, the artists, the events in the record, the standing terms, <b>and honest statements of what is not held.</b> <i>&quot;No plate on file&quot;</i> ships; <i>&quot;nobody has photographed this yet&quot;</i> does not.</p>
+<p><b>TWO THINGS THAT LOOK LIKE META AND ARE NOT:</b> <b>provenance</b> (sources lines, accession numbers) and <b>mechanism state</b> (LIVE / NOT BUILT).</p>
+<p><b>COROLLARY: empty and honest beats populated and false.</b></p>
+<p><b>THE PRACTICAL TRAP:</b> the <code>why</code> on a Portal drum position, the <code>held</code> on a Record door, and a <code>note</code> on a face entry are all <b>PRINTED</b>. <i>A comment-shaped string in a data file is not a comment.</i></p>
+<h2 id="doctrine-12-ops-does-not-invent-content">Doctrine 12 · OPS DOES NOT INVENT CONTENT</h2>
+<p><a id="doctrine-12"></a></p>
+<p><b>The reason <code>SER. NO.</code> and <code>DATE</code> are blank on the FEED CONTROL's badge (<a href="HOLES.html#h-21">H-21</a>), the reason the NIAC drum positions carry a name and nothing else, and the reason the reveal ledger's <code>when</code> is null on all 174 rows.</b></p>
+<p><b>A plausible invented specific is the exact failure this doctrine names.</b></p>
+<h2 id="doctrine-16-the-law-of-subtraction">Doctrine 16 · THE LAW OF SUBTRACTION</h2>
+<p><a id="doctrine-16"></a></p>
+<blockquote><p><b>If it does not help, it hurts. If it does not need to be there, it needs to not be there.</b></p></blockquote>
+<p><b>IT IS NOT DOCTRINE 11 AGAIN.</b> 11 tests a line's <b>SUBJECT</b>; this tests its <b>NECESSITY</b>. Ask of any object, control, count, caption or badge: <b>what is lost if it goes?</b> <i>&quot;Nothing a reader would miss&quot;</i> means it goes. <b>Harmless is not passing — harmless costs attention.</b></p>
+<p><b>It is a reason to delete, never a reason to delete QUIETLY.</b></p>
+<h2 id="doctrine-18-in-story-technical-specifications">Doctrine 18 · IN-STORY TECHNICAL SPECIFICATIONS</h2>
+<p><a id="doctrine-18"></a></p>
+<blockquote><p><b>&quot;Technical Specifications&quot; means THE IN-STORY SPECS, NEVER THE REAL ONES.</b></p></blockquote>
+<p><b>Given as a global standard with Mike's own forecast attached:</b> <b><i>&quot;this drifts back easily.&quot;</b></i></p>
+<p><b>WHAT A SPECIFICATION SURFACE IS.</b> Any surface whose subject is <i>what the machine is.</i> <b>Defined by SUBJECT, not by heading</b> — a face that starts listing the machine's components becomes one the moment it does.</p>
+<p><b>WHAT MAY NOT BE ON ONE:</b> the board's part number, source-tree filenames, the module list, the bench sketch count, the count of lines of source, the I²C addresses, the pin numbers, the validation state of the workshop, <b>and any calendar date of the real build.</b> <i>These are all TRUE. They are the provenance of a prop, and a spec sheet is not a provenance record.</i></p>
+<p><b>WHAT IS NOT COVERED:</b> <b>the Record is the house's log of receiving the object THIS YEAR</b> — a sealed modern bag, a USB-C adapter, a slow charge. All modern, all correct, on a surface whose subject is <i>now.</i> <b>The rule is about which machine a spec sheet is describing, not about banning the present tense.</b></p>
+<p><b>WHY IT DRIFTS BACK, WHICH IS THE PART WORTH KNOWING:</b> <i>the real facts are the ones Ops can VERIFY. A session looking for something true to put on a spec sheet reaches for the firmware tree every time, because the firmware tree is the thing it can read — and it will feel like diligence while it does it.</i> <b>Recording the law does not stop it; a gate does</b> — <code>npm run instory:gate</code>.</p>
+<p><b>AND IT BEARS ON TWO CONFLICTS IN THIS CATALOGUE</b>, in a direction that is easy to miss: <a href="CONFLICTS.html#k-08">K-08</a> and <a href="CONFLICTS.html#k-09">K-09</a>. <i>&quot;The in-story manual is the authority for the in-story spec, and <b>the real firmware is not evidence about a 1965 machine at all.</b>&quot;</i> Register row <b>N-i</b>.</p>
+<h2 id="doctrine-20-the-bouncy-ball-law">Doctrine 20 · THE BOUNCY BALL LAW</h2>
+<p><a id="doctrine-20"></a></p>
+<blockquote><p><i>&quot;Humans remember one or two things; ten things reduces the odds they keep the one that matters.&quot;</i></p></blockquote>
+<p><b>IT CAPS POINTS OF FOCUS, NOT ASSETS. IT DOES NOT MEAN WE MAY NOT SHOW MORE PICTURES.</b></p>
+<div class="tw"><table><thead><tr><th>bucket</th><th>ceiling</th></tr></thead><tbody><tr><td><b>PRECIOUS</b> — genuine reveals</td><td><b>two or three a week</b></td></tr><tr><td><b>DUMP</b> — everything else</td><td><b>no ceiling</b> — ten manual pages arriving is ONE point of focus</td></tr></tbody></table></div>
+<p><b>The judged field is <code>bucket</code> on <code>provenance/asset-table.json</code>, it is Mike's, and Ops does not derive it.</b></p>
+<h2 id="doctrine-21-everything-in-the-form-is-story">Doctrine 21 · EVERYTHING IN THE FORM IS STORY</h2>
+<p><a id="doctrine-21"></a></p>
+<p><b>Material arriving through the dictation instruments is in-story by construction</b>, so Doctrine 11 is satisfied <b>at the instrument</b> and no future dictation gets re-adjudicated entry by entry.</p>
+<p><b>IT DOES NOT EXEMPT OPS' OWN PROSE ANYWHERE</b>, including inside a Record entry, <b>and it does not lower the provenance bar.</b></p>
+<h2 id="doctrine-22-a-limit-is-shown-where-the-string-is-written">Doctrine 22 · A LIMIT IS SHOWN WHERE THE STRING IS WRITTEN</h2>
+<p><a id="doctrine-22"></a></p>
+<blockquote><p><b>He must never again discover a limit from a report.</b></p></blockquote>
+<p><b>A constraint has three halves: a render that cannot lie, a gate that refuses, and a live count on the field.</b> <b>WARN, NEVER BLOCK.</b> Count what would be SAVED, not the raw field. <b>Say where there is NO limit.</b> The warning travels into the paste.</p>
+<h2 id="doctrine-23-the-record-s-register-email-like-not-an-email-program">Doctrine 23 · THE RECORD'S REGISTER — EMAIL-LIKE, NOT AN EMAIL PROGRAM</h2>
+<p><a id="doctrine-23"></a></p>
+<p><b>No From, no To, no Subject line, no reply affordances, no inbox, no message headers, no envelope furniture of any kind.</b> What is borrowed is <b>the REGISTER ONLY</b>: the plainness and the attachments-at-the-bottom convention.</p>
+<p><b>THE TEST IS NOT <i>is it useful</i> — IT IS <i>would a mail program have it</i>.</b></p>
+<h2 id="doctrine-24-once-it-is-ruled-gone-it-is-gone-from-his-view">Doctrine 24 · ONCE IT IS RULED GONE, IT IS GONE FROM HIS VIEW</h2>
+<p><a id="doctrine-24"></a></p>
+<p><b>Not archived where it resurfaces, not listed in a tracker, not carried in a register as a closed row he has to scroll past.</b> <b>A deleted thing is named ONCE, in the log of the round that killed it, and nowhere else.</b></p>
+<p><b>THE TEST IS NOT <i>is it archived</i>, IT IS <i>will he meet it again</i>.</b></p>
+<p><b>THIS CATALOGUE IS BOUND BY IT.</b> Nothing on these pages is a resurrection of something Mike ruled gone. Where a struck thing is named — the credit reel, THE MORGUE, the <code>_tmp/</code> line, <code>MGK-65x</code> — <b>it is named once, in the row that records the striking, because a catalogue that does not record a strike invites the next session to rebuild it.</b></p>
+<h2 id="doctrine-25-the-tools-are-for-working-not-for-briefing">Doctrine 25 · THE TOOLS ARE FOR WORKING, NOT FOR BRIEFING</h2>
+<p><a id="doctrine-25"></a></p>
+<blockquote><p><i>&quot;All the stuff at the top, I never read.&quot;</i></p></blockquote>
+<p><b>Construction clause: on the field, in the footer, or on a reference page — never above the work.</b> <b>A LEGEND IS NOT A BRIEFING</b> — the test is whether the page is unreadable without it.</p>
+<h2 id="doctrine-26-lead-with-what-he-must-do-or-decide">Doctrine 26 · LEAD WITH WHAT HE MUST DO OR DECIDE</h2>
+<p><a id="doctrine-26"></a></p>
+<p><b>Every report to Mike opens with what is waiting on him.</b> <b>THE TEST IS NOT <i>is it true</i> AND NOT <i>is it interesting</i> — IT IS <i>does this change what he does next?</b></i> <b>AN EMPTY ASK IS A COMPLETE REPORT.</b></p>
+<hr>
+<h2 id="the-provenance-gate">THE PROVENANCE GATE</h2>
+<p><a id="provenance"></a></p>
+<p><b><code>npm run provenance:gate</code> runs beside lint and build on every packet.</b> It fails if any visitor-facing string in <code>src/</code> or <code>index.html</code> has no row in <code>provenance/register.json</code>, or any referenced image has no row in <code>provenance/assets.json</code>.</p>
+<p><b>Classes:</b> <code>MIKE</code> · <code>VERIFIED</code> · <code>DERIVED</code> · <code>HOUSE</code> · <code>RESTATED</code>.</p>
+<p><b>APPROVAL IS NOT AUTHORSHIP.</b> A sentence Mike approved that Ops wrote is filed <b>RESTATED</b>, not MIKE, <b>and must never be re-marked</b> — <i>a paraphrase in his class is indistinguishable from his words a week later.</i></p>
+<p><b>AND THE GATE CANNOT VERIFY THAT A DECLARATION IS TRUE.</b> That is the largest hole in it and it is written down in <code>provenance/README.md</code> §4.</p>
+<hr>
+<h2 id="the-three-marks">THE THREE MARKS</h2>
+<p><a id="three-marks"></a></p>
+<p><b>In the dictation instruments, and the rule that governs them.</b></p>
+<div class="tw"><table><thead><tr><th>mark</th><th>meaning</th></tr></thead><tbody><tr><td><code>Ops</code> <b>blue</b></td><td>Ops' sentence</td></tr><tr><td><b><code>your words</code> gold</b></td><td><b>VERBATIM</b></td></tr><tr><td><code>your rule · Ops wording</code> <b>amber</b></td><td>his rule, Ops' sentence</td></tr></tbody></table></div>
+<p><b>A <code>beat</code> MAY BE DELETED BUT NEVER REWORDED.</b></p>
+<p><b>BOTH ERRORS COST THE SAME:</b> <i>a paraphrase in gold is indistinguishable a week later from something he said, and his own sentence left in blue gets quietly &quot;improved&quot; by the next round.</i></p>
+<p><b>OPS DIVIDES AND DOES NOT INVENT.</b></p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/10-LAWS.md</code>,
+last written <b>2026-08-20 04:15 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

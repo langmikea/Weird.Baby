@@ -436,6 +436,44 @@ export const RECORD_ENTRIES = [
                     { img: "/robots/manual/scan-31-a.webp",
                       label: "Bias settings, the four communications settings" },
                   ] },
+                /* [2026-08-19] THE FOURTH ATTACHMENT, BACK-POSTED. Mike ruled
+                   it, and his reason is the whole of why it is allowed: "We
+                   have had no visitors." Record 003 published 19 Aug 17:00 and
+                   is live.
+                   RULING B: THE ORIGINAL SCAN STAYS. The marked copy arrives
+                   BESIDE it, as a new attachment. The museum does not edit what
+                   it has already shown; a page comes back with somebody's
+                   handwriting on it. Scan 31 above is untouched, and the
+                   marked page is a SECOND RENDER of the same master rather
+                   than a retouch of the first file - the generator emits
+                   pages/page-47.png and pages/marked/page-47.png separately,
+                   so the pair can be differenced and audited.
+                   AND IT IS DELIBERATELY NOT CALLED A SCAN. Record 003's own
+                   DETAILED REPORT, in Mike's published words, names three:
+                   SCAN 07, SCAN 11, SCAN 31. Ruling 10 - what's said matches
+                   what's shown - would then force a fourth line into text the
+                   museum has already published, which Ruling B forbids. It
+                   also happens to be true: this page was not recovered from
+                   the ZIP and was not filmed with anything. It is a different
+                   object with a different provenance, and Ruling 12's own test
+                   (the pages that were filmed together because they belong
+                   together) puts it with nothing.
+                   THE FILENAME ASSERTS NO PAGE. Ruling 11's practical half is
+                   that no public address may assert a page of the manual -
+                   which is why the others are scan-NN. `marked-b1` would
+                   assert B-1, a real paragraph number; `marked-01` asserts a
+                   sequence of marked copies and nothing about the document.
+                   Mike has said this is a recurring channel, so it takes a
+                   number from the first one.
+                   THE PEN IS MIKE'S OWN HAND - he is the PEN WRITER, logged
+                   for the credits page. */
+                { title: "Marked copy 01 - Bias settings",
+                  source: "ABEAL 8P-OMI-1",
+                  pages: 1,
+                  plates: [
+                    { img: "/robots/manual/marked-01-a.webp",
+                      label: "Bias settings, returned marked" },
+                  ] },
               ],
             },
             { no: 4,
@@ -474,10 +512,52 @@ export const RECORD_ENTRIES = [
                     + "works.",
                   ] },
               ],
-              docs: [
-                { title: "View of the portal screen" },
-                { title: "Manual ref to Portal" },
-              ],
+              /* ═══ [2026-08-20] THE TWO ATTACHMENT ROWS ARE STRUCK ═══════════
+                 MIKE, ruling on the morning of the day this entry posts:
+                 *"Remove the docs field entirely. The ATTACHMENTS 2 badge goes
+                 with it."*
+
+                 WHAT WAS HERE, named once so nobody rebuilds it (Doctrine 24):
+                 two `docs` rows carrying a title and nothing else —
+                 `View of the portal screen` and `Manual ref to Portal`. No
+                 source, no date, no pages, no plates, no extract.
+
+                 IT IS RULING 9's OWN SHAPE, AND HE HAD ALREADY STRUCK IT ONCE.
+                 *"We do not hold back what we say we have. We hold back what we
+                 don't have yet."* A Record names only what it can produce. The
+                 `_tmp/` line in Record 002 was a name in a list with nothing
+                 behind it and it went for this reason; these are two.
+
+                 AND THE THIRD REASON IS THE ONE HE RULED ON, because it is a
+                 CONTRADICTION rather than a gap. `docState()` resolves a row
+                 with no plates to `held`, which draws as **not here yet** —
+                 and *Manual ref to Portal* is `SCAN 11 - VID-LINK`, which
+                 **Record 003 delivered on Wednesday**, at a public address,
+                 with a thumbnail that opens. Thursday would have said the
+                 museum does not have a thing it showed on Wednesday. That is
+                 Ruling 10 — what's said matches what's shown — failing in the
+                 harder direction.
+
+                 A THIRD FAULT, RECORDED BECAUSE IT IS THE ONE A GATE COULD
+                 CATCH: `held` is defined in `src/lib/record-model.js` as *"its
+                 provenance is recorded and nothing else has arrived."* Neither
+                 row recorded any provenance, so `attachmentsOf()` built a meta
+                 line containing the words `not here yet` AND NOTHING ELSE.
+                 They were not empty-and-honest; they were empty-and-unsourced.
+
+                 STRIKING THEM COSTS NO PROSE, WHICH WAS MEASURED BEFORE IT WAS
+                 CLAIMED. This entry was searched for `attach`, `contents`,
+                 `enclos`, `appendix`, `below` and `see ` — zero hits. Its one
+                 backward reference is *"Excerpts from the Manual earlier in the
+                 week"*, which points at Record 003, is true, and is delivered.
+                 Not one character of Mike's text moved.
+                 (Contrast Record 003, which promises and delivers: *"Outer
+                 layer opened - three manual pages recovered, contents
+                 attached."*)
+
+                 NOTHING IS OWED LATER. A picture of the portal screen may
+                 arrive on any future Record; Ruling 9's own words are that the
+                 Record may withhold and the Record may not promise. */
             },
             { no: 5,
               date: recordDay(5),

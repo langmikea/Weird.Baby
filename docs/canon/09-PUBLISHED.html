@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — what is published</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="09-the-published-record-what-a-visitor-has-already-read">09 · THE PUBLISHED RECORD — what a visitor has already read</h1>
+<p><b>EVERYTHING ON THIS PAGE MARKED <code>PUBLISHED</code> IS FROZEN. It cannot be changed — only built on.</b></p>
+<p>That is not a style rule. A visitor read it; the museum does not edit what it has already shown. <b>A correction is a later Record that discovers something, not an edit to an earlier one.</b> The one exception is the one Mike has already used and named: <i>&quot;We have had no visitors&quot;</i> — see <a href="#back-posting">the back-post</a>.</p>
+<hr>
+<h2 id="the-three-states">THE THREE STATES</h2>
+<p><a id="the-three-states"></a></p>
+<p><b>A Record entry is in exactly one of three states, and the difference matters every time somebody asks <i>can we change this</i>.</b></p>
+<div class="tw"><table><thead><tr><th>state</th><th>meaning</th><th>can it change?</th></tr></thead><tbody><tr><td><b>PUBLISHED</b></td><td>The museum's clock has passed its posting instant. A visitor could have read it.</td><td><b>No.</b> Build on it.</td></tr><tr><td><b>SCHEDULED</b></td><td>Written, committed, <b>in the shipped bundle</b> — a visitor with devtools can read it — but the page does not draw it.</td><td><b>Yes</b>, until it posts.</td></tr><tr><td><b>UNPUBLISHED</b></td><td>Not written, or written and not committed.</td><td>Yes.</td></tr></tbody></table></div>
+<p><b>THE HONEST DESCRIPTION OF THE FILTER IS <i>&quot;the Record does not show you the future&quot;</i>, NEVER <i>&quot;the future is not there.&quot;</b></i> <code>RECORD_ENTRIES</code> is imported statically, so every entry — including days that have not happened — is compiled into the chunk. <b>That is a known and accepted limit, ruled 2026-08-12</b>, and the entries move to a worker-served endpoint as their own packet. Open row <code>CH5-a</code>.</p>
+<p><b>The asset half has no such hole:</b> <code>src/worker.js</code> refuses the FILE a future entry names, and a file the worker refuses is not in the page at all.</p>
+<hr>
+<h2 id="the-clock">THE CLOCK</h2>
+<p><a id="the-clock"></a></p>
+<div class="tw"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><b>Epoch</b></td><td><code>RECORD_EPOCH = &quot;2026-08-17&quot;</code> — <b>one constant</b>, <code>src/data/artists/record-epoch.js</code>. A slip is that one line and nothing else.</td></tr><tr><td><b>Timezone</b></td><td><code>America/New_York</code></td></tr><tr><td><b>Posting hour</b></td><td><b>17:00</b> — <i>&quot;Records post at 17:00 America/New_York on their day. Record N becomes visible at 5pm on day N.&quot;</i></td></tr><tr><td><b>Dating</b></td><td><code>recordDay(n)</code>, UTC arithmetic, counted from the epoch. <b>Not typed.</b></td></tr><tr><td><b>Whose clock</b></td><td><b>The museum's, on the server.</b> <code>src/worker.js</code> injects <code>window.__WB_TODAY__</code> on every HTML response. <b>Not the browser's</b> — <i>&quot;a browser clock belongs to the visitor: it can be wrong by accident or on purpose.&quot;</i></td></tr></tbody></table></div>
+<p><b>RECORD 001 IS THE EXCEPTION AND IT STAYS ONE.</b> It posted at <b>00:00 Monday</b>. Not backdated, not hidden. <b>Its own text says the site went live <i>&quot;at 12:00 am Monday morning&quot;</i> and that is canon and untouched.</b> <code>/robots</code> opened at 00:00 Monday and stays open.</p>
+<p><b>AND THE BOUNDARY IS READ OFF THE WALL CLOCK, NOT BY SUBTRACTING 17 HOURS.</b> On 8 March 2026 a flat subtraction posts the Record an hour late, because the day is 23 hours long. Tested on both 2026 transition days.</p>
+<p><b>THERE ARE TWO REQUEST-TIME CLOCKS AND ANY DATE OVERRIDE MUST SET BOTH:</b> <code>todayInRecordTz()</code> (the <b>day</b>, <code>worker.js:210</code>) and <code>window.__WB_NOW__</code> (the <b>instant</b>, for the lobby countdown, <code>worker.js:180</code>). <b>Move the day and leave the instant and the lobby countdown contradicts the Record on the same page.</b></p>
+<p><b>AND A CLOCK OVERRIDE IS NOT AN AS-OF QUERY.</b> The museum's data carries <b>no <code>valid-from</code> and no <code>superseded-at</code></b> — so a date parameter shows <b>today's text under an older date.</b> <i>Never label it as seeing the past.</i> The honest answer to <i>&quot;walk the museum as it stood&quot;</i> is immutable deploys, recorded and not built.</p>
+<hr>
+<h2 id="the-five-entries">THE FIVE ENTRIES</h2>
+<p><a id="entries"></a></p>
+<div class="tw"><table><thead><tr><th>no</th><th>date</th><th>title</th><th>state as of the museum's 2026-08-19</th></tr></thead><tbody><tr><td><b>001</b></td><td>2026-08-17</td><td>INITIAL LAUNCH - Weird.Baby Website</td><td><b>PUBLISHED</b></td></tr><tr><td><b>002</b></td><td>2026-08-18</td><td>GENERAL STATUS UPDATE</td><td><b>PUBLISHED</b></td></tr><tr><td><b>003</b></td><td>2026-08-19</td><td>DATA RECOVERY - LEVEL 1 - SUCCESS!</td><td><b>PUBLISHED</b></td></tr><tr><td><b>004</b></td><td>2026-08-20</td><td>GENERAL STATUS UPDATE</td><td><b>SCHEDULED</b> — posts 17:00</td></tr><tr><td><b>005</b></td><td>2026-08-21</td><td>GENERAL STATUS UPDATE</td><td><b>SCHEDULED</b></td></tr><tr><td><b>013</b></td><td>—</td><td><i>the prototype</i></td><td>see <a href="#record-013">Record 013</a></td></tr></tbody></table></div>
+<hr>
+<h2 id="record-001-published">RECORD 001 — PUBLISHED</h2>
+<p><a id="record-001"></a></p>
+<p><b>Mike's own launch report, carried VERBATIM.</b> The dictation instrument's rule holds: <i>everything in the form is story</i>, and <b>Ops does not tidy.</b></p>
+<p><b>HIS TYPOS SHIP ON PURPOSE.</b> <code>was made made</code> · <code>=  86%</code> · <code>auto containment. and auto alerts</code> are in the entry deliberately, and <b>a round that tidies one has broken the instruction.</b></p>
+<p><b>Facts it establishes, all frozen:</b></p>
+<ul><li><b>The Weird.Baby website went live</b>, on schedule, at 00:00 Monday.</li><li><b>An incoming server load &gt;1000× nominal</b>, contained. <b>Multi-source swarm payloads precluded IP/domain blocking.</b></li><li><b><code>f(Ump) = 100%</code></b> — the museum's own recurring metric, never explained.</li><li><b>The RX ended abruptly and coincident with the Weird.Baby launch.</b></li><li>The Friday timeline: <b>15:04 first data packet · 15:58 second · 16:00 instantaneous sustained FULL LOAD, packet rejects = n! · 16:10 server auto-shutdown, auto-containment, auto-alerts · 16:13 REACT team convened · 23:30 REACT ruling — restart with 5K× incoming server resources.</b></li><li><i>&quot;The decision to resume was determined to be low risk, reversible, and a real-world stress test. The engineering team was more intrigued than concerned, and not involved in the determination.&quot;</i></li><li>The weekend: <b>pages of hexadecimal numbers; presumably to be compiled into something of use.</b></li><li>Monday: <b>00:02 the incoming data stream ends.</b> <i>&quot;The remainder of the day was completely uneventful.&quot;</i></li><li><b><code>ADDED PAGE - W.B/Robots added (to track what happened, just for a few days)</code></b> — with a hash line ending <code>&gt;&gt; Complete!</code></li></ul>
+<p><b>ITS INDEX ROW HAS NO SUMMARY AND THAT IS DELIBERATE.</b> A 477-character executive summary does not fit a 130-character index row, and <b>picking which of his sentences becomes the summary is an edit.</b> Measured: 001's row is 84px against 013's 157px at 390px.</p>
+<hr>
+<h2 id="record-002-published">RECORD 002 — PUBLISHED</h2>
+<p><a id="record-002"></a></p>
+<p><b>Establishes:</b></p>
+<ul><li><b>The incoming server data assault has ceased; no impact.</b></li><li><b>All processes 6+ sigma.</b></li><li><b><code>Incoming Data: ZIP file (31.4 GB) Password Protected</code></b> — <b>and the figure is 31.4</b>, the fleet's own number.</li><li>Manifest extraction attempted <b>against the stream still in flight.</b></li><li><b>THE PARTIAL MANIFEST — names only, no contents:</b></li></ul>
+<pre>MGK-VIIIp/MANUAL/00-FRONTMATTER.tif
+MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif
+MGK-VIIIp/MANUAL/11-VID-LINK.tif
+MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif
+PERSONNEL/CEO/
+PERSONNEL/INFORMER/
+PERSONNEL/EVERYDAY/
+PERSONNEL/GAMBLER/
+PORTAL/CH3-STANDARD/
+PORTAL/CH4-DETAIL/</pre>
+<p><b>FOUR THINGS IN THAT MANIFEST BIND ELSEWHERE:</b></p>
+<ol><li><b><code>00-FRONTMATTER.tif</code> is named and has never been delivered.</b> It is the only manual file in the manifest with no scan behind it.</li><li><b>The four personnel folders</b> — <a href="HOLES.html#h-01">H-01</a>.</li><li><b><code>PORTAL/CH3-STANDARD/</code> and <code>PORTAL/CH4-DETAIL/</code></b> are <b>the drum's two arming channels, by their engraved names</b>, published before anybody has seen the drum. The Portal wing is HELD; its channel numbering is <a href="06-PORTAL.html#feed-control">an egg</a>.</li><li><b><code>31-PARITY-BIAS</code></b> — the scan numbers are <b>frame numbers from whoever filmed the manual</b>, not page numbers. See <a href="#ruling-11">ruling 11</a>.</li></ol>
+<p><b>FLAGGED AND NOT CORRECTED:</b> the DETAILED REPORT ends <i>&quot;- Appendix 01&quot;</i> while the section heading below it reads <i>&quot;ADDENDUM 01&quot;</i>. <b>Both are Mike's, both carried as typed.</b></p>
+<p><b>AND ONE LINE WAS STRUCK FROM THIS ENTRY BEFORE IT POSTED.</b> The <code>_tmp/</code> manifest line and its marginal note promised something the museum could not show. See <a href="#ruling-9">ruling 9</a>. <b>A post-publication edit to this entry was missed by luck, not by design</b> — the DETAILED REPORT was rewritten at 09:51 on 18 August and the entry published at 17:00 the same day.</p>
+<hr>
+<h2 id="record-003-published">RECORD 003 — PUBLISHED</h2>
+<p><a id="record-003"></a></p>
+<p><b>The first delivery. Establishes:</b></p>
+<ul><li><i>&quot;Ops now wants an Early-Pull-Off with Confidence &gt;&gt; 6.28 sigma&quot;</i> — <b>the figure is <code>6.28</code>.</b> <i>(Ops observation, not canon: nothing in either repo connects this figure to anything. The π motif is established elsewhere — the fleet is 31.4, the ZIP is 31.4 GB, <code>reserved-date-3-14-65</code> is cut and deliberately unplaced — and whether <code>6.28</code> belongs to it is Mike's to say.)</i></li><li><b>The outer layer was not password protected.</b></li><li><b>Three manual pages recovered: <code>SCAN 07 - POWER SYSTEM</code> · <code>SCAN 11 - VID-LINK</code> · <code>SCAN 31 - PARITY BIAS</code>.</b></li><li><b>ADDENDUM 02 — the personnel folders, opened:</b></li></ul>
+<pre>THE CEO         - one page, redacted to the letterhead
+THE INFORMER    - photographs only, no text
+THE EVERYDAY    - not yet opened
+THE GAMBLER     - not yet opened
+
+  ? Four people are described in a manual for a machine. No explanation is offered.</pre>
+<p><b>THE ATTACHMENTS — the first pages of the manual any visitor has seen:</b></p>
+<div class="tw"><table><thead><tr><th>attachment</th><th>pages</th><th>files</th></tr></thead><tbody><tr><td><b>Scan 07 - Power supply and distribution</b></td><td>2</td><td><code>scan-07-a.webp</code> · <code>scan-07-b.webp</code></td></tr><tr><td><b>Scan 11 - The video link</b></td><td>2</td><td><code>scan-11-a.webp</code> · <code>scan-11-b.webp</code></td></tr><tr><td><b>Scan 31 - Bias settings</b></td><td>1</td><td><code>scan-31-a.webp</code></td></tr><tr><td><b>Marked copy 01 - Bias settings</b></td><td>1</td><td><code>marked-01-a.webp</code> — <b>UNCOMMITTED. Not yet published.</b> See <a href="BELL-103.html#where-it-stands">BELL-103</a>.</td></tr></tbody></table></div>
+<p><b>SO ¶7-19, SP 7-14 AND B-1 ARE ALL PUBLISHED IN FULL.</b> Their text is at <a href="03-ANSWERS.html#second-kind">03-ANSWERS</a> and <a href="06-PORTAL.html#video-link">06-PORTAL</a>. <b>Everything they say is frozen</b> — including <i>Inclination</i> (<a href="CONFLICTS.html#k-07">K-07</a>), the <i>determination</i> (<a href="HOLES.html#h-13">H-13</a>), the <i>keeper</i> (<a href="CONFLICTS.html#k-22">K-22</a>) and the <i>cell</i> (<a href="HOLES.html#h-02">H-02</a>).</p>
+<p><b>AN ATTACHMENT IS THE PAGES THAT WERE FILMED TOGETHER.</b> <i>&quot;We show the things that need to be shown. Each page is a page, and if we need to include a couple more pages, fine. Those pages were in the outer layer for a reason.&quot;</i> <b>The three scans are four manual pages delivered as five files — one page is in two scans</b>, because the leaf that closes the video link also opens the power supply.</p>
+<hr>
+<h2 id="record-004-scheduled-posts-17-00-on-2026-08-20">RECORD 004 — SCHEDULED, posts 17:00 on 2026-08-20</h2>
+<p><a id="record-004"></a></p>
+<p><b>Establishes (once it posts):</b></p>
+<ul><li><i>&quot;Portal may be the &quot;answer&quot; this whole mystery.&quot;</i></li><li><i>&quot;It appears to be an unattended remote access terminal.&quot;</i></li><li><i>&quot;Excerpts from the Manual earlier in the week indicate a bi-directional CNC Vid-Link&quot;</i> — <b>and <code>CNC</code> appears nowhere else in either repo.</b></li><li><i>&quot;Probably not useful to us. (Probably not meant for us...)&quot;</i></li><li><b>The bench description</b> — see <a href="06-PORTAL.html#the-bench">06-PORTAL §7</a>. Seven lines of a 1965 console, closing: <b><code>! Nothing here postdates 1969. Everything here works.</code></b></li></ul>
+<p><b>Its <code>docs</code> are two titles with no plates behind them yet:</b> <i>View of the portal screen</i> · <i>Manual ref to Portal</i>.</p>
+<hr>
+<h2 id="record-005-scheduled-posts-17-00-on-2026-08-21">RECORD 005 — SCHEDULED, posts 17:00 on 2026-08-21</h2>
+<p><a id="record-005"></a></p>
+<p><b>Establishes (once it posts):</b></p>
+<ul><li><i>&quot;ZIP - We have reached the capability limit of brute force.&quot;</i></li><li><i>&quot;Portal appears to function. Intended purpose unknown.&quot;</i></li><li><i>&quot;Portal is accessible via the Robots Exhibit.&quot;</i> — <b>which the Portal wing being HELD currently contradicts.</b> Recorded.</li><li><i>&quot;The launch controls are intuitive looking, but the system fails to boot.&quot;</i></li><li><b><code>Error: Communications Parity Bias Setting Mismatch</code></b></li><li><i>&quot;Four toggles. Sixteen combinations. One of them is correct.&quot;</i></li><li><i>&quot;&lt; The Manual names the settings and declines to name the values.&quot;</i></li><li><b>ADDENDUM 01 — The Four Settings, as printed</b> — the four, verbatim from B-1, closing:</li></ul>
+<pre>  ? A period operator would have known this without being told.
+  ! We are not period operators.</pre>
+<hr>
+<h2 id="record-013-the-prototype">RECORD 013 — the prototype</h2>
+<p><a id="record-013"></a></p>
+<p><b>RULED, Mike, 2026-08-07: Record 013 is a PROTOTYPE and the real Record starts at 001.</b> Not day one, no re-dating, no defending.</p>
+<p><b>It is KEPT rather than retired</b> because it is the only thing exercising <code>RecordEntry.jsx</code>, the index budgets, the per-entry ledger derivation and the pull-back rule's one delivered picture — <b>the photograph of the power switch round the back, the single picture the pull-back rule let through onto this wing.</b></p>
+<p><b>THE PROTOTYPE MARK IS IN <code>reveal/ledger-declare.mjs</code> AND THE DICTATION PAGES AND NOWHERE ON THE GLASS.</b> Its number is untouched and open: register row <code>B-b</code>.</p>
+<hr>
+<h2 id="the-museum-s-other-published-robots-surfaces">THE MUSEUM'S OTHER PUBLISHED ROBOTS SURFACES</h2>
+<p><a id="other-surfaces"></a></p>
+<h3 id="the-front-desk-faq-published">The front desk FAQ — <code>PUBLISHED</code></h3>
+<blockquote><p><b>Where do I start?</b> — <i>&quot;Finish the FAQ, then follow The Record.&quot;</i></p>
+<p><b>Is this stuff real?</b> — <i>&quot;The hardware is; I mean you can hold it at least. And it's heavier than you might expect.&quot;</i></p>
+<p><b>Does it work?</b> — <i>&quot;See &quot;Is this stuff real?&quot;&quot;</i></p>
+<p><b>Can I buy one?</b> — <i>&quot;Monitor the website for availability. Follow us on social media.&quot;</i></p>
+<p><b>Can I try one?</b> — <i>&quot;Yes.&quot;</i> / <i>&quot;Well, not now, but soon. Hopefully. That's all I can say right now.&quot;</i></p></blockquote>
+<h3 id="the-two-machines-faces-published">The two machines' faces — <code>PUBLISHED</code></h3>
+<p>Full text at <a href="02-MACHINES.html#museum-albums">02-MACHINES §8</a>. The load-bearing ones:</p>
+<ul><li><b>MGK-NIAC's Technical Specifications</b> — the matrix, the bar, the outputs and <b>the five declared rules</b>, including <b>RULE 5: <i>no adaptive learning — the machine is forbidden, in writing, from getting to know you.</b></i></li><li><b>MGK-VIIIp's Technical Specifications</b> — <i>&quot;The Record says what was found. The Manual says what it was sold as. <b>The firmware is the only one of the three that cannot be wrong about the machine, because it is the machine.</b>&quot;</i></li><li><b>Both Documentation faces name <code>ABEAL 8P-OMI-1</code></b> and describe it as <i>&quot;Held. Incomplete, assembled out of copies caught at different stages.&quot;</i></li><li><b>Both FAQs:</b> <i>&quot;Yes. Both units power on and run their own firmware.&quot;</i> and <i>&quot;No. The shop carries what the shop carries; the machines are not stock.&quot;</i></li></ul>
+<h3 id="the-museum-s-own-description-published">The museum's own description — <code>PUBLISHED</code></h3>
+<p>On all three description tags, one string:</p>
+<blockquote><p><b>Weird.Baby Museum</b> — <i>&quot;A free museum of weird things worth keeping. Robots arriving one day at a time, music worth a listen, and a guest book that remembers who got here early.&quot;</i></p></blockquote>
+<hr>
+<h2 id="the-rules-that-govern-what-a-record-may-say">THE RULES THAT GOVERN WHAT A RECORD MAY SAY</h2>
+<p><a id="record-rules"></a></p>
+<h3 id="ruling-9-we-do-not-hold-back-what-we-say-we-have">Ruling 9 — WE DO NOT HOLD BACK WHAT WE SAY WE HAVE</h3>
+<p><a id="ruling-9"></a></p>
+<blockquote><p><b>&quot;We do not hold back what we say we have. We hold back what we don't have yet.&quot;</b></p></blockquote>
+<p><b>DOCTRINE.</b> A Record <b>names only what it can produce.</b></p>
+<p><b>IT IS THE INVERSE OF THE PULL-BACK RULE AND THE TWO NOW MEET.</b> The pull-back rule governs a thing the museum HAS and is not showing yet. This governs a thing the museum does NOT have: <b>it may not be named as though it did.</b> Between them: <b>the Record may withhold, and the Record may not promise.</b></p>
+<h3 id="ruling-10-what-s-said-matches-what-s-shown">Ruling 10 — WHAT'S SAID MATCHES WHAT'S SHOWN</h3>
+<p><a id="ruling-10"></a></p>
+<blockquote><p><b>&quot;What's said matches what's shown.&quot;</b></p></blockquote>
+<p><b>Ops makes it true and asks Mike for what is missing. Ops does not hedge the Record's wording to cover a gap.</b> <i>A sentence that says eleven while three are on the glass is not fixed by softening the sentence; it is fixed by showing eleven or by saying three.</i></p>
+<p><b>Applied the same hour it was made:</b> Record 003's DETAILED REPORT read <i>&quot;Eleven manual pages and four personnel folders&quot;</i> against three attachments. <b>ELEVEN became THREE.</b></p>
+<h3 id="ruling-11-the-scan-numbers-are-not-page-numbers">Ruling 11 — THE SCAN NUMBERS ARE NOT PAGE NUMBERS</h3>
+<p><a id="ruling-11"></a></p>
+<p><b><code>07</code>, <code>11</code> and <code>31</code> are frame numbers from whoever filmed the manual.</b> They match nothing in the document and <b>they are not meant to.</b></p>
+<p><b>No renumbering anywhere.</b> The document keeps its own page numbering; the ledger keys its rows by the manual's page index; <b>the two never meet.</b></p>
+<p><b>THE PRACTICAL HALF: no public address may assert a page of the manual</b> — which is why the files are <code>scan-NN</code> and the marked copy is <code>marked-01</code> rather than <code>marked-b1</code>.</p>
+<p><b>THE VOCABULARY WENT WITH IT: <i>manual pages</i>, never <i>plates</i>.</b> <code>PLATE 07</code> became <code>SCAN 07</code>. The museum's remaining uses of <i>plate</i> are for a <b>photographic</b> plate and a <b>maker's</b> plate, which is a different word, and they stand.</p>
+<h3 id="ruling-14-the-museum-publishes-a-derivative">Ruling 14 — the museum publishes a derivative</h3>
+<p><a id="ruling-14"></a></p>
+<p><b>The 300-dpi PNG masters stay in the robots repo. The museum publishes 1700×2200 WebP q82.</b> <i>&quot;It is a measurement, not a preference&quot;</i> — the source masters would have cost a visitor <b>9.02 MB to paint five 52px squares</b>; the derivative costs <b>0.42 MB</b>, and legibility was checked at 1:1.</p>
+<h3 id="the-pull-back-rule-h2">The pull-back rule (H2)</h3>
+<p><a id="pull-back"></a></p>
+<blockquote><p><b>NOTHING PUBLISHES UNTIL THE RECORD DELIVERS IT.</b></p></blockquote>
+<p><b>Mike, stating it generally:</b> <i>&quot;this applies to images, the manual, and probably more. Every asset stays held until a Record entry brings it into the story, at which point it is placed according to that entry. The archive and the viewer stay built; they are simply empty until the story fills them.&quot;</i></p>
+<p><b>The population is &quot;a picture of the objects&quot;, and that is the whole of the boundary.</b> The museum's own signage is not delivered by anybody and is not governed.</p>
+<p><b>AND IT IS A LAUNCH-STATE RULE.</b> <i>&quot;DURING DEVELOPMENT, SHOW EVERYTHING THAT IS PLACED, until asked to filter. Mike cannot direct what he cannot see.&quot;</i></p>
+<h3 id="back-posting">Back-posting</h3>
+<p><a id="back-posting"></a></p>
+<p><b>Record 003 gained a fourth attachment after it published, on Mike's ruling, and his reason is the whole of why it was allowed: <i>&quot;We have had no visitors.&quot;</b></i></p>
+<p><b>RULING B: THE ORIGINAL SCAN STAYS.</b> The marked copy arrives <b>beside</b> it as a new attachment. <b>The museum does not edit what it has already shown; a page comes back with somebody's handwriting on it.</b></p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/09-PUBLISHED.md</code>,
+last written <b>2026-08-20 04:16 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

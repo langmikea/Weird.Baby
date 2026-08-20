@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE CANON — the Portal and the far end</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+/* [2026-08-20] THE FIRST CUT PAINTED A LIGHT BLOCK ON A DARK PAGE. It reached
+   for a --card token this stylesheet does not define, so the light fallback
+   took and the body's light text landed on it: unreadable, and only a
+   screenshot found it. It uses the page's OWN tokens now, and its text colour
+   is the code rule's, so a fenced block and an inline code span read as the
+   same material.
+   NOTE FOR ANY FUTURE EDIT IN HERE: this is inside a TEMPLATE LITERAL. A
+   backtick in a comment closes the string, and the parse error it throws
+   points at the top of the literal rather than at the line you typed. */
+pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+ padding:10px 12px;margin:0 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ color:#b9c9dc;
+ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="../OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="../OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="06-the-portal-the-video-link-and-the-far-end">06 · THE PORTAL, THE VIDEO LINK AND THE FAR END</h1>
+<p><b>Register key:</b> <code>STORY</code> · <code>OPS</code>. <b>Publication key:</b> <code>PUB</code> · <code>—</code>.</p>
+<p><b>THREE OBJECTS WEAR THE WORD <i>PORTAL</i> AND ALL THREE ARE CANON</b> — <a href="CONFLICTS.html#k-03">K-03</a>. This file is about the third: <b>the doorway.</b></p>
+<hr>
+<h2 id="1-the-video-link-the-instrument-s-side">1 · THE VIDEO LINK — the instrument's side</h2>
+<p><a id="video-link"></a></p>
+<p><b>This is the only subsystem in the manual whose theory is already written, and it is published in full as <code>scan-11-a.webp</code> / <code>scan-11-b.webp</code>, Record 003.</b> Quoted whole, because every term in it is load-bearing.</p>
+<blockquote><p><i>&quot;The upper display may be given over to a <b>video link</b> with a <b>far end</b>. The link is not an extension of the upper display: the far end is a <b>station in its own right and is drawn on its own glass.</b> The link is bi-directional by design. <b>Assume the far end is attended.</b>&quot;</i></p>
+<p><i>&quot;The link opens only where the communications settings of Appendix B agree with those held at the far end. Where they do not agree the instrument does not open the link, and <b>reports the disagreement rather than the far end.</b>&quot;</i></p>
+<p><i>&quot;While the link is up, <b>signal is shown in the graph window of the diagnostic monitor</b> and the upper display is not available to a program. <b>Absence of signal is not in itself a fault; a far end that is not answering is not a far end that is not there.</b>&quot;</i></p>
+<p><i>&quot;The instrument's record holds <b>that</b> a link was opened and <b>for how long</b>. It does not hold <b>what passed over it.</b>&quot;</i></p></blockquote>
+<div class="tw"><table><thead><tr><th>term</th><th>register</th><th>pub</th><th>meaning as attested</th></tr></thead><tbody><tr><td><b>Video link</b></td><td>STORY</td><td><b>PUB</b></td><td>The manual's own name for the thing.</td></tr><tr><td><b>Far end</b></td><td>STORY</td><td><b>PUB</b></td><td>The other station. <b>Attended by assumption.</b> <a href="HOLES.html#h-03">H-03</a></td></tr><tr><td><b>Station</b></td><td>STORY</td><td><b>PUB</b></td><td><i>&quot;a station in its own right… drawn on its own glass.&quot;</i></td></tr><tr><td><b>Signal</b></td><td>STORY</td><td><b>PUB</b></td><td>Shown in the graph window while the link is up.</td></tr><tr><td><b>The installation record</b></td><td>STORY</td><td><b>PUB</b></td><td>Where the four communications values are entered at the time the link is made. <b>The values are not given in the manual.</b> An instrument moved to another far end is to be set again.</td></tr></tbody></table></div>
+<p><b>IT IS NOT BUILT.</b> Nothing in the twin implements a video link — see <a href="FAILURE-MODES.html#what-the-twin-can-do">FAILURE-MODES §2</a>.</p>
+<hr>
+<h2 id="2-the-portal-the-doorway">2 · THE PORTAL — the doorway</h2>
+<p><a id="the-doorway"></a></p>
+<p><b>CANON, Mike, 2026-07-29 — THE PORTAL REVELATION:</b></p>
+<blockquote><p><i>&quot;The bezel is the transitional frame between the webpage's real world and a camera feed / controller arrangement arriving from <b>an unknown source, an unknown location, and for an unknown reason.</b> The MGK-portal. <b>Three unknowns, and they are the point — the frame does not explain itself.</b>&quot;</i></p></blockquote>
+<p><b>And it is the <code>p</code></b> — <a href="CONFLICTS.html#k-17">K-17</a>.</p>
+<div class="tw"><table><thead><tr><th>term</th><th>register</th><th>meaning as attested</th></tr></thead><tbody><tr><td><b>The bezel</b></td><td>STORY</td><td>Renders as <b>its own layer ABOVE everything</b> and takes <b>no video treatment whatsoever</b> — it is the real world's frame. <b>Every feed treatment applies inside the opening and nowhere else.</b></td></tr><tr><td><b>Feed</b></td><td>STORY</td><td>What arrives through the opening.</td></tr><tr><td><b>Channel</b></td><td>STORY</td><td>An engraved number on the drum, 1–8.</td></tr><tr><td><b>Arms / armed</b></td><td>STORY</td><td>A position that lights the drum and permits the latch.</td></tr><tr><td><b>Latch</b></td><td>STORY</td><td>The control that opens the feed. Reads <b><code>FEED ARMED</code></b> or <b><code>NOT ARMED</code>.</b></td></tr></tbody></table></div>
+<p><b>SIGNAL QUALITY IS WEATHER</b> — doctrine, recorded as canon at the Portal polish round, 2026-07-29.</p>
+<hr>
+<h2 id="3-the-feed-control">3 · THE FEED CONTROL</h2>
+<p><a id="feed-control"></a></p>
+<p><b><code>museum:src/data/artists/portal.js</code>.</b> Register STORY. <b>HELD — no visitor has seen any of it.</b></p>
+<h3 id="the-nameplate">The nameplate</h3>
+<pre>ABEAL  ·  FEED CONTROL
+MODEL NO.   TYPE 8p
+SER. NO.    (blank)
+DATE        (blank)</pre>
+<p><b>MIKE, NAMING HIS REFERENCES:</b> <i>&quot;a raised chrome bezel; a black field with brushed-metal letterforms sitting PROUD of it; stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck into a lighter recess; an accent panel beside the wordmark. <b>It must be unmistakably a BADGE bolted to a machine — not a label, not a caption.</b>&quot;</i></p>
+<p><b>TWO OF THE THREE FIELDS ARE DELIBERATELY BLANK</b> — <a href="HOLES.html#h-21">H-21</a>.</p>
+<h3 id="the-drum">The drum</h3>
+<p><b>Legend <code>FEED</code>. Sub <code>SELECT · ONE ARMED</code> — and the sub is wrong by one word, knowingly</b> (<a href="HOLES.html#h-22">H-22</a>). Positions read <b>top to bottom.</b></p>
+<div class="tw"><table><thead><tr><th>ch</th><th>id</th><th>engraved</th><th>arms</th><th>what it opens</th></tr></thead><tbody><tr><td>1</td><td><code>niac-1</code></td><td><b>MGK-NIAC</b></td><td>no</td><td><i>&quot;This feed is not available.&quot;</i></td></tr><tr><td>2</td><td><code>niac-2</code></td><td><b>MGK-NIAC</b></td><td>no</td><td><i>&quot;This feed is not available.&quot;</i></td></tr><tr><td><b>3</b></td><td><code>standard</code></td><td><b>STANDARD</b></td><td><b>yes</b></td><td>the twin</td></tr><tr><td><b>4</b></td><td><code>idling-updated</code></td><td><b>DETAIL</b></td><td><b>yes</b></td><td><code>MGK-TWIN_MONITOR_CLOSE_UP.png</code> — the close-up</td></tr><tr><td>5</td><td><code>boot-playback</code></td><td><b>COLD START</b></td><td>no</td><td><i>&quot;This feed is not available.&quot;</i></td></tr><tr><td>6</td><td><code>off-first-boot</code></td><td><b>FIRST RUN</b></td><td>no</td><td><i>&quot;This feed is not available.&quot;</i></td></tr><tr><td>7</td><td><code>last-state</code></td><td><b>LAST STATE</b></td><td>no</td><td><i>&quot;This feed is not available.&quot;</i></td></tr><tr><td>8</td><td><code>test-bench</code></td><td><b>TEST BENCH</b></td><td>no</td><td><i>&quot;This feed is not available.&quot;</i></td></tr></tbody></table></div>
+<p><b>THE NUMBERING IS AN EGG AND IT MUST NOT BE EXPLAINED ON THE GLASS.</b> Mike's instruction: the feed positions renumber — <b>MGK-NIAC takes 1 and 2 and MGK-VIIIp moves to 3 and 4</b> — and <i>the reason is the egg.</i> It is recorded <b>once</b>, in <code>museum:reveal/ledger.json</code> (<code>egg.channels</code>), and nowhere else.</p>
+<p><b>THE NIAC POSITIONS ARE NOT INVENTED FEEDS.</b> Each carries the machine's name and nothing else — no state, no mode, no feed title, because nobody has supplied one. <b>Neither arms: the mainframe does not run on the Portal</b>, and the day it does is a ruling and a feed, not a label.</p>
+<p><b>THE ENGRAVINGS ARE ENGRAVINGS.</b> Mike ruled that every position must be <b>deliberately obfuscated or dressed in period garb — nothing merely awkward.</b> Three of them had been the <code>id</code>s truncated until they fitted, <i>&quot;which is what a filename looks like and not what a drum looks like.&quot;</i> <b>The <code>id</code>s did not move</b> — the <code>id</code> is the key the twin reads as <code>preset</code> in the URL.</p>
+<p><b>THE REFUSAL LINES WERE CHANGED ONCE AND THE REASON IS A DOCTRINE.</b> They used to read <i>&quot;held — one entry state (C3)&quot;</i>, <i>&quot;held — awaiting a privacy ruling&quot;</i> and <i>&quot;held — workshop entry, by URL&quot;</i>: <b>internal decision codes, an unmade ruling, and the existence of an undisclosed URL, all shown to whoever rolls the drum.</b> They now say the one thing an instrument says when a position will not arm.</p>
+<h3 id="the-switches-the-dial-the-latch">The switches, the dial, the latch</h3>
+<div class="tw"><table><thead><tr><th>control</th><th>states</th><th>note</th></tr></thead><tbody><tr><td><b>AUTO MAINT</b> · <code>NON-INTERRUPTIBLE</code></td><td>off today</td><td>Thrown up: <i>&quot;Maintenance is running. The machine will not be hurried.&quot;</i> <b>The launch fortnight, as an instrument.</b></td></tr><tr><td><b>AT PROMPT</b> · <code>BOOTS + UPDATES DONE</code></td><td><b>on</b></td><td><b>The entry state today.</b></td></tr><tr><td><b>SOURCE</b> dial</td><td><b>LIVE</b> (arms) / <b>SEEDED</b> (does not)</td><td>SEEDED: <i>&quot;no seeded feed on file — the lamps read the seed, and there is nothing to read.&quot;</i></td></tr><tr><td><b>LATCH</b></td><td><code>FEED ARMED</code> / <code>NOT ARMED</code></td><td>Throws only when the panel is armed.</td></tr></tbody></table></div>
+<p><b>THE CONTROLS TELL THE STORY; THEY ARE NOT THE STORY (Mike).</b> <i>&quot;The same two lamps say both — AUTO MAINT lit + AT PROMPT dark is the launch fortnight; AUTO MAINT dark + AT PROMPT lit is today. Nothing about the fortnight is built; the panel is simply an instrument capable of reporting it, set to today.&quot;</i></p>
+<hr>
+<h2 id="4-the-portal-album">4 · THE PORTAL ALBUM</h2>
+<p><a id="album"></a></p>
+<p><b>Mike: <i>&quot;THE PORTAL becomes ITS OWN ALBUM — it is very important and this keeps it top-shelf visible.&quot;</b></i> It sits at index <b>1</b> — second in the deck — <i>&quot;the only position that is both top-shelf and not the landing.&quot;</i> The two machines keep their canon order behind it: <b>the original mainframe, then the portable.</b></p>
+<p><b>Three tracks:</b> <code>Portal</code> (the door) · <code>Portal Feed Controller</code> (the panel) · <code>FAQ</code>.</p>
+<p><b>Its FAQ, both questions moved word for word from the public machines' FAQs:</b></p>
+<blockquote><p><b>Is the Portal the real machine?</b> — <i>&quot;It is the real firmware on shimmed hardware — the twin. The unit itself is a physical object in a room; the twin is how it is met from here.&quot;</i></p>
+<p><b>Is the mainframe on the Portal?</b> — <i>&quot;Not yet. Two channels are engraved for it on the feed drum and neither of them arms.&quot;</i></p></blockquote>
+<p><b>THEY WERE MOVED, NOT COPIED.</b> <i>&quot;An FAQ on a public page answering questions about a held room is a listing of it.&quot;</i></p>
+<hr>
+<h2 id="5-the-portal-is-held">5 · THE PORTAL IS HELD</h2>
+<p><a id="held"></a></p>
+<p><b>MIKE'S RULING: the Portal is HELD FROM LAUNCH and development continues.</b></p>
+<p><b>A held thing must be UNREACHABLE BY A VISITOR</b> — no route, no link, no listing, no share tag, no crawler path.</p>
+<p><b>AND THAT IS WHY THE ALBUM IS ITS OWN MODULE.</b> A boolean in <code>robots.js</code> would have stopped the RENDER and still shipped the MATERIAL — the drum's eight engravings, the refusal lines, the twin's address — <b>in a public chunk anybody can read.</b></p>
+<p><b>THE TWIN'S ADDRESS TRAVELS IN THE EVENT, NOT IN THE LISTENER.</b> The door's <code>src</code> and <code>title</code> are declared in <code>portal.js</code> and ride the dispatch, so the public flow component <b>holds no address for a held thing and no string naming it.</b></p>
+<p><b>TWO HOLDS, TWO DOORS, AND THEY MUST NEVER SHARE A LIST:</b></p>
+<div class="tw"><table><thead><tr><th>prefix</th><th>what</th><th>opens</th></tr></thead><tbody><tr><td><code>/assets/locked/</code> + <code>/locked/</code></td><td><b>the PERMISSION hold</b></td><td>never — refused in <b>every</b> stage</td></tr><tr><td><code>/assets/held/</code> + <code>/held/</code></td><td><b>the STAGE hold</b></td><td>in development</td></tr></tbody></table></div>
+<p><b>The Portal and the machine photographs are the STAGE hold.</b></p>
+<hr>
+<h2 id="6-the-presets-a-recipe-is-data">6 · THE PRESETS — a recipe is data</h2>
+<p><a id="recipes"></a></p>
+<p><b>Mike's ruling: <i>&quot;Recipes are DATA, so Mike can direct new ones in plain language.&quot;</b></i> The switch that used to live in code is a <b>row</b> now, and every row is the same handful of knobs the machine actually has.</p>
+<div class="tw"><table><thead><tr><th>knob</th><th>values</th></tr></thead><tbody><tr><td><code>power</code></td><td><code>&quot;on&quot;</code> / <code>&quot;off&quot;</code> — the rear switch</td></tr><tr><td><code>level</code></td><td><code>0</code> / <code>1</code> / <code>2</code> — virgin / first-run / established</td></tr><tr><td><code>replay</code></td><td><code>true</code> — Sandbox Tech replays the install</td></tr><tr><td><code>day</code></td><td><code>&quot;YYYY-MM-DD&quot;</code> — seed the weather from a Record date</td></tr><tr><td><code>dev</code></td><td><code>true</code> — leave the workshop showing</td></tr><tr><td><code>resume</code></td><td><code>true</code> — checked before <code>power</code></td></tr></tbody></table></div>
+<p><b>Anything not named is LEFT ALONE</b>, which is what makes these <b>deltas</b> rather than states. <b>An unknown id is chipped and ignored</b>, so the museum may name a recipe before the machine learns it and <i>&quot;the failure mode is 'nothing happened'.&quot;</i></p>
+<div class="tw"><table><thead><tr><th>id</th><th>recipe</th></tr></thead><tbody><tr><td><code>standard</code></td><td><code>resume:true, power:&quot;on&quot;, level:2</code></td></tr><tr><td><code>idling-updated</code></td><td><code>power:&quot;on&quot;, level:2</code></td></tr><tr><td><code>boot-playback</code></td><td><code>power:&quot;on&quot;, level:2, replay:true</code></td></tr><tr><td><code>off-first-boot</code></td><td><code>power:&quot;off&quot;, level:0</code></td></tr><tr><td><code>test-bench</code></td><td><code>power:&quot;on&quot;, level:2, dev:true</code></td></tr><tr><td><code>clean-boot</code></td><td>carried, wired, <b>unexposed</b></td></tr><tr><td><code>record-day</code></td><td>carried, wired, <b>unexposed</b> — <code>day:&quot;1965-01-01&quot;</code></td></tr></tbody></table></div>
+<p><b>ORDER MATTERS AND IS FIXED:</b> the weather first (it is what the picture is drawn with), then the install level (it decides which boot the power-on performs), then power, then the replay (it is a performance and wants a machine to perform on).</p>
+<p><b>RESUME IF THIS VISIT ALREADY HAS A MACHINE.</b> <i>&quot;It did not stop being a machine when the overlay closed, and making it perform its own install again on the way back would be the lie, not the shortcut.&quot;</i></p>
+<p><b>AND THIS IS THE CHEAPEST PLACE TO PUT THE FOUR COMMUNICATIONS SETTINGS IF THEY ARE EVER BUILT</b> — <a href="FAILURE-MODES.html#where-state-lives">FAILURE-MODES §3.5</a>.</p>
+<hr>
+<h2 id="7-the-far-end-s-own-bench-written-scheduled-not-yet-published">7 · THE FAR END'S OWN BENCH — written, scheduled, not yet published</h2>
+<p><a id="the-bench"></a></p>
+<p><b>Record 004, dated 2026-08-20, posts at 17:00 America/New_York on that day. As of the museum's own clock reading 2026-08-19 it is <code>SCHEDULED</code>, not <code>PUBLISHED</code>: it is written, committed, and in the bundle a visitor could open devtools and read — but the page does not draw it.</b> <i>&quot;The Record does not show you the future&quot;</i>, never <i>&quot;the future is not there.&quot;</i> See <a href="09-PUBLISHED.html#the-three-states">PUBLISHED</a>.</p>
+<p><b>ADDENDUM 01 — Bench Description. Mike's words:</b></p>
+<pre>Console is a single welded steel desk. No maker plate, no model number.
+Display is a vidicon-tube monitor, long-persistence phosphor, green.
+Readouts are cold-cathode numeric tubes. Eight digits, four lit.
+Input is a light pen on a coiled cord, seated in a cradle at the right.
+There is an ashtray cast into the desk and it has been used.
+A paper-tape reader is fitted and empty. The take-up reel is full.
+Four toggle switches sit under a hinged guard, unlabelled.
+
+  ! Nothing here postdates 1969. Everything here works.</pre>
+<p><b>THREE THINGS IN IT BEAR ON EVERYTHING ELSE IN THIS CATALOGUE:</b></p>
+<ol><li><b>The four toggle switches under a hinged guard are the communications settings, and they are at the FAR END, not on the instrument.</b> Record 005 (<code>SCHEDULED</code>, 2026-08-21) confirms it — <i>&quot;Four toggles. Sixteen combinations. One of them is correct.&quot;</i> <b>It is a written placement, not yet a published one</b>, and it constrains any failure-mode design (<a href="FAILURE-MODES.html#where-state-lives">FAILURE-MODES §3.5</a>). <b>It becomes unchangeable at 17:00 on the 21st.</b></li><li><b>The ashtray has been used</b> — the one detail on the page that says a person sat there, on a console the same Record calls <i>&quot;an unattended remote access terminal&quot;</i>, in a story whose canon says <b>nobody is at headquarters.</b> Recorded; not reconciled.</li><li><b><code>No maker plate, no model number</code></b> — the far end's console is deliberately the opposite of the FEED CONTROL, which is a badge whose whole job is to say who made it.</li></ol>
+<p><b>AND THE MUSEUM'S READING AND THE MANUAL'S INSTRUCTION DISAGREE.</b> Record 004: <i>&quot;It appears to be an unattended remote access terminal.&quot;</i> SP 7-14: <i>&quot;Assume the far end is attended.&quot;</i> <b>The manual's line is published; the museum's reading posts at 17:00 on the 20th.</b> Neither is a ruling. <b>Both are Mike's, and the disagreement is between the 1965 document and the 2026 restorers reading it, which is exactly the register the corpus uses everywhere</b> — recorded rather than flagged.</p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/canon/06-PORTAL.md</code>,
+last written <b>2026-08-20 04:12 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

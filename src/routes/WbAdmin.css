@@ -104,3 +104,9 @@ html[data-room="admin"], html[data-room="admin"] body { background: #050505; col
 .adm-held-stage { display: flex; align-items: baseline; gap: 12px; margin: 14px 0 0; }
 .adm-held-stage-k { color: #555; font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; }
 .adm-held-stage-v { color: var(--wb-gold); font-family: 'Courier Prime', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
+/* [2026-08-20] THE ONE ALARM STATE ON THIS PAGE: the door is open and the
+   store is empty. It borrows the stage row's shape so it reads as the same
+   KIND of fact, and turns its value red so it cannot be skimmed past — the
+   failure it reports went unnoticed for a week while every other line on the
+   page said the wing was fine. */
+.adm-held-stage--bad .adm-held-stage-v { color: #c0392b; font-weight: 700; }
