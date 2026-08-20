@@ -14185,76 +14185,6 @@
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
   },
-  "d4bb58a42d7c9bb4": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 366,
-   "t": "> Weird.Baby Website - All Systems Favorable\n> /Robots data analysis",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "6fd539cad916958f": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 383,
-   "t": "ADDENDUM 01 - Bench Description",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "c244f94c4fe30f87": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 385,
-   "t": "    Console is a single welded steel desk. No maker plate, no model number.\n    Display is a vidicon-tube monitor, long-persistence phosphor, green.\n    Readouts are cold-cathode numeric tubes. Eight digits, four lit.\n    Input is a light pen on a coiled cord, seated in a cradle at the right.\n    There is an ashtray cast into the desk and it has been used.\n    A paper-tape reader is fitted and empty. The take-up reel is full.\n    Four toggle switches sit under a hinged guard, unlabelled.",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "993aec2fceb022ac": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 395,
-   "t": "  ! Nothing here postdates 1969. Everything here works.",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "58b7aa34b96a7317": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 408,
-   "t": "> ZIP Extraction - Outer Layers Complete / Stopped\n> Portal Data Link - Connection Achieved",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "4f9da402e677af74": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 413,
-   "t": "  > ZIP - We have reached the capability limit of brute force.\n  > Portal appears to function. Intended purpose unknown.",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "3cf22de052a2f166": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 419,
-   "t": "  > Portal is accessible via the Robots Exhibit.\n  > The launch controls are intuitive looking, but the system fails to boot.\n  > Error: Communications Parity Bias Setting Mismatch\n  > Four toggles. Sixteen combinations. One of them is correct.\n  < The Manual names the settings and declines to name the values.",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "46e4b6cf645d1a20": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 426,
-   "t": "ADDENDUM 01 - The Four Settings, as printed",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "ef161d5130e01fc3": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 428,
-   "t": "    1  PARITY    ODD / EVEN\n    2  DUPLEX    HALF / FULL\n    3  WORD      7 BIT / 8 BIT\n    4  STOP      1 / 2",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "3b95d5943a925d7a": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 431,
-   "t": "  ? A period operator would have known this without being told.\n  ! We are not period operators.",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
   "fdd17baaf3b2561d": {
    "f": "src/data/artists/foundation.js",
    "l": 587,
@@ -15440,32 +15370,11 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
   },
-  "c57f6030e8ca9f5e": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 523,
-   "t": "  > It appears to be an unattended remote access terminal.\n  > The Manual's bi-directional CNC Vid-Link is one half of it; this is the other. It expects a unit at the far end, and it will not open the link until four communications settings agree with whatever is there.\n  > Documentation looks proprietary. Probably not meant for us to see...\n  > NOTE: Quality has declared it unsafe to run in any sandbox; permanently quarantined.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
-  },
   "ddcd409d2a0ea958": {
    "f": "src/data/artists/robots-record.js",
    "l": 647,
    "t": "OTHER",
    "c": "HOUSE"
-  },
-  "d3a8f868da1a1c69": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 543,
-   "t": "  > RAISED - Req 0628 - Internal Transfer - No net increase in head count",
-   "c": "HOUSE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Ops' wording, proposed 2026-08-20 and adopted with Mike's brief; his to change"
-  },
-  "9467eade52d8a970": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 640,
-   "t": "  > Currently, the system offers eight feeds. Two answer. The rest report no signal.\n  > One of the two carries a picture. The other carries a machine, and the machine is not ours.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
   },
   "b8fcd91ce434e9c0": {
    "f": "src/data/artists/robots-record.js",
@@ -15473,6 +15382,41 @@
    "t": "  > APPROVED - Req 0628 - Internal Transfer - No net increase in head count",
    "c": "MIKE",
    "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
+  },
+  "f6dc42112dcd4056": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 484,
+   "t": "> Weird.Baby Website - All Systems Favorable\n> /Robots ZIP File Cracked",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
+  },
+  "2f9e13157598173a": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 532,
+   "t": "  > It appears to be an unattended remote access terminal.\n  > The Manual's bi-directional CNC Vid-Link is one half of it; it expects a unit at the far end, and will not open the link until four communications settings agree with whatever is there.\n  > Documentation looks proprietary. Probably not meant for us to see...\n  > NOTE: Quality has declared it unsafe to run in any sandbox; permanently quarantined.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
+  },
+  "c77a5b64188a8d40": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 619,
+   "t": "> Portal Data Link - Connection Achieved\n> ZIP Extraction - Outer Layers Complete / Stopped",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
+  },
+  "1c92289a7e3c89da": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 626,
+   "t": "  > Portal appears to function. Intended purpose unknown.\n  > ZIP - We have reached the capability limit of brute force.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
+  },
+  "f5f84bc17a28139b": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 648,
+   "t": "  > Portal is accessible via the Robots Exhibit.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
   }
  }
 }

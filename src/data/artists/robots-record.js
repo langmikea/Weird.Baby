@@ -479,8 +479,10 @@ export const RECORD_ENTRIES = [
             { no: 4,
               date: recordDay(4),
               title: "GENERAL STATUS UPDATE",
+              /* [2026-08-20] MIKE: deck line 2 was "> /Robots data analysis"
+                 and the day's news is the crack, not the analysis. */
               line: "> Weird.Baby Website - All Systems Favorable\n> /Robots"
-                    + " data analysis",
+                    + " ZIP File Cracked",
               sections: [
                 { label: "EXECUTIVE SUMMARY",
                   body: [
@@ -520,44 +522,42 @@ export const RECORD_ENTRIES = [
                       + "         CH4-DETAIL/      one photograph\n"
                       + "         ANTENNA/         empty\n"
                       + "         INSTALL/         one form, filled in by hand" },
+                    /* [2026-08-20] MIKE: *"No paragraphs - single line only."*
+                       His rewrite of the Vid-Link line, verbatim: `this is the
+                       other.` is struck and the two `it will` clauses are cut
+                       to one. IT IS STILL LONGER THAN THE MEASURE and that is
+                       REPORTED rather than fixed here - shortening his sentence
+                       to make it fit would be Ops editing him. See the round
+                       log's character counts. */
                     "  > It appears to be an unattended remote access "
                     + "terminal.\n  > The Manual's bi-directional CNC Vid-Link"
-                    + " is one half of it; this is the other. It expects a "
-                    + "unit at the far end, and it will not open the link "
-                    + "until four communications settings agree with whatever "
-                    + "is there.\n  > Documentation looks proprietary. Probably"
-                    + " not meant for us to see...\n  > NOTE: Quality has "
-                    + "declared it unsafe to run in any sandbox; permanently "
-                    + "quarantined.",
+                    + " is one half of it; it expects a unit at the far end, "
+                    + "and will not open the link until four communications "
+                    + "settings agree with whatever is there.\n  > Documentation"
+                    + " looks proprietary. Probably not meant for us to see..."
+                    + "\n  > NOTE: Quality has declared it unsafe to run in any"
+                    + " sandbox; permanently quarantined.",
                   ] },
-                /* === [2026-08-20] `OTHER` - THE REQUISITION IS RAISED =======
-                   004 raises it and 005 approves it, so a reader meets the
-                   sequence rather than a decision with no request behind it.
-                   THE SECTION'S PLACEMENT IS OPS' AND IS NAMED: after the
-                   DETAILED REPORT and before the addenda, because an addendum
-                   is an appendix and `OTHER` is part of the report.
-                   THE WORDING IS OPS' PROPOSAL, filed as such and not as
-                   Mike's, until he says otherwise. */
-                { label: "OTHER",
-                  body: [
-                    "  > RAISED - Req 0628 - Internal Transfer - No net "
-                    + "increase in head count",
-                  ] },
-                { label: "ADDENDUM 01 - Bench Description",
-                  body: [
-                    "    Console is a single welded steel desk. No maker "
-                    + "plate, no model number.\n    Display is a vidicon-tube "
-                    + "monitor, long-persistence phosphor, green.\n    "
-                    + "Readouts are cold-cathode numeric tubes. Eight digits,"
-                    + " four lit.\n    Input is a light pen on a coiled cord, "
-                    + "seated in a cradle at the right.\n    There is an "
-                    + "ashtray cast into the desk and it has been used.\n    A"
-                    + " paper-tape reader is fitted and empty. The take-up "
-                    + "reel is full.\n    Four toggle switches sit under a "
-                    + "hinged guard, unlabelled.",
-                    "  ! Nothing here postdates 1969. Everything here "
-                    + "works.",
-                  ] },
+                /* === [2026-08-20] TWO SECTIONS STRUCK FROM 004, NAMED ONCE ===
+                   (Doctrine 24 - they are named here, in the round log, and
+                   nowhere else.)
+
+                   `OTHER` - THE REQUISITION. It carried
+                   `> RAISED - Req 0628 - Internal Transfer - No net increase in
+                   head count`. **MIKE: "NOW I SEE WHAT YOU DID, YOU ADDED A
+                   THUR."** He proposed the requisition RAISED Thursday and
+                   APPROVED Friday as a sequence a reader could follow; OPS PUT
+                   A THURSDAY SECTION IN THE RECORD WITHOUT A RULING, which is
+                   not the same act. **The requisition lives in 005 only.**
+                   The section placement Ops reasoned about at length was
+                   reasoning about a section that should not have existed.
+
+                   `ADDENDUM 01 - Bench Description` - the whole block, both
+                   paragraphs, including the closing `! Nothing here postdates
+                   1969. Everything here works.` Mike's ruling; struck entire.
+                   Its subject survives where it belongs - the far end's console
+                   is described in the canon (`docs/canon/06-PORTAL.md`), which
+                   is where a fact lives when the Record is not saying it. */
               ],
               /* ═══ [2026-08-20] THE TWO ATTACHMENT ROWS ARE STRUCK ═══════════
                  MIKE, ruling on the morning of the day this entry posts:
@@ -614,60 +614,62 @@ export const RECORD_ENTRIES = [
             { no: 5,
               date: recordDay(5),
               title: "GENERAL STATUS UPDATE",
-              line: "> ZIP Extraction - Outer Layers Complete / Stopped\n> "
-                    + "Portal Data Link - Connection Achieved",
+              /* [2026-08-20] MIKE REORDERED THE DECK: the Portal line leads
+                 and the ZIP line follows. Same two sentences, swapped. */
+              line: "> Portal Data Link - Connection Achieved\n> ZIP "
+                    + "Extraction - Outer Layers Complete / Stopped",
               sections: [
+                /* [2026-08-20] SWAPPED WITH THE DECK, for the same reason and
+                   in the same order: Portal first, ZIP second. */
                 { label: "EXECUTIVE SUMMARY",
                   body: [
-                    "  > ZIP - We have reached the capability limit of "
-                    + "brute force.\n  > Portal appears to function. Intended "
-                    + "purpose unknown.",
+                    "  > Portal appears to function. Intended purpose "
+                    + "unknown.\n  > ZIP - We have reached the capability limit"
+                    + " of brute force.",
                   ] },
+                /* === [2026-08-20] THE DETAILED REPORT IS ONE LINE NOW ========
+                   MIKE replaced the whole section with its first sentence.
+                   STRUCK, named once (Doctrine 24): the launch-controls line,
+                   the `Error: Communications Parity Bias Setting Mismatch`
+                   line, `Four toggles. Sixteen combinations. One of them is
+                   correct.`, `< The Manual names the settings and declines to
+                   name the values.`, and the two `Currently, the system...`
+                   lines that landed earlier the same day.
+
+                   HIS LINE ARRIVED CARRYING `{Mike to rewrite}` AND OPS
+                   STRIPPED THE BRACES, WHICH IS THE ONLY REASON THIS LANDS.
+                   A curly brace is a note to Ops and the launch gate refuses
+                   any that survive (`wb-ops-braces`), so the entry could not
+                   have shipped with it. **He knows, and whether he rewrites
+                   the line before 17:00 on the 21st is his.** Nothing here
+                   guesses at what the rewrite would say. */
                 { label: "DETAILED REPORT",
                   body: [
-                    "  > Portal is accessible via the Robots Exhibit.\n  > "
-                    + "The launch controls are intuitive looking, but the "
-                    + "system fails to boot.\n  > Error: Communications Parity"
-                    + " Bias Setting Mismatch\n  > Four toggles. Sixteen "
-                    + "combinations. One of them is correct.\n  < The Manual "
-                    + "names the settings and declines to name the values.",
-                    /* [2026-08-20] MIKE'S TWO LINES, verbatim. They are what
-                       the drum shows, counted: eight positions, two that arm
-                       (3 and 4), six that report no signal. The one that
-                       carries a picture is channel 4; the one that carries a
-                       machine is channel 3, and the machine on it is the
-                       MGK-VIIIp - which is not the museum's. */
-                    "  > Currently, the system offers eight feeds. Two answer."
-                    + " The rest report no signal.\n  > One of the two carries"
-                    + " a picture. The other carries a machine, and the "
-                    + "machine is not ours.",
+                    "  > Portal is accessible via the Robots Exhibit.",
                   ] },
-                /* [2026-08-20] `OTHER` - the requisition raised in 004 is
-                   approved here. Same placement rule as 004's. */
+                /* [2026-08-20] `OTHER` - the requisition. It is APPROVED here
+                   and it is raised NOWHERE: the Thursday `RAISED` section was
+                   Ops' unruled addition and is struck from 004. */
                 { label: "OTHER",
                   body: [
                     "  > APPROVED - Req 0628 - Internal Transfer - No net "
                     + "increase in head count",
                   ] },
-                { label: "ADDENDUM 01 - The Four Settings, as printed",
-                  body: [
-                    /* [2026-08-20] A LISTING, ON MIKE'S RULING - the same
-                       `{ pre }` shape Record 004's folder tree uses, and for a
-                       reason the label itself gives. MIKE: *"It says 'as
-                       printed'. Printed means aligned. Collapsed it is a list;
-                       aligned it is a page from a manual, which is what a
-                       visitor must recognise when they meet the same four
-                       names on the panel."* Under `pre-line` this rendered as
-                       `1 PARITY ODD / EVEN` - true, readable, and not a page.
-                       IT IS AN OPT-IN AND NOTHING ELSE MOVED: the string is
-                       unchanged to the character, only its wrapper. */
-                    { pre:
-                      "    1  PARITY    ODD / EVEN\n    2  DUPLEX    HALF / "
-                      + "FULL\n    3  WORD      7 BIT / 8 BIT\n    4  STOP      1"
-                      + " / 2" },
-                    "  ? A period operator would have known this without "
-                    + "being told.\n  ! We are not period operators.",
-                  ] },
+                /* === [2026-08-20] `ADDENDUM 01 - The Four Settings, as
+                   printed` IS STRUCK ENTIRE, both closing lines with it:
+                   `? A period operator would have known this without being
+                   told.` and `! We are not period operators.` Named once
+                   (Doctrine 24).
+
+                   IT TAKES THE `{ pre }` CASE RULED THE SAME DAY WITH IT, AND
+                   THE MECHANISM STAYS - Record 004's folder tree is the
+                   remaining case and the reason the shape exists.
+
+                   AND THE FOUR SETTINGS ARE STILL PUBLISHED. Wednesday's
+                   marked manual page carries them in pen, delivered by Record
+                   003. 005 no longer repeats what the museum has already
+                   shown, which is ruling 10 holding rather than being spent
+                   twice. */
               ],
             },
 ];

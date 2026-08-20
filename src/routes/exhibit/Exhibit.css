@@ -4944,24 +4944,37 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 .vp-rec-sect-doors{display:flex;flex-wrap:wrap;gap:10px 16px}
 
 /* === [2026-08-20] A LISTING INSIDE A SECTION ==============================
-   Record 004's folder tree. `pre`, NOT `pre-wrap`: a fixed-column listing that
-   reflows is not a listing, and the columns here carry the meaning - a file
-   hanging under the file above it belongs to the directory on that row's left.
-   IT IS MACHINE OUTPUT, SO IT WEARS THE TYPEWRITER. T2/T3's rule is that the
-   Record's plain face governs THE WRITER'S WORDS; the dateline, the stamp and
-   the mark rail are already Courier for the same reason a pasted directory
-   listing is - nobody wrote them in a sentence.
-   IT SCROLLS INSIDE ITSELF AND THE PAGE NEVER DOES. The widest row is 52
-   characters and will not fit 390px at body size, so the box takes the
-   overflow - the house rule for any wide block.
-   SCOPE IS THE RECORD, like every `.vp-rec-*` rule (A4): nothing shared is
-   retuned to serve one tree. */
-.vp-rec-sect-pre{margin:0;padding-left:var(--rec-indent);
-  font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--fs-body) * .86);line-height:1.45;letter-spacing:0;
-  white-space:pre;overflow-x:auto;color:var(--wb-gold-lo)}
-.vp-rec-sect-body + .vp-rec-sect-pre,
-.vp-rec-sect-pre + .vp-rec-sect-body{margin-top:var(--rec-para)}
+   Record 004's folder tree. **THE RECORD'S OWN FACE, ALIGNED BY THE GRID AND
+   NOT BY SPACES** - MIKE: *"This is the wrong font. This is not a paste in."*
+   The first cut was a `<pre>` in Courier at .86em, and it read as a code block
+   dropped in from somewhere else.
+   THE FACE IS INHERITED ON PURPOSE AND IS NOT RESTATED HERE. Everything about
+   the type comes from `.vp-rec-sect-body`'s own ramp; if that changes, this
+   changes with it, which is the only way one voice stays one voice.
+   WHY A GRID AND NOT `white-space: pre` IN THE SAME FACE: measured on the
+   built page, Arial takes the tree's second column from a spread of 0 to
+   **88.48px**, because a typed run of spaces only measures anything in a
+   uniform advance. `RecordEntry.jsx`'s `Listing` derives the columns from the
+   text and the grid holds them at 0.
+   IT NEEDS NO OVERFLOW BOX. `max-content 1fr` sizes the name column to its
+   longest name and lets the value column wrap like prose, so the block is as
+   narrow as the measure requires and the page never scrolls sideways.
+   SCOPE IS THE RECORD, like every `.vp-rec-*` rule (A4). */
+/* `minmax(0,1fr)` AND NOT `1fr`, MEASURED: a bare `1fr` track keeps its
+   min-content floor, so at 390px the name column plus the longest unbreakable
+   value came to 349px inside a 283.7px measure and spilled. With the floor
+   removed the value column wraps like the prose it is and the block sits
+   inside the measure at every width; `overflow-x:auto` stays as the backstop
+   the house rule asks for on any wide block. */
+.vp-rec-list{display:grid;grid-template-columns:max-content minmax(0,1fr);
+  column-gap:1.2em;row-gap:0;overflow-x:auto;
+  margin:0;padding-left:var(--rec-indent);
+  font-family:var(--wb-plain);font-size:var(--fs-body);line-height:1.45;
+  letter-spacing:0;color:var(--wb-gold-lo);max-width:68ch}
+.vp-rec-list-head,.vp-rec-list-name{padding-left:calc(var(--rec-list-pad, 0) * 1ch)}
+.vp-rec-list-head{grid-column:1 / -1}
+.vp-rec-sect-body + .vp-rec-list,
+.vp-rec-list + .vp-rec-sect-body{margin-top:var(--rec-para)}
 
 /* ---- THE DOORS.
    A door sets IN the sentence, so it must not break the line's rhythm: it is

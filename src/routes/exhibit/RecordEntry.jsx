@@ -202,6 +202,81 @@ const MARK = /\[\[(\d+)\]\]/;
    Ops picks them up (`src/lib/visitor-prose.js`, OPS_BRACE). Nothing about a
    note is this renderer's business any more, so the branch, the two classes and
    the `launched()` filter are gone rather than left dormant. */
+/* === [2026-08-20] A LISTING IS A GRID, NOT A BLOCK OF PREFORMATTED TEXT ====
+   MIKE, on the first cut: *"This is the wrong font. This is not a paste in."*
+   It must keep its ALIGNMENT and lose the distinct face - the Record's own
+   voice, in the Record's own type.
+
+   THE OBVIOUS ANSWER IS WRONG AND A MEASUREMENT SAYS SO. A `<pre>` with
+   `font-family: inherit` keeps every space and loses the alignment, because
+   space-alignment is an artefact of a UNIFORM ADVANCE WIDTH. Measured on the
+   built page, the second column of Record 004's tree lands at:
+       Courier `<pre>`          783.74 x5      spread 0
+       Arial `<pre>`   739.24 / 650.76 / 713.89 / 709.57 / 696.26   spread 88.48px
+   Arial's space is narrower than its letters, so the padding a writer typed in
+   a monospaced editor no longer measures anything.
+
+   SO THE COLUMNS ARE DERIVED FROM HIS TEXT AND LAID OUT BY A GRID, and the
+   grid holds them at **spread 0 in Arial**. Nothing is authored twice: the
+   string is the same string, and the split is deterministic - a field ends at
+   a run of TWO OR MORE spaces, so a single space inside `Folder: PORTAL/` or
+   `one form, filled in by hand` is text and never a column break.
+   THE VALUE COLUMN IS THE RIGHTMOST FIELD START in the block; a line with no
+   field there is a HEADING and spans both columns, which is how
+   `Folder: PORTAL/` stays a heading and `PORTAL.CFG` stays a value with no
+   name of its own. Leading indents survive as `ch` of the body face - a
+   proportional restatement of what he typed, not a re-authoring of it.
+
+   IT IS STILL AN OPT-IN AND STILL THE ONLY ONE. `{ pre }` is declared by one
+   body item in one Record; every other paragraph is untouched. */
+function listingRows(text) {
+  const rows = String(text).split("\n").map((line) => {
+    const parts = [];
+    let i = 0;
+    while (i < line.length) {
+      while (i < line.length && line[i] === " ") i += 1;
+      if (i >= line.length) break;
+      const start = i;
+      let j = i;
+      while (j < line.length && !(line[j] === " " && line[j + 1] === " ")) j += 1;
+      parts.push({ start, text: line.slice(i, j) });
+      i = j;
+    }
+    return parts;
+  });
+  const starts = rows.flat().map((p) => p.start);
+  return { rows, valueCol: starts.length ? Math.max(...starts) : 0 };
+}
+
+function Listing({ text }) {
+  const { rows, valueCol } = listingRows(text);
+  const out = [];
+  rows.forEach((parts, r) => {
+    const val = parts.find((p) => p.start === valueCol);
+    const head = parts.filter((p) => p.start !== valueCol);
+    /* THE INDENT CROSSES AS A NUMBER AND THE UNIT LIVES IN THE STYLESHEET.
+       Writing `+ "ch"` here put a CSS unit into the provenance sweep as a
+       visitor-facing string, which it is not, and it put a unit decision in a
+       renderer, which is not where units are decided. */
+    const pad = { "--rec-list-pad": head[0] ? head[0].start : 0 };
+    if (!val) {
+      out.push(
+        <div key={"h" + r} className="vp-rec-list-head" style={pad}>
+          {head.map((p) => p.text).join(" ")}
+        </div>
+      );
+      return;
+    }
+    out.push(
+      <div key={"n" + r} className="vp-rec-list-name" style={pad}>
+        {head.map((p) => p.text).join(" ")}
+      </div>
+    );
+    out.push(<div key={"v" + r} className="vp-rec-list-val">{val.text}</div>);
+  });
+  return <div className="vp-rec-list">{out}</div>;
+}
+
 /* === [2026-08-20] A BODY ITEM MAY BE A LISTING: `{ pre: "..." }` ===========
    WHY IT HAD TO EXIST. `.vp-rec-sect-body` is `white-space: pre-line`, chosen
    deliberately in 2026-08-10 so a run of spaces COLLAPSES - which is right for
@@ -225,7 +300,7 @@ function SectionBody({ body, doors, onFire }) {
   const used = new Set();
   const out = paras.map((text, pi) => {
     if (text && typeof text === "object" && typeof text.pre === "string") {
-      return <pre key={pi} className="vp-rec-sect-pre">{text.pre}</pre>;
+      return <Listing key={pi} text={text.pre} />;
     }
     const bits = String(text).split(new RegExp(MARK.source, "g")).map((piece, k) => {
       if (k % 2 === 0) return piece;

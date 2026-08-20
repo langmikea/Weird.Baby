@@ -100,6 +100,10 @@ left**, per Doctrine 24. Measured on the page: `01 Portal 02 FAQ`.
 
 ## 5 — RECORDS 004 AND 005, AND THE LIMIT THE TREE FOUND
 
+> **SUPERSEDED IN PART BY §9, THE SAME DAY.** The `{ pre }` shape survives;
+> its RENDERING is no longer a `<pre>`, 004's `OTHER` section is struck, and
+> 005's addendum is gone. Read §9 before trusting a mechanism claim here.
+
 **`355113`.** His transposition corrected on his own ruling — 355/113 =
 3.14159292, six decimals of Zu Chongzhi's ratio, which a transposed pair is not.
 
@@ -203,6 +207,9 @@ repo is byte-identical to the museum copy.
 
 ## 8 — THE THREE FLAGS, RULED THE SAME DAY
 
+> **THE FIRST OF THE THREE WAS REVERSED WITHIN THE HOUR — SEE §9.** Record
+> 005's ADDENDUM 01 is struck entire, and the `{ pre }` case it added with it.
+
 **RECORD 005's ADDENDUM 01 TAKES `{ pre }`.** MIKE: *"It says 'as printed'.
 Printed means aligned. Collapsed it is a list; aligned it is a page from a
 manual, which is what a visitor must recognise when they meet the same four
@@ -221,3 +228,114 @@ staging directory is not a holding, and a row minted from one is born an orphan
 the moment the file moves on. **Proved by the scan that would otherwise have
 re-added it** — a fresh `assets:scan` now adds the bezel and nothing else, and
 the table holds at 460.
+
+
+---
+
+## 9 — RULED AGAIN, THE SAME DAY: THE RECORD EDITS
+
+### 004
+
+**`OTHER` IS STRUCK, AND THE CORRECTION IS THE ENTRY.** MIKE: *"NOW I SEE WHAT
+YOU DID, YOU ADDED A THUR."* He proposed the requisition RAISED Thursday and
+APPROVED Friday **as a sequence a reader could follow**; Ops put a Thursday
+section into the Record on the strength of that and called it a proposal. **A
+proposal about wording is not a ruling that a section exists.** The requisition
+lives in 005 only, and the careful paragraph §5 spends on where `OTHER` belongs
+was reasoning about a section that should not have been there.
+
+**`ADDENDUM 01 - Bench Description` STRUCK ENTIRE**, both paragraphs, including
+`! Nothing here postdates 1969. Everything here works.` Its subject is not lost
+— the far end's console is described in `docs/canon/06-PORTAL.md`, which is
+where a fact lives when the Record is not saying it.
+
+**Deck line 2** — `> /Robots data analysis` → `> /Robots ZIP File Cracked`.
+
+### THE TREE'S FONT — THE OBVIOUS ANSWER WAS WRONG, MEASURED
+
+MIKE: *"This is the wrong font. This is not a paste in."* It must keep its
+ALIGNMENT and lose the distinct face.
+
+**A `<pre>` WITH THE FAMILY INHERITED DOES NOT WORK, AND THE NUMBERS ARE THE
+WHOLE ARGUMENT.** Second-column x-positions of the five rows, measured on the
+built page:
+
+| mechanism | column 2 lands at | spread |
+|---|---|---:|
+| `<pre>`, Courier (first cut) | 783.74 ×5 | **0** |
+| `<pre>`, `font-family: inherit` (Arial) | 739.24 / 650.76 / 713.89 / 709.57 / 696.26 | **88.48px** |
+| **derived column grid, Arial** | 799.80 ×5 | **0** |
+
+Space-alignment is an artefact of a **uniform advance width**. Arial's space is
+narrower than its letters, so the padding a writer typed in a monospaced editor
+stops measuring anything the moment the face changes. **Asking for both the
+alignment and the Record's own type means the columns cannot come from the
+spaces.**
+
+**SO THEY ARE DERIVED FROM HIS TEXT AND HELD BY A GRID** (`Listing` in
+`RecordEntry.jsx`, `.vp-rec-list` in `Exhibit.css`). The split is deterministic:
+a field ends at a run of **two or more** spaces, so the single space inside
+`Folder: PORTAL/` and `one form, filled in by hand` is text and never a break.
+The value column is the **rightmost field start** in the block; a line with no
+field there is a heading and spans — which is how `Folder: PORTAL/` stays a
+heading and `PORTAL.CFG` stays a value with no name of its own. Leading indents
+cross as a **number** and the `ch` unit lives in the stylesheet.
+
+**Verified: same family and same size as `.vp-rec-sect-body`, spread 0, and the
+page does not scroll sideways at either width.** At 390px the block is 349px
+inside a 283.7px measure and scrolls **inside itself** — the house rule for a
+wide block; `minmax(0,1fr)` was tried first and does not help, because the floor
+is the indent plus the longest name plus the longest unbreakable word.
+
+### THE VID-LINK LINE — HIS REWRITE LANDED, AND IT IS STILL THREE LINES
+
+His shortened sentence is in. **It does not fit one line and the counts are his
+to act on, not Ops':**
+
+| line | chars | one line at desktop? |
+|---|---:|---|
+| `> It appears to be an unattended remote access terminal.` | 56 | **yes** |
+| `> The Manual's bi-directional CNC Vid-Link …` | **187** | **no — 96 over** |
+| `> Documentation looks proprietary…` | 70 | **yes** |
+| `> NOTE: Quality has declared it unsafe…` | **86** | **no** |
+
+The measure is `max-width: 68ch` = **727.96px** at 19.25px body; **91
+characters** of that sentence fit before it turns. **The NOTE line is over too**
+at 86 — he did not name it, and it is the other line in the same section that is
+not one line.
+
+**AND "ONE LINE" CAN ONLY MEAN DESKTOP.** At 390px the measure is 283.7px and
+**40** characters fit; the section's *shortest* line is 56. Nothing in the
+Record is one line on a phone.
+
+### 005
+
+Deck and EXECUTIVE SUMMARY **reordered** — Portal first, ZIP second, same
+sentences. DETAILED REPORT replaced by its first line. **`ADDENDUM 01 - The Four
+Settings, as printed` struck entire**, both closing lines with it.
+
+**THE FOUR SETTINGS ARE STILL PUBLISHED** — Wednesday's marked manual page
+carries them in pen, delivered by Record 003. 005 no longer repeats what the
+museum has already shown, which is ruling 10 holding rather than being spent
+twice.
+
+**HIS DETAILED REPORT LINE ARRIVED CARRYING `{Mike to rewrite}` AND OPS STRIPPED
+THE BRACES.** That is the only reason 005 can land: a curly brace is a note to
+Ops, and `wb-ops-braces` refuses any that survive a launch build. **Flagged, not
+acted on** — whether he rewrites the line before 17:00 on the 21st is his, and
+nothing here guesses at what it would say. Verified on the built page: **no
+brace anywhere in the rendered Record.**
+
+### THE REGISTER
+
+**5 added, 13 pruned, 0 surviving rows changed, 0 broken RESTATED chains.** The
+thirteen are exactly the struck strings: both addenda and their closing lines,
+004's `RAISED` row, 005's old deck, summary and detailed report, the four
+settings, and the `Currently, the system` lines that landed earlier the same day.
+
+### GATES
+
+lint **9/8 = baseline** · build green · **launch build green** · provenance
+**PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate`
+**PASS** · `docs:numbers` **PASS** · `reveal:day` **nothing to move** ·
+`assets:orphans` **13, unchanged**.
