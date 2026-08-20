@@ -339,3 +339,97 @@ lint **9/8 = baseline** · build green · **launch build green** · provenance
 **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate`
 **PASS** · `docs:numbers` **PASS** · `reveal:day` **nothing to move** ·
 `assets:orphans` **13, unchanged**.
+
+---
+
+## 10 — COCONUTS GAINS A VIDEO (/wb)
+
+### The label — the museum had already answered it
+
+`type: "official"`, `label: "Official Music Video"`. `tidyDesc()` maps that
+string explicitly to **OFFICIAL VIDEO**, which is what /hr's eleven video rows
+read. **No new word.** MediaVault's `kind` vocabulary is a different axis and
+was deliberately not used: `release`/"Music" classifies an ARTIFACT for the
+deck's pill columns and is defined as *containing* "a track, single, album, or
+official music video" — it contains this thing, it does not name it.
+
+### The select is back, and the invariant holds by construction
+
+**Measured on the page.** Coconuts: `display:flex`, no `data-single`, no static
+label, two options — `OFFICIAL VIDEO` / `FIRST PASS`. The other five:
+`display:none`, `data-single="1"`, static `FIRST PASS`, one option. Label and
+control cannot both draw because one expression (`videos.length < 2`) drives
+both, inverted.
+
+**THE HIT TEST, with the corrected predicate** (`hit === control ||
+control.contains(hit)` — not `hit.contains(control)`, which passes everywhere):
+
+| row | wrap box | points | reached | dead |
+|---|---|---:|---:|---:|
+| Coconuts | 111.5 × 12 | 392 | **392** | **0** |
+| the other five | 0 × 0 | 0 | 0 | 0 |
+
+**Zero hit area on the five single-version rows**, which is the 16 August ruling
+still holding. This is the first time the control has drawn with real options
+anywhere in the museum — checked structurally across all three public spines
+(`weird-baby.js` 8 video arrays, `foundation.js` 9, `worth-a-listen.js` 6):
+**no track had two renditions before today.**
+
+**ONE MEASUREMENT WORTH KEEPING AND NOT ACTING ON.** The `<select>`'s own box is
+30px tall — the 9px invisible padding with a cancelling negative margin — but
+scanning `elementFromPoint` down its centre line, **only 18 of those 30 rows
+reach the control** (y 284…301 of 279…309). The top 5px and bottom 8px are
+covered by the row. The enlarged target is real and is smaller than declared.
+Pre-existing CSS, untouched here.
+
+### The embed — nocookie, confirmed on the wire
+
+**Only the id crosses.** He supplied a `/shorts/` URL; the museum never writes
+an embed URL. `useYTPlayer` builds the player with
+`host: "https://www.youtube-nocookie.com"` and calls `loadVideoById(ytId)`.
+**Measured with the player up: one iframe, host `www.youtube-nocookie.com`, and
+no `www.youtube.com` embed.**
+
+### The vertical short — SHIPPED PILLARBOXED, AND THE PICTURE BAND IS NOT MEASURED
+
+Ruled 2026-08-20: ship it, do not build the per-video ratio.
+
+**What is measured:** `.vp-area` 1443.8 × 813 (ratio **1.776**), `.vp-inner`
+1441.8 × 811, iframe 1441.8 × 811 — the iframe fills the box exactly, and
+`object-fit` is `fill` on an element that has no intrinsic size, so **nothing in
+the museum crops or stretches it.** The fit is YouTube's own player.
+
+**WHAT IS NOT MEASURED, STATED PLAINLY: the picture band.** The player loaded,
+showed its chrome and a 1:52 duration, and **sat at 0:00 with the spinner for
+~20 seconds without ever rendering a frame** in this browser. So the black area
+in the screenshots is a buffering player, not a pillarbox.
+
+**THE "ROUGHLY A THIRD" FIGURE OPS GAVE MIKE IS A PREDICTION AND WAS NEVER A
+MEASUREMENT.** It is arithmetic conditional on a 9:16 source: 811 × 9/16 =
+456.2px of 1441.8 = **31.6%**. **The source aspect is also unconfirmed** —
+`oardefault.jpg` (YouTube's original-aspect thumbnail) **404s** for this id, and
+`maxresdefault`/`hq720` are 1280×720, which every video gets regardless of
+shape. The `/shorts/` URL implies portrait; a 1:52 runtime is longer than a
+classic Short. **Mike should look at it on his own machine before ruling.**
+
+### Rows
+
+- `provenance/assets.json` — **none.** It governs images the museum serves.
+- `reveal/ledger.json` — **none.** 174 rows, zero YouTube.
+- `provenance/register.json` — **two rows, and the earlier report said one.**
+  **The correction matters:** the id was expected to drop out under `SLUG_KEYS`,
+  which contains `ytId` — but `SHAPE_SLUG` requires **lowercase**, and
+  `Z2T7VwXppQo` has capitals, so it stays on the boundary. Filed **VERIFIED**,
+  matching the 49 existing ytId rows, and **actually verified**: YouTube's
+  oEmbed returns title *"2026 08 17 Coconuts (Chords and Lyrics in Comments)
+  #music #weird.baby"*, channel **Mike Lang / @PapaWeirdBaby** — the house's own
+  channel. The label row is **HOUSE** on his ruling.
+  **2 added, 0 pruned, 0 surviving rows changed, 0 broken chains.**
+
+### Backlog
+
+**A per-video aspect ratio** — `docs/BACKLOG.md`, IN PASSING, no row. `16/9` is
+a constant in three places (the `aspect-ratio` rule, the fit that computes
+`--fit-area-max`, the width-drag handler that preserves aspect), so it means a
+field on the video row threaded to `.vp-area` with the fit and the drag reading
+it. **About a round**, touching the handler already re-fixed twice (V2a, then W).

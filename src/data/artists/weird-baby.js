@@ -697,10 +697,47 @@ const spine = [
          Vol. 1` is six songs and nothing else now, which is what an album of
          recordings is, and the chip on every one of them says `first pass` in
          the blurb's own words. */
+      /* ═══ [2026-08-20] COCONUTS GAINS A VIDEO, AND IT IS FIRST ═════════════
+         MIKE ruled the video the FIRST option and the `first pass` audio the
+         second. It is the wing's first track with two renditions.
+
+         THE LABEL IS THE MUSEUM'S OWN WORD AND NOT A NEW ONE. `type:
+         "official"` is `TYPE_META`'s existing key; `label: "Official Music
+         Video"` is the same string /hr's ELEVEN video rows carry, produced
+         there by `cleanLabel()` off the MediaVault title. `tidyDesc()` maps it
+         explicitly to **OFFICIAL VIDEO** on the glass, so this row reads
+         character for character what those eleven read. MIKE: *"Official Music
+         Video, or whatever we use for that."* - the museum had already
+         answered it, in a `.replace()` written for exactly this.
+         MEDIAVAULT'S `kind` VOCABULARY IS A DIFFERENT AXIS and deliberately
+         not used here: `release`/"Music" classifies an ARTIFACT for the deck's
+         pill columns and is defined as containing "a track, single, album, or
+         official music video". It contains this thing; it does not name it.
+
+         ONLY THE ID CROSSES, NOT A URL. He supplied a `/shorts/` link; the
+         museum never writes an embed URL. `useYTPlayer` builds the player with
+         `host: "https://www.youtube-nocookie.com"` and calls
+         `loadVideoById(ytId)`, so the nocookie promise in the booth FAQ is
+         kept by the player option and cannot be broken by a row of data.
+         `id` follows the file header's rendition-id rule (`id = ytId ??
+         slug(audioUrl)`), so preset capture and restore stay stable.
+
+         AND IT IS A VERTICAL SHORT IN A 16:9 BOX. Ruled 2026-08-20: **ship it
+         pillarboxed.** A per-video ratio is a backlog row (`V-a`), not this
+         change - the constant lives in three places including the width-drag
+         handler that has been re-fixed twice. Nothing here crops or stretches
+         anything; the fit is YouTube's own player inside a box we do not
+         reshape. */
       {
         id: "coconuts",
         title: "Coconuts",
         videos: [{
+          id: "Z2T7VwXppQo",
+          ytId: "Z2T7VwXppQo",
+          audioUrl: null,
+          label: "Official Music Video",
+          type: "official",
+        }, {
           id: "audio_wb_06_coconuts_2026_06_17_mp3",
           ytId: null,
           audioUrl: "/audio/wb/06_coconuts_2026-06-17.mp3",
