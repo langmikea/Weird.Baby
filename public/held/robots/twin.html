@@ -1935,7 +1935,63 @@ function Clarity_Engine_Response(M8B_ball_ID){                        /* [BIAS:5
 }
 
 /* ============ [FW] FLASH.ino ============ */
-function Save_To_Flash(variableID){ Serial.println("Save to flash not implemented"); } /* [FLASH:11-22] exact - RAM-only */
+/* ═══ [2026-08-20] STICKY, AND INERT — MIKE'S RULING ════════════════════════
+   MIKE: "If you can make it sticky, make it sticky. It's the right function."
+   RULED sticky but INERT: it remembers the choice; the choice does not yet
+   change the answer, because polarity bias defaults to 0 and at bias 0 the
+   weight is 100 for every answer regardless of the setting. A later Record
+   moves the bias and the setting starts to matter. NO GUARD IS NEEDED to keep
+   it inert — the arithmetic already is.
+
+   WHAT WAS HERE, kept as the record of what the firmware does:
+     function Save_To_Flash(variableID){
+       Serial.println("Save to flash not implemented"); }   [FLASH:11-22] exact
+   The unit's own flash write is a stub and WS1 is the real engineering. This
+   is the TWIN's persistence, not a claim about the unit.
+
+   IT JOINS THE SEVEN `wbr_*` KEYS RATHER THAN INVENTING A PATTERN — the twin
+   already persists wbr_boot_level, wbr_parcel, wbr_health, wbr_bs, wbr_user,
+   wbr_santa, wbr_son_best. localStorage is keyed to the ORIGIN, so this
+   survives a stage change, a deploy and the overlay closing, and localhost is
+   a different store from the live site.
+
+   ═══ IT HONOURS `variableID`, AND THAT KEEPS A PRESERVED BUG VISIBLE ═══════
+   Writing all four values on every call would have been one line shorter and
+   would have SILENTLY FIXED the copy-paste bug this file deliberately keeps:
+   BIAS_SET:57 saves CLARITY bias into the POLARITY flash slot. So each slot
+   writes the variable it names, and the consequence is the firmware's own —
+   **clarity bias does not stick.** That is the bug doing what it does, not
+   this build failing. Nothing is corrupted: the polarity slot stores polarity
+   bias's real value either way. */
+const BIAS_KEY="wbr_bias";
+const FLASH_SLOT_VAR={};
+FLASH_SLOT_VAR[FLASH_POLARITY_SETTING]="ps";
+FLASH_SLOT_VAR[FLASH_CLARITY_SETTING] ="cs";
+FLASH_SLOT_VAR[FLASH_POLARITY_BIAS]   ="pb";
+FLASH_SLOT_VAR[FLASH_CLARITY_BIAS]    ="cb";
+function Bias_Store_Read(){
+ try{const v=JSON.parse(localStorage.getItem(BIAS_KEY));return (v&&typeof v==="object")?v:{};}
+ catch(e){return {};}
+}
+function Save_To_Flash(variableID){
+ const k=FLASH_SLOT_VAR[variableID];
+ if(k===undefined)return;                       /* an unnamed slot writes nothing */
+ const live={ps:polaritySettingNOW,cs:claritySettingNOW,pb:polarityBiasNOW,cb:clarityBiasNOW};
+ const store=Bias_Store_Read();
+ store[k]=live[k];                              /* only the slot that was named */
+ try{localStorage.setItem(BIAS_KEY,JSON.stringify(store));}catch(e){}
+}
+/* read back at wake, beside the other stores. Each value is range-checked
+   against its own enum: a store written by an older build, or edited by hand,
+   must not put the machine in a state its own menus cannot show. */
+function Bias_Load(){
+ const v=Bias_Store_Read();
+ const num=(x)=>(typeof x==="number"&&isFinite(x));
+ if(num(v.ps)&&v.ps>=0&&v.ps<=polaritySetting_Max)polaritySettingNOW=v.ps; /* Max, not Max-1: the six-row menu can write 5 (the preserved out-of-enum row) */
+ if(num(v.cs)&&v.cs>=0&&v.cs<claritySetting_MAX)claritySettingNOW=v.cs;
+ if(num(v.pb)&&v.pb>=0&&v.pb<=100)polarityBiasNOW=v.pb;
+ if(num(v.cb)&&v.cb>=0&&v.cb<=100)clarityBiasNOW=v.cb;
+}
 
 /* ============ [FW] 4_AUDIO.ino ============ */
 const Connected=1,   /* [D3 KILLED 2026-07-27] DataTransfer removed entirely - it was
@@ -2033,7 +2089,64 @@ for(let t=0;t<23;t++){
 
 /* ============ [FW] MENU.ino - exact ============ */
 const MENU_SYSTEM_COLD_START=0, CHECK_FOR_INPUT=1, DETERMINE_IF_EXE=2, RUN_EXE_ST=3,
- SCROLL_THE_MENU=4, CLICK_THE_MENU=5, UPDATE_MENU_LEVEL=6;
+ SCROLL_THE_MENU=4, CLICK_THE_MENU=5, UPDATE_MENU_LEVEL=6, REFUSE_SHOWN=7;
+
+/* ═══ [2026-08-20] THE REFUSAL SET — "very limited", as Mike ruled it ═══════
+   MIKE: the machine boots, is FINE, drops to a menu, "except the machine must
+   be very limited." Seven destinations refuse, in the manual's OWN vocabulary.
+   Nothing is invented: Appendix C-2 is titled ENGINE POSITIONS **NOT FITTED**
+   IN INSTRUMENTS OF GENERAL ISSUE, and NO RECORD is the boot's own word for a
+   machine that has not been anywhere (SYSTEM RECORD - NOT ON FILE).
+
+   ═══ IT REFUSES, IT DOES NOT HIDE, AND THAT IS THE WHOLE POINT ════════════
+   This is a THIRD mechanism beside the two that already thin this menu, and it
+   is deliberately the opposite of both:
+     THE PARCEL LAW hides a row until it is earned  — you cannot see it.
+     THE STUB LAW   hides a row that leads nowhere  — you cannot see it.
+     THE REFUSAL    leaves the row standing and answers when you press it.
+   Mike's reason is the shape: "the shape of the machine is visible and almost
+   none of it works yet." A hidden row cannot do that; a refusing row can.
+
+   IT IS THE SAME IDEA THE MACHINE IS ALREADY SPEAKING. Rows 3-38 of the engine
+   list draw PERSONA NOT INSTALLED and have since the DECOUPLE; this is that
+   sentence, in the manual's register, one level up.
+
+   ═══ FLAGGED, NOT RULED: THE PARCEL LAW AND THIS ONE NOW OVERLAP ══════════
+   Detectors, Calculator, Notepad, Excuses and Lines are HIDDEN by the parcel
+   law today and are not in this set, so a visitor never meets them either way.
+   But a parcel GRANT would un-hide a row whose destination this set refuses —
+   Games is the live case (gamepack at 10 asks). Which law wins is Mike's, and
+   nothing here decides it: the grant would simply reveal a row that refuses.
+
+   ONE JUDGEMENT IS OPS' AND IS NAMED: the refusal card carries NO GLITCH.
+   FT8 says a major screen change carries one, and a refusal is a card change —
+   but seven of the eleven reachable rows refuse, so glitching each one would
+   turn FT8's punctuation into texture, which is the thing FT8 caps. Reversible
+   in one line if Mike wants it. */
+const NOT_FITTED="NOT FITTED", NO_RECORD="NO RECORD";
+let REFUSED={};
+function Refusals_Init(){
+ REFUSED={};
+ REFUSED[ADVICE]=NOT_FITTED;          /* Answers > Advice        */
+ REFUSED[PREDICTIONS]=NOT_FITTED;     /* Answers > Predictions   */
+ REFUSED[PROBABILITIES]=NOT_FITTED;   /* Answers > Probabilities */
+ REFUSED[GAMES]=NOT_FITTED;           /* Programs > Games        */
+ REFUSED[MESSAGES]=NO_RECORD;         /* Messages — a machine that has never been anywhere has no mail */
+ REFUSED[USER]=NO_RECORD;             /* Settings > User         */
+ REFUSED[MAINTP]=NOT_FITTED;          /* Settings > Maintenance  */
+}
+/* the destination decides, not the row — so a second row pointing at the same
+   place refuses too, and the set stays one line per destination. */
+function Refusal_For(){return REFUSED[get_as_int(linked_menuNum)]||null;}
+/* The card: the machine's own head, the row's own name, and the one word.
+   No exit hint — the convention is that any input returns, and ruling 3 stands
+   ("It's a magic eight ball. They're gonna put it together."). */
+function Refuse_Card(label,word){
+ Activate_the_Screen(FRONT_SCREEN,true);
+ screenPrintLn(Row_01,0,Header_01,0);
+ screenPrintLnCentered(Row_02,String(label),0);
+ screenPrintLnCentered(Row_03,word,1);
+}
 let currentState=MENU_SYSTEM_COLD_START;
 function Menu_System(){
  switch(currentState){
@@ -2058,7 +2171,20 @@ function Menu_System(){
    break;
   case SCROLL_THE_MENU: Scroll_the_Menu(); currentState=CHECK_FOR_INPUT; break;
   case DETERMINE_IF_EXE:
+   {/* [2026-08-20] the refusal is tested BEFORE both branches, so it catches a
+       submenu row (exe 0) and an app row (exe 1) with one lookup, and neither
+       Update_Menu_Level nor Run_EXE has to learn about it. */
+    const w=Refusal_For();
+    if(w){Refuse_Card(get_as_char(lineName),w);currentState=REFUSE_SHOWN;break;}}
    currentState = Is_Menu_Item_Executable() ? RUN_EXE_ST : CLICK_THE_MENU; break;
+  case REFUSE_SHOWN:
+   {/* any input returns to the menu, standing on the row that refused. Both
+       buffers are drained rather than short-circuited, or the untouched one
+       fires a ghost press into the menu on the way back — the stale-buffer
+       fault COLD_START already flushes for. */
+    const d=Pull_From_Buffer(ROTARY_DIAL), k=Pull_From_Buffer(SHUTTER);
+    if(d||k)currentState=MENU_SYSTEM_COLD_START;}
+   break;
   case RUN_EXE_ST: currentState=MENU_SYSTEM_COLD_START; Run_EXE(); break;
   case CLICK_THE_MENU: Update_Menu_Level(); Update_the_Menu_Screen(); currentState=CHECK_FOR_INPUT; break;
  }
@@ -7379,7 +7505,11 @@ function setup(){
  Messages_Load();
  Scaffold_Load();
  Messages_Trigger("first_boot");
+ Bias_Load();         /* [2026-08-20] the remembered settings wake before the first menu draw,
+                         so the current-setting star is right on the first look */
  Doors_Restructure(); /* four doors — porch 2026-07-23 */
+ Refusals_Init();     /* [2026-08-20] after the doors: the set is keyed by DESTINATION, and
+                         the door tables are what point at those destinations */
  Parcel_Init();       /* [PARCEL LAW] day-one visibility before first draw */
  Scaffold_Strip(true);/* [THE STUB LAW] LAST, so it sees the final tables - the
                          doors and the parcels both rewrite menu rows, and an
@@ -9637,11 +9767,34 @@ function Unit_LoadPhotos(){
    im.src=probe.src;
    Mon_Controls_In();
    Dev_Rail_In();
-   chip("ok","unit base: monitor_base.png at "+base+" - the family shot; apertures measured from the marker file");
+   chip("ok","unit base: the family shot at "+base+" - apertures measured from the marker file");
    Portal_In(base);   /* [PORTAL] upgrade in place if the two layers are there */
   };
   probe.onerror=()=>tryMonBase();
-  probe.src=base+"monitor_base.png";
+  /* ═══ [2026-08-20] THE PROBE ASKS FOR THE PICTURE IT IS ABOUT TO DRAW ═════
+     THE BREAK: this line read `base+"monitor_base.png"` and that photograph was
+     DELETED on 2026-08-12 with the other eight. Tier 0 therefore failed at both
+     candidates on every load; `?user=1` - which is the only way the museum's
+     overlay opens this page - then took O2's public branch straight to
+     NO SIGNAL, and `Portal_In` is called from NOWHERE ELSE. So the portal was
+     never built, `Portal_Build` never ran, and `Portal_Preset_Apply` - its last
+     line - never ran either. Latching channel 3 opened a machine that setup()
+     had left at Power_Standby: menu drawn, dark, no boot. The recipe was not
+     applying two of its three steps; it was applying none, because it was never
+     called. NOTHING WAS WRONG IN `PORTAL_RECIPES` AND NOTHING IS CHANGED THERE.
+
+     WHY IT WAS INVISIBLE FOR EIGHT DAYS: without `?user=1` the ladder descends
+     to `unit_crt_base.webp`, which is still on disk, so a developer opening
+     twin.html plainly got a working machine. Only the museum entry was dead,
+     and the museum entry is the one nobody opens while working on the twin.
+
+     THE FIX IS NOT TO RESTORE THE PHOTOGRAPH. `monitor_base.png` had the bezel
+     and a white top-window rectangle baked into it, and `Portal_Build` has
+     re-pointed the picture at the CLEAN family art since [T7] - so tier 0 was
+     probing a file it then threw away. It now probes the family shot: the image
+     the portal actually draws, which is the only honest thing for a liveness
+     probe to ask for. A deleted photograph cannot gate a live surface again. */
+  probe.src=base+"MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png";
  }
  function tryCrtBase(){
   if(ci>=CAND.length){ci=0;tryNewBase();return;}
@@ -10335,19 +10488,34 @@ function Portal_Grip_In(){
 function Portal_In(base){
  try{
   const st=document.getElementById("unitstage");if(!st)return;
-  if(document.getElementById("portalbez"))return;      /* already built */
+  if(document.getElementById("feedgroup"))return;      /* already built */
   const bezSrc=base+"MGK-TWIN_MONITOR_SCREEN_BEZEL.png";
   const artSrc=base+"MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png";
-  let left=2,failed=false;
+  /* ═══ [2026-08-20] THE FRAME IS OPTIONAL; THE PICTURE IS NOT ══════════════
+     BOTH LAYERS USED TO BE REQUIRED, and the refusal message named a fallback
+     that no longer exists ("staying on the baked monitor_base.png"). One
+     missing compositing asset therefore killed the whole portal - the feed
+     select, the weather, the size dial and the preset with it.
+     THE BEZEL IS A FRAME AND A FRAME IS NOT A PREREQUISITE FOR A PICTURE. A
+     portal without it is the feed unframed, which is a smaller loss than no
+     portal at all, and it is announced rather than silent.
+     THE ALREADY-BUILT GUARD MOVED to `#feedgroup`, which `Portal_Build` always
+     creates - it used to key on the bezel node, and an optional node cannot
+     be the thing that proves a build happened. */
+  let left=2,haveBez=true,haveArt=true;
   const bez=new Image(), art=new Image();
   const done=function(){
    if(--left)return;
-   if(failed){chip("warn","portal layers not found at "+base+
-     " - staying on the baked monitor_base.png (bezel and feed are one image; no feed select)");return;}
-   Portal_Build(st,bezSrc,artSrc);
+   if(!haveArt){
+    chip("warn","portal feed art not found at "+base+" - no portal");
+    if(Public_Entry())Portal_Base_Missing();
+    return;
+   }
+   if(!haveBez)chip("warn","portal bezel not on file - the feed is drawn without its frame");
+   Portal_Build(st,haveBez?bezSrc:null,artSrc);
   };
-  bez.onload=done;bez.onerror=function(){failed=true;done();};
-  art.onload=done;art.onerror=function(){failed=true;done();};
+  bez.onload=done;bez.onerror=function(){haveBez=false;done();};
+  art.onload=done;art.onerror=function(){haveArt=false;done();};
   bez.src=bezSrc;art.src=artSrc;
  }catch(e){}
 }
@@ -10392,10 +10560,12 @@ function Portal_Build(st,bezSrc,artSrc){
        world's frame, deliberately OUTSIDE the feed group so no glitch can
        ever reach it. */
  let bz=document.getElementById("portalbez");
- if(!bz){bz=document.createElement("img");bz.id="portalbez";bz.className="bezimg";
-         bz.alt="";bz.setAttribute("aria-hidden","true");}
- st.appendChild(bz);
- bz.src=bezSrc;
+ if(bezSrc){
+  if(!bz){bz=document.createElement("img");bz.id="portalbez";bz.className="bezimg";
+          bz.alt="";bz.setAttribute("aria-hidden","true");}
+  st.appendChild(bz);
+  bz.src=bezSrc;
+ } else if(bz)bz.remove();     /* [2026-08-20] no frame on file - see Portal_In */
  document.body.classList.add("portal");
  Portal_Layout();
  /* 5. the size dial, the barrel, and today's weather - in that order, so the
@@ -10407,7 +10577,8 @@ function Portal_Build(st,bezSrc,artSrc){
  Feed_Select(1);
  Feed_Glitch_Start();
  Mon_Power_Sync();
- chip("ok","PORTAL: bezel above the feed (clean B&amp;W, no video treatment) &middot; "+
+ chip("ok","PORTAL: "+(bezSrc?"bezel above the feed":"NO BEZEL ON FILE")+
+      " (clean B&amp;W, no video treatment) &middot; "+
       "monitor "+portalSize+"vh (drag the corner grip) &middot; "+
       "today's weather (seed "+FEED_SEED+"): "+Feed_Weather_Report());
  Portal_Preset_Apply();                       /* [O4] */

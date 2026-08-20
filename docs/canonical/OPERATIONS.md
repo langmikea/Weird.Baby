@@ -495,9 +495,10 @@ review walked past it. **THE ASYMMETRY IS THE MECHANISM:** PRECIOUS has a ceilin
 weeks; **DUMP has none, so it divides into nothing**, and `runways()` in
 `reveal/focus.mjs` is structurally unable to print one for it, because a
 symmetrical table would re-commit the original error in the other bucket.
-**`bucket` is the sixth JUDGED field on the asset table, null on all 459 rows
-(re-measured 2026-08-19; the line said 315, then 385, then 404 — the table has
-grown, and the point of it has not: still not one derived value on it), and
+**`bucket` is the sixth JUDGED field on the asset table, null on all 460 rows
+(re-measured 2026-08-20 when the Portal's bezel was restored; the line said 315,
+then 385, then 404, then 459 — the table has grown, and the point of it has not:
+still not one derived value on it), and
 OPS DOES NOT DERIVE IT** — a heuristic calling every machine photograph precious
 would make every tracker read as ANSWERED while nothing had been answered, which
 is the void figure's own defect with better manners. So the 16 pictures behind the
@@ -1830,6 +1831,55 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     **AND A GATE TABLE IS NOT A DECISION.** Gate results are proof that the work
     is safe to accept, not a thing he acts on: one line at the end, or nothing if
     they all passed and he has been told they always run.
+
+27. **AN ASSET CULL ASKS WHAT BUILDS FROM A FILE, NOT ONLY WHAT DISPLAYS IT
+    (Mike, 2026-08-20 — STANDING).**
+
+    A picture may have two jobs. Judging it on the one you can see is how a
+    live surface gets deleted by a round that thought it was tidying a wall.
+
+    **IT HAS BEEN PAID FOR TWICE, ON CONSECUTIVE DAYS.** `monitor_base.png`
+    went on 2026-08-12 with the nine photographs; `MGK-TWIN_MONITOR_SCREEN_BEZEL.png`
+    went on 2026-08-13 under M7 (*three of the nine plates do not show what
+    their captions say*). Both rulings were right **about the wall** — as
+    standalone pictures they were a flattened composite and a frame graphic
+    with a hole in it. Neither round knew that `twin.html` **probes the first
+    one to decide whether the Portal exists at all** and **composites the
+    second one over the feed every time it draws**. The Portal was dead from
+    12 August and nobody met it until 20 August.
+
+    **THE TEST IS NOT *does a wall show it* — IT IS *does anything LOAD it*.**
+    A file's row in `provenance/asset-table.json` records what the picture IS.
+    Nothing in the table records what READS it, and that is the gap.
+
+    **WHY NO EXISTING INSTRUMENT CAUGHT IT, WHICH IS THE SHARP PART.**
+    `assets:orphans` reported `monitor_base.png` the whole time — a row whose
+    file is not on disk. **It had the fact and could not say the consequence.**
+    An orphan reads as dead bookkeeping, and dead bookkeeping is exactly what
+    it looks like right up until something was still loading the file.
+
+    **WHAT WOULD HAVE CAUGHT IT, AND WHAT IT COSTS — SCOPED, NOT BUILT.**
+
+    - **A REFERENCE CHECK IN `assets:cull` (recommended).** Before deleting,
+      search the source trees — `src/`, `index.html`, `public/**/*.html`,
+      `tools/` — for the file's basename, and **refuse** with the hit list if
+      anything names it. **It catches both files:** each appears as a literal
+      basename beside its consumer (`base + "monitor_base.png"`,
+      `base + "MGK-TWIN_MONITOR_SCREEN_BEZEL.png"`). Cost: **about half a
+      round** — one walker with an extension allow-list, one refusal path, and
+      a proof that injects a reference and watches it refuse. Its hole is
+      stated up front: a filename **assembled** at runtime from pieces is
+      invisible to a basename search. The two that bit us were not.
+    - **A MANIFEST OF BUILD INPUTS (not recommended).** Every file a live
+      surface loads, declared, with a gate that fails when a declared input
+      leaves the disk. Cost: **more than a round**, and it carries the failure
+      it is meant to remove — **an input nobody declared is invisible to it**,
+      so it is only as good as the hand that keeps it, whereas a reference
+      check reads the code that actually loads the file.
+
+    **UNTIL ONE IS BUILT, IT IS A HUMAN STEP AND IT IS ONE LINE:** grep the
+    basename across both repos before a cull, and if anything outside the
+    asset table names the file, the cull is a code change and not a cull.
 
 ## 8. Known hazards (environment quirks)
 

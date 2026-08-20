@@ -202,10 +202,31 @@ const MARK = /\[\[(\d+)\]\]/;
    Ops picks them up (`src/lib/visitor-prose.js`, OPS_BRACE). Nothing about a
    note is this renderer's business any more, so the branch, the two classes and
    the `launched()` filter are gone rather than left dormant. */
+/* === [2026-08-20] A BODY ITEM MAY BE A LISTING: `{ pre: "..." }` ===========
+   WHY IT HAD TO EXIST. `.vp-rec-sect-body` is `white-space: pre-line`, chosen
+   deliberately in 2026-08-10 so a run of spaces COLLAPSES - which is right for
+   prose assembled out of concatenated source literals, and which silently
+   destroys a fixed-column listing. Measured on the built page: `A B` and
+   `A    B` both render at 29.97px. Record 004's folder tree hangs `PORTAL.CFG`
+   under `TERMINAL.EXE` at column 26, and as an ordinary paragraph it arrived
+   flat with that file belonging to nobody.
+   IT IS AN OPT-IN AND NOT A RULE CHANGE, which is the whole point. Switching
+   the shared class to `pre-wrap` would make every incidental double space
+   visible on the glass - including `=  86%` in Record 001's body, which is
+   Mike's own open question `S-e` and not a thing a listing may decide. One
+   paragraph asks for `pre`; nothing else moves.
+   AND AN UNKNOWN SHAPE DRAWS RATHER THAN VANISHES. "Nothing drops silently
+   ever again" (Mike, 2026-08-08) is about entry fields, and the same rule is
+   worth more here, where the gate does not look: a body item that is neither a
+   string nor a `{pre}` is stringified into an ordinary paragraph, so a typo in
+   a key shows up on the page instead of deleting a sentence. */
 function SectionBody({ body, doors, onFire }) {
   const paras = Array.isArray(body) ? body : [body];
   const used = new Set();
   const out = paras.map((text, pi) => {
+    if (text && typeof text === "object" && typeof text.pre === "string") {
+      return <pre key={pi} className="vp-rec-sect-pre">{text.pre}</pre>;
+    }
     const bits = String(text).split(new RegExp(MARK.source, "g")).map((piece, k) => {
       if (k % 2 === 0) return piece;
       const di = Number(piece) - 1;

@@ -130,6 +130,13 @@ const SKIP_PATH = [
   // in the robots repo. It is a working aid, not an asset, and a row for it
   // would be born an orphan on the next clone — the M9 class, manufactured.
   "robots/mgk-viiip/manual/marks/_probe",
+  // [2026-08-20] the museum's inbox: files Mike drops on the way to somewhere
+  // else. It is not committed, so a row minted here is BORN AN ORPHAN the
+  // moment the file moves on or the tree is cloned — the same defect class as
+  // the two entries above, and it was caught by a scan sweeping in a
+  // PANEL_MOD.jpg that nobody had asked the table about. A staging directory
+  // is not a holding; the row belongs to wherever the file lands.
+  "_incoming",
 ];
 
 function kindOf(ext) {

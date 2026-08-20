@@ -102,37 +102,25 @@ export const PORTAL_ALBUM = {
   viewerPosterCaption:
     "MGK-VIIIp — the glass carrying the machine's own opening beat.",
   tracks: [
-    /* ═══ [H3c 2026-08-06] THE ALBUM IS THREE TRACKS ═════════════════════════
-       MIKE: "THE PORTAL'S TRACKS: PORTAL · Portal Feed Controller · FAQ."
+    /* ═══ [2026-08-20] THE ALBUM IS TWO TRACKS, AND IT IS A RENAME ═══════════
+       MIKE, ruled 2026-08-13 and re-confirmed 2026-08-20: the tracklist
+       DELETES the `Portal` row and RENAMES `Portal Feed Controller` to
+       `Portal`. One track, not two. The `id` below was already `portal`, so
+       the change is a title and a deletion and touches nothing else.
 
-       ONE JUDGEMENT IS OPS' AND IT IS NAMED RATHER THAN BURIED (register P-b):
-       he named a row and did not say what stands behind it. A row called
-       PORTAL that opens nothing is the dead control Doctrine 11's corollary
-       forbids, so this one IS the door — the portal as it stands, no feed
-       selected. The LATCH one row down is a different door and keeps its job:
-       it opens the feed the drum has been rolled to, and it will not throw
-       until the instrument is armed. If Mike meant something else behind this
-       row it is one field, and nothing else in the album moves. */
-    {
-      id: "portal-door",
-      title: "Portal",
-      videos: [],
-      tags: ["portal", "twin", "interactive"],
-      face: {
-        kind: "text",
-        title: "Portal",
-        subtitle: "MGK-VIIIp",
-        action: {
-          label: "OPEN THE PORTAL",
-          event: TWIN.event,
-          src: TWIN.src,
-          frameTitle: TWIN.title,
-        },
-      },
-    },
+       WHAT WENT, NAMED ONCE BECAUSE IT WAS A DELIBERATE BUILD (register P-b):
+       the deleted row was THIS FILE'S ONE OPS JUDGEMENT. H3c named a row
+       `PORTAL` and did not say what stood behind it, and a row that opens
+       nothing is the dead control Doctrine 11's corollary forbids — so Ops
+       made it a door that opened the twin with no feed selected. HIS RULING
+       SUPERSEDES THAT JUDGEMENT, and the reasoning it was built on survives
+       intact: the LATCH one row down is already a door, and a better one,
+       because it opens the feed the drum has been rolled to and will not
+       throw until the instrument is armed. Nothing on the glass lost a
+       destination. */
     {
       id: "portal",
-      title: "Portal Feed Controller",
+      title: "Portal",
       videos: [],
       tags: ["portal", "twin", "firmware", "1965", "interactive"],
       /* ---- O4 2026-07-30: THE PORTAL IS A TRACK, NOT A BUTTON ----------
@@ -250,14 +238,20 @@ export const PORTAL_ALBUM = {
           },
           drum: {
             label: "FEED",
-            /* [2026-08-19] THIS LEGEND IS WRONG BY ONE WORD AND IS LEFT ALONE
-               ON MIKE'S RULING: fix it when the Portal is next touched, not in
-               a round that is not about the Portal. TWO positions arm, not one
-               — `standard` (ch 3) and, since CH4 2026-08-12, `idling-updated`
-               (ch 4, DETAIL). Nobody has met it: the wing is HELD. It is the
-               Record's own "what's said matches what's shown" rule (ruling 10)
-               applied to a control legend, and it costs one word. */
-            sub: "SELECT · ONE ARMED",
+            /* ═══ [2026-08-20] THE LEGEND IS STRUCK, NOT CORRECTED ═══════════
+               MIKE: two positions arm, not one, so `SELECT · ONE ARMED` was
+               false — and the fix is not `TWO`.
+               THE LAMP UNDER THE LATCH ALREADY REPORTS IT. `FEED ARMED` /
+               `NOT ARMED` is the arm state of the channel the drum is showing,
+               and the readout above it already names that channel. A count of
+               how many of the eight arm is a fact about the instrument that no
+               visitor can use — and one that has already gone stale once,
+               silently, under a stepper whose positions change. Doctrine 16:
+               what is lost if it goes? Nothing a reader would miss.
+               `drum.sub` IS UNDECLARED, NOT REMOVED — Exhibit.jsx renders it
+               conditionally, so the line simply does not draw and leaves no
+               gap, and a future drum that genuinely needs a legend declares
+               one. */
             /* positions are read in drum order, top to bottom. `arms:true`
                is the only one that lights the drum and permits the latch.
 
@@ -285,8 +279,26 @@ export const PORTAL_ALBUM = {
                it needed no argument to place.
                THE VIIIp KEEPS ALL SIX OF ITS POSITIONS. M33 records that five
                of them are engraved reveal levers; renumbering must not quietly
-               destroy five levers, so it does not. STANDARD — the one feed
-               that arms — is channel 3. */
+               destroy five levers, so it does not. The feed that arms first is
+               channel 3.
+
+               ═══ [2026-08-20] CHANNELS 3 AND 4 CARRY THE MACHINE'S NAME ═════
+               MIKE, naming both: channel 3 is `MGK-VIIIp` and channel 4 is
+               `MGK-VIIIp (zoom)`. **Both show the same machine; one is
+               closer.** The words they replace — `STANDARD` and `DETAIL` —
+               described a FEED rather than naming what you are looking at,
+               which is the one thing a drum position is for.
+               IT MAKES THE DRUM ONE KIND OF THING. Channels 1 and 2 already
+               carry a machine's name and nothing else (`MGK-NIAC`), for the
+               reason recorded above: a position is an engraved name, not a
+               state. 3 and 4 now read the same way, and the drum stops being
+               two vocabularies stacked on one barrel.
+               `CH-a` CLOSES. `DETAIL` was Ops' word, registered as such
+               because the engraved legends are Mike's to write. He has
+               written them. The `id`s are untouched, again — `standard` and
+               `idling-updated` are what the latch puts in the event and what
+               a twin URL carries, and P5's rule that no id moves when a
+               legend is recut holds for the third time. */
             positions: [
               { id: "niac-1", ch: 1, label: "MGK-NIAC", arms: false,
                 why: "This feed is not available." },
@@ -303,7 +315,7 @@ export const PORTAL_ALBUM = {
                  `drum.line` IS STILL RENDERED (Exhibit.jsx's `ip-readout`) —
                  the field is undeclared, not removed, so a future feed that
                  genuinely needs a readout can declare one. */
-              { id: "standard", ch: 3, label: "STANDARD", arms: true },
+              { id: "standard", ch: 3, label: "MGK-VIIIp", arms: true },
               /* [CS 2026-08-04] `why` IS PRINTED ON THE PANEL — it is the
                  refusal line under the latch. These five read "held — one
                  entry state (C3)", "held — awaiting a privacy ruling" and
@@ -343,11 +355,9 @@ export const PORTAL_ALBUM = {
                  WHAT IT COST: STANDBY is off the drum. It was an engraved
                  position that did not arm and held nothing, and the position
                  now holds a photograph — the first one on this instrument.
-                 `DETAIL` IS OPS' WORD AND IS ON THE REGISTER (`CH-a`). The
-                 engraved legends are Mike's to write (see the `papa` note
-                 below); this is the period term for a close view and it fits
-                 the drum face at one line, but he has not said it. */
-              { id: "idling-updated", ch: 4, label: "DETAIL", arms: true,
+                 [2026-08-20] THE LABEL IS MIKE'S NOW — see the block above.
+                 `DETAIL` was Ops' word and `CH-a` closes with this line. */
+              { id: "idling-updated", ch: 4, label: "MGK-VIIIp (zoom)", arms: true,
                 src: "/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
                 frameTitle: "MGK-VIIIp — the close-up" },
               { id: "boot-playback", ch: 5, label: "COLD START", arms: false,

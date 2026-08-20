@@ -487,14 +487,61 @@ export const RECORD_ENTRIES = [
                     "  > Weird.Baby uptime: 100%, no anomalies - f(Ump) = "
                     + "100%\n  > Blockers - Nothing to Report",
                   ] },
+                /* === [2026-08-20] THE DETAILED REPORT IS MIKE'S, REWRITTEN =
+                   His text, verbatim. The password is **355113** and the
+                   transposition he first wrote (`335133`) is corrected on his
+                   own ruling: 355/113 = 3.14159292, Zu Chongzhi's ratio,
+                   accurate to six decimals - the digits are the egg and a
+                   transposed pair is not it.
+                   THE FOLDER NAMES ARE ALREADY PUBLISHED. `PORTAL/CH3-STANDARD/`
+                   and `PORTAL/CH4-DETAIL/` are in Record 002's Tuesday
+                   manifest, so the tree agrees with what the museum has
+                   already shown (ruling 10). They are the far end's own
+                   directory names and are NOT the drum's engraved legends,
+                   which Mike renamed to `MGK-VIIIp` / `MGK-VIIIp (zoom)` on
+                   the same day - a disk and a badge may say different things
+                   about the same channel, and here they do. */
                 { label: "DETAILED REPORT",
                   body: [
-                    "  > Portal may be the \"answer\" this whole mystery.\n  >"
-                    + " It appears to be an unattended remote access "
-                    + "terminal.\n  > Excerpts from the Manual earlier in the "
-                    + "week indicate a bi-directional CNC Vid-Link\n  > "
-                    + "Probably not useful to us. (Probably not meant for "
-                    + "us...)",
+                    "  > ZIP Password Cracked: [355113]",
+                    /* THE TREE IS A LISTING AND NOT A PARAGRAPH - see the
+                       `pre` branch in RecordEntry.jsx's SectionBody. Its
+                       columns are load-bearing: `PORTAL.CFG` hangs under
+                       `TERMINAL.EXE` at column 26 and means nothing anywhere
+                       else. `.vp-rec-sect-body` is `white-space: pre-line`,
+                       which COLLAPSES runs of spaces - measured on the built
+                       page, `A B` and `A    B` both render at 29.97px - so as
+                       an ordinary body string this tree would have arrived
+                       flat, with the second file adopted by nobody. */
+                    { pre:
+                      "     Folder: PORTAL/\n"
+                      + "         CH3-STANDARD/    TERMINAL.EXE\n"
+                      + "                          PORTAL.CFG\n"
+                      + "         CH4-DETAIL/      one photograph\n"
+                      + "         ANTENNA/         empty\n"
+                      + "         INSTALL/         one form, filled in by hand" },
+                    "  > It appears to be an unattended remote access "
+                    + "terminal.\n  > The Manual's bi-directional CNC Vid-Link"
+                    + " is one half of it; this is the other. It expects a "
+                    + "unit at the far end, and it will not open the link "
+                    + "until four communications settings agree with whatever "
+                    + "is there.\n  > Documentation looks proprietary. Probably"
+                    + " not meant for us to see...\n  > NOTE: Quality has "
+                    + "declared it unsafe to run in any sandbox; permanently "
+                    + "quarantined.",
+                  ] },
+                /* === [2026-08-20] `OTHER` - THE REQUISITION IS RAISED =======
+                   004 raises it and 005 approves it, so a reader meets the
+                   sequence rather than a decision with no request behind it.
+                   THE SECTION'S PLACEMENT IS OPS' AND IS NAMED: after the
+                   DETAILED REPORT and before the addenda, because an addendum
+                   is an appendix and `OTHER` is part of the report.
+                   THE WORDING IS OPS' PROPOSAL, filed as such and not as
+                   Mike's, until he says otherwise. */
+                { label: "OTHER",
+                  body: [
+                    "  > RAISED - Req 0628 - Internal Transfer - No net "
+                    + "increase in head count",
                   ] },
                 { label: "ADDENDUM 01 - Bench Description",
                   body: [
@@ -551,6 +598,11 @@ export const RECORD_ENTRIES = [
                  backward reference is *"Excerpts from the Manual earlier in the
                  week"*, which points at Record 003, is true, and is delivered.
                  Not one character of Mike's text moved.
+                 [2026-08-20] THE QUOTED SENTENCE ABOVE WAS REPLACED WHEN HE
+                 REWROTE THIS SECTION. The backward reference survives in his
+                 new words - *"The Manual's bi-directional CNC Vid-Link is one
+                 half of it"* - and still points at Record 003's delivered
+                 scan, so the finding holds and only its quotation moved.
                  (Contrast Record 003, which promises and delivers: *"Outer
                  layer opened - three manual pages recovered, contents
                  attached."*)
@@ -579,12 +631,40 @@ export const RECORD_ENTRIES = [
                     + " Bias Setting Mismatch\n  > Four toggles. Sixteen "
                     + "combinations. One of them is correct.\n  < The Manual "
                     + "names the settings and declines to name the values.",
+                    /* [2026-08-20] MIKE'S TWO LINES, verbatim. They are what
+                       the drum shows, counted: eight positions, two that arm
+                       (3 and 4), six that report no signal. The one that
+                       carries a picture is channel 4; the one that carries a
+                       machine is channel 3, and the machine on it is the
+                       MGK-VIIIp - which is not the museum's. */
+                    "  > Currently, the system offers eight feeds. Two answer."
+                    + " The rest report no signal.\n  > One of the two carries"
+                    + " a picture. The other carries a machine, and the "
+                    + "machine is not ours.",
+                  ] },
+                /* [2026-08-20] `OTHER` - the requisition raised in 004 is
+                   approved here. Same placement rule as 004's. */
+                { label: "OTHER",
+                  body: [
+                    "  > APPROVED - Req 0628 - Internal Transfer - No net "
+                    + "increase in head count",
                   ] },
                 { label: "ADDENDUM 01 - The Four Settings, as printed",
                   body: [
-                    "    1  PARITY    ODD / EVEN\n    2  DUPLEX    HALF / "
-                    + "FULL\n    3  WORD      7 BIT / 8 BIT\n    4  STOP      1"
-                    + " / 2",
+                    /* [2026-08-20] A LISTING, ON MIKE'S RULING - the same
+                       `{ pre }` shape Record 004's folder tree uses, and for a
+                       reason the label itself gives. MIKE: *"It says 'as
+                       printed'. Printed means aligned. Collapsed it is a list;
+                       aligned it is a page from a manual, which is what a
+                       visitor must recognise when they meet the same four
+                       names on the panel."* Under `pre-line` this rendered as
+                       `1 PARITY ODD / EVEN` - true, readable, and not a page.
+                       IT IS AN OPT-IN AND NOTHING ELSE MOVED: the string is
+                       unchanged to the character, only its wrapper. */
+                    { pre:
+                      "    1  PARITY    ODD / EVEN\n    2  DUPLEX    HALF / "
+                      + "FULL\n    3  WORD      7 BIT / 8 BIT\n    4  STOP      1"
+                      + " / 2" },
                     "  ? A period operator would have known this without "
                     + "being told.\n  ! We are not period operators.",
                   ] },

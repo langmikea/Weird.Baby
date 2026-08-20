@@ -13119,12 +13119,6 @@
    "t": "This feed is not available.",
    "r": "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
   },
-  "b020879ac0a5f4bd": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 288,
-   "t": "STANDARD"
-  },
   "49b882d7399b6cf8": {
    "c": "HOUSE",
    "f": "src/data/artists/portal.js",
@@ -13293,19 +13287,6 @@
    "f": "src/data/artists/portal.js",
    "l": 112,
    "t": "Portal"
-  },
-  "de35e6e942bd3a86": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 115,
-   "t": "OPEN THE PORTAL"
-  },
-  "45849fd292daced6": {
-   "c": "MIKE",
-   "f": "src/data/artists/portal.js",
-   "l": 124,
-   "t": "Portal Feed Controller",
-   "s": "THE PORTAL HOLD + THE PULL-BACK, H3c: \"THE PORTAL'S TRACKS: PORTAL · Portal Feed Controller · FAQ.\""
   },
   "b3eb0a64e5d5c349": {
    "c": "MIKE",
@@ -13718,14 +13699,6 @@
    "t": "You're in the book.",
    "c": "HOUSE",
    "s": "the guest book's confirmation, on the page since the first build. The clause that followed it — “Welcome, Founding Visitor.” — was struck 2026-08-11 on Mike's ruling as the last not-open-yet framing on the lobby; nothing replaced it. docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
-  },
-  "59114c4e1b0e66e5": {
-   "f": "src/data/artists/portal.js",
-   "l": 343,
-   "t": "DETAIL",
-   "p": "spine[].tracks[].face.panel.drum.positions[].label",
-   "c": "HOUSE",
-   "s": ""
   },
   "a4b64a20bfeacbe1": {
    "f": "src/data/artists/portal.js",
@@ -14219,13 +14192,6 @@
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
   },
-  "5075100b8491f4ae": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 376,
-   "t": "  > Portal may be the \"answer\" this whole mystery.\n  > It appears to be an unattended remote access terminal.\n  > Excerpts from the Manual earlier in the week indicate a bi-directional CNC Vid-Link\n  > Probably not useful to us. (Probably not meant for us...)",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
   "6fd539cad916958f": {
    "f": "src/data/artists/robots-record.js",
    "l": 383,
@@ -14288,20 +14254,6 @@
    "t": "  ? A period operator would have known this without being told.\n  ! We are not period operators.",
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "47aa3aaa0545f16e": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 388,
-   "t": "View of the portal screen",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx, ATTACHMENTS section of REC 1.4, landed on 2026-08-16 via workbook_to_draft.py -> record:land --write. His lines, carried verbatim as the titles of the entry's `docs` attachment rows rather than as a text section: only where they live changed. Round-tripped by --verify, 54 of 54 strings, 0 mismatches."
-  },
-  "a1b36384f7a28723": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 389,
-   "t": "Manual ref to Portal",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx, ATTACHMENTS section of REC 1.4, landed on 2026-08-16 via workbook_to_draft.py -> record:land --write. His lines, carried verbatim as the titles of the entry's `docs` attachment rows rather than as a text section: only where they live changed. Round-tripped by --verify, 54 of 54 strings, 0 mismatches."
   },
   "fdd17baaf3b2561d": {
    "f": "src/data/artists/foundation.js",
@@ -15466,6 +15418,61 @@
    "t": "and the store answered with the\n          application, not the file. Held material was not uploaded with this\n          build, so every held address will render the Lobby. Rebuild and deploy.",
    "p": "WbAdmin{}.heldProbeNote",
    "c": "HOUSE"
+  },
+  "156a6eb0043ec9e5": {
+   "f": "src/data/artists/portal.js",
+   "l": 360,
+   "t": "MGK-VIIIp (zoom)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike named channels 3 and 4 on 2026-08-20"
+  },
+  "8e5810db2d5268cf": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 506,
+   "t": "  > ZIP Password Cracked: [355113]",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
+  },
+  "bb89e20d4d8d63b9": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 517,
+   "t": "     Folder: PORTAL/\n         CH3-STANDARD/    TERMINAL.EXE\n                          PORTAL.CFG\n         CH4-DETAIL/      one photograph\n         ANTENNA/         empty\n         INSTALL/         one form, filled in by hand",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
+  },
+  "c57f6030e8ca9f5e": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 523,
+   "t": "  > It appears to be an unattended remote access terminal.\n  > The Manual's bi-directional CNC Vid-Link is one half of it; this is the other. It expects a unit at the far end, and it will not open the link until four communications settings agree with whatever is there.\n  > Documentation looks proprietary. Probably not meant for us to see...\n  > NOTE: Quality has declared it unsafe to run in any sandbox; permanently quarantined.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
+  },
+  "ddcd409d2a0ea958": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 647,
+   "t": "OTHER",
+   "c": "HOUSE"
+  },
+  "d3a8f868da1a1c69": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 543,
+   "t": "  > RAISED - Req 0628 - Internal Transfer - No net increase in head count",
+   "c": "HOUSE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Ops' wording, proposed 2026-08-20 and adopted with Mike's brief; his to change"
+  },
+  "9467eade52d8a970": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 640,
+   "t": "  > Currently, the system offers eight feeds. Two answer. The rest report no signal.\n  > One of the two carries a picture. The other carries a machine, and the machine is not ours.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
+  },
+  "b8fcd91ce434e9c0": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 649,
+   "t": "  > APPROVED - Req 0628 - Internal Transfer - No net increase in head count",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
   }
  }
 }

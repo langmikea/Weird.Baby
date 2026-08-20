@@ -472,14 +472,20 @@ The engraved legends on the Portal's feed drum are **Mike's to write**. Ops cut
 `STANDBY`, `COLD START`, `FIRST RUN`, `LAST STATE`, `TEST BENCH` and `DETAIL` as
 period terms that fit the drum face at one line, and flagged them.
 
-**`DETAIL` is named on the register (`CH-a`) as Ops' word specifically.**
+**[2026-08-20] TWO OF THEM ARE HIS NOW, AND THE REST ARE NOT.** He named
+channels 3 and 4 — **`MGK-VIIIp`** and **`MGK-VIIIp (zoom)`** — which retires
+`STANDARD` and `DETAIL`, and **`CH-a` closes with `DETAIL`.** `COLD START`,
+`FIRST RUN`, `LAST STATE` and `TEST BENCH` are **still Ops' words on channels
+5 to 8, and this hole stays open for them.** `STANDBY` left the drum in CH4.
 
-**And one legend is wrong by one word and is knowingly left alone**: the drum's
-sub reads `SELECT · ONE ARMED` and **two** positions arm — `standard` (ch 3) and
-`idling-updated` (ch 4, DETAIL). Mike's ruling: fix it when the Portal is next
-touched, not in a round that is not about the Portal. It is the Record's own
-[*what's said matches what's shown*](09-PUBLISHED.md#ruling-10)
-rule applied to a control legend.
+**AND THE SUB IS STRUCK, WHICH CLOSES THE OTHER HALF OF THIS HOLE.** It read
+`SELECT · ONE ARMED` and two positions arm. Mike ruled 2026-08-20 that it is
+**deleted, not corrected to TWO**: the lamp under the latch already reports
+`FEED ARMED` / `NOT ARMED` for the channel the drum shows, and the readout
+already names that channel — so the count is a claim nobody needs and one that
+had already gone stale once. Doctrine 16. The
+[*what's said matches what's shown*](09-PUBLISHED.md#ruling-10) reading was
+right about the fault and reached for the smaller fix.
 
 ---
 

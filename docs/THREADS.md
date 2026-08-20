@@ -23,6 +23,35 @@ live here so they get woven in rather than lost.
 |---|---|---|---|---|
 | **THREAD-001** | The guys worked the whole weekend and knocked off just after midnight after the server clicked over and the incoming server got quiet. | 2026-08-17 | **LOOSE** | — |
 | **THREAD-002** | THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN | 2026-08-07 | **LOOSE** | — |
+| **THREAD-003** | The Quality man who declared the Portal unsafe to run was fired for it, without anyone ever saying so. | 2026-08-20 | **LOOSE** | — |
+
+---
+
+## WHERE THREAD-003 CAME FROM
+
+It arrived on **2026-08-20**, in writing, with Records 004 and 005 — the two
+entries that raise and approve **Req 0628**. The requisition is on the glass;
+the thread is what is behind it, and none of it is said in either Record.
+
+> The Quality man who declared the Portal unsafe to run was fired for it,
+> without anyone ever saying so. Req 0628 is his backfill: promoted from
+> inside, no new hires, and at the end of the chain the last seat quietly goes
+> unfilled — no net increase in head count. The company removed an obstacle
+> and saved a salary and no line item says either.
+>
+> Somebody moved up into a chair that emptied for a reason. That person exists
+> and has not appeared.
+
+**Mike, on what it is for:** *"The story is over, but the seed exists to grow
+another egg, chapter, etc."*
+
+**IT IS LOOSE AND IT IS ALREADY HALF-PUBLISHED**, which is the thing to
+notice: Record 004 prints *"Quality has declared it unsafe to run in any
+sandbox; permanently quarantined"* and both entries print *"No net increase in
+head count"*. **A reader has every visible piece and none of the meaning.** So
+this thread is not waiting to be introduced — it is waiting to be *paid off*,
+and a later Record contradicting it would contradict something already on the
+wall.
 
 ---
 
@@ -45,7 +74,10 @@ Searched for canon-but-unpublished material: every round log in `docs/`, the
 handoffs, the dictation instruments and their rescued browser stores, the magnet
 pile, `answers.json`, and `robots-record.js`.
 
-**Two threads, and only two.** The rest of what a search turns up is not canon:
+**Two threads, and only two** — *this was the count on 2026-08-17, and it is a
+finding about that search, not a running total.* THREAD-003 arrived three days
+later and is not a thing that search missed. The rest of what a search turns up
+is not canon:
 
 - **The logs are almost entirely PROCESS.** Every `MIKE: "..."` quote in them is
   a ruling about the museum — hide this, capitalise that, the lines are too

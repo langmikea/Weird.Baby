@@ -1894,7 +1894,8 @@
    "colorType": 2,
    "role": "shipped",
    "usedBy": [
-    "src/data/artists/portal.js"
+    "src/data/artists/portal.js",
+    "src/worker.js"
    ],
    "what": null,
    "quality": null,
@@ -4935,6 +4936,30 @@
    "usedBy": [
     "src/data/artists/portal.js"
    ],
+   "what": null,
+   "quality": null,
+   "qualityNote": null,
+   "verdict": null,
+   "revealArc": null,
+   "bucket": null
+  },
+  {
+   "id": "museum:public/held/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+   "uid": "A-f530821e12",
+   "repo": "museum",
+   "path": "public/held/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+   "ref": "/held/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+   "sha256": "ca04f2ffbea34d4c2e53f21ddeddf6f046e487efb7f9c495c1d522f0e0e39398",
+   "kind": "image",
+   "format": "png",
+   "bytes": 542670,
+   "container": "png",
+   "w": 3000,
+   "h": 2400,
+   "depth": 8,
+   "colorType": 6,
+   "role": "unreferenced",
+   "usedBy": [],
    "what": null,
    "quality": null,
    "qualityNote": null,

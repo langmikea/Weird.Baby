@@ -249,6 +249,31 @@ different mechanism for a different thing. **His eight notes left `robots.js`
 whole and verbatim** and are in his working copy in braces, at the paragraph they
 followed.
 
+## AN ASSET CULL ASKS WHAT BUILDS FROM A FILE (Mike, 2026-08-20 — STANDING)
+
+> **"An asset cull must ask what BUILDS from a file, not only what DISPLAYS
+> it. Both files were judged on how they looked standing alone."**
+
+Canonical: `docs/canonical/OPERATIONS.md` §7 Doctrine 27.
+
+**IT WAS PAID FOR TWICE ON CONSECUTIVE DAYS.** `monitor_base.png` (2026-08-12)
+and `MGK-TWIN_MONITOR_SCREEN_BEZEL.png` (2026-08-13) were culled as wall plates
+— correctly, as standalone pictures. `twin.html` **probes the first to decide
+whether the Portal exists at all** and **composites the second over the feed on
+every draw**. The Portal was dead from 12 August and nobody met it until the
+20th.
+
+**`assets:orphans` HAD THE FACT AND COULD NOT SAY THE CONSEQUENCE** — it
+reported the missing row the whole time, and a missing row reads as dead
+bookkeeping until something is still loading it.
+
+**SCOPED, NOT BUILT** (Mike's instruction): a reference check in `assets:cull`
+that refuses a delete when any source tree names the basename — **about half a
+round**, and it catches both files. A manifest of build inputs costs more and
+keeps the same hole. **Until then it is a human step:** grep the basename
+across both repos before a cull; if anything outside the asset table names the
+file, **the cull is a code change and not a cull.**
+
 ## LEAD WITH WHAT HE MUST DO OR DECIDE (Mike, 2026-08-09 — STANDING)
 
 > **"Lead with what he must do or decide. Everything else is omitted unless it

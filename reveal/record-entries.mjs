@@ -139,19 +139,43 @@ function strOf(node) {
    `shape` IS RETURNED RATHER THAN SWALLOWED because "which shape did you find"
    is a question somebody had to be able to ask; nobody could, which is why it
    took a screenshot to find this. `npm run record` prints it now. */
+/* [2026-08-20] A BODY ITEM MAY BE A LISTING: `{ pre: "..." }`. Record 004's
+   folder tree is a fixed-column block whose columns carry meaning, and
+   `.vp-rec-sect-body` is `white-space: pre-line`, which collapses runs of
+   spaces. `RecordEntry.jsx`'s SectionBody draws such an item as
+   `<pre class="vp-rec-sect-pre">`; this reader folds it to its own string so
+   the text is CARRIED rather than dropped — which is the whole point of the
+   fault this function returns.
+   THE SHAPE IS REPORTED AS `list+pre` RATHER THAN `list`, deliberately.
+   "Which shape did you find" is the question this function exists to answer,
+   and a listing that reads back as an ordinary list is a listing that a later
+   round-trip would flatten into a paragraph without anything saying so. The
+   Record editor edits `.vp-rec-sect-body` nodes and will not find this one;
+   it is MOTHBALLED for week one (the writing is in the workbook), and the
+   shape is how a future session is told before it re-opens that door. */
+function preOf(node) {
+  if (!node || node.type !== "ObjectExpression") return null;
+  const props = node.properties.filter(p => p.type === "Property" && !p.computed);
+  if (props.length !== node.properties.length || props.length !== 1) return null;
+  const k = props[0].key.name || props[0].key.value;
+  if (k !== "pre") return null;
+  return strOf(props[0].value);
+}
 function paragraphsOf(node) {
   if (!node) return { shape: "absent", body: [], fault: null };
   if (node.type === "ArrayExpression") {
     const body = [];
+    let sawPre = false;
     for (let i = 0; i < node.elements.length; i++) {
-      const v = strOf(node.elements[i]);
-      if (v === null) return { shape: "list", body,
+      let v = strOf(node.elements[i]);
+      if (v === null) { const pre = preOf(node.elements[i]); if (pre !== null) { v = pre; sawPre = true; } }
+      if (v === null) return { shape: sawPre ? "list+pre" : "list", body,
         fault: `is a list whose paragraph ${i + 1} is a `
              + `${node.elements[i] ? node.elements[i].type : "hole"} this reader cannot fold `
              + `into a string` };
       body.push(v);
     }
-    return { shape: "list", body, fault: null };
+    return { shape: sawPre ? "list+pre" : "list", body, fault: null };
   }
   const one = strOf(node);
   if (one !== null) return { shape: "string", body: [one], fault: null };

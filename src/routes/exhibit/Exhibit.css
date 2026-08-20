@@ -4943,6 +4943,26 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 .vp-rec-sect-body + .vp-rec-sect-body{margin-top:var(--rec-para)}
 .vp-rec-sect-doors{display:flex;flex-wrap:wrap;gap:10px 16px}
 
+/* === [2026-08-20] A LISTING INSIDE A SECTION ==============================
+   Record 004's folder tree. `pre`, NOT `pre-wrap`: a fixed-column listing that
+   reflows is not a listing, and the columns here carry the meaning - a file
+   hanging under the file above it belongs to the directory on that row's left.
+   IT IS MACHINE OUTPUT, SO IT WEARS THE TYPEWRITER. T2/T3's rule is that the
+   Record's plain face governs THE WRITER'S WORDS; the dateline, the stamp and
+   the mark rail are already Courier for the same reason a pasted directory
+   listing is - nobody wrote them in a sentence.
+   IT SCROLLS INSIDE ITSELF AND THE PAGE NEVER DOES. The widest row is 52
+   characters and will not fit 390px at body size, so the box takes the
+   overflow - the house rule for any wide block.
+   SCOPE IS THE RECORD, like every `.vp-rec-*` rule (A4): nothing shared is
+   retuned to serve one tree. */
+.vp-rec-sect-pre{margin:0;padding-left:var(--rec-indent);
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--fs-body) * .86);line-height:1.45;letter-spacing:0;
+  white-space:pre;overflow-x:auto;color:var(--wb-gold-lo)}
+.vp-rec-sect-body + .vp-rec-sect-pre,
+.vp-rec-sect-pre + .vp-rec-sect-body{margin-top:var(--rec-para)}
+
 /* ---- THE DOORS.
    A door sets IN the sentence, so it must not break the line's rhythm: it is
    inline-flex with baseline alignment, it takes the reading face rather than

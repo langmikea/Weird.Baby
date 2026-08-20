@@ -33,6 +33,7 @@ sentences already written or already published come first.
 | [K-05](#k-05) | Which units are which — three registries | Manual Appendix A and Appendix C; **the published Record 003** |
 | [K-06](#k-06) | The Everyday vs the Everyman | **Published** in Record 003; the bible registry says the other |
 | [K-07](#k-07) | Inclination exists in specs and in no firmware | Manual SP 7-12, Table B-3 |
+| [K-26](#k-26) | The engine's compile date — 1945 or 1946 | Manual Table C-1's COMPILE DATE column |
 
 ---
 
@@ -728,6 +729,80 @@ the record says the company works out what it has in 1965, and the record also
 says Mr. ABEAL the man knew in 1964, before the gavel fell. **Both stand
 forever.** Mike's verdict for the record: *"ABEAL knew it. Dirty bastard.
 Liar."*
+
+---
+
+## K-25 · MGK-NIAC NAMES TWO THINGS — **CLOSED, NO ACTION, 2026-08-20**
+<a id="k-25"></a>
+
+**RULED: nothing changes. MGK-NIAC inside the unit is the engine's own name and
+stays.**
+
+> **MIKE:** *"No change. The rename question was Ops misreading two things as
+> one."*
+
+**AND THE MISREADING IS THE ENTRY.** Ops read one word appearing in two places
+as a collision that had to be resolved on the glass. It is not one: **a
+mainframe and an answer engine may share a name because the engine is the
+mainframe's, carried onto the portable.** That is what `SPEC_INVENTORY` §D.4
+already says — a *preloaded* engine, on the VIIIp — and reading `preloaded` as
+a contradiction rather than as a provenance is where this row came from.
+
+**WHAT WAS WRITTEN HERE BEFORE, NAMED ONCE (Doctrine 24):** *"MGK-NIAC is the
+mainframe. The answer engine gets a new label,"* with a shortlist of candidate
+labels at `_night-20260820/ENGINE_RENAME_OPTIONS-20260820.md`. **Nothing was
+applied and no label was ever on the glass.** The two canon lines below stand
+exactly as they did.
+
+**The collision was real and both halves are canon**, in one file:
+
+> `STORY_BIBLE.html`, **CANON · NIAC-first, 2026-07-18** — *"The mainframe is,
+> and was only ever, MGK-NIAC; 'VIII/VIIIp' is ABEAL's 1965 rebrand."*
+>
+> `STORY_BIBLE.html`, **CANON · engines** — *"Named engines stand: MGK-NIAC
+> (the pure twenty), MGK-v2.0, MGK-65."*
+
+and `SPEC_INVENTORY` §D.4 lists MGK-NIAC as a **preloaded answer engine** with a
+compile date, sitting on the VIIIp.
+
+**BOTH LINES STAY TRUE AND NOTHING IS PRINTED DIFFERENTLY.** The mainframe keeps
+the name; row 0 of the engine list — the classic twenty — keeps it too.
+
+**THE ONE OBSERVATION WORTH KEEPING** is the one that raised the row, and it
+survives the ruling in a milder form: channel 3 is the MGK-VIIIp, and the engine
+list on it offers *MGK-NIAC*, whose own two channels (1 and 2) are engraved and
+refuse. **That is the engine's provenance showing through the machine it was
+loaded onto, not an error** — and channels 1 and 2 refusing is the same fact
+said the other way.
+
+**AND THE ENGINE ITSELF WAS NEVER WRONG.** Mike: *"the most basic Magic 8-Ball
+Simulator, on the NIAC and the VIIIp."* Row 0 is the right engine for a
+first-boot machine — **and, ruled 2026-08-20, so is its name.** *"on the NIAC
+and the VIIIp"* is the whole answer: one engine, two machines, one name.
+
+---
+
+## K-26 · THE ENGINE'S COMPILE DATE — 1945 OR 1946
+<a id="k-26"></a>
+
+**Surfaced by K-25 and left open.** K-25 closed with no action on 2026-08-20 and
+**this row did not close with it**: it was never really about the label. Appendix
+C's Table C-1 has a COMPILE DATE column and has to print one value, and that is
+true whatever the engine is called.
+
+| account | source |
+|---|---|
+| **1945** — *"Preloaded answer engines with compile dates: MGK-NIAC (**1945**, original M8B responses only)"* | `SPEC_INVENTORY` §D.4; and §D.8's matrix reads *"compile dates 1945/1946/1965×4"* |
+| **1946** — *"NIAC = **the pure 1946 M8B twenty**; others voice-skinned."* | `SPEC_INVENTORY` §D.8 |
+
+**They may not be a contradiction at all**, and that is the thing to rule: 1945
+can be when the engine was compiled and 1946 what its answer set is — the real
+Magic 8 Ball shipped in 1946, which is also the mothball year and the
+Carter/Bookman egg. **Nobody has said whether the corpus means one date or two
+facts.**
+
+**WHAT DEPENDS ON IT.** Appendix C's Table C-1 has a **COMPILE DATE** column and
+has to print one value. See [MANUAL](07-MANUAL.md#structure).
 
 ---
 

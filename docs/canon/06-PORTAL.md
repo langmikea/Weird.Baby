@@ -95,19 +95,43 @@ a label, not a caption.**"*
 
 ### The drum
 
-**Legend `FEED`. Sub `SELECT · ONE ARMED` — and the sub is wrong by one word,
-knowingly** ([H-22](HOLES.md#h-22)). Positions read **top to bottom.**
+**Legend `FEED`. The sub is STRUCK** — ruled 2026-08-20. It read
+`SELECT · ONE ARMED`, two positions arm, and Mike ruled it deleted rather than
+corrected to TWO: the lamp under the latch already reports `FEED ARMED` /
+`NOT ARMED` for the channel the drum is showing, and the readout above it
+already names that channel. A count that went stale once under a stepper will
+go stale again. Doctrine 16. `drum.sub` is undeclared, not removed, and
+`Exhibit.jsx` renders it conditionally, so nothing draws and no gap is left.
+**[H-22](HOLES.md#h-22) half-closes:** its sub complaint is gone and `CH-a` goes
+with `DETAIL`, but **channels 5 to 8 still wear Ops' words** and the hole stays
+open for them. Positions read **top to bottom.**
 
 | ch | id | engraved | arms | what it opens |
 |---:|---|---|---|---|
 | 1 | `niac-1` | **MGK-NIAC** | no | *"This feed is not available."* |
 | 2 | `niac-2` | **MGK-NIAC** | no | *"This feed is not available."* |
-| **3** | `standard` | **STANDARD** | **yes** | the twin |
-| **4** | `idling-updated` | **DETAIL** | **yes** | `MGK-TWIN_MONITOR_CLOSE_UP.png` — the close-up |
+| **3** | `standard` | **MGK-VIIIp** | **yes** | the twin |
+| **4** | `idling-updated` | **MGK-VIIIp (zoom)** | **yes** | `MGK-TWIN_MONITOR_CLOSE_UP.png` — the close-up |
 | 5 | `boot-playback` | **COLD START** | no | *"This feed is not available."* |
 | 6 | `off-first-boot` | **FIRST RUN** | no | *"This feed is not available."* |
 | 7 | `last-state` | **LAST STATE** | no | *"This feed is not available."* |
 | 8 | `test-bench` | **TEST BENCH** | no | *"This feed is not available."* |
+
+**CHANNELS 3 AND 4 CARRY THE MACHINE'S NAME — MIKE, 2026-08-20.** `STANDARD`
+and `DETAIL` are struck. *"Both channels show the same machine; one is
+closer."* The words they replace **described a feed rather than naming what you
+are looking at**, which is the one thing a drum position is for — and it makes
+the barrel one kind of thing, since 1 and 2 have carried a machine's name and
+nothing else since R6. **`CH-a` closes:** `DETAIL` was Ops' word, registered as
+such because the engraved legends are Mike's to write, and he has written them.
+**No `id` moved**, for the third time (P5, CH4): the `id` is what the latch puts
+in the event and what a twin URL carries.
+
+**AND THE RECORD'S FOLDER NAMES DO NOT FOLLOW.** Record 002's Tuesday manifest
+publishes `PORTAL/CH3-STANDARD/` and `PORTAL/CH4-DETAIL/`, and Record 004
+prints the same tree. **Those are the far end's own directory names on a 1965
+disk; these are the museum instrument's engraved legends.** A disk and a badge
+may say different things about one channel, and here they deliberately do.
 
 **THE NUMBERING IS AN EGG AND IT MUST NOT BE EXPLAINED ON THE GLASS.** Mike's
 instruction: the feed positions renumber — **MGK-NIAC takes 1 and 2 and MGK-VIIIp
@@ -155,8 +179,28 @@ it top-shelf visible."*** It sits at index **1** — second in the deck — *"th
 position that is both top-shelf and not the landing."* The two machines keep
 their canon order behind it: **the original mainframe, then the portable.**
 
-**Three tracks:** `Portal` (the door) · `Portal Feed Controller` (the panel) ·
-`FAQ`.
+**Two tracks:** `Portal` (the panel) · `FAQ`. It was three until 2026-08-20.
+
+**AND MIKE HAS RULED THEM TWO — IT IS A RENAME, NOT A KEEP.**
+
+> **The tracklist DELETES `Portal` and RENAMES `Portal Feed Controller` to
+> `Portal`. One track, not two.**
+
+Ruled 2026-08-13, re-confirmed 2026-08-20, **APPLIED 2026-08-20**. The album is
+two tracks now: `Portal` (the panel, `id: portal`) and `FAQ`.
+
+**OPS RECORDED THIS WRONG ON 2026-08-20 AND THE CORRECTION IS THE ENTRY.** It
+was written here and in two round reports as *"drops `Portal`, keeps `Portal
+Feed Controller`"* — which keeps the panel's own name on the glass and is the
+opposite of what he ruled. **The surviving track is called `Portal`.** The `id`
+on the panel track is already `portal`, so the change is a title and a deletion
+and nothing else.
+
+**WHAT THE DELETION COSTS, named because it was a deliberate build:** the
+`portal-door` track was the one Ops judgement in this album (`P-b`) — Mike named
+a row and did not say what stood behind it, and Ops made it the door so it would
+not be the dead control Doctrine 11's corollary forbids. **His ruling supersedes
+that judgement.** The LATCH on the panel is already the door that opens the feed.
 
 **Its FAQ, both questions moved word for word from the public machines' FAQs:**
 
