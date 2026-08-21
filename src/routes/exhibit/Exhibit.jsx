@@ -4034,6 +4034,11 @@ export default function Exhibit({ artist, open = null }) {
   const thumbVi    = thumbTi >= 0 ? ([...(selVis[thumbTi] ?? new Set([0]))][0] ?? 0) : 0;
   const thumbVid   = thumbTrack?.videos?.[thumbVi] ?? thumbTrack?.videos?.[0];
   const hasVideo   = curVideo !== null;
+  /* [2026-08-20] IS THE ROW BEING LOOKED AT THE ROW THAT IS PLAYING? The one
+     question both viewer overlays turn on — see the ruling at the render. It is
+     deliberately NOT `hasVideo`: something playing elsewhere no longer decides
+     what this frame shows. */
+  const showingPlaying = hasVideo && playingThisAlbum && playingTrack === activeTrack;
   /* [W1/W7 2026-08-02] TWO FACE MODES, ONE RENDER PATH.
      `selFace` is the SELECTED track's own face; `fallbackFace` is E2's
      original derivation (selected face, else the album's first face, so a
@@ -4367,7 +4372,32 @@ export default function Exhibit({ artist, open = null }) {
                   {/* Audio-only overlay — hides video when browsing a different
                       album, or when the current source is an audio track (no
                       video frame to show) */}
-                  {hasVideo && (!playingThisAlbum || isAudioSrc) && (
+                  {/* ═══ [2026-08-20] THE VIEWER FOLLOWS FOCUS, ALWAYS ═══════
+                      MIKE RULED A: focus moves the picture; playback keeps
+                      going underneath, whatever it is. B — "a playing video
+                      blocks the viewer from moving" — was the behaviour and is
+                      overruled.
+
+                      IT NEEDED NO NEW MECHANISM AND NO CUE. `.vp-thumb` has
+                      always been a poster IMAGE drawn OVER the player, and a
+                      poster is a plain `<img>` from `i.ytimg.com` — wholly
+                      independent of the player object. **Showing a picture
+                      never required cueing, so cueing never had to stop
+                      anything.** The cue guard is untouched and V3 stands: the
+                      guard was conflating "what is playing" with "what is
+                      shown", and this separates them.
+
+                      ONE PREDICATE DRIVES BOTH LAYERS, which is why they move
+                      together. `showingPlaying` asks: is the row I am LOOKING
+                      at the row that is PLAYING? Only then does the viewer show
+                      the playing thing — the bare player for a video, the
+                      album art plus "audio playing" for an audio track.
+                      Otherwise the focused row's own picture is drawn over the
+                      top and the player keeps running, unseen and audible.
+                      They must be gated together because `.vp-audio-only` is
+                      `z-index:3` and `.vp-thumb` is `z-index:1`; changing only
+                      the thumb would have left the album art covering it. */}
+                  {showingPlaying && isAudioSrc && (
                     <div className="vp-audio-only">
                       {album.art ? (
                         <img className="vp-ao-art" src={album.art} alt={album.title} />
@@ -4385,7 +4415,7 @@ export default function Exhibit({ artist, open = null }) {
                   )}
 
                   {/* Thumbnail overlay — visible when no video is playing */}
-                  {!hasVideo && thumbVid && !(flatFaces && showFace) && (
+                  {!showingPlaying && thumbVid && !(flatFaces && showFace) && (
                     <div className="vp-thumb"
                       onClick={() => thumbTrack && handleTrackSelect(activeDisplay, album.tracks.indexOf(thumbTrack))}>
                       {/* [W3 2026-08-02] COLOR VIA EMBEDS. A wing declaring
