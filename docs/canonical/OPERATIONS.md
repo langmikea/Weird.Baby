@@ -1877,6 +1877,30 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
       so it is only as good as the hand that keeps it, whereas a reference
       check reads the code that actually loads the file.
 
+    **AND THE SAME QUESTION ASKED THE OTHER WAY ROUND HAS THE SAME ANSWER:
+    READ THE GENERATORS, NOT THE OUTPUTS** (2026-08-20, the round mark).
+    Asked whether a bare Weird.Baby mark existed, Ops opened the two COVERS
+    that carry it, found the mark composited onto a beige ground with the baby
+    breaking the circle, and reported that no separable mark existed anywhere.
+    **It existed, at `public/WeirdBaby_PhotoID.png`, 2048x2048 RGBA with a
+    transparent margin, and it is named on LINE 26 of `make_robots_cover.py`
+    and line 54 of `make_house_covers.py` as `MARK`** — opened
+    `.convert("RGBA")` and passed to a helper whose docstring reads *"Bounding
+    box of the mark's own ink, ignoring transparent margin."* The transparency
+    was declared in the code the whole time.
+    **THE RULE IS MECHANICAL: a script that composites a thing onto a ground
+    MUST have that thing as a separate input.** So when the question is *does
+    this asset exist*, the generator's inputs are the answer and its outputs
+    are not. It is Doctrine 27's own class read backwards — there, an asset was
+    judged by how it looked standing alone and its role as a build INPUT was
+    missed; here, an asset was judged by the OUTPUTS it appears in and its
+    existence as an input was missed. **Both are the same failure to ask what
+    builds from what.**
+    **AND A CASE-SENSITIVE GREP IS NOT A SEARCH.** The same round then reported
+    a tile "does not exist" on a grep for `Current Project`; it is
+    `CURRENT PROJECTS`, in caps, in the file already open. Search
+    case-insensitively before concluding absence.
+
     **UNTIL ONE IS BUILT, IT IS A HUMAN STEP AND IT IS ONE LINE:** grep the
     basename across both repos before a cull, and if anything outside the
     asset table names the file, the cull is a code change and not a cull.

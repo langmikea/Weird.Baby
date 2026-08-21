@@ -288,6 +288,22 @@
    "textInImage": true,
    "text": "PRELIMINARY (rubber stamp, struck at an angle across the appendix head) | Appendix B | MODEL MGK-VIIIp APPENDIX B BIAS SETTINGS B-1.    GENERAL. This appendix carries the Bias Settings of the instrument. They are of two kinds and they are not interchangeable. The first kind shapes the determination. Polarity, Clarity and Inclination are set by the keeper, are enabled, set and adjusted by the procedure of paragraph B-3, and are given in Tables B-1, B-2 and B-3. They alter what the instrument says. They do not decide whether it says anything. The second kind is the communications parity bias. It is not set to a preference. It is set to agree with the far end, and until it agrees the instrument holds its peace. Four settings. The unit will not speak until all four agree with the far end. The settings are: 1  PARITY    ODD / EVEN 2  DUPLEX    HALF / FULL 3  WORD      7 BIT / 8 BIT 4  STOP      1 / 2 The values are not given in this manual. They are established at the far end and are entered on the installation record at the time the link is made. An instrument moved to another far end is to be set again. A disagreement in any one of the four is reported as a parity bias setting mismatch. The report names the condition and does not name the setting at fault, there being no means at this end of knowing which of them is wrong. B-3.    ENABLE, SET, ADJUST. [ TEXT REQUIRED ] ABEAL 8P-OMI-1 | B-1 || IN BALLPOINT, over the printed page: the WRONG option in each of the four settings is struck through, leaving EVEN / FULL / 7 BIT / 1 standing. In the right margin beside the settings block, CHECK W/ FAR SIDE FIRST. Beside the last line of the paragraph below it, SEE 7-14. Beside B-3's [ TEXT REQUIRED ], ASK ENGINEERING. An initialling monogram at the foot, deliberately illegible.",
    "inspected": "2026-08-19 - the printed half is transcribed from the generator's own layout ops, as scan-31-a is; the written half was read off the render at full resolution and against the handwriting sheet it was cut from."
+  },
+  "3cf2a981ca0b5e52": {
+   "ref": "/images/wb/steven-tyler-harmonica.jpg",
+   "c": "MIKE",
+   "s": "A DERIVATIVE, NOT A SEPARATE ORIGINAL: a crop of the museum's own /images/wb/steven-tyler-setlist-harmonica.jpg (register 1a156bc33391d1a6), which is Mike's photograph of a thing he owns, supplied 2026-08-17. The crop is the harmonica that sits below the framed setlist in that same shot — box (955,935)-(1565,1272) of 1872x1278, written 610x337. The museum already holds and serves the source at a public address, which is the same relation the manual scans have to their pages; no new photograph was needed.",
+   "textInImage": false,
+   "text": null,
+   "inspected": "2026-08-20 — the crop was cut, read at full size and CHECKED FOR LETTERING BEFORE PLACEMENT rather than assumed. The setlist's own lettering falls out of frame entirely; what remains is the harmonica's embossed top plate, which does not resolve as letters at this size. Hence textInImage false, against the source row's true."
+  },
+  "32ccb45dd84c8405": {
+   "ref": "/images/wb/weird-baby-mark.png",
+   "c": "MIKE",
+   "s": "A DERIVATIVE, NOT A SEPARATE ORIGINAL: the house's own round mark, /WeirdBaby_PhotoID.png (2048x2048 RGBA), put through the same two operations the cover generators perform on it — trim_alpha() then a LANCZOS resize — at 540x544 for a plate that draws 256-296px. The mark is named as MARK on line 26 of tools/make_robots_cover.py and line 54 of tools/make_house_covers.py and is the source of every house cover.",
+   "textInImage": true,
+   "text": "The Weird.Baby wordmark across the mark: Weird.Baby. The house's own logotype, not museum copy.",
+   "inspected": "2026-08-20 — derived and rendered on the live CURRENT PROJECTS tile before it was made final. Two alternatives (mark on the covers' beige ground; mark inverted) were rendered first and rejected on a MEASUREMENT: .vp-prof-plate computes to rgb(250,248,243), near-white, so the dark-card premise behind inverting was false."
   }
  }
 }

@@ -548,3 +548,123 @@ lint **9/8 = baseline** · build green · **launch build green** · provenance
 **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate`
 **PASS** · `docs:numbers` **PASS** · `reveal:day` **nothing to move** ·
 `assets:orphans` **13, unchanged**.
+
+---
+
+## 12 — SIX THINGS ON /wb
+
+**Item 2 is deferred and backlogged. Item 6 is blocked on a file that does not
+exist.** The other four are built and verified.
+
+### 1 — the focus preview, and a defect that predated the task
+
+**It is one flag, because the existing condition already stated Mike's rule.**
+`Exhibit.jsx` reads `thumbFromVideo && thumbVid.ytId ? poster : album.art ?
+cover : ...`, so a rendition with **no `ytId` falls through to the cover by
+itself**. The wing was simply never opted in — until 2026-08-20 no /wb track had
+a video. `/hr` and `/foundation` do not declare the flag and are untouched;
+`/wal` declared it in W3 and is untouched.
+
+**AND THE FLAG WOULD ONLY HAVE BEEN RIGHT BY ACCIDENT.** `thumbVid` read
+`videos[0]` — the track's FIRST rendition — while the picker beside it chose a
+different one. **Every track in the museum had exactly one rendition until
+today**, so nothing could ever show it; Coconuts is the first with two, and its
+video happens to be first. **This is a defect that existed before this task**,
+found in passing and fixed here: `thumbVid` now reads the same
+`albumSelectedVis` set the picker writes, with the same `new Set([0])` default.
+
+**Verified on the page:**
+
+| | thumb drawn |
+|---|---|
+| focus Coconuts (video rendition) | `i.ytimg.com/vi/c1vODrVXOg0/maxresdefault.jpg` — **the video's own frame**, nothing playing, no bar |
+| focus E.D. Yahdah (audio) | `/images/wb/vol1-cover.png` — **the cover** |
+| **FIRST PASS selected on Coconuts** | `/images/wb/vol1-cover.png` — **the cover, not the poster** |
+| video rendition re-selected | back to the video's frame |
+
+*(The picker starts playback when nothing is running — V3's ruled behaviour, not
+a side effect of this change — so the third reading was taken after Stop.)*
+
+### 3 — the captions
+
+**Grey and italic, and still not a fifth field.** `::first-line` cannot do this:
+it styles the first RENDERED line, so a caption that wraps at tile width would be
+half grey. The split is derived instead — the caption is the first line of
+`body`, exactly where 2026-08-17 put it, and **no data changed.**
+
+**ONLY A TILE WITH A PICTURE HAS A CAPTION**, which is the rule and not a guard:
+a caption labels an object, and the object is the photograph. Without that test
+the second Steven Tyler tile — a journal entry — would have had its first
+sentence silently greyed into a caption for a picture that does not exist.
+
+Measured: five captions, `Arial / italic / rgb(95,92,83)` against the body's
+`rgb(33,31,28)`, same face and size.
+
+### 4 — the card font, and why the token did not move
+
+`.vp-prof-body` takes `--wb-plain`. **`--wb-read` does not move.** Fraunces is
+**Mike's own pick** — the v28_3 pairing he chose for the HR deck — introduced in
+R2 *because he twice said the body type was hard to read*, and it is the reading
+face on twelve other surfaces. Changing the token would have undone R2 to answer
+a complaint about one card.
+
+**The card is now DELIBERATELY out of family with the site's reading matter, by
+his ruling.** It is recorded in the rule itself so a later round finding one card
+in Arial is looking at a decision rather than a drift.
+
+### 5 — the harmonica crop
+
+`steven-tyler-harmonica.jpg`, 610x337, 25 KB — box (955,935)-(1565,1272) of the
+1872x1278 source. **A derivative, filed naming its source** (`assets.json`
+`3cf2a981ca0b5e52` -> register `1a156bc33391d1a6`), class MIKE, so it reads as a
+crop and never as a separate original. Same relation the manual scans have to
+their pages; no new photograph was needed.
+
+**`textInImage` IS `false`, MEASURED RATHER THAN ASSUMED.** The crop was cut,
+read at full size and checked for lettering **before** it was placed: the
+setlist's own lettering **falls out of frame entirely**, and what remains is the
+harmonica's embossed top plate, which does not resolve as letters at this size.
+The source row carries `true`; this one carries `false`, and the difference is
+the point of taking the measurement.
+
+**It goes on the porch tile, not a third one** — that tile is the journal entry
+about the honking, it was the only Steven Tyler tile without a picture, and his
+caption is about the honking rather than about Las Vegas. Caption verbatim:
+**`Honkin' on Bobo in Macungie`**.
+
+### 6 — NEITHER FILE IS THE ROUND MARK
+
+**Both are full album covers, and I opened both before saying so.**
+
+| file | what it actually is |
+|---|---|
+| `public/robots/art/wbr-cover-logo.png` 1200x1200 | beige ground, thin border, the round mark, then **ROBOTS** / *PURVEYORS OF THE WEIRD* |
+| `public/images/wb/about-cover.png` 1200x1200 | the same construction, the round mark, then **ABOUT THE ARTIST** / *WEIRD.BABY MUSIC* |
+
+**The mark is not separable by a crop.** In both covers the baby **breaks the
+circle at top and bottom onto the beige ground**, so a crop to the mark's
+bounding box brings that ground with it — you get the mark *on a beige square*,
+not a free-standing logo, and the profile plate is a dark card with a border.
+
+**Nothing was derived, because there is nothing clean to derive from.** It needs
+either Mike's ruling that a beige square is acceptable, or a transparent PNG of
+the bare mark from him — the same shape as the bezel, which he makes himself.
+
+### RULED AND RECORDED
+
+**No hashtags and no links on the names.** Written into the `profile` array's own
+comment block in `weird-baby.js`, beside the four names, rather than only here —
+a rule about four strings belongs where the strings are. The half most likely to
+be "fixed" is called out: **Hunter Root has a room in this building and gets no
+door from here**, and that is ruled rather than overlooked.
+
+### Rows and gates
+
+Register **1 added, 1 pruned, 0 surviving changed, 0 broken chains** (the pruned
+row is the porch tile's old body, re-hashed because his caption joined the
+string — not one character of the existing prose moved). `assets.json` **1 added**.
+
+lint **9/8 = baseline** · build green · **launch build green** · provenance
+**PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate`
+**PASS** · `docs:numbers` **PASS** · `reveal:day` **nothing to move** ·
+`assets:orphans` **13, unchanged**.

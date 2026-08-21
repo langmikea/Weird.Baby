@@ -457,6 +457,18 @@ const spine = [
              Steven Tyler tile is a journal entry about a porch and CURRENT
              PROJECTS is a plan, and neither is an object anybody owns. The
              renderer's `img` is optional precisely so a card can be text. */
+          /* ═══ [2026-08-20] NO HASHTAGS AND NO LINKS ON THESE NAMES ═══════
+             MIKE, ruling on both at once: **"Neither # or links."** P!NK,
+             Steven Tyler, Rod Stewart and Hunter Root are **plain text** and
+             stay plain text.
+             **HUNTER ROOT HAS A ROOM IN THIS BUILDING AND GETS NO DOOR FROM
+             HERE**, which is the half a later round is most likely to "fix":
+             an artist the museum already exhibits, named on a card, with a
+             wing one click away, is exactly the link somebody adds without
+             asking. It is ruled, not overlooked.
+             It is recorded HERE, beside the names, rather than only in a round
+             log - a rule about four strings belongs where the four strings
+             are. */
           profile: [
             /* ═══ [2026-08-17] THE FOUR CAPTIONS, HIS WORDS, FOLDED INTO THE
                    TILE TEXT — THERE IS NOWHERE ELSE FOR THEM TO GO ═══════════
@@ -524,9 +536,35 @@ const spine = [
                 + "stage in Las Vegas, NV January 2020. Then Steven tried to "
                 + "get Papa Weird.Baby to say something into the mic during the "
                 + "show. (Papa Weird.Baby panicked. Wicked awkward!!!)" },
+            /* ═══ [2026-08-20] THE HARMONICA GETS ITS OWN PICTURE ═══════════
+               MIKE asked for a second Steven Tyler photograph: a zoom on the
+               harmonica, which sits below the framed setlist in the shot the
+               tile above already uses.
+
+               IT IS A CROP AND THAT IS HONEST HERE. `steven-tyler-harmonica.jpg`
+               is a derivative of `steven-tyler-setlist-harmonica.jpg` - a
+               photograph the museum owns and already serves at a public address
+               - which is the same relation the manual scans have to their pages.
+               It is filed in `assets.json` naming its source, so it reads as a
+               derivative and never as a separate original. No new photograph was
+               needed from Mike.
+
+               IT GOES ON THE PORCH TILE RATHER THAN A THIRD ONE. This tile is
+               the journal entry about Steven Tyler honking on Mike's front
+               porch, it is the only Steven Tyler tile with no picture, and his
+               caption is about the honking rather than about Las Vegas. A third
+               tile would have split one story across two.
+
+               `textInImage` IS MEASURED, NOT ASSUMED - which is what the crop
+               was checked for before it was written. **The setlist lettering
+               falls out of frame entirely**; what is left is the harmonica's own
+               embossed top plate, which does not resolve as letters at this
+               size. It reads `false`. */
             { label: "Steven Tyler",
+              img: "/images/wb/steven-tyler-harmonica.jpg",
               body:
-                "Spring of 2020: Mike journaled that when Steven Tyler comes to "
+                "Honkin' on Bobo in Macungie\n"
+                + "Spring of 2020: Mike journaled that when Steven Tyler comes to "
                 + "honk out 'Amazing Grace' with Mike on his front porch, it "
                 + "signifies the Weird.Baby Foundation is making a difference." },
             { label: "Rod Stewart",
@@ -545,7 +583,31 @@ const spine = [
                 + "Hunter was playing that night. Burned some time out back "
                 + "with the band. (Why two at once? Because Papa Weird.Baby "
                 + "panicked.)" },
+            /* ═══ [2026-08-20] THE ROUND MARK, BARE — MIKE RULED C ═════════
+               `weird-baby-mark.png` is `public/WeirdBaby_PhotoID.png` — the
+               house's own mark, 2048x2048 RGBA — put through the SAME TWO
+               OPERATIONS the cover generators already perform on it:
+               `trim_alpha()` then a LANCZOS resize. 540x544, transparent,
+               177 KB, derived at 2x because the plate draws 256-296px
+               depending on where the grid reflows.
+
+               NO BAKED-IN GROUND, AND THAT WAS A MEASUREMENT RATHER THAN A
+               PREFERENCE. Two variants were rendered on this tile first: the
+               mark on the covers' beige, and the mark inverted. **The premise
+               behind inverting it was wrong** — `.vp-prof-plate` computes to
+               `rgb(250,248,243)`, near-WHITE, so there was never a dark card
+               for black ink to disappear into, and the inverted variant was
+               the one that fought its ground (white ink on near-white, and a
+               photographic negative of the baby, because half this mark IS a
+               photograph). The plate is within four points of the covers' own
+               `PAPER (217,213,202)`, so the bare mark reads the same with one
+               less file and no second ground.
+
+               THE SOURCE IS NAMED, NOT COPIED. This is a derivative of an
+               asset the museum already ships at `/WeirdBaby_PhotoID.png`; the
+               `assets.json` row says so, the way the harmonica crop does. */
             { label: "CURRENT PROJECTS",
+              img: "/images/wb/weird-baby-mark.png",
               body:
                 /* [2026-08-16] `is earning` -> `is learning`, HIS RULING on the
                    flag. It was raised and carried as typed for one round, which
@@ -824,6 +886,29 @@ export const weirdBaby = {
   spine: (launched() ? spine.filter(a => !HIDDEN_AT_LAUNCH.has(a.id)) : spine)
     .map(a => ({ ...a, tracks: a.tracks.filter(t => !HELD_TRACKS.has(t.id)) })),
   facts: [], // PUV stays empty for v0 (fact model is MV-side, deferred)
+  /* ═══ [2026-08-20] THE FOCUS PREVIEW: A VIDEO ROW SHOWS ITS OWN FRAME ══════
+     MIKE, having focused Coconuts and seen no preview: **a VIDEO row with focus
+     shows the video's own frame; an AUDIO row keeps the album cover, because it
+     is the only picture that track has.**
+
+     ONE FLAG, AND IT DOES NOT STRIP THE COVER FROM THE FIVE AUDIO ROWS - which
+     was the thing to check before setting it, and the reason the answer is a
+     flag rather than a branch. `Exhibit.jsx` already reads
+     `thumbFromVideo && thumbVid.ytId ? <the video's poster> : album.art ? <the
+     cover> : ...`, so a rendition with **no `ytId` falls through to the cover by
+     itself.** The existing condition already states Mike's rule; this wing was
+     simply never opted in, because until 2026-08-20 no /wb track had a video.
+
+     IT IS SCOPED TO THIS WING AND NOTHING ELSE MOVES. /hr and /foundation do not
+     declare the flag and keep the house cover; /wal declared it in W3 and is
+     untouched.
+
+     AND IT ONLY BECAME TRUE TODAY. The flag alone would have been right by
+     accident: `thumbVid` read `videos[0]`, so it answered for the track's FIRST
+     rendition and not the chosen one. Coconuts' video is first, so the default
+     looked correct while FIRST PASS still drew the video's frame. The reader
+     follows the picker now - see the `thumbVid` note in `Exhibit.jsx`. */
+  thumbFromVideo: true,
   /* ═══ [M 2026-08-14] THE WING OPENS ON THE MUSIC ═══════════════════════════
      MIKE: "/wb — opens on The Best of Weird.Baby Vol. 1, not About the Artist."
 

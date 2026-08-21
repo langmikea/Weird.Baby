@@ -3599,9 +3599,30 @@ button.vp-bill-act:hover,button.vp-bill-act:focus-visible{
    surface, not a new idea. `pre-line` still collapses runs of spaces and still
    wraps a long line: it honours the newline and changes nothing else, so every
    existing single-paragraph card is byte-identical on the glass. */
-.vp-prof-body{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
+/* ═══ [2026-08-20] THIS CARD IS DELIBERATELY NOT THE SITE'S READING FACE ═════
+   MIKE RULED IT, having said more than once that he disliked the card's type.
+   **`--wb-read` DOES NOT MOVE AND MUST NOT BE "FIXED" BACK HERE.** Fraunces is
+   HIS OWN PICK — the v28_3 pairing he chose for the HR deck — introduced in R2
+   *because he twice said the body type was hard to read*, and it is the
+   museum's reading face on twelve other surfaces: the FAQ lines, the Record's
+   lead, the trail notes, the billboard, the quote cards. Changing the token
+   would have undone R2 to answer a complaint about one card.
+   SO THE CHANGE IS THIS RULE ONLY. The card takes `--wb-plain`, the Record's
+   register - Arial-class, no webfont, nothing to load. **A later round finding
+   one card out of family with the other twelve is looking at a ruling, not a
+   drift.** `font-optical-sizing` goes with the face that had the axis. */
+.vp-prof-body{margin:0;font-family:var(--wb-plain);
   font-size:var(--fs-small);line-height:1.5;letter-spacing:.005em;
   color:var(--wb-gold);white-space:pre-line}
+/* ═══ [2026-08-20] THE OBJECT CAPTION. MIKE: "slightly grey, italic. They are
+   labels for an object, not the tile's voice."
+   IT TAKES THE BODY'S FACE AND SIZE and changes only what he named, so the two
+   read as one card rather than two registers stacked. `--wb-gold-mute` is the
+   house's existing dimmer - the same value the tile's own LABEL already uses
+   one line above it - rather than a new grey minted for four lines. */
+.vp-prof-cap{margin:0;font-family:var(--wb-plain);
+  font-size:var(--fs-small);line-height:1.5;letter-spacing:.005em;
+  font-style:italic;color:var(--wb-gold-mute);white-space:pre-line}
 
 /* the SIDEBOXES: boxed asides. They are what makes it read as a magazine page
    rather than as a document - a ruled box beside running text is the oldest

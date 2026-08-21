@@ -3986,7 +3986,19 @@ export default function Exhibit({ artist, open = null }) {
   }, [linkEvent]);
 
   const thumbTrack = activeTrack !== null ? album.tracks[activeTrack] : album.tracks.find(t => t.videos.length > 0);
-  const thumbVid   = thumbTrack?.videos?.[0];
+  /* ═══ [2026-08-20] THE POSTER FOLLOWS THE CHOSEN RENDITION ═════════════════
+     **A DEFECT THAT PREDATES THIS TASK.** `thumbVid` read `videos[0]` — the
+     track's FIRST rendition — while the variant picker beside it chose a
+     different one. Every track in the museum had exactly one rendition until
+     2026-08-20, so nothing could show it; Coconuts is the first track with two,
+     and it worked only by luck, because its video happens to be first. Select
+     FIRST PASS and the viewer still reasoned about the video.
+     IT IS THE SAME SET THE PICKER WRITES (`albumSelectedVis` -> `selVis`), read
+     the same way the play path reads it, with the same `new Set([0])` default —
+     so the picture, the picker and what plays cannot disagree. */
+  const thumbTi    = thumbTrack ? album.tracks.indexOf(thumbTrack) : -1;
+  const thumbVi    = thumbTi >= 0 ? ([...(selVis[thumbTi] ?? new Set([0]))][0] ?? 0) : 0;
+  const thumbVid   = thumbTrack?.videos?.[thumbVi] ?? thumbTrack?.videos?.[0];
   const hasVideo   = curVideo !== null;
   /* [W1/W7 2026-08-02] TWO FACE MODES, ONE RENDER PATH.
      `selFace` is the SELECTED track's own face; `fallbackFace` is E2's
@@ -4860,12 +4872,42 @@ export default function Exhibit({ artist, open = null }) {
                                     thing that rule exists to forbid.
                                     The cost is four photographs, 1.26 MB, on a
                                     card the visitor has just chosen to open. */}
+                                {/* ═══ [2026-08-20] THE OBJECT CAPTION IS GREY AND
+                                    ITALIC, AND IT IS STILL NOT A FIFTH FIELD ══
+                                    MIKE: the four object captions are "labels
+                                    for an object, not the tile's voice."
+                                    Styling them means they have to BE an
+                                    element, and `::first-line` cannot do it —
+                                    it styles the first RENDERED line, so a
+                                    caption that wraps at tile width would be
+                                    half grey. **The split is derived from the
+                                    data instead**: the caption is the first
+                                    line of `body`, exactly where 2026-08-17 put
+                                    it, and nothing in the data changed.
+                                    **ONLY A TILE WITH A PICTURE HAS A CAPTION**,
+                                    which is the rule rather than a guard: a
+                                    caption labels an OBJECT, and the object is
+                                    the photograph. The second Steven Tyler tile
+                                    is a journal entry with no `img`, so its
+                                    first sentence stays body copy — without
+                                    this test it would have been silently
+                                    greyed into a caption for a picture that
+                                    does not exist. */}
                                 {c.img && (
                                   <img className="vp-prof-plate" src={c.img} alt=""
                                        decoding="async" />
                                 )}
                                 <div className="vp-prof-label">{c.label}</div>
-                                <p className="vp-prof-body">{c.body}</p>
+                                {(() => {
+                                  const nl = c.img ? c.body.indexOf("\n") : -1;
+                                  if (nl <= 0) return <p className="vp-prof-body">{c.body}</p>;
+                                  return (
+                                    <>
+                                      <p className="vp-prof-cap">{c.body.slice(0, nl)}</p>
+                                      <p className="vp-prof-body">{c.body.slice(nl + 1)}</p>
+                                    </>
+                                  );
+                                })()}
                               </div>
                             ))}
                           </div>

@@ -62,6 +62,7 @@ owner and no question attached, which is exactly what a register row is not for.
 | Twelve Hunter Root releases with no years and no links | [S-p](OPEN_ACTIONS.md#s-p) |
 | The Coalition gift-shop tile has no picture | [S-g](OPEN_ACTIONS.md#s-g) |
 | 13 orphan asset rows — 8 judged, 5 unjudged | [M9](OPEN_ACTIONS.md#m9) |
+| **The /wb achievement photographs do not open.** Four object photographs sit static on the About the Artist card; they should open full size the way a Record attachment does. **The reader already exists and is deliberately NOT shared:** it lives in `RobotsExhibitFlow.jsx`, whose own note says *"the engine dispatches a door and knows nothing about what opens"* — and /wal declares the same collage and gets different behaviour on purpose. Reuse means **hoisting a component with reel paging, zoom and worked-out Escape ordering into the shared engine**; building a second reader is refused. **About a round**, and it touches every wing that draws a plate. | no row |
 
 
 ---

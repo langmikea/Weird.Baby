@@ -14964,13 +14964,6 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE, a NEW row: the four wings and the date are his, unedited."
   },
-  "8317d6c0d5c26940": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 450,
-   "t": "Spring of 2020: Mike journaled that when Steven Tyler comes to honk out 'Amazing Grace' with Mike on his front porch, it signifies the Weird.Baby Foundation is making a difference.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The SECOND Steven Tyler tile, new this round. He ruled the repeated label fine, so it is a tile of its own rather than a merge with the first."
-  },
   "0bbcec92db55976d": {
    "f": "src/data/house-copy.js",
    "l": 115,
@@ -15431,6 +15424,13 @@
    "t": "c1vODrVXOg0",
    "c": "VERIFIED",
    "s": "checked against YouTube's oEmbed before the id was written: title \"Coconuts - Weird.Baby (chords & lyrics in comments)\", channel Mike Lang / @PapaWeirdBaby - the house's own channel. Re-probed at write time: playabilityStatus OK, playableInEmbed true, isPrivate false, source 1920x1080"
+  },
+  "70d4292a8e70ff4c": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 566,
+   "t": "Honkin' on Bobo in Macungie\nSpring of 2020: Mike journaled that when Steven Tyler comes to honk out 'Amazing Grace' with Mike on his front porch, it signifies the Weird.Baby Foundation is making a difference.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — the caption \"Honkin' on Bobo in Macungie\" is his, verbatim, ruled 2026-08-20; the paragraph under it is his 2026-08-17 journal copy, unchanged to the character and only re-hashed because the caption joined its string."
   }
  }
 }
