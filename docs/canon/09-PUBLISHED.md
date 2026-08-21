@@ -69,13 +69,13 @@ under an older date.** *Never label it as seeing the past.* The honest answer to
 ## THE FIVE ENTRIES
 <a id="entries"></a>
 
-| no | date | title | state as of the museum's 2026-08-19 |
+| no | date | title | state as of the museum's 2026-08-21 |
 |---:|---|---|---|
 | **001** | 2026-08-17 | INITIAL LAUNCH - Weird.Baby Website | **PUBLISHED** |
 | **002** | 2026-08-18 | GENERAL STATUS UPDATE | **PUBLISHED** |
 | **003** | 2026-08-19 | DATA RECOVERY - LEVEL 1 - SUCCESS! | **PUBLISHED** |
-| **004** | 2026-08-20 | GENERAL STATUS UPDATE | **SCHEDULED** — posts 17:00 |
-| **005** | 2026-08-21 | GENERAL STATUS UPDATE | **SCHEDULED** |
+| **004** | 2026-08-20 | GENERAL STATUS UPDATE | **PUBLISHED** |
+| **005** | 2026-08-21 | GENERAL STATUS UPDATE | **SCHEDULED** — posts 17:00 |
 | **013** | — | *the prototype* | see [Record 013](#record-013) |
 
 ---
@@ -198,7 +198,7 @@ THE GAMBLER     - not yet opened
 | **Scan 07 - Power supply and distribution** | 2 | `scan-07-a.webp` · `scan-07-b.webp` |
 | **Scan 11 - The video link** | 2 | `scan-11-a.webp` · `scan-11-b.webp` |
 | **Scan 31 - Bias settings** | 1 | `scan-31-a.webp` |
-| **Marked copy 01 - Bias settings** | 1 | `marked-01-a.webp` — **UNCOMMITTED. Not yet published.** See [BELL-103](BELL-103.md#where-it-stands). |
+| **Marked copy 01 - Bias settings** | 1 | `marked-01-a.webp` — **PUBLISHED** (committed 2026-08-19; corrected here 2026-08-21). |
 
 **SO ¶7-19, SP 7-14 AND B-1 ARE ALL PUBLISHED IN FULL.** Their text is at
 [03-ANSWERS](03-ANSWERS.md#second-kind) and
@@ -215,26 +215,56 @@ because the leaf that closes the video link also opens the power supply.
 
 ---
 
-## RECORD 004 — SCHEDULED, posts 17:00 on 2026-08-20
+## RECORD 004 — PUBLISHED
 <a id="record-004"></a>
 
-**Establishes (once it posts):**
+**[2026-08-21] THIS SECTION WAS DESCRIBING AN ENTRY THAT NO LONGER EXISTS.**
+Mike rewrote the DETAILED REPORT on 20 Aug, the morning it posted, and this page
+was not brought along — it still listed the unattended-terminal sentence, the
+bi-directional Vid-Link sentence, the bench description and two `docs` titles,
+all of which he struck. What follows is what actually went out.
 
-- *"Portal may be the "answer" this whole mystery."*
-- *"It appears to be an unattended remote access terminal."*
-- *"Excerpts from the Manual earlier in the week indicate a bi-directional CNC
-  Vid-Link"* — **and `CNC` appears nowhere else in either repo.**
-- *"Probably not useful to us. (Probably not meant for us...)"*
-- **The bench description** — see [06-PORTAL §7](06-PORTAL.md#the-bench). Seven
-  lines of a 1965 console, closing: **`! Nothing here postdates 1969. Everything
-  here works.`**
+**Establishes:**
 
-**Its `docs` are two titles with no plates behind them yet:** *View of the portal
-screen* · *Manual ref to Portal*.
+- *"> Weird.Baby Website - All Systems Favorable"* · *"> /Robots ZIP File
+  Cracked"* — the deck.
+- **The ZIP password: `[355113]`.** 355/113 = 3.14159292, Zu Chongzhi's ratio to
+  six decimals. The egg is the digits.
+- **The folder listing** — a pure indent tree: `ROOT` · `/(many pwd protected
+  folders)` · `/PORTAL` · `TERMINAL.EXE` · `PORTAL_2v16.CFG` · `/ANTENNA (PWD)` ·
+  `/CHANNEL_SELECT(PWD)` · `/INSTALL` · `QC_101.TIF (hand written notes on
+  form)`. **The version is on the glass in the filename.** `PORTAL/CH3-STANDARD/`
+  and `PORTAL/CH4-DETAIL/` from Record 002's manifest are the far end's own
+  directory names and are NOT the drum's engraved legends (`MGK-VIIIp` /
+  `MGK-VIIIp (zoom)`).
+- *"> Install document looks proprietary. Probably not meant to seen."* —
+  **his typo, carried as typed** (Doctrine 21).
+- *"> QC RULE: Unsafe to run in any sandbox; permanently quarantined."*
+
+**ATTACHMENTS 1 — and it arrived a day AFTER publication.**
+
+| attachment | pages | files |
+|---|---:|---|
+| **QC_101 - Final test and inspection** | 1 | `qc-101-a.webp` |
+
+**That is the first time a published Record has gained an attachment.** Mike
+ruled it on 21 Aug; his reason is *"we have had no visitors."* See
+[Ruling 18](../MUSEUM_RULINGS-20260817.md). The published text is untouched to
+the character — an attachment arrives beside what was shown, it does not rewrite
+it.
+
+**The listing says `.TIF` and the museum serves `.webp`, on purpose.** Same
+arrangement as Record 002's `.tif` manifest and the `scan-NN-a.webp` files that
+answered it. See [Ruling 19](../MUSEUM_RULINGS-20260817.md).
+
+**WHAT WAS STRUCK FROM THIS ENTRY, named once:** the two plate-less `docs`
+titles (*View of the portal screen* · *Manual ref to Portal*), the `OTHER`
+requisition section, and `ADDENDUM 01 - Bench Description` whole. The bench
+survives where it belongs, in [06-PORTAL](06-PORTAL.md).
 
 ---
 
-## RECORD 005 — SCHEDULED, posts 17:00 on 2026-08-21
+## RECORD 005 — SCHEDULED, posts 17:00 on 2026-08-21 (today)
 <a id="record-005"></a>
 
 **Establishes (once it posts):**

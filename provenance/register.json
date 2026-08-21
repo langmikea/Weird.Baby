@@ -15160,6 +15160,27 @@
    "c": "HOUSE",
    "s": "Ops' own words - the attachment's title and the page label in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here. It is deliberately NOT called a scan - Record 003's published report names three scans in Mike's words, and ruling 10 would otherwise force an edit to text the museum has already shown."
   },
+  "9590387dc4227e01": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 670,
+   "t": "QC_101 - Final test and inspection",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title in the reader - and MIKE'S OWN RULING of 2026-08-21, chosen from three Ops drafts. Filed HOUSE rather than MIKE because he selected a string Ops composed and approval is not authorship, the same distinction Record 001's index line is filed under. Both halves restate things that already exist: QC_101 is the filename he published on the glass in the same entry's folder listing, and FINAL TEST AND INSPECTION is the sheet's own printed heading. Ops had recommended 'Install document - QC_101 final test and inspection', on the ground that INSTALL DOCUMENT is his published noun for it in 004's DETAILED REPORT; he did not take it. It is deliberately NOT called a scan - SCAN is Mike's published word for the three manual pages and ruling 10 would force a fourth line into text already shown - and it takes no number, because nothing says a second install document is coming and 01 would promise one."
+  },
+  "eb5abbbd6da9aa14": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 671,
+   "t": "ABEAL FORM QC-101",
+   "c": "VERIFIED",
+   "s": "the form's own designation, printed twice on the sheet - FORM QC-101 at the head, beside INTERNAL - NOT FOR ISSUE, and again in the footer - with ABEAL, A DIVISION OF SCRAPCO as its masthead. The same class of fact as the manual's ABEAL 8P-OMI-1 above and recorded the same way: it is the document number of the object, laid down by tools/qc101_form_build.py in the weird-baby-robots repo. ABEAL is the wing's canon (P1, 2026-08-06)."
+  },
+  "98553ae6873584e7": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 675,
+   "t": "Final test and inspection, completed and passed",
+   "c": "HOUSE",
+   "s": "Ops' own words - the page label in the reader. Both halves are read off the sheet rather than asserted: FINAL TEST AND INSPECTION is its printed title, and PASS is the box the inspector ticked. Named rather than quoted."
+  },
   "561065498eca9618": {
    "f": "src/data/artists/robots-record.js",
    "l": 371,
@@ -15356,13 +15377,6 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
   },
-  "bb89e20d4d8d63b9": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 517,
-   "t": "     Folder: PORTAL/\n         CH3-STANDARD/    TERMINAL.EXE\n                          PORTAL.CFG\n         CH4-DETAIL/      one photograph\n         ANTENNA/         empty\n         INSTALL/         one form, filled in by hand",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
-  },
   "ddcd409d2a0ea958": {
    "f": "src/data/artists/robots-record.js",
    "l": 647,
@@ -15380,13 +15394,6 @@
    "f": "src/data/artists/robots-record.js",
    "l": 484,
    "t": "> Weird.Baby Website - All Systems Favorable\n> /Robots ZIP File Cracked",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
-  },
-  "2f9e13157598173a": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 532,
-   "t": "  > It appears to be an unattended remote access terminal.\n  > The Manual's bi-directional CNC Vid-Link is one half of it; it expects a unit at the far end, and will not open the link until four communications settings agree with whatever is there.\n  > Documentation looks proprietary. Probably not meant for us to see...\n  > NOTE: Quality has declared it unsafe to run in any sandbox; permanently quarantined.",
    "c": "MIKE",
    "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
   },
@@ -15431,6 +15438,20 @@
    "t": "Honkin' on Bobo in Macungie\nSpring of 2020: Mike journaled that when Steven Tyler comes to honk out 'Amazing Grace' with Mike on his front porch, it signifies the Weird.Baby Foundation is making a difference.",
    "c": "MIKE",
    "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — the caption \"Honkin' on Bobo in Macungie\" is his, verbatim, ruled 2026-08-20; the paragraph under it is his 2026-08-17 journal copy, unchanged to the character and only re-hashed because the caption joined its string."
+  },
+  "9cce9185b3ed5869": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 523,
+   "t": "    ROOT\n     /(many pwd protected folders)\n     /PORTAL\n       TERMINAL.EXE\n       PORTAL_2v16.CFG\n       /ANTENNA (PWD)\n       /CHANNEL_SELECT(PWD)\n       /INSTALL\n          QC_101.TIF (hand written notes on form)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike's rewritten Record 004 detailed report, 2026-08-21, carried verbatim. \"not meant to seen\" is his, as typed, and is flagged rather than corrected (Doctrine 21)."
+  },
+  "ee8fd808dacaa206": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 546,
+   "t": "  > Install document looks proprietary. Probably not meant to seen.\n  > QC RULE: Unsafe to run in any sandbox; permanently quarantined.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike's rewritten Record 004 detailed report, 2026-08-21, carried verbatim. \"not meant to seen\" is his, as typed, and is flagged rather than corrected (Doctrine 21)."
   }
  }
 }

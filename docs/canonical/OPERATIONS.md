@@ -495,9 +495,9 @@ review walked past it. **THE ASYMMETRY IS THE MECHANISM:** PRECIOUS has a ceilin
 weeks; **DUMP has none, so it divides into nothing**, and `runways()` in
 `reveal/focus.mjs` is structurally unable to print one for it, because a
 symmetrical table would re-commit the original error in the other bucket.
-**`bucket` is the sixth JUDGED field on the asset table, null on all 460 rows
-(re-measured 2026-08-20 when the Portal's bezel was restored; the line said 315,
-then 385, then 404, then 459 — the table has grown, and the point of it has not:
+**`bucket` is the sixth JUDGED field on the asset table, null on all 475 rows
+(re-measured 2026-08-21 when QC_101 landed; the line said 315, then 385, then
+404, then 459, then 460 — the table has grown, and the point of it has not:
 still not one derived value on it), and
 OPS DOES NOT DERIVE IT** — a heuristic calling every machine photograph precious
 would make every tracker read as ANSWERED while nothing had been answered, which
@@ -1977,6 +1977,37 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
   AFTER finishing — ignore.
 - Drive root contains loose stale code copies from past sessions — stale
   by default (§3 staleness rule).
+
+### AN INSTRUMENT THAT RETURNS HEALTHY IS NOT EVIDENCE OF HEALTH
+### WHEN IT CANNOT SEE THE FAILURE MODE (2026-08-21)
+
+**Two /wal videos showed YouTube's grey unavailable box. Five rounds of probing
+found nothing, because every public signal reads OK on an age-restricted
+video.** Measured on both, against two working controls on the same pages:
+oEmbed **200**, watch-page `playabilityStatus` **OK**, `playableInEmbed`
+**true**, `isPrivate`/`isUnlisted` **false**, the nocookie `/embed/` endpoint
+**200**, the microformat embed URL **present**, `availableCountries`
+**identical** — and **`isFamilySafe: true`**, on an age-restricted video, with
+no `ytRating` or `contentRating` field of any kind.
+
+**`playableInEmbed: true` IS NOT A LIE — IT ANSWERS A DIFFERENT QUESTION.** It
+records whether the OWNER permits embedding. An age gate is a refusal at PLAY
+time, by YouTube, for the viewer. Reading the first as an answer to the second
+is what cost the rounds.
+
+**WHAT WOULD HAVE FOUND IT, IN ONE CLICK: open the embed URL in a browser and
+look** — `https://www.youtube-nocookie.com/embed/<id>`. The refusal is rendered
+inside a cross-origin iframe and exists in no response a script can read, so a
+rendered view is the ONLY oracle.
+
+**THE PROCESS RULE, WHICH IS THE PART THAT GENERALISES: when the only oracle is
+a rendered view and Ops cannot render, ASK MIKE TO LOOK ON ROUND ONE.** Ops knew
+from the first round that embeds do not paint on this host and probed the API
+five times anyway, reporting healthy each time. He found it in one glance. The
+probes were not wrong; they were answering a question nobody had asked.
+
+**AND IT IS NOT FIXABLE FROM HERE.** The videos are the artists' own and the
+restriction is theirs. Open row on what the museum shows instead.
 
 ## 9. Session-close ritual
 

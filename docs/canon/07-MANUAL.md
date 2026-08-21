@@ -218,6 +218,33 @@ PAGE.** See [Doctrine 18](10-LAWS.md#doctrine-18).
 **The channel by which a manual page comes back with somebody's handwriting on
 it.** `robots:robots/mgk-viiip/manual/marks/`.
 
+### THE HAND CANNOT WRITE, AND THAT IS WHY THESE DOCUMENTS LOOK RIGHT
+
+**Measured 2026-08-21, building QC_101: the mark set has NO ALPHABET.** 52
+marks, and the whole vocabulary is **digits** (cut as rows — `1 2 3 4 5 6 7 8`,
+`9 0`, and a fast loose `1234567890`, each of which segments cleanly into single
+glyphs), **punctuation** (`! ? . / * ( ) [ ] -`), **tick and caret stock**
+(seven upright strokes and slashes), **a monogram** — *an initialling, illegible
+by design* — and **eight fixed phrases**: SEE 7-14 · ASK ENGINEERING · NOT FOR
+FIELD UNITS · SAME AS B-3? · CHECK W/ FAR SIDE FIRST · DOES NOT APPLY ·
+SUPERSEDED! · SEE REV B. Plus marginalia: stars, faces, squiggles, underlines,
+scribbles.
+
+**IT CANNOT WRITE `EVEN`, `FULL`, `BIT`, `PASS`, A NAME OR A WORD OF ANY KIND**
+outside that list.
+
+**THE CONSTRAINT PRODUCED THE CORRECT OBJECT, WHICH IS THE FINDING.** A form
+whose values had to be *written* was never available — so the form **prints its
+options and the inspector strikes or ticks**, which is what a real 1965
+inspection form is. B-1's marked copy already worked exactly this way (`ODD /
+EVEN` printed, ODD struck, EVEN standing). **Any future hand-marked document is
+governed by this**: the printed side carries every word, and the hand only ever
+strikes, ticks, numbers and initials.
+
+**A DATE IS COMPOSABLE AND `reserved-date-3-14-65` IS STILL NOT SPENT.** Digits
+plus the slash make any date; the reserved sheet stays unplaced, because it is
+π and 3-14 is the reserved paragraph.
+
 **MIKE'S INSTRUCTION: *"do not invent margin words."*** So none are invented:
 **every word placed on a page is a phrase he actually wrote on the handwriting
 sheet**, cut out and put where it bears. **The only marks DRAWN are the

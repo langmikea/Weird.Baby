@@ -421,6 +421,13 @@ the source masters would have cost a visitor **9.02 MB to paint five squares**.
 The derivative costs **0.42 MB**, and legibility was checked at 1:1 rather than
 assumed: the type is crisp and the strike variation and copier dirt survive.
 
+**[2026-08-21] IT NOW GOVERNS A SHEET THAT IS NOT A MANUAL PAGE.** QC_101 goes
+through the same `tools/manual-derivative.mjs` at the same 1700x2200 q82, because
+it is the same object class: a 2550x3300 300-dpi Letter page off the manual's own
+engines. The tool's 2550x3300 refusal is what makes that safe to assert rather
+than assume - a master of another size is refused by name. **See Ruling 19 for
+the step above this one**, the in-story `.TIF` that no file has ever been.
+
 ---
 
 ## 15 - A CLOCK OVERRIDE IS NOT AN AS-OF QUERY (2026-08-19)
@@ -495,6 +502,93 @@ date parameter, and it will not announce itself.
 from the Record's own `assets` arrays - and `browserToday()`/`museumNow()` fall
 back to the visitor's clock ONLY when no worker injected anything, which is
 every `npm run dev` and no deployment.
+
+---
+
+## 18 - A PUBLISHED RECORD MAY GAIN AN ATTACHMENT (2026-08-21)
+
+**MIKE'S RULING. IT IS THE FIRST TIME IT HAS HAPPENED AND IT IS RECORDED AS A
+PRECEDENT RATHER THAN AS AN EXCEPTION.** Record 004 posted 20 Aug at 17:00 and
+had been live for a day when QC_101 was attached to it on 21 Aug.
+
+**HIS STANDING REASON IS THE WHOLE OF THE PERMISSION:** *"we have had no
+visitors."* That is a fact about today, not a property of the Record, so the
+precedent this sets is narrow on purpose - **it is the museum's own audience
+that licenses a back-post, and the licence expires when the audience arrives.**
+
+**RULING 9 PERMITS IT, AND THE TEST IS PRODUCIBILITY.** Ruling 9 forbids naming
+what cannot be produced. It does not forbid producing. The two rows struck from
+this same entry on 20 Aug were titles with nothing behind them; this is the
+opposite case - the sheet exists at 2550x3300 300 dpi and is published in the
+same commit that names it.
+
+**IT IS THE SECOND BACK-POST AND THE FIRST ONE ONTO PUBLISHED TEXT.** Marked
+copy 01 was added to Record 003 on 19 Aug under Ruling B (*the original scan
+stays; the marked copy arrives beside it*), which is the same permission
+one day earlier. What is new here is only that a full day of publication had
+passed.
+
+**WHAT IT DOES NOT LICENSE.** Ruling B still holds: the museum does not edit
+what it has already shown. **Record 004's DETAILED REPORT is untouched to the
+character** - including *"not meant to seen"*, which is Mike's as typed. An
+attachment arrives BESIDE published text; it does not rewrite it.
+
+---
+
+## 19 - THE ARCHIVE'S FILENAME IS IN-STORY; THE MUSEUM SERVES A DERIVATIVE (2026-08-21)
+
+**OPS' READING, AND IT IS CONFIRMED BY WHAT THE MUSEUM HAS ALREADY DONE TWICE.**
+Record 004's folder listing says `QC_101.TIF`. The museum serves
+`/robots/portal/qc-101-a.webp`. **No TIF is emitted and none ever was.**
+
+**THE EVIDENCE, NOT THE ARGUMENT:**
+
+- Record 002's ADDENDUM 01 manifest names `00-FRONTMATTER.tif`,
+  `07-POWER-SYSTEM.tif`, `11-VID-LINK.tif`, `31-PARITY-BIAS.tif`. The museum
+  delivered those as `scan-07-a.webp`, `scan-07-b.webp`, `scan-11-a.webp`,
+  `scan-11-b.webp` and `scan-31-a.webp`. **Published, live, and nobody has ever
+  called that a mismatch.**
+- **There is no `.tif` anywhere in either repo.** The masters are PNG -
+  `robots/mgk-viiip/manual/structure/pages/page-NN.png`, and now
+  `robots/mgk-viiip/portal/install/QC_101.png`. Emitting one would create the
+  first TIF in the project's history, for no reader.
+
+**SO THE CHAIN HAS THREE LINKS AND ONLY THE MIDDLE ONE IS REAL:** the in-story
+name inside the archive (`.TIF`), the master the tooling actually renders
+(`.png`, 300 dpi, robots repo), and the derivative a visitor downloads
+(`.webp`, 1700x2200 q82, museum repo). **Ruling 14 governs the second-to-third
+step; this ruling governs the first-to-second, which had never been written
+down.**
+
+**AND THE PUBLIC FILENAME TAKES THE DOCUMENT'S OWN NAME, NOT THE ATTACHMENT'S
+TITLE.** `scan-NN` and `marked-NN` are class words Ops chose under Ruling 11.
+`qc-101` is what Mike has already published on the glass. **A title he may still
+rule on therefore cannot move the file**, which is the property that made the
+attachment safe to ship before the title was settled.
+
+---
+
+## 20 - THE QC_101 SIGNATURE IS FINAL (2026-08-21)
+
+> **"It looks like an evil little devil scribble. I am not willing to polish it
+> further right now. It got its turn. Use it and proceed."**
+
+**RULED AND CLOSED. Do not re-open it and do not re-render it.** The mark stands
+at **2.5 lines**, which is 1:1 with the source cut at 300 dpi.
+
+**THE DIAGNOSIS IS KEPT BECAUSE THE FIRST CANDIDATE WAS WRONG AND A LATER ROUND
+WOULD REACH FOR IT AGAIN.** It was not clipping: flood-filling the monogram's
+own connected component on the handwriting sheet gives 81x104 against a cut of
+88x100, so the cut already contained the whole mark, and a deliberately generous
+re-cut came back DENSER (43.4% ink against 38.6%). **It was size.** At 1.7 lines
+the mark was 68px from a 100px source and the interior loops closed at that
+reduction. There is also **no alternative cut** - the sheet carries exactly one
+monogram, and the other dense oval in that column is `loose-face-angry`, a face.
+
+**THE MARK IS MIKE'S OWN, AND HIS OWN INDEX NOTE FOR IT READS *"scribbled over
+itself - an initialling, illegible by design."*** The reading he objects to is
+the one the mark was drawn to produce. If it changes, it changes because he
+supplies a different hand, not because Ops tunes this one.
 
 ---
 

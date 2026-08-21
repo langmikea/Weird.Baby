@@ -244,8 +244,23 @@ function listingRows(text) {
     }
     return parts;
   });
+  /* [2026-08-21] A LISTING WITH NO TWO-FIELD LINE IS AN INDENT TREE, NOT A
+     TABLE, AND THE DIFFERENCE IS VISIBLE. `valueCol` is the RIGHTMOST field
+     start, which is the right answer for Record 004's original tree — every row
+     was `name  value` and the deepest start was the value column. Record 004's
+     rewritten listing has no two-field line at all: it is a pure indent tree
+     (`ROOT` / `/PORTAL` / `TERMINAL.EXE` …). Under the old rule the DEEPEST
+     line alone would have matched `valueCol`, landing in column 2 while every
+     sibling rendered as a spanning heading — one row out of family, and wrong
+     in a way only a render shows.
+     SO THE SHAPE IS ASKED FOR RATHER THAN ASSUMED: if no line carries two
+     fields there is no value column, `valueCol` is -1, nothing can match it,
+     and every line draws as a heading at its own indent. That IS an indent
+     tree. Both shapes now come out of the same reader with no flag in the
+     data. */
   const starts = rows.flat().map((p) => p.start);
-  return { rows, valueCol: starts.length ? Math.max(...starts) : 0 };
+  const table = rows.some((parts) => parts.length > 1);
+  return { rows, valueCol: table && starts.length ? Math.max(...starts) : -1 };
 }
 
 function Listing({ text }) {

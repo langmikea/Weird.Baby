@@ -668,3 +668,57 @@ lint **9/8 = baseline** · build green · **launch build green** · provenance
 **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate`
 **PASS** · `docs:numbers` **PASS** · `reveal:day` **nothing to move** ·
 `assets:orphans` **13, unchanged**.
+
+---
+
+## 13 — THE /wal GREY BOXES: RESOLVED, AGE VERIFICATION (2026-08-21)
+
+**Mike confirmed the graphic reads "Sign in to confirm your age".** The two
+videos are healthy, embedding is permitted, and YouTube refuses PLAYBACK in an
+embed for age-restricted content. **Not ours, not fixable, and it is the
+artists' own setting** — Carsie Blanton's *Shit List* and Jesse Welles'
+*There's A Hole*.
+
+### Why five rounds of probing found nothing
+
+**Every public signal reads healthy on an age-restricted video.** Measured on
+both, against two working controls on the same pages:
+
+| signal | age-restricted | working |
+|---|---|---|
+| oEmbed | 200 + title | 200 + title |
+| watch `playabilityStatus` | **OK** | OK |
+| `playableInEmbed` | **true** | true |
+| `isPrivate` / `isUnlisted` | false / false | false / false |
+| nocookie `/embed/<id>` | **200** | 200 |
+| microformat embed iframeUrl | present | present |
+| `availableCountries` | identical | identical |
+| **`isFamilySafe`** | **true** | true |
+| `ytRating` / `contentRating` / any age field | **absent** | absent |
+
+**`isFamilySafe: true` on an age-restricted video is the fact that makes this
+un-findable from the public API**, and there is no rating field of any kind on
+the anonymous watch page. The two are byte-indistinguishable from the two that
+work.
+
+**AND `playableInEmbed: true` IS NOT A LIE — it is a different question.** It
+records whether the OWNER permits embedding. An age gate is a refusal at PLAY
+time, by YouTube, for the viewer. Reading the first as an answer to the second
+is the error that cost the rounds.
+
+### WHAT WOULD HAVE FOUND IT, IN ONE CLICK
+
+**Open the embed URL in a browser and look:**
+`https://www.youtube-nocookie.com/embed/B7i6Vys6aPI`. That is the only oracle,
+because the refusal is rendered inside a cross-origin iframe and exists nowhere
+in any response the page or a script can read.
+
+**THE PROCESS LESSON IS SHARPER THAN THE TECHNICAL ONE.** Ops knew from the
+first round that embeds do not paint on this machine — and then ran five rounds
+of API probing anyway, reporting each time that everything looked healthy.
+**When the only oracle is a rendered view and Ops cannot render, ASK MIKE TO
+LOOK ON ROUND ONE.** He found it in one glance. The probes were not wrong; they
+were answering a question nobody had asked.
+
+`assets:orphans`-class lesson, one floor up: an instrument that returns healthy
+is not evidence of health when it cannot see the failure mode.

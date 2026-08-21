@@ -38,6 +38,16 @@ the thread is what is behind it, and none of it is said in either Record.
 > inside, no new hires, and at the end of the chain the last seat quietly goes
 > unfilled — no net increase in head count. The company removed an obstacle
 > and saved a salary and no line item says either.
+
+**[2026-08-21] QC_101 IS PUBLISHED NOW AND IT IS NOT ABOUT THIS MAN.** The form
+attached to Record 004 is dated **1965** and it **PASSES** — signed off with no
+marginalia at all, by an inspector whose monogram is illegible by design. **The
+Quality man of THREAD-003 is the 2026 one**, the voice behind Record 004's
+*"QC RULE: Unsafe to run in any sandbox; permanently quarantined."* Two men,
+sixty-one years apart, opposite verdicts, and **the thread belongs to the
+second.** Recorded here because the sheet is the obvious thing a later round
+would reach for, and reaching for it would put the wrong man in the story.
+Canon: [06-PORTAL §8](canon/06-PORTAL.md#qc-101).
 >
 > Somebody moved up into a chair that emptied for a reason. That person exists
 > and has not appeared.

@@ -36,7 +36,7 @@ the twin's own machinery, costed).
 | **[03-ANSWERS](03-ANSWERS.md)** | the determination · the ask · **the two kinds of bias** · polarity · clarity · the weight formula · **the four communications settings** · the twenty · condition |
 | **[04-MENU](04-MENU.md)** | doors · rows · access codes · the tree as built · the apps · the card vocabulary · the input grammar |
 | **[05-BOOT](05-BOOT.md)** | the three starting sequences · F and T · the ballet · the F/T dance · **the eight FT laws** · the sound · the glitch · the system monitor |
-| **[06-PORTAL](06-PORTAL.md)** | **the video link** · the far end · the Portal · the FEED CONTROL · the drum · the hold · the recipes · **the far end's bench** |
+| **[06-PORTAL](06-PORTAL.md)** | **the video link** · the far end · the Portal · the FEED CONTROL · the drum · the hold · the recipes · the far end's bench · **QC_101** |
 | **[07-MANUAL](07-MANUAL.md)** | `ABEAL 8P-OMI-1` · the structure · **the three written paragraphs** · Appendix F · Appendix G · the marked copy · the proto-manual |
 | **[08-PEOPLE](08-PEOPLE.md)** | X · the first five · the Release-1 four · the held units · McKenna · **the sealed rooms** |
 | **[09-PUBLISHED](09-PUBLISHED.md)** | **the three states** · the clock · Records 001–005 · Record 013 · the rules that govern what a Record may say |
@@ -59,6 +59,8 @@ the twin's own machinery, costed).
 | term | where |
 |---|---|
 | ABEAL | [01](01-WORLD.md#abeal) · **PUB** |
+| ABEAL FORM QC-101 | **[06](06-PORTAL.md#qc-101)** · **PUB** |
+| Antenna feed assignment · **FEED NO. 3** | **[06](06-PORTAL.md#qc-101)** · **PUB** — the only published source for VIIIp's channel |
 | `ABEAL 8P-OMI-1` | [07](07-MANUAL.md#what-it-is) · **PUB** |
 | Absent-name law, the | [04](04-MENU.md#apps) |
 | Access code | [04](04-MENU.md#vocabulary) · [H-17](HOLES.md#h-17) |
@@ -183,7 +185,7 @@ the twin's own machinery, costed).
 | F (the front machine) | [05](05-BOOT.md#f-and-t) — **OPS** |
 | Factory test, the (`TEST`) | [05](05-BOOT.md#monitor) — **Egg 1** |
 | Far end, the | [06](06-PORTAL.md#video-link) · [H-03](HOLES.md#h-03) · **PUB** |
-| Far end's bench, the | [06](06-PORTAL.md#the-bench) — **SCHEDULED** |
+| Far end's bench, the | [06](06-PORTAL.md#the-bench) — **canon only; struck from Record 004 before it posted, so it never published** |
 | Feed | [06](06-PORTAL.md#the-doorway) |
 | FEED CONTROL | [06](06-PORTAL.md#feed-control) |
 | First five, the | [08](08-PEOPLE.md#first-five) |
@@ -337,6 +339,7 @@ the twin's own machinery, costed).
 
 | term | where |
 |---|---|
+| QC_101 — the 1965 final test and inspection | **[06](06-PORTAL.md#qc-101)** · [09](09-PUBLISHED.md#record-004) · **PUB** |
 | Quan, Dr. Alexis · Flux, Dr. Violet | [08](08-PEOPLE.md#others) |
 | Radio (the app) · the radio tuning ruling | [04](04-MENU.md#apps) · [04](04-MENU.md#input) |
 | RADIONET · Catalog No. 6710 | [K-21](CONFLICTS.md#k-21) |

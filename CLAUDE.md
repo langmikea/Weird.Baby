@@ -451,9 +451,9 @@ MAY NOT SHOW MORE PICTURES.** Two buckets: **PRECIOUS** — genuine reveals, two
 three **a week**, the ceiling is on these — and **DUMP** — everything else, **no
 ceiling**, because ten manual pages arriving is ONE point of focus. The law and
 both runways are **`reveal/focus.mjs`**; the judged field is **`bucket`** on
-`provenance/asset-table.json`, **Mike's, null on all 460 rows (re-measured
-2026-08-20 when the Portal's bezel came back; this said 459, 404, 397 and 315
-before that), and Ops does not derive it**. **PRECIOUS divides into weeks; DUMP divides into nothing** — the old
+`provenance/asset-table.json`, **Mike's, null on all 475 rows (re-measured
+2026-08-21 when QC_101 landed; this said 460, 459, 404, 397 and 315 before
+that), and Ops does not derive it**. **PRECIOUS divides into weeks; DUMP divides into nothing** — the old
 tracker divided PHOTOGRAPHS by a ceiling on ATTENTION and printed *"16 pictures =
 6–8 days"*, which is **VOID** and kept with its cause in `focus.mjs` `VOIDED`.
 **Before writing any instrument that counts what the museum can show, read
@@ -762,6 +762,56 @@ read Doctrine 25.**
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-21 -> QC_101 ONTO RECORD 004 - sealed
+- **NOTHING IS WAITING ON MIKE. Mirror and deploy: `npm run deploy:launch`.**
+  He ruled the title in the round: **`QC_101 - Final test and inspection`** -
+  his pick of three, over Ops' recommendation, and **filed HOUSE rather than
+  MIKE because selecting an Ops-composed string is not authorship** (Record
+  001's index line, same distinction).
+  Gates: lint **9/8 = baseline** - build green - **launch build green** -
+  provenance **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** -
+  `instory:gate` **PASS** - `docs:numbers` **PASS** (two stale 460s corrected) -
+  `reveal:day` **nothing to move** - `assets:orphans` **13, unchanged (M9)**.
+  Log: `docs/MUSEUM_QC101_ATTACHMENT_LOG-20260821.md`.
+- **THE FIRST TIME A PUBLISHED RECORD HAS GAINED AN ATTACHMENT.** 004 posted
+  20 Aug 17:00 and had been live a full day. Mike ruled it; his reason is *"we
+  have had no visitors."* **Ruling 18**, and the write-up says so in its own
+  text: **the licence is about today's audience, not about Records**, and it
+  expires when visitors arrive. **Ruling B holds** - his published text is
+  untouched to the character, *"not meant to seen"* included.
+- **THE LISTING SAYS `.TIF` AND THE MUSEUM SERVES WebP, AND THAT IS ALREADY
+  LIVE RATHER THAN NEW.** Record 002's manifest names four `.tif` files and the
+  museum delivered `scan-NN-a.webp`. **There is no `.tif` anywhere in either
+  repo** - the masters are PNG - so emitting one would create the first, for no
+  reader. **Ruling 19**, cross-linked from 14. The chain is *in-story name ->
+  300-dpi master -> derivative*, and only the middle link is a file.
+- **THE PUBLIC FILENAME IS THE DOCUMENT'S OWN NAME, WHICH IS WHY THE TITLE
+  COULD SHIP UNSETTLED.** `scan-NN` and `marked-NN` derive from titles Ops
+  chose; `qc-101` is what Mike has already published on the glass. A title
+  ruling cannot move the file.
+- **THE SIGNATURE IS RULED AND CLOSED at 2.5 lines** - *"It got its turn. Use
+  it and proceed."* **Ruling 20**, and the diagnosis is kept with it because the
+  first candidate was wrong: not clipping (81x104 flood-fill against an 88x100
+  cut; a generous re-cut came back DENSER) but SIZE.
+- **THE ASSET TABLE WENT 460 -> 475 AND ONLY ONE ROW WAS THIS ROUND'S.**
+  `assets:scan` merges. Two were museum images the 17 Aug round shipped and
+  never scanned in; twelve are robots-repo files. **FLAGGED: `marks/` and
+  `portal/` are UNTRACKED in weird-baby-robots**, so those twelve rows are
+  orphans until Mike commits - and **`digit-0..9.png` have no committed
+  producer at all**, so a clean clone cannot re-render the form.
+- **THREE CANON PAGES WERE DESCRIBING AN ENTRY THAT NO LONGER EXISTS.**
+  `09-PUBLISHED.md` still had Record 004 as SCHEDULED with the unattended-terminal
+  sentence, the bench addendum and two struck `docs` titles; `06-PORTAL.md` §7
+  was headed *"written, scheduled, not yet published"* for a bench that was
+  **struck before the entry posted and therefore never published**; and
+  `marked-01-a.webp` was still marked UNCOMMITTED. All corrected in place.
+- **TWO PROBE FAULTS, NEITHER THE SITE:** `naturalWidth` reads 0 for
+  `loading="lazy"` images in an unpainted frame (the rAF hazard's family), and
+  this automation host moves browser zoom on its own - `devicePixelRatio` was 2
+  on a fresh tab. Measured through JS instead.
+- **CLAUDE.md IS 1108 LINES AGAINST ITS OWN ~600 RULE.** Not touched this
+  round; it wants an archive sweep.
 
 ### 2026-08-17 -> THE RULING, THE TWO OPEN ITEMS, THE PHOTOGRAPHS (second packet) - sealed
 - **NOTHING IS WAITING ON MIKE. Mirror and deploy: `npm run deploy`.** Gates:

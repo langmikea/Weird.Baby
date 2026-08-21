@@ -506,37 +506,46 @@ export const RECORD_ENTRIES = [
                 { label: "DETAILED REPORT",
                   body: [
                     "  > ZIP Password Cracked: [355113]",
-                    /* THE TREE IS A LISTING AND NOT A PARAGRAPH - see the
-                       `pre` branch in RecordEntry.jsx's SectionBody. Its
-                       columns are load-bearing: `PORTAL.CFG` hangs under
-                       `TERMINAL.EXE` at column 26 and means nothing anywhere
-                       else. `.vp-rec-sect-body` is `white-space: pre-line`,
-                       which COLLAPSES runs of spaces - measured on the built
-                       page, `A B` and `A    B` both render at 29.97px - so as
-                       an ordinary body string this tree would have arrived
-                       flat, with the second file adopted by nobody. */
+                    /* [2026-08-21] HIS REWRITTEN LISTING. It gains a ROOT
+                       level and locked siblings, and `PORTAL.CFG` becomes
+                       `PORTAL_2v16.CFG` - the version is now on the glass in
+                       the filename, which is where an installer would have put
+                       it. `QC_101.TIF` is the install document.
+                       IT IS A PURE INDENT TREE AND THE READER HAD TO LEARN
+                       THAT SHAPE. The 2026-08-20 listing was `name  value` on
+                       every row; this one has no two-field line anywhere, and
+                       under the old rule its DEEPEST line alone would have
+                       landed in the value column while its siblings drew as
+                       spanning headings. `listingRows()` asks whether any line
+                       carries two fields before deciding there is a value
+                       column at all - see RecordEntry.jsx. */
                     { pre:
-                      "     Folder: PORTAL/\n"
-                      + "         CH3-STANDARD/    TERMINAL.EXE\n"
-                      + "                          PORTAL.CFG\n"
-                      + "         CH4-DETAIL/      one photograph\n"
-                      + "         ANTENNA/         empty\n"
-                      + "         INSTALL/         one form, filled in by hand" },
-                    /* [2026-08-20] MIKE: *"No paragraphs - single line only."*
-                       His rewrite of the Vid-Link line, verbatim: `this is the
-                       other.` is struck and the two `it will` clauses are cut
-                       to one. IT IS STILL LONGER THAN THE MEASURE and that is
-                       REPORTED rather than fixed here - shortening his sentence
-                       to make it fit would be Ops editing him. See the round
-                       log's character counts. */
-                    "  > It appears to be an unattended remote access "
-                    + "terminal.\n  > The Manual's bi-directional CNC Vid-Link"
-                    + " is one half of it; it expects a unit at the far end, "
-                    + "and will not open the link until four communications "
-                    + "settings agree with whatever is there.\n  > Documentation"
-                    + " looks proprietary. Probably not meant for us to see..."
-                    + "\n  > NOTE: Quality has declared it unsafe to run in any"
-                    + " sandbox; permanently quarantined.",
+                      "    ROOT\n"
+                      + "     /(many pwd protected folders)\n"
+                      + "     /PORTAL\n"
+                      + "       TERMINAL.EXE\n"
+                      + "       PORTAL_2v16.CFG\n"
+                      + "       /ANTENNA (PWD)\n"
+                      + "       /CHANNEL_SELECT(PWD)\n"
+                      + "       /INSTALL\n"
+                      + "          QC_101.TIF (hand written notes on form)" },
+                    /* [2026-08-21] FLAGGED AND NOT CORRECTED: **"not meant to
+                       seen"** is Mike's, as typed. Doctrine 21's cost (1) - his
+                       typos ship, and a round that tidies one has broken the
+                       instruction that put it there.
+                       WHAT LEFT, NAMED ONCE (Doctrine 24): "It appears to be an
+                       unattended remote access terminal.", the bi-directional
+                       Vid-Link sentence, "Documentation looks proprietary.
+                       Probably not meant for us to see...", and the NOTE line
+                       that the QC RULE line replaces. **The unattended-terminal
+                       sentence was CANON-LOAD-BEARING** - `docs/canon/06-PORTAL.md`
+                       quoted it and built the museum-reading-vs-manual
+                       disagreement on it - so that entry is corrected in the
+                       same round rather than left quoting a line the Record no
+                       longer carries. */
+                    "  > Install document looks proprietary. Probably not "
+                    + "meant to seen.\n  > QC RULE: Unsafe to run in any "
+                    + "sandbox; permanently quarantined.",
                   ] },
                 /* === [2026-08-20] TWO SECTIONS STRUCK FROM 004, NAMED ONCE ===
                    (Doctrine 24 - they are named here, in the round log, and
@@ -610,6 +619,73 @@ export const RECORD_ENTRIES = [
                  NOTHING IS OWED LATER. A picture of the portal screen may
                  arrive on any future Record; Ruling 9's own words are that the
                  Record may withhold and the Record may not promise. */
+              /* ═══ [2026-08-21] THE DOCS FIELD RETURNS, AND THIS IS THE FIRST
+                 TIME A PUBLISHED RECORD HAS GAINED AN ATTACHMENT ═══════════
+                 Record 004 posted 20 Aug at 17:00 and has been live for a day.
+                 Mike ruled the attachment on 21 Aug; his standing reason is
+                 *"we have had no visitors."* THE PRECEDENT IS WRITTEN UP IN
+                 `docs/MUSEUM_RULINGS-20260817.md` AS RULING 17, not in a round
+                 log — the next round that wants to touch published text will
+                 reach for the rulings, and a diary does not answer questions.
+
+                 THE STRIKE ABOVE STANDS AND IS NOT REVERSED. The two rows that
+                 went on 20 Aug carried a title and nothing else, and a Record
+                 names only what it can produce. This row is the opposite case,
+                 which is exactly why Ruling 9 permits it: the sheet EXISTS, at
+                 2550x3300 300 dpi, and is published here. Ruling 9 forbids
+                 naming what cannot be produced. It does not forbid producing.
+
+                 `QC_101.TIF` IS THE NAME INSIDE THE ARCHIVE; `.webp` IS WHAT A
+                 VISITOR DOWNLOADS. The listing above is untouched, and this is
+                 the manual's own arrangement rather than a new one: Record
+                 002's manifest names `07-POWER-SYSTEM.tif` and the museum
+                 served it as `scan-07-a.webp`. No `.tif` exists anywhere in
+                 either repo — the masters are PNG — so emitting one would
+                 create the first, for no reader. Ruling 18.
+
+                 THE FILENAME IS THE DOCUMENT'S OWN NAME, NOT THE ATTACHMENT'S
+                 TITLE. `scan-NN` and `marked-NN` are class words Ops chose
+                 under Ruling 11; `qc-101` is what Mike has already published on
+                 the glass, in the folder listing a dozen lines up. A title he
+                 may still rule on therefore cannot move the file.
+
+                 THE TITLE IS MIKE'S RULING, 2026-08-21. Ops drafted three and
+                 he took the document's own name: `QC_101 - Final test and
+                 inspection`. Ops had recommended `Install document - QC_101
+                 final test and inspection` on the ground that *install
+                 document* is his own published noun in the DETAILED REPORT
+                 above — **the reasoning was sound and the recommendation was
+                 not taken, which is recorded here rather than quietly
+                 forgotten.** Both halves of what he chose are read off things
+                 that already exist: `QC_101` is the filename he published in
+                 the listing, and FINAL TEST AND INSPECTION is the sheet's own
+                 printed heading.
+
+                 IT IS DELIBERATELY NOT CALLED A SCAN, for Record 003's reason
+                 (SCAN is Mike's published word for the three manual pages, and
+                 Ruling 10 would force a fourth line into text already shown)
+                 and for a truer one: this sheet was not filmed. It came out of
+                 the ZIP's INSTALL folder.
+
+                 NO NUMBER, ON SUBTRACTION. `Marked copy 01` took one because
+                 Mike said marked copies are a recurring channel. Nothing says a
+                 second install document is coming, and `01` would promise one.
+
+                 NO `date` FIELD, AND THAT IS A REFUSAL RATHER THAN AN OMISSION.
+                 The sheet is dated 8/14/65 in the inspector's hand and a reader
+                 can see it. That date is OPS' CHOICE, declared as such in the
+                 generator's own FIELDS block — no inspection date exists in the
+                 corpus — so lifting it onto the catalogue card would restate an
+                 invention as provenance. */
+              docs: [
+                { title: "QC_101 - Final test and inspection",
+                  source: "ABEAL FORM QC-101",
+                  pages: 1,
+                  plates: [
+                    { img: "/robots/portal/qc-101-a.webp",
+                      label: "Final test and inspection, completed and passed" },
+                  ] },
+              ],
             },
             { no: 5,
               date: recordDay(5),

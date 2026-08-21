@@ -290,15 +290,18 @@ ARE EVER BUILT** — [FAILURE-MODES §3.5](FAILURE-MODES.md#where-state-lives).
 
 ---
 
-## 7 · THE FAR END'S OWN BENCH — written, scheduled, not yet published
+## 7 · THE FAR END'S OWN BENCH — canon only; it never published
 <a id="the-bench"></a>
 
-**Record 004, dated 2026-08-20, posts at 17:00 America/New_York on that day. As
-of the museum's own clock reading 2026-08-19 it is `SCHEDULED`, not `PUBLISHED`:
-it is written, committed, and in the bundle a visitor could open devtools and
-read — but the page does not draw it.** *"The Record does not show you the
-future"*, never *"the future is not there."* See
-[PUBLISHED](09-PUBLISHED.md#the-three-states).
+**[2026-08-21] THIS SECTION'S PREMISE HAS CHANGED AND THE HEADING WITH IT.** It
+was written while `ADDENDUM 01 - Bench Description` was scheduled inside Record
+004 and said so — *"written, committed, and in the bundle a visitor could open
+devtools and read."* **Mike struck the addendum whole on the morning of 20 Aug,
+before the entry posted.** Record 004 is `PUBLISHED` now and the bench is not in
+it and never was. **So the bench is canon and nothing else: no visitor has read
+these lines, and none of what follows may be cited as something the museum has
+said.** The strike is named once in `robots-record.js`; this is where its subject
+lives.
 
 **ADDENDUM 01 — Bench Description. Mike's words:**
 
@@ -319,22 +322,82 @@ Four toggle switches sit under a hinged guard, unlabelled.
 1. **The four toggle switches under a hinged guard are the communications
    settings, and they are at the FAR END, not on the instrument.** Record 005
    (`SCHEDULED`, 2026-08-21) confirms it — *"Four toggles. Sixteen combinations.
-   One of them is correct."* **It is a written placement, not yet a published
-   one**, and it constrains any failure-mode design
-   ([FAILURE-MODES §3.5](FAILURE-MODES.md#where-state-lives)). **It becomes unchangeable at 17:00
-   on the 21st.**
+   One of them is correct."* **That sentence publishes at 17:00 today
+   (2026-08-21) and is unchangeable from then**, and it constrains any
+   failure-mode design
+   ([FAILURE-MODES §3.5](FAILURE-MODES.md#where-state-lives)). **The bench's own
+   version of the placement publishes never** — see the heading.
 2. **The ashtray has been used** — the one detail on the page that says a person
-   sat there, on a console the same Record calls *"an unattended remote access
-   terminal"*, in a story whose canon says **nobody is at headquarters.**
-   Recorded; not reconciled.
+   sat there, on a console Record 004 **called** *"an unattended remote access
+   terminal"* **until 2026-08-21**, in a story whose canon says **nobody is at
+   headquarters.** Recorded; not reconciled. **The phrase left the Record when
+   Mike rewrote 004's detailed report** (see below); the ashtray and the canon
+   line it sits against are unchanged.
 3. **`No maker plate, no model number`** — the far end's console is deliberately
    the opposite of the FEED CONTROL, which is a badge whose whole job is to say
    who made it.
 
-**AND THE MUSEUM'S READING AND THE MANUAL'S INSTRUCTION DISAGREE.** Record 004:
-*"It appears to be an unattended remote access terminal."* SP 7-14: *"Assume the
-far end is attended."* **The manual's line is published; the museum's reading
-posts at 17:00 on the 20th.** Neither is a ruling. **Both are Mike's, and the
+**AND THE MUSEUM'S READING AND THE MANUAL'S INSTRUCTION DISAGREED — BUT ONLY
+ONE HALF IS STILL ON THE GLASS.** Record 004 read *"It appears to be an
+unattended remote access terminal."* against SP 7-14's *"Assume the far end is
+attended."* **[2026-08-21] MIKE REWROTE 004's DETAILED REPORT AND THE MUSEUM'S
+HALF WENT WITH IT**, so the manual's line now stands unopposed and this entry
+records a disagreement that WAS rather than one a visitor can read. The
+sentence is preserved here and nowhere else — it is named once in the strike
+note in `robots-record.js` and once here. Neither was a ruling. **Both are Mike's, and the
 disagreement is between the 1965 document and the 2026 restorers reading it,
 which is exactly the register the corpus uses everywhere** — recorded rather than
 flagged.
+
+---
+
+## 8 · QC_101 — THE FORM THAT TELLS A VISITOR WHICH CHANNEL
+<a id="qc-101"></a>
+
+**PUBLISHED 2026-08-21, attached to Record 004** (`/robots/portal/qc-101-a.webp`;
+[Ruling 18](../MUSEUM_RULINGS-20260817.md) on the back-post,
+[Ruling 19](../MUSEUM_RULINGS-20260817.md) on why the listing says `.TIF`).
+A one-sheet 1965 **FINAL TEST AND INSPECTION**, `FORM QC-101`, ABEAL, a division
+of ScrapCo. Built by `tools/qc101_form_build.py` in the robots repo, which
+imports the manual's own engines rather than re-implementing them.
+
+**IT IS THE FIRST PLACE A VISITOR CAN LEARN THE CHANNEL.** Section 1, ANTENNA
+FEED ASSIGNMENT, reads `BROADCASTS ON ......... FEED NO.` with a **3** written
+in by hand. That agrees with the drum — VIIIp on channel 3 — and it is the fact
+**THE ANTENNA SELECTOR** is designed around: of the four routings, `1101` is the
+one that leaves channel 3 to the Portal. **Until the selector is built, this
+sheet is the only published source for it.**
+
+**WHAT ELSE THE SHEET ESTABLISHES, all of it agreeing with what was already
+published:**
+
+| on the sheet | agrees with |
+|---|---|
+| `VERSION ... 2.16` | `PORTAL_2v16.CFG` in Record 004's own listing |
+| `ASSEMBLY ... PORTAL - CNC VID-LINK` · `ONE HALF OF A BI-DIRECTIONAL PAIR` | Mike's Record 004 text, and §1 above |
+| `FAR END ... REQUIRED.` | SP 7-14; the link will not open alone |
+| the four settings struck to **EVEN / FULL / 7 BIT / 1** | Appendix B-1, published as `marked-01-a.webp` in Record 003 |
+| `PASS` ticked, signed, dated | new — 1965 QC passed this machine |
+
+**IT PASSES, AND THAT IS DELIBERATE.** The mark set has no alphabet, so the
+inspector can only strike and tick; all eight available written phrases are
+doubts (`ASK ENGINEERING`, `SAME AS B-3?`, `CHECK W/ FAR SIDE FIRST`) and **none
+of them is used.** The hand does four strikes, one tick, a feed digit, a date
+and a monogram — the marks of a man finishing a job. **The unease belongs
+entirely to a reader who knows what bi-directional means.** The 2026 QC ruling
+(*"Unsafe to run in any sandbox; permanently quarantined"*) is in Record 004 and
+is **not** on this sheet.
+
+**TWO THINGS ON IT ARE NOT CANON AND MUST NOT BE READ AS FACTS ABOUT THE WORLD:**
+
+- **The inspection date `8/14/65` is Ops' choice.** No inspection date exists
+  anywhere in the corpus. It is declared as such in the generator's own FIELDS
+  block, and it is deliberately NOT restated on the attachment's catalogue card.
+  The reserved `3/14/65` stays unplaced.
+- **Serial number, works order, contract, test equipment, ambient and revision
+  are blank rules.** A blank line on an internal form is ordinary and says
+  nothing false — it is not a hole to be filled by a later round.
+
+**THE SIGNATURE IS RULED FINAL** at 2.5 lines, 1:1 with Mike's own monogram cut.
+[Ruling 20](../MUSEUM_RULINGS-20260817.md) — do not re-render it.
+

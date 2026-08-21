@@ -1922,7 +1922,9 @@
    "deps": [],
    "arc": null,
    "shown": false,
-   "assets": [],
+   "assets": [
+    "A-26a62c7fdc"
+   ],
    "prod": null,
    "calledBy": [],
    "note": "",
