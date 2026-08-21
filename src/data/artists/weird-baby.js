@@ -714,26 +714,36 @@ const spine = [
          pill columns and is defined as containing "a track, single, album, or
          official music video". It contains this thing; it does not name it.
 
-         ONLY THE ID CROSSES, NOT A URL. He supplied a `/shorts/` link; the
-         museum never writes an embed URL. `useYTPlayer` builds the player with
-         `host: "https://www.youtube-nocookie.com"` and calls
-         `loadVideoById(ytId)`, so the nocookie promise in the booth FAQ is
-         kept by the player option and cannot be broken by a row of data.
-         `id` follows the file header's rendition-id rule (`id = ytId ??
-         slug(audioUrl)`), so preset capture and restore stay stable.
+         ONLY THE ID CROSSES, NOT A URL. The museum never writes an embed URL.
+         `useYTPlayer` builds the player with
+         `host: "https://www.youtube-nocookie.com"` and drives it by id, so the
+         nocookie promise in the booth FAQ is kept by the player option and
+         cannot be broken by a row of data. `id` follows the file header's
+         rendition-id rule (`id = ytId ?? slug(audioUrl)`), so preset capture
+         and restore stay stable.
 
-         AND IT IS A VERTICAL SHORT IN A 16:9 BOX. Ruled 2026-08-20: **ship it
-         pillarboxed.** A per-video ratio is a backlog row (`V-a`), not this
-         change - the constant lives in three places including the width-drag
-         handler that has been re-fixed twice. Nothing here crops or stretches
-         anything; the fit is YouTube's own player inside a box we do not
-         reshape. */
+         IT IS 16:9 AND THE PILLARBOX QUESTION IS CLOSED. The first id here was
+         `Z2T7VwXppQo`, a `/shorts/` link, and it shipped for part of one day on
+         a ruling to accept the pillarboxing; Mike replaced it with this watch
+         URL. **Measured before it was written: YouTube reports the source at
+         1920x1080**, so it fills the 16:9 box and no per-video ratio is needed.
+         The backlog row asking for one is closed.
+
+         AND THE SECOND ID WAS CHECKED BEFORE IT WAS TRUSTED. `c1vODrVXOg0`
+         answered oEmbed with **403 Forbidden** on its first probe - private,
+         confirmed by `playabilityStatus: LOGIN_REQUIRED` and three 404
+         thumbnails - and was NOT written. **The control that made that
+         diagnosis safe is the part worth keeping:** the previous id and a
+         known-public id were probed in the same run and both returned 200, so
+         the 403 was a property of the video rather than of the network. Mike
+         made it public; re-probed at write time it reads
+         `playabilityStatus: OK`, `playableInEmbed: true`, `isPrivate: false`. */
       {
         id: "coconuts",
         title: "Coconuts",
         videos: [{
-          id: "Z2T7VwXppQo",
-          ytId: "Z2T7VwXppQo",
+          id: "c1vODrVXOg0",
+          ytId: "c1vODrVXOg0",
           audioUrl: null,
           label: "Official Music Video",
           type: "official",

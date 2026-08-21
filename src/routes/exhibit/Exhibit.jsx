@@ -618,8 +618,17 @@ function useYTPlayer({ containerRef, onEnded, hasVideo }) {
         onReady() {
           readyRef.current = true;
           if (pendingRef.current) {
-            playerRef.current.loadVideoById(pendingRef.current);
+            /* [2026-08-20] A PENDING REQUEST CARRIES ITS VERB. `pendingRef`
+               held a bare id and `onReady` always LOADED it, which plays. A cue
+               that arrived before the player was ready would therefore have
+               started playing the moment it became ready - the exact autoplay
+               Mike's ruling A forbids, on the one path nobody would have
+               tested. It carries `{id, cue}` now and the verb survives the
+               wait. */
+            const p = pendingRef.current;
             pendingRef.current = null;
+            if (p.cue) playerRef.current.cueVideoById(p.id);
+            else playerRef.current.loadVideoById(p.id);
           }
         },
         onStateChange(e) {
@@ -660,16 +669,35 @@ function useYTPlayer({ containerRef, onEnded, hasVideo }) {
     }
   }
 
-  const loadVideo = useCallback((ytId) => {
+  /* ═══ [2026-08-20] LOAD AND CUE ARE ONE FUNCTION AND A VERB ════════════════
+     They differ by which YouTube method fires and by nothing else, and writing
+     them out twice cost a SECOND copy of the `initPlayer` exhaustive-deps
+     warning this hook already carries - a new lint warning for no new
+     behaviour, which is a baseline moved for a copy-paste. One body, one
+     `useCallback` carrying the existing debt, two named verbs over it. */
+  const requestVideo = useCallback((ytId, cue) => {
     if (playerRef.current && readyRef.current) {
-      playerRef.current.loadVideoById(ytId);
+      if (cue) playerRef.current.cueVideoById(ytId);
+      else playerRef.current.loadVideoById(ytId);
     } else if (playerRef.current) {
-      pendingRef.current = ytId;
+      pendingRef.current = { id: ytId, cue };
     } else {
-      pendingRef.current = ytId;
+      pendingRef.current = { id: ytId, cue };
       ensureApi(() => initPlayer(ytId));
     }
   }, []);
+  const loadVideo = useCallback((ytId) => requestVideo(ytId, false), [requestVideo]);
+
+  /* ═══ [2026-08-20] CUE IS LOAD'S PAIRED VERB, AND THAT IS WHY IT IS SAFE ════
+     MIKE RULED A: on focus the viewer LOADS the track's video and shows its
+     poster frame, ready - it does not play, it makes no sound, it does not
+     move. `cueVideoById` is YouTube's own method for exactly that; `loadVideoById`
+     is the one beside it that plays. **Nothing here is a workaround** - no
+     autoplay flag, no muted start, no play-then-pause, all of which would make
+     sound or motion for a frame and are the reason he chose A over B.
+     IT IS THE SAME PENDING PATH AS LOAD so a cue that arrives before the player
+     is ready is honoured as a CUE when it lands (see `onReady`). */
+  const cueVideo = useCallback((ytId) => requestVideo(ytId, true), [requestVideo]);
 
   const togglePlay = useCallback(() => {
     const p = playerRef.current;
@@ -705,7 +733,7 @@ function useYTPlayer({ containerRef, onEnded, hasVideo }) {
     };
   }, []);
 
-  return { loadVideo, pause, togglePlay, toggleMute, setVolume, getState };
+  return { loadVideo, cueVideo, pause, togglePlay, toggleMute, setVolume, getState };
 }
 
 // ─── AUDIO PLAYER HOOK ────────────────────────────────────────────────────────
@@ -3506,10 +3534,53 @@ export default function Exhibit({ artist, open = null }) {
        /robots and /foundation move with it — flagged for Mike, since only the
        Lobby, /wb and the Foundation are on Sunday's walk. The change can only
        ever cost a press; it can never start something he did not ask for. */
+    /* ═══ [2026-08-20] FOCUS CUES THE VIDEO - MIKE'S RULING A ═══════════════
+       **"When a track takes focus, the viewer LOADS its video and shows the
+       poster frame, ready. It does not play. It makes no sound. The second
+       click plays, exactly as now."** His 14 August rule that a first click
+       never starts audio is UNTOUCHED - this branch still returns without
+       playing, and the line below it is still what plays.
+
+       PATH 1 ONLY, WHICH IS THE WHOLE SCOPE. Five other call sites write
+       `albumActiveTrack` (`advanceQueue`, the preset Play verb, the preset
+       restore, the play branch here, and the face-only branch above) and every
+       one of them already loads and plays. This is the only path that focused
+       without loading.
+
+       AUDIO IS DELIBERATELY UNTOUCHED, on the measurement rather than on taste:
+       an audio row's "focused" and "playing" already draw the same thing (the
+       album art in `.vp-audio-only`), so preloading would show the visitor
+       nothing new - while stepping through /wb's six rows would pull most of
+       **22 MB** and abandon five of the six downloads. All cost, no change.
+
+       AND IT WILL NOT INTERRUPT A RUNNING VIDEO. There is ONE player instance,
+       so cueing while a video plays would replace what is playing - the exact
+       interruption V3's gate exists to prevent, arriving through the gate
+       itself. When a video is running, focus does nothing to the player and the
+       running video keeps the box, which is W1 ("a video plays until STOPPED or
+       ENDED") still true. Cueing while AUDIO plays is harmless and allowed: a
+       cue makes no sound, and the audio-only overlay is drawn above it.
+
+       ═══ KNOWN ASYMMETRY, RECORDED SO IT IS NOT "FIXED" INTO A REGRESSION ════
+       **The row highlighted on ARRIVAL is not cued, and must not be.** H4
+       (2026-08-06) marks that row by DERIVING it - `activeTrack` falls back to
+       the viewer's own first playable track for DRAWING only - and leaves
+       `albumActiveTrack` null on purpose: *"Writing a default INTO
+       `albumActiveTrack` would mean the room had made a selection the visitor
+       did not."* So on arrival one row looks focused and is not ready, and
+       every row focused by hand is. **That asymmetry is deliberate and Mike
+       ruled it in:** making arrival cue would fetch YouTube on page load in
+       every wing, for a video nobody asked for, and would overturn H4. A later
+       round reading this as a bug should read H4 first. */
     const alreadySelected = albumActiveTrack[albumIdx] === ti;
     if (!alreadySelected && !play) {
       setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
       setOpenEntry(null);         /* [M5] a newly armed track opens on its index */
+      const cueing = track.videos[vis[0]];
+      const running = playingAlbum !== null && playingTrack !== null && playingVideo !== null
+        ? SPINE[playingAlbum].tracks[playingTrack]?.videos?.[playingVideo]
+        : null;
+      if (cueing?.ytId && !running?.ytId) yt.cueVideo(cueing.ytId);
       return;
     }
     setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));

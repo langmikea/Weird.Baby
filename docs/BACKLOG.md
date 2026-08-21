@@ -62,7 +62,7 @@ owner and no question attached, which is exactly what a register row is not for.
 | Twelve Hunter Root releases with no years and no links | [S-p](OPEN_ACTIONS.md#s-p) |
 | The Coalition gift-shop tile has no picture | [S-g](OPEN_ACTIONS.md#s-g) |
 | 13 orphan asset rows — 8 judged, 5 unjudged | [M9](OPEN_ACTIONS.md#m9) |
-| **A per-video aspect ratio.** Coconuts' video is a **vertical short in a 16:9 box** and ships pillarboxed on Mike's ruling of 2026-08-20. Making the box follow the source is **not one word**: `16/9` is a constant in three places — the `aspect-ratio` rule, the fit that computes `--fit-area-max`, and the width-drag handler that preserves aspect — so it means a field on the video row threaded to `.vp-area`, with the fit and the drag reading it. **About a round**, and it touches the one handler already re-fixed twice (V2a, then W). | no row |
+
 
 ---
 

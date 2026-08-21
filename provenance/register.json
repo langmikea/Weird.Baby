@@ -15418,19 +15418,19 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
   },
-  "519a15cb86e80fb7": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 736,
-   "t": "Z2T7VwXppQo",
-   "c": "VERIFIED",
-   "s": "checked against YouTube's oEmbed before the id was written: title \"2026 08 17 Coconuts (Chords and Lyrics in Comments) #music #weird.baby\", channel Mike Lang / @PapaWeirdBaby — the house's own channel"
-  },
   "c04feb054aca001b": {
    "f": "src/data/artists/weird-baby.js",
    "l": 738,
    "t": "Official Music Video",
    "c": "HOUSE",
    "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike ruled the concept (\"Official Music Video, or whatever we use for that\"); the string is the museum's existing rendition term, the same one /hr's eleven video rows carry, mapped to OFFICIAL VIDEO on the glass by tidyDesc()"
+  },
+  "c5aa41830f35f059": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 746,
+   "t": "c1vODrVXOg0",
+   "c": "VERIFIED",
+   "s": "checked against YouTube's oEmbed before the id was written: title \"Coconuts - Weird.Baby (chords & lyrics in comments)\", channel Mike Lang / @PapaWeirdBaby - the house's own channel. Re-probed at write time: playabilityStatus OK, playableInEmbed true, isPrivate false, source 1920x1080"
   }
  }
 }

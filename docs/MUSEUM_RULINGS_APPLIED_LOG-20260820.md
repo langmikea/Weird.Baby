@@ -344,6 +344,10 @@ lint **9/8 = baseline** · build green · **launch build green** · provenance
 
 ## 10 — COCONUTS GAINS A VIDEO (/wb)
 
+> **SUPERSEDED IN PART BY §11.** The id changed, the video is 16:9, the
+> pillarbox ruling and the backlog row it opened are both closed, and focus now
+> cues. The label, the select findings and the hit-area numbers all stand.
+
 ### The label — the museum had already answered it
 
 `type: "official"`, `label: "Official Music Video"`. `tidyDesc()` maps that
@@ -433,3 +437,114 @@ a constant in three places (the `aspect-ratio` rule, the fit that computes
 `--fit-area-max`, the width-drag handler that preserves aspect), so it means a
 field on the video row threaded to `.vp-area` with the fit and the drag reading
 it. **About a round**, touching the handler already re-fixed twice (V2a, then W).
+
+
+---
+
+## 11 — THE ID SWAP, AND FOCUS CUES THE VIDEO
+
+### The id, and the check that had to be run twice
+
+`Z2T7VwXppQo` -> **`c1vODrVXOg0`**.
+
+**It was refused once before it was written.** On its first probe the new id
+answered oEmbed with **403 Forbidden**, three thumbnail sizes with **404**, and
+its own watch page with `playabilityStatus: LOGIN_REQUIRED`, reason **"Private
+video"**. It was not written, and the museum did not ship a row whose control
+could not start.
+
+**THE CONTROL IS THE PART WORTH KEEPING.** A 403 could have been the network,
+the endpoint, or a rate limit — so the previous id and a known-public id were
+probed **in the same run** and both returned 200. That is what made "the video
+is private" a finding rather than a guess.
+
+Re-probed after Mike made it public, at write time:
+
+| probe | result |
+|---|---|
+| oEmbed | **200** — *"Coconuts - Weird.Baby (chords & lyrics in comments)"*, **Mike Lang / @PapaWeirdBaby** |
+| watch page | `playabilityStatus: OK`, `playableInEmbed: true`, `isPrivate: false`, `isUnlisted: false` |
+| source dimensions | **1920x1080** |
+
+**Public, not unlisted.** Everything else about the rendition is unchanged: first
+option, `type: "official"`, `label: "Official Music Video"`, the row reads
+**OFFICIAL VIDEO**.
+
+### The aspect — the backlog row is closed
+
+The source is **1920x1080** and the box measures **1279.3 x 719.6, ratio
+1.778** — 16:9 against 16:9, and nothing in the museum crops or stretches an
+iframe. **It fills the box; the per-video ratio row is closed.**
+
+**WHAT IS OBSERVED AND WHAT IS DERIVED, KEPT APART.** The source dimensions and
+the box are both measured. **The rendered picture band is not** — the video
+buffers indefinitely in this browser and never paints a frame, exactly as the
+previous id did. Two 16:9 numbers and a renderer that does not reshape are
+enough to close the row; a pixel reading of the frame is not available here.
+
+### Focus cues the video — ruling A, path 1 only
+
+`cueVideoById`, YouTube's own paired method. **No autoplay flag, no muted start,
+no play-then-pause** — every one of those makes sound or motion for a frame,
+which is why he chose A over B.
+
+**ONE DEFECT THE WRITING FOUND, ON A PATH NOBODY WOULD HAVE TESTED.**
+`pendingRef` held a bare id and `onReady` always **loaded** it, which plays. A
+cue arriving before the player was ready would therefore have **started playing
+the moment it became ready** — the exact autoplay the ruling forbids. It carries
+`{id, cue}` now and the verb survives the wait.
+
+**AND THE FIRST CUT MOVED THE LINT BASELINE FOR A COPY-PASTE.** `cueVideo`
+written out beside `loadVideo` produced a **second** copy of the hook's existing
+`initPlayer` exhaustive-deps warning — 9/8 became 9/9, a new warning for no new
+behaviour. They are one body and a verb now: `requestVideo(ytId, cue)` carries
+the existing debt, two named verbs sit over it, **and the baseline is 9/8
+again.**
+
+**THE INTERRUPTION GUARD, WHICH THE RULING NEEDED AND DID NOT NAME.** There is
+one player instance, so cueing while a video plays would replace what is
+playing — V3's interruption arriving through V3's own gate. Focus does nothing
+to the player while a video runs. **Measured: a video playing, five other rows
+focused in turn, the playing row never changed and no second iframe appeared.**
+
+**Audio untouched** and **arrival un-cued**, both as ruled. The arrival
+asymmetry is recorded in the code beside the change, with H4's reasoning
+attached, so a later round does not "fix" it into a fetch on every page load in
+every wing.
+
+### Verified on the page
+
+| check | result |
+|---|---|
+| fresh load, before any click | 1 iframe, `www.youtube-nocookie.com`, **empty embed**; 3 requests (API, widget, embed); no mp3 |
+| first click on Coconuts | focus set, **nothing plays** — no player bar, no audio element, no motion |
+| the cue itself | the iframe shows a **cued player**: play button, black ground, no progress, no sound |
+| second click | **plays** — `.tl-playing` on Coconuts, poster gone |
+| all six rows, one click each, fresh load | **1 iframe throughout, 0 audio elements, 0 mp3 fetches, nothing ever plays** |
+
+**TWO PROBES OF MINE WERE BLIND AND SAID SO BEFORE THEY SAID ANYTHING ELSE.**
+The iframe's `src` does not change on a cue (the API talks to the loaded embed
+by postMessage) and the parent document's `performance` entries cannot see
+fetches made **inside** a cross-origin iframe. Both read "nothing happened" when
+the cue had in fact fired. Lifting the `.vp-thumb` overlay and looking is what
+settled it. **Suspect the probe before the site.**
+
+### One thing Mike should know, not a defect
+
+**On /wb the visitor does not see the video's poster frame.** `.vp-thumb` draws
+the **album cover** over the player whenever nothing is playing, because only
+`/wal` declares `thumbFromVideo: true`. So the cue is **invisible on this wing**
+and what it buys is that the second click starts instantly. Whether /wb should
+show the video's own frame instead of the album cover is a ruling, not a bug,
+and nothing here changed the draw path.
+
+### Rows and gates
+
+Register: **1 added** (`c1vODrVXOg0`, VERIFIED, oEmbed-checked), **1 pruned**
+(the old id), **0 surviving rows changed, 0 broken chains**. No `assets.json`
+row, no ledger row.
+
+lint **9/8 = baseline** · build green · **launch build green** · provenance
+**PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate`
+**PASS** · `docs:numbers` **PASS** · `reveal:day` **nothing to move** ·
+`assets:orphans` **13, unchanged**.
