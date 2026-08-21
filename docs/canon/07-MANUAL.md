@@ -167,6 +167,30 @@ PAGE.** See [Doctrine 18](10-LAWS.md#doctrine-18).
 
 ---
 
+## 5b · WAITING FOR THE NEXT MANUAL ROUND — `ANT` / `CAB`
+<a id="ant-cab-pending"></a>
+
+**MIKE, 2026-08-21:** the Portal panel's four switches select between **`ANT`**
+and **`CAB`** per channel, and **the naming belongs in this document and nowhere
+else** — as text, without detail. *"It's a little egg to figure this stuff out."*
+
+**AND HE RULED WHICH IS WHICH: `ANT` IS TELEVISION — the aerial pulls it out of
+the air — and `CAB` IS HARDWIRED AND CARRIES THE MGK UNITS.** Ops had inferred
+the opposite; the correction and why the inference was reasonable and wrong are
+in [06-PORTAL §9.3](06-PORTAL.md#ant-cab).
+
+**IT IS NOT WRITTEN YET.** The recommended placement is **Appendix G**, two rows,
+expanded and nothing more — the appendix already carries two abbreviations that
+do not expand at all, so a row that says the words and stops is this appendix
+behaving normally. A sentence in **Section III · INSTALLATION** is optional.
+**Section IV · CONTROLS AND INDICATORS is refused**: its job is to explain what a
+control does, which is the opposite of what this is for.
+
+Full reasoning and the ANT-frees / CAB-carries reading:
+[06-PORTAL §9.3](06-PORTAL.md#ant-cab).
+
+---
+
 ## 6 · APPENDIX G — the 21 abbreviations
 <a id="appendix-g"></a>
 

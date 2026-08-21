@@ -36,7 +36,7 @@ the twin's own machinery, costed).
 | **[03-ANSWERS](03-ANSWERS.md)** | the determination · the ask · **the two kinds of bias** · polarity · clarity · the weight formula · **the four communications settings** · the twenty · condition |
 | **[04-MENU](04-MENU.md)** | doors · rows · access codes · the tree as built · the apps · the card vocabulary · the input grammar |
 | **[05-BOOT](05-BOOT.md)** | the three starting sequences · F and T · the ballet · the F/T dance · **the eight FT laws** · the sound · the glitch · the system monitor |
-| **[06-PORTAL](06-PORTAL.md)** | **the video link** · the far end · the Portal · the FEED CONTROL · the drum · the hold · the recipes · the far end's bench · **QC_101** · **the antenna selector** |
+| **[06-PORTAL](06-PORTAL.md)** | **the video link** · the far end · the Portal · the FEED CONTROL · the drum · the hold · the recipes · the far end's bench · **QC_101** · **the antenna selector** · **what it runs on** |
 | **[07-MANUAL](07-MANUAL.md)** | `ABEAL 8P-OMI-1` · the structure · **the three written paragraphs** · Appendix F · Appendix G · the marked copy · the proto-manual |
 | **[08-PEOPLE](08-PEOPLE.md)** | X · the first five · the Release-1 four · the held units · McKenna · **the sealed rooms** |
 | **[09-PUBLISHED](09-PUBLISHED.md)** | **the three states** · the clock · Records 001–005 · Record 013 · the rules that govern what a Record may say |
@@ -60,6 +60,8 @@ the twin's own machinery, costed).
 |---|---|
 | ABEAL | [01](01-WORLD.md#abeal) · **PUB** |
 | ABEAL FORM QC-101 | **[06](06-PORTAL.md#qc-101)** · **PUB** |
+| `ANT` / `CAB` — the DIP's two positions | **[06 §9.3](06-PORTAL.md#ant-cab)** · [07 §5b](07-MANUAL.md#ant-cab-pending) — ANT is television, CAB carries the units |
+| autosync · the COMM payload | **[06 §10.2](06-PORTAL.md#what-it-runs-on)** · **PUB (Record 005)** |
 | Antenna selector, the | **[06 §9](06-PORTAL.md#antenna)** — BUILT 2026-08-21, HELD wing |
 | Antenna routings — 1110 / 1011 / 1101 / 0111 | **[06 §9](06-PORTAL.md#antenna)** |
 | Antenna feed assignment · **FEED NO. 3** | **[06](06-PORTAL.md#qc-101)** · **PUB** — the only published source for VIIIp's channel |
@@ -426,6 +428,7 @@ the twin's own machinery, costed).
 |---|---|
 | Uniqueness law, the | [10](10-LAWS.md#uniqueness) |
 | Unit | [02](02-MACHINES.md#names) · **PUB** |
+| **UNIX-6x Emulator** — what the Portal runs on | **[06 §10.1](06-PORTAL.md#what-it-runs-on)** · **PUB (Record 005)** |
 | VCS — Voice Control System | [02](02-MACHINES.md#hardware) |
 | VibroSense (VSI) | [02](02-MACHINES.md#hardware) |
 | Video link, the | **[06](06-PORTAL.md#video-link)** · **PUB** |

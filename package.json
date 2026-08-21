@@ -44,6 +44,7 @@
     "instory:all": "node tools/instory-specs.mjs --all",
     "lap": "node tools/lap.mjs",
     "lap:clean": "node tools/lap.mjs --clean",
+    "mock": "node tools/serve-mock.mjs",
     "surfacing": "node tools/surfacing.mjs",
     "record:serve": "node tools/dictation/record-serve.mjs",
     "assign": "node tools/dictation/assign.mjs",

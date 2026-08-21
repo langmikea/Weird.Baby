@@ -406,8 +406,21 @@ is **not** on this sheet.
 ## 9 · THE ANTENNA SELECTOR — BUILT 2026-08-21
 <a id="antenna"></a>
 
-**MIKE'S DESIGN, RULED AND BUILT.** A fifth control on the FEED CONTROL panel,
-beside the drum. It cycles four routings over channels 1–4:
+> **[2026-08-21, SECOND PASS] THE FOUR SWITCHES SELECT BETWEEN `ANT` AND `CAB`
+> — ANTENNA OR CABLE — PER CHANNEL.** Mike's canon. **The mechanics below are
+> unchanged; only the naming is, and the naming lives in THE MANUAL and nowhere
+> else.** It is not on the panel and it is not in a caption: *"It's a little egg
+> to figure this stuff out."* See [§9.3](#ant-cab) for where in the manual it
+> belongs and what it costs.
+>
+> **`1 = television, 0 = free` WAS OPS' WORDING AND NEVER MIKE'S.** It is
+> retired everywhere it was written, including off the panel itself, where it
+> was Ops explaining the machine under the machine.
+
+**MIKE'S DESIGN, RULED AND BUILT.** A control on the FEED CONTROL panel. The
+shipped build cycles four routings over channels 1–4; **the rebuilt panel makes
+the four bits individually settable — a DIP block, any pattern** — which is the
+same mechanic with the cycler taken off it:
 
 | routing | zero on | what channel 3 carries |
 |---|---:|---|
@@ -519,3 +532,111 @@ drift at 0.13 Hz, read straight off `Hum_Start()`. Two smaller reasons are
 recorded in `TestSignal.jsx`: the twin has no feed parameter, and an iframe has
 no user activation of its own so its AudioContext would never resume.
 
+### 9.3 · `ANT` / `CAB` — the switch positions, and they live in the manual
+<a id="ant-cab"></a>
+
+**MIKE, 2026-08-21:** the four switches select between **`ANT`** and **`CAB`** —
+antenna or cable — per channel. **It does not go on the panel. It goes in the
+manual, as text, without detail.** *"It's a little egg to figure this stuff
+out."*
+
+**THE MECHANICS DO NOT MOVE.** One position leaves the channel carrying
+television; the other frees it, and a unit fixed to that channel comes through.
+Everything in §9 above is unchanged.
+
+**WHICH POSITION IS WHICH — MIKE RULED IT, 2026-08-21, AND IT REVERSES OPS'
+INFERENCE:**
+
+> **`ANT` IS TELEVISION — the aerial pulls it out of the air.
+> `CAB` IS HARDWIRED AND CARRIES THE MGK UNITS.**
+
+So a channel switched to **`CAB`** is the one a unit comes through on, and
+`1101` in the old cycler's terms is *cable on channel 3*.
+
+**OPS INFERRED THE OPPOSITE AND THE INFERENCE IS KEPT HERE, NAMED, BECAUSE IT
+WAS REASONABLE AND WRONG.** It ran: the panel's legend is ANTENNA, QC_101 is
+headed `ANTENNA FEED ASSIGNMENT` and reads `BROADCASTS ON ......... FEED NO. 3`,
+therefore the unit is on the aerial. **What it missed is the more ordinary
+reading of a 1965 set:** an aerial is how television arrives, and a machine
+sitting in the same room is *wired to the back of the thing*. `ANTENNA FEED
+ASSIGNMENT` is the form naming the panel it is describing, not a claim about
+which side the unit is on.
+
+**THE LESSON IS THE ONE THE ROUND SHOULD KEEP:** a chain of three plausible
+readings produced a confident answer with no measurement under any link of it.
+It was filed as a reading rather than as canon, which is the only reason it cost
+one line to correct.
+
+**WHERE IN THE MANUAL IT BELONGS — three candidates, and the cheapest is the
+best.**
+
+| place | what it would say | cost |
+|---|---|---|
+| **Appendix G — ABBREVIATIONS** | two rows: `ANT` and `CAB`, expanded and nothing more | **two rows.** The appendix already has 21, *two of which do not expand at all* — so a row that expands and explains nothing is the appendix behaving normally |
+| **Section III — INSTALLATION** | one sentence in passing: a channel's input is selected at the panel | one paragraph, and installation is the right act — a technician patching units into channels is installing them, and QC_101 came out of the ZIP's `INSTALL` folder |
+| Section IV — CONTROLS AND INDICATORS | the switch block enumerated with the rest of the face | the largest, and the most explanatory — it is the section whose job is to say what every control does, which is the opposite of an egg |
+
+**RECOMMENDED: Appendix G, and Section III only if a sentence is wanted.**
+Appendix G costs two rows, says the words and nothing else, and is the one place
+in the document where saying nothing further is the established behaviour.
+**Section IV is refused** — a controls-and-indicators entry explains, and this is
+not to be explained.
+
+**NOT WRITTEN THIS ROUND.** The manual is generated from
+`tools/manual_structure_build.py` in the robots repo and its page count is a
+published standing number (**63**). Adding rows to Appendix G is a change to that
+generator, a re-render, and a page-count check — it belongs in the round that
+next writes the manual, not in a panel round.
+
+---
+
+## 10 · WHAT THE PORTAL RUNS ON — Record 005, 2026-08-21
+<a id="what-it-runs-on"></a>
+
+**TWO FIRST APPEARANCES, BOTH IN ONE LINE OF MIKE'S, BOTH PUBLISHED.** Record
+005's DETAILED REPORT, in his words:
+
+```
+  > Portal is now up and running on our UNIX-6x Emulator.
+  > It carried its own COMM payload, autosync, etc.
+  > The Portal is accessible via the Robots Exhibit.
+```
+
+**Neither `UNIX-6x` nor `COMM payload` existed anywhere in either repo before
+this line** — checked across the museum and the robots repos before it landed.
+
+### 10.1 · THE UNIX-6x EMULATOR — **PUBLISHED**
+
+**The Portal runs on an emulator, and the emulator is Weird.Baby's, not
+ABEAL's.** *"our UNIX-6x Emulator"* — the possessive is the whole of what it
+establishes: the 2026 side is running the 1965 software, rather than the 1965
+machine having been repaired.
+
+**IT AGREES WITH WHAT THE MUSEUM ALREADY SAYS AND IT SHARPENS IT.** The FAQ's
+answer to *"Is the Portal the real machine?"* reads *"It is the real firmware on
+shimmed hardware — the twin."* **`UNIX-6x Emulator` is the name of the shim.**
+That answer was written before this line and needs no change; it is now specific
+where it was general.
+
+**WHAT IS NOT ESTABLISHED, AND MUST NOT BE INVENTED:** what UNIX-6x is, who made
+it, what it runs on, whether it is period or modern. The line names it and stops.
+
+### 10.2 · THE COMM PAYLOAD AND AUTOSYNC — **PUBLISHED**
+
+*"It carried its own COMM payload, autosync, etc."* — **the Portal arrived with
+its own communications software.** `autosync` is named and nothing else about it
+is.
+
+**IT IS THE FIRST THING IN THE CORPUS THAT SAYS THE PORTAL TALKS OUTWARD BY
+ITSELF**, and it lands beside two things already published: the manual's
+bi-directional CNC Vid-Link (Section VII, Record 003), and Record 004's
+*"QC RULE: Unsafe to run in any sandbox; permanently quarantined."* **The museum
+put it in a sandbox; it carried its own sync.** Nothing in 005 draws that
+conclusion and nothing here should either — it is recorded as an adjacency, not
+as a finding.
+
+**`etc.` IS HIS AND IS LOAD-BEARING.** It says there was more in the payload
+than the two things named, without naming any of it — which is a hole the story
+may fill later and a fact the museum may not invent into.
+
+---

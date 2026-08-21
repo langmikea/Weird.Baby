@@ -114,11 +114,64 @@ pre{background:var(--panel);border:1px solid var(--line);border-radius:3px;
 <p><b>The reasons are written up once, in <code>docs/OPEN_ACTIONS_CLOSED.md</code>, and that file is deliberately NOT linked from here and NOT on the desk</b> — Doctrine 24: the test is not whether a dead thing is archived, it is whether you meet it again. It is there for a future round, not for you.</p>
 <p><b>Four of the seven had no row in the register at all</b>, and are recorded there anyway — an item with no row is the one a later round re-raises as if it were new.</p>
 <hr>
+<h2 id="the-queue-filed-2026-08-21">THE QUEUE — filed 2026-08-21</h2>
+<p><b>FIFTEEN ITEMS OPS WAS CARRYING IN CONVERSATION, WHICH IS THE LEAK MIKE TOLD OPS TO CLOSE.</b> A queue held in a chat exists until the chat closes. Everything below is here with what is known about it, so the next round reads it instead of being told it.</p>
+<p><b>THIS SECTION IS NOT RANKED AGAINST MIKE'S 08-16 ORDER ABOVE.</b> It is the carried queue, listed; where he has ruled an item's urgency the ruling is on the row.</p>
+<hr>
+<h3 id="1-the-live-site-clean-up-one-pass-many-small-things">1 · THE LIVE-SITE CLEAN-UP — one pass, many small things</h3>
+<p><b>Mike's own list from walking the live site.</b> It is one item because it is one pass, and it is first because every part of it is visible to a visitor today.</p>
+<div class="tw"><table><thead><tr><th>where</th><th>what</th></tr></thead><tbody><tr><td><b>/robots · Record 003</b></td><td>the two attachment titles</td></tr><tr><td><b>the Lobby</b></td><td>the directory at 2x</td></tr><tr><td><b>the guest book</b></td><td>the line, and a <b>3s</b> cycle</td></tr><tr><td><b>AFFILIATION</b></td><td>the answer has lost its third sentence</td></tr><tr><td><b>/foundation</b></td><td>the blank <b>Short Story</b>; the retitled foundation question; the four-line <i>giving away</i> answer; the three-paragraph <i>what happens when you stop</i>; the centred foot's line spacing</td></tr><tr><td><b>sitewide</b></td><td>the title bar's left and right, sized between too-small and the centre</td></tr><tr><td><b>/wb · About the Artist</b></td><td><b>Mike's full rewrite, all five tiles</b></td></tr></tbody></table></div>
+<p><b>The About the Artist rewrite is his text and has not been supplied yet.</b> Everything else on this row is a fix, not a decision.</p>
+<h3 id="2-the-artist-the-album-an-influences-track-and-the-cover">2 · THE ARTIST — the album, an Influences track, and the cover</h3>
+<ul><li><b>rename the album</b> from <i>About the Artist</i></li><li><b>add an Influences track</b></li><li><b>regenerate the cover</b> from <code>tools/make_house_covers.py</code></li></ul>
+<p><b>MIKE HAS RULED THE COVER IN AS SOON AS FEASIBLE.</b> The generator exists and is the same one the four wing covers came off; the 2026-08-10 ruling that retired it for those four paths does not reach a new cover it is asked to make.</p>
+<p><b>Pairs with item 15</b> — his own concert photographs are what the Influences track is for.</p>
+<h3 id="3-ant-cab-in-the-manual-appendix-g-two-rows">3 · <code>ANT</code> / <code>CAB</code> IN THE MANUAL — Appendix G, two rows</h3>
+<p><b>RULED BY MIKE 2026-08-21, INCLUDING WHICH IS WHICH: <code>ANT</code> IS TELEVISION — the aerial pulls it out of the air — and <code>CAB</code> IS HARDWIRED AND CARRIES THE MGK UNITS.</b> Ops had inferred the opposite; the canon entry is corrected (<a href="canon/06-PORTAL.md#ant-cab">06-PORTAL §9.3</a>).</p>
+<p><b>Two rows in Appendix G, expanded and nothing more.</b> The appendix already carries 21 rows, two of which do not expand at all, so a row that says the words and stops is that appendix behaving normally — which is what an egg wants. <b>Section IV is refused</b>: its job is to explain what a control does.</p>
+<p><b>COST:</b> <code>tools/manual_structure_build.py</code> in the robots repo, a re-render, and a check against the published page count (<b>63</b>). It belongs to the round that next writes the manual. Pointer waiting at <a href="canon/07-MANUAL.md#ant-cab-pending">07-MANUAL §5b</a>.</p>
+<h3 id="4-an-up-to-track-for-wb">4 · AN &quot;UP TO&quot; TRACK FOR /wb</h3>
+<p>Three lines, his:</p>
+<pre>Debuted Weird.Baby /Music
+Started Weird.Baby /Foundation
+Launched Weird.Baby /Robots</pre>
+<h3 id="5-terminal-exe-and-portal_2v16-cfg-as-record-004-attachments">5 · <code>TERMINAL.EXE</code> AND <code>PORTAL_2v16.CFG</code> AS RECORD 004 ATTACHMENTS</h3>
+<p>Both open the Portal, as if arriving through the album. <b>Scoped and not built.</b> <code>RecordEntry</code> already has <code>section.doors[]</code> with <code>kind:&quot;tv&quot;</code>, which dispatches the Portal with a preset and refuses honestly via <code>door.held</code>. What is missing: a <code>door</code> field on a <code>docs</code> row (one branch), and a destination for the <b>album</b> rather than the twin. <b>Recommended: <code>/robots?panel=&lt;bankId&gt;</code></b> over writing the panel's <code>sessionStorage</code> from the Record — a Record writing another surface's store is the two-answers hazard.</p>
+<p><b>Both must open the same thing.</b> Giving them different destinations would invent a difference the museum cannot produce.</p>
+<h3 id="6-test-bench-the-six-digit-base-4-code">6 · TEST BENCH — the six-digit base-4 code</h3>
+<p><b>4⁶ = 4096</b> — a code to be <b>given</b>, not guessed, and the number only holds if the museum gives nothing away: no counter, no partial match, no <i>wrong code</i>.</p>
+<p><b>The keypad exists.</b> The twin's own screen already carries <code>1 2 3 4 X</code> inside the picture (<code>#monlayout .chy</code>, measured). Entry is not a mode — pressing 1–4 in sequence is what changing channel already looks like.</p>
+<p><b>Refusal is silent:</b> TEST BENCH arms and opens the ordinary portal until the sequence is right. That is deliberately the opposite of the panel's never-decline-silently rule, and the difference is that the rule governs <b>controls</b>; this is an <b>egg</b>.</p>
+<p><b>MIKE HAS RULED THE SEQUENCING CONSTRAINT:</b> <i>&quot;They are meant to require a code. I do not want to give them both at the same time.&quot;</i> The lock and the key arrive apart. <b>Which comes first is Ops' to sequence; what it opens is not invented.</b></p>
+<h3 id="7-the-panel-rebuild-held-mid-flight">7 · THE PANEL REBUILD — held mid-flight</h3>
+<p>The mock is at <code>docs/panel-rebuild-20260821/panel.html</code>, served by <code>npm run mock</code>. Three passes done; <b>nothing is in <code>src/</code>.</b></p>
+<p><b>THE STEPPER DEFECT IS DIAGNOSED AND FIXED (2026-08-21).</b> It was never the handler. <b>It steps</b> — measured: PATCHED → COLD START → FIRST RUN → LAST STATE, both handlers bound, the up arrow going back. <b>What did not change is the only thing the eye was on:</b> every bank in the volume is <code>NIAC/VIIIp</code>, so the big lit top line was identical in all five states and the only thing moving was an 11px dim sub-line. A readout whose prominent half never changes reports nothing. <b>The state line is lit now</b> — same colour, one size down instead of three. That was the unpaid half of fixing the readout overflow: splitting <code>NIAC/VIIIp · TEST BENCH</code> onto two lines stopped the clipping; leaving the second line a whisper is what made the split look broken.</p>
+<p>Also carried: the museum's <code>--engrave</code> token is under AA on this chassis, so the rebuilt panel wants its own ramp.</p>
+<h3 id="8-the-three-wrong-bank-state-recipe-ids">8 · THE THREE WRONG BANK-STATE RECIPE IDS</h3>
+<p>Measured against the twin's live recipe table:</p>
+<div class="tw"><table><thead><tr><th>bank state</th><th>wants</th><th>points at today</th><th>what that does</th></tr></thead><tbody><tr><td>COLD START</td><td><code>{power:&quot;on&quot;, level:0}</code></td><td><code>boot-playback</code></td><td>a Sandbox replay of an <b>established</b> machine</td></tr><tr><td>FIRST RUN</td><td><code>{power:&quot;on&quot;, level:1}</code></td><td><code>off-first-boot</code></td><td><code>power:&quot;off&quot;</code> — <b>it never boots</b></td></tr><tr><td>LAST STATE</td><td><code>{power:&quot;on&quot;, level:2}</code></td><td><code>last-state</code></td><td><b>not a recipe at all</b> — opens plain</td></tr></tbody></table></div>
+<p><b>There is no <code>level: 1</code> recipe</b> (measured: the filter returns empty), and the real cold start already exists unexposed as <code>clean-boot</code> — <b>verified by loading it: the boot plays.</b> The fix is three repointings and one new row in <code>twin.html</code>. <b>None of the three may carry <code>resume</code></b>, or a second latch in the same session lands on a static menu.</p>
+<p><b>Mike's levels are 0-indexed in the recipe:</b> his Level 1 / 2 / 3 are <code>level: 0 / 1 / 2</code>.</p>
+<h3 id="9-the-arc-docs-arc-md">9 · THE ARC — <code>docs/ARC.md</code></h3>
+<p>Twelve week headlines plus W01–W04 in outline. <b>Weeks 6, 7 and 8 have no headline</b>, and hardware going on hold means week 2 onward is stale. Mike defines the arc and writes into it.</p>
+<h3 id="10-the-canon-gate">10 · THE CANON GATE</h3>
+<p>A gate that fails when a contested or Ops-register term reaches a visitor-facing string. <b>Ruled in, not started.</b></p>
+<h3 id="11-a-thumbs-up-down-on-the-info-booth">11 · A THUMBS UP / DOWN ON THE INFO BOOTH</h3>
+<p><b>Mike's framing: &quot;the call to action is Decide.&quot;</b></p>
+<h3 id="12-the-blog-low-priority">12 · THE BLOG — low priority</h3>
+<p>Mike's own ranking.</p>
+<h3 id="13-the-long-story">13 · THE LONG STORY</h3>
+<p>The room exists and is empty; the FAQ already sends visitors to it. <b>Pairs with the Foundation's blank Short Story in item 1.</b></p>
+<h3 id="14-top-billing-for-weird-baby-solo-when-leaving-mike-s-sites">14 · TOP BILLING FOR WEIRD.BABY SOLO WHEN LEAVING MIKE'S SITES</h3>
+<p>As /wal artists already get.</p>
+<h3 id="15-mike-s-own-concert-photographs">15 · MIKE'S OWN CONCERT PHOTOGRAPHS</h3>
+<p>For the Influences track. <b>His images; not supplied yet.</b> Pairs with item 2.</p>
+<hr>
 <h2 id="what-this-page-is-not">WHAT THIS PAGE IS NOT</h2>
 <p><b>It is not the register.</b> <code>OPEN_ACTIONS.md</code> carries <b>137 rows</b>, of which <b>132 are OPEN and 114 are owned by Mike</b> — most of them one-word rulings, records and notes rather than work with a date. <b>This page ranks the WORK.</b> A row that is not named here has not been closed, dropped or demoted; it is waiting in the register, where it has always been.</p>
 <p>Rebuild this page with <code>npm run desk</code>.</p>
 <p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/BACKLOG.md</code>,
-last written <b>2026-08-21 00:19 UTC</b>. Every register link on this page is checked against
+last written <b>2026-08-21 18:45 UTC</b>. Every register link on this page is checked against
 <code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
 </div>
 </body></html>

@@ -15508,13 +15508,19 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
   },
-  "f5f84bc17a28139b": {
+  "b079815427ad4c0e": {
    "f": "src/data/artists/robots-record.js",
-   "l": 648,
-   "t": "  > Portal is accessible via the Robots Exhibit.",
+   "t": "PORTAL CONNECTION ONLINE",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
+   "s": "Mike's headline for Record 005, given 2026-08-21, hours before the entry posts. It replaces GENERAL STATUS UPDATE, which 002 and 004 still share - his ruling, and deliberate: a headline that differs is the cheapest signal a Record has and it is spent on the week's payoff rather than on a Tuesday. 24 characters against RECORD_TITLE_MAX 62."
   },
+  "d427faf71a92a9a8": {
+   "f": "src/data/artists/robots-record.js",
+   "t": "  > Portal is now up and running on our UNIX-6x Emulator.\n  > It carried its own COMM payload, autosync, etc.\n  > The Portal is accessible via the Robots Exhibit.",
+   "c": "MIKE",
+   "s": "Mike's words, given 2026-08-21 and carried verbatim. It replaces the single line '> Portal is accessible via the Robots Exhibit.' which he had marked {Mike to rewrite}; the rewrite arrived. TWO FIRST APPEARANCES IN THE CORPUS ARE IN IT and are filed as canon in docs/canon/06-PORTAL.md: the Portal runs on a UNIX-6x Emulator, and it carried its own COMM payload with autosync. Neither string existed anywhere in either repo before this line. TWO THINGS ARE FLAGGED AND NOT FIXED (Doctrine 21): his first line says 'Portal' and his third says 'The Portal', and 'etc.' closes the second sentence with the period doing double duty. Both are his, as typed."
+  },
+
   "c04feb054aca001b": {
    "f": "src/data/artists/weird-baby.js",
    "l": 738,

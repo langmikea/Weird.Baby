@@ -663,6 +663,93 @@ read this first.
 
 ---
 
+## 24 - THE DRAWING SUPERSEDES H3a's BADGE (2026-08-21)
+
+**OPS RULING.** Mike: *"Nothing else sounded UX to me"* — so the three questions
+raised against the panel rebuild are Ops' to settle. This is the first.
+
+**THE BADGE IS ONE OBJECT: a chrome bezel, a black field, ABEAL proud of it, four
+rivets.** No `FEED CONTROL` accent panel, no stamped `MODEL NO. / SER. NO. /
+DATE` cells.
+
+**H3a (2026-08-06) ASKED FOR EXACTLY THOSE and it is superseded, not
+contradicted.** Its own words were *"stamped-in-place fields (MODEL NO., SER.
+NO., DATE) with values struck into a lighter recess; an accent panel beside the
+wordmark."* **`PANEL_MOD.jpg` is dated 2026-08-20 — two weeks later — and it is
+the thing Mike is pointing at when he says the panel is not his layout.** A
+drawing that post-dates a ruling and shows the same object differently IS the
+newer ruling.
+
+**WHAT H3a's REASONING KEEPS, because it was never about the fields:** the badge
+is a MAKER'S BADGE and not a data plate — relief, not print; the name of whoever
+built the machine, read before a single legend. The drawing's plate does that
+with fewer parts.
+
+**AND THE THING H3a WAS PROTECTING IS NOT LOST.** Doctrine 12 said a serial and
+a date are specifics nobody has supplied, so the fields rendered as empty struck
+wells. **With the fields gone there is nothing to leave empty**, and `OPEN_ACTIONS`
+P-a — the day Mike hands over a serial — closes as moot rather than as done. If a
+serial ever arrives it is a new object on the plate, decided then.
+
+---
+
+## 25 - THE PATCH PANEL HAS NO LOCK (2026-08-21)
+
+**OPS RULING.** Deleting the two bat switches leaves the arming rule as
+`armed = bank.arms && dial.arms`, and since every bank arms, that is
+`armed = dial.arms`. **That is the answer, not a problem to solve.**
+
+**A PATCH PANEL THAT ARMS WHEN IT IS LIVE IS HONEST.** The SOURCE dial already
+carries the one condition that means anything — LIVE or SEEDED — and it already
+prints its own refusal.
+
+**AND THE DIP MUST NOT BECOME THE LOCK.** An all-1s refusal was the obvious
+candidate and it is refused: **it would be a second puzzle, nobody asked for it,
+and it sits on top of a puzzle that already exists.** The visitor is already
+working out that channel 3 is the machine. Making them also work out that the
+panel will not arm until they free a channel is two locks on one door.
+
+**WHAT THIS COSTS, NAMED:** the panel loses its most-specific refusal and has one
+thing left to say when it will not arm. That is the correct trade — Mike's own
+reason for striking the switches was that **nothing in the story ever explained
+them and a visitor cannot understand them**, and a lock nobody can read is not a
+lock, it is an obstruction.
+
+---
+
+## 26 - THE OVERLAY CARRIES THE TELEVISION'S OWN CONTROLS (2026-08-21)
+
+**P1 / S4 ARE AMENDED.** The Portal overlay's standing rule was *"no controls, no
+chrome, no caption, no close button — the page is supposed to stop existing."*
+It now reads: **the overlay carries THE TELEVISION'S OWN CONTROLS and nothing
+else.**
+
+**MIKE'S REASONING, AND IT IS THE WHOLE AMENDMENT: a channel selector on a
+television is not chrome — it is the object.** The rule was written to keep the
+MUSEUM's furniture off the picture, and it still does. What it must not do is
+keep the MACHINE's own controls off it, because then the machine cannot be
+operated.
+
+**IT IS THE DISTINCTION S4 ALREADY DREW.** S4 removed the museum's close button
+from outside the frame and put `[X]` on the twin's own digit strip — *"inside the
+picture, in the machine's own register"*. This amendment states the principle S4
+was already applying.
+
+**WHY THE SELECTOR GOES THERE AND NOT IN THE TWIN.** A routed channel can carry
+**television**, which is a YouTube player the museum owns and which Ruling 21
+has just consolidated into one implementation. Putting channel selection inside
+`twin.html` means a second player inside a 10,800-line held document one round
+after removing the second one, or a twin that cannot show television at all, or
+the resolver living in two documents. **One resolver, one player.** POWER and
+SHAKE stay the unit's, inside the twin, where they belong.
+
+**THE TEST THIS LEAVES BEHIND**, so the amendment cannot be read as an opening:
+**would the object have this control if the museum did not exist?** A channel
+selector, yes. A close button, a caption, a title bar, a "back to the exhibit"
+link — no. Those are still refused.
+
+---
+
 ## HOW THIS FILE IS MEANT TO BE USED
 
 **Read it before re-opening any of them.** Each ruling here cost a round to

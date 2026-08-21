@@ -763,6 +763,51 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-21 -> RECORD 005 + THE QUEUE FILED - sealed
+- **NOTHING IS WAITING ON MIKE. Deploy before 17:00: `npm run deploy:launch`.**
+  Gates: lint **9/8** - build green - launch build green - provenance **PASS**
+  (2 rows, 1 stale pruned in place) - `reveal:check` **PASS** - `parity:gate`
+  **PASS** - `instory:gate` **PASS** - `docs:numbers` **PASS** - `reveal:day`
+  nothing to move - `assets:orphans` **13**. Log:
+  `docs/MUSEUM_RECORD_005_LOG-20260821.md`.
+- **005 HAS ITS OWN HEADLINE AND THAT IS THE POINT OF IT.** `PORTAL CONNECTION
+  ONLINE`; **002 and 004 still share `GENERAL STATUS UPDATE`** - Mike's, and
+  deliberate. A headline that differs is the cheapest signal a Record has and it
+  is spent on the week's payoff, not on a Tuesday.
+- **ONLY THE DETAILED REPORT CHANGED**, from one line to three - the deck, the
+  executive summary and OTHER were already correct to the character, checked
+  before touching anything. **VERIFIED TWICE: on the built LAUNCH bundle** (all
+  five strings present as single literals, and the old line plus six struck ones
+  plus `{Mike to rewrite}` all return zero) **and on the page** (5 of 5, line for
+  line).
+- **TWO FIRST APPEARANCES, FILED AS CANON RATHER THAN LOGGED** -
+  `docs/canon/06-PORTAL.md` **§10**, both PUBLISHED. The **UNIX-6x Emulator**
+  (*"our"* - the 2026 side runs the 1965 software; it is the name of the shim the
+  FAQ already described) and the **COMM payload with autosync** (the first thing
+  in the corpus saying the Portal talks outward by itself). Neither string
+  existed in either repo before this line. **`etc.` is his and is load-bearing.**
+- **OPS INFERRED ANT/CAB BACKWARDS AND MIKE CORRECTED IT: `ANT` IS TELEVISION,
+  `CAB` IS HARDWIRED AND CARRIES THE MGK UNITS.** The inference is kept, named:
+  it chained three plausible readings (the ANTENNA legend, QC_101's `ANTENNA
+  FEED ASSIGNMENT`, `BROADCASTS ON FEED NO. 3`) into a confident answer **with
+  no measurement under any link**, and missed the ordinary reading - an aerial is
+  how television arrives; a machine in the room is wired to the back.
+  **It was filed as a READING rather than as canon, which is the only reason it
+  cost one line to correct.**
+- **FIFTEEN ITEMS OUT OF CONVERSATION AND INTO `docs/BACKLOG.md`** - the leak
+  Mike told Ops to close. Filed under THE QUEUE, each with what is known, not
+  ranked against his 08-16 order.
+- **"THE FEED STEPPER DOES NOT STEP" - IT STEPS.** Measured: PATCHED -> COLD
+  START -> FIRST RUN -> LAST STATE, both handlers bound. **What did not change
+  is the only thing the eye was on:** every bank is `NIAC/VIIIp`, so the big lit
+  line was identical in all five states and only an 11px dim sub-line moved.
+  **A readout whose prominent half never changes reports nothing.** The state
+  line is lit now - and it was the unpaid half of fixing the readout overflow.
+- **AND `npm run mock` EXISTS BECAUSE THE EXTENSION REFUSES `file://`** - a mock
+  written to disk is invisible to Ops by construction. `OPERATIONS.md` §8 carries
+  the standing rule: any mock built for Mike is served, its URL goes in the
+  report, and Ops looks first.
+
 ### 2026-08-21 -> THE ANTENNA SELECTOR, THE TWO RULINGS - sealed
 - **NOTHING IS WAITING ON MIKE. Deploy: `npm run deploy:launch`.** Both rulings
   are built and verified. Gates (second sweep): lint **9/8** - build green -

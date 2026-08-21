@@ -689,7 +689,16 @@ export const RECORD_ENTRIES = [
             },
             { no: 5,
               date: recordDay(5),
-              title: "GENERAL STATUS UPDATE",
+              /* ═══ [2026-08-21] 005 HAS ITS OWN HEADLINE, AND THAT IS THE
+                 POINT OF IT ══════════════════════════════════════════════════
+                 MIKE: `PORTAL CONNECTION ONLINE`, replacing `GENERAL STATUS
+                 UPDATE`. **002 and 004 still share the generic one and 005 no
+                 longer does** — deliberate, his, and the reason is that this
+                 entry is the week's payoff. A headline that differs is the
+                 cheapest signal a Record has, and it is spent here rather than
+                 on a Tuesday.
+                 24 characters against `RECORD_TITLE_MAX` 62. */
+              title: "PORTAL CONNECTION ONLINE",
               /* [2026-08-20] MIKE REORDERED THE DECK: the Portal line leads
                  and the ZIP line follows. Same two sentences, swapped. */
               line: "> Portal Data Link - Connection Achieved\n> ZIP "
@@ -703,7 +712,7 @@ export const RECORD_ENTRIES = [
                     + "unknown.\n  > ZIP - We have reached the capability limit"
                     + " of brute force.",
                   ] },
-                /* === [2026-08-20] THE DETAILED REPORT IS ONE LINE NOW ========
+                /* === [2026-08-20] THE DETAILED REPORT WAS CUT TO ONE LINE ====
                    MIKE replaced the whole section with its first sentence.
                    STRUCK, named once (Doctrine 24): the launch-controls line,
                    the `Error: Communications Parity Bias Setting Mismatch`
@@ -713,15 +722,33 @@ export const RECORD_ENTRIES = [
                    lines that landed earlier the same day.
 
                    HIS LINE ARRIVED CARRYING `{Mike to rewrite}` AND OPS
-                   STRIPPED THE BRACES, WHICH IS THE ONLY REASON THIS LANDS.
-                   A curly brace is a note to Ops and the launch gate refuses
-                   any that survive (`wb-ops-braces`), so the entry could not
-                   have shipped with it. **He knows, and whether he rewrites
-                   the line before 17:00 on the 21st is his.** Nothing here
-                   guesses at what the rewrite would say. */
+                   STRIPPED THE BRACES, WHICH IS THE ONLY REASON IT LANDED AT
+                   ALL. A curly brace is a note to Ops and the launch gate
+                   refuses any that survive (`wb-ops-braces`).
+
+                   ═══ [2026-08-21] AND HE WROTE IT. The one line becomes three,
+                   hours before the entry posts. **The rewrite the note asked
+                   for arrived, so the note is closed rather than left standing
+                   as an open question about a section that now has an answer.**
+
+                   TWO FIRST APPEARANCES ARE IN THESE THREE LINES AND BOTH ARE
+                   FILED AS CANON: the Portal runs on a **UNIX-6x Emulator**,
+                   and it **carried its own COMM payload, autosync**. Neither
+                   string existed anywhere in the corpus before this line —
+                   checked across both repos. `docs/canon/06-PORTAL.md`.
+
+                   CARRIED VERBATIM, AND TWO THINGS ARE FLAGGED RATHER THAN
+                   FIXED (Doctrine 21): his first line says `Portal` and his
+                   third says `The Portal`, and `etc.` closes the second
+                   sentence with the period doing double duty. Both are his,
+                   as typed. A round that tidies either has broken the
+                   instruction that put them here. */
                 { label: "DETAILED REPORT",
                   body: [
-                    "  > Portal is accessible via the Robots Exhibit.",
+                    "  > Portal is now up and running on our UNIX-6x "
+                    + "Emulator.\n  > It carried its own COMM payload, "
+                    + "autosync, etc.\n  > The Portal is accessible via the "
+                    + "Robots Exhibit.",
                   ] },
                 /* [2026-08-20] `OTHER` - the requisition. It is APPROVED here
                    and it is raised NOWHERE: the Thursday `RAISED` section was

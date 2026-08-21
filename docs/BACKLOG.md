@@ -96,6 +96,180 @@ new.
 
 ---
 
+## THE QUEUE — filed 2026-08-21
+
+**FIFTEEN ITEMS OPS WAS CARRYING IN CONVERSATION, WHICH IS THE LEAK MIKE TOLD
+OPS TO CLOSE.** A queue held in a chat exists until the chat closes. Everything
+below is here with what is known about it, so the next round reads it instead of
+being told it.
+
+**THIS SECTION IS NOT RANKED AGAINST MIKE'S 08-16 ORDER ABOVE.** It is the
+carried queue, listed; where he has ruled an item's urgency the ruling is on the
+row.
+
+---
+
+### 1 · THE LIVE-SITE CLEAN-UP — one pass, many small things
+
+**Mike's own list from walking the live site.** It is one item because it is one
+pass, and it is first because every part of it is visible to a visitor today.
+
+| where | what |
+|---|---|
+| **/robots · Record 003** | the two attachment titles |
+| **the Lobby** | the directory at 2x |
+| **the guest book** | the line, and a **3s** cycle |
+| **AFFILIATION** | the answer has lost its third sentence |
+| **/foundation** | the blank **Short Story**; the retitled foundation question; the four-line *giving away* answer; the three-paragraph *what happens when you stop*; the centred foot's line spacing |
+| **sitewide** | the title bar's left and right, sized between too-small and the centre |
+| **/wb · About the Artist** | **Mike's full rewrite, all five tiles** |
+
+**The About the Artist rewrite is his text and has not been supplied yet.**
+Everything else on this row is a fix, not a decision.
+
+### 2 · THE ARTIST — the album, an Influences track, and the cover
+
+- **rename the album** from *About the Artist*
+- **add an Influences track**
+- **regenerate the cover** from `tools/make_house_covers.py`
+
+**MIKE HAS RULED THE COVER IN AS SOON AS FEASIBLE.** The generator exists and is
+the same one the four wing covers came off; the 2026-08-10 ruling that retired it
+for those four paths does not reach a new cover it is asked to make.
+
+**Pairs with item 15** — his own concert photographs are what the Influences
+track is for.
+
+### 3 · `ANT` / `CAB` IN THE MANUAL — Appendix G, two rows
+
+**RULED BY MIKE 2026-08-21, INCLUDING WHICH IS WHICH: `ANT` IS TELEVISION — the
+aerial pulls it out of the air — and `CAB` IS HARDWIRED AND CARRIES THE MGK
+UNITS.** Ops had inferred the opposite; the canon entry is corrected
+([06-PORTAL §9.3](canon/06-PORTAL.md#ant-cab)).
+
+**Two rows in Appendix G, expanded and nothing more.** The appendix already
+carries 21 rows, two of which do not expand at all, so a row that says the words
+and stops is that appendix behaving normally — which is what an egg wants.
+**Section IV is refused**: its job is to explain what a control does.
+
+**COST:** `tools/manual_structure_build.py` in the robots repo, a re-render, and
+a check against the published page count (**63**). It belongs to the round that
+next writes the manual. Pointer waiting at
+[07-MANUAL §5b](canon/07-MANUAL.md#ant-cab-pending).
+
+### 4 · AN "UP TO" TRACK FOR /wb
+
+Three lines, his:
+
+```
+Debuted Weird.Baby /Music
+Started Weird.Baby /Foundation
+Launched Weird.Baby /Robots
+```
+
+### 5 · `TERMINAL.EXE` AND `PORTAL_2v16.CFG` AS RECORD 004 ATTACHMENTS
+
+Both open the Portal, as if arriving through the album. **Scoped and not built.**
+`RecordEntry` already has `section.doors[]` with `kind:"tv"`, which dispatches
+the Portal with a preset and refuses honestly via `door.held`. What is missing:
+a `door` field on a `docs` row (one branch), and a destination for the **album**
+rather than the twin. **Recommended: `/robots?panel=<bankId>`** over writing the
+panel's `sessionStorage` from the Record — a Record writing another surface's
+store is the two-answers hazard.
+
+**Both must open the same thing.** Giving them different destinations would
+invent a difference the museum cannot produce.
+
+### 6 · TEST BENCH — the six-digit base-4 code
+
+**4⁶ = 4096** — a code to be **given**, not guessed, and the number only holds if
+the museum gives nothing away: no counter, no partial match, no *wrong code*.
+
+**The keypad exists.** The twin's own screen already carries `1 2 3 4 X` inside
+the picture (`#monlayout .chy`, measured). Entry is not a mode — pressing 1–4 in
+sequence is what changing channel already looks like.
+
+**Refusal is silent:** TEST BENCH arms and opens the ordinary portal until the
+sequence is right. That is deliberately the opposite of the panel's
+never-decline-silently rule, and the difference is that the rule governs
+**controls**; this is an **egg**.
+
+**MIKE HAS RULED THE SEQUENCING CONSTRAINT:** *"They are meant to require a code.
+I do not want to give them both at the same time."* The lock and the key arrive
+apart. **Which comes first is Ops' to sequence; what it opens is not invented.**
+
+### 7 · THE PANEL REBUILD — held mid-flight
+
+The mock is at `docs/panel-rebuild-20260821/panel.html`, served by
+`npm run mock`. Three passes done; **nothing is in `src/`.**
+
+**THE STEPPER DEFECT IS DIAGNOSED AND FIXED (2026-08-21).** It was never the
+handler. **It steps** — measured: PATCHED → COLD START → FIRST RUN → LAST STATE,
+both handlers bound, the up arrow going back. **What did not change is the only
+thing the eye was on:** every bank in the volume is `NIAC/VIIIp`, so the big lit
+top line was identical in all five states and the only thing moving was an 11px
+dim sub-line. A readout whose prominent half never changes reports nothing.
+**The state line is lit now** — same colour, one size down instead of three.
+That was the unpaid half of fixing the readout overflow: splitting
+`NIAC/VIIIp · TEST BENCH` onto two lines stopped the clipping; leaving the
+second line a whisper is what made the split look broken.
+
+Also carried: the museum's `--engrave` token is under AA on this chassis, so the
+rebuilt panel wants its own ramp.
+
+### 8 · THE THREE WRONG BANK-STATE RECIPE IDS
+
+Measured against the twin's live recipe table:
+
+| bank state | wants | points at today | what that does |
+|---|---|---|---|
+| COLD START | `{power:"on", level:0}` | `boot-playback` | a Sandbox replay of an **established** machine |
+| FIRST RUN | `{power:"on", level:1}` | `off-first-boot` | `power:"off"` — **it never boots** |
+| LAST STATE | `{power:"on", level:2}` | `last-state` | **not a recipe at all** — opens plain |
+
+**There is no `level: 1` recipe** (measured: the filter returns empty), and the
+real cold start already exists unexposed as `clean-boot` — **verified by loading
+it: the boot plays.** The fix is three repointings and one new row in
+`twin.html`. **None of the three may carry `resume`**, or a second latch in the
+same session lands on a static menu.
+
+**Mike's levels are 0-indexed in the recipe:** his Level 1 / 2 / 3 are
+`level: 0 / 1 / 2`.
+
+### 9 · THE ARC — `docs/ARC.md`
+
+Twelve week headlines plus W01–W04 in outline. **Weeks 6, 7 and 8 have no
+headline**, and hardware going on hold means week 2 onward is stale. Mike
+defines the arc and writes into it.
+
+### 10 · THE CANON GATE
+
+A gate that fails when a contested or Ops-register term reaches a visitor-facing
+string. **Ruled in, not started.**
+
+### 11 · A THUMBS UP / DOWN ON THE INFO BOOTH
+
+**Mike's framing: "the call to action is Decide."**
+
+### 12 · THE BLOG — low priority
+
+Mike's own ranking.
+
+### 13 · THE LONG STORY
+
+The room exists and is empty; the FAQ already sends visitors to it.
+**Pairs with the Foundation's blank Short Story in item 1.**
+
+### 14 · TOP BILLING FOR WEIRD.BABY SOLO WHEN LEAVING MIKE'S SITES
+
+As /wal artists already get.
+
+### 15 · MIKE'S OWN CONCERT PHOTOGRAPHS
+
+For the Influences track. **His images; not supplied yet.** Pairs with item 2.
+
+---
+
 ## WHAT THIS PAGE IS NOT
 
 **It is not the register.** `OPEN_ACTIONS.md` carries **137 rows**, of which

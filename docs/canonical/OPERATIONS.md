@@ -2072,6 +2072,46 @@ looking at third-party embedded content has to happen on an element the museum
 owns.** Keyboard is the exception — focus can legitimately be in the parent — but
 it cannot be the only path.
 
+### OPS CANNOT SEE `file://`, SO EVERY MOCK IS SERVED — `npm run mock` (2026-08-21)
+
+**THE WALL:** the Chrome extension Ops drives refuses `file://` outright —
+*"Can't interact with browser-internal or unparseable URLs."* **So a mock written
+to disk is INVISIBLE to Ops by construction.** It can be built, described, and
+handed to Mike without anyone on this side ever having looked at it.
+
+**IT HAS NOW COST TWO ROUNDS.** On **15 August** the test harness hit the same
+wall and the fix was to serve it over HTTP. On **21 August** the rebuilt feed
+panel was written to `docs/` and reported to Mike unseen; **he came back with
+eight faults, every one of them visible in a screenshot** — four screws at the
+same angle, an extra dark bar under the plate, a readout whose longest string
+needed 306px of a 151px box, and a knob pointer 107° off the label it was
+supposed to aim at.
+
+**THE STANDING RULE: any mock, render or comparison built for Mike to judge is
+SERVED OVER HTTP AND ITS URL GOES IN THE REPORT. Ops looks before Mike does. A
+rendered artefact with no URL cannot be checked by Ops and must not reach him.**
+
+**THE MECHANISM IS ONE COMMAND, because a rule that depends on remembering costs
+a round every time it is forgotten:**
+
+```
+npm run mock          → http://127.0.0.1:8899/  (docs/, read-only)
+npm run mock -- 8123  → another port
+```
+
+`tools/serve-mock.mjs` serves `docs/` and only `docs/`. **It is deliberately not
+`public/`:** the lap harness has to live there to be same-origin with the museum,
+which is why `npm run lap:clean` exists and why `public/` is one `npm run deploy`
+from being published. A mock has no such requirement.
+
+**AND THE SECOND HALF OF THE LESSON IS NOT ABOUT THE EXTENSION.** Three of the
+eight faults were things no probe reports: `text-overflow: ellipsis` makes an
+element report `scrollWidth === clientWidth` while hiding half its text, so the
+readout could not detect its own overflow; a hardcoded pointer angle is valid CSS
+that points at nothing; and an extra decorative element is indistinguishable from
+a shadow until somebody looks at it. **Serving it is what makes looking possible;
+looking is still the step.**
+
 ## 9. Session-close ritual
 
 0. **Gates, in this order:** `npm run lint` (baseline **9 errors / 8

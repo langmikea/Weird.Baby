@@ -75,7 +75,7 @@ under an older date.** *Never label it as seeing the past.* The honest answer to
 | **002** | 2026-08-18 | GENERAL STATUS UPDATE | **PUBLISHED** |
 | **003** | 2026-08-19 | DATA RECOVERY - LEVEL 1 - SUCCESS! | **PUBLISHED** |
 | **004** | 2026-08-20 | GENERAL STATUS UPDATE | **PUBLISHED** |
-| **005** | 2026-08-21 | GENERAL STATUS UPDATE | **SCHEDULED** — posts 17:00 |
+| **005** | 2026-08-21 | **PORTAL CONNECTION ONLINE** | **SCHEDULED** — posts 17:00 today |
 | **013** | — | *the prototype* | see [Record 013](#record-013) |
 
 ---
@@ -264,26 +264,64 @@ survives where it belongs, in [06-PORTAL](06-PORTAL.md).
 
 ---
 
-## RECORD 005 — SCHEDULED, posts 17:00 on 2026-08-21 (today)
+## RECORD 005 — posts 17:00 on 2026-08-21 (today)
 <a id="record-005"></a>
 
-**Establishes (once it posts):**
+**[2026-08-21] THIS SECTION DESCRIBED A DRAFT THAT NO LONGER EXISTS.** Mike gave
+the final text hours before it posts, and it is the first entry in the volume
+with **its own headline** — 002 and 004 still share `GENERAL STATUS UPDATE` and
+005 does not. That is deliberate and his: **a headline that differs is the
+cheapest signal a Record has, and it is spent on the week's payoff.**
 
-- *"ZIP - We have reached the capability limit of brute force."*
-- *"Portal appears to function. Intended purpose unknown."*
-- *"Portal is accessible via the Robots Exhibit."* — **which the Portal wing
-  being HELD currently contradicts.** Recorded.
-- *"The launch controls are intuitive looking, but the system fails to boot."*
-- **`Error: Communications Parity Bias Setting Mismatch`**
-- *"Four toggles. Sixteen combinations. One of them is correct."*
-- *"< The Manual names the settings and declines to name the values."*
-- **ADDENDUM 01 — The Four Settings, as printed** — the four, verbatim from B-1,
-  closing:
+**HEADLINE — `PORTAL CONNECTION ONLINE`**
+
+**Establishes, in his words:**
 
 ```
-  ? A period operator would have known this without being told.
-  ! We are not period operators.
+DECK
+  > Portal Data Link - Connection Achieved
+  > ZIP Extraction - Outer Layers Complete / Stopped
+
+EXECUTIVE SUMMARY
+  > Portal appears to function. Intended purpose unknown.
+  > ZIP - We have reached the capability limit of brute force.
+
+DETAILED REPORT
+  > Portal is now up and running on our UNIX-6x Emulator.
+  > It carried its own COMM payload, autosync, etc.
+  > The Portal is accessible via the Robots Exhibit.
+
+OTHER
+  > APPROVED - Req 0628 - Internal Transfer - No net increase in head count
 ```
+
+**TWO FIRST APPEARANCES IN THE CORPUS, BOTH IN THE DETAILED REPORT** — the
+**UNIX-6x Emulator** and the **COMM payload with autosync**. Neither string
+existed anywhere in either repo before this line. Filed as canon:
+[06-PORTAL §10](06-PORTAL.md#what-it-runs-on).
+
+**CARRIED VERBATIM, WITH TWO THINGS FLAGGED AND NOT FIXED** (Doctrine 21): his
+first line says *Portal* and his third says *The Portal*, and `etc.` closes the
+second sentence with the period doing double duty. Both are his, as typed.
+
+**`> The Portal is accessible via the Robots Exhibit.` STILL SITS AGAINST THE
+WING BEING HELD**, which was recorded against the draft and is unchanged: the
+sentence is true in DEVELOPMENT and, at LAUNCH, true only for a visitor with the
+cookie. Recorded, not resolved.
+
+**WHAT WENT WITH THE REWRITE, NAMED ONCE** (Doctrine 24): *"The launch controls
+are intuitive looking, but the system fails to boot."*,
+`Error: Communications Parity Bias Setting Mismatch`, *"Four toggles. Sixteen
+combinations. One of them is correct."*, *"< The Manual names the settings and
+declines to name the values."*, and **ADDENDUM 01 — The Four Settings, as
+printed** entire, including *"? A period operator would have known this without
+being told."* and *"! We are not period operators."* **The four settings remain
+published** — Wednesday's marked manual page carries them in pen, delivered by
+Record 003.
+
+**VERIFIED ON THE BUILT LAUNCH BUNDLE, 2026-08-21:** all five strings present
+exactly as above, and no earlier version of any of them survives anywhere in the
+entry.
 
 ---
 
