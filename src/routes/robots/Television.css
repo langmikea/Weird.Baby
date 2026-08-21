@@ -1,0 +1,35 @@
+/* TELEVISION — a routed channel, on the overlay's ground. [2026-08-21]
+   Scoped to `.tv-*` and imported by Television.jsx only. The overlay's own rule
+   is that the page stops existing (P1), so there is no chrome here either: no
+   caption, no controls, no close button. The way out is Escape, exactly as it
+   is for the drawn test signal and for channel 4's photograph. */
+
+.tv-root {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+/* The IFrame API replaces this node with its own iframe and copies the width
+   and height it was given (100%/100%), so the sizing has to be on the element
+   it replaces AND survive the replacement — hence both rules below. */
+.tv-root > *,
+.tv-screen {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* The sound catcher. Invisible, over the picture, and present only while the
+   browser has refused sound — a click inside a cross-origin iframe raises no
+   event in this document, so the first touch has to land on something of ours.
+   It is removed the moment the sound is on. */
+.tv-tap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: transparent;
+  cursor: pointer;
+}

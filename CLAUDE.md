@@ -763,6 +763,100 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-21 -> THE ANTENNA SELECTOR, THE TWO RULINGS - sealed
+- **NOTHING IS WAITING ON MIKE. Deploy: `npm run deploy:launch`.** Both rulings
+  are built and verified. Gates (second sweep): lint **9/8** - build green -
+  launch build green - provenance **PASS** - `reveal:check` **PASS** -
+  `parity:gate` **PASS** - `instory:gate` **PASS** - `docs:numbers` **PASS** -
+  `reveal:day` nothing to move - `assets:orphans` **13**.
+- **TELEVISION PLAYS, AND RULING A DOES NOT REACH A LATCH.** *"They turned the
+  TV on. Whatever channel it is on is playing. It's 1965!"* Ruling A governs a
+  video NOBODY ASKED FOR; a latch is four deliberate acts ending in *open this
+  channel*. **Ruling 21**, and the distinction is in `Television.jsx`'s header
+  so a later round cannot misapply it.
+- **A HAND-WRITTEN IFRAME CANNOT AUTOPLAY, AND THAT IS WHY THE HOOK WON.**
+  Autoplay is a Permissions-Policy feature and must be DELEGATED: a bare iframe
+  carries no `allow`, the API writes its own with `allow="…autoplay…"`. The
+  first build drew a poster; the hook plays. **Ruling 23** - "reuse the hook"
+  was the working choice, not the tidy one.
+- **THE HOOK LEFT `Exhibit.jsx` AND THE LINTER NAMED THE REASON.** Exporting it
+  from a file that default-exports a component costs
+  `react-refresh/only-export-components`, and a baseline is only a tripwire
+  while it is exact. It is `src/routes/exhibit/use-yt-player.js`, body
+  unchanged, two callers. Baseline back to 9/8.
+- **ONE OUTPUT, ENFORCED STRUCTURALLY:** the channel component destroys its
+  player on unmount, and **after closing a channel zero iframes remain** -
+  measured. The tracklist rule is deliberately the inverse.
+- **A CLICK INSIDE A CROSS-ORIGIN IFRAME RAISES NO EVENT IN THE PARENT**, and
+  the first unmute path listened on `window` and could never fire. Found by
+  clicking the picture and watching nothing happen; no gate can see an
+  unreachable listener. `OPERATIONS.md` §8 has the general rule.
+- **SOUND, REPORTED AS OBSERVED:** unmuted autoplay was refused on this host
+  even with a genuine latch click, so the picture starts MUTED AND MOVING and
+  one real click turns the sound on - verified end to end. Some visitors will
+  get sound on the latch; that is Chrome's media-engagement policy for the
+  origin and the museum cannot read it. **The picture is never a poster.**
+- **/wal VERIFIED LIVE** (`controls=1, autoplay=0`, focus still CUES at state 5,
+  video playing). **/hr NOT OPENED - it is password-held and Ops does not handle
+  credentials** - and it is the same call site: two `useYTPlayer` calls exist in
+  the building and `Exhibit.jsx`'s passes no `playerVars`.
+- **THE FAQ CLAUSE IS MIKE'S:** *"…and neither of them carries it."* Filed MIKE,
+  old row replaced in place. **Ruling 22.**
+
+### 2026-08-21 -> THE ANTENNA SELECTOR (first packet)
+- **TWO THINGS NEEDED MIKE AND HE RULED BOTH; see the entry above.** (1) **Television does not autoplay unmuted** - the
+  latch opens the channel and YouTube draws its own poster, title and red play
+  button. `mute=1` DOES play, proved - but **ruling A says "no autoplay flag, no
+  muted start"**, and whether that ruling reaches a channel the visitor
+  explicitly latched open is his call, not Ops'. (2) **The Portal FAQ's
+  *"neither of them arms"* is now false** and is FLAGGED RATHER THAN REWRITTEN -
+  his sentence, his voice; the substance is untouched and the wing is held.
+  Gates: lint **9/8 = baseline** - build green - **launch build green** -
+  provenance **PASS** (15 rows) - `reveal:check` **PASS** - `parity:gate`
+  **PASS** - `instory:gate` **PASS** - `docs:numbers` **PASS** - `reveal:day`
+  **nothing to move** - `assets:orphans` **13, unchanged**. Log:
+  `docs/MUSEUM_ANTENNA_SELECTOR_LOG-20260821.md`.
+- **THE MECHANIC IS A PRIORITY PER CHANNEL, NOT A MAP: television > the
+  machine's signal > the test signal.** A machine is FIXED to its channel, so
+  the puzzle is getting the zero onto 3. **Verified on the page: only `1101`
+  says SIGNAL PRESENT on channel 3**; the other three say TELEVISION. **`arms`
+  stopped being the answer and became an INPUT** - it is how the resolver is
+  told a machine is assigned - which is how the routing joined the one arming
+  rule instead of sitting beside it.
+- **CHANNEL 4 NEEDED NO CHANGE AND THE PER-POSITION `src` IS WHY.** Routed 1 it
+  is television, routed 0 it is the close-up, and the close-up IS that channel's
+  assigned signal. No id moved, no legend recut - P5's rule holds a fourth time.
+- **THE TWIN'S FIVE FEEDS AND THE PANEL'S EIGHT CHANNELS DO NOT MAP, AND THE
+  TWIN COULD NOT CARRY THE TEST SIGNAL HONESTLY.** *The twin IS MGK-VIIIp* - its
+  no-signal card is the machine's own monitor, so opening it to say *no unit on
+  this channel* puts the machine on a channel the routing just proved it is not
+  on. So the card is DRAWN and **the hum is the twin's to the parameter** (60Hz
+  + 120Hz bite, wobble .09, drift .13, off `Hum_Start()`). Two smaller reasons:
+  the twin has no feed param, and an iframe has no user activation so its
+  AudioContext would never resume.
+- **OPS' OWN PREDICTION WAS WRONG AND THE MEASUREMENT SAYS SO.** The pre-round
+  report predicted the fifth bay would shrink the instrument at every size.
+  **Measured: scale 1.0000 at 1706px AND at 390px, nothing cropped, latch whole
+  with 55px to spare.** `fit` only bites when the panel outgrows its frame and
+  the frame tracks content here. The cost is **84px of height at 390px and
+  nothing at desktop**, where the fourth bay joins the existing row.
+- **`useYTPlayer` IS NOT REUSED - A NAMED DEVIATION.** Television is a plain
+  nocookie iframe: **strictly less than the hook** (no `iframe_api` request at
+  all) and it does not touch the ruled host/split. Reusing the hook meant
+  parameterising the thing /hr and /wal play every song through, in an antenna
+  round. It gives up `seekTo`, which is what an unmute-on-interaction fix would
+  need.
+- **THE PHASES ARE EXACTLY A THIRD APART, MEASURED ON THE PAGE:** 581s and
+  1162s against 1743/3. One wall clock, `loop=1&playlist=<id>` so a join near
+  the end cannot draw YouTube's end screen, `controls=0` so it cannot be
+  scrubbed off the clock.
+- **THE DEAD SOURCE FINDING RE-PROVED UNDER THE REAL PARAMETERS, AND THE PROBE
+  LIED ONCE ON THE WAY.** Swapping the dead id into the museum's own overlay
+  drew a poster and a play button for about a second before the refusal
+  resolved - a screenshot in that window says the video is fine, and it nearly
+  reversed a correct finding. **A rendered oracle must be read after it
+  settles**; both facts are `OPERATIONS.md` §8 rows now.
+
 ### 2026-08-21 -> QC_101 ONTO RECORD 004 - sealed
 - **NOTHING IS WAITING ON MIKE. Mirror and deploy: `npm run deploy:launch`.**
   He ruled the title in the round: **`QC_101 - Final test and inspection`** -

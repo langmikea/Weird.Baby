@@ -190,6 +190,14 @@ export const PORTAL_ALBUM = {
            which are two facts. */
         subtitle: "MGK-VIIIp",
         panel: {
+          /* [2026-08-21] WHERE THE PANEL REMEMBERS ITSELF, FOR THE VISIT AND
+             NOT FOR EVER. sessionStorage, on the twin's own weather reasoning:
+             *"a reload inside the session keeps the same weather and a new tab
+             gets a new day. localStorage would have frozen one day forever."*
+             Mike ruled session over local so the antenna stays a puzzle per
+             visit. A panel that declares no `store` remembers nothing, which is
+             how every panel behaved before this line. */
+          store: "wb-portal-panel",
           /* ═══ [H3a 2026-08-06] THE NAMEPLATE IS A BADGE BOLTED TO A MACHINE ══
              MIKE, naming his references: "a raised chrome bezel; a black field
              with brushed-metal letterforms sitting PROUD of it; stamped-in-place
@@ -370,6 +378,92 @@ export const PORTAL_ALBUM = {
                 why: "This feed is not available." },
             ],
           },
+          /* ═══ [2026-08-21] THE ANTENNA SELECTOR ══════════════════════════
+             MIKE'S DESIGN, ruled 2026-08-21. Four routings over channels 1-4.
+             A `1` is a channel carrying television; a `0` is dead air, the
+             Portal listening for a unit - any unit.
+
+             EVERY CHANNEL RESOLVES BY PRIORITY, AND THE ORDER IS HIS:
+               1. TELEVISION, if the routing gives that channel a 1.
+                  Television overrules everything.
+               2. THE MACHINE'S SIGNAL, if a machine is assigned to that
+                  channel and television is not on it.
+               3. THE TEST SIGNAL, if neither.
+
+             A MACHINE IS FIXED TO ITS CHANNEL. MGK-VIIIp is on 3 and does not
+             move; it does not appear on whichever channel happens to be free.
+             So the puzzle is to get the zero onto channel 3, and television is
+             in the way. `1101` is the answer, and QC_101 - attached to Record
+             004 - is where a visitor reads `BROADCASTS ON ... FEED NO. 3` in
+             the installer's own hand.
+
+             WHERE "A MACHINE IS ASSIGNED" IS DECLARED: it is `arms: true` on
+             the drum position, unchanged. The field's meaning widens rather
+             than moving - for a GOVERNED channel it now reads *a machine's
+             signal is assigned here*, and for channels 5-8 it means exactly
+             what it always meant. No id moved and no legend was recut, which
+             is P5's rule holding for the fourth time.
+
+             CHANNEL 4 NEEDED NO CHANGE, AND THAT IS THE RULING WORKING. It
+             carries `MGK-VIIIp (zoom)` with its own `src` - a photograph - and
+             that photograph IS channel 4's assigned signal. Routed 1 it is
+             television; routed 0 it is the close-up. Nothing moves and nothing
+             is covered by accident.
+
+             WHY THE FOURTH CHANNEL HAS A TEST SIGNAL - MIKE, VERBATIM:
+             *"The machine only hosts three TV signals at a time; the reason the
+             fourth has a test signal is unknown. Maybe one of the switches
+             needs flipped? Or maybe there is another module that will come on
+             line? Innocent footholds for future claims of foreshadowing, and a
+             bit of richness."*
+             SO IT IS A FACT ABOUT THE MACHINE, NOT AN ABSENCE. It reads as
+             *this is how it works*, never as *this is broken*. **Nothing here
+             explains it and nothing resolves it**, which is the same discipline
+             R6 put on the channel numbering one drum over: writing the reason
+             down would spend it in the commit that planted it.
+
+             THE DIAL DOES ITS OWN HALF AND NEEDED NO NEW CONTROL. At SEEDED
+             the panel does not arm at all, which IS *no signal on any channel*;
+             LIVE turns the 1s into television. Mike ruled that, and the dial
+             was already declared with `seeded.arms: false`.
+
+             ONE SOURCE, THREE CHANNELS, EVENLY SPACED. `vBAcEqq7T4Q` was
+             dropped on 2026-08-21: it draws *"This video is unavailable"* in a
+             real iframe on BOTH hosts from a real origin while this one plays
+             from the same page, with every public signal identical on the two.
+             Not age restriction, cause unknown, and the museum cannot see it
+             from inside - `OPERATIONS.md` §8 carries the hazard. */
+          antenna: {
+            label: "ANTENNA",
+            /* the channels the routing governs. 5-8 are diagnostic modes and
+               are not antenna business; they refuse as they always have. */
+            governs: [1, 2, 3, 4],
+            /* read left to right as channels 1..4. One zero each, and the
+               order is Mike's. */
+            routings: ["1110", "1011", "1101", "0111"],
+            /* what the panel shows for the routing while the source dial is
+               not LIVE. His words: no signal on any channel. */
+            dark: "0000",
+            television: {
+              /* A/V Geeks 16mm Films - "Assorted 1960s TV Commercials".
+                 PROVED PLAYABLE in a real nocookie iframe, 2026-08-21. */
+              ytId: "aA5oKoCRjWw",
+              /* the true length, and the modulo depends on it: if the source is
+                 ever re-uploaded or trimmed this number is wrong and every
+                 phase drifts with nothing reporting it. Read off the watch
+                 page 2026-08-21 (`lengthSeconds`), not estimated. */
+              seconds: 1743,
+              title: "Television",
+            },
+            test: { title: "Test signal" },
+            /* the readout under the latch. It names what the channel is
+               carrying, which is the only place the antenna explains itself. */
+            says: {
+              television: "TELEVISION ON THIS CHANNEL.",
+              machine: "SIGNAL PRESENT.",
+              test: "TEST SIGNAL. NO UNIT ON THIS CHANNEL.",
+            },
+          },
           switches: [
             /* [C1] the fortnight, as an instrument. Thrown UP the machine is
                in automated maintenance and will not be interrupted — the
@@ -430,9 +524,22 @@ export const PORTAL_ALBUM = {
                 "The unit itself is a physical object in a room; the twin is " +
                 "how it is met from here.",
           note: "" },
+        /* [2026-08-21] MIKE'S EDIT, HIS SENTENCE AND HIS APPROVAL. The answer
+           read "…and neither of them ARMS" until the antenna selector shipped,
+           and that clause became false the moment channels 1 and 2 began
+           arming: they carry television or a test signal depending on the
+           routing, and neither of those is MGK-NIAC.
+           THE SUBSTANCE NEVER MOVED — the mainframe is still not on the Portal
+           — only the mechanism the answer reaches for, and CARRIES is the truer
+           word for it in any case: a channel arming says something about the
+           latch, and what this answer is about is what comes out.
+           OPS FLAGGED IT AND DID NOT WRITE IT. The replacement clause is his,
+           filed MIKE in the register, because a sentence in a visitor's face is
+           voice and voice is his. Ruling B does not apply: the Portal is HELD
+           and no visitor has read either version. */
         { title: "Is the mainframe on the Portal?",
           line: "Not yet. Two channels are engraved for it on the feed " +
-                "drum and neither of them arms.",
+                "drum and neither of them carries it.",
           note: "" },
       ]),
     },

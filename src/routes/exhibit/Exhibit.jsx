@@ -1,5 +1,8 @@
 import React, { Fragment, useState, useEffect, useRef, useCallback, useLayoutEffect, useMemo } from "react";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
+/* [2026-08-21] the one player implementation in the building. It left this
+   file when the Portal's television needed it as well — see its own header. */
+import { useYTPlayer } from "./use-yt-player.js";
 import { visitorProse, kept } from "../../lib/visitor-prose.js";
 /* [2026-08-11] `launched` IS NO LONGER IMPORTED. Its only caller here was the
    red notes block’s stage gate, which is deleted; the STAGE still governs
@@ -558,216 +561,6 @@ function FactScroller({ facts, albumTag, songSlug, eraSlugs, exhibit, accent }) 
       </div>
     </div>
   );
-}
-
-// ─── YOUTUBE PLAYER HOOK ──────────────────────────────────────────────────────
-function useYTPlayer({ containerRef, onEnded, hasVideo }) {
-  const playerRef  = useRef(null);
-  const readyRef   = useRef(false);
-  const pendingRef = useRef(null);
-  const onEndedRef = useRef(onEnded);
-  useEffect(() => { onEndedRef.current = onEnded; });
-
-  /* ═══ [CH8 2026-08-12] NO VIDEO IN THE WING, NO PLAYER ═════════════════════
-     MIKE'S RULING. The eager build below was unconditional, so EVERY wing that
-     renders this component built a YouTube player — including `/foundation` and
-     `/wb`, which have `videos: []` on every track. A player with no videoId is
-     still a real `youtube.com/embed/` IFRAME, and YouTube's own script inside it
-     calls `googleads.g.doubleclick.net/pagead/id`. That is how a museum whose
-     Information Booth says it carries no advertising came to call Google's
-     ad-identity endpoint from a page about a charitable foundation.
-
-     `hasVideo` IS COMPUTED FROM THE SPINE, NOT PASSED BY HAND, so a wing cannot
-     acquire a video and forget to turn its player on: the day a track gets a
-     `ytId`, the player returns by itself.
-
-     WHAT IS LOST, AND WHY IT DOES NOT MATTER HERE: the comment below records
-     that the eager build fixes mobile first-click playback. That fix is kept
-     wherever there is anything to play — the condition is "this wing has a
-     video", not "the visitor pressed something" — and on a wing with no video
-     there is no first click to lose. */
-  useEffect(() => {
-    if (!hasVideo) return;
-    ensureApi(() => initPlayer());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasVideo]);
-
-  /* ═══ [2026-08-15] THE EMBED IS `youtube-nocookie.com` ══════════════════════
-     MIKE: "switch to youtube-nocookie.com in Exhibit.jsx… Risk abatement begins
-     with risk elimination: do not caveat a third-party cookie you can simply
-     not set."
-     `host` IS THE WHOLE MECHANISM. The IFrame API builds its own iframe, so the
-     origin cannot be set on an element we write — it is a player option, and it
-     is the ONLY supported way to move the embed. Measured before this: playing
-     a song on /wal created one iframe on `www.youtube.com`.
-     IT MAKES THE MUSEUM AGREE WITH ITSELF. `HrExhibitFlow.jsx`'s lightbox has
-     used the nocookie host since 2026-05-31, so this was one building serving
-     two different embed origins depending which room you were in.
-     WHAT IT DOES AND DOES NOT DO, STATED SO NOBODY OVERSELLS IT LATER: the
-     nocookie host does not set its cookies until playback begins, which is why
-     it is the stricter of the two available hosts and why it is the right
-     default. It is NOT a claim that nothing is set once a visitor presses play.
-     The booth's answer does not make that claim either. */
-  function initPlayer() {
-    if (!containerRef.current || playerRef.current) return;
-    playerRef.current = new window.YT.Player(containerRef.current, {
-      width: "100%", height: "100%",
-      host: "https://www.youtube-nocookie.com",
-      playerVars: { autoplay: 0, controls: 1, modestbranding: 1, rel: 0, iv_load_policy: 3, playsinline: 1 },
-      events: {
-        onReady() {
-          readyRef.current = true;
-          if (pendingRef.current) {
-            /* [2026-08-20] A PENDING REQUEST CARRIES ITS VERB. `pendingRef`
-               held a bare id and `onReady` always LOADED it, which plays. A cue
-               that arrived before the player was ready would therefore have
-               started playing the moment it became ready - the exact autoplay
-               Mike's ruling A forbids, on the one path nobody would have
-               tested. It carries `{id, cue}` now and the verb survives the
-               wait. */
-            const p = pendingRef.current;
-            pendingRef.current = null;
-            if (p.cue) playerRef.current.cueVideoById(p.id);
-            else playerRef.current.loadVideoById(p.id);
-          }
-        },
-        onStateChange(e) {
-          if (e.data === window.YT.PlayerState.ENDED) onEndedRef.current?.();
-        },
-      },
-    });
-  }
-
-  /* ═══ [2026-08-15] THE API SCRIPT STAYS ON `www.youtube.com`, AND IT IS
-         MEASURED RATHER THAN CHOSEN ══════════════════════════════════════════
-     The first cut of this ruling moved the script to the nocookie host as well.
-     **`https://www.youtube-nocookie.com/iframe_api` RETURNS 503** — that host
-     serves embeds, not the API — so `window.YT` never arrived, no player was
-     ever built, and every video in the museum silently did nothing. Caught on
-     the wire; the page threw no error, because a `<script>` that 503s is not an
-     exception, it is just a script that never runs.
-     SO THE SPLIT IS: the API comes from `www.youtube.com` (the only host that
-     serves it) and the PLAYER it builds is pointed at the nocookie host by the
-     `host` option above. **The embed a visitor loads is nocookie; loading the
-     API costs one request to `www.youtube.com` on the first play of a visit.**
-     That residual is real, it is stated in the round log, and it is not
-     something this code can remove — the API is Google's and there is no other
-     origin for it. What it is NOT is the thing the ruling was about: the embed
-     that hosts the video, and its cookies, moved.
-     THE DEDUPE GUARD MATCHES `/iframe_api` AND NOT THE HOST. It read
-     `src*="youtube.com/iframe_api"`, which is host-coupled; matching the path
-     alone means a future change of origin cannot silently stop the guard
-     matching and append a second copy of the API on every call. */
-  function ensureApi(cb) {
-    if (window.YT?.Player) { cb(); return; }
-    const prev = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => { prev?.(); cb(); };
-    if (!document.querySelector('script[src*="/iframe_api"]')) {
-      const s = document.createElement("script");
-      s.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(s);
-    }
-  }
-
-  /* ═══ [2026-08-20] LOAD AND CUE ARE ONE FUNCTION AND A VERB ════════════════
-     They differ by which YouTube method fires and by nothing else, and writing
-     them out twice cost a SECOND copy of the `initPlayer` exhaustive-deps
-     warning this hook already carries - a new lint warning for no new
-     behaviour, which is a baseline moved for a copy-paste. One body, one
-     `useCallback` carrying the existing debt, two named verbs over it. */
-  /* ═══ [2026-08-20] EVERY LOAD MEETS THE SAME PLAYER STATE ══════════════════
-     THE FAULT, AND IT IS POSITIONAL. There is ONE player and it is reused, so
-     the FIRST track a visitor plays is loaded into a player that has never
-     played anything, and EVERY track after it is loaded into a player that is
-     mid-playback of the previous one — W1 keeps the old video running while
-     focus moves. Measured on /wal, Carsie Blanton's album: at the moment
-     `Shit List` is clicked, `playing` still reads `Be Good`. Track 01 can never
-     be in that state; nothing after track 01 can avoid it. Mike sees YouTube's
-     unavailable graphic on exactly the tracks that take the second path.
-
-     `stopVideo()` AND NOT `pauseVideo()`, ON THE PRINCIPLE RATHER THAN ON A
-     MEASUREMENT. The state track 01 meets is *no video loaded and nothing
-     playing*. `stopVideo()` unloads and stops, which is that state;
-     `pauseVideo()` leaves the previous video loaded and merely halted, which is
-     a THIRD state and would make the two paths differ in a new way instead of
-     the same way. The rule being applied is Mike's — make every track meet the
-     same state — and stop is the only one of the three that does it.
-
-     WHAT IS NOT CLAIMED: that `loadVideoById` alone was measured to fail.
-     Embeds do not paint on the machine this was written on, so the refusal was
-     never reproduced here. The asymmetry above IS measured; the link from it to
-     the grey box is Mike's observation plus the positional pattern, and it is
-     inference. If this does not fix it, that inference is where to look first —
-     not at the videos, which are healthy on every probe. */
-  const requestVideo = useCallback((ytId, cue) => {
-    if (playerRef.current && readyRef.current) {
-      if (cue) playerRef.current.cueVideoById(ytId);
-      else {
-        try { playerRef.current.stopVideo(); } catch { /* an idle player has nothing to stop */ }
-        playerRef.current.loadVideoById(ytId);
-      }
-    } else if (playerRef.current) {
-      pendingRef.current = { id: ytId, cue };
-    } else {
-      pendingRef.current = { id: ytId, cue };
-      /* [2026-08-20] `initPlayer()` TAKES NO PARAMETER AND THE CALL WAS WRONG,
-         NOT THE FUNCTION. It was called `initPlayer(ytId)` here and declared
-         bare, so the argument was silently dropped. **The empty build is
-         deliberate** — the eager build above calls it bare on purpose, and the
-         player is designed to receive its video by METHOD, through `pendingRef`
-         and `onReady`. Adding a `videoId` parameter to match this call would
-         have changed the behaviour to fit the mistake. The argument goes. */
-      ensureApi(() => initPlayer());
-    }
-  }, []);
-  const loadVideo = useCallback((ytId) => requestVideo(ytId, false), [requestVideo]);
-
-  /* ═══ [2026-08-20] CUE IS LOAD'S PAIRED VERB, AND THAT IS WHY IT IS SAFE ════
-     MIKE RULED A: on focus the viewer LOADS the track's video and shows its
-     poster frame, ready - it does not play, it makes no sound, it does not
-     move. `cueVideoById` is YouTube's own method for exactly that; `loadVideoById`
-     is the one beside it that plays. **Nothing here is a workaround** - no
-     autoplay flag, no muted start, no play-then-pause, all of which would make
-     sound or motion for a frame and are the reason he chose A over B.
-     IT IS THE SAME PENDING PATH AS LOAD so a cue that arrives before the player
-     is ready is honoured as a CUE when it lands (see `onReady`). */
-  const cueVideo = useCallback((ytId) => requestVideo(ytId, true), [requestVideo]);
-
-  const togglePlay = useCallback(() => {
-    const p = playerRef.current;
-    if (!p || !readyRef.current) return;
-    const state = p.getPlayerState();
-    if (state === window.YT.PlayerState.PLAYING) p.pauseVideo();
-    else p.playVideo();
-  }, []);
-
-  const pause = useCallback(() => {
-    const p = playerRef.current;
-    if (p && readyRef.current) p.pauseVideo();
-  }, []);
-
-  const toggleMute = useCallback(() => {
-    const p = playerRef.current;
-    if (!p || !readyRef.current) return;
-    if (p.isMuted()) p.unMute(); else p.mute();
-  }, []);
-
-  const setVolume = useCallback((v) => {
-    const p = playerRef.current;
-    if (p && readyRef.current) p.setVolume(v);
-  }, []);
-
-  const getState = useCallback(() => {
-    const p = playerRef.current;
-    if (!p || !readyRef.current) return { playing: false, muted: false, volume: 100 };
-    return {
-      playing: p.getPlayerState() === window.YT.PlayerState.PLAYING,
-      muted: p.isMuted(),
-      volume: p.getVolume(),
-    };
-  }, []);
-
-  return { loadVideo, cueVideo, pause, togglePlay, toggleMute, setVolume, getState };
 }
 
 // ─── AUDIO PLAYER HOOK ────────────────────────────────────────────────────────
@@ -1554,6 +1347,104 @@ function dialArc(i, n) {
     whiteSpace: "nowrap",
   };
 }
+/* ═══ [2026-08-21] THE CHANNEL RESOLVER — ONE PRIORITY, ONE PLACE ═══════════
+   MIKE'S MECHANIC, and it is a PRIORITY PER CHANNEL rather than a fixed map:
+
+     1. TELEVISION, if the routing gives that channel a 1. It overrules
+        everything.
+     2. THE MACHINE'S SIGNAL, if a machine is assigned to that channel and
+        television is not on it.
+     3. THE TEST SIGNAL, if neither.
+
+   A MACHINE IS FIXED TO ITS CHANNEL. It does not appear on whichever channel
+   happens to be free — it appears on its own, or not at all. That is the whole
+   puzzle: get the zero onto the machine's channel and television stops being in
+   the way.
+
+   `arms: true` ON A DRUM POSITION IS WHAT "A MACHINE IS ASSIGNED" MEANS. The
+   field's meaning widens for a governed channel and is untouched everywhere
+   else, so no id moved and no legend was recut.
+
+   THIS FUNCTION KNOWS NOTHING ABOUT PORTALS, MGK OR TELEVISION CONTENT. It is
+   handed a position, an antenna declaration and an index, and it returns one of
+   four words. A face that declares no `antenna` gets `machine` or `none`, which
+   is exactly the behaviour every panel had before this existed. */
+function resolveChannel(pos, ant, routingIdx) {
+  const p = pos || {};
+  const governed = !!ant && Array.isArray(ant.governs)
+    && p.ch != null && ant.governs.indexOf(p.ch) >= 0;
+  if (!governed) return p.arms ? "machine" : "none";
+  const routing = (ant.routings || [])[routingIdx] || "";
+  const digit = routing.charAt(ant.governs.indexOf(p.ch));
+  if (digit === "1") return "television";
+  return p.arms ? "machine" : "test";
+}
+
+/* THE PANEL REMEMBERS ITSELF FOR THE VISIT. sessionStorage, never local — the
+   twin's own weather note is the reasoning and Mike ruled it here: a reload
+   inside the session keeps the state and a new tab starts again, so the antenna
+   stays a puzzle per visit rather than being solved once for ever.
+   ALL OF IT OR NONE OF IT. A routing that survived while the drum reset would
+   be one instrument disagreeing with itself about whether anything happened.
+   IT DEGRADES HONESTLY. Refused storage (private windows, blocked site data,
+   thumbnail capture) throws on the accessor itself, so both ends are wrapped
+   and a panel that cannot remember simply opens at its declared defaults. */
+/* ═══ [2026-08-21] THE BROADCAST IS A WALL CLOCK, NOT A PLAYLIST ═══════════
+   One source, three channels, evenly spaced: phases 0, d/3 and 2d/3, and the
+   join is `(now + phase) mod duration`. Nothing is stored and nothing has to be
+   kept in step — two visitors on two machines are on the same frame, which is
+   what makes channel-surfing feel like REJOINING a broadcast rather than
+   starting a playlist.
+
+   THE PHASE IS POSITIONAL, NOT PER-CHANNEL. It is this channel's index among
+   the channels the CURRENT routing has routed to television, so the three live
+   channels are always a third of the reel apart whichever one is dark.
+
+   `loop=1&playlist=<id>` IS LOAD-BEARING AND IS NOT DECORATION. Without it a
+   join near the end of the reel runs out within seconds and YouTube draws its
+   own end screen — related videos, on the Portal's glass. It is the one failure
+   mode of this mechanism that will actually happen, so it is built in from the
+   first commit rather than added after somebody sees it.
+   `controls=0` and `disablekb=1` remove the scrub bar. A visitor who seeks is
+   off the wall clock until the channel is reloaded, and the illusion does not
+   come back on its own — and a 1965 television has no scrub bar either, so the
+   fix and the period register want the same thing.
+
+   ═══ [2026-08-21] IT COMPUTES A SECOND, NOT A URL, AND THAT IS THE RULING ═══
+   MIKE ruled the hook parameterised rather than a hand-written iframe:
+   *"Same/data… Small invest, pays back HUGE. That is why the thing is even
+   there to be reparameterized."* So this returns the second to join at, and
+   `routes/robots/Television.jsx` drives the player.
+   IT WAS ALSO THE ONLY THING THAT WORKED. A hand-written iframe carries no
+   `allow` attribute, so autoplay is never delegated to the cross-origin frame
+   and the channel drew a POSTER instead of playing; the API writes its own
+   iframe with `allow="…autoplay…"` on it. The first build proved that on the
+   page, which is the only place it could have been proved. */
+function televisionStart(tv, phaseIdx, phaseCount) {
+  const dur = Math.max(1, Math.floor((tv && tv.seconds) || 1));
+  const phase = (dur * phaseIdx) / Math.max(phaseCount, 1);
+  return Math.floor((Date.now() / 1000 + phase) % dur);
+}
+/* which of the live television channels this one is, and how many there are */
+function televisionPhase(ant, routingIdx, ch) {
+  const routing = (ant.routings || [])[routingIdx] || "";
+  const on = (ant.governs || []).filter((c, i) => routing.charAt(i) === "1");
+  return { idx: Math.max(0, on.indexOf(ch)), count: on.length || 1 };
+}
+
+function panelLoad(key) {
+  if (!key) return null;
+  try {
+    const raw = sessionStorage.getItem(key);
+    const v = raw ? JSON.parse(raw) : null;
+    return v && typeof v === "object" ? v : null;
+  } catch { return null; }
+}
+function panelSave(key, v) {
+  if (!key) return;
+  try { sessionStorage.setItem(key, JSON.stringify(v)); } catch { /* refused */ }
+}
+
 function InstrumentPanel({ decl }) {
   const D = decl || {};
   /* [STAGE 2026-08-02] A PANEL IS SCALED TO FIT, NEVER CROPPED.
@@ -1610,12 +1501,35 @@ function InstrumentPanel({ decl }) {
      A DRUM WITH NO ARMING POSITION FALLS BACK TO 0, unchanged: a panel where
      nothing arms should show its first legend and say why, which is exactly
      what it did before this line existed. */
+  const ANT = D.antenna || null;
+  const antN = Math.max((ANT && ANT.routings && ANT.routings.length) || 0, 1);
+  /* [2026-08-21] the remembered panel, read ONCE at mount. Every clamp below is
+     against the DECLARATION rather than against the stored number: a session
+     that outlives a data change must not land the drum on a position that no
+     longer exists, and a stored index is the one value a redeploy can invalidate
+     without anything noticing. */
+  const REM = useMemo(() => panelLoad(D.store) || {}, [D.store]);
   const [drumIdx, setDrumIdx] = useState(() => {
+    const r = Number(REM.drum);
+    if (Number.isInteger(r) && r >= 0 && r < drumPos.length) return r;
     const i = drumPos.findIndex(p => p.arms);
     return i >= 0 ? i : 0;
   });
-  const [dialIdx, setDialIdx] = useState(0);
-  const [swOn, setSwOn] = useState(() => swDecl.map(w => !!w.on));
+  const [dialIdx, setDialIdx] = useState(() => {
+    const r = Number(REM.dial);
+    return Number.isInteger(r) && r >= 0 && r < dialPos.length ? r : 0;
+  });
+  const [swOn, setSwOn] = useState(() => (
+    Array.isArray(REM.sw) && REM.sw.length === swDecl.length
+      ? REM.sw.map(Boolean)
+      : swDecl.map(w => !!w.on)));
+  const [antIdx, setAntIdx] = useState(() => {
+    const r = Number(REM.ant);
+    return Number.isInteger(r) && r >= 0 && r < antN ? r : 0;
+  });
+  useEffect(() => {
+    panelSave(D.store, { drum: drumIdx, dial: dialIdx, sw: swOn, ant: antIdx });
+  }, [D.store, drumIdx, dialIdx, swOn, antIdx]);
 
   /* [N1 2026-08-02] THE POINTER POINTS AT THE LEGEND IT HAS CHOSEN.
      The knob rotated by `idx * 90 - 45`, which is a number that happens to
@@ -1663,15 +1577,42 @@ function InstrumentPanel({ decl }) {
   const drum = drumPos[drumIdx] || {};
   const dial = dialPos[dialIdx] || {};
   const swBad = swDecl.findIndex((w, i) => swOn[i] !== !!w.armsWhen);
-  const armed = !!drum.arms && !!dial.arms && swBad === -1;
+  /* ═══ [2026-08-21] THE ROUTING JOINED THE ARMING RULE ══════════════════════
+     ARMING IS STILL ONE RULE IN ONE PLACE, which is the doctrine at the head of
+     this component and the reason the routing had to come inside it rather than
+     sit beside it: a routing that changed what the latch OPENED without
+     changing what the panel SAYS is the silent decline that doctrine forbids.
+     `arms` therefore stops being the answer and becomes an INPUT — the resolver
+     asks it whether a machine is assigned to the channel, and the channel arms
+     if it resolves to anything at all.
+     WHAT CHANGED FOR THE PORTAL, STATED: channels 1 and 2 now arm. They carry
+     television or a test signal depending on the routing, and neither is
+     MGK-NIAC. Their declared `why` — "This feed is not available." — is
+     unreachable while an antenna is declared and is kept rather than deleted,
+     because a panel with no antenna is still governed by it.
+     THE DIAL IS UNTOUCHED AND DOES ITS OWN HALF. At SEEDED nothing arms, which
+     IS Mike's "no signal on any channel"; the routing display reads `dark` and
+     the dial prints its own refusal. */
+  const feed = resolveChannel(drum, ANT, antIdx);
+  const armed = feed !== "none" && !!dial.arms && swBad === -1;
 
   /* the panel explains its own refusal, most-specific first */
   let refusal = null;
   if (!armed) {
     if (swBad !== -1) refusal = swDecl[swBad].held;
-    else if (!drum.arms) refusal = drum.why;
+    else if (feed === "none") refusal = drum.why;
     else if (!dial.arms) refusal = dial.why;
   }
+  /* what the channel is carrying — the one place the antenna explains itself.
+     A face with no `antenna` falls through to its own declared readout, so
+     nothing outside this panel can notice the field exists. */
+  const readout = armed
+    ? ((ANT && ANT.says && ANT.says[feed]) || drum.line)
+    : null;
+  /* the routing as the instrument shows it: dark until the source is LIVE */
+  const shownRouting = ANT
+    ? (dial.arms ? ((ANT.routings || [])[antIdx] || "") : (ANT.dark || ""))
+    : "";
 
   function roll(d) { setDrumIdx(i => (i + d + N) % N); }
 
@@ -1765,6 +1706,38 @@ function InstrumentPanel({ decl }) {
           {D.drum && D.drum.sub && <div className="ip-sub">{D.drum.sub}</div>}
         </div>
 
+        {/* ---- THE ANTENNA ----
+            [2026-08-21] MIKE'S DESIGN. Four routings over the governed
+            channels; a lit cell is a channel carrying television and the dark
+            one is the channel the Portal is listening on.
+            IT IS ONE BUTTON AND IT STEPS, which is the whole of PZ-a's old
+            objection answered: adding channels does not add controls. A second
+            unit broadcasting on a different channel later is the same four
+            routings and the same one button — same except the data.
+            IT SITS IN `.ip-deck`, WHICH WRAPS. At desktop the fourth bay joins
+            the existing row and the panel does not grow; at 390px it wraps and
+            costs a row, which is measured in the round log rather than guessed.
+            THE CHANNEL NUMBER IS UNDER THE BIT because the drum engraves the
+            same numbers a few centimetres to the left, and a routing a visitor
+            cannot line up with the drum is four digits of nothing. */}
+        {ANT && (
+          <div className="ip-bay ip-bay-ant">
+            <div className="ip-legend">{ANT.label}</div>
+            <button className="ip-ant"
+                    onClick={() => setAntIdx(i => (i + 1) % antN)}
+                    aria-label={(ANT.label || "antenna") + " " + shownRouting}>
+              {(ANT.governs || []).map((c, i) => (
+                <span key={c}
+                      className={"ip-ant-cell"
+                        + (shownRouting.charAt(i) === "1" ? " ip-on" : "")}>
+                  <span className="ip-ant-bit">{shownRouting.charAt(i) || "0"}</span>
+                  <span className="ip-ant-ch">{c}</span>
+                </span>
+              ))}
+            </button>
+          </div>
+        )}
+
         {/* ---- THE BAT SWITCHES ---- */}
         <div className="ip-bay ip-bay-switches">
           {swDecl.map((w, i) => (
@@ -1855,9 +1828,45 @@ function InstrumentPanel({ decl }) {
                      per field and no position outside channel 4 changes. The
                      held address still rides the event and the engine still
                      learns nothing about what opens. */
+                  /* [2026-08-21] THE LATCH OPENS WHAT THE CHANNEL CARRIES.
+                     Three payloads, one event, and the engine still learns
+                     nothing about what any of them are:
+                       machine     — unchanged: the position's own address, or
+                                     the latch's, exactly as before.
+                       television  — an id and a second. The channel is DRIVEN
+                                     rather than addressed: `Television.jsx`
+                                     builds the player through the museum's one
+                                     player hook, so there is no URL for this
+                                     listener to decorate.
+                       test        — no address at all. The signal is DRAWN, so
+                                     the listener is handed a kind and renders
+                                     it; a src would be a page that does not
+                                     exist. */
                   const L = D.latch || {};
-                  window.dispatchEvent(new CustomEvent(
-                    L.event || "wb-robots-open-twin",
+                  const ev = L.event || "wb-robots-open-twin";
+                  if (feed === "television" && ANT && ANT.television) {
+                    const ph = televisionPhase(ANT, antIdx, drum.ch);
+                    window.dispatchEvent(new CustomEvent(ev, {
+                      detail: {
+                        kind: "television",
+                        ytId: ANT.television.ytId,
+                        startSeconds:
+                          televisionStart(ANT.television, ph.idx, ph.count),
+                        frameTitle: ANT.television.title || "",
+                      },
+                    }));
+                    return;
+                  }
+                  if (feed === "test" && ANT) {
+                    window.dispatchEvent(new CustomEvent(ev, {
+                      detail: {
+                        kind: "test",
+                        frameTitle: (ANT.test && ANT.test.title) || "",
+                      },
+                    }));
+                    return;
+                  }
+                  window.dispatchEvent(new CustomEvent(ev,
                     { detail: { preset: drum.id,
                                 src: drum.src || L.src,
                                 frameTitle: drum.frameTitle || L.frameTitle } }
@@ -1876,7 +1885,7 @@ function InstrumentPanel({ decl }) {
 
       {/* the panel says why it will not arm — never silently */}
       {!armed && refusal && <div className="ip-refusal">{refusal}</div>}
-      {armed && drum.line && <div className="ip-readout">{drum.line}</div>}
+      {armed && readout && <div className="ip-readout">{readout}</div>}
     </div>
   );
 }

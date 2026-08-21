@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import { T as MUSEUM } from "../../styles/tokens.js";
+/* [2026-08-21] the drawn channel. Mounted on the payload's `kind`, the way
+   `InstrumentPanel` and the Foundation's objects are mounted on a field: this
+   file learns one more shape and no other wing can notice. */
+import TestSignal from "./TestSignal.jsx";
+import Television from "./Television.jsx";
 
 /* RobotsExhibitFlow — the Robots exhibit's deck, riding Exhibit.jsx's
    documented extension seam (the same mechanism as HrExhibitFlow; walk-six
@@ -195,9 +200,34 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      An unknown id is not filtered here. The twin ignores ids it does not know
      and opens plain, so a preset can be added to the exhibit before the
      machine learns it and the failure mode is "nothing special happened". */
+  /* [2026-08-21] THE DOOR OPENS ONTO THREE KINDS NOW, AND THE SEAM IS
+     UNCHANGED. The antenna selector made a channel resolve to television or to
+     a test signal as well as to a machine, and all three arrive on the same
+     event with the same one rule: the panel says what to open and this listener
+     knows nothing about why.
+       `kind: "test"`        — no address at all, because the signal is DRAWN.
+                               A src would be a page that does not exist.
+       `kind: "television"`  — an id and a second to join at. The channel is
+                               DRIVEN through the museum's one player hook
+                               rather than addressed, so there is no URL here
+                               either. The twin's own contract is untouched.
+     THE ORDER MATTERS: `kind` is tested before the `!d.src` guard, or a drawn
+     channel would be refused for having no address — which is the thing that
+     makes it drawn. */
   useEffect(() => {
     function open(e) {
       const d = (e && e.detail) || {};
+      if (d.kind === "test") {
+        setTwin({ kind: "test", title: d.frameTitle || "" });
+        setTwinOpen(true);
+        return;
+      }
+      if (d.kind === "television") {
+        setTwin({ kind: "television", ytId: d.ytId,
+                  startSeconds: d.startSeconds, title: d.frameTitle || "" });
+        setTwinOpen(true);
+        return;
+      }
       if (!d.src) return;                 /* [H1] no address, no door */
       const q = new URLSearchParams({ user: "1" });
       if (d.preset) q.set("preset", String(d.preset));
@@ -380,9 +410,29 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
                 out is [X] on the digit strip — inside the picture, in the
                 machine's register, learned in one press — plus Escape, which
                 W2 asked for and which costs nothing. */}
-          <iframe
-            style={tear ? { ...S.iframe, transform: `translateX(${tear.slip}px)` } : S.iframe}
-            src={twin ? twin.src : undefined} title={twin ? twin.title : ""} />
+          {/* [2026-08-21] A DRAWN CHANNEL IS A NODE, NOT AN IFRAME. Everything
+              else about the overlay is untouched — same ground, same inset 0,
+              same deliberate absence of chrome (P1/S4), same Escape (W2). The
+              way out of a drawn channel is Escape, exactly as it already is for
+              channel 4's photograph, which has carried no [X] since CH4 and
+              ships that way today. */}
+          {twin && twin.kind === "test" ? (
+            <div style={S.iframe}><TestSignal title={twin.title} /></div>
+          ) : twin && twin.kind === "television" ? (
+            <div style={S.iframe}>
+              {/* keyed on the id AND the join second, so latching a second
+                  television channel builds a NEW set rather than reusing the
+                  one that is playing. ONE OUTPUT — the old player is destroyed
+                  on unmount before the new one is built. */}
+              <Television key={twin.ytId + ":" + twin.startSeconds}
+                          ytId={twin.ytId} startSeconds={twin.startSeconds}
+                          title={twin.title} />
+            </div>
+          ) : (
+            <iframe
+              style={tear ? { ...S.iframe, transform: `translateX(${tear.slip}px)` } : S.iframe}
+              src={twin ? twin.src : undefined} title={twin ? twin.title : ""} />
+          )}
           {/* the rip itself: a bright hairline with a smeared band under it,
               sitting OVER the whole view. The picture slips sideways for the
               same 130ms, so the band reads as the seam the slip happened at

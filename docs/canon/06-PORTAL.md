@@ -401,3 +401,121 @@ is **not** on this sheet.
 **THE SIGNATURE IS RULED FINAL** at 2.5 lines, 1:1 with Mike's own monogram cut.
 [Ruling 20](../MUSEUM_RULINGS-20260817.md) — do not re-render it.
 
+---
+
+## 9 · THE ANTENNA SELECTOR — BUILT 2026-08-21
+<a id="antenna"></a>
+
+**MIKE'S DESIGN, RULED AND BUILT.** A fifth control on the FEED CONTROL panel,
+beside the drum. It cycles four routings over channels 1–4:
+
+| routing | zero on | what channel 3 carries |
+|---|---:|---|
+| `1110` | 4 | television |
+| `1011` | 2 | television |
+| **`1101`** | **3** | **MGK-VIIIp — the machine comes through** |
+| `0111` | 1 | television |
+
+**EVERY CHANNEL RESOLVES BY PRIORITY, AND THE ORDER IS THE WHOLE MECHANIC:**
+
+1. **TELEVISION**, if the routing gives that channel a `1`. It overrules
+   everything.
+2. **THE MACHINE'S SIGNAL**, if a machine is assigned to that channel and
+   television is not on it.
+3. **THE TEST SIGNAL**, if neither.
+
+**A MACHINE IS FIXED TO ITS CHANNEL.** MGK-VIIIp is on 3 and does not move. It
+does not appear on whichever channel happens to be free — it appears on 3, or
+not at all. **So the puzzle is to get the zero onto channel 3, and television is
+what is in the way.** [QC_101](#qc-101) is where a visitor reads which channel:
+`BROADCASTS ON ......... FEED NO. 3`, in the installer's hand.
+
+**CHANNEL 4 NEEDED NO CHANGE.** `MGK-VIIIp (zoom)` is a photograph and that
+photograph IS channel 4's assigned signal. Routed `1` it is television; routed
+`0` it is the close-up. Nothing on the drum moved.
+
+**CHANNELS 5–8 ARE NOT ANTENNA BUSINESS** and are unchanged: COLD START, FIRST
+RUN, LAST STATE and TEST BENCH still refuse with *"This feed is not
+available."* Verified on the page.
+
+**THE SOURCE DIAL DOES ITS OWN HALF AND NEEDED NO NEW CONTROL.** At `SEEDED` the
+panel does not arm, the routing display reads **`0000`**, and the dial prints its
+own refusal — which IS Mike's *"no signal on any channel"*. `LIVE` turns the
+ones into television. Verified.
+
+**THE BROADCAST IS A WALL CLOCK.** One source — A/V Geeks, *Assorted 1960s TV
+Commercials*, 1743 s — on three channels at phases `0`, `d/3`, `2d/3`, joined at
+`(now + phase) mod duration`. **Measured on the page: 581 s and 1162 s, against
+1743/3 = 581.** Two visitors on two machines are on the same frame, which is what
+makes surfing feel like rejoining a broadcast. `controls=0` and `disablekb=1` so
+the reel cannot be scrubbed off the clock, which a 1965 television could not be
+either. **The loop is the museum's own, on the player's ENDED** rather than
+YouTube's `loop=1&playlist=`, which does not survive the `loadVideoById` a
+wall-clock join requires — a reel joined seconds from its end would otherwise run
+out and draw YouTube's end screen on the Portal's glass.
+
+**AND IT PLAYS, WITH SOUND.** Mike: *"They turned the TV on. Whatever channel it
+is on is playing. It's 1965!"* The set is driven through the museum's ONE player
+hook (`useYTPlayer`, parameterised), not a hand-written iframe — see
+[Ruling 21](../MUSEUM_RULINGS-20260817.md) for why a latch is not the case
+ruling A governs, and [Ruling 23](../MUSEUM_RULINGS-20260817.md) for why a bare
+iframe could not autoplay at all.
+
+**ONE OUTPUT.** *"not like the tracklist you can peruse while another track
+continues playing."* Rolling the drum to another channel switches what comes out.
+Enforced structurally: the channel component destroys its player on unmount, and
+**after closing a channel, zero iframes remain in the document** — measured.
+
+**IF THE BROWSER REFUSES SOUND**, the picture starts muted and the first touch
+turns it on — a silent picture is a television with the volume down; a still
+poster is a broken television. The catcher is a node the museum owns, because a
+click inside a cross-origin iframe raises no event in the parent
+(`OPERATIONS.md` §8). **Verified end to end on the page: latch → muted picture →
+one real click → sound on.**
+
+### 9.1 · WHAT CHANGED IN THE ARMING RULE
+<a id="antenna-arming"></a>
+
+**CHANNELS 1 AND 2 NOW ARM.** They carry television or a test signal depending
+on the routing, and neither of those is MGK-NIAC. `arms: true` on a drum
+position stopped being the answer and became an INPUT — it is how the resolver
+is told *a machine is assigned to this channel*.
+
+**THE PORTAL'S FAQ WAS CORRECTED IN THE SAME ROUND, ON MIKE'S APPROVAL.**
+*"Is the mainframe on the Portal?" — "Not yet. Two channels are engraved for it
+on the feed drum and **neither of them carries it**."* The old clause read
+*"neither of them arms"* and became false the moment channels 1 and 2 began
+arming. **The substance never moved** — the mainframe is still not on the Portal
+— and `carries` is the truer word in any case: arming is a fact about the latch,
+and what the answer is about is what comes out. His sentence, his approval, filed
+MIKE. [Ruling 22](../MUSEUM_RULINGS-20260817.md).
+
+### 9.2 · THE TEST SIGNAL, AND WHY IT IS NOT THE TWIN'S
+<a id="test-signal"></a>
+
+**MIKE, VERBATIM:** *"The machine only hosts three TV signals at a time; the
+reason the fourth has a test signal is unknown. Maybe one of the switches needs
+flipped? Or maybe there is another module that will come on line? Innocent
+footholds for future claims of foreshadowing, and a bit of richness."*
+
+**SO IT IS A FACT ABOUT THE MACHINE, NOT AN ABSENCE**, and nothing in the museum
+explains it or resolves it. It is a foothold, left standing.
+
+**THE TWIN'S NO-SIGNAL STATE WAS EXAMINED AND NOT USED, AND THE READING IS THE
+BREADCRUMB:** the twin numbers **five** feeds and the panel numbers **eight**
+channels, and they are not the same numbers — FEED 4 in the twin is the chronic
+underperformer; channel 4 on the drum is the VIIIp close-up. **They do not map,
+and they do not need to**, because the panel never needed a per-channel
+correspondence. What it needed was one state, and **the twin cannot supply it
+honestly: the twin IS MGK-VIIIp.** Its no-signal card is the machine's own
+monitor showing nothing on one of ITS feeds. Opening it to say *there is no unit
+on this channel* would put the machine on a channel the routing has just
+established it is not on.
+
+**So the card is drawn by the museum** — a 1965 monoscope in the wing's B&W,
+carrying no lettering — **and the hum is the twin's, to the parameter**: 60 Hz
+sine with a 120 Hz transformer bite, volume wobble at 0.09 Hz and frequency
+drift at 0.13 Hz, read straight off `Hum_Start()`. Two smaller reasons are
+recorded in `TestSignal.jsx`: the twin has no feed parameter, and an iframe has
+no user activation of its own so its AudioContext would never resume.
+

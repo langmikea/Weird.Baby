@@ -2009,6 +2009,69 @@ probes were not wrong; they were answering a question nobody had asked.
 **AND IT IS NOT FIXABLE FROM HERE.** The videos are the artists' own and the
 restriction is theirs. Open row on what the museum shows instead.
 
+### A VIDEO CAN BE UNEMBEDDABLE WITH EVERY PUBLIC SIGNAL READING HEALTHY,
+### AND IT IS NOT ALWAYS AN AGE GATE (2026-08-21)
+
+**THE SECOND INSTANCE IN ONE WEEK, AND IT IS A DIFFERENT CAUSE WITH THE SAME
+SIGNATURE**, which is why it gets its own row beside the one above rather than a
+sentence inside it. Building the antenna selector, one of Mike's two seed
+sources — `vBAcEqq7T4Q`, FredFlix, *Channeling 1960 to 1963 TV* — draws
+**"Video unavailable"** in a real iframe on **both** `youtube-nocookie.com` and
+`www.youtube.com`, from a real origin, while `aA5oKoCRjWw` plays from the same
+page under identical parameters.
+
+**MEASURED SIDE BY SIDE, AND EVERY MACHINE-READABLE SIGNAL IS THE SAME ON THE
+TWO:** oEmbed 200 with a real title, watch-page `playabilityStatus.status`
+**OK**, `playableInEmbed` **true**, `isFamilySafe` **true**, `isPrivate` and
+`isUnlisted` **false**, and **no `ytRating` or `contentRating` field on either**.
+
+**IT IS NOT AN AGE GATE.** An age gate renders *"Sign in to confirm your age."*
+This renders *"Video unavailable."* **Cause not diagnosed and not guessed at** —
+what is established is that the refusal exists, that it is not the row above's
+cause, and that nothing the museum can read predicts it.
+
+**SO THE ORACLE RULE GENERALISES PAST AGE RESTRICTION: THE ONLY WAY TO KNOW A
+VIDEO EMBEDS IS TO PUT IT IN A REAL IFRAME, IN A REAL PAGE, ON A REAL ORIGIN,
+AND LOOK.** Not oEmbed. Not the watch page. Not the API. **Not the bare embed
+URL in a top-level tab either** — that returns `Error 153`, a missing-origin
+artefact, on videos that embed perfectly. The probe that works is a local page
+with an `<iframe>` in it and a screenshot; that is how both of these were
+settled, and it takes two minutes.
+
+**AND THE PROBE ITSELF LIED ONCE ON THE WAY.** Swapping the dead id into the
+museum's own overlay drew a POSTER and a play button — for about a second,
+before the refusal resolved — and a screenshot taken in that window says the
+video is fine. **A rendered oracle still has to be read after it has settled.**
+
+**THE STANDING CONSEQUENCE FOR ANY FUTURE VIDEO SOURCE:** a source is not
+adopted until it has been seen playing in an iframe, and a source that stops
+working later cannot be detected from inside the museum by any gate. That is an
+accepted, named cost — see the antenna round log.
+
+### A CLICK INSIDE A CROSS-ORIGIN IFRAME RAISES NO EVENT IN THE PARENT (2026-08-21)
+
+**IT IS OBVIOUS ONCE STATED AND IT SHIPPED WRONG ANYWAY.** The Portal's
+television falls back to a muted picture when the browser refuses sound, and the
+first cut listened on `window` for `pointerdown` to turn the sound back on. **The
+listener could never fire.** The set fills the overlay, so every click a visitor
+makes lands inside a cross-origin iframe, and such a click raises nothing in the
+parent document — no `pointerdown`, no `click`, no `focus`. The code read
+correctly and was unreachable.
+
+**FOUND BY CLICKING ON THE PICTURE AND WATCHING NOTHING HAPPEN**, which is the
+only way it could have been found — no gate can see an unreachable listener, and
+it is indistinguishable from a listener that fired and did nothing.
+
+**THE FIX IS A NODE OF OUR OWN OVER THE FRAME**, present only while it is needed.
+`.tv-tap` is transparent, `inset: 0`, and swallows exactly one click — which
+costs nothing there because the player is built with `controls: 0` and has
+nothing under it to press.
+
+**THE GENERAL RULE: any interaction the museum needs from a visitor who is
+looking at third-party embedded content has to happen on an element the museum
+owns.** Keyboard is the exception — focus can legitimately be in the parent — but
+it cannot be the only path.
+
 ## 9. Session-close ritual
 
 0. **Gates, in this order:** `npm run lint` (baseline **9 errors / 8

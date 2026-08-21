@@ -13263,12 +13263,12 @@
    "l": 386,
    "t": "Is the mainframe on the Portal?"
   },
-  "1f75f59c425a42cd": {
-   "c": "DERIVED",
+  "2bbb40a6116adfd2": {
    "f": "src/data/artists/portal.js",
-   "l": 387,
-   "t": "Not yet. Two channels are engraved for it on the feed drum and neither of them arms.",
-   "s": "read off the Portal face's own drum in the same file: two positions carry ch 1 and 2 labelled MGK-NIAC and both declare `arms: false`."
+   "l": 0,
+   "t": "Not yet. Two channels are engraved for it on the feed drum and neither of them carries it.",
+   "c": "MIKE",
+   "s": "Mike's sentence and Mike's approval, 2026-08-21. The answer read '...and neither of them ARMS' until the antenna selector shipped; that clause became false the moment channels 1 and 2 began arming, because they carry television or a test signal depending on the routing and neither of those is MGK-NIAC. OPS FLAGGED IT AND DID NOT WRITE IT - the replacement clause is his, which is why this is MIKE rather than RESTATED. The substance never moved: the mainframe is still not on the Portal. The rest of the answer is unchanged and was itself MOVED word for word from the MGK-NIAC FAQ at H3c."
   },
   "9b665a5f5d804433": {
    "c": "HOUSE",
@@ -15180,6 +15180,103 @@
    "t": "Final test and inspection, completed and passed",
    "c": "HOUSE",
    "s": "Ops' own words - the page label in the reader. Both halves are read off the sheet rather than asserted: FINAL TEST AND INSPECTION is its printed title, and PASS is the box the inspector ticked. Named rather than quoted."
+  },
+  "ce432338e628cd3e": {
+   "f": "src/data/artists/portal.js",
+   "t": "wb-portal-panel",
+   "c": "HOUSE",
+   "s": "the panel's sessionStorage key. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "5680e65f4c5ab4dc": {
+   "f": "src/data/artists/portal.js",
+   "t": "ANTENNA",
+   "c": "HOUSE",
+   "s": "Ops' own word for the control, and it is the legend engraved on the panel beside FEED and SOURCE. Mike named the control THE ANTENNA SELECTOR when he designed it (2026-08-21); the engraving takes the noun and not the phrase, which is the drum's own rule - a legend is one terse word cut into brass (P5)."
+  },
+  "ac16195875d56ad3": {
+   "f": "src/data/artists/portal.js",
+   "t": "aA5oKoCRjWw",
+   "c": "VERIFIED",
+   "s": "the YouTube id of A/V Geeks 16mm Films, 'Assorted 1960s TV Commercials', 1743 seconds - Mike's own seed source, ruled 2026-08-21. PROVED PLAYABLE in a real youtube-nocookie iframe from a real origin on 2026-08-21, which is the only oracle that works: his other seed vBAcEqq7T4Q carries identical public signals (status OK, playableInEmbed true, isFamilySafe true, no rating field) and refuses to play in an embed on either host. See OPERATIONS.md section 8."
+  },
+  "59d21066ad5e5198": {
+   "f": "src/data/artists/portal.js",
+   "t": "Television",
+   "c": "HOUSE",
+   "s": "Ops' own word - the frame title on the television channel, used as the iframe's accessible name. Named rather than described: the channel carries television and the museum says so in one word."
+  },
+  "3428e0769294dbd4": {
+   "f": "src/data/artists/portal.js",
+   "t": "Test signal",
+   "c": "HOUSE",
+   "s": "Ops' own word - the frame title on a channel with no unit on it. MIKE ruled the object and the phrase is his: 'the reason the fourth has a test signal is unknown'. It is a fact about the machine and not an absence, so it is named rather than apologised for."
+  },
+  "ceef789ffa98df27": {
+   "f": "src/data/artists/portal.js",
+   "t": "TELEVISION ON THIS CHANNEL.",
+   "c": "HOUSE",
+   "s": "Ops' own words - the readout under the latch. It reports what the channel is carrying and nothing else; it does not tell a visitor what to do about it, which would be the museum solving its own puzzle. The instrument register: terse, upper case, full stop, like the refusal lines it sits in the place of."
+  },
+  "dcc9b6d548fabbd0": {
+   "f": "src/data/artists/portal.js",
+   "t": "SIGNAL PRESENT.",
+   "c": "HOUSE",
+   "s": "Ops' own words - the readout under the latch when a machine's signal reaches the selected channel. Deliberately does NOT name the machine: the drum is already engraved with it two bays to the left, and a readout repeating the engraving is the second object saying what the first already said (H6)."
+  },
+  "c02247659dad27c9": {
+   "f": "src/data/artists/portal.js",
+   "t": "TEST SIGNAL. NO UNIT ON THIS CHANNEL.",
+   "c": "HOUSE",
+   "s": "Ops' own words - the readout under the latch on a channel the routing leaves listening and no machine is assigned to. It states the fact and stops. Mike's ruling is that the test signal is a foothold and must not be explained: 'Maybe one of the switches needs flipped? Or maybe there is another module that will come on line?' - so nothing here answers it."
+  },
+  "062a6a5b72860624": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "t": "machine",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "41705bbdb1214312": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "t": "none",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "d54364f676dd25aa": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "t": "television",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "cc6c97c318d08d8f": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "t": "test",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "8fbc0e3ed3496aaa": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "t": "antenna",
+   "c": "HOUSE",
+   "s": "the accessible-name fallback for the antenna control when a panel declares no label. Never rendered for the Portal, which declares ANTENNA; it exists so a future panel cannot ship a control with no accessible name."
+  },
+  "f33e72e18a7ecfcd": {
+   "f": "src/routes/robots/TestSignal.jsx",
+   "t": "sine",
+   "c": "HOUSE",
+   "s": "a Web Audio oscillator type. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "d3348ecb65e83352": {
+   "f": "src/routes/robots/TestSignal.jsx",
+   "t": "Test signal",
+   "c": "HOUSE",
+   "s": "Ops' own words - the accessible name on the drawn test card, which is an image with no lettering in it. A screen reader is told what the picture IS; the card itself carries no words, because a test card that said TEST SIGNAL would be the museum narrating the machine."
+  },
+  "ce049a64275f1aea": {
+   "f": "src/routes/robots/Television.jsx",
+   "l": 134,
+   "t": "Television",
+   "c": "HOUSE",
+   "s": "Ops' own word - the accessible-name fallback on the set when the antenna declares no title. Never rendered for the Portal, which declares one; it exists so a future channel cannot ship a full-frame video with no accessible name. Same shape and same reason as the 'antenna' fallback in Exhibit.jsx and 'Test signal' in TestSignal.jsx."
   },
   "561065498eca9618": {
    "f": "src/data/artists/robots-record.js",

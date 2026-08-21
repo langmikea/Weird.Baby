@@ -2600,6 +2600,33 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 
 /* ---- THE BAT SWITCHES -------------------------------------------------
    A toggle whose lever actually moves: a metal bat pivoting in a bezel. */
+/* ---- THE ANTENNA [2026-08-21] ----------------------------------------
+   Four cells cut into the panel, one per governed channel: the digit the
+   routing gives it over the channel number the drum engraves. A lit cell is a
+   channel carrying television; the dark one is where the Portal is listening.
+   ONE BUTTON, NOT FOUR. The whole strip is the control and it steps — adding
+   channels must never add controls. */
+.ip-ant{display:flex;gap:6px;padding:6px;cursor:pointer;
+  background:linear-gradient(180deg,#232420,#191a17);
+  border:1px solid #45463f;
+  box-shadow:inset 0 2px 5px -3px #000,0 1px 0 rgba(255,255,255,.05)}
+.ip-ant:focus-visible{outline:1px solid #6a5c3a;outline-offset:2px}
+.ip-ant-cell{display:flex;flex-direction:column;align-items:center;gap:3px;
+  width:30px;padding:5px 0 3px;
+  background:#0b0b0a;border:1px solid #3a3b38;
+  box-shadow:inset 0 3px 5px -4px #000}
+.ip-ant-bit{font-family:inherit;font-size:var(--fs-small);line-height:1;
+  letter-spacing:.02em;color:#4a4b45}
+.ip-ant-ch{font-size:var(--fs-micro);line-height:1;letter-spacing:.1em;
+  color:#5d5850}
+/* a channel carrying television. The lamp ramp is the panel's own warm one,
+   so the strip reads as the same instrument as the lamps beside the switches. */
+.ip-ant-cell.ip-on{border-color:#6a5c3a;background:#141310;
+  box-shadow:inset 0 0 8px -2px rgba(216,168,86,.35)}
+.ip-ant-cell.ip-on .ip-ant-bit{color:#d8a856;
+  text-shadow:0 0 6px rgba(216,168,86,.45)}
+.ip-ant-cell.ip-on .ip-ant-ch{color:#8a7a56}
+
 .ip-bay-switches{gap:16px}
 .ip-sw{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:11px}
 .ip-bat{width:26px;height:44px;padding:0;cursor:pointer;position:relative;
@@ -2701,6 +2728,11 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   .ip{padding:clamp(12px,3vw,18px);gap:11px}
   .ip-deck{gap:14px}
   .ip-bay-switches{gap:11px}
+  /* [2026-08-21] the antenna tightens with everything else. It keeps all four
+     cells — a routing that shed a channel on a phone would be a different
+     routing, which is the badge's own rule one bay over. */
+  .ip-ant{gap:4px;padding:5px}
+  .ip-ant-cell{width:26px;padding:4px 0 3px}
   .ip-dial{height:104px}
   .ip-latchbay{padding-top:10px;gap:12px}
   .ip-latch{padding:10px 24px}

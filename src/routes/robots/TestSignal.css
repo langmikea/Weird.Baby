@@ -1,0 +1,65 @@
+/* THE TEST SIGNAL — the Portal's own, drawn on the overlay's ground.
+   [2026-08-21] Scoped to `.ts-*` and imported by TestSignal.jsx only. It shares
+   no class with the panel or the reader, so nothing here can reach another
+   room — the cascade-probe discipline the Record's own register runs under. */
+
+.ts-root {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #0a0a09;
+}
+
+/* the card sits in the middle of the frame at its own ratio and never crops.
+   A test card cropped by the frame is a broken test card — the whole object is
+   a claim that the geometry is right. */
+.ts-card {
+  width: min(92vw, 132vh);
+  height: auto;
+  display: block;
+  filter: grayscale(1) contrast(1.04);
+}
+
+/* the fine scan texture. Two pixels on, two off, at a low alpha — it reads as a
+   raster at any size and costs one gradient. */
+.ts-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0 2px,
+    rgba(0, 0, 0, 0.26) 2px 4px);
+  mix-blend-mode: multiply;
+}
+
+/* the slow band. A frame-roll that never quite settles: 9 seconds bottom to
+   top, which is slow enough to read as drift rather than as an animation. */
+.ts-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 22vh;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.045) 46%,
+    rgba(255, 255, 255, 0.075) 52%,
+    rgba(255, 255, 255, 0) 100%);
+  animation: ts-roll 9s linear infinite;
+}
+
+@keyframes ts-roll {
+  from { top: 100%; }
+  to   { top: -24vh; }
+}
+
+/* A visitor who has asked for less motion gets the card and the hum and no
+   roll. The signal is still a signal; it simply stops drifting. */
+@media (prefers-reduced-motion: reduce) {
+  .ts-band { animation: none; top: 46%; }
+}

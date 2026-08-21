@@ -592,6 +592,77 @@ supplies a different hand, not because Ops tunes this one.
 
 ---
 
+## 21 - TELEVISION PLAYS, AND RULING A DOES NOT REACH A LATCH (2026-08-21)
+
+> **"They turned the TV on. Whatever channel it is on is playing. It's 1965!"**
+
+**THE DISTINCTION IS RECORDED SO A LATER ROUND DOES NOT APPLY THE WRONG RULE.**
+Ruling A (2026-08-20) reads *"No autoplay flag, no muted start, no
+play-then-pause - every one of those makes sound or motion for a frame."* It
+governs **a video NOBODY ASKED FOR**: a track the visitor merely FOCUSED in a
+tracklist, where the museum would be making sound on its own initiative.
+
+**A LATCH IS AN EXPLICIT REQUEST.** The visitor sets a source dial to LIVE, steps
+an antenna routing, rolls a drum to a channel and throws a switch. Four
+deliberate acts ending in one that means *open this channel*. **Playing what the
+channel carries is answering the request, not taking an initiative.** The two
+cases differ on WHO ASKED, which is the only axis ruling A turns on - not on
+whether sound is made.
+
+**ONE OUTPUT. A TELEVISION IS NOT A TRACKLIST.** Mike: *"not like the tracklist
+you can peruse while another track continues playing."* The tracklist keeps a
+song running while you read another track, deliberately. A set has one output:
+rolling the drum to another channel switches what comes out. **It is enforced
+structurally rather than by a rule** - the channel component is mounted for
+exactly one channel and destroys its player on unmount, so there is never a
+second player alive to layer with. Measured: after closing a channel, **zero
+iframes remain in the document.**
+
+**AND THE HOOK IS PARAMETERISED RATHER THAN DUPLICATED** - Mike's ruling:
+*"Same/data... Small invest, pays back HUGE. That is why the thing is even there
+to be reparameterized."* One player implementation in the building, one nocookie
+host, one `iframe_api` request. **It also turned out to be the only thing that
+worked** - see Ruling 23.
+
+---
+
+## 22 - THE PORTAL FAQ SAYS `CARRIES`, NOT `ARMS` (2026-08-21)
+
+> *"Two channels are engraved for it on the feed drum and neither of them
+> **carries it**."*
+
+**MIKE'S SENTENCE AND MIKE'S APPROVAL**, filed MIKE in the register. The answer
+to *"Is the mainframe on the Portal?"* read *"...neither of them ARMS"* until the
+antenna selector shipped, and that clause became false the moment channels 1 and
+2 began arming - they carry television or a test signal depending on the routing,
+and neither of those is MGK-NIAC.
+
+**THE SUBSTANCE NEVER MOVED** - the mainframe is still not on the Portal - only
+the mechanism the answer reaches for. **And `carries` is the truer word in any
+case:** arming is a fact about the latch, and what the answer is about is what
+comes out. **Ops flagged it and did not write it.**
+
+---
+
+## 23 - A HAND-WRITTEN IFRAME CANNOT AUTOPLAY, AND THAT IS WHY THE HOOK WON (2026-08-21)
+
+**MEASURED, TWICE, ON THE PAGE.** The first television build was a plain
+`<iframe>` pointed at the nocookie embed with `autoplay=1` in the query. **It
+drew a poster and a play button.** The same video through `useYTPlayer` plays.
+
+**THE CAUSE IS THE `allow` ATTRIBUTE.** Autoplay is a Permissions-Policy feature
+and it must be DELEGATED to a cross-origin frame. An iframe written by hand
+carries no `allow`, so the delegation never happens and the top frame's
+activation cannot reach the player. The IFrame API writes its own iframe with
+`allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;
+picture-in-picture; web-share"` - read off the live element to confirm it.
+
+**SO "REUSE THE HOOK" WAS NOT ONLY THE TIDIER CHOICE; IT WAS THE WORKING ONE.**
+Any future round that reaches for a bare `<iframe>` for embedded media should
+read this first.
+
+---
+
 ## HOW THIS FILE IS MEANT TO BE USED
 
 **Read it before re-opening any of them.** Each ruling here cost a round to
