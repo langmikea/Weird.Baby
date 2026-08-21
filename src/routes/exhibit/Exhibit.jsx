@@ -675,15 +675,49 @@ function useYTPlayer({ containerRef, onEnded, hasVideo }) {
      warning this hook already carries - a new lint warning for no new
      behaviour, which is a baseline moved for a copy-paste. One body, one
      `useCallback` carrying the existing debt, two named verbs over it. */
+  /* ═══ [2026-08-20] EVERY LOAD MEETS THE SAME PLAYER STATE ══════════════════
+     THE FAULT, AND IT IS POSITIONAL. There is ONE player and it is reused, so
+     the FIRST track a visitor plays is loaded into a player that has never
+     played anything, and EVERY track after it is loaded into a player that is
+     mid-playback of the previous one — W1 keeps the old video running while
+     focus moves. Measured on /wal, Carsie Blanton's album: at the moment
+     `Shit List` is clicked, `playing` still reads `Be Good`. Track 01 can never
+     be in that state; nothing after track 01 can avoid it. Mike sees YouTube's
+     unavailable graphic on exactly the tracks that take the second path.
+
+     `stopVideo()` AND NOT `pauseVideo()`, ON THE PRINCIPLE RATHER THAN ON A
+     MEASUREMENT. The state track 01 meets is *no video loaded and nothing
+     playing*. `stopVideo()` unloads and stops, which is that state;
+     `pauseVideo()` leaves the previous video loaded and merely halted, which is
+     a THIRD state and would make the two paths differ in a new way instead of
+     the same way. The rule being applied is Mike's — make every track meet the
+     same state — and stop is the only one of the three that does it.
+
+     WHAT IS NOT CLAIMED: that `loadVideoById` alone was measured to fail.
+     Embeds do not paint on the machine this was written on, so the refusal was
+     never reproduced here. The asymmetry above IS measured; the link from it to
+     the grey box is Mike's observation plus the positional pattern, and it is
+     inference. If this does not fix it, that inference is where to look first —
+     not at the videos, which are healthy on every probe. */
   const requestVideo = useCallback((ytId, cue) => {
     if (playerRef.current && readyRef.current) {
       if (cue) playerRef.current.cueVideoById(ytId);
-      else playerRef.current.loadVideoById(ytId);
+      else {
+        try { playerRef.current.stopVideo(); } catch { /* an idle player has nothing to stop */ }
+        playerRef.current.loadVideoById(ytId);
+      }
     } else if (playerRef.current) {
       pendingRef.current = { id: ytId, cue };
     } else {
       pendingRef.current = { id: ytId, cue };
-      ensureApi(() => initPlayer(ytId));
+      /* [2026-08-20] `initPlayer()` TAKES NO PARAMETER AND THE CALL WAS WRONG,
+         NOT THE FUNCTION. It was called `initPlayer(ytId)` here and declared
+         bare, so the argument was silently dropped. **The empty build is
+         deliberate** — the eager build above calls it bare on purpose, and the
+         player is designed to receive its video by METHOD, through `pendingRef`
+         and `onReady`. Adding a `videoId` parameter to match this call would
+         have changed the behaviour to fit the mistake. The argument goes. */
+      ensureApi(() => initPlayer());
     }
   }, []);
   const loadVideo = useCallback((ytId) => requestVideo(ytId, false), [requestVideo]);
