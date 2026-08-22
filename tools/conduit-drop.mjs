@@ -14,7 +14,15 @@
    the drop refuses rather than half-succeeds. A partial drop is worse than no
    drop, because it looks complete.
 
-   ═══ THE FOUR REFUSALS, AND WHY EACH ONE ABORTS THE WHOLE RUN ══════════════
+   ═══ THE SIX REFUSALS, AND WHY EACH ONE ABORTS THE WHOLE RUN ═══════════════
+   ALL SIX ARE EVALUATED BEFORE THE CLEAR STEP, AND THAT ORDER IS THE RULE
+   RATHER THAN AN ACCIDENT. A refusal that fires after the conduit has been
+   emptied leaves the reader with nothing at all — which is a worse outcome
+   than whatever the refusal was preventing. The only check that cannot obey
+   this is refusal 4's second half, the post-write read-back, because there is
+   nothing to read back until something has been written; it is stated as an
+   exception rather than left to be discovered.
+
      1. NO HEAD, NO DROP.       A stamp is the point; a file that cannot be
                                 stamped may not travel.
      2. DIRTY TREE.             A stamp naming a HEAD that does not contain the
@@ -31,6 +39,41 @@
                                 Every output is verified after writing — byte 0
                                 must be the first byte of the stamp — so that
                                 is not reproducible.
+     5. HEAD IS NOT ON ORIGIN.  The stamp records LOCAL HEAD; a reader measures
+                                staleness against `origin/main`. A stamp naming
+                                a commit the reader cannot resolve is a
+                                complete-looking answer that is wrong — the
+                                exact failure shape this tool was written for.
+                                `git fetch origin main` runs FIRST, because a
+                                stale remote-tracking ref makes the check pass
+                                falsely, which is the same as no check at all.
+                                IF THE FETCH FAILS FOR ANY REASON, INCLUDING NO
+                                NETWORK, THE DROP REFUSES: push state cannot be
+                                verified offline, and guessing at it is the
+                                thing being guarded against.
+                                THERE IS NO OVERRIDE FLAG, DELIBERATELY. A
+                                refusal that advertises the way past it is the
+                                defect found in the deploy guard on 2026-08-22;
+                                it is not rebuilt here. Push, then drop.
+     6. THE DESTINATION IS NOT AN EXISTING DIRECTORY. Never created. A drop
+                                into a folder nobody reads looks exactly like a
+                                successful drop, and an unmounted `G:` turns a
+                                helpful `mkdir -p` into a silent, complete,
+                                local folder that syncs nowhere.
+
+   ═══ `WB_CONDUIT` IS TEST-ONLY, AND IT IS THE ONLY NAME ════════════════════
+   The destination is `G:\My Drive\_conduit` and one environment variable
+   overrides it: `WB_CONDUIT`. IT EXISTS SO THAT REFUSAL 6 CAN BE DEMONSTRATED
+   WITHOUT POINTING ANYTHING AT THE REAL CONDUIT, and so the drop can be
+   exercised end to end against a temp folder. It is not a normal operating
+   mode: a real drop sets nothing and takes the default.
+
+   THERE IS EXACTLY ONE NAME FOR IT, DELIBERATELY. A second spelling was
+   proposed and added on 2026-08-22 and removed the same day: two names for one
+   thing means a reader who greps for the wrong one concludes the override does
+   not exist, and a drop aimed by the name the tool no longer reads goes to the
+   default — which is the real conduit. An alias kept "for compatibility" is
+   that defect with a reason attached.
 
    ═══ IT CLEARS FIRST, AND THAT IS DELIBERATE ═══════════════════════════════
    The conduit is a TRANSFER PAYLOAD, not a reference copy, and it is
@@ -56,7 +99,8 @@ const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
 
 /* the destination, overridable — a hardcoded single option is a tool that
-   cannot be tested anywhere but the machine it was written on. */
+   cannot be tested anywhere but the machine it was written on. `WB_CONDUIT` is
+   TEST-ONLY and is the only name — see the header. */
 const DEST = process.env.WB_CONDUIT || "G:\\My Drive\\_conduit";
 
 const ALLOW_DIRTY = process.argv.includes("--allow-dirty");
@@ -122,6 +166,116 @@ function dirtyAmong(rels) {
   }
 }
 
+/* ── REFUSAL 6 — THE DESTINATION MUST ALREADY BE A DIRECTORY ───────────────
+   It is never created. `mkdir` here would turn an unmounted drive, a typo or a
+   renamed folder into a drop that reports success into a place nobody reads —
+   indistinguishable, from the sending end, from the real thing. */
+function assertDestination() {
+  let st = null;
+  try { st = fs.statSync(DEST); }
+  catch (e) {
+    if (!e || e.code !== "ENOENT") {
+      die([
+        "conduit REFUSED — the destination cannot be examined:",
+        "      " + DEST,
+        "  " + (e && e.message ? e.message : String(e)),
+        "",
+        "Nothing was written and nothing was cleared.",
+      ]);
+    }
+  }
+  if (st === null) {
+    die([
+      "conduit REFUSED — the destination does not exist:",
+      "      " + DEST,
+      "",
+      "It was NOT created. A drop into a folder nobody reads looks exactly like",
+      "a successful drop — an unmounted drive or a renamed folder would take the",
+      "whole payload and report twenty-one files.",
+      "",
+      "  Check the drive is mounted and the folder is where you think it is.",
+      "Nothing was written and nothing was cleared.",
+    ]);
+  }
+  if (!st.isDirectory()) {
+    die([
+      "conduit REFUSED — the destination exists and is not a directory:",
+      "      " + DEST,
+      "",
+      "The drop writes one file per document into a folder. Nothing was written,",
+      "and the thing at that path was not touched.",
+    ]);
+  }
+}
+
+/* ── REFUSAL 5 — HEAD MUST BE CONTAINED IN origin/main ─────────────────────
+   The stamp records local HEAD and a reader measures staleness against origin.
+   The fetch is not optional and its failure is not survivable: a stale
+   remote-tracking ref answers this question wrongly and confidently, which is
+   the same failure as not asking it. There is no override. */
+function assertHeadOnOrigin(head) {
+  try {
+    execFileSync("git", ["-C", REPO, "fetch", "--quiet", "origin", "main"],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+  } catch (e) {
+    die([
+      "conduit REFUSED — cannot fetch `origin main`, so push state is unknown.",
+      "  " + (e && e.stderr ? String(e.stderr).trim() : (e && e.message ? e.message : String(e))),
+      "",
+      "THE DROP CANNOT VERIFY PUSH STATE OFFLINE. The stamp names local HEAD and",
+      "a reader resolves it against origin/main; without a fetch, the",
+      "remote-tracking ref on this machine may be days old and would answer that",
+      "question wrongly and confidently.",
+      "",
+      "  Get on the network and re-run.",
+      "Nothing was written and nothing was cleared.",
+    ]);
+  }
+  let originMain;
+  try {
+    originMain = execFileSync("git",
+      ["-C", REPO, "rev-parse", "--short", "origin/main"],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
+  } catch (e) {
+    die([
+      "conduit REFUSED — `origin/main` does not resolve after a successful fetch.",
+      "  " + (e && e.message ? e.message : String(e)),
+      "",
+      "Nothing was written and nothing was cleared.",
+    ]);
+  }
+  let contained = false;
+  try {
+    execFileSync("git",
+      ["-C", REPO, "merge-base", "--is-ancestor", "HEAD", "origin/main"],
+      { stdio: ["ignore", "ignore", "pipe"] });
+    contained = true;
+  } catch (e) {
+    /* exit 1 is the honest "not an ancestor"; anything else is git failing to
+       answer, and an unanswered question is refused rather than assumed. */
+    if (!e || e.status !== 1) {
+      die([
+        "conduit REFUSED — cannot determine whether HEAD is on origin/main.",
+        "  " + (e && e.message ? e.message : String(e)),
+        "",
+        "Nothing was written and nothing was cleared.",
+      ]);
+    }
+  }
+  if (!contained) {
+    die([
+      `conduit REFUSED — HEAD ${head} is not on origin/main (${originMain}).`,
+      "",
+      "Every stamp in the drop would name a commit the reader cannot resolve.",
+      "They would look complete, and checking one against origin would fail to",
+      "find it at all — a complete-looking answer that is wrong.",
+      "",
+      "  Push, then drop:   git push origin main",
+      "Nothing was written and nothing was cleared.",
+    ]);
+  }
+}
+
 const sha256of = (buf) => crypto.createHash("sha256").update(buf).digest("hex");
 
 /* ── 2. RESOLVE THE CANON ──────────────────────────────────────────────────
@@ -162,6 +316,15 @@ function commentFor(rel, body) {
 
 /* ═══ THE RUN ══════════════════════════════════════════════════════════════ */
 const HEAD = headSha();
+
+/* REFUSAL 6 first — it is local, certain, and costs nothing. There is no point
+   asking the network whether a payload may travel to a place that is not
+   there. */
+assertDestination();
+
+/* REFUSAL 5 — fetch, then containment. Both before anything is read or moved. */
+assertHeadOnOrigin(HEAD);
+
 const NOW = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
 
 const list = [...DOCUMENTS];
@@ -245,17 +408,11 @@ for (const rel of list) {
 /* ── CLEAR FIRST ───────────────────────────────────────────────────────────
    Files only, one level: the conduit is flat by construction and a recursive
    delete against an env-var path is a bigger weapon than this job needs. A
-   subdirectory is reported and left alone rather than removed. */
-if (!fs.existsSync(DEST)) {
-  try { fs.mkdirSync(DEST, { recursive: true }); }
-  catch (e) {
-    die([
-      `conduit REFUSED — the destination does not exist and cannot be created:`,
-      "      " + DEST,
-      "  " + (e && e.message ? e.message : String(e)),
-    ]);
-  }
-}
+   subdirectory is reported and left alone rather than removed.
+
+   THE DESTINATION IS NOT CREATED HERE OR ANYWHERE — refusal 6 has already
+   established that it exists and is a directory, above, before a single source
+   was read. Every one of the six refusals is behind us at this line. */
 let removed = [], kept = [];
 try {
   for (const e of fs.readdirSync(DEST, { withFileTypes: true })) {

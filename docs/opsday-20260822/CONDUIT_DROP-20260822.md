@@ -19,7 +19,7 @@ Read before writing anything: `tools/ops-desk.mjs` (799 lines) and
 | `REPO` resolved from `import.meta.url`, never from `cwd` | `ops-desk.mjs:57–58`, `arc.mjs:31` | same, and it is what makes refusal 1 testable |
 | a long block header stating **why the file exists** before any code, with `═══` rules | both | same |
 | a hand-held array with a comment saying it is hand-held, one row per thing | `ops-desk.mjs:65` `INSTRUMENTS`, with `/* ── THE EIGHT ── */` | `DOCUMENTS`, with `/* ── THE LIST ── */` |
-| refuse-and-say-why rather than warn-and-continue | `ops-desk.mjs:713` (`missing`, drawn as a red card with no link), `arc.mjs:74–79` | four refusals, each aborting |
+| refuse-and-say-why rather than warn-and-continue | `ops-desk.mjs:713` (`missing`, drawn as a red card with no link), `arc.mjs:74–79` | six refusals, each aborting |
 | `console.error(lines)` + `process.exit(1)` | `arc.mjs:76–79` | same, via a `die(lines)` helper |
 | the `die(lines)` helper shape itself | `tools/deploy-guard.mjs:45–48` — read as a third reference because it is the repo's other refusing tool | copied verbatim in shape |
 | error text names the fix on its own last line | `arc.mjs:78`, `deploy-guard.mjs:83` | every refusal ends with what to run or what to do |
@@ -88,7 +88,7 @@ counted separately and the canon half is never enumerated in the source.
 
 ---
 
-## 3 · THE FOUR REFUSALS — EACH ONE TRIGGERED, NOT REASONED ABOUT
+## 3 · THE SIX REFUSALS — EACH ONE TRIGGERED, NOT REASONED ABOUT
 
 Every command below was run. `WB_CONDUIT` pointed at
 `C:\Users\macun\AppData\Local\Temp\conduit-test` throughout.
@@ -191,6 +191,195 @@ exit=1
 **Refusal 4 has a second half that cannot be triggered on demand** — the
 post-write read-back (`Buffer.compare(back, out)`) that fires if what arrived is
 not what was sent. It is proved positively in §4 instead.
+
+### Refusal 5 — HEAD is not on origin/main
+
+**Added 2026-08-22, second packet.** The stamp records LOCAL HEAD; a reader
+measures staleness against `origin/main`. A stamp naming a commit the reader
+cannot resolve is a complete-looking answer that is wrong — which is the exact
+failure this whole tool exists to prevent, arriving through the stamp itself.
+
+`git fetch --quiet origin main` runs FIRST, always. **A stale remote-tracking
+ref answers the question wrongly and confidently, which is the same failure
+shape as not asking it at all.**
+
+Triggered against the real repo, whose HEAD `93417e7` is genuinely unpushed:
+
+```
+$ WB_CONDUIT=<temp>/dest-ok node tools/conduit-drop.mjs
+
+conduit REFUSED — HEAD 93417e7 is not on origin/main (427140b).
+
+Every stamp in the drop would name a commit the reader cannot resolve.
+They would look complete, and checking one against origin would fail to
+find it at all — a complete-looking answer that is wrong.
+
+  Push, then drop:   git push origin main
+Nothing was written and nothing was cleared.
+
+exit=1
+```
+
+**The destination held 0 files afterwards** — it was never opened.
+
+**THERE IS NO OVERRIDE FLAG, AND THAT IS THE DESIGN.** No `--allow-unpushed`,
+no stamping `UNPUSHED`. A refusal that advertises the way past it is the defect
+found in the deploy guard this morning; it is not rebuilt here. Push, then drop.
+
+### Refusal 5's offline path — the fetch fails, so the drop refuses
+
+**If the fetch fails for any reason, including no network, the drop refuses.**
+Push state cannot be verified offline and guessing at it is the thing being
+guarded against. Induced two ways, in a clone whose HEAD *is* on its origin —
+so the only thing failing is the fetch:
+
+```
+$ git remote set-url origin https://no-such-host.invalid/weird-baby.git
+$ node tools/conduit-drop.mjs
+
+conduit REFUSED — cannot fetch `origin main`, so push state is unknown.
+  fatal: unable to access 'https://no-such-host.invalid/weird-baby.git/': Could not resolve host: no-such-host.invalid
+
+THE DROP CANNOT VERIFY PUSH STATE OFFLINE. The stamp names local HEAD and
+a reader resolves it against origin/main; without a fetch, the
+remote-tracking ref on this machine may be days old and would answer that
+question wrongly and confidently.
+
+  Get on the network and re-run.
+Nothing was written and nothing was cleared.
+
+exit=1
+```
+
+`Could not resolve host` is the same error a genuinely offline machine
+produces. The second induction points `origin` at a path that is not a
+repository — a dismounted drive rather than a dead network — and refuses
+identically:
+
+```
+  fatal: '<temp>/no-such-origin-repo' does not appear to be a git repository
+fatal: Could not read from remote repository.
+```
+
+**The destination held its previous 21 files after both**, unchanged.
+
+### Refusal 6 — the destination is not an existing directory
+
+**It is never created. No `mkdir`, no `mkdir -p`.** A drop into a folder nobody
+reads looks exactly like a successful drop; an unmounted `G:` would turn a
+helpful `mkdir -p` into a silent, complete, local folder that syncs nowhere.
+This closes X6d below, which recorded the hole and left it open.
+
+**Missing destination:**
+
+```
+$ WB_CONDUIT=<temp>/there-is-no-such-folder/deeper/still node tools/conduit-drop.mjs
+
+conduit REFUSED — the destination does not exist:
+      <temp>/there-is-no-such-folder/deeper/still
+
+It was NOT created. A drop into a folder nobody reads looks exactly like
+a successful drop — an unmounted drive or a renamed folder would take the
+whole payload and report twenty-one files.
+
+  Check the drive is mounted and the folder is where you think it is.
+Nothing was written and nothing was cleared.
+
+exit=1
+```
+
+**Checked afterwards, which is the half that matters** — not one of the three
+path segments exists:
+
+```
+absent   : <temp>/there-is-no-such-folder
+absent   : <temp>/there-is-no-such-folder/deeper
+absent   : <temp>/there-is-no-such-folder/deeper/still
+```
+
+**Destination exists and is a file:**
+
+```
+$ WB_CONDUIT=<temp>/dest-is-a-file.txt node tools/conduit-drop.mjs
+
+conduit REFUSED — the destination exists and is not a directory:
+      <temp>/dest-is-a-file.txt
+
+The drop writes one file per document into a folder. Nothing was written,
+and the thing at that path was not touched.
+
+exit=1
+```
+
+The file was 27 bytes before and 27 bytes after, contents unchanged.
+
+### The order: all six are evaluated before the clear
+
+**Read off the control flow and then measured.** In source order:
+
+| # | refusal | where |
+|---:|---|---|
+| 1 | no HEAD | `headSha()`, first statement of THE RUN |
+| 6 | destination is not an existing directory | `assertDestination()`, immediately after |
+| 5 | HEAD not on `origin/main` (fetch first) | `assertHeadOnOrigin()`, immediately after |
+| 3 | a listed source is missing | after the list is resolved |
+| 2 | dirty tree among the listed files | after 3 |
+| 4a | a source is not valid UTF-8 | the staging loop |
+| — | **THE CLEAR** | after every one of the above |
+| 4b | a written file did not arrive as written | after the write — *the one exception* |
+
+**Refusal 6 is checked before refusal 5 deliberately:** it is local, certain and
+free, and there is no point asking the network whether a payload may travel to a
+place that is not there.
+
+**4b cannot obey the rule and the code says so rather than leaving it to be
+discovered** — there is nothing to read back until something has been written.
+
+### `WB_CONDUIT` is test-only, and it is the only name
+
+The destination override is `WB_CONDUIT`, read at startup, defaulting to
+`G:\My Drive\_conduit`. **It exists so refusal 6 can be demonstrated without
+pointing anything at the real conduit.** A real drop sets nothing and takes the
+default.
+
+**There is exactly one name for it.** A second spelling was proposed and added
+earlier the same day and removed: two names for one thing means a reader who
+greps for the wrong one concludes the override does not exist, and a drop aimed
+by the name the tool no longer reads goes to the default — which is the real
+conduit. An alias kept "for compatibility" is that defect with a reason attached.
+
+### A clean run, for comparison — 20 files plus manifest
+
+Run in a clone whose `origin/main` equals its HEAD, with the museum's own
+working-tree bytes copied in, so what the tool read is byte-for-byte what a real
+drop would read:
+
+```
+  conduit  ->  <temp>/dest-clean
+  HEAD 93417e7 · 2026-08-22T14:50:48Z
+  cleared: 1 file(s) — STALE-LEFTOVER.md
+     291786  OPERATIONS.md
+      38420  MUSEUM_RULINGS-20260817.md
+      10071  ARC.md
+      14871  BACKLOG.md
+       5366  THREADS.md
+      29541  INDEX.md
+      ...
+       1852  MANIFEST.md
+
+  20 file(s) + manifest. 6 listed, 14 resolved from docs/canon/INDEX.md.
+exit=0
+```
+
+**The `OPERATIONS.md` manifest row is byte-identical to the pre-amendment
+value**, which is the check that the amendment changed nothing it should not
+have:
+
+```
+| OPERATIONS.md | 291786 | `0c464c5b67567362` | `docs/canonical/OPERATIONS.md` |
+```
+
+21 files delivered, 21 of 21 beginning `0x3c`, the planted stray gone.
 
 ### Every mutation was reverted and the revert was verified
 
@@ -357,21 +546,23 @@ live the day a non-markdown file joins the list.
 
 **X6c · §3's staleness test is against `origin/main`; the stamp records local
 HEAD.** §3: *"if the stamp's HEAD doesn't match current `origin/main` … treat it
-as STALE."* The tool stamps `git rev-parse --short HEAD` and never consults a
-remote. **A drop taken from a local HEAD that is ahead of `origin/main` is fresh
-by the stamp and stale by §3's rule.** The tool cannot close this without a
-network call, and refusing on an unpushed commit would block the normal case —
-Mike commits and drops before pushing. Flagged rather than decided.
+as STALE."* **CLOSED 2026-08-22 by refusal 5** — the tool now fetches `origin
+main` and refuses unless HEAD is contained in it, so a stamp can only ever name
+a commit the reader can resolve. This section originally read *"refusing on an
+unpushed commit would block the normal case — Mike commits and drops before
+pushing"*, and **that reasoning was rejected**: blocking the drop is the point,
+because the alternative is a drop that looks fresh and cites a commit nobody
+else has. The cost is real and is the intended one — push, then drop.
 
 **X6d · Two files in the repo record the conduit failing for a different
 reason.** `docs/HANDOFF_leftrail_applied.md:109–111` and its `_cowork` twin:
 *"The Drive conduit is `G:\My Drive\_conduit\` (OPERATIONS §3), which is **not
 mounted** in this session (only `C:\AI` is)."* **The mount is not guaranteed.**
-This tool creates the destination if it is missing (`fs.mkdirSync`), which on an
-unmounted `G:` would silently create a local folder that syncs nowhere. **That is
-a real hole in refusal coverage** — it would produce a complete-looking drop into
-a destination nobody reads. I have not closed it; it is out of the four refusals
-the packet specifies.
+This tool used to create the destination if it was missing (`fs.mkdirSync`),
+which on an unmounted `G:` would silently create a local folder that syncs
+nowhere — a complete-looking drop into a destination nobody reads. **CLOSED
+2026-08-22 by refusal 6**: the destination is never created, and a missing one
+or a non-directory one aborts before a single source is read.
 
 **X7 · `HANDOFF_relayout_scope.md` is in the live conduit and is not in the
 list.** See §5 — it will be deleted by the first real run. It is the only one of
