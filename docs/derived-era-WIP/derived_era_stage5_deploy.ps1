@@ -11,8 +11,14 @@
 #   WRITES (after live verify only): STATE.md,
 #           docs/DERIVED_ERA_REWIRE_LOG-20260707.md,
 #           docs/derived-era-WIP/DERIVED_ERA_WIP_STATE.md
-#   DEPLOYS: npx wrangler deploy (the only durable path; yours)
+#   DEPLOYS: NOTHING. Disarmed 2026-08-22 — see §0 DEPLOY — THE ONLY ACCOUNT
+#            in docs/canonical/OPERATIONS.md.
 # NO DB WRITE. Commits/push printed at the end — yours, after the gate.
+# ═══════════════════════════════════════════════════════════════════════════
+# ═══ DISARMED 2026-08-22 ═══════════════════════════════════════════════════
+# This script reached the Cloudflare deploy CLI directly, which is a publish
+# tools/deploy-guard.mjs never sees. The invocation is gone; section 3 now
+# prints and stops. The file is kept for its documentary value only.
 # ═══════════════════════════════════════════════════════════════════════════
 $ErrorActionPreference = "Stop"
 function Abort($msg) { Write-Host "ABORT: $msg" -ForegroundColor Red; exit 1 }
@@ -64,14 +70,13 @@ $go = Read-Host "type DEPLOY to ship, anything else aborts"
 Stop-Job $job -ErrorAction SilentlyContinue; Remove-Job $job -Force -ErrorAction SilentlyContinue
 if ($go -ne "DEPLOY") { Abort "stopped at preview gate — nothing deployed; docs untouched" }
 
-# ── 3. Deploy + capture version id ───────────────────────────────────────────
-$deployOut = (npx wrangler deploy 2>&1 | Out-String)
-Write-Host $deployOut
-if ($LASTEXITCODE -ne 0) { Abort "wrangler deploy failed — docs untouched" }
-$m = [regex]::Match($deployOut, "Current Version ID:\s*([0-9a-f]{8})")
-if (-not $m.Success) { Abort "could not parse version id from wrangler output — paste output back; docs untouched" }
-$ver = $m.Groups[1].Value
-Write-Host "deployed version: $ver"
+# ── 3. Deploy — DISARMED ─────────────────────────────────────────────────────
+# Everything below (live verify, the STATE.md ledger rewrite, the run-log
+# close-out) consumed a real deploy and its version id. With no deploy there is
+# no version id, so the run STOPS here rather than stamping the ledger for a
+# publish that did not happen.
+Write-Host "Deploy is not run from this script. Run: npm run deploy:launch"
+exit 1
 
 # ── 4. Verify live ───────────────────────────────────────────────────────────
 Start-Sleep -Seconds 5

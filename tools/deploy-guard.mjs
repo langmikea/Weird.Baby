@@ -12,9 +12,11 @@
    `DEFAULT_STAGE` stays `development`. That is Mike's word on the day and this
    file does not touch it — a guard that quietly changed the answer would be the
    same class of error as the deploy it is guarding.
-   WHAT CHANGES IS THAT THE STAGE MUST BE *SAID*. `npm run deploy` no longer
-   means "publish whatever the default is"; it means "publish development, and I
-   know that", and it will not run until somebody has said so once.
+   WHAT CHANGES IS THAT THE STAGE MUST BE *SAID*, AND IT IS SAID BY CHOOSING
+   THE COMMAND. `npm run deploy:launch` publishes the museum; plain
+   `npm run deploy` asks to publish DEVELOPMENT and is refused outright. There
+   is no acknowledgement flag and no override of any kind — see the note at
+   `acknowledged` below for why the one that used to be printed never worked.
 
    ═══ WHY IT READS THE BUILT WORKER AND NOT ITS OWN ENVIRONMENT ══════════════
    The failure this project has already had once (see `tools/stage-build.mjs`)
@@ -38,9 +40,13 @@ const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const WORKER = path.join(REPO, "dist", "weird_baby", "index.js");
 
 const want = process.argv.includes("--launch") ? LAUNCH : DEVELOPMENT;
-const acknowledged =
-  process.argv.includes("--i-know-this-publishes-development") ||
-  want === LAUNCH;
+/* THERE IS NO OVERRIDE. This was once a flag, and the flag never worked: npm
+   appends `--` arguments to the LAST command in an `&&` chain, so
+   `npm run deploy -- --i-know-this-publishes-development` handed the flag to
+   `wrangler deploy` and never to this file. It was printed as the way through
+   for months and was not one. Nothing is lost by deleting it, and a future
+   round must not re-add it without first proving npm forwards to this process. */
+const acknowledged = want === LAUNCH;
 
 const die = (lines) => {
   console.error("\n" + lines.join("\n") + "\n");
@@ -117,10 +123,10 @@ if (!acknowledged) {
     "weird.baby, readable by anyone. That is what every deploy this week did.",
     "",
     "  To publish the real museum:      npm run deploy:launch",
-    "  To publish development anyway:   npm run deploy -- --i-know-this-publishes-development",
+    "  There is no override. This refusal cannot be acknowledged past.",
     "",
     "DEFAULT_STAGE is unchanged and stays development — that is Mike's word on",
-    "the day, not this guard's to move. All this asks is that you say it.",
+    "the day, not this guard's to move. There is no flag that changes this.",
   ]);
 }
 
