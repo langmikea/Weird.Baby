@@ -225,233 +225,128 @@ export const PORTAL_ALBUM = {
              like — and the day Mike hands over a serial it is one value
              (OPEN_ACTIONS P-a). */
           nameplate: {
-            /* ═══ [P1 2026-08-06] "INSTRUMENT DIV." IS STRUCK. MIKE: ABEAL is
-               correct canon — a division of ScrapCo — but INSTRUMENT DIVISION
-               is DRIFT, and it is the SECOND time the same drift has grown.
-               He struck "ABEAL Instrument Company" off the manual cover on
-               2026-08-05 and it regrew here in a new costume, on a different
-               object, inside a fortnight. A name a maker never had is not a
-               small error on a nameplate: a nameplate is the one object on a
-               machine whose whole job is to say who made it.
-               ABEAL ALONE, unless canon says otherwise. The hyphen went with
-               it — the wing's own canon spells it ABEAL, and "A-BEAL" was this
-               file's spelling and nowhere else's. */
+            /* [2026-08-21] THE BADGE IS THE MAKER'S NAME AND NOTHING ELSE.
+               MIKE, ruling the rebuild: the ABEAL badge alone. `FEED CONTROL`
+               and the three struck fields (MODEL NO. / SER. NO. / DATE) are
+               OFF the plate.
+               IT IS THE LAW OF SUBTRACTION, NOT A CORRECTION. Every one of
+               those was true and none was needed: the bay beneath the badge is
+               already engraved FEED, and two of the three fields were
+               deliberately empty wells. `TYPE 8p` was the only value on the
+               plate and it is on the spec sheet, where a spec belongs.
+               `P-a` - the serial Mike was to hand over - closes with it: there
+               is no field left to strike it into. */
             maker: "ABEAL",
-            unit: "FEED CONTROL",
-            fields: [
-              { k: "MODEL NO.", v: "TYPE 8p" },
-              { k: "SER. NO.", v: null },
-              { k: "DATE", v: null },
-            ],
           },
-          drum: {
+          /* === [2026-08-21] THE FEED BAY SETS A START MODE, NOT A CHANNEL ===
+             MIKE, whole: **the drum sets the device's start mode. Nothing else.
+             The DIP sets ANT or CAB per channel. The LATCH launches it, on
+             channel 1. The four channel buttons pick which of four inputs
+             shows. The drum and the channels are UNRELATED and neither affects
+             the other.**
+
+             SO THE EIGHT-POSITION DRUM IS GONE AND ITS `ch` FIELD WITH IT. The
+             barrel carried two jobs that were never one - *which machine state*
+             and *which channel* - and R6's channel engravings were the second
+             job wearing the first one's clothes. Channels moved down to the
+             ANTENNA, which already addressed them by number.
+
+             LATER ROBOTS ARE NEW BANKS, NOT NEW CONTROLS. `bank` is the patched
+             pair, `state` is the mode it starts in; a second unit is another row
+             here and no new control anywhere.
+
+             THE STATE IS ITS OWN FIELD so the readout's top line never carries
+             `NIAC/VIIIp - TEST BENCH` on one row - and BOTH LINES ARE LIT, which
+             is what makes the stepper look like it steps. Every bank in this
+             volume is `NIAC/VIIIp`, so a dim sub-line was the only thing moving
+             and the prominent half reported nothing.
+
+             === THE IDS ARE THE TWIN'S RECIPE KEYS AND THEY WERE CHECKED ======
+             Each `id` is a key in `PORTAL_RECIPES` in `twin.html`. Verified by
+             reading that object on 2026-08-21, because the mapping the rebuild
+             inherited had four of five wrong and nothing reported it:
+               PATCHED     -> `standard`   {resume:true, power:"on", level:2}
+               COLD START  -> `clean-boot` {power:"on", level:0}
+               FIRST RUN   -> `first-run`  {power:"on", level:1}
+             `first-run` is NEW in `twin.html` this round. **`level:1` reaches
+             `Boot_Offer()`, which stops and asks the visitor a question, and
+             that is CORRECT** - MIKE: *"the machine does what the machine was
+             designed to do."* Nothing routes around it.
+
+             === TWO BANKS DO NOT ARM, FOR TWO DIFFERENT REASONS ==============
+             TEST BENCH - MIKE: *"disarm because we are not going to change lanes
+             and work the 6-digit code right now."* Its recipe carries
+             `dev:true`, which shows the workshop; disarmed, the workshop does
+             not ship and the six-digit code stays backlogged.
+             LAST STATE - **the recipe it was to be pointed at does not do what
+             the legend says.** Mike's meaning is *"I left the machine running,
+             so when I return resume right where I left off"*, and
+             `idling-updated` is `{power:"on", level:2}` with NO `resume`: it
+             opens an IDLE machine - PATCHED without the resume. The only thing
+             that returns a visitor to their own machine is `resume:true`, and it
+             is already on `standard`. Disarmed rather than wired to a recipe
+             that would quietly mean something else.
+             Full finding: `docs/MUSEUM_PANEL_REBUILD_LOG-20260821.md`. */
+          feed: {
             label: "FEED",
-            /* ═══ [2026-08-20] THE LEGEND IS STRUCK, NOT CORRECTED ═══════════
-               MIKE: two positions arm, not one, so `SELECT · ONE ARMED` was
-               false — and the fix is not `TWO`.
-               THE LAMP UNDER THE LATCH ALREADY REPORTS IT. `FEED ARMED` /
-               `NOT ARMED` is the arm state of the channel the drum is showing,
-               and the readout above it already names that channel. A count of
-               how many of the eight arm is a fact about the instrument that no
-               visitor can use — and one that has already gone stale once,
-               silently, under a stepper whose positions change. Doctrine 16:
-               what is lost if it goes? Nothing a reader would miss.
-               `drum.sub` IS UNDECLARED, NOT REMOVED — Exhibit.jsx renders it
-               conditionally, so the line simply does not draw and leaves no
-               gap, and a future drum that genuinely needs a legend declares
-               one. */
-            /* positions are read in drum order, top to bottom. `arms:true`
-               is the only one that lights the drum and permits the latch.
-
-               ═══ [R6 2026-08-05] THE FEEDS CARRY CHANNEL NUMBERS, AND THE
-               REASON IS NOT ON THIS PAGE. Mike's instruction: the Portal's
-               feed positions renumber — MGK-NIAC takes channels 1 and 2 and
-               MGK-VIIIp moves to 3 and 4 — and *the reason is the egg and it
-               must not be explained on the glass.*
-               SO NOTHING HERE EXPLAINS IT. Not the drum's legend, not its
-               sub, not a caption, not a note on the face. The engraving is a
-               number. A visitor who knows why 3 is where a machine like this
-               starts has been given something; a visitor who does not has
-               been given a numbered drum, which is what a numbered drum looks
-               like. Writing the reason down here would spend it in the same
-               commit that planted it. It is recorded once, in
-               `reveal/ledger.json`, which is where this house keeps things it
-               holds and does not show.
-               THE NIAC POSITIONS ARE NOT INVENTED FEEDS. Two channels are
-               engraved for the mainframe and each carries the machine's name
-               and nothing else — no state, no mode, no feed title, because
-               nobody has supplied one and a plausible one is Doctrine 12's
-               exact failure. Neither arms: the mainframe does not run on the
-               Portal, and the day it does is a ruling and a feed, not a
-               label. That NIAC comes first is the true development order and
-               it needed no argument to place.
-               THE VIIIp KEEPS ALL SIX OF ITS POSITIONS. M33 records that five
-               of them are engraved reveal levers; renumbering must not quietly
-               destroy five levers, so it does not. The feed that arms first is
-               channel 3.
-
-               ═══ [2026-08-20] CHANNELS 3 AND 4 CARRY THE MACHINE'S NAME ═════
-               MIKE, naming both: channel 3 is `MGK-VIIIp` and channel 4 is
-               `MGK-VIIIp (zoom)`. **Both show the same machine; one is
-               closer.** The words they replace — `STANDARD` and `DETAIL` —
-               described a FEED rather than naming what you are looking at,
-               which is the one thing a drum position is for.
-               IT MAKES THE DRUM ONE KIND OF THING. Channels 1 and 2 already
-               carry a machine's name and nothing else (`MGK-NIAC`), for the
-               reason recorded above: a position is an engraved name, not a
-               state. 3 and 4 now read the same way, and the drum stops being
-               two vocabularies stacked on one barrel.
-               `CH-a` CLOSES. `DETAIL` was Ops' word, registered as such
-               because the engraved legends are Mike's to write. He has
-               written them. The `id`s are untouched, again — `standard` and
-               `idling-updated` are what the latch puts in the event and what
-               a twin URL carries, and P5's rule that no id moves when a
-               legend is recut holds for the third time. */
-            positions: [
-              { id: "niac-1", ch: 1, label: "MGK-NIAC", arms: false,
-                why: "This feed is not available." },
-              { id: "niac-2", ch: 2, label: "MGK-NIAC", arms: false,
-                why: "This feed is not available." },
-              /* [P3 2026-08-06] THE READOUT IS STRUCK. MIKE, naming the
-                 sentence: "the unit as it stands: boots and updates complete,
-                 powered, waiting at the opening prompt."
-                 It was the panel narrating what the panel already shows —
-                 AT PROMPT is lit, BOOTS + UPDATES DONE is engraved under it,
-                 and the latch says FEED ARMED. Three instruments reporting a
-                 state and then a sentence reporting the three instruments.
-                 Law of Subtraction: nothing is lost that a reader would miss.
-                 `drum.line` IS STILL RENDERED (Exhibit.jsx's `ip-readout`) —
-                 the field is undeclared, not removed, so a future feed that
-                 genuinely needs a readout can declare one. */
-              { id: "standard", ch: 3, label: "MGK-VIIIp", arms: true },
-              /* [CS 2026-08-04] `why` IS PRINTED ON THE PANEL — it is the
-                 refusal line under the latch. These five read "held — one
-                 entry state (C3)", "held — awaiting a privacy ruling" and
-                 "held — workshop entry, by URL": internal decision codes, an
-                 unmade ruling, and the existence of an undisclosed URL, all
-                 shown to whoever rolls the drum. The instrument now says the
-                 one thing an instrument says when a position will not arm. */
-              /* ═══ [P5 2026-08-06] THE ENGRAVINGS ARE ENGRAVINGS NOW ═══════
-                 MIKE: one entry WRAPS ("off, first boot") and it ruins the
-                 effect — and that label makes no sense to a human either.
-                 Every position must be DELIBERATELY OBFUSCATED or DRESSED IN
-                 PERIOD GARB. Nothing merely awkward.
-                 THE DIAGNOSIS IS THAT THREE OF THEM WERE NEITHER. "IDLING,
-                 UPD", "BOOT PLAYBK" and "OFF · 1ST BOOT" are not engravings
-                 in either register — they are the `id`s below them, truncated
-                 until they fitted, which is what a filename looks like and
-                 not what a drum looks like. A 1965 selector engraves terse
-                 state words, and it engraves them whole.
-                 THE MEANING DID NOT MOVE, AND THAT IS THE CONSTRAINT. The
-                 `id` is the key the twin reads (`preset` in the URL) and no
-                 id changed, so M33's five engraved reveal levers are exactly
-                 the five levers they were. What changed is the word cut into
-                 the brass: STANDBY is a machine idling after its updates,
-                 COLD START is a boot from cold, FIRST RUN is the unit's first
-                 one. Each is the period term for the state its id names, and
-                 each fits the drum face at one line. */
-              /* ═══ [CH4 2026-08-12] CHANNEL 4 HOLDS THE CLOSE-UP ════════════
-                 MIKE: channel 4 is a close-up of the MGK-VIIIp; channel 3 is
-                 the VIIIp's screen. Channel 3 is `standard` and already opens
-                 the twin, so only this position moved.
-                 THE `id` IS DELIBERATELY UNCHANGED. It is what the latch puts
-                 in the event as `preset` and what a twin URL carries, and P5
-                 above records that when these legends were recut NO id moved.
-                 Repurposing in place keeps `preset=idling-updated` resolving;
-                 renumbering the drum would have moved five engraved levers to
-                 add one.
-                 WHAT IT COST: STANDBY is off the drum. It was an engraved
-                 position that did not arm and held nothing, and the position
-                 now holds a photograph — the first one on this instrument.
-                 [2026-08-20] THE LABEL IS MIKE'S NOW — see the block above.
-                 `DETAIL` was Ops' word and `CH-a` closes with this line. */
-              { id: "idling-updated", ch: 4, label: "MGK-VIIIp (zoom)", arms: true,
-                src: "/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
-                frameTitle: "MGK-VIIIp — the close-up" },
-              { id: "boot-playback", ch: 5, label: "COLD START", arms: false,
-                why: "This feed is not available." },
-              { id: "off-first-boot", ch: 6, label: "FIRST RUN", arms: false,
-                why: "This feed is not available." },
-              { id: "last-state", ch: 7, label: "LAST STATE", arms: false,
-                why: "This feed is not available." },
-              { id: "test-bench", ch: 8, label: "TEST BENCH", arms: false,
-                why: "This feed is not available." },
+            banks: [
+              { id: "standard", bank: "NIAC/VIIIp", state: "PATCHED", arms: true },
+              { id: "clean-boot", bank: "NIAC/VIIIp", state: "COLD START", arms: true },
+              { id: "first-run", bank: "NIAC/VIIIp", state: "FIRST RUN", arms: true },
+              { id: "last-state", bank: "NIAC/VIIIp", state: "LAST STATE", arms: false },
+              { id: "test-bench", bank: "NIAC/VIIIp", state: "TEST BENCH", arms: false },
             ],
           },
-          /* ═══ [2026-08-21] THE ANTENNA SELECTOR ══════════════════════════
-             MIKE'S DESIGN, ruled 2026-08-21. Four routings over channels 1-4.
-             A `1` is a channel carrying television; a `0` is dead air, the
-             Portal listening for a unit - any unit.
+          /* === [2026-08-21] THE ANTENNA IS FOUR INDEPENDENT SWITCHES ========
+             MIKE'S DESIGN. Four sliders numbered 1 2 3 4 and NO LEGEND: what
+             they select belongs in the manual, without detail - it is an egg to
+             be worked out, not a caption.
 
-             EVERY CHANNEL RESOLVES BY PRIORITY, AND THE ORDER IS HIS:
-               1. TELEVISION, if the routing gives that channel a 1.
-                  Television overrules everything.
-               2. THE MACHINE'S SIGNAL, if a machine is assigned to that
-                  channel and television is not on it.
-               3. THE TEST SIGNAL, if neither.
+             A `1` IS `ANT` AND A `0` IS `CAB`, which is the correction Mike made
+             on 2026-08-21: **`ANT` is television - an aerial is how television
+             arrives - and `CAB` is hardwired and carries the MGK units.** So a
+             channel switched to ANT shows television; switched to CAB it shows
+             whatever unit is wired to it, or the test signal if none is.
 
-             A MACHINE IS FIXED TO ITS CHANNEL. MGK-VIIIp is on 3 and does not
-             move; it does not appear on whichever channel happens to be free.
-             So the puzzle is to get the zero onto channel 3, and television is
-             in the way. `1101` is the answer, and QC_101 - attached to Record
-             004 - is where a visitor reads `BROADCASTS ON ... FEED NO. 3` in
-             the installer's own hand.
+             === FOUR ROUTINGS BECAME SIXTEEN, AND THAT IS THE POINT ==========
+             The stepping button offered four fixed strings and the puzzle was
+             *step until 1101*. Four independent switches is the instrument Mike
+             drew: the puzzle is *find the channel the machine is on and switch
+             that one to CAB*, and QC_101 - attached to Record 004 - is where a
+             visitor reads `BROADCASTS ON ... FEED NO. 3` in the installer's own
+             hand.
 
-             WHERE "A MACHINE IS ASSIGNED" IS DECLARED: it is `arms: true` on
-             the drum position, unchanged. The field's meaning widens rather
-             than moving - for a GOVERNED channel it now reads *a machine's
-             signal is assigned here*, and for channels 5-8 it means exactly
-             what it always meant. No id moved and no legend was recut, which
-             is P5's rule holding for the fourth time.
+             DEFAULT `1111` - every channel taken, nothing listening.
 
-             CHANNEL 4 NEEDED NO CHANGE, AND THAT IS THE RULING WORKING. It
-             carries `MGK-VIIIp (zoom)` with its own `src` - a photograph - and
-             that photograph IS channel 4's assigned signal. Routed 1 it is
-             television; routed 0 it is the close-up. Nothing moves and nothing
-             is covered by accident.
-
-             WHY THE FOURTH CHANNEL HAS A TEST SIGNAL - MIKE, VERBATIM:
-             *"The machine only hosts three TV signals at a time; the reason the
-             fourth has a test signal is unknown. Maybe one of the switches
-             needs flipped? Or maybe there is another module that will come on
-             line? Innocent footholds for future claims of foreshadowing, and a
-             bit of richness."*
-             SO IT IS A FACT ABOUT THE MACHINE, NOT AN ABSENCE. It reads as
-             *this is how it works*, never as *this is broken*. **Nothing here
-             explains it and nothing resolves it**, which is the same discipline
-             R6 put on the channel numbering one drum over: writing the reason
-             down would spend it in the commit that planted it.
-
-             THE DIAL DOES ITS OWN HALF AND NEEDED NO NEW CONTROL. At SEEDED
-             the panel does not arm at all, which IS *no signal on any channel*;
-             LIVE turns the 1s into television. Mike ruled that, and the dial
-             was already declared with `seeded.arms: false`.
-
-             ONE SOURCE, THREE CHANNELS, EVENLY SPACED. `vBAcEqq7T4Q` was
-             dropped on 2026-08-21: it draws *"This video is unavailable"* in a
-             real iframe on BOTH hosts from a real origin while this one plays
-             from the same page, with every public signal identical on the two.
-             Not age restriction, cause unknown, and the museum cannot see it
-             from inside - `OPERATIONS.md` §8 carries the hazard. */
+             === THE CHANNELS LIVE HERE NOW ==================================
+             `unit: true` is what *a machine is assigned to this channel* means,
+             and it is the old drum position's `arms` field MOVED rather than
+             invented - the same four declarations, at the address that always
+             addressed them by number. Channel 4 keeps its own `src`: routed ANT
+             it is television, routed CAB it is the close-up, and that photograph
+             IS that channel's assigned signal. P5's rule holds again - no id
+             moved and no legend was recut. */
           antenna: {
             label: "ANTENNA",
-            /* the channels the routing governs. 5-8 are diagnostic modes and
-               are not antenna business; they refuse as they always have. */
-            governs: [1, 2, 3, 4],
-            /* read left to right as channels 1..4. One zero each, and the
-               order is Mike's. */
-            routings: ["1110", "1011", "1101", "0111"],
-            /* what the panel shows for the routing while the source dial is
-               not LIVE. His words: no signal on any channel. */
-            dark: "0000",
+            default: "1111",
+            channels: [
+              { ch: 1, unit: false },
+              { ch: 2, unit: false },
+              { ch: 3, unit: true },
+              { ch: 4, unit: true,
+                src: "/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+                frameTitle: "MGK-VIIIp - the close-up" },
+            ],
             television: {
               /* A/V Geeks 16mm Films - "Assorted 1960s TV Commercials".
-                 PROVED PLAYABLE in a real nocookie iframe, 2026-08-21. */
+                 PROVED PLAYABLE in a real nocookie iframe 2026-08-21, and
+                 re-proved on the live site the same day (`onReady`, no
+                 `onError`, duration read back). */
               ytId: "aA5oKoCRjWw",
               /* the true length, and the modulo depends on it: if the source is
-                 ever re-uploaded or trimmed this number is wrong and every
-                 phase drifts with nothing reporting it. Read off the watch
-                 page 2026-08-21 (`lengthSeconds`), not estimated. */
+                 ever re-uploaded or trimmed this number is wrong and every phase
+                 drifts with nothing reporting it. Read off the watch page
+                 2026-08-21 (`lengthSeconds`), not estimated. */
               seconds: 1743,
               title: "Television",
             },
@@ -464,28 +359,19 @@ export const PORTAL_ALBUM = {
               test: "TEST SIGNAL. NO UNIT ON THIS CHANNEL.",
             },
           },
-          switches: [
-            /* [C1] the fortnight, as an instrument. Thrown UP the machine is
-               in automated maintenance and will not be interrupted — the
-               latch goes dark and says why. Thrown DOWN, maintenance is
-               complete, which is where C3 leaves it today. */
-            { id: "maint", label: "AUTO MAINT", sub: "NON-INTERRUPTIBLE",
-              on: false, armsWhen: false,
-              held: "Maintenance is running. The machine will not be hurried.",
-              lamp: "amber" },
-            /* [C3] the entry state, as an instrument. */
-            { id: "prompt", label: "AT PROMPT", sub: "BOOTS + UPDATES DONE",
-              on: true, armsWhen: true,
-              held: "The unit is not at its prompt.",
-              lamp: "warm" },
-          ],
+          /* === [2026-08-21] THE BAT SWITCHES ARE STRUCK =====================
+             `AUTO MAINT` and `AT PROMPT` are off the panel. Ruling 25: there is
+             no lock - a patch panel arms when it is LIVE. They were two controls
+             whose only job was to refuse, and the refusal they produced was a
+             paragraph that grew the chassis 62px on a dial turn.
+             NOTHING DECLINES SILENTLY STILL HOLDS: the lamp beside the latch
+             reads NOT ARMED and the latch is visibly disabled - two reports of
+             the same fact, by the controls that caused it. */
           dial: {
             label: "SOURCE",
             positions: [
               { id: "live", label: "LIVE", arms: true },
-              { id: "seeded", label: "SEEDED", arms: false,
-                why: "no seeded feed on file — the lamps read the seed, " +
-                     "and there is nothing to read" },
+              { id: "seeded", label: "SEEDED", arms: false },
             ],
           },
           latch: {
@@ -495,6 +381,24 @@ export const PORTAL_ALBUM = {
             event: TWIN.event,
             src: TWIN.src,
             frameTitle: TWIN.title,
+            /* === [2026-08-21] THE BEZEL THE OVERLAY DRAWS ====================
+               MIKE: the bezel and the channel buttons belong to THE PORTAL, not
+               to the machine - *"the screen is a television set; its frame and
+               its buttons do not disappear because of what is on it."*
+               THE GEOMETRY IS MEASURED AND MUST NOT BE EYEBALLED. Both numbers
+               are read off the twin's own asset notes: the bezel PNG is
+               3000x2400 and its barrel-curved opening encloses x 227..2766,
+               y 202..2213. THE FEED RECT IS DELIBERATELY TALLER THAN THE HOLE -
+               x 227..2766, y 194..2229 - because the picture OVERFILLS the
+               opening top and bottom and the curved inner edge crops it. That
+               overscan is what makes a plain rectangle a legal feed shape here:
+               0 hole pixels fall outside the rect, so no page ground can leak
+               into the picture. MIKE: *"standard 60s CRT."* */
+            bezel: {
+              src: "/held/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+              w: 3000, h: 2400,
+              feed: { x: 227, y: 194, w: 2540, h: 2036 },
+            },
           },
         },
         /* [2026-08-11] THE `papa` FIELD IS DELETED WITH THE RED NOTES. It

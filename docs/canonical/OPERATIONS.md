@@ -2112,6 +2112,109 @@ that points at nothing; and an extra decorative element is indistinguishable fro
 a shadow until somebody looks at it. **Serving it is what makes looking possible;
 looking is still the step.**
 
+### A STALLED HARNESS AND A STALLED CEREMONY LOOK IDENTICAL — THE ONLY ORACLE
+### FOR PLAYBACK IS A PERSON IN A FOREGROUND TAB (2026-08-21)
+
+**THE CASE THAT CLOSED IT.** The 20 August round reported the twin's boot
+ceremony stalling at 89 seconds and left it open. **Mike ran it and the boot
+COMPLETED.** The ceremony reaches its level-specific section; what stalled was
+the harness. This is the `requestAnimationFrame` hazard above wearing a costume:
+rAF does not fire in a frame nobody is painting, so the thing under test and the
+thing doing the testing fail in exactly the same way and produce the same
+reading.
+
+**AND IT IS WIDER THAN rAF — VIDEO IS THE OTHER HALF.** The Chrome the extension
+drives keeps every tab at **`document.visibilityState: "hidden"`**, and Chrome
+does not start video in a tab it is not showing. Measured on the Portal's
+television, after a latch: `player state −1 (UNSTARTED)`, `currentTime` correctly
+cued, `muted true`, the sound catcher rendered. **Every link in the chain was
+provably built and tuned, and the picture still did not move.** A round reading
+that as *television is broken* would be reporting the harness.
+
+**TIMERS ARE THROTTLED IN THE SAME TAB, WHICH BREAKS THE PROBE'S CLOCK TOO.**
+`Television.jsx`'s refusal path ticks a 350ms interval and gives up at try 5 —
+1.75s. Under background throttling the tick floor is ~1000ms, so it lands at
+~5s. **A first reading taken at 3 seconds says the fallback never ran, and is
+wrong.** Any probe that waits *n* milliseconds for a timer-driven path on this
+host has to budget for the throttle or it will file a phantom defect.
+
+**WHAT IS STILL PROVABLE FROM HERE, AND WHAT IS NOT.** Provable: that the player
+BUILT (one iframe, the right host, the `allow` attribute present), that it TUNED
+(`getVideoData()` returns the id and title, `getDuration()` returns a length),
+and that the source is EMBEDDABLE (`onReady` fires and `onError` does not).
+**Not provable: that it MOVES.** Say which of those was measured; never let the
+first three stand in for the fourth.
+
+### `getAttribute("style")` IS THE TARGET, `getComputedStyle` IS THE
+### INTERPOLATED VALUE, AND FOR 420ms THEY DISAGREE (2026-08-21)
+
+**THE CASE.** The Portal drum carries `transform .42s cubic-bezier(.2,.75,.25,1)`.
+Two probes written to answer *which face is the visitor looking at* both lied, in
+different directions, and one of them nearly reversed a correct finding:
+
+- A `getBoundingClientRect()` heuristic for "the front face of the 3D barrel"
+  reported an **off-by-one between the glass and the resolver** — at **+1** in one
+  reading and **−2** in the next. **The tell was that it returned IDENTICAL
+  geometry at two different drum positions**, which no real off-by-one can do.
+- A probe reading `getComputedStyle(el).transform` caught a `matrix3d` for 45°
+  while the style attribute held the target 90°, and reported it as **the drum
+  moving on its own with no input**. There was no input and there was no movement:
+  it read a transition in flight.
+
+**THE RULE.** On any animated element the style attribute holds where it is
+GOING and the computed value holds where it IS. Take state measurements off the
+attribute; take visual measurements only after the transition has finished; and
+**never rank 3D-transformed siblings by their client rects** — a barrel's front
+and back face both sit at the same centre.
+
+**AND THE HALF THAT IS NOT ABOUT CSS.** The panel's readout and the payload its
+latch dispatches are React state and are correct on the same tick as the click.
+**Only the picture lags.** So a screenshot taken mid-roll shows one channel while
+the panel is correctly reasoning about the next one — *the instrument is right
+and the photograph of it is wrong*. A round driving a panel faster than its own
+animation will manufacture defects that are not there; put the settle in the
+probe, not in the report.
+
+### A CIRCULAR SIZE RESOLVES TO ZERO, NOT TO AN ERROR (2026-08-21)
+
+**THE CASE.** The Portal's screen needed to fit an overlay in BOTH axes and keep
+a picture's ratio. A box with `aspect-ratio` cannot honour both `max-width` and
+`max-height` without distorting, so the first cut let the bezel `<img>` size the
+frame and positioned everything against it — the img shrinks to two constraints
+and keeps its proportions, which is true and is why it looked right.
+
+**IT CAME BACK 0 x 0.** The img's `max-width:100%` resolves against its parent,
+and the parent's size was to come from the img. **The browser does not warn on a
+circular size; it resolves it to zero**, and every rule in the file reads
+correctly while nothing is on the screen.
+
+**THE FIX AND THE RULE: SIZE AGAINST AN ANCESTOR, NEVER A DESCENDANT.** The wrap
+is a `container-type: size` and the frame is
+`width: min(100cqw, calc(100cqh * var(--arn)))` with the ratio passed in as data.
+**Whenever a measurement comes back 0, suspect a loop before suspecting the
+element** — a mis-set value is usually wrong, but a zero is usually circular.
+
+### `!important` IS SOMETIMES THE HONEST ANSWER, AND IT IS THE SECOND HALF OF A
+### TWO-OWNER LAYOUT (2026-08-21)
+
+**THE CASE.** The museum draws the Portal's bezel; `twin.html` draws the picture
+inside it. Every number in both was correct and **the art sat 1104px wide inside
+a 1200px frame** with black showing between. `#unitstage` is capped at
+`min(96vw,880px)` and then re-written by the twin's own **portal size dial**,
+which writes an INLINE width — a real control, ruled and persisted.
+
+**TWO OWNERS OF ONE DIMENSION IS THE DEFECT; THE OVERRIDE IS THE FIX.** Framed,
+the overlay decides how big the Portal is, so the framed stylesheet overrides the
+dial with `!important` — it is fighting an inline style, which is the one case
+where nothing weaker works — and the source says so at the declaration. The dial
+is untouched standalone, where it is the only thing deciding.
+
+**AND NEITHER HALF WAS VISIBLE TO A PROBE.** `getBoundingClientRect` on the frame
+read exactly what it should; the mismatch was between two elements nothing
+compared. **It took a screenshot.** Ratios and offsets that live in two documents
+have to be measured against EACH OTHER or looked at — reading either one alone
+proves nothing.
+
 ## 9. Session-close ritual
 
 0. **Gates, in this order:** `npm run lint` (baseline **9 errors / 8

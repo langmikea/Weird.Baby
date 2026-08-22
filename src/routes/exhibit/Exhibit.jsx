@@ -1369,15 +1369,10 @@ function dialArc(i, n) {
    handed a position, an antenna declaration and an index, and it returns one of
    four words. A face that declares no `antenna` gets `machine` or `none`, which
    is exactly the behaviour every panel had before this existed. */
-function resolveChannel(pos, ant, routingIdx) {
-  const p = pos || {};
-  const governed = !!ant && Array.isArray(ant.governs)
-    && p.ch != null && ant.governs.indexOf(p.ch) >= 0;
-  if (!governed) return p.arms ? "machine" : "none";
-  const routing = (ant.routings || [])[routingIdx] || "";
-  const digit = routing.charAt(ant.governs.indexOf(p.ch));
-  if (digit === "1") return "television";
-  return p.arms ? "machine" : "test";
+function resolveChannel(chRow, bits, i) {
+  if (!chRow) return "none";
+  if (String(bits || "").charAt(i) === "1") return "television";
+  return chRow.unit ? "machine" : "test";
 }
 
 /* THE PANEL REMEMBERS ITSELF FOR THE VISIT. sessionStorage, never local — the
@@ -1426,9 +1421,10 @@ function televisionStart(tv, phaseIdx, phaseCount) {
   return Math.floor((Date.now() / 1000 + phase) % dur);
 }
 /* which of the live television channels this one is, and how many there are */
-function televisionPhase(ant, routingIdx, ch) {
-  const routing = (ant.routings || [])[routingIdx] || "";
-  const on = (ant.governs || []).filter((c, i) => routing.charAt(i) === "1");
+function televisionPhase(ant, bits, ch) {
+  const rows = (ant && ant.channels) || [];
+  const on = rows.filter((r, i) => String(bits || "").charAt(i) === "1")
+                 .map(r => r.ch);
   return { idx: Math.max(0, on.indexOf(ch)), count: on.length || 1 };
 }
 
@@ -1478,71 +1474,59 @@ function InstrumentPanel({ decl }) {
     if (ro) { ro.observe(el.parentElement); ro.observe(el); }
     return () => { if (ro) ro.disconnect(); };
   }, []);
-  /* [H3a] the nameplate's declaration, read once. A panel that declares none
-     draws none — the badge is an object the face asks for, not furniture. */
+  /* [H3a, cut back 2026-08-21] the badge's declaration, read once. A panel
+     that declares none draws none - the badge is an object the face asks for,
+     not furniture. It is the maker's name and nothing else now (Ruling 24). */
   const NP = D.nameplate || null;
-  const npFields = Array.isArray(NP && NP.fields) ? NP.fields : [];
-  const drumPos = Array.isArray(D.drum && D.drum.positions) ? D.drum.positions : [];
+  const banks   = Array.isArray(D.feed && D.feed.banks) ? D.feed.banks : [];
   const dialPos = Array.isArray(D.dial && D.dial.positions) ? D.dial.positions : [];
-  const swDecl  = Array.isArray(D.switches) ? D.switches : [];
+  const ANT     = D.antenna || null;
+  /* memoised because `openChannel` closes over it: a fresh `[]` on every render
+     would rebuild the callback every render, and the callback is what the
+     screen's channel strip is subscribed to. */
+  const chRows  = useMemo(
+    () => ((ANT && Array.isArray(ANT.channels)) ? ANT.channels : []), [ANT]);
 
-  /* [R6 2026-08-05] THE DRUM STARTS ON THE FEED THAT ARMS, NOT ON POSITION 0.
-     FOUND BY LOOKING AT THE PAGE, WHICH IS THE ONLY WAY IT COULD HAVE BEEN
-     FOUND. Renumbering put MGK-NIAC's two dead channels at the top of the drum,
-     and `useState(0)` therefore landed every visitor on a position that will not
-     arm: the Portal — the one thing in the wing that is actually running —
-     greeted them with NOT ARMED and "This feed is not available", with the
-     latch two rolls away. The numbering was right and the landing was wrong.
-     THE FIX IS THE PANEL READING ITS OWN DATA rather than a constant. It opens
-     on the first `arms:true` position, so the instrument presents itself in the
-     state it can actually be used in and the channels above it are found by
-     rolling UP — which is how a selector on a real machine behaves and is also
-     what makes the numbering discoverable at all.
-     A DRUM WITH NO ARMING POSITION FALLS BACK TO 0, unchanged: a panel where
-     nothing arms should show its first legend and say why, which is exactly
-     what it did before this line existed. */
-  const ANT = D.antenna || null;
-  const antN = Math.max((ANT && ANT.routings && ANT.routings.length) || 0, 1);
-  /* [2026-08-21] the remembered panel, read ONCE at mount. Every clamp below is
-     against the DECLARATION rather than against the stored number: a session
-     that outlives a data change must not land the drum on a position that no
-     longer exists, and a stored index is the one value a redeploy can invalidate
-     without anything noticing. */
+  /* [2026-08-21] THE PANEL REMEMBERS ITSELF FOR THE VISIT, unchanged in kind
+     from the drum it replaces: sessionStorage, never local, so a reload inside
+     the visit keeps the switches and a new tab starts the puzzle again. Every
+     clamp is against the DECLARATION rather than the stored value - a session
+     that outlives a data change must not land on a bank that no longer exists.
+     IT DEGRADES HONESTLY: refused storage throws on the accessor itself, both
+     ends are wrapped, and a panel that cannot remember opens at its defaults. */
   const REM = useMemo(() => panelLoad(D.store) || {}, [D.store]);
-  const [drumIdx, setDrumIdx] = useState(() => {
-    const r = Number(REM.drum);
-    if (Number.isInteger(r) && r >= 0 && r < drumPos.length) return r;
-    const i = drumPos.findIndex(p => p.arms);
+
+  /* THE FEED OPENS ON A BANK THAT ARMS. Two of the five do not (LAST STATE and
+     TEST BENCH), and opening on one of those would greet a visitor with a dead
+     latch on the one instrument in the wing that is actually running - which is
+     the R6 landing defect, in its second costume. */
+  const [bankIdx, setBankIdx] = useState(() => {
+    const r = Number(REM.bank);
+    if (Number.isInteger(r) && r >= 0 && r < banks.length) return r;
+    const i = banks.findIndex(b => b.arms);
     return i >= 0 ? i : 0;
   });
   const [dialIdx, setDialIdx] = useState(() => {
     const r = Number(REM.dial);
     return Number.isInteger(r) && r >= 0 && r < dialPos.length ? r : 0;
   });
-  const [swOn, setSwOn] = useState(() => (
-    Array.isArray(REM.sw) && REM.sw.length === swDecl.length
-      ? REM.sw.map(Boolean)
-      : swDecl.map(w => !!w.on)));
-  const [antIdx, setAntIdx] = useState(() => {
-    const r = Number(REM.ant);
-    return Number.isInteger(r) && r >= 0 && r < antN ? r : 0;
+  /* the four switches, as a string of ones and zeros - one character per
+     channel, in `channels` order. A string rather than an array because it is
+     what the resolver reads and what a stored value round-trips cleanly. */
+  const [bits, setBits] = useState(() => {
+    const dflt = String((ANT && ANT.default) || "").padEnd(chRows.length, "1");
+    const r = typeof REM.bits === "string" ? REM.bits : null;
+    return (r && r.length === chRows.length && /^[01]*$/.test(r)) ? r : dflt;
   });
   useEffect(() => {
-    panelSave(D.store, { drum: drumIdx, dial: dialIdx, sw: swOn, ant: antIdx });
-  }, [D.store, drumIdx, dialIdx, swOn, antIdx]);
+    panelSave(D.store, { bank: bankIdx, dial: dialIdx, bits });
+  }, [D.store, bankIdx, dialIdx, bits]);
 
-  /* [N1 2026-08-02] THE POINTER POINTS AT THE LEGEND IT HAS CHOSEN.
-     The knob rotated by `idx * 90 - 45`, which is a number that happens to
-     move rather than an angle that means anything: at LIVE the mark aimed up
-     and to the LEFT, away from both legends, and at SEEDED it aimed up and to
-     the right at nothing in particular. On a real instrument the pointer is
-     how you read the setting, so it has to aim AT the reading.
-     MEASURED, NOT TABULATED. The angle is computed from where the legends
-     actually land - knob centre to legend centre - rather than written down
-     as a constant per position. A table would be right until someone adds a
-     third source, restyles the column or wraps a label, and then it would be
-     confidently wrong; this cannot drift because it reads the layout it is
-     pointing into. */
+  /* [N1 2026-08-02] THE POINTER POINTS AT THE LEGEND IT HAS CHOSEN, and the
+     angle is MEASURED - knob centre to legend centre - rather than tabulated.
+     A table is right until somebody adds a third source or restyles a label,
+     and then it is confidently wrong; this cannot drift because it reads the
+     layout it is pointing into. */
   const knobRef = useRef(null);
   const marksRef = useRef(null);
   const [angles, setAngles] = useState([]);
@@ -1551,6 +1535,7 @@ function InstrumentPanel({ decl }) {
     if (!k || !m) return;
     function measure() {
       const kb = k.getBoundingClientRect();
+      if (!kb.width) return;
       const cx = kb.left + kb.width / 2, cy = kb.top + kb.height / 2;
       const out = [];
       for (const el of m.children) {
@@ -1569,194 +1554,147 @@ function InstrumentPanel({ decl }) {
     return () => { if (ro) ro.disconnect(); };
   }, [dialPos.length]);
 
-  const N = Math.max(drumPos.length, 1);
-  const STEP = 360 / N;
-  const FACE_H = 34;
-  const RADIUS = N > 2 ? (FACE_H / 2) / Math.tan(Math.PI / N) : FACE_H;
-
-  const drum = drumPos[drumIdx] || {};
+  const bank = banks[bankIdx] || {};
   const dial = dialPos[dialIdx] || {};
-  const swBad = swDecl.findIndex((w, i) => swOn[i] !== !!w.armsWhen);
-  /* ═══ [2026-08-21] THE ROUTING JOINED THE ARMING RULE ══════════════════════
-     ARMING IS STILL ONE RULE IN ONE PLACE, which is the doctrine at the head of
-     this component and the reason the routing had to come inside it rather than
-     sit beside it: a routing that changed what the latch OPENED without
-     changing what the panel SAYS is the silent decline that doctrine forbids.
-     `arms` therefore stops being the answer and becomes an INPUT — the resolver
-     asks it whether a machine is assigned to the channel, and the channel arms
-     if it resolves to anything at all.
-     WHAT CHANGED FOR THE PORTAL, STATED: channels 1 and 2 now arm. They carry
-     television or a test signal depending on the routing, and neither is
-     MGK-NIAC. Their declared `why` — "This feed is not available." — is
-     unreachable while an antenna is declared and is kept rather than deleted,
-     because a panel with no antenna is still governed by it.
-     THE DIAL IS UNTOUCHED AND DOES ITS OWN HALF. At SEEDED nothing arms, which
-     IS Mike's "no signal on any channel"; the routing display reads `dark` and
-     the dial prints its own refusal. */
-  const feed = resolveChannel(drum, ANT, antIdx);
-  const armed = feed !== "none" && !!dial.arms && swBad === -1;
+  /* [Ruling 25] NO LOCK. A patch panel arms when it is LIVE, and when the bank
+     it is showing is one this volume will start. */
+  const armed = !!bank.arms && !!dial.arms;
 
-  /* the panel explains its own refusal, most-specific first */
-  let refusal = null;
-  if (!armed) {
-    if (swBad !== -1) refusal = swDecl[swBad].held;
-    else if (feed === "none") refusal = drum.why;
-    else if (!dial.arms) refusal = dial.why;
+  /* ===== [2026-08-21] ONE RESOLVER, AND THE LATCH IS ONE OF ITS CALLERS =====
+     MIKE: **the LATCH launches it, on channel 1** - and the four buttons on the
+     screen pick which of the four inputs shows after that. Both arrive here, so
+     there is exactly one place that decides what a channel carries and exactly
+     one payload shape leaving this panel. A second resolver on the overlay side
+     is the thing this function exists to prevent.
+     THE ENGINE STILL LEARNS NOTHING. The event carries a kind, a picture frame
+     and the list of channel numbers; nothing downstream knows what an antenna
+     is, which is the seam R6 drew and this round did not move. */
+  const openChannel = useCallback((ch) => {
+    if (!armed) return;
+    const i = chRows.findIndex(r => r.ch === ch);
+    if (i < 0) return;
+    const row = chRows[i];
+    const kind = resolveChannel(row, bits, i);
+    const L = D.latch || {};
+    const ev = L.event || "wb-robots-open-twin";
+    const base = {
+      ch,
+      chList: chRows.map(r => r.ch),
+      bezel: L.bezel || null,
+      note: (ANT && ANT.says && ANT.says[kind]) || "",
+    };
+    if (kind === "television" && ANT && ANT.television) {
+      const ph = televisionPhase(ANT, bits, ch);
+      window.dispatchEvent(new CustomEvent(ev, { detail: { ...base,
+        kind: "television",
+        ytId: ANT.television.ytId,
+        startSeconds: televisionStart(ANT.television, ph.idx, ph.count),
+        frameTitle: ANT.television.title || "" } }));
+      return;
+    }
+    if (kind === "test" && ANT) {
+      window.dispatchEvent(new CustomEvent(ev, { detail: { ...base,
+        kind: "test",
+        frameTitle: (ANT.test && ANT.test.title) || "" } }));
+      return;
+    }
+    window.dispatchEvent(new CustomEvent(ev, { detail: { ...base,
+      preset: bank.id,
+      src: row.src || L.src,
+      frameTitle: row.frameTitle || L.frameTitle } }));
+  }, [armed, chRows, bits, D.latch, ANT, bank.id]);
+
+  /* THE SCREEN'S FOUR BUTTONS COME BACK HERE. They are drawn by the overlay -
+     they belong to the Portal and must survive television and the test signal,
+     which the machine's own strip could not - but the panel is the only thing
+     that can say what a channel carries, so the strip ASKS and this answers.
+     It is a window event and not a postMessage: both ends are the museum's own
+     components now, and the twin's iframe is no longer in the path at all. */
+  useEffect(() => {
+    function onSel(e) {
+      const ch = e && e.detail && e.detail.ch;
+      if (typeof ch === "number") openChannel(ch);
+    }
+    window.addEventListener("wb-portal-select-channel", onSel);
+    return () => window.removeEventListener("wb-portal-select-channel", onSel);
+  }, [openChannel]);
+
+  function step(d) {
+    const n = Math.max(banks.length, 1);
+    setBankIdx(i => (i + d + n) % n);
   }
-  /* what the channel is carrying — the one place the antenna explains itself.
-     A face with no `antenna` falls through to its own declared readout, so
-     nothing outside this panel can notice the field exists. */
-  const readout = armed
-    ? ((ANT && ANT.says && ANT.says[feed]) || drum.line)
-    : null;
-  /* the routing as the instrument shows it: dark until the source is LIVE */
-  const shownRouting = ANT
-    ? (dial.arms ? ((ANT.routings || [])[antIdx] || "") : (ANT.dark || ""))
-    : "";
-
-  function roll(d) { setDrumIdx(i => (i + d + N) % N); }
+  function flip(i) {
+    setBits(v => v.slice(0, i) + (v.charAt(i) === "1" ? "0" : "1") + v.slice(i + 1));
+  }
 
   return (
     <div ref={fitRef} className={"ip" + (armed ? " ip-armed" : "")}
          style={fit < 1 ? { transform: `scale(${fit.toFixed(4)})`,
                             transformOrigin: "top center" } : undefined}>
-      {/* [N2 2026-08-02] THE PANEL IS MOUNTED, NOT PRINTED. Four screws in
-          the corners, each seated at a DIFFERENT angle - a screw that lines
-          up with its neighbours is a logo, not a fastener, and the eye knows
-          the difference without being told why. They are furniture, so they
-          live in the renderer with the bevels and the wear rather than in the
-          artist config: no face should have to declare its own screws. */}
+      {/* [N2 2026-08-02] THE PANEL IS MOUNTED, NOT PRINTED. Four screws in the
+          corners, each seated at a DIFFERENT angle - a screw that lines up with
+          its neighbours is a logo, not a fastener, and the eye knows the
+          difference without being told why. They are furniture, so they live in
+          the renderer rather than in the artist config. */}
       <i className="ip-screw ip-screw-tl" aria-hidden="true" style={{ "--turn": "18deg" }} />
       <i className="ip-screw ip-screw-tr" aria-hidden="true" style={{ "--turn": "-42deg" }} />
       <i className="ip-screw ip-screw-bl" aria-hidden="true" style={{ "--turn": "71deg" }} />
       <i className="ip-screw ip-screw-br" aria-hidden="true" style={{ "--turn": "-7deg" }} />
-      {/* ═══ [H3a 2026-08-06] THE NAMEPLATE — A BADGE BOLTED TO A MACHINE ══════
-          MIKE, with UNIVAC references in hand: "a raised chrome bezel; a black
-          field with brushed-metal letterforms sitting PROUD of it;
-          stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck
-          into a lighter recess; an accent panel beside the wordmark. It must be
-          unmistakably a BADGE bolted to a machine — not a label, not a caption."
 
-          FOUR REGIONS, AND EACH ONE IS A DIFFERENT MANUFACTURING PROCESS. That
-          is the whole reason this is four elements rather than a styled string:
-          the bezel is FORMED, the wordmark is CAST AND RAISED, the accent panel
-          is a separate piece of stock, and the data is STRUCK. P2's plate had
-          two of the four and drew the maker's line as printed ink, which is a
-          data plate — right for a data plate and wrong for the badge that says
-          whose machine this is.
-
-          THE FIELDS RENDER WHETHER OR NOT THEY CARRY A VALUE, which is P2's own
-          rule kept and widened to three. An unstamped field is what an unstamped
-          plate looks like; a missing field is a different plate. Ops does not
-          strike a serial or a date into one (Doctrine 12).
-
-          THE OLD `plate` / `serialLabel` / `serial` SHAPE IS GONE, not deprecated
-          — one face in the museum declares a panel and it is this one, so a
-          compatibility branch would be a second code path with no second
-          caller. */}
-      {NP && (
+      {/* THE BADGE - the maker's name, cast and raised on a formed bezel, and
+          nothing else on it. */}
+      {NP && NP.maker && (
         <div className="ip-np">
           <div className="ip-np-bezel">
+            <span className="ip-np-riv ip-np-riv-a" aria-hidden="true" />
+            <span className="ip-np-riv ip-np-riv-b" aria-hidden="true" />
+            <span className="ip-np-riv ip-np-riv-c" aria-hidden="true" />
+            <span className="ip-np-riv ip-np-riv-d" aria-hidden="true" />
             <div className="ip-np-field">
-              {NP.maker && <span className="ip-np-mark">{NP.maker}</span>}
-              {NP.unit && (
-                <span className="ip-np-accent"><span>{NP.unit}</span></span>
-              )}
-              {npFields.length > 0 && (
-                <span className="ip-np-data">
-                  {npFields.map((f, i) => (
-                    <span className="ip-np-cell" key={f.k || i}>
-                      <span className="ip-np-k">{f.k}</span>
-                      <span className="ip-np-v">{f.v || ""}</span>
-                    </span>
-                  ))}
-                </span>
-              )}
+              <span className="ip-np-mark">{NP.maker}</span>
             </div>
           </div>
         </div>
       )}
 
       <div className="ip-deck">
-        {/* ---- THE DRUM ---- */}
-        <div className="ip-bay ip-bay-drum">
-          <div className="ip-legend">{D.drum && D.drum.label}</div>
-          <div className="ip-drumwrap">
-            <button className="ip-roll" onClick={() => roll(-1)} aria-label="roll up">&#9650;</button>
-            <div className="ip-drum">
-              <div className="ip-drum-spin" style={{ transform: `rotateX(${drumIdx * STEP}deg)` }}>
-                {drumPos.map((p, i) => (
-                  <div key={p.id || i} className="ip-drum-face"
-                       style={{ transform: `rotateX(${-i * STEP}deg) translateZ(${RADIUS}px)` }}>
-                    {/* [R6 2026-08-05] THE CHANNEL NUMBER, engraved on the drum
-                        beside the feed's name. Optional: a position with no `ch`
-                        renders exactly the face it rendered before, so no other
-                        wing can notice this exists. It is a number and nothing
-                        else — nothing on this panel, this face or this wing says
-                        what the numbering means. */}
-                    {p.ch != null && <span className="ip-drum-ch">{p.ch}</span>}
-                    {p.label}
-                  </div>
-                ))}
-              </div>
-              <div className="ip-drum-glass" />
+        {/* ---- FEED: a lit readout with the steppers OUTSIDE it ---- */}
+        <div className="ip-bay ip-bay-feed">
+          <div className="ip-legend">{(D.feed && D.feed.label) || "FEED"}</div>
+          <div className="ip-rd-row">
+            <button className="ip-step" onClick={() => step(-1)} aria-label="previous bank">&#9650;</button>
+            <div className="ip-rd">
+              <b className="ip-rd-bank">{bank.bank || ""}</b>
+              <small className="ip-rd-state">{bank.state || ""}</small>
             </div>
-            <button className="ip-roll" onClick={() => roll(1)} aria-label="roll down">&#9660;</button>
+            <button className="ip-step" onClick={() => step(1)} aria-label="next bank">&#9660;</button>
           </div>
-          {D.drum && D.drum.sub && <div className="ip-sub">{D.drum.sub}</div>}
         </div>
 
-        {/* ---- THE ANTENNA ----
-            [2026-08-21] MIKE'S DESIGN. Four routings over the governed
-            channels; a lit cell is a channel carrying television and the dark
-            one is the channel the Portal is listening on.
-            IT IS ONE BUTTON AND IT STEPS, which is the whole of PZ-a's old
-            objection answered: adding channels does not add controls. A second
-            unit broadcasting on a different channel later is the same four
-            routings and the same one button — same except the data.
-            IT SITS IN `.ip-deck`, WHICH WRAPS. At desktop the fourth bay joins
-            the existing row and the panel does not grow; at 390px it wraps and
-            costs a row, which is measured in the round log rather than guessed.
-            THE CHANNEL NUMBER IS UNDER THE BIT because the drum engraves the
-            same numbers a few centimetres to the left, and a routing a visitor
-            cannot line up with the drum is four digits of nothing. */}
+        {/* ---- ANTENNA: four independent switches, numbered, no legend under
+             them. What they select belongs in the manual. ---- */}
         {ANT && (
           <div className="ip-bay ip-bay-ant">
             <div className="ip-legend">{ANT.label}</div>
-            <button className="ip-ant"
-                    onClick={() => setAntIdx(i => (i + 1) % antN)}
-                    aria-label={(ANT.label || "antenna") + " " + shownRouting}>
-              {(ANT.governs || []).map((c, i) => (
-                <span key={c}
-                      className={"ip-ant-cell"
-                        + (shownRouting.charAt(i) === "1" ? " ip-on" : "")}>
-                  <span className="ip-ant-bit">{shownRouting.charAt(i) || "0"}</span>
-                  <span className="ip-ant-ch">{c}</span>
-                </span>
-              ))}
-            </button>
+            <div className="ip-dip-wrap">
+              <div className="ip-dip">
+                {chRows.map((r, i) => (
+                  <div className="ip-dip-cell" key={r.ch}>
+                    <button className="ip-slot" data-on={bits.charAt(i) === "1" ? "1" : "0"}
+                            onClick={() => flip(i)}
+                            aria-label={"channel " + r.ch}
+                            aria-pressed={bits.charAt(i) === "1"}>
+                      <i className="ip-slider" />
+                    </button>
+                    <span className="ip-dip-n">{r.ch}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
-        {/* ---- THE BAT SWITCHES ---- */}
-        <div className="ip-bay ip-bay-switches">
-          {swDecl.map((w, i) => (
-            <div key={w.id || i} className="ip-sw">
-              <span className={"ip-lamp ip-lamp-" + (w.lamp || "warm") + (swOn[i] ? " ip-lit" : "")} />
-              <button className={"ip-bat" + (swOn[i] ? " ip-bat-up" : "")}
-                      onClick={() => setSwOn(v => v.map((x, j) => (j === i ? !x : x)))}
-                      aria-pressed={swOn[i]} aria-label={w.label}>
-                <span className="ip-bat-lever" />
-              </button>
-              <span className="ip-sw-legend">
-                <span className="ip-sw-name">{w.label}</span>
-                {w.sub && <span className="ip-sw-sub">{w.sub}</span>}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* ---- THE ROTARY DIAL ---- */}
+        {/* ---- SOURCE ---- */}
         <div className="ip-bay ip-bay-dial">
           <div className="ip-legend">{D.dial && D.dial.label}</div>
           <div className="ip-dial">
@@ -1766,126 +1704,38 @@ function InstrumentPanel({ decl }) {
                     aria-label={"source: " + (dial.label || "")}>
               <span className="ip-knob-mark" />
             </button>
-            {/* [N1 2026-08-02] THE LEGENDS SIT ON AN ARC, AND THAT IS WHAT
-                MAKES THE POINTER READABLE. Stacked in a column they measured
-                82deg and 98deg from the knob - the pointer aimed at the right
-                legend and the SIXTEEN DEGREES between them was invisible, so
-                the instrument looked broken while being exactly correct. A
-                rotary selector's detents are spread around its dial; laid on
-                a 100deg arc the same two positions are a hundred degrees
-                apart and the throw is unmistakable.
-                The arc is generated from the number of positions, so a third
-                source spaces itself, and the pointer angle is still MEASURED
-                from where the legends actually land - the layout moved, the
-                aiming code did not have to. */}
+            {/* [N1] the legends sit on an arc, which is what makes the pointer
+                readable: stacked in a column two positions measured 16deg apart
+                and the instrument looked broken while being exactly correct. */}
             <div ref={marksRef} className="ip-dial-marks">
-              {dialPos.map((p, i) => (
-                <span key={p.id || i}
+              {dialPos.map((pp, i) => (
+                <span key={pp.id || i}
                       style={dialArc(i, dialPos.length)}
                       className={"ip-dial-mark" + (i === dialIdx ? " ip-on" : "")}>
-                  {/* [N1 2026-08-02] THE TIE LINE WAS BUILT, RENDERED AND
-                      REJECTED - Mike asked to be told if it was noise, and it
-                      was. A rule from the legend back toward the knob touches
-                      NEITHER end: the knob is round and the line stops short
-                      of its rim, the label has its own letter-spacing and the
-                      line stops short of that too. What it actually reads as,
-                      at the size this is set, is an em-dash in front of the
-                      word - punctuation, not a connection. Tried at 14px and
-                      at 27px; the longer one reads as a leader rule pointing
-                      at nothing, which is worse.
-                      THE POINTER IS ALREADY THE INDICATOR. It is measured to
-                      aim at the chosen legend and it sweeps 73deg between the
-                      two, so the relationship is stated once, by the
-                      instrument, in the way the instrument states things. */}
-                  {p.label}
+                  {pp.label}
                 </span>
               ))}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* ---- THE LATCH ---- */}
-      <div className="ip-latchbay">
-        <button className="ip-latch" disabled={!armed}
-                onClick={() => {
-                  if (!armed) return;
-                  /* [H1 2026-08-06] THE DOOR'S ADDRESS RIDES THE EVENT. The
-                     latch used to dispatch a preset id and nothing else, and
-                     the listener supplied the address from a literal in a
-                     public file. A held thing's address may not live there, so
-                     the panel that IS held carries it and the engine still
-                     learns nothing about what opens. */
-                  /* [CH4 2026-08-12] A POSITION MAY CARRY ITS OWN SOURCE. The
-                     latch had ONE address for every position, so the drum chose
-                     only whether the panel armed, never what opened — and the
-                     row above ("it opens the feed the drum has been rolled to")
-                     was true of the intent and not of the code. Channel 4 holds
-                     a close-up rather than the twin, which is the first time the
-                     difference has been visible.
-                     THE FALLBACK IS THE LATCH'S OWN, so every position that
-                     declares nothing behaves exactly as before; this is one `||`
-                     per field and no position outside channel 4 changes. The
-                     held address still rides the event and the engine still
-                     learns nothing about what opens. */
-                  /* [2026-08-21] THE LATCH OPENS WHAT THE CHANNEL CARRIES.
-                     Three payloads, one event, and the engine still learns
-                     nothing about what any of them are:
-                       machine     — unchanged: the position's own address, or
-                                     the latch's, exactly as before.
-                       television  — an id and a second. The channel is DRIVEN
-                                     rather than addressed: `Television.jsx`
-                                     builds the player through the museum's one
-                                     player hook, so there is no URL for this
-                                     listener to decorate.
-                       test        — no address at all. The signal is DRAWN, so
-                                     the listener is handed a kind and renders
-                                     it; a src would be a page that does not
-                                     exist. */
-                  const L = D.latch || {};
-                  const ev = L.event || "wb-robots-open-twin";
-                  if (feed === "television" && ANT && ANT.television) {
-                    const ph = televisionPhase(ANT, antIdx, drum.ch);
-                    window.dispatchEvent(new CustomEvent(ev, {
-                      detail: {
-                        kind: "television",
-                        ytId: ANT.television.ytId,
-                        startSeconds:
-                          televisionStart(ANT.television, ph.idx, ph.count),
-                        frameTitle: ANT.television.title || "",
-                      },
-                    }));
-                    return;
-                  }
-                  if (feed === "test" && ANT) {
-                    window.dispatchEvent(new CustomEvent(ev, {
-                      detail: {
-                        kind: "test",
-                        frameTitle: (ANT.test && ANT.test.title) || "",
-                      },
-                    }));
-                    return;
-                  }
-                  window.dispatchEvent(new CustomEvent(ev,
-                    { detail: { preset: drum.id,
-                                src: drum.src || L.src,
-                                frameTitle: drum.frameTitle || L.frameTitle } }
-                  ));
-                }}>
-          <span className="ip-latch-face">{(D.latch && D.latch.label) || "LATCH"}</span>
-        </button>
-        <div className="ip-state">
-          <span className={"ip-lamp ip-lamp-green" + (armed ? " ip-lit" : "")} />
-          <span className="ip-state-txt">
-            {armed ? ((D.latch && D.latch.armed) || "ARMED")
-                   : ((D.latch && D.latch.idle) || "NOT ARMED")}
-          </span>
+        {/* ---- LATCH ---- */}
+        <div className="ip-bay ip-bay-latch">
+          <div className="ip-latchbay">
+            <button className="ip-latch" disabled={!armed}
+                    onClick={() => openChannel(chRows.length ? chRows[0].ch : 1)}>
+              <span className="ip-latch-face">{(D.latch && D.latch.label) || "LATCH"}</span>
+            </button>
+            <div className="ip-state">
+              <span className={"ip-lamp ip-lamp-green" + (armed ? " ip-lit" : "")} />
+              <span className="ip-state-txt">
+                {armed ? ((D.latch && D.latch.armed) || "ARMED")
+                       : ((D.latch && D.latch.idle) || "NOT ARMED")}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* the panel says why it will not arm — never silently */}
-      {!armed && refusal && <div className="ip-refusal">{refusal}</div>}
-      {armed && readout && <div className="ip-readout">{readout}</div>}
     </div>
   );
 }

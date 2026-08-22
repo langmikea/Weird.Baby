@@ -640,3 +640,47 @@ than the two things named, without naming any of it — which is a hole the stor
 may fill later and a fact the museum may not invent into.
 
 ---
+
+## 11 · THE FOUR SCREEN BUTTONS ARE THE CHANNEL SELECTOR — RULED, NOT BUILT
+
+**MIKE, 2026-08-21:** *"Channels are selected on the portal screen, along with
+shake, power, etc."*
+
+**THE MODEL, WHOLE, SO NOTHING DRIFTS:**
+
+| control | what it sets |
+|---|---|
+| **THE DRUM** | the device's configuration at launch — which bank is patched, in which state |
+| **THE DIP** | `ANT` or `CAB` per channel |
+| **THE LATCH** | launches it |
+| **THE SCREEN'S FOUR BUTTONS** | which channel you WATCH, inside the thing that launched |
+
+**THEY ARE NOT WIRED TO THAT, AND THAT IS THE DEFECT.** Today the four buttons
+call `devLayout(n)` → `Feed_Select(n)` — the twin's own internal monitor views,
+built when the twin stood alone and before channels existed. Feed 1 is *"the
+family shot"*; 2, 3 and 4 are *"no signal (test pattern + hum)"*.
+
+**SO THE `1` A VISITOR SEES LIT IS VIEW 1, NOT CHANNEL 1.** When the panel is on
+channel 3 and the machine's strip shows 1, nothing is contradicting anything —
+the strip is answering a question nobody asked.
+
+**AN EARLIER OPS FRAMING OF THIS AS A NUMBERING/VOCABULARY COLLISION WAS WRONG
+AND IS STRUCK.** There is no collision to rule on and no renaming to consider:
+the buttons have a job, they are not doing it, and the fix is wiring. It is
+recorded here because the wrong framing reached this page once and a later
+session must not find it and act on it.
+
+**THE FIX, RULED:** buttons 1–4 select channels 1–4, and what draws is whatever
+that channel resolves to — television, the machine assigned to it, or the test
+signal — **through the resolver the panel already uses. There is not to be a
+second one.**
+
+**BUILT 2026-08-21.** The strip lived inside `twin.html`, and the overlay draws
+the twin, the television and the test signal as three mutually exclusive
+branches — so **leaving the machine unmounted the document the buttons were
+in**. The bezel and the strip are now the museum's (`PortalScreen.jsx`), drawn
+over all three, and the twin suppresses its own when framed. A button asks
+(`wb-portal-select-channel`); the panel answers with the payload the latch
+already sends, so there is one resolver. Log:
+`docs/MUSEUM_PANEL_REBUILD_LOG-20260821.md`.
+

@@ -5,6 +5,7 @@ import { T as MUSEUM } from "../../styles/tokens.js";
    file learns one more shape and no other wing can notice. */
 import TestSignal from "./TestSignal.jsx";
 import Television from "./Television.jsx";
+import PortalScreen from "./PortalScreen.jsx";
 
 /* RobotsExhibitFlow — the Robots exhibit's deck, riding Exhibit.jsx's
    documented extension seam (the same mechanism as HrExhibitFlow; walk-six
@@ -217,13 +218,20 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
   useEffect(() => {
     function open(e) {
       const d = (e && e.detail) || {};
+      /* [2026-08-21] THE SCREEN'S OWN FIELDS RIDE EVERY KIND. `bezel`, `ch`,
+         `chList` and `note` describe the SET, not what is on it, so they are
+         read off the detail before the kinds diverge and are the same three
+         lines for all three. The engine still learns nothing: a frame
+         declaration, a list of numbers and a string it prints. */
+      const screen = { bezel: d.bezel || null, ch: d.ch,
+                       chList: d.chList, note: d.note || "" };
       if (d.kind === "test") {
-        setTwin({ kind: "test", title: d.frameTitle || "" });
+        setTwin({ ...screen, kind: "test", title: d.frameTitle || "" });
         setTwinOpen(true);
         return;
       }
       if (d.kind === "television") {
-        setTwin({ kind: "television", ytId: d.ytId,
+        setTwin({ ...screen, kind: "television", ytId: d.ytId,
                   startSeconds: d.startSeconds, title: d.frameTitle || "" });
         setTwinOpen(true);
         return;
@@ -232,7 +240,8 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
       const q = new URLSearchParams({ user: "1" });
       if (d.preset) q.set("preset", String(d.preset));
       if (d.day) q.set("day", String(d.day));
-      setTwin({ src: `${d.src}?${q.toString()}`, title: d.frameTitle || "" });
+      setTwin({ ...screen, src: `${d.src}?${q.toString()}`,
+                title: d.frameTitle || "" });
       setTwinOpen(true);
     }
     window.addEventListener("wb-robots-open-twin", open);
@@ -416,23 +425,39 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
               way out of a drawn channel is Escape, exactly as it already is for
               channel 4's photograph, which has carried no [X] since CH4 and
               ships that way today. */}
-          {twin && twin.kind === "test" ? (
-            <div style={S.iframe}><TestSignal title={twin.title} /></div>
-          ) : twin && twin.kind === "television" ? (
-            <div style={S.iframe}>
-              {/* keyed on the id AND the join second, so latching a second
-                  television channel builds a NEW set rather than reusing the
-                  one that is playing. ONE OUTPUT — the old player is destroyed
-                  on unmount before the new one is built. */}
-              <Television key={twin.ytId + ":" + twin.startSeconds}
-                          ytId={twin.ytId} startSeconds={twin.startSeconds}
-                          title={twin.title} />
-            </div>
-          ) : (
-            <iframe
-              style={tear ? { ...S.iframe, transform: `translateX(${tear.slip}px)` } : S.iframe}
-              src={twin ? twin.src : undefined} title={twin ? twin.title : ""} />
-          )}
+          {/* [2026-08-21] THE SET IS ONE OBJECT; ONLY THE PICTURE SWAPS.
+              The three kinds stay mutually exclusive — that is what keeps a
+              television from having two outputs — but the BEZEL and the
+              CHANNEL BUTTONS are outside the ternary now, because they belong
+              to the Portal and not to whichever of the three is showing.
+              MIKE: "the screen is a television set; its frame and its buttons
+              do not disappear because of what is on it." */}
+          <div style={S.iframe}>
+            <PortalScreen bezel={twin && twin.bezel} ch={twin && twin.ch}
+                          chList={twin && twin.chList}
+                          note={twin && twin.note}
+                          place={(twin && (twin.kind === "test"
+                                        || twin.kind === "television"))
+                                 ? "feed" : "canvas"}
+                          onClose={closeTwin}>
+              {twin && twin.kind === "test" ? (
+                <TestSignal title={twin.title} />
+              ) : twin && twin.kind === "television" ? (
+                /* keyed on the id AND the join second, so choosing a second
+                   television channel builds a NEW set rather than reusing the
+                   one that is playing. ONE OUTPUT — the old player is
+                   destroyed on unmount before the new one is built. */
+                <Television key={twin.ytId + ":" + twin.startSeconds}
+                            ytId={twin.ytId} startSeconds={twin.startSeconds}
+                            title={twin.title} />
+              ) : (
+                <iframe
+                  style={tear ? { transform: `translateX(${tear.slip}px)` } : undefined}
+                  src={twin ? twin.src : undefined}
+                  title={twin ? twin.title : ""} />
+              )}
+            </PortalScreen>
+          </div>
           {/* the rip itself: a bright hairline with a smeared band under it,
               sitting OVER the whole view. The picture slips sideways for the
               same 130ms, so the band reads as the seam the slip happened at

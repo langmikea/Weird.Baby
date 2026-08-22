@@ -1,0 +1,105 @@
+/* THE PORTAL SCREEN — see PortalScreen.jsx for why this exists.
+   [2026-08-21]
+
+   THE UNITS ARE THE TWIN'S OWN. `--dig-*` and the group origin are copied from
+   `body.monbase` in `twin.html` so the buttons do not move a pixel when the
+   picture behind them changes. They are `cqw` of the FRAME, so `.ps` opens a
+   container — the same axis the twin resolves them against. Retype nothing:
+   if the twin's strip is ever re-measured, these come with it. */
+/* ═══ THE SCREEN IS SIZED FROM THE OVERLAY, IN BOTH AXES, WITHOUT A LOOP ═══
+   A box with `aspect-ratio` cannot honour BOTH `max-width` and `max-height`
+   and keep its ratio - whichever of width/height is definite wins and the
+   other clamp distorts it. The obvious escape is to let the bezel <img> size
+   itself and hang everything off that, and IT DOES NOT WORK: the img's
+   `max-width:100%` resolves against `.ps`, whose size would then come from the
+   img. **That is circular, and the browser resolves it to ZERO** - measured,
+   the whole screen came back 0x0 with every rule reading correctly.
+   SO THE WRAP IS A SIZE CONTAINER and the frame is sized against IT: the
+   width is whichever is smaller, the overlay's width or the height it is
+   allowed to occupy times the picture's own ratio. Nothing resolves against a
+   descendant, so there is no loop to collapse.
+   `--ar` and `--arn` are the SAME two numbers the bezel declares (3000 x 2400),
+   passed as data rather than typed here - one measurement, one owner. */
+.ps-wrap{position:absolute;inset:0;display:flex;
+  align-items:center;justify-content:center;overflow:hidden;
+  container-type:size}
+.ps{
+  --dig-h:5.26cqw; --dig-gap:1.2cqw; --dig-text:3.20cqw;
+  --dig-weight:500; --dig-weight-on:700;
+  --chy-line:0.30cqw; --chy-round:0.55cqw;
+  /* the group's origin, derived exactly as the twin derives it:
+     strip width = 5*5.26 + 4*1.2 = 31.1cqw, centred on the panel's centre x;
+     strip top   = the group top plus the 2x2's height and the gap under it.
+     The twin states these rather than calc()ing them because a calc() mixing
+     cqw and % on `top` resolves its two halves against different axes. */
+  --strip-w:31.1cqw;
+  --strip-left:calc(68.817% - (31.1cqw / 2));
+  --strip-top:calc(55.359% + 15.2cqw);
+
+  container-type:inline-size;
+  position:relative;
+  display:block;
+  width:min(100cqw, calc(100cqh * var(--arn)));
+  aspect-ratio:var(--ar);
+  line-height:0;
+}
+/* the picture sits on the measured feed rect and is CROPPED by the opening.
+   `cover` is the ruling: television and the test card get the treatment the
+   machine's own picture already gets. */
+.ps-feed{position:absolute;overflow:hidden;background:#000;z-index:0;
+  line-height:normal}
+.ps-feed > *{width:100%;height:100%;display:block}
+.ps-feed iframe,.ps-feed img,.ps-feed canvas,.ps-feed video{
+  width:100%;height:100%;object-fit:cover;border:0;display:block}
+
+/* the frame, over the picture — which is what makes the opening a crop */
+/* the frame fills the screen it is the shape of. It paints ABOVE the picture
+   by z-index rather than by source order, which is what makes the curved
+   opening a crop and not a border. */
+.ps-bezel{position:absolute;inset:0;z-index:1;display:block;
+  width:100%;height:100%;
+  pointer-events:none;user-select:none}
+
+/* ---- THE CHANNEL BUTTONS ---------------------------------------------- */
+.ps-strip{position:absolute;
+  left:var(--strip-left);top:var(--strip-top);width:var(--strip-w);
+  height:var(--dig-h);display:flex;gap:var(--dig-gap);z-index:2}
+.ps-chy{
+  flex:1 1 0;min-width:0;padding:0;cursor:pointer;
+  background:transparent;color:#fff;
+  border:var(--chy-line) solid #fff;border-radius:var(--chy-round);
+  font-family:'Helvetica Neue',Arial,'Liberation Sans',sans-serif;
+  font-size:var(--dig-text);font-weight:var(--dig-weight);
+  letter-spacing:.02em;line-height:1;
+  display:flex;align-items:center;justify-content:center}
+.ps-chy:focus-visible{outline:1px solid #fff;outline-offset:2px}
+/* INVERSE VIDEO = ON AIR, and the glyph goes one weight heavier when it is
+   knocked out — the twin's own rule, and it is a legibility fix rather than a
+   font change: white-on-black and black-on-white do not read at equal weight. */
+.ps-chy.ps-on{background:#fff;color:#000;font-weight:var(--dig-weight-on)}
+
+/* ---- WHAT THE CHANNEL IS CARRYING -------------------------------------- */
+.ps-note{position:absolute;
+  left:var(--strip-left);top:calc(var(--strip-top) + var(--dig-h) + 1.2cqw);
+  width:var(--strip-w);
+  font-family:'Helvetica Neue',Arial,'Liberation Sans',sans-serif;
+  font-size:1.75cqw;letter-spacing:.08em;line-height:1.35;
+  color:rgba(255,255,255,.72);z-index:2;pointer-events:none}
+/* [2026-08-21] THE NOTE NEEDED A NARROW RULE AND THE MEASUREMENT IS WHY.
+   Everything on this screen is `cqw` so it scales with the picture, which is
+   right for the buttons — they stay where the twin put them at every size. It
+   is WRONG for a sentence: at 390px the picture is 390 wide, `1.75cqw` is
+   **6.8px**, and the one line that separates *no unit on this channel* from
+   *this screen is broken* was unreadable. So the note leaves the strip's
+   column at narrow widths and runs the width of the opening instead. It is a
+   container query and not a media query: the frame's size, not the page's, is
+   what the type has to answer to — this screen is a different size in the
+   overlay than it is at the same viewport in the record's preview. */
+@container (max-width: 640px){
+  .ps-note{left:8cqw;width:84cqw;font-size:max(10px,2.6cqw);letter-spacing:.04em}
+}
+
+/* no bezel declared: the picture, unframed, rather than a box of the wrong
+   shape drawn around it. */
+.ps-plain{position:absolute;inset:0}
+.ps-plain > *{width:100%;height:100%}

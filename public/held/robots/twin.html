@@ -9765,7 +9765,8 @@ function Unit_LoadPhotos(){
            im.alt="MGK-VIIIp and its top window on the monitor";
            st.insertBefore(im,st.firstChild);}
    im.src=probe.src;
-   Mon_Controls_In();
+   Framed_Fit();
+  Mon_Controls_In();
    Dev_Rail_In();
    chip("ok","unit base: the family shot at "+base+" - apertures measured from the marker file");
    Portal_In(base);   /* [PORTAL] upgrade in place if the two layers are there */
@@ -9940,7 +9941,15 @@ function Mon_Controls_In(){
    Chy_Knock(b,pair[1],CHY_M.w,CHY_M.h,CHY_M.fs,CHY_M.wt);
    box.appendChild(b);
   });
+  /* [2026-08-21] THE CHANNEL STRIP IS THE PORTAL'S, NOT THE MACHINE'S. Framed,
+     the museum draws it - over television and the test signal too, which this
+     one could never do because it dies with this document. The 2x2 above it
+     does NOT move: SCROLL / CLICK / SHAKE / POWER are the unit's own controls
+     and there is no unit to drive while a broadcast is on.
+     `Feed_Select` is untouched and still selects this monitor's four views
+     standalone; it simply finds no buttons to light when there are none. */
   let strip=document.getElementById("monlayout");
+  if(!Framed()){
   if(!strip){strip=document.createElement("div");strip.id="monlayout";}
   warp.appendChild(strip);
   if(!strip.childElementCount){
@@ -9971,6 +9980,53 @@ function Mon_Controls_In(){
    x.setAttribute("onclick","Portal_Close()");
    strip.appendChild(x);
   }
+  } else if(strip&&strip.parentNode){ strip.parentNode.removeChild(strip); }
+ }catch(e){}
+}
+/* [2026-08-21] IS THIS PAGE INSIDE THE MUSEUM'S OVERLAY?
+   The museum draws the Portal's own bezel and its own channel strip over
+   WHATEVER is on the screen - television and the test signal as well as the
+   machine - because those belong to the Portal and not to the unit. MIKE: "the
+   screen is a television set; its frame and its buttons do not disappear
+   because of what is on it."
+   SO WHEN FRAMED THIS PAGE DRAWS NEITHER, or there would be two of each.
+   Standalone it draws both, unchanged - the twin ships with no panel behind it
+   and nothing here may depend on one. Same test as `Portal_Close()`, which has
+   used it since S4. */
+function Framed(){
+ try{return !!(window.parent&&window.parent!==window);}catch(e){return false;}
+}
+/* [2026-08-21] FRAMED, THE STAGE FILLS THE FRAME - AND THIS IS THE HALF THAT
+   ONLY A SCREENSHOT COULD HAVE FOUND. `#unitstage` is capped at
+   `min(96vw,880px)` and centred with a margin, which is right for a page
+   somebody opened. Inside the museum's overlay it made the picture SMALLER
+   than the frame the museum lays over it: art at 880px under a bezel at the
+   overlay's width, with black showing between them. Every number was correct
+   and the two layers were drawn at different scales.
+   The class is added once, at boot, and only when framed - standalone nothing
+   here applies and the page is untouched. */
+function Framed_Fit(){
+ try{
+  if(!Framed())return;
+  document.body.classList.add("framed");
+  if(document.getElementById("framedfit"))return;
+  const st=document.createElement("style");
+  st.id="framedfit";
+  st.textContent=
+   "body.framed{margin:0;padding:0;background:#000}"+
+   /* !important because the SIZE DIAL writes its width inline: framed, the
+      overlay is the thing that decides how big the Portal is, and a picture
+      the visitor can resize underneath a frame that cannot resize with it
+      would never register. The dial is untouched STANDALONE, which is the
+      only place it was ever for. */
+   "body.framed #unitstage{max-width:none!important;width:100%!important;"+
+     "margin:0!important;padding:0!important}"+
+   "body.framed #portalbar{margin:0!important;width:100%!important;"+
+     "max-width:none!important}"+
+   /* the page's other furniture is not the Portal's picture. Public entry
+      already hides most of it; this is the belt for a framed view. */
+   "body.framed>header,body.framed>footer,body.framed .workshop{display:none}";
+  document.head.appendChild(st);
  }catch(e){}
 }
 /* [S4] THE WAY OUT. Inside the museum's overlay the twin is an iframe, so
@@ -10512,7 +10568,13 @@ function Portal_In(base){
     return;
    }
    if(!haveBez)chip("warn","portal bezel not on file - the feed is drawn without its frame");
-   Portal_Build(st,haveBez?bezSrc:null,artSrc);
+   /* [2026-08-21] framed by the museum: the overlay draws the frame, so this
+      page passes the bezel it HAS as absent. `Portal_Build` already takes null
+      as "the feed unframed" - a first-class path since 2026-08-20 - so there
+      is no second way of not drawing a bezel. The art is the full 3000x2400
+      canvas either way, which is what keeps it registered with the frame the
+      museum lays over it. */
+   Portal_Build(st,(haveBez&&!Framed())?bezSrc:null,artSrc);
   };
   bez.onload=done;bez.onerror=function(){haveBez=false;done();};
   art.onload=done;art.onerror=function(){haveArt=false;done();};
@@ -10649,6 +10711,14 @@ const PORTAL_RECIPES={
  /* recipe C: virgin, dark, waiting. Power OFF is the whole point - the
     machine has never run and is not running now. */
  "off-first-boot": {power:"off", level:0},
+ /* [2026-08-21] FIRST RUN, for the rebuilt panel's third bank. MIKE ruled the
+    bank means a unit's first run, and `off-first-boot` is a unit that has never
+    been switched ON - it opens dark, which is a different object.
+    `level:1` REACHES `Boot_Offer()`, WHICH STOPS AND ASKS THE VISITOR A
+    QUESTION, AND THAT IS THE POINT. MIKE: "the machine does what the machine
+    was designed to do." Nothing routes around it and nothing may be added here
+    to skip it. */
+ "first-run":      {power:"on", level:1},
  /* recipe E: the bench. DEV-ONLY BY DEFAULT - see the museum side. */
  "test-bench":     {power:"on", level:2, dev:true},
  /* carried, still wired, currently unexposed */

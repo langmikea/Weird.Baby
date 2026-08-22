@@ -15520,7 +15520,6 @@
    "c": "MIKE",
    "s": "Mike's words, given 2026-08-21 and carried verbatim. It replaces the single line '> Portal is accessible via the Robots Exhibit.' which he had marked {Mike to rewrite}; the rewrite arrived. TWO FIRST APPEARANCES IN THE CORPUS ARE IN IT and are filed as canon in docs/canon/06-PORTAL.md: the Portal runs on a UNIX-6x Emulator, and it carried its own COMM payload with autosync. Neither string existed anywhere in either repo before this line. TWO THINGS ARE FLAGGED AND NOT FIXED (Doctrine 21): his first line says 'Portal' and his third says 'The Portal', and 'etc.' closes the second sentence with the period doing double duty. Both are his, as typed."
   },
-
   "c04feb054aca001b": {
    "f": "src/data/artists/weird-baby.js",
    "l": 738,
@@ -15555,6 +15554,90 @@
    "t": "  > Install document looks proprietary. Probably not meant to seen.\n  > QC RULE: Unsafe to run in any sandbox; permanently quarantined.",
    "c": "MIKE",
    "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike's rewritten Record 004 detailed report, 2026-08-21, carried verbatim. \"not meant to seen\" is his, as typed, and is flagged rather than corrected (Doctrine 21)."
+  },
+  "3a15a6b7cfcfa0cf": {
+   "f": "src/data/artists/portal.js",
+   "l": 297,
+   "t": "NIAC/VIIIp",
+   "c": "MIKE",
+   "s": "MIKE 2026-08-20, naming both machines on the drum: channel 3 is MGK-VIIIp and channel 4 is MGK-VIIIp. MGK-NIAC is the mainframe pair. The bank is the patched pair, written as the machines' own names."
+  },
+  "077ee4a4294538b7": {
+   "f": "src/data/artists/portal.js",
+   "l": 293,
+   "t": "PATCHED",
+   "c": "HOUSE",
+   "s": "the rebuilt FEED bay's first bank state. House word for a patch panel's resting state; the other four states (COLD START / FIRST RUN / LAST STATE / TEST BENCH) are Mike's own engravings, carried unchanged from the drum they replace."
+  },
+  "d065ed957ebc12a2": {
+   "f": "src/data/artists/portal.js",
+   "l": 338,
+   "t": "MGK-VIIIp - the close-up",
+   "c": "HOUSE",
+   "s": "frame title for channel 4's photograph. CH4 2026-08-12, MIKE: 'channel 4 is a close-up of the MGK-VIIIp'. The hyphen replaces an em dash; the words are his."
+  },
+  "c2443eb66954dda1": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 1579,
+   "t": "wb-robots-open-twin",
+   "c": "HOUSE",
+   "s": "an event name, not a visitor-facing string. Never rendered."
+  },
+  "c4826d227e58caa9": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 1663,
+   "t": "FEED",
+   "c": "MIKE",
+   "s": "the FEED bay's engraved legend, unchanged from the drum it replaces. On the panel since R6 and on QC_101 in the installer's hand: 'BROADCASTS ON ......... FEED NO. 3'."
+  },
+  "890430794569ef9f": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 1665,
+   "t": "previous bank",
+   "c": "HOUSE",
+   "s": "aria-label on the FEED stepper's up arrow. Assistive text for an unlabelled control; never drawn."
+  },
+  "77ce261d3e95a41d": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 1670,
+   "t": "next bank",
+   "c": "HOUSE",
+   "s": "aria-label on the FEED stepper's down arrow. Assistive text for an unlabelled control; never drawn."
+  },
+  "050b2c6bfc7147c6": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 1685,
+   "t": "channel {}",
+   "c": "HOUSE",
+   "s": "aria-label on a numbered control - the ANTENNA switch and the screen's channel button. Assistive text; the control itself draws only its number."
+  },
+  "19d951e54f7e3dab": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 89,
+   "t": "channel",
+   "c": "HOUSE",
+   "s": "aria-label on the screen's channel button group. Assistive text; never drawn."
+  },
+  "07b5174f16e18049": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 94,
+   "t": "channel {}",
+   "c": "HOUSE",
+   "s": "aria-label on a numbered control - the ANTENNA switch and the screen's channel button. Assistive text; the control itself draws only its number."
+  },
+  "4719402ae5cb7696": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 106,
+   "t": "close the portal",
+   "c": "HOUSE",
+   "s": "aria-label on the [X] button. S4 2026-07-30, Mike: the fifth position is the way out. The twin's own title on the same control has read 'close the portal' since that ruling; this is the same words on the same control, moved to the overlay with it."
+  },
+  "a463f6d79c7b5a6f": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 107,
+   "t": "X",
+   "c": "MIKE",
+   "s": "S4 2026-07-30, MIKE: 'The fifth position becomes the way OUT: press X and the portal closes.' Carried from twin.html unchanged."
   }
  }
 }
