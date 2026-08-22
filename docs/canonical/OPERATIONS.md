@@ -938,6 +938,160 @@ scrubber. Round log: `docs/MUSEUM_WAL_POSTER_EDIT_LOG-20260805.md`). Previously
 
 ---
 
+## 0. THE OPERATING SHAPE — how Mike and Ops work
+
+**READ THIS FIRST AND READ IT WHOLE.** Everything here was learned by getting it
+wrong at least once. It is written down because a reset Ops that has to relearn
+it costs Mike the same rounds twice. §1 below is the compressed version of the
+first heading; this section is the one that settles arguments.
+
+### WHO DECIDES WHAT
+
+> **"WHAT WE DO = UX, and that is Mike's. WHEN WE DO = Ops."** — Mike
+
+It settles most disputes on its own. **Ops rules the technical**: sequencing,
+mechanism, which of two equivalent implementations, what order things ship in.
+**Mike rules anything a visitor sees, reads, or feels** — copy, layout, the
+story, what is on the glass and what is held.
+
+When the two touch, the UX half wins and Ops says how. A mechanism that changes
+what a visitor reads is not a mechanism decision wearing a technical hat.
+
+### HOW TO ASK MIKE A QUESTION
+
+**NUMBER EVERY QUESTION.**
+
+> **"When you number the items I have a better chance of answering the ones you
+> want answered and not trying to read into shit I should not read into."**
+
+An unnumbered question gets read into. A numbered one gets answered.
+
+- **One load-bearing question at a time.** If there are three, they are numbered
+  1 / 2 / 3 and the first one is the one that decides the round.
+- **Plain human syntax. No jargon, no file paths, no function names.** He is
+  ruling on the museum, not on the repository.
+- **Options as A / B / C, never more.** Four options is Ops failing to think.
+- **If you want a decision, ASK for it.** A flag buried in a list is not a
+  question and will not be answered as one.
+- **Do not ask about something already ruled.** Read the ruling back in your own
+  words first, then ask the ONE thing that is genuinely open. Re-litigating a
+  ruling spends his patience on ground already paid for.
+
+### BRIEFS
+
+**MIKE DOES NOT EDIT BRIEFS.** He has said so twice. A brief goes to him
+**complete or not at all** — never a brief plus a correction, never "with this
+one change", never "ignore the third paragraph". **Ops rewrites; Mike pastes.**
+
+If a brief is wrong after it is written, the brief is rewritten whole.
+
+### MIKE HAS APHANTASIA
+
+**He cannot judge a visual from a description.** No amount of careful prose about
+a layout is a substitute for looking at it. **Every visual ruling needs a
+RENDERED comparison** — the thing itself, and the alternative beside it.
+
+And **any mock or render must be SERVED OVER HTTP** — `npm run mock` — **with the
+URL in the report.** The Chrome extension refuses `file://`, so a mock written to
+disk is invisible to Ops by construction and can reach Mike unseen. That has cost
+two rounds; see §8.
+
+**OPS LOOKS BEFORE MIKE DOES. Always.**
+
+### VERBATIM
+
+**Mike's words are verbatim.** His line splits and his casing are the
+instruction, not incidental. **Do not join his lines. Do not correct his casing.
+Do not smooth his writing.** Typos are carried unless he asks otherwise — Record
+001 ships `was made made` and `=  86%` on purpose.
+
+**FLAG, NEVER FIX.** When his words have gone stale, say so and leave them. A
+paraphrase filed in his class is indistinguishable from his own sentence a week
+later, which is why the three-mark scheme exists (§5) and why a `beat` may be
+deleted but never reworded.
+
+### ONE THING AT A TIME
+
+> **"In EVERY case, work on only ONE thing at a time. Stop interweaving."**
+
+**Ops controls the flow.** He gets the next brief when the current one is done
+**and deployed**, not before. Holding a finished brief back is Ops doing its job,
+not Ops being slow.
+
+**The only exception is a Record on a clock.**
+
+### MIKE IS THE LOCK
+
+He alone runs git and deploy. Ops edits, verifies and reports; **Ops never
+commits, never pushes, never deploys.**
+
+**DEPLOY IS ALWAYS `npm run deploy:launch`.** Never plain `deploy` — that builds
+the DEVELOPMENT stage and would publish everything behind the stage door. It has
+been written short five times and caught five times; the sixth time nobody
+catches it is the whole reason this line is here.
+
+### SAME EXCEPT DATA
+
+The standing design constraint.
+
+> **"Don't build me a standalone turd; for god's sake at least put them all in
+> one pile!"**
+
+**A new robot should be a data drop, not a rebuild.** Every instrument, face and
+deck is the museum's shared machinery driven by an artist config. **The second
+robot is the test of the first** — if adding it means writing a component, the
+first one was built wrong.
+
+### BREADCRUMBS
+
+> **"Leave breadcrumbs or we will become lost."**
+
+When a round produces a **fact** — a measurement, a mechanism, a defect, a
+resolved conflict — **file it where the fact belongs**: the canon
+(`docs/canon/`), the rulings (`docs/MUSEUM_RULINGS-*.md`), the threads
+(`docs/THREADS.md`), this file's §5 or §8. **Not only in the round log.**
+
+**A round log is a diary, and diaries do not answer questions.** Nobody greps a
+diary for *which channel is the machine on*.
+
+### EVIDENCE
+
+**Reading code is not evidence.** From one week, all four measured:
+
+- a preset recipe that read correctly opened a **dead menu** — the function that
+  applies it was never called;
+- a video **healthy on every public signal** would not embed;
+- a harness that **could not paint** reported a boot as stalled;
+- the Portal **stayed held by its own path, quoted inside the comment that
+  recorded its release.**
+
+**The only oracle for a rendered thing is a rendered thing.** Load the page.
+Green gates are not a working site.
+
+**IF A RESULT SURPRISES YOU, SUSPECT THE PROBE BEFORE THE SITE.** Probes have
+been wrong more often than the museum has this month: an off-by-one that read
+`+1` then `−2`, a status check that called three deleted files present, a
+`hit.contains(control)` that made every point pass. When a measurement is
+surprising, the first thing to re-measure is the measurement.
+
+### FOUR MORE THAT COST A ROUND EACH
+
+- **A HOLD IS NOT A HOLD IF IT DEPENDS ON ANOTHER HOLD.** Mike's own words, and
+  the reason `robots-units.js` exists. Anything held must be held **on its own
+  condition** — a flag in a public module stops the render and ships every string
+  anyway.
+- **A RULING IS NOT DONE UNTIL A LEDGER ROW MOVES — AND NEITHER IS A REBUILD.**
+  The panel was rebuilt and its twelve ledger rows still described a drum and two
+  bat switches, with every gate passing.
+- **NO ID MOVES WHEN A LEGEND IS RECUT.** An `id` is identity; the `name` is what
+  restates the glass. Renaming rows to match new vocabulary broke the transfer
+  table and looked like a deletion to the guard — which refused, correctly.
+- **THE WORK GOES TO DISK BEFORE IT GOES TO CHAT.** Every round writes its report
+  to a file first. The chat is the delivery; **the file is the record**, and a
+  chat that closes takes everything in it.
+
+---
+
 ## 1. Roles & the carry model
 
 - **Mike** owns all UX-facing / UX-impactful calls, runs ALL host-side
@@ -1057,6 +1211,7 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | **The asset table + approval gate** (Doctrine 15) | `tools/asset-table.mjs` → `provenance/asset-table.json`. **385 rows** (measured 2026-08-13; the row said 251) — 250 images, 132 audio, 3 video, of which **13 are missing from disk** — across the museum and robots repos with what each is, what depends on it, an Ops quality read, **Mike's verdict, unset by default**, and **[N8 2026-08-04] `revealArc`** — `arrived / understood / partial / online / null`, Mike's canon for how a thing is revealed, where `null` means UNSET and is NOT a stage (populated on 6 rows, unset on 245). `npm run assets` / `assets:scan` / `assets:checklist` / `assets:gate`. The scan rewrites only measured fields and **never** touches the five judged ones (`what` / `quality` / `qualityNote` / `verdict` / `revealArc`). **[C32 CLOSED v52] IT IS NO LONGER KEYED BY PATH.** Every row carries a **`uid` minted once and never rewritten** — that is the row's NAME, and `id` (repo:path) is demoted to an ADDRESS — plus a **`sha256`** re-measured each scan. Matching goes address → content → nothing: a prior row and a new file sharing a hash inside one repo are the same file MOVED and the judgement travels automatically. Where a rename ALSO re-rendered the file (the ordinary case, because the name is usually IN the picture) **no keying can infer it, so the scan REFUSES TO GUESS and reports the judged row under its own banner**; `npm run assets:rename -- <old> <new>` is the explicit human declaration, and `assets:orphans` lists them. **The silence was the defect; the hash only makes it rarer.** The first run caught v51/A7's own stranded `jesse-welles-plate.jpg` alongside this round's cover rename. **`usedBy` MATCHES AGAINST SOURCE WITH COMMENTS STRIPPED** (N8) — before that a path merely NAMED in a comment counted as a reference, so any orphan was invisible for as long as anybody had written its name down. NOT a packet gate — see Doctrine 15. |
 | **The archive (IMAGE ARCHIVE)** | `ArchiveWall` + `archiveSpreads` + `SpreadHead` + `SpreadTiles` in `Exhibit.jsx` (module scope, just below `FaceFlow`); `.vp-spread-head` / `.vp-spread-stow` in `Exhibit.css` beside `.vp-collage`. A face declaring `spreads:[{head,no,tiles}]` stacks in headed albums sorted by record number descending; a face declaring only `collage` emits the DOM it always did. **[N2 2026-08-04] THE FIRST SPREAD IS OPEN AND EVERY LATER HEADED SPREAD IS STOWED** in a native `<details>` whose closed line carries its own head, its record number if any, and its COUNT — which is why it does not trip the no-hidden-information law. An unheaded spread is never stowed. `face.archiveUnit = {one,many}` names the count's noun (default `image/images`; the robots wing says `plate/plates`). Both walls are in `robots.js` (`mgk-viii` and `mgk-viiip`, track id `plates`). **[v56/R4] THE MGK-NIAC WALL IS NO LONGER ONE OF THE SPREAD-STACKING CASES, AND THAT MATTERS TO WHOEVER TOUCHES THIS COMPONENT NEXT.** Mike's canon made the mainframe the subject and the camera-body robot an easter egg, so six robot plates and a bench shot came off the wall and **the FEBRUARY 2013 spread went with them** — it was three plates of the figure. The wall is four cabinet plates in one unheaded `collage` now. **THAT WAS THE ONLY WALL IN THE MUSEUM WITH MORE THAN ONE SPREAD, so `SpreadHead` / `.vp-spread-stow` and the whole stowed-shelf mechanism have ZERO live callers** — do not read the code's presence as evidence it is exercised (register C29). **THE ROOM WAS CALLED THE MORGUE FOR ONE ROUND** (v49/A3 printed both candidate names so Mike could strike one) — he struck it at v50/N1, and `morgue` outside a historical comment is now a miss. Its two siblings, VIDEO ARCHIVE and AUDIO ARCHIVE, are named in `robots.js`'s header and deliberately NOT built. |
 | **THE OPS INSTRUMENTS THAT RENDER TO `docs/`** (K2–K6 · W1–W8, 2026-08-07) | `tools/dictation/prep.mjs` + `tools/dictation/spec-source.mjs` + `tools/dictation/worksheet.mjs` + `tools/dictation/shell.mjs` → `docs/dictation-20260807/` (`npm run dictation`); the same shape as `tools/contact-sheet.mjs` → `docs/CONTACT_SHEET.html`, `reveal:cards` and `assets:checklist`. **THREE THINGS A FUTURE SESSION MUST HOLD.** **(1) THEY MUST NEVER BECOME ROUTES.** A page whose subject is the museum's own housekeeping is meta under Doctrine 11 and fails the visible-line test at any live address. They render to files under `docs/` and are deliberately NOT written into `public/` — which is the same trap `npm run lap:clean` exists to police, since anything left in `public/` is one `npm run deploy` from being published. **(2) THEY READ AND NEVER WRITE.** `provenance/asset-table.json` is the authority on FILES and `reveal/ledger.json` on REVEALABLE THINGS; an instrument that computes a third answer is a third copy. `verdict` is Mike's field and Ops never sets it (Doctrine 15). **(3) A JOIN THAT IS PARTIAL SAYS SO ON THE PAGE.** The two tables meet at `assets` and that is NINE ROWS in a 162-row ledger against a 315-row asset table. Drawing the unjoined rows as joined would be an instrument lying about its own coverage — so transfer class, reveal arc and dependencies live in the ledger's own table rather than being faked into the file table. **[E1 2026-08-09] AND THE WORKSHEET ITSELF IS RETIRED — HE WRITES IN THE RECORD.** The four questions it asked are four FIELDS of a Record entry, so `record.html` asks each one where its answer lands; `buildWorksheet()` and its five helpers are deleted from `worksheet.mjs`, `prep.mjs` prunes the emitted page by name, and the weekday guard that lived inside the retired builder was exported and moved to the top of the run — a gate belongs there rather than inside one builder that might be the next thing deleted. `reference.html` and `arc.html` are unchanged and still built from this file. **And they get lapped like anything else:** a five-column table cannot fit 390px and must not be made to try — the TABLE scrolls inside its own `overflow-x` box and the PAGE never scrolls sideways. **[W1–W8 2026-08-07] AND ONE OF THEM IS AN INSTRUMENT MIKE WRITES IN, WHICH ADDS A FOURTH RULE: REFERENCE AND WORK DO NOT SHARE A PAGE.** `week1.html` explained the rail scheme, the transfer classes, the bouncy ball law and five collisions BEFORE it showed a headline, and then had nowhere for him to type — *“if it is the firehose I have to drink from to do anything, thanks, pass.”* It is `worksheet.html` (the instrument: 32 slots, Ops left / input right, `localStorage` autosave, one COPY EVERYTHING button) plus `reference.html` (everything that explains the machine), and `prep.mjs` **prunes `week1.html` by name** rather than leave an orphan every other page still links past. **The shared shell is `shell.mjs` and it was MOVED, not copied — proved by regenerating the three unchanged pages and diffing them byte for byte.** **A worksheet is only useful if it degrades honestly:** a refused `localStorage` raises a red banner rather than losing an hour of typing on a reload, and a refused clipboard leaves the assembled text selected. **Never call `navigator.clipboard.readText()` from the driver when lapping one** — it raises a tab-modal permission prompt that freezes the renderer and times out CDP. |
+| **THE ARC — `docs/ARC.md`** (ruled 2026-08-20, built 2026-08-22) | **Twelve weeks, and the file Mike writes into.** He never opens it — **he asks Ops and Ops reads this** — which is the whole reason it exists: before it, Ops could not answer *what is Monday* at all, because the plan lived only in a workbook he has retired. **TWO VIEWS, his:** a twelve-row headline table, and a WEEK/day outline for **W01–W04 only** (5–12 carry headlines and nothing more). Day titles are ONE LINE — the beat, not a synopsis. **It states the arc as CONSTRAINTS, not script:** per week, what it SETS UP, what it PAYS OFF, what must be TRUE by the end, and a state-of-the-world line. **IT ALSO CARRIES THE PROMISES LEDGER** — every unfulfilled claim the published Records have made, each marked with the Record that made it, **18 open on 2026-08-22** — which is the answer to *what have I promised and not delivered*, previously unanswerable without reading five files. **THREE THINGS A FUTURE SESSION MUST HOLD.** **(1) THE PUBLISHED HEADLINES ARE DERIVED, NOT TYPED** — `npm run arc` reads them out of `src/data/artists/robots-record.js` and rewrites **only** the block between the `RECORDS:BEGIN`/`END` markers, refusing if either marker is missing; `npm run arc:check` fails without writing, so it can stand beside the other gates. **A generator that owned the whole page would overwrite Mike's arc the first time anybody ran it**, which is the one failure that would make the file useless. **(2) NOTHING ON IT WAS INVENTED.** It is seeded from `NEW_RECORD_MAKER_V3.xlsx`, read once; where the workbook is empty the page is empty and says so. **(3) TWO THINGS ARE KNOWN BROKEN AND ARE RECORDED RATHER THAN REPLACED** — **weeks 6, 7 and 8 have no headline at all** (three consecutive empty weeks mid-arc, and not an extraction failure: 5 and 9–12 have headlines in the same column), and **HARDWARE IS ON HOLD** as of 2026-08-19, which makes three of week 2's five days stale and week 4 suspect. **Deleting nothing is the instruction.** It also records the two places the workbook and the tree diverge — week 1's WED/THU swap, and the Portal arriving five days early in Record 005 — so that nobody "corrects" the tree to match a retired workbook. |
 | **THE OPS DESK — ONE PAGE, EVERY INSTRUMENT** (S1, 2026-08-07) | `tools/ops-desk.mjs` → `npm run desk` → `docs/OPS_DESK.html` **and** `docs/OPEN_ACTIONS.html`; the shortcut is `tools/ops-desk-shortcut.ps1` → `Weird.Baby Ops.lnk` on the desktop. **MIKE: *"assemble every Ops instrument Mike uses behind ONE desktop shortcut that opens them so he can switch back and forth. Simplest honest mechanism. Name it plainly."*** Eight cards: **the Record** (the worksheet was retired at E1, 2026-08-09, and its card points at `record.html`), the twelve-week table, the artifact tracker, the egg tracker, the spec sheet, the reference page, the contact sheet, the open-actions register. **FIVE THINGS A FUTURE SESSION MUST HOLD.** **(1) IT IS THE ROW ABOVE, NOT AN EXCEPTION TO IT** — it renders to `docs/`, never to `public/`, and must never become a route. **(2) IT REPORTS WHAT IS MISSING RATHER THAN LINKING PAST IT.** Every card is `fs.statSync`'d at generation; a file that is not on disk gets a red card and **no link**, because a dead link on a launcher is worse than an absent one — a 404 reads as *the tool is broken* when the truth is *a generator has not been run*. **(3) "CURRENT" IS A PROPERTY OF THE GENERATOR BEHIND EACH PAGE, NOT OF THE LAUNCHER.** Each card prints its own file's mtime and the `npm run …` that rebuilds it, and this tool claims no freshness it did not read off the disk. **(4) THE MARKDOWN RENDERER IS SMALL ON PURPOSE AND THE REGISTER IS ITS WHOLE SPECIFICATION** — headings, tables, lists, blockquotes, rules, links, the register's own raw `<a id>` anchors, `<br>`, named entities, code, bold, italic, strike. It must not grow into a Markdown implementation; the day it needs a feature the register does not use, the register is being written for the renderer. **Two bugs it shipped with and their shapes are worth knowing:** a non-lazy bold pattern cannot cross an italic nested inside it (eight spans printed as literal `**`), and **a blank line between two pipe rows is not the end of a table** — THE SHORT LIST has one, and the first cut dropped nine rows into paragraphs full of pipe characters. **(5) IT IS PHONE-LEGIBLE AND NOT PHONE-REACHABLE, AND THAT IS SAID PLAINLY** (register [S-d]): measured at 390px, page overflow **0**, nothing painting past the edge, all 23 register tables inside their own `overflow-x:auto` boxes — and it is a local file, because publishing it is what Doctrine 11 refuses. **The lap recipe used on it is worth reusing:** a throwaway static server over `docs/` plus a same-origin iframe, which is `tools/lap/harness.html`'s trick pointed at a different tree. **Its own first run measured a 404 page and reported zeros** — the server's path guard compared a forward-slash root against a `path.join` backslash path — so **check `document.title` and a node count before believing a clean overflow reading.** |
 | **THE STORY OUTLINES, AND THE VERBATIM RULE** (W1 2026-08-07 · W1–W8 2026-08-07) | `reveal/week-one.mjs` (week 1, `ORIGIN`/`WEEK`/`PRELUDE`/`DAYS`/`FRIDAY_FORMULA`/`RECORD_RULES`/`COLLISIONS`) and `reveal/week-two.mjs` (week 2, same shape plus `beat`). Rendered by `tools/dictation/worksheet.mjs`; never imported by `src/`. **THREE THINGS A FUTURE SESSION MUST HOLD.** **(1) THERE ARE THREE MARKS AND THEY ARE NOT DECORATION.** `OPS` (blue) = Ops wrote the sentence; **`your words` (gold) = VERBATIM, character for character**; `your rule · Ops wording` (amber) = he named the rule, Ops wrote it. **(2) A `beat` MAY BE DELETED BUT NEVER REWORDED.** Week one was SPOKEN and written down from the framing, so nothing in it is quotable and its gold rail is empty as a fact rather than a policy. Week two arrived IN WRITING, so its headline and six beats are carried exactly. **Both errors cost the same:** a paraphrase in gold is indistinguishable a week later from something he said, and his own sentence left in blue gets quietly “improved” by the next round. If a beat needs different words it stops being his and moves into `headline`, `shape` or `topics`. **(3) OPS DIVIDES AND DOES NOT INVENT.** The one structuring decision in week two — merging *the unlabeled table holding more codes* with *the codes that fail when typed directly* into day 4, because they are one object — is named in the file header and printed on `reference.html`. **No `weight` field was invented** (K-b) for the same reason no `bucket` is derived (B-a): a made-up ranking makes a page read as answered while nothing has been answered. `COLLISIONS` are checks against the tree, NAMED AND NOT RESOLVED; resolving one is authoring. Open row `X-1`. |
 | **THE BOUNCY BALL LAW AND THE TWO BUCKETS** (B1, 2026-08-07 — Doctrine 20) | `reveal/focus.mjs` — `LAW`, `BUCKETS`, `bucketOf`, `split`, `runways`, `VOIDED`. The judged field is `bucket` on `provenance/asset-table.json` (declared in `JUDGED` and `_bucket` in `tools/asset-table.mjs`, printed by `npm run assets`); the renderer is `runwayBlock()` in `tools/dictation/prep.mjs`, used on the week-one page and the artifact tracker. **THREE THINGS A FUTURE SESSION MUST HOLD.** **(1) THE LAW CAPS POINTS OF FOCUS AND EVERY INSTRUMENT THAT COUNTS ASSETS AGAINST IT IS WRONG.** That is not a subtlety — it is the defect this file was written to correct, and it survived because the sentence it came from was true and the arithmetic under it was sound. **(2) THE DUMP BUCKET HAS NO RUNWAY AND `runways()` WILL NOT PRODUCE ONE.** A bucket with no ceiling divides into nothing; a symmetrical table that printed weeks for it would be the same error in the other bucket. **(3) `bucket` IS MIKE'S AND UNSET ON ALL 315 ROWS, SO EVERY RUNWAY IS A BOUND.** Ops does not derive it and must not: the derivation would make every tracker read as answered. Open row `B-a`. |

@@ -67,7 +67,9 @@
     "covers:unit": "python tools/make_unit_covers.py",
     "vocab:registry:rebuild": "python tools/build-vocabulary-registry.py",
     "yt:ingest": "node tools/yt-ingest.mjs",
-    "assets:r2:sync": "node tools/sync-assets-to-r2.mjs"
+    "assets:r2:sync": "node tools/sync-assets-to-r2.mjs",
+    "arc": "node tools/arc.mjs",
+    "arc:check": "node tools/arc.mjs --check"
   },
   "dependencies": {
     "react": "^19.2.4",
