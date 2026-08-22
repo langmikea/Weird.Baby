@@ -177,7 +177,7 @@ Use `--dry-run` to see what would be exported without writing. Use `--verbose` t
 ### Release flow
 
 **[CH4 2026-08-12] `npm run export-artifacts` IS OUT OF THE RELEASE FLOW AND THE
-FLOW IS NOW ONE STEP: `npm run deploy`.**
+FLOW IS NOW ONE STEP.** See OPERATIONS.md §0 DEPLOY — THE ONLY ACCOUNT.
 
 The old flow put the export at step 2 of every publish and called it "the
 most-missed step". It is now the most DANGEROUS step, and the reason is on the
@@ -203,7 +203,8 @@ on `MV-HR-20260405-013` — and when that is done the guard block at the top of
 
 **To publish today:**
 
-1. **In museum repo**: `npm run deploy` — builds and ships to weird.baby.
+1. **In museum repo**: the deploy command — it builds and ships to weird.baby.
+   See OPERATIONS.md §0 DEPLOY — THE ONLY ACCOUNT.
 
 The exhibit JSON is a committed snapshot and ships as it stands. It has not been
 regenerated since **2026-07-07**, MediaVault has had no write since the same day,
@@ -440,7 +441,8 @@ which is what makes the page Mike reads the page that ships.
 A 403px same-origin iframe (`tools/lap/harness.html`) gives `innerWidth: 390`
 exactly; the window's size was never the museum's viewport. **`npm run lap:clean`
 before you seal** — the harness has to live in `public/` to be same-origin, and
-anything in `public/` is one `npm run deploy` from being published.
+anything in `public/` is one deploy from being published. See OPERATIONS.md
+§0 DEPLOY — THE ONLY ACCOUNT.
 
 ## TWO STANDING RULES ADDED 2026-08-07 (THE TWO BUCKETS + 013)
 
@@ -505,7 +507,8 @@ manifest was rejected on DUPLICATION, not on the clock. `deliveryFaults()` has
 **four** checks now - the new one walks the ENTRY, because the first three walk
 FILES and could not see an entry naming a picture at neither address. **IT IS
 NOT A GATE and it never moves the stage:** in DEVELOPMENT everything PLACED
-renders, so `npm run deploy` publishes the Portal and all sixteen photographs.
+renders, so a deploy publishes the Portal and all sixteen photographs. See
+OPERATIONS.md §0 DEPLOY — THE ONLY ACCOUNT.
 **The performance is `deploy:launch`, and the day it starts `DEFAULT_STAGE`
 moves - Mike's word, register R-a.** Read `OPERATIONS.md` §5's THE DAY'S STEP
 row before touching any of it.
@@ -731,7 +734,8 @@ everything else is omitted unless it changes something for him. **THE TEST IS NO
 next?*** Craftsmanship notes, measurements, before-and-after numbers and internal
 findings go in the round log, where a future session reads them; **he is not a
 future session.** **AN EMPTY ASK IS A COMPLETE REPORT** - *"Nothing here needs
-you. Mirror and deploy: `npm run deploy`."* Padding it makes him read a page to
+you. Mirror and deploy."* The command it names is in OPERATIONS.md §0 DEPLOY
+— THE ONLY ACCOUNT. Padding it makes him read a page to
 discover it is empty, which is Doctrine 25's cost charged to a message instead of
 a page. **A GATE TABLE IS NOT A DECISION:** one line at the end, or nothing.
 **It is Doctrine 25 for prose and carries the same construction clause** - what

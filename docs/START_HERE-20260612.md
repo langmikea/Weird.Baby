@@ -22,7 +22,7 @@ the hands. He is slow and error-prone — keep his steps small, one paste at a t
    to embed multi-line content cannot nest heredocs — ship content base64-encoded instead.
    NOTE: [System.IO.File] methods resolve relative paths against the PROCESS cwd, not
    PowerShell's cd — always Resolve-Path first.
-3. Build and deploy are SEPARATE steps. Deploy: cd repo; npx wrangler@4.81.1 deploy
+3. Build and deploy are SEPARATE steps. See OPERATIONS.md §0 DEPLOY — THE ONLY ACCOUNT.
    (pin 4.81.1; npx outside repo prompts a global install — answer n and cd first).
    code:10001 auth -> Mike runs npx wrangler@4.81.1 login, then re-deploy (dist/ persists).
    Mike often deploys/commits between pastes silently — curl the live bundle hash to confirm
