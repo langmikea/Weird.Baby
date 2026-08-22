@@ -127,6 +127,29 @@ measure.openActions = () => {
 };
 measure.manualPages = () => fs.readdirSync(path.join(REPO, "public/held/robots/manual"))
   .filter(f => /^page-\d+\.png$/.test(f)).length;
+/* THE COST OF THE LAUNCH DOOR — §0's TWO NUMBERS ===========================
+   §0 DEPLOY publishes "137 files (186,888,028 bytes) become publicly
+   readable". Those are the highest-consequence numbers in the manual — they
+   are what a reader is told they are about to expose — and until now nothing
+   checked them. That is the 460 -> 475 stale-reading shape, in the one block
+   where being wrong is not a tidiness problem.
+   THE DEFINITION IS §0's OWN, quoted there: files behind the door and present
+   under public/held. A recursive walk is therefore the whole measurement — no
+   filter by extension, because a file behind the door is exposed whatever it
+   is called, and a filter is how a count starts disagreeing with the door it
+   claims to describe. */
+measure.heldCost = () => {
+  let files = 0, bytes = 0;
+  const walk = (d) => {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (e.isFile()) { files++; bytes += fs.statSync(p).size; }
+    }
+  };
+  walk(path.join(REPO, "public/held"));
+  return { files, bytes };
+};
 measure.recordEntries = async () => {
   const m = await import(pathToFileURL(path.join(REPO, "reveal/record-entries.mjs")).href);
   return m.entries().length;
@@ -202,6 +225,18 @@ const CHECKS = [
     near: /are OPEN/i,
     what: "how many register rows are OPEN and how many are Mike's",
     measured: async () => { const o = measure.openActions(); return [o.open, o.mike]; } },
+
+  /* Both numbers sit in ONE sentence, so this is one check with two groups —
+     the lint-baseline shape. Either half being wrong fails it, which is the
+     point: a file count that agrees while the byte total does not is a door
+     nobody has re-measured. The `near` anchor is the phrase "publicly
+     readable" rather than the digits, so the same figures quoted in a round
+     log or an old deploy report cannot match it. */
+  { id: "held-cost",
+    find: /\*{0,2}(\d[\d,]*)\s*files\s*\(\s*(\d[\d,]*)\s*bytes\s*\)/gi,
+    near: /publicly readable/i,
+    what: "the launch door's cost — the files behind it and their byte total (§0 DEPLOY)",
+    measured: async () => { const h = measure.heldCost(); return [h.files, h.bytes]; } },
 ];
 
 /* ═══ A CORRECTION NOTE IS NOT A CLAIM ═════════════════════════════════════
@@ -290,6 +325,8 @@ console.log(`    asset-table rows     ${measure.assetRows()}  (${measure.assetMi
 console.log(`    ledger rows          ${measure.ledgerRows()}`);
 console.log(`    register rows        ${measure.registerRows()}`);
 console.log(`    manual pages         ${measure.manualPages()}`);
+const held = measure.heldCost();
+console.log(`    held behind the door ${held.files} files (${held.bytes.toLocaleString("en-US")} bytes)`);
 console.log(`    Record entries       ${await measure.recordEntries()}`);
 console.log("");
 console.log(`  ${claims} published claim(s) checked in ${DOCS.filter(d => !d.skipWhole).length} document(s)`);

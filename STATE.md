@@ -288,7 +288,8 @@ numbers and internal findings belong in the round log; a future session reads
 them there, and he is not a future session.
 
 **AN EMPTY ASK IS A COMPLETE REPORT.** *"Nothing here needs you. Mirror and
-deploy: `npm run deploy`."* Padding it makes him read a page to discover it is
+deploy."* The command it names is in OPERATIONS.md §0 DEPLOY — THE ONLY
+ACCOUNT. Padding it makes him read a page to discover it is
 empty — Doctrine 25's cost, charged to a message instead of a page. **A gate
 table is not a decision:** one line at the end, or nothing.
 
@@ -2716,9 +2717,9 @@ any repo work, any session, any agent.
    verify-or-abort. (This silently skipped a real edit once; a commit
    message overclaimed as a result.)
 6. **Durability.** Work isn't done until committed AND pushed AND (for
-   UI changes) deployed: `npm run build && npx wrangler deploy` — there
-   is no CI; deploy is manual. Scratch files and local commits are not
-   durable.
+   UI changes) deployed. See OPERATIONS.md §0 DEPLOY — THE ONLY ACCOUNT.
+   There is no CI; deploy is manual. Scratch files and local commits are
+   not durable.
 
 ## What this is
 
@@ -2740,7 +2741,7 @@ Planned routes when this table is next touched: `/drawing`, and the Stacks filte
 ## Stack
 
 React 19, Vite 8, Cloudflare Workers, D1 (`weird-baby-db`).
-Build: `npx vite build`. Deploy: `npx wrangler deploy`.
+Build: `npx vite build`. See OPERATIONS.md §0 DEPLOY — THE ONLY ACCOUNT.
 
 ## Mothballed for v1
 
