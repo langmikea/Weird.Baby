@@ -69,7 +69,8 @@
     "yt:ingest": "node tools/yt-ingest.mjs",
     "assets:r2:sync": "node tools/sync-assets-to-r2.mjs",
     "arc": "node tools/arc.mjs",
-    "arc:check": "node tools/arc.mjs --check"
+    "arc:check": "node tools/arc.mjs --check",
+    "conduit": "node tools/conduit-drop.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",
