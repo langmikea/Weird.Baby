@@ -121,7 +121,8 @@ import url from "node:url";
 import { execFileSync } from "node:child_process";
 import { entries as recordEntries, parseRecord, RECORD_SOURCE,
          RECORD_SOURCE_LEGACY } from "./record-entries.mjs";
-import { delivered, publicPlacements, deliveryFaults, SIGNAGE } from "./delivery.mjs";
+import { delivered, publicPlacements, deliveryFaults, SIGNAGE,
+         PUBLISHED_BY_RULING } from "./delivery.mjs";
 import { GOVERNED_PREFIX, STAGE_PREFIX } from "./placement.mjs";
 import { readStage, LAUNCH } from "./stage.mjs";
 
@@ -174,7 +175,13 @@ export function plan() {
     const webPublic = GOVERNED_PREFIX + base;
     const isDelivered = given.has(webPublic) || given.has(STAGE_PREFIX + webPublic);
     const isSignage = Object.prototype.hasOwnProperty.call(SIGNAGE, base);
-    const wantsPublic = isDelivered || isSignage;
+    /* [2026-08-22] a file a RULING published belongs at a public address for
+       the same reason signage does: no entry delivers it and none ever will.
+       Without this the day's step reads the Portal's own fabric as seven
+       pictures nobody delivered and offers to pull them all back — which is
+       the rule working on a question it was not asked. */
+    const isRuled = Object.prototype.hasOwnProperty.call(PUBLISHED_BY_RULING, base);
+    const wantsPublic = isDelivered || isSignage || isRuled;
     const state = wantsPublic
       ? (isHeld ? "PLACE" : "PUBLIC")
       : (isHeld ? "HELD" : "PULL");

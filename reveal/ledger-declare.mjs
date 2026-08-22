@@ -338,7 +338,7 @@ FACE("viiip.firmware", "TECHNICAL SPECIFICATIONS (MGK-VIIIp) — the machine's o
    forgets a ledger row. The `arc` comes off all three: an arc is how the house
    REVEALS a thing, and nothing here is being revealed today. */
 R("portal.album", "THE PORTAL — the album: the door, the feed controller, and the questions about it.",
-  "surface", "src/data/artists/portal.js", "LIVE", null, "HELD",
+  "surface", "src/data/artists/portal.js", "LIVE", "/robots — the second album in the carousel", "REVEALED",
   { deps: ["Mike's ruling on when the Portal opens"],
     /* [2026-08-10] THE POSTER MOVED TO `viiip-v2.png` AND THIS ROW MOVED WITH
        IT. `portal.js`'s `viewerPoster` is the only reason this row ever named
@@ -348,13 +348,13 @@ R("portal.album", "THE PORTAL — the album: the door, the feed controller, and 
     assets: ["/held/robots/art/portal-cover.png", "/held/robots/art/viiip-v2.png"],
     note: "Held from launch. The album is a dynamic import Robots.jsx asks for only behind the password on /admin; the deck closes up to four albums without it, and the splice index is PORTAL_AT so the position Mike gave it survives the hold." });
 R("portal.door", "THE PORTAL — the first track, and the way in.",
-  "surface", "src/data/artists/portal.js", "LIVE", null, "HELD",
+  "surface", "src/data/artists/portal.js", "LIVE", "the Portal album, track 01", "REVEALED",
   { deps: ["Mike's ruling on when the Portal opens"],
     note: "[H3c] Mike named three tracks and did not say what stands behind the first. A row called PORTAL that opens nothing is a dead control, so it is the door — the portal as it stands, no feed selected. Named as Ops' judgement at OPEN_ACTIONS P-b." });
-FACE("viiip.portal", "THE PORTAL — the feed-control panel: drum, two bat switches, a rotary dial, a latch.", "LIVE", "HELD",
+FACE("viiip.portal", "THE PORTAL — the feed-control panel: drum, two bat switches, a rotary dial, a latch.", "LIVE", "REVEALED",
   { where: "src/data/artists/portal.js",
     note: "The panel is the immersion's first step; the latch opens the twin. [H1 2026-08-06] HELD — it left robots.js with the album." });
-FACE("viiip.faq", "FAQ — questions about the machine.", "LIVE", "HELD",
+FACE("viiip.faq", "FAQ — questions about the machine.", "LIVE", "REVEALED",
   { where: "src/data/artists/robots-units.js", note: "[2026-08-17] HELD WITH ITS ALBUM. Mike ruled both machines down the night the wing opened; the album is filtered out of `robotsExhibit.spine` unconditionally (`HELD_ALBUMS` in robots.js), so this face has no track to be a track of. **The strings still ship in the chunk** — a filter in a public module stops the render, not the bundle — which is the limitation named on the album row and the reason this row is HELD rather than REVEALED." });
 
 /* ═════════ 3. THE PORTAL'S OWN CONTROLS — availability that already varies ═
@@ -364,42 +364,68 @@ FACE("viiip.faq", "FAQ — questions about the machine.", "LIVE", "HELD",
    `egg.channels` below, which is the only place in either repository it is
    written down. Nothing in `src/` says it. */
 for (const n of [1, 2]) {
-  R(`portal.feed.niac.${n}`, `FEED · CHANNEL ${n} — MGK-NIAC, engraved on the drum and inert.`,
-    "machine", "src/data/artists/portal.js panel.drum", "NOT_BUILT", null, "HELD",
+  R(`portal.feed.niac.${n}`, `ANTENNA · CHANNEL ${n} — no unit assigned; test signal when switched to CAB.`,
+    "machine", "src/data/artists/portal.js panel.antenna", "LIVE", "the ANTENNA, switches 1 and 2", "REVEALED",
     { deps: ["a NIAC feed — the mainframe does not run on the Portal yet"], shown: true,
-      note: "[R5] Mike's canon is that the mainframe runs on the Portal SOMEDAY. These two channels are that someday, engraved where a visitor reads them and dark — the same instrument M33 describes, pointed at the other machine. They carry the machine's name and NO feed title: naming a state the mainframe has never been in would be inventing the thing the arc is for." });
+      note: "[2026-08-21] WAS `portal.feed.niac.N`, `MGK-NIAC, engraved on the drum and inert`. THE ENGRAVING IS GONE: the rebuild struck the drum, and the ANTENNA's switches carry numbers and no names. Mike ruled on 2026-08-22 that the engravings do NOT come back. The channel still carries no unit, which is the half that was ever true — what changed is that nothing on the glass now says whose channel it is. The FAQ still describes the old instrument; that line is his to rewrite and is backlogged (`docs/BACKLOG.md`). [2026-08-22] Published with the Portal." });
 }
-R("portal.feed.standard", "FEED · CHANNEL 3 · STANDARD — the unit as it stands, at the opening prompt.",
-  "machine", "src/data/artists/portal.js panel.drum", "LIVE", null, "HELD",
-  { note: "[R6] The one feed that arms, and it is channel 3. [H1] Held with the album — the drum it is engraved on is behind the door." });
-/* [P5 2026-08-06] THREE ENGRAVINGS CHANGED AND THESE NAMES CHANGE WITH THEM.
-   Mike struck "IDLING, UPD", "BOOT PLAYBK" and "OFF · 1ST BOOT" — one of them
-   wrapped on the drum and none of the three was in either permitted register
-   (deliberately obfuscated, or dressed in period garb); they were the `slug`s
-   below, truncated until they fitted. THE SLUG IS THE ROW'S IDENTITY AND DID
-   NOT MOVE, which is the whole reason a relabelling is safe here: `id`,
-   channel, lever and dependency are untouched, and it is only the word cut into
-   the brass that is different. A ledger row's `name` restates the glass, so a
-   ledger that kept the old engravings would be the "fixing one never fixes the
-   other" defect Doctrine 17 is named for, one file out. */
-for (const [slug, ch, label, why] of [
-  ["idling-updated", 4, "STANDBY", "no feed on file"],
-  ["boot-playback", 5, "COLD START", "no feed on file"],
-  ["off-first-boot", 6, "FIRST RUN", "no feed on file"],
-  ["last-state", 7, "LAST STATE", "awaiting a privacy ruling — LAST STATE resumes across visits"],
-  ["test-bench", 8, "TEST BENCH", "workshop entry; no public feed"],
+R("portal.feed.standard", "FEED · PATCHED — NIAC/VIIIp, the bank as it stands, at the opening prompt.",
+  "machine", "src/data/artists/portal.js panel.feed", "LIVE", "the FEED readout, first bank", "REVEALED",
+  { note: "[2026-08-21] WAS `portal.feed.standard`, `FEED · CHANNEL 3 · STANDARD`. The rebuild took the CHANNEL off this row: the FEED bay sets a start mode and nothing else, and channels moved to the ANTENNA. The recipe id `standard` is unchanged and is still the one that resumes. [2026-08-22] Published with the Portal." });
+/* ═══ [2026-08-21] THE DRUM'S FIVE INERT POSITIONS ARE THE FEED'S BANKS ═════
+   The rebuild replaced an eight-position drum with a five-bank readout, and the
+   mapping is not one-to-one: two positions left the volume, two recipes were
+   repointed, and two banks are deliberately disarmed. Recorded row by row
+   because a ledger that kept the old channels would be Doctrine 17's "fixing
+   one never fixes the other", one file out — and because THE REBUILD SHIPPED
+   WITHOUT MOVING THESE ROWS, which is the same failure it is describing. */
+/* THE IDS DO NOT MOVE, AND THAT IS P5's RULE HELD FOR THE FOURTH TIME: an id is
+   the row's identity and the `name` is what restates the glass. `boot-playback`
+   and `off-first-boot` name the LEVER, not the recipe behind it — and the
+   recipe behind both was repointed this round, which is exactly the case P5
+   was written for. Renaming them would also have broken `reveal/transfers.mjs`,
+   which addresses rows by id, and the M99 guard refused the write until they
+   were put back — correctly: a rename is indistinguishable from a deletion to
+   anything reading the file afterwards. */
+for (const [id, label, build, why] of [
+  ["boot-playback", "COLD START", "LIVE", null],
+  ["off-first-boot", "FIRST RUN", "LIVE", null],
+  ["last-state", "LAST STATE", "NOT_BUILT",
+    "a recipe that resumes the visitor's own machine — `idling-updated` opens an IDLE one and the only `resume:true` is on `standard`"],
+  ["test-bench", "TEST BENCH", "NOT_BUILT",
+    "Mike disarmed it 2026-08-22 — its recipe carries `dev:true` and would show the workshop; the six-digit code stays backlogged"],
 ]) {
-  R("portal.feed." + slug, `FEED · CHANNEL ${ch} · ${label} — engraved on the drum and inert.`,
-    "machine", "src/data/artists/portal.js panel.drum", "NOT_BUILT", null, "HELD",
-    { deps: [why], shown: true,
-      note: "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged. [P5] Re-engraved; the id and the lever are unchanged again." });
+  R("portal.feed." + id, `FEED · ${label} — NIAC/VIIIp, the mode the latch starts the device in.`,
+    "machine", "src/data/artists/portal.js panel.feed", build,
+    build === "LIVE" ? "the FEED readout" : null,
+    /* SHOWN AND NOT BUILT IS `HELD`, and it is what the five inert drum
+       positions always were: a visitor can step to the bank and the lamp
+       reads NOT ARMED. `REVEALED` would claim the thing behind it exists. */
+    build === "LIVE" ? "REVEALED" : "HELD",
+    { deps: why ? [why] : [], shown: true,
+      note: "[2026-08-21] The five banks replace the drum's eight channels. COLD START keeps the id `boot-playback` and its RECIPE was repointed to `clean-boot` (the old one was a sandbox replay); FIRST RUN keeps `off-first-boot` and now runs the new `first-run` recipe (the old one was power off, black), whose `level:1` reaches `Boot_Offer()` and stops to ask the visitor a question — Mike: the machine does what the machine was designed to do. A disarmed bank says NOT ARMED on the lamp and disables the latch. [2026-08-22] Published with the Portal." });
 }
-R("portal.switch.maint", "AUTO MAINT — the C1 fortnight as an instrument. Thrown up, the latch goes dark.",
-  "machine", "src/data/artists/portal.js panel.switches", "LIVE", null, "HELD");
-R("portal.switch.prompt", "AT PROMPT — the entry state as an instrument.",
-  "machine", "src/data/artists/portal.js panel.switches", "LIVE", null, "HELD");
+/* the fourth channel's photograph moved with the channels, not with the banks */
+R("portal.feed.idling-updated", "ANTENNA · CHANNEL 4 — the MGK-VIIIp close-up, when the channel is switched to CAB.",
+  "machine", "src/data/artists/portal.js panel.antenna", "LIVE", "the ANTENNA, switch 4", "REVEALED",
+  { note: "[2026-08-21] WAS `portal.feed.idling-updated`, `CHANNEL 4 · STANDBY — engraved on the drum and inert`. It is neither standby nor inert: routed ANT it is television, routed CAB it is the photograph, and the photograph IS that channel's assigned signal. [2026-08-22] Published with the Portal." });
+/* [2026-08-21] BOTH BAT SWITCHES ARE STRUCK FROM THE PANEL — Ruling 25,
+   there is no lock; a patch panel arms when it is LIVE. They RETIRE rather
+   than disappear: a row that leaves without saying so is how a ledger stops
+   being the record of what was built. */
+R("portal.switch.maint", "AUTO MAINT — the C1 fortnight as an instrument. Struck from the panel 2026-08-21.",
+  "machine", "src/data/artists/portal.js panel.switches", "LIVE", null, "RETIRED");
+R("portal.switch.prompt", "AT PROMPT — the entry state as an instrument. Struck from the panel 2026-08-21.",
+  "machine", "src/data/artists/portal.js panel.switches", "LIVE", null, "RETIRED");
+/* ---- what the rebuild BUILT, and had no rows for until now ---- */
+R("portal.antenna", "ANTENNA — four independent switches, numbered 1 2 3 4, no legend. ANT is television; CAB is hardwired.",
+  "machine", "src/data/artists/portal.js panel.antenna", "LIVE", "the ANTENNA bay", "REVEALED",
+  { note: "[2026-08-21] Sixteen states, not the stepper's four. The puzzle is to find the channel the machine is on and switch that one to CAB; QC_101, attached to Record 004, is where a visitor reads BROADCASTS ON ... FEED NO. 3 in the installer's own hand. Default 1111 — every channel taken, nothing listening." });
+R("portal.screen", "THE PORTAL SCREEN — the CRT bezel and the channel buttons, drawn over whatever the channel carries.",
+  "surface", "src/routes/robots/PortalScreen.jsx", "LIVE", "opening any channel", "REVEALED",
+  { note: "[2026-08-21] MIKE: the bezel and the channel buttons belong to THE PORTAL, not to the machine — the screen is a television set and its frame and its buttons do not disappear because of what is on it. They lived inside twin.html, so leaving the machine unmounted the document the buttons were in. The twin suppresses its own when framed." });
 R("portal.dial.live", "SOURCE · LIVE — the dial position that arms.",
-  "machine", "src/data/artists/portal.js panel.dial", "LIVE", null, "HELD");
+  "machine", "src/data/artists/portal.js panel.dial", "LIVE", "the SOURCE knob", "REVEALED");
 R("portal.dial.seeded", "SOURCE · SEEDED — a seeded feed the lamps would read.",
   "machine", "src/data/artists/portal.js panel.dial", "NOT_BUILT", null, "HELD",
   { deps: ["a seeded feed on file"], shown: true });
@@ -744,9 +770,9 @@ R("egg.laststate", "LAST STATE — resume across visits.", "egg", TWIN, "NOT_BUI
    visitor can see is a numbered drum, and no label anywhere promises a meaning
    behind it. That is the whole difference between an egg and a debt. */
 R("egg.channels", "The Portal's channel numbering — the mainframe on 1 and 2, the portable starting at 3.",
-  "egg", "src/data/artists/portal.js panel.drum", "LIVE",
-  null, "HELD",
-  { note: "[H1 2026-08-06] THE EGG WENT BACK IN THE DRAWER WITH THE DRUM IT IS CUT INTO. It had been SPENT — planted where a visitor rolls a selector and finds numbers — and holding the Portal un-spends it, which is a thing worth noticing about eggs: one planted on a held surface is not planted at all. THE EGG, IN FULL, AND IT IS WRITTEN NOWHERE ELSE: a 1970s home device fed a television through an RF modulator and you tuned the SET to channel 3 or 4. The MGK-VIIIp is the portable, the consumer object, the one you take home — so it starts at 3, exactly where a machine like that has always started. And the numbering carries a second thing for free: NIAC holds 1 and 2 because NIAC came first, which is the true development order. Neither fact is stated on any face, in any caption, or in any label; the drum is engraved with numbers and nothing else. Explaining it on the glass would spend it in the same commit that planted it." });
+  "egg", "src/data/artists/portal.js panel.antenna", "LIVE",
+  "the ANTENNA's four numbered switches", "REVEALED",
+  { note: "[H1 2026-08-06] THE EGG WENT BACK IN THE DRAWER WITH THE DRUM IT IS CUT INTO. It had been SPENT — planted where a visitor rolls a selector and finds numbers — and holding the Portal un-spends it, which is a thing worth noticing about eggs: one planted on a held surface is not planted at all. THE EGG, IN FULL, AND IT IS WRITTEN NOWHERE ELSE: a 1970s home device fed a television through an RF modulator and you tuned the SET to channel 3 or 4. The MGK-VIIIp is the portable, the consumer object, the one you take home — so it starts at 3, exactly where a machine like that has always started. And the numbering carries a second thing for free: NIAC holds 1 and 2 because NIAC came first, which is the true development order. Neither fact is stated on any face, in any caption, or in any label; the drum is engraved with numbers and nothing else. Explaining it on the glass would spend it in the same commit that planted it. [2026-08-21] THE DRUM IS GONE AND THE EGG IS THINNER FOR IT: the numbering survives on the ANTENNA's four switches, but the MGK-NIAC engravings that told a reader WHOSE channels 1 and 2 were went with the barrel. Mike ruled 2026-08-22 that they do not come back. What is planted now is four numbers and no names. [2026-08-22] PLANTED FOR REAL AT LAST: the Portal is public, so an egg on a held surface is finally on a surface somebody can reach." });
 
 /* ═══ [R4 2026-08-05] THE ROBOT — CANON, HELD, AND OFF EVERY FRAME ══════════
    MIKE: "NIAC is so complicated THEY NEEDED A ROBOT TO OPERATE IT. The robot —

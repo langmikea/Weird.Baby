@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Exhibit from "../exhibit/Exhibit.jsx";
 import { robotsExhibit } from "../../data/artists/robots.js";
-import { heldOpen } from "../../lib/held.js";
-import { launched } from "../../lib/placement.js";
 
 /* /robots — walk-six structural rebuild (2026-07-25, STAGED ONLY):
    Robots IS the museum's shared exhibit machinery now — an artist config
@@ -49,7 +47,17 @@ export default function Robots({ open = null }) {
   const [portal, setPortal] = useState(null);
 
   useEffect(() => {
-    if (launched() && !heldOpen()) return undefined;
+    /* === [2026-08-22] THE GATE IS OFF — MIKE RULED THE PORTAL PUBLIC ======
+       This read `if (launched() && !heldOpen()) return undefined;`, and it was
+       the SECOND of the two things holding the Portal shut. Taking the module
+       out of `HELD_PATHS` puts it in a public chunk; this line still decided
+       whether the router bothered to ASK for it. **Without both changes a
+       visitor gets nothing** — which is exactly the state Record 005 was
+       published into, saying on the glass that the Portal is accessible.
+       BOTH IMPORTS WENT WITH IT, rather than being left as a dead read: this
+       was the only caller of `heldOpen` and of `launched` in this file, and an
+       import kept "in case" is how a retired gate grows back.
+       The `catch` below is unchanged and is still the whole error path. */
     let live = true;
     import("../../data/artists/portal.js")
       .then(m => { if (live) setPortal(m); })

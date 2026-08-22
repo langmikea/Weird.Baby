@@ -60,6 +60,7 @@ import url from "node:url";
 import { publicLedger, PUBLIC_FIELDS } from "./public-view.mjs";
 import { placeRule, STAGE_PREFIX, GOVERNED_PREFIX } from "./placement.mjs";
 import { DEFAULT_STAGE, DEVELOPMENT, LAUNCH, STAGES as STAGES_OK } from "./stage.mjs";
+import { PUBLISHED_BY_RULING } from "./delivery.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -286,6 +287,32 @@ export function reachabilityFaults(rows) {
         if (HELD_PREFIXES.some(p => ref.startsWith(p))) continue;
         const governed = ref.startsWith(GOVERNED_PREFIX);
         if (governed && !onDisk(ref) && onDisk(STAGE_PREFIX + ref)) continue;
+        /* ═══ [2026-08-22] A FILE A RULING PUBLISHED IS NOT THIS RULE'S LEAK ══
+           WHAT FIRED IT: Mike ruled the Portal public and its fabric moved to
+           public addresses. `robots-units.js` — still HELD, and rightly — names
+           three of the same files: `viiip-v2.png`, the family shot and
+           `top_monitor.png`. The two machines' albums and the Portal are
+           different exhibits that happen to photograph the same machine.
+
+           THE RULE WAS RIGHT TO ASK AND THE ANSWER IS RECORDED RATHER THAN
+           SUPPRESSED. The held module's strings never ship — it is parked under
+           `assets/held/` and the worker refuses that directory — so no visitor
+           is handed the reference. What is true, and is worth saying plainly
+           in the round log rather than only here, is that **three photographs
+           of MGK-VIIIp are fetchable by URL because the Portal published
+           them**, and the held albums share them.
+
+           IT REUSES THE ONE DECLARATION INSTEAD OF ADDING A SECOND LIST.
+           `PUBLISHED_BY_RULING` in `reveal/delivery.mjs` already names each of
+           those files WITH THE RULING THAT PUBLISHED IT, one row per file. A
+           second list here would be the same claim in two places, and the day
+           they disagreed neither would be the answer.
+           **THE RULE STILL BITES:** a held module naming any other public
+           governed file — one no ruling published — is the fault it was
+           written for and still fails. */
+        if (governed && onDisk(ref)
+            && Object.prototype.hasOwnProperty.call(
+                 PUBLISHED_BY_RULING, ref.slice(GOVERNED_PREFIX.length))) continue;
         faults.push(
           `${f}: a HELD module points at \`${ref}\`, which is served at a public ` +
           "address. Move the file under `public/held/` — the door is already built " +

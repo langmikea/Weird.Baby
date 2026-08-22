@@ -170,6 +170,10 @@ const BLAST = [
         maintenance-mode lore expressed as two classes rather than asserted. */
   "portal.feed.standard", "portal.switch.maint", "portal.switch.prompt",
   "portal.dial.live",
+  /* [2026-08-21] the rebuild's own objects ride the transfer that brought
+     the panel they are part of: the ANTENNA replaced the drum in place and
+     the screen is the frame that was always around it. */
+  "portal.antenna", "portal.screen",
   /* [H1 2026-08-06] THE ALBUM AND ITS DOOR RIDE THE SAME BLAST, AND HOLDING THE
      PORTAL DOES NOT MOVE THEM. A transfer class says when material ARRIVED; it
      is not the same axis as whether the museum has shown it, which is exactly

@@ -12,6 +12,7 @@ owner and no question attached, which is exactly what a register row is not for.
 
 | # | what | where |
 |---|---|---|
+| 0 | **THE PORTAL FAQ CARRIES A KNOWN FALSE LINE, AND IT IS MIKE'S TO REWRITE.** The answer to *Is the mainframe on the Portal?* reads *"Not yet. Two channels are engraved for it on the feed drum and neither of them carries it."* **There is no feed drum.** The 2026-08-21 rebuild replaced it with the FEED bank readout and the two `MGK-NIAC` engravings went with the barrel. He amended this same clause earlier the same day (`arms` → `carries`) and the rebuild made it false again hours later. **He ruled 2026-08-22: the engravings do NOT come back, and the sentence is his to rewrite later.** It shipped public with the Portal, knowingly. **A later round must not quietly rewrite it — it is his voice, and a paraphrase in his class is indistinguishable from his words a week later.** | no row · the ledger says so on `portal.feed.niac.1` and `.2` |
 | 1 | **Record 003 artwork — Wednesday 19 August.** Two manual plates and a redacted CEO letterhead. **The mechanism is built and this is zero code.** It is Mike's artwork, and it is **the only hard external deadline on this page.** | no row · the four devices' names are [E-a](OPEN_ACTIONS.md#e-a) |
 | 2 | **Records 2.1–2.5.** Mike's writing. | no row |
 | 3 | **/robots and /robots/record** — Mike checks before **5pm Monday**. | no row |

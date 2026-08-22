@@ -240,9 +240,10 @@ const opsNotesStrip = {
      LOCKED_PATHS   the PERMISSION hold. `/hr` — the museum does not have his
                     permission (R5). Behind the password in EVERY stage;
                     chunks under `assets/locked/`.
-     HELD_PATHS     the STAGE hold. The Portal, held from launch (H1). Behind
-                    the password at LAUNCH and open in DEVELOPMENT; chunks
-                    under `assets/held/`.
+     HELD_PATHS     the STAGE hold. Behind the password at LAUNCH and open
+                    in DEVELOPMENT; chunks under `assets/held/`. The Portal
+                    was its founding member and left on 2026-08-22 when
+                    Mike ruled it public; the two machines remain.
    BOTH LISTS ARE APPLIED IN BOTH STAGES AND THAT IS WHAT MAKES THE GATE HONEST.
    The stage does not change which chunks are parked where — it changes only
    whether `src/worker.js` opens the stage door — so `heldChunkGuard` below and
@@ -256,7 +257,23 @@ const LOCKED_PATHS = [
   "/src/data/hr_journal_prompts.js",
 ];
 const HELD_PATHS = [
-  "/src/data/artists/portal.js",
+  /* === [2026-08-22] THE PORTAL IS OUT OF THIS LIST — MIKE'S RULING =========
+     The path that stood here from H1 (2026-08-06) until Record
+     005 was the Portal album. **MIKE ruled the Portal PUBLIC**, and Record 005 — live since 21 Aug —
+     says so on the glass: *The Portal is accessible via the Robots Exhibit.*
+     A line the museum publishes and does not honour is the thing his own
+     doctrine forbids: we do not hold back what we say we have.
+
+     IT SUPERSEDES `PORTAL: Hide at launch` (13 Aug) AND IT CROSSES THE 17 AUG
+     RULING BELOW, WHICH IS WHY BOTH ARE NAMED HERE RATHER THAN ONE.
+     Publishing the Portal puts **MGK-VIIIp's working twin and BOTH units'
+     names** on public glass. That is the shape the 17 August ruling was made
+     against — *a hold that depends on another thing's hold is not a hold* —
+     and the difference is that this time it is intended and ruled. **The units'
+     own albums do not come with it:** `robots-units.js` stays in this list,
+     nothing imports it, and there is no door to it.
+     Full scope and the count of what moved:
+     `docs/MUSEUM_PORTAL_PUBLISH_SCOPE-20260821.md`. */
   /* [2026-08-17] THE TWO MACHINES. Mike ruled MGK-NIAC and MGK-VIIIp down the
      night Record 001 opened the wing and both came through the door with it.
      THE FIRST CUT WAS A FILTER IN `robots.js` AND THE LEDGER REFUSED IT — nine

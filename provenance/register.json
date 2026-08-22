@@ -15638,6 +15638,13 @@
    "t": "X",
    "c": "MIKE",
    "s": "S4 2026-07-30, MIKE: 'The fifth position becomes the way OUT: press X and the portal closes.' Carried from twin.html unchanged."
+  },
+  "02b5dbb724eeb6c8": {
+   "f": "src/data/artists/portal.js",
+   "l": 80,
+   "t": "/robots/twin.html",
+   "c": "HOUSE",
+   "s": "the Portal's own door: the address twin.html is served from. Was /held/robots/twin.html until 2026-08-22, when Mike ruled the Portal public and the file moved to its public address; the string moved with the file."
   }
  }
 }

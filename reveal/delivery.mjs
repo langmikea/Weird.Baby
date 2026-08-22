@@ -84,10 +84,64 @@ export const SIGNAGE = {
     "thing the museum made about itself.",
 };
 
-/* The twin is a program, not a picture, and it is held for a different reason
-   (H1 — the Portal is held from launch). Naming it here rather than in SIGNAGE
-   keeps the two rules from being read as one. */
+/* The twin is a program, not a picture. [2026-08-22] It is no longer HELD —
+   Mike ruled the Portal public — but the reason it is named here never was the
+   hold: a rule about pictures has nothing to say about a program. */
 const NOT_A_PICTURE = new Set(["twin.html"]);
+
+/* ═══ [2026-08-22] PUBLISHED BY RULING — THE SECOND EXCEPTION, AND IT IS NOT
+       SIGNAGE ══════════════════════════════════════════════════════════════
+   THE PULL-BACK RULE ANSWERS ONE QUESTION: *has the Record delivered this
+   photograph yet?* It was built for the twenty-six machine photographs, whose
+   whole point is that they arrive on a day, in an entry, in order.
+
+   **A RULING THAT PUBLISHES A WHOLE EXHIBIT IS A DIFFERENT ACT.** On
+   2026-08-22 Mike ruled the Portal public and Record 005 says so on the glass.
+   The Portal's own fabric — its sleeve, its poster, and the four photographs
+   the twin composites its screen out of — became public with it. **No Record
+   entry delivers them and none ever will**, because they were never reveal
+   material; they are the furniture of a room that has been opened.
+
+   THEY ARE NOT SIGNAGE AND MUST NEVER BE PUT THERE. Signage is *the museum's
+   own lettering*, and four of these are photographs of MGK-VIIIp. Filing them
+   under a word that means "there is no machine in this picture" would make
+   that list exactly what its own header warns against — an exception list
+   nobody re-reads, which is a list of excuses.
+
+   SO: A SECOND LIST, NAMED FOR ITS OWN REASON, WITH THE SAME DISCIPLINE. One
+   row per file, each carrying the ruling that published it. A row with no
+   reason is not an exception, it is an oversight with a comma in it.
+   **THE RULE STILL BITES EVERYWHERE ELSE**: anything that lands at a public
+   address without a Record entry and without a row here still fails. */
+export const PUBLISHED_BY_RULING = {
+  "art/portal-cover.png":
+    "The Portal album's sleeve. Published 2026-08-22 with the Portal itself, " +
+    "by Mike's ruling and by Record 005 — 'The Portal is accessible via the " +
+    "Robots Exhibit.' An album that is public cannot have a held cover.",
+  "art/viiip-v2.png":
+    "The Portal album's viewer poster, published with the album for the same " +
+    "reason and by the same ruling.",
+  "reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png":
+    "The picture the twin's monitor actually shows. It is not a photograph " +
+    "the Record delivers to a reader; it is a layer the running program " +
+    "composites, and without it the Portal opens to no picture at all.",
+  "reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png":
+    "The other half of the same exact layer split — the CRT frame the museum " +
+    "draws over every channel. Same ruling, same reason: it is fabric, not a " +
+    "reveal.",
+  "reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png":
+    "What ANTENNA channel 4 carries when it is switched to CAB. It is a " +
+    "channel's content, reached by solving the panel, and it is published " +
+    "with the panel.",
+  "reference/photos/top_monitor.png":
+    "A tier in the twin's own loader ladder — the CRT photo, controls " +
+    "in-frame. Reached only when the family shot is unavailable; it is a " +
+    "fallback for the fabric above and cannot be held while the thing it " +
+    "backs is public.",
+  "reference/photos/unit_crt_base.webp":
+    "The last tier of the same ladder. Same ruling and the same reasoning as " +
+    "`top_monitor.png`.",
+};
 
 function walk(dir, out = []) {
   const abs = path.join(REPO, dir);
@@ -128,6 +182,7 @@ export function publicPlacements(given = delivered()) {
     else if (a.startsWith(GOVERNED_PREFIX)) out.add(a);
   }
   for (const k of Object.keys(SIGNAGE)) out.add(GOVERNED_PREFIX + k);
+  for (const k of Object.keys(PUBLISHED_BY_RULING)) out.add(GOVERNED_PREFIX + k);
   return out;
 }
 
@@ -147,6 +202,7 @@ export function deliveryFaults() {
     const webHeld = "/held/robots/" + base;
     const isDelivered = given.has(webPublic) || given.has(webHeld);
     const isSignage = Object.prototype.hasOwnProperty.call(SIGNAGE, base);
+    const isRuled = Object.prototype.hasOwnProperty.call(PUBLISHED_BY_RULING, base);
 
     if (isDelivered && isSignage) {
       faults.push(
@@ -155,7 +211,7 @@ export function deliveryFaults() {
         "— one of the two claims is wrong and neither is safe to guess at.");
       continue;
     }
-    if (!isDelivered && !isSignage) {
+    if (!isDelivered && !isSignage && !isRuled) {
       /* 3. NO FALL-THROUGH — but only report it once, as the state it is in */
       if (!isHeld) {
         faults.push(
@@ -180,6 +236,21 @@ export function deliveryFaults() {
         "Signage is not held material; either it is the museum's own lettering " +
         "and belongs at a public address, or the SIGNAGE row is wrong.");
     }
+    /* the same rot, one list over: a file published by a ruling that is still
+       behind the door means the ruling was not carried out, or the row is
+       wrong. Either way somebody must look. */
+    if (isRuled && isHeld) {
+      faults.push(
+        `delivery: \`${base}\` is declared PUBLISHED_BY_RULING and is behind ` +
+        "the door. The ruling that published it was not carried out, or the " +
+        "row is wrong.");
+    }
+    if (isDelivered && isRuled) {
+      faults.push(
+        `delivery: \`${base}\` is BOTH published by ruling and named by a ` +
+        "Record entry. One of the two claims is wrong and neither is safe to " +
+        "guess at.");
+    }
   }
 
   /* a SIGNAGE row naming a file that is not there is the same rot the transfer
@@ -191,6 +262,12 @@ export function deliveryFaults() {
   for (const k of Object.keys(SIGNAGE)) {
     if (!have.has(k)) {
       faults.push(`delivery: SIGNAGE names \`${k}\`, which is not in the tree.`);
+    }
+  }
+  for (const k of Object.keys(PUBLISHED_BY_RULING)) {
+    if (!have.has(k)) {
+      faults.push(
+        `delivery: PUBLISHED_BY_RULING names \`${k}\`, which is not in the tree.`);
     }
   }
 

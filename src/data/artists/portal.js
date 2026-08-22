@@ -77,7 +77,7 @@
 /* The door's own address, declared once. Read by the two faces below and by
    nothing else; `RobotsExhibitFlow` receives it through the event. */
 const TWIN = {
-  src: "/held/robots/twin.html",
+  src: "/robots/twin.html",
   title: "MGK-VIIIp digital twin — the Portal",
   event: "wb-robots-open-twin",
 };
@@ -96,9 +96,9 @@ export const PORTAL_ALBUM = {
   title: "The Portal",
   year: null,
   tags: ["portal", "twin", "firmware", "interactive", "mgk", "viiip"],
-  art: "/held/robots/art/portal-cover.png",
+  art: "/robots/art/portal-cover.png",
   accent: null,
-  viewerPoster: "/held/robots/art/viiip-v2.png",
+  viewerPoster: "/robots/art/viiip-v2.png",
   viewerPosterCaption:
     "MGK-VIIIp — the glass carrying the machine's own opening beat.",
   tracks: [
@@ -334,7 +334,7 @@ export const PORTAL_ALBUM = {
               { ch: 2, unit: false },
               { ch: 3, unit: true },
               { ch: 4, unit: true,
-                src: "/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+                src: "/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
                 frameTitle: "MGK-VIIIp - the close-up" },
             ],
             television: {
@@ -395,7 +395,7 @@ export const PORTAL_ALBUM = {
                0 hole pixels fall outside the rect, so no page ground can leak
                into the picture. MIKE: *"standard 60s CRT."* */
             bezel: {
-              src: "/held/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+              src: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
               w: 3000, h: 2400,
               feed: { x: 227, y: 194, w: 2540, h: 2036 },
             },
