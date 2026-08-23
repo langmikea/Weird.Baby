@@ -70,7 +70,9 @@
     "assets:r2:sync": "node tools/sync-assets-to-r2.mjs",
     "arc": "node tools/arc.mjs",
     "arc:check": "node tools/arc.mjs --check",
-    "conduit": "node tools/conduit-drop.mjs"
+    "conduit": "node tools/conduit-drop.mjs",
+    "ops:size": "node tools/ops-size-gate.mjs",
+    "ops:archive": "node tools/ops-archive-index.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",

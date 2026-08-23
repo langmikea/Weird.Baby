@@ -65,6 +65,33 @@ const DOCS = [
   { file: "docs/canonical/OPERATIONS.md",
     historyFrom: null,
     note: "no round log in this file — read whole" },
+  /* [2026-08-23] THE SPLIT MOVED THREE CHECKED CLAIMS OUT OF SCOPE AND THE GATE
+     WENT ON PRINTING PASS. `OPERATIONS.md` was cut to a ground state and its
+     round log, §5, §7 and §8 became files under `OPERATIONS_ARCHIVE/`; the count
+     fell 11 → 8 with no change in verdict — which is §8s own hazard, an
+     instrument that returns healthy is not evidence of health. The archive holds
+     the same prose it held yesterday, so it is read on the same terms.
+     ONE THING THIS ENSHRINES, SAID OUT LOUD: `ROUND-LOGS.md` IS A ROUND LOG AND
+     IT IS READ WHOLE, which the header above says this gate never does. It was
+     read whole inside `OPERATIONS.md` too — that files `no round log` note was
+     simply wrong — so this PRESERVES coverage rather than granting it. What
+     keeps it honest is SHAPE, not SCOPE: every check carries a `near` phrase.
+     Whether this file should instead be excluded whole like `STATE.md` is a
+     live question; the cost of excluding it is the `bucket … null on all 475
+     rows` claim going ungated. */
+  { file: "docs/canonical/OPERATIONS_ARCHIVE/ROUND-LOGS.md",
+    historyFrom: null,
+    note: "the round log cut out of OPERATIONS.md 2026-08-23 — read on the "
+        + "terms it was read on before the cut" },
+  { file: "docs/canonical/OPERATIONS_ARCHIVE/05-FILE-MAP.md",
+    historyFrom: null,
+    note: "OPERATIONS §5, cut out 2026-08-23 — a stamped reference, not a log" },
+  { file: "docs/canonical/OPERATIONS_ARCHIVE/07-WORKING-DOCTRINE.md",
+    historyFrom: null,
+    note: "OPERATIONS §7, cut out 2026-08-23 — standing process rules" },
+  { file: "docs/canonical/OPERATIONS_ARCHIVE/08-KNOWN-HAZARDS.md",
+    historyFrom: null,
+    note: "OPERATIONS §8, cut out 2026-08-23 — standing hazards" },
   { file: "docs/OPEN_ACTIONS.md",
     historyFrom: null,
     note: "every row is live by Doctrine 24 — a closed row leaves the file. "
