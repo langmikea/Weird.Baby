@@ -13,33 +13,30 @@ owner and no question attached, which is exactly what a register row is not for.
 | # | what | where |
 |---|---|---|
 | 0 | **THE PORTAL FAQ CARRIES A KNOWN FALSE LINE, AND IT IS MIKE'S TO REWRITE.** The answer to *Is the mainframe on the Portal?* reads *"Not yet. Two channels are engraved for it on the feed drum and neither of them carries it."* **There is no feed drum.** The 2026-08-21 rebuild replaced it with the FEED bank readout and the two `MGK-NIAC` engravings went with the barrel. He amended this same clause earlier the same day (`arms` → `carries`) and the rebuild made it false again hours later. **He ruled 2026-08-22: the engravings do NOT come back, and the sentence is his to rewrite later.** It shipped public with the Portal, knowingly. **A later round must not quietly rewrite it — it is his voice, and a paraphrase in his class is indistinguishable from his words a week later.** | no row · the ledger says so on `portal.feed.niac.1` and `.2` |
-| 1 | **Record 003 artwork — Wednesday 19 August.** Two manual plates and a redacted CEO letterhead. **The mechanism is built and this is zero code.** It is Mike's artwork, and it is **the only hard external deadline on this page.** | no row · the four devices' names are [E-a](OPEN_ACTIONS.md#e-a) |
-| 2 | **Records 2.1–2.5.** Mike's writing. | no row |
-| 3 | **/robots and /robots/record** — Mike checks before **5pm Monday**. | no row |
 
 ## TUESDAY — committed
 
 | # | what | where |
 |---|---|---|
-| 4 | **The scroller-facts review.** 98 quotes at or over fifteen words, 23 artist-page/source pairs quoted more than once. **The real question is volume rather than any single line:** Hunter Root's page alone carries 67 quotes from ten publications. The list is on this desk. | [Q-a](OPEN_ACTIONS.md#q-a) |
-| 5 | **The Short Story and The Long Story.** **Two empty rooms a visitor can walk into** — the FAQ already sends them to both. | [S-f](OPEN_ACTIONS.md#s-f) |
+| 1 | **The scroller-facts review.** 98 quotes at or over fifteen words, 23 artist-page/source pairs quoted more than once. **The real question is volume rather than any single line:** Hunter Root's page alone carries 67 quotes from ten publications. The list is on this desk. | [Q-a](OPEN_ACTIONS.md#q-a) |
+| 2 | **The Short Story and The Long Story.** **Two empty rooms a visitor can walk into** — the FAQ already sends them to both. | [S-f](OPEN_ACTIONS.md#s-f) |
 
 ## NEXT — the bottleneck
 
 | # | what | where |
 |---|---|---|
-| 6 | **Social: accounts, handles, three schedules, content.** Robots **3×/week**, Music **fortnightly**, the house **silent**. **Everything else on this page improves a museum nobody has found.** | [M60](OPEN_ACTIONS.md#m60) |
+| 3 | **Social: accounts, handles, three schedules, content.** Robots **3×/week**, Music **fortnightly**, the house **silent**. **Everything else on this page improves a museum nobody has found.** | [M60](OPEN_ACTIONS.md#m60) |
 
 ## THEN — in this order
 
 | # | what | where |
 |---|---|---|
-| 7 | The shop | [M13](OPEN_ACTIONS.md#m13) · [M21](OPEN_ACTIONS.md#m21) · [S-n](OPEN_ACTIONS.md#s-n) |
-| 8 | The media intake pipeline | no row |
-| 9 | Ops Desk prune **+ the WYSIWYG REC editor** | no row |
-| 10 | The light table — clutter out, no audio, collapsible manual, thumbnails too faint to read the form | [Q-e](OPEN_ACTIONS.md#q-e) |
-| 11 | Coalition's reply | [S-g](OPEN_ACTIONS.md#s-g) |
-| 12 | **The manual, built from the program itself** — screenshots and composites. ***"You can make SO MUCH of this!!!"*** **FLAGGED: the most fun item on this page, which is why it will eat a week.** | [Q-d](OPEN_ACTIONS.md#q-d) |
+| 4 | The shop | [M13](OPEN_ACTIONS.md#m13) · [M21](OPEN_ACTIONS.md#m21) · [S-n](OPEN_ACTIONS.md#s-n) |
+| 5 | The media intake pipeline | no row |
+| 6 | Ops Desk prune **+ the WYSIWYG REC editor** | no row |
+| 7 | The light table — clutter out, no audio, collapsible manual, thumbnails too faint to read the form | [Q-e](OPEN_ACTIONS.md#q-e) |
+| 8 | Coalition's reply | [S-g](OPEN_ACTIONS.md#s-g) |
+| 9 | **The manual, built from the program itself** — screenshots and composites. ***"You can make SO MUCH of this!!!"*** **FLAGGED: the most fun item on this page, which is why it will eat a week.** | [Q-d](OPEN_ACTIONS.md#q-d) |
 
 ## PARKED — no date
 

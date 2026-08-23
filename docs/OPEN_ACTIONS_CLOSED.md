@@ -493,3 +493,29 @@ Records.* **Ops had dismissed the whole of SEO and was too broad**: the robots
 fiction will not rank and chasing it is wasted, but *"Papa Weird.Baby"*,
 *"Weird.Baby Foundation"* and the album should own their own names, so a person
 who HEARS the name and types it lands here. That half is cheap and permanent.
+
+---
+
+## CLOSED 2026-08-22 — THE THREE DELIVERED
+
+Mike: *"These are done."* All three were rows under **NOW — a Record needs it**
+on `BACKLOG.md`, and all three carried **no row** in the register. Doctrine 24:
+they left that file. They are named here for the reason this file exists — an
+item with no row is exactly the one a later round re-raises as if it were new.
+
+**THESE THREE WERE DELIVERED, NOT KILLED**, which is a different ending from
+everything above this line. Nothing here was judged not worth doing. The work
+arrived.
+
+| the item | had a row? | what closed it |
+|---|---|---|
+| **Record 003 artwork** | no | **DELIVERED — THE WEDNESDAY 19 AUGUST DEADLINE, MET.** Two manual plates and a redacted CEO letterhead. It was **the only hard external date on the page** and it was Mike's own artwork, so nothing but his hand could have closed it. `canon/09-PUBLISHED.md` carries Record 003 as **PUBLISHED 2026-08-19**. |
+| **Records 2.1–2.5** | no | **DELIVERED.** Mike's writing. |
+| **/robots and /robots/record** | no | **CHECKED BY MIKE** — the 5pm Monday pass he set himself. |
+
+**ONE ROW THAT LOOKS LIKE THESE WAS LEFT STANDING ON PURPOSE.** `/robots ·
+Record 003 — the two attachment titles`, in **THE QUEUE §1**, the live-site
+clean-up. It names the same page and the same Record, and it is **not** part of
+this delivery: it is a fix to two titles on the glass, in a queue that is
+explicitly not ranked against the 08-16 order. Mike ruled it out of scope on the
+day. **It is still open.**
