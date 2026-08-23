@@ -108,8 +108,22 @@ const ALLOW_DIRTY = process.argv.includes("--allow-dirty");
 /* ── THE LIST ──────────────────────────────────────────────────────────────
    One array. Adding a document is one line. The canon INDEX is here because it
    is a document in its own right; the fourteen it links to are resolved below
-   rather than typed. */
+   rather than typed.
+
+   ORDER IS MEANING, AND `docs/HANDOFF.md` IS FIRST DELIBERATELY. It is what a
+   fresh Ops reads immediately after MANIFEST.md, so it is what the drop lists
+   first. THE PATH IS FIXED RATHER THAN DATED, and that is the whole repair: on
+   2026-08-22 `docs/opsday-20260822/HANDOFF-20260822.md` was written, committed
+   and pushed, and the drop that followed carried twenty files without it — the
+   one document the reader most needed was the one document the pipe could not
+   name. A DATED FILENAME CANNOT LIVE IN A HARDCODED LIST, because tomorrow's
+   handoff has tomorrow's name and the list goes stale the day it is written.
+   So every future handoff OVERWRITES `docs/HANDOFF.md`, the dated copy stays
+   where it is as the record of its day, and this line never needs editing
+   again. */
 const DOCUMENTS = [
+  "docs/HANDOFF.md",
+  "STATE.md",
   "docs/canonical/OPERATIONS.md",
   "docs/MUSEUM_RULINGS-20260817.md",
   "docs/ARC.md",
@@ -191,7 +205,7 @@ function assertDestination() {
       "",
       "It was NOT created. A drop into a folder nobody reads looks exactly like",
       "a successful drop — an unmounted drive or a renamed folder would take the",
-      "whole payload and report twenty-one files.",
+      "whole payload and report twenty-three files.",
       "",
       "  Check the drive is mounted and the folder is where you think it is.",
       "Nothing was written and nothing was cleared.",
