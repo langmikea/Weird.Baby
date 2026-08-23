@@ -99,6 +99,11 @@ not Ops being slow.
 He alone runs git and deploy. Ops edits, verifies and reports; **Ops never
 commits, never pushes, never deploys.**
 
+**THE MARKER IS `[MIKE]`.** Anywhere in this file, a clause marked **[MIKE]**
+is his: Code prepares it, **stops there, and does not go on until he has run
+it.** It attaches to the clause that is his, never to the whole step — mark
+the step and a session hands him its own work and waits for it.
+
 **THERE IS ONE DEPLOY.** See §0 DEPLOY — THE ONLY ACCOUNT, immediately below.
 The short form has been written five times and caught five times; the sixth time
 nobody catches it is the whole reason that block exists.
@@ -432,6 +437,8 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ## 9. Session-close ritual
 
+**Code works this ritual, except where marked [MIKE]** — §0 MIKE IS THE LOCK.
+
 0. **Gates, in this order:** `npm run lint` (baseline **9 errors / 8
    warnings**, zero new) → `npm run build` (green) → **`npm run
    provenance:gate` (exit 0)** → **`npm run reveal:check` (exit 0) if the
@@ -475,8 +482,9 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
    deploy would publish it (see §0 DEPLOY — THE ONLY ACCOUNT).
    **`npm run lap:clean` before the seal is part of the ritual, not an
    afterthought.** A packet that added visitor-facing
-   content adds its register rows in the same commit; a packet that added or
-   changed a media file re-runs `npm run assets:scan` in the same commit.
+   content adds its register rows in the same commit **[MIKE]**; a packet that
+   added or changed a media file re-runs `npm run assets:scan` in the same
+   commit **[MIKE]**.
 
    **[v56/R7] AND THEN READ `npm run surfacing`, which is NOT a gate.** It
    cannot fail — an unshown thing is inventory, not a defect. It is here because
@@ -550,13 +558,13 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
    is inert is free: if `keyOf` had shifted by one bit, every register key would
    have changed and `provenance:gate` would have failed on every string in the
    museum. A passing gate after the edit is the test.**
-1. Commit + push everything durable (explicit paths).
+1. **[MIKE]** Commit + push everything durable (explicit paths).
 1a. **Update `docs/OPEN_ACTIONS.md`** (Doctrine 14) — statuses flipped for what
-   closed, rows added for what this round exposed. Same commit.
+   closed, rows added for what this round exposed. Same commit **[MIKE]**.
 2. If facts in THIS FILE or STATE.md changed (file map, hazards,
    protocols, closed decisions) — update them in the same session, same
-   commit discipline. An orientation doc more than a few days behind
-   git log is a defect.
+   commit discipline **[MIKE]**. An orientation doc more than a few days
+   behind git log is a defect.
 3. Write/refresh `docs/HANDOFF_next_session.md` only for session-scoped
    context (what's mid-flight, open UX questions). Process and facts do
    NOT go in handoffs — they go here or in STATE.md.
@@ -575,9 +583,12 @@ MV_VOCAB_RECONCILE_PLAN-20260624 (believed committed 6/24; was untracked until
 1. LANDING GATE — a chat deliverable does not exist until it is at its target
    path in the tree. Downloads is transit, never storage. Prefer heredoc
    direct-write to target path over browser download. Any file that does
-   transit Downloads is copied to the tree and committed in the same session.
-2. COMMIT GATE — no commit is "done" until `git status --short` is re-run and
-   the new hash is confirmed in `git log`. Narrating a commit is not a commit.
+   transit Downloads is copied to the tree and committed in the same
+   session **[MIKE]**.
+2. COMMIT GATE — Mike runs the commit **[MIKE]**; Code verifies it by
+   re-running `git status --short` and confirming the new hash in `git log`.
+   No commit is "done" until that read has happened. Narrating a commit is
+   not a commit.
 3. SESSION-CLOSE CHECK — before any session ends: `git status --short` is
    empty, or every remaining line is explained and accepted.
 4. DB dumps (`backups/`) are gitignored by policy. Durable home: OneDrive
