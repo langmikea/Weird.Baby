@@ -386,7 +386,9 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 ## 8. Known hazards (environment quirks)
 
 > Every hazard's body is in `OPERATIONS_ARCHIVE/08-KNOWN-HAZARDS.md`,
-> cut whole at HEAD `b3812cc`. Lead lines only below.
+> cut whole at HEAD `b3812cc`. Lead lines only below — except entries raised
+> after that cut, which carry their bodies here, because the archive is a
+> snapshot (§0) and is never edited.
 
 - **[2026-08-17] `assets:scan` WALKS DISK, AND DISK INCLUDES GITIGNORED TREES.
   A ROW IS COMMITTED; THE FILE MAY NOT BE, AND THEN THE ROW IS BORN AN ORPHAN.**
@@ -416,6 +418,8 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 - **FOUR WAYS TO PROVE A FEATURE ABSENT THAT IS PRESENT AND RUNNING (2026-08-16).**
 - `export-artifacts.mjs` prints a harmless `UV_HANDLE_CLOSING` assertion
 - Drive root contains loose stale code copies from past sessions — stale
+- **`docs/canonical/START_HERE.md` HAS AN UNVERSIONED TWIN AT `C:\AI\START_HERE.md`, AND NOTHING NOTICES WHEN THEY DRIFT (2026-08-23).** `C:\AI` is a plain directory — there is no `.git` at `C:\AI` or at `C:\` — so the twin has no history, no `git diff`, no `git checkout --` to undo a bad write, and it never appears in any `git status`. It is the copy a fresh session outside this repo actually opens. It held one md5, `1c020bd0`, from 2026-06-09 until `0fa8709`: the governed copy was edited that day and the twin stayed stale until it was copied over. **The twin is COPIED byte-for-byte from the governed file after a push, never hand-edited** — an unversioned file gets no manual write while an identical governed copy exists. No gate, no generator and no `git status` will report the next drift; only someone reading both will.
+- **`npm run` STARTUP EXCEEDS THE AGENT TOOL TIMEOUT ON THIS HOST, SO A GATE MAY BE RUN AS A DIRECT `node` CALL — AND THE TWO ARE NOT THE SAME CLAIM (2026-08-23).** `npm run docs:numbers:gate` hit the two-minute ceiling with no output on 2026-08-23; `node tools/numbers-gate.mjs --gate` completed in seconds. The direct call runs the same script with the same flags, so the RESULT is sound — but **"the gate passed" and "the npm script completed" are different sentences**, and a round reporting the first while having done the second has not exercised the `package.json` wiring at all. A renamed or broken script entry would pass unnoticed. **Say which one was run.**
 
 ### AN INSTRUMENT THAT RETURNS HEALTHY IS NOT EVIDENCE OF HEALTH
 ### WHEN IT CANNOT SEE THE FAILURE MODE (2026-08-21)
