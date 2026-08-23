@@ -2,8 +2,8 @@
 
 **Owner of this document:** Claude (Ops)
 **Authority boundary:** Mike owns UX and all product/voice/scope decisions. Claude owns everything else — repository accuracy, completeness, maintenance, backups, documentation, and not letting the project rot or lose data.
-**Execution surface:** This charter is written here for review. It is *executed* in Cowork/Claude Code, which has the filesystem + git access this chat does not. This chat defines the standard; Cowork enforces it.
-**Status:** v1.0 — draft for Mike's review, then hand to Cowork.
+**Execution surface:** Written in chat for review; executed by Code, on Mike's host, which has the filesystem and git access a chat session does not. Chat defines the standard; Code enforces it. Mike alone commits, pushes and deploys.
+**Status:** v1.0 — draft for Mike's review.
 
 ---
 
@@ -24,7 +24,7 @@ Each section maps to one of these.
 **Problem addressed:** silent drift.
 
 - **`STATE.md` is the single source of truth** for project state. If it disagrees with reality, that is a bug to fix immediately, not a note to leave.
-- **One canonical `STATE.md`**, at a known path (confirm location in Cowork — the past notes reference both `C:\AI\Projects\weird_baby\STATE.md` and the `-update` tree; **resolving which is canonical and killing the other is the first Cowork task**).
+- **One canonical `STATE.md`**, at a known path: `STATE.md` at the museum repo root. (The `weird_baby` vs `-update` two-tree question this line once posed is long settled — one tree.)
 - **STATE.md required sections:**
   - `LIVE` — what is deployed and working right now, per route.
   - `IN PROGRESS` — what is actively being built, with enough detail to resume cold.
@@ -43,10 +43,10 @@ Each section maps to one of these.
 
 The failure mode is real information sitting next to junk until someone trusts or ships the junk. Rules:
 
-- **`.gitignore` is authoritative and complete.** Build output (`dist/`), `node_modules/`, local env files, OS cruft (`.DS_Store`, `Thumbs.db`), editor folders, and **anything containing a plaintext secret** never enter the repo. Cowork audits the current tree against this on first run.
+- **`.gitignore` is authoritative and complete.** Build output (`dist/`), `node_modules/`, local env files, OS cruft (`.DS_Store`, `Thumbs.db`), editor folders, and **anything containing a plaintext secret** never enter the repo. Code audits the tree against this.
 - **Scratch ≠ committed.** Experimental files, dead code, "old" copies, and one-off scripts do not live beside production source. A `scratch/` or `_archive/` directory that is gitignored is fine; littering `App.old.jsx` next to `App.jsx` is not.
 - **The multi-artist lyric data** (`bd_data.js`, `tp_data.js` — Bob Dylan, Tom Petty) is the live example of this tension: deployed site shows Hunter Root only, but the full set is kept for Mike. Decision to record in STATE.md: is the full set kept *in the repo* (and just hidden in the UI), or kept *local-only*? Whichever — it must be **documented as a deliberate choice**, not left as ambiguous debris.
-- **No secret ever in the repo or in client code.** The Drawing's plaintext codes exist only in the HTTP response at issuance (per the raffle spec); the repo and the Worker store hashes only. Cowork verifies no code, ledger, or `.env` with secrets is tracked.
+- **No secret ever in the repo or in client code.** The Drawing's plaintext codes exist only in the HTTP response at issuance (per the raffle spec); the repo and the Worker store hashes only. Code verifies no code, ledger, or `.env` with secrets is tracked.
 - **One project, one tree.** If there are two project directories (`weird_baby` and `weird-baby-update`), one is canonical and the other is archived or deleted with a tombstone note. Two live trees is how you edit the wrong one at 1 a.m.
 
 ---
@@ -101,10 +101,10 @@ Three distinct things need backing up, and they are not the same:
 
 - Maintains STATE.md accuracy and enforces the update cadence.
 - Audits the tree for debris and secrets; keeps `.gitignore` complete.
-- Owns the backup routine: defines it, scripts it in Cowork, verifies it runs, runs the quarterly restore drill.
+- Owns the backup routine: defines it, scripts it, verifies it runs, runs the quarterly restore drill.
 - Keeps docs and specs versioned and findable.
 - Raises the flag *early* when something is drifting toward "REALLY bad" — before it gets there, not after.
-- Does the above **in Cowork**, against the real files, because that's where the access is.
+- Does the above **against the real files in the working tree**, never against memory or a Drive copy.
 
 ## 7. What Claude (Ops) does NOT do
 
@@ -113,7 +113,7 @@ Three distinct things need backing up, and they are not the same:
 
 ---
 
-## 8. First Cowork run — ordered checklist
+## 8. First run — ordered checklist (done; kept as the record)
 
 1. Resolve canonical project tree (`weird_baby` vs `weird-baby-update`); tombstone the other.
 2. Locate and confirm the one true `STATE.md`; reconcile it to the actual deployed state and the route table.
@@ -127,4 +127,4 @@ Three distinct things need backing up, and they are not the same:
 
 ---
 
-*Review this, change what's wrong, and it becomes the standing instruction set for Ops. Enforcement happens in Cowork.*
+*Review this, change what's wrong, and it becomes the standing instruction set for Ops. Enforcement happens in the tree.*

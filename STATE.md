@@ -2698,14 +2698,14 @@ any repo work, any session, any agent.
    stale/retired trees), or against assumption. Past errors traced
    directly to this: scoping against the album-registry file instead of
    the foundation export; reading a retired repo from Drive.
-2. **Don't guess — look it up.** Use pwsh (read-only) or Cowork to read
-   real code/data. If a claim about the codebase isn't backed by a file
-   just read, it is a guess and must not be acted on.
-3. **Default to Cowork for repo work.** For repo reads, big-file edits
-   (`HrExhibitFlow.jsx` ~152KB, `Exhibit.jsx` ~37KB), and multi-file
-   scoping, prefer a Cowork task over chat-driven pwsh paste-back:
-   Cowork has full repo reach, is faster, and avoids the human relay's
-   buffer limits and paste errors.
+2. **Don't guess — look it up.** Read the real file in the tree. If a
+   claim about the codebase isn't backed by a file just read, it is a
+   guess and must not be acted on.
+3. **Repo work is done in the tree, not through a relay.** Reads,
+   big-file edits (`Exhibit.jsx`, `HrExhibitFlow.jsx` — both very
+   large) and multi-file scoping are Code's, working the files
+   directly. A chat-driven pwsh paste-back is the fallback when no
+   Code session is open; it costs Mike's time and hits buffer limits.
 4. **Drive the live UI by accessibility ref, not pixel coordinates.**
    The dock has tiny targets and a peek-to-open animation; pixel clicks
    miss silently. Use `find`/`read_page` refs. (A live verification

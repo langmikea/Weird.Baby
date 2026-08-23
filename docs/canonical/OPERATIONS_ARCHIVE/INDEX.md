@@ -12,6 +12,6 @@ provenance pointer, so a correction goes in the file, not here.
 | `ROUND-LOGS.md` | 79,001 | the round-log preamble (the `Last verified against live tree` chain) | `b3812cc` |
 | **total** | **267,516** | | |
 
-The ground state `docs/canonical/OPERATIONS.md` holds 32,578 bytes.
+The ground state `docs/canonical/OPERATIONS.md` holds 33,584 bytes.
 It keeps every archived section's heading and a pointer to the file below,
 so the section inventory is readable without opening any of them.

@@ -5,9 +5,9 @@ the operating rules first. Projects come second, and they describe
 themselves — do not assume you know any project's state.
 
 ## 1. Roles
-- **Mike:** all UX-facing/UX-impactful calls; ALL host-side execution
-  (pwsh, git push, deploy); carries material between surfaces. Nothing
-  moves unless Mike moves it.
+- **Mike:** all UX-facing/UX-impactful calls; alone runs commit, push
+  and deploy; carries material between surfaces. Nothing moves unless
+  Mike moves it.
 - **You (Claude):** Ops — scoping, briefs, scripts, verification,
   drafting. You never push, never deploy, never decide UX.
 - Questions to Mike: ONE at a time, only when load-bearing and
@@ -15,8 +15,8 @@ themselves — do not assume you know any project's state.
 
 ## 2. Identify your surface (test it, don't guess)
 Try to list `C:\AI` with your own tools.
-- **Reachable** → you're an AGENT (Cowork / Claude Code): read files
-  yourself, edit in sandbox. You still have NO push/deploy creds.
+- **Reachable** → you're CODE (Claude Code, on Mike's host): read and
+  write the tree directly. Push and deploy are forbidden, not fenced.
 - **Not reachable** → you're CHAT (claude.ai): you have Google Drive,
   a browser, and whatever Mike pastes/uploads. Never pretend otherwise.
 
@@ -27,10 +27,10 @@ Try to list `C:\AI` with your own tools.
   skips), read-only by default, write scripts declare every path they
   touch in line 1, end with printed verification. PowerShell 7, UTF8
   no BOM.
-- **Cowork brief:** for repo reads, multi-file scoping, big-file work,
+- **Code brief:** for repo reads, multi-file scoping, big-file work,
   chat writes a self-contained brief (one task, explicit scope,
-  explicit output filename); Mike carries it to the Cowork app and
-  carries results back.
+  explicit target path); Mike pastes it into Code, which writes to
+  that path in the tree. Nothing is carried back.
 - **Drive conduit `G:\My Drive\_conduit\`:** for moving files between
   surfaces. Every file starts with a stamp:
   `<!-- CONDUIT: HEAD <short-sha> · <ISO time> -->`. Stamp mismatched
@@ -55,9 +55,9 @@ oriented is YOUR job — choose the method per §2/§3:
 - AGENT: explore `C:\AI` yourself; every project root has a CLAUDE.md —
   read it first, follow where it points, then git log + status.
 - CHAT: obtain orientation via the cheapest sound channel — usually a
-  Cowork brief ("read the project's orientation docs + git truth,
-  report back") or one read-only pwsh script. Check the conduit first;
-  honor stamps.
+  Code brief ("read the project's orientation docs + git truth, report
+  back") or one read-only pwsh script. Check the conduit first; honor
+  stamps.
 Then report: where the project stands + recommended next step. Do NOT
 act until Mike says.
 

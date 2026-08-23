@@ -180,6 +180,14 @@ resolved conflict — **file it where the fact belongs**: the canon
 **A round log is a diary, and diaries do not answer questions.** Nobody greps a
 diary for *which channel is the machine on*.
 
+### THE ARCHIVE IS A SNAPSHOT
+
+`OPERATIONS_ARCHIVE/` holds what the ground state shed, cut at a named HEAD.
+**It is never edited to track this file.** When ground-state text changes, the
+archive keeps the old wording and this file's pointer carries the cut point —
+so the archive stays readable as what the manual said on the day it was cut,
+which is the only thing it is for.
+
 ### EVIDENCE
 
 **Reading code is not evidence.** From one week, all four measured:
@@ -220,9 +228,9 @@ surprising, the first thing to re-measure is the measurement.
 
 ## 1. Roles & the carry model
 
-- **Mike** owns all UX-facing / UX-impactful calls, runs ALL host-side
-  execution (pwsh, git push, deploy), and **carries** material between the
-  three surfaces below. Nothing moves between surfaces unless Mike moves it.
+- **Mike** owns all UX-facing / UX-impactful calls, alone runs **commit,
+  push and deploy**, and **carries** material between the three surfaces
+  below. Nothing moves between surfaces unless Mike moves it.
 - **Claude (any surface)** owns Ops: scoping, briefs, verification,
   drafting. Claude never pushes, never deploys, never decides UX.
 - Questions to Mike: one at a time, only when genuinely load-bearing and
@@ -231,36 +239,36 @@ surprising, the first thing to re-measure is the measurement.
 
 ## 2. The three surfaces — capabilities matrix
 
-| Surface | Repo reach | Can write repo | Push/deploy creds | Role |
+| Surface | Repo reach | Can write repo | May push/deploy | Role |
 |---|---|---|---|---|
-| **Chat Claude** (claude.ai) | NONE. No filesystem access to `C:\AI`. Has: Google Drive connector, Chrome browser, web, chat uploads. | No | No | Scoping, briefs, doctrine, reading conduit drops |
-| **Cowork** (desktop app) | Full, via per-session folder mount Mike approves | Yes (sandbox) | **No** | Repo reads, big-file edits, multi-file scoping, reports |
-| **Host pwsh** (Mike) | Full, native | Yes | **YES — the only durable path** | Push, deploy, MV launch, anything load-bearing |
+| **Chat Claude** (claude.ai) | NONE. No filesystem access to `C:\AI`. Has: Google Drive connector, Chrome browser, web, chat uploads. | No | No — and no way to | Scoping, briefs, doctrine, reading conduit drops |
+| **Code** (Claude Code, on the host) | Full, native, as Mike's account | Yes — straight to the tree | **Has them. Never uses them.** | Repo reads/writes, verification, drafting, reports |
+| **Host pwsh** (Mike) | Full, native | Yes | **YES — the only permitted path** | Push, deploy, MV launch, anything load-bearing |
 
 Facts every session must hold without rediscovering them:
-- Chat Claude NEVER has a "Cowork tool." Cowork is a separate app Mike
-  runs. Chat Claude writes Cowork **briefs**; Mike carries them.
-- Cowork folder mounts and delete permissions are **per-session**.
+- Chat Claude has NO filesystem and no tool that reaches one. It writes
+  **briefs**; Mike carries them to Code.
+- Code writes straight into the working tree — no mount, no sandbox, no
+  output folder, nothing to carry out. A file Code writes IS the file.
 - There is no CI. Deploy is manual and host-side only.
   See §0 DEPLOY — THE ONLY ACCOUNT.
-- Cowork outputs land in
-  `%APPDATA%\Claude\local-agent-mode-sessions\<session>\...\outputs` —
-  Mike carries them out (chat upload or the Drive conduit, §3).
+- Code runs as Mike's own account and is NOT fenced off from his push
+  and deploy credentials. Nothing technical stops it. §0 does.
 
 ## 3. Conduit protocols (how material moves)
 
-**Chat → Cowork:** Chat Claude writes a self-contained brief (one task,
-explicit read-only/write scope, explicit output filename). Mike pastes it
-into Cowork.
+**Chat → Code:** Chat Claude writes a self-contained brief (one task,
+explicit read-only/write scope, explicit target path). Mike pastes it
+into Code, which writes to that path directly.
 
-**Cowork → Chat:** Cowork writes its output file; Mike either uploads it
-to the chat directly or drops it in the Drive conduit (below). Either is
-fine; Drive is preferred for code files (chat Claude reads them via the
-Drive connector, octet-stream/base64 for `.jsx` etc.).
+**Code → Chat:** Code writes the file to its path in the tree and says
+so in chat; the file is the record. To reach a session that cannot see
+disk, Mike runs `npm run conduit` (below) or uploads directly — Drive is
+preferred for code files (chat Claude reads them via the Drive connector).
 
-**Host → Chat:** Mike runs a script chat Claude wrote and pastes output
-back. Keep host paste-backs small (single files, short reports); anything
-big or multi-file goes through Cowork instead (Doctrine #3).
+**Host → Code:** Mike runs what Code may not — `git push`,
+`npm run deploy:launch` — and pastes the output back. Everything else Code
+runs itself and reports. A paste-back is for what is gated, not for size.
 
 **The Drive conduit — `G:\My Drive\_conduit\`:**
 - A dedicated folder. Everything in it is a **transfer payload**, not a
@@ -286,7 +294,7 @@ big or multi-file goes through Cowork instead (Doctrine #3).
   about the tree.
 - `_conduit` is disposable. Clear it freely.
 
-## 4. Script rules (anything Mike runs host-side)
+## 4. Script rules (anything run host-side)
 
 1. **No placeholders, ever.** Every path, every value concrete. If a
    value is unknown, the script's first job is to discover and print it.
@@ -341,7 +349,7 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 1. **Verify before scoping.**
 2. **Don't guess — look it up.**
-3. **Default to Cowork for repo work** — repo reads, big-file edits
+3. **Repo work is done in the tree, not through a relay.**
 4. **Drive the live UI by accessibility ref, not pixel coordinates**
 5. **No load-bearing if/else in pasted scripts** (§4.2).
 6. **Durability:** committed AND pushed AND (UI) deployed. Scratch files,

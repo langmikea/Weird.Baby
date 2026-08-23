@@ -9,20 +9,19 @@ If Mike sees Claude constantly referring to this file, Mike will delete it.
 
 - The deployed site is ground truth for "what exists."
 - Windows git is ground truth for repo state.
-- The Cowork-side WSL/9P mount is NOT ground truth — known reliability issues.
 - Treating Cowork-side git state as authoritative caused the burn-down event
   of 2026-05-03. Do not repeat.
 
 ## Editing and committing
 
-- Cowork edits files. Mike runs all git commands on Windows.
+- Code edits files and runs git reads. Mike runs every git write.
 - Every commit step is four moves:
     1. Claude writes the literal git command for Windows PowerShell.
     2. Mike runs it.
     3. Mike pastes output back.
     4. Claude verifies with git log before declaring committed.
 - "Ready to commit" language without command output is forbidden.
-- No Cowork-side git operations.
+- No git writes from Code — commit, push and deploy are Mike's.
 
 ## Documents
 
