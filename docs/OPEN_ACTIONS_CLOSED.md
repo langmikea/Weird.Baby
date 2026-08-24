@@ -519,3 +519,61 @@ clean-up. It names the same page and the same Record, and it is **not** part of
 this delivery: it is a fix to two titles on the glass, in a queue that is
 explicitly not ranked against the 08-16 order. Mike ruled it out of scope on the
 day. **It is still open.**
+## CLOSED 2026-08-23 — HUNTER ROOT'S BIOGRAPHY
+
+**Mike ruled the biography in, and that is what closed this — not a demotion,
+not a re-scope.** The gap M72 named is filled: the card carries three paragraphs
+between its register and its shelf, the way the other three artists' cards have
+since they were built.
+
+**THE ROW LEFT `OPEN_ACTIONS.md` AND SO DID ITS SHORT-LIST TWIN.** Row 48 under
+§0 existed only to point at M72; a short-list entry outliving the row it points
+at is a dangling anchor in the one file Mike is told to open.
+
+| the row | | what closed it |
+|---|---|---|
+| **M72** | | **CLOSED 2026-08-23 — Mike ruled the biography in and lifted the Doctrine 12 refusal.** The slot had been empty since **R4, 2026-08-06**, which struck both of its paragraphs because both WERE the holdings announcement — *"the house artist — the one musician in this wing whose records the museum holds in its own vault…"* and *"Two of those songs are surfaced in this room, both from the vault's own copies…"*. Before CS struck the pair in front of those, the same two slots described this WEBSITE: **the same slot failed the same way three times, and each time the card whose job is to introduce a musician was talking about the house instead.** What fills it is 289 words in three paragraphs — origins, the turn, tradition — Ops' prose, ruled in by Mike, built from DECLARED VAULT FACTS ONLY. |
+| **row 48** | | **CLOSED with M72.** The §0 short-list entry that carried the same gap for Mike's own view. |
+
+**THE TOMBSTONE WAS BUILT FIRST, AND THE ORDER WAS THE WHOLE JOB.** A `label`
+paragraph is classed RESTATED, and a RESTATED row is worth nothing unless its
+`r` resolves to a VERIFIED one. Measured before a word was written: **every
+anchor this artist owned was CATALOGUE-level** — song titles, accession numbers,
+`Crooked Home`, the '94 sleeve, the tee. Not one was about the man, while
+Carsie's and Jesse's bios each resolve onto seven biographical tombstone rows.
+Write the prose first and it would have restated a catalogue. Five rows were
+built to carry it — **Born · Raised · Started · First band · Label** — and ¶1
+now resolves onto four of them.
+
+**NO BIRTH DATE, AND IT IS THE ROW A LATER PASS WILL WANT TO "COMPLETE".**
+Jesse's `Born` carries a date and a place; this one carries a place. No birth
+date exists anywhere in either repository, and the only age anchor —
+`MV-HR-20260707-079`'s *"At 30"* in 2025 — is a PUBLICATION's sentence, not his.
+Subtracting it into a birth year would put an unsourced fact on the glass.
+
+**`src/routes/hr/hr_facts.js` WAS RULED OUT AS AN ANCHOR, BY OPS.** It is the
+only source in the tree for Northstar Artists, which is why the `Label` row says
+Tolok and stops. Its own header calls its contents *"seeds to prove the
+machinery"*, it carries three self-declared unverified BACKLOG items, and two of
+its artist rows have no external source anywhere — yet all 119 of its strings
+are classed VERIFIED against *"the museum's own Hunter Root research"*, which is
+the weakest sourcing sentence in the tree.
+
+**TWO FACTS OPS CITED DO NOT HOLD THE ROWS THEY WERE CITED FOR, AND BOTH ARE
+RECORDED AT THE ROW RATHER THAN ONLY HERE.** `MV-HR-20260707-079` is where he
+**lives now** (*"based in Columbia, outside Lancaster"*), not where he was
+raised; `MV-HR-20260707-076` is about **Nick** starting guitar at eight, not
+about Hunter. Each row's `s` in `provenance/register.json` says so, so the next
+reader meets the correction where the claim is.
+
+**R4'S COMMENT IS NOT DELETED.** `worth-a-listen.js` keeps it whole, with a
+dated amendment appended inside the same block. A lifted refusal is not a
+mistaken one, and it is the only place the three failures of this slot are
+named. Doctrine 12 forbids Ops **inventing** content; it never forbade Ops
+writing what Mike has ruled in.
+
+**ONE INBOUND LINK NOW DANGLES AND IS LEFT STANDING, WHICH IS THIS FILE'S OWN
+PRECEDENT.** `docs/MUSEUM_PORCH_RULINGS_LOG-20260806.md:97` carries
+`[M72](OPEN_ACTIONS.md#m72)`. A round log is a diary and is not edited to track
+a closure — `docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md` has pointed at the
+closed **M40** the same way since 2026-08-16. `npm run desk` will report it.

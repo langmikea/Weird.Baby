@@ -15645,6 +15645,108 @@
    "t": "/robots/twin.html",
    "c": "HOUSE",
    "s": "the Portal's own door: the address twin.html is served from. Was /held/robots/twin.html until 2026-08-22, when Mike ruled the Portal public and the file moved to its public address; the string moved with the file."
+  },
+  "4ffe458664422453": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 639,
+   "t": "Fayetteville, Arkansas",
+   "p": "ARTISTS[].card.tombstone[].v",
+   "c": "VERIFIED",
+   "s": "MediaVault foundation export, src/data/exhibits/hunter_root.facts.json — MV-HR-20260707-035, his own words to Whiskey Riff, 2023: \"I am Pennsylvania raised but I was born in Fayetteville, Arkansas. My brother and I both.\" Place only: no birth date exists in this repository and MV-HR-20260707-079's \"At 30\" is a publication's sentence, not a sourced year."
+  },
+  "b6315dbf00a048ef": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 640,
+   "t": "Raised",
+   "p": "ARTISTS[].card.tombstone[].k",
+   "c": "HOUSE"
+  },
+  "3b520a628ec6e9c7": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 640,
+   "t": "Lancaster County, Pennsylvania",
+   "p": "ARTISTS[].card.tombstone[].v",
+   "c": "VERIFIED",
+   "s": "MediaVault foundation export — MV-HR-20260707-092, The Country Note, 2025 (\"He grew up in Lancaster's Amish country\"), with MV-HR-20260707-035's own \"Pennsylvania raised\". MV-HR-20260707-079 (\"based in Columbia, outside Lancaster\") is where he LIVES now and is deliberately NOT cited for this row."
+  },
+  "2cf8a4b21291449b": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 641,
+   "t": "Started",
+   "p": "ARTISTS[].card.tombstone[].k",
+   "c": "HOUSE"
+  },
+  "218b866b35052e9a": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 641,
+   "t": "Drums and guitar at twelve",
+   "p": "ARTISTS[].card.tombstone[].v",
+   "c": "VERIFIED",
+   "s": "MediaVault foundation export — MV-HR-20260707-042, his own words to MuzicNotez, 2024: \"I started playing drums and guitar at the age of twelve because of my older brother, Nick.\" Corroborated by MV-HR-20260707-081, The Country Note, 2025. MV-HR-20260707-076 is about NICK starting at eight and is not cited for this row."
+  },
+  "9296dfb335e9fde9": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 642,
+   "t": "First band",
+   "p": "ARTISTS[].card.tombstone[].k",
+   "c": "HOUSE"
+  },
+  "eaf7b7d042f92667": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 642,
+   "t": "SEEDS, then Medusa's Disco — Lancaster, c. 2013",
+   "p": "ARTISTS[].card.tombstone[].v",
+   "c": "VERIFIED",
+   "s": "MediaVault foundation export — MV-HR-20260707-003 (founding member of SEEDS, which became Medusa's Disco when a trademark forced the change) and MV-HR-20260707-020 (Wynton Huddle, Chasing Destino, 2018 — first show on the Chameleon Club main stage, Lancaster). The year is arithmetic off MV-HR-20260707-018, \"In August 2014 the band had been together about a year and a half\", and carries `c.` for that reason. Not a DERIVED row: in this register DERIVED means computed at render."
+  },
+  "86216648667316c3": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 643,
+   "t": "Tolok Records, from Crooked Home, 2025",
+   "p": "ARTISTS[].card.tombstone[].v",
+   "c": "VERIFIED",
+   "s": "MediaVault foundation export — MV-HR-20260707-053, Shore Fire Media, 2025: \"Cut at Addiction Studios, Nashville; released October 17, 2025 via Tolok.\" With MV-HR-20260707-079, Americana Highways, 2025: \"Crooked Home was Hunter's first label-backed release.\" Northstar Artists is NOT named here — src/routes/hr/hr_facts.js is its only source and Ops ruled that file out as an anchor (its own header calls its contents seeds)."
+  },
+  "0204d785241beb76": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 745,
+   "t": "He was born in Fayetteville, Arkansas, and raised in Pennsylvania, in Lancaster County, where he still lives. His older brother Nick played guitar first, from the age of eight; Hunter took up drums and guitar at twelve because of him, wanting to be in a band with him. He was a founding member of the Lancaster group SEEDS, which became Medusa's Disco when a trademark forced the change, and whose first show was the main stage of the Chameleon Club — before they had a bassist. Run With The Hunt was the first record under his own name.",
+   "p": "ARTISTS[].card.label[]",
+   "c": "RESTATED",
+   "r": [
+    "4ffe458664422453",
+    "3b520a628ec6e9c7",
+    "218b866b35052e9a",
+    "eaf7b7d042f92667",
+    "d4b948d21a10192d",
+    "src/data/exhibits/hunter_root.facts.json"
+   ],
+   "s": "Ops' prose, ruled in by Mike 2026-08-23, restating this card's own register rows and the vault facts behind them: MV-HR-20260707-035 (born Fayetteville), -092 (raised Lancaster County), -079 (still there), -076 (Nick on guitar from eight), -042 (drums and guitar at twelve, because of Nick), -003 (SEEDS to Medusa's Disco on a trademark), -020 (first show, Chameleon Club main stage, before a bassist), -004 (Run With The Hunt the first solo record)."
+  },
+  "6f3ddb5b74ff9d14": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 754,
+   "t": "The turn came in January 2023. He put twenty seconds of himself singing the first verse of “Town Rat Heathen” on TikTok, it took half a million views, and he finished and released the song on the strength of that; he went from four hundred monthly listeners to a hundred thousand inside a few months. Crooked Home followed on 17 October 2025 — his first label-backed record, and the first he had ever cut live with a full band, produced by Anders Osborne in Nashville. Half of it is about Nick, who died in 2021 at twenty-seven.",
+   "p": "ARTISTS[].card.label[]",
+   "c": "RESTATED",
+   "r": [
+    "86216648667316c3",
+    "48c0fbb0df5e93bd",
+    "src/data/exhibits/hunter_root.facts.json"
+   ],
+   "s": "Ops' prose, ruled in by Mike 2026-08-23. Vault facts: MV-HR-20260707-048 (the twenty-second TikTok of the first verse, 500k views), -041 (January 2023), -049 (400 to 100k monthly listeners), -053 (17 October 2025, Anders Osborne, Nashville, via Tolok), -079 (first label-backed release), -063 (first record cut live with a full band), -068 (half of it about Nick), -001 and -058 (Nick died 2021, aged 27)."
+  },
+  "f9c54535a4577834": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 763,
+   "t": "His first influences were the records his father listened to — the Rolling Stones, Led Zeppelin, The Doors, Lynyrd Skynyrd — and he names Hank just as readily. He says he has always struggled to fit a genre and does not want to land anywhere; the tags on his own posts are country, folk, dark folk and singer-songwriter. The lyric comes first now, where it used to be the riff, written with a notebook and pen. He calls the songs confessions set to music rather than messages. It is spelled Root and pronounced Rut.",
+   "p": "ARTISTS[].card.label[]",
+   "c": "RESTATED",
+   "r": [
+    "ed57743425453268",
+    "src/data/exhibits/hunter_root.facts.json"
+   ],
+   "s": "Ops' prose, ruled in by Mike 2026-08-23. Vault facts: MV-HR-20260707-043 (his father's records — the Rolling Stones, Led Zeppelin, The Doors, Lynyrd Skynyrd), -088 (Hank), -083 (the genre refusal), -091 (lyric before riff, notebook and pen), -052 (confessions set to music, not messages), -082 (spelled Root, pronounced Rut); his own post tags are the feed-sourced row at worth-a-listen-facts.js:520."
   }
  }
 }

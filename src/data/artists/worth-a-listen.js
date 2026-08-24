@@ -582,7 +582,65 @@ const ARTISTS = [
          Carsie's "Twelve, every one of them independent" makes — and it names
          neither the museum nor the vault. The row that had to go is the one
          whose subject was us. */
+      /* ═══ [2026-08-23] FIVE BIOGRAPHICAL ROWS, AND THEY ARE THE ANCHOR THE
+             BIOGRAPHY WILL REST ON ═══════════════════════════════════════════
+         MIKE HAS RULED THE BIOGRAPHY IN. That lifts R4's Doctrine 12 refusal
+         immediately below — which is KEPT, unedited, because it is the record
+         of why this card stood empty for seventeen days and of the two earlier
+         times the same slot failed. A lifted refusal is not a wrong one.
+         THE REGISTER IS BUILT BEFORE THE PROSE, AND THE ORDER IS THE WHOLE
+         POINT. A `label` paragraph is classed RESTATED, and a RESTATED row is
+         only worth anything if its `r` resolves to a VERIFIED row. Measured
+         before writing: every anchor this artist owns was CATALOGUE-level —
+         song titles, accession numbers, `Crooked Home`, the '94 sleeve, the
+         tee. Not one was about the man. Carsie's and Jesse's bios resolve onto
+         SEVEN biographical tombstone rows each; his had three, and all three
+         were about the work. Write the prose first and it would have restated
+         nothing.
+         EVERY VALUE COMES FROM THE VAULT — `src/data/exhibits/hunter_root.facts.json`,
+         the foundation export, which `aboutNote` below already declares as this
+         card's source. Row by row:
+           Born        MV-HR-20260707-035, his own words, Whiskey Riff 2023
+           Raised      MV-HR-20260707-092 (Lancaster's Amish country) with
+                       -035's own "Pennsylvania raised"
+           Started     MV-HR-20260707-042, his own words, MuzicNotez 2024,
+                       corroborated by -081 (The Country Note 2025)
+           First band  MV-HR-20260707-003 and -020; the year is arithmetic off
+                       -018, and carries `c.` because of it
+           Label       MV-HR-20260707-053 (Shore Fire Media) with -079
+         **NO BIRTH DATE, AND THAT IS THE ROW A LATER PASS WILL WANT TO
+         "COMPLETE".** Jesse's `Born` carries a date and a place; this one
+         carries a place. No birth date exists anywhere in either repository.
+         The only age anchor is -079's "At 30" in 2025 — a PUBLICATION's
+         sentence, not his — and subtracting it into a birth year would put a
+         fact on the glass that nobody sourced. The asymmetry is deliberate.
+         `hr_facts.js` IS RULED OUT AS AN ANCHOR and is the reason `Label` says
+         Tolok and not "Tolok Records and Northstar Artists". That file supplies
+         the management name and nothing else does — but its own header calls
+         its contents "seeds to prove the machinery", it carries three
+         self-declared unverified BACKLOG items, and two of its artist rows have
+         no external source anywhere. All 119 of its strings are classed
+         VERIFIED against "the museum's own Hunter Root research", which is the
+         weakest sourcing sentence in the tree. Ops' ruling, not Mike's.
+         THE CHRONOLOGY CONFLICT REPORTED THIS ROUND IS CLOSED AND WAS NEVER
+         ONE. Nick was eleven months older (-070) and started guitar at eight
+         (-076); Hunter started at twelve (-042). Nick had been playing four
+         years by then, so "He played guitar before me" (-037) holds, and 27
+         against 26 fits an eleven-month gap. Nothing to resolve, and it is
+         written here so the next round does not re-open it.
+         `c. 2013` IS NOT A `DERIVED` ROW. In this register DERIVED means a
+         string computed at RENDER — `record-model.js`, `hr_era.js` — not a
+         fact inferred at authoring time. The precedent for this row is
+         `Records`, which is VERIFIED with a source that names its arithmetic.
+         THE SWEEP HAS NOT RUN. Ten new strings enter here (five `k`, five `v`)
+         and `provenance:gate` will report them undeclared until it does. That
+         is step 2's, not this file's. */
       tombstone: [
+        { k: "Born", v: "Fayetteville, Arkansas" },
+        { k: "Raised", v: "Lancaster County, Pennsylvania" },
+        { k: "Started", v: "Drums and guitar at twelve" },
+        { k: "First band", v: "SEEDS, then Medusa's Disco — Lancaster, c. 2013" },
+        { k: "Label", v: "Tolok Records, from Crooked Home, 2025" },
         { k: "Records", v: "Seven, plus an EP and a set of singles and rarities" },
         { k: "His own site", v: "hunterroot.com — Merch, Tour, Tunes, Bio, Contact",
           url: "https://www.hunterroot.com/", src: "his own site" },
@@ -618,7 +676,99 @@ const ARTISTS = [
          decks, doors. Named as a gap in docs/OPEN_ACTIONS.md, with the one
          sourced life fact this museum does hold (MV-HR-20260707-035, his own
          words to Whiskey Riff, 2023) put to Mike as a question rather than
-         drafted into prose nobody asked for. */
+         drafted into prose nobody asked for.
+         ═══ [2026-08-23] AND THE REFUSAL ABOVE IS LIFTED — MIKE RULED THE
+             BIOGRAPHY IN ══════════════════════════════════════════════════
+         **EVERYTHING ABOVE THIS LINE STAYS AND NOT ONE WORD OF IT IS EDITED.**
+         It was right on the day it was written, it is the record of why this
+         card stood empty, and it is the only place the two earlier failures of
+         this same slot are named. A lifted refusal is not a mistaken one, and
+         deleting it would leave the next round to rediscover that the obvious
+         paragraph here has already been written twice about the wrong subject.
+         WHAT CHANGED IS THE RULING, NOT THE DOCTRINE. Doctrine 12 forbids OPS
+         inventing content; it has never forbidden Ops writing what Mike has
+         ruled in. He ruled it in on 2026-08-23 and the text below is Ops'
+         prose built from DECLARED VAULT FACTS ONLY — every clause traces to
+         `src/data/exhibits/hunter_root.facts.json`, the foundation export this
+         card's own `aboutNote` already names as its source.
+         THE TOMBSTONE WAS BUILT FIRST AND ON PURPOSE — see the block above it.
+         A `label` paragraph is RESTATED and a RESTATED row is worth nothing
+         unless its `r` resolves; before this round every anchor he owned was
+         catalogue-level, so the prose would have restated song titles.
+         TWO STALE THINGS IN THE PARAGRAPH ABOVE, FLAGGED AND NOT REWRITTEN
+         because the paragraph is a record: `Exhibit.jsx:3379` is now
+         `Exhibit.jsx:4552` (the conditional is unchanged and still verified on
+         the built page), and "It is empty now" describes the card as it stood
+         from 2026-08-06 to today. */
+      /* ═══ [2026-08-23] HIS BIOGRAPHY. THREE PARAGRAPHS, THE SHAPE THE OTHER
+             THREE CARDS SET ══════════════════════════════════════════════════
+         Origins, then the turn, then tradition and self-description — the same
+         three beats Carsie's and Jesse's labels run, because the shape is the
+         wing's and not a per-artist choice.
+         RULED BY MIKE AND CARRIED WITHOUT A WORD CHANGED. One typographic
+         conformance and it is named here rather than done quietly: the song
+         title arrived as "Town Rat Heathen" in straight quotes and is set as
+         “Town Rat Heathen”, which is what every other song title in this file
+         wears (`“Nothin' Wrong”`, `“’94”`). RECORD titles stay plain — Run
+         With The Hunt and Crooked Home are set exactly as Jesse's `Red Trees
+         and White Trashes` is, with no quotes and no italics, because no label
+         in this wing carries markup of any kind. Nothing else moved: not a
+         word, not a paragraph break, not a dash.
+         THE FACTS BEHIND EACH PARAGRAPH, so a later round can check the prose
+         against the vault without re-deriving which fact is which:
+           ¶1  -035 born Fayetteville · -092 raised Lancaster County · -079 he
+               still lives there · -076 Nick on guitar from eight · -042 drums
+               and guitar at twelve, because of Nick · -003 SEEDS to Medusa's
+               Disco on a trademark · -020 first show, Chameleon Club main
+               stage, before a bassist · -004 Run With The Hunt the first solo
+               record
+           ¶2  -048 the twenty-second TikTok and the half-million views · -041
+               January 2023 · -049 four hundred to a hundred thousand monthly
+               listeners · -053 17 October 2025, Anders Osborne, Nashville ·
+               -079 first label-backed · -063 first cut live with a full band ·
+               -068 half of it about Nick · -001/-058 died 2021 at twenty-seven
+           ¶3  -043 his father's records · -088 Hank · -083 the genre refusal ·
+               his own post tags (worth-a-listen-facts.js, `source: feed`) ·
+               -091 lyric before riff, notebook and pen · -052 confessions set
+               to music · -082 spelled Root, pronounced Rut
+         WHAT IS DELIBERATELY NOT IN IT. Nick's addiction and the six months of
+         hospice (-069, -070, -074) are his own words on his own brother's
+         death and they are the most quotable material in the vault; they are
+         not here. The card already carries the grief where he says it himself,
+         and a museum label summarising a man's brother's overdose in the third
+         person is the house speaking over him. `-064`'s vintage-microphone
+         provenance is a press-kit line with no corroboration in this tree and
+         is out for that reason. Nothing from `src/routes/hr/hr_facts.js` is
+         used anywhere in these three paragraphs — ruled out as an anchor in
+         the tombstone block above, and the ruling holds here. */
+      label: [
+        "He was born in Fayetteville, Arkansas, and raised in Pennsylvania, " +
+        "in Lancaster County, where he still lives. His older brother Nick " +
+        "played guitar first, from the age of eight; Hunter took up drums " +
+        "and guitar at twelve because of him, wanting to be in a band with " +
+        "him. He was a founding member of the Lancaster group SEEDS, which " +
+        "became Medusa's Disco when a trademark forced the change, and " +
+        "whose first show was the main stage of the Chameleon Club — before " +
+        "they had a bassist. Run With The Hunt was the first record under " +
+        "his own name.",
+        "The turn came in January 2023. He put twenty seconds of himself " +
+        "singing the first verse of “Town Rat Heathen” on TikTok, it took " +
+        "half a million views, and he finished and released the song on the " +
+        "strength of that; he went from four hundred monthly listeners to a " +
+        "hundred thousand inside a few months. Crooked Home followed on 17 " +
+        "October 2025 — his first label-backed record, and the first he had " +
+        "ever cut live with a full band, produced by Anders Osborne in " +
+        "Nashville. Half of it is about Nick, who died in 2021 at " +
+        "twenty-seven.",
+        "His first influences were the records his father listened to — the " +
+        "Rolling Stones, Led Zeppelin, The Doors, Lynyrd Skynyrd — and he " +
+        "names Hank just as readily. He says he has always struggled to fit " +
+        "a genre and does not want to land anywhere; the tags on his own " +
+        "posts are country, folk, dark folk and singer-songwriter. The " +
+        "lyric comes first now, where it used to be the riff, written with " +
+        "a notebook and pen. He calls the songs confessions set to music " +
+        "rather than messages. It is spelled Root and pronounced Rut.",
+      ],
       /* [P22] the merch list stays — it is a store inventory, not a
          discography, and it is the one place a visitor learns the records
          exist as OBJECTS. The "lately, in his own words" list graduated into
