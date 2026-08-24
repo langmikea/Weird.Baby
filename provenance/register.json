@@ -15761,6 +15761,139 @@
    "t": "Cache-Control",
    "p": "noStore{}.headers.set",
    "c": "HOUSE"
+  },
+  "946c2654c4c9b066": {
+   "f": "src/worker.js",
+   "l": 301,
+   "t": "wb_asof",
+   "p": "AS_OF_COOKIE",
+   "c": "HOUSE"
+  },
+  "283af9881ce8b757": {
+   "f": "src/worker.js",
+   "l": 302,
+   "t": "wb-asof-v1:{}:{}",
+   "p": "asOfToken",
+   "c": "HOUSE"
+  },
+  "09e99153b34a1947": {
+   "f": "src/worker.js",
+   "l": 308,
+   "t": "{}={}; Path=/; HttpOnly; Secure; SameSite=Lax",
+   "p": "AS_OF_SET",
+   "c": "HOUSE"
+  },
+  "02c6472a382d2e25": {
+   "f": "src/worker.js",
+   "l": 309,
+   "t": "{}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0",
+   "p": "AS_OF_CLEAR",
+   "c": "HOUSE"
+  },
+  "732ab34e2b4cecfc": {
+   "f": "src/worker.js",
+   "l": 313,
+   "t": "{}T00:00:00Z",
+   "p": "realCalendarDay{}.Date.parse",
+   "c": "HOUSE"
+  },
+  "b9f0c0cc83bf7716": {
+   "f": "src/worker.js",
+   "l": 319,
+   "t": "malformed — expected YYYY-MM-DD",
+   "p": "badDay{}.shape",
+   "c": "HOUSE"
+  },
+  "bc73ca42ebe5f07a": {
+   "f": "src/worker.js",
+   "l": 320,
+   "t": "not a real calendar day — {} does not exist",
+   "p": "badDay{}.calendar",
+   "c": "HOUSE"
+  },
+  "2461349ff753451e": {
+   "f": "src/worker.js",
+   "l": 322,
+   "t": "forward-dated — {} is after {}. ",
+   "p": "badDay{}.forward",
+   "c": "HOUSE"
+  },
+  "57d7ae17715cd16d": {
+   "f": "src/worker.js",
+   "l": 323,
+   "t": "Backwards is honoured; forwards is refused, not clamped",
+   "p": "badDay{}.forward",
+   "c": "HOUSE"
+  },
+  "301e1d9c6bd72977": {
+   "f": "src/worker.js",
+   "l": 332,
+   "t": "as-of refused: {}.\nClear it with ?as-of=off\n",
+   "p": "refuseAsOf{}",
+   "c": "HOUSE"
+  },
+  "81db8e27457aff48": {
+   "f": "src/worker.js",
+   "l": 333,
+   "t": "text/plain;charset=UTF-8",
+   "p": "refuseAsOf{}.Content-Type",
+   "c": "HOUSE"
+  },
+  "e000a5a0178cf2de": {
+   "f": "src/worker.js",
+   "l": 350,
+   "t": "The museum is being driven to {} (the real day is ",
+   "p": "drivenReadOnly{}.error",
+   "c": "HOUSE"
+  },
+  "c39b5a5b3d8ac0f1": {
+   "f": "src/worker.js",
+   "l": 351,
+   "t": "{}). Writes are refused while the clock is driven. ",
+   "p": "drivenReadOnly{}.error",
+   "c": "HOUSE"
+  },
+  "1336ca22ca8efe10": {
+   "f": "src/worker.js",
+   "l": 352,
+   "t": "Clear it with ?as-of=off",
+   "p": "drivenReadOnly{}.error",
+   "c": "HOUSE"
+  },
+  "0590003602fd44a9": {
+   "f": "src/worker.js",
+   "l": 360,
+   "t": "as-of",
+   "p": "resolveAsOf{}.searchParams",
+   "c": "HOUSE"
+  },
+  "4262d2b1665a5597": {
+   "f": "src/worker.js",
+   "l": 373,
+   "t": "{}.{}",
+   "p": "resolveAsOf{}.mint",
+   "c": "HOUSE"
+  },
+  "a7c8d15fc7fc8461": {
+   "f": "src/worker.js",
+   "l": 381,
+   "t": "cookie is malformed",
+   "p": "resolveAsOf{}.refusal",
+   "c": "HOUSE"
+  },
+  "bd761b5e9201f851": {
+   "f": "src/worker.js",
+   "l": 391,
+   "t": "cookie does not verify against this deployment's key",
+   "p": "resolveAsOf{}.refusal",
+   "c": "HOUSE"
+  },
+  "1335d71460679a75": {
+   "f": "src/worker.js",
+   "l": 921,
+   "t": "Set-Cookie",
+   "p": "withSetCookie{}.header",
+   "c": "HOUSE"
   }
  }
 }

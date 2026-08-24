@@ -70,7 +70,7 @@
    literal in the built worker rather than a runtime lookup — there is no
    environment variable on the deployed Worker that can move it, and the only
    way to change stage is to build again. */
-import { todayInRecordTz, assetWithheld, RECORD_TZ } from "../reveal/record-clock.mjs";
+import { todayInRecordTz, recordVisibleAt, assetWithheld, RECORD_TZ } from "../reveal/record-clock.mjs";
 
 const HELD_COOKIE = "wb_held";
 export const LOCKED_DIRS = ["/assets/locked/", "/locked/"];
@@ -228,6 +228,171 @@ async function previewOpen(request, env) {
   return got === await recordToken(env.RECORD_KEY);
 }
 
+/* ═══ [2026-08-24] THE DATE PARAMETER — A FOURTH DOOR, AND IT MOVES THE CLOCK ══
+   MIKE/OPS: drive the museum to a past day and see what that day showed.
+
+   ═══ IT MOVES THE CLOCK AND NEVER THE STORY ════════════════════════════════
+   THIS IS THE WHOLE DESIGN AND EVERY OTHER PROPERTY FALLS OUT OF IT. The
+   parameter changes ONE THING: what day this worker thinks it is. It does not
+   filter entries, does not choose assets, does not open or shut a wing, and
+   owns no list of what any day contained. Every existing rule then runs
+   UNCHANGED against a different day and reveals exactly what it would have
+   revealed then — `assetWithheld` holds the same files it would have held,
+   `wingOpenOn` answers the same way, the page's own filter draws the same
+   entries. Nothing new consults a clock; ONE EXISTING CLOCK READ GETS A
+   DIFFERENT ANSWER.
+   SO THERE IS NO SCHEDULE FILE, NO DATE MAP AND NO LIST, and if a later round
+   finds itself wanting one, the thing it is building is not this feature. A
+   table of what each day showed is a SECOND SOURCE OF TRUTH about the past,
+   and it would drift from the Record the first time an entry was edited.
+
+   ═══ ONE READ, ONE OVERRIDE — AND NOTHING COUNTS THE CALL SITES ════════════
+   `todayInRecordTz()` IS CALLED EXACTLY ONCE IN THIS FILE, in the default
+   export below, and its result is `realToday`. The driven day is chosen from it
+   there and handed down as `clock.today`; nothing downstream reads a clock or
+   knows that one exists. A SECOND CALL WOULD SPLIT THE MUSEUM IN HALF — part of
+   a page answering the driven day and part the real one — and it would do so
+   silently, on a path nobody looks at.
+   > **[FLAG 2026-08-24 · flagged, not fixed] NOTHING IN THIS TREE COUNTS THEM.**
+   > No gate greps for a second `todayInRecordTz(` in this file, exactly as no
+   > gate reads a response header. The rule holds today because it is written
+   > here, and a future edit that adds a second call will be reported by nobody.
+
+   ═══ A COOKIE CARRIES, A QUERY GESTURES ════════════════════════════════════
+   `?as-of=` is a one-shot gesture that MINTS `wb_asof`; the cookie is what
+   every subsequent request rides on. It has to be a cookie: a query dies on
+   subresources, so the page would come back on the driven day while every
+   image it names was fetched on the real one — and the asset door would refuse
+   exactly the pictures the visit exists to look at.
+   ITS OWN COOKIE, NOT A SEAT ON `wb_record`. A new reason gets a new door (§8).
+   `wb_record` shows FUTURE entries; this moves the clock BACKWARDS. They are
+   opposite motions and folding them together would mean one control doing two
+   things nobody asked it to do at once.
+
+   ═══ WHAT IS BEHIND THE KEY, AND WHAT IS NOT ═══════════════════════════════
+   MINTING is behind the Record key: the requester must already hold `wb_record`
+   (Mike ruled A — Ops and Mike only). The minted cookie then carries its OWN
+   digest, `sha256("wb-asof-v1:" + RECORD_KEY + ":" + day)`, so reading it back
+   costs one hash and does not re-check the other door on every request. A
+   forged `wb_asof` drives nothing.
+   CLEARING IS NOT BEHIND THE KEY, and it is checked BEFORE anything else is
+   validated. The exit cannot sit behind the thing that is broken: a cookie that
+   fails every test below must still be removable, and giving up a privilege is
+   not a privileged act — the same reasoning `/api/record {close:true}` carries.
+
+   ═══ BACKWARDS ONLY, AND A REFUSAL IS SAID OUT LOUD ════════════════════════
+   Forwards is REFUSED, never clamped to today. A clamp would answer a question
+   nobody asked and look like it had worked. A malformed value is refused and
+   the refusal NAMES WHICH CHECK FAILED, because "as-of refused" on its own
+   sends the reader back to guess between four things.
+
+   ═══ RULING B: A BARE QUERY FROM A STRANGER IS IGNORED ═════════════════════
+   **DO NOT "FIX" THIS INTO A REFUSAL.** An earlier draft refused every
+   unauthenticated `?as-of=`, on the reading that a supplied date must never be
+   dropped silently. Ops corrected it: that rule was written about a DRIVEN
+   SESSION dropping a date quietly, and generalising it into a UX consequence
+   would hand any stranger a URL that makes the museum answer an error page —
+   `weird.baby/?as-of=x`, typed once, shareable. So a requester who presents
+   NOTHING gets today's museum with the parameter ignored, exactly as before
+   this parameter existed. A requester who presents SOMETHING — a `wb_asof`
+   cookie, or a query while holding `wb_record` — gets an explicit refusal,
+   because they are the one who can act on it. Never silent to a driver; never
+   loud at a passer-by. */
+const AS_OF_COOKIE = "wb_asof";
+const asOfToken = (key, day) => sha256Hex("wb-asof-v1:" + key + ":" + day);
+const ISO_DAY = /^\d{4}-\d{2}-\d{2}$/;
+/* SESSION-SCOPED ON PURPOSE — no `Max-Age`, so it dies with the browser window.
+   Ops ruled the lifetime "short, and not a number": a constant here is a thing
+   a later round tunes, and a driven session should not outlive the sitting in
+   which somebody chose to drive. */
+const AS_OF_SET = (v) => `${AS_OF_COOKIE}=${v}; Path=/; HttpOnly; Secure; SameSite=Lax`;
+const AS_OF_CLEAR = `${AS_OF_COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`;
+
+/** `2026-02-30` passes the shape and is not a day. Round-tripping is the test. */
+function realCalendarDay(day) {
+  const t = Date.parse(day + "T00:00:00Z");
+  return Number.isFinite(t) && new Date(t).toISOString().slice(0, 10) === day;
+}
+
+/** which check a candidate day fails, in words, or null when it passes */
+function badDay(day, realToday) {
+  if (!ISO_DAY.test(day)) return "malformed — expected YYYY-MM-DD";
+  if (!realCalendarDay(day)) return `not a real calendar day — ${day} does not exist`;
+  if (day > realToday) {
+    return `forward-dated — ${day} is after ${realToday}. `
+         + "Backwards is honoured; forwards is refused, not clamped";
+  }
+  return null;
+}
+
+/* every refusal is marked like every other cookie-decided exit in this file,
+   and every one of them names the way out. See THE CACHE KEY at the head. */
+function refuseAsOf(status, why) {
+  return new Response(
+    `as-of refused: ${why}.\nClear it with ?as-of=off\n`,
+    { status, headers: { "Content-Type": "text/plain;charset=UTF-8",
+                         "Cache-Control": NO_STORE } });
+}
+
+/* ═══ [2026-08-24] A DRIVEN SESSION IS READ-ONLY ═══════════════════════════
+   The three D1 writes stamp `datetime('now')` — SQLite's clock, which this
+   parameter does not reach and must not. So a row written while the museum is
+   pretending to be another day would carry the REAL instant against work done
+   in a FICTIONAL one, and nothing afterwards could tell it from an honest row:
+   not the row, not the table, not a person reading either. A guest book
+   signature is the clear case — it is somebody's mark on a day, and a mark
+   whose day cannot be trusted is worse than a mark that was never made.
+   SO THE WRITE IS REFUSED, NOT STAMPED DIFFERENTLY AND NOT DROPPED. A driven
+   session therefore logs no visits at all: the counts for it are ABSENT rather
+   than wrong, which is the failure that can be reasoned about later. */
+function drivenReadOnly(cors, clock) {
+  return new Response(JSON.stringify({
+    error: `The museum is being driven to ${clock.today} (the real day is `
+         + `${clock.realToday}). Writes are refused while the clock is driven. `
+         + "Clear it with ?as-of=off",
+    driven: true, today: clock.today, realToday: clock.realToday,
+  }), { status: 403, headers: { ...cors, "Content-Type": "application/json",
+                                "Cache-Control": NO_STORE } });
+}
+
+/** `{}` = not driven · `{day}` = driven · `{cookie}` = mint/clear · `{refusal}` */
+async function resolveAsOf(request, env, url, realToday) {
+  const q = url.searchParams.get("as-of");
+
+  /* CLEAR FIRST, BEFORE ANY VALIDATION — see the note above. */
+  if (q === "off") return { cookie: AS_OF_CLEAR };
+
+  if (q !== null) {
+    /* THE QUERY MINTS. Ruling B: a requester who proves nothing is ignored,
+       and that is checked before the value is judged, so a stranger's typo
+       never becomes an error page. */
+    if (!env.RECORD_KEY) return {};
+    if (!await previewOpen(request, env)) return {};
+    const why = badDay(q, realToday);
+    if (why) return { refusal: refuseAsOf(400, why) };
+    return { day: q, cookie: AS_OF_SET(`${q}.${await asOfToken(env.RECORD_KEY, q)}`) };
+  }
+
+  /* THE COOKIE CARRIES. Presenting one IS presenting something, so from here
+     down every failure is said out loud rather than ignored. */
+  const raw = readCookie(request, AS_OF_COOKIE);
+  if (!raw) return {};
+  const cut = raw.lastIndexOf(".");
+  if (cut < 0) return { refusal: refuseAsOf(400, "cookie is malformed") };
+  const day = raw.slice(0, cut);
+  const why = badDay(day, realToday);
+  if (why) return { refusal: refuseAsOf(400, why) };
+  if (!env.RECORD_KEY) return { refusal: refuseAsOf(503, NO_RECORD_KEY_NOTE) };
+  /* re-checked on every request, not only at the mint. A day minted behind the
+     real one can never become a day ahead of it, so this cannot fire on an
+     honest cookie — it is here so the cookie cannot drive forward under any
+     circumstance a later round has to reason about. */
+  if (raw.slice(cut + 1) !== await asOfToken(env.RECORD_KEY, day)) {
+    return { refusal: refuseAsOf(403, "cookie does not verify against this deployment's key") };
+  }
+  return { day };
+}
+
 /* ── THE INJECTION ──────────────────────────────────────────────────────────
    The page needs the SERVER's date before its first line runs, or the Record
    would draw with the browser's clock and then correct itself — a flash of the
@@ -249,7 +414,7 @@ const CARD_WHILE_SHUT =
   "A museum of weird things worth keeping. No ads, no affiliate links, "
   + "no cut of anything you buy from an artist.";
 
-function injectClock(response, today, previewing, wingOpen, governed) {
+function injectClock(response, clock, previewing, wingOpen, governed) {
   const type = response.headers.get("Content-Type") || "";
   if (!type.includes("text/html")) {
     /* [2026-08-24] NOT HTML, SO NOTHING IS INJECTED — AND THE ONLY
@@ -304,8 +469,8 @@ function injectClock(response, today, previewing, wingOpen, governed) {
      same function, same response, same `<script>`, computed on the same request
      as the date beside it. */
   const payload =
-    `window.__WB_TODAY__=${JSON.stringify(today)};` +
-    `window.__WB_NOW__=${Date.now()};` +
+    `window.__WB_TODAY__=${JSON.stringify(clock.today)};` +
+    `window.__WB_NOW__=${clock.nowMs};` +
     `window.__WB_RECORD_ALL__=${previewing ? "true" : "false"};`;
   let r = new HTMLRewriter()
     .on("head", {
@@ -331,13 +496,20 @@ function wingOpenOn(today) {
   return !!__WB_RECORD_FIRST_DAY__ && today >= __WB_RECORD_FIRST_DAY__;
 }
 
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-
+/* ═══ [2026-08-24] THE ENTRY POINT IS TWO HALVES, AND THE SPLIT IS THE POINT ══
+   `routes` is the museum and knows nothing about clocks or driving: it is handed
+   a `clock` and answers. The default export below is the ONLY thing that reads
+   the real day, resolves the override and stamps the cookie — so there is one
+   place to look for "what day is it" and one place a `Set-Cookie` can be added,
+   instead of a stamp at each of the dozen returns in here. */
+const routes = {
+  async fetch(request, env, url, clock) {
     /* [CH5] the museum's own day, computed once per request. Everything below
-       that reasons about the Record reads this and never `new Date()` again. */
-    const recordToday = todayInRecordTz();
+       that reasons about the Record reads this and never `new Date()` again.
+       [2026-08-24] IT IS NOW HANDED IN RATHER THAN READ. Same value, same name,
+       same meaning to every line below — the difference is that it may have
+       been driven, and NOTHING DOWN HERE LEARNS THAT. See THE DATE PARAMETER. */
+    const recordToday = clock.today;
 
     // CORS headers
     const cors = {
@@ -486,6 +658,8 @@ export default {
 
     // POST /api/visits — log a page visit
     if (url.pathname === "/api/visits" && request.method === "POST") {
+      /* [2026-08-24] see A DRIVEN SESSION IS READ-ONLY above. */
+      if (clock.driven) return drivenReadOnly(cors, clock);
       try {
         const { page, referrer } = await request.json();
         await env.weird_baby_db.prepare(
@@ -511,6 +685,8 @@ export default {
 
     // POST /api/guestbook — sign the guest book
     if (url.pathname === "/api/guestbook" && request.method === "POST") {
+      /* [2026-08-24] a signature is somebody's mark on a DAY; see above. */
+      if (clock.driven) return drivenReadOnly(cors, clock);
       try {
         const { name, note } = await request.json();
         if (!name || !name.trim()) {
@@ -557,6 +733,8 @@ export default {
     // POST /api/presets {payload:<snapshot>} → {id}. Payload stored opaque,
     // size-capped, shape-checked just enough to refuse junk.
     if (url.pathname === "/api/presets" && request.method === "POST") {
+      /* [2026-08-24] see A DRIVEN SESSION IS READ-ONLY above. */
+      if (clock.driven) return drivenReadOnly(cors, clock);
       try {
         const body = await request.text();
         if (body.length > 8192) {
@@ -698,6 +876,14 @@ export default {
            age a later request can read, so on any page load after the one that
            minted it this is the whole of what is honestly knowable. */
         maxAgeDays: Math.round(HELD_MAX_AGE / 86400),
+        /* ═══ [2026-08-24] A DRIVEN CLOCK IS NEVER SILENT, AND BOTH DAYS OR
+           NEITHER. `today` is what the museum is reckoning and `realToday` is
+           what the world says; ONE WITHOUT THE OTHER IS THE LIE, because
+           `today` alone reads as the truth on any day it has been driven. This
+           endpoint is the only place a driven session is legible — nothing on
+           the glass says so — which is why all three fields ship together. */
+        realToday: clock.realToday,
+        driven: clock.driven,
         /* [2026-08-24] `previewing` above is decided by `wb_record`, so this
            is the Record clock's half of the same fault `/api/held` carries:
            two bodies, one URL, a key that does not see the cookie.
@@ -716,7 +902,55 @@ export default {
        half of the Record clock's door (a `.webp` a previewer may have early).
        `injectClock` is where both are stamped — see the two notes in it. */
     return injectClock(
-      await env.ASSETS.fetch(request), recordToday,
+      await env.ASSETS.fetch(request), clock,
       await previewOpen(request, env), wingOpenOn(recordToday), governed);
+  }
+};
+
+/* attach a Set-Cookie to a response the router already decided.
+   IT MARKS AS WELL AS APPENDS, AND THAT IS NOT BELT-AND-BRACES. The router's
+   marked exits cover every response whose BODY depends on a cookie, but this
+   function can land on one whose body does not — `?as-of=` typed onto a plain
+   public asset returns an ordinary image, which leaves with `public,
+   max-age=0, must-revalidate` and would now carry a `Set-Cookie` holding the
+   driving token. A cached Set-Cookie hands a stranger the key, so anything
+   this touches is marked here, on its own condition, rather than relying on
+   where it happened to land. */
+function withSetCookie(response, cookie) {
+  const out = new Response(response.body, response);
+  out.headers.append("Set-Cookie", cookie);
+  out.headers.set("Cache-Control", NO_STORE);
+  return out;
+}
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    /* ═══ THE ONE READ. There is exactly one `todayInRecordTz(` in this file and
+       it is this line. Nothing counts them — see THE DATE PARAMETER above. */
+    const realToday = todayInRecordTz();
+
+    const asOf = await resolveAsOf(request, env, url, realToday);
+    if (asOf.refusal) return asOf.refusal;
+
+    /* THE INSTANT FOLLOWS THE DAY, or the Record is on one day and the lobby
+       countdown on another. `recordVisibleAt(day)` is the instant museum-day
+       `day` BEGINS — `todayInRecordTz` starts returning `day` at RECORD_HOUR on
+       it, and this is that same moment read from the other end. This is its
+       first caller; it has been correct and unused since 2026-08-16.
+       UNDRIVEN IT STAYS `Date.now()`, so a visitor with no cookie gets the byte
+       for byte identical injection they got before this existed. */
+    const clock = {
+      today: asOf.day || realToday,
+      realToday,
+      driven: !!asOf.day,
+      nowMs: asOf.day ? recordVisibleAt(asOf.day) : Date.now(),
+    };
+
+    const response = await routes.fetch(request, env, url, clock);
+    /* the mint and the clear are the only two responses that carry it, and both
+       are already marked no-store by the exit that produced them. */
+    return asOf.cookie ? withSetCookie(response, asOf.cookie) : response;
   }
 };
