@@ -53,6 +53,38 @@ tools/dictation/.thumb-cache.json
 # writing); its dated backups are not.
 docs/dictation-20260807/answers.*.bak.json
 
+# THE LIVE PREVIEW'S BUNDLE — build output, and it stopped being committable on
+# 2026-08-24, when it reached 1.85 MB.
+#
+# WHY IT GREW, AND WHY NO CONFIG FLAG REACHES IT.
+# tools/dictation/preview/vite.config.mjs is a `build.lib` build, and vite's
+# `shouldInline()` returns true on `config.build.lib` BEFORE it ever reads
+# `assetsInlineLimit` — so every asset is inlined unconditionally and the limit
+# is dead config. The museum went from 1 self-hosted webface to 41 between
+# 2026-08-12 and 2026-08-24 and all 41 arrive as base64: 1,761,172 of
+# preview.css's 1,852,798 bytes are font payload, 95.1% of the file, against
+# 91,626 bytes of actual stylesheet. The only way to reach the limit is to stop
+# being a lib build — an HTML entry, a base path and a manifest read-back, all
+# moving parts that config's own header rejects by name — and it would still
+# commit ~1.32 MB, now as 41 binaries whose hashed names churn.
+#
+# BOTH HALVES, NOT ONE. They are one vite build, linked by unhashed name from
+# record.html and frame.html. Ignoring the CSS while committing the JS splits a
+# build in half: nothing 404s, it just draws in the wrong faces, silently — and
+# a silent wrong rendering is the one failure a man with aphantasia cannot catch
+# by reading. A build artifact in history is the thing being fixed; half of one
+# is not a smaller version of it.
+#
+# A FRESH CLONE FAILS LOUD RATHER THAN DRAWING WRONG. tools/dictation/prep.mjs
+# throws if the bundle does not build, and throws again if either file is
+# missing, so an ungenerated preview is an error with a message rather than a
+# page in fallback type. One command restores both: npm run dictation.
+#
+# frame.html IS DELIBERATELY NOT HERE. It is hand-written, committed, and copied
+# in AFTER the build, because vite's `emptyOutDir` clears this folder every run.
+docs/dictation-20260807/_preview/preview.css
+docs/dictation-20260807/_preview/preview.js
+
 # RENDER OUTPUT. A recipe is the durable artifact; the MP4 it compiles to is
 # not — it is regenerable from the recipe by one command, it is megabytes, and
 # it is a file Mike uploads to a platform rather than anything the museum
