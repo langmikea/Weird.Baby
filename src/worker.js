@@ -645,6 +645,18 @@ const routes = {
            above reads. `/admin` prints it. Nothing on a public surface does —
            what stage a museum is at is a fact about the work (Doctrine 11). */
         stage: __WB_STAGE__,
+        /* ═══ [2026-08-24] WHAT COMMIT IS THIS? PRODUCTION ANSWERS IT ═══════
+           Until today nothing in the repository could say what was deployed —
+           establishing it meant probing this site and bracketing the answer
+           from which fields `/api/record` was MISSING. `docs/DEPLOYED.md` is
+           the tree's record and is written automatically, but it is written
+           after the deploy and still needs committing, so it can drift. This
+           cannot: it is compiled in (`__WB_COMMIT__`, vite.config.js) and it is
+           whatever actually shipped. A `-dirty` suffix means the build was made
+           over uncommitted changes and the sha alone does not describe it.
+           NULL WITHOUT THE KEY, like `served` and `probe`: what commit a museum
+           is running is a fact about the WORK (Doctrine 11). */
+        commit: open ? __WB_COMMIT__ : null,
         /* [2026-08-24] `open`, `served` and `probe` above are all decided by
            `wb_held`: this endpoint answers two different bodies at one URL,
            same as the doors it reports on. It is EXTENSIONLESS, so it sits

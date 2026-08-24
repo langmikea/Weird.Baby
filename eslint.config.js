@@ -39,6 +39,10 @@ export default defineConfig([
       globals: {
         ...globals.browser,
         __BUILD_TIME__: 'readonly', // injected by vite.config.js define{}
+        // [2026-08-24] the commit the bundle was built from, so production can
+        // answer "what is live" — `/api/held` reports it to a key-holder. See
+        // THE COMMIT TRAVELS WITH THE BUNDLE at the head of vite.config.js.
+        __WB_COMMIT__: 'readonly',
         __WB_STAGE__: 'readonly',      // [V1] the stage — see reveal/stage.mjs
         __WB_PLACEMENT__: 'readonly',  // [V1] stage + the public placement set
         // [CH5 2026-08-12] the Record's clock. `__WB_RECORD_ASSETS__` is the

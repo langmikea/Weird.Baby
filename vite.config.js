@@ -18,12 +18,43 @@ import { assetSchedule } from "./reveal/record-clock.mjs";
 import { entries as recordEntries } from "./reveal/record-entries.mjs";
 import { recordDay } from "./src/data/artists/record-epoch.js";
 import { state as approvalState } from "./reveal/approval.mjs";
+import { execSync } from "node:child_process";
 
 /* [V1 2026-08-06] THE STAGE, READ ONCE PER BUILD. `reveal/stage.mjs` is the
    declaration and its header is the ruling; an unknown value throws there
    rather than falling back, so a typo'd flag fails the build instead of
    quietly building the state you thought you had left. */
 const STAGE = readStage(process.env);
+
+/* ═══ [2026-08-24] THE COMMIT TRAVELS WITH THE BUNDLE, SO PRODUCTION CAN SAY
+       WHAT IT IS ══════════════════════════════════════════════════════════════
+   Nothing in this repository could answer *what is deployed*. Establishing it
+   on 2026-08-24 meant probing the live site and bracketing the answer from
+   which fields `/api/record` was missing — which is not a method anybody should
+   need twice. `docs/DEPLOYED.md` is the tree's record and `tools/deploy-record.mjs`
+   writes it without being asked — but it is written AFTER the deploy and still
+   has to be COMMITTED by a person, so it can drift. THIS cannot: the sha is
+   compiled into the worker, and the worker reports it.
+
+   IT IS ANSWERED ONLY TO A KEY-HOLDER, like `served` and `probe` beside it.
+   What commit a museum is running is a fact about the WORK (Doctrine 11).
+
+   `-dirty` IS PART OF IT AND IS NOT A DETAIL. Mike deploys from the working
+   tree. A sha recorded against a tree with uncommitted changes is a lie of
+   exactly the kind the conduit's freshness stamp exists to stop, so a build
+   made over uncommitted changes says so and goes on saying so while it is live.
+
+   NO GIT? `unknown`, and the build proceeds. A build that cannot read git is
+   not a reason to refuse to build; it is a reason to say the sha is unknown. */
+const COMMIT = (() => {
+  try {
+    const sha = execSync("git rev-parse --short HEAD", { encoding: "utf8" }).trim();
+    const dirty = execSync("git status --porcelain", { encoding: "utf8" }).trim() !== "";
+    return dirty ? sha + "-dirty" : sha;
+  } catch {
+    return "unknown";
+  }
+})();
 
 /* [R5 2026-08-06] HUNTER ROOT'S VAULT AUDIO DOES NOT ENTER THE BUNDLE.
    Mike: "we do not have his permission… the vault keeps the material; the site
@@ -498,6 +529,14 @@ const opsBraceGuard = {
 export default defineConfig({
   define: {
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+    /* [2026-08-24] see THE COMMIT TRAVELS WITH THE BUNDLE at the head of this
+       file. Note for anyone who reads `reveal/stage.mjs`'s claim that the
+       bundle is BYTE IDENTICAL every day: it already was not — `__BUILD_TIME__`
+       above has stamped a fresh ISO instant into every build since 2026-08-08
+       and `WbAdmin.jsx` prints it. This adds a second per-build value to a
+       bundle that was never reproducible, rather than making a reproducible one
+       stop being so. */
+    __WB_COMMIT__: JSON.stringify(COMMIT),
     /* [V1 2026-08-06] THE STAGE REACHES THREE PLACES AND ALL THREE ARE BUILT
        BY VITE: the worker (whether the stage door opens), `src/lib/stage.js`
        (what /admin reports) and `src/lib/placement.js` (what a governed
