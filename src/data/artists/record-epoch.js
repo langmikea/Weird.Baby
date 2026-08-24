@@ -20,8 +20,8 @@
      **AN ENTRY'S DATE IS THE ACTUAL CALENDAR DAY IT IS PUBLISHED, NOT A
      FICTIONAL OFFSET.**
 
-   There is no story clock running beside the real one. A Record entry dated the
-   seventeenth of August went on the glass on the seventeenth of August, and
+   There is no story clock running beside the real one. A Record entry dated a
+   given day goes on the glass on that day, and
    everything the museum derives from a date — the register stamp, the weekday,
    the week number, the month band — is arithmetic on a day that actually
    happened. It is why `entryDate()` has always parsed a CALENDAR date rather
@@ -43,14 +43,47 @@
    qualification and is the reason this is a constant and not a decision.
 
    AND IT AGREES WITH HIS OWN TEXT, which was checked rather than assumed:
-   2026-08-17 is a **Monday** — his report says the site went live *"at 12:00 am
-   Monday morning"* — and his `FRIDAY DAY (-3)` heading lands on 2026-08-14,
-   which is a **Friday**. Nothing was adjusted to make that true. */
-export const RECORD_EPOCH = "2026-08-17";
+   2026-08-31 is a **Monday** — his report says the site went live *"at 12:00 am
+   Monday morning"* — and his `FRIDAY DAY (-3)` heading lands on 2026-08-28,
+   which is a **Friday**. Nothing was adjusted to make that true.
+
+   ═══ [2026-08-24] THE DATE MOVED TO 2026-08-31, AND THE MECHANISM IS WHAT LET
+       IT ════════════════════════════════════════════════════════════════════
+   MIKE'S RULING C: last week was design and development. **The site was never
+   live.** Nothing is unpublished because nothing was published, so *we never go
+   backwards* is not broken by this — there is nothing behind us to go back to.
+   The site restarts **Sunday 30 August** and Record 001 posts **Monday
+   31 August at 17:00 America/New_York.**
+
+   IT COST ONE LINE, WHICH IS THE ONLY INTERESTING THING ABOUT IT — the claim
+   three paragraphs above, collected. Everything followed: five entry dates, the
+   stamps, the weekdays, the week numbers, the datelines, both build bakes, the
+   share cards, the wing and the lobby countdown. **The five entries were not
+   edited.** Not one of them carries a literal date; `recordDay(n)` did the move.
+
+   AND THE WEEKDAYS SURVIVED, WHICH IS WHY THIS DATE AND NOT ANOTHER. 31 August
+   is a Monday, so the outline's ten `MON…FRI` rows in `reveal/week-one.mjs` and
+   `reveal/week-two.mjs` are untouched and `npm run dictation` still builds. A
+   day that was not a Monday would have failed `checkOutlineDates()` ten times —
+   the guard that exists for exactly this move.
+
+   WHAT THOSE FIVE ENTRIES *ARE* IS A SEPARATE FACT AND IT IS NOT RECORDED HERE.
+   This file holds the clock. The state of the five — what a visitor did or did
+   not read — is Mike's, and it lands in `docs/MUSEUM_RULINGS-20260817.md` and
+   `docs/canon/09-PUBLISHED.md`. */
+export const RECORD_EPOCH = "2026-08-31";
 
 /* [L4 2026-08-09] EVERY OTHER ENTRY'S DATE IS COUNTED FROM IT, NOT TYPED.
    Mike: "DATES from the epoch: D1 = 2026-08-17 Monday, D2 = 08-18, D3 = 08-19,
-   D4 = 08-20, D5 = 08-21." Five literals would be five things a slip has to
+   D4 = 08-20, D5 = 08-21."
+   [2026-08-24] **HIS DAYS ARE SUPERSEDED BY RULING C AND ARE LEFT AS HE WROTE
+   THEM** (OPERATIONS §0 VERBATIM — flag, never fix; a paraphrase filed in his
+   class is indistinguishable from his own sentence a week later). The SHAPE of
+   what he said is what survived and it is the whole point of this function:
+   five consecutive days counted off day one. Against the epoch above, the same
+   five days are **D1 = 2026-08-31 Monday, D2 = 09-01, D3 = 09-02, D4 = 09-03,
+   D5 = 09-04** — derived, not typed, and nobody edited an entry to get them.
+   Five literals would be five things a slip has to
    find; this is the same one-field rule the epoch's own note states, extended
    to the entries that follow it. Day 1 IS the epoch, so `recordDay(1)` and
    `RECORD_EPOCH` are the same string by construction rather than by agreement.

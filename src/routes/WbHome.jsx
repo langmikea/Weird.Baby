@@ -32,10 +32,15 @@ import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
    This is the thing a visitor should see first. It carries the 'you found
    something' feeling that the current copy states in words."
 
-   THE TARGET IS DERIVED, NOT TYPED: `RECORD_EPOCH` (2026-08-17) resolved to an
-   instant in `RECORD_TZ` (America/New_York) = 2026-08-17T04:00:00Z. His ruling,
+   THE TARGET IS DERIVED, NOT TYPED: `RECORD_EPOCH` (2026-08-31) resolved to an
+   instant in `RECORD_TZ` (America/New_York) = 2026-08-31T04:00:00Z. His ruling,
    after reversing an earlier local-to-the-visitor reading: *"The museum's own
    clock, matching the doors."* A launch slip still moves one field.
+   [2026-08-24] AND IT MOVED — Ruling C put day one on 31 August, this comment's
+   two dates are the only thing in this file that had to follow, and the counter
+   re-armed itself. It had already run to zero on the old epoch and returned
+   `null`; it now has days on it again, which is the correct reading of a museum
+   whose doors open on Sunday 30 August. Nothing below this block changed.
 
    THE TICK IS THE SERVER'S CLOCK, NOT THE VISITOR'S. `museumNow()` counts from
    the instant the worker injected, advanced by `performance.now()` — a

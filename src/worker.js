@@ -299,10 +299,18 @@ export default {
        from the Record's own `assets` arrays.
        [2026-08-20] IT IS EXERCISED. This note said the schedule was EMPTY and
        the branch "built and unexercised" — true when it was written, and
-       FALSE since Record 003 delivered on 2026-08-19. The built worker now
-       carries six real rows, all dated `2026-08-19`: the five manual scans and
-       the marked copy. They ship at PUBLIC addresses and this branch is what
-       held them until their day.
+       FALSE since Record 003 delivered. The built worker now
+       carries SEVEN real rows: the five manual scans and the marked copy on
+       Record 003's day, and Record 004's `qc-101-a` on the day after. They ship
+       at PUBLIC addresses and this branch is what holds them until their day.
+       [2026-08-24] TWO CORRECTIONS IN ONE, AND THE SECOND IS THE INTERESTING
+       ONE. **Six became seven on 2026-08-21** when Mike back-posted `qc-101-a`
+       onto Record 004 — this note went on saying six for three days and nothing
+       reported it, because no gate counts these rows. **And the dates are gone
+       from this note deliberately**: Ruling C moved `RECORD_EPOCH` to
+       2026-08-31 and every one of the seven re-dated with it, so a date quoted
+       here would be the third thing in this comment to go stale. The schedule
+       derives; read it from `__WB_RECORD_ASSETS__`, never from prose.
        IT IS ALSO THE LIVE PRECEDENT FOR THE STAGE DOOR, which is why the
        correction is worth more than tidiness: `heldOutOfLaunch` was removed on
        the same day (vite.config.js) on the argument that shipping a file and
@@ -527,11 +535,22 @@ export default {
        SO IT IS THE SAME FAULT WITH A SMALLER MOUTH: `/api/held` had ONE grant
        and it was entirely empty; this has two and only the second can be.
 
-       IT IS LATENT TODAY, AND THAT IS MEASURED RATHER THAN ASSUMED. On
-       2026-08-20 the schedule holds six paths, all dated 2026-08-19, all past,
-       and **all six are present at their public paths**. Future-dated assets:
-       ZERO. So there is no path today for which a previewer would be handed the
-       fallback.
+       IT WAS LATENT, AND IT IS NOT ANY MORE. THE MEASUREMENT IS THE POINT.
+       On 2026-08-20 this said the schedule held **six** paths, all past, all
+       present at their public paths, and *"Future-dated assets: ZERO."* Two
+       things have since made every clause of that false, and neither was
+       reported by anything:
+         · **2026-08-21** — Mike back-posted `qc-101-a` onto Record 004. Six
+           became **SEVEN**.
+         · **2026-08-24, Ruling C** — `RECORD_EPOCH` moved to 2026-08-31, so all
+           seven re-dated into the future. Future-dated assets: **SEVEN.**
+       SO THE LATENT CASE IS NOW THE LIVE ONE. Every one of the seven files is
+       physically at its public path AND refused by the branch above until its
+       new day, which is the mechanism working — but it also means a previewer
+       is, for the first time, exactly the person this note says can be lied to.
+       The files are present, so the lie does not fire today; it fires the first
+       time an entry names a file `reveal:day --place` has not moved out yet.
+       Still NOT FIXED, and still deliberately — see below.
 
        NOT FIXED, AND DELIBERATELY. Mike ruled the probe for `/api/held` and
        asked only for a statement here. The fix is not the same shape either: a

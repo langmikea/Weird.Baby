@@ -21,6 +21,30 @@
 
    THE DAY COLUMN IS DERIVED FROM THE ENTRY NUMBER, not typed: Record N falls on
    weekday N of the run, five to a week, off the same epoch the museum uses.
+
+   ═══ [FLAG 2026-08-24 · verified, placed not fixed] ════════════════════════
+   **THE SECOND HALF OF THAT SENTENCE IS NOT TRUE OF THE CODE.** The day column
+   is `DAYS[(r.no - 1) % 5]` at the table build below — a hard-coded MON…FRI
+   cycle keyed on the entry number. **This file never reads `RECORD_EPOCH` and
+   imports nothing that does.** Grep it: there is no `recordDay`, no
+   `record-epoch.js`, no `Date` of any kind in this module.
+
+   WHY IT MATTERS AND WHY IT IS NOT AN ACADEMIC POINT: move day one to a day
+   that is not a Monday and `docs/ARC.md` goes on printing `MON` for Record 001
+   — **and `npm run arc:check` goes on printing PASS**, because it compares the
+   generated block to the file and both are wrong in the same way. It is
+   OPERATIONS §8's own class: an instrument that returns healthy because it
+   cannot see the failure mode.
+
+   IT IS HARMLESS TODAY AND THAT IS LUCK, NOT DESIGN. Ruling C put day one on
+   2026-08-31, which is a Monday, so the cycle and the calendar agree — the same
+   luck the outline's ten `MON…FRI` rows are running on. The day either of them
+   stops being a Monday is the day this is a defect and not a note.
+
+   NOT FIXED HERE. The fix is one import and one call, but this file's whole
+   virtue is that it is a small hand-rolled reader that keeps working when the
+   Record's shape moves, and adding the epoch is a scoping call rather than a
+   typo correction. Flagged at the site so the next session meets it here.
    =========================================================================== */
 import fs from "node:fs";
 import path from "node:path";
@@ -63,6 +87,9 @@ const table = [
   "",
   "| # | day | published headline |",
   "|---|---|---|",
+  /* [FLAG 2026-08-24] THIS IS THE LINE THE HEADER'S FLAG IS ABOUT: the day is a
+     fixed MON…FRI cycle on the entry number and owes nothing to `RECORD_EPOCH`.
+     Correct only while day one is a Monday. Not fixed — see the header. */
   ...rows.map(r =>
     `| ${String(r.no).padStart(3, "0")} | ${DAYS[(r.no - 1) % 5]} | ${r.title} |`),
   "",

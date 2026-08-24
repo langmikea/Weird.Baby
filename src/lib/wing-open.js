@@ -2,15 +2,20 @@
 //
 // MIKE'S RULING: **hide all of /robots at launch — NIAC, VIIIp, the FAQ, the
 // Record, everything. It does not exist to a visitor until Record 001 announces
-// it on 2026-08-17.** The Record lives inside the wing, so both arrive together,
+// it on 2026-08-31.** The Record lives inside the wing, so both arrive together,
 // and 001 is what announces it.
+//
+// [2026-08-24] THE DATE IN THAT SENTENCE IS THE ONE THING RULING C MOVED, AND
+// IT MOVED WITHOUT THIS FILE'S MECHANISM NOTICING — which is the claim the rest
+// of this header makes, collected. Day one is 2026-08-31 now; the line below
+// still has no date in it, and `ROBOTS_OPEN` was not edited.
 //
 // ═══ THE RULE UNDERNEATH, AND WHY THIS FILE HAS NO DATE IN IT ═══════════════
 // MIKE: *"the site says what the site says until a SCRIPTED EVENT says
 // otherwise. Nothing reveals by clock alone; the story does the revealing."*
 //
 // THAT SENTENCE IS THE WHOLE DESIGN OF THIS FILE. The obvious build is
-// `TODAY >= "2026-08-17"` — a second date literal, sitting beside `RECORD_EPOCH`,
+// `TODAY >= "2026-08-31"` — a second date literal, sitting beside `RECORD_EPOCH`,
 // agreeing with it by hand until the day somebody moves one of them. It would
 // also be a clock revealing a wing, which is the thing he ruled out.
 //

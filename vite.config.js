@@ -518,11 +518,21 @@ export default defineConfig({
        is being withheld. It reaches the WORKER, not the browser — the client
        never sees it and has no use for it.
        [2026-08-20] NO LONGER EMPTY. This said `{}` and called the worker's
-       branch unexercised, which was true until Record 003 delivered on
-       2026-08-19. It now bakes SIX rows — `scan-07-a/b`, `scan-11-a/b`,
-       `scan-31-a` and `marked-01-a` — every one dated `2026-08-19`, and the
-       worker held each of them until that day. Corrected here and at the
-       branch that reads it (`src/worker.js`). */
+       branch unexercised, which was true until Record 003 delivered. It bakes
+       SEVEN rows — `scan-07-a/b`, `scan-11-a/b`, `scan-31-a` and `marked-01-a`
+       on Record 003's day, and `qc-101-a` on Record 004's — and the worker holds
+       each of them until that day. Corrected here and at the
+       branch that reads it (`src/worker.js`).
+       [2026-08-24] IT SAID **SIX** UNTIL TODAY AND HAD BEEN WRONG SINCE
+       2026-08-21, when Mike back-posted `qc-101-a` onto Record 004. **Nothing
+       counts these rows** — `docs:numbers:gate` measures ledger, register,
+       asset-table and entry counts and does not measure this one, so the number
+       sat wrong in three comments for three days. **The dates are deliberately
+       not quoted any more.** Ruling C moved `RECORD_EPOCH` to 2026-08-31 and
+       every row re-dated; a day named in this comment would go stale on the
+       next move, which is what happened to the last one. The schedule is
+       derived from the entries' own `assets` arrays and their own dates — read
+       the object, never the prose. */
     __WB_RECORD_ASSETS__: JSON.stringify(
       assetSchedule(recordEntries(), (e) => (e.no == null ? null : recordDay(e.no)))),
     /* [CH6 2026-08-12] THE DAY THE WING ARRIVES, DERIVED AND NOT TYPED.

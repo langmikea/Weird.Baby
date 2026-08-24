@@ -160,15 +160,24 @@ import { recordDay } from "./record-epoch.js";
                    the place the lights go off.
 
                **[D1 2026-08-08] IT HAS A DATE NOW AND IT IS A REAL ONE.**
-               `date: RECORD_EPOCH` — 2026-08-17, Mike's, pending the launch
-               happening that day. The rule above it is the standing one, at the
+               `date: recordDay(1)` — which resolves to `RECORD_EPOCH` itself,
+               Mike's, pending the launch happening that day. The rule above it
+               is the standing one, at the
                head of this file: *an entry's date is the actual calendar day it
                is published, not a fictional offset.* What it turns on, measured
-               rather than assumed (round log §1): the register stamp prints
-               `17 AUG 26`, the dateline becomes `Week 1 · Monday · Record 001`,
+               rather than assumed (round log §1): the register stamp, the
+               dateline `Week 1 · Monday · Record 001`,
                and `C8` closes. What it does NOT turn on is the month band —
                `shouldBand` needs fourteen entries across more than one month and
                this volume holds two, so `C1` is unmoved and says so.
+
+               **[2026-08-24] THE DAY MOVED AND THIS ENTRY DID NOT.** Ruling C
+               put day one on **2026-08-31**, and the only thing edited was the
+               constant: `recordDay(1)` follows, the stamp follows, the dateline
+               still reads `Week 1 · Monday` because 31 August is a Monday too.
+               **No date is written in this file and that is why.** The stamp is
+               deliberately not quoted above any more — quoting a derived value
+               is how the last one went stale.
 
                DOCTRINE 11 IS SETTLED HERE AND NOT RE-ASKED. S-a asked whether
                this report is an event in the story or a real report about
