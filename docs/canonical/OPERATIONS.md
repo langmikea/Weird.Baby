@@ -385,10 +385,27 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ## 8. Known hazards (environment quirks)
 
-> Every hazard's body is in `OPERATIONS_ARCHIVE/08-KNOWN-HAZARDS.md`,
-> cut whole at HEAD `b3812cc`. Lead lines only below — except entries raised
-> after that cut, which carry their bodies here, because the archive is a
-> snapshot (§0) and is never edited.
+> **LEAD LINES ONLY. Every body is in the archive, in TWO cuts** — because §0
+> rules an archive a snapshot that is never edited: `OPERATIONS_ARCHIVE/`
+> `08-KNOWN-HAZARDS.md` at HEAD `b3812cc`, and `08-KNOWN-HAZARDS-II.md` at HEAD
+> `2f94fd7` for everything raised after it. Each is true of its own moment.
+>
+> **THE UNIT IS THE BOLDED LEAD SPAN WHERE IT CLOSES ON TERMINAL PUNCTUATION,
+> OTHERWISE THE WHOLE FIRST PHYSICAL LINE.** The `wrangler dev` entry below is
+> the second case — its bold closes mid-sentence at `open**` — and it is why the
+> rule has two halves rather than one.
+>
+> **[2026-08-24] A BODIED ENTRY COSTS EIGHT TIMES A LEAD LINE, AND THE CEILING
+> IS WHAT SAID SO.** Measured at this cut: **848 bytes for a bodied entry
+> against 102 for a lead-only one.** §8 was 5,026 of the 6,032 bytes this file
+> gained after `4a0ef11`, and ONE packet's three bodied entries were 2,536 of
+> that — **42% of the whole file's growth in one round.** Three bodied hazards
+> spend about a fifth of the headroom. Write the lead line here, the body there.
+>
+> **[2026-08-24] ONE HAZARD, ONE HOME.** The NUL-byte class was filed TWICE — a
+> lead line here and a full body inside §9's close ritual — and the duplicate
+> came from **a hazard being written into a RITUAL section rather than a hazard
+> one.** §9's copy is gone; the lead line below is the home.
 
 - **[2026-08-17] `assets:scan` WALKS DISK, AND DISK INCLUDES GITIGNORED TREES.
   A ROW IS COMMITTED; THE FILE MAY NOT BE, AND THEN THE ROW IS BORN AN ORPHAN.**
@@ -405,11 +422,6 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 - **A BUILD THAT BUILDS HALF THE APPLICATION LOOKS LIKE A BUILD (V1, 2026-08-06).**
 - **A GOVERNED PICTURE HAS TWO ADDRESSES, AND ANYTHING THAT MATCHES ON ONE OF THEM IS WRONG (C1, 2026-08-06).**
 - **`wrangler dev` holds `dist/weird_baby/.wrangler` open**, so `npm run build` fails with `EPERM … dist\weird_baby\.wrangler` while it is running. Stop the dev server (and any leftover `workerd` processes) before rebuilding. It also **caches its asset manifest at startup**, so a file added or removed under `dist/client` mid-run is not seen until it restarts — which is what makes an honest break-it-on-purpose test need a restart to be real.
-  > **[FLAG 2026-08-23 · flagged, not fixed]** This entry's bold closes
-  > mid-sentence — at `open**` — so it falls back to its whole first physical
-  > line, which in this hazard is the whole hazard. That is why it carries body
-  > text where the other entries do not. The `**` is not moved and the source
-  > line is not edited.
 - **A CLIPBOARD WRITE IS NOT DONE UNTIL IT HAS BEEN READ BACK (U2, 2026-08-09).**
 - **A GENERATED PAGE AND THE LIST ITS SCRIPT WALKS MUST BE PROVED THE SAME SET, NOT ASSUMED (U3, 2026-08-09).**
 - **THE PROVENANCE SWEEP'S "UNREACHABLE" BUCKET IS NOT A DEAD-CODE LIST, AND A CLEANUP ROUND COULD DELETE A LIVE WING FROM IT (M84, 2026-08-06 — moved here from the register 2026-08-09 because it is a note, not an action).**
@@ -418,13 +430,12 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 - **FOUR WAYS TO PROVE A FEATURE ABSENT THAT IS PRESENT AND RUNNING (2026-08-16).**
 - `export-artifacts.mjs` prints a harmless `UV_HANDLE_CLOSING` assertion
 - Drive root contains loose stale code copies from past sessions — stale
-- **`docs/canonical/START_HERE.md` HAS AN UNVERSIONED TWIN AT `C:\AI\START_HERE.md`, AND NOTHING NOTICES WHEN THEY DRIFT (2026-08-23).** `C:\AI` is a plain directory — there is no `.git` at `C:\AI` or at `C:\` — so the twin has no history, no `git diff`, no `git checkout --` to undo a bad write, and it never appears in any `git status`. It is the copy a fresh session outside this repo actually opens. It held one md5, `1c020bd0`, from 2026-06-09 until `0fa8709`: the governed copy was edited that day and the twin stayed stale until it was copied over. **The twin is COPIED byte-for-byte from the governed file after a push, never hand-edited** — an unversioned file gets no manual write while an identical governed copy exists. No gate, no generator and no `git status` will report the next drift; only someone reading both will.
-- **`docs:numbers:gate` TAKES OVER TWO MINUTES BECAUSE IT SHELLS OUT TO `npx eslint .`, AND IT WILL TIME OUT UNDER ANY DEFAULT AGENT CEILING WHICHEVER WAY IT IS INVOKED (2026-08-23, corrected the same day).** Measured: `npm run desk` **1s**, `npm run docs:numbers:gate` **136s**, `node tools/numbers-gate.mjs --gate` **134s**. **npm costs about two seconds, not two minutes.** This entry first blamed npm startup and was disproved by running the thing it described — the expense is `measure.lint`, which runs `npx eslint .` over the whole repo on every gate. Allow 300s and either route completes. **The npm-versus-node distinction survives as reporting honesty, never as a workaround:** "the gate passed" and "the npm script completed" are different sentences, a direct `node` call never exercises the `package.json` wiring, and a renamed or broken script entry would pass unnoticed. **Say which one was run.**
-- **THE DESK'S REGISTER CHECK IS ONE-DIRECTIONAL: IT PROVES EVERY LINK POINTS AT A LIVE ROW, AND NOTHING PROVES A ROW IS REACHABLE (2026-08-23).** `npm run desk` collects every `OPEN_ACTIONS.md#id` on each side page and reports any that resolves to no row. It is a real check and the only anchor validation in the tree, but it says nothing in the other direction: **a row nothing links to passes by not being referenced**, which is how `g-a`, `g-b` and `g-c` passed on their first run. A clean anchor report is not evidence that a row is findable — only that no page points at a row that has gone.
-- **NO GATE IN THIS TREE READS A RESPONSE HEADER, SO THE WORKER'S CACHE MARKS ARE ENFORCED BY NOTHING (2026-08-24).** The class named below, with the instrument missing altogether: `src/worker.js` marks every cookie-decided exit `private, no-store` (`5acff0e`), and deleting all of them leaves `lint`, `build`, `provenance:gate`, `reveal:check`, `instory:gate`, `parity:gate` and `docs:numbers:gate` every one of them green. **THE REMEDY IS A RUNTIME PROBE, NOT A GREP:** which exits are cookie-decided is a judgement rather than a pattern, so the only honest check boots the worker and asserts the header on the real addresses. **AND THE RAW COUNT IS NOT A GATE INPUT:** 16 `Cache-Control` sites at HEAD, 2 of them inside the `noStore` and `withSetCookie` helper bodies.
-- **NOTHING COUNTS `todayInRecordTz` CALL SITES, AND A NAIVE COUNT IS INFLATED BY THE SENTENCE THAT STATES THE RULE (2026-08-24).** `src/worker.js` must keep exactly ONE call (`f2dc391`); a second splits the museum in half — part of a page answering the driven day and part the real one — and does it silently. The rule is a comment and nothing else. **`grep -c "todayInRecordTz(" src/worker.js` RETURNS 4: one call and three prose mentions, TWO OF WHICH ARE THE DOCTRINE TEXT DESCRIBING THE INVARIANT.** A gate reading that number would be inflated by the sentence stating the thing it checks, so a real check strips comments first — the same trap as the header count above, and neither raw number is usable as a gate input.
-- **NOTHING READS THE DICTATION PAGES' PUBLISHED NUMBERS, AND THEY WERE WRONG FOR EIGHT DAYS (2026-08-24).** `docs/dictation-20260807/` published 16 pictures behind the stage door against a real 144, and 44 addressable files against 183, from 2026-08-16 until `80c6fb8`. **THEY WERE NOT FALSE WHEN WRITTEN:** `prep.mjs` computed them correctly and nobody regenerated the pages while their inputs moved, so this is DERIVED-ARTIFACT STALENESS and not a false published claim. **THE REMEDY IS REGENERATE-TO-A-TEMP-DIR AND DIFF, AND IT IS NAMED HERE RATHER THAN BUILT:** `prep.mjs` is deterministic — `specsheet.html` and `arc.html` came back byte-identical after twelve days — and no page carries a build stamp, so a byte-diff is exact and needs no measurers. **EXTENDING `docs:numbers:gate` IS THE WRONG JOB:** its model is a `near` phrase in markdown prose against a `measure.*` value, and every count here would need a measurer re-implementing the asset-table × ledger JOIN — the third copy `prep.mjs`'s own header forbids.
-
+- **`docs/canonical/START_HERE.md` HAS AN UNVERSIONED TWIN AT `C:\AI\START_HERE.md`, AND NOTHING NOTICES WHEN THEY DRIFT (2026-08-23).**
+- **`docs:numbers:gate` TAKES OVER TWO MINUTES BECAUSE IT SHELLS OUT TO `npx eslint .`, AND IT WILL TIME OUT UNDER ANY DEFAULT AGENT CEILING WHICHEVER WAY IT IS INVOKED (2026-08-23, corrected the same day).**
+- **THE DESK'S REGISTER CHECK IS ONE-DIRECTIONAL: IT PROVES EVERY LINK POINTS AT A LIVE ROW, AND NOTHING PROVES A ROW IS REACHABLE (2026-08-23).**
+- **NO GATE IN THIS TREE READS A RESPONSE HEADER, SO THE WORKER'S CACHE MARKS ARE ENFORCED BY NOTHING (2026-08-24).**
+- **NOTHING COUNTS `todayInRecordTz` CALL SITES, AND A NAIVE COUNT IS INFLATED BY THE SENTENCE THAT STATES THE RULE (2026-08-24).**
+- **NOTHING READS THE DICTATION PAGES' PUBLISHED NUMBERS, AND THEY WERE WRONG FOR EIGHT DAYS (2026-08-24).**
 ### AN INSTRUMENT THAT RETURNS HEALTHY IS NOT EVIDENCE OF HEALTH
 ### WHEN IT CANNOT SEE THE FAILURE MODE (2026-08-21)
 
@@ -451,9 +462,16 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 ### ON THIS SITE A MISSING IMAGE IS A 200, AND ONLY THE DECODE TELLS THE TRUTH
 ### (2026-08-22)
 
+
 ## 9. Session-close ritual
 
 **Code works this ritual, except where marked [MIKE]** — §0 MIKE IS THE LOCK.
+
+> **The steps stay here; the reasoning under step 0 is in**
+> `OPERATIONS_ARCHIVE/09-SESSION-CLOSE.md`, cut at HEAD `2f94fd7`. The hazard
+> narrative that had accreted in the same step went to `08-KNOWN-HAZARDS-II.md`
+> instead — a prune procedure and a NUL-byte defect class are hazards, and a
+> hazard filed in a ritual section is how that class came to be filed twice.
 
 0. **Gates, in this order:** `npm run lint` (baseline **9 errors / 8
    warnings**, zero new) → `npm run build` (green) → **`npm run
@@ -468,112 +486,6 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
    `npm run docs:numbers:gate` (exit 0) on EVERY packet — see the row below** →
    the lap.
 
-   **[2026-08-13] THE NUMBERS GATE, AND WHY IT IS UNCONDITIONAL.** `npm run
-   docs:numbers` measures every standing value published in THIS file and in
-   `CLAUDE.md` — the lint baseline, the asset table's row count, the ledger's,
-   the manual's page count — and refuses on a mismatch, naming the document, the
-   line and both numbers. It exists because **six stale published numbers were
-   found on 2026-08-13 and it was the third time**, and because the failure is
-   worse than "out of date": a baseline is only useful as a comparison, so
-   publishing the wrong one does not weaken the tripwire, **it inverts it.**
-   IT RUNS ON EVERY PACKET FOR THE REASON DOCTRINE 18's GATE DOES: a number goes
-   stale when somebody changes the thing it counts, and "did I change something a
-   document publishes a count of" is exactly the question a session answers
-   wrongly. On its first honest run it found a SEVENTH — the ledger's `when`
-   field published as null on 152 rows against a real 166.
-   **IT NEVER READS A ROUND LOG.** `STATE.md` is excluded whole and this file has
-   no round log; in `CLAUDE.md` the gate stops at `## Recent session log`. A
-   recorded measurement is history and rewriting it would falsify the record that
-   makes the tripwire legible. See the header of `tools/numbers-gate.mjs`.
-
-   **[N5 2026-08-06] AND THE LAP HAS BOTH HALVES AGAIN — `npm run lap`.** M97
-   recorded four consecutive rounds in which the 390px half did not run, because
-   the operator's window will not go below 1228 CSS px and Chrome refuses
-   `window.resizeTo`. **The window's size was never the museum's viewport.** A
-   403px same-origin iframe gives a document whose `innerWidth` is 390 exactly,
-   and same-origin means the driver takes real measurements instead of reading
-   pixels off a screenshot. The harness is committed at `tools/lap/harness.html`;
-   `npm run lap` copies it into `public/` for the run and `npm run lap:clean`
-   takes it out, because anything left in `public/` is in `dist/client` and one
-   deploy would publish it (see §0 DEPLOY — THE ONLY ACCOUNT).
-   **`npm run lap:clean` before the seal is part of the ritual, not an
-   afterthought.** A packet that added visitor-facing
-   content adds its register rows in the same commit **[MIKE]**; a packet that
-   added or changed a media file re-runs `npm run assets:scan` in the same
-   commit **[MIKE]**.
-
-   **[v56/R7] AND THEN READ `npm run surfacing`, which is NOT a gate.** It
-   cannot fail — an unshown thing is inventory, not a defect. It is here because
-   **the packet is the only clock this repository has**, and the number it prints
-   is the one Mike asked for a mechanism to be able to say: *what has this wing
-   built and never shown anybody.* The proposed cadence is ONE SURFACING PER
-   PACKET, and **the shelf must not grow two packets running** — one round of
-   building ahead is stock, two is a habit. A round that moves it runs
-   `npm run surfacing -- --log` so the next round's number means something.
-
-   **[v56] TWO HAZARDS THIS ROUND RE-CONFIRMED, both worth reading before you
-   trip them again.** `provenance-sweep --prune` broke **44 RESTATED chains** in
-   one run — v52 already recorded that *a rename plus a prune is two safe
-   operations that are unsafe in sequence*, and it is now twice. Re-run the gate
-   after any prune; the RESTATED class's requirement that a reference RESOLVE is
-   the only thing in the whole boundary that notices a deletion. And **never use
-   `git checkout --` to undo a deliberate test break on a file that also holds
-   uncommitted work** — it reverted this round's own G1 edits along with the
-   break. **Sandbox breakage tests by FILE COPY.**
-
-   **[P1–P5 2026-08-05] THE PRUNE HAZARD IS NOW A PROCEDURE, AND IT IS FOUR
-   STEPS IN THIS ORDER: CHECK ANCHORS → REPOINT → PRUNE → RE-GATE.** v52 and v56
-   both discovered the ordering after the fact; this round checked first and
-   found that the single stale row left by deleting one caption was **the anchor
-   of 18 RESTATED chains.** Read `r` across `provenance/register.json` for the
-   stale key BEFORE pruning; repoint every hit onto a surviving sourced row (and
-   refuse to prune if any chain would be left with no reference at all); then
-   prune; then run the gate. Deleting one visitor-facing string is enough to
-   trip this — it is not a hazard of big edits.
-
-   **[REMOTE CONTROL P1–P11 2026-08-05] AND THE PROCEDURE IS CORRECTED BY ITS
-   OWN FAILURE: PRUNE AGAINST A COPY AND LET THE GATE FIND THE BROKEN CHAINS.**
-   Step 1 above — read `r` across the register for the stale key BEFORE pruning —
-   assumes you can enumerate the stale set, and **you cannot do it by hand**. The
-   check written for it folds `"a " + "b"` concatenation but not `\u2014`
-   escapes, so it reported 154 rows where the sweep's own count was 61, and an
-   over-report is useless for deciding what to repoint. What worked: **copy
-   `register.json`, run `--prune`, run the gate.** The gate's own `badRestated`
-   check named all eleven broken chains exactly, because IT is the thing that
-   defines "resolves"; the copy is what makes it safe, since a broken chain can
-   always be read back to the row it used to point at. **It also exposed a
-   mis-classification no reading would have found:** five of the eleven were not
-   repointed but RECLASSED — they were RESTATED for a COINCIDENCE OF WORDING with
-   a face this round replaced, and two of them are Mike's own words.
-
-   **[D1–D9 2026-08-06] AND A PRUNE PLUS A *MOVE* IS THE SAME HAZARD AS A PRUNE
-   PLUS A RENAME — THE PROCEDURE HELD, AND THE GATE NAMED ELEVEN CHAINS EXACTLY.**
-   The register is keyed on `keyOf(file, text)`, so a string that changes FILE
-   goes undeclared and its old row goes stale even though not one character of it
-   changed; this round moved 106 such strings. **They were CARRIED, not
-   re-classified** — matched on exact text, from the exact file they left —
-   because re-deciding 138 origins is 138 chances to give a sourced line a
-   different origin than it had yesterday. **A carry is only sound when the text
-   is byte-identical, so that is the test:** a string whose old row cannot be
-   found under its old file is left undeclared and reported, never handed a row.
-   Then, per the procedure above: **prune against a copy and let the gate find
-   the breaks.** Nine of the eleven were the WAL poster's acts pointing at a
-   `papa` note this round shortened — and they were **repointed onto the
-   artist-card rows that actually carry each claim, which is a better chain than
-   the one that broke**, because the old anchor merely ASSERTED that the sourcing
-   existed. The other two pointed at rows the carry had re-keyed. Result: **0
-   undeclared · 0 stale · 0 invention.**
-
-   **AND A DEFECT CLASS WORTH KNOWING BY SIGHT: a LITERAL NUL byte in a source
-   file makes every `grep`/`rg` over that file report "binary file matches" and
-   nothing else — and the Read tool renders it as a SPACE, so an `Edit` whose
-   anchor crosses it fails to match a line you just read.** P5 found six such
-   bytes in four `tools/*.mjs`, including `keyOf` in `provenance-sweep.mjs`.
-   Write them as the two-character escape `\0`; it is the same value to
-   JavaScript and plain text to everything else. **The proof that such a change
-   is inert is free: if `keyOf` had shifted by one bit, every register key would
-   have changed and `provenance:gate` would have failed on every string in the
-   museum. A passing gate after the edit is the test.**
 1. **[MIKE]** Commit + push everything durable (explicit paths).
 1a. **Update `docs/OPEN_ACTIONS.md`** (Doctrine 14) — statuses flipped for what
    closed, rows added for what this round exposed. Same commit **[MIKE]**.
@@ -587,7 +499,6 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 4. Optionally drop refreshed OPERATIONS.md + STATE.md into
    `G:\My Drive\_conduit\` (with stamps) so chat sessions can self-orient
    without a paste.
-
 
 ## Delivery & Commit Gates (RCCA 2026-07-06 — stranded-Downloads incident)
 
