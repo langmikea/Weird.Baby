@@ -385,10 +385,18 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ## 8. Known hazards (environment quirks)
 
-> **LEAD LINES ONLY. Every body is in the archive, in TWO cuts** — because §0
-> rules an archive a snapshot that is never edited: `OPERATIONS_ARCHIVE/`
-> `08-KNOWN-HAZARDS.md` at HEAD `b3812cc`, and `08-KNOWN-HAZARDS-II.md` at HEAD
-> `2f94fd7` for everything raised after it. Each is true of its own moment.
+> **LEAD LINES, AND EVERY BODY THAT HAS BEEN CUT IS IN THE ARCHIVE — in TWO
+> cuts**, because §0 rules an archive a snapshot that is never edited:
+> `OPERATIONS_ARCHIVE/08-KNOWN-HAZARDS.md` at HEAD `b3812cc`, and
+> `08-KNOWN-HAZARDS-II.md` at HEAD `2f94fd7` for everything raised after it.
+> Each is true of its own moment.
+>
+> **A HAZARD RAISED SINCE THE LAST CUT CARRIES ITS BODY HERE, AND THAT IS THE
+> CYCLE RATHER THAN AN EXCEPTION.** A snapshot cannot be appended to without
+> ceasing to be one, so a new body has nowhere else to live until the next cut
+> sweeps it — which is exactly what happened between `b3812cc` and `2f94fd7`.
+> **Bodies accumulate here and a cut moves them; the ceiling is what says when.**
+> Keep them few and keep them short: the arithmetic below is why.
 >
 > **THE UNIT IS THE BOLDED LEAD SPAN WHERE IT CLOSES ON TERMINAL PUNCTUATION,
 > OTHERWISE THE WHOLE FIRST PHYSICAL LINE.** The `wrangler dev` entry below is
@@ -406,6 +414,8 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 > lead line here and a full body inside §9's close ritual — and the duplicate
 > came from **a hazard being written into a RITUAL section rather than a hazard
 > one.** §9's copy is gone; the lead line below is the home.
+
+- **`CF-Cache-Status` IS APPENDED BY THE ASSET WORKER, NOT BY THE ZONE CDN, AND READING IT AS THE EDGE'S VERDICT PUT A DISPROVED CLAIM IN A PUSHED COMMIT (2026-08-24).** The class this section already names, with the instrument being a HEADER: it returns `HIT` about the asset store's own lookup and cannot see the edge at all, so it answers a question nobody asked it and looks like an answer to the one they did. **THE MEASUREMENT THAT SETTLED IT:** two fetches of `https://weird.baby/` **3.2 seconds apart, both reading `CF-Cache-Status: HIT`, with `__WB_NOW__` differing by exactly 3.2 seconds** — the worker ran both times, so the HTML is NOT edge-cached and a deploy takes effect on the next request. A cache-busted URL reads `HIT` too, which is the tell. The header is appended at `asset-worker/index.js:5078`, inside the bundle this repo ships. **`e08e2b4`'s COMMIT MESSAGE STATES THE DISPROVED VERSION** — that it proved the edge caches worker responses — and a pushed message cannot be rewritten, so the correction lives here and this line is the one that is true. **`5acff0e`'s MARKS REMAIN CORRECT ON THEIR OWN REASONING, WHICH NEVER DEPENDED ON THIS:** a cookie-decided body was leaving with `Cache-Control: public`, which is wrong for any browser or shared proxy, and that was established from the code rather than from a probe. **AND THE PRACTICAL CONSEQUENCE IS A DEPLOY STEP THAT IS NOT NEEDED:** no cache purge for HTML. What this does NOT establish is the same for images — HTML carries a per-request `__WB_NOW__` to diff and an image carries no such marker, so that half is unmeasured rather than proven either way.
 
 - **[2026-08-17] `assets:scan` WALKS DISK, AND DISK INCLUDES GITIGNORED TREES.
   A ROW IS COMMITTED; THE FILE MAY NOT BE, AND THEN THE ROW IS BORN AN ORPHAN.**

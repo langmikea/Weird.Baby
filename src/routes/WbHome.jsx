@@ -24,7 +24,7 @@ import { ROBOTS_OPEN } from "../lib/wing-open.js";
 /* [2026-08-16] the countdown's clock — the server's instant, and the moment the
    doors open, both from the museum's own declarations. */
 import { museumNow, SERVER_NOW } from "../lib/record-clock.js";
-import { dayStartInRecordTz } from "../../reveal/record-clock.mjs";
+import { recordVisibleAt } from "../../reveal/record-clock.mjs";
 import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
 
 /* ═══ [2026-08-16] THE COUNTDOWN TO THE DOORS ═══════════════════════════════
@@ -40,7 +40,28 @@ import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
    two dates are the only thing in this file that had to follow, and the counter
    re-armed itself. It had already run to zero on the old epoch and returned
    `null`; it now has days on it again, which is the correct reading of a museum
-   whose doors open on Sunday 30 August. Nothing below this block changed.
+   whose doors open on Monday 31 August.
+
+   ═══ [2026-08-24 · SECOND CORRECTION, AND IT IS THE LOAD-BEARING ONE] THE
+       TARGET IS `recordVisibleAt`, NOT `dayStartInRecordTz` ═══════════════════
+   THE TWO ANSWER DIFFERENT QUESTIONS AND THIS COUNTER WAS ASKING THE WRONG ONE.
+   `dayStartInRecordTz(day)` is MIDNIGHT on that day; `recordVisibleAt(day)` is
+   17:00 on it — the instant `todayInRecordTz` starts returning `day`, which is
+   the instant `wingOpenOn` opens the wing and Record 001 appears. Against day
+   one those are **seventeen hours apart**.
+   WHAT IT MEANT, MEASURED: the counter reached zero at 00:00 on 31 August and
+   REMOVED ITSELF, while the wing stayed shut until 17:00 — so for seventeen
+   hours the lobby would have shown neither a countdown nor a Record, on the
+   museum's opening day. It is the failure `reveal/record-clock.mjs`'s own header
+   warns about from the other direction: a visitor watches the counter reach zero
+   and finds the museum shut.
+   `dayStartInRecordTz` IS NOT MOVED AND MUST NOT BE. Its round log records that
+   it was left alone deliberately: it answers *when does the calendar day begin*,
+   Record 001's text calls that moment "12:00 am Monday morning", and moving the
+   function would retcon his words. **Two questions, two functions** — which is
+   why `recordVisibleAt` exists. This is its second caller; `src/worker.js`
+   (f2dc391) was the first, and it had gone unused since 2026-08-16.
+   Nothing below this block changed.
 
    THE TICK IS THE SERVER'S CLOCK, NOT THE VISITOR'S. `museumNow()` counts from
    the instant the worker injected, advanced by `performance.now()` — a
@@ -57,7 +78,7 @@ import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
    seconds-resolution readout needs; `requestAnimationFrame` would tick 60x for
    one visible change and, per §8's hazard, does not fire at all in a background
    tab — which is exactly the tab this has to be correct in. */
-const DOORS_OPEN_AT = dayStartInRecordTz(RECORD_EPOCH);
+const DOORS_OPEN_AT = recordVisibleAt(RECORD_EPOCH);
 
 function remainingAt(ms) {
   const left = DOORS_OPEN_AT - ms;
