@@ -149,6 +149,49 @@ const RECORD_COOKIE = "wb_record";
 const NO_RECORD_KEY_NOTE =
   "No record key is set on this deployment. Run: npx wrangler secret put RECORD_KEY";
 
+/* ═══ [2026-08-24] THE CACHE KEY DOES NOT INCLUDE THE COOKIE ═══════════════════
+   TWO COOKIES DECIDE WHAT A VISITOR GETS — `wb_held` at the two doors above,
+   `wb_record` at the Record's clock below — AND UNTIL TODAY NOTHING MARKED
+   THOSE RESPONSES UNCACHEABLE. Cloudflare's default cache key is the URL. It
+   does not include the `Cookie` header. PNG, WEBP, WAV, MP3 and JS are
+   cacheable by default and HTML is not, so the exposure was widest on exactly
+   the material the doors exist to hold: one URL, two bodies, one key.
+
+   SO EVERY EXIT WHOSE BODY DEPENDS ON A COOKIE LEAVES WITH
+   `Cache-Control: private, no-store`, AND IT IS MARKED AT THE SITE — BOTH
+   HALVES OF EVERY DOOR. **THE 200 IS THE HALF THAT LEAKS.** A refusal cached
+   under a cookie-blind key is a nuisance; a GRANT cached under one is the held
+   material on the street. The first cut of this list named only the refusals
+   and would have looked complete while holding nothing. Four branches, six
+   exits, and the three that matter are the ones that return a body.
+
+   WHY NOT `Vary: Cookie`, WHICH IS THE PRECISE DECLARATION. Because Cloudflare
+   documents that it ignores `Vary` on anything but `Accept-Encoding`.
+   `Vary: Cookie` would be a true sentence that no cache in this path acts on;
+   `no-store` is the enforceable one. Ops ruled it 2026-08-24 and the reason is
+   written down HERE so the next session does not re-open it as an oversight.
+
+   IT CANNOT GO IN `_headers`. That file governs the ASSET layer and never
+   reaches a response this worker generates — and there is no `_headers` in
+   this tree at all, so there is nothing to amend even where it would apply.
+
+   > **[FLAG 2026-08-24 · flagged, not fixed] NO GATE IN THIS TREE READS A
+   > RESPONSE HEADER.** `reveal:check` reads the door prefixes out of this file
+   > and `wrangler.jsonc` and nothing further; no other gate looks at a header
+   > at all. If a future edit drops one of these marks, NOTHING REPORTS IT —
+   > the same silence that let the gap stand in the first place. */
+const NO_STORE = "private, no-store";
+
+/** re-stamp a response this worker decided from a cookie. A response handed
+    back by `env.ASSETS.fetch` has IMMUTABLE headers, so it is rebuilt rather
+    than mutated — `new Response(body, response)` carries status and headers
+    across, and the rebuilt copy's headers are writable. */
+function noStore(response) {
+  const marked = new Response(response.body, response);
+  marked.headers.set("Cache-Control", NO_STORE);
+  return marked;
+}
+
 async function sha256Hex(s) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, "0")).join("");
@@ -206,9 +249,47 @@ const CARD_WHILE_SHUT =
   "A museum of weird things worth keeping. No ads, no affiliate links, "
   + "no cut of anything you buy from an artist.";
 
-function injectClock(response, today, previewing, wingOpen) {
+function injectClock(response, today, previewing, wingOpen, governed) {
   const type = response.headers.get("Content-Type") || "";
-  if (!type.includes("text/html")) return response;
+  if (!type.includes("text/html")) {
+    /* [2026-08-24] NOT HTML, SO NOTHING IS INJECTED — AND THE ONLY
+       COOKIE-DECIDED CASE LEFT ON THIS LINE IS THE RECORD CLOCK'S 200 HALF.
+       A file the Record's schedule governs is a 404 to the public and a 200 to
+       a previewer AT THE SAME URL, decided by `wb_record`, and the refusal is
+       the only half that branch answers itself — the grant falls through to
+       here. The seven governed paths are `.webp`, which is cacheable by
+       default. Everything else through this line is the same bytes for
+       everybody and keeps the asset layer's `public, max-age=0,
+       must-revalidate`, which is correct for it. */
+    return governed ? noStore(response) : response;
+  }
+
+  /* ═══ [2026-08-24] THE ETag RESIDUAL, AND WHY THE MARK IS UNCONDITIONAL ═════
+     THE ASSET LAYER'S ETag HASHES THE STORED FILE, NOT THIS INJECTION. It is
+     computed before this worker is ever asked, so it does not move when the
+     values below do — and the same layer sends `public, max-age=0,
+     must-revalidate`, which is precisely the header that makes a browser STORE
+     the body and revalidate on every use.
+     SO THE 304 IS THE NORMAL PATH FOR A RETURNING VISITOR, NOT AN EDGE CASE.
+     `env.ASSETS.fetch(request)` forwards their `If-None-Match` verbatim, the
+     store's ETag has not moved, the layer answers 304 with a null body — and
+     the browser renders ITS OWN STORED COPY: a stale `__WB_TODAY__`, a stale
+     `__WB_NOW__`, and a `__WB_RECORD_ALL__` frozen at whatever the cookie said
+     on the request that last delivered a body. Mike enters the preview code,
+     reloads, and the page has not noticed the door moved. The same in reverse
+     when he closes it.
+     `no-store` CLOSES IT BY CONSTRUCTION: a browser that may not store the
+     body cannot send a conditional request about it. There is no second
+     mechanism and no cache-busting query to maintain.
+     AND THAT IS WHY THE MARK IS NOT CONDITIONAL ON THE COOKIE BEING PRESENT.
+     EVERY HTML response carries a `__WB_RECORD_ALL__` decided by `wb_record` —
+     `false` is a cookie-decided value too. Marking only a previewer's copy
+     would leave the public one cacheable and still stale. */
+  const marked = noStore(response);
+  /* a 304 has no body to rewrite. Running HTMLRewriter over one was always a
+     no-op — the guard above tests Content-Type, which a 304 still carries — so
+     it is skipped, and the mark above is now the whole of what happens to it. */
+  if (!marked.body) return marked;
   /* [2026-08-16] `__WB_NOW__` IS THE SERVER'S INSTANT, AND IT IS ONE FIELD IN
      THE INJECTION THAT WAS ALREADY HAPPENING. The lobby countdown needs seconds
      and `__WB_TODAY__` is a DAY — `todayInRecordTz` formats the time of day away
@@ -239,7 +320,9 @@ function injectClock(response, today, previewing, wingOpen) {
         element(el) { el.setAttribute("content", CARD_WHILE_SHUT); },
       });
   }
-  return r.transform(response);
+  /* transformed AFTER the mark, not before: `transform` carries the response's
+     headers across, so stamping first is the ordering that cannot lose it. */
+  return r.transform(marked);
 }
 
 /** has Record 001 announced the wing? — the worker's half of wing-open.js */
@@ -275,17 +358,33 @@ export default {
        THE STAGE. Written in this order on purpose: a future edit that widens
        the stage condition cannot widen it onto `/hr`, because control never
        reaches the stage branch with a locked path in hand. */
+    /* [2026-08-24] BOTH HALVES ARE MARKED, AND THE SECOND ONE IS WHY.
+       This branch answers two different bodies at one URL and the only thing
+       that chooses between them is `wb_held`, which is not in the cache key.
+       The GRANT serves `/assets/locked/*` — three built JS chunks, 188,356
+       bytes — and JS is cacheable by default. See THE CACHE KEY above. */
     if (LOCKED_DIRS.some(d => url.pathname.startsWith(d))) {
       if (!await heldOpen(request, env)) {
-        return new Response("Not found", { status: 404 });
+        return noStore(new Response("Not found", { status: 404 }));
       }
-      return env.ASSETS.fetch(request);
+      return noStore(await env.ASSETS.fetch(request));
     }
+    /* [2026-08-24] BOTH HALVES AGAIN, AND HERE THE GRANT IS THE BIG ONE:
+       `/held/*` is 137 files and 186,888,028 bytes — png, wav, mp3, jpg — and
+       every one of those extensions is cacheable by default. `wb_held` decides
+       and the key does not see it.
+       THE MARK IS NOT MADE CONDITIONAL ON THE STAGE, though the condition
+       above is. At DEVELOPMENT this branch is cookie-blind and serves
+       everybody, so nothing here varies — but a stage-dependent header is a
+       second thing to reason about at the exact site where getting it wrong
+       publishes the wing, and `npm run deploy` (development) is refused
+       outright by tools/deploy-guard.mjs, so no development build reaches the
+       public and the cost of the plainer rule is a local `wrangler dev`. */
     if (STAGE_DIRS.some(d => url.pathname.startsWith(d))) {
       if (__WB_STAGE__ === "launch" && !await heldOpen(request, env)) {
-        return new Response("Not found", { status: 404 });
+        return noStore(new Response("Not found", { status: 404 }));
       }
-      return env.ASSETS.fetch(request);
+      return noStore(await env.ASSETS.fetch(request));
     }
 
     /* ═══ [CH5 2026-08-12 · A3] A FUTURE RECORD'S FILES ARE REFUSED TOO ══════
@@ -317,9 +416,17 @@ export default {
        refusing it at the edge is the arrangement this museum already runs. A
        stale comment saying the mechanism had never run would have been the
        first thing to contradict that argument. */
-    if (assetWithheld(__WB_RECORD_ASSETS__, url.pathname, recordToday)
-        && !await previewOpen(request, env)) {
-      return new Response("Not found", { status: 404 });
+    /* [2026-08-24] THE TEST IS HOISTED SO THE 200 HALF CAN BE MARKED TOO.
+       This branch answers the REFUSAL and nothing else — a previewer falls
+       through to the last line of this worker, and THAT is where the 200 for a
+       governed `.webp` is served. Hoisting the test into a name is the only
+       way the far end can know the URL it is about to answer was decided by
+       `wb_record`. It changes nothing else: `assetWithheld` is an object
+       lookup on a build-time table, and `previewOpen` is still reached only
+       when a path is governed, exactly as the short-circuit did before. */
+    const governed = assetWithheld(__WB_RECORD_ASSETS__, url.pathname, recordToday);
+    if (governed && !await previewOpen(request, env)) {
+      return noStore(new Response("Not found", { status: 404 }));
     }
 
     /* POST /api/held {key} — the admin page's door. */
@@ -335,7 +442,13 @@ export default {
         return json({ error: "Wrong key" }, 401);
       }
       const cookie = `${HELD_COOKIE}=${await heldToken(env.HR_KEY)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${HELD_MAX_AGE}`;
-      return json({ ok: true }, 200, { "Set-Cookie": cookie });
+      /* [2026-08-24] A CACHED `Set-Cookie` HANDS A STRANGER THE KEY. Nothing
+         caches a POST, so this is not live — and that is a property of the
+         METHOD, not of this response. A secret is not left resting on a method
+         somebody could change in a later round for an unrelated reason. Marked
+         on its own condition, which is the same rule §0 states for a hold. */
+      return json({ ok: true }, 200,
+                  { "Set-Cookie": cookie, "Cache-Control": NO_STORE });
     }
 
     /* GET /api/held — does this browser already hold the door open? Lets the
@@ -360,7 +473,15 @@ export default {
            above reads. `/admin` prints it. Nothing on a public surface does —
            what stage a museum is at is a fact about the work (Doctrine 11). */
         stage: __WB_STAGE__,
-      }), { headers: { ...cors, "Content-Type": "application/json" } });
+        /* [2026-08-24] `open`, `served` and `probe` above are all decided by
+           `wb_held`: this endpoint answers two different bodies at one URL,
+           same as the doors it reports on. It is EXTENSIONLESS, so it sits
+           outside Cloudflare's default cacheable set today — a smaller mouth,
+           not a different fault, and one Cache Everything rule would close the
+           gap between them. It also carries `Access-Control-Allow-Origin: *`,
+           so a cached copy would be readable cross-origin by anything. */
+      }), { headers: { ...cors, "Content-Type": "application/json",
+                       "Cache-Control": NO_STORE } });
     }
 
     // POST /api/visits — log a page visit
@@ -498,8 +619,14 @@ export default {
       if (body.close === true) {
         const cleared = `${RECORD_COOKIE}=`
           + `; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`;
+        /* [2026-08-24] THE RULING NAMED TWO `Set-Cookie` RESPONSES AND THERE
+           ARE THREE. This is the third: it clears rather than mints, so it
+           carries no key and is the least dangerous of them — which is exactly
+           the argument that leaves one unmarked next to two marked ones and
+           makes the sweep look complete. Marked. Flagged to Ops as the one
+           addition beyond the ruled list. */
         return json({ ok: true, open: false, today: recordToday }, 200,
-                    { "Set-Cookie": cleared });
+                    { "Set-Cookie": cleared, "Cache-Control": NO_STORE });
       }
       if (!env.RECORD_KEY) return json({ error: NO_RECORD_KEY_NOTE }, 503);
       const supplied = body.key;
@@ -510,9 +637,11 @@ export default {
         + `; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${HELD_MAX_AGE}`;
       /* the instant this cookie dies. Knowable HERE and nowhere else: it is
          HttpOnly, so no later request can read its age back out. */
+      /* [2026-08-24] the same reason as `/api/held`'s mint above: a cached
+         `Set-Cookie` hands a stranger the preview code's token. */
       return json({ ok: true, open: true, today: recordToday,
                     expires: Date.now() + HELD_MAX_AGE * 1000 },
-                  200, { "Set-Cookie": cookie });
+                  200, { "Set-Cookie": cookie, "Cache-Control": NO_STORE });
     }
     /* ═══ [2026-08-20] DOES THIS ENDPOINT CARRY THE SAME LIE? PARTLY. ════════
        MIKE asked the question plainly, so here is the plain answer.
@@ -569,15 +698,25 @@ export default {
            age a later request can read, so on any page load after the one that
            minted it this is the whole of what is honestly knowable. */
         maxAgeDays: Math.round(HELD_MAX_AGE / 86400),
-      }), { headers: { ...cors, "Content-Type": "application/json" } });
+        /* [2026-08-24] `previewing` above is decided by `wb_record`, so this
+           is the Record clock's half of the same fault `/api/held` carries:
+           two bodies, one URL, a key that does not see the cookie.
+           Extensionless, `*` CORS, same reasoning as there. */
+      }), { headers: { ...cors, "Content-Type": "application/json",
+                       "Cache-Control": NO_STORE } });
     }
 
     if (url.pathname.startsWith("/api/")) {
       return new Response("Not found", { status: 404 });
     }
-    /* [CH5] every HTML response leaves with the museum's day written into it */
+    /* [CH5] every HTML response leaves with the museum's day written into it
+       [2026-08-24] AND `governed` RIDES ALONG, because this line serves two
+       things that need marking for two different reasons: every HTML response
+       (cookie-decided `__WB_RECORD_ALL__`, plus the ETag residual) and the 200
+       half of the Record clock's door (a `.webp` a previewer may have early).
+       `injectClock` is where both are stamped — see the two notes in it. */
     return injectClock(
       await env.ASSETS.fetch(request), recordToday,
-      await previewOpen(request, env), wingOpenOn(recordToday));
+      await previewOpen(request, env), wingOpenOn(recordToday), governed);
   }
 };

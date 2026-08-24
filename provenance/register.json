@@ -15747,6 +15747,20 @@
     "src/data/exhibits/hunter_root.facts.json"
    ],
    "s": "Ops' prose, ruled in by Mike 2026-08-23. Vault facts: MV-HR-20260707-043 (his father's records — the Rolling Stones, Led Zeppelin, The Doors, Lynyrd Skynyrd), -088 (Hank), -083 (the genre refusal), -091 (lyric before riff, notebook and pen), -052 (confessions set to music, not messages), -082 (spelled Root, pronounced Rut); his own post tags are the feed-sourced row at worth-a-listen-facts.js:520."
+  },
+  "4f84f20518c4485d": {
+   "f": "src/worker.js",
+   "l": 183,
+   "t": "private, no-store",
+   "p": "NO_STORE",
+   "c": "HOUSE"
+  },
+  "a8c0230e04e1aa8a": {
+   "f": "src/worker.js",
+   "l": 191,
+   "t": "Cache-Control",
+   "p": "noStore{}.headers.set",
+   "c": "HOUSE"
   }
  }
 }
