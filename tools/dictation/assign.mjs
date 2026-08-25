@@ -28,10 +28,16 @@
      Counted and reported, not shown.
 
    ── WHAT A TILE DOES NOW ───────────────────────────────────────────────────
-   It shows the thing, and it takes his answer. The answer is ON the tile —
-   five numbered buttons, one per Record — because the day is the decision.
-   Setting a mode in one corner and then clicking in another was a mechanism
-   he had to learn before he could say anything.
+   It shows the thing, and it takes his answer. The answer is ON the tile — ONE
+   button, add or remove — because the decision is which pages belong together.
+   Setting a mode in one corner and then clicking in another was a mechanism he
+   had to learn before he could say anything, and that rule still governs.
+
+   [2026-08-25] IT WAS FIVE NUMBERED BUTTONS, ONE PER RECORD, "because the day
+   is the decision". The day is not the decision; see the 2026-08-25 block at
+   the foot of this header. The sentence is corrected here rather than left
+   standing, because a header describing a surface that no longer exists is how
+   the next round rebuilds the thing that was replaced.
 
    ── SIZED TO WHAT EACH KIND NEEDS (A3 / C2 / C3) ───────────────────────────
    *"Using a full height tile for audio is distracting in the other
@@ -57,6 +63,113 @@
    renders — there is nothing but a filename. The tile says "no description on
    file" rather than printing it, and the count is reported. That is a gap in
    the asset table's `what` field, not something to invent here.
+
+   ═══════════════════════════════════════════════════════════════════════════
+   [2026-08-25] IT CAPTURES AN ATTACHMENT, NOT A DAY — AND A LATER ROUND MUST
+   NOT SIMPLIFY IT BACK INTO A DAY-PICKER.
+   ═══════════════════════════════════════════════════════════════════════════
+   MIKE RULED IT: he names the attachment while he picks the pictures. Title and
+   files are born in one act.
+
+   ── WHY, AND IT IS A RULING HE ALREADY MADE ────────────────────────────────
+   This page used to ask WHICH DAY. That is the wrong question, and the museum
+   has already paid for the right one. On 2026-08-16 his workbook's two
+   ATTACHMENTS lines — `View of the portal screen` and `Manual ref to Portal` —
+   landed on Record 004 as `docs` rows carrying a title and nothing else. On
+   2026-08-20 HE STRUCK THEM BOTH: *"Remove the docs field entirely. The
+   ATTACHMENTS 2 badge goes with it."* The reasoning is at the site in
+   `src/data/artists/robots-record.js` and it is Ruling 9's own shape —
+
+       "the Record may withhold and the Record may not promise."
+
+   A title with no files behind it is a promise. `docState()` resolves a row
+   with no plates to `held`, which draws **not here yet**; and one of the two
+   named a scan Record 003 had ALREADY DELIVERED, so Thursday would have said
+   the museum lacks a thing it showed on Wednesday.
+
+   THIS SURFACE MAKES THAT FAILURE IMPOSSIBLE RATHER THAN FORBIDDEN. A title
+   cannot exist here without the files it names, because naming is what CLOSES
+   a set that already has files in it. There is no order of operations that
+   produces an empty `docs` row. **A day-picker cannot make that guarantee —
+   it captures (day, file) and leaves the title to be paired afterwards, which
+   is the thing that has to be invented.**
+
+   ── AND THE ORDERING PROBLEM GOES WITH IT ──────────────────────────────────
+   The old `STATE[day]` was a list per day built by `setDay` filtering an id out
+   of every day and PUSHING it, so it recorded LAST-CLICK ORDER. Reading that as
+   intent is reading click history. Worse, it could not express what a `docs`
+   row needs: ruling 12 (2026-08-19) says an attachment is *the set of pages
+   that were filmed together because they belong together* — Record 003 is four
+   titles over six files, grouped 2/2/1/1, with one page in two scans. No
+   positional zip can produce that. **Grouping is now the thing he is doing,
+   not something a writer infers later.**
+
+   ORDER IS REAL INSIDE A SET and is captured: plates render in array order, so
+   the working set is shown in order with move-up / move-down. Order ACROSS
+   sets never meant anything and is not recorded.
+
+   ── THE GUARD THAT WOULD HAVE CAUGHT THE STRUCK ROW ────────────────────────
+   A tile the chosen entry ALREADY delivers is greyed and cannot be added, from
+   `already` in `buildDays()` (the entry's own `assets`, which this file has
+   carried since it was written and never drew). That is exactly the check that
+   would have stopped `Manual ref to Portal` naming Wednesday's scan on
+   Thursday. Changing the Record re-asks the question and takes an offending
+   file OFF the bench with a banner rather than leaving it sitting there looking
+   chosen.
+
+   **ITS POPULATION IS EMPTY TODAY AND A CLEAN RUN THEREFORE PROVES NOTHING.**
+   Measured on the built page 2026-08-25: the seven paths `delivered()` returns
+   have NO TILE — the shelf's `supersededBy` filter drops all seven, so the
+   guard cannot fire against anything currently on the shelf. **It was proved by
+   injection instead** (a delivered path pushed into `ALREADY` at runtime: the
+   button went disabled, the row said *already in this Record*, the click was
+   refused, and switching Record swept it off the bench). This is the orphan
+   check's own defect one room over — `--orphans` counted a population that was
+   empty by construction and read 0 for its whole life — so the emptiness is
+   written down here rather than discovered later by somebody who trusts a green
+   run. The day a delivered file is also on the shelf, this guard is load-bearing
+   and untested in the wild.
+
+   ── WHAT IT STILL DOES NOT DO, ON PURPOSE ──────────────────────────────────
+   NOTHING HERE WRITES TO THE TREE. The capture is `wb.assign.v2` in the browser
+   plus a file he can hand over; the writer that lands it into
+   `record-draft.json` is a separate step and is not built. Ops wanted the
+   surface in his hands first.
+
+   IT EMITS NO `source` AND NO `pages`. The register files both as Ops wiring,
+   and `pages` counts PAGES rather than FILES — ruling 12's one-page-in-two-
+   scans case is why those are not the same number. A plate needs no `label`
+   either: `RecordAttachments.jsx` falls back to the file's own name, *"a fact
+   rather than a caption Ops made up for the row."*
+
+   ── THE OLD CAPTURE IS NOT MIGRATED ────────────────────────────────────────
+   `wb.assign.week1.v1` stands as a record and this page does not read it. It
+   holds 22 ids, 18 of them in the older `repo:path` vocabulary naming files in
+   the ROBOTS repo. Translating them to `/robots/manual/page-NN.png` is not a
+   lookup: the museum's copy is a DIFFERENT FILE — page-01 is sha `af4abdef0832`
+   at 1,926,945 bytes here against `6d0276faa168` at 2,218,869 bytes there — so
+   re-pointing decides which file the museum shows, which is Mike's call and not
+   a migration. **All 22 ids are banked, resolved one by one, in
+   `C:\AI\_night-20260825\BROWSER_RESCUE-20260825.md`.** Re-picking them costs
+   one sitting and carries no inference, and under this surface he would be
+   doing something different anyway — grouping pages into named attachments
+   rather than dropping loose files onto days.
+
+   ── THE STORY EVENTS ARE NOT PART OF THIS JOB ──────────────────────────────
+   They are still listed, because what the museum is holding is worth seeing,
+   and they no longer take an answer here. A story event's day is `when:` on its
+   ledger row and `npm run reveal:cards` already asks for it one card at a time.
+
+   > **[FLAG 2026-08-25 · stated, not fixed] `when`'s UNIT IS UNDECIDED IN PROSE
+   > AND DECIDED AS A WEEK BY ITS ONLY READER.** `reveal/README.md` defines it as
+   > *"the story day or week it becomes available"*; `tools/reveal-ledger.mjs`
+   > asks *"what day something comes out"* and prints a section headed ASSETS
+   > CLUSTERING ON ONE DAY. The one consumer in the tree is
+   > `reveal/transfers.mjs`, which does `typeof r.when === "number"` and compares
+   > it to a transfer WEEK. A day written into it would be compared against a
+   > week and fault silently. All 176 rows are null, so the ambiguity has never
+   > been paid for — it will be paid by whoever answers the first card. Not
+   > fixed here: this file writes no `when` and never did.
    =========================================================================== */
 
 import fs from "node:fs";
@@ -183,6 +296,11 @@ figure.as-card.as-on{border-color:var(--gold,#b8974a);box-shadow:inset 0 0 0 2px
 .as-row{display:flex;align-items:center;gap:12px;border:1px solid var(--rule,#3a3529);
   border-radius:2px;background:#0f0e0a;padding:7px 10px}
 .as-row.as-on{border-color:var(--gold,#b8974a);box-shadow:inset 0 0 0 1px var(--gold,#b8974a)}
+/* SPENT — in a closed attachment, or already delivered by the chosen Record.
+   Dimmed rather than hidden: a thing he cannot pick twice is still a thing the
+   museum holds, and removing it from the shelf would answer a question he did
+   not ask (Doctrine 24 runs the other way — nothing left his view). */
+figure.as-card.as-off,.as-row.as-off{opacity:.4}
 .as-row .as-lab{flex:0 0 165px;font-size:12px;line-height:1.35}
 .as-row audio{height:32px;flex:1 1 auto;min-width:150px;max-width:330px}
 .as-row.as-evt .as-lab{flex:1 1 auto}
@@ -191,16 +309,55 @@ figure.as-card.as-on{border-color:var(--gold,#b8974a);box-shadow:inset 0 0 0 2px
 .as-pick{display:flex;gap:3px;align-items:center;flex:0 0 auto}
 figure.as-card .as-pick{padding:2px 7px 7px}
 .as-pick b{font-size:9.5px;opacity:.45;margin-right:3px;font-weight:400;letter-spacing:.04em}
-.as-pick button{font-family:inherit;font-size:11px;line-height:1;padding:4px 0;width:22px;
+.as-pick button{font-family:inherit;font-size:11px;line-height:1;padding:4px 9px;
   cursor:pointer;background:transparent;border:1px solid var(--rule,#3a3529);
-  color:inherit;border-radius:2px}
+  color:inherit;border-radius:2px;letter-spacing:.05em}
 .as-pick button:hover{border-color:var(--gold,#b8974a)}
 .as-pick button[aria-pressed=true]{background:var(--gold,#b8974a);
   border-color:var(--gold,#b8974a);color:#17150f;font-weight:700}
+.as-pick button[disabled]{opacity:.3;cursor:default;border-style:dashed}
+.as-pick button[disabled]:hover{border-color:var(--rule,#3a3529)}
+.as-has{font-size:9.5px;opacity:.5;font-style:italic}
 .as-undesc{display:block;font-size:10px;opacity:.45;font-style:italic;margin-top:2px}
 
+/* ═══ THE COMPOSER ═══ */
+.as-comp{border:1px solid var(--gold,#b8974a);border-radius:2px;margin:0 0 14px;padding:10px 11px}
+.as-comp h3{margin:0 0 3px;font-size:12.5px;letter-spacing:.04em}
+.as-hint{font-size:10.5px;opacity:.62;line-height:1.45;margin:0 0 8px}
+ol.as-set{list-style:none;margin:0;padding:0;counter-reset:pg}
+ol.as-set li{counter-increment:pg;font-size:10.5px;line-height:1.35;padding:4px 0;
+  border-top:1px solid #2a2620;display:flex;gap:5px;align-items:center}
+ol.as-set li::before{content:counter(pg);opacity:.45;flex:0 0 auto;min-width:11px}
+ol.as-set li span.nm{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+ol.as-set li button{font-family:inherit;font-size:10px;line-height:1;padding:2px 4px;
+  cursor:pointer;background:transparent;border:1px solid var(--rule,#3a3529);
+  color:inherit;border-radius:2px;flex:0 0 auto}
+ol.as-set li button:hover{border-color:var(--gold,#b8974a)}
+ol.as-set li button[disabled]{opacity:.25;cursor:default}
+.as-fld{display:block;margin:8px 0 0;font-size:10.5px;opacity:.8}
+.as-fld span{display:block;margin:0 0 3px;letter-spacing:.04em;opacity:.7}
+.as-fld input,.as-fld select{width:100%;box-sizing:border-box;font-family:inherit;
+  font-size:11.5px;padding:5px 6px;background:transparent;color:inherit;
+  border:1px solid var(--rule,#3a3529);border-radius:2px}
+.as-fld input:focus,.as-fld select:focus{outline:none;border-color:var(--gold,#b8974a)}
+#as-close{margin:9px 0 0;font-family:inherit;font-size:11.5px;padding:6px 12px;
+  cursor:pointer;background:transparent;border:1px solid var(--rule,#3a3529);
+  color:inherit;border-radius:2px;width:100%}
+#as-close:hover:not([disabled]){border-color:var(--gold,#b8974a)}
+#as-close[disabled]{opacity:.35;cursor:default}
+.as-why{font-size:10px;opacity:.6;line-height:1.4;margin:6px 0 0;min-height:1.3em;font-style:italic}
+.as-att{margin:7px 0 0;padding:6px 7px;border:1px solid #2a2620;border-radius:2px}
+.as-att .t{font-size:11px;line-height:1.35}
+.as-att .f{font-size:9.5px;opacity:.55;line-height:1.4;margin:2px 0 0}
+.as-att .r{margin:4px 0 0;display:flex;gap:5px}
+.as-att button{font-family:inherit;font-size:9.5px;line-height:1;padding:3px 6px;
+  cursor:pointer;background:transparent;border:1px solid var(--rule,#3a3529);
+  color:inherit;border-radius:2px}
+.as-att button:hover{border-color:var(--gold,#b8974a)}
+
 /* the five days */
-.as-rail{position:sticky;top:74px}
+.as-rail{position:sticky;top:74px;max-height:calc(100vh - 88px);overflow-y:auto}
 .as-day{border:1px solid var(--rule,#3a3529);border-radius:2px;margin:0 0 9px;padding:9px 10px}
 .as-day h3{margin:0 0 2px;font-size:12.5px;letter-spacing:.04em}
 .as-day .as-dt{font-size:11px;opacity:.66}
@@ -242,10 +399,14 @@ figure.as-card .as-pick{padding:2px 7px 7px}
 `;
 
 /* ═══ RENDER ═══════════════════════════════════════════════════════════════ */
-const PICK = id => `<div class="as-pick" data-for="${esc(id)}"><b>REVEAL ON</b>${
-  [1, 2, 3, 4, 5].map(n =>
-    `<button type="button" data-day="${n}" aria-pressed="false" title="Record 00${n}">${n}</button>`
-  ).join("")}</div>`;
+/* ONE CONTROL PER TILE. It joins the working set or leaves it; there is no
+   second mode to learn and nothing to set in another corner first — the J6
+   rule this page was rebuilt under. `aria-pressed` carries the state and the
+   paint reads it back, so a tile cannot look chosen while the model disagrees.
+   DISABLED means the entry now chosen already delivers this file. */
+const PICK = id => `<div class="as-pick" data-for="${esc(id)}"
+  ><button type="button" data-add aria-pressed="false">add</button
+  ><span class="as-has" hidden>already in this Record</span></div>`;
 
 const UNDESC = r => r.undescribed
   ? `<span class="as-undesc">no description on file</span>` : "";
@@ -267,8 +428,12 @@ function audioRow(r) {
 </div>`;
 }
 
+/* [2026-08-25] A STORY EVENT TAKES NO ANSWER HERE AND IS STILL SHOWN. Its day
+   is `when:` on its ledger row and `npm run reveal:cards` asks for it properly,
+   one card at a time. Leaving the row visible keeps what the museum is holding
+   in view; leaving a control on it would take an answer nothing reads. */
 const eventRow = r => `<div class="as-row as-evt" data-id="${esc(r.id)}" data-nm="${esc(r.label)}">
-  <div class="as-lab">${esc(r.label)}</div>${PICK(r.id)}
+  <div class="as-lab">${esc(r.label)}</div>
 </div>`;
 
 function section(key, label, blurb, kind, items, thumbs) {
@@ -302,6 +467,28 @@ const evtKeys = [...new Set(events.map(e => e.section))];
 const evtHtml = evtKeys.map(k => section(k, k.replace("evt:", ""), null, "say",
   events.filter(e => e.section === k), thumbs)).join("\n");
 
+/* THE COMPOSER — the whole of the change, in one panel. Pick tiles, order them,
+   name the set, choose the Record, close it. The title field is LAST in reading
+   order and the close button is under it, so the only path through is
+   files → name → entry, which is why an empty `docs` row cannot be built. */
+const composerHtml = `<div class="as-comp">
+  <h3>THE ATTACHMENT YOU ARE BUILDING</h3>
+  <p class="as-hint">Pick the pages that were filmed together. Then name the set
+    and say which Record carries it.</p>
+  <ol class="as-set" data-set></ol>
+  <p class="as-none" data-setnone>Nothing picked yet.</p>
+  <label class="as-fld"><span>What is it?</span>
+    <input type="text" id="as-title" spellcheck="false" autocomplete="off"
+      placeholder="e.g. Scan 07 - Power supply and distribution"></label>
+  <label class="as-fld"><span>Which Record?</span>
+    <select id="as-no">
+      <option value="">&mdash; choose &mdash;</option>
+      ${days.map(d => `<option value="${d.no}">RECORD ${String(d.no).padStart(3, "0")} &middot; ${esc(d.weekday)} ${esc(d.date)}</option>`).join("")}
+    </select></label>
+  <button type="button" id="as-close">Close this attachment</button>
+  <p class="as-why" id="as-why"></p>
+</div>`;
+
 const dayHtml = days.map(d => `<div class="as-day" data-no="${d.no}">
   <h3>RECORD ${String(d.no).padStart(3, "0")}</h3>
   <div class="as-dt">${esc(d.weekday)} ${esc(d.date)}</div>
@@ -318,7 +505,7 @@ const body = `
   <div class="as-shelf">
     <b>${rows.length}</b> things the museum can show &middot;
     <b>${events.length}</b> things a day can announce &middot;
-    <span class="dim">open a section, then press the Record that reveals it</span>
+    <span class="dim">open a section, add the pages that belong together, then name the set</span>
     <span id="as-cnt"></span>
   </div>
   <div id="as-banner"></div>
@@ -351,7 +538,7 @@ const body = `
       </div>
     </details>
   </div>
-  <div class="as-rail">${dayHtml}</div>
+  <div class="as-rail">${composerHtml}${dayHtml}</div>
 </div>
 
 <div id="as-view">
@@ -371,8 +558,17 @@ const body = `
 
 <script>
 "use strict";
-var KEY = "wb.assign.week1.v1";
-var STATE = {};
+/* [2026-08-25] A NEW KEY, AND THE OLD ONE IS LEFT WHERE IT IS. No backtick in
+   this script: it sits inside a template literal and one would close it.
+   wb.assign.week1.v1 holds the day-keyed capture and this page never reads it.
+   Its 22 ids are banked and resolved in
+   C:\\AI\\_night-20260825\\BROWSER_RESCUE-20260825.md, 18 of them naming files
+   in the ROBOTS repo whose museum counterpart is a different file. Translating
+   them would decide which file the museum shows, which is Mike's call and not
+   a migration. */
+var KEY = "wb.assign.v2";
+var OLDKEY = "wb.assign.week1.v1";
+var STATE = { open:{ files:[], title:"", no:null }, done:[] };
 var VIEW = null, ZOOM = null;
 
 function banner(t){var b=document.getElementById("as-banner");b.innerHTML=t;b.className=t?"as-on":"";}
@@ -383,91 +579,194 @@ function save(){
   catch(e){ OK=false; banner("<b>THIS BROWSER WILL NOT LET THE PAGE REMEMBER ANYTHING.</b> Your choices are on the screen and in the text at the foot of the page, but they will be gone if you close this tab. Open <b>the text to hand to Ops</b> and copy it first."); }
 }
 function load(){
-  try{ var raw=localStorage.getItem(KEY); if(raw) STATE=JSON.parse(raw)||{}; }
+  try{
+    var raw=localStorage.getItem(KEY);
+    if(raw){
+      var p=JSON.parse(raw)||{};
+      STATE={ open:{ files:(p.open&&p.open.files)||[], title:(p.open&&p.open.title)||"",
+                     no:(p.open&&p.open.no)||null },
+              done:Array.isArray(p.done)?p.done:[] };
+    }
+  }
   catch(e){ OK=false; banner("<b>THIS BROWSER WILL NOT LET THE PAGE REMEMBER ANYTHING.</b> Nothing was lost \\u2014 there was nothing saved to read."); }
 }
 function cssq(s){ return String(s).replace(/["\\\\]/g,"\\\\$&"); }
-function dayOf(id){ for(var k in STATE){ if(STATE[k].indexOf(id)>=0) return Number(k); } return 0; }
 function nameOf(id){
   var n=document.querySelector('[data-id="'+cssq(id)+'"]');
   return n?n.getAttribute("data-nm"):id;
 }
+function inSet(id){ return STATE.open.files.indexOf(id)>=0; }
+/* an id already spoken for by a CLOSED attachment. Two attachments naming one
+   file would put the same picture on the page twice under two names. */
+function heldBy(id){
+  for(var i=0;i<STATE.done.length;i++)
+    if(STATE.done[i].files.indexOf(id)>=0) return STATE.done[i];
+  return null;
+}
+/* what the chosen Record ALREADY delivers, off the entry's own assets. This is
+   the check that would have caught "Manual ref to Portal" naming Wednesday's
+   scan on Thursday. */
+function alreadyIn(no,id){
+  if(!no) return false;
+  var a=ALREADY[String(no)]||[];
+  return a.indexOf(id)>=0;
+}
 
-/* THE ONE ACTION ON THE PAGE. Press a number: that Record reveals it. Press
-   the same number again: it does not. */
-function setDay(id,n){
-  var was=dayOf(id);
-  for(var k in STATE) STATE[k]=STATE[k].filter(function(x){return x!==id;});
-  if(was!==n){ STATE[n]=STATE[n]||[]; STATE[n].push(id); }
+/* THE ONE ACTION ON A TILE. It joins the set being built, or it leaves it. */
+function toggle(id){
+  if(inSet(id)) STATE.open.files=STATE.open.files.filter(function(x){return x!==id;});
+  else {
+    if(heldBy(id)||alreadyIn(STATE.open.no,id)) return;
+    STATE.open.files.push(id);
+  }
+  save(); paint();
+}
+/* ORDER IS REAL INSIDE A SET — plates render in array order. */
+function move(id,d){
+  var i=STATE.open.files.indexOf(id), j=i+d;
+  if(i<0||j<0||j>=STATE.open.files.length) return;
+  var f=STATE.open.files;
+  var t=f[i]; f[i]=f[j]; f[j]=t;
+  save(); paint();
+}
+/* CLOSING IS WHAT MAKES THE TITLE AND THE FILES ONE ACT. It refuses an empty
+   set and an unnamed one, so there is no order of operations that produces a
+   docs row with nothing behind it. */
+function closeSet(){
+  var t=(STATE.open.title||"").trim();
+  if(!STATE.open.files.length||!t||!STATE.open.no) return;
+  STATE.done.push({ no:Number(STATE.open.no), title:t, files:STATE.open.files.slice() });
+  STATE.open={ files:[], title:"", no:STATE.open.no };
+  document.getElementById("as-title").value="";
+  save(); paint();
+}
+function dropAtt(i){ STATE.done.splice(i,1); save(); paint(); }
+/* REOPEN puts a closed attachment back on the bench whole. It refuses while
+   something is being built, because merging two sets silently is how a page
+   loses a choice. */
+function reopenAtt(i){
+  if(STATE.open.files.length||(STATE.open.title||"").trim()) return;
+  var a=STATE.done.splice(i,1)[0];
+  STATE.open={ files:a.files.slice(), title:a.title, no:a.no };
+  document.getElementById("as-title").value=a.title;
   save(); paint();
 }
 
 function paint(){
-  var total=0;
-  document.querySelectorAll(".as-pick").forEach(function(p){
-    var id=p.getAttribute("data-for"), d=dayOf(id);
-    p.querySelectorAll("button").forEach(function(b){
-      b.setAttribute("aria-pressed", Number(b.getAttribute("data-day"))===d?"true":"false");
-    });
-    var host=p.closest("figure.as-card")||p.closest(".as-row");
-    if(host) host.classList.toggle("as-on", !!d);
-  });
-  for(var k in STATE) total+=STATE[k].length;
+  var no=STATE.open.no;
 
+  document.querySelectorAll(".as-pick").forEach(function(p){
+    var id=p.getAttribute("data-for");
+    var b=p.querySelector("button"), has=p.querySelector(".as-has");
+    var mine=inSet(id), held=heldBy(id), dlv=alreadyIn(no,id);
+    b.setAttribute("aria-pressed", mine?"true":"false");
+    b.textContent = mine ? "remove" : "add";
+    b.disabled = !mine && (!!held || dlv);
+    has.hidden = !(dlv||held);
+    if(dlv) has.textContent="already in this Record";
+    else if(held) has.textContent="in \\u201c"+held.title+"\\u201d";
+    var host=p.closest("figure.as-card")||p.closest(".as-row");
+    if(host){ host.classList.toggle("as-on", mine); host.classList.toggle("as-off", b.disabled); }
+  });
+
+  /* the bench */
+  var ol=document.querySelector("[data-set]"); ol.innerHTML="";
+  STATE.open.files.forEach(function(id,i){
+    var li=document.createElement("li");
+    li.innerHTML='<span class="nm">'+nameOf(id)+'</span>'
+      +'<button type="button" data-up="'+id.replace(/"/g,"&quot;")+'"'+(i===0?" disabled":"")+'>\\u2191</button>'
+      +'<button type="button" data-dn="'+id.replace(/"/g,"&quot;")+'"'+(i===STATE.open.files.length-1?" disabled":"")+'>\\u2193</button>'
+      +'<button type="button" data-off="'+id.replace(/"/g,"&quot;")+'">\\u00d7</button>';
+    ol.appendChild(li);
+  });
+  document.querySelector("[data-setnone]").hidden = STATE.open.files.length>0;
+
+  var sel=document.getElementById("as-no");
+  if(sel.value!==(no?String(no):"")) sel.value = no?String(no):"";
+  var t=(STATE.open.title||"").trim();
+  var ready=STATE.open.files.length>0 && !!t && !!no;
+  document.getElementById("as-close").disabled=!ready;
+  document.getElementById("as-why").textContent = ready ? ""
+    : !STATE.open.files.length ? "Add the pages first."
+    : !t ? "Name it."
+    : "Say which Record carries it.";
+
+  /* the closed attachments, under their Record */
   document.querySelectorAll(".as-day").forEach(function(el){
-    var no=Number(el.getAttribute("data-no"));
+    var n=Number(el.getAttribute("data-no"));
     var ul=el.querySelector("ul"); ul.innerHTML="";
-    (STATE[no]||[]).forEach(function(id){
+    var any=false;
+    STATE.done.forEach(function(a,i){
+      if(a.no!==n) return;
+      any=true;
       var li=document.createElement("li");
-      li.innerHTML='<span class="as-x" data-off="'+id.replace(/"/g,"&quot;")+'">&times;</span><span>'
-        +nameOf(id)+'</span>';
+      li.innerHTML='<div class="as-att"><div class="t">'+a.title+'</div>'
+        +'<div class="f">'+a.files.length+' file'+(a.files.length===1?"":"s")+' \\u00b7 '
+        +a.files.map(nameOf).join(" \\u00b7 ")+'</div>'
+        +'<div class="r"><button type="button" data-re="'+i+'">reopen</button>'
+        +'<button type="button" data-del="'+i+'">remove</button></div></div>';
       ul.appendChild(li);
     });
-    if(!(STATE[no]||[]).length){
+    if(!any){
       var li0=document.createElement("li");
-      li0.innerHTML='<span class="as-none">nothing chosen</span>';
+      li0.innerHTML='<span class="as-none">no attachment yet</span>';
       ul.appendChild(li0);
     }
   });
 
-  /* a CLOSED section still says how much of it he has chosen, or he would have
+  /* a CLOSED section still says how much of it he has spent, or he would have
      to open all eleven to find out */
   document.querySelectorAll("details.as-sec").forEach(function(sec){
     var mine=0;
     sec.querySelectorAll(".as-pick").forEach(function(p){
-      if(dayOf(p.getAttribute("data-for"))) mine++;
+      var id=p.getAttribute("data-for");
+      if(inSet(id)||heldBy(id)) mine++;
     });
-    sec.querySelector(".as-mine").textContent = mine ? "\\u00b7 " + mine + " chosen" : "";
+    sec.querySelector(".as-mine").textContent = mine ? "\\u00b7 " + mine + " used" : "";
   });
 
-  document.getElementById("as-cnt").textContent = total ? " \\u00b7 " + total + " chosen" : "";
+  var nf=0; STATE.done.forEach(function(a){ nf+=a.files.length; });
+  document.getElementById("as-cnt").textContent = STATE.done.length
+    ? " \\u00b7 " + STATE.done.length + " attachment" + (STATE.done.length===1?"":"s")
+      + ", " + nf + " file" + (nf===1?"":"s") : "";
   writeOut();
 }
 
+/* THE CAPTURE. The object at the foot is the docs row the lander already
+   reads, minus the two fields that are Ops' wiring: no source, and no pages
+   — pages counts PAGES, not FILES, and ruling 12's one-page-in-two-scans case
+   is why those are not the same number. A plate needs no label either;
+   RecordAttachments.jsx falls back to the file's own name. */
 function writeOut(){
-  var L=["WEEK ONE \\u2014 WHAT EACH RECORD REVEALS",
+  var L=["THE RECORD'S ATTACHMENTS \\u2014 what each one is, and what is in it",
          "written "+new Date().toISOString().slice(0,16).replace("T"," "),""];
   DAYS.forEach(function(d){
-    var got=STATE[d.no]||[];
+    var mine=STATE.done.filter(function(a){return a.no===d.no;});
     L.push("RECORD "+("00"+d.no).slice(-3)+"  "+d.weekday+" "+d.date
       +(d.title?"  \\u2014 "+d.title.split("\\n")[0]:""));
-    if(!got.length) L.push("    (nothing chosen)");
-    got.forEach(function(id){
-      L.push("    "+(id.indexOf("event:")===0
-        ? "[ANNOUNCE] "+nameOf(id)+"  ("+id+")"
-        : nameOf(id)+"  ["+id+"]"));
+    if(!mine.length) L.push("    (no attachment)");
+    mine.forEach(function(a){
+      L.push("    "+a.title);
+      a.files.forEach(function(id,i){ L.push("       "+(i+1)+". "+nameOf(id)+"  ["+id+"]"); });
     });
     L.push("");
   });
-  var o={},ev={};
-  DAYS.forEach(function(d){
-    o[d.no]=(STATE[d.no]||[]).filter(function(x){return x.indexOf("event:")!==0;});
-    var e=(STATE[d.no]||[]).filter(function(x){return x.indexOf("event:")===0;});
-    if(e.length) ev[d.no]=e;
-  });
-  L.push("--- for Ops: the assets arrays, keyed by record number ---");
-  L.push(JSON.stringify(o,null,1));
-  if(Object.keys(ev).length){ L.push(""); L.push("--- to announce ---"); L.push(JSON.stringify(ev,null,1)); }
+  if(STATE.open.files.length){
+    L.push("STILL ON THE BENCH, NOT CLOSED \\u2014 it is not in the object below");
+    L.push("    "+((STATE.open.title||"").trim()||"(unnamed)")
+      +(STATE.open.no?"  \\u2014 for Record "+("00"+STATE.open.no).slice(-3):"  \\u2014 no Record chosen"));
+    STATE.open.files.forEach(function(id,i){ L.push("       "+(i+1)+". "+nameOf(id)); });
+    L.push("");
+  }
+  L.push("--- for Ops ---");
+  L.push(JSON.stringify({
+    _: "attachments, picked on assign.html. Titles and files are Mike's, chosen together.",
+    key: KEY,
+    saved: new Date().toISOString(),
+    attachments: STATE.done.map(function(a){
+      return { no:a.no, title:a.title, files:a.files.slice() };
+    })
+  },null,1));
   document.getElementById("as-ta").value=L.join("\\n");
 }
 
@@ -492,9 +791,8 @@ function drawView(){
   img.src=f.getAttribute("data-src");
   document.getElementById("as-vpick").innerHTML =
     '<div class="as-pick" data-for="'+f.getAttribute("data-id").replace(/"/g,"&quot;")+'">'
-    +'<b>REVEAL ON</b>'+[1,2,3,4,5].map(function(n){
-      return '<button type="button" data-day="'+n+'" aria-pressed="false">'+n+'</button>';}).join("")
-    +'</div>';
+    +'<button type="button" data-add aria-pressed="false">add</button>'
+    +'<span class="as-has" hidden></span></div>';
   paint();
 }
 function fitZoom(){
@@ -516,19 +814,45 @@ function step(d){ if(!VIEW) return; VIEW.i=(VIEW.i+d+VIEW.list.length)%VIEW.list
 /* WIRING. Never behind requestAnimationFrame — it does not fire in a tab that
    is not being painted, and a page that draws but wires nothing is a defect
    with no error anywhere. */
-load(); paint();
+load();
+document.getElementById("as-title").value=STATE.open.title||"";
+paint();
 
 document.addEventListener("click", function(ev){
   var t=ev.target;
   var b=t.closest && t.closest(".as-pick button");
-  if(b){ setDay(b.parentNode.getAttribute("data-for"), Number(b.getAttribute("data-day"))); return; }
+  if(b){ if(!b.disabled) toggle(b.closest(".as-pick").getAttribute("data-for")); return; }
+  var up=t.closest && t.closest("[data-up]");
+  if(up){ move(up.getAttribute("data-up"),-1); return; }
+  var dn=t.closest && t.closest("[data-dn]");
+  if(dn){ move(dn.getAttribute("data-dn"),1); return; }
   var off=t.closest && t.closest("[data-off]");
-  if(off){ var id=off.getAttribute("data-off");
-    for(var k in STATE) STATE[k]=STATE[k].filter(function(x){return x!==id;});
-    save(); paint(); return; }
+  if(off){ toggle(off.getAttribute("data-off")); return; }
+  var re=t.closest && t.closest("[data-re]");
+  if(re){ reopenAtt(Number(re.getAttribute("data-re"))); return; }
+  var del=t.closest && t.closest("[data-del]");
+  if(del){ dropAtt(Number(del.getAttribute("data-del"))); return; }
   var z=t.closest && t.closest("[data-zoom]");
   if(z){ openView(z.getAttribute("data-zoom")); return; }
 });
+
+document.getElementById("as-title").addEventListener("input", function(){
+  STATE.open.title=this.value; save(); paint();
+});
+/* CHANGING THE RECORD RE-ASKS THE ALREADY-DELIVERS QUESTION, and a file the new
+   Record already carries is taken off the bench rather than left sitting there
+   looking chosen. It is reported, never silent. */
+document.getElementById("as-no").addEventListener("change", function(){
+  STATE.open.no=this.value?Number(this.value):null;
+  var drop=STATE.open.files.filter(function(id){ return alreadyIn(STATE.open.no,id); });
+  if(drop.length){
+    STATE.open.files=STATE.open.files.filter(function(id){ return drop.indexOf(id)<0; });
+    banner("<b>"+drop.length+" file"+(drop.length===1?"":"s")+" came off the bench</b> \\u2014 that Record already delivers "
+      +drop.map(nameOf).join(", ")+". A Record cannot attach what it has already shown.");
+  } else banner("");
+  save(); paint();
+});
+document.getElementById("as-close").addEventListener("click", closeSet);
 
 document.getElementById("as-vx").addEventListener("click", closeView);
 document.getElementById("as-vprev").addEventListener("click", function(){ step(-1); });
@@ -554,18 +878,26 @@ document.getElementById("as-dl").addEventListener("click", function(){
   var ta=document.getElementById("as-ta");
   var a=document.createElement("a");
   a.href=URL.createObjectURL(new Blob([ta.value],{type:"text/plain"}));
-  a.download="week-one.txt"; document.body.appendChild(a); a.click(); a.remove();
-  document.getElementById("as-msg").textContent="Saved as week-one.txt \\u2014 look in your Downloads folder.";
+  a.download="attachments.txt"; document.body.appendChild(a); a.click(); a.remove();
+  document.getElementById("as-msg").textContent="Saved as attachments.txt \\u2014 look in your Downloads folder.";
 });
 document.getElementById("as-clr").addEventListener("click", function(){
-  STATE={}; save(); paint();
+  STATE={ open:{ files:[], title:"", no:null }, done:[] };
+  document.getElementById("as-title").value="";
+  save(); paint();
   document.getElementById("as-msg").textContent="Every choice cleared.";
 });
 </script>
 `;
 
+/* [2026-08-25] `ALREADY` IS THE ENTRY'S OWN ASSETS, AND IT IS DRAWN NOW.
+   `buildDays()` has carried it since this file was written and nothing read it.
+   It is what greys a tile the chosen Record already delivers — the check that
+   would have caught `Manual ref to Portal` naming Wednesday's scan on Thursday.
+   Keyed by record number as a string, because that is how it is looked up. */
 const inject = `<script>var DAYS = ${JSON.stringify(days.map(d =>
-  ({ no: d.no, date: d.date, weekday: d.weekday, title: d.title })))};</script>`;
+  ({ no: d.no, date: d.date, weekday: d.weekday, title: d.title })))};
+var ALREADY = ${JSON.stringify(Object.fromEntries(days.map(d => [String(d.no), d.already])))};</script>`;
 
 fs.writeFileSync(OUT, page({ title: "Week one", css: CSS, body: inject + body, favi: "🗓" }));
 
