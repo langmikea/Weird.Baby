@@ -141,13 +141,59 @@ const INSTRUMENTS = [
      landed when it was generated. Week one is Records 001 to 005, so the sheet
      he writes in has to hold all five. The old workbook is NOT deleted and NOT
      modified; it simply stops being the door on this desk. */
+  /* ═══ [2026-08-25] REPOINTED AGAIN, AND THE CARD HAD BEEN WRONG FOR NINE DAYS
+     ════════════════════════════════════════════════════════════════════════
+     IT POINTED AT `C:/AI/_week01/WEEK01_records-001-to-005.xlsx`, and on
+     2026-08-16 Mike stopped writing in it. `workbook_to_draft.py`'s own header
+     says so — *"Mike now writes in a workbook HE built, not the one this tool
+     generated, and it is a different animal"* — and names the replacement as
+     the source of truth. `provenance/register.json` agrees: sixteen Record
+     strings are sourced to *"his own hand-built week-1 workbook,
+     NEW_RECORD_MAKER_V3.xlsx"*.
+
+     MEASURED 2026-08-25, WHICH IS WHY THIS IS A REPOINT AND NOT A PREFERENCE.
+     The two workbooks were compared cell by cell against what shipped in
+     `src/data/artists/robots-record.js`:
+       · V3's Record 001 title and BOTH deck lines match the tree exactly,
+         down to the double space in `Server Load  (contained)`; 002 likewise.
+       · WEEK01's 001 reads `INITIAL LAUNCH REPORT - Weird.Baby` and
+         `Weird.Baby website is live` — different text, with a mojibake em dash
+         — and its Day 4 and Day 5 tabs are EMPTY.
+     V3 is the ancestor of what is published. WEEK01 is a superseded draft.
+
+     THE DESK COULD NOT CATCH THIS AND STILL CANNOT. Its rule is that it never
+     links to a file that is not there (see (2) at the head of this file), so it
+     models ABSENT and has no idea of WRONG. The stale path exists, so the card
+     rendered green, printed `10 days ago`, and told him in bold not to edit a
+     copy — while pointing at one. **A red card requires a missing file; nothing
+     here reports a present file that is the wrong one.**
+
+     THE REAL FIX IS NOT THIS LINE. A literal repointed by hand goes stale the
+     next time he builds a V4, exactly as this one did. The fix is for the
+     reader to STAMP THE PATH IT ACTUALLY READ into the draft and for this card
+     to print that stamp — nothing today records which workbook produced the
+     Records, so both ends assert a path and neither derives one. That is a
+     mechanism change and is deferred under §0 ONE THING AT A TIME, not under
+     the freeze; this repoint is the stopgap and is meant to read as one.
+
+     THE OLD WORKBOOK IS NOT DELETED AND NOT MODIFIED, same as last time. It
+     stops being the door, and that is all. */
   { name: "The workbook — where you write",
-    abs: "C:/AI/_week01/WEEK01_records-001-to-005.xlsx",
+    abs: "C:/Users/macun/OneDrive/Desktop - Laptop/ADD TO REPOS/TEMP - Use it or lose it!/NEW_RECORD_MAKER_V3.xlsx",
     /* [2026-08-15] THE 314 RULE IS DEAD — his ruling, "too much squeeze for the
        juice" — and this line carried it, so it goes with it rather than being
        softened. 314 as Film A's packet rate is a SEPARATE use and is untouched;
        what died is the requirement that every Record carry one. */
-    what: "Records 001 to 005, one tab each. Type in the white cells.",
+    /* [2026-08-25] `Type in the white cells` WENT WITH THE REPOINT RATHER THAN
+       BEING CARRIED OVER. It was written about the GENERATED workbook, whose
+       input cells were left unfilled on purpose. V3 is his own build and 108 of
+       REC 1.1's 150 cells carry a solid fill, so the sentence is a claim about
+       a different file and Ops cannot check which cells he means to type in.
+       WHAT REPLACES IT IS THE TAB NAMES, and that is the point of the repoint:
+       `REC 1.1`-`REC 1.5` is how he can tell at a glance that the file he has
+       open is the one `record:workbook` reads. The old sheet's tabs read
+       `Day 1 - Record 001`. */
+    what: "Records 001 to 005 — one tab each, REC 1.1 to REC 1.5.",
     rebuild: "read it back with npm run record:workbook -- <path>",
     lead: true },
   { name: "The Record — MOTHBALLED",

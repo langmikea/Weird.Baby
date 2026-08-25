@@ -562,9 +562,56 @@ def main():
             carried_from_tree.append(t["no"])
 
     entries.sort(key=lambda e: e["no"])
+    # ═══════════════════════════════════════════════════════════════════════
+    # [2026-08-25] `saved` IS THE MOMENT THIS READER RAN, NOT THE MOMENT HE
+    # WROTE — AND THAT MAKES GUARD 8 INERT ON THIS PATH.
+    # ═══════════════════════════════════════════════════════════════════════
+    # `record:land`'s guard 8 refuses a draft that is OLDER than the Record it
+    # would overwrite. It decides that by comparing `saved` below against when
+    # `src/data/artists/robots-record.js` last moved in git. That test works for
+    # the EDITOR, which stamps `saved` when Mike presses Save, so the stamp is a
+    # fact about his writing.
+    #
+    # IT DOES NOT WORK HERE. `now()` is a fact about the READER. Run this over a
+    # workbook of any age and the draft is stamped this instant, so guard 8
+    # passes — always, by construction. A stale workbook cannot fail it.
+    #
+    # MEASURED 2026-08-25, SO THIS IS NOT HYPOTHETICAL: NEW_RECORD_MAKER_V3.xlsx
+    # was last written 2026-08-16 14:13 and is NINE DAYS BEHIND THE TREE.
+    # Records 003, 004 and 005 were revised after it, through round logs and
+    # written briefs rather than through Excel — the register sources them to
+    # `dictated 2026-08-19`, `MUSEUM_RULINGS_APPLIED_LOG-20260820` and
+    # `given 2026-08-21`. The workbook still carries `GENERAL STATUS UPDATE` for
+    # 003 and 005, 004's old second deck line, and `ADDENDUM 01 - The Four
+    # Settings, as printed`, which the tree struck on 2026-08-20. This reader
+    # overlays the workbook onto the tree and the workbook wins, so all three
+    # would land as CHANGED.
+    #
+    # WHAT IS ACTUALLY HOLDING THE DOOR IS THE COMMENT REFUSAL, AND IT IS
+    # HOLDING IT FOR AN UNRELATED REASON. Those three entries carry comment
+    # blocks, and `emit-record-entries.mjs` refuses to regenerate a changed
+    # entry that carries comments. That refusal knows nothing about staleness;
+    # it fires because of where the reasoning happens to live. An entry with no
+    # comments would land a nine-day-old cell over newer text, silently, past
+    # every remaining guard, because every string in it round-trips perfectly.
+    #
+    # GUARD 8's OWN HEADER NAMES THIS EXACT SHAPE: *"A protection that fires for
+    # an unrelated reason is not a protection; it is a coincidence with a good
+    # record so far."* It was written against a stale EDITOR draft. The workbook
+    # path arrived later and does not carry the property the guard depends on.
+    #
+    # FLAGGED, NOT FIXED. The honest stamp is the workbook's own mtime — the
+    # moment HE wrote — and that is a one-line change with a real decision under
+    # it: an mtime moves when Excel touches the file for any reason, so it is
+    # not simply a better clock. Whoever fixes it decides that first. Do not
+    # "repair" guard 8 by tightening the comment refusal; that would remove the
+    # only thing currently standing here and call it a cleanup.
     draft = {
         "_": "Mike's Records, read out of the workbook by "
-             "tools/dictation/workbook_to_draft.py. Fed to `npm run record:land`.",
+             "tools/dictation/workbook_to_draft.py. Fed to `npm run record:land`. "
+             "NOTE: `saved` below is when THIS READER RAN, not when he wrote — "
+             "see the block above; record:land's guard 8 cannot see a stale "
+             "workbook.",
         "key": "wb.record.2026-08-09",
         "saved": datetime.datetime.now(datetime.timezone.utc)
                  .isoformat().replace("+00:00", "Z"),
