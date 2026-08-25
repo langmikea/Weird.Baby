@@ -68,6 +68,16 @@
    but a COMPOSITING ASSET with a knocked-out white rectangle where the screen
    goes, which is M7's own finding about it. The reasons live in that tool's
    header beside the line that skips them.
+   [FLAG 2026-08-25] M2's WORD IS WRONG AND THE SENTENCE ABOVE INHERITS IT.
+   The plate is ROTATED 180°, not mirrored — proved on 2026-08-11 by applying
+   M2's horizontal flip and looking at the result (the words came back in the
+   right ORDER with every glyph inverted, still unreadable), and re-measured
+   2026-08-25: the museum's file is the robots master rotated exactly 180°,
+   same 2048x1536, identical pixel histogram, rot180 true and flip-horizontal
+   false. THE REASONING ABOVE SURVIVES THE CORRECTION — the lettering is
+   unreadable either way, which is the whole of why the badge was rejected, so
+   nothing this paragraph concludes moves. M2 stays OPEN because it is Mike's;
+   the file still needing the correction is the ROBOTS master, not this one.
    [H1] BOTH FILES MOVED UNDER `public/held/`. A cover and a poster are the
    held album's own material; leaving them at a public address would have made
    the one thing the hold is for — a picture of the machine nobody has been

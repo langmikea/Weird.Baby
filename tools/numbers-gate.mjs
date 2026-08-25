@@ -50,6 +50,11 @@ import path from "node:path";
 import url from "node:url";
 import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
+/* [2026-08-25] ONE DEFINITION, TWO CALLERS — see `measure.manualPages` below. */
+import {
+  manualPages as manualPagesFromSource,
+  manualSourceState,
+} from "../reveal/schema.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -152,8 +157,35 @@ measure.openActions = () => {
     mike: rows.filter(l => cell(l, 3) === "Mike").length,
   };
 };
-measure.manualPages = () => fs.readdirSync(path.join(REPO, "public/held/robots/manual"))
-  .filter(f => /^page-\d+\.png$/.test(f)).length;
+/* ═══ [2026-08-25] REPOINTED AT THE SOURCE, AND GUARDED ═══════════════════════
+   THIS COUNTED THE MUSEUM'S COPY, AND THE COPY HAS BEEN TWO PAGES STALE SINCE
+   2026-08-19. There were TWO `manualPages()` in this repo — `reveal/schema.mjs`
+   counting the robots source (63) and this one counting
+   `public/held/robots/manual` (61). Same name, same tree, different answers.
+
+   IT PRINTED PASS, AND THAT IS THE FINDING RATHER THAN THE STALENESS. The
+   published claim it checks (`OPEN_ACTIONS` row E-b, "the manual is 61 pages")
+   was stale, and so was the directory it measured, and the two were stale in
+   the SAME DIRECTION — so they matched and the gate went green. **A check whose
+   two halves cancel is worse than one pointed at nothing**, because an inert
+   check is visibly inert and this one published a verdict.
+
+   THE SOURCE IS THE OBJECT. The museum's copy is an intermediate render that
+   exists in no commit of the robots repo, no visitor surface references it, and
+   nothing keeps it in step. Counting it could only ever prove the copy
+   consistent with itself. `schema.mjs` holds the one definition — under G1's
+   ruling that the manual's length is derived and never declared — and this file
+   CALLS it now instead of deriving a second answer beside it.
+
+   AND IT IS GUARDED, WHICH IT WAS NOT. The old body was a bare `readdirSync`
+   with no `existsSync` anywhere in this file, called unconditionally in the
+   summary as well as inside the rule: a missing directory killed the gate with
+   ENOENT instead of reporting a fault. `null` means the robots tree is not
+   reachable; the runner treats a falsy measurement as UNMEASURABLE and names it
+   in `skipped`, which is the honest answer when the other repo is not beside
+   this one — not a zero, which would silently mismatch every published count. */
+measure.manualPages = () =>
+  manualSourceState() === "ok" ? manualPagesFromSource() : null;
 /* THE COST OF THE LAUNCH DOOR — §0's TWO NUMBERS ===========================
    §0 DEPLOY publishes "137 files (186,888,028 bytes) become publicly
    readable". Those are the highest-consequence numbers in the manual — they
@@ -238,8 +270,8 @@ const CHECKS = [
   { id: "manual-pages",
     find: /the manual is\s*(\d+)\s*pages/gi,
     near: /manual is/i,
-    what: "the manual's page count",
-    measured: async () => [measure.manualPages()] },
+    what: "the manual's page count (counted off the robots source, never the copy)",
+    measured: async () => { const n = measure.manualPages(); return n === null ? null : [n]; } },
 
   { id: "open-actions-rows",
     find: /carries\s*\*{0,2}(\d+)\s*rows\*{0,2}/gi,
@@ -351,7 +383,10 @@ console.log(`    lint                 ${lint ? lint.errors + " errors / " + lint
 console.log(`    asset-table rows     ${measure.assetRows()}  (${measure.assetMissing()} missing from disk, ${measure.assetBucketed()} bucketed)`);
 console.log(`    ledger rows          ${measure.ledgerRows()}`);
 console.log(`    register rows        ${measure.registerRows()}`);
-console.log(`    manual pages         ${measure.manualPages()}`);
+const manualPageCount = measure.manualPages();
+console.log(`    manual pages         ${manualPageCount === null
+  ? "UNMEASURABLE — the robots source tree is not reachable"
+  : manualPageCount + "  (robots source)"}`);
 const held = measure.heldCost();
 console.log(`    held behind the door ${held.files} files (${held.bytes.toLocaleString("en-US")} bytes)`);
 console.log(`    Record entries       ${await measure.recordEntries()}`);
