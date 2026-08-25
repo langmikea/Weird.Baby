@@ -44,6 +44,34 @@
    mark that works and one that is always absent.** This repository is more than
    half comment by character in places; a fingerprint over raw file bytes would
    drop every approval in the building every time somebody explained something.
+
+   ═══ [2026-08-25] THE OVER-REACH — RECORDED, NOT FIXED, AND IT IS THE THING
+   THE QUALITY-BOX ROUND MUST SOLVE BEFORE ANY PAGE IS WORTH SIGNING ══════════
+   **REACHABILITY IS THE IMPORT GRAPH, NOT WHAT RENDERS**, and the two are not
+   the same page. `/` is the Lobby. It reaches `src/data/artists/robots-record.js`
+   for the countdown and the wing-open gate — so **every asset any Record
+   carries counts as a picture on the Lobby**, whether or not a visitor standing
+   on `/` can see one of them.
+
+   **IT IS NOT HYPOTHETICAL. IT IS WHAT KILLED THE ONLY SIGNATURE THIS FILE HAS
+   EVER HELD.** Mike signed `/` on 2026-08-16 against ONE picture — the house
+   mark. Records 003 and 004 then attached six manual scans and `qc-101-a.webp`
+   between 08-19 and 08-21, the pictures part went 1 -> 8, and the signature
+   stopped applying. **He signed the Lobby and it was dropped by seven pictures
+   no Lobby visitor sees.**
+
+   **THE CONSEQUENCE IS STRUCTURAL: under this design `/` CANNOT HOLD A
+   SIGNATURE FOR MORE THAN A FEW DAYS**, because a Record gains attachments most
+   weeks and every one of them lands on the Lobby's fingerprint. Any page
+   reaching `robots-record.js` inherits the same fate. Signing is close to
+   futile until the fingerprint separates REACHED from SHOWN.
+
+   **THE BEHAVIOUR IS UNCHANGED BY THIS NOTE, BY RULING.** Narrowing
+   reachability is a design decision with a real cost on the other side — a
+   fingerprint that tracked only what renders would need to know what renders,
+   which is the thing an import graph is standing in for — and it belongs to the
+   round that builds the quality box, not to the round that found it. See
+   `OPERATIONS.md` §5's `approve:check` row and `docs/OPEN_ACTIONS_CLOSED.md`.
    =========================================================================== */
 import fs from "node:fs";
 import path from "node:path";

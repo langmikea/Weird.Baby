@@ -311,6 +311,26 @@ runs itself and reports. A paste-back is for what is gated, not for size.
 
 > Moved whole to `OPERATIONS_ARCHIVE/05-FILE-MAP.md`, cut at HEAD `b3812cc`.
 > Stamped *as of 2026-06-09*; §6 rules that the live working tree outranks it.
+>
+> **A ROW RAISED SINCE THAT CUT CARRIES ITS BODY HERE** — §8's own cycle, for
+> §8's own reason: a snapshot cannot be appended to without ceasing to be one.
+
+- **[2026-08-25] `approve:check` IS RED BY DESIGN, IS NOBODY'S PACKET GATE, AND
+  WAS PARKED ON PURPOSE — 11 of 11 pages, and that is the expected reading.**
+  It is Doctrine 15's shape exactly: it checks **whether MIKE HAS LOOKED**, not
+  anything Ops can fix, so it must never join §9's list — putting it there would
+  block every commit on an inspection nobody has been asked for, which is the
+  opposite of his own condition that he must not perfect things in advance.
+  **THE TOOL WAS CLOSED AS A BACKLOG ITEM ON 2026-08-17** (`c5b7943`) — *"a
+  stamp with no consumer… nothing reads it back"* — and **THE APPROVAL LAW WAS
+  EXPLICITLY NOT CLOSED AND NOT WEAKENED**: the signature, the fingerprint and
+  the rule that a changed page stops being approved all stand, and
+  `provenance/approvals.json` is untouched. **It returns when it feeds the
+  quality box**, which is `docs/BACKLOG.md` **PARKED — no date**. The closure is
+  `docs/OPEN_ACTIONS_CLOSED.md` and **nothing links to it**, which is why this
+  row exists: **a red gate with no explanation is how a later round "fixes"
+  something that was parked on purpose.** Before any page is worth signing, read
+  the over-reach recorded at the head of `reveal/approval.mjs`.
 
 ## 6. Orientation protocol (every fresh session)
 

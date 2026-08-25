@@ -183,6 +183,23 @@ a deploy, and nothing fails a deploy if they were skipped.** The only automatic
 constraints on a publish are `deploy-guard.mjs` and the build-time vite plugins
 in A3.
 
+> **[CORRECTION 2026-08-25] TWO OF THOSE EIGHT ARE NOT PACKET DISCIPLINE AND
+> `OPERATIONS.md` HAS NEVER NAMED ONE OF THEM.** The sentence above is right
+> about the absence of automation and wrong about what fills the gap.
+> **`approve:check` appears nowhere in `OPERATIONS.md` — nor in any archive cut,
+> `CLAUDE.md`, `STATE.md`, `OPEN_ACTIONS.md` or `BACKLOG.md`** (searched
+> 2026-08-25). No human reading OPERATIONS could have been enforcing it, because
+> until today OPERATIONS did not know it existed. **It is red by design and was
+> parked as a backlog item on 2026-08-17** (`c5b7943`); it now has a §5 row.
+> **`assets:gate` is likewise not packet discipline** — Doctrine 15 says in as
+> many words that it *"IS NOT A PACKET GATE AND MUST NOT BECOME ONE"*, and it
+> has exited 1 continuously since it was built. **The six that ARE packet
+> discipline, and are named in §9's list, are** `provenance:gate`,
+> `reveal:check`, `parity:gate`, `instory:gate`, `docs:numbers` and the lap
+> (`lap:clean` seals it). **Nothing else in this document is affected** — the
+> hooks reading, the deploy commands and the guard are untouched and still
+> stand.
+
 ---
 
 ## B) THE COMMANDS

@@ -1,6 +1,30 @@
 #!/usr/bin/env node
 /* ===========================================================================
    npm run approval:proof — prove the mark cannot render at launch. [2026-08-13]
+
+   ═══ [2026-08-25] IT WOULD REPORT INCONCLUSIVE AND EXIT 1 TODAY, AND THE
+   RECORDED "PROVED" WAS TWO OF THREE TELLS ══════════════════════════════════
+   READ OFF THE CODE PATH BELOW, NOT RUN — this file shells out to
+   `build:launch`, and the round that established it was read-only.
+
+   The third tell is a route -> date pair out of `approvals.json`. The `define`
+   in `vite.config.js` puts only pages whose status is `approved` into the map,
+   and **nothing is approved today** — `approve:check` is 11 of 11 red — so the
+   development map is `{}` and that pair is in NEITHER bundle. The `WEAK` branch
+   below then reports INCONCLUSIVE and exits 1. **Tells 1 and 2 still pass**: in
+   development `__WB_APPROVALS__` is `{}`, which is truthy, so the component
+   survives and its tooltip and z-index are both in the bundle.
+
+   **THAT IS THIS FILE WORKING, NOT FAILING.** `WEAK` exists precisely so a term
+   that has stopped matching reports INCONCLUSIVE instead of passing.
+
+   AND THE 2026-08-14 READING RECORDED AS `PROVED` IN
+   `docs/MUSEUM_FRIDAY_LOG-20260814.md` WAS **TWO OF THREE**: no page was signed
+   until 08-16, so the third tell was skipped — this file printed the NOTE
+   saying so, and the log's one-word entry did not carry it. The launch fold
+   itself is not in doubt; `__WB_APPROVALS__` is the literal `null` at LAUNCH and
+   two independent tells were measured absent. **What is not currently proved is
+   the third tell, and it cannot be until a page is signed.**
    ---------------------------------------------------------------------------
    MIKE, 2b: *"DEVELOPMENT ONLY. It must never render at launch. Prove it
    against a launch build."*
