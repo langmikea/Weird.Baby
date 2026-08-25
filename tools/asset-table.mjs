@@ -411,8 +411,8 @@ function scan(renames = []) {
   const takenUids = new Set(priorRows.map(e => e.uid).filter(Boolean));
   const carried = [];                 // renames the hash resolved on its own
 
-  /* [C32] prior rows that carry a judgement, indexed by content — the pool a
-     moved file is matched against when its path no longer finds it. */
+  /* [C32] prior rows indexed by content — the pool a moved file is matched
+     against when its path no longer finds it. */
   /* ═══ [H2 2026-08-06] THE KEY IS ONE FUNCTION NOW, AND C32 HAD NEVER FIRED ══
      The pool was keyed on a NUL between repo and hash and read back with a
      SPACE between them, in two lines eighteen apart — so the content-move carry
@@ -430,9 +430,48 @@ function scan(renames = []) {
      tools/*.mjs, and this patch put a seventh in before the same grep caught
      it. Same value to JavaScript, plain text to everything else. */
   const hashKey = (repo, sha) => repo + "\u0000" + sha;
+  /* ═══ [2026-08-25] THE POOL IS EVERY ROW NOW, NOT THE JUDGED ONES ══════════
+     OPS' RULING, and it is Ops' to make: **identity may travel on content alone
+     when the row's own file is gone from disk.** How a file is TRACKED is a
+     mechanism question — it never touches what a visitor sees — so this is the
+     technical half and it does not go to Mike.
+
+     WHAT WAS TRUE BEFORE. This pool was gated `!isJudged(e)`, so the
+     content-carry fired for **35 rows of 475**. For the other 440 a move lost
+     the uid, and the table's own promise — *"`uid` is minted once and never
+     rewritten"*, restated in the ledger as *"the uid survives a rename; the path
+     does not"* — was false for 93% of the rows it was written about.
+
+     WHAT IT COST, MEASURED. On 2026-08-22 seven byte-identical `R100` renames
+     moved out from behind the stage door. Two were judged and the carry took
+     them; five were not. Declaring them one at a time made it worse rather than
+     better: `--rename` runs a FULL SCAN per invocation, so the first call minted
+     rows at the six paths not yet declared and calls two through five MERGED
+     into them — four uids replaced, one of which (`A-1c59d467b5`, viiip-v2.png)
+     `reveal/ledger.json` names, and `reveal:check` failed on it.
+
+     WHY THE GUARD MAKES IT UNAMBIGUOUS. A candidate is only taken when its own
+     file is NOT on disk — the `existsSync` test at the carry below. So a carry
+     can only ever fire for a row that genuinely lost its file, and "same bytes,
+     old address empty, new address full" is a move by any reading.
+
+     THE AMBIGUITY THIS ADMITS, COUNTED RATHER THAN FEARED. Across all 475 rows
+     exactly ONE `(repo, sha256)` group holds more than one row —
+     `public/robots/manual/scan-07-a.webp` and `.../scan-11-b.webp`, the same
+     page rendered under two names. BOTH FILES ARE PRESENT, so neither can ever
+     be a carry source. Zero ambiguous cases today.
+
+     AND THE THEORETICAL COST, NAMED RATHER THAN ABSORBED: a scan in which one
+     unjudged file is DELETED and a DIFFERENT file with byte-identical content is
+     ADDED in the same pass would carry the uid between two unrelated pictures.
+     That is a weaker claim than carrying a verdict — it asserts sameness of
+     FILE, not that an inspection still applies — and the judged half still
+     carries its six fields on exactly the evidence it always did. If that case
+     ever arrives it shows as a uid on a picture nobody recognises, and the fix
+     is `--rename` to declare the truth, not a re-narrowing of this pool. */
   const byHash = new Map();
   for (const e of priorRows) {
-    if (!e.sha256 || !isJudged(e)) continue;
+    if (!e.sha256) continue;
     const k = hashKey(e.repo, e.sha256);
     if (!byHash.has(k)) byHash.set(k, []);
     byHash.get(k).push(e);
@@ -706,13 +745,49 @@ if (argv.includes("--gate")) {
      command a person types, not a heuristic: carrying a verdict onto a file
      whose bytes changed is a claim that the inspection still applies, and only
      a human can make it. */
-  const i = argv.indexOf("--rename");
-  const from = argv[i + 1], to = argv[i + 2];
-  if (!from || !to) {
-    console.error("usage: --rename <old path|ref|id> <new path>");
+  /* ═══ [2026-08-25] REPEATED PAIRS, BECAUSE ONE PAIR CANNOT DESCRIBE A COMMIT ═
+     `scan()` has taken an ARRAY of renames since the day it was written; only
+     this parse was singular. That was not a limitation anybody accepted — it is
+     one nobody met. Its only recorded use is two rows moved one at a time on
+     2026-08-05, and the first multi-file case it existed for (24 manual pages,
+     2026-08-09) was culled instead, the log saying so: *"exactly the case
+     `--rename` exists for and nobody ran."*
+
+     WHY ONE PAIR AT A TIME IS WORSE THAN NONE FOR A MULTI-FILE MOVE. Every
+     invocation runs a FULL SCAN, and a scan mints a row for every asset it finds
+     without one. So declaring seven moves in seven calls means call one mints
+     rows at the six paths not yet declared, and calls two through seven find a
+     target already present and MERGE into it — the judgement transfers and the
+     uid does not. Proved on 2026-08-25: four uids replaced, `reveal:check`
+     failed on `A-1c59d467b5`, and the table had to be restored from HEAD. All
+     the pairs have to reach ONE scan, which is what this does. */
+  const rest = argv.slice(argv.indexOf("--rename") + 1).filter(a => !a.startsWith("--"));
+  if (!rest.length || rest.length % 2) {
+    console.error(rest.length
+      ? `! --rename: ${rest.length} argument(s) — renames come in pairs, so the count must be even.`
+      : "! --rename: nothing to declare.");
+    console.error("usage: --rename <old path|ref|id> <new path> [<old> <new> …]");
     process.exit(1);
   }
-  const t = scan([[from, to]]);
+  const pairs = [];
+  for (let n = 0; n < rest.length; n += 2) pairs.push([rest[n], rest[n + 1]]);
+  /* THE SWAP IS REFUSED BY NAME RATHER THAN GUESSED AT. The declarations are
+     applied in order against ONE mutating `priorById`, so a batch where a target
+     is also a source (A→B with B→C, or the true swap A→B with B→A) has the
+     second declaration meeting the first one's result instead of the table. That
+     is resolvable in principle and it is not resolvable by reading the argv, so
+     it is refused and named — a silent reordering here would move a judgement
+     onto the wrong file, which is the one thing this command exists to stop. */
+  const sources = new Set(pairs.map(([from]) => from));
+  const chained = pairs.filter(([, to]) => sources.has(to));
+  if (chained.length) {
+    console.error("! --rename: a target in this batch is also a source, so the "
+      + "declarations would be applied to each other rather than to the table:");
+    chained.forEach(([from, to]) => console.error(`    ${from}  ->  ${to}   (and ${to} is itself being moved)`));
+    console.error("  Split them across separate invocations, innermost first.");
+    process.exit(1);
+  }
+  const t = scan(pairs);
   writeTable(t);
   report(t);
 } else if (argv.includes("--cull")) {

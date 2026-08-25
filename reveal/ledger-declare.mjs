@@ -345,7 +345,16 @@ R("portal.album", "THE PORTAL — the album: the door, the feed controller, and 
        the plate; when the call site was versioned the row went one round saying
        the album's asset was a file the album no longer draws. The cover stays —
        it is Mikey's hand-authored sleeve and this album is what draws it. */
-    assets: ["/held/robots/art/portal-cover.png", "/held/robots/art/viiip-v2.png"],
+    /* [2026-08-25] BOTH REFS LOST THEIR `/held` PREFIX, BECAUSE BOTH FILES DID.
+       `efc379f` published the Portal on 2026-08-22 and moved its assets out from
+       behind the stage door; a held row's `ref` carries the prefix, so these two
+       strings have addressed nothing since. `resolve()` would have put them in
+       `unresolved` and this file exits 1 on that — LOUD, and the right
+       direction, but it fires at the next BUILD rather than at the move, so it
+       sat armed for three days while every gate passed. The uids in
+       `ledger.json` stayed valid throughout because a uid outlives a path; the
+       DECLARATION is the half that has to be moved by hand. */
+    assets: ["/robots/art/portal-cover.png", "/robots/art/viiip-v2.png"],
     note: "Held from launch. The album is a dynamic import Robots.jsx asks for only behind the password on /admin; the deck closes up to four albums without it, and the splice index is PORTAL_AT so the position Mike gave it survives the hold." });
 R("portal.door", "THE PORTAL — the first track, and the way in.",
   "surface", "src/data/artists/portal.js", "LIVE", "the Portal album, track 01", "REVEALED",
@@ -1032,7 +1041,7 @@ R("tool.provenance", "The provenance boundary and gate — every visitor-facing 
   { note: "Runs on every packet beside lint and build. INVENTION is 0 and its ceiling is ratcheted to 0." });
 R("tool.assettable", "The asset table — 253 media files with what each is, what depends on it, a quality read, Mike's verdict and the reveal arc.",
   "tool", "tools/asset-table.mjs", "LIVE", null, "HELD",
-  { note: "[C32 2026-08-05] re-keyed: `uid` is minted once, `sha256` resolves a pure rename, and a judged row whose file is gone is now reported rather than dropped." });
+  { note: "[C32 2026-08-05] re-keyed: `uid` is minted once, `sha256` resolves a pure rename, and a judged row whose file is gone is now reported rather than dropped. [2026-08-25] `sha256` RESOLVES A PURE RENAME FOR EVERY ROW NOW — the pool it matches against was gated to judged rows, which made the first clause of this note untrue for 440 of 475. And `--rename` takes repeated pairs, because one pair per invocation is one full scan per pair, and a scan mints rows at the paths not yet declared: a commit that moved seven files could not be declared without the declaring breaking it." });
 R("tool.reveal", "This ledger.", "tool", "reveal/ledger-declare.mjs", "PARTIAL", null, "HELD",
   { deps: ["Mike's story schedule — every `when` is null"],
     note: "One consumer is wired (the Foundation's state column). Everything else still hard-codes its own availability." });
@@ -1088,7 +1097,7 @@ const out = {
   _transferWeek: "transferWeek: the week the material ARRIVED. 0 for BLAST (stated: pre-launch) and 0 for UNLOCK (derived by necessity — an unlock is of a thing already in hand, and it is in hand because the blast brought it). NULL for PACKAGE and TRANSMISSION, because the arc gives windows (weeks 3–7 on four Fridays; weeks 5–12) and names no week inside them — five weeks and four packages, and which one goes empty nobody has said. A null here means EXACTLY ONE THING: no named arrival, therefore not showable.",
   _arc: "arc: THE REVEAL ARC (Mike, 2026-08-04) — arrived · understood · partial · online · null. Same field, same values, as provenance/asset-table.json. `null` is UNSET and is not a stage.",
   _shown: "shown: true where a VISITOR CAN SEE THE LABEL of something that is not built — an engraved drum position that will not arm, a register row printed NOT BUILT, a document a face names and does not hold. It separates a PROMISE from a private gap. The twin's stub rows are NOT shown, because THE STUB LAW strips them from the menus.",
-  _assets: "assets: asset-table `uid`s, resolved from public refs at build time. The uid survives a rename; the path does not — see C32.",
+  _assets: "assets: asset-table `uid`s, resolved from public refs at build time. The uid survives a rename; the path does not — see C32. [2026-08-25] AND THAT SENTENCE IS ONLY NOW TRUE OF EVERY ROW: C32's content-carry was gated to rows carrying a judgement, so a rename kept the uid for 35 rows of 475 and silently minted a new one for the other 440. Ops ruled identity may travel on content alone when the row's own file is gone from disk, the pool is every row, and the guard is unchanged — a candidate is taken only when its own file is absent. What proved it was seven byte-identical moves on 2026-08-22 that this ledger joined to by uid, four of which were re-minted before the fix.",
   _prod: "prod: [R3] THE PRODUCTION ARC — needed · printed · photographed · placed. The manual-page vessel's field and no other row's; null everywhere else. NOT the same field as `arc`: `arc` is how the house REVEALS a thing it has, `prod` is whether the house HAS it. `build` is DERIVED from it, so a page cannot claim a state the world is not in.",
   _calledBy: "calledBy: [R3] the `record.NNN` rows whose entries ask for this thing — Mike's ruling that the manual arrived in pieces, so the museum needs only the pages the story reaches for. Validated against real rows: nothing can be called for by an entry that does not exist.",
   _record: "record.NNN: [R1] one row per Record ENTRY, DERIVED from src/data/artists/robots.js rather than typed. The reader hands this table entry numbers and asset paths and nothing else, so a Record entry's headline, dateline or sections have no route into the ledger. THE LEDGER MUST NEVER BECOME A SECOND COPY OF THE RECORD (audit §8a) — `reveal:check` fails if any row here holds six consecutive words of the Record's own prose.",
