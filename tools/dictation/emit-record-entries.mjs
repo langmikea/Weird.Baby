@@ -40,6 +40,7 @@ import { execFileSync } from "node:child_process";
 /* [2026-08-13] the emitter reads the CURRENT file's comments so it can carry
    them through; acorn is already this repo's parser everywhere else. */
 import * as acorn from "acorn";
+import { recordEpoch } from "../../reveal/record-entries.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
@@ -185,12 +186,56 @@ if (argv.includes("--verify")) {
 /* [2026-08-13] ONE ENTRY AT A TIME, so that `--write` can choose per entry
    between generating it and carrying the original source through untouched.
    What it generates is unchanged. */
+/* ═══ [2026-08-24] THE INDEX COMES FROM THE ENTRY'S DAY, NOT FROM ITS NUMBER ══
+   MIKE'S RULING — **SED: build for everyday drops, drop on the days you choose.**
+   The calendar is DUMB: `recordDay(n)` is `epoch + (n − 1)` with no weekend
+   logic, no holiday table, and nothing anywhere skips anything. Which days get
+   a Record is decided by WHICH ENTRIES EXIST, which is Mike writing or not
+   writing. So a gap in the numbers is not a defect and must never be "fixed".
+
+   WHAT THAT MAKES THE NUMBER: a LABEL. `no: 6` is the sixth Record, not the
+   sixth day. THE ENTRY'S OWN DAY IS THE AUTHORITY, and this line is where that
+   is decided — until today it emitted `recordDay(e.no)`, which threw the
+   drafted day away and re-derived it from the label. An entry Mike dated Monday
+   landed on whatever day its number happened to fall on.
+
+   AND THE CALL SURVIVES, WHICH IS THE POINT OF DOING IT THIS WAY. D1's
+   one-field rule is untouched: no literal date is ever emitted, so a launch
+   slip still moves ONE line — `RECORD_EPOCH` — and every entry follows it. What
+   changed is only WHERE THE INDEX COMES FROM. Emitting `date: "2026-09-02"`
+   would have satisfied the ruling and broken the slip, which is why it is not
+   what this does.
+
+   THE INDEX IS COMPUTED AGAINST THE TREE'S EPOCH, not the draft's. The draft's
+   `epoch` field records what was true when Mike wrote; the emitted call resolves
+   against `RECORD_EPOCH` at build time, so the index has to be measured from the
+   same origin the call will be read against. A draft carrying a stale epoch —
+   which is the state that made this a bug worth finding — then lands correctly
+   rather than landing its staleness. */
+const EPOCH_MS = Date.parse(recordEpoch() + "T00:00:00Z");
+function dayIndex(iso) {
+  const t = Date.parse(iso + "T00:00:00Z");
+  if (!Number.isFinite(t) || !Number.isFinite(EPOCH_MS)) return null;
+  return Math.round((t - EPOCH_MS) / 86400000) + 1;
+}
+
 function generate(e) {
   const out = [];
   out.push(`            { no: ${e.no},`);
-  /* the date is emitted as `recordDay(n)` and never as a literal — D1's
-     one-field rule: if the launch slips, ONE line moves and everything follows */
-  if (e.date) out.push(`              date: recordDay(${e.no}),`);
+  /* the date is emitted as `recordDay(<index>)` and never as a literal — see
+     THE INDEX COMES FROM THE ENTRY'S DAY above. The index is the entry's day
+     measured from the epoch; the number beside it is a label. */
+  if (e.date) {
+    const idx = dayIndex(e.date);
+    if (idx === null) {
+      console.error(`record:land REFUSED — Record ${e.no} has date ${JSON.stringify(e.date)},`);
+      console.error(`which is not a day this can measure from the epoch (${recordEpoch()}).`);
+      console.error("Nothing was written. A date that cannot be placed on the calendar is not");
+      console.error("a date, and guessing one would put an entry on a day nobody chose.");
+      process.exit(1);
+    }
+    out.push(`              date: recordDay(${idx}),`);
+  }
   if (e.title) out.push(`              title: ${wrap(e.title, 20)},`);
   if (e.line) out.push(`              line: ${wrap(e.line, 20)},`);
   if (e.lead) out.push(`              lead: ${wrap(e.lead, 20)},`);
@@ -727,6 +772,34 @@ function differences(d, t) {
    characters after. It refuses on ANY loss and names what would go. It is not
    clever about which blocks matter, because a rule that decided that would be
    the thing making the mistake.
+   ═══ [2026-08-24] AND THE FOLLOW-ON HAS A PRECONDITION NOBODY WOULD GUESS ═══
+   **READ THIS BEFORE TEACHING THE EMITTER TO CARRY COMMENT BLOCKS THROUGH.**
+   THE PIPELINE RUNS ONE WAY — draft to source — AND THE SOURCE HAS BEEN EDITED
+   DIRECTLY. Measured 2026-08-24: `record-draft.json` was last written
+   2026-08-16, while Record 003's title arrived in `robots-record.js` on
+   2026-08-19 (`c1a74ae`) and Record 005's on 2026-08-21 (`a5a2d38`) — both
+   straight into the source, neither touching the draft or the workbook. The
+   draft had fallen two Records behind the museum.
+
+   **THE ONLY THING STOPPING `--write` FROM REVERTING THEM WAS THIS GUARD**, and
+   it was stopping it for an unrelated reason: comment loss. So the day somebody
+   does the work this guard exists to force, **the reversion becomes live** —
+   the write would succeed, and it would put back the titles Mike replaced.
+
+   **REFRESHING THE DRAFT IS THEREFORE A PRECONDITION OF THAT WORK, NOT A
+   FOLLOW-UP.** The refresh is mechanical and lossless: `draftEntries()` in
+   `reveal/record-entries.mjs` reads the landed source and returns the draft's
+   own schema — `no, date, title, line, sections, docs` — which is exactly what
+   the source uses, and `assets` is derived by scanning strings inside those
+   fields, so it follows. That is how the draft was brought back into step on
+   2026-08-24.
+
+   **AND NOTHING WATCHES FOR THE NEXT DRIFT.** `compareAnswers()` compares the
+   shipped entries against `answers.json` — the RETIRED two-column worksheet's
+   file — not against the draft. `npm run record:report`, which invokes it, is
+   in `package.json` and in NO gate and NO ritual. A direct source edit is
+   invisible again the moment it happens.
+
    WHAT IT COSTS, STATED: `--write` cannot land a Record into a file that
    carries per-entry commentary until the emitter learns to carry those blocks
    through. That is the follow-on this guard exists to force rather than to

@@ -1,11 +1,12 @@
 {
- "_": "Mike's Records, read out of the workbook by tools/dictation/workbook_to_draft.py. Fed to `npm run record:land`.",
+ "_": "Mike's Records. REGENERATED FROM THE LANDED SOURCE (src/data/artists/robots-record.js) by reveal/record-entries.mjs draftEntries() on 2026-08-24, because entries had been edited directly in the source and this file had fallen behind — Records 003 and 005 differed. The workbook (tools/dictation/workbook_to_draft.py) remains the origin of Mike's words; this file is the working copy `npm run record:land` reads. Fed to `npm run record:land`.",
  "key": "wb.record.2026-08-09",
- "saved": "2026-08-16T18:13:47.896552Z",
- "epoch": "2026-08-17",
+ "saved": "2026-08-24T00:00:00Z",
+ "epoch": "2026-08-31",
  "entries": [
   {
    "no": 1,
+   "date": "2026-08-31",
    "title": "INITIAL LAUNCH - Weird.Baby Website",
    "line": "> Weird.Baby website went live\n> Alert - Incoming Server Load  (contained)",
    "sections": [
@@ -40,11 +41,11 @@
       "    > 00:00 - WB Go-Live went off without a hitch.\n    > 00:02 - Incoming data stream ends\n    > The remainder of the day was completely uneventful.\n    > Weird.Baby uptime - 100%, no further anomalies.\n    > ADDED PAGE - W.B/Robots added (to track what happened, just for a few days)\n       HASH: 982056&363 = $^6/Tx=0............................. >> Complete!"
      ]
     }
-   ],
-   "date": "2026-08-17"
+   ]
   },
   {
    "no": 2,
+   "date": "2026-09-01",
    "title": "GENERAL STATUS UPDATE",
    "line": "> Weird.Baby Integrity Management Plan remains on-track without anomalies.\n> Incoming Server Data Assault has ceased; no impact.",
    "sections": [
@@ -57,22 +58,21 @@
     {
      "label": "DETAILED REPORT",
      "body": [
-      "  > METRIC SUMMARY - Nothing to report. All processes 6+ sigma.\n  > Incoming Data = ZIP file (31.4 GB) Password Protected\n  > Partial extraction attempted against the stream still in flight.\n  < A ZIP index is written last. No catalog is available until receipt completes.\n  > Each file is preceded by its own header. Names arrive ahead of contents.\n  ? 1,046 names recovered before the stream closed. Not one of them opens."
+      "  > METRIC SUMMARY -All processes 6+ sigma.\n  > Incoming Data: ZIP file (31.4 GB) Password Protected\n  > Manifest extraction attempted against the stream still in flight - Appendix 01"
      ]
     },
     {
      "label": "ADDENDUM 01 - Partial Manifest (names only, no contents)",
      "body": [
-      "    MGK-VIIIp/MANUAL/00-FRONTMATTER.tif\n    MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif\n    MGK-VIIIp/MANUAL/11-VID-LINK.tif\n    MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif\n    PERSONNEL/CEO/\n    PERSONNEL/INFORMER/\n    PERSONNEL/EVERYDAY/\n    PERSONNEL/GAMBLER/\n    PORTAL/CH3-STANDARD/\n    PORTAL/CH4-DETAIL/\n    _tmp/                              < password bit not set",
-      "  ! The last entry is the only one we can open. It is being reviewed."
+      "    MGK-VIIIp/MANUAL/00-FRONTMATTER.tif\n    MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif\n    MGK-VIIIp/MANUAL/11-VID-LINK.tif\n    MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif\n    PERSONNEL/CEO/\n    PERSONNEL/INFORMER/\n    PERSONNEL/EVERYDAY/\n    PERSONNEL/GAMBLER/\n    PORTAL/CH3-STANDARD/\n    PORTAL/CH4-DETAIL/"
      ]
     }
-   ],
-   "date": "2026-08-18"
+   ]
   },
   {
    "no": 3,
-   "title": "GENERAL STATUS UPDATE",
+   "date": "2026-09-02",
+   "title": "DATA RECOVERY - LEVEL 1 - SUCCESS!",
    "line": "> Weird.Baby Website - All Systems Favorable\n> Robots - Nothing to Report",
    "sections": [
     {
@@ -84,13 +84,7 @@
     {
      "label": "DETAILED REPORT",
      "body": [
-      "  > Ops transition moving to Early-Pull (Confidence >> 6.28 sigma)\n  > One tmp folder unprotected - Contents attached\n  > Extraction staging, left behind. Eleven manual plates and four personnel folders.\n  ? The manual is not written for the unit. It is written for the person keeping it."
-     ]
-    },
-    {
-     "label": "ADDENDUM 01 - Manual Plates Recovered",
-     "body": [
-      "    PLATE 07 - POWER SYSTEM\n      \"Do not service under load. The keeper is answerable for the state of the cell.\"\n    PLATE 11 - VID-LINK\n      \"The link is bi-directional by design. Assume the far end is attended.\"\n    PLATE 31 - PARITY BIAS\n      \"Four settings. The unit will not speak until all four agree with the far end.\""
+      "  > Ops now wants an Early-Pull-Off with Confidence >> 6.28 sigma\n  > Data Deluge ZIP File - The outer layer was not password protected\n       Manual Pages Recovered\n         SCAN 07 - POWER SYSTEM\n         SCAN 11 - VID-LINK\n         SCAN 31 - PARITY BIAS"
      ]
     },
     {
@@ -101,12 +95,66 @@
      ]
     }
    ],
-   "date": "2026-08-19"
+   "docs": [
+    {
+     "title": "Scan 07 - Power supply and distribution",
+     "source": "ABEAL 8P-OMI-1",
+     "pages": 2,
+     "plates": [
+      {
+       "img": "/robots/manual/scan-07-a.webp",
+       "label": "Power supply and distribution, first page"
+      },
+      {
+       "img": "/robots/manual/scan-07-b.webp",
+       "label": "Power supply and distribution, second page"
+      }
+     ]
+    },
+    {
+     "title": "Scan 11 - The video link",
+     "source": "ABEAL 8P-OMI-1",
+     "pages": 2,
+     "plates": [
+      {
+       "img": "/robots/manual/scan-11-a.webp",
+       "label": "The video link, first page"
+      },
+      {
+       "img": "/robots/manual/scan-11-b.webp",
+       "label": "The video link, second page"
+      }
+     ]
+    },
+    {
+     "title": "Scan 31 - Bias settings",
+     "source": "ABEAL 8P-OMI-1",
+     "pages": 1,
+     "plates": [
+      {
+       "img": "/robots/manual/scan-31-a.webp",
+       "label": "Bias settings, the four communications settings"
+      }
+     ]
+    },
+    {
+     "title": "Marked copy 01 - Bias settings",
+     "source": "ABEAL 8P-OMI-1",
+     "pages": 1,
+     "plates": [
+      {
+       "img": "/robots/manual/marked-01-a.webp",
+       "label": "Bias settings, returned marked"
+      }
+     ]
+    }
+   ]
   },
   {
    "no": 4,
+   "date": "2026-09-03",
    "title": "GENERAL STATUS UPDATE",
-   "line": "> Weird.Baby Website - All Systems Favorable\n> /Robots data analysis",
+   "line": "> Weird.Baby Website - All Systems Favorable\n> /Robots ZIP File Cracked",
    "sections": [
     {
      "label": "EXECUTIVE SUMMARY",
@@ -117,53 +165,51 @@
     {
      "label": "DETAILED REPORT",
      "body": [
-      "  > Portal may be the \"answer\" this whole mystery.\n  > It appears to be an unattended remote access terminal.\n  > Excerpts from the Manual earlier in the week indicate a bi-directional CNC Vid-Link\n  > Probably not useful to us. (Probably not meant for us...)"
-     ]
-    },
-    {
-     "label": "ADDENDUM 01 - Bench Description",
-     "body": [
-      "    Console is a single welded steel desk. No maker plate, no model number.\n    Display is a vidicon-tube monitor, long-persistence phosphor, green.\n    Readouts are cold-cathode numeric tubes. Eight digits, four lit.\n    Input is a light pen on a coiled cord, seated in a cradle at the right.\n    There is an ashtray cast into the desk and it has been used.\n    A paper-tape reader is fitted and empty. The take-up reel is full.\n    Four toggle switches sit under a hinged guard, unlabelled.",
-      "  ! Nothing here postdates 1969. Everything here works."
+      "  > ZIP Password Cracked: [355113]",
+      "    ROOT\n     /(many pwd protected folders)\n     /PORTAL\n       TERMINAL.EXE\n       PORTAL_2v16.CFG\n       /ANTENNA (PWD)\n       /CHANNEL_SELECT(PWD)\n       /INSTALL\n          QC_101.TIF (hand written notes on form)",
+      "  > Install document looks proprietary. Probably not meant to seen.\n  > QC RULE: Unsafe to run in any sandbox; permanently quarantined."
      ]
     }
    ],
    "docs": [
     {
-     "title": "View of the portal screen"
-    },
-    {
-     "title": "Manual ref to Portal"
+     "title": "QC_101 - Final test and inspection",
+     "source": "ABEAL FORM QC-101",
+     "pages": 1,
+     "plates": [
+      {
+       "img": "/robots/portal/qc-101-a.webp",
+       "label": "Final test and inspection, completed and passed"
+      }
+     ]
     }
-   ],
-   "date": "2026-08-20"
+   ]
   },
   {
    "no": 5,
-   "title": "GENERAL STATUS UPDATE",
-   "line": "> ZIP Extraction - Outer Layers Complete / Stopped\n> Portal Data Link - Connection Achieved",
+   "date": "2026-09-04",
+   "title": "PORTAL CONNECTION ONLINE",
+   "line": "> Portal Data Link - Connection Achieved\n> ZIP Extraction - Outer Layers Complete / Stopped",
    "sections": [
     {
      "label": "EXECUTIVE SUMMARY",
      "body": [
-      "  > ZIP - We have reached the capability limit of brute force.\n  > Portal appears to function. Intended purpose unknown."
+      "  > Portal appears to function. Intended purpose unknown.\n  > ZIP - We have reached the capability limit of brute force."
      ]
     },
     {
      "label": "DETAILED REPORT",
      "body": [
-      "  > Portal is accessible via the Robots Exhibit.\n  > The launch controls are intuitive looking, but the system fails to boot.\n  > Error: Communications Parity Bias Setting Mismatch\n  > Four toggles. Sixteen combinations. One of them is correct.\n  < The Manual names the settings and declines to name the values."
+      "  > Portal is now up and running on our UNIX-6x Emulator.\n  > It carried its own COMM payload, autosync, etc.\n  > The Portal is accessible via the Robots Exhibit."
      ]
     },
     {
-     "label": "ADDENDUM 01 - The Four Settings, as printed",
+     "label": "OTHER",
      "body": [
-      "    1  PARITY    ODD / EVEN\n    2  DUPLEX    HALF / FULL\n    3  WORD      7 BIT / 8 BIT\n    4  STOP      1 / 2",
-      "  ? A period operator would have known this without being told.\n  ! We are not period operators."
+      "  > APPROVED - Req 0628 - Internal Transfer - No net increase in head count"
      ]
     }
-   ],
-   "date": "2026-08-21"
+   ]
   }
  ]
 }

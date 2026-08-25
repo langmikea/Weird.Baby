@@ -21,7 +21,7 @@ import path from "node:path";
 import url from "node:url";
 import crypto from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { draftEntries } from "../../reveal/record-entries.mjs";
+import { draftEntries, recordEpoch } from "../../reveal/record-entries.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
@@ -47,12 +47,20 @@ const land = (args) => {
 
 /* a draft derived FROM the tree — the shape the editor saves. Dates are filled
    in because `draftEntries` cannot resolve `recordDay(n)` against a source that
-   is not `record-epoch.js`, and a draft with null dates reads as a change. */
+   is not `record-epoch.js`, and a draft with null dates reads as a change.
+   [2026-08-24] TWO THINGS WERE WRONG HERE AND THE SECOND HID THE FIRST. The
+   fallback epoch was the literal `"2026-08-17"`, which Ruling C superseded on
+   2026-08-24 — a fifth day-from-number site, and the only one carrying a stale
+   date of its own. It went unnoticed because the emitter also derived the day
+   from `e.no`, so a wrong epoch here produced a wrong date that the emitter
+   then threw away: two errors cancelling. The emitter now measures the index
+   from the entry's DATE (Mike's SED ruling — the number is a label), so this
+   date has to be right, and it is read from the tree rather than guessed. */
 function makeDraft(mutate) {
   const d = draftEntries(fs.readFileSync(TARGET, "utf8"));
   const entries = JSON.parse(JSON.stringify(d.entries));
   const day = (n) => {
-    const t = new Date((d.epoch || "2026-08-17") + "T00:00:00Z");
+    const t = new Date(recordEpoch() + "T00:00:00Z");
     t.setUTCDate(t.getUTCDate() + (n - 1));
     return t.toISOString().slice(0, 10);
   };

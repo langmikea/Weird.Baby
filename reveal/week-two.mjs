@@ -74,6 +74,17 @@ export const WEEK = {
   headlineVerbatim: true,
   days: 5,
   span: "Monday to Friday",
+  /* > **[FLAG 2026-08-24 · flagged, not changed] `spanRule` DESCRIBES WHAT MIKE
+     > WRITES, NOT WHAT THE MECHANISM DOES.** Mike's SED ruling: the calendar is
+     > DUMB — `recordDay(n)` is `epoch + (n − 1)`, with no weekend logic and no
+     > holiday table, ever — and nothing anywhere skips anything. Which days get
+     > a Record is decided by WHICH ENTRIES EXIST, which is him writing or not
+     > writing. So "the Record rests on weekends" is true as a statement about
+     > his week and false as a statement about the code: nothing would stop an
+     > entry landing on a Saturday, and nothing should. **The sentence is left
+     > exactly as written** — it is a claim about the practice and it is
+     > accurate about the practice. It is flagged only so a later session does
+     > not read it as a mechanism that exists somewhere and go looking. */
   spanRule:
     "Five, for the same standing rule week one is five: the Record rests on "
     + "weekends and the team does not.",

@@ -70,10 +70,9 @@ import { thumbnails, diskHref } from "./lighttable.mjs";
    packet's words: "not a parallel list". Proved byte-identical across the
    move. RULED_OUT, SECTIONS and labelOf went with it. */
 import { buildShelf, SECTIONS, RULED_OUT } from "./shelf.mjs";
-import { entries as recordEntries, summaries } from "../../reveal/record-entries.mjs";
+import { entries as recordEntries, summaries, draftEntries as draftRecordEntries } from "../../reveal/record-entries.mjs";
 import { SIGNAGE, delivered } from "../../reveal/delivery.mjs";
 import { GOVERNED_PREFIX } from "../../reveal/placement.mjs";
-import { recordDay } from "../../src/data/artists/record-epoch.js";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
@@ -112,12 +111,26 @@ const STANDING = {
   1: ["The Robots wing opens. It is hidden until the Record has an entry, so "
     + "posting 001 opens it. Nothing to arrange."],
 };
+/* [2026-08-24] THE DAY COMES OFF THE ENTRY, NOT OFF THE LOOP COUNTER.
+   Mike's SED ruling: the calendar is dumb — `recordDay(n)` is `epoch + (n − 1)`
+   with no weekend logic and no holiday table, ever — and WHICH days get a Record
+   is decided by which entries exist. **The number is a LABEL; the entry's own
+   `date` is the authority.** This walked `n = 1..DAYS` calling `recordDay(n)`,
+   which drew a grid of five consecutive days and hung whatever entry shared that
+   number on each: right only while every Record falls on the day its number
+   names. It now walks the ENTRIES, in date order. A gap in the numbers is not a
+   defect and this page must not draw one as a missing day. */
 function buildDays() {
   const sums = summaries(), live = recordEntries();
   const WD = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const dayOf = (() => {
+    const d = draftRecordEntries(); const l = d.entries || d;
+    return (Array.isArray(l) ? l : Object.values(l))
+      .filter(e => e.date).map(e => [e.no, e.date])
+      .sort((a, b) => a[1].localeCompare(b[1]));
+  })();
   const out = [];
-  for (let n = 1; n <= DAYS; n++) {
-    const date = recordDay(n);
+  for (const [n, date] of dayOf) {
     const s = sums.find(x => x.no === n) || {};
     const e = live.find(x => x.no === n) || {};
     out.push({ no: n, date, weekday: WD[new Date(date + "T12:00:00Z").getUTCDay()],

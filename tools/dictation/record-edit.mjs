@@ -108,8 +108,15 @@ const CARRIED_NOTES = [
 /* WHICH WORKSHEET SLOT FEEDS WHICH FIELD OF WHICH RECORD. The worksheet asked
    four questions a day for ten days; every one of them is a field of a Record
    entry, which is why the form could be retired rather than replaced. Week one
-   is records 001–005 and week two is 006–010 — the same numbering `recordDay()`
-   uses, so a slot cannot land on the wrong day. */
+   is records 001–005 and week two is 006–010 — a slot carries a NUMBER, and it
+   lands on the entry with that number.
+   [2026-08-24] AND THAT NUMBER IS NOT A DAY. This used to end "the same
+   numbering `recordDay()` uses, so a slot cannot land on the wrong day", which
+   stopped being true under Mike's SED ruling: the calendar is dumb, the entry's
+   own `date` decides which day it posts, and the number is a LABEL. A slot
+   still cannot land on the wrong ENTRY — that is what the number guarantees and
+   it is all it ever guaranteed. Which day that entry appears on is the entry's
+   business. */
 function carryMap() {
   const out = [];
   for (let w = 1; w <= 2; w++) {

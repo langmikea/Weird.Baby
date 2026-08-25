@@ -88,7 +88,22 @@ export const RECORD_EPOCH = "2026-08-31";
    to the entries that follow it. Day 1 IS the epoch, so `recordDay(1)` and
    `RECORD_EPOCH` are the same string by construction rather than by agreement.
    UTC arithmetic deliberately: a local-midnight Date rolls the day backwards in
-   any timezone west of Greenwich, which is how a dateline reads Sunday. */
+   any timezone west of Greenwich, which is how a dateline reads Sunday.
+
+   ═══ [2026-08-24] THE CALENDAR IS DUMB, AND THAT IS MIKE'S RULING ═══════════
+   **SED: build for everyday drops, drop on the days you choose.** This function
+   is `epoch + (n − 1)` and it will never be anything else — **NO weekend logic,
+   NO holiday table, ever.** Which days get a Record is decided by WHICH ENTRIES
+   EXIST, and that is Mike writing or not writing.
+
+   SO `n` IS AN OFFSET FROM THE EPOCH AND AN ENTRY'S `no` IS A LABEL. They are
+   the same number today only because the first five Records fell on the first
+   five days. `tools/dictation/emit-record-entries.mjs` computes the offset from
+   the entry's OWN DATE, so an entry dated a week out lands a week out and keeps
+   whatever number it has. **A GAP IN THE NUMBERS IS NOT A DEFECT** — 001–005
+   followed by 008 means nobody wrote on three days — **and a later round must
+   not "fix" one.** Everything that needs an entry's day reads the entry's
+   `date`, never its number. */
 export function recordDay(n) {
   const d = new Date(RECORD_EPOCH + "T00:00:00Z");
   d.setUTCDate(d.getUTCDate() + (n - 1));

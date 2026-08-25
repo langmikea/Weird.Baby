@@ -15,8 +15,12 @@ import { readStage } from "./reveal/stage.mjs";
 import { publicPlacements } from "./reveal/delivery.mjs";
 import { placeRule } from "./reveal/placement.mjs";
 import { assetSchedule } from "./reveal/record-clock.mjs";
-import { entries as recordEntries } from "./reveal/record-entries.mjs";
-import { recordDay } from "./src/data/artists/record-epoch.js";
+import { entries as recordEntries, draftEntries as draftRecordEntries } from "./reveal/record-entries.mjs";
+/* [2026-08-24] `recordDay` LEFT WITH THE DAY-FROM-NUMBER DERIVATION. Both
+   defines that called it now read the entry's own date through `RECORD_DAY_OF`
+   below, so a grep for the identifier in this file returns only prose. It goes
+   with them (Law of Subtraction), exactly as `node:fs` and `node:path` went
+   with `heldOutOfLaunch`. */
 import { state as approvalState } from "./reveal/approval.mjs";
 import { execSync } from "node:child_process";
 
@@ -46,6 +50,36 @@ const STAGE = readStage(process.env);
 
    NO GIT? `unknown`, and the build proceeds. A build that cannot read git is
    not a reason to refuse to build; it is a reason to say the sha is unknown. */
+/* ═══ [2026-08-24] THE CALENDAR IS DUMB AND THE ENTRY CARRIES ITS OWN DAY ═════
+   MIKE'S RULING — **SED: build for everyday drops, drop on the days you choose.**
+   `recordDay(n)` is `epoch + (n − 1)`. It has NO weekend logic, NO holiday
+   table, and it never will. **Nothing anywhere skips anything.** Which days get
+   a Record is decided by WHICH ENTRIES EXIST, and that is Mike writing or not
+   writing.
+
+   SO THE NUMBER IS A LABEL AND THE DATE IS THE AUTHORITY. `no: 6` is the sixth
+   Record, not the sixth day. **A GAP IN THE NUMBERS IS NOT A DEFECT AND MUST
+   NEVER BE "FIXED"** — a later round that meets 001–005 followed by 008 is
+   looking at three days on which nobody wrote, which is the mechanism working.
+
+   THIS MAP IS WHERE THAT STOPPED BEING TRUE OF THE BUILD. Both defines below
+   derived the day from `recordDay(e.no)` — the LABEL — while the glass filters
+   on the entry's own `date`. They agreed only because every entry was written
+   on the day its number happened to name. An entry dated Monday would have had
+   its pictures unlock on the day its NUMBER fell on, and the wing gate would
+   have read that day too.
+
+   IT NEEDS A JOIN BECAUSE THE TWO HALVES LIVE IN TWO READERS: `entries()`
+   returns `no` and `assets`; `draftEntries()` returns `no` and `date`. Joined
+   on the number, which is what a label is for. */
+const RECORD_DAY_OF = new Map(
+  (() => {
+    const d = draftRecordEntries();
+    const list = d.entries || d;
+    return (Array.isArray(list) ? list : Object.values(list))
+      .map((e) => [e.no, e.date || null]);
+  })());
+
 const COMMIT = (() => {
   try {
     const sha = execSync("git rev-parse --short HEAD", { encoding: "utf8" }).trim();
@@ -573,7 +607,7 @@ export default defineConfig({
        derived from the entries' own `assets` arrays and their own dates — read
        the object, never the prose. */
     __WB_RECORD_ASSETS__: JSON.stringify(
-      assetSchedule(recordEntries(), (e) => (e.no == null ? null : recordDay(e.no)))),
+      assetSchedule(recordEntries(), (e) => RECORD_DAY_OF.get(e.no) ?? null)),
     /* [CH6 2026-08-12] THE DAY THE WING ARRIVES, DERIVED AND NOT TYPED.
        The worker needs it for one job only: the share cards name the MGK robots,
        and that sentence is false on a site whose Robots wing does not exist yet
@@ -583,10 +617,7 @@ export default defineConfig({
        there is still no second date literal beside `RECORD_EPOCH`. `null` when
        the Record is empty, which reads as "never opened" and holds the cards. */
     __WB_RECORD_FIRST_DAY__: JSON.stringify(
-      recordEntries()
-        .map((e) => (e.no == null ? null : recordDay(e.no)))
-        .filter(Boolean)
-        .sort()[0] ?? null),
+      [...RECORD_DAY_OF.values()].filter(Boolean).sort()[0] ?? null),
     /* ═══ [2026-08-13] MIKE'S SIGNATURES, AND THE REASON THIS IS A `define` ═══
        The approval mark draws the house mark on a page he has personally
        approved. It must NEVER render at launch, and the strongest version of
