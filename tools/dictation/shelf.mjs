@@ -54,6 +54,66 @@ export const RULED_OUT = {
     "photograph. Same category as the bezel.",
 };
 
+/* ═══ NEVER PUBLISHED — A SECOND LIST, AND IT IS NOT RULED_OUT ══════════════
+   [2026-08-25] `RULED_OUT` above means ONE thing: **Mike met this and said no
+   to this use.** Every row carries a date and his words. That is Doctrine 24,
+   and it is why the map exists.
+
+   THESE FILES ARE THE OPPOSITE CASE. **He has never been asked about them.**
+   The bar is not a ruling about three files; it is a standing rule about a
+   CLASS of material, made once and recorded in the other repository. Filing
+   them in `RULED_OUT` would fabricate a ruling and put a date on it.
+
+   AND THE COLLISION IS NOT HYPOTHETICAL — IT COST A ROUND. `RULED_OUT` is
+   keyed by BASENAME and its value records a ruling about a USE, so a reader
+   who takes it for a list of forbidden FILES gets it wrong: on 2026-08-25 the
+   Portal's own CRT bezel was reported as a public leak on exactly that
+   misreading. It is a live, declared component of `portal.js` and its
+   publication is correct. Adding a second, different kind of fact to that same
+   map would compound the ambiguity in the one place a future round will look.
+
+   SCOPED TO THE CLASS, NOT TO FILENAMES, AND THAT IS DELIBERATE.
+   `BURP_LIBRARY_01.md` is numbered **01** and the burp doctrine expects more
+   shoots. Three basenames would be correct today and silently wrong at the
+   fourth burp, which is the failure mode this whole file exists to avoid.
+
+   THE CITATION IS CARRIED, NOT IMPORTED. The rule is the robots repository's
+   and this repository cannot read it at build time — that repo may not be
+   beside this one, which is the lesson `tools/numbers-gate.mjs` already
+   learned about counting the manual. So the quote and its file-and-line travel
+   in the row, and divergence is a thing a robots-side sweep catches, not an
+   import.
+
+   COUNTED IN ITS OWN BUCKET. `drop.neverPublished`, never folded into
+   `drop.ruled` — they are different reasons and a reader who sees one number
+   cannot tell which. A silent filter is indistinguishable from a bug. */
+export const NEVER_PUBLISHED = [
+  {
+    key: "burp-logbook-audio",
+    test: (p) => /^public\/held\/robots\/audio\/burps\//.test(p),
+    what: "the burp clips' own audio track — Mike talking while he shoots",
+    reason:
+      "Ruling 2026-08-03(a), NO VOICE ON ROBOTS. These are the logbook: " +
+      "`tools/burp_intake.py` extracts each clip's audio whole (-vn -ac 1 " +
+      "-ar 16000) so it can be transcribed, and the burp doctrine's point 9 " +
+      "calls that track the logbook and rules the published clip must carry " +
+      "no audio stream at all. The words are read and quoted as TEXT; the " +
+      "recording is not published in any asset class.",
+    citation:
+      "weird-baby-robots/docs/MAGIC8_ACTION_REEL-20260803.md:69 — ruling " +
+      "2026-08-03(a): \"no voice on robots. Mike's narration is a research " +
+      "artifact and is quoted as text; nothing published anywhere in the " +
+      "robots wing carries his voice.\" Restated at " +
+      "weird-baby-robots/docs/BURP_LIBRARY_01.md:5 and as point 9 of " +
+      "weird-baby-robots/docs/BURP_DOCTRINE-20260804.md.",
+  },
+];
+
+/** the NEVER_PUBLISHED row that covers this path, or null. */
+export function neverPublished(p) {
+  return NEVER_PUBLISHED.find((r) => r.test(p)) || null;
+}
+
 /* ═══ THE LABEL ════════════════════════════════════════════════════════════ */
 const TITLE = s => s.charAt(0).toUpperCase() + s.slice(1);
 export function labelOf(e) {
@@ -116,13 +176,18 @@ export function buildShelf() {
   const signage = new Set(Object.keys(SIGNAGE).map(k => GOVERNED_PREFIX + k));
   const isSuperseded = supersededBy(table.filter(r => r.repo === "museum"
     && /^public\/(held\/)?robots\//.test(r.path)));
-  const drop = { ruled: 0, absent: 0, superseded: 0, elsewhere: 0 };
+  const drop = { ruled: 0, neverPublished: 0, absent: 0, superseded: 0, elsewhere: 0 };
   const out = [];
 
   for (const s of SECTIONS) {
     for (const e of table.filter(r => r.repo === "museum" && s.test(r))) {
       const base = e.path.split("/").pop();
       if (Object.prototype.hasOwnProperty.call(RULED_OUT, base)) { drop.ruled++; continue; }
+      /* [2026-08-25] BEFORE the `missing` test on purpose: never-published is a
+         fact about the CLASS and is true whether or not the file is on disk
+         today. Counting one of these as "absent" would file a standing rule
+         under a bookkeeping accident. */
+      if (neverPublished(e.path)) { drop.neverPublished++; continue; }
       if (e.missing) { drop.absent++; continue; }
       const pub = "/" + e.path.replace(/^public\/held\//, "").replace(/^public\//, "");
       if (signage.has(pub)) { drop.ruled++; continue; }

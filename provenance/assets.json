@@ -312,6 +312,15 @@
    "textInImage": true,
    "text": "The Weird.Baby wordmark across the mark: Weird.Baby. The house's own logotype, not museum copy.",
    "inspected": "2026-08-20 — derived and rendered on the live CURRENT PROJECTS tile before it was made final. Two alternatives (mark on the covers' beige ground; mark inverted) were rendered first and rejected on a MEASUREMENT: .vp-prof-plate computes to rgb(250,248,243), near-white, so the dark-card premise behind inverting was false."
+  },
+  "7b48549f07b18ee6": {
+   "ref": "/robots/reference/photos/unit_crt_base.webp",
+   "c": "VERIFIED",
+   "s": "A PHOTOGRAPH OF THE UNIT, and the record for it already existed elsewhere — this row copies it here rather than establishing anything new. The bytes (449,652 B, 1294x924) are identical to weird-baby-robots reference/photos/unit_crt_base.webp, which landed there at 071cc38 on 2026-07-26 — 'CRT-PHOTO BASE: the presentation as a photograph of a 60s CRT displaying the VIIIp (Mike's art…)' — and that repo's STATE.md:3468 records it as 1294x924, copied from Downloads. It reached this repository under the Portal publish scope of 2026-08-21 and moved out from behind the stage door at efc379f on 2026-08-22, where it is TIER TWO of twin.html's base-image ladder (monitor_base -> unit_crt_base -> unit_new_base -> the legacy two-photo path). twin.html:9841 records that the family shot supersedes it, so it is published so a fallback is not broken and is expected never to be drawn. OPEN FOR MIKE: the class. It is filed VERIFIED as a photograph with a cited source, but the robots-side commit calls it Mike's art, which would make it MIKE — his call, not Ops'.",
+   "textInImage": null,
+   "text": "NOT READ. Nobody has looked at these bytes for lettering. The CRT it photographs is displaying the VIIIp, and the unit's glass carries lettering in every other photograph of it, so the honest value is unknown rather than false. FOR MIKE: one look decides it.",
+   "inspected": "NOT INSPECTED — this row is written from records that already existed (the robots-repo commit, that repo's STATE.md, and twin.html's own loader ladder). Nobody has looked at the picture.",
+   "n": "WHY NO GATE CAUGHT THIS, AND IT IS NOT AN OVERSIGHT. `provenance:gate` DOES fail on an undeclared visual asset (tools/provenance-sweep.mjs:633), but the assets it can see are the ones NAMED IN THE AUTHORED SOURCE, walked as an import graph from src/main.jsx. This file is named nowhere in src/ — it exists only inside public/robots/twin.html, six times, and the twin is a 646 KB standalone page outside the React render seam. That is register row N-k's class exactly. It published unregistered because the instrument cannot reach the place it is named, which is a blind spot rather than a lapse, and it is the reason this row had to be written by hand."
   }
  }
 }

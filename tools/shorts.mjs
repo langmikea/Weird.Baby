@@ -190,6 +190,7 @@ const body = `
     <span><b>${images.length}</b> ingredients on the shelf</span>
     <span>withheld: <b>${drop.absent}</b> with no file on disk ·
       <b>${drop.ruled}</b> ruled out or signage ·
+      <b>${drop.neverPublished}</b> never published ·
       <b>${notImages}</b> not pictures ·
       <b>${drop.elsewhere + drop.superseded}</b> robots-repo rows</span>
     <span>← → step a frame · shift for ten · space plays</span>
@@ -240,6 +241,7 @@ console.log(`wrote ${path.relative(REPO, OUT)}  ${kb(html.length)}`);
 console.log(`  ${images.length} ingredients, in ${shelf.length} groups:`);
 for (const g of shelf) console.log(`    ${String(g.items.length).padStart(3)}  ${g.label}`);
 console.log(`  withheld: ${drop.absent} with no file, ${drop.ruled} ruled out or signage, `
+  + `${drop.neverPublished} never published, `
   + `${notImages} not pictures, ${drop.elsewhere + drop.superseded} robots-repo rows`);
 console.log(`  thumbnails: ${hits} cached, ${made} made, ${failed} could not be read`);
 console.log(`  recipes read back: ${baked ? (baked.recipes || []).length + ` from ${path.relative(REPO, RECIPES)}` : "none on disk yet"}`);

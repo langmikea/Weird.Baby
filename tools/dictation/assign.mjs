@@ -577,7 +577,8 @@ SECTIONS.forEach(s => {
 });
 console.log(`  ${events.length} story events, in ${evtKeys.length} sections`);
 console.log(`  labels: ${rows.length - nUndesc} readable, ${nUndesc} with nothing but a filename`);
-console.log(`  not shown: ${drop.ruled} ruled out or signage, ${drop.absent} with no file, `
+console.log(`  not shown: ${drop.ruled} ruled out or signage, ${drop.neverPublished} never published, `
+  + `${drop.absent} with no file, `
   + `${notBuilt} not built, ${drop.superseded + drop.elsewhere} robots-repo rows`);
 console.log(`  thumbnails: ${hits} cached, ${made} made, ${failed} could not be read`);
 console.log(`  delivered by the Record today: ${Object.keys(del || {}).length}`);
