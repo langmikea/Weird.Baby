@@ -7515,6 +7515,33 @@ function setup(){
                          doors and the parcels both rewrite menu rows, and an
                          earlier strip was silently undone by them. */
  Health_Load();       /* [HEALTH] the persisted condition wakes with the machine */
+ /* ═══ [2026-08-26] THE FRAMED LAYOUT IS APPLIED BEFORE THE FIRST PAINT ═════
+    MIKE: **"CH3: Resize behind some cover; user should not see it happening."**
+    **THERE IS NOTHING LEFT TO COVER, BECAUSE THE RESIZE IS GONE RATHER THAN
+    HIDDEN.** `Framed_Fit()` used to be called from `probe.onload` - on the far
+    side of a NETWORK FETCH for the base photograph - so the document laid out
+    once at `#unitstage{margin:10px auto; max-width:min(96vw,880px)}` and again
+    at full width when the picture arrived.
+    MEASURED IN THE OVERLAY, by removing the injected `#framedfit` rule from a
+    live framed twin and reading the stage back:
+        without it   828 x 662 at x 36
+        with it      900 x 720 at x 0
+    an **8.7% growth and a 36px shift**, at whatever moment the network chose.
+    NOTHING IN `Framed_Fit` NEEDS THE PROBE. It adds `body.framed` and injects
+    CSS for `#unitstage`, `#portalbar` and the page furniture; `Framed()` is a
+    synchronous window test. It sat in `onload` only because that is where
+    `monbase` is added, which is a different fact about a different thing.
+    `setup()` runs from an inline script at the end of the body, so this lands
+    before the browser paints the stage even once.
+    AND IT FIXES A SECOND CASE NOBODY HAD LOOKED AT: when the base plate is
+    missing entirely the probe never loads, so framed styling never ran at all
+    and `Portal_Base_Missing`'s NO SIGNAL card drew in the small centred stage.
+    It draws at full width now, which is what a dead channel should look like.
+    The call in `probe.onload` is left where it is and is now a no-op on its
+    second visit - it early-returns on `#framedfit` already existing - because
+    STANDALONE it is still the thing that does nothing, and removing it would
+    make the ladder's two entries disagree about who is responsible. */
+ Framed_Fit();
  Unit_LoadPhotos();   /* [PHOTO PATH FIX] candidate-chain: museum layout, then repo layout */
  Unit_View(true);     /* [EYEBALL RULING] unit view = DEFAULT everywhere; degrades if photos missing */
  Power_Standby();     /* [W1] the machine arrives OFF - the POWER control starts it */

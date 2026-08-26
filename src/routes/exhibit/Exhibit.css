@@ -1935,10 +1935,19 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   font-style:normal;font-size:var(--fs-micro);line-height:1.05;
   letter-spacing:.06em;color:var(--wb-gold-mute);white-space:nowrap}
 @media (max-width:699px){ .vp-rec-mark-day{display:none} }
-/* [2026-08-10] `.vp-rec-mark-day` IS DELETED, not left dormant — the date is
-   out of the index rail on Mike's ruling and `RecordIndexRow.jsx` no longer
-   emits the element. The date itself is untouched in the data and still prints
-   in the opened record's dateline. */
+/* [FLAG CLEARED 2026-08-26] THIS COMMENT WAS STALE AND SAT DIRECTLY UNDER THE
+   LIVE RULE IT SAID WAS DELETED. It read *"`.vp-rec-mark-day` IS DELETED, not
+   left dormant — the date is out of the index rail on Mike's ruling and
+   `RecordIndexRow.jsx` no longer emits the element."* True when it was written
+   on 2026-08-10 (`098d604`) — and **C1 brought the weekday back the next day**
+   (`0de3bf3`, 2026-08-11), re-adding the rule ABOVE it without touching it.
+   `RecordIndexRow.jsx` has emitted `<i className="vp-rec-mark-day">` ever since.
+   WHAT IS STILL TRUE, and it is the half worth keeping: **the DATE is out of
+   the rail and stays out.** `17 AUG 26` needs 71.97px of Courier Prime against
+   a 44px rail and wrapped to three lines on every dated row — struck for that
+   measurement, and `MON` is three characters, which is why the WEEKDAY could
+   come back where the date could not. The date is untouched in the data and
+   still prints in the opened record's dateline. */
 .vp-rec-open:hover .vp-rec-mark-no,
 .vp-rec-open:focus-visible .vp-rec-mark-no{color:var(--wb-gold)}
 
@@ -2312,14 +2321,63 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    person who grepped for it. The controls it used to space are in the face head
    now and take the head's own grid. */
 
-/* AN UNREAD RECORD IS MARKED ON ITS OWN ROW. A rule down the left edge rather
-   than a dot: the index is a register of ruled rows and a dot would be the one
+/* ═══ [2026-08-26] THE MARKING INVERTS: A READ RECORD IS DIMMED, AND THE LEFT
+       RULE IS STRUCK. MIKE'S RULING. ═════════════════════════════════════════
+   WHAT WAS HERE, and it stood from 2026-08-05 (`8fe959f`) until today:
+   `.vp-rec-row--unread > .vp-rec-open::before`, a 2px rule down the left edge
+   of every UNREAD row.
+
+   **IT MARKED THE WRONG STATE, AND THE COST LANDS ON THE ONE VISITOR WHO
+   MATTERS MOST.** A first-time reader has read nothing, so every row is unread,
+   so every row grows a rule — **a wall of them, on the first thing they see.**
+   The marking is loudest exactly when it carries no information, and it fades
+   as it starts to mean something. Dimming READ rows inverts that: a first-time
+   reader sees a clean register, and the marking appears as they go.
+
+   **THE ORIGINAL REASONING SURVIVES THE FLIP AND IS KEPT WORD FOR WORD**, since
+   it was never an argument about polarity: *"a rule down the left edge rather
+   than a dot — the index is a register of ruled rows and a dot would be the one
    round thing on the page, and a rule reads at a glance down a column of sixty
-   without being counted. `--wb-gold-lo` because it is a fact about the row and
-   not an alarm. */
-.vp-rec-row--unread > .vp-rec-open{position:relative}
-.vp-rec-row--unread > .vp-rec-open::before{content:"";position:absolute;
-  left:0;top:6px;bottom:6px;width:2px;background:var(--wb-gold-lo)}
+   without being counted."* Scanning sixty rows is still the job. What changed
+   is which sixty are marked, and the answer is now *the ones behind you*.
+
+   ═══ "SLIGHTLY" IS A MEASUREMENT, NOT A TASTE — AND THE GROUND IS THE HALF
+       THAT WAS NEARLY GOT WRONG ═══════════════════════════════════════════
+   The rail is TEXT — a bold number at `--fs-lead` and three mono characters at
+   `--fs-micro`.
+
+   **THE FIRST FIGURES WERE COMPUTED AGAINST THE WRONG GROUND AND THE PAGE SAID
+   SO.** `.vp-face` declares `background:var(--wb-ink)` #ece9e0, which is the
+   obvious answer and is not the one that paints: walking up from a live row,
+   the first non-transparent ancestor is **`.vp-face-body`, `#faf8f3`** — the
+   CARD ground, the lightest in the museum. `.vp-flat` and `.vp-rec-index`
+   between them are both transparent. A ratio is a fact about two colours, and
+   naming the wrong second one makes every number in the table quietly wrong in
+   the safe direction. Measured in the browser, on the shipped row:
+
+     number  --wb-gold-lo   #57544d   **7.12:1**   (5.15 on the mat, 6.22 on ink)
+     day     --wb-gold-mute #5f5c53   **6.30:1**
+
+   **`0.86` IS THE FLOOR, AND IT IS THE PALETTE'S FLOOR RATHER THAN A TASTE:**
+
+     opacity .86  ->  number 5.01:1  ·  day **4.53:1**    both still AA
+     opacity .85  ->  number 4.88:1  ·  day **4.46:1**    the DAY drops under AA
+     opacity .80  ->  number 4.33:1  ·  day   3.98:1      both AA-large only
+
+   The day binds, and it binds because it is already sitting on the museum's own
+   quietest legible text step: `--wb-gold-mute` was RAISED to #5f5c53
+   specifically to clear 4.5:1 on this class of small mono — *"the type a
+   visitor squints at hardest"* — and `museum-tokens.css` records that at
+   length. **Dimming past .86 spends a measured ruling from a round that is not
+   this one**, which is the exact failure that block warns about, so it is not
+   Ops' to spend. A stronger dim is available and it is Mike's call, not a
+   tuning: `.80` reads clearly and puts the day at 3.98:1.
+
+   ONE DECLARATION ON THE RAIL, and the rail is only ever the number and the
+   day, so this dims what Mike named and nothing else. Opacity rather than a
+   second colour: there is one source for these two values and a read state that
+   invented hexes would be the third palette arriving again. */
+.vp-rec-row--read > .vp-rec-open > .vp-rec-mark{opacity:.86}
 
 /* ══ [P4] AND A RECORD ARRIVES RATHER THAN APPEARING ═══════════════════════
    Mike asked for the walk to be DELIGHTFUL. This is the whole of the moving

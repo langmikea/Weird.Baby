@@ -162,6 +162,15 @@ export default function PortalScreen({ bezel, ch, chList, note, place,
                                        slip, unitOn, onClose, children }) {
   const B = bezel || null;
   const list = Array.isArray(chList) ? chList : [];
+  /* no declaration, no frame: the screen falls back to the bare picture rather
+     than drawing a box of the wrong shape around it.
+     [2026-08-26] IT MOVED ABOVE THE GEOMETRY, WHERE IT ALWAYS BELONGED. The
+     rect used to be computed with a `B &&` guard on every read and the early
+     return came after it, so the null case was handled twice and neither place
+     said so. The crop-box arithmetic below reads `B.w`, `B.h` and `B.feed`
+     directly; one guard, at the top, is what makes that safe to write. */
+  if (!B) return <div className="ps-plain">{children}</div>;
+
   /* ═══ TWO PLACEMENTS, AND THE DIFFERENCE IS WHAT THE PICTURE *IS* ═════════
      `canvas` — the machine, and the photograph. `twin.html` draws the family
        art on the SAME 3000x2400 canvas this bezel was cut from, and the
@@ -175,16 +184,57 @@ export default function PortalScreen({ bezel, ch, chList, note, place,
      GETTING THIS BACKWARDS IS SILENT AND UGLY: the machine placed on the feed
      rect would be the whole canvas — bezel margin and all — shrunk into the
      hole, a picture of a monitor inside a monitor. */
-  const rect = (B && B.feed && place === "feed") ? {
-    left: `${(B.feed.x / B.w) * 100}%`,
-    top: `${(B.feed.y / B.h) * 100}%`,
-    width: `${(B.feed.w / B.w) * 100}%`,
-    height: `${(B.feed.h / B.h) * 100}%`,
-  } : { left: 0, top: 0, width: "100%", height: "100%" };
+  const base = (B.feed && place === "feed")
+    ? { x: B.feed.x, y: B.feed.y, w: B.feed.w, h: B.feed.h }
+    : { x: 0, y: 0, w: B.w, h: B.h };
 
-  /* no declaration, no frame: the screen falls back to the bare picture rather
-     than drawing a box of the wrong shape around it. */
-  if (!B) return <div className="ps-plain">{children}</div>;
+  /* ═══ [2026-08-26] THE CENTRE 4:3, AND IT IS ONE RULE RATHER THAN THREE ════
+     MIKE: **"ENLARGE the screen BEHIND THE BEZEL to crop the screen to just
+     the center 4:3 area."**
+
+     THE APERTURE CANNOT BE MADE 4:3 AND THAT IS WHAT DECIDES THE READING.
+     The opening measures 2532 x 2003 — **1.264** — and it is barrel-curved art
+     on a plate Mike has shelved the replacement for, so no amount of code makes
+     the visible hole 1.333. **So "the center 4:3 area" is a fact about the
+     PICTURE, not about the hole**, and the instruction is exactly what it says:
+     enlarge what is behind until the hole is framing the middle of it.
+
+     A SURVEY OFFERED THREE CANDIDATES AND THE MECHANISM COLLAPSES THEM TO ONE.
+     They differed only in which rectangle "the screen" meant — the canvas
+     (3000 x 2250), the declared feed rect (2540 x 1905), or the measured
+     opening (2532 x 1899), up to 75px of height apart. **Each placement already
+     knows which rectangle it is fitted to**, so the rule is written once and
+     each kind answers it with its own: the machine and the photograph against
+     the canvas, television and the test card against the feed rect.
+
+     **THE MEASURED OPENING IS THE ONE DELIBERATELY NOT USED**, and the overscan
+     is why. The feed rect is *taller than the hole on purpose* — 0 hole pixels
+     fall outside it — so that the curved inner edge crops the picture and no
+     page ground can ever leak in. Cropping to the hole's own bounding box would
+     put the picture's edge exactly on the hole's edge and hand that guarantee
+     back, to buy 13px of height.
+
+     THE BOX IS THE CENTRE 4:3 THAT *COVERS* THE RECT, never one inscribed in
+     it. Inscribing would letterbox — it would shrink the picture to fit a
+     shape, which is the opposite of ENLARGE. Both of our rects are narrower
+     than 4:3, so the box grows sideways and the existing `object-fit: cover`
+     does the rest: the picture fills it and loses the overflow to the opening.
+
+       canvas   3000 x 2400  ->  3200 x 2400 at x -100     the art scales x16/15
+       feed     2540 x 2036  ->  2714.67 x 2036 at x 139.67
+
+     NOTHING LEAKS, CHECKED BOTH WAYS: the hole runs x 231..2762, y 206..2208,
+     and sits inside both boxes with room. */
+  const cw = Math.max(base.w, (base.h * 4) / 3);
+  const chh = Math.max(base.h, (base.w * 3) / 4);
+  const box = { x: base.x - (cw - base.w) / 2, y: base.y - (chh - base.h) / 2,
+                w: cw, h: chh };
+  const rect = {
+    left: `${(box.x / B.w) * 100}%`,
+    top: `${(box.y / B.h) * 100}%`,
+    width: `${(box.w / B.w) * 100}%`,
+    height: `${(box.h / B.h) * 100}%`,
+  };
 
   return (
     <div className="ps-wrap">

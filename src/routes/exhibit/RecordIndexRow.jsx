@@ -31,10 +31,24 @@ import { evidenceOf, entryWeekday } from "../../lib/record-model.js";
    one entry and therefore never bands. Moving it would have been tidying rather
    than a reason.
    =========================================================================== */
-export default function RecordIndexRow({ entry, unread, onOpen }) {
+/* [2026-08-26] `read` IS A SECOND PROP RATHER THAN `!unread`, AND THE PREVIEW
+   IS WHY. Mike struck the unread rule and ruled the marking the other way
+   round: a READ record has its number and day slightly dimmed. The obvious
+   shape — style `:not(.vp-rec-row--unread)` — is wrong, because `unread` is
+   `list.length > 1 && isUnread(...)` and the FIRST half of that is not about
+   this row at all. It says *is there a list worth marking*. The dictation
+   preview renders exactly one entry, so `unread` is false there for a reason
+   that has nothing to do with reading, and `:not()` would have dimmed the row
+   Mike writes into.
+   So the caller computes both against the same guard and this prints what it is
+   told. A row can be neither, which is correct: one entry on its own is not
+   read and not unread, it is just the entry. */
+export default function RecordIndexRow({ entry, unread, read, onOpen }) {
   const en = entry;
   return (
-    <li className={"vp-fe vp-rec-row" + (unread ? " vp-rec-row--unread" : "")}>
+    <li className={"vp-fe vp-rec-row"
+                   + (unread ? " vp-rec-row--unread" : "")
+                   + (read ? " vp-rec-row--read" : "")}>
       <button className="vp-rec-open" onClick={onOpen}>
         {/* ═══ [R1 2026-08-06] THE MARK, FAR LEFT ══════════════════════════
             MIKE: "each entry needs a DATE and/or a DAY NUMBER — or something

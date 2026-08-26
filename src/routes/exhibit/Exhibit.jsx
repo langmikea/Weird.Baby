@@ -5406,6 +5406,12 @@ export default function Exhibit({ artist, open = null }) {
                                   key={row.index}
                                   entry={row.entry}
                                   unread={list.length > 1 && isUnread(row.entry, readRecords)}
+                                  /* [2026-08-26] the SAME guard, deliberately.
+                                     `list.length > 1` asks whether there is a
+                                     register worth marking at all, and it has
+                                     to hold for both states or a lone entry
+                                     would come out marked as read. */
+                                  read={list.length > 1 && !isUnread(row.entry, readRecords)}
                                   onOpen={() => landOpen(row.index)} />
                               ))}
                             </ol>

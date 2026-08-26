@@ -60,6 +60,14 @@
   container-type:inline-size;
   position:relative;
   display:block;
+  /* [2026-08-26] THE FRAME CLIPS NOW, AND THE 4:3 CROP IS WHY. The feed's box
+     is the centre 4:3 that COVERS its rect, so it is wider than the frame —
+     3200 against 3000 on the canvas placement, 100px past each edge. Inside the
+     frame the bezel is opaque and hides it; OUTSIDE the frame there is nothing
+     over it, and the picture would spill onto the overlay's ground wherever the
+     wrap is wider than the screen. `.ps-wrap` already clips, but it clips the
+     WRAP, and the screen is centred inside it. */
+  overflow:hidden;
   width:min(100cqw, calc(100cqh * var(--arn)));
   aspect-ratio:var(--ar);
   line-height:0;

@@ -789,6 +789,86 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-26 -> THE MARKING INVERTS (third packet) + THE TV WAS OPS'
+- **THE TV MIKE COULD NOT STOP WAS OPS' OWN LEFTOVER**, and the lesson is a
+  hazard: **a dev server started for verification and left running is a thing
+  that makes noise on his machine.** A live unmuted YouTube player sat in the
+  app's Browser pane for 20 minutes; **closing browsers could not touch it
+  because it is not in one**, and **killing the server would not have stopped it
+  either** — the page was already loaded and the audio streamed direct from
+  youtube-nocookie.com. **Sound first (close the tab), then the tree.** Closed
+  and verified gone. `record-serve.mjs` on 8899 and a stale `servedist.mjs` on
+  8955 (an earlier session's) were left alone; the 8955 one is Mike's to clear.
+- **THE UNREAD RULE WAS NEVER THIS WEEK'S WORK** — `8fe959f`, 2026-08-05, its
+  only commit, and the unread path is untouched since 08-19. It became visible
+  because the read set is `localStorage` **per origin**, and Ops' dev server is
+  a different origin from weird.baby.
+- **IT MARKED THE WRONG STATE.** A first-time reader has read nothing, so every
+  row grew a rule — **loudest exactly when it carries no information.** Dimming
+  READ rows inverts it: clean on arrival, marking appears as you go. The old
+  comment's own argument survives the flip word for word.
+- **THE GROUND WAS NEARLY GOT WRONG AND THE PAGE CAUGHT IT.** `.vp-face`
+  declares `--wb-ink` #ece9e0; the first ancestor that actually PAINTS is
+  **`.vp-face-body` #faf8f3**. Same two inks read **5.15 / 4.56** on the mat,
+  **6.22 / 5.50** on ink, **7.12 / 6.30** on what is really there. Wrong in the
+  safe direction, which is the kind that does not announce itself.
+- **`.86` IS THE PALETTE'S AA FLOOR, NOT A TASTE:** number 5.01:1, day 4.53:1;
+  at `.85` the day drops to 4.46 and under AA. **The day binds** because
+  `--wb-gold-mute` was raised to clear 4.5:1 on exactly this small mono. `.80`
+  reads more clearly at 3.98:1 on the day and **is Mike's call, not a tuning.**
+- **`read` IS A SECOND PROP, NOT `!unread`** — `unread` carries a
+  `list.length > 1` guard that is about the LIST, so `:not(--unread)` would have
+  dimmed the single row the dictation preview renders, which is the row Mike
+  writes into.
+- **THIRD STRUCK-FACT-READING-AS-LIVE OF THE DAY** (after `1.24cqw` and the
+  `no [X] on channel 4` note): a 2026-08-10 comment saying `.vp-rec-mark-day` is
+  deleted sat directly under the rule C1 re-added on 08-11. Cleared, keeping the
+  half that is still true — the DATE stays out of the rail at 71.97px.
+
+### 2026-08-26 -> THE 4:3 CROP + THE RESIZE THAT NEEDED NO COVER (second packet)
+- **ONE THING NEEDS MIKE AND IT IS A LOOK:** whether the crop took the reference
+  he meant. Gates: lint **9/7 = baseline** - build green - launch build green -
+  provenance **PASS** - `reveal:check` - `parity:gate` - `instory:gate` -
+  `docs:numbers:gate` **PASS** - `reveal:day` nothing to move -
+  `assets:orphans` **13, unchanged**. Log:
+  `docs/MUSEUM_CROP_AND_COVER_LOG-20260826.md`.
+- **THE APERTURE CANNOT BE MADE 4:3 AND THAT DECIDED THE READING.** The opening
+  is **2532 x 2003 = 1.264** on a plate whose replacement is shelved, so "the
+  center 4:3 area" is a fact about the PICTURE. The three surveyed candidates
+  **collapse to one rule** — each placement already knows its own rectangle:
+  canvas `3000x2400 -> 3200x2400 at x-100` (art **x16/15 exact**), feed
+  `2540x2036 -> 2714.67x2036 at x139.67`. Cover-box, never inscribed;
+  inscribing letterboxes, which is the opposite of ENLARGE. Verified served on
+  all four channels, hole covered on both axes.
+- **THE MEASURED OPENING WAS DELIBERATELY NOT USED**: the feed rect is taller
+  than the hole ON PURPOSE (0 hole px outside it), and cropping to the hole's
+  own bbox hands that no-leak guarantee back **to buy 13px**. And the three
+  candidates are **within 1.2% of each other as enlargements** — if the built
+  one looks wrong, the other two will not fix it.
+- **THE CROP TAKES A SIXTH OFF TELEVISION'S BLACK AND DOES NOT CLOSE IT:**
+  303.6 -> **254.5px** a side, 30.3% -> **25.4%** of the opening. Same root as
+  CH4's: **`object-fit` is inert on an iframe**, so a wider box only changes how
+  YouTube letterboxes inside it. Closing it means sizing the player to the box's
+  HEIGHT and overflowing its width (3619.6 wide). **Separate job, not built.**
+- **B WAS REPORTED AND NEITHER SHAPE WAS BUILT, BECAUSE B WOULD NOT HAVE FIXED
+  IT.** B is about RETURNING to ch3; the resize happens on the FIRST open too,
+  so it would have paid the ONE OUTPUT guarantee and left the defect standing.
+- **THE CAUSE, MEASURED BY CONSTRUCTION:** removing the injected `#framedfit`
+  rule from a live framed twin and reading the stage back gives
+  **828x662 at x36** against **900x720 at x0** — an 8.7% growth and a 36px
+  shift, scheduled by a network fetch (73.5ms on localhost). `Framed_Fit()` now
+  runs in `setup()` before `Unit_LoadPhotos()`; nothing in it ever needed the
+  probe, and `setup()` is inline at the end of the body. **It also fixes the
+  missing-base-plate case, where framed styling had never run at all.**
+- **"SOME COVER" WOULD HAVE BEEN HIS WORD AND IS MOOT:** a cover is a thing a
+  visitor looks at, so it is UX — but **the resize is gone rather than hidden**,
+  and what remains is a load, which is what every channel does.
+- **FIRST-PAINT TIMING COULD NOT BE MEASURED AND THE PROBE SAID SO.** The pane
+  does not composite: a 25ms sampler returned **5 samples across 4,682ms** and
+  `getEntriesByType('paint')` returns empty. Measured the two layout STATES
+  instead — a stronger oracle for what they are, and none at all for how long
+  the wrong one shows.
+
 ### 2026-08-26 -> ONE SURFACE (the Portal's controls, all four channels)
 - **NOTHING BLOCKS IT.** Gates: lint **9/7 — A NEW BASELINE** - build green -
   launch build green - provenance **PASS** (15 added, 1 pruned) -
