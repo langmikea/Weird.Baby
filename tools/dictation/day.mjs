@@ -393,11 +393,60 @@ const HEADER_RULE = CONSTRAINTS.find(c =>
    Removing the field outright would make this page silently hide content that
    exists, which is exactly the defect that let two Records land and draw
    nothing at all. */
+/* ═══ THE COMMON INDENT COMES OFF, AND HERE IS WHY IT IS NOT HIS ═══════════
+   `[SHAPE]` MIKE, 2026-08-25: *"artificial indents, each at a deeper level."*
+
+   THE CAUSE WAS MEASURED BEFORE ANYTHING WAS CHANGED, AND IT IS NOT NESTING.
+   On the served page every TITLE box began at x=326 and every LINES box at
+   x=340 — one edge each, first section and last, so the recipe's one level was
+   already equal. **What was uneven was the first GLYPH: 349, 362, 374.** Every
+   body carries a leading run of spaces of its own, and it deepens down the
+   page because the summaries carry 2 and the addenda carry 4. That is the
+   "deeper level" exactly, and it is in the text rather than in the layout.
+
+   AND IT REACHES NO VISITOR. The museum sets a Record body `white-space:
+   pre-line` (`.vp-rec-sect-body`, `Exhibit.css`), which COLLAPSES a run of
+   spaces. Measured in the browser rather than read off the stylesheet: the
+   same string draws its first glyph at **0px under pre-line and 25.3px under
+   pre-wrap**. So this indent is an artefact of how the source is typed, the
+   glass has never shown it, and only this editor's `pre-wrap` exposed it.
+   **Artificial is the right word for it.**
+
+   SO THE COMMON PREFIX COMES OFF FOR DISPLAY AND NOTHING ELSE MOVES. The cut
+   is the SMALLEST leading run across the non-empty lines of that body, so
+   every relative step he authored survives — 004's folder tree still hangs
+   `PORTAL.CFG` under `TERMINAL.EXE`, and 003's `SCAN 07` still sits under
+   `Manual Pages Recovered`. **The data is not touched**: this page writes
+   nothing, and the number of spaces removed is named in the hint rather than
+   applied silently.
+
+   WHY NOT SIMPLY MATCH THE GLASS AND USE `pre-line`: it collapses EVERY run,
+   which would flatten those two structures into prose — worse than the glass,
+   which draws a `{pre}` body as an aligned `Listing`. Dedenting keeps more of
+   what he wrote than either.
+
+   > **[FLAG 2026-08-25 · found here, filed on C-day1] THE DRAFT LOSES `{pre}`
+   > TOO.** `robots-record.js` declares 004's folder tree as `{ pre: "…" }` and
+   > the museum renders it as an aligned listing; `draftEntries()` hands this
+   > page a plain string, so the editor cannot tell a listing from a paragraph.
+   > It is the same round-trip loss as `wire` and `plates` and it belongs to the
+   > same repair — a THIRD field, added to the register row. */
+function dedent(s) {
+  const lines = String(s).split("\n");
+  const runs = lines.filter(l => l.trim() !== "").map(l => l.match(/^ */)[0].length);
+  const cut = runs.length ? Math.min(...runs) : 0;
+  return { text: cut ? lines.map(l => l.slice(cut)).join("\n") : String(s), cut };
+}
+
 function element({ key, icon = null, header, runs, kind = "section", fault = null, extra = {} }) {
-  const list = (runs || []).filter(r => r != null && r !== "");
+  const raw = (runs || []).filter(r => r != null && r !== "");
+  const cuts = raw.map(r => dedent(r));
+  const list = cuts.map(c => c.text);
   return {
     kind, key, icon, header,
     runs: list,
+    /* what came off, so the hint can say it and never remove it silently. */
+    indentCut: cuts.length ? Math.max(...cuts.map(c => c.cut)) : 0,
     lines: list.reduce((a, r) => a + String(r).split("\n").length, 0),
     longest: list.reduce((a, r) => Math.max(a, ...String(r).split("\n").map(x => x.length)), 0),
     empty: !list.length,
@@ -661,13 +710,56 @@ function dayMarks(d) {
    thin rules, gold only where a state means something.
    No backtick below: this sits inside a template literal and one would close it. */
 const CSS = OPS_CSS + `
-.dy-wrap{display:grid;grid-template-columns:250px minmax(0,1fr) 330px;gap:16px;align-items:start}
+/* THE RECORD SCROLLS, NOT THE PAGE. MIKE, 2026-08-25: the bar, the calendar
+   and the shelf STAY PUT and the day moves in its own column.
+   THE PAGE ITSELF NO LONGER SCROLLS AT ALL at desktop width - body is a flex
+   column pinned to the viewport, the bar is a fixed-size first item, and the
+   three columns each own their overflow. Sticky was the wrong instrument: a
+   sticky bar still lets the furniture travel, and he was losing the calendar
+   and the shelf the moment he read past the third section.
+   min-height:0 IS LOAD-BEARING ON BOTH AXES OF THE NESTING. A grid or flex
+   item defaults to min-height:auto, which is its CONTENT height, so without
+   these two declarations the middle column simply grows and the page scrolls
+   again - the rule reads as if it does nothing until it is removed.
+   THE TWO PANELS ARE align-self:start SO A CLOSED ONE IS ITS OWN HEIGHT, and
+   max-height:100% so an OPEN one - the shelf is 138 tiles - stops at the
+   column and scrolls inside itself with its summary still on screen. */
+html,body{height:100%}
+/* overflow:hidden ON HTML AS WELL AS BODY, AND IT WAS MEASURED THAT IT HAD TO
+   BE. With it on body alone the html element still scrolled - window.scrollTo
+   moved the page 500px while every column sat still, so the furniture stayed
+   put only for as long as nobody used a wheel over it. */
+html{overflow:hidden}
+body{overflow:hidden;display:flex;flex-direction:column;padding:16px 20px 12px}
+.dy-wrap{display:grid;grid-template-columns:250px minmax(0,1fr) 330px;gap:16px;
+  align-items:stretch;flex:1 1 auto;min-height:0}
+.dy-wrap>*{min-height:0}
+.dy-mid{overflow-y:auto;overflow-x:hidden;height:100%;padding-right:6px}
+/* THE SCROLL IS ON THE PANEL, NOT ON ITS BODY, AND THE FIRST CUT PROVED WHY.
+   A panel is align-self:start so a CLOSED one is its own height - which makes
+   its height AUTO, and max-height only caps the box afterwards. A flex or grid
+   child laid out against that auto height never shrinks: measured, the shelf's
+   inner box stayed 2102px inside a 732px panel and scrolled nothing, with
+   min-height:0 and flex-shrink:1 both already set. Overflow on the element
+   that carries the max-height does not depend on any child-sizing rule. The
+   cost is that the shelf's own summary scrolls with its tiles, which is a
+   fair trade for a panel that cannot spill. */
+.dy-panel{align-self:start;max-height:100%;overflow:auto}
 @media (max-width:1200px){.dy-wrap{grid-template-columns:210px minmax(0,1fr)}
   .dy-pick{grid-column:1/-1}}
-@media (max-width:820px){.dy-wrap{grid-template-columns:1fr}}
+/* ONE COLUMN IS A PHONE, AND A PHONE SCROLLS THE PAGE. Three independent
+   scrollers stacked on 390px is a worse instrument than the ordinary one. */
+@media (max-width:820px){
+  html,body{height:auto}
+  html{overflow:visible}
+  body{overflow:visible;display:block;padding:20px 14px 80px}
+  .dy-wrap{display:block;min-height:0}
+  .dy-mid{overflow:visible;height:auto;padding-right:0}
+  .dy-panel{max-height:none;overflow:visible}
+}
 
-.dy-top{position:sticky;top:0;z-index:30;background:var(--paper,#17150f);
-  border-bottom:1px solid var(--rule,#3a3529);padding:9px 0 8px;margin:0 0 14px}
+.dy-top{flex:0 0 auto;z-index:30;background:var(--paper,#17150f);
+  border-bottom:1px solid var(--rule,#3a3529);padding:0 0 8px;margin:0 0 12px}
 .dy-bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
 .dy-ic{display:inline-flex;align-items:center;gap:4px;font-size:11px;line-height:1;
   padding:4px 7px;border:1px solid var(--rule,#3a3529);border-radius:2px}
@@ -953,10 +1045,16 @@ function elementHtml(el) {
           "the SECTION's LINES — the text following the HEADER. " + BOX.why,
           "READS  no lines")}>no lines</div>`
       : `<div class="dy-box-l"${hint(
-          "the SECTION's LINES — the text following the HEADER, drawn as it is stored: the "
-          + "same line splits, the same indentation, the same spacing. The BOX is the measure: "
-          + BOX.why,
-          `READS  ${el.lines} line${el.lines === 1 ? "" : "s"}, longest ${el.longest} of ${BOX.chars} characters`)
+          "the SECTION's LINES — the text following the HEADER, drawn with your line splits, "
+          + "your steps and your spacing. It sits ONE level under its title, the same level on "
+          + "every section. The BOX is the measure: " + BOX.why
+          + (el.indentCut
+              ? " The leading indent every line of this section carried has been taken off for "
+                + "display, because it is how the source is typed and not a level you wrote — "
+                + "the museum collapses it entirely. Nothing is written to the data."
+              : ""),
+          `READS  ${el.lines} line${el.lines === 1 ? "" : "s"}, longest ${el.longest} of ${BOX.chars} characters`
+          + (el.indentCut ? `, ${el.indentCut} leading space${el.indentCut === 1 ? "" : "s"} removed` : ""))
         }>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`;
 
   return `<li><div class="dy-el ${el.state}" data-el="${esc(el.key)}" data-fault="${el.fault ? 1 : 0}">${control}
@@ -1119,7 +1217,7 @@ const body = `
     </div>
   </details>
 
-  <div>
+  <div class="dy-mid">
     <div class="dy-nav" style="margin:0 0 10px">
       <button type="button" id="dy-prev"${hint("the day before this one. The left arrow key does the same.",
         "READS  disabled on the first day")}>&lsaquo; previous day</button>
