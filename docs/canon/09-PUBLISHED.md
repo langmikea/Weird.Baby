@@ -165,6 +165,31 @@ See [ruling 9](#ruling-9). **A post-publication edit to this entry was missed by
 luck, not by design** — the DETAILED REPORT was rewritten at 09:51 on 18 August
 and the entry published at 17:00 the same day.
 
+**WHERE THE STRUCK TEXT ITSELF IS.** Five lines left this entry on 18 August and
+Doctrine 24 puts a deleted thing in the log of the round that killed it. That log
+is `docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md`, **§ 27** for the words
+and **§ 28** for the proof they are absent from the built launch bundle:
+
+| what left | where its words are |
+|---|---|
+| the `_tmp/` manifest line and its marginal note | § 27, and `MUSEUM_RULINGS-20260817.md` § 9 |
+| the closing line — *"The last entry is the only one we can open…"* | § 27, and ruling 9 |
+| the ZIP-index line | § 27 |
+| the per-file-header line | § 27 |
+| the recovered-names line, **with the invented count** | § 27 — deliberately kept out of the source, because a figure for something the museum cannot produce is a fact a later round could reinstate believing it was data |
+
+**HIS CHARACTERS IN WHAT REPLACED THEM ARE CARRIED AS TYPED** — `SUMMARY -All`
+with no space after the dash, and the colon in `Incoming Data:` where the old
+line had an equals. Both are Mike's; a round that tidies either has broken
+Doctrine 21. Recorded at § 27 of the same log.
+
+**[2026-08-26] THE SOURCE NO LONGER CARRIES ANY OF THIS.** Record 002's two
+comment blocks in `src/data/artists/robots-record.js` were **deleted rather than
+moved** — every claim in them was already in the two files above, in fuller form
+— so that the entry can accept an edit from the day editor. The preamble of that
+file records the deletion, and `npm run day:proof` P6 asserts on every run that
+each claim is still findable here. Register [C-day2](../OPEN_ACTIONS.md#c-day2).
+
 ---
 
 ## RECORD 003 — PUBLISHED

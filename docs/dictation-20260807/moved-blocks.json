@@ -1,0 +1,105 @@
+{
+ "_": "EVERY COMMENT BLOCK TAKEN OUT OF src/data/artists/robots-record.js, WITH PROOF ITS CLAIMS STILL HAVE A HOME. Read by npm run day:proof (P6), asserted on every run. A block is DELETED only when every claim in it is already written down elsewhere; each claim below is a phrase that must still be findable in the file named beside it. Ops does not hand-edit this file without re-running the proof. A `find` phrase MUST NOT cross a line wrap in the cited file: a markdown file wraps its prose, and the first run of this check found exactly that.",
+ "blocks": [
+  {
+   "entry": 2,
+   "block": 0,
+   "chars": 1383,
+   "sha256": "7f930918eb47812ccd8793215c8527e264bc2e1396b729bfb688c116994d1d31",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-18] HIS REWRITE, VERBATIM",
+   "claims": [
+    {
+     "claim": "the doctrine it quoted",
+     "find": "We do not hold back what we say we have",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "the ZIP-index line, verbatim",
+     "find": "A ZIP index is written last",
+     "in": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md"
+    },
+    {
+     "claim": "the per-file-header line, verbatim",
+     "find": "Each file is preceded by its own header",
+     "in": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md"
+    },
+    {
+     "claim": "the recovered-names line and its count",
+     "find": "1,046 names recovered",
+     "in": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md"
+    },
+    {
+     "claim": "why the count is not left in the source",
+     "find": "a later round could reinstate",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "three lines for six",
+     "find": "three lines for six",
+     "in": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md"
+    },
+    {
+     "claim": "his typography, as typed",
+     "find": "SUMMARY -All",
+     "in": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md"
+    },
+    {
+     "claim": "the entry-facing summary",
+     "find": "AND ONE LINE WAS STRUCK FROM THIS ENTRY",
+     "in": "docs/canon/09-PUBLISHED.md"
+    }
+   ]
+  },
+  {
+   "entry": 2,
+   "block": 1,
+   "chars": 1196,
+   "sha256": "8c543a4cfe3e68348e242fad3840d5cca2412dcd7c3d21f5c224c508d0a1d4ce",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-18] THE _tmp/ LINE AND THE CLOSING LINE ARE BOTH STRUCK",
+   "claims": [
+    {
+     "claim": "the _tmp/ line, verbatim",
+     "find": "password bit not set",
+     "in": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md"
+    },
+    {
+     "claim": "the closing line, verbatim",
+     "find": "It is being reviewed",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "why the two are one ruling",
+     "find": "could not survive it",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "a Record names only what it can produce",
+     "find": "A Record names only what it can produce",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "the manifest is ten lines now",
+     "find": "splits to **10 lines**",
+     "in": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md"
+    },
+    {
+     "claim": "Record 003 is untouched",
+     "find": "RECORD 003 IS UNTOUCHED",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "and 003 own line was later replaced",
+     "find": "THAT LINE IS GONE",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "where the struck text itself is",
+     "find": "WHERE THE STRUCK TEXT ITSELF IS",
+     "in": "docs/canon/09-PUBLISHED.md"
+    }
+   ]
+  }
+ ]
+}

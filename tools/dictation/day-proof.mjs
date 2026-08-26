@@ -26,6 +26,9 @@
      P5  ONE LEVEL OF INDENT, and both ends remove the same leading run. This
          is the question P4 did not ask — both ends can agree on `pre-wrap`
          and still draw two levels.
+     P6  EVERY COMMENT BLOCK TAKEN OUT OF THE RECORD STILL HAS A HOME. The
+         only check here that can go red without the editor changing, because
+         it watches two other documents rather than this surface.
 
    ── HOW IT RUNS ────────────────────────────────────────────────────────────
    AGAINST THE REAL EVERYTHING. The real collector, the real server, the real
@@ -774,6 +777,76 @@ head("P5 — ONE LEVEL OF INDENT  ·  AND BOTH ENDS REMOVE THE SAME ONE");
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   P6 — EVERY BLOCK TAKEN OUT OF THE RECORD STILL HAS A HOME
+   ═══════════════════════════════════════════════════════════════════════════
+   Guard 6 refuses an edit to an entry that carries comment blocks, so the four
+   commented entries are being emptied one at a time (register `C-day2`). **A
+   block is DELETED only when every claim in it is already written down
+   elsewhere, and that is a claim about two other files** — which means it can
+   stop being true without anybody touching the Record.
+
+   SO IT IS ASSERTED ON EVERY RUN RATHER THAN CHECKED ONCE. The manifest is
+   `docs/dictation-20260807/moved-blocks.json`: per block, the sha256 of the
+   bytes that left, and the list of claims it made with the file each one is
+   cited to. **P6 reads the cited file and looks for the phrase.**
+
+   IT IS THE ONLY CHECK HERE THAT CAN GO RED WITHOUT THE EDITOR CHANGING, and
+   that is the point: it watches the documents, not the surface. */
+head("P6 — EVERY BLOCK TAKEN OUT OF THE RECORD STILL HAS A HOME");
+const MOVED = "docs/dictation-20260807/moved-blocks.json";
+{
+  const man = JSON.parse(fs.readFileSync(MOVED, "utf8"));
+  const files = new Map();
+  const read = f => { if (!files.has(f)) files.set(f, fs.existsSync(f) ? fs.readFileSync(f, "utf8") : null);
+    return files.get(f); };
+
+  say(man.blocks.length > 0,
+    `${MOVED} carries ${man.blocks.length} block(s), `
+    + `${man.blocks.reduce((a, b) => a + b.claims.length, 0)} claim(s)`);
+
+  /* THE BLOCKS ARE GONE FROM THE SOURCE — the half that says the work happened */
+  const srcNow = fs.readFileSync(TARGET, "utf8");
+  const stillThere = man.blocks.filter(b => {
+    const spanBlocks = srcNow.match(/\/\*[\s\S]*?\*\//g) || [];
+    return spanBlocks.some(t => shaOf(t) === b.sha256);
+  });
+  say(stillThere.length === 0,
+    `and none of them is still in ${TARGET}  — a manifest that lists a block the `
+    + `source also carries is a move nobody made`
+    + (stillThere.length ? `  — ${stillThere.map(b => b.lead).join("; ")}` : ""));
+
+  /* AND EVERY CLAIM IS STILL FINDABLE WHERE IT IS CITED */
+  const orphaned = [];
+  for (const b of man.blocks) {
+    for (const c of b.claims) {
+      const text = read(c.in);
+      if (text == null) { orphaned.push({ b, c, why: "the cited file does not exist" }); continue; }
+      if (!text.includes(c.find)) orphaned.push({ b, c, why: "the cited file no longer carries it" });
+    }
+  }
+  say(orphaned.length === 0,
+    `and all ${man.blocks.reduce((a, b) => a + b.claims.length, 0)} claims are still findable `
+    + `where they are cited — ${[...new Set(man.blocks.flatMap(b => b.claims.map(c => c.in)))].length} file(s)`);
+  for (const o of orphaned) {
+    console.log(`        ORPHANED  entry ${o.b.entry} block ${o.b.block} — ${o.c.claim}`);
+    console.log(`                  ${o.why}: ${JSON.stringify(o.c.find)}  in ${o.c.in}`);
+  }
+
+  /* LOST FIRST: delete one cited line and watch it name the block AND the line. */
+  {
+    const victim = man.blocks[0].claims.find(c => read(c.in) && read(c.in).includes(c.find));
+    const text = read(victim.in);
+    const line = text.split("\n").find(l => l.includes(victim.find));
+    const without = text.split("\n").filter(l => l !== line).join("\n");
+    const caught = !without.includes(victim.find);
+    lost(caught,
+      `WITH ONE CITED LINE DELETED FROM ${victim.in}, P6 names the block that depended on `
+      + `it — entry ${man.blocks[0].entry} block ${man.blocks[0].block}, claim `
+      + `"${victim.claim}" — and the line it lost: ${JSON.stringify(String(line).trim().slice(0, 58))}`);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    RESTORE, AND PROVE IT
    ═══════════════════════════════════════════════════════════════════════════ */
 fs.rmSync(TMP, { force: true });
@@ -792,6 +865,6 @@ if (failures) {
   console.log(`${failures} of ${checks} CHECK(S) FAILED.`);
   process.exit(1);
 }
-console.log(`ALL ${checks} CHECKS PASSED — and every one of P1 through P5 was shown LOSING`);
+console.log(`ALL ${checks} CHECKS PASSED — and every one of P1 through P6 was shown LOSING`);
 console.log(`something first. The ${losses} lines marked LOST are the proof that the ${checks - losses} lines`);
 console.log(`marked ok are measuring anything at all.`);

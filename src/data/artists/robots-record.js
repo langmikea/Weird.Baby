@@ -252,6 +252,46 @@ import { recordDay } from "./record-epoch.js";
                        note there for the whole of it. His three moved whole and
                        verbatim into his working copy, in place, in braces. */
 
+/* ═══ RECORD 002's TWO BLOCKS — DELETED, NOT MOVED [2026-08-26] ═════════════
+   **THE SAME REASON RECORD 001's THREE AND RECORD 003's ONE CAME OUT ABOVE:**
+   `record:land --write` will not regenerate an entry that carries comments, so
+   an entry that carries them cannot take an edit from the day editor. 002 is
+   the first of four; the register row is `C-day2`.
+
+   **AND THIS ONE IS A DELETION RATHER THAN A MOVE, WHICH IS OPS' RULING OF
+   2026-08-26: a duplicate is deleted and cited, never carried twice.** Both
+   blocks were read whole and **every claim in them was already written down
+   somewhere else, in fuller form.** Four copies of a ruling are four things
+   that can disagree, and a citation cannot drift from what it cites.
+
+   ── WHERE ALL 2,579 CHARACTERS ALREADY LIVE ────────────────────────────────
+   · **`docs/MUSEUM_RULINGS-20260817.md` § 9** — the doctrine itself, the
+     `_tmp/` strike, the closing line and the reasoning that it *"named 'the
+     last entry', which WAS `_tmp/`, so it could not survive it"*, the invented
+     count, and Record 003's relation to all of it. **It also carries what the
+     deleted block did NOT:** that 003's opening line was itself replaced on
+     2026-08-19, so the block's closing sentence had gone stale in the source.
+   · **`docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md` §§ 27–28** — the
+     three struck DETAILED REPORT lines VERBATIM including the invented number,
+     *"three lines for six"*, the manifest's ten lines, his typography as typed
+     (`SUMMARY -All`, `Incoming Data:`), and every struck string grepped ABSENT
+     from the built launch bundle.
+   · **`docs/canon/09-PUBLISHED.md#record-002`** — what a visitor reads, with
+     the citations that reach the two above.
+
+   ── WHAT IS DIFFERENT FROM THE 2026-08-16 PRECEDENT, AND WHY ───────────────
+   Record 003's block was MOVED here whole — *"not one character of it is
+   edited"* — and the note above it now records that the entry's text was
+   replaced afterwards, so **what it documents is not the section that is there
+   now.** A note parked in a preamble goes stale where nobody is reading it.
+   That is the argument for Ops' destinations rather than this one, and it is
+   why 002's material is cited into the documents a later round actually opens
+   instead of being parked here.
+
+   **NOTHING IS DELETED WITHOUT A CHECK THAT ITS HOME STILL HOLDS IT.**
+   `npm run day:proof` P6 reads `docs/dictation-20260807/moved-blocks.json` and
+   asserts, on every run, that every claim these blocks made is still findable
+   where it is cited. */
 export const RECORD_ENTRIES = [
             { no: 1,
               date: recordDay(1),
@@ -323,24 +363,6 @@ export const RECORD_ENTRIES = [
                   ] },
                 { label: "DETAILED REPORT",
                   body: [
-                    /* [2026-08-18] HIS REWRITE, VERBATIM. The whole body is
-                       replaced; three lines where there were six.
-                       WHAT WENT, NAMED ONCE (Doctrine 24) AND NOT MOVED
-                       ANYWHERE ELSE, which is his instruction: the ZIP-index
-                       line ("A ZIP index is written last. No catalog is
-                       available until receipt completes."), the per-file-header
-                       line ("Each file is preceded by its own header. Names
-                       arrive ahead of contents."), and the recovered-names line.
-                       **THE INVENTED NUMBER GOES WITH THEM AND IS NOT REPEATED
-                       HERE** - it counted something the museum cannot produce, so
-                       leaving the figure in the source is leaving a fact a later
-                       round could reinstate believing it was data. It is written
-                       down once, in the round log, which is where Doctrine 24 puts
-                       a deleted thing. His ruling: we do not hold back what we say
-                       we have; we hold back what we do not have yet.
-                       HIS CHARACTERS ARE CARRIED AS TYPED, including
-                       "SUMMARY -All" with no space after the dash and the colon
-                       in "Incoming Data:" where the old line had an equals. */
                     "  > METRIC SUMMARY -All processes 6+ sigma.\n"
                     + "  > Incoming Data: ZIP file (31.4 GB) Password "
                     + "Protected\n"
@@ -356,22 +378,6 @@ export const RECORD_ENTRIES = [
                     + "\n    PERSONNEL/INFORMER/\n    PERSONNEL/EVERYDAY/\n    "
                     + "PERSONNEL/GAMBLER/\n    PORTAL/CH3-STANDARD/\n    "
                     + "PORTAL/CH4-DETAIL/",
-                    /* [2026-08-18] THE `_tmp/` LINE AND THE CLOSING LINE ARE
-                       BOTH STRUCK, AND THEY ARE ONE RULING RATHER THAN TWO.
-                       Named once (Doctrine 24): "    _tmp/
-                       < password bit not set" and "  ! The last entry is the
-                       only one we can open. It is being reviewed."
-                       MIKE: **"We do not hold back what we say we have. We hold
-                       back what we do not have yet."** The `_tmp/` line promised
-                       something the museum cannot show, and the closing line was
-                       the promise restated - it pointed at "the last entry",
-                       which was `_tmp/`, so it could not survive it. **A Record
-                       names only what it can produce.**
-                       THE OTHER TEN ENTRIES ARE UNCHANGED AND IN THE SAME
-                       ORDER, and the manifest is now one element rather than
-                       two. Record 003 still opens on the tmp folder in its own
-                       words ("One tmp folder unprotected - Contents attached"),
-                       which is the day the museum HAS the thing - untouched. */
                   ] },
               ],
             },
