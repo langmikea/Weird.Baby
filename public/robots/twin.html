@@ -9930,24 +9930,50 @@ function Mon_Controls_In(){
      both address, and it keeps the two rows as one object. */
   let warp=document.getElementById("monwarp");
   if(!warp){warp=document.createElement("div");warp.id="monwarp";st.appendChild(warp);}
+  /* [2026-08-26] THE 2x2 FOLLOWS THE STRIP OUT, ON MIKE'S RULING THAT CH3'S
+     SURFACE IS THE TARGET FOR ALL FOUR CHANNELS. Framed, this document draws
+     NEITHER row - the museum draws both, over television and the test signal
+     and the photograph as well, which neither of these could ever do because
+     they die with this document. That is the SAME argument the channel strip
+     left on in August and it is not a second decision; it is the first one
+     applied to the row above.
+     WHAT DID NOT CHANGE: `devRotary`, `devShutter`, `devPower` and `devShake`
+     are untouched, still global, still the machine's only inputs, and the
+     museum reaches them through `portal-control` below. The buttons simply
+     stay where they were built (inside `.btns`, which `body.usermode #devrail`
+     already hides) rather than being moved onto the picture.
+     STANDALONE NOTHING HERE MOVES. The twin ships with no museum and both rows
+     draw exactly as they did. */
   let box=document.getElementById("monctl");
-  if(!box){box=document.createElement("div");box.id="monctl";}
-  warp.appendChild(box);
-  MON_CTL.forEach(function(pair){
-   const b=document.querySelector('.btns button[onclick="'+pair[0]+'"]');
-   if(!b)return;
-   b.classList.add("chy");
-   Chy_Label(b,pair[1]);            /* labels only - no icons, per the ruling */
-   Chy_Knock(b,pair[1],CHY_M.w,CHY_M.h,CHY_M.fs,CHY_M.wt);
-   box.appendChild(b);
-  });
+  if(!Framed()){
+   if(!box){box=document.createElement("div");box.id="monctl";}
+   warp.appendChild(box);
+   MON_CTL.forEach(function(pair){
+    const b=document.querySelector('.btns button[onclick="'+pair[0]+'"]');
+    if(!b)return;
+    b.classList.add("chy");
+    Chy_Label(b,pair[1]);            /* labels only - no icons, per the ruling */
+    Chy_Knock(b,pair[1],CHY_M.w,CHY_M.h,CHY_M.fs,CHY_M.wt);
+    box.appendChild(b);
+   });
+  } else if(box&&box.parentNode){ box.parentNode.removeChild(box); }
   /* [2026-08-21] THE CHANNEL STRIP IS THE PORTAL'S, NOT THE MACHINE'S. Framed,
      the museum draws it - over television and the test signal too, which this
-     one could never do because it dies with this document. The 2x2 above it
-     does NOT move: SCROLL / CLICK / SHAKE / POWER are the unit's own controls
-     and there is no unit to drive while a broadcast is on.
+     one could never do because it dies with this document.
      `Feed_Select` is untouched and still selects this monitor's four views
-     standalone; it simply finds no buttons to light when there are none. */
+     standalone; it simply finds no buttons to light when there are none.
+     [FLAG 2026-08-26 - MEASURED, NOT FIXED, ON MIKE'S RULING] AND THAT IS WHY
+     `monFeed` HAS BEEN PINNED AT 1 INSIDE THE MUSEUM SINCE 2026-08-21.
+     `Feed_Select` has three call sites: `devLayout` (unreachable framed - the
+     strip that called it is deleted here), the definition, and `Feed_Select(1)`
+     at the end of `Portal_Build`. So framed, the per-feed weather in
+     `FEED_PROFILE` - quality, wobble, drift, glitch rate - collapses to profile
+     1 and stays there for the whole visit.
+     `docs/MUSEUM_PORTAL_CHANNEL_SELECTOR-20260821.md` §2 predicted exactly this
+     in the row marked WATCH IT: *"monFeed pins at 1 for ever and the weather
+     quietly collapses to one profile. Not dead - CHANGED, and it must not
+     change silently."* It changed silently for five days. Recorded here, at the
+     site, and open in `docs/OPEN_ACTIONS.md` as `W-a`. */
   let strip=document.getElementById("monlayout");
   if(!Framed()){
   if(!strip){strip=document.createElement("div");strip.id="monlayout";}
@@ -10043,6 +10069,58 @@ function Portal_Close(){
   chip("ok","[X] close is for the portal frame - standalone there is nothing to close");
  }catch(e){}
 }
+/* ======== [2026-08-26] THE CONTRACT'S THIRD AND FOURTH WORDS ==============
+   The contract has run BOTH ways since S4 and this adds one message in each
+   direction. It stays a contract about words rather than shared code, because
+   the STANDING CONSTRAINT at the head of this file is single-file, no-network
+   and the twin must work with no museum at all.
+
+     museum -> twin   {wb:"portal-control", id:"scroll"|"click"|"power"|"shake"}
+     twin   -> museum {wb:"portal-power",   on:<bool>}
+
+   WHY THIS EXISTS AT ALL: the museum now draws the 2x2, so the presses happen
+   in the parent document and the machine is in this one. The four handlers are
+   untouched and are still the only things that drive the unit - this listener
+   calls them and nothing else. It cannot reach anything they cannot.
+
+   ORIGIN IS UNCHECKED AND THE REASON IS THE ONE ALREADY WRITTEN DOWN for
+   `portal-close`: the twin is same-origin by construction. What IS checked is
+   that there is a parent at all - standalone this listener never fires,
+   because standalone the museum is not there to post.
+
+   AN UNKNOWN `id` IS IGNORED, exactly as an unknown `preset` is: the twin never
+   guesses, and a control added to the museum before it is added here fails as
+   "nothing special happened" rather than as an error. */
+const PORTAL_CONTROL={
+ scroll:function(){devRotary();},
+ click: function(){devShutter();},
+ power: function(){devPower();},
+ shake: function(){devShake();},
+};
+window.addEventListener("message",function(e){
+ try{
+  const d=e&&e.data;
+  if(!d||d.wb!=="portal-control")return;
+  const fn=PORTAL_CONTROL[d.id];
+  if(typeof fn==="function")fn();
+ }catch(err){}
+});
+/* THE POWER LAMP TRAVELS, AND IT LEAVES FROM THE CHOKEPOINT RATHER THAN FROM
+   THE SIX WRITERS. `unitPowered` is written from at least six places and
+   `Mon_Power_Sync` already exists for exactly that reason - it rides
+   `refreshChrome`'s 200ms tick so no new caller can bypass it. This posts from
+   the same tick and ONLY ON A CHANGE, so the parent is told once per transition
+   rather than five times a second. */
+let portalPowerPosted=null;
+function Portal_Power_Post(){
+ try{
+  if(!Framed())return;
+  const on=!!unitPowered;
+  if(on===portalPowerPosted)return;
+  portalPowerPosted=on;
+  window.parent.postMessage({wb:"portal-power",on:on},"*");
+ }catch(e){}
+}
 /* ======== T6: THE POWER CONTROL SHOWS MACHINE STATE ====================
    THE CHOICE, stated: **POWER wears the SAME LATCHED FILL the digit strip
    uses for the live feed.** ON = the slug is filled and the word is punched
@@ -10059,6 +10137,9 @@ function Portal_Close(){
    bypassed by a new caller. */
 function Mon_Power_Sync(){
  try{
+  /* [2026-08-26] the post rides the same tick and comes FIRST, because framed
+     there is no `#monctl` to find and the early return below would skip it. */
+  Portal_Power_Post();
   const b=document.querySelector('#monctl .chy[onclick="devPower()"]');
   if(!b)return;
   b.classList.toggle("chydown",!!unitPowered);

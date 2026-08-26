@@ -128,9 +128,32 @@ export const PORTAL_ALBUM = {
        because it opens the feed the drum has been rolled to and will not
        throw until the instrument is armed. Nothing on the glass lost a
        destination. */
+    /* ═══ [2026-08-26] THE TITLE IS `Launch the Portal`, AND THIS IS A
+       REVERSAL RATHER THAN A CORRECTION. THE DIFFERENCE IS THE ENTRY. ═══════
+       MIKE, 2026-08-26: **rename the Portal track to `Launch the Portal`.**
+
+       THE ROW ABOVE RECORDS A RULING THAT IS NOW SUPERSEDED, AND IT STAYS
+       WHERE IT IS. Read in order, the record is: ruled 2026-08-13 →
+       re-confirmed 2026-08-20 → applied 2026-08-20 → **mis-recorded by Ops the
+       same day** (written up as *"drops `Portal`, keeps `Portal Feed
+       Controller`"*, which is the opposite of what he ruled) → corrected in
+       canon → **reversed by Mike 2026-08-26.**
+
+       A LATER ROUND MUST BE ABLE TO TELL THE FOURTH STEP FROM THE SIXTH, and
+       that is the whole reason this comment exists rather than a one-word
+       edit. **The correction was Ops fixing its own write-up of what Mike
+       said. The reversal is Mike saying something different.** A round that
+       reads them as one thing concludes that `Portal` was never really ruled
+       and re-derives whichever it met first. It was ruled, twice, and it held
+       for six days.
+
+       NOTHING ELSE MOVES. The `id` stays `portal` — OPERATIONS §0, *NO ID
+       MOVES WHEN A LEGEND IS RECUT*: an `id` is identity and the `title` is
+       what restates the glass. The album is still two tracks and the deleted
+       `portal-door` row does not come back. */
     {
       id: "portal",
-      title: "Portal",
+      title: "Launch the Portal",
       videos: [],
       tags: ["portal", "twin", "firmware", "1965", "interactive"],
       /* ---- O4 2026-07-30: THE PORTAL IS A TRACK, NOT A BUTTON ----------
@@ -343,7 +366,32 @@ export const PORTAL_ALBUM = {
               { ch: 1, unit: false },
               { ch: 2, unit: false },
               { ch: 3, unit: true },
-              { ch: 4, unit: true,
+              /* ═══ [2026-08-26] `picture: true` — THE CHANNEL SAYS WHAT ITS
+                 SIGNAL IS MADE OF, AND THAT IS ALL IT SAYS ══════════════════
+                 CHANNEL 3 AND CHANNEL 4 ARE BOTH `unit: true` AND BOTH RESOLVE
+                 TO `machine`, WHICH IS CORRECT — a photograph of the machine's
+                 own monitor IS that channel's assigned signal, and that ruling
+                 is untouched. What the overlay could not tell was that one of
+                 them is a DOCUMENT and the other is a PICTURE, so both went
+                 through the same `<iframe>`.
+                 THE DEFECT THAT COST: `object-fit` DOES NOT APPLY TO AN
+                 IFRAME. `PortalScreen.css` sets `object-fit:cover` on
+                 `.ps-feed iframe` and it has been inert since the day it was
+                 written; what a visitor got was the BROWSER'S OWN IMAGE
+                 VIEWER, scaling the plate by its own rules inside our frame,
+                 with no script in it so `Framed_Fit()` never ran either.
+                 THE ART WAS NEVER THE PROBLEM AND IS NOT RE-CUT. Measured
+                 2026-08-26: the plate is 3000x2400 — the bezel's own canvas —
+                 and REGISTERS with it, showing a frame ring of 0px at nine of
+                 eleven rows sampled across the opening (the two others are the
+                 camera body in the picture). So it goes on `place:"canvas"`
+                 edge to edge, exactly as the twin's own art does, and `cover`
+                 is a no-op on it rather than a crop.
+                 IT IS DATA AND NOT LOGIC, in the same shape as `bezel` and
+                 `note`: the channel declares it, `openChannel` carries it, and
+                 the overlay picks an element. Nothing downstream learns what a
+                 channel or an antenna is, which is the seam R6 drew. */
+              { ch: 4, unit: true, picture: true,
                 src: "/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
                 frameTitle: "MGK-VIIIp - the close-up" },
             ],
@@ -362,9 +410,21 @@ export const PORTAL_ALBUM = {
             },
             test: { title: "Test signal" },
             /* the readout under the latch. It names what the channel is
-               carrying, which is the only place the antenna explains itself. */
+               carrying, which is the only place the antenna explains itself.
+               ═══ [2026-08-26] `television` IS STRUCK, ON MIKE'S RULING ══════
+               It read `TELEVISION ON THIS CHANNEL.` and it is gone. The two
+               that remain are doing a job this one was not: `SIGNAL PRESENT.`
+               and `TEST SIGNAL. NO UNIT ON THIS CHANNEL.` both report something
+               a visitor cannot see for themselves — whether the routing found a
+               machine. **Television announcing itself is the museum captioning
+               a picture that is already playing**, which is the Law of
+               Subtraction's own test: what is lost if it goes, and the answer
+               is nothing a reader would miss.
+               A KIND WITH NO ENTRY YIELDS `""`, AND `PortalScreen` DRAWS NO
+               NOTE AT ALL — `{note && …}`. So the line does not go blank, the
+               element goes away, and television carries no chyron under the
+               strip. Register row `ceef789ffa98df27` is pruned with it. */
             says: {
-              television: "TELEVISION ON THIS CHANNEL.",
               machine: "SIGNAL PRESENT.",
               test: "TEST SIGNAL. NO UNIT ON THIS CHANNEL.",
             },

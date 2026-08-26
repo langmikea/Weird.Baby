@@ -25,15 +25,36 @@
   container-type:size}
 .ps{
   --dig-h:5.26cqw; --dig-gap:1.2cqw; --dig-text:3.20cqw;
-  --dig-weight:500; --dig-weight-on:700;
+  /* [2026-08-26] `--dig-weight-on` IS STRUCK. It carried the twin's rule that
+     the knocked-out glyph goes one weight heavier — a legibility fix, because
+     white-on-black and black-on-white do not read at equal weight — and it was
+     read by the old `color:#000` ON state, which is the ink T4 forbade. The
+     rule survives and is enforced where the glyph is now actually drawn:
+     `CHY_M.dwt` (700) against `--dig-weight` (500) in `PortalScreen.jsx`. A CSS
+     variable nothing reads is a second declaration waiting to disagree. */
+  --dig-weight:500;
   --chy-line:0.30cqw; --chy-round:0.55cqw;
+  /* [2026-08-26] the 2x2's own metrics, the twin's `body.monbase` numbers.
+     --chy-w is the P2b cut: SCROLL is the binding word and inks out at
+     13.12cqw, plus 0.55cqw of breathing room each side and two 0.30cqw
+     borders = 14.82 -> 14.8cqw. --chy-h is the T2 vertical trim, which halved
+     the vertical padding and left V at 1.15cqw against H at 0.54 - so Mike's
+     "V must still EXCEED H" holds at 2.1x. */
+  --chy-w:14.8cqw; --chy-h:6.0cqw; --chy-gap:1.5cqw;
+  --chy-text:3.10cqw; --chy-weight:700;
+  --grp-gap:1.7cqw;
   /* the group's origin, derived exactly as the twin derives it:
-     strip width = 5*5.26 + 4*1.2 = 31.1cqw, centred on the panel's centre x;
-     strip top   = the group top plus the 2x2's height and the gap under it.
+     the 2x2 is 2*14.8 + 1.5 = 31.1cqw wide, the strip is 5*5.26 + 4*1.2 =
+     31.1cqw, and THE TWO ROWS SHARE ONE EDGE BY ARITHMETIC rather than by a
+     second hand-typed number. Both centre on the panel's centre x.
+     group top   = 55.359%, the panel's centre y less half the group's height.
+     strip top   = the group top plus the 2x2's height and the gap under it,
+                   13.5 + 1.7 = 15.2cqw.
      The twin states these rather than calc()ing them because a calc() mixing
      cqw and % on `top` resolves its two halves against different axes. */
   --strip-w:31.1cqw;
   --strip-left:calc(68.817% - (31.1cqw / 2));
+  --grp-top:55.359%;
   --strip-top:calc(55.359% + 15.2cqw);
 
   container-type:inline-size;
@@ -48,6 +69,12 @@
    machine's own picture already gets. */
 .ps-feed{position:absolute;overflow:hidden;background:#000;z-index:0;
   line-height:normal}
+/* [2026-08-26] the slip wrapper: the tear moves EVERY kind of picture, not
+   only the one that happened to be in an iframe. Its box is the feed rect
+   exactly, so at slip 0 nothing moves; `position:relative` keeps it the
+   containing block for the drawn channels' `inset:0` in both states, so
+   there is no jump when the transform arrives and leaves. */
+.ps-slip{position:relative;width:100%;height:100%;display:block}
 .ps-feed > *{width:100%;height:100%;display:block}
 .ps-feed iframe,.ps-feed img,.ps-feed canvas,.ps-feed video{
   width:100%;height:100%;object-fit:cover;border:0;display:block}
@@ -60,23 +87,85 @@
   width:100%;height:100%;
   pointer-events:none;user-select:none}
 
-/* ---- THE CHANNEL BUTTONS ---------------------------------------------- */
+/* ---- THE CONTROLS ------------------------------------------------------
+   [2026-08-26] THE SEVEN THINGS THIS FILE LACKED ARE CARRIED ACROSS, and not
+   one of them is cosmetic. They are named where they land, below. */
+
+/* the 2x2, in Mike's row-major order: [SCROLL][CLICK] / [POWER][SHAKE] */
+.ps-ctl{position:absolute;
+  left:var(--strip-left);top:var(--grp-top);width:var(--strip-w);
+  display:grid;grid-template-columns:var(--chy-w) var(--chy-w);
+  grid-auto-rows:var(--chy-h);gap:var(--chy-gap);z-index:2}
 .ps-strip{position:absolute;
   left:var(--strip-left);top:var(--strip-top);width:var(--strip-w);
   height:var(--dig-h);display:flex;gap:var(--dig-gap);z-index:2}
+/* [2026-08-26] `flex:1 1 0` is gone and the twin's own sizing is used instead:
+   a digit is `height:100%; aspect-ratio:1/1`, which is 5.26 x 5.26cqw, and five
+   of them with four 1.2cqw gaps is 31.1cqw — the strip's stated width, reached
+   by arithmetic rather than by division. It matters beyond tidiness: the
+   knockout's viewBox is stated in the button's own cqw dimensions so
+   `mask-size:100% 100%` cannot distort the letterform, and a flex-divided box
+   is only 5.26 by rounding. */
 .ps-chy{
-  flex:1 1 0;min-width:0;padding:0;cursor:pointer;
+  padding:0;cursor:pointer;
   background:transparent;color:#fff;
   border:var(--chy-line) solid #fff;border-radius:var(--chy-round);
   font-family:'Helvetica Neue',Arial,'Liberation Sans',sans-serif;
   font-size:var(--dig-text);font-weight:var(--dig-weight);
   letter-spacing:.02em;line-height:1;
-  display:flex;align-items:center;justify-content:center}
-.ps-chy:focus-visible{outline:1px solid #fff;outline-offset:2px}
-/* INVERSE VIDEO = ON AIR, and the glyph goes one weight heavier when it is
-   knocked out — the twin's own rule, and it is a legibility fix rather than a
-   font change: white-on-black and black-on-white do not read at equal weight. */
-.ps-chy.ps-on{background:#fff;color:#000;font-weight:var(--dig-weight-on)}
+  display:flex;align-items:center;justify-content:center;
+  /* ---- THE CHYRON HALO. NOT DECORATION — a measurement.
+     A white chyron on the family shot's own quadrant is about 1.6:1 and the
+     words all but vanish; the quadrant measures 183 and the softened
+     no-signal card 204. A broadcast chyron has ALWAYS carried a dark edge for
+     exactly this reason: it has to read over whatever picture it is keyed
+     onto, and the station does not get to choose the picture. **On this
+     surface that is now literally true** — these controls sit over
+     television, a monoscope card, a photograph and the machine, and only one
+     of the four was ever measured. Deliberately tight (0.12cqw) so it reads
+     as an edge rather than as a shadow. */
+  text-shadow:0 0 .30cqw rgba(255,255,255,.45),
+              0 0 .12cqw rgba(18,18,18,.80),
+              0 .04cqw .07cqw rgba(18,18,18,.55);
+  box-shadow:0 0 0 .05cqw rgba(18,18,18,.38);   /* the same fix, outside the box */
+  position:relative;          /* the punched slug is a ::before on this box */
+  box-sizing:border-box;      /* the stated size IS the visible box */
+  overflow:hidden;            /* the slug is inset:0 and must not escape */
+  -webkit-user-select:none;user-select:none;
+  background-size:100% 100%;background-repeat:no-repeat}  /* ready for the art */
+.ps-ctl .ps-chy{font-size:var(--chy-text);font-weight:var(--chy-weight)}
+.ps-strip .ps-chy{height:100%;aspect-ratio:1/1;width:auto}
+/* the label rides its own span so the knocked state can hide it and put the
+   punched slug in its place */
+.ps-chytxt{display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;pointer-events:none}
+/* NO HOVER AND NO FOCUS RING. `twin.html`: "No icons. No hover. INVERSE VIDEO
+   while pressed, and that is the whole interaction vocabulary." A focus ring
+   here was a second white box drawn inside a white box. */
+.ps-chy:hover{background-color:transparent;color:#fff}
+.ps-chy:focus,.ps-chy:focus-visible{outline:none}
+
+/* ═══ INVERSE VIDEO = ON AIR, AND IT IS A HOLE RATHER THAN INK ═════════════
+   T4 (2026-07-29) and S2 (2026-07-30) both ruled this and neither reached this
+   file when it was built on 2026-08-21: it shipped `background:#fff;color:#000`,
+   which is a white slug with the numeral painted in. Mike saw it in one shot —
+   the `3` filled in beside a POWER carrying the proper knockout.
+   THE SLUG IS A WHITE ::before MASKED BY THE BUTTON'S OWN SVG, so the glyph is
+   REMOVED from it and whatever is behind the button shows through. Under it
+   sits a SCRIM at .34 — not lower, because a literal hole onto a 183 quadrant
+   inside a 255 slug is about 1.9:1 and completely illegible, and not higher,
+   because at .62 the hole measured 84.6 against 234.6 and read as ink again,
+   which is the one thing T4 set out to kill. At .34 the arithmetic lands near
+   133: clearly darker than the slug, light enough to carry THE FEED'S OWN
+   TEXTURE through the letterform. It moves, because the feed does. */
+.ps-chy.ps-on{
+  background-color:rgba(18,18,18,.34);   /* the scrim: the picture, dimmed */
+  color:transparent;text-shadow:none;border-color:#fff}
+.ps-chy.ps-on .ps-chytxt{visibility:hidden}
+.ps-chy.ps-on::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:var(--knock);background-size:100% 100%;
+  background-repeat:no-repeat;background-position:center}
 
 /* ---- WHAT THE CHANNEL IS CARRYING -------------------------------------- */
 .ps-note{position:absolute;

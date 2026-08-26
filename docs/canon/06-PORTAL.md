@@ -179,22 +179,32 @@ it top-shelf visible."*** It sits at index **1** — second in the deck — *"th
 position that is both top-shelf and not the landing."* The two machines keep
 their canon order behind it: **the original mainframe, then the portable.**
 
-**Two tracks:** `Portal` (the panel) · `FAQ`. It was three until 2026-08-20.
+**Two tracks:** `Launch the Portal` (the panel) · `FAQ`. It was three until
+2026-08-20, and the surviving track was called `Portal` until 2026-08-26.
 
-**AND MIKE HAS RULED THEM TWO — IT IS A RENAME, NOT A KEEP.**
+### The six steps, in order, because two of them look alike and are not
 
-> **The tracklist DELETES `Portal` and RENAMES `Portal Feed Controller` to
-> `Portal`. One track, not two.**
+**A LATER ROUND MUST BE ABLE TO TELL STEP 4 FROM STEP 6.** One is Ops fixing its
+own write-up of what Mike said; the other is Mike saying something different.
+Read as one thing, they support the conclusion that `Portal` was never really
+ruled — and it was, twice, and it held for six days.
 
-Ruled 2026-08-13, re-confirmed 2026-08-20, **APPLIED 2026-08-20**. The album is
-two tracks now: `Portal` (the panel, `id: portal`) and `FAQ`.
+| # | | date |
+|---|---|---|
+| 1 | **RULED.** *"The tracklist DELETES `Portal` and RENAMES `Portal Feed Controller` to `Portal`. One track, not two."* | 2026-08-13 |
+| 2 | **RE-CONFIRMED**, unchanged. | 2026-08-20 |
+| 3 | **APPLIED.** The album became two tracks: `Portal` (`id: portal`) and `FAQ`. | 2026-08-20 |
+| 4 | **MIS-RECORDED BY OPS** — written here and in two round reports as *"drops `Portal`, keeps `Portal Feed Controller`"*, which keeps the panel's own name on the glass and is **the opposite of what he ruled.** | 2026-08-20 |
+| 5 | **CORRECTED**, here. Ops' write-up was wrong; his ruling was never in doubt and never moved. | 2026-08-20 |
+| 6 | **REVERSED BY MIKE.** *Rename the Portal track to `Launch the Portal`.* | 2026-08-26 |
 
-**OPS RECORDED THIS WRONG ON 2026-08-20 AND THE CORRECTION IS THE ENTRY.** It
-was written here and in two round reports as *"drops `Portal`, keeps `Portal
-Feed Controller`"* — which keeps the panel's own name on the glass and is the
-opposite of what he ruled. **The surviving track is called `Portal`.** The `id`
-on the panel track is already `portal`, so the change is a title and a deletion
-and nothing else.
+**STEP 5 CHANGED A DOCUMENT. STEP 6 CHANGED THE MUSEUM.** Between them the
+title on the glass was `Portal`, exactly as ruled at step 1.
+
+**WHAT THE REVERSAL DOES NOT TOUCH.** The `id` stays `portal` — OPERATIONS §0,
+*NO ID MOVES WHEN A LEGEND IS RECUT*. The album is still two tracks and the
+deleted `portal-door` row does not come back; what went at step 3 is still gone,
+and its cost is recorded below.
 
 **WHAT THE DELETION COSTS, named because it was a deliberate build:** the
 `portal-door` track was the one Ops judgement in this album (`P-b`) — Mike named
@@ -683,4 +693,53 @@ over all three, and the twin suppresses its own when framed. A button asks
 (`wb-portal-select-channel`); the panel answers with the payload the latch
 already sends, so there is one resolver. Log:
 `docs/MUSEUM_PANEL_REBUILD_LOG-20260821.md`.
+
+### 11.1 · THE OTHER HALF — *"along with shake, power, etc."* — BUILT 2026-08-26
+<a id="one-surface"></a>
+
+**HIS 2026-08-21 RULING HAD TWO HALVES AND ONLY ONE SHIPPED.** The channels
+half did; *along with shake, power, etc.* did not, and the round wrote down why:
+*"there is no machine to control while television is playing."*
+
+**MIKE, 2026-08-26, ruling the other way:** **CH3's surface is the target for
+all four channels** — the same SCROLL, CLICK, POWER, SHAKE and channel strip on
+every one. **CH3 is the reference, not a special case.**
+
+The August reasoning was sound about the MACHINE and wrong about the SET: a
+television's controls do not vanish because the channel changed. So the 2x2
+follows the strip out by **the same structural argument, not a second one** —
+a control that lives in the twin can appear on one channel of four, because
+leaving the machine unmounts the document it is in.
+
+| | where it lives now |
+|---|---|
+| the bezel, the channel strip, **and the 2x2** | the museum — `PortalScreen.jsx`, drawn over all four kinds |
+| the four handlers | `twin.html`, untouched and still the machine's only inputs |
+| the press | `wb-portal-machine-control` → the overlay → `postMessage {wb:"portal-control", id}` |
+| the power lamp | `postMessage {wb:"portal-power", on}`, from `Mon_Power_Sync`'s existing 200ms chokepoint, only on a change |
+
+**TWO IMPLEMENTATIONS ON DISK, THE TWIN'S AS REFERENCE, AND THAT IS FORCED
+RATHER THAN CHOSEN.** `twin.html` is **single-file, no-network by a standing
+constraint** and must work with no museum at all, so neither can import the
+other. What they share is arithmetic — five numbers, mirrored as `CHY_M`.
+
+**THE PANEL IS NOT FULL, MEASURED 2026-08-26.** The blank lower-right quadrant
+is 37.77 × 28.57cqw and the whole group is 31.10 × 20.46cqw — **59.0% of it by
+area**, with 3.33cqw of slack a side horizontally and 4.05cqw vertically. An Ops
+survey called it full by quoting *"1.24cqw on every side"*, which is the P2 note
+of 2026-07-29 that P2b superseded hours later. The live figure has been stated
+at `twin.html:903` since that day.
+
+**SCROLL DOES NOT CHANGE CHANNELS, AND THAT WAS DECIDED RATHER THAN SKIPPED.**
+It was proposed and **MIKE withdrew it after review:** *"scroll only does what it
+was originally designed to do, and in all other instances is ignored."* It would
+have given one control two meanings depending on what was on the glass — §3's
+own named fault. **A control that reaches nothing on three channels of four is
+the ruling, not a `TODO`**; the reasoning is written at the site that does the
+ignoring so a later round cannot wire it up by mistake.
+
+**CLICK TEARS, ON EVERY CHANNEL, AND KEEPS ITS SHUTTER WHERE THERE IS ONE.**
+Mike: *"No reason, no explanation. Maybe someday we will learn why."* **The
+absence of a reason is deliberate and is recorded at the tear itself** — Doctrine
+12, and an invented reason would be worse than none.
 

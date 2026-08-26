@@ -1,8 +1,14 @@
 /* TELEVISION — a routed channel, on the overlay's ground. [2026-08-21]
    Scoped to `.tv-*` and imported by Television.jsx only. The overlay's own rule
-   is that the page stops existing (P1), so there is no chrome here either: no
-   caption, no controls, no close button. The way out is Escape, exactly as it
-   is for the drawn test signal and for channel 4's photograph. */
+   is that the page stops existing (P1), so THIS COMPONENT draws no chrome: no
+   caption, no controls, no close button of its own.
+   [2026-08-26] THE OLD SECOND HALF OF THIS NOTE WAS STALE AND IS STRUCK. It
+   read *"The way out is Escape, exactly as it is for the drawn test signal and
+   for channel 4's photograph"* — untrue since the strip became the museum's on
+   2026-08-21, and doubly so now: the Portal draws its bezel, its 2x2 and its
+   channel strip with [X] over EVERY kind, this one included. What is absent
+   here is absent because it belongs to `PortalScreen`, not because it does not
+   exist. `RobotsExhibitFlow.jsx` carried the same stale sentence. */
 
 .tv-root {
   position: absolute;

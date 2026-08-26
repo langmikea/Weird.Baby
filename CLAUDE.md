@@ -183,7 +183,7 @@ Mike pre-approves the entire flow when he says "push" — drive end-to-end witho
 ### Pre-flight before commit
 
 1. Verify file integrity: `wc -c <file>` matches expected, `tail -3 <file>` shows the proper end.
-2. `npm run lint` — should be at the baseline (**9 errors / 8 warnings**, all pre-existing on main, all in routing files Mike has flagged for separate semantic review). **[CH8 2026-08-12] IT WAS 11 / 9 AND IT IS NOW 9 / 8, AND THE DROP IS REAL RATHER THAN SUPPRESSED.** Making the YouTube player conditional (`useYTPlayer`'s `hasVideo` guard) removed the *unguarded* eager `useEffect` that raised both `Cannot access variable before it is declared` errors in `Exhibit.jsx`; they went with the code that caused them. Nothing was disabled and no rule was turned off. **The number is updated here in the same round that moved it** — for the reason the note below already gives, which had to be learned once in the other direction. **[A1 2026-08-04] This line said 4 / 6 and had been wrong since at least v40** — every round log from v40 onward records 11 / 9 and this file was never brought along. An orientation doc that publishes the wrong tripwire number disables the tripwire: a session that trusts it reads eleven pre-existing errors as seven new ones and starts hunting for a regression that is not there. The lint-debt table below lists four of the nine; the per-file breakdown is in that section, **measured 2026-08-13**. `eslint.config.js` ignores non-source trees (`_cowork/`, `dist`/`dist.pre_*`, `.phase1_retired_files/`) and `*.pre-*`/`*.old_v*`/`*.bak_*` backups, so the count reflects `src/` only — a higher number means you've introduced an error. **[2026-08-13] TWO STALE NUMBERS CAME OUT OF THIS PARAGRAPH AND BOTH WERE IN THE SENTENCE THAT WARNS ABOUT STALE NUMBERS.** It said the other errors "live in `HrExhibitFlow.jsx` and `RobotsExhibitFlow.jsx`" — measured, five of the nine are in `Exhibit.jsx` — and it closed with a sandbox caveat ending *"on Windows the file is intact and the count is 4/6"*, which contradicted the 9/8 at the head of the same paragraph. The caveat described a sandbox nobody runs in and is deleted with it.
+2. `npm run lint` — should be at the baseline (**9 errors / 7 warnings**, all pre-existing on main, all in routing files Mike has flagged for separate semantic review). **[2026-08-26] IT WAS 9 / 8 AND IT IS NOW 9 / 7, AND THE DROP IS REAL RATHER THAN SUPPRESSED — WHICH WAS CHECKED, BECAUSE THE FIRST CUT OF THE SAME EDIT WAS THE OTHER KIND.** `TEAR_SCRIPT` and `TEAR_MS` were declared inside `RobotsExhibitFlow`'s render body, so they were a fresh array every render and the effect that walks them could not honestly list them as dependencies; the ONE-SURFACE round first silenced that with an `eslint-disable-next-line`, which moved this number while changing nothing — **the exact tripwire-disabling failure the A1 note below describes, arriving from the other direction.** They are constants and are at module scope now, the deps are satisfiable, and the disable is gone. **A suppressed warning must never move this line.** **[CH8 2026-08-12] IT WAS 11 / 9 AND IT WAS 9 / 8, AND THAT DROP WAS ALSO REAL.** Making the YouTube player conditional (`useYTPlayer`'s `hasVideo` guard) removed the *unguarded* eager `useEffect` that raised both `Cannot access variable before it is declared` errors in `Exhibit.jsx`; they went with the code that caused them. Nothing was disabled and no rule was turned off. **The number is updated here in the same round that moved it** — for the reason the note below already gives, which had to be learned once in the other direction. **[A1 2026-08-04] This line said 4 / 6 and had been wrong since at least v40** — every round log from v40 onward records 11 / 9 and this file was never brought along. An orientation doc that publishes the wrong tripwire number disables the tripwire: a session that trusts it reads eleven pre-existing errors as seven new ones and starts hunting for a regression that is not there. The lint-debt table below lists four of the nine; the per-file breakdown is in that section, **measured 2026-08-13**. `eslint.config.js` ignores non-source trees (`_cowork/`, `dist`/`dist.pre_*`, `.phase1_retired_files/`) and `*.pre-*`/`*.old_v*`/`*.bak_*` backups, so the count reflects `src/` only — a higher number means you've introduced an error. **[2026-08-13] TWO STALE NUMBERS CAME OUT OF THIS PARAGRAPH AND BOTH WERE IN THE SENTENCE THAT WARNS ABOUT STALE NUMBERS.** It said the other errors "live in `HrExhibitFlow.jsx` and `RobotsExhibitFlow.jsx`" — measured, five of the nine are in `Exhibit.jsx` — and it closed with a sandbox caveat ending *"on Windows the file is intact and the count is 4/6"*, which contradicted the 9/8 at the head of the same paragraph. The caveat described a sandbox nobody runs in and is deleted with it.
 3. `npm run build` — must pass. Vite + rolldown + Cloudflare plugin.
 
 ## Local tooling
@@ -330,12 +330,12 @@ over.
 - **`src/styles/museum-tokens.css`** — design tokens. Off-limits for population/data work; only touch with explicit UX direction.
 - **Routing files** during data tasks — `Exhibit.jsx`, `HrExhibitFlow.jsx`, etc. are routing components. Population/data tasks should not modify them. UX tasks can.
 
-## Pre-existing lint debt — the baseline is 9 errors / 8 warnings
+## Pre-existing lint debt — the baseline is 9 errors / 7 warnings
 
 **[2026-08-13] THIS HEADING SAID "(4 errors)" AND THE TABLE BELOW LISTS FOUR,
 WHICH IS THE TRIPWIRE-DISABLING FAILURE THIS FILE'S OWN A1 NOTE WARNS ABOUT** —
 a session that reads the heading as the baseline sees five phantom regressions
-and goes hunting. **The baseline is 9 errors / 8 warnings**, confirmed by
+and goes hunting. **The baseline is 9 errors / 7 warnings**, confirmed by
 running `npm run lint` on a clean tree on 2026-08-13, and it agrees with the
 number in `### Pre-flight before commit` above. Measured per file on the same
 run, so a future session can tell a regression from the debt:
@@ -344,9 +344,9 @@ run, so a future session can tell a regression from the debt:
 |---|---:|---:|
 | `Exhibit.jsx` | 5 | 5 |
 | `HrExhibitFlow.jsx` | 2 | 2 |
-| `RobotsExhibitFlow.jsx` | 1 | 1 |
+| `RobotsExhibitFlow.jsx` | 1 | 0 |
 | `WbAdmin.jsx` | 1 | 0 |
-| **total** | **9** | **8** |
+| **total** | **9** | **7** |
 
 The table below writes up four of those nine. It is not the whole baseline and
 never was.
@@ -788,6 +788,63 @@ read Doctrine 25.**
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-26 -> ONE SURFACE (the Portal's controls, all four channels)
+- **NOTHING BLOCKS IT.** Gates: lint **9/7 — A NEW BASELINE** - build green -
+  launch build green - provenance **PASS** (15 added, 1 pruned) -
+  `reveal:check` **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** -
+  `docs:numbers:gate` **PASS** (4 published values corrected) - `reveal:day`
+  nothing to move - `assets:orphans` **13, unchanged**. Log:
+  `docs/MUSEUM_ONE_SURFACE_LOG-20260826.md`.
+- **THE SURVEY LED WITH A STRUCK NUMBER.** Ops reported the control quadrant
+  FULL; it is **59.0% full**. The quoted *"1.24cqw on every side"* is the P2
+  note of 2026-07-29 that **P2b superseded hours later**, and the live figure
+  (3.34 / 4.06cqw) is stated eleven lines below it at `twin.html:903`. Mike's
+  screenshot was the correction. **A struck number in a comment reads exactly
+  like a live one** — the replacement paragraph states both and names which
+  superseded which.
+- **THE 2x2 LEFT THE TWIN BY THE SAME ARGUMENT THE DIGIT STRIP DID, NOT A
+  SECOND ONE.** A control living in `twin.html` can appear on one channel of
+  four, because the overlay unmounts that document. `Framed()` removes
+  `#monctl` as it already removed `#monlayout`. **Two implementations on disk
+  is FORCED**: the twin is single-file/no-network by standing constraint, so
+  neither can import the other. They share five numbers (`CHY_M`), and every
+  one was measured on the page at a 900px frame — 133.20 / 54.00 / 47.34, both
+  rows 279.90 wide at the same x, **sharing one edge by arithmetic**.
+- **SCROLL KEEPS ONE MEANING AND THE IGNORING IS THE RULING.** Mike withdrew
+  channels-on-SCROLL after review, so §3's one-control-two-meanings fault is
+  **not created**. A control reaching nothing on three channels of four reads
+  like a `TODO`; the reasoning sits at the listener that ignores it.
+- **BOTH TEARS, ON SEPARATE CLOCKS.** A press does not advance the script's
+  index, reset its timer or consume a step — **a press cannot make an unbidden
+  event less unbidden**, which is the whole of why the scripted rip keeps its
+  point. **The absence of a reason for the tear is recorded as DELIBERATE at
+  the tear** (Doctrine 12; an invented reason is worse than none).
+  **And the slip had only ever reached the `<iframe>`** — on television the rip
+  drew with nothing moving under it. It is on a wrapper now: measured
+  `translateX(7px)` on ch3, `-4px` on television, both clearing.
+- **CH4 IS AN `<img>` AND THE ART WAS NEVER THE PROBLEM.** 3000x2400, registers
+  with the bezel at **0px across nine of eleven rows**. `object-fit` is inert on
+  an iframe, so that rule had been dead since it was written and the browser's
+  own image viewer was drawing. The channel declares `picture: true` — data, in
+  the shape of `bezel` and `note`.
+- **THE KNOCKOUT IS MEASURED, NOT ASSERTED.** The browser painted the shipped
+  `--knock` to a canvas: corner `rgba(255,255,255,255)`, **centre
+  `rgba(0,0,0,0)`**, 7.87% of the slug transparent, three runs down the middle
+  column of a `3`. **Ink would read `[0,0,0,255]` and zero transparent.**
+- **THE BASELINE MOVED AND THE FIRST ATTEMPT MOVED IT WRONG.** Hoisting
+  `TEAR_SCRIPT` fixed the deps honestly; the first cut had silenced them with a
+  disable, **which moves the number while changing nothing.** Undone. No rule is
+  disabled anywhere in this packet.
+- **`Launch the Portal` IS A REVERSAL, NOT A CORRECTION, AND CANON NOW CARRIES
+  SIX NUMBERED STEPS** so a later round can tell step 5 (Ops fixing its own
+  write-up) from step 6 (Mike ruling differently). The `id` stays `portal`.
+- **FLAGGED, NOT FIXED (his ruling):** `monFeed` pinned at 1 inside the museum
+  since 2026-08-21 — the selector doc's **WATCH IT** row predicted it and
+  nothing read that document. `OPEN_ACTIONS.md` **W-a**.
+- **NO PIXEL SCREENSHOT.** The Browser pane does not composite in this session
+  (§8's rAF family: the page runs, it does not paint), so the visual claim was
+  proved by reading painted pixels instead. **Mike is the first eye on the look.**
 
 ### 2026-08-21 -> RECORD 005 + THE QUEUE FILED - sealed
 - **NOTHING IS WAITING ON MIKE. Deploy before 17:00: `npm run deploy:launch`.**

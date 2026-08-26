@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { T as MUSEUM } from "../../styles/tokens.js";
 /* [2026-08-21] the drawn channel. Mounted on the payload's `kind`, the way
    `InstrumentPanel` and the Foundation's objects are mounted on a field: this
@@ -6,6 +6,24 @@ import { T as MUSEUM } from "../../styles/tokens.js";
 import TestSignal from "./TestSignal.jsx";
 import Television from "./Television.jsx";
 import PortalScreen from "./PortalScreen.jsx";
+
+/* gap before the tear (ms), then how tall it is (vh) and how far the picture
+   slips (px). Walked in order, wrapping - a script, not a shuffle.
+   [2026-08-26] HOISTED OUT OF THE COMPONENT, and not for tidiness: declared in
+   the render body they were a fresh array every render, so the effect that
+   walks them could not honestly list them as dependencies and the warning had
+   to be silenced. **A suppressed warning is not a fixed one** - and silencing
+   it would have moved this file's lint count while changing nothing, which is
+   the tripwire-disabling failure CLAUDE.md's own baseline note describes. They
+   are constants; at module scope the deps are satisfiable and the disable is
+   gone. */
+const TEAR_SCRIPT = [
+  { after: 26000, h: 2.4, slip:  7 },
+  { after: 41000, h: 1.1, slip: -4 },
+  { after: 33000, h: 3.6, slip: 11 },
+  { after: 57000, h: 1.7, slip: -6 },
+];
+const TEAR_MS = 130;                 /* one or two frames of a real rip */
 
 /* RobotsExhibitFlow — the Robots exhibit's deck, riding Exhibit.jsx's
    documented extension seam (the same mechanism as HrExhibitFlow; walk-six
@@ -112,17 +130,53 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
     setTwinOpen(false);
   }
 
-  /* gap before the tear (ms), then how tall it is (vh) and how far the
-     picture slips (px). Walked in order, wrapping - a script, not a shuffle. */
-  const TEAR_SCRIPT = [
-    { after: 26000, h: 2.4, slip:  7 },
-    { after: 41000, h: 1.1, slip: -4 },
-    { after: 33000, h: 3.6, slip: 11 },
-    { after: 57000, h: 1.7, slip: -6 },
-  ];
-  const TEAR_MS = 130;                 /* one or two frames of a real rip */
+  /* ═══ [2026-08-26] TWO TEARS, AND WHY THE SECOND DOES NOT COST THE FIRST ═══
+     MIKE RULED BOTH: **"A: rare on its own, plus on demand."** CLICK now tears
+     as well, and the scripted tear keeps its rarity.
+
+     THE OBJECTION THIS ANSWERS IS OPS' OWN, AND IT WAS RIGHT: *"a tear that
+     happens often is a texture."* A visitor can press CLICK as fast as they
+     like, so if the two shared a clock the commanded rips would eat the
+     scripted one's whole argument.
+
+     **THEY ARE TWO OBJECTS DOING TWO JOBS, AND ONLY ONE OF THEM IS EVIDENCE.**
+     The scripted tear is UNBIDDEN - it is the canon's proof that the whole view
+     is one surface, and it only proves that because nobody asked for it. The
+     commanded tear proves something else entirely: that the control on the
+     glass does something. A press cannot make an unbidden event less unbidden,
+     so the rarity that carries the meaning is untouched by any number of
+     presses.
+
+     **SO THE CLOCKS ARE SEPARATE AND NEITHER FEEDS THE OTHER.** A press does
+     NOT advance `i`, does NOT reset `t1`, and does NOT consume a step. The
+     script runs on its own timer exactly as it did, whether the visitor presses
+     nothing or presses fifty times. If every scripted rip in a visit happens to
+     land while the visitor is pressing, the script has still fired four times in
+     four minutes and the presses have still fired on demand - the two counts are
+     independent by construction rather than by tuning.
+
+     **AND THE PRESSES STAY DETERMINISTIC, per the glitch-realism law.** No
+     `Math.random` here either: a press walks the SAME four-step vocabulary of
+     rips through its own index, so a commanded tear and a scripted one are the
+     same kind of object and cannot be told apart by their shape - which is the
+     point. Same session, same sequence.
+
+     THE GUARD IS A TOKEN, not a boolean. Two rips can overlap - a press during
+     a scripted tear is the ordinary case - and without it the first one's
+     clear-timeout would end the second one early. Each fire claims the token;
+     only the claimant clears. */
+  const tearTok = useRef(0);
+  const tearPress = useRef(0);
+  const fireTear = useCallback((step, y) => {
+    const tok = ++tearTok.current;
+    setTear({ y, h: step.h, slip: step.slip });
+    setTimeout(() => {
+      if (tearTok.current === tok) setTear(null);
+    }, TEAR_MS);
+  }, []);
+
   useEffect(() => {
-    if (!twinOpen) { setTear(null); return; }
+    if (!twinOpen) { setTear(null); tearPress.current = 0; return undefined; }
     let i = 0, alive = true, t1, t2;
     function schedule() {
       const step = TEAR_SCRIPT[i % TEAR_SCRIPT.length];
@@ -131,13 +185,95 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
         /* the y position walks too, so the rip does not always land in the
            same place - still scripted, still no randomness. */
         const y = 12 + ((i * 37) % 74);
-        setTear({ y, h: step.h, slip: step.slip });
-        t2 = setTimeout(() => { if (alive) { setTear(null); i++; schedule(); } }, TEAR_MS);
+        fireTear(step, y);
+        t2 = setTimeout(() => { if (alive) { i++; schedule(); } }, TEAR_MS);
       }, step.after);
     }
     schedule();
     return () => { alive = false; clearTimeout(t1); clearTimeout(t2); };
-  }, [twinOpen]);
+  }, [twinOpen, fireTear]);
+
+  /* ═══ [2026-08-26] THE FOUR MACHINE CONTROLS, AND WHAT THEY DO ON A CHANNEL
+         WITH NO MACHINE ON IT ══════════════════════════════════════════════
+     MIKE: **CH3's surface is the target for all four channels** — the same
+     SCROLL, CLICK, POWER, SHAKE and channel strip on every one. So the 2x2 is
+     drawn by `PortalScreen` now, over television and the test signal and the
+     photograph as well, and `twin.html` suppresses its own `#monctl` exactly as
+     it already suppressed its own digit strip. The button asks and stops; this
+     answers — the same shape the channel strip has used since August.
+
+     ═══ SCROLL IS IGNORED ON THREE CHANNELS OF FOUR, AND THE IGNORING IS THE
+         RULING — IT IS NOT AN UNFINISHED BRANCH ══════════════════════════════
+     MIKE, 2026-08-26, after review: **"scroll only does what it was originally
+     designed to do, and in all other instances is ignored."**
+
+     `devRotary` is MGK-VIIIp's ROTARY_DIAL — a real input device in the
+     emulated `5_INPUT.ino`, edge-queued at depth 1, drained into
+     `Device_Manager` with `PlaySound(Scroll)`. It navigates the machine's
+     menus. **It was proposed that SCROLL should change channels and that
+     proposal was withdrawn**, because it would have given one control two
+     meanings depending on what was on the glass — which is the exact fault
+     `docs/MUSEUM_PORTAL_CHANNEL_SELECTOR-20260821.md` §3 names: *"the same
+     class of thing that made a `1` read as a channel this week."* Channels stay
+     on the channel strip, where they have always been.
+
+     **SO A LATER ROUND MUST NOT WIRE THIS UP.** A control that reaches nothing
+     reads like a `TODO` and it is not one: on a channel carrying television
+     there is no rotary dial to turn, and the honest thing for a dial to do is
+     nothing. The dial stays the dial.
+
+     ═══ CLICK IS THE ONE THAT ALWAYS DOES SOMETHING ══════════════════════════
+     It stays the machine's SHUTTER where there is a machine — nothing was taken
+     away from CH3 — and it tears on every channel, because the tear belongs to
+     the whole view rather than to what is on it. See the H-TEAR block above for
+     why a commanded tear does not cost the scripted one its point.
+     THE TEAR FIRES FIRST AND UNCONDITIONALLY, before the forward: the forward
+     can find no window and return, and the rip is not the machine's to refuse.
+
+     ═══ THE FORWARD IS THE CONTRACT, NOT A REACH-IN ══════════════════════════
+     `postMessage` to the twin's own window, `{wb:"portal-control", id}`, which
+     `twin.html` maps onto the four global handlers and nothing else. It is the
+     mirror of `portal-close` and it carries no code across the boundary — the
+     standing constraint on that document is single-file, no-network, and it
+     must work with no museum at all. A twin that has not finished loading has
+     no listener yet, which is a dropped press and not an error: the machine
+     refuses input while it boots anyway (`[X1]`). */
+  const twinFrameRef = useRef(null);
+  const [unitOn, setUnitOn] = useState(false);
+  useEffect(() => {
+    function onCtl(e) {
+      const id = e && e.detail && e.detail.id;
+      if (!id) return;
+      if (id === "click") {
+        const step = TEAR_SCRIPT[tearPress.current % TEAR_SCRIPT.length];
+        const y = 12 + ((tearPress.current * 29) % 74);
+        tearPress.current += 1;
+        fireTear(step, y);
+      }
+      const w = twinFrameRef.current && twinFrameRef.current.contentWindow;
+      if (!w) return;                    /* no machine on this channel: ignored */
+      try { w.postMessage({ wb: "portal-control", id }, "*"); } catch { /* gone */ }
+    }
+    window.addEventListener("wb-portal-machine-control", onCtl);
+    return () => window.removeEventListener("wb-portal-machine-control", onCtl);
+  }, [fireTear]);
+
+  /* THE POWER SLUG MIRRORS THE MACHINE, and it is a mirror rather than a
+     second opinion: the twin posts from `Mon_Power_Sync`, which already rides
+     its 200ms chrome tick precisely because `unitPowered` is written from six
+     places and hooking the call sites is how a state mirror falls out of step.
+     It posts ONLY ON A CHANGE. A channel with no machine clears it, or POWER
+     would sit latched over a television. */
+  useEffect(() => {
+    function onPower(e) {
+      if (e && e.data && e.data.wb === "portal-power") setUnitOn(!!e.data.on);
+    }
+    window.addEventListener("message", onPower);
+    return () => window.removeEventListener("message", onPower);
+  }, []);
+  useEffect(() => {
+    if (!twinOpen || !twin || twin.kind !== "machine") setUnitOn(false);
+  }, [twinOpen, twin]);
 
   /* [B6] ONE KEY HANDLER, AND IT KNOWS WHICH SURFACE IS UP. It used to call
      closeTwin() on every Escape anywhere in the wing, which fired the
@@ -237,10 +373,27 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
         return;
       }
       if (!d.src) return;                 /* [H1] no address, no door */
+      /* [2026-08-26] A PICTURE IS AN `<img>`, AND IT IS TESTED BEFORE THE
+         QUERY STRING FOR THE SAME REASON `kind` IS TESTED BEFORE THE `!d.src`
+         GUARD: the preset and `user=1` are a contract with a DOCUMENT, and
+         hanging them off a PNG addresses nothing. The channel declares this
+         (`picture: true` in portal.js); this listener still knows nothing about
+         what a channel is. */
+      if (d.picture) {
+        setTwin({ ...screen, kind: "picture", src: d.src,
+                  title: d.frameTitle || "" });
+        setTwinOpen(true);
+        return;
+      }
       const q = new URLSearchParams({ user: "1" });
       if (d.preset) q.set("preset", String(d.preset));
       if (d.day) q.set("day", String(d.day));
-      setTwin({ ...screen, src: `${d.src}?${q.toString()}`,
+      /* [2026-08-26] this branch names itself `machine` now. It was the only
+         one carrying no `kind` at all, which read as "the default" and is not:
+         it is the one kind that is a live DOCUMENT, and the four machine
+         controls are forwarded to it and to nothing else. A kind that has to be
+         recognised by the absence of a field is a kind nobody can grep for. */
+      setTwin({ ...screen, kind: "machine", src: `${d.src}?${q.toString()}`,
                 title: d.frameTitle || "" });
       setTwinOpen(true);
     }
@@ -421,10 +574,13 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
                 W2 asked for and which costs nothing. */}
           {/* [2026-08-21] A DRAWN CHANNEL IS A NODE, NOT AN IFRAME. Everything
               else about the overlay is untouched — same ground, same inset 0,
-              same deliberate absence of chrome (P1/S4), same Escape (W2). The
-              way out of a drawn channel is Escape, exactly as it already is for
-              channel 4's photograph, which has carried no [X] since CH4 and
-              ships that way today. */}
+              same deliberate absence of chrome (P1/S4), same Escape (W2).
+              [2026-08-26] THE SECOND HALF OF THIS NOTE WAS STALE AND IS STRUCK.
+              It said the way out of a drawn channel is Escape *"exactly as it
+              already is for channel 4's photograph, which has carried no [X]
+              since CH4"*. Untrue since the strip became the museum's: [X] is
+              drawn on every kind, channel 4 included. `Television.css`'s header
+              carried the same stale sentence and is corrected with it. */}
           {/* [2026-08-21] THE SET IS ONE OBJECT; ONLY THE PICTURE SWAPS.
               The three kinds stay mutually exclusive — that is what keeps a
               television from having two outputs — but the BEZEL and the
@@ -433,12 +589,23 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
               MIKE: "the screen is a television set; its frame and its buttons
               do not disappear because of what is on it." */}
           <div style={S.iframe}>
+            {/* [2026-08-26] THE SLIP MOVED OFF THE `<iframe>` AND ONTO THE
+                SCREEN, because it was only ever reaching one kind of picture.
+                The band already spanned the whole view as the canon requires,
+                but the transform sat on the iframe alone — so on television and
+                the test signal the rip drew and NOTHING MOVED UNDER IT, which
+                reads as a bar laid on a still rather than as a seam. Mike's
+                ruling that CH3's surface is the target for all four channels
+                covers this too. `PortalScreen` takes a number and applies it;
+                it still knows nothing about tears. */}
             <PortalScreen bezel={twin && twin.bezel} ch={twin && twin.ch}
                           chList={twin && twin.chList}
                           note={twin && twin.note}
                           place={(twin && (twin.kind === "test"
                                         || twin.kind === "television"))
                                  ? "feed" : "canvas"}
+                          slip={tear ? tear.slip : 0}
+                          unitOn={unitOn}
                           onClose={closeTwin}>
               {twin && twin.kind === "test" ? (
                 <TestSignal title={twin.title} />
@@ -450,9 +617,18 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
                 <Television key={twin.ytId + ":" + twin.startSeconds}
                             ytId={twin.ytId} startSeconds={twin.startSeconds}
                             title={twin.title} />
+              ) : twin && twin.kind === "picture" ? (
+                /* [2026-08-26] A PHOTOGRAPH IS AN `<img>`. It is cut on the
+                   bezel's own 3000x2400 canvas and registers with it (measured:
+                   a 0px frame ring at nine of eleven rows across the opening),
+                   so on `place:"canvas"` it lands edge to edge and the declared
+                   `object-fit:cover` is a no-op rather than a crop. In an
+                   `<iframe>` that rule was INERT — object-fit does not apply to
+                   one — and what drew was the browser's own image viewer. */
+                <img src={twin.src} alt="" />
               ) : (
                 <iframe
-                  style={tear ? { transform: `translateX(${tear.slip}px)` } : undefined}
+                  ref={twinFrameRef}
                   src={twin ? twin.src : undefined}
                   title={twin ? twin.title : ""} />
               )}

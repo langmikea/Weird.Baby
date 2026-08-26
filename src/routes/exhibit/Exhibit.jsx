@@ -1598,9 +1598,16 @@ function InstrumentPanel({ decl }) {
         frameTitle: (ANT.test && ANT.test.title) || "" } }));
       return;
     }
+    /* [2026-08-26] `picture` rides across on the row's own word. A channel
+       whose signal is a PICTURE rather than a document is drawn with an
+       `<img>`, because `object-fit` does not apply to an iframe and a
+       photograph in one is scaled by the browser rather than by us. The engine
+       still learns nothing: it is a boolean beside `src`, exactly as `bezel`
+       is a frame declaration beside `ch`. */
     window.dispatchEvent(new CustomEvent(ev, { detail: { ...base,
       preset: bank.id,
       src: row.src || L.src,
+      picture: !!row.picture,
       frameTitle: row.frameTitle || L.frameTitle } }));
   }, [armed, chRows, bits, D.latch, ANT, bank.id]);
 

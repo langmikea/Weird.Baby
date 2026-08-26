@@ -15211,12 +15211,6 @@
    "c": "HOUSE",
    "s": "Ops' own word - the frame title on a channel with no unit on it. MIKE ruled the object and the phrase is his: 'the reason the fourth has a test signal is unknown'. It is a fact about the machine and not an absence, so it is named rather than apologised for."
   },
-  "ceef789ffa98df27": {
-   "f": "src/data/artists/portal.js",
-   "t": "TELEVISION ON THIS CHANNEL.",
-   "c": "HOUSE",
-   "s": "Ops' own words - the readout under the latch. It reports what the channel is carrying and nothing else; it does not tell a visitor what to do about it, which would be the museum solving its own puzzle. The instrument register: terse, upper case, full stop, like the refusal lines it sits in the place of."
-  },
   "dcc9b6d548fabbd0": {
    "f": "src/data/artists/portal.js",
    "t": "SIGNAL PRESENT.",
@@ -15901,6 +15895,111 @@
    "t": "Set-Cookie",
    "p": "withSetCookie{}.header",
    "c": "HOUSE"
+  },
+  "b8b35faf64daba58": {
+   "c": "MIKE",
+   "f": "src/data/artists/portal.js",
+   "l": 156,
+   "t": "Launch the Portal",
+   "s": "MIKE, 2026-08-26: rename the Portal track to `Launch the Portal`. IT IS A REVERSAL AND NOT A CORRECTION, and the two must stay tellable apart: `Portal` was ruled 2026-08-13, re-confirmed and applied 2026-08-20, MIS-RECORDED by Ops the same day as \"drops `Portal`, keeps `Portal Feed Controller`\" - the opposite of his ruling - and corrected in docs/canon/06-PORTAL.md §4. The correction was Ops fixing its own write-up; this is Mike saying something different, six days later. The `id` stays `portal`."
+  },
+  "fb5050b2ea9b504e": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 126,
+   "t": "&amp;",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG that punches the glyph out of the latched slug (T4). It is markup and an entity, never read by anyone: same class as the channel resolutions `machine` and `none` two files over, filed the same way."
+  },
+  "a204312867deab97": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 126,
+   "t": "&lt;",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG that punches the glyph out of the latched slug (T4). It is markup and an entity, never read by anyone: same class as the channel resolutions `machine` and `none` two files over, filed the same way."
+  },
+  "c433975937626cab": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 126,
+   "t": "&gt;",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG that punches the glyph out of the latched slug (T4). It is markup and an entity, never read by anyone: same class as the channel resolutions `machine` and `none` two files over, filed the same way."
+  },
+  "25d88c70315a38db": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 127,
+   "t": "k{}",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG that punches the glyph out of the latched slug (T4). It is markup and an entity, never read by anyone: same class as the channel resolutions `machine` and `none` two files over, filed the same way."
+  },
+  "52f87371cdf65153": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 139,
+   "t": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 {} {}\" preserveAspectRatio=\"none\"><defs><mask id=\"{}\"><rect width=\"{}\" height=\"{}\" fill=\"#fff\"/><text x=\"{}\" y=\"{}\" fill=\"#000\" text-anchor=\"middle\" dominant-baseline=\"central\" font-family=\"Helvetica Neue,Arial,Liberation Sans,sans-serif\" font-weight=\"{}\" font-size=\"{}\" letter-spacing=\"{}\">{}</text></mask></defs><rect width=\"{}\" height=\"{}\" fill=\"#fff\" mask=\"url(%23{})\"/></svg>",
+   "s": "Ops' machinery, not a visitor-facing string - the whole SVG that punches the glyph out of the latched slug, written as ONE template literal so it is one reviewable row rather than twenty-two fragments of markup in the origin register. Ported from `Chy_Knock` in public/robots/twin.html, which is the reference implementation and is not scanned by this sweep. The luminance step is inside the SVG because CSS mask-image defaults to alpha."
+  },
+  "43f38829a9be64b2": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 142,
+   "t": "url(\"data:image/svg+xml,{}\")",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG that punches the glyph out of the latched slug (T4). It is markup and an entity, never read by anyone: same class as the channel resolutions `machine` and `none` two files over, filed the same way."
+  },
+  "5e3aad6029243bd7": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 142,
+   "t": "%23",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG that punches the glyph out of the latched slug (T4). It is markup and an entity, never read by anyone: same class as the channel resolutions `machine` and `none` two files over, filed the same way."
+  },
+  "0a70904dc2251747": {
+   "c": "MIKE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 150,
+   "t": "SCROLL",
+   "s": "MIKE's control legend, on record since 2026-07-28 as `MON_CTL` in public/robots/twin.html and arranged by his 2026-07-29 ruling into the 2x2 [SCROLL][CLICK] / [POWER][SHAKE]. It is the machine's rotary dial. MOVED, NOT WRITTEN: his 2026-08-26 ruling is that CH3's surface is the target for all four channels, so the museum draws it and the twin suppresses its own."
+  },
+  "0faba7812dbc8560": {
+   "c": "MIKE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 151,
+   "t": "CLICK",
+   "s": "MIKE's control legend - the machine's shutter - same supply and same move as SCROLL: `MON_CTL` in public/robots/twin.html, 2026-07-28, his 2x2 order 2026-07-29, carried onto all four channels by his ruling of 2026-08-26."
+  },
+  "e418854c77c6b911": {
+   "c": "MIKE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 152,
+   "t": "POWER",
+   "s": "MIKE's control legend - the machine's power switch - same supply and same move as SCROLL. It is the one of the four that latches, and it wears the strip's own ON-AIR register (T6)."
+  },
+  "8f67818b930b53b9": {
+   "c": "MIKE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 153,
+   "t": "SHAKE",
+   "s": "MIKE's control legend - the machine's shake input - same supply and same move as SCROLL."
+  },
+  "f2519144d4e6f714": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 224,
+   "t": "machine controls",
+   "s": "Ops' own words - the accessible name of the group holding the four machine controls, the counterpart of the channel strip's `channel` one bay over. Never drawn: the surface is a 1965 monitor and a caption naming a group of buttons is not on it."
+  },
+  "492f65c2e31de830": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/RobotsExhibitFlow.jsx",
+   "l": 249,
+   "t": "portal-control",
+   "s": "Ops' machinery, not a visitor-facing string - the contract word the museum posts to the twin when a machine control is pressed, the mirror of `portal-close` which the twin has posted back since S4. An identifier, filed as `machine` and `none` are."
+  },
+  "25ab0437b5be80e4": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/RobotsExhibitFlow.jsx",
+   "l": 249,
+   "t": "*",
+   "s": "Ops' machinery, not a visitor-facing string - `postMessage`'s targetOrigin. The twin is same-origin by construction, which is the reason already written down for the unchecked origin on `portal-close` travelling the other way."
   }
  }
 }

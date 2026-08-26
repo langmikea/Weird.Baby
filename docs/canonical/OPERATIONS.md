@@ -509,8 +509,11 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 > instead — a prune procedure and a NUL-byte defect class are hazards, and a
 > hazard filed in a ritual section is how that class came to be filed twice.
 
-0. **Gates, in this order:** `npm run lint` (baseline **9 errors / 8
-   warnings**, zero new) → `npm run build` (green) → **`npm run
+0. **Gates, in this order:** `npm run lint` (baseline **9 errors / 7
+   warnings**, zero new — moved from 9 / 8 on 2026-08-26 by a real removal,
+   and the round checked that it was one: see CLAUDE.md's pre-flight note,
+   where the first cut of the same edit moved this number by SUPPRESSION and
+   was undone) → `npm run build` (green) → **`npm run
    provenance:gate` (exit 0)** → **`npm run reveal:check` (exit 0) if the
    ledger changed — [R3 2026-08-06] OR IF THE RECORD DID, because it now
    carries `RECORD BUDGETS` and a Record edit that never touches the ledger is
