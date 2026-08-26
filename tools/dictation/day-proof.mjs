@@ -329,9 +329,19 @@ say(CAN_LAND.length > 0,
   + `(${CAN_LAND.map(n => String(n).padStart(3, "0")).join(", ") || "none"}). `
   + `THE REST ARE WALLED BY guard 6 AND THAT GUARD IS CORRECT — the fix is to move an entry's `
   + `reasoning above it, one entry at a time, not to weaken the guard.`);
-say(CAN_LAND.length < ENTRIES.length,
-  `and the wall is REPORTED rather than discovered — a save that writes a draft nothing can `
-  + `land is the quietest failure this surface has left, and it is named here and in the round log`);
+/* [2026-08-26] THIS ASSERTED THAT A WALL STILL EXISTED, AND THE WALL IS GONE.
+   It read `CAN_LAND.length < ENTRIES.length` — true while `C-day2` was open and
+   red the moment the last entry was emptied, which is a check outliving its
+   subject. **What is worth asserting now is the finished state, and what is
+   worth KEEPING is the table**: an entry that gains a comment block again drops
+   out of it on the next run, and that is the only warning anybody gets. */
+say(CAN_LAND.length === ENTRIES.length,
+  CAN_LAND.length === ENTRIES.length
+    ? `EVERY entry accepts an edit — C-day2 is closed. The table above is printed on every run, `
+      + `so an entry that gains a comment block again falls out of it the next time this executes`
+    : `${ENTRIES.length - CAN_LAND.length} entr(y/ies) still walled, and the wall is REPORTED `
+      + `rather than discovered — a save that writes a draft nothing can land is the quietest `
+      + `failure this surface has`);
 const EDITABLE = ENTRIES.find(e => CAN_LAND.includes(e.no)) || ENTRIES[ENTRIES.length - 1];
 
 /* ── P1.4 END TO END, THROUGH THE REAL LANDER. ─────────────────────────── */

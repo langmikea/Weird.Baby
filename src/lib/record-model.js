@@ -287,7 +287,28 @@ function fileNameOf(p) {
    `imaged`   — there is a photograph of the page; it opens in the reader
    `quoted`   — no image yet, but words have been taken out of it
    `held`     — its provenance is recorded and nothing else has arrived
-   The renderer prints the state; it never guesses one. */
+   The renderer prints the state; it never guesses one.
+
+   ═══ [2026-08-20] `held` PRESUMES A PROVENANCE, AND A ROW WITH NONE FALLS
+   THROUGH TO IT AND DRAWS EMPTY-AND-UNSOURCED ═══════════════════════════════
+   **THE DEFAULT ABOVE IS A FALL-THROUGH, NOT A JUDGEMENT.** Anything that is
+   not `imaged` and not `quoted` returns `held`, whose declared meaning is *its
+   provenance IS recorded*. A row that records no provenance at all therefore
+   arrives at a state that claims one.
+
+   **MEASURED ON RECORD 004's TWO STRUCK `docs` ROWS**, which carried a title
+   and nothing else — no source, no date, no pages, no plates, no extract:
+   `attachmentsOf()` built a meta line containing the words **`not here yet` AND
+   NOTHING ELSE.** They were not empty-and-honest, which is what the line at the
+   head of this block is for; **they were empty-and-unsourced**, and the reader
+   could not tell the difference because the state does not carry one.
+
+   **THE THING TO KNOW BEFORE TRUSTING A `held`:** it means *nothing has
+   arrived* AND it means *nobody said where it would come from*, and only the
+   row itself distinguishes them. A gate could catch the second — none does.
+
+   *(Carried here 2026-08-26 from Record 004's source comment, which was the
+   only place it was written down — see `docs/OPEN_ACTIONS.md` C-day2.)* */
 /* [N3 2026-08-06] `plates` COUNTS AS IMAGED, and it is the multi-page case.
    A document with one photograph declares `scan`; a document with a REEL of
    them declares `plates` — the plate wall's own shape, so a manual's pages open

@@ -368,6 +368,53 @@ import { recordDay } from "./record-epoch.js";
    **IT IS THE SAME SHAPE AS RECORD 003's ONE SURVIVING SENTENCE** — why a
    mechanism exists, which no field records — and it is the second time in
    three entries that the only unique thing in a block was of that kind. */
+/* ═══ RECORD 004's SEVEN BLOCKS — THE LAST ONES [2026-08-26] ════════════════
+   **EVERY ENTRY IN THIS ARRAY NOW CARRIES ZERO COMMENT BLOCKS, AND `record:land
+   --write` WILL ACCEPT AN EDIT TO ANY OF THEM.** `C-day2` closes with this.
+   11,592 characters, 86% of this entry's own span, and it held every class.
+
+   **NOTHING RESTED ON A REASON THAT EXPIRES.** 004 is the entry that gained an
+   attachment after publication on *"we have had no visitors"* — a licence that
+   ends when an audience arrives. **Ruling 18 records the licence AND its
+   expiry**, in those words, so deleting the comment loses neither half.
+
+   ── FOUR OF THE SEVEN ARE DUPLICATES OF ONE DOCUMENT ───────────────────────
+   `docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md` § 004 carries the deck line
+   change, the `OTHER` strike with *"YOU ADDED A THUR"*, and `ADDENDUM 01 -
+   Bench Description` — the last two nearly verbatim. `docs/canon/09-PUBLISHED.md`
+   carries the password and Zu Chongzhi's ratio, the folder listing, the struck
+   titles and *"not meant to seen"*; `docs/canon/06-PORTAL.md` carries the
+   engraved legends, the inspection date's refusal, and — at its own § — the
+   record that Mike's rewrite took the museum's half of the unattended-terminal
+   disagreement with it. Rulings 18 and 19 carry the back-post, the `.tif`/`.webp`
+   split and the filename; `MUSEUM_QC101_ATTACHMENT_LOG-20260821.md` carries the
+   title he ruled and why the attachment takes no number. The `listingRows()`
+   mechanism is at `RecordEntry.jsx`, in the code it describes.
+
+   ── AND THREE THINGS WERE WRITTEN DOWN NOWHERE ELSE, ALL IN ONE BLOCK ──────
+   All three are in `[2026-08-20] THE TWO ATTACHMENT ROWS ARE STRUCK`, and all
+   three are the shape this whole exercise kept finding: **a fact about how a
+   mechanism behaves, which no register field holds.**
+
+   1. **`Manual ref to Portal` IS `SCAN 11 - VID-LINK`, WHICH RECORD 003 HAD
+      ALREADY DELIVERED** — so keeping it would have said the museum does not
+      have a thing it showed the day before. That is Ruling 10 failing in a
+      direction its own examples do not cover, and it is **at Ruling 10** now,
+      with the test that catches it.
+   2. **`held` IS A FALL-THROUGH THAT CLAIMS A PROVENANCE.** Both rows recorded
+      none, so `attachmentsOf()` built a meta line reading `not here yet` and
+      nothing else — empty-and-unsourced rather than empty-and-honest. **At
+      `src/lib/record-model.js`, beside `docState`.**
+   3. **THE STRIKE COST NO PROSE, AND THAT WAS MEASURED** — six search terms,
+      zero hits, and the one backward reference still lands on 003's delivered
+      scan through his rewrite. **At `09-PUBLISHED.md`, with Record 004.**
+
+   ── WHAT THE FOUR ENTRIES TAUGHT, IN ONE LINE ──────────────────────────────
+   002 was duplicate throughout; 003 kept one sentence, 005 one paragraph, 004
+   three findings — **and every survivor was a fact about a MECHANISM'S REASON
+   TO EXIST.** Rulings, strikes and his words all had homes already. What had
+   none was why a thing works the way it does, and that is worth knowing before
+   the next round reaches for a comment block. */
 export const RECORD_ENTRIES = [
             { no: 1,
               date: recordDay(1),
@@ -524,8 +571,6 @@ export const RECORD_ENTRIES = [
             { no: 4,
               date: recordDay(4),
               title: "GENERAL STATUS UPDATE",
-              /* [2026-08-20] MIKE: deck line 2 was "> /Robots data analysis"
-                 and the day's news is the crack, not the analysis. */
               line: "> Weird.Baby Website - All Systems Favorable\n> /Robots"
                     + " ZIP File Cracked",
               sections: [
@@ -534,36 +579,9 @@ export const RECORD_ENTRIES = [
                     "  > Weird.Baby uptime: 100%, no anomalies - f(Ump) = "
                     + "100%\n  > Blockers - Nothing to Report",
                   ] },
-                /* === [2026-08-20] THE DETAILED REPORT IS MIKE'S, REWRITTEN =
-                   His text, verbatim. The password is **355113** and the
-                   transposition he first wrote (`335133`) is corrected on his
-                   own ruling: 355/113 = 3.14159292, Zu Chongzhi's ratio,
-                   accurate to six decimals - the digits are the egg and a
-                   transposed pair is not it.
-                   THE FOLDER NAMES ARE ALREADY PUBLISHED. `PORTAL/CH3-STANDARD/`
-                   and `PORTAL/CH4-DETAIL/` are in Record 002's Tuesday
-                   manifest, so the tree agrees with what the museum has
-                   already shown (ruling 10). They are the far end's own
-                   directory names and are NOT the drum's engraved legends,
-                   which Mike renamed to `MGK-VIIIp` / `MGK-VIIIp (zoom)` on
-                   the same day - a disk and a badge may say different things
-                   about the same channel, and here they do. */
                 { label: "DETAILED REPORT",
                   body: [
                     "  > ZIP Password Cracked: [355113]",
-                    /* [2026-08-21] HIS REWRITTEN LISTING. It gains a ROOT
-                       level and locked siblings, and `PORTAL.CFG` becomes
-                       `PORTAL_2v16.CFG` - the version is now on the glass in
-                       the filename, which is where an installer would have put
-                       it. `QC_101.TIF` is the install document.
-                       IT IS A PURE INDENT TREE AND THE READER HAD TO LEARN
-                       THAT SHAPE. The 2026-08-20 listing was `name  value` on
-                       every row; this one has no two-field line anywhere, and
-                       under the old rule its DEEPEST line alone would have
-                       landed in the value column while its siblings drew as
-                       spanning headings. `listingRows()` asks whether any line
-                       carries two fields before deciding there is a value
-                       column at all - see RecordEntry.jsx. */
                     { pre:
                       "    ROOT\n"
                       + "     /(many pwd protected folders)\n"
@@ -574,154 +592,11 @@ export const RECORD_ENTRIES = [
                       + "       /CHANNEL_SELECT(PWD)\n"
                       + "       /INSTALL\n"
                       + "          QC_101.TIF (hand written notes on form)" },
-                    /* [2026-08-21] FLAGGED AND NOT CORRECTED: **"not meant to
-                       seen"** is Mike's, as typed. Doctrine 21's cost (1) - his
-                       typos ship, and a round that tidies one has broken the
-                       instruction that put it there.
-                       WHAT LEFT, NAMED ONCE (Doctrine 24): "It appears to be an
-                       unattended remote access terminal.", the bi-directional
-                       Vid-Link sentence, "Documentation looks proprietary.
-                       Probably not meant for us to see...", and the NOTE line
-                       that the QC RULE line replaces. **The unattended-terminal
-                       sentence was CANON-LOAD-BEARING** - `docs/canon/06-PORTAL.md`
-                       quoted it and built the museum-reading-vs-manual
-                       disagreement on it - so that entry is corrected in the
-                       same round rather than left quoting a line the Record no
-                       longer carries. */
                     "  > Install document looks proprietary. Probably not "
                     + "meant to seen.\n  > QC RULE: Unsafe to run in any "
                     + "sandbox; permanently quarantined.",
                   ] },
-                /* === [2026-08-20] TWO SECTIONS STRUCK FROM 004, NAMED ONCE ===
-                   (Doctrine 24 - they are named here, in the round log, and
-                   nowhere else.)
-
-                   `OTHER` - THE REQUISITION. It carried
-                   `> RAISED - Req 0628 - Internal Transfer - No net increase in
-                   head count`. **MIKE: "NOW I SEE WHAT YOU DID, YOU ADDED A
-                   THUR."** He proposed the requisition RAISED Thursday and
-                   APPROVED Friday as a sequence a reader could follow; OPS PUT
-                   A THURSDAY SECTION IN THE RECORD WITHOUT A RULING, which is
-                   not the same act. **The requisition lives in 005 only.**
-                   The section placement Ops reasoned about at length was
-                   reasoning about a section that should not have existed.
-
-                   `ADDENDUM 01 - Bench Description` - the whole block, both
-                   paragraphs, including the closing `! Nothing here postdates
-                   1969. Everything here works.` Mike's ruling; struck entire.
-                   Its subject survives where it belongs - the far end's console
-                   is described in the canon (`docs/canon/06-PORTAL.md`), which
-                   is where a fact lives when the Record is not saying it. */
               ],
-              /* ═══ [2026-08-20] THE TWO ATTACHMENT ROWS ARE STRUCK ═══════════
-                 MIKE, ruling on the morning of the day this entry posts:
-                 *"Remove the docs field entirely. The ATTACHMENTS 2 badge goes
-                 with it."*
-
-                 WHAT WAS HERE, named once so nobody rebuilds it (Doctrine 24):
-                 two `docs` rows carrying a title and nothing else —
-                 `View of the portal screen` and `Manual ref to Portal`. No
-                 source, no date, no pages, no plates, no extract.
-
-                 IT IS RULING 9's OWN SHAPE, AND HE HAD ALREADY STRUCK IT ONCE.
-                 *"We do not hold back what we say we have. We hold back what we
-                 don't have yet."* A Record names only what it can produce. The
-                 `_tmp/` line in Record 002 was a name in a list with nothing
-                 behind it and it went for this reason; these are two.
-
-                 AND THE THIRD REASON IS THE ONE HE RULED ON, because it is a
-                 CONTRADICTION rather than a gap. `docState()` resolves a row
-                 with no plates to `held`, which draws as **not here yet** —
-                 and *Manual ref to Portal* is `SCAN 11 - VID-LINK`, which
-                 **Record 003 delivered on Wednesday**, at a public address,
-                 with a thumbnail that opens. Thursday would have said the
-                 museum does not have a thing it showed on Wednesday. That is
-                 Ruling 10 — what's said matches what's shown — failing in the
-                 harder direction.
-
-                 A THIRD FAULT, RECORDED BECAUSE IT IS THE ONE A GATE COULD
-                 CATCH: `held` is defined in `src/lib/record-model.js` as *"its
-                 provenance is recorded and nothing else has arrived."* Neither
-                 row recorded any provenance, so `attachmentsOf()` built a meta
-                 line containing the words `not here yet` AND NOTHING ELSE.
-                 They were not empty-and-honest; they were empty-and-unsourced.
-
-                 STRIKING THEM COSTS NO PROSE, WHICH WAS MEASURED BEFORE IT WAS
-                 CLAIMED. This entry was searched for `attach`, `contents`,
-                 `enclos`, `appendix`, `below` and `see ` — zero hits. Its one
-                 backward reference is *"Excerpts from the Manual earlier in the
-                 week"*, which points at Record 003, is true, and is delivered.
-                 Not one character of Mike's text moved.
-                 [2026-08-20] THE QUOTED SENTENCE ABOVE WAS REPLACED WHEN HE
-                 REWROTE THIS SECTION. The backward reference survives in his
-                 new words - *"The Manual's bi-directional CNC Vid-Link is one
-                 half of it"* - and still points at Record 003's delivered
-                 scan, so the finding holds and only its quotation moved.
-                 (Contrast Record 003, which promises and delivers: *"Outer
-                 layer opened - three manual pages recovered, contents
-                 attached."*)
-
-                 NOTHING IS OWED LATER. A picture of the portal screen may
-                 arrive on any future Record; Ruling 9's own words are that the
-                 Record may withhold and the Record may not promise. */
-              /* ═══ [2026-08-21] THE DOCS FIELD RETURNS, AND THIS IS THE FIRST
-                 TIME A PUBLISHED RECORD HAS GAINED AN ATTACHMENT ═══════════
-                 Record 004 posted 20 Aug at 17:00 and has been live for a day.
-                 Mike ruled the attachment on 21 Aug; his standing reason is
-                 *"we have had no visitors."* THE PRECEDENT IS WRITTEN UP IN
-                 `docs/MUSEUM_RULINGS-20260817.md` AS RULING 17, not in a round
-                 log — the next round that wants to touch published text will
-                 reach for the rulings, and a diary does not answer questions.
-
-                 THE STRIKE ABOVE STANDS AND IS NOT REVERSED. The two rows that
-                 went on 20 Aug carried a title and nothing else, and a Record
-                 names only what it can produce. This row is the opposite case,
-                 which is exactly why Ruling 9 permits it: the sheet EXISTS, at
-                 2550x3300 300 dpi, and is published here. Ruling 9 forbids
-                 naming what cannot be produced. It does not forbid producing.
-
-                 `QC_101.TIF` IS THE NAME INSIDE THE ARCHIVE; `.webp` IS WHAT A
-                 VISITOR DOWNLOADS. The listing above is untouched, and this is
-                 the manual's own arrangement rather than a new one: Record
-                 002's manifest names `07-POWER-SYSTEM.tif` and the museum
-                 served it as `scan-07-a.webp`. No `.tif` exists anywhere in
-                 either repo — the masters are PNG — so emitting one would
-                 create the first, for no reader. Ruling 18.
-
-                 THE FILENAME IS THE DOCUMENT'S OWN NAME, NOT THE ATTACHMENT'S
-                 TITLE. `scan-NN` and `marked-NN` are class words Ops chose
-                 under Ruling 11; `qc-101` is what Mike has already published on
-                 the glass, in the folder listing a dozen lines up. A title he
-                 may still rule on therefore cannot move the file.
-
-                 THE TITLE IS MIKE'S RULING, 2026-08-21. Ops drafted three and
-                 he took the document's own name: `QC_101 - Final test and
-                 inspection`. Ops had recommended `Install document - QC_101
-                 final test and inspection` on the ground that *install
-                 document* is his own published noun in the DETAILED REPORT
-                 above — **the reasoning was sound and the recommendation was
-                 not taken, which is recorded here rather than quietly
-                 forgotten.** Both halves of what he chose are read off things
-                 that already exist: `QC_101` is the filename he published in
-                 the listing, and FINAL TEST AND INSPECTION is the sheet's own
-                 printed heading.
-
-                 IT IS DELIBERATELY NOT CALLED A SCAN, for Record 003's reason
-                 (SCAN is Mike's published word for the three manual pages, and
-                 Ruling 10 would force a fourth line into text already shown)
-                 and for a truer one: this sheet was not filmed. It came out of
-                 the ZIP's INSTALL folder.
-
-                 NO NUMBER, ON SUBTRACTION. `Marked copy 01` took one because
-                 Mike said marked copies are a recurring channel. Nothing says a
-                 second install document is coming, and `01` would promise one.
-
-                 NO `date` FIELD, AND THAT IS A REFUSAL RATHER THAN AN OMISSION.
-                 The sheet is dated 8/14/65 in the inspector's hand and a reader
-                 can see it. That date is OPS' CHOICE, declared as such in the
-                 generator's own FIELDS block — no inspection date exists in the
-                 corpus — so lifting it onto the catalogue card would restate an
-                 invention as provenance. */
               docs: [
                 { title: "QC_101 - Final test and inspection",
                   source: "ABEAL FORM QC-101",

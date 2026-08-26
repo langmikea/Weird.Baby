@@ -285,7 +285,7 @@ Three further rulings sit on that attachment and are worth carrying:
   every mark on the page accounted for. A retouch would have left one file and
   no way to ask what changed. *(Carried here 2026-08-26 from Record 003's source
   comment, which was the only place it was written down — see
-  [C-day2](../OPEN_ACTIONS.md#c-day2).)*
+  [C-day2](../OPEN_ACTIONS_CLOSED.md), closed 2026-08-26.)*
 
   > **[FLAG 2026-08-26 · found here, not fixed]** `provenance/assets.json`'s
   > `scan-31-a` row names its master as

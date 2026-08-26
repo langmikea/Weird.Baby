@@ -336,6 +336,27 @@ pages and four personnel folders"* against three attachments. **ELEVEN became
 THREE.** If a later Record shows more, it says so then - and that is the whole
 of the rule: the number follows the wall, not the other way round.
 
+**[2026-08-20] AND IT CAN FAIL IN THE HARDER DIRECTION, WHICH IS THE CASE THAT
+STRUCK TWO ATTACHMENT ROWS FROM RECORD 004.** The two plate-less `docs` rows
+were `View of the portal screen` and `Manual ref to Portal`. Ruling 9 struck them
+for naming what could not be produced — but the second one had a worse fault
+than a gap, and it is **a contradiction rather than a silence**:
+
+**`Manual ref to Portal` IS `SCAN 11 - VID-LINK`, WHICH RECORD 003 DELIVERED ON
+WEDNESDAY**, at a public address, with a thumbnail that opens. A plate-less row
+resolves to `held` in `docState()` and draws as **not here yet** — so Thursday's
+Record would have said the museum does not have a thing it showed on Wednesday.
+**That is this ruling failing in the direction the examples above do not cover:
+not a number that overstates the wall, but a row that DENIES something already
+on it.**
+
+**THE TEST THAT CATCHES IT:** before a Record says it does not have a thing, ask
+whether an earlier Record has already delivered it. *What's said matches what's
+shown* runs backwards through the volume as well as forwards.
+
+*(Carried here 2026-08-26 from Record 004's source comment, which was the only
+place it was written down — see [C-day2](OPEN_ACTIONS_CLOSED.md), closed 2026-08-26.)*
+
 ---
 
 ## 11 - THE SCAN NUMBERS ARE NOT PAGE NUMBERS (2026-08-19)

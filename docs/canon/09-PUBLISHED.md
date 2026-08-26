@@ -188,7 +188,7 @@ comment blocks in `src/data/artists/robots-record.js` were **deleted rather than
 moved** — every claim in them was already in the two files above, in fuller form
 — so that the entry can accept an edit from the day editor. The preamble of that
 file records the deletion, and `npm run day:proof` P6 asserts on every run that
-each claim is still findable here. Register [C-day2](../OPEN_ACTIONS.md#c-day2).
+each claim is still findable here. Register [C-day2](../OPEN_ACTIONS_CLOSED.md), closed 2026-08-26.
 
 ---
 
@@ -286,6 +286,21 @@ answered it. See [Ruling 19](../MUSEUM_RULINGS-20260817.md).
 titles (*View of the portal screen* · *Manual ref to Portal*), the `OTHER`
 requisition section, and `ADDENDUM 01 - Bench Description` whole. The bench
 survives where it belongs, in [06-PORTAL](06-PORTAL.md).
+
+**AND STRIKING THE TWO ROWS COST NO PROSE, WHICH WAS MEASURED BEFORE IT WAS
+CLAIMED.** The entry was searched for `attach`, `contents`, `enclos`, `appendix`,
+`below` and `see ` — **zero hits.** Its one backward reference is to Record 003
+and is delivered: it read *"Excerpts from the Manual earlier in the week"* on
+20 August, and when Mike rewrote the section on the 21st it became *"The
+Manual's bi-directional CNC Vid-Link is one half of it"* — **still pointing at
+003's delivered scan, so the finding held and only its quotation moved.** Not
+one character of his text moved to allow the strike.
+
+*(Carried here 2026-08-26 from Record 004's source comment, which was the only
+place this measurement was written down. The second row's sharper fault — that
+it DENIED something Record 003 had already shown — is now at
+[Ruling 10](../MUSEUM_RULINGS-20260817.md). See
+[C-day2](../OPEN_ACTIONS_CLOSED.md), closed 2026-08-26.)*
 
 ---
 

@@ -141,9 +141,10 @@
    **THE ORDER HELD.** Editing came AFTER the round-trip repair (`a3356c6`),
    because the draft silently ate `wire` and `plates` until then — Record 013's
    defect — and a surface that loses a field the moment he types into it would
-   lose his words on its first day. `C-day1` closed with it; what the
-   build found in its place is `C-day2`, and it is the one thing still between
-   this page and an ordinary writing day.
+   lose his words on its first day. `C-day1` closed with it; what the build
+   found in its place was `C-day2` — four of the five entries carrying comment
+   blocks that `record:land` guard 6 refuses to regenerate. **`C-day2` closed
+   2026-08-26: every entry now carries zero, and every one accepts an edit.**
 
    ── PIECE 4 — WHAT TAKES A KEYSTROKE, AND WHAT GUARDS IT ───────────────────
    **WHAT HE ASKED FOR:** *"I can edit any line and add sections on demand."*

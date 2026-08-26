@@ -320,6 +320,176 @@
      "in": "src/routes/exhibit/RecordEntry.jsx"
     }
    ]
+  },
+  {
+   "entry": 4,
+   "block": 0,
+   "chars": 134,
+   "sha256": "97f95e38c9d77a85bc158e6858c91879ffdaedb98af4833d3e50e68d2ccf279e",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-20] deck line 2",
+   "claims": [
+    {
+     "claim": "the deck line he replaced",
+     "find": "Robots data analysis",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    }
+   ]
+  },
+  {
+   "entry": 4,
+   "block": 1,
+   "chars": 1005,
+   "sha256": "def886cd91b89a7f6229bb3120e72c2c3ee6021036fa229f0595c2fa61fc5103",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-20] THE DETAILED REPORT IS MIKE-S, REWRITTEN",
+   "claims": [
+    {
+     "claim": "the password as he ruled it",
+     "find": "355113",
+     "in": "docs/canon/09-PUBLISHED.md"
+    },
+    {
+     "claim": "the ratio behind the digits",
+     "find": "Zu Chongzhi",
+     "in": "docs/canon/09-PUBLISHED.md"
+    },
+    {
+     "claim": "the drum-s engraved legends",
+     "find": "engraved legends",
+     "in": "docs/canon/09-PUBLISHED.md"
+    }
+   ]
+  },
+  {
+   "entry": 4,
+   "block": 2,
+   "chars": 957,
+   "sha256": "ab2ee63b582fcdcefb5835c19f17c6863c06e36b37f5eb49e4fa328e6d6beb20",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-21] HIS REWRITTEN LISTING",
+   "claims": [
+    {
+     "claim": "the listing as published",
+     "find": "a pure indent tree",
+     "in": "docs/canon/09-PUBLISHED.md"
+    },
+    {
+     "claim": "what listingRows had to learn",
+     "find": "no two-field line at all",
+     "in": "src/routes/exhibit/RecordEntry.jsx"
+    }
+   ]
+  },
+  {
+   "entry": 4,
+   "block": 3,
+   "chars": 1024,
+   "sha256": "ddaa8ec30f3aaec904db72eee319a81bef13c2f57963bdd8bbc929a5533f7bc6",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-21] FLAGGED AND NOT CORRECTED",
+   "claims": [
+    {
+     "claim": "his typo, carried as typed",
+     "find": "not meant to seen",
+     "in": "docs/canon/09-PUBLISHED.md"
+    },
+    {
+     "claim": "the canon half that went with the rewrite",
+     "find": "unattended remote access terminal",
+     "in": "docs/canon/06-PORTAL.md"
+    }
+   ]
+  },
+  {
+   "entry": 4,
+   "block": 4,
+   "chars": 1326,
+   "sha256": "ce3e3edcdb135b464e2740a4fd889cc6d82ecd311c701cc0fe80eab11bb5afa9",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-20] TWO SECTIONS STRUCK FROM 004",
+   "claims": [
+    {
+     "claim": "the OTHER strike and his words",
+     "find": "YOU ADDED A THUR",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    },
+    {
+     "claim": "ADDENDUM 01 struck entire",
+     "find": "Bench Description",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    }
+   ]
+  },
+  {
+   "entry": 4,
+   "block": 5,
+   "chars": 3300,
+   "sha256": "c36a46a9e2d25c4a6d5137fb3f0bc977eec2c31af2f8c42170c31008e8d59d7f",
+   "disposition": "deleted-except-three-findings-carried",
+   "lead": "[2026-08-20] THE TWO ATTACHMENT ROWS ARE STRUCK",
+   "claims": [
+    {
+     "claim": "the two rows, named",
+     "find": "View of the portal screen",
+     "in": "docs/canon/09-PUBLISHED.md"
+    },
+    {
+     "claim": "why Ruling 9 struck them",
+     "find": "titles with nothing behind them",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "CARRIED: the contradiction, at Ruling 10",
+     "find": "a row that DENIES something already",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "CARRIED: and the test that catches it",
+     "find": "runs backwards through the volume",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "CARRIED: held is a fall-through claiming provenance",
+     "find": "empty-and-unsourced",
+     "in": "src/lib/record-model.js"
+    },
+    {
+     "claim": "CARRIED: the strike cost no prose, measured",
+     "find": "zero hits",
+     "in": "docs/canon/09-PUBLISHED.md"
+    }
+   ]
+  },
+  {
+   "entry": 4,
+   "block": 6,
+   "chars": 3846,
+   "sha256": "00cad991d3ad70b54fa326c569143cf6f1a4b930ddcee0187474a457eaf18d4c",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-21] THE DOCS FIELD RETURNS",
+   "claims": [
+    {
+     "claim": "the title he ruled",
+     "find": "Final test and inspection",
+     "in": "docs/MUSEUM_QC101_ATTACHMENT_LOG-20260821.md"
+    },
+    {
+     "claim": "why it takes no number",
+     "find": "second install document is coming",
+     "in": "docs/MUSEUM_QC101_ATTACHMENT_LOG-20260821.md"
+    },
+    {
+     "claim": "the filename is the document-s own name",
+     "find": "already published on the glass",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "no date field, and why",
+     "find": "No inspection date exists",
+     "in": "docs/canon/06-PORTAL.md"
+    }
+   ]
   }
  ]
 }
