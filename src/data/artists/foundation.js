@@ -1044,7 +1044,11 @@ const faqTrack = (id, where, closing) => ({
   id,
   title: "FAQ",
   videos: [],
-  face: faqFace("THE WEIRD.BABY FOUNDATION", faqFor(where), closing),
+  /* [2026-08-26] the wing in the house's own caps, full form — Mike: "The
+     board, the door and the FAQ subtitle agree." Was
+     `THE WEIRD.BABY FOUNDATION`. N1 took that article off the BOARD on
+     2026-08-04 and left it standing here; it leaves the last surface today. */
+  face: faqFace("WEIRD.BABY \\FOUNDATION", faqFor(where), closing),
 });
 
 /* ═══ [CH5 2026-08-12] TWO OF THESE ALBUMS ARE HIDDEN AT LAUNCH ═════════════
@@ -1136,7 +1140,7 @@ const spine = [
         face: {
           kind: "text",
           title: "The Short Story",
-          subtitle: "THE WEIRD.BABY FOUNDATION",
+          subtitle: "WEIRD.BABY \\FOUNDATION",
           /* ═══ ONE SENTENCE, AND IT IS LOAD-BEARING RATHER THAN STYLE ═══
              `visitorProse` cuts by SENTENCE and drops only the sentence
              carrying the mark, so a two-sentence note leaves its second
@@ -1156,7 +1160,7 @@ const spine = [
         face: {
           kind: "text",
           title: "The Long Story",
-          subtitle: "THE WEIRD.BABY FOUNDATION",
+          subtitle: "WEIRD.BABY \\FOUNDATION",
           /* one sentence — see the note on The Short Story above. */
           blurb: "[PAPA] yours to write, and the nearest thing already written "
                + "is C:/AI/VISION.md, which is about the museum rather than "
@@ -1170,7 +1174,7 @@ const spine = [
         face: {
           kind: "text",
           title: "The Blog",
-          subtitle: "THE WEIRD.BABY FOUNDATION",
+          subtitle: "WEIRD.BABY \\FOUNDATION",
           /* one sentence — see the note on The Short Story above. */
           blurb: "[PAPA] yours, and the FAQ already tells a reader to follow "
                + "it, so this one needs either your first post or a ruling "
@@ -1222,15 +1226,15 @@ const spine = [
     tracks: [
       { id: "help-a-little", title: "Just help a little", videos: [],
         face: { kind: "text", title: "Just help a little",
-                subtitle: "THE WEIRD.BABY FOUNDATION",
+                subtitle: "WEIRD.BABY \\FOUNDATION",
                 blurb: NOT_BUILT_YET } },
       { id: "financial-help", title: "Financial help", videos: [],
         face: { kind: "text", title: "Financial help",
-                subtitle: "THE WEIRD.BABY FOUNDATION",
+                subtitle: "WEIRD.BABY \\FOUNDATION",
                 blurb: NOT_BUILT_YET } },
       { id: "operational-help", title: "Operational help", videos: [],
         face: { kind: "text", title: "Operational help",
-                subtitle: "THE WEIRD.BABY FOUNDATION",
+                subtitle: "WEIRD.BABY \\FOUNDATION",
                 blurb: NOT_BUILT_YET } },
     ],
   },
@@ -1246,7 +1250,24 @@ export const foundation = {
      Music Worth A Listen` at 26 characters with SIX PIXELS of slack either side
      at 390px, and it is the longest name the bar holds. "The Weird.Baby
      Foundation" is 25 and would have joined it on the floor. */
-  name: "The Foundation",
+  /* ═══ [2026-08-26] `The Foundation` -> `\Foundation`. MIKE'S RULING ═════
+     **"THE TITLE BARS CARRY IT TOO. \ROBOTS, \MUSIC, \FOUNDATION, and the
+     rest."** A visitor reads `\FOUNDATION`, uppercased by `.wb-bar-room`.
+
+     THE D7 NOTE BELOW IS SUPERSEDED AND IS KEPT BECAUSE ITS ARITHMETIC IS NOT.
+     Its argument was that a bar carries the ROOM and a door the FULL name,
+     citing *(M26's own reading)* — and **M26 is an OPEN ACTION, not a ruling**.
+     This round's census raised that: Ops had adopted an unanswered register row
+     as settled doctrine and built on it. Mike has now ruled the shape himself,
+     so this field carries `\Foundation` because that is the short form he
+     wrote, and not because a register row was read as an answer.
+
+     ITS MEASUREMENT STILL BINDS, AND IN THE HELPFUL DIRECTION. D7 measured
+     `The Weird.Baby Foundation` at 25 characters and refused it as too long for
+     the bar. `\Foundation` is **eleven** — three shorter than the string it
+     replaces — so this wing GAINS slack. The wing that spends it is /wal; see
+     C36 and this round's before/after at 390px. */
+  name: "\\Foundation",
   exhibitSlug: "foundation",
   eraAlias: {},
   /* [CH5] see HIDDEN_AT_LAUNCH above. The array is filtered here rather than

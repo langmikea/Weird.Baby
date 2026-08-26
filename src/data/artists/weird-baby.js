@@ -356,7 +356,8 @@ const spine = [
         face: {
           kind: "text",
           title: "About the artist",
-          subtitle: "WEIRD.BABY",
+          /* [2026-08-26] the wing, not the house. Was `WEIRD.BABY`. */
+          subtitle: "WEIRD.BABY \\MUSIC",
           /* ═══ [2026-08-16] THE HYPHEN IN `Melodic‑Talker` IS U+2011 AND THAT
                  IS THE WHOLE OF THE FIX — MIKE: "Do not break Melodic-Talker
                  across lines." ════════════════════════════════════════════
@@ -428,7 +429,32 @@ const spine = [
             { k: "High School", v: "CB West - Doylestown, PA - Class of 1981" },
             { k: "Studied", v: "Stevens Institute of Technology - Hoboken, NJ - 1985 BSME" },
             { k: "Studied", v: "New Jersey Institute of Technology - Newark, NJ - 2000 MS Eng Mgmt" },
-            { k: "Founder", v: "Weird.Baby /Foundation /Robots /Music - August 16, 2026" },
+            /* ═══ [2026-08-26] THE SLASHES TURN THE OTHER WAY — HIS RULING ON HIS
+               OWN STRING, AND THAT IS WHY THIS BLOCK IS LONGER THAN THE EDIT
+               ═════════════════════════════════════════════════════════════
+               This round's census surfaced this row as the one place in the
+               museum where Mike had already written a compound short form, and
+               it read `Weird.Baby /Foundation /Robots /Music` — FORWARD slashes.
+               The note twelve lines above still stands and is the reason it was
+               reported rather than quietly conformed: **"the value is his to the
+               character, the four wings and the date included."**
+
+               HE READ THE CENSUS AND RULED IT HIMSELF: *"THAT INCLUDES the
+               string your census found and Ops did not know about… It becomes
+               backslashes. RECORD IT AS HIS RULING, NOT A HOUSE EDIT — Ops is
+               not restyling his words; he changed them."*
+
+               SO THE REGISTER ROW IS RE-DECLARED **MIKE** AGAINST TODAY'S
+               RULING, not carried over and not softened to HOUSE. A later round
+               reading this diff must be able to see that the author changed his
+               own sentence, because a paraphrase filed in his class is
+               indistinguishable from his own sentence a week later — which is
+               the whole reason the three-mark scheme exists.
+
+               THE DATE IS UNTOUCHED AND SO IS EVERY OTHER CHARACTER: same four
+               wings, same order, same spaced hyphen, same `August 16, 2026`.
+               Only the two-character shape of each separator moved. */
+            { k: "Founder", v: "Weird.Baby \\Foundation \\Robots \\Music - August 16, 2026" },
           ],
           /* ═══ [2026-08-17] FOUR OF THE SIX TILES GAIN A PHOTOGRAPH ═════════
              MIKE supplied four pictures of objects he owns, taken by him, one
@@ -616,7 +642,8 @@ const spine = [
                 + "in order to record the songs he just wrote, so he can "
                 + "release the album he announced. And Robots." },
           ],
-          footer: "WEIRD.BABY · ABOUT THE ARTIST",
+          /* [2026-08-26] was `WEIRD.BABY · ABOUT THE ARTIST`. */
+          footer: "WEIRD.BABY \\MUSIC · ABOUT THE ARTIST",
         },
       },
       /* ═══ [M 2026-08-14] THE FAQ ROW, FROM THE STANDARD TEMPLATE ════════════
@@ -653,7 +680,10 @@ const spine = [
         id: "wb-faq",
         title: "FAQ",
         videos: [],
-        face: faqFace("WEIRD.BABY", [
+        /* [2026-08-26] the wing in the house's own caps, full form — Mike:
+           "The board, the door and the FAQ subtitle agree." Was `WEIRD.BABY`,
+           which named the HOUSE where the parameter wants the WING. */
+        face: faqFace("WEIRD.BABY \\MUSIC", [
           { title: "Who is Weird.Baby?", lines: [KEEPER] },
           /* ONE SENTENCE, AND THAT IS LOAD-BEARING RATHER THAN STYLE.
              `visitorProse` splits a string into SENTENCES and drops only the
@@ -952,7 +982,31 @@ const spine = [
 
 export const weirdBaby = {
   id: "wb",
-  name: "Weird.Baby",
+  /* ═══ [2026-08-26] `Weird.Baby` -> `\Music`. MIKE'S RULING, AND IT MOVES A
+     STRING THE REGISTER CLASSES AS HIS ═══════════════════════════════════════
+     **"THE TITLE BARS CARRY IT TOO. \ROBOTS, \MUSIC, \FOUNDATION, and the
+     rest."** A visitor reads `\MUSIC`, uppercased by `.wb-bar-room`.
+
+     THIS IS NOT OPS RESTYLING HIS WORDS — HE CHANGED THEM, AND THE DISTINCTION
+     IS THE WHOLE REASON THIS BLOCK IS HERE. The retired string was declared
+     **MIKE** in `provenance/register.json`, sourced to
+     `docs/canonical/THE_CHARTER.md`. Its register row is re-declared MIKE
+     against TODAY's ruling instead, so a later round reading the diff finds his
+     name on both ends of it rather than an Ops edit sitting on top of a charter
+     citation.
+
+     THE WORDMARK IS NOT THIS FIELD AND DOES NOT MOVE. `MuseumBar.jsx`'s
+     top-left `Weird.Baby` is the HOUSE, still charter-sourced, still on every
+     route — his first line is *"Weird.Baby"* on its own. The bar's two ends are
+     the house and the middle is which room you are in; that is exactly the
+     distinction `MuseumBar.css:196` already states, and the backslash is what
+     now makes it legible.
+
+     M8'S SECOND HALF CLOSES HERE. Its 2026-08-03 note diagnosed *"'Robots' and
+     'Weird.Baby' were ROUTE names wearing a directory's clothes"*, fixed the
+     board and left both words in the title bars. `robots.js` carried the other;
+     both move in this commit and neither word is on a bar any more. */
+  name: "\\Music",
   /* [CH5] filtered here, not at the declaration, so the album stays written and
      readable in source — the hold is a stage decision, not a deletion. */
   /* [2026-08-17] the TRACK hold runs in both stages and is applied first; the

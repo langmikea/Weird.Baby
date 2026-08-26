@@ -789,6 +789,49 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-26 -> THE WING NAMES TAKE THE BACKSLASH (fourth packet)
+- **ONE THING NEEDS MIKE AND IT IS A LOOK**, plus one word: whether the Gift
+  Shop and the Information Booth join the shape. "Every wing takes it" was read
+  as the four EXHIBIT wings, on his own M8 list (the booth is in it and takes no
+  house name; the shop was never in it). Two strings each either way.
+  Gates: lint **9/7 = baseline** - build green - launch build green - provenance
+  **PASS** (16 added, 38 pruned) - `reveal:check` - `parity:gate` -
+  `instory:gate` - `docs:numbers:gate` **PASS**. The log is at
+  `docs/MUSEUM_WING_NAMES_LOG-20260826.md` and nothing was deployed.
+- **`"\WORTH A LISTEN"` IS A LEGAL JS STRING WHOSE VALUE IS `WORTH A LISTEN`.**
+  `\W` is not a recognised escape and the backslash is dropped **silently**; the
+  source reads correctly in every editor and every grep. Ten literals landed that
+  way, a second pass over-corrected six to four backslashes (renders two), and
+  **a substring scan of the built bundle passed the broken ones** because
+  the two-character escape `\\WORTH` is a substring of the four-character
+  `\\\\WORTH`. What settled it was an audit that
+  PARSES each literal and reports its RUNTIME value: 21 literals, one backslash
+  each. **A backslash in a JS string cannot be checked by reading it.**
+- **EIGHT FORMS OF ROBOTS COLLAPSE TO ONE SHAPE.** Board `Weird.Baby \Robots`,
+  bar `\ROBOTS`, FAQ subtitle `WEIRD.BABY \ROBOTS`. Every wing, every surface a
+  visitor reads. **The Record's four in-story forms are untouched** - Doctrine 21,
+  and `09-PUBLISHED` freezes them; he named the board, the door, the FAQ subtitle
+  and the Founder row, not the Record.
+- **HIS LOWERCASE `a` RENDERS NOWHERE.** `.wb-dir-entry`, `.wb-bar-room` and
+  every FAQ subtitle are `text-transform: uppercase`, so the board is uppercased
+  too and `Worth a Listen` reads `WORTH A LISTEN`. **The first draft of the note
+  in `worth-a-listen.js` claimed it survived on the board and was wrong** -
+  corrected after measuring the CSS rather than assuming it.
+- **M26 CLOSES ON ITS OWN THIRD OPTION** (*a ruling that the two may differ*) and
+  **had been load-bearing while open**: `foundation.js` cited *(M26's own
+  reading)* as doctrine for `name: "The Foundation"`. **Ops had built on an
+  unanswered register row.** Named at the edit site.
+- **C36's `6px` WAS STALE BEFORE THIS ROUND TOUCHED IT** - measured 2026-08-05 in
+  a 373px rig and before the 1.45rem title ruling. True 390px today: **21.4px,
+  and 17.9px after the ruling - a cost of 3.5px a side, no overflow.** Two wings
+  GAINED slack (`\Music` +21.0, `\Foundation` +14.9).
+- **21 OF THE 38 PRUNED REGISTER ROWS WERE PRE-EXISTING DEBT**, not this round's -
+  17 `portal.js` and 3 `Exhibit.jsx` strings the ONE SURFACE round left behind.
+  Each verified absent from source first; inbound `r` chains checked and **zero**.
+- **NO PIXEL SCREENSHOT** - the pane does not composite in this session (the rAF
+  family). Verified by painted-DOM reads and Range geometry on the served page,
+  which says what the text IS and nothing about how it looks.
+
 ### 2026-08-26 -> THE MARKING INVERTS (third packet) + THE TV WAS OPS'
 - **THE TV MIKE COULD NOT STOP WAS OPS' OWN LEFTOVER**, and the lesson is a
   hazard: **a dev server started for verification and left running is a thing

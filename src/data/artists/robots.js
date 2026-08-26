@@ -527,7 +527,12 @@ const WBR_TRACKS = [
            of the four is said better by an object the visitor can already reach.
            The face is built by `faqFace()` now — see src/data/faq-face.js for
            why the fields are absent rather than merely unset. */
-        face: faqFace("WEIRD.BABY ROBOTS", [
+        /* [2026-08-26] THE FAQ SUBTITLE TAKES THE FULL FORM IN THE HOUSE'S OWN
+           CAPS. MIKE: **"The board, the door and the FAQ subtitle agree."**
+           `faq-face.js` already declares this parameter as *"the wing, in the
+           house's own caps"*, so the full form is what belongs here and the
+           short form belongs in the bar. Was `WEIRD.BABY ROBOTS`. */
+        face: faqFace("WEIRD.BABY \\ROBOTS", [
           /* ==== [P3 2026-08-05] THE QUESTIONS ARE MIKE'S ==================
              MIKE: "THE ROBOTS FAQ — replace with the FAQ template and Mike's
              content, verbatim where given."
@@ -739,7 +744,18 @@ const spine = [
      in step and one of them would eventually be wrong. */
   {
     id: "wbr-logo",
-    title: "Weird.Baby Robots",
+    /* [2026-08-26] THE WING'S OWN SLEEVE TAKES THE FULL FORM. Was
+       `Weird.Baby Robots`. This is the string that travels through the bar's
+       centre (`Exhibit.css` E, 2026-08-11) and is drawn mixed-case rather than
+       uppercased, because `[data-exhibit="robots"]` scopes `text-transform:none`
+       so this wing's data says its own casing — which is now the backslash's
+       casing too.
+       **ITS COVER ART STILL SAYS `ROBOTS`.** `/robots/art/wbr-cover-logo.png`
+       has `ROBOTS - PURVEYORS OF THE WEIRD` in the pixels, from
+       `tools/make_robots_cover.py:72`. The nine name-bearing PNGs are OUT OF
+       SCOPE this round on Mike's word; the album title and its sleeve disagree
+       until they are redrawn, and that is stated rather than discovered. */
+    title: "Weird.Baby \\Robots",
     year: null,
     tags: ["wbr", "house", "front-desk", "cover-variant"],
     /* THE WING'S OWN SLEEVE — declared SIGNAGE in reveal/delivery.mjs, so
@@ -791,7 +807,26 @@ const spine = [
 
 export const robotsExhibit = {
   id: "robots",
-  name: "Robots",
+  /* ═══ [2026-08-26] THE DOOR CARRIES THE SHORT FORM — MIKE'S RULING ════════
+     **"THE TITLE BARS CARRY IT TOO. \ROBOTS, \MUSIC, \FOUNDATION, and the
+     rest."** `<MuseumBar>` prints this field as the page's `<h1>` and
+     `.wb-bar-room` uppercases it, so a visitor reads `\ROBOTS`.
+
+     WHAT THIS REPLACES AND WHY IT WAS WRONG BEFORE THE RULING TOUCHED IT.
+     `name: "Robots"` was the route segment with the slash taken off, and it was
+     the last of the two strings M8 diagnosed in 2026-08-03 and only half-fixed:
+     *"'Robots' and 'Weird.Baby' were ROUTE names wearing a directory's
+     clothes."* M8 changed the BOARD and left both retired words in the title
+     bars, where they have stood for twenty-three days. `weird-baby.js` carried
+     the other one; it moves in the same commit.
+
+     THE `id` DOES NOT MOVE. OPERATIONS §0 — *NO ID MOVES WHEN A LEGEND IS
+     RECUT* — which has fired four times, most recently on eight ledger rows
+     that took `reveal/transfers.mjs` down with them. `id`, `exhibitSlug`,
+     `visitPath`, `splitKey`, `cfKey` and `shopExitParam` are all untouched, and
+     `/robots` is still the address. AN ADDRESS DOES NOT CHANGE AND A NAME DOES;
+     that distinction is the reason this edit is one field. */
+  name: "\\Robots",
   exhibitSlug: "robots",
   eraAlias: {},
   spine,

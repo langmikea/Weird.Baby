@@ -116,16 +116,6 @@
    "p": "hunterRoot.shopExitParam",
    "c": "HOUSE"
   },
-  "3d8a11ce895f705f": {
-   "f": "src/data/artists/robots.js",
-   "l": 379,
-   "t": "Weird.Baby Robots",
-   "p": "spine[].title",
-   "c": "RESTATED",
-   "r": [
-    "4f092c2947cb9a8e"
-   ]
-  },
   "4f092c2947cb9a8e": {
    "f": "src/data/artists/robots.js",
    "l": 385,
@@ -147,13 +137,6 @@
    "l": 837,
    "t": "log",
    "p": "spine[].tracks[].face.entriesMode",
-   "c": "HOUSE"
-  },
-  "360512d3a8c35a47": {
-   "f": "src/data/artists/robots.js",
-   "l": 1338,
-   "t": "Robots",
-   "p": "robotsExhibit.name",
    "c": "HOUSE"
   },
   "a8827cd8628f3f58": {
@@ -245,14 +228,6 @@
    "p": "spine[].tracks[].title",
    "c": "MIKE",
    "s": "the house's own recordings, titled by their maker"
-  },
-  "5b7a541afbdd0421": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 105,
-   "t": "Weird.Baby",
-   "p": "weirdBaby.name",
-   "c": "MIKE",
-   "s": "docs/canonical/THE_CHARTER.md — the house's soul document, Papa's own"
   },
   "5bf16aa2ff714d85": {
    "f": "src/data/artists/weird-baby.js",
@@ -7111,13 +7086,6 @@
    "p": "aboutArtistTrack{}.face.entriesMode",
    "c": "HOUSE"
   },
-  "a17d5c8c3a25a034": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1355,
-   "t": "WORTH A LISTEN · {}",
-   "p": "upToTrack{}.face.footer",
-   "c": "HOUSE"
-  },
   "c4ee2aefdac8bc72": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1241,
@@ -7158,13 +7126,6 @@
    "l": 1416,
    "t": "worth_a_listen",
    "p": "HOUSE_ALBUM.tag",
-   "c": "HOUSE"
-  },
-  "27c48cb4257cb24f": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1598,
-   "t": "WORTH A LISTEN",
-   "p": "HOUSE_ALBUM.tracks[].face.subtitle",
    "c": "HOUSE"
   },
   "e90fc03a0e36599d": {
@@ -7228,13 +7189,6 @@
     "a8489db8d087a989",
     "e835557498ec2b58"
    ]
-  },
-  "3d455e133a820a53": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1707,
-   "t": "WORTH A LISTEN · WEIRD.BABY",
-   "p": "HOUSE_ALBUM.tracks[].face.footer",
-   "c": "HOUSE"
   },
   "617343a2df0bde49": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -7932,25 +7886,11 @@
    "p": "BannerTransport{}.<div>.<input>.@aria-label",
    "c": "HOUSE"
   },
-  "729a026d580aa706": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1116,
-   "t": "roll up",
-   "p": "InstrumentPanel{}.<div>.<div>.<div>.<div>.<button>.@aria-label",
-   "c": "HOUSE"
-  },
   "3564c3faa152308e": {
    "f": "src/routes/exhibit/Exhibit.jsx",
    "l": 1116,
    "t": "▲",
    "p": "InstrumentPanel{}.<div>.<div>.<div>.<div>.<button>",
-   "c": "HOUSE"
-  },
-  "95baf291c51a6518": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1128,
-   "t": "roll down",
-   "p": "InstrumentPanel{}.<div>.<div>.<div>.<div>.<button>.@aria-label",
    "c": "HOUSE"
   },
   "e071022f0eed5b0b": {
@@ -11501,31 +11441,10 @@
    "p": "WbHome{}.<div>.<div>.<nav>.<div>",
    "c": "HOUSE"
   },
-  "906cb9cd8f92cf8d": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 120,
-   "t": "Weird.Baby Robots",
-   "p": "WbHome{}.<div>.<div>.<nav>.<button>.<span>",
-   "c": "HOUSE"
-  },
   "9cd8e5cec5301678": {
    "f": "src/routes/WbHome.jsx",
    "l": 157,
    "t": "→",
-   "p": "WbHome{}.<div>.<div>.<nav>.<button>.<span>",
-   "c": "HOUSE"
-  },
-  "a2d732388e53e894": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 123,
-   "t": "Weird.Baby Music",
-   "p": "WbHome{}.<div>.<div>.<nav>.<button>.<span>",
-   "c": "HOUSE"
-  },
-  "e4dd7684c1972eaa": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 130,
-   "t": "Other Music Worth a Listen",
    "p": "WbHome{}.<div>.<div>.<nav>.<button>.<span>",
    "c": "HOUSE"
   },
@@ -11773,13 +11692,6 @@
    "c": "MIKE",
    "s": "Mike's remote-control brief, N5, 2026-08-04: \"THE INFO BOOTH'S TICKET ... ALSO add ARE YOU TRACKING ME? answered honestly - no login, what cookies do, what we keep (nothing), written against worker.js not against goodwill.\""
   },
-  "56f71c783927ab42": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 252,
-   "t": "Weird.Baby Foundation",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Only the DIRECTORY line changed; the room's own name, title bar and heading are untouched."
-  },
   "fed990836fb40a2f": {
    "f": "src/lib/reveal.js",
    "l": 46,
@@ -11793,12 +11705,6 @@
    "t": "HELD",
    "c": "HOUSE",
    "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
-  },
-  "9506f2c8e635a2b6": {
-   "f": "src/data/artists/robots.js",
-   "l": 320,
-   "t": "WEIRD.BABY ROBOTS",
-   "c": "HOUSE"
   },
   "110cf66cd27af684": {
    "f": "src/data/artists/robots.js",
@@ -11884,18 +11790,6 @@
    "f": "src/data/artists/weird-baby.js",
    "l": 58,
    "t": "About the Artist",
-   "c": "HOUSE"
-  },
-  "29422d30c2a1dd59": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 63,
-   "t": "WEIRD.BABY",
-   "c": "HOUSE"
-  },
-  "f6e60cf26ade15e8": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 96,
-   "t": "WEIRD.BABY · ABOUT THE ARTIST",
    "c": "HOUSE"
   },
   "1145c644dfebffdb": {
@@ -12606,11 +12500,6 @@
    "c": "MIKE",
    "s": "docs/canonical/THE_CHARTER.md — the house's soul document, Papa's own"
   },
-  "e23f21c8cf1cefd8": {
-   "f": "src/data/artists/foundation.js",
-   "t": "THE WEIRD.BABY FOUNDATION",
-   "c": "HOUSE"
-  },
   "5657e88724a01363": {
    "f": "src/data/artists/foundation.js",
    "t": "WHAT THE MUSEUM COSTS, AND WHO CARRIED IT",
@@ -13093,31 +12982,11 @@
    "l": 192,
    "t": "MGK-VIIIp"
   },
-  "9ab6c6fe7f9bace3": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 233,
-   "t": "FEED CONTROL"
-  },
   "22185ac737e8b1d6": {
    "c": "HOUSE",
    "f": "src/data/artists/portal.js",
    "l": 241,
    "t": "FEED"
-  },
-  "0854d5f9fe3b931b": {
-   "c": "VERIFIED",
-   "f": "src/data/artists/portal.js",
-   "l": 275,
-   "t": "MGK-NIAC",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "fa0396f287283fc7": {
-   "c": "RESTATED",
-   "f": "src/data/artists/portal.js",
-   "l": 324,
-   "t": "This feed is not available.",
-   "r": "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
   },
   "49b882d7399b6cf8": {
    "c": "HOUSE",
@@ -13143,56 +13012,6 @@
    "l": 323,
    "t": "TEST BENCH"
   },
-  "63aeabbfdd8dc162": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 332,
-   "t": "AUTO MAINT"
-  },
-  "8d6fdcfddaacd24b": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 332,
-   "t": "NON-INTERRUPTIBLE"
-  },
-  "2d0c73b5a8f5429b": {
-   "c": "RESTATED",
-   "f": "src/data/artists/portal.js",
-   "l": 334,
-   "t": "Maintenance is running. The machine will not be hurried.",
-   "r": "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
-  },
-  "fe2adc695a854444": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 335,
-   "t": "amber"
-  },
-  "122a1ff7df2002cc": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 337,
-   "t": "AT PROMPT"
-  },
-  "1dcb136402a6214a": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 337,
-   "t": "BOOTS + UPDATES DONE"
-  },
-  "cf3fd7cf33f710d8": {
-   "c": "RESTATED",
-   "f": "src/data/artists/portal.js",
-   "l": 339,
-   "t": "The unit is not at its prompt.",
-   "r": "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
-  },
-  "f55d6f652d17c9ea": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 340,
-   "t": "warm"
-  },
   "2e20a162812101f0": {
    "c": "HOUSE",
    "f": "src/data/artists/portal.js",
@@ -13210,13 +13029,6 @@
    "f": "src/data/artists/portal.js",
    "l": 346,
    "t": "SEEDED"
-  },
-  "8446742df0540cf6": {
-   "c": "RESTATED",
-   "f": "src/data/artists/portal.js",
-   "l": 347,
-   "t": "no seeded feed on file — the lamps read the seed, and there is nothing to read",
-   "r": "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
   },
   "d9d733d809dde841": {
    "c": "HOUSE",
@@ -13270,23 +13082,11 @@
    "c": "MIKE",
    "s": "Mike's sentence and Mike's approval, 2026-08-21. The answer read '...and neither of them ARMS' until the antenna selector shipped; that clause became false the moment channels 1 and 2 began arming, because they carry television or a test signal depending on the routing and neither of those is MGK-NIAC. OPS FLAGGED IT AND DID NOT WRITE IT - the replacement clause is his, which is why this is MIKE rather than RESTATED. The substance never moved: the mainframe is still not on the Portal. The rest of the answer is unchanged and was itself MOVED word for word from the MGK-NIAC FAQ at H3c."
   },
-  "9b665a5f5d804433": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 75,
-   "t": "/held/robots/twin.html"
-  },
   "5cd50fcf05606b90": {
    "c": "HOUSE",
    "f": "src/data/artists/portal.js",
    "l": 76,
    "t": "MGK-VIIIp digital twin — the Portal"
-  },
-  "96a0abf5cdd448c6": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 112,
-   "t": "Portal"
   },
   "b3eb0a64e5d5c349": {
    "c": "MIKE",
@@ -13294,33 +13094,6 @@
    "l": 232,
    "t": "ABEAL",
    "s": "P1 2026-08-06: \"ABEAL is correct canon — a division of ScrapCo — but INSTRUMENT DIVISION is DRIFT.\" The wing's own canon spells it ABEAL."
-  },
-  "b59c037706101dba": {
-   "c": "MIKE",
-   "f": "src/data/artists/portal.js",
-   "l": 235,
-   "t": "MODEL NO.",
-   "s": "THE PORTAL HOLD + THE PULL-BACK, H3a: \"stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck into a lighter recess.\""
-  },
-  "aee683befd4473a8": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 235,
-   "t": "TYPE 8p"
-  },
-  "d44c7b5865875018": {
-   "c": "MIKE",
-   "f": "src/data/artists/portal.js",
-   "l": 236,
-   "t": "SER. NO.",
-   "s": "THE PORTAL HOLD + THE PULL-BACK, H3a: \"stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck into a lighter recess.\""
-  },
-  "8b6062cddd4806e9": {
-   "c": "MIKE",
-   "f": "src/data/artists/portal.js",
-   "l": 237,
-   "t": "DATE",
-   "s": "THE PORTAL HOLD + THE PULL-BACK, H3a: \"stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck into a lighter recess.\""
   },
   "e51e83951a9cd9bd": {
    "c": "HOUSE",
@@ -13699,14 +13472,6 @@
    "t": "You're in the book.",
    "c": "HOUSE",
    "s": "the guest book's confirmation, on the page since the first build. The clause that followed it — “Welcome, Founding Visitor.” — was struck 2026-08-11 on Mike's ruling as the last not-open-yet framing on the lobby; nothing replaced it. docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
-  },
-  "a4b64a20bfeacbe1": {
-   "f": "src/data/artists/portal.js",
-   "l": 345,
-   "t": "MGK-VIIIp — the close-up",
-   "p": "spine[].tracks[].face.panel.drum.positions[].frameTitle",
-   "c": "HOUSE",
-   "s": ""
   },
   "027bb7106b406961": {
    "f": "src/data/artists/robots.js",
@@ -14957,13 +14722,6 @@
    "c": "HOUSE",
    "s": "HOUSE label on the fact grid, the same rule the other four labels carry: every value in the grid is his line, every label is Ops' word for it, on his own instruction to propose the label set from his facts and invent none of them. The VALUE beside this label is his to the character. See docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md."
   },
-  "15a16f3484a37e49": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 418,
-   "t": "Weird.Baby /Foundation /Robots /Music - August 16, 2026",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE, a NEW row: the four wings and the date are his, unedited."
-  },
   "0bbcec92db55976d": {
    "f": "src/data/house-copy.js",
    "l": 115,
@@ -15247,12 +15005,6 @@
    "c": "HOUSE",
    "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
   },
-  "8fbc0e3ed3496aaa": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "t": "antenna",
-   "c": "HOUSE",
-   "s": "the accessible-name fallback for the antenna control when a panel declares no label. Never rendered for the Portal, which declares ANTENNA; it exists so a future panel cannot ship a control with no accessible name."
-  },
   "f33e72e18a7ecfcd": {
    "f": "src/routes/robots/TestSignal.jsx",
    "t": "sine",
@@ -15453,13 +15205,6 @@
    "t": "and the store answered with the\n          application, not the file. Held material was not uploaded with this\n          build, so every held address will render the Lobby. Rebuild and deploy.",
    "p": "WbAdmin{}.heldProbeNote",
    "c": "HOUSE"
-  },
-  "156a6eb0043ec9e5": {
-   "f": "src/data/artists/portal.js",
-   "l": 360,
-   "t": "MGK-VIIIp (zoom)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike named channels 3 and 4 on 2026-08-20"
   },
   "8e5810db2d5268cf": {
    "f": "src/data/artists/robots-record.js",
@@ -16000,6 +15745,118 @@
    "l": 249,
    "t": "*",
    "s": "Ops' machinery, not a visitor-facing string - `postMessage`'s targetOrigin. The twin is same-origin by construction, which is the reason already written down for the unchecked origin on `portal-close` travelling the other way."
+  },
+  "017814c3b7b9de5b": {
+   "f": "src/data/artists/foundation.js",
+   "t": "WEIRD.BABY \\FOUNDATION",
+   "l": 1237,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "389942f53ee998e4": {
+   "f": "src/data/artists/foundation.js",
+   "t": "\\Foundation",
+   "l": 1270,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "48bcbc32ec8bebe7": {
+   "f": "src/data/artists/robots.js",
+   "t": "WEIRD.BABY \\ROBOTS",
+   "l": 535,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "cd4764feefdd69f4": {
+   "f": "src/data/artists/robots.js",
+   "t": "Weird.Baby \\Robots",
+   "l": 758,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "02c1db2238f2a0a1": {
+   "f": "src/data/artists/robots.js",
+   "t": "\\Robots",
+   "l": 829,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "7dc65afb56fbbf13": {
+   "f": "src/data/artists/weird-baby.js",
+   "t": "WEIRD.BABY \\MUSIC",
+   "l": 686,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "0365f54ae7983847": {
+   "f": "src/data/artists/weird-baby.js",
+   "t": "Weird.Baby \\Foundation \\Robots \\Music - August 16, 2026",
+   "l": 457,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "b60610c256308d47": {
+   "f": "src/data/artists/weird-baby.js",
+   "t": "WEIRD.BABY \\MUSIC · ABOUT THE ARTIST",
+   "l": 646,
+   "c": "HOUSE",
+   "s": "Composite label: the wing's name (Mike's, per the 2026-08-26 backslash ruling - see the wing-name rows in this file) inside an Ops-assembled frame. The frame is chrome and is unchanged; only the wing name moved."
+  },
+  "77cb05edb892a442": {
+   "f": "src/data/artists/weird-baby.js",
+   "t": "\\Music",
+   "l": 1009,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "ce0b17d9c856a448": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "t": "WEIRD.BABY \\WORTH A LISTEN · {}",
+   "l": 1878,
+   "c": "HOUSE",
+   "s": "Composite label: the wing's name (Mike's, per the 2026-08-26 backslash ruling - see the wing-name rows in this file) inside an Ops-assembled frame. The frame is chrome and is unchanged; only the wing name moved."
+  },
+  "f0872c7aa4feb6f7": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "t": "WEIRD.BABY \\WORTH A LISTEN",
+   "l": 2334,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "2509db45a5ca0bc7": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "t": "\\Worth a Listen",
+   "l": 2413,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "c56f474b9663cd4a": {
+   "f": "src/routes/WbHome.jsx",
+   "t": "Weird.Baby \\Robots",
+   "l": 964,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "dd9a4da545c4fe5b": {
+   "f": "src/routes/WbHome.jsx",
+   "t": "Weird.Baby \\Music",
+   "l": 980,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "a9395b71d8e971a9": {
+   "f": "src/routes/WbHome.jsx",
+   "t": "Weird.Baby \\Worth a Listen",
+   "l": 1019,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  },
+  "507d99328f9a2473": {
+   "f": "src/routes/WbHome.jsx",
+   "t": "Weird.Baby \\Foundation",
+   "l": 1051,
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
   }
  }
 }

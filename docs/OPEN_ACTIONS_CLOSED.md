@@ -579,3 +579,12 @@ PRECEDENT.** `docs/MUSEUM_PORCH_RULINGS_LOG-20260806.md:97` carries
 `[M72](OPEN_ACTIONS.md#m72)`. A round log is a diary and is not edited to track
 a closure — `docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md` has pointed at the
 closed **M40** the same way since 2026-08-16. `npm run desk` will report it.
+
+
+---
+
+## 2026-08-26 — THE WING NAMES TAKE THE BACKSLASH
+
+| row | what it was | how it closed |
+|---|---|---|
+| **M26** | **The Foundation's name differed between the board and the door**, open on Mike since 2026-08-04. The directory read *Weird.Baby Foundation* (N1 dropped the article there) and the room's own title bar and heading still read *The Foundation* / *The Weird.Baby Foundation*. It asked for one of three: one name for the bar, one for the board, **or a ruling that the two may differ.** | **CLOSED ON THE THIRD OPTION, AND ON EVERY WING RATHER THAN ONE.** Mike ruled the museum's naming form on 2026-08-26: the board carries the full form `Weird.Baby \Foundation`, the door carries the short form `\FOUNDATION`, and the FAQ subtitle carries the full form in the house's caps. **The two may differ, and now they differ by a stated shape instead of by an accident of which instruction reached which surface.** **AND THE ROW HAD BEEN QUIETLY LOAD-BEARING WHILE IT WAS OPEN**, which is the part worth keeping: `foundation.js` cited *(M26's own reading)* — *"a door carries the full name and a bar carries the room"* — as the justification for `name: "The Foundation"`. **Ops had adopted an unanswered register row as settled doctrine and built on it.** That is named in the file at the edit site so a later round meets it as a decision. **ONE RESIDUE, AND IT IS NOT M26's QUESTION:** the wing's FIRST ALBUM is still titled `The Foundation`, a section alongside `The Ledger` and `Contribute`. M26 named the title bar and the heading; an album title is content, not signage, and it is reported in the round log rather than moved on an inference. |

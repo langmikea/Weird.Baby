@@ -868,9 +868,32 @@ export default function WbHome() {
                 approved and is history). Hunter Root is a WORTH A LISTEN
                 artist served from our own vault; his door out is his own
                 site. /hr remains reachable only by URL, as an archive. */}
-            {/* [M8 2026-08-03] THE DIRECTORY NAMES THE EXHIBITS PROPERLY.
-                Mike's list, verbatim: Weird.Baby Robots · Weird.Baby Music ·
-                Other Music Worth a Listen · Information Booth.
+            {/* ═══ [2026-08-26] A CONTRADICTION THIS ROUND FOUND AND DID NOT
+                RESOLVE — READ IT BEFORE TRUSTING THE PARAGRAPH BELOW ════════
+                M8's note says the four names it set are **Mike's verbatim**.
+                `provenance/register.json` classes the same four strings
+                **HOUSE** — functional chrome, which requires no origin at all.
+                Only `Weird.Baby Foundation` was ever classed MIKE, and it
+                carries his N1 quote.
+
+                BOTH CLAIMS ARE IN THIS TREE AND THEY CANNOT BOTH BE RIGHT.
+                `provenance/README.md §4.1` names the hole that lets it stand:
+                *"It cannot verify that a declaration is true… MIKE on a row is
+                a claim by whoever wrote the row."* HOUSE needs no source, so
+                the same hole runs the other way and a row of his sits in it
+                unremarked.
+
+                IT IS LEFT OPEN ON PURPOSE. Today's ruling is Mike's beyond
+                doubt — he wrote the shape himself — so the four rows below are
+                declared MIKE from here on, and the question of what their
+                PREDECESSORS were is a separate one that only he can answer.
+                Ops did not answer it by overwriting the evidence.
+
+                [M8 2026-08-03] THE DIRECTORY NAMES THE EXHIBITS PROPERLY.
+                Mike's list, as M8 recorded it: Weird.Baby Robots · Weird.Baby
+                Music · Other Music Worth a Listen · Information Booth. **The
+                first three of those strings are retired as of 2026-08-26** and
+                are named here once, which is where a retired string is named.
                 WHAT THE OLD NAMES WERE DOING WRONG. "Robots" and "Weird.Baby"
                 were ROUTE names wearing a directory's clothes: a stranger
                 reading the board could not tell that the first two are the
@@ -892,9 +915,53 @@ export default function WbHome() {
                 and returns the visitor to the page they are standing on. That
                 is the dead control Doctrine 11's corollary forbids, and it is
                 worse than absence because it looks like a room. */}
+            {/* ═══ [2026-08-26] THE BACKSLASH — MIKE'S RULING, AND IT IS HIS
+                WORDS THAT CHANGED, NOT OPS' STYLING OF THEM ═════════════════
+                MIKE, verbatim, on how the museum refers to itself:
+
+                  "Lobby Directory (and everywhere) - this is how to refer to
+                   Weird.Baby:
+                     Weird.Baby
+                     Weird.Baby \Robots
+                     Weird.Baby \Music
+                     Weird.Baby \Foundation
+                     etc.
+                     \Robots
+                     \Music
+                     \Foundation
+                     etc."
+
+                RULED THE SAME DAY, on a census that found EIGHT forms of the
+                Robots wing's name in use at once and four of six rooms where
+                the board and the door disagreed:
+                  1. THE FULL FORM IS `Weird.Baby \Wing`; THE SHORT FORM IS
+                     `\Wing`. Both are his.
+                  2. THE TITLE BARS CARRY THE SHORT FORM — `\ROBOTS`, `\MUSIC`,
+                     `\FOUNDATION`, `\WORTH A LISTEN`.
+                  3. /wal TAKES THE HOUSE NAME LIKE EVERY OTHER WING:
+                     **"Weird.Baby \Worth a Listen"**, and the lowercase `a` is
+                     his — it is the casing `house-copy.js`'s AFFILIATION
+                     already carries in his own sentence.
+
+                THE BOARD CARRIES THE FULL FORM. It is a list of where things
+                are and a stranger reading it must be able to tell whose work
+                each room holds; that is M8's whole argument and it is
+                unchanged. What changed is the SHAPE the house name attaches by.
+
+                THE SHOP AND THE DESK ARE NOT TOUCHED, AND THAT IS AN OPS
+                READING OF "every wing", FLAGGED FOR HIS WORD. His own M8 list
+                is the evidence: *"Weird.Baby Robots · Weird.Baby Music · Other
+                Music Worth a Listen · Information Booth"* — the booth is in his
+                list and takes no house name, and the shop was never in it
+                ("it is not an exhibit and was not in his list"). The Foundation
+                is a WING (D7/M62); the shop is a shop and the booth is the
+                desk. One word from him puts either into the shape.
+
+                N1'S RULING IS UNTOUCHED AND IS WHY THIS LINE HAS NO ARTICLE.
+                *"Directory loses 'The'"* — no board row gains one back. */}
             {ROBOTS_OPEN && (
               <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
-                <span>Weird.Baby Robots</span><span className="wb-dir-arrow">→</span>
+                <span>Weird.Baby \Robots</span><span className="wb-dir-arrow">→</span>
               </button>
             )}
             {/* [L1 2026-08-06] THE RECORD IS OFF THE BOARD. MIKE: it is clutter
@@ -910,7 +977,7 @@ export default function WbHome() {
                 (App.jsx) and still opens the wing with the Record selected —
                 the door is not bricked up, it is off the board. */}
             <button className="wb-dir-entry" onClick={() => navigate("/wb")}>
-              <span>Weird.Baby Music</span><span className="wb-dir-arrow">→</span>
+              <span>Weird.Baby \Music</span><span className="wb-dir-arrow">→</span>
             </button>
             {/* [WAL 2026-08-02] listed exactly like the others: same button,
                 same arrow, same navigate call. A new exhibit is one entry here
@@ -928,8 +995,28 @@ export default function WbHome() {
                 the column of arrows down the board is unbroken. Indenting the
                 whole button would have taken its rule and its arrow with it and
                 read as a broken row rather than a nested one. */}
+            {/* ═══ [2026-08-26] AND THE INDENT'S STATED REASON IS NOW GONE.
+                FLAGGED, NOT FIXED ══════════════════════════════════════════
+                F7's argument for `wb-dir-entry-sub` was that this was **"the
+                only entry on the board that begins with the word 'Other'"**,
+                and that the indent made visible what M8's ORDER was saying —
+                *"the first two lines are the house's own, this one is
+                everybody else's."*
+
+                MIKE'S RULING TODAY TAKES THE WORD "Other" OFF THE BOARD AND
+                GIVES THIS ROW THE HOUSE NAME. All four wings now read
+                `Weird.Baby \…`, so the distinction the indent was drawing is
+                no longer one the board draws anywhere else — and the room it
+                points at still holds other people's records, which is the fact
+                F7 wanted visible.
+
+                THE INDENT STAYS UNTIL HE RULES ON IT. He ruled the NAME; he
+                did not rule the layout, and Ops does not take a visible
+                decision of his off the glass on an inference. Same for M8's
+                ORDER, which encodes the same reading and is likewise untouched.
+                Both are in this round's report for his word. */}
             <button className="wb-dir-entry wb-dir-entry-sub" onClick={() => navigate("/wal")}>
-              <span>Other Music Worth a Listen</span><span className="wb-dir-arrow">&rarr;</span>
+              <span>Weird.Baby \Worth a Listen</span><span className="wb-dir-arrow">&rarr;</span>
             </button>
             {/* [N1 2026-08-04] THE BOOTH LEAVES THIS POSITION — see the note at
                 the foot of the board, where it now stands. */}
@@ -961,7 +1048,7 @@ export default function WbHome() {
                 heading still say what they said. A board is a list of where
                 things are; the door still carries the full name. */}
             <button className="wb-dir-entry" onClick={() => navigate("/foundation")}>
-              <span>Weird.Baby Foundation</span><span className="wb-dir-arrow">→</span>
+              <span>Weird.Baby \Foundation</span><span className="wb-dir-arrow">→</span>
             </button>
             <button className="wb-dir-entry" onClick={() => navigate("/shop")}>
               <span>Gift Shop</span><span className="wb-dir-arrow">→</span>

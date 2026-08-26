@@ -1797,7 +1797,7 @@ function aboutArtistTrack(a) {
          FOR a thing that is now gone and a later round reading it would put
          the warning back. */
       lines: a.siteNote ? ["NOTE     " + a.siteNote] : undefined,
-      footer: "WORTH A LISTEN · " + a.name,
+      footer: "WEIRD.BABY \\WORTH A LISTEN · " + a.name,
     },
   };
 }
@@ -1875,7 +1875,7 @@ function upToTrack(a) {
          noise. **What is lost is real and is named:** an undated wall of
          thumbnails no longer says it is a snapshot, so a visitor cannot tell
          it is not live. Recorded as a reduction. */
-      footer: "WORTH A LISTEN · " + a.name,
+      footer: "WEIRD.BABY \\WORTH A LISTEN · " + a.name,
     },
   };
 }
@@ -2081,7 +2081,8 @@ const HOUSE_ALBUM = {
       face: {
         kind: "text",
         title: "Meet the Artists",
-        subtitle: "WORTH A LISTEN",
+        /* [2026-08-26] was `WORTH A LISTEN`. */
+        subtitle: "WEIRD.BABY \\WORTH A LISTEN",
         /* [V1 2026-08-06] THE BLURB IS STRUCK, on Mike's ruling. "Four of them.
            Two songs each, all playable. Every one of them is somebody's
            favourite record and none of them is ours." — the third clause is the
@@ -2238,7 +2239,10 @@ const HOUSE_ALBUM = {
            card, so the link went with it. A pointer left standing where its own
            reason has walked away is the kind of orphan every round of this
            project has had to go back and remove. */
-        footer: "WORTH A LISTEN · WEIRD.BABY",
+        /* [2026-08-26] was `WORTH A LISTEN · WEIRD.BABY`, which put the wing
+           and the house on either side of a separator as if they were two
+           parties. The house name is inside the wing's name now. */
+        footer: "WEIRD.BABY \\WORTH A LISTEN",
         /* [D3a 2026-08-06] M53 CLOSED, ON MIKE'S STRIKE, AND THE SCRUBBER IS
            UNTOUCHED. The second sentence — "Every claim about an artist here is
            already on that artist's own card, sourced there." — carried no
@@ -2324,7 +2328,10 @@ const HOUSE_ALBUM = {
       title: "FAQ",
       tags: ["wal", "house", "faq", "questions", "artists", "rights"],
       videos: [],
-      face: faqFace("WORTH A LISTEN", [
+      /* [2026-08-26] the wing in the house's own caps, full form — Mike:
+         "The board, the door and the FAQ subtitle agree." Was `WORTH A LISTEN`,
+         which named no house at all. */
+      face: faqFace("WEIRD.BABY \\WORTH A LISTEN", [
         /* ═══ [2026-08-17] TWO OF THE THREE ARE STRUCK — HIS WALKTHROUGH ════
            MIKE: **"KILL 'Can I use what is here?' entirely, question and
            answer. KILL 'Whose pictures are these?' entirely."**
@@ -2371,7 +2378,39 @@ export const worthAListenArtists = ARTISTS;
 
 export const worthAListenExhibit = {
   id: "wal",
-  name: "Worth A Listen",
+  /* ═══ [2026-08-26] THIS WING TAKES THE HOUSE NAME — MIKE'S RULING ══════
+     **"/wal TAKES THE HOUSE NAME. 'Weird.Baby \Worth a Listen.' Every wing
+     takes it."** The board carries the full form; this field is the door and
+     carries the short one, uppercased by `.wb-bar-room` to `\WORTH A LISTEN`.
+
+     IT IS THE BIGGEST CHANGE ON THE BOARD AND IT IS NOT A TIDY-UP. Until today
+     the directory read `Other Music Worth a Listen` — M8 built that name to say
+     *whose work is in the room*, and F7 indented the row to say it again. The
+     house name now sits on all four wings, so the board no longer separates
+     ours from theirs by NAME. **The room's contents are unchanged and still
+     other people's records**; what changed is that the museum says the room is
+     the museum's.
+
+     HIS LOWERCASE `a` IS CARRIED AND IT IS NOT AN ACCIDENT. He wrote *"Worth a
+     Listen"*, which is the casing `house-copy.js`'s AFFILIATION already prints
+     in his own sentence and which `provenance/register.json` already classes
+     MIKE. The retired `Worth A Listen` was HOUSE and had the capital.
+     **AND IT RENDERS NOWHERE, WHICH WAS MEASURED RATHER THAN ASSUMED.** The
+     first draft of this note said the lowercase `a` survives on the board. It
+     does not: `.wb-dir-entry` in `WbHome.css:53` sets `text-transform:
+     uppercase`, exactly as `.wb-bar-room` and every FAQ subtitle do. **Every
+     surface in the museum that prints a wing name is uppercased**, so `a` and
+     `A` are the same glyph on all of them.
+     THE CASING IS THEREFORE IN THE DATA AND NOT ON THE GLASS — it is what
+     `textContent` returns, what a copy takes and what the register hashes, and
+     a visitor sees `WORTH A LISTEN` either way. His instruction is carried to
+     the character; the fact that no surface shows it is FLAGGED for his word
+     and not fixed, because un-uppercasing four surfaces to reveal one letter is
+     a visual decision and it is his.
+
+     C36 IS THE MEASURED RISK AND IT IS OPEN. This is the longest room name the
+     bar holds; the before/after at 390px is in this round's report. */
+  name: "\\Worth a Listen",
   exhibitSlug: "wal",
   eraAlias: {},
   spine,
