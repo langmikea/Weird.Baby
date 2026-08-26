@@ -62,6 +62,48 @@ const ROBOTS = path.resolve(MUSEUM, "..", "weird-baby-robots");
 const ROOT = { museum: MUSEUM, robots: ROBOTS };
 
 export const THUMB_PX = 240;
+
+/* ═══ [2026-08-25] THE FAINT-DOCUMENT STRETCH — `[SHAPE]` ═══════════════════
+   MIKE: the manual pages are mostly white space, and a thumbnail of one shows
+   nothing. MEASURED before anything was written, because "mostly white space"
+   turned out to be the wrong diagnosis in the useful direction:
+
+     the pages are 2040x2640, mean luminance 246-250 of 255, and
+     91-97% of every page sits in the brightest band (224-255).
+     Ink below 200 is 0.3%-1.8% of pixels.
+
+   SO THEY ARE FAINT, NOT SMALL, AND A CROP IS NOT THE ANSWER. The ink's
+   bounding box is 61-92% of the page — it is sparse but spread to the margins
+   by page numbers, headers and rules — so cropping to it buys x1.00 to x1.24.
+   `sharp.trim()` is worse: at threshold 18 it returns 98.4-99.7% of the page,
+   because the scans carry edge noise. No single band is representative either;
+   the densest contiguous 25% holds 34-51% of the ink.
+
+   WHAT THE NUMBERS DO SUPPORT IS A CONTRAST STRETCH, and the parameters are
+   measured rather than taste. On page-07, ink below 200 goes:
+
+     original          1.8%      normalise 1/99    6.8%
+     normalise 2/98    9.8%   <- chosen
+     normalise 5/95   88.9%      blown out
+     normalise 10/90   1.8%      no-op
+
+   `normalise()` IS NOT A MIN/MAX STRETCH AND THAT IS WHY IT WORKS HERE. These
+   pages already contain a true 0 and a true 255, so a min/max map would do
+   nothing; sharp normalises on PERCENTILES, which is what reaches the band the
+   ink actually lives in.
+
+   IT IS APPLIED PER IMAGE, ON THE IMAGE'S OWN EVIDENCE, AND NEVER TO A
+   PHOTOGRAPH. `stretch: "auto"` reads each image's greyscale mean and applies
+   the stretch only above `STRETCH_ABOVE_MEAN`. Measured: a manual page is 246,
+   the machine photograph `front_screen.png` is 108, so the gate skips every
+   photograph by a margin of 127. A blanket stretch would wreck them.
+
+   THE CACHE KEY CARRIES THE TREATMENT (`@480a`), so a stretched 480 and a plain
+   240 coexist and no existing entry is invalidated. */
+export const STRETCH_LOWER = 2;
+export const STRETCH_UPPER = 98;
+export const STRETCH_ABOVE_MEAN = 235;
+
 const CACHE = path.join(HERE, ".thumb-cache.json");
 
 /* ── the relative href out of the page's own folder into a repo ─────────────
@@ -84,19 +126,28 @@ function loadCache() {
 /** one inline WebP per row, or null. `null` is drawn, never hidden — a tile
  *  with no picture is a fact about the file and the whole point of the page is
  *  that he can see which ones those are. */
-export async function thumbnails(rows, { fresh = false, px = THUMB_PX, log = () => {} } = {}) {
+export async function thumbnails(rows, { fresh = false, px = THUMB_PX,
+                                         stretch = false, log = () => {} } = {}) {
   const cache = fresh ? {} : loadCache();
   const out = new Map();
-  let hits = 0, made = 0, failed = 0, done = 0;
+  let hits = 0, made = 0, failed = 0, done = 0, stretched = 0;
 
   for (const e of rows) {
-    const key = `${e.sha256 || e.path}@${px}`;
+    const key = `${e.sha256 || e.path}@${px}${stretch === "auto" ? "a" : stretch ? "n" : ""}`;
     if (e.kind !== "image") { out.set(e.uid, null); continue; }
     if (cache[key]) { out.set(e.uid, cache[key]); hits++; continue; }
     const abs = path.join(ROOT[e.repo], e.path.split("/").join(path.sep));
     try {
-      const buf = await sharp(abs, { failOn: "none" })
-        .rotate()
+      /* THE DECISION IS THE IMAGE'S OWN, and it is taken before the resize so
+         it reads the real page rather than an artefact of scaling. */
+      let doStretch = stretch === true;
+      if (stretch === "auto") {
+        const st = await sharp(abs, { failOn: "none" }).greyscale().stats();
+        doStretch = st.channels[0].mean > STRETCH_ABOVE_MEAN;
+      }
+      let pipe = sharp(abs, { failOn: "none" }).rotate();
+      if (doStretch) { pipe = pipe.normalise({ lower: STRETCH_LOWER, upper: STRETCH_UPPER }); stretched++; }
+      const buf = await pipe
         .resize(px, px, { fit: "inside", withoutEnlargement: true })
         .webp({ quality: 62 })
         .toBuffer();
@@ -108,7 +159,7 @@ export async function thumbnails(rows, { fresh = false, px = THUMB_PX, log = () 
     if (++done % 40 === 0) log(`  thumbnails ${done}/${rows.length}`);
   }
   try { fs.writeFileSync(CACHE, JSON.stringify(cache)); } catch { /* a cache that cannot be written is not an error */ }
-  return { thumbs: out, hits, made, failed };
+  return { thumbs: out, hits, made, failed, stretched };
 }
 
 /* ═══ THE PAGE ═════════════════════════════════════════════════════════════ */
