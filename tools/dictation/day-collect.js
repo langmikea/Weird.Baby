@@ -16,24 +16,24 @@
    One file, assigned to a global, works in both realms untouched — the same
    construction `record-edit.client.js` already uses.
 
-   ── [MIKE, 2026-08-26] WYSIWYG, AND THE DEDENT IS GONE ─────────────────────
-   **HE ASKED: *"Is it WYSIWYG? If so, that is the test."*** It was not, and
-   this file held half the reason. The editor drew `pre-wrap` and the museum
-   drew `pre-line`, so a run of spaces showed in the box and collapsed on the
-   page — and this file compensated with a DEDENT: the common leading run came
-   off for display and was put back on save, with the box announcing *"2 spaces
-   off"* underneath.
+   ── [MIKE, 2026-08-26] WYSIWYG, IN TWO RULINGS ON ONE DAY ──────────────────
+   **FIRST HE ASKED: *"Is it WYSIWYG? If so, that is the test."*** It was not:
+   the museum drew `pre-line`, which COLLAPSES runs of spaces inside a line,
+   while the box showed them — `=  86%` in the box, `= 86%` on the glass. The
+   museum went to `pre-wrap` and that half stands.
 
-   **ALL OF THAT MACHINERY EXISTED ONLY BECAUSE THE TWO ENDS DISAGREED.** The
-   museum is `pre-wrap` now (`.vp-rec-sect-body`, `Exhibit.css`), his alignment
-   survives to the visitor, and there is nothing left to compensate for. So
-   `dedent`, `reindent`, the per-block `cut` and the announcement are **gone
-   rather than defaulted to zero** — a transformation that is always the
-   identity is a transformation waiting to be re-enabled by somebody who does
-   not know why it was there.
+   **THEN HE READ THE EDITOR AGAIN: *"From Exec Summary and on, the indent is
+   double indented, should not be."*** Because `pre-line` had been doing TWO
+   things and only the first was wrong. It also REMOVED the leading indent of
+   each line, and the box's DEDENT agreed with it — both ends put a body at one
+   level. Dropping the dedent with it left the recipe's one level of indent and
+   his own 2 or 4 leading spaces on top of it, at both ends at once.
 
-   **WHAT THE BOX HOLDS IS NOW WHAT THE TREE HOLDS.** That is one sentence and
-   it replaces four paragraphs of round-trip reasoning.
+   **SO THE DEDENT IS BACK AND THE ARGUMENT IS AT `dedent` BELOW.** Inner runs
+   stay visible; the leading run comes off for DISPLAY at both ends, and the
+   museum does the same thing in `RecordEntry.jsx`'s `dedentPara`. The `2
+   spaces off` announcement does NOT come back — Mike killed it, and a rule
+   both ends obey has nothing to announce.
 
    ── WHAT IT STILL HAS TO GET RIGHT ─────────────────────────────────────────
 
@@ -51,11 +51,11 @@
       keeps every character and throws away the one bit that says they are
       COLUMNS. The shape travels on the item.
 
-   3. **AN UNTOUCHED BOX RETURNS THE ITEMS THAT ARRIVED, NOT A RE-SPLIT.** With
-      the dedent gone this is the only transformation left that could move a
-      character, and it moves none: a box whose text still equals what it was
-      seeded with emits the original item array, boundaries and shapes intact.
-      The blank-line split is reached only by a box he has changed.
+   3. **AN UNTOUCHED BOX RETURNS THE ITEMS THAT ARRIVED, NOT A RE-SPLIT.** A
+      box whose text still equals the DEDENTED form of what it was seeded with
+      emits the original item array — boundaries, shapes and leading spaces
+      intact. The blank-line split and the re-indent are reached only by a box
+      he has changed.
 
    4. **AN EMPTY FIELD IS OMITTED, NOT EMITTED AS `""`.** That is the shape
       `draftEntries` itself produces. A cleared field therefore leaves the KEY
@@ -75,14 +75,63 @@
 (function (root) {
   "use strict";
 
+  /* ═══ [MIKE, 2026-08-26] THE DEDENT IS BACK, AND SO IS THE MUSEUM'S ═══════
+     **IT WAS REMOVED THE SAME DAY AND THAT WAS AN OVER-REACH.** His question
+     was *"Is it WYSIWYG?"*, and the answer was no because the museum's
+     `pre-line` COLLAPSED runs of spaces inside a line while the box showed
+     them. But `pre-line` was doing two things, and the other one — REMOVING
+     the leading indent of each line — was right, and the box's dedent agreed
+     with it. Dropping both put a second level of indent on the glass and in
+     the box on the same afternoon: *"From Exec Summary and on, the indent is
+     double indented, should not be."*
+
+     SO INNER RUNS STAY VISIBLE — that half of the ruling stands, `=  86%`
+     draws with both spaces at both ends — AND THE LEADING RUN COMES OFF FOR
+     DISPLAY AT BOTH ENDS. `RecordEntry.jsx`'s `dedentPara` is the museum's
+     copy of this arithmetic and `day:proof` asserts the two agree on every
+     string in the Record.
+
+     ── AND IT IS PUT BACK ON SAVE, WHICH IS WHAT KEEPS THE DATA HIS ──────────
+     The alternative — save what the box shows — would strip his leading spaces
+     out of `robots-record.js` the first time he pressed Save, silently, on
+     every section he never touched. §0 VERBATIM says his characters are his,
+     so the transform is DISPLAY-ONLY: an untouched box emits the original
+     string byte for byte, and a box he changed is re-indented to that block's
+     own level so an edit lands where the paragraph above it sits.
+
+     WYSIWYG IS UNAFFECTED BECAUSE WYSIWYG IS ABOUT THE BOX AND THE PAGE, NOT
+     ABOUT THE BOX AND THE FILE. He never reads the file. */
+  function dedent(s) {
+    var lines = String(s).split("\n");
+    var runs = [], i;
+    for (i = 0; i < lines.length; i++) {
+      if (lines[i].trim() !== "") runs.push(lines[i].match(/^ */)[0].length);
+    }
+    var cut = runs.length ? Math.min.apply(null, runs) : 0;
+    if (!cut) return { text: String(s), cut: 0 };
+    var out = [];
+    for (i = 0; i < lines.length; i++) out.push(lines[i].slice(cut));
+    return { text: out.join("\n"), cut: cut };
+  }
+
+  /* PUT IT BACK ON, AND ONLY ON LINES THAT CARRY SOMETHING. Padding a blank
+     line would add trailing whitespace he never typed. */
+  function reindent(s, cut) {
+    if (!cut) return String(s);
+    var pad = new Array(cut + 1).join(" ");
+    return String(s).split("\n")
+      .map(function (l) { return l.trim() === "" ? l : pad + l; })
+      .join("\n");
+  }
+
   /* ── ONE BOX, ONE STRING ─────────────────────────────────────────────────
-     `f` is `{ orig, text }`. There is no transformation left: what he can see
-     in the box is what is written. `orig` is kept because `P1` and the
-     untouched test below are worth more than the byte it costs, and because a
-     future round that adds one back has an obvious place to hang it. */
+     `f` is `{ orig, cut, text }`. An untouched box returns its original
+     verbatim; a changed one is re-indented to the block's own level. */
   function outOf(f) {
     if (!f) return "";
-    return String(f.text == null ? "" : f.text);
+    var t = String(f.text == null ? "" : f.text);
+    if (f.orig != null && dedent(f.orig).text === t) return f.orig;
+    return reindent(t, f.cut || 0);
   }
 
   /* ── ONE BOX, MANY PARAGRAPHS — AND WHY THE GROUPING EXISTS ─────────────
@@ -104,17 +153,40 @@
      returns its original item array verbatim, so the round trip of a day
      nobody edited cannot depend on the split being reversible. */
   var SPLIT = /\n[ \t]*\n/;
+  /* THE PARAGRAPH JOIN, NAMED ONCE — a blank line is the boundary one box
+     carries between the items of one section body. */
+  var PARA = "\n\n";
+
+  /* THE CUT IS PER PARAGRAPH, NOT PER BOX, AND THAT IS THE MUSEUM'S UNIT.
+     `RecordEntry.jsx` draws one `<p>` per body item and dedents each one on its
+     own. A box groups several items, so dedenting the JOINED text takes the
+     minimum across all of them — and where one paragraph sits at 4 and another
+     at 2, the box cuts 2 and leaves the first paragraph showing a second level
+     while the museum shows none. **Measured on Record 003's ADDENDUM 02**,
+     which is exactly that shape and is the last section of that day: the box
+     read `"  THE CEO         - one page…"` and the page read `"THE CEO…"`.
+     So every item is dedented on its own and the box is the join of those. */
+  function itemTexts(b) {
+    return (b.items || []).map(function (x) {
+      return typeof x === "string" ? dedent(x).text : String(x);
+    });
+  }
 
   function blockOut(b) {
     if (b.kind === "pre") return [{ pre: outOf(b) }];
     var t = String(b.text == null ? "" : b.text);
-    if (b.raw != null && b.raw === t) {
+    if (b.items && itemTexts(b).join(PARA) === t) {
       /* UNTOUCHED: the items that arrived, in the shapes they arrived in. */
       return (b.items || []).slice();
     }
-    var parts = t.split(SPLIT), out = [], i;
+    var cuts = b.cuts || [], parts = t.split(SPLIT), out = [], i;
     for (i = 0; i < parts.length; i++) {
-      if (parts[i].trim() !== "") out.push(parts[i]);
+      if (parts[i].trim() === "") continue;
+      /* A NEW PARAGRAPH TAKES THE LEVEL OF THE ONE BEFORE IT, which is what
+         "lands level with the paragraph above" means; the first one with no
+         history at all lands flush. */
+      var c = i < cuts.length ? cuts[i] : (cuts.length ? cuts[cuts.length - 1] : 0);
+      out.push(reindent(parts[i], c));
     }
     return out;
   }
@@ -132,9 +204,12 @@
     var out = [], run = [], i;
     function flush() {
       if (!run.length) return;
-      var raw = run.join("\n\n");
-      out.push({ uid: "b" + (++UID), kind: "strs", items: run.slice(),
-        raw: raw, text: raw });
+      var items = run.slice();
+      var cuts = items.map(function (x) { return dedent(x).cut; });
+      var texts = items.map(function (x) { return dedent(x).text; });
+      out.push({ uid: "b" + (++UID), kind: "strs", items: items,
+        raw: items.join("\n\n"), cuts: cuts, cut: cuts.length ? cuts[0] : 0,
+        text: texts.join("\n\n") });
       run = [];
     }
     for (i = 0; i < (items || []).length; i++) {
@@ -142,19 +217,23 @@
       if (typeof p === "string") { run.push(p); continue; }
       flush();
       if (p && typeof p.pre === "string") {
+        /* A LISTING KEEPS ITS OWN LEADING RUN. `Listing` derives the museum's
+           columns from exactly those spaces, so a dedent here would move the
+           whole tree left on the glass. cut 0, text = raw. */
         out.push({ uid: "b" + (++UID), kind: "pre", items: [p],
-          raw: p.pre, text: p.pre });
+          raw: p.pre, cuts: [0], cut: 0, text: p.pre });
         continue;
       }
       var s = JSON.stringify(p, null, 1);
-      out.push({ uid: "b" + (++UID), kind: "opaque", items: [p], raw: s, text: s });
+      out.push({ uid: "b" + (++UID), kind: "opaque", items: [p], raw: s, cuts: [0], cut: 0, text: s });
     }
     flush();
     return out;
   }
 
   function fieldOf(raw) {
-    return { orig: String(raw), text: String(raw) };
+    var d = dedent(String(raw));
+    return { orig: String(raw), cut: d.cut, text: d.text };
   }
 
   /* ── AN ENTRY BECOMES A DAY ──────────────────────────────────────────────
@@ -302,7 +381,7 @@
   }
 
   root.WBDay = {
-    outOf: outOf, blockOut: blockOut, blocksOf: blocksOf, fieldOf: fieldOf,
+    dedent: dedent, reindent: reindent, outOf: outOf, blockOut: blockOut, blocksOf: blocksOf, fieldOf: fieldOf,
     modelOf: modelOf, collect: collect, keysOf: keysOf, diffKeys: diffKeys,
     budgetMark: budgetMark, asRendered: asRendered,
     STRING_FIELDS: STRING_FIELDS,

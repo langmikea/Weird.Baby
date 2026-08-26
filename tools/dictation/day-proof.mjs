@@ -20,6 +20,12 @@
          exists is that `record:land`'s guard 8 passes this case.
      P3  A DELETION IS NEVER SILENT — and the limit is stated rather than
          glossed: it cannot tell a deliberate deletion from a bug.
+     P4  WYSIWYG — the CONTROL can hold the data, and both ends declare the
+         same white-space. P1-P3 could not see either: they drive the collector
+         in node and never type into the real box.
+     P5  ONE LEVEL OF INDENT, and both ends remove the same leading run. This
+         is the question P4 did not ask — both ends can agree on `pre-wrap`
+         and still draw two levels.
 
    ── HOW IT RUNS ────────────────────────────────────────────────────────────
    AGAINST THE REAL EVERYTHING. The real collector, the real server, the real
@@ -219,12 +225,12 @@ if (PRE_ENTRY) {
   say(false, "no entry in the Record carries a {pre} listing — P1.1 cannot run");
 }
 
-/* ── P1.2 HIS LEADING SPACES REACH THE VISITOR ─────────────────────────
-   [REWRITTEN 2026-08-26] This used to prove the DEDENT — that the box showed
-   his indent stripped and saved it back. **The dedent is gone**: the museum
-   draws `pre-wrap`, so his indent is his and it reaches the glass, and the
-   property worth proving is now the simplest one there is. What he typed is
-   what is stored, untouched blocks and edited blocks alike. */
+/* ── P1.2 HIS LEADING SPACES ARE HIS, AND THE BOX SHOWS ONE LEVEL ──────
+   [CORRECTED 2026-08-26, second time in one day] This asserted the dedent,
+   then asserted its absence, and now asserts it again — because the dedent
+   was removed on a reading that missed what `pre-line` had been doing, and
+   Mike saw the second level of indent the same afternoon. The property is:
+   the box shows ONE level, and the DATA keeps every character. */
 if (INDENT_ENTRY) {
   const e = clone(INDENT_ENTRY);
   const out = WB.collect(WB.modelOf(e));
@@ -232,49 +238,55 @@ if (INDENT_ENTRY) {
     .filter(x => typeof x === "string" && /^ +\S/m.test(x)).length;
   say(norm(out) === norm(e),
     `Record ${String(e.no).padStart(3, "0")}'s leading indent survives an untouched save `
-    + `verbatim — ${indented} indented paragraph(s), nothing stripped and nothing re-applied`);
+    + `verbatim — ${indented} indented paragraph(s); the box SHOWS one level and SAVES `
+    + `his characters`);
 
-  /* AND AN EDITED BOX STORES EXACTLY WHAT IS IN IT. No level is inferred for
-     him: a line typed flush left is stored flush left, which is what WYSIWYG
-     means at this end. */
+  /* AND AN EDITED BOX LANDS AT THE BLOCK'S OWN LEVEL, so a line he adds sits
+     with the paragraph above it rather than at a different indent in the file. */
   const m = WB.modelOf(clone(e));
-  const s0 = m.sections.find(s => s.blocks.some(b => /^ +\S/m.test(b.text)));
-  const blk = s0.blocks.find(b => /^ +\S/m.test(b.text));
-  blk.text = blk.text + "\n\n      A line the proof typed, at six spaces.";
+  const s0 = m.sections.find(s => s.blocks.some(b => b.cut > 0));
+  const blk = s0.blocks.find(b => b.cut > 0);
+  const cut = blk.cut;
+  blk.text = blk.text + "\n\nA line the proof typed.";
   const typed = WB.collect(m);
   const added = (typed.sections.find(s => s.label === s0.label.orig) || {}).body || [];
   const mine = added.find(x => typeof x === "string" && /A line the proof typed/.test(x));
-  say(mine === "      A line the proof typed, at six spaces.",
-    `and a line typed INTO that block is stored at the indent it was typed at — six spaces, `
-    + `neither stripped nor "corrected" to the block's own level`);
+  say(mine === " ".repeat(cut) + "A line the proof typed.",
+    `and a line typed INTO that block is stored at the block's own level — ${cut} space(s) `
+    + `re-applied, so it draws level with the paragraph above it at both ends`);
 
-  /* LOST FIRST: the collector as it was until today, which dedented for
-     display. With the museum on pre-wrap that is no longer a compensation,
-     it is a deletion of his spacing. */
-  /* THE MUTATION GOES WHERE HIS BODIES ACTUALLY TRAVEL. A first cut dedented
-     `outOf` and changed NOTHING, because a `strs` block short-circuits in
-     `blockOut` and returns its original items without ever calling `outOf`.
-     A breakage that misses the live path is a breakage that proves the check
-     is asleep — so it is the untouched return that dedents here. */
+  /* LOST FIRST: a box that SAVES WHAT IT SHOWS. It looks like the simplest
+     possible editor and it strips his leading spaces out of the tree the first
+     time he presses Save, on every section he never touched. */
+  /* THE MUTATION HAS TO REMOVE BOTH HALVES, AND A FIRST CUT THAT REMOVED ONLY
+     THE RE-INDENT CHANGED NOTHING — the untouched short-circuit returns the
+     original items before the re-indent is ever reached. **That is the third
+     time in this file a breakage has missed the live path**, and it is the
+     reason every one of them is checked for actually going red. */
   const b = broken(
-    "    if (b.raw != null && b.raw === t) {\n"
+    "    if (b.items && itemTexts(b).join(PARA) === t) {\n"
     + "      /* UNTOUCHED: the items that arrived, in the shapes they arrived in. */\n"
     + "      return (b.items || []).slice();\n"
     + "    }",
-    "    if (b.raw != null && b.raw === t) {\n"
-    + "      return (b.items || []).map(function (x) {\n"
-    + "        return typeof x === \"string\"\n"
-    + "          ? x.split(\"\\n\").map(function (l) { return l.replace(/^ +/, \"\"); }).join(\"\\n\")\n"
-    + "          : x; });\n"
-    + "    }",
-    "a dedenting collector");
-  if (b) {
-    const outB = b.collect(b.modelOf(clone(e)));
+    "    /* the untouched short-circuit, deliberately removed */",
+    "save-what-you-show-A");
+  const b2 = b && broken(
+    "      var c = i < cuts.length ? cuts[i] : (cuts.length ? cuts[cuts.length - 1] : 0);\n"
+    + "      out.push(reindent(parts[i], c));",
+    "      out.push(parts[i]); /* and the re-indent with it */",
+    "save-what-you-show-B") && load(COLLECT_SRC
+      .replace("    if (b.items && itemTexts(b).join(PARA) === t) {\n"
+        + "      /* UNTOUCHED: the items that arrived, in the shapes they arrived in. */\n"
+        + "      return (b.items || []).slice();\n"
+        + "    }", "")
+      .replace("      var c = i < cuts.length ? cuts[i] : (cuts.length ? cuts[cuts.length - 1] : 0);\n"
+        + "      out.push(reindent(parts[i], c));", "      out.push(parts[i]);"));
+  if (b2) {
+    const outB = b2.collect(b2.modelOf(clone(e)));
     lost(JSON.stringify(outB) !== JSON.stringify(e),
-      `WITH A DEDENTING COLLECTOR — which is what stood here until today — Record `
-      + `${String(e.no).padStart(3, "0")} comes back with its leading spaces gone. That was a `
-      + `COMPENSATION while the museum collapsed them; against a pre-wrap museum it is a `
-      + `deletion of something a visitor would have seen.`);
+      `WITH THE BOX SAVING WHAT IT SHOWS, merely OPENING the page and pressing Save strips `
+      + `the leading spaces of every section out of Record `
+      + `${String(e.no).padStart(3, "0")} — silently, and on sections he never touched.`);
   }
 } else {
   say(false, "no entry carries a leading indent — P1.2 cannot run");
@@ -672,6 +684,96 @@ const WS = "pre-wrap";
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   P5 — ONE LEVEL OF INDENT, AND BOTH ENDS REMOVE THE SAME ONE
+   ═══════════════════════════════════════════════════════════════════════════
+   MIKE, 2026-08-26: **"From Exec Summary and on, the indent is double
+   indented, should not be."**
+
+   THE CAUSE WAS THE PREVIOUS ROUND, AND P4 COULD NOT SEE IT. P4 asserts that
+   both ends declare the SAME white-space, and they did — `pre-wrap` at both.
+   What it never asked is whether that declaration leaves ONE level of indent.
+   `pre-line` had been doing two things; only the collapse of inner runs was
+   wrong, and dropping the leading-indent removal with it put his own 2 or 4
+   spaces on top of the recipe's one level, on the glass and in the box.
+
+   SO P5 IS THE QUESTION P4 DID NOT ASK:
+     P5.1  THE TWO DEDENTS AGREE — `day-collect.js`'s and `RecordEntry.jsx`'s,
+           on every string in the Record. They are duplicated because a museum
+           component may not import from `tools/`, so the relation is asserted
+           rather than the files merged.
+     P5.2  NO BODY REACHES EITHER SURFACE WITH A LEADING RUN LEFT ON IT.
+     P5.3  AND HIS RELATIVE STEPS AND INNER RUNS SURVIVE IT.
+   =========================================================================== */
+head("P5 — ONE LEVEL OF INDENT  ·  AND BOTH ENDS REMOVE THE SAME ONE");
+{
+  const JSX = fs.readFileSync("src/routes/exhibit/RecordEntry.jsx", "utf8");
+
+  /* the museum's copy, lifted out of its own source and run — not
+     reimplemented here, which would make this a test of a third copy. */
+  const m = JSX.match(/function dedentPara\(s\) \{[\s\S]*?\n\}/);
+  say(!!m, "RecordEntry.jsx carries dedentPara — the museum's own leading-run removal");
+  const museumDedent = m ? (new Function(m[0] + "\n;return dedentPara;"))() : null;
+
+  const bodies = ENTRIES.flatMap(e => (e.sections || []).flatMap((s, si) =>
+    (s.body || []).filter(x => typeof x === "string")
+      .map((x, bi) => ({ no: e.no, where: `${s.label} [${bi}]`, v: x }))));
+
+  if (museumDedent) {
+    /* COMPARED AT THE BOX'S OWN UNIT, WHICH IS WHERE THE FIRST CUT WAS WRONG.
+       An earlier version of this check compared one BODY ITEM against one
+       museum paragraph and passed — while the box, which GROUPS items, was
+       cutting the minimum across the group and leaving Record 003's ADDENDUM
+       02 showing a second level. **The unit a person looks at is the BOX**, so
+       that is the unit asserted: the box's text against the museum's
+       paragraphs joined the way the box joins them. */
+    const blocks = ENTRIES.flatMap(e => (e.sections || []).map(sec => ({
+      no: e.no, where: `${e.no}/${sec.label}`,
+      box: WB.blocksOf(sec.body || []).filter(b => b.kind === "strs"),
+      items: (sec.body || []).filter(x => typeof x === "string"),
+    }))).filter(x => x.box.length === 1 && x.items.length);
+    const JOIN = "\n\n";
+    const disagree = blocks.filter(x =>
+      x.box[0].text !== x.items.map(museumDedent).join(JOIN));
+    say(disagree.length === 0,
+      `the box and the museum's paragraphs agree on all ${blocks.length} section boxes — `
+      + `compared at the BOX, which is the unit he looks at`
+      + (disagree.length ? `  — ${disagree.map(d => d.where).join(", ")}` : ""));
+
+    /* LOST FIRST: a museum that strips ALL leading whitespace rather than the
+       COMMON run. It looks identical on a flat paragraph and destroys every
+       relative step in an indented one. */
+    const wrong = s => String(s).split("\n").map(l => l.replace(/^ +/, "")).join("\n");
+    const caught = bodies.filter(b => wrong(b.v) !== WB.dedent(b.v).text);
+    lost(caught.length > 0,
+      `WITH THE MUSEUM STRIPPING ALL LEADING WHITESPACE INSTEAD OF THE COMMON RUN, `
+      + `${caught.length} of ${bodies.length} bodies disagree with the box — every relative `
+      + `step he authored would flatten, and a flat paragraph would look identical.`);
+  }
+
+  /* ── P5.2 ONE LEVEL: nothing arrives at a surface still indented ───────── */
+  const stillIndented = bodies.filter(b => /^ /.test(WB.dedent(b.v).text));
+  say(stillIndented.length === 0,
+    `no body reaches the box with a leading run left on it — ${bodies.length} checked, `
+    + `so the recipe's one level is the only level`);
+  const museumLeft = museumDedent ? bodies.filter(b => /^ /.test(museumDedent(b.v))) : [];
+  say(museumLeft.length === 0,
+    `and none reaches the museum's paragraph with one either`);
+
+  const had = bodies.filter(b => WB.dedent(b.v).cut > 0);
+  lost(had.length > 0,
+    `BEFORE THE CUT, ${had.length} of ${bodies.length} bodies carried one — depths `
+    + `${[...new Set(had.map(b => WB.dedent(b.v).cut))].sort((a, c) => a - c).join(", ")} `
+    + `spaces — and every one of them was drawing as a second level.`);
+
+  /* ── P5.3 AND WHAT MUST SURVIVE THE CUT, DOES ─────────────────────────── */
+  const relSteps = bodies.filter(b => /\n +\S/.test(WB.dedent(b.v).text));
+  const innerRuns = bodies.filter(b => /\S {2,}\S/.test(WB.dedent(b.v).text));
+  say(relSteps.length > 0 && innerRuns.length > 0,
+    `his relative steps survive the cut in ${relSteps.length} bodies and his inner runs of `
+    + `spaces in ${innerRuns.length} — only the COMMON run comes off`);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    RESTORE, AND PROVE IT
    ═══════════════════════════════════════════════════════════════════════════ */
 fs.rmSync(TMP, { force: true });
@@ -690,6 +792,6 @@ if (failures) {
   console.log(`${failures} of ${checks} CHECK(S) FAILED.`);
   process.exit(1);
 }
-console.log(`ALL ${checks} CHECKS PASSED — and every one of P1 through P4 was shown LOSING`);
+console.log(`ALL ${checks} CHECKS PASSED — and every one of P1 through P5 was shown LOSING`);
 console.log(`something first. The ${losses} lines marked LOST are the proof that the ${checks - losses} lines`);
 console.log(`marked ok are measuring anything at all.`);

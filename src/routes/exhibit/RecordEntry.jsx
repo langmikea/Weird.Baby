@@ -327,6 +327,54 @@ function Listing({ text }) {
    worth more here, where the gate does not look: a body item that is neither a
    string nor a `{pre}` is stringified into an ordinary paragraph, so a typo in
    a key shows up on the page instead of deleting a sentence. */
+/* ═══ [MIKE, 2026-08-26] ONE LEVEL OF INDENT, AND IT IS THE PAGE'S ═════════
+   **HIS WORDS ON THE EDITOR: *"From Exec Summary and on, the indent is double
+   indented, should not be."*** Measured on the live page the same afternoon,
+   with Record 001 open at 1280: the body's structural indent is `--rec-indent`
+   at **18px** and the text then starts a further **8.91px** in (a two-space
+   summary) or **17.84px** (a four-space addendum). Three left edges — 18, 27,
+   36 — where his recipe says one.
+
+   ── THE CAUSE, AND IT IS THE PREVIOUS ROUND'S OVER-REACH ───────────────────
+   `.vp-rec-sect-body` was `pre-line` until 2026-08-26, and **`pre-line` was
+   doing TWO things**:
+     1. it REMOVED the leading indent of each line, and
+     2. it COLLAPSED runs of spaces inside a line.
+   Only the second was wrong. It is what made `=  86%` draw as `= 86%` while
+   the editor's box showed both spaces, and it is what Mike's *"Is it
+   WYSIWYG?"* was about. **The first was RIGHT and the editor agreed with it**
+   — the day editor dedented for display, so both ends put a body at one level.
+
+   Moving to `pre-wrap` fixed (2) and silently undid (1), at BOTH ENDS at once,
+   and the second level appeared on the glass and in the box on the same day.
+
+   ── SO THE LEADING RUN COMES OFF HERE, AND NOTHING ELSE DOES ───────────────
+   The common leading run of a paragraph is removed at RENDER; every other
+   character survives, `pre-wrap` included, so `=  86%` still draws with both
+   spaces. **The cut is the SMALLEST leading run across the paragraph's
+   non-empty lines**, so every relative step he authored is kept — Record 003's
+   manifest still hangs its second column, because those lines carry 7 and 9
+   against a common 4.
+
+   THE DATA IS NOT TOUCHED. Removing the spaces from `robots-record.js` would
+   be the tidier mechanism and it is not Ops' to do: §0 VERBATIM says his
+   characters are his, and `record:land` guard 6 refuses a change to four of
+   the five entries anyway (register `C-day2`). This is a render rule, the same
+   kind of thing `pre-line` was.
+
+   AND IT IS THE SAME ARITHMETIC AS `tools/dictation/day-collect.js`'s
+   `dedent`, deliberately duplicated rather than shared — a museum component
+   may not import from `tools/`. **`npm run day:proof` asserts the two agree on
+   every string in the Record**, which is the tree's own answer to a pair of
+   functions that must not drift: assert the relation, do not merge the files.
+   A `{pre}` item never reaches this — `Listing` derives its own columns. */
+function dedentPara(s) {
+  const lines = String(s).split("\n");
+  const runs = lines.filter(l => l.trim() !== "").map(l => l.match(/^ */)[0].length);
+  const cut = runs.length ? Math.min(...runs) : 0;
+  return cut ? lines.map(l => l.slice(cut)).join("\n") : String(s);
+}
+
 function SectionBody({ body, doors, onFire }) {
   const paras = Array.isArray(body) ? body : [body];
   const used = new Set();
@@ -334,7 +382,7 @@ function SectionBody({ body, doors, onFire }) {
     if (text && typeof text === "object" && typeof text.pre === "string") {
       return <Listing key={pi} text={text.pre} />;
     }
-    const bits = String(text).split(new RegExp(MARK.source, "g")).map((piece, k) => {
+    const bits = dedentPara(text).split(new RegExp(MARK.source, "g")).map((piece, k) => {
       if (k % 2 === 0) return piece;
       const di = Number(piece) - 1;
       const door = doors && doors[di];

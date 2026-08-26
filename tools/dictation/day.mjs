@@ -123,8 +123,9 @@
      · THE RECORD SCROLLS, NOT THE PAGE. The bar, the calendar and the shelf
        stay put; see the layout block in the CSS.
      · THE CUMULATIVE INDENT WAS THE SOURCE'S OWN LEADING SPACES, not nesting —
-       the dedent — removed 2026-08-26, when the museum became `pre-wrap` and
-       there was no longer anything to compensate for.
+       the dedent — and note that the measurement below is still exactly why
+       it exists. It was removed on 2026-08-26 and put back the same day; the
+       argument is in `day-collect.js`.
      · AND THEN THE TOP BAR WENT. It was a legend of the same seven marks the
        calendar rows carry, one line above them; the rows are how five days are
        read at a glance and the legend was furniture. `MARKSBAR`, `hintAttr`
@@ -565,14 +566,14 @@ const HEADER_RULE = CONSTRAINTS.find(c =>
    > lines of its own and a blank-line split would cut one listing into three.
    > **`npm run day:proof` proves it by first removing that preservation and
    > watching the tree come back as prose.** */
-/* [MIKE, 2026-08-26] THE DEDENT IS GONE, AND SO IS THE REASON FOR IT.
-   Everything above this line argued that the leading indent was an artefact
-   of how the workbook types and never reached a visitor, because the museum
-   drew `pre-line` and collapsed it. **The museum draws `pre-wrap` now**, so
-   the indent DOES reach a visitor, it is his, and taking it off for display
-   would make the editor lie about the page. The block above is kept as the
-   record of a measurement that was true when it was made; what it describes
-   no longer happens anywhere. */
+/* [2026-08-26] THE BLOCK ABOVE IS STILL TRUE AND IT SURVIVED A ROUND THAT
+   BRIEFLY SAID OTHERWISE. The dedent was removed when the museum went to
+   `pre-wrap`, on the reading that his indent now reached a visitor and taking
+   it off would make the editor lie about the page. **What that missed is that
+   `pre-line` had been removing the leading indent too** — the museum and the
+   box had always agreed about it — so removing only the box half put a second
+   level of indent on both. The museum removes it in `RecordEntry.jsx` now and
+   the box still does here; the measurement above is why. */
 
 /* ═══ [PIECE 4] A SECTION'S BODY BECOMES BOXES ═════════════════════════════
    HIS RECIPE IS ONE TEXT BOX PER SECTION, and a section's body is a LIST of
@@ -1502,7 +1503,7 @@ function elementHtml(el) {
         }>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`
       : el.field || el.editHeader
         ? `<div class="dy-blocks">${
-            (el.blocks.length ? el.blocks : [{ uid: "n" + esc(el.key), kind: "strs", text: "" }])
+            (el.blocks.length ? el.blocks : [{ uid: "n" + esc(el.key), kind: "strs", cuts: [], text: "" }])
               .map(editBox).join("")}</div>`
         : el.empty
           ? `<div class="dy-box-l void">no lines</div>`
@@ -1729,13 +1730,13 @@ var STORE_KEY = ${JSON.stringify(MARK_STORE_KEY)};
    REST is every field of every entry this page does NOT edit, kept whole and
    spread back by WBDay.collect. ORIG is what each box held when the page was
    built, so an untouched box can be recognised and its ORIGINAL string emitted
-   byte for byte, which with the dedent gone is simply what it still says. SOURCE is which
+   byte for byte rather than the dedented copy he was shown. SOURCE is which
    Record the whole page was baked from. KEYS0 is the key set each day OPENED
    with, so a deletion can be named. */
 var REST = ${JSON.stringify(Object.fromEntries(days.map(d => [d.no, d.rest])))};
 var ORIG = ${JSON.stringify(Object.fromEntries(
   days.flatMap(d => d.els.flatMap(el =>
-    (el.blocks || []).map(b => [b.uid, { raw: b.raw, kind: b.kind, items: b.items }])))
+    (el.blocks || []).map(b => [b.uid, { raw: b.raw, cuts: b.cuts || [], kind: b.kind, items: b.items }])))
 ))};
 var HEAD0 = ${JSON.stringify(Object.fromEntries(
   days.flatMap(d => d.els.filter(el => el.editHeader)
@@ -2037,7 +2038,8 @@ function dayModel(no){
     if (f) {
       if (!boxes.length) return;
       var o = ORIG[boxes[0].getAttribute("data-uid")] || null;
-      day.fields[f] = { orig: o ? o.raw : null, text: boxes[0].value };
+      day.fields[f] = { orig: o ? o.raw : null,
+        cut: Number(boxes[0].getAttribute("data-cut") || 0), text: boxes[0].value };
       return;
     }
     if (row.getAttribute("data-sect") !== "1") return;
@@ -2045,12 +2047,15 @@ function dayModel(no){
     var key0 = row.getAttribute("data-el0");
     var blocks = boxes.map(function(b){
       var oo = ORIG[b.getAttribute("data-uid")] || null;
+      /* THE CUTS COME FROM ORIG AND NOT FROM AN ATTRIBUTE, because there is
+         one per PARAGRAPH now and an attribute would be a list in a string. */
       return { kind: b.getAttribute("data-kind") || "strs",
-        raw: oo ? oo.raw : null, items: oo ? oo.items : null, text: b.value };
+        raw: oo ? oo.raw : null, items: oo ? oo.items : null,
+        cuts: oo ? oo.cuts : [], text: b.value };
     });
     day.sections.push({
       label: { orig: (key0 != null && HEAD0[key0] != null) ? HEAD0[key0] : null,
-        text: lab ? lab.value : "" },
+        cut: 0, text: lab ? lab.value : "" },
       blocks: blocks });
   });
   return day;
