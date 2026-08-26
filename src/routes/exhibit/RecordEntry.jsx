@@ -310,6 +310,18 @@ function Listing({ text }) {
    columns from the text and the grid holds them at 0**, which is a thing no
    white-space value can do in a proportional face.
 
+   ── AND IT IS DOWN TO ONE CASE, WHICH IS WORTH KNOWING BEFORE ANYONE CUTS IT
+   **`ADDENDUM 01 - The Four Settings, as printed` WAS STRUCK FROM RECORD 005 ON
+   2026-08-20 AND TOOK A `{ pre }` WITH IT.** Record 004's folder tree is the
+   only one left, so this mechanism now exists for a single body item in the
+   whole Record — and that is exactly the reading under which a later round
+   deletes it as dead weight. **It is not dead weight: it is the reason the
+   shape exists, and the shape is what keeps a listing a listing.**
+   MEASURED 2026-08-26, not asserted: one entry carries a `{ pre }`, and it is
+   004. Re-measure before acting on this line; it is a count, and counts move.
+   *(Carried here from Record 005's source comment, which was the only place it
+   was written down — see [C-day2] in `docs/OPEN_ACTIONS.md`.)*
+
    SO THIS IS THE ONE PLACE THE EDITOR AND THE MUSEUM STILL DRAW THE SAME
    STRING DIFFERENTLY, and it is reported rather than hidden: the day editor
    shows a `{pre}` block in a MONOSPACE box, where his alignment is true as

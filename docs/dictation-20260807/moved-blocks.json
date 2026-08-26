@@ -185,6 +185,141 @@
      "in": "docs/canon/BELL-103.md"
     }
    ]
+  },
+  {
+   "entry": 5,
+   "block": 0,
+   "chars": 627,
+   "sha256": "953d1747079b95353937a3d613bd758676f53bfdf5e8a0562a1ff12689d505d5",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-21] 005 HAS ITS OWN HEADLINE",
+   "claims": [
+    {
+     "claim": "the headline he chose",
+     "find": "PORTAL CONNECTION ONLINE",
+     "in": "docs/canon/09-PUBLISHED.md"
+    },
+    {
+     "claim": "why it is spent here",
+     "find": "week's payoff",
+     "in": "docs/canon/09-PUBLISHED.md"
+    }
+   ]
+  },
+  {
+   "entry": 5,
+   "block": 1,
+   "chars": 137,
+   "sha256": "8383e908da2417bda81882fd42791f0dbbb933da9e4c8ab11ab6f3299a642235",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-20] MIKE REORDERED THE DECK",
+   "claims": [
+    {
+     "claim": "the deck reorder",
+     "find": "Portal first, ZIP second",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    }
+   ]
+  },
+  {
+   "entry": 5,
+   "block": 2,
+   "chars": 129,
+   "sha256": "ac8495d488b2f3050d3685a4d95a314d6ad8d289ba42399bfcbcd546c9b4397e",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-20] SWAPPED WITH THE DECK",
+   "claims": [
+    {
+     "claim": "the EXECUTIVE SUMMARY reorder",
+     "find": "Portal first, ZIP second",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    }
+   ]
+  },
+  {
+   "entry": 5,
+   "block": 3,
+   "chars": 2012,
+   "sha256": "22b13259dccf601e5556c0fd8d39ff58823fa6d4dd12829c0a58bc7bd76ecb6a",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-20] THE DETAILED REPORT WAS CUT TO ONE LINE",
+   "claims": [
+    {
+     "claim": "the section replaced by one line",
+     "find": "DETAILED REPORT replaced by its first line",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    },
+    {
+     "claim": "the braces he sent it with",
+     "find": "Mike to rewrite",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    },
+    {
+     "claim": "the gate that refuses a brace",
+     "find": "wb-ops-braces",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    },
+    {
+     "claim": "two first appearances, as canon",
+     "find": "existed anywhere in either repo before this line",
+     "in": "docs/canon/09-PUBLISHED.md"
+    },
+    {
+     "claim": "his two typography flags",
+     "find": "the period doing double duty",
+     "in": "docs/canon/09-PUBLISHED.md"
+    },
+    {
+     "claim": "and the rewrite that closed it",
+     "find": "Mike to rewrite",
+     "in": "docs/MUSEUM_RECORD_005_LOG-20260821.md"
+    }
+   ]
+  },
+  {
+   "entry": 5,
+   "block": 4,
+   "chars": 209,
+   "sha256": "51687c550497c83a7ddc7db9cefa5ad2cca4bed0eadd5148ac1938980b59fcba",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-20] OTHER - the requisition",
+   "claims": [
+    {
+     "claim": "the requisition lives in 005 only",
+     "find": "The requisition",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    }
+   ]
+  },
+  {
+   "entry": 5,
+   "block": 5,
+   "chars": 868,
+   "sha256": "cdbcc0f435e9989133942de14330baae063b01579419e3981504d06879aca3fc",
+   "disposition": "deleted-except-one-paragraph-carried",
+   "lead": "[2026-08-20] ADDENDUM 01 - The Four Settings IS STRUCK ENTIRE",
+   "claims": [
+    {
+     "claim": "the strike, both closing lines",
+     "find": "Settings, as printed",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    },
+    {
+     "claim": "the settings are still published",
+     "find": "THE FOUR SETTINGS ARE STILL PUBLISHED",
+     "in": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md"
+    },
+    {
+     "claim": "CARRIED: 004 is the only case left",
+     "find": "only one left",
+     "in": "src/routes/exhibit/RecordEntry.jsx"
+    },
+    {
+     "claim": "CARRIED: and the count is dated",
+     "find": "MEASURED 2026-08-26",
+     "in": "src/routes/exhibit/RecordEntry.jsx"
+    }
+   ]
   }
  ]
 }

@@ -330,6 +330,44 @@ import { recordDay } from "./record-epoch.js";
    `pages/page-47.png`; the `scan-31-a` provenance row names
    `structure/page-47.png`, and **there is no file at that path.** The flag is
    at `BELL-103.md` beside the carried sentence. */
+/* ═══ RECORD 005's SIX BLOCKS — DELETED, ONE PARAGRAPH CARRIED [2026-08-26] ══
+   **THE FOURTH ENTRY EMPTIED UNDER `C-day2`.** Only 004 is left.
+
+   **NONE OF THE SIX HAD GONE STALE**, and every factual claim was re-measured
+   against the tree rather than trusted: 005's title is still `PORTAL CONNECTION
+   ONLINE` at 24 characters, 002 and 004 still share `GENERAL STATUS UPDATE`,
+   the deck and the EXECUTIVE SUMMARY still lead with the Portal line, the
+   DETAILED REPORT is still the three lines he wrote, there is no `RAISED`
+   section anywhere in the volume, and exactly one entry still carries a
+   `{ pre }`. All true.
+
+   ── FIVE OF THE SIX ARE DUPLICATES, AND MOST OF THEM OF ONE PARAGRAPH ──────
+   **`docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md` § 005** carries the deck and
+   EXECUTIVE SUMMARY reorder (*"Portal first, ZIP second, same sentences"* —
+   which is blocks 1 and 2 in one line), the DETAILED REPORT's replacement, the
+   `ADDENDUM 01` strike with both closing lines, the four settings still being
+   published through Record 003, and the `{Mike to rewrite}` braces and
+   `wb-ops-braces`. Its § THE REGISTER names 004's `RAISED` row, and § 240 has
+   *"The requisition lives in 005 only"* — block 4.
+
+   **`docs/canon/09-PUBLISHED.md`** carries the headline ruling with its
+   reasoning (*the week's payoff*, *the cheapest signal*), the two first
+   appearances filed as canon, and **both Doctrine 21 flags verbatim** — his
+   `Portal` against his `The Portal`, and `etc.` with the period doing double
+   duty. `docs/MUSEUM_RECORD_005_LOG-20260821.md` carries the same and the
+   rewrite that closed the note.
+
+   ── THE ONE THAT WAS WRITTEN DOWN NOWHERE ELSE ─────────────────────────────
+   **THAT STRIKING `ADDENDUM 01` TOOK A `{ pre }` WITH IT, LEAVING 004's FOLDER
+   TREE AS THE ONLY CASE THE MECHANISM STILL HAS.** No register field holds a
+   count of how many body items use a shape, so nothing else could have said it
+   — and it is the reading under which a later round deletes the Listing as
+   dead weight. It is in `RecordEntry.jsx` beside the argument for why the
+   Listing exists, with the count dated and marked re-measurable.
+
+   **IT IS THE SAME SHAPE AS RECORD 003's ONE SURVIVING SENTENCE** — why a
+   mechanism exists, which no field records — and it is the second time in
+   three entries that the only unique thing in a block was of that kind. */
 export const RECORD_ENTRIES = [
             { no: 1,
               date: recordDay(1),
@@ -696,60 +734,16 @@ export const RECORD_ENTRIES = [
             },
             { no: 5,
               date: recordDay(5),
-              /* ═══ [2026-08-21] 005 HAS ITS OWN HEADLINE, AND THAT IS THE
-                 POINT OF IT ══════════════════════════════════════════════════
-                 MIKE: `PORTAL CONNECTION ONLINE`, replacing `GENERAL STATUS
-                 UPDATE`. **002 and 004 still share the generic one and 005 no
-                 longer does** — deliberate, his, and the reason is that this
-                 entry is the week's payoff. A headline that differs is the
-                 cheapest signal a Record has, and it is spent here rather than
-                 on a Tuesday.
-                 24 characters against `RECORD_TITLE_MAX` 62. */
               title: "PORTAL CONNECTION ONLINE",
-              /* [2026-08-20] MIKE REORDERED THE DECK: the Portal line leads
-                 and the ZIP line follows. Same two sentences, swapped. */
               line: "> Portal Data Link - Connection Achieved\n> ZIP "
                     + "Extraction - Outer Layers Complete / Stopped",
               sections: [
-                /* [2026-08-20] SWAPPED WITH THE DECK, for the same reason and
-                   in the same order: Portal first, ZIP second. */
                 { label: "EXECUTIVE SUMMARY",
                   body: [
                     "  > Portal appears to function. Intended purpose "
                     + "unknown.\n  > ZIP - We have reached the capability limit"
                     + " of brute force.",
                   ] },
-                /* === [2026-08-20] THE DETAILED REPORT WAS CUT TO ONE LINE ====
-                   MIKE replaced the whole section with its first sentence.
-                   STRUCK, named once (Doctrine 24): the launch-controls line,
-                   the `Error: Communications Parity Bias Setting Mismatch`
-                   line, `Four toggles. Sixteen combinations. One of them is
-                   correct.`, `< The Manual names the settings and declines to
-                   name the values.`, and the two `Currently, the system...`
-                   lines that landed earlier the same day.
-
-                   HIS LINE ARRIVED CARRYING `{Mike to rewrite}` AND OPS
-                   STRIPPED THE BRACES, WHICH IS THE ONLY REASON IT LANDED AT
-                   ALL. A curly brace is a note to Ops and the launch gate
-                   refuses any that survive (`wb-ops-braces`).
-
-                   ═══ [2026-08-21] AND HE WROTE IT. The one line becomes three,
-                   hours before the entry posts. **The rewrite the note asked
-                   for arrived, so the note is closed rather than left standing
-                   as an open question about a section that now has an answer.**
-
-                   TWO FIRST APPEARANCES ARE IN THESE THREE LINES AND BOTH ARE
-                   FILED AS CANON: the Portal runs on a **UNIX-6x Emulator**,
-                   and it **carried its own COMM payload, autosync**. Neither
-                   string existed anywhere in the corpus before this line —
-                   checked across both repos. `docs/canon/06-PORTAL.md`.
-
-                   CARRIED VERBATIM, AND TWO THINGS ARE FLAGGED RATHER THAN
-                   FIXED (Doctrine 21): his first line says `Portal` and his
-                   third says `The Portal`, and `etc.` closes the second
-                   sentence with the period doing double duty. Both are his,
-                   as typed. A round that tidies either has broken the
-                   instruction that put them here. */
                 { label: "DETAILED REPORT",
                   body: [
                     "  > Portal is now up and running on our UNIX-6x "
@@ -757,29 +751,11 @@ export const RECORD_ENTRIES = [
                     + "autosync, etc.\n  > The Portal is accessible via the "
                     + "Robots Exhibit.",
                   ] },
-                /* [2026-08-20] `OTHER` - the requisition. It is APPROVED here
-                   and it is raised NOWHERE: the Thursday `RAISED` section was
-                   Ops' unruled addition and is struck from 004. */
                 { label: "OTHER",
                   body: [
                     "  > APPROVED - Req 0628 - Internal Transfer - No net "
                     + "increase in head count",
                   ] },
-                /* === [2026-08-20] `ADDENDUM 01 - The Four Settings, as
-                   printed` IS STRUCK ENTIRE, both closing lines with it:
-                   `? A period operator would have known this without being
-                   told.` and `! We are not period operators.` Named once
-                   (Doctrine 24).
-
-                   IT TAKES THE `{ pre }` CASE RULED THE SAME DAY WITH IT, AND
-                   THE MECHANISM STAYS - Record 004's folder tree is the
-                   remaining case and the reason the shape exists.
-
-                   AND THE FOUR SETTINGS ARE STILL PUBLISHED. Wednesday's
-                   marked manual page carries them in pen, delivered by Record
-                   003. 005 no longer repeats what the museum has already
-                   shown, which is ruling 10 holding rather than being spent
-                   twice. */
               ],
             },
 ];
