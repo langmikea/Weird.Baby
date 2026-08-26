@@ -303,17 +303,17 @@
      and the one that drifted would be the one he is looking at. */
   function budgetMark(len, b, near) {
     if (len == null || !b) return null;
+    /* `short` IS THE WHOLE HINT NOW — one line, a few words, and the mark
+       itself already prints the numbers as `70/62`. The two paragraphs this
+       used to carry said the same thing about the same gate on every hover,
+       which is the furniture Mike killed on 2026-08-26. */
     if (len > b.max) {
       return { level: "bad", says: len + "/" + b.max,
-        means: b.name + " is OVER its limit of " + b.max + " characters. " + b.enforcedBy + ".",
-        read: "READS  " + len + " characters, " + (len - b.max) + " over" };
+        short: (len - b.max) + " over — the packet gate refuses it" };
     }
     if (len > b.max - near) {
       return { level: "warn", says: len + "/" + b.max,
-        means: b.name + " is inside " + near + " characters of its limit of " + b.max
-             + ". It still passes — this mark is Ops' slack band and no gate fires at it. "
-             + "The gate is " + b.enforcedBy + ", and it fires only above " + b.max + ".",
-        read: "READS  " + len + " characters, " + (b.max - len) + " left" };
+        short: (b.max - len) + " left — nothing refuses it yet" };
     }
     return null;
   }

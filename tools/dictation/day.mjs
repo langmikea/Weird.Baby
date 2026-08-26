@@ -265,21 +265,61 @@ const VIEW_PX = 480;
    that would be eight megabytes to answer a question the light table answers. */
 const ZOOM_PX = VIEW_PX * 2;
 
-/* ═══ EVERY MARK SAYS TWO THINGS ═══════════════════════════════════════════
-   `[SHAPE]` MIKE, 2026-08-25: **hover hints everywhere — every icon and every
-   mark says what it means and what it read.**
+/* ═══ A HINT IS ONE LINE, AND THE CEILING IS IN THIS FUNCTION ══════════════
+   `[SHAPE]` MIKE, 2026-08-26: **"Kill the giant hover hint boxes - way too
+   much to bother reading any of it."**
 
-   LINE ONE IS THE MEANING and is the SAME SENTENCE every time that mark is
-   drawn, on any day; LINE TWO is what it read on THIS day. Splitting them is
-   the point: a hint that only describes leaves him deriving the reading from
-   the glyph, and a hint that only reports leaves him deriving the rule from
-   the reading. `&#10;` is appended after `esc()` because `esc()` would escape
-   its own ampersand.
+   MEASURED BEFORE ANYTHING WAS CUT: **484 hints, 98,378 characters, every one
+   of them two lines, median 161 characters and the longest 894.** A hint that
+   long is not help — it is a paragraph that arrives when the pointer stops
+   moving, and **a hint nobody reads is worse than no hint, because it looks
+   like help.**
 
-   NOTHING ON THIS PAGE CARRIES A BARE `title=`. If a mark is added and its
-   hint is not, this is the function that was not called. */
-const hint = (means, read) =>
-  ` title="${esc(means)}${read ? "&#10;" + esc(String(read)) : ""}"`;
+   ── WHAT WAS CUT, AND THE RULE THAT DECIDED EACH ONE ───────────────────────
+   OPS, 2026-08-26: *cut them down, do not cut them out. A mark whose meaning
+   is not obvious still needs a word.* So the test is **can the thing already
+   speak for itself**, and it answers most of them:
+
+     · A GLYPH OR A ONE-LETTER MARK cannot. The state button, the seven
+       calendar letters, the door chip — these KEEP a hint, and it is a few
+       words plus what they read.
+     · ANYTHING ALREADY LABELLED IN WORDS ON THE GLASS loses its hint outright.
+       A box whose title says EXECUTIVE SUMMARY does not need a sentence saying
+       it is a section's lines; a filename under a tile does not need a hint
+       reading the filename back. That was most of the 98,378 characters.
+     · A LIVE NUMBER WORTH A GLANCE survives as numbers only — `9 lines ·
+       longest 45/68` — with no sentence around it.
+
+   ── THE SECOND LINE IS GONE ENTIRELY ───────────────────────────────────────
+   The old scheme was MEANING then READING, and the meaning was **the same
+   sentence every time that mark was drawn on any day.** It earned its place
+   once and was furniture on every hover after. What is left is one line.
+
+   ── AND THE CEILING IS ENFORCED HERE RATHER THAN WRITTEN DOWN ──────────────
+   **Doctrine 25 records that this exact thing GROWS BACK** — `week1.html` was
+   split for this complaint and the worksheet's masthead was seven paragraphs
+   three rounds later. A ceiling in prose is a ceiling that grows back. **This
+   one throws**, so a hint over `HINT_MAX` or carrying a newline stops the
+   build by name and cannot reach him at all. */
+const HINT_MAX = 60;
+/* A READING THAT IS HIS — a section header, a shelf label — has no length this
+   file controls, so it is cut to the ceiling rather than left to stop a build
+   on the day he writes a long one. Everything Ops writes is short by hand and
+   `hint()` throws if it is not; this is only for strings that arrive. */
+const short = s => {
+  const t = String(s || "").replace(/\s+/g, " ").trim();
+  return t.length <= HINT_MAX ? t : t.slice(0, HINT_MAX - 1) + "…";
+};
+function hint(says) {
+  if (!says) return "";
+  const s = String(says);
+  if (s.includes("\n") || s.length > HINT_MAX) {
+    throw new Error(`day.mjs: a hint is ONE line of at most ${HINT_MAX} characters. `
+      + `This one is ${s.length}${s.includes("\n") ? " and has a line break" : ""}:\n  `
+      + JSON.stringify(s));
+  }
+  return ` title="${esc(s)}"`;
+}
 
 /* ═══ THE BRACE TEST — the gate's own, not a second one ════════════════════
    `[SHAPE]` `reveal:check` fails a packet on `/\{[^{}]*\}/g` over the Record's
@@ -451,8 +491,13 @@ const WD = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "S
    so where it prints the state. */
 const DOOR_SAYS = {
   PUBLIC: ["public", "at its public address"],
-  PLACE: ["not placed", "this Record delivers it and it is still behind the door — npm run reveal:day -- --place moves it"],
+  /* [2026-08-26] THE SECOND HALF IS A HINT AND HINTS ARE ONE SHORT LINE NOW.
+     It read *"this Record delivers it and it is still behind the door — npm run
+     reveal:day -- --place moves it"* — 95 characters restating the chip that is
+     six pixels away. The command is the only part a glance cannot get. */
+  PLACE: ["not placed", "behind the stage door — reveal:day --place moves it"],
 };
+const word = f => (DOOR_SAYS[f.door] || ["unknown"])[0];
 
 /* `[SHAPE]` the section HEADER's rule, quoted from the one place that declares
    it rather than restated here. It is `silent: true` — nothing enforces it —
@@ -840,60 +885,62 @@ const COLUMNS = [
   { k: "{}", of: null, what: "unresolved notes to Ops" },
 ];
 
+/* ── [2026-08-26] `short` REPLACED `w` AND `r` ────────────────────────────
+   A calendar mark is a LETTER, so it is exactly the case Ops kept hints for:
+   it cannot say what it is. But it was saying it in two lines and about 190
+   characters — the same explanation of what loud, quiet and empty mean, on
+   every one of the thirty-five marks, on every hover, forever.
+
+   **THE NAME AND THE READING ARE THE WHOLE HINT NOW:** `EXECUTIVE SUMMARY ·
+   ready`, `the files · 2 behind the door`. What the letter stands for is the
+   half a glance cannot get; what the three weights mean is learned once from
+   the colours and never needs saying again. */
 function dayMarks(d) {
   const byKey = k => d.els.find(x => x.key === k);
   const mand = k => {
     const el = byKey(k);
-    if (!el) return { s: "loud", r: "READS  not written" };
-    if (el.notRequired) return { s: "off", r: "READS  you have marked it not required" };
-    if (el.notReady) return { s: "loud", r: "READS  you have marked it NOT READY" };
-    if (el.fault) return { s: "loud", r: "READS  " + el.fault.says };
-    return { s: "quiet", r: "READS  ready" };
+    if (!el) return { s: "loud", says: "not written" };
+    if (el.notRequired) return { s: "off", says: "not required" };
+    if (el.notReady) return { s: "loud", says: "your mark" };
+    if (el.fault) return { s: "loud", says: el.fault.says };
+    return { s: "quiet", says: "ready" };
+  };
+  /* THE CEILING IS ENFORCED IN `hint()` AND THIS IS THE ONE PLACE A READING
+     CAN RUN LONG — a section header is his and can be any length. It is cut
+     here rather than left to throw the build on a day he writes a long one. */
+  const line = (name, says) => {
+    const s = `${name} · ${says}`;
+    return s.length <= HINT_MAX ? s : s.slice(0, HINT_MAX - 1) + "…";
   };
 
   return COLUMNS.map(c => {
     if (c.of) {
       const st = mand(c.of);
-      return { k: c.k,
-        w: `${c.what} — one of the three sections every day has. `
-         + "Loud is NOT READY, quiet is ready, empty is one you have marked not required.",
-        ...st };
+      return { k: c.k, s: st.s, short: line(c.what.replace(/^the /, ""), st.says) };
     }
     if (c.k === "S") {
       const rest = d.els.filter(x => x.kind === "section"
         && !MANDATORY.some(m => m.key === x.key) && !x.notRequired);
       const loud = rest.filter(x => x.state === "loud");
       return { k: "S", s: loud.length ? "loud" : rest.length ? "quiet" : "off",
-        w: "every other section of this day — the deck and whatever else you wrote. "
-         + "Loud if any one of them is not ready.",
-        r: loud.length ? `READS  ${loud.length} of ${rest.length} not ready — ${loud.map(x => x.header).join(", ")}`
-          : rest.length ? `READS  ${rest.length} section${rest.length === 1 ? "" : "s"}, all ready`
-            : "READS  none" };
+        short: line("other sections", loud.length ? `${loud.length} of ${rest.length} not ready`
+          : rest.length ? `${rest.length}, all ready` : "none") };
     }
     if (c.k === "A") {
       const at = d.els.filter(x => x.kind === "attachment" && !x.notRequired);
       const loud = at.filter(x => x.state === "loud");
       return { k: "A", s: loud.length ? "loud" : at.length ? "quiet" : "off",
-        w: "the attachments. Loud if any one of them is not ready — an attachment with "
-         + "no files draws “not here yet” on the glass (Ruling 9).",
-        r: loud.length ? `READS  ${loud.length} of ${at.length} not ready`
-          : at.length ? `READS  ${at.length} attachment${at.length === 1 ? "" : "s"}, all ready`
-            : "READS  none" };
+        short: line("attachments", loud.length ? `${loud.length} of ${at.length} not ready`
+          : at.length ? `${at.length}, all ready` : "none") };
     }
     if (c.k === "P") {
       const un = d.fileRows.filter(f => f.door === "PLACE").length;
       return { k: "P", s: un ? "loud" : d.fileRows.length ? "quiet" : "off",
-        w: "files this Record delivers that are still behind the stage door. "
-         + "npm run reveal:day -- --place moves them.",
-        r: un ? `READS  ${un} of ${d.fileRows.length} still behind the door`
-          : d.fileRows.length ? `READS  ${d.fileRows.length} file${d.fileRows.length === 1 ? "" : "s"}, every one at its public address`
-            : "READS  none" };
+        short: line("files", un ? `${un} of ${d.fileRows.length} behind the door`
+          : d.fileRows.length ? `${d.fileRows.length}, all public` : "none") };
     }
     return { k: "{}", s: d.braces.length ? "loud" : "quiet",
-      w: "a note in braces is you writing to Ops, never story. "
-       + "npm run reveal:check refuses the packet while one survives.",
-      r: d.braces.length ? `READS  ${d.braces.length} unresolved — ${d.braces.join("  ")}`
-        : "READS  none" };
+      short: line("notes to Ops", d.braces.length ? `${d.braces.length} unresolved` : "none") };
   });
 }
 
@@ -1255,16 +1302,10 @@ table.dy-t td:first-child{opacity:.5;white-space:nowrap;width:1%}
 function elementHtml(el) {
   /* THE ONLY NUMBER ON THE PAGE, and it is printed only when it fires. */
   const mark = el.mark
-    ? `<span class="dy-count ${el.mark.level}"${hint(el.mark.means
-        + (el.measured
-            ? " The gate is one number and a headline is not: measured, the real line wraps at "
-              + el.measured.map(m => `${m.chars} at ${m.viewport}px`).join(", ") + "."
-            : ""),
-        el.mark.read)}>${esc(el.mark.says)}</span>`
+    ? `<span class="dy-count ${el.mark.level}"${hint(el.mark.short)}>${esc(el.mark.says)}</span>`
     : el.fault && el.fault.says && /\d\/\d/.test(el.fault.says)
-      ? `<span class="dy-count bad"${hint(
-          `${el.budget ? el.budget.name : "this field"} is over its limit. ${el.fault.why}.`,
-          `READS  ${el.fault.says}`)}>${esc(el.fault.says)}</span>`
+      ? `<span class="dy-count bad"${hint("over the limit — the packet gate refuses it")
+        }>${esc(el.fault.says)}</span>`
       : "";
 
   /* BOTH VOICES ARE ALWAYS IN THE MARKUP AND CSS DECIDES WHICH SPEAKS.
@@ -1274,19 +1315,14 @@ function elementHtml(el) {
      take off is not a mark, it is a deletion — so every row carries its lines,
      its loud line and its quiet line, and the class on the row is the only
      thing that changes. */
+  /* AND THE HINT ON EACH IS THE ONE THING THE WORD DOES NOT SAY. `NOT READY`
+     is already legible; WHY it is not ready is not, so that is the hint and it
+     is a few words. `not required` and `DELETED` both need only the way out. */
   const say = `<span class="dy-say"${hint(
-      "NOT READY TO PUBLISH. Either the system's own rules say so, or you have marked it "
-      + "NOT READY even though it passes — your mark overrides the system.",
-      el.fault ? `READS  ${el.fault.says} — ${el.fault.why}`
-        : el.notReady ? "READS  your mark" : "READS  ready")
-    }>NOT READY</span><span class="dy-off-say"${hint(
-      "deemed not required, not presented — regardless of what the system says. Its lines "
-      + "are not drawn. Press the button round to bring it back.",
-      el.notRequired ? "READS  you have marked this not required" : "READS  unmarked")
-    }>not required</span><span class="dy-gone-say"${hint(
-      "DELETED — this section will not be in the draft the next time you save. Every character "
-      + "of it is still on this page until then; press the × again to bring it back.",
-      "READS  press × again to undo")}>DELETED</span>`;
+      el.fault ? "why: " + el.fault.says : "your mark")
+    }>NOT READY</span><span class="dy-off-say"${hint("press the button round to bring it back")
+    }>not required</span><span class="dy-gone-say"${hint("press × again to undo")
+    }>DELETED</span>`;
 
   /* ═══ ONE CONTROL, THREE STATES, AND IT COMES BACK ROUND ═════════════════
      `[SHAPE]` MIKE, 2026-08-25: **two checkboxes become ONE multistate button,
@@ -1328,21 +1364,14 @@ function elementHtml(el) {
      control he cannot take back is a deletion, and this page has been caught
      doing that once already.** */
   const rowControls = el.canDelete
-    ? `<button type="button" class="dy-rw dy-ins"${hint(
-        "insert a new, empty section directly BELOW this one. It writes nothing until you "
-        + "type into it — an empty section is dropped by the museum and is not put in the draft.",
-        "READS  press it")}>+</button><button type="button" class="dy-rw dy-del"${hint(
-        "delete this section. It is struck through and kept until you save — press again to "
-        + "bring it back. Every character stays on the page until the save lands.",
-        "READS  press it")}>&times;</button>`
+    ? `<button type="button" class="dy-rw dy-ins"${hint("insert a section below")
+      }>+</button><button type="button" class="dy-rw dy-del"${hint(
+        "delete — press again to undo")}>&times;</button>`
     : "";
 
   const control = `<div class="c"><button type="button" class="dy-st" data-key="${esc(el.key)}"
     data-state="${st}" aria-label="${esc(NOW[st])}"${hint(
-      "READY, NOT READY, NOT REQUIRED — press it to go round. NOT READY is yours even when "
-      + "the system's test passes; NOT REQUIRED takes it out of the summary regardless of "
-      + "what the system says. A third press comes back to ready.",
-      `READS  ${NOW[st]} — press for ${NEXT[st]}`)
+      `${NOW[st]} · press for ${NEXT[st]}`)
     }>${GLYPH[st]}</button>${rowControls}</div>`;
 
   /* ═══ THE TITLE BOX — DISPLAYS BOLD, AND NOW IT TAKES HIS WORDS ══════════
@@ -1355,28 +1384,32 @@ function elementHtml(el) {
      THE BOX IS THE SAME BOX EITHER WAY. Same class, same bold, same border,
      so the column of boxes does not go ragged at the one row he is editing —
      which is the defect the three budget widths were killed for. */
-  const titleHint = hint(
-    el.kind === "attachment"
-      ? "the attachment's title, as it prints at the foot of the record."
-      : el.editHeader
-        ? `the SECTION's HEADER, and it is yours to type. ${HEADER_RULE.rule} `
-          + `Enforced by: ${HEADER_RULE.enforcedBy}. Renaming it moves this row's READY mark `
-          + `with it — the mark follows the row while the page is open, so a rename does not `
-          + `orphan a mark you set an hour ago.`
-        : `the SECTION's HEADER. ${HEADER_RULE.rule} Enforced by: ${HEADER_RULE.enforcedBy}.`,
-    `READS  ${el.header || "(no header)"}`);
-
+  /* AND THE TITLE BOX HAS NO HINT AT ALL NOW. It carried four sentences about
+     what a section header is, restating the words inside the box — and where
+     the box was empty the `placeholder` already says SECTION HEADER. There was
+     nothing in it a glance needed that the box was not already showing. */
   const titleBox = el.editHeader
     ? `<div class="dy-th"><input type="text" class="dy-box-t dy-edit" data-role="label"
-        value="${esc(el.header || "")}" placeholder="SECTION HEADER"${titleHint}>${mark}${say}</div>`
-    : `<div class="dy-box-t"${titleHint}>${esc(el.header || "(no header)")}${mark}${say}</div>`;
+        value="${esc(el.header || "")}" placeholder="SECTION HEADER">${mark}${say}</div>`
+    : `<div class="dy-box-t">${esc(el.header || "(no header)")}${mark}${say}</div>`;
 
   /* THE LINES BOX — accepts crlf, expands, spaced as he wrote it, indented
      automatically, and ONE WIDTH, the same on every element on every day. */
-  const linesHint = (extra, read) => hint(
-    "the SECTION's LINES — the text following the HEADER, with your line splits, your steps "
-    + "and your spacing. It sits ONE level under its title, the same level on every section. "
-    + "The BOX is the measure: " + BOX.why + extra, read);
+  /* ── THE LINES BOX'S HINT IS NUMBERS, AND NOTHING ELSE ──────────────────
+     IT WAS THE WORST ONE ON THE PAGE: 894 characters, four sentences about
+     what a section's lines are and where 68ch comes from, on a box he is
+     LOOKING AT and typing into. **The box is the measure — that was always the
+     argument for the box** — so a paragraph restating it is the page not
+     trusting its own design.
+     WHAT SURVIVES IS THE PART A GLANCE CANNOT GET FROM LOOKING: how many
+     lines, and how close the longest one is to the wrap. `45/68` is the same
+     grammar as the budget mark, which is the only other number on the page. */
+  const measure = (b) => {
+    const lines = String(b.text).split("\n");
+    const longest = Math.max(0, ...lines.map(x => x.length));
+    return `${lines.length} line${lines.length === 1 ? "" : "s"} · longest ${longest}/${BOX.chars}`
+      + (b.cut ? ` · ${b.cut} space${b.cut === 1 ? "" : "s"} off` : "");
+  };
 
   /* ═══ [PIECE 4] THE BOX THAT TAKES THE KEYSTROKE ══════════════════════════
      HIS SPECIFICATION, UNCHANGED, NOW BUILT AS THE THING ITSELF:
@@ -1406,13 +1439,9 @@ function elementHtml(el) {
   const editBox = (b, i) => {
     const isPre = b.kind === "pre";
     const isOpaque = b.kind === "opaque";
-    const read = `READS  ${String(b.text).split("\n").length} line(s), longest `
-      + `${Math.max(0, ...String(b.text).split("\n").map(x => x.length))} of ${BOX.chars} characters`
-      + (b.cut ? `, ${b.cut} leading space${b.cut === 1 ? "" : "s"} taken off for display and put back on save` : "");
     if (isOpaque) {
-      return `<div class="dy-box-l locked"${linesHint(
-        " THIS BLOCK IS A SHAPE THIS EDITOR DOES NOT AUTHOR, so it is drawn and not typed into. "
-        + "It is carried through your save untouched.", read)}>${esc(b.text)}</div>`;
+      return `<div class="dy-box-l locked"${hint("carried through your save · not editable here")
+        }>${esc(b.text)}</div>`;
     }
     /* ONE LINE MEANS ONE LINE, AND THE CONTROL IS THE RULE. A HEADLINE and a
        DECK are single strings with a character budget that a gate enforces;
@@ -1421,42 +1450,31 @@ function elementHtml(el) {
        WHERE THE STRING IS WRITTEN (Doctrine 22) rather than announced in a
        hint and enforced two commands later. */
     if (el.oneLine) {
+      /* NO HINT. The box will not take a line break and the budget mark fires
+         when the length matters; a sentence saying so is the third telling. */
       return `<input type="text" class="dy-box-l dy-edit oneline" data-role="block"
         data-uid="${esc(b.uid)}" data-cut="0" data-kind="strs" spellcheck="true"
-        value="${esc(b.text)}"${linesHint(
-          " It is ONE LINE — this field is a single string with a character budget, so the box "
-          + "will not take a line break.", read)}>`;
+        value="${esc(b.text)}">`;
     }
     return `<textarea class="dy-box-l dy-edit${isPre ? " pre" : ""}" data-role="block"
       data-uid="${esc(b.uid)}" data-cut="${b.cut}" data-kind="${esc(b.kind)}"
-      spellcheck="true"${linesHint(
-        (b.cut ? " The leading indent every line of this block carried is off for DISPLAY only "
-               + "— it is how the source is typed, not a level you wrote, and the museum "
-               + "collapses it. It is put back on save, so a box you do not touch reaches the "
-               + "tree byte for byte." : "")
-        + (isPre ? " THIS IS A LISTING — the museum draws it in columns rather than as prose, "
-                 + "and it stays a listing however you edit it." : ""),
-        read)}>${esc(b.text)}</textarea>`;
+      spellcheck="true"${hint(isPre ? "a listing — it stays one however you edit it"
+        : measure(b))}>${esc(b.text)}</textarea>`;
   };
 
   const linesBox = el.kind === "attachment"
     ? attachmentBody(el)
     : el.locked
-      ? `<div class="dy-box-l locked"${linesHint(
-          " THIS FIELD IS A LIST, NOT A SENTENCE, and this editor does not author one — a box "
-          + "holding JSON is a shape editor wearing a text box. It is drawn here so the day it "
-          + "exists you can see it, and it is carried through your save untouched.",
-          `READS  ${el.lines} line(s)`)}>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`
+      ? `<div class="dy-box-l locked"${hint("carried through your save · not editable here")
+        }>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`
       : el.field || el.editHeader
         ? `<div class="dy-blocks">${
             (el.blocks.length ? el.blocks : [{ uid: "n" + esc(el.key), kind: "strs", cut: 0, text: "" }])
               .map(editBox).join("")}</div>`
         : el.empty
-          ? `<div class="dy-box-l void"${linesHint("", "READS  no lines")}>no lines</div>`
-          : `<div class="dy-box-l"${linesHint(
-              el.indentCut ? " The leading indent every line of this section carried has been "
-                + "taken off for display. Nothing is written to the data." : "",
-              `READS  ${el.lines} line${el.lines === 1 ? "" : "s"}, longest ${el.longest} of ${BOX.chars} characters`)
+          ? `<div class="dy-box-l void">no lines</div>`
+          : `<div class="dy-box-l"${hint(
+              `${el.lines} line${el.lines === 1 ? "" : "s"} · longest ${el.longest}/${BOX.chars}`)
             }>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`;
 
   return `<li><div class="dy-el ${el.state}" data-el="${esc(el.key)}" data-fault="${el.fault ? 1 : 0}"${
@@ -1475,33 +1493,21 @@ function attachmentBody(el) {
   const a = el.doc;
   const rows = el.files || [];
   return `<div class="dy-att">
-    <div class="m"${hint("the attachment's own facts: how many files it carries, where it came "
-      + "from, how many pages it is.",
-      `READS  ${a.files.length} file${a.files.length === 1 ? "" : "s"}`
-      + (a.source ? `, source ${a.source}` : "")
-      + (a.pages != null ? `, ${a.pages} page${a.pages === 1 ? "" : "s"}` : ""))
-    }>${a.files.length} file${a.files.length === 1 ? "" : "s"}${a.source ? " · " + esc(a.source) : ""}${a.pages != null ? " · " + a.pages + " page" + (a.pages === 1 ? "" : "s") : ""}</div>
+    <div class="m">${a.files.length} file${a.files.length === 1 ? "" : "s"}${a.source ? " · " + esc(a.source) : ""}${a.pages != null ? " · " + a.pages + " page" + (a.pages === 1 ? "" : "s") : ""}</div>
     ${rows.length ? `<div class="dy-files">${rows.map(f => {
       const t = TILES.byWeb.get(f.web);
-      const [word, doorMeans] = DOOR_SAYS[f.door]
-        || ["unknown", "no door state — this file is not in the plan"];
+      /* THE PLATE LABEL AND THE FILENAME LOST THEIR HINTS ENTIRELY: each one
+         was a sentence introducing a string printed directly beneath it. The
+         picture keeps four words because a thumbnail does not say it opens. */
       return `<figure class="dy-file">${
-        t ? `<img src="${t}" alt="${esc(f.label || f.name)}" data-zoom="${esc(f.web)}"${hint(
-              `the page itself, inlined at ${VIEW_PX}px so it draws however this file is `
-              + `opened. Click for the viewer, which shows it at ${ZOOM_PX}px.`,
-              `READS  ${f.name}` + (TILES.bigByWeb.has(f.web) ? "" : " — the viewer has only this size for it"))}>`
-          : `<div class="noimg"${hint(
-              "no thumbnail — this file is named by the Record and could not be read from "
-              + "disk to inline.", `READS  ${f.web}`)}></div>`}
-  ${f.label ? `<div class="cap"${hint(
-      "the plate's own label, as it is written in the attachment.",
-      `READS  ${f.label}`)}>${esc(f.label)}</div>` : ""}
-  <div class="n"${hint("the file's name at its public address.",
-      `READS  ${f.web}`)}>${esc(f.name)}</div>
+        t ? `<img src="${t}" alt="${esc(f.label || f.name)}" data-zoom="${esc(f.web)}"${
+              hint("click to open the viewer")}>`
+          : `<div class="noimg"${hint("no thumbnail — not read from disk")}></div>`}
+  ${f.label ? `<div class="cap">${esc(f.label)}</div>` : ""}
+  <div class="n">${esc(f.name)}</div>
   <span class="dr${f.door === "PLACE" || !f.onDisk ? " bad" : ""}"${hint(
-      `the door — ${doorMeans}.`,
-      `READS  ${f.web}` + (f.onDisk ? "" : " — and there is no file at that path on disk"))
-    }>${esc(word)}${f.onDisk ? "" : " · not on disk"}</span>
+      !f.onDisk ? "no file at that path on disk" : DOOR_SAYS[f.door] ? DOOR_SAYS[f.door][1] : "not in the plan")
+    }>${esc(word(f))}${f.onDisk ? "" : " · not on disk"}</span>
 </figure>`;
     }).join("")}</div>` : ""}
   </div>`;
@@ -1514,34 +1520,24 @@ function dayHtml(d) {
 
   return `<div class="dy-day" data-day="${d.no}" hidden>
   <h2>RECORD ${String(d.no).padStart(3, "0")}</h2>
-  <p class="when"${hint("the day this Record is dated, and the weekday it falls on.",
-    `READS  ${d.date || "no date"}`)}>${d.weekday ? esc(d.weekday) + " " : ""}${esc(d.date || "no date")}</p>
+  <p class="when">${d.weekday ? esc(d.weekday) + " " : ""}${esc(d.date || "no date")}</p>
 
-  <div class="dy-sec"><h3${hint("every section of this day, in one recipe: a HEADER and its LINES.",
-    `READS  ${sections.length} section${sections.length === 1 ? "" : "s"}`)}>SECTIONS · ${sections.length}</h3>
+  <div class="dy-sec"><h3>SECTIONS · ${sections.length}</h3>
     ${list(sections)}
     <div class="dy-addsect"><button type="button" class="dy-add"${hint(
-      "add a new, empty section at the end of this day. It writes nothing until you type into "
-      + "it — an empty section is dropped by the museum and is not put in the draft. To put one "
-      + "in the MIDDLE, press + on the row you want it under.",
-      "READS  press it")}>+ add a section</button></div>
+      "for one in the middle, press + on a row")}>+ add a section</button></div>
   </div>
 
-  <div class="dy-sec"><h3${hint("the attachments, which carry the same two marks as a section.",
-    `READS  ${atts.length} attachment${atts.length === 1 ? "" : "s"}`)}>ATTACHMENTS · ${atts.length}</h3>
+  <div class="dy-sec"><h3>ATTACHMENTS · ${atts.length}</h3>
     ${atts.length ? list(atts) : ""}
   </div>
 
   ${d.braces.length ? `<div class="dy-sec"><h3>UNRESOLVED NOTES TO OPS · ${d.braces.length}</h3>
     <table class="dy-t">${d.braces.map(b => `<tr><td${hint(
-      "a note in braces is you writing to Ops, never story.",
-      `READS  ${b}`)}>{}</td><td>${esc(b)}</td></tr>`).join("")}</table></div>` : ""}
+      "a note to Ops — the packet gate refuses it")}>{}</td><td>${esc(b)}</td></tr>`).join("")}</table></div>` : ""}
 
   ${d.orphans.length ? `<div class="dy-sec"><h3${hint(
-    "a mark in readiness.json whose element is not on this day any more — a header that was "
-    + "renamed, or an attachment that left. It is SHOWN rather than dropped: a mark of yours "
-    + "that vanishes silently is worse than one that is in the way.",
-    `READS  ${d.orphans.length} orphaned`)}>MARKS WITH NO ELEMENT · ${d.orphans.length}</h3>
+    "a mark whose row was renamed or left")}>MARKS WITH NO ELEMENT · ${d.orphans.length}</h3>
     <table class="dy-t">${d.orphans.map(k => `<tr><td>·</td><td>${esc(k)}</td></tr>`).join("")}</table></div>` : ""}
 </div>`;
 }
@@ -1583,32 +1579,29 @@ TILES = { byWeb, bigByWeb };
 
 const calHtml = days.map(d => {
   const mk = dayMarks(d);
-  return `<button type="button" data-go="${d.no}" aria-current="false"${hint(
-    "a day in this volume. Click it to open that day whole.",
-    `READS  Record ${String(d.no).padStart(3, "0")}, ${d.weekday || "no weekday"} ${d.date || "no date"}`)}>
+  return `<button type="button" data-go="${d.no}" aria-current="false"${hint("open this day")}>
   <div class="d1">RECORD ${String(d.no).padStart(3, "0")}</div>
   <div class="d2">${esc(d.weekday || "")} ${esc(d.date || "")}</div>
-  <div class="row">${mk.map(i => `<i class="${i.s}"${hint(i.w, i.r)}>${esc(i.k)}</i>`).join("")}</div>
+  <div class="row">${mk.map(i => `<i class="${i.s}"${hint(i.short)}>${esc(i.k)}</i>`).join("")}</div>
 </button>`;
 }).join("");
 
 const pickHtml = SECTIONS.map(s => {
   const items = shelf.filter(r => r.section === s.key);
   if (!items.length) return "";
-  return `<div class="sec"><b${hint("a shelf section — how the shelf is divided.",
-    `READS  ${s.label}`)}>${esc(s.label)}</b><span${hint(
-    "how many things are on the shelf under this section.",
-    `READS  ${items.length}`)}>${items.length}</span>
+  return `<div class="sec"><b>${esc(s.label)}</b><span>${items.length}</span>
   <div class="g">${items.map(r => {
     const t = small.thumbs.get(r.uid);
     return t
-      ? `<img src="${t}" alt="${esc(r.label)}" data-zoomsrc="${esc(r.uid)}"${hint(
-          "a thing on the shelf, inlined at the shelf's own size. Click to open the viewer — "
-          + "the day's own pictures are the ones held at the viewer's size; the light table is "
-          + "the full-size instrument for everything else.",
-          `READS  ${r.label}`)}>`
-      : `<div class="noimg"${hint("on the shelf, and it is not an image.",
-          `READS  ${r.label}`)}></div>`;
+      /* THE SHELF TILE'S HINT IS ITS LABEL, AND THAT IS THE ONE PLACE ON THE
+         PAGE WHERE A HINT EARNS MORE THAN THE THING IT SITS ON. A tile is
+         52px and shows no caption, so the label is genuinely unobtainable by
+         looking; "click to open the viewer" — which is what these 138 said
+         after the first cut — is the same four words 138 times about a
+         behaviour the first click teaches for good. */
+      ? `<img src="${t}" alt="${esc(r.label)}" data-zoomsrc="${esc(r.uid)}"${
+          hint(short(r.label))}>`
+      : `<div class="noimg"${hint(short(r.label))}></div>`;
   }).join("")}</div></div>`;
 }).filter(Boolean).join("");
 
@@ -1623,16 +1616,9 @@ const body = `
 
 <div class="dy-wrap">
   <details class="dy-panel dy-cal" open>
-    <summary${hint("every day in this volume, each carrying its seven marks in the same "
-      + "seven columns — this is where five days are read at a glance.",
-      `READS  ${days.length} days`)}>THE DAYS · ${days.length}</summary>
+    <summary>THE DAYS · ${days.length}</summary>
     <div class="in">${calHtml}
-      <p class="dy-note" id="dy-caldirty"${hint(
-        "the seven marks are computed when this page is BUILT. You have edited something since, "
-        + "so they describe the day as it was, not as it is on your screen. Save, then npm run "
-        + "day, and they are true again. The page does not recompute them because a second "
-        + "implementation of the seven columns would drift from the one that refuses a packet.",
-        "READS  you have unsaved edits")}>These read the BUILD, not your edits. Save, then
+      <p class="dy-note" id="dy-caldirty">These read the BUILD, not your edits. Save, then
         <code>npm run day</code>.</p>
       <p class="dy-note">Every day, with its seven marks in the same seven columns.
         A day with no entry is not drawn and is not a defect — which days get a
@@ -1642,40 +1628,26 @@ const body = `
 
   <div class="dy-mid">
     <div class="dy-nav" style="margin:0 0 10px">
-      <button type="button" id="dy-prev"${hint("the day before this one. The left arrow key does the same.",
-        "READS  disabled on the first day")}>&lsaquo; previous day</button>
-      <button type="button" id="dy-next"${hint("the day after this one. The right arrow key does the same.",
-        "READS  disabled on the last day")}>next day &rsaquo;</button>
-      <span id="dy-where"${hint("where this day sits in the volume.", "READS  below")}></span>
+      <button type="button" id="dy-prev"${hint("or the left arrow key")}>&lsaquo; previous day</button>
+      <button type="button" id="dy-next"${hint("or the right arrow key")}>next day &rsaquo;</button>
+      <span id="dy-where"></span>
     </div>
     ${days.map(d => dayHtml(d)).join("\n")}
 
     <div class="dy-marks" id="dy-savebox">
-      <div class="h"${hint(
-        "your words and your marks, together, in one save. It writes two files in the repo: "
-        + "record-draft.json for the day, readiness.json for the NOT READY and NOT REQUIRED "
-        + "marks. IT DOES NOT WRITE THE RECORD — that is npm run record:land -- --write, and "
-        + "it is yours.",
-        "READS  nothing has been saved from this page yet")}>SAVE · your words and your marks, in one</div>
+      <div class="h">SAVE · your words and your marks, in one</div>
       <p style="margin:6px 0 0">
         <button type="button" id="dy-save"${hint(
-          "write what is on this page to the repo. It goes to the working copy the lander reads, "
-          + "never to the Record itself.",
-          "READS  press it, or Ctrl+S")}>Save to the repo</button>
+          "writes the draft, not the Record · Ctrl+S")}>Save to the repo</button>
         <span class="said" id="dy-save-said"></span>
       </p>
       <p class="dy-note" id="dy-save-where"></p>
       <div id="dy-fallback" hidden>
-        <div class="h"${hint(
-          "the save could not reach the server, so this is the whole draft as text. It is the "
-          + "road out that does not depend on anything working — copy it and Ops lands it.",
-          "READS  the live draft")}>THE WAY OUT — copy this and nothing is lost</div>
+        <div class="h">THE WAY OUT — copy this and nothing is lost</div>
         <textarea id="dy-fb-out" readonly></textarea>
         <p style="margin:6px 0 0">
           <button type="button" id="dy-fb-copy"${hint(
-            "put the draft on the clipboard and READ IT BACK before saying it worked. A clipboard "
-            + "write is not done until it has been read back.",
-            "READS  press it")}>copy everything</button>
+            "copies, then reads it back to be sure")}>copy everything</button>
           <span class="said" id="dy-fb-said"></span>
         </p>
       </div>
@@ -1683,8 +1655,7 @@ const body = `
   </div>
 
   <details class="dy-panel dy-pick">
-    <summary${hint("the shelf — everything that could be attached to a day.",
-      `READS  ${shelf.length} things`)}>THE SHELF · ${shelf.length}</summary>
+    <summary>THE SHELF · ${shelf.length}</summary>
     <div class="in">${pickHtml}
       <p class="dy-note">Piece one shows the shelf and takes no answer from it.
         Attachments are built on <b>assign.html</b> until Piece 4.</p>
@@ -1693,12 +1664,9 @@ const body = `
 </div>
 
 <div id="dy-view"><div id="dy-vbar">
-  <button type="button" id="dy-vx"${hint("close the viewer. Escape does the same.",
-    "READS  the viewer is open")}>&times; close</button>
-  <button type="button" id="dy-vp"${hint("the previous picture on this day. The left arrow key does the same.",
-    "READS  wraps at the first")}>&lsaquo;</button>
-  <button type="button" id="dy-vn"${hint("the next picture on this day. The right arrow key does the same.",
-    "READS  wraps at the last")}>&rsaquo;</button>
+  <button type="button" id="dy-vx"${hint("or Escape")}>&times; close</button>
+  <button type="button" id="dy-vp"${hint("or the left arrow key")}>&lsaquo;</button>
+  <button type="button" id="dy-vn"${hint("or the right arrow key")}>&rsaquo;</button>
   <span id="dy-vname"></span>
   <span id="dy-vcap"></span>
 </div><img id="dy-vimg" alt=""></div>
@@ -1744,14 +1712,17 @@ var EPOCH = ${JSON.stringify(RECORD_EPOCH_VALUE)};
 var BUDGETS = ${JSON.stringify({ title: BUDGETS.title, line: BUDGETS.line })};
 var NEAR = ${NEAR};
 var KEYS0 = {};
-var HINT_IMG = ${JSON.stringify(`the picture, at ${ZOOM_PX}px — the viewer's one size. `
-  + `x1 died on 2026-08-25; x2 is the viewer.`)};
+var HINT_IMG = ${JSON.stringify(`the viewer's size, ${ZOOM_PX}px`)};
 var i = 0, VIEW = null;
 
-/* every mark says what it means and what it read — two lines, one function,
-   the same shape the generator uses. */
-function hint(el, means, read){
-  el.setAttribute("title", read ? means + "\\n" + read : means);
+/* ONE LINE, AND THE SAME CEILING THE GENERATOR ENFORCES. A hint written here
+   is written while he is typing, which is exactly when a paragraph is worst.
+   It cannot throw a build — nothing is being built — so it CUTS, and the
+   generator side throws instead, which is where a long one would come from. */
+var HINT_MAX = ${HINT_MAX};
+function hint(el, says){
+  var s = String(says || "").replace(/\\n/g, " ");
+  el.setAttribute("title", s.length > HINT_MAX ? s.slice(0, HINT_MAX - 1) + "\u2026" : s);
 }
 
 /* ═══ HIS MARKS ════════════════════════════════════════════════════════════
@@ -1838,25 +1809,15 @@ function paintRow(row){
   /* the row's own markup is never rewritten \\u2014 CSS picks the voice. Only the
      two hints move, because what they READ has changed. */
   var says = row.querySelector(".dy-say"), off = row.querySelector(".dy-off-say");
-  if (says) hint(says,
-    "NOT READY TO PUBLISH. Either the system's own rules say so, or you have marked it NOT "
-    + "READY even though it passes \\u2014 your mark overrides the system.",
-    fault ? "READS  the system's own rules" : m.notReady ? "READS  your mark" : "READS  ready");
-  if (off) hint(off,
-    "deemed not required, not presented \\u2014 regardless of what the system says. Its lines "
-    + "are not drawn. Clear the box to bring it back.",
-    m.notRequired ? "READS  you have marked this not required" : "READS  unmarked");
+  if (says) hint(says, fault ? "why: the system's own rules" : "your mark");
+  if (off) hint(off, "press the button round to bring it back");
   var btn = row.querySelector(".dy-st");
   if (btn) {
     var st = m.notRequired ? "off" : m.notReady ? "loud" : "quiet";
     btn.setAttribute("data-state", st);
     btn.textContent = GLYPH[st];
     btn.setAttribute("aria-label", NOWSAY[st]);
-    hint(btn,
-      "READY, NOT READY, NOT REQUIRED \u2014 press it to go round. NOT READY is yours even "
-      + "when the system's test passes; NOT REQUIRED takes it out of the summary regardless "
-      + "of what the system says. A third press comes back to ready.",
-      "READS  " + NOWSAY[st] + " \u2014 press for " + NEXTSAY[st]);
+    hint(btn, NOWSAY[st] + " \u00b7 press for " + NEXTSAY[st]);
   }
 }
 
@@ -1881,10 +1842,8 @@ function show(n){
     .forEach(autosize);
   document.getElementById("dy-prev").disabled = i === 0;
   document.getElementById("dy-next").disabled = i === DAYS.length - 1;
-  var where = document.getElementById("dy-where");
-  where.textContent = (i+1) + " of " + DAYS.length;
-  hint(where, "where this day sits in the volume.",
-    "READS  day " + (i+1) + " of " + DAYS.length);
+  /* NO HINT: the span already prints "3 of 5". */
+  document.getElementById("dy-where").textContent = (i+1) + " of " + DAYS.length;
   try { history.replaceState(null, "", "#" + n); } catch(e){}
 }
 function step(d){ var k = i + d; if (k >= 0 && k < DAYS.length) show(DAYS[k].no); }
@@ -1920,7 +1879,7 @@ function draw(){
   var img = document.getElementById("dy-vimg");
   img.src = big || el.getAttribute("src");
   img.alt = el.getAttribute("alt") || "";
-  hint(img, HINT_IMG, "READS  " + (big ? "the viewer's size" : "this picture is held at one size only"));
+  hint(img, big ? HINT_IMG : "held at one size only");
   var fig = el.closest(".dy-file");
   var nm = fig && fig.querySelector(".n") ? fig.querySelector(".n").textContent
     : (el.getAttribute("alt") || "");
@@ -2259,7 +2218,7 @@ function repaintBudget(row){
   }
   span.className = "dy-count " + m.level;
   span.textContent = m.says;
-  hint(span, m.means, m.read);
+  hint(span, m.short);
 }
 
 /* ── HIS MARK FOLLOWS HIS HEADER ─────────────────────────────────────────
