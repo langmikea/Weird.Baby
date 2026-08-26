@@ -119,6 +119,17 @@
      · THE TWO CHECKBOXES BECAME ONE MULTISTATE BUTTON — `elementHtml`, and
        `CYCLE` in the page's own script.
 
+   PASS FOUR, and the shape settled at the end of it — *"Done! Looks great!"*:
+     · THE RECORD SCROLLS, NOT THE PAGE. The bar, the calendar and the shelf
+       stay put; see the layout block in the CSS.
+     · THE CUMULATIVE INDENT WAS THE SOURCE'S OWN LEADING SPACES, not nesting —
+       `dedent()`, which carries the measurement that found it.
+     · AND THEN THE TOP BAR WENT. It was a legend of the same seven marks the
+       calendar rows carry, one line above them; the rows are how five days are
+       read at a glance and the legend was furniture. `MARKSBAR`, `hintAttr`
+       and the whole `.dy-top` strip left with it rather than being left
+       computed for nobody — see `COLUMNS`.
+
    ── [MIKE, 2026-08-25 — RULING A] THIS PAGE BECOMES WHERE HE WRITES ────────
    **THE BIGGEST RULING OF THE DAY, RECORDED AND NOT BUILT.** He ruled that the
    day editor becomes his writing surface and that **Excel stops being the
@@ -626,10 +637,18 @@ function buildDays() {
    `[SHAPE]` the mechanism · `[WEIRD.BABY]` which seven.
 
    MIKE, 2026-08-25: **"Keeping the icons in predefined columns is still a
-   plus."** So the day summary is SEVEN COLUMNS IN ONE ORDER, on every day,
-   and a column that has nothing to say is still there and still empty — the
-   eye learns a position once and reads it forever after. A bar that packs
-   itself is a bar he has to read from the left every time.
+   plus."** So a day's marks are SEVEN COLUMNS IN ONE ORDER, on every day, and
+   a column that has nothing to say is still there and still empty — the eye
+   learns a position once and reads it forever after. A row that packs itself
+   is a row he has to read from the left every time.
+
+   THEY ARE DRAWN IN EXACTLY ONE PLACE: A CALENDAR ROW. There was a legend of
+   the same seven across the top of the page and **Mike killed it the same day
+   he settled the shape** — it was only a KEY for the rows, and the rows are
+   where five days are read at a glance. A key that repeats the thing it
+   explains, one line above it, is furniture (Doctrine 16), and it cost the
+   page its whole top strip. `dayMarks()` has one caller now, which is what
+   this section was always describing.
 
    AND THERE ARE NO COUNTS IN IT. Mike: **"CHARACTER COUNTS COME OFF THE DAY
    SUMMARY. They are only useful when there is a problem, and not at Day
@@ -758,15 +777,9 @@ body{overflow:hidden;display:flex;flex-direction:column;padding:16px 20px 12px}
   .dy-panel{max-height:none;overflow:visible}
 }
 
-.dy-top{flex:0 0 auto;z-index:30;background:var(--paper,#17150f);
-  border-bottom:1px solid var(--rule,#3a3529);padding:0 0 8px;margin:0 0 12px}
-.dy-bar{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.dy-ic{display:inline-flex;align-items:center;gap:4px;font-size:11px;line-height:1;
-  padding:4px 7px;border:1px solid var(--rule,#3a3529);border-radius:2px}
-.dy-ic b{font-weight:700;opacity:.55;font-size:10px;letter-spacing:.06em}
-.dy-ic.ok{opacity:.72}
-.dy-ic.warn{border-color:var(--gold,#b8974a);color:var(--gold,#b8974a)}
-.dy-ic.bad{border-color:#c76a6a;color:#e89a9a}
+/* THE TOP BAR IS GONE - MIKE, 2026-08-25: it was only a KEY for the marks on
+   the calendar rows, and the rows are where he reads across five days at once.
+   A key that repeats the thing it explains, one line above it, is furniture. */
 .dy-nav{margin-left:auto;display:flex;gap:5px;align-items:center;font-size:11px;opacity:.8}
 .dy-nav button{font-family:inherit;font-size:11px;padding:4px 9px;cursor:pointer;
   background:transparent;border:1px solid var(--rule,#3a3529);color:inherit;border-radius:2px}
@@ -1204,15 +1217,15 @@ const pickHtml = SECTIONS.map(s => {
 
 const body = `
 <div id="dy-storebanner"></div>
-<div class="dy-top"><div class="dy-bar" id="dy-icons"></div></div>
 
 <div class="dy-wrap">
   <details class="dy-panel dy-cal" open>
-    <summary${hint("every day in this volume, each with the same seven marks as the bar above.",
+    <summary${hint("every day in this volume, each carrying its seven marks in the same "
+      + "seven columns — this is where five days are read at a glance.",
       `READS  ${days.length} days`)}>THE DAYS · ${days.length}</summary>
     <div class="in">${calHtml}
-      <p class="dy-note">Every day, with the same seven marks as the bar above, in the same
-        seven columns. A day with no entry is not drawn and is not a defect — which days get a
+      <p class="dy-note">Every day, with its seven marks in the same seven columns.
+        A day with no entry is not drawn and is not a defect — which days get a
         Record is decided by which entries exist.</p>
     </div>
   </details>
@@ -1278,7 +1291,6 @@ const body = `
    BIG is the viewer's set, inlined at ZOOM_PX and keyed by the same public
    address the tile carries, so the viewer resolves no path either. */
 var DAYS = ${JSON.stringify(days.map(d => ({ no: d.no, date: d.date, weekday: d.weekday })))};
-var MARKSBAR = ${JSON.stringify(Object.fromEntries(days.map(d => [d.no, dayMarks(d)])))};
 var BIG = ${JSON.stringify(Object.fromEntries(bigByWeb))};
 var BAKED = ${JSON.stringify(loadMarks())};
 var STORE_KEY = ${JSON.stringify(MARK_STORE_KEY)};
@@ -1290,10 +1302,6 @@ var i = 0, VIEW = null;
    the same shape the generator uses. */
 function hint(el, means, read){
   el.setAttribute("title", read ? means + "\\n" + read : means);
-}
-function hintAttr(means, read){
-  var s = read ? means + "\\n" + read : means;
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 }
 
 /* ═══ HIS MARKS ════════════════════════════════════════════════════════════
@@ -1410,11 +1418,6 @@ function show(n){
   document.querySelectorAll(".dy-cal button").forEach(function(b){
     b.setAttribute("aria-current", Number(b.getAttribute("data-go")) === n ? "true" : "false");
   });
-  var bar = document.getElementById("dy-icons");
-  bar.innerHTML = (MARKSBAR[n]||[]).map(function(o){
-    return '<span class="dy-ic ' + o.s + '" title="' + hintAttr(o.w, o.r) + '">'
-      + '<b>' + o.k + '</b></span>';
-  }).join("") + '<span class="dy-nav" id="dy-navspare"></span>';
   document.getElementById("dy-prev").disabled = i === 0;
   document.getElementById("dy-next").disabled = i === DAYS.length - 1;
   var where = document.getElementById("dy-where");
