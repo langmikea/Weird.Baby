@@ -568,17 +568,26 @@ function buildDays() {
 
       /* every OTHER field that carries something, in the same recipe. None of
          the five Records has one; the path exists so that the day one does,
-         the page draws it instead of hiding it. */
+         the page draws it instead of hiding it. `stamp` joined this list on
+         2026-08-25 with the round-trip repair: the reader carries it now, and a
+         field the reader carries and this page hides is the same silent hole
+         one surface further on. */
       for (const [k, head] of [["lead", "LEAD"], ["tomb", "TOMBSTONE"],
-                               ["still", "STILL"], ["wire", "WIRE"],
-                               ["plates", "PLATES"], ["note", "NOTE"]]) {
+                               ["still", "STILL"], ["stamp", "STAMP"],
+                               ["wire", "WIRE"], ["plates", "PLATES"],
+                               ["note", "NOTE"]]) {
         if (e[k] == null || e[k] === "") continue;
         const v = typeof e[k] === "string" ? e[k] : JSON.stringify(e[k], null, 1);
+        /* [2026-08-25] `locked` CAME OFF HERE, and its going is the round-trip
+           repair landing. It marked `wire`, `plates` and `note` as fields that
+           render on the glass and CANNOT survive the draft — true when it was
+           written and false as of today: `draftEntries` carries all three and
+           `record:land` writes them back. A flag that still said so would be
+           this page telling him a repaired thing is still broken. */
         els.push(element({
           key: "field:" + k,
           header: head + (k === "still" && e.stillCaption ? " — " + e.stillCaption : ""),
           runs: [v],
-          extra: { locked: ["wire", "plates", "note"].includes(k) },
         }));
       }
 

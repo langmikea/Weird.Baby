@@ -40,7 +40,7 @@ import { execFileSync } from "node:child_process";
 /* [2026-08-13] the emitter reads the CURRENT file's comments so it can carry
    them through; acorn is already this repo's parser everywhere else. */
 import * as acorn from "acorn";
-import { recordEpoch } from "../../reveal/record-entries.mjs";
+import { recordEpoch, textOf } from "../../reveal/record-entries.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
@@ -79,7 +79,7 @@ function strings(e) {
   for (const k of ["title", "line", "lead", "tomb", "stillCaption"]) if (e[k]) out.push([k, e[k]]);
   (e.sections || []).forEach((s, i) => {
     if (s.label) out.push([`section ${i + 1} heading`, s.label]);
-    (s.body || []).forEach((p, j) => out.push([`section ${i + 1}, paragraph ${j + 1}`, p]));
+    (s.body || []).forEach((p, j) => out.push([`section ${i + 1}, paragraph ${j + 1}`, textOf(p)]));
   });
   /* [2026-08-16] THE ATTACHMENT TITLES ARE HIS STRINGS TOO. His workbook's
      ATTACHMENTS section lands as `docs` rather than as a text section
@@ -117,6 +117,11 @@ if (notes.length && !argv.includes("--with-notes") && !argv.includes("--verify")
 
 /* ── VERIFY ──────────────────────────────────────────────────────────────── */
 const q = (s) => JSON.stringify(s);
+/* one plate, written the one way both places a plate hangs are read - the
+   mirror of `platesOf` in reveal/record-entries.mjs */
+const plate = (pl) => pl && pl.label
+  ? `{ img: ${q(pl.img)}, label: ${q(pl.label)} }`
+  : `{ img: ${q(pl.img)} }`;
 const wrap = (s, indent) => {
   /* one literal per paragraph, broken across lines only where a space allows,
      so the file stays readable and the string stays exact.
@@ -236,6 +241,7 @@ function generate(e) {
     }
     out.push(`              date: recordDay(${idx}),`);
   }
+  if (e.stamp) out.push(`              stamp: ${q(e.stamp)},`);
   if (e.title) out.push(`              title: ${wrap(e.title, 20)},`);
   if (e.line) out.push(`              line: ${wrap(e.line, 20)},`);
   if (e.lead) out.push(`              lead: ${wrap(e.lead, 20)},`);
@@ -249,30 +255,122 @@ function generate(e) {
      paragraph of whitespace is not a body; an empty cell can round-trip through
      three tools and arrive as `[""]`. */
   for (const s of (e.sections || [])
-         .filter(s => (s.body || []).some(p => typeof p === "string" && p.trim() !== ""))) {
+         .filter(s => (s.body || []).some(p => textOf(p).trim() !== ""))) {
     out.push(`                { ${s.label ? `label: ${q(s.label)},` : "label: null,"}`);
     out.push(`                  body: [`);
-    for (const p of s.body || []) out.push(`                    ${wrap(p, 20)},`);
+    for (const p of s.body || []) {
+      /* A LISTING IS WRITTEN BACK AS A LISTING. Emitting `textOf(p)` here would
+         carry every character and turn Record 004's folder tree into a
+         paragraph - the museum would collapse its columns on the next build
+         and nothing would have said a word. */
+      if (p && typeof p === "object" && typeof p.pre === "string") {
+        out.push(`                    { pre:`);
+        out.push(`                      ${wrap(p.pre, 22)} },`);
+      } else out.push(`                    ${wrap(p, 20)},`);
+    }
     out.push(`                  ] },`);
   }
   out.push(`              ],`);
-  /* [2026-08-16] THE ATTACHMENTS, AFTER THE WRITING — the object mirrors the
-     page, where `RecordAttachments` mounts below the sections and above the
-     tombstone. Only `title` is emitted because only `title` is what he wrote;
-     `source`, `date`, `scan` and `plates` are facts about a photograph that
-     exists, and a reader that filled them in would be inventing provenance.
-     A doc with a title and no image is a DESIGNED state — the row prints
-     "not here yet" — not a gap to be papered over. */
+  /* ═══ [2026-08-25] THE ATTACHMENTS, WHOLE — AND THE COMMENT THAT USED TO BE
+     HERE WAS RIGHT ABOUT AUTHORSHIP AND WRONG ABOUT WRITING ════════════════
+     It said only `title` is emitted "because only `title` is what he wrote",
+     and that a reader filling in `source`, `date`, `scan` or `plates` would be
+     inventing provenance. THE FIRST HALF IS STILL TRUE: nothing here authors a
+     doc field, and a doc with a title and no image stays a designed state that
+     prints "not here yet".
+     THE SECOND HALF CONFUSED AUTHORING WITH CARRYING, AND IT COST THE ROUND
+     TRIP EVERY PHOTOGRAPH. `draftEntries` has read these fields since
+     2026-08-19 precisely so they would travel; this function then wrote them
+     away. MEASURED, on the real Record before this change: Record 003's four
+     attachments came back as four bare titles - `source` x4, `pages` x4 and
+     SIX PLATES with their captions, all gone, with `--verify` printing ALL 51
+     STRINGS ROUND-TRIP over the top of it.
+     A FIELD THAT ARRIVED IS WRITTEN BACK. That is not provenance invented; it
+     is provenance PRESERVED, and it is the U-round rule this file already
+     lives under: a generator may remove a field, never the answer that was in
+     it. */
   const docs = (e.docs || []).filter(d => d && typeof d.title === "string" && d.title.trim() !== "");
   if (docs.length) {
     out.push(`              docs: [`);
-    for (const d of docs) out.push(`                { title: ${wrap(d.title, 18)} },`);
+    for (const d of docs) {
+      out.push(`                { title: ${wrap(d.title, 18)},`);
+      for (const k of ["source", "date", "scan", "extract", "note"]) {
+        if (typeof d[k] === "string" && d[k] !== "") out.push(`                  ${k}: ${q(d[k])},`);
+      }
+      if (typeof d.pages === "number") out.push(`                  pages: ${d.pages},`);
+      if (Array.isArray(d.plates) && d.plates.length) {
+        out.push(`                  plates: [`);
+        for (const pl of d.plates) out.push(`                    ${plate(pl)},`);
+        out.push(`                  ],`);
+      }
+      out.push(`                },`);
+    }
     out.push(`              ],`);
   }
+  /* [2026-08-25] THE ENTRY'S OWN PAYLOADS, beside the attachments because
+     `record-model.js` draws all three through one `attachmentRows` walk. */
+  if (Array.isArray(e.wire) && e.wire.length) {
+    out.push(`              wire: [`);
+    for (const w of e.wire) out.push(`                ${wrap(w, 16)},`);
+    out.push(`              ],`);
+  }
+  if (Array.isArray(e.plates) && e.plates.length) {
+    out.push(`              plates: [`);
+    for (const pl of e.plates) out.push(`                ${plate(pl)},`);
+    out.push(`              ],`);
+  }
+  if (e.note) out.push(`              note: ${wrap(e.note, 20)},`);
   /* the tombstone closes the entry on the page, so it closes the object here */
   if (e.tomb) out.push(`              tomb: ${wrap(e.tomb, 20)},`);
   out.push(`            },`);
   return out.join("\n");
+}
+
+/* ═══ [2026-08-25] THE EMITTER REFUSES A FIELD IT CANNOT WRITE ══════════════
+   The mirror, at last, of `READ_ENTRY_FIELDS`. The reader has refused an
+   unknown field loudly since 2026-08-11; this end of the same round trip
+   dropped four of them without a word, so the trip was only half guarded and
+   the unguarded half was the one that WRITES THE TREE.
+
+   IT IS A LIST OF WHAT IS EMITTED, not of what is allowed - the same
+   construction as `DRAWN_ENTRY_FIELDS`, and for the same reason: add a field
+   to the draft and teach nothing to write it and this refuses, by name, before
+   anything reaches disk. */
+const EMITTED_ENTRY_FIELDS = new Set([
+  "no", "date", "stamp", "title", "line", "lead", "still", "stillCaption",
+  "sections", "docs", "wire", "plates", "note", "tomb",
+]);
+const EMITTED_DOC_FIELDS = new Set(
+  ["title", "source", "date", "scan", "extract", "note", "pages", "plates"]);
+
+function emitFaults(list) {
+  const out = [];
+  for (const e of list) {
+    const who = `Record ${e.no == null ? "(unnumbered)" : String(e.no).padStart(3, "0")}`;
+    for (const k of Object.keys(e)) {
+      if (EMITTED_ENTRY_FIELDS.has(k)) continue;
+      out.push(`${who}: the draft carries \`${k}\` and this emitter cannot write it. `
+        + `It would be dropped from the tree with nothing said. Teach generate() to `
+        + `emit it, or add it to EMITTED_ENTRY_FIELDS with the ruling.`);
+    }
+    (e.docs || []).forEach((d, i) => {
+      for (const k of Object.keys(d || {})) {
+        if (EMITTED_DOC_FIELDS.has(k)) continue;
+        out.push(`${who}: attachment ${i + 1} carries \`${k}\` and this emitter cannot `
+          + `write it. Teach generate(), or add it to EMITTED_DOC_FIELDS with the ruling.`);
+      }
+    });
+  }
+  return out;
+}
+
+const EMIT_FAULTS = emitFaults(entries);
+if (EMIT_FAULTS.length) {
+  console.error("\nrecord:land REFUSED — the draft carries something this cannot write:\n");
+  for (const f of EMIT_FAULTS) console.error("  " + f);
+  console.error("\nNothing was written. A field that reaches the emitter and not the tree is");
+  console.error("the silent half of the round trip, and it is the half that edits the source.");
+  process.exit(1);
 }
 
 /* the dry run still prints every entry generated, byte for byte as before */

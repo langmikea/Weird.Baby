@@ -79,6 +79,16 @@ const ASSET_LIKE = /^\/[\w\-./]+\.\w{2,5}$/;
 const READ_ENTRY_FIELDS = new Set([
   "no", "date", "title", "line", "lead", "tomb", "still", "stillCaption",
   "sections",
+  /* [2026-08-25] THE ROUND-TRIP REPAIR. `stamp`, `note`, `wire` and `plates`
+     are all DRAWN by the museum and none of them was read here, so the comment
+     below this set was describing four live holes rather than a hypothetical
+     one. They are carried now, and — this is the half that matters — the
+     EMITTER writes them too. Widening this set alone would have silenced a
+     true warning while `record:land` still dropped them, which is the trap the
+     `docs` note two blocks down was written about after it had already been
+     sprung once. Measured before the repair, on a fixture carrying every drawn
+     field: the reader reported all four and the emitter wrote none of them. */
+  "stamp", "note", "wire", "plates",
   /* [2026-08-16] `docs` — the attachments. It is here because his workbook's
      ATTACHMENTS section now lands as this field rather than as a text section,
      so it is a thing he writes and the surface he writes on has to hand it
@@ -153,6 +163,41 @@ function strOf(node) {
    Record editor edits `.vp-rec-sect-body` nodes and will not find this one;
    it is MOTHBALLED for week one (the writing is in the workbook), and the
    shape is how a future session is told before it re-opens that door. */
+/* [2026-08-25] THE ONE PLACE ANYTHING ASKS A BODY ITEM FOR ITS WORDS.
+   A body item is a string or a `{ pre }` listing - the two shapes the renderer
+   accepts and, since this round, the two the reader hands back. Every tool that
+   used to assume a string calls this instead, so the day a THIRD shape is
+   accepted there is one function to teach rather than six sites to find. */
+export function textOf(p) {
+  if (typeof p === "string") return p;
+  if (p && typeof p.pre === "string") return p.pre;
+  return "";
+}
+
+/* [2026-08-25] ONE PLATES READER FOR BOTH PLACES A PLATE CAN HANG. An entry
+   carries `plates` and so does each of its attachments, in the SAME shape -
+   `{ img, label }` - and until today only the attachment half was read. Two
+   readers for one shape is how the two halves drift; a plate this cannot read
+   is reported rather than filtered away, which the attachment half was quietly
+   doing with `.filter(Boolean)`. */
+function platesOf(node, val, report) {
+  const out = [];
+  node.elements.forEach((pl, i) => {
+    if (!pl || pl.type !== "ObjectExpression") {
+      report(`plate ${i + 1} is a ${pl ? pl.type : "hole"}, not an object`);
+      return;
+    }
+    const img = val(propOf(pl, "img"));
+    if (img === null || img === undefined) {
+      report(`plate ${i + 1} has no \`img\` this reader can read`);
+      return;
+    }
+    const lab = val(propOf(pl, "label"));
+    out.push(lab === null || lab === undefined ? { img } : { img, label: lab });
+  });
+  return out;
+}
+
 function preOf(node) {
   if (!node || node.type !== "ObjectExpression") return null;
   const props = node.properties.filter(p => p.type === "Property" && !p.computed);
@@ -168,7 +213,17 @@ function paragraphsOf(node) {
     let sawPre = false;
     for (let i = 0; i < node.elements.length; i++) {
       let v = strOf(node.elements[i]);
-      if (v === null) { const pre = preOf(node.elements[i]); if (pre !== null) { v = pre; sawPre = true; } }
+      /* [2026-08-25] THE LISTING KEEPS ITS MARKER NOW, NOT ONLY ITS TEXT.
+         Folding `{pre:"..."}` to a bare string carried the characters and threw
+         away the one bit that says they are COLUMNS - so the museum drew an
+         aligned listing, the reader reported `list+pre` to say it had seen one,
+         and anything writing back produced a paragraph. The text survived and
+         the shape did not, which is the same silent loss one level down.
+         THE ITEM IS RETURNED IN THE SHAPE THE SOURCE WROTE IT and the renderer
+         accepts, which is the 013 lesson applied to the body ITEM rather than
+         to the body: whatever the reader cannot see, the writer cannot
+         preserve. Every consumer of a body now asks `textOf`. */
+      if (v === null) { const pre = preOf(node.elements[i]); if (pre !== null) { v = { pre }; sawPre = true; } }
       if (v === null) return { shape: sawPre ? "list+pre" : "list", body,
         fault: `is a list whose paragraph ${i + 1} is a `
              + `${node.elements[i] ? node.elements[i].type : "hole"} this reader cannot fold `
@@ -622,7 +677,8 @@ export function draftEntries(src) {
             + `it would be missing from the page Mike writes on and gone from anything he saved. `
             + `Teach draftEntries to read it, or add it to READ_ENTRY_FIELDS with the ruling`);
       }
-      for (const k of ["date", "title", "line", "lead", "tomb", "still", "stillCaption"]) {
+      for (const k of ["date", "title", "line", "lead", "tomb", "still", "stillCaption",
+                       "stamp", "note"]) {
         const node = propOf(el, k);
         if (!node) continue;
         const v = val(node);
@@ -670,6 +726,32 @@ export function draftEntries(src) {
          REASON. An entry declaring `docs` used to render on the glass and
          vanish from the editor — the exact silence the comment above this
          reader's field guard was written about, and the field it named first. */
+      /* [2026-08-25] `wire` AND `plates` — THE ENTRY'S OWN PAYLOADS.
+         `record-model.js` draws both (`attachmentRows`, lines 180-181 and
+         221-242) and the reader saw neither. They are read the same way the
+         attachments below are: a shape this reader does not understand is a
+         FAULT with a name on it, never an empty array. */
+      const wireNode = propOf(el, "wire");
+      if (wireNode && wireNode.type !== "ArrayExpression") {
+        unreadable.push(`Record ${e.no}: \`wire\` is a ${wireNode.type}, not a list`);
+      } else if (wireNode) {
+        const lines = [];
+        wireNode.elements.forEach((w, i) => {
+          const v = strOf(w);
+          if (v === null) {
+            unreadable.push(`Record ${e.no}: \`wire\` line ${i + 1} is a `
+              + `${w ? w.type : "hole"} this reader cannot fold into a string`);
+          } else lines.push(v);
+        });
+        e.wire = lines;
+      }
+      const platesNode = propOf(el, "plates");
+      if (platesNode && platesNode.type !== "ArrayExpression") {
+        unreadable.push(`Record ${e.no}: \`plates\` is a ${platesNode.type}, not a list`);
+      } else if (platesNode) {
+        e.plates = platesOf(platesNode, val, (m) =>
+          unreadable.push(`Record ${e.no}: \`plates\` ${m}`));
+      }
       const docsNode = propOf(el, "docs");
       if (docsNode && docsNode.type !== "ArrayExpression") {
         unreadable.push(`Record ${e.no}: \`docs\` is a ${docsNode.type}, not a list`);
@@ -700,15 +782,10 @@ export function draftEntries(src) {
           const pagesNode = propOf(d, "pages");
           if (pagesNode && pagesNode.type === "Literal" && typeof pagesNode.value === "number")
             doc.pages = pagesNode.value;
-          const platesNode = propOf(d, "plates");
-          if (platesNode && platesNode.type === "ArrayExpression") {
-            doc.plates = platesNode.elements.map(pl => {
-              if (!pl || pl.type !== "ObjectExpression") return null;
-              const img = val(propOf(pl, "img"));
-              if (img === null) return null;
-              const lab = val(propOf(pl, "label"));
-              return lab === null ? { img } : { img, label: lab };
-            }).filter(Boolean);
+          const dPlatesNode = propOf(d, "plates");
+          if (dPlatesNode && dPlatesNode.type === "ArrayExpression") {
+            doc.plates = platesOf(dPlatesNode, val, (m) =>
+              unreadable.push(`Record ${e.no}: attachment ${i + 1} \`plates\` ${m}`));
           }
           return doc;
         }).filter(Boolean);

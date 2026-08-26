@@ -68,7 +68,7 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import { spawnSync } from "node:child_process";
-import { draftEntries } from "../../reveal/record-entries.mjs";
+import { draftEntries, textOf } from "../../reveal/record-entries.mjs";
 import { BUDGETS, FORMATS, sectionsFromText,
          TITLE_BUDGET_MEASURED } from "../../reveal/record-shape.mjs";
 
@@ -144,7 +144,10 @@ function seedOf(shipped) {
     if (!e) { report.misplaced.push(`Record ${c.no} is not in the Record any more`); continue; }
     let placed = false;
     for (const s of e.sections || []) {
-      const i = (s.body || []).indexOf(c.after);
+      /* [2026-08-25] a body item is a string OR a `{ pre }` listing now, so the
+         match asks for its WORDS. `indexOf` on a mixed list would miss every
+         listing silently, which is this round's own defect in miniature. */
+      const i = (s.body || []).findIndex(p => textOf(p) === c.after);
       if (i < 0) continue;
       s.body.splice(i + 1, 0, ...c.notes.map(n => "{" + n + "}"));
       placed = true;
@@ -185,7 +188,7 @@ function compareAnswers(shipped) {
     }
     const want = sectionsFromText(text);
     const have = new Set();
-    for (const s of e.sections || []) { if (s.label) have.add(s.label); for (const p of s.body || []) have.add(p); }
+    for (const s of e.sections || []) { if (s.label) have.add(s.label); for (const p of s.body || []) have.add(textOf(p)); }
     const missing = [];
     for (const s of want) { if (s.label && !have.has(s.label)) missing.push(s.label); for (const p of s.body) if (!have.has(p)) missing.push(p); }
     rows.push({ slot: c.slot, state: missing.length ? "PARTLY IN" : "ALREADY IN",
