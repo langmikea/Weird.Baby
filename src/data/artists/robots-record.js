@@ -292,6 +292,44 @@ import { recordDay } from "./record-epoch.js";
    `npm run day:proof` P6 reads `docs/dictation-20260807/moved-blocks.json` and
    asserts, on every run, that every claim these blocks made is still findable
    where it is cited. */
+/* ═══ RECORD 003's TWO BLOCKS — DELETED, ONE SENTENCE CARRIED [2026-08-26] ══
+   **THE THIRD ENTRY EMPTIED UNDER `C-day2`**, after 001 and 003's earlier block
+   went to the preamble in 2026-08-16 and 002's two were deleted yesterday.
+
+   **NEITHER OF THESE HAD GONE STALE, AND THAT WAS CHECKED RATHER THAN
+   ASSUMED** — 002's closing sentence had, and the preamble block above this
+   file's array carries a note saying its own subject was replaced underneath
+   it. Every factual claim in these two was re-measured against the tree: 003
+   still delivers four attachments, `scan-31` is still untouched beside the
+   marked copy, the DETAILED REPORT still names SCAN 07, SCAN 11 and SCAN 31,
+   and both master renders are still on disk. All true.
+
+   ── BLOCK 0, `THE THREE SCANS` — DELETED IN FULL ───────────────────────────
+   Every claim is in **`docs/MUSEUM_RULINGS-20260817.md`**, in fuller form:
+   Ruling 12 carries Mike's quote with a whole sentence this comment dropped
+   (*"As we peel the onion that is the ZIP file, the story unfolds"*), the
+   filmed-together test, AND *"One page is in two scans - the leaf that closes
+   the video link also opens the power supply"* — which was the one thing here
+   that looked entry-specific. Ruling 11 carries the scan-number half and adds
+   the vocabulary sweep this comment does not mention.
+
+   ── BLOCK 1, `THE FOURTH ATTACHMENT, BACK-POSTED` — ONE SENTENCE SURVIVED ───
+   Five of its six claims are already in **`docs/canon/BELL-103.md`**, which
+   carries them as *"Three further rulings sit on that attachment"* — the
+   back-post and *"We have had no visitors"*, Ruling B, *deliberately not called
+   a scan*, *the filename asserts no page*, and the PEN WRITER credit. Ruling B
+   itself is at `docs/canon/09-PUBLISHED.md#back-posting`.
+
+   **THE SIXTH WAS WRITTEN DOWN NOWHERE ELSE AND IS CARRIED, NOT DELETED:** that
+   the marked page is a SECOND RENDER of the same master rather than a retouch,
+   **so the pair can be differenced and audited.** `provenance/assets.json`
+   records the second render and the generator; the AUDIT REASON and the pairing
+   with the unmarked leaf were only here. Both are in `BELL-103.md` now.
+
+   **AND DELETING IT WOULD HAVE LOST A CORRECT PATH.** This comment names
+   `pages/page-47.png`; the `scan-31-a` provenance row names
+   `structure/page-47.png`, and **there is no file at that path.** The flag is
+   at `BELL-103.md` beside the carried sentence. */
 export const RECORD_ENTRIES = [
             { no: 1,
               date: recordDay(1),
@@ -410,21 +448,6 @@ export const RECORD_ENTRIES = [
                     + "machine. No explanation is offered.",
                   ] },
               ],
-              /* [2026-08-19] THE THREE SCANS. Mike's ruling on what an
-                 attachment IS: "We show the things that need to be shown. Each
-                 page is a page, and if we need to include a couple more pages,
-                 fine. Those pages were in the outer layer for a reason." So a
-                 scan carries the pages that were filmed together because they
-                 belong together, in reading order, and no page is cropped out
-                 to tidy a set or padded in to even one.
-                 THE NUMBERS 07/11/31 ARE SCAN NUMBERS, NOT PAGE NUMBERS (T-A,
-                 ruled 2026-08-19): they are frame numbers from whoever filmed
-                 the manual, they match nothing in the document, and they are
-                 not meant to. That is why the public names are scan-NN, and
-                 why no address here asserts a page of the manual.
-                 ONE PAGE IS IN TWO SCANS. The manual page that closes the
-                 video link also opens the power supply, so it was filmed into
-                 both sets and is delivered under both names. */
               docs: [
                 { title: "Scan 07 - Power supply and distribution",
                   source: "ABEAL 8P-OMI-1",
@@ -451,37 +474,6 @@ export const RECORD_ENTRIES = [
                     { img: "/robots/manual/scan-31-a.webp",
                       label: "Bias settings, the four communications settings" },
                   ] },
-                /* [2026-08-19] THE FOURTH ATTACHMENT, BACK-POSTED. Mike ruled
-                   it, and his reason is the whole of why it is allowed: "We
-                   have had no visitors." Record 003 published 19 Aug 17:00 and
-                   is live.
-                   RULING B: THE ORIGINAL SCAN STAYS. The marked copy arrives
-                   BESIDE it, as a new attachment. The museum does not edit what
-                   it has already shown; a page comes back with somebody's
-                   handwriting on it. Scan 31 above is untouched, and the
-                   marked page is a SECOND RENDER of the same master rather
-                   than a retouch of the first file - the generator emits
-                   pages/page-47.png and pages/marked/page-47.png separately,
-                   so the pair can be differenced and audited.
-                   AND IT IS DELIBERATELY NOT CALLED A SCAN. Record 003's own
-                   DETAILED REPORT, in Mike's published words, names three:
-                   SCAN 07, SCAN 11, SCAN 31. Ruling 10 - what's said matches
-                   what's shown - would then force a fourth line into text the
-                   museum has already published, which Ruling B forbids. It
-                   also happens to be true: this page was not recovered from
-                   the ZIP and was not filmed with anything. It is a different
-                   object with a different provenance, and Ruling 12's own test
-                   (the pages that were filmed together because they belong
-                   together) puts it with nothing.
-                   THE FILENAME ASSERTS NO PAGE. Ruling 11's practical half is
-                   that no public address may assert a page of the manual -
-                   which is why the others are scan-NN. `marked-b1` would
-                   assert B-1, a real paragraph number; `marked-01` asserts a
-                   sequence of marked copies and nothing about the document.
-                   Mike has said this is a recurring channel, so it takes a
-                   number from the first one.
-                   THE PEN IS MIKE'S OWN HAND - he is the PEN WRITER, logged
-                   for the credits page. */
                 { title: "Marked copy 01 - Bias settings",
                   source: "ABEAL 8P-OMI-1",
                   pages: 1,

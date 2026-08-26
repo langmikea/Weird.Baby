@@ -100,6 +100,91 @@
      "in": "docs/canon/09-PUBLISHED.md"
     }
    ]
+  },
+  {
+   "entry": 3,
+   "block": 0,
+   "chars": 1110,
+   "sha256": "cf6ced2424d00c6007d6364f37603d760def00d8455092b01e01beb9ce63c4f0",
+   "disposition": "deleted-as-duplicate",
+   "lead": "[2026-08-19] THE THREE SCANS",
+   "claims": [
+    {
+     "claim": "Mike quote on what an attachment is",
+     "find": "We show the things that need to be shown",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "the filmed-together test",
+     "find": "never padded in to make one even",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "07/11/31 are frame numbers",
+     "find": "frame numbers from whoever filmed the manual",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "no address asserts a manual page",
+     "find": "the practical half of the ruling",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    },
+    {
+     "claim": "one page is in two scans",
+     "find": "One page is in two scans",
+     "in": "docs/MUSEUM_RULINGS-20260817.md"
+    }
+   ]
+  },
+  {
+   "entry": 3,
+   "block": 1,
+   "chars": 2223,
+   "sha256": "a1153d13229fcc3f4033f86105023484fdc7d89128bef5995f89e2f3b098576d",
+   "disposition": "deleted-except-one-sentence-carried",
+   "lead": "[2026-08-19] THE FOURTH ATTACHMENT, BACK-POSTED",
+   "claims": [
+    {
+     "claim": "the back-post and his reason",
+     "find": "We have had no visitors",
+     "in": "docs/canon/BELL-103.md"
+    },
+    {
+     "claim": "Ruling B, the original scan stays",
+     "find": "RULING B: THE ORIGINAL SCAN STAYS",
+     "in": "docs/canon/09-PUBLISHED.md"
+    },
+    {
+     "claim": "deliberately not called a scan",
+     "find": "It is deliberately not called a scan",
+     "in": "docs/canon/BELL-103.md"
+    },
+    {
+     "claim": "the filename asserts no page",
+     "find": "The filename asserts no page",
+     "in": "docs/canon/BELL-103.md"
+    },
+    {
+     "claim": "a recurring channel, numbered from the first",
+     "find": "recurring channel",
+     "in": "docs/canon/BELL-103.md"
+    },
+    {
+     "claim": "the pen is Mike own hand",
+     "find": "He is the PEN WRITER",
+     "in": "docs/canon/BELL-103.md"
+    },
+    {
+     "claim": "CARRIED: second render, so the pair can be audited",
+     "find": "so the pair can be differenced and audited",
+     "in": "docs/canon/BELL-103.md"
+    },
+    {
+     "claim": "CARRIED: the two master paths",
+     "find": "pages/marked/page-47.png",
+     "in": "docs/canon/BELL-103.md"
+    }
+   ]
   }
  ]
 }

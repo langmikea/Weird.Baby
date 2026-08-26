@@ -277,6 +277,24 @@ Three further rulings sit on that attachment and are worth carrying:
   **recurring channel**, so it takes a number from the first one.
 - **The pen is Mike's own hand.** He is the PEN WRITER, logged for the credits
   page.
+- **It is a SECOND RENDER of the same master, not a retouch of the first file,
+  and that is so the pair can be differenced and audited.** The generator emits
+  `robots/mgk-viiip/manual/structure/pages/page-47.png` and
+  `robots/mgk-viiip/manual/structure/pages/marked/page-47.png` **separately**,
+  so the unmarked leaf and the marked one can be laid against each other and
+  every mark on the page accounted for. A retouch would have left one file and
+  no way to ask what changed. *(Carried here 2026-08-26 from Record 003's source
+  comment, which was the only place it was written down — see
+  [C-day2](../OPEN_ACTIONS.md#c-day2).)*
+
+  > **[FLAG 2026-08-26 · found here, not fixed]** `provenance/assets.json`'s
+  > `scan-31-a` row names its master as
+  > `robots/mgk-viiip/manual/structure/page-47.png` — **there is no file at that
+  > path.** The leaf is at `structure/pages/page-47.png`, as the marked row and
+  > the deleted comment both have it. Measured 2026-08-26: the row's path is
+  > absent, the other two exist. Not corrected here because this round moves one
+  > Record's reasoning and does not edit a gated provenance record on the way
+  > past.
 
 **AND ONE MARK ON THAT PAGE IS FLAGGED AND NOT SPENT.** The sheet carries two
 registers — a careful hand and a loose one — and *"a page marked in both is a
