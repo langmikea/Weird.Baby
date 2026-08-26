@@ -1959,7 +1959,37 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    IT DOES NOT STOP A LONG LINE WRAPPING. Nothing in CSS can do that and keep
    the text readable; the no-wrap guarantee is an AUTHORING budget, measured at
    46 characters a line at 390px, and it is kept by the person writing. */
-.vp-rec-sum{opacity:.72;white-space:pre-line}
+/* [MIKE, 2026-08-26] `pre-wrap`, and the argument is at `.vp-rec-sect-body`.
+   The note above this line reasoned that `pre-line` was right BECAUSE it
+   collapses runs of spaces — true of a string assembled from concatenated
+   source literals that nobody could see while writing, and false of a string
+   he types into a box. It is the same declaration on the deck and the body so
+   the Record still has ONE answer to what a character means, which was that
+   note's own principle and is the only part of it that survives. */
+.vp-rec-sum{opacity:.72;white-space:pre-wrap}
+
+/* ═══ [MIKE, 2026-08-26] AND EVERY OTHER FIELD THAT CARRIES HIS TYPING ══════
+   THE SWEEP THAT FOUND THE DECK FOUND FIVE MORE, ALL LATENT. `.vp-rec-lead`,
+   `.vp-rec-tomb`, `.vp-rec-sect-label`, the Record's `.vp-fe-note` and
+   `.vp-rec-still-cap` declare no `white-space` at all, so they inherit
+   `normal` — which collapses a newline to a SPACE and a run of spaces to one.
+   **Measured: no entry carries one today**, so nothing on the glass moves; but
+   the day editor draws every one of those fields as a box the moment an entry
+   has one, and a box that shows what `normal` would eat is the same defect
+   that produced this round, waiting for the first `lead` anybody writes.
+   **A latent disagreement is still a disagreement**, and the cost of closing
+   it while it is latent is this rule.
+
+   SCOPE IS THE RECORD (A4). `.vp-fe-note` is a SHARED class — restyling it
+   bare would retype the FAQ and every other entry list in the building — so it
+   is reached the way `.vp-rec-openhead ~ .vp-fe-note` above already reaches it,
+   through the Record's own ancestors and nowhere else. */
+.vp-rec-lead,
+.vp-rec-tomb,
+.vp-rec-sect-label,
+.vp-rec-still-cap,
+.vp-rec-index .vp-fe-note,
+.vp-rec-openhead ~ .vp-fe-note{white-space:pre-wrap}
 
 /* ═══ [2026-08-11] THE DECK, IN THE OPENED RECORD ═══════════════════════════
    MIKE'S RULING: the opened record shows the same subtext as the index, in the
@@ -4926,9 +4956,46 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    that `.vp-rec-sect-body + .vp-rec-sect-body` already spaces with
    `--rec-para`. An entry with no newline inside any paragraph — 003, 004, 005
    — renders byte-identically to before. */
+/* ═══ [MIKE, 2026-08-26] THE MUSEUM PRESERVES WHAT HE TYPES ════════════════
+   **HE ASKED ONE QUESTION AND IT SETTLED THE MECHANISM: *"Is it WYSIWYG? If
+   so, that is the test."*** It was not. The day editor drew `pre-wrap` and
+   this drew `pre-line`, so a run of spaces showed in the box he types in and
+   collapsed on the page a visitor reads. **What he writes and what is
+   published were two different strings, and nothing said so.**
+
+   HIS RULE: *"a long line can be used to make a paragraph; the short line is
+   defined when wrapping is not preferred."* His line breaks and his alignment
+   are the instruction, the same way his line splits and his casing are (§0
+   VERBATIM). `pre-line` honoured half of that — it kept the newline and threw
+   away the spacing.
+
+   SO IT IS `pre-wrap` AT BOTH ENDS AND THE EDITOR IS WYSIWYG BECAUSE THERE IS
+   NOTHING LEFT TO DIFFER. **The whole class of announcement went with it** —
+   the editor used to print *"2 spaces off"* under a box, and that hint existed
+   only because the two ends disagreed. A surface that has to explain how it
+   differs from the page is a surface that should not differ from the page.
+
+   **THIS SUPERSEDES THE `pre-line` REASONING AT `.vp-rec-sum` AND THE ONE THAT
+   STOOD HERE**, both of which argued that collapsing runs of spaces was right
+   for text assembled from concatenated source literals. That was true of a
+   string nobody could see while writing. It is not true of a string he types
+   into a box.
+
+   AND IT CLOSES `S-e` BY RULING RATHER THAN BY SIDE EFFECT. That register row
+   asked whether Record 001's `=  86%` should be visible on the glass; the
+   2026-08-10 note here recorded it as *"not a thing this rule may decide"*.
+   He has now decided it: the double space is his and it shows. **He also said
+   what makes it safe** — *"I will re-edit all of the Recs prior to launch.
+   Many editorial changes planned, none story-impactful"* — so the leading
+   spaces becoming visible is not a risk being managed, it is a change he is
+   walking into with his eyes open.
+
+   `pre-wrap` STILL WRAPS, so the deck's no-wrap guarantee is unchanged: it was
+   always an AUTHORING budget kept by the person writing, never a CSS promise.
+   What changes is only that a space he typed is a space a visitor sees. */
 .vp-rec-sect-body{margin:0;font-family:var(--wb-plain);
   font-size:var(--fs-body);line-height:1.4;letter-spacing:0;
-  padding-left:var(--rec-indent);white-space:pre-line;
+  padding-left:var(--rec-indent);white-space:pre-wrap;
   color:var(--wb-gold-lo);max-width:68ch}
 .vp-rec-sect-body + .vp-rec-sect-body{margin-top:var(--rec-para)}
 .vp-rec-sect-doors{display:flex;flex-wrap:wrap;gap:10px 16px}

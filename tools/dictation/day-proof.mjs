@@ -219,52 +219,67 @@ if (PRE_ENTRY) {
   say(false, "no entry in the Record carries a {pre} listing — P1.1 cannot run");
 }
 
-/* ── P1.2 HIS LEADING SPACES. ──────────────────────────────────────────── */
+/* ── P1.2 HIS LEADING SPACES REACH THE VISITOR ─────────────────────────
+   [REWRITTEN 2026-08-26] This used to prove the DEDENT — that the box showed
+   his indent stripped and saved it back. **The dedent is gone**: the museum
+   draws `pre-wrap`, so his indent is his and it reaches the glass, and the
+   property worth proving is now the simplest one there is. What he typed is
+   what is stored, untouched blocks and edited blocks alike. */
 if (INDENT_ENTRY) {
   const e = clone(INDENT_ENTRY);
   const out = WB.collect(WB.modelOf(e));
+  const indented = (e.sections || []).flatMap(s => s.body || [])
+    .filter(x => typeof x === "string" && /^ +\S/m.test(x)).length;
   say(norm(out) === norm(e),
-    `Record ${String(e.no).padStart(3, "0")}'s leading indent survives an untouched save — `
-    + `the box SHOWS it dedented and SAVES the original`);
+    `Record ${String(e.no).padStart(3, "0")}'s leading indent survives an untouched save `
+    + `verbatim — ${indented} indented paragraph(s), nothing stripped and nothing re-applied`);
 
-  /* and an EDITED box keeps the block's own level */
+  /* AND AN EDITED BOX STORES EXACTLY WHAT IS IN IT. No level is inferred for
+     him: a line typed flush left is stored flush left, which is what WYSIWYG
+     means at this end. */
   const m = WB.modelOf(clone(e));
-  const s0 = m.sections.find(s => s.blocks.some(b => b.cut > 0));
-  const blk = s0.blocks.find(b => b.cut > 0);
-  const cut = blk.cut;
-  blk.text = blk.text + "\n\nA line the proof typed.";
+  const s0 = m.sections.find(s => s.blocks.some(b => /^ +\S/m.test(b.text)));
+  const blk = s0.blocks.find(b => /^ +\S/m.test(b.text));
+  blk.text = blk.text + "\n\n      A line the proof typed, at six spaces.";
   const typed = WB.collect(m);
   const added = (typed.sections.find(s => s.label === s0.label.orig) || {}).body || [];
-  const mine = added.find(p => typeof p === "string" && /A line the proof typed\./.test(p));
-  say(!!mine && mine === " ".repeat(cut) + "A line the proof typed.",
-    `and a line typed INTO that block lands at the block's own level — ${cut} space(s) re-applied, `
-    + `so an edit does not sit at a different indent from the paragraph above it`);
+  const mine = added.find(x => typeof x === "string" && /A line the proof typed/.test(x));
+  say(mine === "      A line the proof typed, at six spaces.",
+    `and a line typed INTO that block is stored at the indent it was typed at — six spaces, `
+    + `neither stripped nor "corrected" to the block's own level`);
 
-  /* THE BREAKAGE IS THE DEFECT ITSELF: a box that SAVES WHAT IT SHOWS.
-     Note that `dedent` then `reindent` is an identity, so removing the
-     untouched-original rule ALONE loses nothing — the two halves protect
-     together, and this mutation removes both by returning the displayed text
-     the way a naive editor would. That is the honest breakage; removing one
-     line and calling it a loss would be a check passing on a technicality. */
+  /* LOST FIRST: the collector as it was until today, which dedented for
+     display. With the museum on pre-wrap that is no longer a compensation,
+     it is a deletion of his spacing. */
+  /* THE MUTATION GOES WHERE HIS BODIES ACTUALLY TRAVEL. A first cut dedented
+     `outOf` and changed NOTHING, because a `strs` block short-circuits in
+     `blockOut` and returns its original items without ever calling `outOf`.
+     A breakage that misses the live path is a breakage that proves the check
+     is asleep — so it is the untouched return that dedents here. */
   const b = broken(
-    "    if (b.orig != null && dedent(b.orig).text === t) {\n"
+    "    if (b.raw != null && b.raw === t) {\n"
     + "      /* UNTOUCHED: the items that arrived, in the shapes they arrived in. */\n"
     + "      return (b.items || []).slice();\n"
-    + "    }\n"
-    + "    var whole = reindent(t, b.cut || 0);",
-    "    var whole = t; /* the box saves what it SHOWS — the defect, on purpose */",
-    "save-what-you-show");
+    + "    }",
+    "    if (b.raw != null && b.raw === t) {\n"
+    + "      return (b.items || []).map(function (x) {\n"
+    + "        return typeof x === \"string\"\n"
+    + "          ? x.split(\"\\n\").map(function (l) { return l.replace(/^ +/, \"\"); }).join(\"\\n\")\n"
+    + "          : x; });\n"
+    + "    }",
+    "a dedenting collector");
   if (b) {
     const outB = b.collect(b.modelOf(clone(e)));
-    const gone = JSON.stringify(outB) !== JSON.stringify(e);
-    lost(gone,
-      `WITH THE BOX SAVING WHAT IT SHOWS, merely OPENING the page and pressing Save rewrites `
-      + `the indentation of every section he never touched — Record `
-      + `${String(e.no).padStart(3, "0")} comes back with its leading spaces gone.`);
+    lost(JSON.stringify(outB) !== JSON.stringify(e),
+      `WITH A DEDENTING COLLECTOR — which is what stood here until today — Record `
+      + `${String(e.no).padStart(3, "0")} comes back with its leading spaces gone. That was a `
+      + `COMPENSATION while the museum collapsed them; against a pre-wrap museum it is a `
+      + `deletion of something a visitor would have seen.`);
   }
 } else {
   say(false, "no entry carries a leading indent — P1.2 cannot run");
 }
+
 
 /* ── P1.3 WHICH DAYS CAN HIS SAVE ACTUALLY LAND TODAY? ──────────────────
    MEASURED, NOT ASSUMED, AND IT IS THE FINDING OF THIS ROUND. `record:land`
@@ -517,6 +532,146 @@ head("P3 — A DELETION IS NEVER SILENT  ·  AND IT CANNOT TELL A DELIBERATE ONE
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   P4 — WYSIWYG: THE BOX AND THE PAGE ARE THE SAME STRING
+   ═══════════════════════════════════════════════════════════════════════════
+   MIKE, 2026-08-26: **"Is it WYSIWYG? If so, that is the test."**
+
+   IT WAS NOT, AND P1 THROUGH P3 COULD NOT SEE IT. They drive `modelOf` and
+   `collect` in node, so they prove the COLLECTOR and say nothing about the
+   CONTROL the collector reads or the CSS the museum draws with. **The deck is
+   what that blind spot cost:** all five decks are two lines, Piece 4 put them
+   in an `<input>`, a browser strips CR and LF from an input's value, and every
+   save flattened them — with `day:proof` green.
+
+   SO P4 ASSERTS THE TWO ENDS THIS PAGE SITS BETWEEN:
+     P4.1  THE CONTROL CAN HOLD THE DATA — read off the BUILT PAGE, not the
+           model. A box seeded with a newline must be a `textarea`.
+     P4.2  BOTH ENDS DECLARE THE SAME WHITE-SPACE — the editor's CSS out of the
+           built page, the museum's out of `Exhibit.css`.
+     P4.3  AND UNDER THAT DECLARATION HIS STRINGS SURVIVE CHARACTER FOR
+           CHARACTER — every string in the Record, through the mode the museum
+           actually declares.
+   =========================================================================== */
+head("P4 — WYSIWYG  ·  THE BOX AND THE PAGE ARE THE SAME STRING");
+const PAGE_SRC = fs.readFileSync(PAGE, "utf8");
+const CSS_SRC = fs.readFileSync("src/routes/exhibit/Exhibit.css", "utf8");
+
+/* ── P4.1 THE CONTROL CAN HOLD THE DATA ─────────────────────────────────── */
+{
+  /* every editable box on the page, with the value it was seeded with. `ORIG`
+     is baked into the page as the raw each uid arrived carrying. */
+  const origM = PAGE_SRC.match(/\nvar ORIG = (\{[\s\S]*?\});\n/);
+  const ORIG = origM ? JSON.parse(origM[1]) : {};
+  const boxes = [...PAGE_SRC.matchAll(/<(input|textarea)([^>]*?)data-role="block"([^>]*)>/g)]
+    .map(m => {
+      const attrs = m[2] + m[3];
+      const uid = (attrs.match(/data-uid="([^"]*)"/) || [])[1];
+      return { tag: m[1], uid };
+    });
+  say(boxes.length > 0, `the built page carries ${boxes.length} editable box(es)`);
+
+  const cannotHold = boxes.filter(b => {
+    const o = ORIG[b.uid];
+    return b.tag === "input" && o && typeof o.raw === "string" && o.raw.includes("\n");
+  });
+  say(cannotHold.length === 0,
+    `every box seeded with a MULTI-LINE string is a textarea — an <input> silently drops `
+    + `CR and LF, so one here is a control that cannot hold its own data`
+    + (cannotHold.length ? `  — ${cannotHold.map(b => b.uid).join(", ")}` : ""));
+
+  /* AND THE DECK SPECIFICALLY, BY NAME, because it is the one that shipped
+     broken and a check that only counts is a check that can go quiet. */
+  const decks = ENTRIES.filter(e => typeof e.line === "string" && e.line.includes("\n"));
+  /* 2500 AND NOT 900, AND THE FIRST NUMBER WAS WRONG FOR A REASON WORTH
+     KEEPING: the deck row carries `data-budget`, which is the whole budget
+     object as JSON, so the box is over a kilobyte behind the attribute that
+     names it. A window that ends first reads as "no deck boxes" and the check
+     goes quiet on the one field it was written for. */
+  const deckBoxes = [...PAGE_SRC.matchAll(/data-field="line"[\s\S]{0,2500}?<(input|textarea)/g)]
+    .map(m => m[1]);
+  say(decks.length > 0 && deckBoxes.length > 0 && deckBoxes.every(t => t === "textarea"),
+    `all ${decks.length} decks are two lines and all ${deckBoxes.length} deck boxes are `
+    + `textareas  (${[...new Set(deckBoxes)].join(", ") || "none found"})`);
+
+  /* LOST FIRST: the page as it shipped yesterday. The deck's own box is turned
+     back into the `<input>` it was, on the real built markup. */
+  const deckUid = Object.keys(ORIG).find(u => String(ORIG[u].raw)
+    === String((ENTRIES.find(e => typeof e.line === "string" && e.line.includes("\n")) || {}).line));
+  const asShipped = deckUid
+    ? PAGE_SRC.replace(new RegExp(`<textarea([^>]*?)data-uid="${deckUid}"([^>]*)>`),
+        `<input$1data-uid="${deckUid}"$2>`)
+    : PAGE_SRC;
+  const shippedBad = [...asShipped.matchAll(/<(input|textarea)([^>]*?)data-role="block"([^>]*)>/g)]
+    .map(m => ({ tag: m[1], uid: ((m[2] + m[3]).match(/data-uid="([^"]*)"/) || [])[1] }))
+    .filter(b => b.tag === "input" && ORIG[b.uid] && String(ORIG[b.uid].raw).includes("\n"));
+  lost(shippedBad.length > 0,
+    `WITH A MULTI-LINE BOX PUT BACK IN AN <input>, the check names it — ${shippedBad.length} `
+    + `box(es). This is the shape that shipped yesterday and flattened every deck while P1 `
+    + `through P3 stayed green, because they never type into the real control.`);
+}
+
+/* ── P4.2 BOTH ENDS DECLARE THE SAME WHITE-SPACE ────────────────────────── */
+const WS = "pre-wrap";
+{
+  const museum = [
+    [".vp-rec-sect-body", /\.vp-rec-sect-body\{[^}]*white-space:\s*([a-z-]+)/],
+    [".vp-rec-sum", /\.vp-rec-sum\{[^}]*white-space:\s*([a-z-]+)/],
+  ].map(([name, re]) => [name, (CSS_SRC.match(re) || [])[1] || "normal"]);
+  const bad = museum.filter(([, v]) => v !== WS);
+  say(bad.length === 0,
+    `the museum draws his prose ${WS} — ${museum.map(([n, v]) => `${n} ${v}`).join(", ")}`);
+
+  const editor = (PAGE_SRC.match(/textarea\.dy-box-l\{[^}]*white-space:\s*([a-z-]+)/) || [])[1];
+  say(editor === WS, `and the editor's box is ${editor} — the same declaration at both ends`);
+
+  /* THE LATENT ONES, swept because a disagreement that has not happened yet is
+     still a disagreement — the deck's had not happened either, until Piece 4. */
+  const latent = [".vp-rec-lead", ".vp-rec-tomb", ".vp-rec-sect-label", ".vp-rec-still-cap"];
+  const covered = latent.filter(c => new RegExp(c.replace(".", "\\.") + "[,\\s]")
+    .test((CSS_SRC.match(/\.vp-rec-lead,[\s\S]{0,400}?white-space:pre-wrap\}/) || [""])[0]));
+  say(covered.length === latent.length,
+    `and the four fields that carry his typing and had NO white-space at all are covered `
+    + `too — ${covered.length}/${latent.length}: ${latent.join(" ")}`);
+}
+
+/* ── P4.3 HIS STRINGS SURVIVE THAT DECLARATION ──────────────────────────── */
+{
+  const strings = [];
+  const walk = (v, path, no) => {
+    if (typeof v === "string") { strings.push({ no, path, v }); return; }
+    if (Array.isArray(v)) return v.forEach((x, i) => walk(x, `${path}[${i}]`, no));
+    if (v && typeof v === "object") return Object.entries(v).forEach(([k, x]) => walk(x, `${path}.${k}`, no));
+  };
+  for (const e of ENTRIES) for (const [k, v] of Object.entries(e)) {
+    if (k === "no" || k === "date" || k === "docs") continue;
+    walk(v, k, e.no);
+  }
+  const differ = strings.filter(s => WB.asRendered(s.v, WS) !== s.v);
+  say(differ.length === 0,
+    `all ${strings.length} of his strings render character-identical under ${WS} — what he `
+    + `types in the box is what a visitor reads`);
+
+  /* LOST FIRST, AND THIS IS THE NUMBER THE ROUND REPORT NEEDS — SO IT EXCLUDES
+     THE ONE STRING THAT NEVER TOUCHED THIS RULE. A `{pre}` item is drawn by
+     `Listing`, which derives columns from the text and emits them as grid
+     padding; it never reaches `.vp-rec-sect-body`, so no white-space value has
+     ever applied to it. Counting its 59 characters would report a change to a
+     visitor that does not happen. */
+  const eaten = strings.filter(s => !/\.pre$/.test(s.path))
+    .map(s => ({ ...s, was: WB.asRendered(s.v, "pre-line") }))
+    .filter(s => s.was !== s.v);
+  const chars = eaten.reduce((a, s) => a + (s.v.length - s.was.length), 0);
+  const perRecord = [...new Set(eaten.map(s => s.no))].sort((a, b) => a - b)
+    .map(n => `${String(n).padStart(3, "0")}:${eaten.filter(s => s.no === n)
+      .reduce((a, s) => a + (s.v.length - s.was.length), 0)}`).join(" ");
+  lost(eaten.length > 0,
+    `UNDER pre-line — what the museum drew until today — ${eaten.length} of ${strings.length} `
+    + `strings come out DIFFERENT and ${chars} characters of his spacing are eaten `
+    + `(${perRecord}). That is exactly what a visitor stops losing; the {pre} listing is `
+    + `excluded because Listing draws it as a grid and no white-space value ever reached it.`);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    RESTORE, AND PROVE IT
    ═══════════════════════════════════════════════════════════════════════════ */
 fs.rmSync(TMP, { force: true });
@@ -535,6 +690,6 @@ if (failures) {
   console.log(`${failures} of ${checks} CHECK(S) FAILED.`);
   process.exit(1);
 }
-console.log(`ALL ${checks} CHECKS PASSED — and every one of P1, P2 and P3 was shown LOSING`);
+console.log(`ALL ${checks} CHECKS PASSED — and every one of P1 through P4 was shown LOSING`);
 console.log(`something first. The ${losses} lines marked LOST are the proof that the ${checks - losses} lines`);
 console.log(`marked ok are measuring anything at all.`);

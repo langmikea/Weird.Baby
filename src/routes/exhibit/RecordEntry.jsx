@@ -293,18 +293,35 @@ function Listing({ text }) {
 }
 
 /* === [2026-08-20] A BODY ITEM MAY BE A LISTING: `{ pre: "..." }` ===========
-   WHY IT HAD TO EXIST. `.vp-rec-sect-body` is `white-space: pre-line`, chosen
-   deliberately in 2026-08-10 so a run of spaces COLLAPSES - which is right for
-   prose assembled out of concatenated source literals, and which silently
-   destroys a fixed-column listing. Measured on the built page: `A B` and
-   `A    B` both render at 29.97px. Record 004's folder tree hangs `PORTAL.CFG`
-   under `TERMINAL.EXE` at column 26, and as an ordinary paragraph it arrived
-   flat with that file belonging to nobody.
-   IT IS AN OPT-IN AND NOT A RULE CHANGE, which is the whole point. Switching
-   the shared class to `pre-wrap` would make every incidental double space
-   visible on the glass - including `=  86%` in Record 001's body, which is
-   Mike's own open question `S-e` and not a thing a listing may decide. One
-   paragraph asks for `pre`; nothing else moves.
+   WHY IT HAD TO EXIST, AND WHY IT STILL DOES FOR A DIFFERENT REASON.
+   It was built because `.vp-rec-sect-body` was `white-space: pre-line`, which
+   COLLAPSES a run of spaces - right for prose assembled out of concatenated
+   source literals, and fatal to a fixed-column listing. Record 004's folder
+   tree hangs `PORTAL.CFG` under `TERMINAL.EXE` at column 26, and as an
+   ordinary paragraph it arrived flat with that file belonging to nobody.
+
+   **[MIKE, 2026-08-26] THAT HALF IS NOW OBSOLETE AND THE LISTING SURVIVES ON
+   THE OTHER HALF.** The body is `pre-wrap`; a run of spaces no longer
+   collapses anywhere in the Record. **But preserving a space is not aligning a
+   column.** Measured on the built page when this was written: in Arial the
+   tree's second column spreads from 0 to **88.48px**, because a typed run of
+   spaces only measures anything in a uniform advance. `pre-wrap` keeps every
+   one of those spaces and the column still staggers. **`Listing` derives the
+   columns from the text and the grid holds them at 0**, which is a thing no
+   white-space value can do in a proportional face.
+
+   SO THIS IS THE ONE PLACE THE EDITOR AND THE MUSEUM STILL DRAW THE SAME
+   STRING DIFFERENTLY, and it is reported rather than hidden: the day editor
+   shows a `{pre}` block in a MONOSPACE box, where his alignment is true as
+   typed; the museum shows it as a grid derived from that alignment. They agree
+   about which things line up and differ about the glyphs that do the lining
+   up. Changing it would undo Mike's own ruling of 2026-08-20 - *"This is the
+   wrong font. This is not a paste in."*
+
+   `S-e` IS CLOSED AND THE PARAGRAPH THAT USED TO STAND HERE SAID IT WAS NOT A
+   LISTING'S TO DECIDE. It was not; he decided it. `=  86%` in Record 001's
+   body is visible on the glass now, by his ruling, and he is re-editing every
+   Record before launch with that in view.
    AND AN UNKNOWN SHAPE DRAWS RATHER THAN VANISHES. "Nothing drops silently
    ever again" (Mike, 2026-08-08) is about entry fields, and the same rule is
    worth more here, where the gate does not look: a body item that is neither a

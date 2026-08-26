@@ -123,7 +123,8 @@
      · THE RECORD SCROLLS, NOT THE PAGE. The bar, the calendar and the shelf
        stay put; see the layout block in the CSS.
      · THE CUMULATIVE INDENT WAS THE SOURCE'S OWN LEADING SPACES, not nesting —
-       `dedent()`, which carries the measurement that found it.
+       the dedent — removed 2026-08-26, when the museum became `pre-wrap` and
+       there was no longer anything to compensate for.
      · AND THEN THE TOP BAR WENT. It was a legend of the same seven marks the
        calendar rows carry, one line above them; the rows are how five days are
        read at a glance and the legend was furniture. `MARKSBAR`, `hintAttr`
@@ -564,13 +565,14 @@ const HEADER_RULE = CONSTRAINTS.find(c =>
    > lines of its own and a blank-line split would cut one listing into three.
    > **`npm run day:proof` proves it by first removing that preservation and
    > watching the tree come back as prose.** */
-/* [PIECE 4] THE ARITHMETIC MOVED TO `day-collect.js` AND THIS IS THE ONE
-   CALL. It was reimplemented there when the editable box needed to COMPARE a
-   box against its original, and two copies of this that ever disagreed would
-   make an untouched box read as edited — which rewrites his indentation on a
-   save he did not make. The reasoning above is why the cut exists; the file
-   the page and the proof both load is where it now happens, once. */
-const dedent = s => WBDay.dedent(s);
+/* [MIKE, 2026-08-26] THE DEDENT IS GONE, AND SO IS THE REASON FOR IT.
+   Everything above this line argued that the leading indent was an artefact
+   of how the workbook types and never reached a visitor, because the museum
+   drew `pre-line` and collapsed it. **The museum draws `pre-wrap` now**, so
+   the indent DOES reach a visitor, it is his, and taking it off for display
+   would make the editor lie about the page. The block above is kept as the
+   record of a measurement that was true when it was made; what it describes
+   no longer happens anywhere. */
 
 /* ═══ [PIECE 4] A SECTION'S BODY BECOMES BOXES ═════════════════════════════
    HIS RECIPE IS ONE TEXT BOX PER SECTION, and a section's body is a LIST of
@@ -605,7 +607,6 @@ function element({ key, icon = null, header, runs, blocks = null, kind = "sectio
     blocks: bl,
     runs: list,
     /* what came off, so the hint can say it and never remove it silently. */
-    indentCut: bl.length ? Math.max(...bl.map(b => b.cut)) : 0,
     lines: list.reduce((a, r) => a + String(r).split("\n").length, 0),
     longest: list.reduce((a, r) => Math.max(a, ...String(r).split("\n").map(x => x.length)), 0),
     empty: !list.length,
@@ -689,6 +690,12 @@ function buildDays() {
             : null,
         extra: { mark: budgetMark(e.title ? e.title.length : null, BUDGETS.title),
           budget: BUDGETS.title, measured: TITLE_BUDGET_MEASURED,
+          /* THE ONLY `oneLine` FIELD LEFT, AND IT IS ONE LINE IN THE DATA
+             RATHER THAN BY PREFERENCE: no headline in the Record carries a
+             newline, and one would put a line break through `reveal:check`
+             and onto the index row. The DECK looked like this field and is
+             not — see the block at `field:line`. `day:proof` P4 asserts the
+             difference from the DATA rather than from this comment. */
           field: "title", oneLine: true },
       }));
 
@@ -702,6 +709,28 @@ function buildDays() {
          mandatory letter draws its empty box. The other absent fields stay
          absent and arrive through ADD A FIELD, which is the same rule with a
          door on it. */
+      /* ═══ [2026-08-26] THE DECK IS NOT ONE LINE, AND SHIPPING IT AS ONE WAS
+         A LIVE DATA LOSS ═══════════════════════════════════════════════════
+         **ALL FIVE DECKS ARE TWO LINES** — every one carries a `\n`, and the
+         museum has drawn them as two lines since 2026-08-10, when Mike ruled
+         *"the deck is ALWAYS two lines and must NEVER wrap."*
+
+         PIECE 4 PUT IT IN AN `<input>`. **A browser strips CR and LF from an
+         input's value**, so the box held `…went live> Alert - Incoming…` — the
+         two lines run together with nothing between them — and because the
+         collector's untouched-original test compares the box against the
+         original, the two did not match and **a save wrote the flattened
+         string.** Opening the page and pressing Save destroyed all five decks.
+
+         MEASURED ON THE SERVED PAGE BEFORE IT WAS FIXED, not reasoned:
+           orig   "> Weird.Baby website went live\n> Alert - …  (contained)"
+           box    "> Weird.Baby website went live> Alert - …  (contained)"
+           saved  the box's version, and IDENTICAL came back false.
+
+         **AND `day:proof` PASSED WHILE IT WAS TRUE**, which is the finding
+         underneath the finding: the proof drives `modelOf` and `collect` in
+         node and never types into the real control, so it could not see a
+         control that cannot hold the data. `P4` closes that. */
       els.push(element({
         key: "field:line", header: "DECK",
         runs: e.line ? [e.line] : [],
@@ -709,7 +738,7 @@ function buildDays() {
           ? { says: `${e.line.length}/${BUDGETS.line.max}`, why: BUDGETS.line.enforcedBy }
           : null,
         extra: { mark: e.line ? budgetMark(e.line.length, BUDGETS.line) : null,
-          budget: BUDGETS.line, field: "line", oneLine: true },
+          budget: BUDGETS.line, field: "line" },
       }));
 
       /* his authored sections, in his order, matched to the mandatory letters
@@ -1408,7 +1437,11 @@ function elementHtml(el) {
     const lines = String(b.text).split("\n");
     const longest = Math.max(0, ...lines.map(x => x.length));
     return `${lines.length} line${lines.length === 1 ? "" : "s"} · longest ${longest}/${BOX.chars}`
-      + (b.cut ? ` · ${b.cut} space${b.cut === 1 ? "" : "s"} off` : "");
+      /* [MIKE, 2026-08-26] `· 2 spaces off` WAS HERE AND IT IS THE HINT THAT
+         KILLED THE DEDENT. It announced a difference between the box and the
+         page, which is a thing a WYSIWYG surface has nothing to say about.
+         **The whole class of announcement goes with it** — a surface that has
+         to explain how it differs from the page should not differ. */;
   };
 
   /* ═══ [PIECE 4] THE BOX THAT TAKES THE KEYSTROKE ══════════════════════════
@@ -1453,11 +1486,11 @@ function elementHtml(el) {
       /* NO HINT. The box will not take a line break and the budget mark fires
          when the length matters; a sentence saying so is the third telling. */
       return `<input type="text" class="dy-box-l dy-edit oneline" data-role="block"
-        data-uid="${esc(b.uid)}" data-cut="0" data-kind="strs" spellcheck="true"
+        data-uid="${esc(b.uid)}" data-kind="strs" spellcheck="true"
         value="${esc(b.text)}">`;
     }
     return `<textarea class="dy-box-l dy-edit${isPre ? " pre" : ""}" data-role="block"
-      data-uid="${esc(b.uid)}" data-cut="${b.cut}" data-kind="${esc(b.kind)}"
+      data-uid="${esc(b.uid)}" data-kind="${esc(b.kind)}"
       spellcheck="true"${hint(isPre ? "a listing — it stays one however you edit it"
         : measure(b))}>${esc(b.text)}</textarea>`;
   };
@@ -1469,7 +1502,7 @@ function elementHtml(el) {
         }>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`
       : el.field || el.editHeader
         ? `<div class="dy-blocks">${
-            (el.blocks.length ? el.blocks : [{ uid: "n" + esc(el.key), kind: "strs", cut: 0, text: "" }])
+            (el.blocks.length ? el.blocks : [{ uid: "n" + esc(el.key), kind: "strs", text: "" }])
               .map(editBox).join("")}</div>`
         : el.empty
           ? `<div class="dy-box-l void">no lines</div>`
@@ -1696,13 +1729,13 @@ var STORE_KEY = ${JSON.stringify(MARK_STORE_KEY)};
    REST is every field of every entry this page does NOT edit, kept whole and
    spread back by WBDay.collect. ORIG is what each box held when the page was
    built, so an untouched box can be recognised and its ORIGINAL string emitted
-   byte for byte rather than the dedented copy he was shown. SOURCE is which
+   byte for byte, which with the dedent gone is simply what it still says. SOURCE is which
    Record the whole page was baked from. KEYS0 is the key set each day OPENED
    with, so a deletion can be named. */
 var REST = ${JSON.stringify(Object.fromEntries(days.map(d => [d.no, d.rest])))};
 var ORIG = ${JSON.stringify(Object.fromEntries(
   days.flatMap(d => d.els.flatMap(el =>
-    (el.blocks || []).map(b => [b.uid, { raw: b.raw, cut: b.cut, kind: b.kind, items: b.items }])))
+    (el.blocks || []).map(b => [b.uid, { raw: b.raw, kind: b.kind, items: b.items }])))
 ))};
 var HEAD0 = ${JSON.stringify(Object.fromEntries(
   days.flatMap(d => d.els.filter(el => el.editHeader)
@@ -2004,8 +2037,7 @@ function dayModel(no){
     if (f) {
       if (!boxes.length) return;
       var o = ORIG[boxes[0].getAttribute("data-uid")] || null;
-      day.fields[f] = { orig: o ? o.raw : null,
-        cut: Number(boxes[0].getAttribute("data-cut") || 0), text: boxes[0].value };
+      day.fields[f] = { orig: o ? o.raw : null, text: boxes[0].value };
       return;
     }
     if (row.getAttribute("data-sect") !== "1") return;
@@ -2014,12 +2046,11 @@ function dayModel(no){
     var blocks = boxes.map(function(b){
       var oo = ORIG[b.getAttribute("data-uid")] || null;
       return { kind: b.getAttribute("data-kind") || "strs",
-        orig: oo ? oo.raw : null, items: oo ? oo.items : null,
-        cut: Number(b.getAttribute("data-cut") || 0), text: b.value };
+        raw: oo ? oo.raw : null, items: oo ? oo.items : null, text: b.value };
     });
     day.sections.push({
       label: { orig: (key0 != null && HEAD0[key0] != null) ? HEAD0[key0] : null,
-        cut: 0, text: lab ? lab.value : "" },
+        text: lab ? lab.value : "" },
       blocks: blocks });
   });
   return day;
@@ -2260,7 +2291,7 @@ function freshRow(){
   var li = tpl.content.firstElementChild.cloneNode(true);
   var row = li.querySelector(".dy-el");
   /* a uid nothing has an ORIG for, so the box is read as NEW and its text is
-     emitted exactly as typed \\u2014 no cut is re-applied to a line he wrote here. */
+     emitted exactly as typed. */
   var u = "new" + Math.round(performance.now() * 1000) + "-" + (freshRow.n = (freshRow.n || 0) + 1);
   [].slice.call(row.querySelectorAll("[data-role=block]")).forEach(function(b){
     b.setAttribute("data-uid", u); b.value = "";
