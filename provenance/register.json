@@ -15534,6 +15534,13 @@
    "c": "VERIFIED",
    "s": "checked against YouTube's oEmbed before the id was written: title \"Coconuts - Weird.Baby (chords & lyrics in comments)\", channel Mike Lang / @PapaWeirdBaby - the house's own channel. Re-probed at write time: playabilityStatus OK, playableInEmbed true, isPrivate false, source 1920x1080"
   },
+  "9ebecdca822b99b5": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 893,
+   "t": "-IwcOSnyNBI",
+   "c": "VERIFIED",
+   "s": "the video of E.D. Yahdah, channel WeirdBaby / @PapaWeirdBaby - the house's own channel. SEEN PLAYING BEFORE IT WAS WRITTEN, which is the only probe OPERATIONS section 8's adoption rule accepts: a real youtube-nocookie.com/embed/-IwcOSnyNBI iframe, built by the museum's own useYTPlayer with the museum's own five playerVars, on the live https://weird.baby origin. Player state -1 unstarted -> 3 buffering -> 1 PLAYING; getCurrentTime() 10.401s then 15.407s across 5.0s of wall clock, one to one; duration 87.941s; loaded fraction 0.46; onError never fired. Read twice, after it settled - a rendered oracle read too early shows a poster on a video that then refuses. CONTROL, same page and same minute: c1vODrVXOg0 reached state 1 and advanced 4.867s -> 8.875s over 4.0s, so a refusal would have been a property of this video and not of the host. TWO THINGS FLAGGED AND NOT ACTED ON, BOTH MIKE'S. (1) The video's own YouTube title reads \"E.D. Yadah\", with no h, and it disagrees with the museum's \"E.D. Yahdah\" - his ruling A of 2026-08-26 is that THE MUSEUM IS RIGHT AND THE CHANNEL IS WRONG, and he corrects it there when convenient; a later round must not read the mismatch as a defect in this tree. (2) getVideoData() reads isListed false here and isListed true on Coconuts - unlisted embeds identically and is his call"
+  },
   "70d4292a8e70ff4c": {
    "f": "src/data/artists/weird-baby.js",
    "l": 566,

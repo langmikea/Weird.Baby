@@ -817,10 +817,84 @@ const spine = [
           type: "audio",
         }],
       },
+      /* ═══ [2026-08-26] E.D. YAHDAH GAINS ITS VIDEO, AND IT IS FIRST ════════
+         MIKE ruled the video the FIRST option and the `first pass` audio the
+         second — the same order he ruled for Coconuts on 2026-08-20, quoted at
+         that track. This is the wing's second track with two renditions and the
+         second `ytId` in the file. Nothing new is built: `hasVideo` was already
+         true from Coconuts, so the player and the picker were already drawing.
+
+         ONLY THE ID CROSSES. The museum never writes an embed URL —
+         `useYTPlayer` builds the player with
+         `host: "https://www.youtube-nocookie.com"` and drives it by id, so the
+         nocookie promise in the booth FAQ is kept by the player option and
+         cannot be broken by a row of data. `id` follows the file header's
+         rendition-id rule (`id = ytId ?? slug(audioUrl)`).
+
+         ═══ THE SPELLING IS `E.D. Yahdah` AND THE MUSEUM IS THE ONE THAT IS
+             RIGHT — MIKE'S RULING A, 2026-08-26 ═══════════════════════════════
+         FLAG, DO NOT FIX, AND IT POINTS AWAY FROM THIS TREE. **YouTube's title
+         on this video reads `E.D. Yadah`, with no `h`.** The mismatch is real
+         and it is the CHANNEL's, not the museum's: Mike ruled the museum's
+         spelling correct and will correct the video's title when convenient.
+
+         **A LATER ROUND MUST NOT READ THE MISMATCH AS A DEFECT HERE AND
+         "CORRECT" IT.** That is exactly what happened on the day this line was
+         written: Ops reported the two spellings, ruling B came back — *"E.D.
+         Yadah, no h. The museum's spelling is wrong and YouTube is right"* — the
+         title, the header comment, the register row and the asset-table prose
+         were all changed to match, and **Mike then reversed it to ruling A.**
+
+         THE REASON THE REVERSAL GIVES IS THE PART WORTH KEEPING, because it is
+         a rule about this kind of edit rather than about this word. **Four
+         references carry `yahdah` and none of them can move:** this track's
+         `id`, the audio rendition's `id`, the `audioUrl`, and the mp3's own
+         filename on disk. The id is identity (§0 — *no id moves when a legend is
+         recut*), the rendition id is DERIVED from the path, the path must match
+         the file, and the file is an asset-table row with a sha256 under it.
+         **So correcting the glass would have left the identity spelled the other
+         way — and if that spelling was what the recording was registered under,
+         the identity is the half that matters.** Changing the visible half and
+         stranding four unmovable references is the wrong half to change.
+
+         WHAT WAS TRUE OF THE MP3 IS WORTH KEEPING TOO, since it was measured
+         while the wrong ruling was being carried out: the file has **no ID3
+         title frame at all** (ID3v2.3 holding only TYER/TDAT/TIME/PRIV, and the
+         ID3v1 title, artist and album fields all NUL). The name is in the
+         filename and nowhere inside the audio.
+
+         ═══ IT WAS SEEN PLAYING BEFORE IT WAS WRITTEN ═════════════════════════
+         §8's adoption rule accepts one probe and only one, because oEmbed, the
+         watch page and the API all read healthy on a video that refuses. In a
+         real `youtube-nocookie.com/embed/-IwcOSnyNBI` iframe, built by the
+         museum's own hook with the museum's own five playerVars, **on the live
+         `https://weird.baby` origin**: state went `-1` unstarted -> `3`
+         buffering -> `1` PLAYING, and `getCurrentTime()` read **10.401s and then
+         15.407s across 5.0s of wall clock** — one to one, which is what playing
+         means. Duration 87.941s, loaded fraction 0.46, `onError` never fired.
+         **Read twice, after it settled**, because §8's other half is that a
+         rendered oracle read too early shows a poster on a video that then
+         refuses.
+         THE CONTROL RAN IN THE SAME PAGE AND THE SAME MINUTE: `c1vODrVXOg0`
+         reached state `1` and advanced 4.867s -> 8.875s over 4.0s. So a refusal
+         would have been a property of this video rather than of the host — the
+         control that the dead-antenna-source round says makes the diagnosis
+         safe.
+         **AND IT IS UNLISTED, WHICH COCONUTS IS NOT.** `getVideoData()` reads
+         `isListed: false` here and `isListed: true` on Coconuts, both measured
+         in that run. An unlisted video embeds exactly as a listed one does —
+         proved above — but it does not appear on the channel. Flagged for Mike,
+         not acted on: which of his videos are listed is his call. */
       {
         id: "ed_yahdah",
         title: "E.D. Yahdah",
         videos: [{
+          id: "-IwcOSnyNBI",
+          ytId: "-IwcOSnyNBI",
+          audioUrl: null,
+          label: "Official Music Video",
+          type: "official",
+        }, {
           id: "audio_wb_05_ed_yahdah_2026_06_16_mp3",
           ytId: null,
           audioUrl: "/audio/wb/05_ed_yahdah_2026-06-16.mp3",
