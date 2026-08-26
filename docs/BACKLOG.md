@@ -14,6 +14,12 @@ owner and no question attached, which is exactly what a register row is not for.
 |---|---|---|
 | 0 | **THE PORTAL FAQ CARRIES A KNOWN FALSE LINE, AND IT IS MIKE'S TO REWRITE.** The answer to *Is the mainframe on the Portal?* reads *"Not yet. Two channels are engraved for it on the feed drum and neither of them carries it."* **There is no feed drum.** The 2026-08-21 rebuild replaced it with the FEED bank readout and the two `MGK-NIAC` engravings went with the barrel. He amended this same clause earlier the same day (`arms` → `carries`) and the rebuild made it false again hours later. **He ruled 2026-08-22: the engravings do NOT come back, and the sentence is his to rewrite later.** It shipped public with the Portal, knowingly. **A later round must not quietly rewrite it — it is his voice, and a paraphrase in his class is indistinguishable from his words a week later.** | no row · the ledger says so on `portal.feed.niac.1` and `.2` |
 
+## NEXT AFTER A REPAIR — the writing surface moves
+
+| # | what | where |
+|---|---|---|
+| A | **[MIKE, 2026-08-25 — RULING A] THE DAY EDITOR BECOMES WHERE HE WRITES, AND EXCEL STOPS BEING THE SURFACE.** `docs/dictation-20260807/day.html` is read-only today: the boxes are the shape and nothing takes a keystroke. **`npm run record:workbook` becomes a RESCUE PATH rather than the road** — it keeps working, a workbook that exists still has to land, but no round should widen that chain now. Said at the head of `workbook_to_draft.py` so the session that goes there finds out first. **ONE THING COMES FIRST AND IT IS NOT NEGOTIABLE:** the draft round-trip silently drops `wire` and `plates` (Record 013's defect), so a surface that took his typing today would lose a field on its first day. Repair, then Piece 4. | [C-day1](OPEN_ACTIONS.md#c-day1) |
+
 ## TUESDAY — committed
 
 | # | what | where |
@@ -270,8 +276,8 @@ For the Influences track. **His images; not supplied yet.** Pairs with item 2.
 
 ## WHAT THIS PAGE IS NOT
 
-**It is not the register.** `OPEN_ACTIONS.md` carries **139 rows**, of which
-**134 are OPEN and 115 are owned by Mike** — most of them one-word rulings,
+**It is not the register.** `OPEN_ACTIONS.md` carries **140 rows**, of which
+**135 are OPEN and 115 are owned by Mike** — most of them one-word rulings,
 records and notes rather than work with a date. **This page ranks the WORK.** A
 row that is not named here has not been closed, dropped or demoted; it is
 waiting in the register, where it has always been.

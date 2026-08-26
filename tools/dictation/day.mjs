@@ -111,6 +111,27 @@
      · READINESS ON EVERY ELEMENT, HIS TWO MARKS, BOTH OVERRIDING THE SYSTEM —
        `READINESS` and `COLUMNS`. Stored, never inferred.
 
+   PASS THREE, three fixes, all of them Ops being right about a rule and wrong
+   about the page:
+     · ONE BOX WIDTH — see `BOX`. Three correct widths made a ragged column.
+     · THE LETTER IDS CAME OFF THE ROWS. They keep the top bar and the
+       calendar, which is the fixed column that was asked for.
+     · THE TWO CHECKBOXES BECAME ONE MULTISTATE BUTTON — `elementHtml`, and
+       `CYCLE` in the page's own script.
+
+   ── [MIKE, 2026-08-25 — RULING A] THIS PAGE BECOMES WHERE HE WRITES ────────
+   **THE BIGGEST RULING OF THE DAY, RECORDED AND NOT BUILT.** He ruled that the
+   day editor becomes his writing surface and that **Excel stops being the
+   surface** — which makes `npm run record:workbook` a RESCUE PATH rather than
+   the road, and it says so at the head of `workbook_to_draft.py`.
+
+   **THIS FILE IS STILL READ-ONLY AND THE ORDER MATTERS.** Editing is Piece 4
+   and it comes AFTER the round-trip repair, because **the draft silently eats
+   `wire` and `plates` today** — Record 013's defect. A surface that loses a
+   field the moment he types into it would lose his words on its first day,
+   which is the one thing this piece was sequenced last to avoid. The register
+   row is `C-day1`; the boxes are the shape and nothing here takes a keystroke.
+
      npm run day
    =========================================================================== */
 import fs from "node:fs";
@@ -184,50 +205,85 @@ function bracesIn(e) {
 }
 
 /* ═══ THE WRAP POINT — WHAT THE BOXES ARE SIZED TO ═════════════════════════
-   `[SHAPE]` the mechanism · `[WEIRD.BABY]` the three numbers.
+/* ═══ THE BOX, AND THE MARK ═══════════════════════════════════════
+   `[SHAPE]` the mechanism · `[WEIRD.BABY]` the one number and the two budgets.
 
    MIKE, 2026-08-25, specifying the section recipe: *"Width is sized to show me
-   when I am going to risk wrapping a line."* THAT REPLACES THE CHARACTER
-   COUNTS — the constraint made visible in the shape rather than announced as a
-   number. A box he can see the edge of is a limit he never has to be told.
+   when I am going to risk wrapping a line."* THE BOX IS THE WARNING — the
+   constraint made visible in the shape rather than announced as a number.
 
-   IT IS MEASURED FROM THE MUSEUM'S OWN BUDGETS AND NOTHING HERE IS CHOSEN:
+   ── ONE WIDTH, AND THE THREE WERE OPS BEING RIGHT AND WRONG AT ONCE ────────
+   THE FIRST CUT GAVE EVERY ELEMENT ITS OWN WIDTH: 62 for the headline, 65 for
+   the deck, 68 for a section, each taken from that element's own budget. Every
+   number was correct and the page was wrong. **MIKE, on reading it: the boxes
+   look ragged for no visible reason.** He is looking at a column of boxes, not
+   at three budgets — the edges do not line up and nothing on the glass says
+   why, so the raggedness reads as sloppiness rather than as information.
 
-     HEADLINE  62  `RECORD_TITLE_MAX` — the number `reveal:check` refuses a
-                   packet over. `TITLE_BUDGET_MEASURED` says the real line
-                   wraps at 64 characters at 1280px, 58 at 768 and 36 at 390,
-                   so 62 is TWO tighter than the desktop wrap and twenty-six
-                   LOOSER than the phone. A wrap in this box therefore means
-                   the gate is about to refuse AND the desktop line is about to
-                   break; the phone is already wrapping and no box can say two
-                   things at once.
-     DECK      65  `RECORD_LINE_MAX` 130 over the TWO lines of the index row it
-                   is declared to hold — `BUDGETS.line.holds`. A second line
-                   reaching this edge IS the budget, exactly.
-     SECTION   68  the museum's own body measure: `.vp-rec-sect-body` is
-                   `max-width: 68ch` in `Exhibit.css`, chosen at R4 2026-08-06
-                   from the 65–75 band. A line that wraps in this box is a line
-                   that wraps on the glass.
+   SO THERE IS ONE WIDTH AND IT IS THE SECTION'S: **68 characters**, the
+   museum's own body measure — `.vp-rec-sect-body { max-width: 68ch }` in
+   `Exhibit.css`, chosen at R4 2026-08-06 out of the 65–75 band. A line that
+   wraps in this box is a line that wraps on the glass.
 
-   AND THE BOXES ARE MONOSPACE, WHICH IS WHAT MAKES `ch` HONEST. In a monospace
+   THE WRAP WARNING ONLY HAS TO BE HONEST WHERE A LIMIT EXISTS, and a limit
+   exists on exactly two fields. Those two get a MARK instead of a narrower box
+   — see `budgetMark()`. A section has no limit at all, so a box that implied
+   one would be inventing a gate.
+
+   AND THE BOX IS MONOSPACE, WHICH IS WHAT MAKES `ch` HONEST. In a monospace
    face `1ch` is every character, so 68ch is exactly 68 characters. In the
    museum's proportional Arial it is not — the same 68ch holds a different
    number of characters in every sentence. The museum's own cap is expressed in
    `ch` for the same reason and this box reads it the same way. */
-const WRAP = {
-  title: { chars: BUDGETS.title.max,
-    why: `${BUDGETS.title.max} characters — RECORD_TITLE_MAX, the number `
-       + `reveal:check refuses a packet over. Measured, the real line wraps at `
-       + `${(TITLE_BUDGET_MEASURED[0] || {}).chars} at ${(TITLE_BUDGET_MEASURED[0] || {}).viewport}px `
-       + `and ${(TITLE_BUDGET_MEASURED[2] || {}).chars} at ${(TITLE_BUDGET_MEASURED[2] || {}).viewport}px.` },
-  line: { chars: Math.floor(BUDGETS.line.max / 2),
-    why: `${Math.floor(BUDGETS.line.max / 2)} characters — RECORD_LINE_MAX `
-       + `${BUDGETS.line.max} over the two lines of the index row it holds. A `
-       + `second line reaching this edge is the budget.` },
-  body: { chars: 68,
-    why: "68 characters — the museum's own body measure, .vp-rec-sect-body "
-       + "max-width:68ch in Exhibit.css. A line that wraps here wraps on the glass." },
-};
+const BOX = { chars: 68,
+  why: "68 characters — the museum's own body measure, .vp-rec-sect-body "
+     + "max-width:68ch in Exhibit.css. A line that wraps here wraps on the glass. "
+     + "Every box on the page is this width; the two fields that have a limit "
+     + "carry a mark instead." };
+
+/* ═══ THE MARK, AND EXACTLY WHEN IT FIRES ══════════════════════════════════
+   `[SHAPE]` the mechanism · `[WEIRD.BABY]` the two budgets it reads.
+
+   IT IS THE ONLY NUMBER ON THE PAGE, and it is the same mark in both places it
+   can appear. Two states and nothing between them:
+
+     AMBER  the string is inside `NEAR` characters of its budget. It still
+            passes. This is Ops' slack band and NOT a gate — said plainly in
+            the hint, because a mark that implies a gate nobody can find is the
+            same defect as a gate nobody can read.
+     RED    the string is OVER its budget. `npm run reveal:check` refuses the
+            packet — a fact, not a judgement.
+
+   AND IT FIRES NOWHERE ELSE. A field inside its budget carries no number at
+   all: Mike's own ruling that a count is *"only useful when there is a
+   problem"*. Two of the five days show one mark between them today — 002's
+   deck at 128 of 130.
+
+   THE HEADLINE'S HINT CARRIES THE MEASURED WRAP POINTS TOO, because the gate
+   is one number and a headline does not have one: `TITLE_BUDGET_MEASURED` puts
+   the real wrap at 64 characters at 1280px, 58 at 768 and 36 at 390. The gate
+   at 62 is two tighter than a desktop line and twenty-six looser than a phone,
+   so a headline can pass every check here and still wrap on his phone. That is
+   a fact about the museum, not a fault of the entry, and it is shown rather
+   than turned into a second red. */
+const NEAR = 5;
+
+function budgetMark(len, b) {
+  if (len == null) return null;
+  if (len > b.max) {
+    return { level: "bad", says: `${len}/${b.max}`,
+      means: `${b.name} is OVER its limit of ${b.max} characters. ${b.enforcedBy}.`,
+      read: `READS  ${len} characters, ${len - b.max} over` };
+  }
+  if (len > b.max - NEAR) {
+    return { level: "warn", says: `${len}/${b.max}`,
+      means: `${b.name} is inside ${NEAR} characters of its limit of ${b.max}. It still `
+           + `passes — this mark is Ops' slack band and no gate fires at it. The gate is `
+           + `${b.enforcedBy}, and it fires only above ${b.max}.`,
+      read: `READS  ${len} characters, ${b.max - len} left` };
+  }
+  return null;
+}
 
 /* ═══ THE THREE MANDATORY SECTIONS ═════════════════════════════════════════
    `[SHAPE]` a day HAS a list of sections that must exist, each with a
@@ -337,16 +393,16 @@ const HEADER_RULE = CONSTRAINTS.find(c =>
    Removing the field outright would make this page silently hide content that
    exists, which is exactly the defect that let two Records land and draw
    nothing at all. */
-function element({ key, icon = null, header, runs, wrap, kind = "section", fault = null, extra = {} }) {
+function element({ key, icon = null, header, runs, kind = "section", fault = null, extra = {} }) {
   const list = (runs || []).filter(r => r != null && r !== "");
   return {
     kind, key, icon, header,
     runs: list,
     lines: list.reduce((a, r) => a + String(r).split("\n").length, 0),
     longest: list.reduce((a, r) => Math.max(a, ...String(r).split("\n").map(x => x.length)), 0),
-    wrap,
     empty: !list.length,
     fault,
+    mark: null,
     ...extra,
   };
 }
@@ -406,33 +462,31 @@ function buildDays() {
       /* ── THE ELEMENTS, IN ONE LIST, IN ONE SHAPE ────────────────────────── */
       const els = [];
 
-      /* the headline, as a section. Its fault is the gate's own: over
-         RECORD_TITLE_MAX and reveal:check refuses the packet. The COUNT is
-         attached only when the limit is at risk — Mike, 2026-08-25:
-         *"A count appears when a limit is at risk, nowhere else."* */
+      /* THE TWO FIELDS THAT HAVE A LIMIT, AND THEY CARRY A MARK RATHER THAN A
+         NARROWER BOX — every box on this page is `BOX` wide. `budgetMark()`
+         says when the mark fires and it is the only number the page prints. */
       els.push(element({
         key: "field:title", icon: "H", header: "HEADLINE",
-        runs: [e.title], wrap: WRAP.title,
+        runs: [e.title],
         fault: !e.title
           ? { says: "not written", why: "the index row prints no headline. 004 and 005 shipped this way (register L-c)" }
           : e.title.length > BUDGETS.title.max
             ? { says: `${e.title.length}/${BUDGETS.title.max}`, why: BUDGETS.title.enforcedBy }
             : null,
-        extra: { risk: e.title && e.title.length > BUDGETS.title.max - 5
-          ? `${e.title.length}/${BUDGETS.title.max}` : null, budget: BUDGETS.title },
+        extra: { mark: budgetMark(e.title ? e.title.length : null, BUDGETS.title),
+          budget: BUDGETS.title, measured: TITLE_BUDGET_MEASURED },
       }));
 
-      /* the deck, as a section. Not mandatory — it has no letter — but it has
-         the other gate, and Record 002 sits one character from it. */
+      /* the deck, as a section. Not one of the three, but it has the other
+         gate, and Record 002 sits two characters from it. */
       if (e.line) {
         els.push(element({
           key: "field:line", header: "DECK",
-          runs: [e.line], wrap: WRAP.line,
+          runs: [e.line],
           fault: e.line.length > BUDGETS.line.max
             ? { says: `${e.line.length}/${BUDGETS.line.max}`, why: BUDGETS.line.enforcedBy }
             : null,
-          extra: { risk: e.line.length > BUDGETS.line.max - 5
-            ? `${e.line.length}/${BUDGETS.line.max}` : null, budget: BUDGETS.line },
+          extra: { mark: budgetMark(e.line.length, BUDGETS.line), budget: BUDGETS.line },
         }));
       }
 
@@ -446,7 +500,7 @@ function buildDays() {
         els.push(element({
           key: "section:" + String(header || "(no header)"),
           icon: m ? m.icon : null,
-          header, runs, wrap: WRAP.body,
+          header, runs,
           fault: runs.length ? null
             : { says: "no lines", why: "a section with an empty body is dropped ENTIRELY, its header with it, and nothing says so" },
         }));
@@ -463,7 +517,7 @@ function buildDays() {
         els.push(element({
           key: "field:" + k,
           header: head + (k === "still" && e.stillCaption ? " — " + e.stillCaption : ""),
-          runs: [v], wrap: WRAP.body,
+          runs: [v],
           extra: { locked: ["wire", "plates", "note"].includes(k) },
         }));
       }
@@ -473,7 +527,7 @@ function buildDays() {
       for (const m of MANDATORY) {
         if (els.some(x => x.key === m.key)) continue;
         els.push(element({
-          key: m.key, icon: m.icon, header: m.header, runs: [], wrap: WRAP.body,
+          key: m.key, icon: m.icon, header: m.header, runs: [],
           fault: { says: "not written", why: "a mandatory section. Headline, Executive Summary and Detailed Report are the three every day has" },
           extra: { missing: true },
         }));
@@ -484,7 +538,7 @@ function buildDays() {
       for (const a of docs) {
         els.push(element({
           kind: "attachment", key: "attachment:" + a.title, header: a.title,
-          runs: [], wrap: WRAP.body,
+          runs: [],
           fault: a.files.length ? null
             : { says: "no files", why: "an attachment with no files draws “not here yet” on the glass (Ruling 9)" },
           extra: { doc: a, files: fileRows.filter(f => a.files.includes(f.web)) },
@@ -671,25 +725,34 @@ const CSS = OPS_CSS + `
    TITLE BOX, BOLD. LINES BOX, INDENTED, AS MANY LINES AS HE GIVES IT.
    Both are BOXES because Piece 4 types into them and the shape is what is
    being ruled on now; nothing here is editable yet.
-   THE WIDTH IS THE WHOLE POINT and it is set per element from the museum's
-   own budgets — an inline max-width in ch, written by the generator, because
-   the headline, the deck and a section have three different wrap points and
-   one class cannot carry three numbers. MONOSPACE IS WHAT MAKES ch HONEST:
-   one character, one ch, so 68ch is 68 characters exactly.
+   ONE WIDTH, DECLARED ONCE, ON EVERY BOX. The first cut sized each element to
+   its own budget — 62, 65, 68 — and every number was right while the page was
+   wrong: Mike reads a COLUMN OF BOXES, and edges that do not line up for a
+   reason he cannot see read as sloppiness. The two fields that have a limit
+   carry a mark instead. MONOSPACE IS WHAT MAKES ch HONEST: one character, one
+   ch, so 68ch is 68 characters exactly.
    pre-wrap accepts his crlf and his spacing; the box expands because nothing
    caps its height. */
 ol.dy-sects{list-style:none;margin:0;padding:0}
 ol.dy-sects>li{margin:0 0 10px}
-.dy-el{display:grid;grid-template-columns:1.5rem 1.5rem 1.5rem minmax(0,1fr);
-  gap:0 6px;align-items:start}
-/* THE PREDEFINED COLUMNS. Every element on every day puts its letter, its NOT
-   READY box and its NOT REQUIRED box at the same three x positions — an empty
-   column is still a column, so nothing shifts and the eye learns them once. */
-.dy-el .c{font-size:10px;line-height:1.5;text-align:center;padding-top:3px}
-.dy-el .c-key{font-weight:700;letter-spacing:.04em;opacity:.5}
-.dy-el input[type=checkbox]{margin:4px auto 0;display:block;cursor:pointer;
-  accent-color:#c76a6a}
+/* ONE FIXED COLUMN ON A ROW, AND IT IS THE STATE BUTTON. The one-letter ids
+   came off the rows on 2026-08-25 — they stay in the top bar and the calendar,
+   which is the fixed column that was asked for, and a letter beside the row it
+   labels is redundant when the row says EXECUTIVE SUMMARY in bold an inch
+   away. */
+.dy-el{display:grid;grid-template-columns:1.7rem minmax(0,1fr);gap:0 7px;align-items:start}
+.dy-el .c{font-size:10px;line-height:1.5;text-align:center;padding-top:2px}
 .dy-el .body{min-width:0}
+/* THE MULTISTATE BUTTON. One control, three states, and the third press comes
+   back round to ready — no state is a corner. */
+.dy-st{width:1.7rem;height:1.7rem;padding:0;cursor:pointer;border-radius:2px;
+  font-family:inherit;font-size:13px;line-height:1;background:transparent;
+  border:1px solid #2a2620;color:inherit;opacity:.55}
+.dy-st:hover{border-color:var(--gold,#b8974a);opacity:1}
+.dy-st:focus-visible{outline:2px solid var(--gold,#b8974a);outline-offset:1px}
+.dy-st[data-state=loud]{border-color:#c76a6a;color:#e89a9a;background:#241616;
+  opacity:1;font-weight:700}
+.dy-st[data-state=off]{border-style:dashed;opacity:.35}
 /* the title box, bold */
 .dy-box-t{display:block;border:1px solid #2a2620;border-radius:2px;
   padding:4px 7px;font-size:11.5px;font-weight:700;letter-spacing:.05em;
@@ -711,7 +774,7 @@ ol.dy-sects>li{margin:0 0 10px}
    would. That errs toward warning him TOO SOON and never too late, which is
    the safe direction for a warning; the alternative is a horizontal scrollbar
    inside every section on a phone. Read the boxes at desktop width. */
-.dy-box-l{box-sizing:content-box;margin:4px 0 0 14px;
+.dy-box-l{box-sizing:content-box;max-width:68ch;margin:4px 0 0 14px;
   border:1px solid #22201a;border-radius:2px;padding:6px 8px;background:#141310;
   font-family:ui-monospace,Consolas,monospace;font-size:11.5px}
 .dy-box-l p{margin:0 0 9px;font-family:inherit;
@@ -723,17 +786,15 @@ ol.dy-sects>li{margin:0 0 10px}
    SPEAK LOUDLY. His words, and the only two voices on the page. */
 .dy-el.quiet .dy-box-t{opacity:.72}
 .dy-el.loud .dy-box-t{border-color:#c76a6a;color:#e89a9a;background:#241616}
-.dy-el.loud .c-key{opacity:1;color:#e89a9a}
 /* EVERY ROW CARRIES BOTH VOICES AND ITS OWN CLASS PICKS ONE. Nothing is
    written or removed when he ticks a box, so no mark is a one-way door. */
 .dy-say,.dy-off-say{display:none}
 .dy-el.loud .dy-say{display:inline-block;margin-left:8px;font-size:10px;
   letter-spacing:.08em;color:#e89a9a;font-weight:700}
 /* NOT REQUIRED: not presented. One dim line so the mark stays reversible —
-   the lines are gone, the two boxes are still reachable. */
+   the lines are gone, the button is still there and still goes round. */
 .dy-el.off .dy-box-t{opacity:.34;border-style:dashed;background:transparent;
   font-weight:400;color:inherit}
-.dy-el.off .c-key{opacity:.25}
 .dy-el.off .dy-box-l,.dy-el.off .dy-att{display:none}
 .dy-el.off .dy-off-say{display:inline;margin-left:8px;font-size:9.5px;
   letter-spacing:.08em;opacity:.6;font-weight:400}
@@ -809,26 +870,27 @@ table.dy-t td:first-child{opacity:.5;white-space:nowrap;width:1%}
 
    FOUR FIXED COLUMNS, ALWAYS IN THIS ORDER: the one-letter icon, NOT READY,
    NOT REQUIRED, and the body. A column with nothing to say stays empty rather
-   than closing up, because *"keeping the icons in predefined columns is still
-   a plus"* is a statement about POSITION and a bar that packs itself has none.
+   THE ROW HAS ONE FIXED COLUMN AND IT IS THE STATE BUTTON. The letter used to
+   sit beside it and Mike took it off: **the letters stay in the top bar and the
+   calendar, which is the fixed column he asked for; a letter beside the row it
+   labels is redundant** — the row already says EXECUTIVE SUMMARY in bold, in a
+   box, an inch away.
 
-   THE WIDTH IS WRITTEN INLINE, PER ELEMENT, IN ch. It is the one thing that
-   differs between instances and it is the thing the recipe exists to carry.
-   See `WRAP` for the three numbers and where each comes from. */
+   EVERY BOX IS `BOX` WIDE. The two fields that have a limit carry a MARK
+   instead of a narrower box — see `budgetMark()`. */
 function elementHtml(el) {
-  const w = el.wrap;
-  const atRisk = el.risk && !el.fault;
-
-  /* the count, and ONLY when the limit is at risk. */
-  const count = el.fault && el.fault.says && /\d\/\d/.test(el.fault.says)
-    ? `<span class="dy-count bad"${hint(
-        `${el.budget ? el.budget.name : "this field"} is over its limit. ${el.fault.why}`,
-        `READS  ${el.fault.says}`)}>${esc(el.fault.says)}</span>`
-    : atRisk
-      ? `<span class="dy-count"${hint(
-          `${el.budget ? el.budget.name : "this field"} is inside five characters of its `
-          + `limit — the count appears because the limit is at risk, and for no other reason.`,
-          `READS  ${el.risk}`)}>${esc(el.risk)}</span>`
+  /* THE ONLY NUMBER ON THE PAGE, and it is printed only when it fires. */
+  const mark = el.mark
+    ? `<span class="dy-count ${el.mark.level}"${hint(el.mark.means
+        + (el.measured
+            ? " The gate is one number and a headline is not: measured, the real line wraps at "
+              + el.measured.map(m => `${m.chars} at ${m.viewport}px`).join(", ") + "."
+            : ""),
+        el.mark.read)}>${esc(el.mark.says)}</span>`
+    : el.fault && el.fault.says && /\d\/\d/.test(el.fault.says)
+      ? `<span class="dy-count bad"${hint(
+          `${el.budget ? el.budget.name : "this field"} is over its limit. ${el.fault.why}.`,
+          `READS  ${el.fault.says}`)}>${esc(el.fault.says)}</span>`
       : "";
 
   /* BOTH VOICES ARE ALWAYS IN THE MARKUP AND CSS DECIDES WHICH SPEAKS.
@@ -845,50 +907,59 @@ function elementHtml(el) {
         : el.notReady ? "READS  your mark" : "READS  ready")
     }>NOT READY</span><span class="dy-off-say"${hint(
       "deemed not required, not presented — regardless of what the system says. Its lines "
-      + "are not drawn. Clear the box to bring it back.",
+      + "are not drawn. Press the button round to bring it back.",
       el.notRequired ? "READS  you have marked this not required" : "READS  unmarked")
     }>not required</span>`;
 
-  const boxes = `<div class="c"><input type="checkbox" data-mark="notReady" data-key="${esc(el.key)}"${
-      el.notReady ? " checked" : ""} aria-label="not ready"${hint(
-      "NOT READY even though it may pass the system's test. Your mark, and it overrides "
-      + "the system in the loud direction.",
-      `READS  ${el.notReady ? "you have marked this NOT READY" : "unmarked"}`)}></div>
-    <div class="c"><input type="checkbox" data-mark="notRequired" data-key="${esc(el.key)}"${
-      el.notRequired ? " checked" : ""} aria-label="not required"${hint(
-      "deemed not required, not presented — regardless of what the system says. Your mark, "
-      + "and it takes the element out of the summary.",
-      `READS  ${el.notRequired ? "you have marked this not required" : "unmarked"}`)}></div>`;
+  /* ═══ ONE CONTROL, THREE STATES, AND IT COMES BACK ROUND ═════════════════
+     `[SHAPE]` MIKE, 2026-08-25: **two checkboxes become ONE multistate button,
+     cycling ready → not ready → not required.** Two boxes could express four
+     combinations for three states, and the fourth — both ticked — meant
+     nothing; one button cannot say a thing that has no meaning.
 
-  const key = `<div class="c c-key"${hint(
-    el.icon
-      ? `${el.header} — one of the three sections every day has, and it keeps this column on every day.`
-      : "this column carries the one-letter icon of a mandatory section. This element is not one of the three.",
-    el.icon ? `READS  ${el.icon}` : "READS  no letter")}>${el.icon ? esc(el.icon) : ""}</div>`;
+     IT IS REVERSIBLE FROM EVERY STATE BECAUSE IT IS A CYCLE. The third press
+     returns to ready, so no state is a corner: **a mark he cannot take off is
+     a deletion**, which this page has already been caught doing once. The hint
+     names the state it is IN and the state the next press moves to, so the way
+     out is never something he has to discover.
+
+     IT IS A `button`, so it is in the tab order and answers Enter and Space
+     with no keyboard handling of this file's own. */
+  const st = el.notRequired ? "off" : el.notReady ? "loud" : "quiet";
+  const NEXT = { quiet: "not ready", loud: "not required", off: "ready" };
+  const NOW = { quiet: "ready", loud: "NOT READY", off: "not required" };
+  const GLYPH = { quiet: "·", loud: "!", off: "–" };
+  const control = `<div class="c"><button type="button" class="dy-st" data-key="${esc(el.key)}"
+    data-state="${st}" aria-label="${esc(NOW[st])}"${hint(
+      "READY, NOT READY, NOT REQUIRED — press it to go round. NOT READY is yours even when "
+      + "the system's test passes; NOT REQUIRED takes it out of the summary regardless of "
+      + "what the system says. A third press comes back to ready.",
+      `READS  ${NOW[st]} — press for ${NEXT[st]}`)
+    }>${GLYPH[st]}</button></div>`;
 
   /* THE TITLE BOX — displays BOLD. */
   const titleBox = `<div class="dy-box-t"${hint(
     el.kind === "attachment"
       ? "the attachment's title, as it prints at the foot of the record."
       : `the SECTION's HEADER. ${HEADER_RULE.rule} Enforced by: ${HEADER_RULE.enforcedBy}.`,
-    `READS  ${el.header || "(no header)"}`)}>${esc(el.header || "(no header)")}${count}${say}</div>`;
+    `READS  ${el.header || "(no header)"}`)}>${esc(el.header || "(no header)")}${mark}${say}</div>`;
 
   /* THE LINES BOX — accepts crlf, expands, spaced as he wrote it, indented
-     automatically, and sized to its own wrap point. */
+     automatically, and ONE WIDTH, the same on every element on every day. */
   const linesBox = el.kind === "attachment"
     ? attachmentBody(el)
     : el.empty
-      ? `<div class="dy-box-l void" style="max-width:${w.chars}ch"${hint(
-          "the SECTION's LINES — the text following the HEADER. " + w.why,
+      ? `<div class="dy-box-l void"${hint(
+          "the SECTION's LINES — the text following the HEADER. " + BOX.why,
           "READS  no lines")}>no lines</div>`
-      : `<div class="dy-box-l" style="max-width:${w.chars}ch"${hint(
+      : `<div class="dy-box-l"${hint(
           "the SECTION's LINES — the text following the HEADER, drawn as it is stored: the "
-          + "same line splits, the same indentation, the same spacing. The BOX is the limit: "
-          + w.why,
-          `READS  ${el.lines} line${el.lines === 1 ? "" : "s"}, longest ${el.longest} of ${w.chars} characters`)
+          + "same line splits, the same indentation, the same spacing. The BOX is the measure: "
+          + BOX.why,
+          `READS  ${el.lines} line${el.lines === 1 ? "" : "s"}, longest ${el.longest} of ${BOX.chars} characters`)
         }>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`;
 
-  return `<li><div class="dy-el ${el.state}" data-el="${esc(el.key)}" data-fault="${el.fault ? 1 : 0}">${key}${boxes}
+  return `<li><div class="dy-el ${el.state}" data-el="${esc(el.key)}" data-fault="${el.fault ? 1 : 0}">${control}
     <div class="body">${titleBox}${linesBox}</div></div></li>`;
 }
 
@@ -1167,12 +1238,28 @@ function saveMarks(){
 function markOf(no, key){
   return (MARKS[no] && MARKS[no][key]) || {};
 }
-function setMark(no, key, which, on){
+/* ONE CONTROL, THREE STATES, AND IT COMES BACK ROUND.
+   ready -> not ready -> not required -> ready. The cycle is what makes every
+   state reversible: a mark he cannot take off is a deletion.
+   THE STORED SHAPE DOES NOT CHURN. readiness.json still carries the two
+   booleans, and a state sets exactly ONE of them and clears the other, so a
+   file written by the two-checkbox build reads correctly here and a file
+   written here reads correctly anywhere. Both-true is not a state this button
+   can reach; if a hand-edited file carries it, notRequired wins, which is the
+   same precedence the generator uses. */
+var CYCLE = { quiet: "loud", loud: "off", off: "quiet" };
+var GLYPH = { quiet: "·", loud: "!", off: "–" };
+var NOWSAY = { quiet: "ready", loud: "NOT READY", off: "not required" };
+var NEXTSAY = { quiet: "not ready", loud: "not required", off: "ready" };
+function stateOf(no, key){
+  var m = markOf(no, key);
+  return m.notRequired ? "off" : m.notReady ? "loud" : "quiet";
+}
+function setState(no, key, st){
   MARKS[no] = MARKS[no] || {};
-  var m = MARKS[no][key] || {};
-  m[which] = !!on;
-  if (!m.notReady && !m.notRequired) { delete MARKS[no][key]; }
-  else { MARKS[no][key] = m; }
+  if (st === "quiet") { delete MARKS[no][key]; }
+  else if (st === "loud") { MARKS[no][key] = { notReady: true }; }
+  else { MARKS[no][key] = { notRequired: true }; }
   if (MARKS[no] && !Object.keys(MARKS[no]).length) delete MARKS[no];
   saveMarks();
 }
@@ -1201,6 +1288,18 @@ function paintRow(row){
     "deemed not required, not presented \\u2014 regardless of what the system says. Its lines "
     + "are not drawn. Clear the box to bring it back.",
     m.notRequired ? "READS  you have marked this not required" : "READS  unmarked");
+  var btn = row.querySelector(".dy-st");
+  if (btn) {
+    var st = m.notRequired ? "off" : m.notReady ? "loud" : "quiet";
+    btn.setAttribute("data-state", st);
+    btn.textContent = GLYPH[st];
+    btn.setAttribute("aria-label", NOWSAY[st]);
+    hint(btn,
+      "READY, NOT READY, NOT REQUIRED \u2014 press it to go round. NOT READY is yours even "
+      + "when the system's test passes; NOT REQUIRED takes it out of the summary regardless "
+      + "of what the system says. A third press comes back to ready.",
+      "READS  " + NOWSAY[st] + " \u2014 press for " + NEXTSAY[st]);
+  }
 }
 
 function show(n){
@@ -1271,22 +1370,19 @@ function draw(){
 function vstep(d){ if(!VIEW) return; VIEW.k = (VIEW.k + d + VIEW.list.length) % VIEW.list.length; draw(); }
 function closeView(){ document.getElementById("dy-view").className = ""; VIEW = null; }
 
-document.addEventListener("change", function(ev){
-  var t = ev.target;
-  if (!t || !t.getAttribute || !t.getAttribute("data-mark")) return;
-  var row = t.closest(".dy-el");
-  var no = Number(t.closest(".dy-day").getAttribute("data-day"));
-  setMark(no, t.getAttribute("data-key"), t.getAttribute("data-mark"), t.checked);
-  paintRow(row);
-  hint(t, t.getAttribute("data-mark") === "notReady"
-    ? "NOT READY even though it may pass the system's test. Your mark, and it overrides the system in the loud direction."
-    : "deemed not required, not presented \\u2014 regardless of what the system says. Your mark, and it takes the element out of the summary.",
-    "READS  " + (t.checked ? "you have marked this" : "unmarked"));
-});
-
 document.addEventListener("click", function(ev){
   var t = ev.target;
-  if (t && t.getAttribute && t.getAttribute("data-mark")) return;
+  /* the state button, and it is the first thing tested because it sits inside
+     a row that is also clickable furniture. */
+  var b = t.closest && t.closest(".dy-st");
+  if (b) {
+    var row = b.closest(".dy-el");
+    var no = Number(b.closest(".dy-day").getAttribute("data-day"));
+    var key = b.getAttribute("data-key");
+    setState(no, key, CYCLE[stateOf(no, key)]);
+    paintRow(row);
+    return;
+  }
   var g = t.closest && t.closest("[data-go]");
   if (g) { show(Number(g.getAttribute("data-go"))); return; }
   var z = t.closest && t.closest("img[data-zoom]");
@@ -1335,16 +1431,10 @@ document.addEventListener("keydown", function(e){
 });
 
 loadMarks();
-document.querySelectorAll(".dy-el").forEach(function(row){
-  var key = row.getAttribute("data-el");
-  var no = Number(row.closest(".dy-day").getAttribute("data-day"));
-  var m = markOf(no, key);
-  var nr = row.querySelector('[data-mark="notReady"]');
-  var nq = row.querySelector('[data-mark="notRequired"]');
-  if (nr) nr.checked = !!m.notReady;
-  if (nq) nq.checked = !!m.notRequired;
-  paintRow(row);
-});
+/* paintRow reads the store and repaints the row and its button, so the boot
+   pass is the same call the click makes — the baked-in state and the live
+   state cannot disagree about how a row is drawn. */
+document.querySelectorAll(".dy-el").forEach(paintRow);
 paintMarksBox();
 
 var want = Number(String(location.hash || "").replace("#","")) || DAYS[0].no;
@@ -1361,7 +1451,7 @@ days.forEach(d => {
   const loud = d.els.filter(x => x.state === "loud");
   const off = d.els.filter(x => x.state === "off");
   const lines = secs.reduce((a, s) => a + s.lines, 0);
-  const over = secs.filter(s => s.longest > s.wrap.chars).length;
+  const over = secs.filter(s => s.longest > BOX.chars).length;
   console.log(`     ${String(d.no).padStart(3, "0")}  ${d.date}  ${secs.length} section(s) / `
     + `${lines} line(s), ${d.els.filter(x => x.kind === "attachment").length} attachment(s), `
     + `${d.fileRows.length} file(s)`
@@ -1369,8 +1459,8 @@ days.forEach(d => {
     + (off.length ? `, ${off.length} not required` : "")
     + (over.length === 0 && over ? "" : over ? `, ${over} past the box` : ""));
 });
-console.log(`  the boxes: headline ${WRAP.title.chars}ch, deck ${WRAP.line.chars}ch, `
-  + `section ${WRAP.body.chars}ch \u2014 the wrap point, from the museum's own budgets`);
+console.log(`  the box: ${BOX.chars}ch on every element \u2014 the museum's own body measure. `
+  + `The two fields that have a limit carry a mark instead, from ${NEAR} characters out.`);
 console.log(`  his marks: ${Object.keys(loadMarks()).length} day(s) carry one in `
   + `${path.relative(REPO, READINESS)}`);
 console.log(`  the day's pictures: ${VIEW_PX}px, ${big.made} made, ${big.hits} cached, `

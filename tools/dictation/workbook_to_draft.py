@@ -3,6 +3,25 @@
 
     python tools/dictation/workbook_to_draft.py <workbook.xlsx> [-o <draft.json>]
 
+═══ [MIKE, 2026-08-25 — RULING A] THIS IS A RESCUE PATH NOW, NOT THE ROAD ═══
+**HE RULED THAT THE DAY EDITOR BECOMES WHERE HE WRITES, AND THAT EXCEL STOPS
+BEING THE SURFACE.** So this script keeps working and keeps its place — a
+workbook that already exists still has to land, and a surface that is down
+still needs a way round it — but **it is no longer the path a Record is
+expected to arrive by**, and a round that finds it should not invest in
+widening it. The writing surface is `tools/dictation/day.mjs`
+(`docs/dictation-20260807/day.html`).
+
+**IT IS RECORDED HERE RATHER THAN ONLY IN A ROUND LOG** because this file is
+where a session goes when it is about to improve the workbook chain, and that
+is exactly the session that must know the chain is being retired. Nothing about
+this script changed on the day of the ruling.
+
+**WHAT THE DAY EDITOR STILL NEEDS BEFORE IT CAN TAKE THE WRITING:** the draft
+round-trip silently drops `wire` and `plates` — Record 013's defect — and that
+repair comes before anybody types into it. Register row, and `day.mjs`'s own
+header.
+
 WHY THIS EXISTS. Mike writes the Records in an Excel workbook — one sheet per
 day, a headline, two deck lines and up to six label/text section pairs. The
 lander (`npm run record:land`) reads a DRAFT JSON. **Nothing joined the two.**
