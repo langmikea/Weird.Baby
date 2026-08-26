@@ -154,6 +154,29 @@ Mike pre-approves the entire flow when he says "push" — drive end-to-end witho
 
 - **Commit author from cowork**: `cowork agent <cowork@local>`. GitHub overrides this on squash-merge to Mike's noreply (`98126530+langmikea@users.noreply.github.com`), so the squash commit on `main` is correctly authored.
 - **Commit messages**: subject line under 72 chars, imperative mood. Body explains *why* and references the user's report verbatim where applicable.
+- **[2026-08-26] A PATH ON ITS OWN LAST LINE IS A TRAILER. HOUSE COMMITS END ON
+  PROSE.** `git interpret-trailers` reads **any** `Key: value` line in the final
+  paragraph as a trailer — the key does not have to be one it has heard of. So
+  `Log: C:\AI\_night-…\ROUND_LOG.md`, which is how a round log wants to be
+  named, becomes a machine-readable trailer on a commit that was supposed to
+  have none. **It is committed and pushed at `73179dc` and it stands** —
+  rewriting history for one line is worse than the line.
+  **PUT THE PATH IN A SENTENCE:** *"the log is at `C:\AI\…\X.md` and nothing was
+  deployed."* Measured on the ten messages of 2026-08-25: **every one ends
+  mid-sentence and all ten parse as zero trailers.** This is the house shape and
+  it was already unanimous; one message broke it.
+  **AND THE CHECK IS THE COMMAND, NOT A GREP.** The failure was not writing the
+  line — it was *verifying* it by grepping for trailer NAMES
+  (`co-authored-by`, `signed-off-by`, `generated with`) and reporting "no
+  trailers" on zero hits. **A grep for known names cannot see trailer SHAPE.**
+  Before handing over a message file:
+
+  ```
+  git interpret-trailers --parse < <message-file>      # must print nothing
+  ```
+
+  §0's *IF A RESULT SURPRISES YOU, SUSPECT THE PROBE* has a quieter half: an
+  unsurprising green is exactly when nobody re-reads the probe.
 - **PR bodies**: tabular fix summary, commit list, mechanism notes, "out of scope" section. Include the literal user-reported phrasing.
 - **Squash merge** is the default — most branches accumulate iteration commits. Only choose merge-commit if the per-commit history is genuinely worth preserving.
 
