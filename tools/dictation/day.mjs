@@ -130,29 +130,67 @@
        and the whole `.dy-top` strip left with it rather than being left
        computed for nobody — see `COLUMNS`.
 
-   ── [MIKE, 2026-08-25 — RULING A] THIS PAGE BECOMES WHERE HE WRITES ────────
-   **THE BIGGEST RULING OF THE DAY, RECORDED AND NOT BUILT.** He ruled that the
-   day editor becomes his writing surface and that **Excel stops being the
-   surface** — which makes `npm run record:workbook` a RESCUE PATH rather than
-   the road, and it says so at the head of `workbook_to_draft.py`.
+   ── [MIKE, 2026-08-25 — RULING A] THIS PAGE IS WHERE HE WRITES ────────────
+   **THE BIGGEST RULING OF THAT DAY, AND AS OF 2026-08-26 IT IS BUILT.** He
+   ruled that the day editor becomes his writing surface and that **Excel stops
+   being the surface** — which makes `npm run record:workbook` a RESCUE PATH
+   rather than the road, and it says so at the head of `workbook_to_draft.py`.
 
-   **THIS FILE IS STILL READ-ONLY AND THE ORDER MATTERS.** Editing is Piece 4
-   and it comes AFTER the round-trip repair, because **the draft silently eats
-   `wire` and `plates` today** — Record 013's defect. A surface that loses a
-   field the moment he types into it would lose his words on its first day,
-   which is the one thing this piece was sequenced last to avoid. The register
-   row is `C-day1`; the boxes are the shape and nothing here takes a keystroke.
+   **THE ORDER HELD.** Editing came AFTER the round-trip repair (`a3356c6`),
+   because the draft silently ate `wire` and `plates` until then — Record 013's
+   defect — and a surface that loses a field the moment he types into it would
+   lose his words on its first day. `C-day1` closed with it; what the
+   build found in its place is `C-day2`, and it is the one thing still between
+   this page and an ordinary writing day.
 
-     npm run day
+   ── PIECE 4 — WHAT TAKES A KEYSTROKE, AND WHAT GUARDS IT ───────────────────
+   **WHAT HE ASKED FOR:** *"I can edit any line and add sections on demand."*
+   *"How do I delete a row? Insert a row?"* — and the section recipe, verbatim,
+   as a specification. All of it is built and each half is argued where it
+   stands: `elementHtml` for the recipe, `blocksOf` for how a body becomes
+   boxes, the two controls in `rowControls`, `dy-add` for a section on demand.
+
+   **THE SAVE IS A POST TO A LOOPBACK SERVER AND IT WRITES TWO FILES:**
+   `record-draft.json` (his words) and `readiness.json` (his marks), together,
+   on Ops' ruling that a page where half the state is durable and half is a
+   clipboard is the shape that loses work. **IT NEVER WRITES THE RECORD** —
+   that is `npm run record:land -- --write`, it is behind eight guards, and it
+   is Mike's. Every sentence the page and the endpoint print says so.
+
+   **THE GUARD THIS PIECE COULD NOT SHIP WITHOUT.** A generated page is a
+   SNAPSHOT, and until today it did not know which tree it came from: type into
+   a tab opened this morning, save this afternoon, and the POST stamps `saved`
+   HONESTLY at the moment of saving — so `record:land`'s guard 8, which
+   compares the STAMP and not the WORDS, passes it and this morning's copy
+   lands on top of the afternoon's. **It is OPERATIONS §8's workbook hazard one
+   surface over.** So `SOURCE_STATE` puts the source file's sha256 in the page,
+   the endpoint refuses a save that does not match the file on disk NOW, and
+   the page re-asks on every focus. Both ends, on Ops' ruling — the server
+   because it is the thing that writes, the page because it is the only end
+   that can tell him in time.
+
+   **AND IT IS PROVED BY LOSING SOMETHING FIRST.** `npm run day:proof` runs
+   P1 (a keystroke survives to the tree, field set as well as prose), P2 (the
+   stale page is refused — demonstrated by first LANDING the loss with the
+   guard off and naming the destroyed paragraph) and P3 (a deletion is never
+   silent). **Each one is shown FAILING against a deliberately broken build
+   before it is shown passing**, because a guard with only a clean run behind
+   it proves nothing.
+
+     npm run day          build it
+     npm run day:proof    prove it
+     npm run day:serve    write in it       http://127.0.0.1:8899/
    =========================================================================== */
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+import crypto from "node:crypto";
 
 import { esc, page, OPS_CSS } from "./shell.mjs";
 import { thumbnails } from "./lighttable.mjs";
 import { buildShelf, SECTIONS } from "./shelf.mjs";
-import { draftEntries, entries as recordEntries, summaries } from "../../reveal/record-entries.mjs";
+import { draftEntries, entries as recordEntries, summaries, RECORD_SOURCE }
+  from "../../reveal/record-entries.mjs";
 import { BUDGETS, CONSTRAINTS, TITLE_BUDGET_MEASURED } from "../../reveal/record-shape.mjs";
 import { STAGE_PREFIX } from "../../reveal/placement.mjs";
 
@@ -161,6 +199,52 @@ const REPO = path.resolve(HERE, "..", "..");
 const OUT = path.join(REPO, "docs", "dictation-20260807", "day.html");
 const TABLE = path.join(REPO, "provenance", "asset-table.json");
 const FRESH = process.argv.includes("--fresh");
+
+/* ═══ [PIECE 4] THE COLLECTOR IS INLINED, NOT REIMPLEMENTED ════════════════
+   `day-collect.js` turns the boxes back into a Record entry, and the page and
+   `npm run day:proof` load THE SAME BYTES — the page by having them pasted in
+   here, the proof by reading the file and evaluating it. The proof asserts the
+   two are byte-identical by sha256 before it runs a check, because a proof
+   that passes against a second copy of the collector proves nothing about the
+   collector he is typing into. */
+const COLLECT_JS = fs.readFileSync(path.join(HERE, "day-collect.js"), "utf8");
+
+/* AND THE GENERATOR EVALUATES IT RATHER THAN CARRYING A COPY. The first build
+   of this piece had `blocksOf` here and `blockOut` there, and for as long as
+   that lasted the arrangement of boxes DRAWN and the arrangement of boxes SAVED
+   were two functions that happened to agree. Those are the two things on this
+   page that must never be able to disagree — a body grouped one way and
+   ungrouped another loses a paragraph boundary silently — so there is one
+   function and all three callers reach it the same way. */
+const WBDay = (new Function(COLLECT_JS + "\n;return globalThis.WBDay;"))();
+
+/* ═══ [PIECE 4] WHICH RECORD THIS PAGE WAS BAKED FROM ══════════════════════
+   **THE PAGE IS A SNAPSHOT AND UNTIL TODAY IT DID NOT KNOW WHICH TREE IT CAME
+   FROM.** That is the loss the whole of Piece 4 was gated on: he opens the
+   page at 09:00, the tree moves at 14:00, he types and saves at 16:00, and the
+   POST stamps `saved` = 16:00 HONESTLY — so `record:land`'s guard 8, which
+   compares the STAMP and not the WORDS, passes it, and 09:00's copy of the
+   Record lands on top of 14:00's.
+
+   IT IS OPERATIONS §8's WORKBOOK HAZARD ONE SURFACE OVER: that guard is inert
+   on the workbook path for exactly the same reason, because
+   `workbook_to_draft.py` stamps `saved` with `now()`. A generated page that
+   stamps at POST time has the identical defect.
+
+   SO THE SHA GOES IN THE PAGE. It travels with every save; `record-serve.mjs`
+   refuses a save whose sha is not the file on disk NOW, and the page asks
+   `/day/source` whenever it regains focus so he finds out before he has typed
+   for an hour rather than at the moment he tries to keep it. **Both ends, on
+   Ops' ruling** — the server because it is the thing that writes, the page
+   because it is the only end that can tell him in time. */
+const RECORD_EPOCH_VALUE = draftEntries().epoch;
+const SOURCE_FILE = path.join(REPO, RECORD_SOURCE);
+const SOURCE_STATE = {
+  file: RECORD_SOURCE,
+  sha256: crypto.createHash("sha256").update(fs.readFileSync(SOURCE_FILE)).digest("hex"),
+  mtime: fs.statSync(SOURCE_FILE).mtime.toISOString(),
+  bytes: fs.statSync(SOURCE_FILE).size,
+};
 
 /* `[SHAPE]` THE DAY'S OWN PICTURES ARE BIGGER THAN THE SHELF'S. 240px is 8.5%
    of a 2640px manual page; at 480 the ink reads. The shelf keeps 240 because it
@@ -279,22 +363,11 @@ const BOX = { chars: 68,
    than turned into a second red. */
 const NEAR = 5;
 
-function budgetMark(len, b) {
-  if (len == null) return null;
-  if (len > b.max) {
-    return { level: "bad", says: `${len}/${b.max}`,
-      means: `${b.name} is OVER its limit of ${b.max} characters. ${b.enforcedBy}.`,
-      read: `READS  ${len} characters, ${len - b.max} over` };
-  }
-  if (len > b.max - NEAR) {
-    return { level: "warn", says: `${len}/${b.max}`,
-      means: `${b.name} is inside ${NEAR} characters of its limit of ${b.max}. It still `
-           + `passes — this mark is Ops' slack band and no gate fires at it. The gate is `
-           + `${b.enforcedBy}, and it fires only above ${b.max}.`,
-      read: `READS  ${len} characters, ${b.max - len} left` };
-  }
-  return null;
-}
+/* [PIECE 4] IT MOVED TO `day-collect.js` AND THIS IS THE ONE CALL. The mark
+   under a box he is TYPING into and the mark the generator bakes have to be
+   one function: two would drift, and the one that drifted would be the one on
+   the glass while he was writing to a limit. */
+const budgetMark = (len, b) => WBDay.budgetMark(len, b, NEAR);
 
 /* ═══ THE THREE MANDATORY SECTIONS ═════════════════════════════════════════
    `[SHAPE]` a day HAS a list of sections that must exist, each with a
@@ -436,31 +509,67 @@ const HEADER_RULE = CONSTRAINTS.find(c =>
    which draws a `{pre}` body as an aligned `Listing`. Dedenting keeps more of
    what he wrote than either.
 
-   > **[FLAG 2026-08-25 · found here, filed on C-day1] THE DRAFT LOSES `{pre}`
-   > TOO.** `robots-record.js` declares 004's folder tree as `{ pre: "…" }` and
-   > the museum renders it as an aligned listing; `draftEntries()` hands this
-   > page a plain string, so the editor cannot tell a listing from a paragraph.
-   > It is the same round-trip loss as `wire` and `plates` and it belongs to the
-   > same repair — a THIRD field, added to the register row. */
-function dedent(s) {
-  const lines = String(s).split("\n");
-  const runs = lines.filter(l => l.trim() !== "").map(l => l.match(/^ */)[0].length);
-  const cut = runs.length ? Math.min(...runs) : 0;
-  return { text: cut ? lines.map(l => l.slice(cut)).join("\n") : String(s), cut };
-}
+   > **[CLOSED 2026-08-26] THE DRAFT ONCE LOST `{pre}` TOO, AND IT DOES NOT
+   > NOW.** Flagged here on 2026-08-25: `robots-record.js` declares 004's folder
+   > tree as `{ pre: "…" }` and the museum draws it as an aligned Listing, but
+   > `draftEntries()` handed this page a plain string, so the editor could not
+   > tell a listing from a paragraph. **Repaired at `a3356c6`** with `wire` and
+   > `plates`, and Piece 4 carries the marker the whole way: `blocksOf` gives a
+   > `{pre}` item a box of its OWN — never grouped, because it contains blank
+   > lines of its own and a blank-line split would cut one listing into three.
+   > **`npm run day:proof` proves it by first removing that preservation and
+   > watching the tree come back as prose.** */
+/* [PIECE 4] THE ARITHMETIC MOVED TO `day-collect.js` AND THIS IS THE ONE
+   CALL. It was reimplemented there when the editable box needed to COMPARE a
+   box against its original, and two copies of this that ever disagreed would
+   make an untouched box read as edited — which rewrites his indentation on a
+   save he did not make. The reasoning above is why the cut exists; the file
+   the page and the proof both load is where it now happens, once. */
+const dedent = s => WBDay.dedent(s);
 
-function element({ key, icon = null, header, runs, kind = "section", fault = null, extra = {} }) {
-  const raw = (runs || []).filter(r => r != null && r !== "");
-  const cuts = raw.map(r => dedent(r));
-  const list = cuts.map(c => c.text);
+/* ═══ [PIECE 4] A SECTION'S BODY BECOMES BOXES ═════════════════════════════
+   HIS RECIPE IS ONE TEXT BOX PER SECTION, and a section's body is a LIST of
+   items the museum draws one paragraph each. So the consecutive string items
+   are grouped into ONE box with a blank line between them — the boundary every
+   writer already uses — and a `{pre}` item gets a box of its own.
+
+   THE `{pre}` ITEM IS ALONE FOR A REASON AND IT IS 004's FOLDER TREE. It
+   carries blank lines inside itself and the museum draws it as an aligned
+   Listing; grouped, a blank-line split would cut one listing into three and
+   two of them would come back as prose. Alone, it is one item in one box and
+   there is no split to get wrong — **it is fully editable and it comes back
+   `{pre}`.** The reasoning is at the split in `day-collect.js`; this is the
+   half that builds what that half reads.
+
+   AN UNKNOWN SHAPE GETS A BOX THAT DOES NOT TAKE A KEYSTROKE. The reader only
+   produces strings and `{pre}` today. If a third arrives, drawing it read-only
+   and passing it through is the only thing that cannot lose it. */
+/* THE GROUPING IS `day-collect.js`'s, EVALUATED ABOVE — see that file's
+   header for the {pre} argument. This is a call, not a second copy. */
+const blocksOf = items => WBDay.blocksOf(items);
+
+/* `blocks` IS THE TRUTH AND `runs` IS DERIVED FROM IT, so the drawn text and
+   the saved text cannot come from two different arrangements of the same body.
+   A caller that has no blocks (an attachment) still passes `runs`. */
+function element({ key, icon = null, header, runs, blocks = null, kind = "section",
+                   fault = null, extra = {} }) {
+  const bl = blocks || blocksOf((runs || []).filter(r => r != null && r !== ""));
+  const list = bl.map(b => b.text);
   return {
     kind, key, icon, header,
+    blocks: bl,
     runs: list,
     /* what came off, so the hint can say it and never remove it silently. */
-    indentCut: cuts.length ? Math.max(...cuts.map(c => c.cut)) : 0,
+    indentCut: bl.length ? Math.max(...bl.map(b => b.cut)) : 0,
     lines: list.reduce((a, r) => a + String(r).split("\n").length, 0),
     longest: list.reduce((a, r) => Math.max(a, ...String(r).split("\n").map(x => x.length)), 0),
     empty: !list.length,
+    /* `[PIECE 4]` WHAT A ROW LETS HIM DO. `editHeader` is his own words in the
+       title box — true only for a section HE authored; HEADLINE and DECK are
+       Ops' labels for his fields and renaming them would rename a field.
+       `field` names the entry key a field row edits. `locked` is a row whose
+       shape this editor will not author. */
+    editHeader: false, field: null, locked: false, canDelete: false,
     fault,
     mark: null,
     ...extra,
@@ -534,35 +643,49 @@ function buildDays() {
             ? { says: `${e.title.length}/${BUDGETS.title.max}`, why: BUDGETS.title.enforcedBy }
             : null,
         extra: { mark: budgetMark(e.title ? e.title.length : null, BUDGETS.title),
-          budget: BUDGETS.title, measured: TITLE_BUDGET_MEASURED },
+          budget: BUDGETS.title, measured: TITLE_BUDGET_MEASURED,
+          field: "title", oneLine: true },
       }));
 
       /* the deck, as a section. Not one of the three, but it has the other
          gate, and Record 002 sits two characters from it. */
-      if (e.line) {
-        els.push(element({
-          key: "field:line", header: "DECK",
-          runs: [e.line],
-          fault: e.line.length > BUDGETS.line.max
-            ? { says: `${e.line.length}/${BUDGETS.line.max}`, why: BUDGETS.line.enforcedBy }
-            : null,
-          extra: { mark: budgetMark(e.line.length, BUDGETS.line), budget: BUDGETS.line },
-        }));
-      }
+      /* `[PIECE 4]` IT DRAWS WHETHER OR NOT IT CARRIES ANYTHING NOW, and that
+         is the field-draws-when-it-carries rule meeting an editor. On a
+         read-only page an absent deck was correctly invisible — *"things not
+         required are not displayed"*. On a writing surface an invisible field
+         is a field he cannot start, so the ONE gate that has a budget and no
+         mandatory letter draws its empty box. The other absent fields stay
+         absent and arrive through ADD A FIELD, which is the same rule with a
+         door on it. */
+      els.push(element({
+        key: "field:line", header: "DECK",
+        runs: e.line ? [e.line] : [],
+        fault: e.line && e.line.length > BUDGETS.line.max
+          ? { says: `${e.line.length}/${BUDGETS.line.max}`, why: BUDGETS.line.enforcedBy }
+          : null,
+        extra: { mark: e.line ? budgetMark(e.line.length, BUDGETS.line) : null,
+          budget: BUDGETS.line, field: "line", oneLine: true },
+      }));
 
       /* his authored sections, in his order, matched to the mandatory letters
          on the header he wrote. */
       for (const x of (e.sections || [])) {
         const header = x.label || null;
-        const runs = (x.body || []).map(p => typeof p === "string" ? p
-          : (p && typeof p.pre === "string" ? p.pre : JSON.stringify(p)));
+        const blocks = blocksOf(x.body || []);
         const m = MANDATORY.find(z => z.header === String(header || "").toUpperCase());
         els.push(element({
           key: "section:" + String(header || "(no header)"),
           icon: m ? m.icon : null,
-          header, runs,
-          fault: runs.length ? null
+          header, blocks,
+          fault: blocks.length ? null
             : { says: "no lines", why: "a section with an empty body is dropped ENTIRELY, its header with it, and nothing says so" },
+          /* `[PIECE 4]` HIS OWN SECTION: his words in the title box, and the
+             row can be deleted and can have one inserted after it. A MANDATORY
+             one is deletable too — deleting it does not hide it, it makes it
+             draw LOUDLY as not written, which is the state the list already
+             had a shape for. A control that refused would be Ops deciding what
+             his day contains. */
+          extra: { editHeader: true, canDelete: true },
         }));
       }
 
@@ -577,17 +700,29 @@ function buildDays() {
                                ["wire", "WIRE"], ["plates", "PLATES"],
                                ["note", "NOTE"]]) {
         if (e[k] == null || e[k] === "") continue;
-        const v = typeof e[k] === "string" ? e[k] : JSON.stringify(e[k], null, 1);
+        const isStr = typeof e[k] === "string";
+        const v = isStr ? e[k] : JSON.stringify(e[k], null, 1);
         /* [2026-08-25] `locked` CAME OFF HERE, and its going is the round-trip
            repair landing. It marked `wire`, `plates` and `note` as fields that
            render on the glass and CANNOT survive the draft — true when it was
            written and false as of today: `draftEntries` carries all three and
            `record:land` writes them back. A flag that still said so would be
            this page telling him a repaired thing is still broken. */
+        /* `[PIECE 4]` A STRING FIELD TAKES A KEYSTROKE; A LIST DOES NOT.
+           `wire` is an array of strings and `plates` is an array of
+           `{img,label}`. The round-trip repair taught the reader and the
+           emitter to CARRY both, and this row carries them through untouched
+           — they are in `rest` and are spread back on save whether or not a
+           box on this page has ever heard of them. **What this editor will not
+           do is AUTHOR one**: a textarea holding JSON is a shape editor
+           wearing a text box, and the first malformed bracket would be his
+           words turned into a parse error. It is drawn, it is labelled locked,
+           and the hint says which instrument owns it. */
         els.push(element({
           key: "field:" + k,
           header: head + (k === "still" && e.stillCaption ? " — " + e.stillCaption : ""),
           runs: [v],
+          extra: isStr ? { field: k } : { locked: true },
         }));
       }
 
@@ -598,7 +733,15 @@ function buildDays() {
         els.push(element({
           key: m.key, icon: m.icon, header: m.header, runs: [],
           fault: { says: "not written", why: "a mandatory section. Headline, Executive Summary and Detailed Report are the three every day has" },
-          extra: { missing: true },
+          /* `[PIECE 4]` IT IS A BOX HE CAN WRITE INTO, NOT A COMPLAINT.
+             Read-only, this row's whole job was to say an absent thing is
+             absent. On a writing surface a row that names what is missing and
+             gives him nowhere to put it is furniture — so the header is
+             prefilled with the vocabulary the match is made on and the lines
+             box is empty and waiting. **It stays LOUD until it carries lines**,
+             and it writes nothing while it is empty (`day-collect.js`), so
+             opening the page and saving it cannot invent a section. */
+          extra: { missing: true, editHeader: true, canDelete: true },
         }));
       }
 
@@ -629,6 +772,27 @@ function buildDays() {
       const keys = new Set(els.map(x => x.key));
       const orphans = Object.keys(mine).filter(k => !keys.has(k));
 
+      /* ═══ [PIECE 4] `rest` — EVERY FIELD THIS PAGE DOES NOT EDIT ═════════
+         **THE ONE THING THAT DECIDES WHETHER A SAVE LOSES A FIELD.** The
+         repair at `a3356c6` taught the reader and the emitter fourteen entry
+         fields and eight doc fields. This page edits five strings and the
+         sections. **Everything else is copied here verbatim and spread back
+         out by `collect()` whether or not this file has ever heard of it** —
+         `docs` with its sources, page counts and plate captions, `wire`,
+         `plates`, `stillCaption`, and whatever the next repair adds.
+
+         A COLLECTOR THAT REBUILT AN ENTRY FROM THE BOXES ON THE GLASS WOULD
+         DROP EVERY ONE OF THEM, AND THE EMITTER COULD NOT REFUSE IT: its
+         guard names a field it cannot WRITE, and an absent field is not
+         something it can see. That is exactly how six photographs and four
+         sources went missing on 2026-08-25 while the tool printed *"ALL 51
+         STRINGS ROUND-TRIP"*. `P1` deletes this spread on purpose and proves
+         the check names what went. */
+      const EDITED_HERE = new Set(["no", "date", "sections",
+        "stamp", "title", "line", "lead", "still", "tomb", "note"]);
+      const rest = {};
+      for (const k of Object.keys(e)) if (!EDITED_HERE.has(k)) rest[k] = e[k];
+
       return {
         no: e.no,
         date: e.date || null,
@@ -636,7 +800,7 @@ function buildDays() {
         title: e.title || null,
         line: e.line || null,
         indexTitle: s.title || null,
-        els, docs, fileRows, orphans,
+        els, docs, fileRows, orphans, rest,
         braces: bracesIn(e),
       };
     });
@@ -896,6 +1060,74 @@ ol.dy-sects>li{margin:0 0 10px}
 .dy-box-l p:last-child{margin:0}
 .dy-box-l.void{padding:4px 8px;opacity:.5;font-style:italic;font-size:11px}
 
+/* ═══ [PIECE 4] THE SAME BOX, TAKING A KEYSTROKE ═══════════════════════════
+   THE EDITABLE BOX IS THE READ-ONLY BOX WITH A CARET IN IT. Every measurement
+   the read-only box earned is load-bearing here and none of it is restated:
+   68ch, the monospace face that makes a ch honest, content-box so the measure
+   is the TEXT, the 14px indent, pre-wrap spacing. A control that reset any one
+   of them would move his wrap warning, which is worse than not having one.
+   SO THE RULES BELOW ONLY UNDO WHAT A FORM CONTROL BRINGS WITH IT — the UA's
+   own font, its border, its background, its resize grip and its scrollbar. */
+.dy-edit{font:inherit;color:inherit;background:#141310;border:1px solid #22201a;
+  border-radius:2px;outline:none}
+.dy-edit:hover{border-color:#3a3529}
+.dy-edit:focus{border-color:var(--gold,#b8974a);background:#17150f}
+/* THE MEASURE IS STILL THE TEXT, AND THE ARITHMETIC MOVED RATHER THAN THE
+   RULE. The read-only box is content-box, because a block DIV's auto width
+   already absorbs its own padding and border and 68ch then means 68 characters
+   of text. A TEXTAREA does not do that: width:100% on a content-box textarea
+   is the parent's width PLUS its padding, border and indent, so at 393px it
+   hung 18px past the viewport and the page scrolled sideways - measured on the
+   served page, and it is exactly 8+8+1+1 of chrome. Border-box plus a
+   max-width widened by that same chrome gives a CONTENT box of 68ch, which is
+   the property the honest-ch comment above is about, and a total that can
+   never exceed its parent. Measured before and after: 447.94px at desktop,
+   both ways, so nothing on the glass moved.
+   AND THE INDENT MOVED TO THE WRAPPER for the same reason - a margin on a
+   width:100% child is 14px of guaranteed overflow whatever the box-sizing. */
+textarea.dy-box-l{display:block;width:100%;box-sizing:border-box;
+  max-width:calc(68ch + 18px);margin:4px 0 0;padding:6px 8px;
+  font-family:ui-monospace,Consolas,monospace;font-size:11.5px;line-height:1.5;
+  white-space:pre-wrap;overflow:hidden;resize:none;opacity:.9}
+/* EXPANDS — the height is set from the content by autosize() on every
+   keystroke, so it has as many lines as he gives it. overflow:hidden is what
+   makes that honest: with a scrollbar the box could be short AND full, and he
+   would be typing into a porthole. */
+input.dy-box-l.oneline{display:block;width:100%;box-sizing:border-box;
+  max-width:calc(68ch + 18px);margin:4px 0 0;padding:6px 8px;
+  font-family:ui-monospace,Consolas,monospace;font-size:11.5px;line-height:1.5}
+.dy-box-l.locked{opacity:.62;border-style:dashed}
+/* the one level under the title, carried by the wrapper so the boxes inside it
+   can be width:100% and still fit. Same 14px, same one level, every section. */
+.dy-blocks{margin-left:14px}
+.dy-blocks>*+*{margin-top:6px}
+/* THE TITLE BOX AS A CONTROL — bold, same box, and it must not stretch to the
+   column or a two-word header would sit in a 68ch slab. */
+.dy-th{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 4px}
+input.dy-box-t{width:auto;min-width:22ch;max-width:52ch;flex:0 1 auto}
+input.dy-box-t::placeholder{font-weight:400;opacity:.4;letter-spacing:.04em}
+/* [PIECE 4] THE TWO ROW CONTROLS, UNDER THE STATE BUTTON, IN ITS COLUMN. */
+.dy-rw{display:block;width:1.7rem;height:.95rem;margin-top:3px;padding:0;cursor:pointer;
+  font-family:inherit;font-size:10px;line-height:1;border-radius:2px;
+  background:transparent;border:1px solid #22201a;color:inherit;opacity:.4}
+.dy-rw:hover{opacity:1;border-color:var(--gold,#b8974a)}
+.dy-rw:focus-visible{outline:2px solid var(--gold,#b8974a);outline-offset:1px}
+.dy-del:hover{border-color:#c76a6a;color:#e89a9a}
+/* DELETED IS A STATE, NOT AN ABSENCE. Every character is still on the page and
+   still in the box; the row leaves only when the save lands and the page is
+   rebuilt. A control he cannot take back is a deletion. */
+.dy-el.gone .dy-box-t,.dy-el.gone input.dy-box-t{text-decoration:line-through;opacity:.4}
+.dy-el.gone .dy-blocks,.dy-el.gone .dy-box-l{opacity:.28}
+.dy-el.gone .dy-edit{pointer-events:none}
+.dy-el.gone .dy-del{border-color:var(--gold,#b8974a);color:var(--gold,#b8974a);opacity:1}
+.dy-gone-say{display:none}
+.dy-el.gone .dy-gone-say{display:inline-block;margin-left:8px;font-size:10px;
+  letter-spacing:.08em;color:var(--gold,#b8974a);font-weight:700}
+.dy-addsect{margin:10px 0 0 1.7rem}
+.dy-addsect button{font-family:inherit;font-size:11px;padding:5px 11px;cursor:pointer;
+  background:transparent;border:1px dashed var(--rule,#3a3529);color:inherit;border-radius:2px;opacity:.75}
+.dy-addsect button:hover{opacity:1;border-color:var(--gold,#b8974a);border-style:solid}
+
 /* THINGS THAT ARE READY ARE DISPLAYED DISCRETELY. THINGS THAT ARE NOT READY
    SPEAK LOUDLY. His words, and the only two voices on the page. */
 .dy-el.quiet .dy-box-t{opacity:.72}
@@ -941,6 +1173,34 @@ table.dy-t td:first-child{opacity:.5;white-space:nowrap;width:1%}
 #dy-storebanner{display:none;margin:0 0 12px;padding:8px 10px;border:1px solid #c76a6a;
   border-radius:2px;color:#e89a9a;font-size:11.5px}
 #dy-storebanner.on{display:block}
+/* ═══ [PIECE 4] THE STALE BANNER ═══════════════════════════════════════════
+   IT IS THE LOUDEST THING THIS PAGE CAN DRAW AND THAT IS PROPORTIONATE. It
+   means the Record moved under an open tab, so every box on the screen is a
+   copy of something that has already been superseded, and a save from here
+   would pass the lander's staleness guard with a true timestamp on stale
+   words. It sits above everything, it does not close, and it takes the Save
+   button with it. */
+#dy-stale{display:none;margin:0 0 12px;padding:10px 12px;border:2px solid #c76a6a;
+  border-radius:2px;background:#241616;color:#e89a9a;font-size:12px;line-height:1.55}
+#dy-stale.on{display:block}
+#dy-stale b{letter-spacing:.04em}
+#dy-stale code{font-family:ui-monospace,Consolas,monospace;font-size:11px;opacity:.85}
+.dy-marks button[disabled]{opacity:.3;cursor:default}
+.dy-marks .said.good{color:var(--gold,#b8974a)}
+.dy-marks .said.bad{color:#e89a9a}
+/* THE CALENDAR READS THE BUILD, AND SAYS SO THE MOMENT IT STOPS BEING TRUE.
+   The seven marks are computed by dayMarks() when the page is generated. The
+   page does not recompute them, because a second implementation of the seven
+   columns would drift from the one the generator uses and the one that drifted
+   would be the one he is looking at. So when the model is dirty they DIM and
+   the hint says what they are: the state as built. */
+.dy-cal.dirty .row i{opacity:.25}
+.dy-cal.dirty .row i.warn,.dy-cal.dirty .row i.bad{opacity:.4}
+#dy-caldirty{display:none;font-size:10px;line-height:1.45;margin:6px 0 0;color:var(--gold,#b8974a)}
+.dy-cal.dirty #dy-caldirty{display:block}
+#dy-fb-out{display:block;width:100%;margin:6px 0 0;min-height:120px;
+  background:#141310;color:inherit;border:1px solid #22201a;border-radius:2px;
+  font-family:ui-monospace,Consolas,monospace;font-size:10.5px;line-height:1.45;padding:6px}
 
 .dy-pick .sec{border-top:1px solid #2a2620;padding:6px 0}
 .dy-pick .sec>b{font-size:10.5px;letter-spacing:.05em;font-weight:400;opacity:.75}
@@ -1023,7 +1283,10 @@ function elementHtml(el) {
       "deemed not required, not presented — regardless of what the system says. Its lines "
       + "are not drawn. Press the button round to bring it back.",
       el.notRequired ? "READS  you have marked this not required" : "READS  unmarked")
-    }>not required</span>`;
+    }>not required</span><span class="dy-gone-say"${hint(
+      "DELETED — this section will not be in the draft the next time you save. Every character "
+      + "of it is still on this page until then; press the × again to bring it back.",
+      "READS  press × again to undo")}>DELETED</span>`;
 
   /* ═══ ONE CONTROL, THREE STATES, AND IT COMES BACK ROUND ═════════════════
      `[SHAPE]` MIKE, 2026-08-25: **two checkboxes become ONE multistate button,
@@ -1043,43 +1306,163 @@ function elementHtml(el) {
   const NEXT = { quiet: "not ready", loud: "not required", off: "ready" };
   const NOW = { quiet: "ready", loud: "NOT READY", off: "not required" };
   const GLYPH = { quiet: "·", loud: "!", off: "–" };
+  /* ═══ [PIECE 4] DELETE A ROW. INSERT A ROW. ═══════════════════════════════
+     MIKE, 2026-08-25: **"How do I delete a row? Insert a row?"**
+
+     THEY SIT UNDER THE STATE BUTTON, IN THE COLUMN THAT WAS ALREADY FIXED.
+     The row has one fixed column and it is the control column; adding a second
+     column for two more controls would move every box on the page sideways to
+     make room for something that is used once a day. The column stays 1.7rem
+     and the two new controls are half-height under the one that was there.
+
+     **AND ONLY A SECTION HAS THEM.** A FIELD is not a row in a list — there
+     is one HEADLINE and deleting it means clearing it, which the box already
+     does. An ATTACHMENT is `assign.html`'s until that piece lands, and a
+     delete control over a row this page cannot author would be a button that
+     destroys something it cannot put back.
+
+     DELETE IS NOT A ONE-WAY DOOR EITHER, AND FOR THE SAME REASON THE MARKS ARE
+     A CYCLE: the row goes to a DELETED state that still holds every character,
+     drawn struck through with the control offering to bring it back, and it
+     leaves the page only when the save lands and the page is rebuilt. **A
+     control he cannot take back is a deletion, and this page has been caught
+     doing that once already.** */
+  const rowControls = el.canDelete
+    ? `<button type="button" class="dy-rw dy-ins"${hint(
+        "insert a new, empty section directly BELOW this one. It writes nothing until you "
+        + "type into it — an empty section is dropped by the museum and is not put in the draft.",
+        "READS  press it")}>+</button><button type="button" class="dy-rw dy-del"${hint(
+        "delete this section. It is struck through and kept until you save — press again to "
+        + "bring it back. Every character stays on the page until the save lands.",
+        "READS  press it")}>&times;</button>`
+    : "";
+
   const control = `<div class="c"><button type="button" class="dy-st" data-key="${esc(el.key)}"
     data-state="${st}" aria-label="${esc(NOW[st])}"${hint(
       "READY, NOT READY, NOT REQUIRED — press it to go round. NOT READY is yours even when "
       + "the system's test passes; NOT REQUIRED takes it out of the summary regardless of "
       + "what the system says. A third press comes back to ready.",
       `READS  ${NOW[st]} — press for ${NEXT[st]}`)
-    }>${GLYPH[st]}</button></div>`;
+    }>${GLYPH[st]}</button>${rowControls}</div>`;
 
-  /* THE TITLE BOX — displays BOLD. */
-  const titleBox = `<div class="dy-box-t"${hint(
+  /* ═══ THE TITLE BOX — DISPLAYS BOLD, AND NOW IT TAKES HIS WORDS ══════════
+     **IT IS AN `input` ONLY WHERE THE HEADER IS HIS.** A section's header is
+     something he wrote and the mandatory match is made on it, so it is a box.
+     HEADLINE, DECK, STAMP and NOTE are OPS' LABELS FOR HIS FIELDS — renaming
+     one would not rename a heading, it would rename a field, and the entry
+     would arrive at the emitter under a name nothing has ever read.
+
+     THE BOX IS THE SAME BOX EITHER WAY. Same class, same bold, same border,
+     so the column of boxes does not go ragged at the one row he is editing —
+     which is the defect the three budget widths were killed for. */
+  const titleHint = hint(
     el.kind === "attachment"
       ? "the attachment's title, as it prints at the foot of the record."
-      : `the SECTION's HEADER. ${HEADER_RULE.rule} Enforced by: ${HEADER_RULE.enforcedBy}.`,
-    `READS  ${el.header || "(no header)"}`)}>${esc(el.header || "(no header)")}${mark}${say}</div>`;
+      : el.editHeader
+        ? `the SECTION's HEADER, and it is yours to type. ${HEADER_RULE.rule} `
+          + `Enforced by: ${HEADER_RULE.enforcedBy}. Renaming it moves this row's READY mark `
+          + `with it — the mark follows the row while the page is open, so a rename does not `
+          + `orphan a mark you set an hour ago.`
+        : `the SECTION's HEADER. ${HEADER_RULE.rule} Enforced by: ${HEADER_RULE.enforcedBy}.`,
+    `READS  ${el.header || "(no header)"}`);
+
+  const titleBox = el.editHeader
+    ? `<div class="dy-th"><input type="text" class="dy-box-t dy-edit" data-role="label"
+        value="${esc(el.header || "")}" placeholder="SECTION HEADER"${titleHint}>${mark}${say}</div>`
+    : `<div class="dy-box-t"${titleHint}>${esc(el.header || "(no header)")}${mark}${say}</div>`;
 
   /* THE LINES BOX — accepts crlf, expands, spaced as he wrote it, indented
      automatically, and ONE WIDTH, the same on every element on every day. */
+  const linesHint = (extra, read) => hint(
+    "the SECTION's LINES — the text following the HEADER, with your line splits, your steps "
+    + "and your spacing. It sits ONE level under its title, the same level on every section. "
+    + "The BOX is the measure: " + BOX.why + extra, read);
+
+  /* ═══ [PIECE 4] THE BOX THAT TAKES THE KEYSTROKE ══════════════════════════
+     HIS SPECIFICATION, UNCHANGED, NOW BUILT AS THE THING ITSELF:
+
+       [Section text box that accepts crlf and expands.
+        Width is sized to show me when I am going to risk wrapping a line.
+        It is spaced like I show it, has as many lines as I give it.
+        This section always displays indented automatically.]
+
+     ACCEPTS CRLF — a `textarea`, so Enter is a line and not a submit.
+     EXPANDS — `autosize()` in the page's script sets the height from the
+     content on every keystroke, so it has **as many lines as he gives it** and
+     never a scrollbar of its own. There is no rows= that means anything here.
+     WIDTH SIZED TO WARN — the same `68ch` in the same monospace face as the
+     read-only box, and `box-sizing: content-box` so the number is the TEXT.
+     INDENTED — the same `margin-left:14px`, one level, every section.
+
+     **ONE BOX PER BLOCK, AND `blocksOf()` IS WHY THERE IS EVER MORE THAN ONE.**
+     A section's string paragraphs are one box with a blank line between them;
+     a `{pre}` listing is its own box, because it carries blank lines and a
+     split would cut a listing into three.
+
+     AN EMPTY EDITABLE ROW STILL DRAWS A BOX. Read-only, *"no lines"* was the
+     honest answer; on a writing surface it is a locked door. The row stays
+     LOUD until the box carries something and the box writes nothing while it
+     is empty, so opening the page and saving cannot invent a section. */
+  const editBox = (b, i) => {
+    const isPre = b.kind === "pre";
+    const isOpaque = b.kind === "opaque";
+    const read = `READS  ${String(b.text).split("\n").length} line(s), longest `
+      + `${Math.max(0, ...String(b.text).split("\n").map(x => x.length))} of ${BOX.chars} characters`
+      + (b.cut ? `, ${b.cut} leading space${b.cut === 1 ? "" : "s"} taken off for display and put back on save` : "");
+    if (isOpaque) {
+      return `<div class="dy-box-l locked"${linesHint(
+        " THIS BLOCK IS A SHAPE THIS EDITOR DOES NOT AUTHOR, so it is drawn and not typed into. "
+        + "It is carried through your save untouched.", read)}>${esc(b.text)}</div>`;
+    }
+    /* ONE LINE MEANS ONE LINE, AND THE CONTROL IS THE RULE. A HEADLINE and a
+       DECK are single strings with a character budget that a gate enforces;
+       an Enter inside one would put a newline through `reveal:check` and onto
+       the glass. An `input` cannot take that keystroke, which is a limit shown
+       WHERE THE STRING IS WRITTEN (Doctrine 22) rather than announced in a
+       hint and enforced two commands later. */
+    if (el.oneLine) {
+      return `<input type="text" class="dy-box-l dy-edit oneline" data-role="block"
+        data-uid="${esc(b.uid)}" data-cut="0" data-kind="strs" spellcheck="true"
+        value="${esc(b.text)}"${linesHint(
+          " It is ONE LINE — this field is a single string with a character budget, so the box "
+          + "will not take a line break.", read)}>`;
+    }
+    return `<textarea class="dy-box-l dy-edit${isPre ? " pre" : ""}" data-role="block"
+      data-uid="${esc(b.uid)}" data-cut="${b.cut}" data-kind="${esc(b.kind)}"
+      spellcheck="true"${linesHint(
+        (b.cut ? " The leading indent every line of this block carried is off for DISPLAY only "
+               + "— it is how the source is typed, not a level you wrote, and the museum "
+               + "collapses it. It is put back on save, so a box you do not touch reaches the "
+               + "tree byte for byte." : "")
+        + (isPre ? " THIS IS A LISTING — the museum draws it in columns rather than as prose, "
+                 + "and it stays a listing however you edit it." : ""),
+        read)}>${esc(b.text)}</textarea>`;
+  };
+
   const linesBox = el.kind === "attachment"
     ? attachmentBody(el)
-    : el.empty
-      ? `<div class="dy-box-l void"${hint(
-          "the SECTION's LINES — the text following the HEADER. " + BOX.why,
-          "READS  no lines")}>no lines</div>`
-      : `<div class="dy-box-l"${hint(
-          "the SECTION's LINES — the text following the HEADER, drawn with your line splits, "
-          + "your steps and your spacing. It sits ONE level under its title, the same level on "
-          + "every section. The BOX is the measure: " + BOX.why
-          + (el.indentCut
-              ? " The leading indent every line of this section carried has been taken off for "
-                + "display, because it is how the source is typed and not a level you wrote — "
-                + "the museum collapses it entirely. Nothing is written to the data."
-              : ""),
-          `READS  ${el.lines} line${el.lines === 1 ? "" : "s"}, longest ${el.longest} of ${BOX.chars} characters`
-          + (el.indentCut ? `, ${el.indentCut} leading space${el.indentCut === 1 ? "" : "s"} removed` : ""))
-        }>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`;
+    : el.locked
+      ? `<div class="dy-box-l locked"${linesHint(
+          " THIS FIELD IS A LIST, NOT A SENTENCE, and this editor does not author one — a box "
+          + "holding JSON is a shape editor wearing a text box. It is drawn here so the day it "
+          + "exists you can see it, and it is carried through your save untouched.",
+          `READS  ${el.lines} line(s)`)}>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`
+      : el.field || el.editHeader
+        ? `<div class="dy-blocks">${
+            (el.blocks.length ? el.blocks : [{ uid: "n" + esc(el.key), kind: "strs", cut: 0, text: "" }])
+              .map(editBox).join("")}</div>`
+        : el.empty
+          ? `<div class="dy-box-l void"${linesHint("", "READS  no lines")}>no lines</div>`
+          : `<div class="dy-box-l"${linesHint(
+              el.indentCut ? " The leading indent every line of this section carried has been "
+                + "taken off for display. Nothing is written to the data." : "",
+              `READS  ${el.lines} line${el.lines === 1 ? "" : "s"}, longest ${el.longest} of ${BOX.chars} characters`)
+            }>${el.runs.map(r => `<p>${esc(r)}</p>`).join("")}</div>`;
 
-  return `<li><div class="dy-el ${el.state}" data-el="${esc(el.key)}" data-fault="${el.fault ? 1 : 0}">${control}
+  return `<li><div class="dy-el ${el.state}" data-el="${esc(el.key)}" data-fault="${el.fault ? 1 : 0}"${
+    el.editHeader ? ` data-sect="1"` : ""}${el.field ? ` data-field="${esc(el.field)}"` : ""}${
+    el.oneLine ? ` data-oneline="1"` : ""}${
+    el.budget ? ` data-budget="${esc(JSON.stringify(el.budget))}"` : ""}>${control}
     <div class="body">${titleBox}${linesBox}</div></div></li>`;
 }
 
@@ -1137,6 +1520,11 @@ function dayHtml(d) {
   <div class="dy-sec"><h3${hint("every section of this day, in one recipe: a HEADER and its LINES.",
     `READS  ${sections.length} section${sections.length === 1 ? "" : "s"}`)}>SECTIONS · ${sections.length}</h3>
     ${list(sections)}
+    <div class="dy-addsect"><button type="button" class="dy-add"${hint(
+      "add a new, empty section at the end of this day. It writes nothing until you type into "
+      + "it — an empty section is dropped by the museum and is not put in the draft. To put one "
+      + "in the MIDDLE, press + on the row you want it under.",
+      "READS  press it")}>+ add a section</button></div>
   </div>
 
   <div class="dy-sec"><h3${hint("the attachments, which carry the same two marks as a section.",
@@ -1226,6 +1614,12 @@ const pickHtml = SECTIONS.map(s => {
 
 const body = `
 <div id="dy-storebanner"></div>
+<div id="dy-stale"></div>
+<template id="dy-newrow">${elementHtml(element({
+  key: "section:", header: "", runs: [],
+  extra: { editHeader: true, canDelete: true, state: "quiet",
+    notReady: false, notRequired: false },
+}))}</template>
 
 <div class="dy-wrap">
   <details class="dy-panel dy-cal" open>
@@ -1233,6 +1627,13 @@ const body = `
       + "seven columns — this is where five days are read at a glance.",
       `READS  ${days.length} days`)}>THE DAYS · ${days.length}</summary>
     <div class="in">${calHtml}
+      <p class="dy-note" id="dy-caldirty"${hint(
+        "the seven marks are computed when this page is BUILT. You have edited something since, "
+        + "so they describe the day as it was, not as it is on your screen. Save, then npm run "
+        + "day, and they are true again. The page does not recompute them because a second "
+        + "implementation of the seven columns would drift from the one that refuses a packet.",
+        "READS  you have unsaved edits")}>These read the BUILD, not your edits. Save, then
+        <code>npm run day</code>.</p>
       <p class="dy-note">Every day, with its seven marks in the same seven columns.
         A day with no entry is not drawn and is not a defect — which days get a
         Record is decided by which entries exist.</p>
@@ -1249,23 +1650,35 @@ const body = `
     </div>
     ${days.map(d => dayHtml(d)).join("\n")}
 
-    <div class="dy-marks">
+    <div class="dy-marks" id="dy-savebox">
       <div class="h"${hint(
-        "your marks — NOT READY and NOT REQUIRED — for every day, as they stand in this browser. "
-        + "The page reads them from docs/dictation-20260807/readiness.json at build time; this box "
-        + "is how what you have changed since gets back into that file.",
-        "READS  the live marks, updated on every box you tick")}>YOUR MARKS · for docs/dictation-20260807/readiness.json</div>
-      <textarea id="dy-marks-out" readonly${hint(
-        "the marks as they would be written to readiness.json. Nothing on this page writes to the "
-        + "tree — copy this and Ops lands it.",
-        "READS  the live marks")}></textarea>
+        "your words and your marks, together, in one save. It writes two files in the repo: "
+        + "record-draft.json for the day, readiness.json for the NOT READY and NOT REQUIRED "
+        + "marks. IT DOES NOT WRITE THE RECORD — that is npm run record:land -- --write, and "
+        + "it is yours.",
+        "READS  nothing has been saved from this page yet")}>SAVE · your words and your marks, in one</div>
       <p style="margin:6px 0 0">
-        <button type="button" id="dy-marks-copy"${hint(
-          "put the marks on the clipboard and READ THEM BACK before saying it worked. A clipboard "
-          + "write is not done until it has been read back.",
-          "READS  press it")}>copy the marks</button>
-        <span class="said" id="dy-marks-said"></span>
+        <button type="button" id="dy-save"${hint(
+          "write what is on this page to the repo. It goes to the working copy the lander reads, "
+          + "never to the Record itself.",
+          "READS  press it, or Ctrl+S")}>Save to the repo</button>
+        <span class="said" id="dy-save-said"></span>
       </p>
+      <p class="dy-note" id="dy-save-where"></p>
+      <div id="dy-fallback" hidden>
+        <div class="h"${hint(
+          "the save could not reach the server, so this is the whole draft as text. It is the "
+          + "road out that does not depend on anything working — copy it and Ops lands it.",
+          "READS  the live draft")}>THE WAY OUT — copy this and nothing is lost</div>
+        <textarea id="dy-fb-out" readonly></textarea>
+        <p style="margin:6px 0 0">
+          <button type="button" id="dy-fb-copy"${hint(
+            "put the draft on the clipboard and READ IT BACK before saying it worked. A clipboard "
+            + "write is not done until it has been read back.",
+            "READS  press it")}>copy everything</button>
+          <span class="said" id="dy-fb-said"></span>
+        </p>
+      </div>
     </div>
   </div>
 
@@ -1291,6 +1704,13 @@ const body = `
 </div><img id="dy-vimg" alt=""></div>
 
 <script>
+/* ═══ THE COLLECTOR, INLINED VERBATIM FROM tools/dictation/day-collect.js ═══
+   Not a copy of it — the file's own bytes, pasted here by the generator, and
+   npm run day:proof asserts these bytes and that file's are the same sha256
+   before it runs a check. It defines globalThis.WBDay and nothing else. */
+${COLLECT_JS}
+</script>
+<script>
 "use strict";
 /* No backtick in this script: it sits inside a template literal.
    THE PICTURES ARE INLINE. Nothing here resolves a path relative to the page,
@@ -1303,6 +1723,27 @@ var DAYS = ${JSON.stringify(days.map(d => ({ no: d.no, date: d.date, weekday: d.
 var BIG = ${JSON.stringify(Object.fromEntries(bigByWeb))};
 var BAKED = ${JSON.stringify(loadMarks())};
 var STORE_KEY = ${JSON.stringify(MARK_STORE_KEY)};
+
+/* ═══ [PIECE 4] WHAT THE SAVE IS BUILT FROM ════════════════════════════════
+   REST is every field of every entry this page does NOT edit, kept whole and
+   spread back by WBDay.collect. ORIG is what each box held when the page was
+   built, so an untouched box can be recognised and its ORIGINAL string emitted
+   byte for byte rather than the dedented copy he was shown. SOURCE is which
+   Record the whole page was baked from. KEYS0 is the key set each day OPENED
+   with, so a deletion can be named. */
+var REST = ${JSON.stringify(Object.fromEntries(days.map(d => [d.no, d.rest])))};
+var ORIG = ${JSON.stringify(Object.fromEntries(
+  days.flatMap(d => d.els.flatMap(el =>
+    (el.blocks || []).map(b => [b.uid, { raw: b.raw, cut: b.cut, kind: b.kind, items: b.items }])))
+))};
+var HEAD0 = ${JSON.stringify(Object.fromEntries(
+  days.flatMap(d => d.els.filter(el => el.editHeader)
+    .map(el => [el.key, el.header || ""]))))};
+var SOURCE = ${JSON.stringify(SOURCE_STATE)};
+var EPOCH = ${JSON.stringify(RECORD_EPOCH_VALUE)};
+var BUDGETS = ${JSON.stringify({ title: BUDGETS.title, line: BUDGETS.line })};
+var NEAR = ${NEAR};
+var KEYS0 = {};
 var HINT_IMG = ${JSON.stringify(`the picture, at ${ZOOM_PX}px — the viewer's one size. `
   + `x1 died on 2026-08-25; x2 is the viewer.`)};
 var i = 0, VIEW = null;
@@ -1378,10 +1819,12 @@ function setState(no, key, st){
   if (MARKS[no] && !Object.keys(MARKS[no]).length) delete MARKS[no];
   saveMarks();
 }
-function paintMarksBox(){
-  document.getElementById("dy-marks-out").value =
-    JSON.stringify({ marks: MARKS }, null, 2);
-}
+/* [PIECE 4] THE MARKS BOX IS GONE AND THE MARKS TRAVEL WITH THE WORDS.
+   It was a clipboard with no writer — "copy this and Ops lands it" — which
+   is a page where half the state is durable and half is a transcription step.
+   A tick is now an unsaved edit like any other, and it goes to
+   readiness.json in the same POST that carries the day. */
+function paintMarksBox(){ touch(); }
 
 /* the row's three voices, recomputed in the page when a box is ticked. The
    system's own verdict is baked into the row as data-fault and is never
@@ -1427,6 +1870,15 @@ function show(n){
   document.querySelectorAll(".dy-cal button").forEach(function(b){
     b.setAttribute("aria-current", Number(b.getAttribute("data-go")) === n ? "true" : "false");
   });
+  /* [PIECE 4] AND THE BOXES ARE SIZED HERE, NOT AT BOOT. A hidden element has
+     a scrollHeight of ZERO, so an autosize pass over every day at load left
+     four of the five days' boxes one line tall and only the day that happened
+     to be open was right — measured on the served page: 16px of box holding
+     47px of text. Every day but the first was in that state. The height is
+     therefore set when a day is REVEALED, which is the first moment the
+     browser can answer the question. */
+  document.querySelectorAll('.dy-day[data-day="' + n + '"] textarea.dy-edit')
+    .forEach(autosize);
   document.getElementById("dy-prev").disabled = i === 0;
   document.getElementById("dy-next").disabled = i === DAYS.length - 1;
   var where = document.getElementById("dy-where");
@@ -1509,10 +1961,11 @@ document.getElementById("dy-vn").addEventListener("click", function(){ vstep(1);
 
 /* A CLIPBOARD WRITE IS NOT DONE UNTIL IT HAS BEEN READ BACK (OPERATIONS U2).
    Three sentences, never one, and the text is selected first so Ctrl+C works
-   whichever way the write goes. */
-document.getElementById("dy-marks-copy").addEventListener("click", function(){
-  var box = document.getElementById("dy-marks-out");
-  var said = document.getElementById("dy-marks-said");
+   whichever way the write goes. This is the FALLBACK's copy, which is the only
+   clipboard left on the page. */
+document.getElementById("dy-fb-copy").addEventListener("click", function(){
+  var box = document.getElementById("dy-fb-out");
+  var said = document.getElementById("dy-fb-said");
   box.focus(); box.select();
   if (!navigator.clipboard || !navigator.clipboard.writeText) {
     said.textContent = "not verified \\u2014 press Ctrl+C, the text is selected"; return;
@@ -1540,12 +1993,379 @@ document.addEventListener("keydown", function(e){
   else if (e.key === "ArrowRight") step(1);
 });
 
+/* ═════════════════════════════════════════════════════════════════════════
+   [PIECE 4] THE WRITING HALF
+   ═════════════════════════════════════════════════════════════════════════
+   Everything above this line is Piece 1's page and is unchanged in kind: it
+   draws a day and takes a mark. Everything below takes a keystroke.
+
+   THE DOM IS THE MODEL. There is no parallel JavaScript copy of the day being
+   kept in step with the boxes, because the two would drift and the one that
+   drifted would be the one that gets saved. A save WALKS THE ROWS, reads each
+   box, and hands the result to WBDay.collect \\u2014 which is the file the proof
+   loads, byte for byte.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+var DIRTY = false, LASTSAVE = null, STALE = false;
+
+function say2(msg, cls){
+  var s = document.getElementById("dy-save-said");
+  s.textContent = msg || ""; s.className = "said" + (cls ? " " + cls : "");
+}
+
+/* EXPANDS \\u2014 as many lines as he gives it, and no scrollbar of its own.
+   The height is cleared before it is read, or the box could only ever grow. */
+function autosize(t){
+  if (!t || t.tagName !== "TEXTAREA") return;
+  t.style.height = "auto";
+  t.style.height = (t.scrollHeight + 2) + "px";
+}
+
+function touch(){
+  DIRTY = true;
+  document.querySelector(".dy-cal").classList.add("dirty");
+  snapSoon();
+}
+
+/* ── THE DAY, READ OFF THE GLASS ─────────────────────────────────────────
+   Row order is DOM order, which is the order he arranged with + and \\u00d7.
+   A row marked DELETED is not read at all \\u2014 that is what the mark means \\u2014
+   and its characters stay in its box until the page is rebuilt. */
+function dayModel(no){
+  var root = document.querySelector('.dy-day[data-day="' + no + '"]');
+  var meta = null, j;
+  for (j = 0; j < DAYS.length; j++) if (DAYS[j].no === Number(no)) meta = DAYS[j];
+  var day = { no: Number(no), date: meta ? meta.date : null,
+    rest: REST[no] || {}, fields: {}, sections: [] };
+  if (!root) return day;
+  [].slice.call(root.querySelectorAll(".dy-el")).forEach(function(row){
+    if (row.classList.contains("gone")) return;
+    var boxes = [].slice.call(row.querySelectorAll("[data-role=block]"));
+    var f = row.getAttribute("data-field");
+    if (f) {
+      if (!boxes.length) return;
+      var o = ORIG[boxes[0].getAttribute("data-uid")] || null;
+      day.fields[f] = { orig: o ? o.raw : null,
+        cut: Number(boxes[0].getAttribute("data-cut") || 0), text: boxes[0].value };
+      return;
+    }
+    if (row.getAttribute("data-sect") !== "1") return;
+    var lab = row.querySelector("input[data-role=label]");
+    var key0 = row.getAttribute("data-el0");
+    var blocks = boxes.map(function(b){
+      var oo = ORIG[b.getAttribute("data-uid")] || null;
+      return { kind: b.getAttribute("data-kind") || "strs",
+        orig: oo ? oo.raw : null, items: oo ? oo.items : null,
+        cut: Number(b.getAttribute("data-cut") || 0), text: b.value };
+    });
+    day.sections.push({
+      label: { orig: (key0 != null && HEAD0[key0] != null) ? HEAD0[key0] : null,
+        cut: 0, text: lab ? lab.value : "" },
+      blocks: blocks });
+  });
+  return day;
+}
+
+function allEntries(){
+  return DAYS.map(function(d){ return WBDay.collect(dayModel(d.no)); });
+}
+
+/* WHAT LEFT, BY DAY. The key set each day OPENED with against the set it would
+   save, so a deletion \\u2014 a section removed, a headline cleared \\u2014 is named
+   rather than being an absence nothing can see. It cannot tell a deliberate
+   deletion from a bug; it makes sure neither is silent. */
+function goneKeys(entries){
+  var out = [];
+  entries.forEach(function(e){
+    var was = KEYS0[e.no] || [];
+    var d = WBDay.diffKeys(was, WBDay.keysOf(e));
+    d.gone.forEach(function(k){ out.push(String(e.no).replace(/^/, "00").slice(-3) + " " + k); });
+  });
+  return out;
+}
+
+function payload(){
+  var entries = allEntries();
+  return JSON.stringify({
+    what: "Mike's working copy of the Record, from the day editor.",
+    key: "wb.day.2026-08-26", saved: new Date().toISOString(), epoch: EPOCH,
+    source: SOURCE, marks: MARKS, keys: { gone: goneKeys(entries) },
+    entries: entries
+  }, null, 1);
+}
+
+/* ── THE WAY OUT ─────────────────────────────────────────────────────────
+   **THERE IS NO FILE PICKER ON THIS PAGE AND THAT IS DELIBERATE.** The Record
+   editor falls back to showSaveFilePicker, and on an http origin the picker
+   EXISTS \\u2014 so a save aimed at a server that is not listening opens a folder
+   dialog and reports success about a file outside the repo. Measured before
+   this page was built: npm run mock answers a POST with a 404 because it never
+   reads the method, and the fallback fires exactly as designed into the wrong
+   place. A quiet wrong road is worse than a loud dead end, so the only
+   fallback here is THE TEXT, on the screen, with the reason above it. */
+function fallback(why){
+  var fb = document.getElementById("dy-fallback");
+  document.getElementById("dy-fb-out").value = payload();
+  fb.hidden = false;
+  say2(why, "bad");
+}
+
+function saveNow(){
+  if (STALE) { say2("the Record moved under this page \\u2014 nothing was saved. Read the red box.", "bad"); return; }
+  var text = payload();
+  var btn = document.getElementById("dy-save");
+  if (!/^https?:$/.test(location.protocol)) {
+    fallback("This page is open as a FILE, so it has no server to write to. Everything you have "
+      + "typed is below \\u2014 copy it. To save straight into the repo: npm run day:serve");
+    return;
+  }
+  btn.disabled = true; say2("saving\\u2026");
+  fetch("/day/save", { method: "POST", headers: { "content-type": "application/json" }, body: text })
+    .then(function(r){ return r.json().then(function(j){ return { s: r.status, j: j }; }); })
+    .then(function(res){
+      btn.disabled = false;
+      if (res.s === 409 && res.j && res.j.stale) { markStale(res.j.detail); return; }
+      if (!res.j || !res.j.ok) {
+        fallback("The server refused the save: " + ((res.j && (res.j.why || res.j.detail)) || res.s)
+          + " Nothing was written. Everything you have typed is below \\u2014 copy it.");
+        return;
+      }
+      DIRTY = false; LASTSAVE = new Date();
+      document.getElementById("dy-fallback").hidden = true;
+      say2("SAVED \\u2014 " + res.j.records + " record(s), " + res.j.bytes + " characters, at "
+        + LASTSAVE.toTimeString().slice(0, 8), "good");
+      var w = document.getElementById("dy-save-where");
+      w.innerHTML = "Written: <code>" + res.j.draft + "</code> and <code>" + res.j.marks
+        + "</code>. <b>The Record itself is not written</b> \\u2014 that is "
+        + "<code>npm run record:land -- --write</code>, and it is yours."
+        + (res.j.gone && res.j.gone.length
+            ? "<br><b>GONE from this save:</b> " + res.j.gone.join(" \\u00b7 ")
+              + " \\u2014 named because a deletion must never be silent."
+            : "");
+      try { localStorage.removeItem(SNAP_KEY); } catch(e){}
+    })
+    .catch(function(){
+      btn.disabled = false;
+      fallback("The save could not reach the server \\u2014 it is not running, or it stopped. "
+        + "NOTHING WAS WRITTEN. Everything you have typed is below \\u2014 copy it, or start "
+        + "npm run day:serve and press Save again.");
+    });
+}
+
+/* ── THE PAGE ASKS WHETHER IT IS STILL TALKING ABOUT THE SAME RECORD ─────
+   The server refuses a stale save because it is the thing that writes. This
+   asks on every focus because it is the only end that can tell him BEFORE he
+   has typed for an hour. Both, on Ops' ruling. */
+function markStale(detail){
+  STALE = true;
+  var b = document.getElementById("dy-stale");
+  b.innerHTML = "<b>THE RECORD MOVED AFTER THIS PAGE WAS BUILT. DO NOT SAVE.</b><br>"
+    + (detail || "") + "<br><b>What is on this screen is still complete.</b> Copy anything you "
+    + "have typed since you opened it, then run <code>npm run day</code> and paste it back in.";
+  b.className = "on";
+  document.getElementById("dy-save").disabled = true;
+  fallback("The Record moved under this page. Nothing was saved. Copy this.");
+}
+function checkSource(){
+  if (STALE || !/^https?:$/.test(location.protocol)) return;
+  fetch("/day/source").then(function(r){ return r.ok ? r.json() : null; }).then(function(j){
+    if (!j || !j.ok || !j.source) return;
+    if (j.source.sha256 !== SOURCE.sha256) {
+      markStale("The page was built against " + SOURCE.file + " at sha256 "
+        + SOURCE.sha256.slice(0, 16) + "\\u2026 (" + SOURCE.mtime + "). On disk now it is "
+        + j.source.sha256.slice(0, 16) + "\\u2026 (" + j.source.mtime + "). Saving would send this "
+        + "page's older copy to the lander with a fresh timestamp on it, and the lander's "
+        + "staleness guard reads the timestamp, not the words \\u2014 so it would pass.");
+    }
+  }).catch(function(){ /* the server being down is not staleness, and saveNow says so */ });
+}
+
+/* ── WHAT THE BROWSER HOLDS BETWEEN SAVES ────────────────────────────────
+   IT IS NOT A RESTORE AND IT DOES NOT PRETEND TO BE ONE. A snapshot is written
+   to this browser as he types, and if one is found on boot that was never
+   saved, the page SAYS SO and offers the text. It does not put the words back
+   in the boxes: a page that silently repopulated itself from a browser copy
+   would be a second stale-copy road, which is the loss this whole piece was
+   gated on. The words are what must not be lost; the arrangement can be
+   retyped and the arrangement is what a restore would have to guess at.
+   IT IS REFUSED IF IT WAS TYPED AGAINST A DIFFERENT RECORD, for the same
+   reason the save is. */
+var SNAP_KEY = "wb.day.snapshot.v1", snapTimer = null;
+function snapSoon(){
+  if (snapTimer) clearTimeout(snapTimer);
+  snapTimer = setTimeout(function(){
+    if (!STORE_OK) return;
+    try { localStorage.setItem(SNAP_KEY, JSON.stringify({
+      source: SOURCE.sha256, at: new Date().toISOString(), text: payload() })); }
+    catch(e){ STORE_OK = false;
+      banner("<b>THIS BROWSER HAS STOPPED KEEPING A COPY OF YOUR WORK.</b> What is on the screen "
+        + "is complete. Press <b>Save to the repo</b> now."); }
+  }, 700);
+}
+function offerSnapshot(){
+  var s = null;
+  try { s = JSON.parse(localStorage.getItem(SNAP_KEY) || "null"); } catch(e){ return; }
+  if (!s || !s.text) return;
+  if (s.source !== SOURCE.sha256) { try { localStorage.removeItem(SNAP_KEY); } catch(e){} return; }
+  var b = document.getElementById("dy-storebanner");
+  b.innerHTML = "<b>THIS BROWSER HAS WORK FROM " + String(s.at).replace("T", " ").slice(0, 19)
+    + " THAT WAS NEVER SAVED TO THE REPO.</b> It is not put back in the boxes \\u2014 a page that "
+    + "repopulated itself from a browser copy is a second way to save something stale. "
+    + "<button type=\\"button\\" id=\\"dy-snapshow\\">show it</button> "
+    + "<button type=\\"button\\" id=\\"dy-snapdrop\\">discard it</button>";
+  b.className = "on";
+  document.getElementById("dy-snapshow").addEventListener("click", function(){
+    document.getElementById("dy-fallback").hidden = false;
+    document.getElementById("dy-fb-out").value = s.text;
+    document.getElementById("dy-fb-out").focus();
+  });
+  document.getElementById("dy-snapdrop").addEventListener("click", function(){
+    try { localStorage.removeItem(SNAP_KEY); } catch(e){}
+    b.className = ""; b.innerHTML = "";
+  });
+}
+
+/* TWO TABS ON ONE RECORD. Both write the same store and the same draft path,
+   last writer wins, and until today neither knew about the other. */
+window.addEventListener("storage", function(e){
+  if (e.key !== SNAP_KEY || !e.newValue) return;
+  var b = document.getElementById("dy-storebanner");
+  b.innerHTML = "<b>ANOTHER TAB IS EDITING THIS RECORD.</b> Both tabs write the same draft file "
+    + "and the last save wins outright \\u2014 whichever one saves second replaces the other's work "
+    + "entirely. Close one before you save.";
+  b.className = "on";
+});
+
+/* ── THE LIVE MARK ───────────────────────────────────────────────────────
+   The count under a box he is TYPING into and the count the generator bakes
+   are ONE function \\u2014 WBDay.budgetMark, in the file the proof loads. Two
+   would drift and the one that drifted would be the one on the glass. */
+function repaintBudget(row){
+  var raw = row.getAttribute("data-budget");
+  if (!raw) return;
+  var b = JSON.parse(raw);
+  var box = row.querySelector("[data-role=block]");
+  var span = row.querySelector(".dy-count");
+  var m = box ? WBDay.budgetMark(box.value.length, b, NEAR) : null;
+  if (!m) { if (span) span.remove(); return; }
+  if (!span) {
+    span = document.createElement("span");
+    /* BEFORE the two voices, which is where the generator puts it. A count
+       that jumps to the other side of NOT READY the first time it fires would
+       be the page moving under him at the moment it is trying to warn him. */
+    var host = row.querySelector(".dy-th") || row.querySelector(".dy-box-t");
+    var voice = host.querySelector(".dy-say");
+    if (voice) host.insertBefore(span, voice); else host.appendChild(span);
+  }
+  span.className = "dy-count " + m.level;
+  span.textContent = m.says;
+  hint(span, m.means, m.read);
+}
+
+/* ── HIS MARK FOLLOWS HIS HEADER ─────────────────────────────────────────
+   A section's key IS its header, which is the vocabulary the marks already
+   use. So renaming a header would orphan the mark he set an hour ago \\u2014 the
+   page draws orphans loudly for exactly that reason, and making him read one
+   he caused by typing would be the page punishing him for using it. The mark
+   moves with the row while the page is open. */
+function renameKey(row){
+  var no = Number(row.closest(".dy-day").getAttribute("data-day"));
+  var lab = row.querySelector("input[data-role=label]");
+  var was = row.getAttribute("data-el");
+  var now = "section:" + (lab.value || "(no header)");
+  if (now === was) return;
+  if (MARKS[no] && MARKS[no][was]) {
+    MARKS[no][now] = MARKS[no][was];
+    delete MARKS[no][was];
+    saveMarks();
+  }
+  row.setAttribute("data-el", now);
+  var btn = row.querySelector(".dy-st");
+  if (btn) btn.setAttribute("data-key", now);
+}
+
+/* ── ONE HANDLER, EVERY BOX ────────────────────────────────────────────── */
+document.addEventListener("input", function(ev){
+  var t = ev.target;
+  if (!t.classList || !t.classList.contains("dy-edit")) return;
+  autosize(t);
+  var row = t.closest(".dy-el");
+  if (t.getAttribute("data-role") === "label") renameKey(row);
+  repaintBudget(row);
+  touch();
+});
+
+/* ── DELETE A ROW. INSERT A ROW. ADD A SECTION. ────────────────────────── */
+function freshRow(){
+  var tpl = document.getElementById("dy-newrow");
+  var li = tpl.content.firstElementChild.cloneNode(true);
+  var row = li.querySelector(".dy-el");
+  /* a uid nothing has an ORIG for, so the box is read as NEW and its text is
+     emitted exactly as typed \\u2014 no cut is re-applied to a line he wrote here. */
+  var u = "new" + Math.round(performance.now() * 1000) + "-" + (freshRow.n = (freshRow.n || 0) + 1);
+  [].slice.call(row.querySelectorAll("[data-role=block]")).forEach(function(b){
+    b.setAttribute("data-uid", u); b.value = "";
+  });
+  row.setAttribute("data-el", "section:(no header)");
+  return li;
+}
+document.addEventListener("click", function(ev){
+  var t = ev.target;
+  var ins = t.closest && t.closest(".dy-ins");
+  if (ins) { ins.closest("li").after(freshRow()); touch(); return; }
+  var del = t.closest && t.closest(".dy-del");
+  if (del) {
+    var row = del.closest(".dy-el");
+    row.classList.toggle("gone");
+    touch();
+    return;
+  }
+  var add = t.closest && t.closest(".dy-add");
+  if (add) {
+    var ol = add.closest(".dy-sec").querySelector("ol.dy-sects");
+    var li = freshRow(); ol.appendChild(li);
+    var box = li.querySelector("input[data-role=label]"); if (box) box.focus();
+    touch();
+    return;
+  }
+  if (t.id === "dy-save") saveNow();
+});
+
+document.addEventListener("keydown", function(e){
+  if ((e.ctrlKey || e.metaKey) && (e.key === "s" || e.key === "S")) {
+    e.preventDefault(); saveNow();
+  }
+});
+
+/* NOTHING LEAVES QUIETLY. The Record editor has no such handler and neither
+   did this page, because neither had anything to lose until today. */
+window.addEventListener("beforeunload", function(e){
+  if (!DIRTY) return;
+  e.preventDefault(); e.returnValue = "";
+});
+window.addEventListener("focus", checkSource);
+document.addEventListener("visibilitychange", function(){
+  if (!document.hidden) checkSource();
+});
+
 loadMarks();
 /* paintRow reads the store and repaints the row and its button, so the boot
    pass is the same call the click makes — the baked-in state and the live
    state cannot disagree about how a row is drawn. */
 document.querySelectorAll(".dy-el").forEach(paintRow);
-paintMarksBox();
+/* THE KEY EACH SECTION ROW OPENED WITH, kept on the row so a rename can still
+   find what the box originally held. */
+document.querySelectorAll(".dy-el[data-sect]").forEach(function(row){
+  row.setAttribute("data-el0", row.getAttribute("data-el"));
+});
+document.querySelectorAll("textarea.dy-edit").forEach(autosize);
+/* WHAT EACH DAY OPENED WITH, read through the real collector \\u2014 so the set a
+   deletion is measured against is the set a save would have produced a moment
+   earlier, not a list built a second way. */
+DAYS.forEach(function(d){ KEYS0[d.no] = WBDay.keysOf(WBDay.collect(dayModel(d.no))); });
+document.querySelectorAll(".dy-el[data-budget]").forEach(repaintBudget);
+offerSnapshot();
+checkSource();
 
 var want = Number(String(location.hash || "").replace("#","")) || DAYS[0].no;
 show(DAYS.some(function(d){ return d.no === want; }) ? want : DAYS[0].no);
@@ -1581,5 +2401,31 @@ console.log(`  the shelf: ${shelf.length} rows, ${small.made} made, ${small.hits
   + `${small.stretched} contrast-stretched`);
 console.log(`  not shown on the shelf: ${drop.ruled} ruled out, ${drop.neverPublished} never published, `
   + `${drop.absent} with no file, ${drop.superseded + drop.elsewhere} robots-repo rows`);
-console.log(`\nserve it \u2014 the viewer is inline, so a served page works:`);
-console.log(`  npm run mock 8931   \u2192  http://127.0.0.1:8931/dictation-20260807/day.html`);
+console.log(`  the Record it was built from: ${SOURCE_STATE.file}`);
+console.log(`     sha256 ${SOURCE_STATE.sha256}`);
+console.log(`     ${SOURCE_STATE.mtime}, ${SOURCE_STATE.bytes.toLocaleString()} bytes`);
+console.log(`     A save from a page built against a different one is REFUSED, by sha.`);
+
+/* \u2550\u2550\u2550 [PIECE 4] THE LINE THAT USED TO BE HERE WAS A TRAP THE DAY THE PAGE
+   TOOK A KEYSTROKE \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+   It printed `npm run mock 8931` and the day.html address on that server. That
+   was CORRECT while this page was read-only \u2014 the mock is how OPERATIONS \u00a78
+   obliges Ops to look at anything, because Ops cannot see `file://`.
+
+   IT STOPPED BEING CORRECT AT THE FIRST TEXTAREA. `tools/serve-mock.mjs` never
+   reads `req.method`, so a POST to `/day/save` is treated as a request for the
+   file `docs/save`, which does not exist, and it answers 404. The page would
+   fall to its way-out box every time \u2014 and the RECORD editor, on the same
+   origin, would fall to `showSaveFilePicker`, which EXISTS on http, and open a
+   folder dialog reporting success about a file outside the repo.
+
+   **A PRINTED INSTRUCTION THAT SILENTLY LOSES A SAVE IS NOT A DOC FIX.** It
+   changed in the commit that made the page writable, which is this one. */
+console.log(`\nWHERE HE WRITES \u2014 this page takes keystrokes now, so it needs the`);
+console.log(`server that can accept a save. npm run mock CANNOT: it never reads the`);
+console.log(`request method, so a save to it 404s.\n`);
+console.log(`  npm run day:serve   \u2192  http://127.0.0.1:8899/`);
+console.log(`\n  Save writes  docs/dictation-20260807/record-draft.json   (his words)`);
+console.log(`               docs/dictation-20260807/readiness.json      (his marks)`);
+console.log(`  It does NOT write the Record. That is  npm run record:land -- --write  [MIKE]`);
+console.log(`\n  prove it first:  npm run day:proof`);

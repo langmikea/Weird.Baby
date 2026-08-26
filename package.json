@@ -49,6 +49,8 @@
     "record:serve": "node tools/dictation/record-serve.mjs",
     "assign": "node tools/dictation/assign.mjs",
     "day": "node tools/dictation/day.mjs",
+    "day:serve": "node tools/dictation/record-serve.mjs",
+    "day:proof": "node tools/dictation/day-proof.mjs",
     "shorts": "node tools/shorts.mjs",
     "approve": "node tools/approve.mjs",
     "approve:check": "node tools/approve.mjs --check",
