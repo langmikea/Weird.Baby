@@ -1,8 +1,14 @@
 {
- "_": "Mike's Records. REGENERATED FROM THE LANDED SOURCE (src/data/artists/robots-record.js) by reveal/record-entries.mjs draftEntries() on 2026-08-24, because entries had been edited directly in the source and this file had fallen behind — Records 003 and 005 differed. The workbook (tools/dictation/workbook_to_draft.py) remains the origin of Mike's words; this file is the working copy `npm run record:land` reads. Fed to `npm run record:land`.",
- "key": "wb.record.2026-08-09",
- "saved": "2026-08-24T00:00:00Z",
+ "_": "Mike's working copy of the Record. Written by docs/dictation-20260807/day.html (tools/dictation/day.mjs), read by tools/dictation/emit-record-entries.mjs. Curly braces are notes to Ops. Ops does not hand-edit this file.",
+ "key": "wb.day.2026-08-26",
+ "saved": "2026-08-26T13:17:10.927Z",
  "epoch": "2026-08-31",
+ "source": {
+  "file": "src/data/artists/robots-record.js",
+  "sha256": "20f4c8aaae14f91a5cd3363a0142c0ecd775db3473716bfec5a119769590891e",
+  "mtime": "2026-08-26T12:49:06.876Z",
+  "bytes": 50239
+ },
  "entries": [
   {
    "no": 1,
@@ -70,31 +76,6 @@
    ]
   },
   {
-   "no": 3,
-   "date": "2026-09-02",
-   "title": "DATA RECOVERY - LEVEL 1 - SUCCESS!",
-   "line": "> Weird.Baby Website - All Systems Favorable\n> Robots - Nothing to Report",
-   "sections": [
-    {
-     "label": "EXECUTIVE SUMMARY",
-     "body": [
-      "  > Weird.Baby uptime: 100%, no anomalies - f(Ump) = 100%\n  > Blockers - Nothing to Report"
-     ]
-    },
-    {
-     "label": "DETAILED REPORT",
-     "body": [
-      "  > Ops now wants an Early-Pull-Off with Confidence >> 6.28 sigma\n  > Data Deluge ZIP File - The outer layer was not password protected\n       Manual Pages Recovered\n         SCAN 07 - POWER SYSTEM\n         SCAN 11 - VID-LINK\n         SCAN 31 - PARITY BIAS"
-     ]
-    },
-    {
-     "label": "ADDENDUM 02 - Personnel Folders (empty, names only)",
-     "body": [
-      "    THE CEO         - one page, redacted to the letterhead\n    THE INFORMER    - photographs only, no text\n    THE EVERYDAY    - not yet opened\n    THE GAMBLER     - not yet opened",
-      "  ? Four people are described in a manual for a machine. No explanation is offered."
-     ]
-    }
-   ],
    "docs": [
     {
      "title": "Scan 07 - Power supply and distribution",
@@ -148,9 +129,47 @@
       }
      ]
     }
+   ],
+   "no": 3,
+   "date": "2026-09-02",
+   "title": "DATA RECOVERY - LEVEL 1 - SUCCESS!",
+   "line": "> Weird.Baby Website - All Systems Favorable\n> Robots - Nothing to Report",
+   "sections": [
+    {
+     "label": "EXECUTIVE SUMMARY",
+     "body": [
+      "  > Weird.Baby uptime: 100%, no anomalies - f(Ump) = 100%\n  > Blockers - Nothing to Report"
+     ]
+    },
+    {
+     "label": "DETAILED REPORT",
+     "body": [
+      "  > Ops now wants an Early-Pull-Off with Confidence >> 6.28 sigma\n  > Data Deluge ZIP File - The outer layer was not password protected\n       Manual Pages Recovered\n         SCAN 07 - POWER SYSTEM\n         SCAN 11 - VID-LINK\n         SCAN 31 - PARITY BIAS"
+     ]
+    },
+    {
+     "label": "ADDENDUM 02 - Personnel Folders (empty, names only)",
+     "body": [
+      "    THE CEO         - one page, redacted to the letterhead\n    THE INFORMER    - photographs only, no text\n    THE EVERYDAY    - not yet opened\n    THE GAMBLER     - not yet opened",
+      "  ? Four people are described in a manual for a machine. No explanation is offered."
+     ]
+    }
    ]
   },
   {
+   "docs": [
+    {
+     "title": "QC_101 - Final test and inspection",
+     "source": "ABEAL FORM QC-101",
+     "pages": 1,
+     "plates": [
+      {
+       "img": "/robots/portal/qc-101-a.webp",
+       "label": "Final test and inspection, completed and passed"
+      }
+     ]
+    }
+   ],
    "no": 4,
    "date": "2026-09-03",
    "title": "GENERAL STATUS UPDATE",
@@ -166,21 +185,10 @@
      "label": "DETAILED REPORT",
      "body": [
       "  > ZIP Password Cracked: [355113]",
-      "    ROOT\n     /(many pwd protected folders)\n     /PORTAL\n       TERMINAL.EXE\n       PORTAL_2v16.CFG\n       /ANTENNA (PWD)\n       /CHANNEL_SELECT(PWD)\n       /INSTALL\n          QC_101.TIF (hand written notes on form)",
-      "  > Install document looks proprietary. Probably not meant to seen.\n  > QC RULE: Unsafe to run in any sandbox; permanently quarantined."
-     ]
-    }
-   ],
-   "docs": [
-    {
-     "title": "QC_101 - Final test and inspection",
-     "source": "ABEAL FORM QC-101",
-     "pages": 1,
-     "plates": [
       {
-       "img": "/robots/portal/qc-101-a.webp",
-       "label": "Final test and inspection, completed and passed"
-      }
+       "pre": "    ROOT\n     /(many pwd protected folders)\n     /PORTAL\n       TERMINAL.EXE\n       PORTAL_2v16.CFG\n       /ANTENNA (PWD)\n       /CHANNEL_SELECT(PWD)\n       /INSTALL\n          QC_101.TIF (hand written notes on form)"
+      },
+      "  > Install document looks proprietary. Probably not meant to seen.\n  > QC RULE: Unsafe to run in any sandbox; permanently quarantined."
      ]
     }
    ]
