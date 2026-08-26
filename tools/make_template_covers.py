@@ -51,9 +51,25 @@ was "exactly the positions the Robots cover uses" — it reports the clearance i
 measures and fails if the descender would touch the rule, so the decision stays
 his. See the CLEARANCE line each run prints.
 
-    python tools/make_template_covers.py
+[2026-08-26] BOTH ITS OUTPUTS WERE REPLACED BY HAND THE NEXT DAY, SO THE FENCE
+RETIRES IT WHOLE. `dd367c7`, 2026-08-10 — *"covers: hand-authored art for
+PORTAL, MGK-NIAC, MGK-VIIIp; front plate v2; generator fenced"* — put Mikey's
+art at both paths, and Mike's ruling that day was *"all four wing covers are
+now hand-authored."* The fence went onto `make_unit_covers.py` and not onto
+this file, which is the one that actually writes them.
+
+**WHAT A RUN WOULD DESTROY IS NOT A RE-RENDER OF THE SAME COVER.** The shipped
+files are PHOTOGRAPHS of the two machines on the house paper. The header above
+carries Mike's own instruction for this tool — **DO NOT ADD A PHOTOGRAPH** —
+so what it writes is a closed-ring type sleeve, which is the 2026-08-09 design
+that 2026-08-10 superseded. Everything below is kept as the record of how the
+ring was closed and how the faces were fitted; what is gone is its authority.
+
+    python tools/make_template_covers.py  <- refuses; see tools/cover_fences.py
 """
 import os
+
+import cover_fences
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
@@ -199,6 +215,11 @@ def build(title, out_name):
 
 
 def main():
+    # THE FENCE, before the template is even opened. Both names are Mikey's
+    # art, so this raises on every run and `OUT_DIR` is never created.
+    cover_fences.guard("make_template_covers.py",
+                       ["mgk-niac-cover.png", "mgk-viiip-cover.png"])
+
     os.makedirs(OUT_DIR, exist_ok=True)
     print("building the two machine covers on Mike's blank template")
     build("MGK-NIAC", "mgk-niac-cover.png")
@@ -206,4 +227,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    cover_fences.run_main(main)

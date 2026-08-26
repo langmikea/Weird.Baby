@@ -789,6 +789,59 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-26 -> THE COVER FENCES (fifth packet)
+- **NOTHING BLOCKS IT, AND TWO THINGS WAIT ON MIKE'S EYE RATHER THAN ON A
+  BUILD.** He ruled A / B / B on the album art and said what the rulings are
+  worth: **"For now at least. I will not know until I start looking at the
+  entire site."** All three are `OPEN` register rows (`A-a`, `A-b`, `A-c`) with
+  his sentence verbatim in each, plus short-list rows 67 and 68.
+  **NO COVER WAS REGENERATED, REDRAWN OR CHANGED.** Gates: lint **9/7 =
+  baseline** - build green - provenance **PASS** - `reveal:check` **PASS** -
+  `parity:gate` **PASS** - `instory:gate` **PASS** - `docs:numbers:gate`
+  **PASS** (2 stale values corrected). Log:
+  `docs/MUSEUM_COVER_FENCES_LOG-20260826.md`; the survey it acts on is
+  `C:\AI\_night-20260826\ALBUM_ART_SURVEY-20260826.md`.
+- **THE FENCE WAS ON THE ONE TOOL THAT WRITES NOTHING.** `make_unit_covers.py`
+  is retired and carried `HAND_AUTHORED` alone since 2026-08-10; the four tools
+  that DO write those paths had no fence at all. `covers:house` would have
+  destroyed Mike's vinyl master, `covers:robots` his own `NEW Robots.png`,
+  `covers:template` both of Mikey's photographs. **`tools/cover_fences.py` is
+  one set for all five**, keyed on the BASENAME because §8's *a governed
+  picture has two addresses*, checked over the WHOLE intended set before the
+  first write, and `--dry-run` is guarded on the same reasoning.
+- **FOUR OF THE FIVE GENERATORS NOW REFUSE EVERY RUN**, because every path they
+  own is hand-authored or superseded. That is not a side effect — it is the true
+  state of those tools and has been since 2026-08-10 without being enforced.
+  `make_house_covers.py` is the only one with live output, through **`--only`**.
+- **PROVED BY TRIPPING, AGAINST A COPY.** All five refuse, **all exit 1**; the
+  five legitimate covers rewrite **byte-for-byte identical** (sha256 unchanged);
+  all twelve files in the copy unchanged after nine runs; 25 of 25 tool×name
+  refusals; four spellings of one file all refused; `SUPERSEDED` correctly
+  tool-scoped. **The first harness read `EXIT 0` on every refusal and was
+  wrong** — it piped python into `tail` and read the pipeline's code. The
+  refusal text was correct and visible, so a wrong number sat under a
+  right-looking result.
+- **`--verify` HAS BEEN RED SINCE 2026-08-09 AND IS IN NO GATE.** 419,442
+  differing pixels; the template's rule at rows 992–995 against the shipped
+  file's at 1061–1064. **It is not drift — the comparand changed** when Mike's
+  art was installed. Repointing it is one line and is **deliberately not done**:
+  a check wrong for seventeen days is repointed by a round that then watches it,
+  and it must not join §9's list before it can pass (`Q-b`'s argument). Row
+  `A-d`, owned by Code.
+- **FOUR SENTENCES IN THE TREE READ AS PERMISSION TO OVERWRITE HIS ART**, two of
+  them carrying *"a re-render cannot drift"* about a file that is hand-drawn.
+  `robots.js` ×2, `asset-table.json`'s `what` + `qualityNote`, and
+  `ledger-declare.mjs`'s `route.wb` comment. **`provenance/assets.json` was
+  already right** and the others were conformed to it. `verdict` and `bucket`
+  untouched on every row — they are Mike's.
+- **THE BACKSLASH CLASS IS NOT A JAVASCRIPT FACT.** Writing `\MUSIC` through a
+  `python - <<'PY'` heredoc raised `invalid escape sequence '\M'` and **landed
+  correct by accident.** Counted on disk instead: exactly one backslash each.
+  §8 row.
+- **NO PIXEL SCREENSHOT AND NONE WAS OWED** — nothing in this packet renders.
+  The covers are untouched, and the changes are a new tool, four guarded
+  entry points, two JS comments, two JSON judged fields and three documents.
+
 ### 2026-08-26 -> THE WING NAMES TAKE THE BACKSLASH (fourth packet)
 - **ONE THING NEEDS MIKE AND IT IS A LOOK**, plus one word: whether the Gift
   Shop and the Information Booth join the shape. "Every wing takes it" was read

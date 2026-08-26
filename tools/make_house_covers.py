@@ -33,6 +33,15 @@ the shipped `wbr-cover-logo.png`. If the geometry has drifted by one pixel the
 check fails. "One theme" is a claim about geometry and a hand-matched cover
 drifts the first time either is re-rendered.
 
+    [2026-08-26] THE PARAGRAPH ABOVE DESCRIBES A CHECK THAT HAS BEEN RED SINCE
+    2026-08-09 AND IS KEPT BECAUSE IT IS THE ARGUMENT, NOT THE STATUS. Its
+    comparand stopped being a generated file the day Mike's own `NEW Robots.png`
+    was installed there, so `--verify` now measures the distance between this
+    template and a piece of hand art — 303,783 strongly differing pixels. The
+    claim about geometry is still the right claim and it needs a comparand this
+    tool owns. Read `verify()`'s own docstring below: it carries the numbers,
+    names what would repoint it, and says why that is not done here.
+
 THE ONE THING THIS TOOL DOES THAT ITS ANCESTOR CANNOT: a word too long for one
 line. "ROBOTS" is six glyphs; "ABOUT THE ARTIST" is sixteen, and Georgia caps at
 0.132S cannot be tracked down far enough to fit. So a long name WRAPS, and the
@@ -42,11 +51,29 @@ which is the part a visitor reads as "the same cover". The house's own printed
 card on /wal already wraps its name across three lines, so wrapping is the
 building's own handling of a long album name and not a new idea.
 
+THE FENCE, AND WHY A BARE RUN NOW REFUSES. `COVERS` row 5 is
+`public/images/wb/vol1-cover.png`, and since 2026-08-12 that path has held
+MIKE'S OWN VINYL MASTER rather than this template's output — so `main()`'s
+unconditional loop is a one-command deletion of his art. The other five writes
+are byte-identical no-ops, which is what made it dangerous: a run reports six
+cheerful `wrote ...` lines and five of them are true in the boring sense.
+`tools/cover_fences.py` refuses the whole set before the first pixel.
+
+    python tools/make_house_covers.py --only about-cover.png   <- writes ONE
     python tools/make_house_covers.py [--verify] [--dry-run]
+
+`--only` IS THE FENCE'S OTHER HALF AND IS NOT A CONVENIENCE. Before it, this
+tool could only be run all-or-nothing, so a round told to regenerate ONE cover
+had no way to do it and `docs/BACKLOG.md` item 2 pointed at the whole loop.
+Names are matched on the basename and every name given must be a row in
+`COVERS`; an unknown name is an error rather than a silent empty run.
+
+    python tools/make_house_covers.py --only about-cover.png,ledger-cover.png
 """
 import os
 import sys
 
+import cover_fences
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -188,7 +215,31 @@ def build(lines, strap, mark_path=MARK):
 
 def verify():
     """Re-render the ROBOTS cover through this tool and compare it with the one
-    on disk. A single differing pixel is a drift in the template."""
+    on disk. A single differing pixel is a drift in the template.
+
+    [2026-08-26] IT HAS BEEN RED SINCE 2026-08-09 AND NOTHING HAS RUN IT.
+    Measured this round: **419,442 differing pixels, 303,783 of them by more
+    than 16 of 255, max delta 255** — the mark, the word, the rule and the
+    strapline all differ, and the border does not. It is not drift. On
+    2026-08-09 `27a9200` replaced `wbr-cover-logo.png` with Mike's own
+    `NEW Robots.png`, whose rule sits at rows 1061-1064 where this template
+    puts it at 992-995. **The comparand stopped being a generated file, so the
+    check stopped being a check** — and because it is in no gate, no packet
+    ritual and no npm script, seventeen days of red went unseen.
+
+    WHAT WOULD RUN IT, STATED AND DELIBERATELY NOT WIRED THIS ROUND. It needs a
+    comparand this template actually owns. The five house sleeves are
+    pixel-identical to `build()` today, so `--verify` against ANY of them would
+    be green and would prove the same thing this one was written to prove — that
+    the geometry has not drifted. Repointing it is a one-line change and it is
+    NOT made here, because a check that has been wrong for seventeen days should
+    be repointed in a round that then watches it, not in a round that is
+    building fences. Until it is repointed it must not join §9's gate list: a
+    gate that always fails is read as noise and then skipped, which is the
+    tripwire-disabling failure this repository has already recorded twice
+    (`docs/OPEN_ACTIONS.md` Q-b makes the same argument about `facts:gate`).
+    Registered as a row rather than left in this comment.
+    """
     shipped = os.path.join(REPO, "public", "robots", "art", "wbr-cover-logo.png")
     want = Image.open(shipped).convert("RGB")
     got = build(["ROBOTS"], "PURVEYORS OF THE WEIRD")
@@ -203,11 +254,35 @@ def verify():
     return 0
 
 
+def selected(argv):
+    """The rows this run intends to write. `--only a.png,b.png` narrows it."""
+    want = None
+    for i, a in enumerate(argv):
+        if a == "--only" and i + 1 < len(argv):
+            want = [n.strip() for n in argv[i + 1].split(",") if n.strip()]
+        elif a.startswith("--only="):
+            want = [n.strip() for n in a[7:].split(",") if n.strip()]
+    if want is None:
+        return list(COVERS)
+    known = {rel.rsplit("/", 1)[-1]: row for row in COVERS for rel in (row[2],)}
+    unknown = [n for n in want if n not in known]
+    if unknown:
+        # NOT a silent empty run: a typo that writes nothing and exits 0 reads
+        # exactly like a fence firing, and the two must never look alike.
+        raise SystemExit(
+            "unknown cover name: %s\n  this tool writes: %s"
+            % (", ".join(unknown), ", ".join(sorted(known))))
+    return [known[n] for n in want]
+
+
 def main():
     if "--verify" in sys.argv:
         sys.exit(verify())
+    rows = selected(sys.argv)
+    # THE FENCE, before a single pixel is rendered and before --dry-run prints.
+    cover_fences.guard("make_house_covers.py", [r[2] for r in rows])
     dry = "--dry-run" in sys.argv
-    for lines, strap, rel in COVERS:
+    for lines, strap, rel in rows:
         out = os.path.join(REPO, *rel.split("/"))
         if dry:
             print("would write %s  (%s)" % (out, " / ".join(lines)))
@@ -219,4 +294,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    cover_fences.run_main(main)

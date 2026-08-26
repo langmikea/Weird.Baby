@@ -135,11 +135,43 @@ Everything else on this row is a fix, not a decision.
 
 - **rename the album** from *About the Artist*
 - **add an Influences track**
-- **regenerate the cover** from `tools/make_house_covers.py`
+- **regenerate `public/images/wb/about-cover.png`** — and **only** that file:
+
+```
+npm run covers:house -- --only about-cover.png
+```
 
 **MIKE HAS RULED THE COVER IN AS SOON AS FEASIBLE.** The generator exists and is
 the same one the four wing covers came off; the 2026-08-10 ruling that retired it
 for those four paths does not reach a new cover it is asked to make.
+
+> **[2026-08-26] THIS BULLET USED TO READ "regenerate the cover from
+> `tools/make_house_covers.py`", AND IT AIMED AT A LOOP THAT WRITES SIX FILES.**
+> One of the six is `public/images/wb/vol1-cover.png`, which has held **Mike's
+> own vinyl master** since 2026-08-12 — so a round that did exactly what this
+> row said, with his own *as soon as feasible* on it, would have destroyed his
+> art while reporting six successful writes. **The row now names its target and
+> carries the command that hits only that target.**
+>
+> **`--only` did not exist when this bullet was written, which is half of why
+> the bullet was shaped that way** — there was no way to regenerate one cover.
+> It exists now. A bare `npm run covers:house` **refuses and writes nothing**
+> (`tools/cover_fences.py`), so the failure mode this row had is closed from
+> both ends: the row names the file, and the tool would not have obeyed the old
+> row anyway.
+>
+> **The rename is the harder half and it is not the cover.** The album's name
+> lives in `src/data/artists/weird-baby.js`; the cover only carries whatever
+> that name becomes, so the render is the LAST step of this item, not the
+> first. And its strapline is `WEIRD.BABY MUSIC` — **a string that exists
+> nowhere else in the museum**, authored only inside a picture — so a
+> regeneration is also the moment that string could quietly take or refuse the
+> backslash. **Mike ruled that string PROVISIONALLY on 2026-08-26: it stays as
+> it is** — *"For now at least. I will not know until I start looking at the
+> entire site."* The register row is [A-c](OPEN_ACTIONS.md#a-c), and it is open.
+> A round that regenerates this cover before he has walked the site must carry
+> `WEIRD.BABY MUSIC` unchanged and must not read his provisional word as a
+> settled one.
 
 **Pairs with item 15** — his own concert photographs are what the Influences
 track is for.
@@ -276,8 +308,8 @@ For the Influences track. **His images; not supplied yet.** Pairs with item 2.
 
 ## WHAT THIS PAGE IS NOT
 
-**It is not the register.** `OPEN_ACTIONS.md` carries **140 rows**, of which
-**135 are OPEN and 114 are owned by Mike** — most of them one-word rulings,
+**It is not the register.** `OPEN_ACTIONS.md` carries **144 rows**, of which
+**139 are OPEN and 117 are owned by Mike** — most of them one-word rulings,
 records and notes rather than work with a date. **This page ranks the WORK.** A
 row that is not named here has not been closed, dropped or demoted; it is
 waiting in the register, where it has always been.

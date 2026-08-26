@@ -150,7 +150,15 @@ R("route.wb", "Weird.Baby Music — the house's own record.",
   "surface", "/wb", "LIVE", "linked from the directory", "REVEALED",
   { assets: ["/images/wb/vol1-cover.png"] });   /* [A3 2026-08-06] the sleeve was
      rebuilt on the robots template and the old file is deleted; the ledger meets
-     the asset table at `assets: [uid]`, so a repointed FILE is a repointed row. */
+     the asset table at `assets: [uid]`, so a repointed FILE is a repointed row.
+     [2026-08-26] AND IT WAS REPOINTED AGAIN SIX DAYS LATER, WHICH THIS COMMENT
+     DID NOT SAY. On 2026-08-12 `e998d03` replaced this path with MIKE'S OWN
+     VINYL MASTER — 1.37 MB, resampled from 4506×4506, red lettering, no house
+     mark — so the file this row publishes has not been "the robots template"
+     since. The row and its id are untouched; only the description of what is
+     at the end of it was stale. It is named here because this array IS a
+     publish list: `reveal:day` moves whatever it points at, and a comment
+     describing the wrong picture is how the wrong picture gets moved. */
 R("route.hr", "The Hunter Root reference wing — 8 albums, 93 tracks, the deepest thing in the museum about any artist.",
   "surface", "/hr", "PARTIAL", null, "HELD",
   { note: "HELD PERMANENTLY BY RULING (ASSET_REVEAL_CHECKLIST §E). [H1 2026-08-06] THE REACH IS NULL NOW AND IT WAS STALE FOR A ROUND: it read 'by URL only — deliberately unlisted', which was true until the previous round put the wing behind a password on /admin and made /hr render the Lobby. A visitor cannot get here. The reachability check is what noticed. PARTIAL because the deck's journal tab is dead machinery (M17) and the page is one exhibit plus an unlinked discography." });

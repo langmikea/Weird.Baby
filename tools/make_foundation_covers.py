@@ -31,10 +31,25 @@ inset, the same Georgia setting at the same size and tracking, the same rule at
 the same drop, the same Courier strapline in the same dim ink. One theme is a
 claim about geometry.
 
-    python tools/make_foundation_covers.py
+[2026-08-26] SUPERSEDED IN PROSE SINCE 2026-08-06; SUPERSEDED IN FACT NOW.
+`make_house_covers.py`'s header already says this tool *"is superseded by this
+one"*, on Mike's A3 ruling that the robots grey album art is the standard and
+every equivalent is replaced. **A tool that is superseded in a docstring and
+live in `package.json` is superseded in a docstring only** — `covers:foundation`
+would overwrite two of the shipped house sleeves with the MARKLESS typographic
+covers the ruling reversed, which is the fade at the carousel's edges that the
+ruling was about. The departure this file defends at length was ruled the other
+way; the argument is kept, the authority is not.
+
+**AND ITS THIRD OUTPUT WOULD MANUFACTURE AN ORPHAN.** `faq-cover.png` was
+culled on 2026-08-09 with its stale `role: shipped` row; `src/` references it
+nowhere. Writing it would put the file back with nothing reading it.
+
+    python tools/make_foundation_covers.py  <- refuses; see tools/cover_fences.py
 """
 import os
 
+import cover_fences
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -109,9 +124,13 @@ def build(word, out_name):
 
 
 def main():
+    # THE FENCE, before a single pixel is rendered. Every row this tool owns
+    # was taken by make_house_covers.py, so this raises on every run.
+    cover_fences.guard("make_foundation_covers.py", [o for _, o in ALBUMS])
+
     for word, out_name in ALBUMS:
         build(word, out_name)
 
 
 if __name__ == "__main__":
-    main()
+    cover_fences.run_main(main)

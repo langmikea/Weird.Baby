@@ -107,16 +107,28 @@ ART = os.path.join(REPO, "public", "robots", "art")
 # make_robots_cover.py's output. It is fenced here anyway because the ruling
 # names four covers, and a fence that only lists what a tool happens to write
 # today stops being a fence the first time somebody adds a row to UNITS.
-HAND_AUTHORED = frozenset({
-    "portal-cover.png",
-    "mgk-viiip-cover.png",
-    "mgk-niac-cover.png",
-    "wbr-cover-logo.png",
-})
-
-
-class HandAuthoredCover(RuntimeError):
-    """This tool may not write a cover Mike authored by hand."""
+#
+# ═══ [2026-08-26] THE SET MOVED TO `tools/cover_fences.py`; NOTHING ELSE DID.
+#
+# The paragraph directly above is the argument for the move, read one step
+# further out: a fence that only guards the tool it happens to live in stops
+# being a fence the first time somebody reaches for a DIFFERENT tool — and on
+# 2026-08-26 that was already true of three of them. `make_robots_cover.py`,
+# `make_template_covers.py` and `make_foundation_covers.py` write these exact
+# paths and had no fence at all; `make_house_covers.py` would have destroyed a
+# fifth file, `vol1-cover.png`, that was not hand-authored when this list was
+# written and became so two days later.
+#
+# WHAT THIS FILE REFUSES IS UNCHANGED, AND HOW IT READS IS NOT. The same four
+# names refuse, at the same point in `build()`, with the same ruling in the
+# message, and `vol1-cover.png` joins the set without reaching anything this
+# tool writes. Two things did change and are named rather than absorbed:
+# `run_main()` prints the refusal instead of a nine-line traceback, and the
+# exit code — which was already 1 — is now 1 by construction rather than by
+# an uncaught exception. What is bigger is that the other four tools now
+# refuse these names too, off this same set.
+import cover_fences
+from cover_fences import HAND_AUTHORED, HandAuthoredCover  # noqa: F401
 
 # ---- constants lifted verbatim from make_robots_cover.py --------------------
 S = 1200                      # square master; the deck reads it small
@@ -426,4 +438,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    cover_fences.run_main(main)
