@@ -431,8 +431,146 @@ body.monbase .glassmask{pointer-events:auto;background:#000}
    round them again. */
 body.monbase #maskFront{left:28.9667%;top:43.6250%;width:10.9%;height:6.625%;aspect-ratio:auto;
   clip-path:none}
+/* ═══ [2026-08-27, SAME DAY] REVERTED. MIKE LOOKED AND RULED IT BACK ═══════
+   **"put it back how it was because at least it was readable, and at some
+   point we're going to have to talk about what we can do to make it larger and
+   more readable."**
+
+   SO THE APERTURE IS 10.9% x 6.625% AGAIN, THE VALUES IT HELD BEFORE THIS
+   MORNING. It was enlarged by his own estimate of 20% (measured +19.99%), he
+   looked at the result, and **the enlargement cost readability** — which is the
+   one thing the change was for.
+
+   **WHY IT GOT WORSE WHEN IT GOT BIGGER, AND THIS IS THE THING TO KNOW BEFORE
+   ANYONE TRIES AGAIN.** The glass is a fixed 128x64 canvas scaled into this
+   box. Making the box bigger does not add a single pixel of type — it magnifies
+   the same pixels, so every baked-in scanline gap grows with them and the
+   aliasing the `.glassmask canvas` note below describes gets coarser. **The
+   type did not become larger; it became a larger picture OF small type.**
+
+   THE READABILITY QUESTION IS HIS AND IS FILED RATHER THAN SOLVED — *"at some
+   point we're going to have to talk about"* is not an instruction to go and fix
+   it, and the fix is not a number in this rule: it is a font, a screen height,
+   or a render scale inside the emulator, and all three are changes to what the
+   machine draws. `docs/OPEN_ACTIONS.md` row **MD-a**.
+
+   THE MEASUREMENT THAT ROUND TOOK IS KEPT, because it is the ground the next
+   conversation starts from: scanning the family shot for the glass's own
+   luminance plateau on 15 rows and 15 columns through the centroid, the
+   photographed top window is **~304 x 108 image px** and this aperture is
+   **327 x 159** — already wider and half again as tall as the glass it sits on.
+   Enlarging it further was always going to spend legibility on nothing.
+
+   ═══ WHAT THE ENLARGEMENT WAS, so the revert is legible in a diff ══════════
+     width   10.9%   -> 13.08% and back;   of 3000 = 327 -> 392.4 -> 327 px
+     height   6.625% -> 7.95%  and back;   of 2400 = 159 -> 190.8 -> 159 px
+
+   **THE CENTRE DOES NOT MOVE, AND THAT IS THE ONE RULE THIS EDIT MAY NOT
+   BREAK.** `.glassmask` carries `transform:translate(-50%,-50%)`, so `left`
+   and `top` are the aperture's CENTRE — the measured marker centroid
+   (2118, 764) — not its corner. Scaling `width` and `height` about a centre
+   leaves the centroid where it is; every previous aperture bug in this file
+   came from something moving off its centroid. `left` and `top` are untouched.
+
+   ═══ I LOOKED, AS HE ASKED, AND THE MEASUREMENT DISAGREES WITH THE NUMBER.
+       IT IS APPLIED ANYWAY AND REPORTED, WHICH IS THE ORDER THAT IS HIS ══════
+   Measured on the family shot itself (`MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png`,
+   3000x2400) by scanning for the glass's own luminance plateau against the
+   housing, on 15 rows and 15 columns through the centroid:
+
+     the photographed top glass   x 1962..2265, y 715..822   ~304 x 108 px
+     the aperture BEFORE this cut                             327 x 159 px
+
+   So the aperture was **already 7.6% wider and 47% taller than the glass in the
+   photograph**, and at +20% it is 29% wider and 77% taller. What is drawn
+   spills onto the housing above and below the window rather than filling a
+   window that was short of it.
+
+   **THE MEASUREMENT IS REPORTED AND HIS NUMBER IS BUILT, RATHER THAN OPS
+   PICKING ONE.** Three things make that the right order here. He said *"Go
+   look, but I est 20%"* — an estimate offered WITH an instruction to measure is
+   an invitation to come back with a number, not a licence to substitute one.
+   The aperture's height was never fitted to the glass in the first place: the
+   OLED is 128x64 and the aperture is 2.06:1, while the photographed window is
+   2.8:1, so a 47% overshoot was the state he has been looking at for a month
+   and is not a regression this round introduced. And the plateau scan finds the
+   glass's LIT/reflective area, which is not necessarily the whole window — a
+   top-facing glass reads 36 against the front's 11 because it catches the
+   ceiling, and the bezel around it may well read as housing.
+   **He is the eye. The numbers are in this round's report so the next word can
+   be a number.** If it should shrink instead, that is one line and this comment
+   is where the next reader finds the measurement. */
 body.monbase #maskTop  {left:70.6000%;top:31.8333%;width:10.9%;height:6.625%;aspect-ratio:auto;
   clip-path:none;border-radius:0}
+
+/* ═══ [2026-08-27] CH4 — MIKE'S SECOND PLATE, AND HIS SECOND MARKER SET ═════
+   MIKE: **"I created the artwork for CH3 and CH4, and also handed you the
+   marker for where the screen is to land. I created CH3 so I could see the
+   entire front and top, and I created CH4 such that they were zoomed in
+   versions of the same."**
+
+   **AND HE NAMED THE THREE MARKS HIMSELF:** *"Top left: FRONT SCREEN ZOOMED /
+   Top right: TOP SCREEN ZOOMED / Dot: Lens that flashes when click is issued."*
+   Three elements, the same three channel 3 has, at different places on a
+   different plate — *"All of this is EXACTLY as on Channel 3, except for the
+   different background and locations. You should be able to toggle back and
+   forth between 3/4 and have a seamless experience."*
+
+   **EVERY NUMBER BELOW IS READ FROM HIS MARKER FILE. NONE IS OPS' EYE.**
+   `MGK-TWIN_MONITOR_CLOSE_UP_MARKERS.png`, 3000 x 2400, three solid red marks,
+   resolved by connected-component scan at fill ratios of 0.995-0.996:
+
+     front screen   centroid (863.4,  692.6)   1071 x 522   (his top-left)
+     top screen     centroid (2139.5, 693.6)   1071 x 522   (his top-right)
+     the lens dot   centroid (861.2, 1935.5)   141 x 143    (his dot)
+
+   The dot's fill ratio is **0.786 against pi/4 = 0.7854**, which is the
+   arithmetic saying it is a circle rather than a square - so the flash keeps
+   its round shape and only its place and size change.
+
+   ═══ WHERE THE ARTEFACT LIVES, AND IT IS OUTSIDE GIT ═══════════════════════
+   **MIKE'S ORIGINAL IS `MGK-TWIN MONITOR Close up RED MARKERS.png`** - with
+   SPACES - in `OneDrive\Desktop - Laptop\ADD TO REPOS\TEMP - Use it or lose
+   it!\Weird.Baby Files\EDITED IMAGES - VIIIp`, beside the plate itself. Same
+   class as `C:\AI\START_HERE.md`: his, outside both repositories, outside git,
+   and nothing in the tree points at it.
+   **THE REPO COPY IS BYTE-IDENTICAL AND THAT WAS PROVED RATHER THAN ASSUMED** -
+   sha256 `d9e04fc1394515f6cb9e003b17a04a5d...`, 556,169 bytes, matching on both
+   the marker file and the plate. It was renamed on the way in (spaces to
+   underscores, case normalised), which is the only difference and is exactly
+   the shape that makes a filename search miss it.
+
+   converted against the 3000 x 2400 canvas, and nothing rounded by hand:
+     863.4/3000 = 28.7800%    692.6/2400 = 28.8583%
+     2139.5/3000 = 71.3167%   693.6/2400 = 28.9000%
+     1071/3000 = 35.7%        522/2400 = 21.75%
+
+   **THIS IS THE SAME METHOD CH3's NUMBERS CAME FROM, AND THAT WAS VERIFIED
+   RATHER THAN ASSUMED.** `monitor_base_markers.png` carries the same three
+   marks for the wide plate — front (869.2, 1047.1), top (2118.2, 764.0), both
+   327 x 159, dot (868.5, 1427.1) — and the rules above read 28.9667% /
+   43.6250%, 70.6000% / 31.8333%, 10.9% x 6.625%, and 59.4583% for the flash.
+   **Every one of them matches his marker to a tenth of a pixel.** CH3 was
+   never eyeballed either.
+
+   **AND THE TWO PLATES ARE NOT ONE PICTURE.** In CH3 the screens sit 283px
+   apart vertically; in CH4 they sit one pixel apart. Two shots, two poses. The
+   `closeup` class swaps the plate AND its geometry together, because they are
+   the same fact.
+
+   THE GLASS IS 3.27x LARGER HERE — 35.7% of the frame against 10.9% — which is
+   what *"zoomed in versions of the same"* means and is the whole point of the
+   channel. It is the same 128 x 64 canvas drawn bigger, so it is a closer look
+   rather than more resolution; that distinction is `MD-a`'s, not this rule's. */
+body.monbase.closeup #maskFront{left:28.7800%;top:28.8583%;
+  width:35.7%;height:21.75%;aspect-ratio:auto;clip-path:none;border-radius:0}
+body.monbase.closeup #maskTop  {left:71.3167%;top:28.9000%;
+  width:35.7%;height:21.75%;aspect-ratio:auto;clip-path:none;border-radius:0}
+/* the shutter flash rides the lens dot on THIS plate, not the wide one's */
+body.monbase.closeup #unitfront.clickflash::before{left:28.7067%;top:80.6458%;
+  width:4.7%;margin:-2.35% 0 0 -2.35%}
+body.monbase.closeup #unitfront.clickflash::after{left:28.7067%;top:80.6458%;
+  width:23.5%;margin:-11.75% 0 0 -11.75%}
 /* the live canvases fill their measured aperture exactly */
 body.monbase .glassmask canvas{width:100%!important;height:100%!important;
   object-fit:fill;position:static!important;clip-path:none!important;
@@ -474,6 +612,48 @@ body.monbase .glassmask canvas{
   mask-image:linear-gradient(to bottom,transparent 0,#000 4%,#000 96%,transparent 100%),
              linear-gradient(to right,transparent 0,#000 1.2%,#000 98.8%,transparent 100%);
   mask-composite:intersect}
+/* [2026-08-27] LESS ON THE FRONT — MIKE'S RULING, AND ONLY THE FRONT.
+   **"Less vignetting on ch3 front VIIIp screen."**
+
+   WHAT HE IS LOOKING AT IS THE RULE ABOVE, AND THAT WAS ESTABLISHED BY
+   ELIMINATION RATHER THAN ASSUMED. On the served page, `elementsFromPoint` at
+   the centre of `#maskFront` returns `canvas#cvFront` -> `#maskFront` ->
+   `.monimg` -> `#feedlive` -> `#feedgroup` -> `#unitstage` -> `#portalbar` ->
+   `body`, and **the only mask, filter, opacity or blend on any of them is this
+   one**: `#maskFront` has no `::before` (the rolling band is `#maskTop`'s
+   alone), no element over the glass carries a gradient, and both the canvas and
+   the aperture compute `opacity:1` with `filter:none`. The `crtbase` tier's
+   baked-in photographic vignette is a different base and is not mounted here.
+   **So the darkening at the edges of the front glass is S9a's alpha falloff
+   against `.glassmask`'s own `background:#000`, and nothing else is available
+   to be the thing he sees.**
+
+   S9a'S RULING IS NOT REVERSED AND MUST NOT BE. *The apertures are RECTANGLES
+   cut to measured marker centroids and nothing may round them again* — the
+   feather exists because the physical window is round and a straight cut edge
+   reads as a hard seam against the photo's own black. **A feather at zero is
+   the seam back.** So this halves it rather than removing it:
+
+     vertical    4%   -> 2%     of a 50.1px aperture: 2.00px -> 1.00px a side
+     horizontal  1.2% -> 0.6%   of a 103px aperture:  1.24px -> 0.62px a side
+
+   THE HORIZONTAL AXIS IS THE ONE THE RULING PROTECTS — *"a full-width line dims
+   at its very ends rather than losing them"* — and halving it is strictly in
+   that ruling's favour. The vertical carried most of the falloff and gives up
+   most of it.
+
+   **THE TOP GLASS IS DELIBERATELY UNTOUCHED.** He named the front. T also
+   carries the W9 rolling band, which is a band and not a vignette and is
+   standing law; changing T's feather would move two things at once on a glass
+   he did not mention.
+
+   `#maskFront canvas` beats `.glassmask canvas` on the id, so this needs no
+   `!important` and does not disturb the shared rule for T. */
+body.monbase #maskFront canvas{
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 2%,#000 98%,transparent 100%),
+                     linear-gradient(to right,transparent 0,#000 .6%,#000 99.4%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 2%,#000 98%,transparent 100%),
+             linear-gradient(to right,transparent 0,#000 .6%,#000 99.4%,transparent 100%)}
 /* THE FLASH at the measured dot: the aperture lights, the bloom is its spill */
 body.monbase #unitfront.clickflash::before{content:'';position:absolute;
   left:28.95%;top:59.4583%;width:1.4%;aspect-ratio:1/1;margin:-0.7% 0 0 -0.7%;
@@ -712,8 +892,31 @@ body.portal #feedlive.fg-drop{
   filter:brightness(calc(.90 * var(--feed-bright,1))) contrast(calc(1.12 * var(--feed-contrast,1)))}
 body.portal #feedsnow.fg-snow{opacity:calc(var(--feed-floor,0) + .18)}
 /* [B8] THE ROLL - vertical hold slipping. The picture slides and snaps
-   back; the frame never moves, because the frame is the real world. */
+   back; the frame never moves, because the frame is the real world.
+   ═══ [2026-08-27] IT JUMPS NOW, AND IT NO LONGER SLIDES ════════════════════
+   MIKE: **"Vertical jitter looks crummy."** It was: `transition .10s linear`
+   ran on the way IN as well as on the way out, so a 6-15px displacement was
+   TWEENED over a tenth of a second in both directions. **A vertical hold does
+   not ease.** It loses lock, the picture is somewhere else on the next field,
+   and it hunts back in a step or two. So the class is applied only for the
+   RECOVERY, and the displacement itself is instant - `.04s` from the base rule
+   below is one frame and reads as a jump. */
 body.portal #feedgroup.fg-roll{transition:transform .10s linear}
+body.portal #feedgroup.fg-snap{transition:none}
+/* ═══ [2026-08-27] NO BLANKING BAR, AND IT WAS BUILT BEFORE IT WAS DROPPED ══
+   The obvious companion to a roll is the FRAME BLANKING BAR - the black band
+   with a bright leading edge that a rolling set shows at the seam. It was
+   built, served and photographed, and it is **invisible by construction at the
+   size the Portal actually opens at**: the strip a 6-15px roll vacates is
+   inside the plate's own overscan, so the bar landed at museum y 72..87 with
+   the opening starting at 72.6 and the curve taking most of what was left -
+   about three pixels of visible band at the centre and nothing at the edges.
+   **A visual nobody can see is the dead control Doctrine 11's corollary
+   forbids, wearing a different hat**, so it is gone rather than left in at a
+   size that would have made it decoration instead of a seam. What a visible
+   bar needs is the picture WRAPPING - the bottom of the field re-entering at
+   the top - and that is a bigger build than a defect fix. It is a question for
+   Mike, not an Ops guess. */
 /* the machine's own stutter now shakes THE WHOLE FEED - picture, glass and
    controls together - and still never the frame. */
 body.portal #unitstage.gl-jit #feedgroup{transform:translateY(2px);opacity:.93}   /* [B8] no skew */
@@ -1477,9 +1680,9 @@ const player={
   if(file>255)chip("miss","<b>FILE-256 BUG</b> [bug d, M8BALL:132]: requested file "+file+" &gt; 255 &mdash; DFPlayer undefined behavior");
   const over255=file>255?" <b>256+</b>":"";
   if(currentAudio){currentAudio.pause();} /* DFPlayer: new command interrupts current track */
-  const a=new Audio(url);currentAudio=a;
+  const a=new Audio(url);currentAudio=a;a.muted=portalAudioOff;
   a.play().then(()=>chip("ok","&#9834; "+folder+"/"+name)).catch(()=>{
-   const b=new Audio(AUDIO_BASE+String(folder).padStart(2,"0")+"/"+stem+".mp3");currentAudio=b;
+   const b=new Audio(AUDIO_BASE+String(folder).padStart(2,"0")+"/"+stem+".mp3");currentAudio=b;b.muted=portalAudioOff;
    b.play().then(()=>chip("ok","&#9834; "+folder+"/"+stem+".mp3")).catch(()=>chip("miss","&#9834; missing "+folder+"/"+stem+" (.wav/.mp3)"+over255));
   });
  },
@@ -1551,6 +1754,32 @@ const IMU={
    set (guaranteed audible; unlocked on first user gesture). The SD files
    remain the BENCH truth - firmware is untouched; real assets supersede at
    the audio pass. [D4] the modem screech rides the same shim. */
+/* ═══ [2026-08-27] THE UNIT KEEPS RUNNING AND STOPS BEING HEARD ════════════
+   MIKE: **"Sound from VIIIp is heard when on non-VIIIp channels. Fix pls."**
+
+   THE RUNNING IS THE THING HE ASKED FOR AND IS NOT TOUCHED. The frame stopped
+   being unmounted on a channel change so the machine would stop rebooting -
+   *"different camera views of the same live unit"* - and it is now merely
+   COVERED while television or the test card is up. **A covered machine that is
+   still audible is the defect; a covered machine that is still running is the
+   feature.** So this mutes the OUTPUT and touches no clock: `osTick`, the OLED
+   buffers, the emulator state machine and every timer carry straight on.
+
+   THIS FLAG IS READ AT `FX_ctx()`, WHICH IS THE CHOKEPOINT THE SOUND SHIM
+   ALREADY HAS. Every tone and every noise burst in the machine goes through
+   it, and every caller already handles a null return, because a browser that
+   refuses an AudioContext returns exactly that. Muting therefore costs no new
+   branch at 40-odd call sites - which is the same argument `unitPowered` won
+   at that function two months ago.
+
+   THE THREE CONTEXTS AND THE ONE ELEMENT, all of them, because the machine has
+   more than one voice: `FX_AC` (the shim), `radioAC` (the radio band), `sgAC`
+   (Snow Globe's tune) and `currentAudio` (the DFPlayer's own element). The
+   contexts are SUSPENDED - which silences a hum and a looping static that are
+   already sounding, where a flag alone would not - and the element is MUTED
+   rather than paused, so a track that was playing is still playing when the
+   channel comes back. */
+let portalAudioOff=false;
 let FX_AC=null, FX_ON=true;
 /* [BLOCK 1 SOC 2026-07-26 - SOUND AUDIT] one master gain for the whole
    machine. The shim's per-effect gains were authored at 0.03-0.09, which is
@@ -1564,6 +1793,11 @@ function devVolume(){
  PlaySound(Select);
 }
 function FX_ctx(){
+ /* [2026-08-27] muted: no context, so nothing is built and nothing resumes.
+    The null is the shape every caller already handles - see the block at
+    `portalAudioOff`. It comes FIRST, or the resume below would undo the
+    suspend on the very next tone the machine plays to itself. */
+ if(portalAudioOff)return null;
  if(!FX_AC){try{FX_AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}
  if(FX_AC&&FX_AC.state==="suspended")FX_AC.resume().catch(()=>{});
  return FX_AC;
@@ -4277,6 +4511,7 @@ let radioState=0,radioBand=0,radioAC=null,radioNodes=[],radioNumAt=0,radioNumSeq
 function Radio_StopAudio(){for(const n of radioNodes){try{n.stop?n.stop():n.disconnect();}catch(e){}}radioNodes=[];}
 function Radio_Audio(){
  Radio_StopAudio();
+ if(portalAudioOff)return;   /* [2026-08-27] covered: no band comes up */
  try{
   if(!radioAC)radioAC=new (window.AudioContext||window.webkitAudioContext)();
   const kind=RADIO_BANDS[radioBand].kind;
@@ -4365,6 +4600,7 @@ function Radio_Sweep(){
 }
 function Radio_Static(){
  Radio_StopAudio();
+ if(portalAudioOff)return;   /* [2026-08-27] covered: no seek noise */
  try{
   if(!radioAC)radioAC=new (window.AudioContext||window.webkitAudioContext)();
   const g=radioAC.createGain();g.connect(radioAC.destination);radioNodes.push(g);
@@ -4929,6 +5165,7 @@ const SG_TUNE=[ /* [freqHz,beats] — the 1857 chorus, key of C */
  [349.23,1],[349.23,1],[349.23,1.5],[349.23,.5],[349.23,1],[329.63,1],[329.63,1],[329.63,.5],[329.63,.5],
  [329.63,1],[293.66,1],[293.66,1],[329.63,1],[293.66,2],[392.00,2]];
 function SG_music(){
+ if(portalAudioOff)return;   /* [2026-08-27] covered: the tune does not sound */
  if(currentGameID!==GAME_SNOWGLOBE||gameState_FSM!==GAME_RUN){sgIdx=0;return;}
  if(SGx&&millis()<SGx.musicHold)return; /* [B5] the needle settles, a beat, then the drop */
  try{
@@ -9732,7 +9969,11 @@ function Glitch_Tick(){
   }catch(e){}
  } else {try{if(unitPowered){FX_tone(60,0.22,"sawtooth",0.05,0);FX_noise(0.08,0.03,0.02);}}catch(e){}} /* [V4] the "zowt" - a mains-hum transient; chosen over silence as the more period-true tell (FLAGGED) */
  if(unitViewOn&&Math.random()<0.5){const st=document.getElementById("unitstage");
-  if(st){st.classList.add("gl-jit");setTimeout(()=>st.classList.remove("gl-jit"),90);}}
+  if(st){st.classList.add("gl-jit");
+   /* the portal tier moves #feedgroup by 2px; report it so the museum's
+      controls ride it, the same as the transmission's own bumps. */
+   Portal_Jit_Post(0,2);
+   setTimeout(()=>{st.classList.remove("gl-jit");Portal_Jit_Post(0,0);},90);}}
 }
 /* ---- [TWIN-AS-ARTIFACT] unit-chrome composite ---- */
 let unitPhotosOK=true, unitViewOn=false;
@@ -9786,6 +10027,9 @@ function Unit_LoadPhotos(){
   const probe=new Image();
   probe.onload=()=>{
    document.body.classList.add("monbase");
+   /* [2026-08-27] the close-up is its own plate with its own marker set; the
+      class is what swaps the aperture rectangles to it. */
+   if(Portal_View()==="closeup")document.body.classList.add("closeup");
    const st=document.getElementById("unitstage");
    let im=st.querySelector(".monimg");
    if(!im){im=document.createElement("img");im.className="monimg";
@@ -9822,7 +10066,12 @@ function Unit_LoadPhotos(){
      probing a file it then threw away. It now probes the family shot: the image
      the portal actually draws, which is the only honest thing for a liveness
      probe to ask for. A deleted photograph cannot gate a live surface again. */
-  probe.src=base+"MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png";
+  /* [2026-08-27] and it asks for THIS view's plate, so a missing close-up
+     fails the probe honestly instead of passing on the family shot's presence
+     and then drawing a 404. */
+  probe.src=base+(Portal_View()==="closeup"
+    ? "MGK-TWIN_MONITOR_CLOSE_UP.png"
+    : "MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png");
  }
  function tryCrtBase(){
   if(ci>=CAND.length){ci=0;tryNewBase();return;}
@@ -10049,6 +10298,32 @@ function Mon_Controls_In(){
 function Framed(){
  try{return !!(window.parent&&window.parent!==window);}catch(e){return false;}
 }
+/* ═══ [2026-08-27] `?view=` - WHICH OF MIKE'S TWO PLATES THIS IS ═══════════
+   MIKE: **"I created the artwork for CH3 and CH4, and also handed you the
+   marker for where the screen is to land. I created CH3 so I could see the
+   entire front and top, and I created CH4 such that they were zoomed in
+   versions of the same."**
+
+   **CH4 IS NOT A CROP OF CH3 AND THE MARKER FILES PROVE IT.** Both are 3000 x
+   2400 and both carry three red marks, and the two units are POSED
+   DIFFERENTLY in them:
+
+     monitor_base_markers.png (CH3)   front (869.2, 1047.1)  top (2118.2, 764.0)
+     ..._CLOSE_UP_MARKERS.png (CH4)   front (863.4,  692.6)  top (2139.5, 693.6)
+
+   In CH3 the two screens sit 283px apart vertically; in CH4 they sit at the
+   SAME height, one pixel apart. **No crop, scale or pan of one photograph can
+   produce the other** - they are two separate shots of the same machine, which
+   is exactly what he said they were. Ops read *"two zooms"* as one image at two
+   magnifications and was wrong twice about it.
+
+   SO A VIEW IS A PLATE PLUS ITS OWN MARKER GEOMETRY, and `?view=closeup`
+   selects both together. The default is unchanged in every way, so a twin
+   opened standalone or without the parameter is the machine it has always
+   been. */
+function Portal_View(){
+ try{return new URLSearchParams(location.search).get("view")||"";}catch(e){return "";}
+}
 /* [2026-08-21] FRAMED, THE STAGE FILLS THE FRAME - AND THIS IS THE HALF THAT
    ONLY A SCREENSHOT COULD HAVE FOUND. `#unitstage` is capped at
    `min(96vw,880px)` and centred with a margin, which is right for a page
@@ -10072,12 +10347,76 @@ function Framed_Fit(){
       the visitor can resize underneath a frame that cannot resize with it
       would never register. The dial is untouched STANDALONE, which is the
       only place it was ever for. */
+   /* ═══ [2026-08-27] AND THE BOX IS PINNED, NOT ONLY UNCAPPED ═════════════
+      MIKE: **"Ch3 resizes visibly at startup. It should not."**
+
+      THE 08-26 ROUND FIXED ONE OF THREE STATES AND MEASURED ONLY THAT ONE. It
+      moved `Framed_Fit()` off `probe.onload` into `setup()`, which was correct
+      and is kept — but it checked its work by removing the injected rule from
+      an already-settled twin, which can only ever see the difference this rule
+      makes. **It could not see the states that arrive AFTER it.**
+
+      MEASURED THIS ROUND, sampling `#unitstage` every 40ms from the press,
+      inside a museum overlay whose iframe is a constant 960 x 720 throughout:
+
+        t=67ms   body `usermode framed unitview`          679.8 x 332.9 at x 16.8
+        t=82ms   `+ monbase`                              546.1 x 436.9 at x 16.8
+        t=120ms  `+ portal`                               944.8 x 755.8 at x 0
+
+      **Two visible jumps and a 16.8px shift, ending 1.73x the size of the
+      second state.** The last one is the worst and is the same class of defect
+      the 08-26 round named: `body.portal` is added by `Portal_In()` from inside
+      `probe.onload`, so **the final size of the picture was scheduled by a
+      network fetch.**
+
+      UNCAPPING IS NOT ENOUGH BECAUSE THE BOX'S SHAPE ALSO CHANGES. Each tier
+      declares its own `display` and its own `aspect-ratio`: the pre-monbase
+      bench is a `flex` row sized by its contents, `monbase` is a `block` at
+      3000/2400, and `portal` re-caps the width against `--portal-h`. Removing
+      one cap leaves the other two transitions.
+
+      SO THE FRAMED STAGE IS DECLARED WHOLE HERE, AT ITS FINAL VALUES, AND
+      EVERY TIER IS OVERRIDDEN INTO IT. All of them are knowable before the
+      first paint — a framed portal is always the family shot on the bezel's own
+      3000 x 2400 canvas — so nothing here is waiting on anything.
+      `overflow:hidden` is what makes the pre-monbase content harmless: the
+      bench row is clipped inside the final box for the ~50ms it exists,
+      **instead of the box growing to fit it and then shrinking.**
+
+      **THIS IS NOT THE "COVER" HE ASKED FOR ON 08-26 AND DOES NOT NEED TO BE.**
+      A cover hides a resize; there is no resize left to hide. What remains is
+      a load, which is what every channel does. */
    "body.framed #unitstage{max-width:none!important;width:100%!important;"+
-     "margin:0!important;padding:0!important}"+
+     "margin:0!important;padding:0!important;display:block!important;"+
+     "aspect-ratio:3000/2400!important;overflow:hidden!important;"+
+     "background:#000!important;container-type:inline-size!important}"+
    "body.framed #portalbar{margin:0!important;width:100%!important;"+
      "max-width:none!important}"+
    /* the page's other furniture is not the Portal's picture. Public entry
       already hides most of it; this is the belt for a framed view. */
+   /* ═══ [2026-08-27] AND THE CORNER GRIP GOES WITH THEM, FRAMED ═══════════
+      MIKE: **"I seem to have lost the ability to drag size the monitor
+      itself."** He had not lost it — **he was pulling on a control that had
+      been inert since `efc379f` on 2026-08-22** and nothing said so. Measured
+      in a framed twin before this line was written: the grip is in the DOM at
+      `opacity:.34`, `Portal_Size_Set` runs when it is dragged, and the stage
+      reads **1185 x 948 before, after 140vh and after 50vh** — it moves
+      nothing, because the rule directly above nails the stage with
+      `!important` and says why.
+
+      **THE RULE ABOVE IS RIGHT AND IS NOT REVERSED.** A picture that resizes
+      under a frame that cannot resize with it would never register. What was
+      wrong was leaving the HANDLE for it drawn: a control that is visible and
+      does nothing is the dead control Doctrine 11's corollary forbids, and it
+      is worse than an absent one because it looks like a feature.
+
+      **THE GESTURE IS RESTORED ONE LAYER OUT**, on the museum's own screen,
+      where the bezel and the picture move together — `.ps-grip` in
+      `PortalScreen`. **STANDALONE THIS CHANGES NOTHING**: `body.framed` only
+      exists inside a frame, so the grip, the dial and `Portal_Grip_In` are all
+      exactly as they were on a twin somebody opened directly, which is the
+      only place they were ever for. */
+   "body.framed #portalgrip{display:none}"+
    "body.framed>header,body.framed>footer,body.framed .workshop{display:none}";
   document.head.appendChild(st);
  }catch(e){}
@@ -10127,11 +10466,102 @@ const PORTAL_CONTROL={
 window.addEventListener("message",function(e){
  try{
   const d=e&&e.data;
-  if(!d||d.wb!=="portal-control")return;
+  if(!d)return;
+  /* ═══ [2026-08-27] THE CAMERA MOVES; THE MACHINE DOES NOT RESTART ════════
+     MIKE: **"Changing channels should not cause a VIIIp reboot. These are to
+     be different camera views of the same live unit."** And, on whether that
+     reaches the television channels too: **"running regardless of how you
+     spent your time."**
+
+     `?view=` STILL SETS THE OPENING VIEW and is untouched - a twin opened
+     directly is exactly what it was. What this adds is the ability to change it
+     WITHOUT A LOAD, which is the whole of the fix: the museum used to put the
+     view in the src, so switching to channel 4 changed the address and the
+     document reloaded. Measured before the change: a new `performance.timeOrigin`
+     and an uptime of ~3.6s on every channel change.
+
+     **IT TOUCHES TWO THINGS AND NEITHER IS THE EMULATOR.** One `img.src` and
+     one class - the plate the camera is pointed at, and which marker set the
+     apertures use. `osTick`, the OLED buffers, the boot state, the power state
+     and every timer carry straight on. That is what makes it a camera move
+     rather than a restart. */
+  if(d.wb==="portal-view"){
+   const want=(d.view==="closeup")?"closeup":"";
+   const had=document.body.classList.contains("closeup")?"closeup":"";
+   if(want===had)return;                       /* already there; do nothing */
+   document.body.classList.toggle("closeup",want==="closeup");
+   const im=document.querySelector("#feedlive .monimg")||document.querySelector(".monimg");
+   if(im&&Portal_Art_Base()){
+    im.src=Portal_Art_Base()+(want==="closeup"
+     ? "MGK-TWIN_MONITOR_CLOSE_UP.png"
+     : "MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png");
+   }
+   return;
+  }
+  /* ═══ [2026-08-27] THE SET IS ON ANOTHER CHANNEL; THE MACHINE IS NOT OFF ══
+     MIKE: **"Sound from VIIIp is heard when on non-VIIIp channels."** The
+     museum sends `on:false` when the machine stops being the picture and
+     `on:true` when it comes back. **This is not POWER and must never become
+     it**: `unitPowered` is machine state a visitor sets with a control, and a
+     channel change is not the visitor reaching for it. The reasoning and the
+     four voices are at the `portalAudioOff` block. */
+  if(d.wb==="portal-audio"){ Portal_Audio_Set(d.on!==false); return; }
+  if(d.wb!=="portal-control")return;
   const fn=PORTAL_CONTROL[d.id];
   if(typeof fn==="function")fn();
  }catch(err){}
 });
+/* the folder the plates were found in, remembered when the portal was built so
+   a view change does not have to walk the candidate ladder again. */
+let portalArtBase=null;
+function Portal_Art_Base(){return portalArtBase;}
+
+/* THE MUTE ITSELF. Suspending is what silences a hum and a looping static that
+   are ALREADY sounding - a flag alone stops the next voice and leaves the ones
+   in flight - and resuming brings them back where they were. Every accessor is
+   wrapped: a context in a closing state throws on `suspend`, and this must
+   never be the thing that takes the machine down. */
+function Portal_Audio_Set(on){
+ const off=!on;
+ if(off===portalAudioOff)return;
+ portalAudioOff=off;
+ let ctxs=[];
+ try{ ctxs=[FX_AC,radioAC,sgAC]; }catch(e){ ctxs=[]; }
+ for(const c of ctxs){
+  if(!c)continue;
+  try{ if(off)c.suspend(); else c.resume(); }catch(e){}
+ }
+ try{ if(currentAudio)currentAudio.muted=off; }catch(e){}
+}
+
+/* ═══ [2026-08-27] THE FEED'S OWN DISPLACEMENT, REPORTED OUTWARD ═══════════
+   MIKE, T7 2026-07-29: **"the stutter glitch moves everything EXCEPT the
+   control panel - the control panel must move WITH the glitch (the controls
+   are part of the feed; only the bezel is the real world)."** Raised again
+   2026-08-27, because the chyron LEFT this document on 2026-08-26 and became a
+   sibling of `#feedgroup` again - one layer further out than where T7 fixed it.
+
+   T7's FIX WAS STRUCTURAL AND STILL IS: everything down the wire is in
+   `#feedgroup` and one transform moves it. This does not add a second
+   transform; it REPORTS the one that already exists, so the controls the museum
+   now draws can ride the same number. **The bezel is still told nothing**,
+   which is the half of T7 that must never change.
+
+   POSTED ONLY ON A CHANGE, like `Portal_Power_Post` beside it, and always
+   returning to `0,0` when the group settles - a glitch that ended must not
+   leave the controls parked off-centre. Standalone this posts into no parent
+   and costs a try/catch. */
+let portalJitPosted="";
+function Portal_Jit_Post(dx,dy){
+ try{
+  const key=dx+","+dy;
+  if(key===portalJitPosted)return;
+  portalJitPosted=key;
+  if(window.parent&&window.parent!==window){
+   window.parent.postMessage({wb:"portal-jit",dx:dx,dy:dy},"*");
+  }
+ }catch(e){}
+}
 /* THE POWER LAMP TRAVELS, AND IT LEAVES FROM THE CHOKEPOINT RATHER THAN FROM
    THE SIX WRITERS. `unitPowered` is written from at least six places and
    `Mon_Power_Sync` already exists for exactly that reason - it rides
@@ -10508,13 +10938,13 @@ function Feed_Glitch_Tick(){
   const dx=(Math.random()<0.5?-1:1)*(1+Math.trunc(Math.random()*3));
   const dy=(Math.random()<0.5?-1:1)*(Math.trunc(Math.random()*2));
   grp.style.transform="translate("+dx+"px,"+dy+"px)";
-  setTimeout(function(){grp.style.transform="";},70+Math.trunc(Math.random()*60));
+  Portal_Jit_Post(dx,dy);
+  setTimeout(function(){grp.style.transform="";Portal_Jit_Post(0,0);},70+Math.trunc(Math.random()*60));
  } else if(kind===1){                            /* the vertical hold slips */
-  const h=(Math.random()<0.5?-1:1)*(6+Math.trunc(Math.random()*10));
-  grp.classList.add("fg-roll");
-  grp.style.transform="translateY("+h+"px)";
-  setTimeout(function(){grp.style.transform="";},90+Math.trunc(Math.random()*70));
-  setTimeout(function(){grp.classList.remove("fg-roll");},260);
+  /* 0.75%-1.85% of the stage: the same 6-15px it always drew at the default
+     size, and the same slip rather than a bigger one when the monitor is
+     dragged small. See `Feed_Roll`. */
+  Feed_Roll(0.75+Math.random()*1.10,Math.random()<0.5?-1:1);
  } else if(kind===2){                            /* a level dropout */
   live.classList.add("fg-drop");
   setTimeout(function(){live.classList.remove("fg-drop");},110+Math.trunc(Math.random()*90));
@@ -10524,6 +10954,64 @@ function Feed_Glitch_Tick(){
   sn.classList.add("fg-snow");
   setTimeout(function(){sn.classList.remove("fg-snow");},70+Math.trunc(Math.random()*60));
  }
+}
+/* ═══ [2026-08-27] THE ROLL, REBUILT - MIKE: "vertical jitter looks crummy" ══
+   TWO THINGS WERE WRONG WITH IT AND NEITHER WAS THE AMPLITUDE.
+
+   1. **IT EASED IN.** `fg-roll` put a 100ms linear transition on the group and
+      THEN set the transform, so a 6-15px displacement was TWEENED over a tenth
+      of a second in BOTH directions. **A vertical hold does not ease** - it
+      loses lock between one field and the next, and what he was watching was a
+      photograph sliding. The displacement is a JUMP now (`fg-snap`, transition
+      none); the transition is put on for the recovery only.
+   2. **IT WENT STRAIGHT BACK TO ZERO.** A set that has lost vertical lock
+      HUNTS: it catches about half of what it lost and then settles. Two steps,
+      because one is what it was already doing and three is a wobble.
+
+   THE MAGNITUDE IS A SHARE OF THE PICTURE NOW, and that is the same correction
+   the tear was given the same day, for the same reason. It was 6-15 PX against
+   a stage the visitor can now DRAG to 0.35 of the fit, so the slip got
+   proportionally three times bigger as the monitor got smaller - and at that
+   size it exceeds the plate's own bleed and pulls his cut edge into the
+   opening. **At the default size nothing moves**: 0.75%-1.85% of an 842px
+   stage is the same 6-15px it has always drawn.
+
+   THE REPORTED DISPLACEMENT FOLLOWS EVERY STEP, so the museum's controls ride
+   the hunt rather than the first jump alone - T7, and it is why
+   `Portal_Jit_Post` is called at each stage rather than once at each end.
+
+   WHAT IS NOT HERE IS THE BLANKING BAR - see the note in the stylesheet where
+   its rules were. It was built and measured invisible at the size the Portal
+   opens at, and the version that would be visible needs the picture to WRAP,
+   which is a build rather than a fix and is Mike's call. */
+function Feed_Roll(pct,dir){
+ const grp=document.getElementById("feedgroup");if(!grp)return;
+ const st=document.getElementById("unitstage");
+ const H=(st&&st.clientHeight)||842;
+ /* at least 1px, or a rounded-down slip on a small monitor is no slip at all */
+ const h=dir*Math.max(1,Math.round((pct/100)*H));
+ const step=function(px,snap){
+  grp.classList.toggle("fg-snap",!!snap);
+  grp.classList.toggle("fg-roll",!snap);
+  grp.style.transform=px?("translateY("+px+"px)"):"";
+  Portal_Jit_Post(0,px);
+ };
+ const t1=80+Math.trunc(Math.random()*50);
+ const t2=t1+110+Math.trunc(Math.random()*60);
+ step(h,true);                                     /* lock lost: it jumps */
+ /* the hunt DECAYS TOWARD ZERO rather than crossing it. A step to the other
+    side of zero would be a second roll, which is two events where the dice
+    threw one. */
+ setTimeout(function(){ step(Math.trunc(h/2),false); },t1);
+ setTimeout(function(){ step(0,false); },t2);      /* and it settles */
+ /* the classes come off AFTER the settle has had its transition, not with it:
+    removing `fg-roll` in the same call would hand the last step the base
+    rule's .04s and there would be nothing to settle. */
+ setTimeout(function(){ grp.classList.remove("fg-roll","fg-snap"); },t2+140);
+}
+function devFeedRoll(){   /* dev handle: one roll, on demand */
+ Feed_Roll(0.75+Math.random()*1.10,Math.random()<0.5?-1:1);
+ chip("ok","[DEV] vertical hold slipped");
 }
 function devFeedGlitch(){   /* dev handle: force one, whatever the dice say */
  const live=document.getElementById("feedlive");
@@ -10653,8 +11141,12 @@ function Portal_In(base){
  try{
   const st=document.getElementById("unitstage");if(!st)return;
   if(document.getElementById("feedgroup"))return;      /* already built */
+  portalArtBase=base;          /* [2026-08-27] for `portal-view`, below */
   const bezSrc=base+"MGK-TWIN_MONITOR_SCREEN_BEZEL.png";
-  const artSrc=base+"MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png";
+  /* [2026-08-27] TWO PLATES, TWO MARKER SETS, ONE MACHINE - see Portal_View. */
+  const artSrc=base+(Portal_View()==="closeup"
+    ? "MGK-TWIN_MONITOR_CLOSE_UP.png"
+    : "MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png");
   /* ═══ [2026-08-20] THE FRAME IS OPTIONAL; THE PICTURE IS NOT ══════════════
      BOTH LAYERS USED TO BE REQUIRED, and the refusal message named a fallback
      that no longer exists ("staying on the baked monitor_base.png"). One

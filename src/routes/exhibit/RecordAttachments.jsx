@@ -126,7 +126,28 @@ export default function RecordAttachments({ entry, openLink }) {
               </span>
             )}
             <div className="vp-rec-att-body">
-              <span className="vp-rec-att-name">{a.name}</span>
+              {/* ═══ [2026-08-26] A DOOR ROW RUNS; EVERY OTHER ROW READS ════
+                  MIKE, on how it is reached: **"How to run the file: Rec
+                  attachment · \Robots Track= filename."** This is the first
+                  half. The name becomes the control, because the name IS the
+                  file — a separate RUN button beside it would be a second thing
+                  to press for one act.
+                  THE DETAIL IS THE DECLARATION'S, VERBATIM. This component
+                  holds no address, no preset and no knowledge of what a portal
+                  is; it dispatches what the row handed it. A door whose event
+                  nobody listens for does nothing, which is the honest failure
+                  for a museum that publishes its Records before it builds every
+                  room in them. */}
+              {a.door ? (
+                <button type="button" className="vp-rec-att-run"
+                        title={"run " + a.name}
+                        onClick={() => window.dispatchEvent(new CustomEvent(
+                          a.door.event, { detail: a.door.detail || {} }))}>
+                  {a.name}
+                </button>
+              ) : (
+                <span className="vp-rec-att-name">{a.name}</span>
+              )}
               <span className="vp-rec-att-meta">
                 {a.kind}{a.meta ? " · " + a.meta : ""}
               </span>

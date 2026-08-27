@@ -632,5 +632,38 @@ export const RECORD_ENTRIES = [
                     + "increase in head count",
                   ] },
               ],
+              /* ═══ [2026-08-26] THE SHORTCUT — MIKE'S OWN ASK ════════════════
+                 **"R005 - ADD attachment: Shortcut to the Feed screen, but
+                 under the theatre that you are running a .bat file to run the
+                 .exe via UNIX 6x, or whatever it was named."**
+
+                 THE FILENAME IS RECORD 004'S AND THERE IS NO `.bat`. That
+                 entry's cracked-ZIP listing carries three files —
+                 `TERMINAL.EXE`, `PORTAL_2v16.CFG`, `QC_101.TIF` — and a search
+                 of both repositories returns **zero** in-story `.bat`. So the
+                 file that runs is the one that is there. Nothing was invented
+                 to stand in front of it (Doctrine 12), and `or whatever it was
+                 named` is answered by the listing rather than by Ops.
+
+                 IT IS AN ATTACHMENT WITH NO PICTURE, WHICH IS THE HONEST SHAPE.
+                 A program has no scan. It draws the document glyph and its own
+                 name, and the name is the control.
+
+                 THE EVENT IS DELIBERATELY NOT `wb-robots-open-twin`. This
+                 module is PUBLIC — `robots.js` imports it — and the console's
+                 declaration lives in `portal.js`, which is loaded as its own
+                 chunk by `Robots.jsx` and by nothing else. Naming the full
+                 detail here would drag the Portal's whole panel declaration
+                 into the public entry and collapse a split the album's
+                 architecture rests on. So this asks, and the one module that
+                 already holds `portal.js` answers. Same seam the panel and the
+                 channel strip use: **the button asks; it does not answer.** */
+              docs: [
+                { title: "TERMINAL.EXE",
+                  source: "ROOT/PORTAL",
+                  extract: "Runs on the UNIX-6x Emulator. Reads "
+                           + "PORTAL_2v16.CFG.",
+                  door: { event: "wb-portal-run-console" } },
+              ],
             },
 ];

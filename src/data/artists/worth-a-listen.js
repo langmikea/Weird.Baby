@@ -2380,16 +2380,32 @@ export const worthAListenExhibit = {
   id: "wal",
   /* ═══ [2026-08-26] THIS WING TAKES THE HOUSE NAME — MIKE'S RULING ══════
      **"/wal TAKES THE HOUSE NAME. 'Weird.Baby \Worth a Listen.' Every wing
-     takes it."** The board carries the full form; this field is the door and
-     carries the short one, uppercased by `.wb-bar-room` to `\WORTH A LISTEN`.
+     takes it."** This field is the door and carries the short form, uppercased
+     by `.wb-bar-room` to `\WORTH A LISTEN`.
 
-     IT IS THE BIGGEST CHANGE ON THE BOARD AND IT IS NOT A TIDY-UP. Until today
-     the directory read `Other Music Worth a Listen` — M8 built that name to say
-     *whose work is in the room*, and F7 indented the row to say it again. The
-     house name now sits on all four wings, so the board no longer separates
-     ours from theirs by NAME. **The room's contents are unchanged and still
-     other people's records**; what changed is that the museum says the room is
-     the museum's.
+     ═══ [2026-08-27] THE BOARD NO LONGER CARRIES THE FULL FORM, AND THIS FIELD
+     IS UNCHANGED TO THE CHARACTER BY THAT RULING ═══════════════════════════
+     MIKE: **"RENAME 'Weird.Baby \Worth a Listen' to '\Worth a Listen'. In the
+     directory, all of the '\' should line up vertically."** — reasoning:
+     **"\Worth a Listen is parallel to \Music in this context."**
+
+     **IT REVERSES THE BOARD'S HALF OF THE 08-26 RULING AND LEAVES THIS ONE
+     STANDING**, which is worth stating because the two used to be one sentence.
+     The board took the FULL form and the door took the SHORT one; the board now
+     takes the short one too, so **the two surfaces agree and this field did not
+     move.** The paragraph below is about the door and is still true.
+
+     The sentence that used to sit here — *"The board carries the full form"* —
+     is struck rather than reworded, because it was a true statement of a ruling
+     he has since replaced. `WbHome.jsx`'s directory block carries the reversal
+     whole; this is the pointer, not a second copy of it.
+
+     IT WAS THE BIGGEST CHANGE ON THE BOARD AND IT IS NOT A TIDY-UP. Until
+     2026-08-26 the directory read `Other Music Worth a Listen` — M8 built that
+     name to say *whose work is in the room*, and F7 indented the row to say it
+     again. **Both are gone now**, and what separates ours from theirs on the
+     board is M8's ORDER alone, which is untouched. **The room's contents are
+     unchanged and still other people's records.**
 
      HIS LOWERCASE `a` IS CARRIED AND IT IS NOT AN ACCIDENT. He wrote *"Worth a
      Listen"*, which is the casing `house-copy.js`'s AFFILIATION already prints

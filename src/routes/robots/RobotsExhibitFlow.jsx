@@ -5,6 +5,8 @@ import { T as MUSEUM } from "../../styles/tokens.js";
    file learns one more shape and no other wing can notice. */
 import TestSignal from "./TestSignal.jsx";
 import Television from "./Television.jsx";
+import PortalConsole from "./PortalConsole.jsx";
+import { useFeedControl } from "./feed-control.js";
 import PortalScreen from "./PortalScreen.jsx";
 
 /* gap before the tear (ms), then how tall it is (vh) and how far the picture
@@ -88,6 +90,30 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
   const [reel, setReel] = useState(null);   /* { set, i, title } | null */
   const [zoom, setZoom] = useState(false);
   /* ======== [CR1 / FORK A (b) 2026-08-02] THE H-TEAR =====================
+     ═══ [2026-08-27] READ THIS FIRST: THE SPAN IS REVERSED, BY MIKE ═════════
+     **"Tears must only happen on the Monitor Screen (not bezel, background,
+     etc)"**
+
+     **THIS IS A REVERSAL AND NOT A CORRECTION**, and the paragraph it reverses
+     is left standing directly below because its argument is the thing that was
+     overruled — deleting it would leave a later round free to rebuild the
+     view-wide rip from the same reasoning and think it was finishing something.
+
+     WHAT THE OLD RULE CLAIMED, AND IT IS NOT REFUTED: a rip that crosses the
+     ground and the portal together is the only way to show that both are one
+     surface, so a rip confined to the picture proves nothing. **Mike has ruled
+     that the museum does not make that argument this way.** The canon that the
+     whole view is itself a screen is HIS and is untouched; what he has ruled on
+     is whether the tear is its evidence.
+
+     WHERE IT LIVES NOW: `.ps-tear`, inside `PortalScreen`'s feed box, drawn as
+     a sibling of the slip and cropped by the opening — the same crop the
+     picture gets, by the same mechanism, with nothing added to enforce it.
+     Its height reads as a share of the PICTURE rather than of the window.
+     **The two clocks below are untouched**, and so is every number in
+     `TEAR_SCRIPT`.
+
+     ═══ THE ORIGINAL RULE, OVERRULED 2026-08-27, KEPT FOR ITS ARGUMENT ══════
      Mike's canon: the whole portal view is ITSELF a screen, and the portal is
      a screen ON it. The evidence-in-fiction is a tear that rips through
      EVERYTHING AT ONCE - background and portal together - because a tear can
@@ -96,6 +122,11 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      inside the twin could only ever cross the twin; it would prove the
      opposite of what it is there to prove. One element spanning the whole
      view is the only honest place for it.
+     [The two paragraphs above no longer describe the build. The half that
+     still does is the second one's REASON for not putting the tear inside
+     `twin.html`: it is still drawn by the museum and not by the machine, so a
+     tear crosses whatever the channel is carrying — television, the test card,
+     the photograph — rather than only the one channel that is a document.]
      DETERMINISTIC, PER THE GLITCH-REALISM LAW. No Math.random anywhere: the
      gaps and the heights come from a fixed script that is walked in order and
      wraps. The same session produces the same sequence, which is what makes
@@ -114,6 +145,35 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      the held album is not loaded there is no twin to open. */
   const [twin, setTwin] = useState(null);   /* { src, title } | null */
 
+  /* ═══ [2026-08-26] THE FEED CONTROL IS OWNED HERE, AND THAT IS THE FIX ═════
+     MIKE: **"BIG CHANGE: Move the FUNCTIONALITY of the feed panel to the
+     MONITOR"** — and **"TV - I cannot change channels!"**, which was the same
+     problem seen from the other end.
+
+     THE DEFECT, MEASURED: `wb-portal-select-channel` used to be answered inside
+     the panel COMPONENT. Reached through the album page that worked, because
+     the face stayed mounted behind the overlay. Reached through TERMINAL.EXE it did
+     not: the console IS the overlay's content, so latching replaced it and the
+     `.ip` count went 1 -> 0 at the same instant the digit strip appeared.
+     **The strip's only listener was destroyed by the act that showed the strip.**
+
+     This component owns the overlay and is mounted for the whole visit to the
+     wing, so the state cannot be replaced out from under the strip any more.
+     `useFeedControl` registers the listener; nothing else does.
+
+     IT READS THE DECLARATION OFF THE OPEN CONSOLE AND FALLS BACK TO NULL. The
+     Portal album is a dynamic chunk, so this public component must not name it;
+     the declaration arrives on the event, exactly as `bezel` and `boot` do.
+
+     AND THE DECLARATION IS ITS OWN STATE, WHICH IS NOT TIDINESS. Reading it
+     off `twin` directly was the first cut and it was wrong in exactly the way
+     the defect was: latching from the console REPLACES `twin` with a television
+     that carries no `panel`, so the hook would lose its declaration — and its
+     bank, its bits and its resolver — at the same instant the digit strip
+     appeared. It is set when a console opens and held for the visit. */
+  const [feedDecl, setFeedDecl] = useState(null);
+  const feed = useFeedControl(feedDecl);
+
   /* [L1 2026-07-31] CLOSING ANNOUNCED ITSELF, to nobody.
      The rule was: the Portal track's face runs a live twin and stands down
      while this overlay holds one — one machine at a time — so the close had to
@@ -126,7 +186,171 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      anything — an event nobody receives still has to be reasoned about.
      Removed rather than restored: there is no second machine to stand down, and
      reviving the announcement is the job of whatever revives the live face. */
+  /* ═══ [2026-08-27] TERMINAL.EXE DOES NOT VANISH — IT SHUTS DOWN ═══════════
+     MIKE: **"X RUNS A VISIBLE CLEAN SHUTDOWN — quick, but it happens — then
+     lands back on the ALBUM."**
+
+     So the way out has two shapes and the surface decides which. A television
+     and a machine are PICTURES: turning the set off is instantaneous and
+     nothing is owed. TERMINAL.EXE is a PROGRAM the visitor started from a
+     filename, and a program that disappears mid-word has crashed. **The
+     shutdown is the difference between closing a window and ending a run.**
+
+     `consoleOpen` IS A REF AND NOT STATE, and that is load-bearing rather than
+     an optimisation: the control listener above is registered once and reads
+     this on every press. As state it would need to be a dependency, the
+     listener would be torn down and rebuilt on every open, and a press landing
+     in that gap is a dropped input on the one surface where every press is the
+     interface. */
+  /* ═══ [2026-08-27] THE MACHINE OUTLIVES THE CHANNEL ══════════════════════
+     `machineSrc` is remembered the first time a machine channel opens and is
+     NOT cleared when another channel shows, which is what keeps one document
+     alive across every switch. It changes only when the PRESET changes, and
+     that reload is deliberate — see the note at the element.
+     `showingMachine` decides whether it is the picture or is covered by one. */
+  const [machine, setMachine] = useState(null);   /* { src, title } | null */
+  const machineSrc = machine && machine.src;
+  const machineTitle = (machine && machine.title) || "";
+  const showingMachine = !!(twin && (twin.kind === "machine" || twin.kind === "picture"));
+
+  /* THE VIEW IS A MESSAGE, NOT AN ADDRESS. Which of Mike's two plates the
+     machine is wearing is a runtime state of a running unit — the camera moved,
+     the machine did not restart — so it is posted to the live document instead
+     of being put in its URL where it would force a load. `twin.html` answers
+     it by swapping `.monimg`'s src and toggling one class; nothing it does
+     touches the emulator.
+     IT ALSO FIRES ON MOUNT, because the first open has to establish the view
+     even though the initial `?view=` already did: the frame may have been built
+     for channel 3 and the visitor's first press may be 4. Posting the same
+     value twice is a no-op at the other end. */
+  useEffect(() => {
+    if (!machineSrc) return undefined;
+    const w = twinFrameRef.current && twinFrameRef.current.contentWindow;
+    if (!w) return undefined;
+    const view = (twin && twin.view) || "";
+    try { w.postMessage({ wb: "portal-view", view }, "*"); } catch { /* gone */ }
+    return undefined;
+  }, [machineSrc, twin]);
+
+  /* ═══ [2026-08-27] HEARD ONLY ON THE CHANNEL IT IS ON ═════════════════════
+     MIKE: **"Sound from VIIIp is heard when on non-VIIIp channels. Fix pls."**
+
+     **THE RUNNING IS NOT UNDONE AND MUST NOT BE.** He asked for one live unit
+     that does not reboot when he looks away, and the frame therefore stays
+     mounted for the whole visit — see the note at the element. What was wrong
+     is that a machine nobody is watching was still audible over the television.
+     **Covered is not off.** This mutes the OUTPUT and touches no clock: the
+     emulator, the OLED buffers and every timer in that document carry on, which
+     is the whole of what "running continuously" was worth.
+
+     IT IS A MESSAGE FOR THE SAME REASON `portal-view` IS. A running machine is
+     told things; it is not re-addressed. `twin.html` answers by suspending its
+     three audio contexts and muting the DFPlayer's element — the reasoning and
+     the list of voices are at `portalAudioOff` in that file.
+
+     IT ALSO FIRES ON MOUNT, and it must: the machine is built the moment a
+     machine channel first opens, and the visitor's next press may be
+     television. Sending the same value twice is a no-op at the other end. */
+  useEffect(() => {
+    if (!machineSrc) return undefined;
+    const w = twinFrameRef.current && twinFrameRef.current.contentWindow;
+    if (!w) return undefined;
+    try { w.postMessage({ wb: "portal-audio", on: showingMachine }, "*"); }
+    catch { /* the frame is gone; nothing to silence */ }
+    return undefined;
+  }, [machineSrc, showingMachine]);
+
+  /* ═══ [2026-08-27] THE CONTROLS RIDE THE PICTURE — T7, ONE LAYER OUT ══════
+     MIKE, 2026-07-29: **"the stutter glitch moves everything EXCEPT the control
+     panel - the control panel must move WITH the glitch (the controls are part
+     of the feed; only the bezel is the real world)."** He raised it again on
+     2026-08-27 about both machine channels.
+
+     **IT IS HIS OWN T7 DEFECT, REINTRODUCED BY A MIGRATION.** T7's fix was
+     structural: `#feedgroup` in `twin.html` was made to hold the picture, both
+     glass apertures, the chyron and the snow plane, so every glitch moved one
+     element and nothing could be left behind. **Then the chyron moved OUT of
+     the twin and into the museum** on 2026-08-26 — the bezel and the buttons
+     belong to the Portal — and the controls became siblings of the moving group
+     again, which is exactly the state T7 was written to end.
+
+     THE MUSEUM CANNOT SEE INSIDE THE FRAME, so the twin reports its own
+     displacement: `{wb:"portal-jit", dx, dy}` on every bump, roll and machine
+     jitter, and `0,0` when it settles. The two sources compose here — the
+     twin's glitch and the museum's own tear slip — and `PortalScreen` applies
+     the sum to both control groups. One number in, and the groups ride whatever
+     the picture rides. */
+  const [jit, setJit] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    function onJit(e) {
+      if (!e || !e.data || e.data.wb !== "portal-jit") return;
+      const x = Number(e.data.dx) || 0, y = Number(e.data.dy) || 0;
+      setJit(p => (p.x === x && p.y === y ? p : { x, y }));
+    }
+    window.addEventListener("message", onJit);
+    return () => window.removeEventListener("message", onJit);
+  }, []);
+  /* a channel with no machine on it cannot be jittering; clear it so a stale
+     offset cannot outlive the picture that caused it. */
+  useEffect(() => {
+    if (!showingMachine) setJit(p => (p.x === 0 && p.y === 0 ? p : { x: 0, y: 0 }));
+  }, [showingMachine]);
+
+  /* ═══ [2026-08-27] BETWEEN TWO CHANNELS THERE IS SNOW ════════════════════
+     MIKE: **"When changing channels go to noise instead of black during the
+     transition."**
+
+     WHAT HE WAS SEEING, AND WHY IT IS TWO DIFFERENT WAITS. Switching to the
+     machine or the test card is instant — the machine has been mounted the
+     whole visit and the card is drawn — so the black there is one or two
+     frames of an empty box. **Television is not instant**: a player has to be
+     built and has to join a video mid-broadcast, and that is seconds, not
+     frames. A fixed burst would have covered the first case and left the
+     second doing exactly what he reported.
+
+     SO IT IS A FLOOR AND A CEILING RATHER THAN A DURATION. The snow is up for
+     at least `SNOW_MIN` on every channel change, and on television it stays up
+     until the set is actually PLAYING — `Television` says so — or until
+     `SNOW_MAX`, whichever comes first. **The ceiling is not a guess about
+     speed; it is the refusal path.** A browser that blocks autoplay may never
+     reach PLAYING at all, and snow for ever is a worse defect than the black
+     it replaced.
+
+     IT IS KEYED ON THE CHANNEL AND ON THE KIND, not on the payload identity. A
+     press that lands on the channel already showing is not a transition and
+     must not flash — and re-tuning the same television channel IS one, because
+     the player is rebuilt. */
+  const SNOW_MIN = 380, SNOW_MAX = 4000;
+  const twinKind = twin && twin.kind;
+  const twinCh = twin && twin.ch;
+  const [snowFloor, setSnowFloor] = useState(false);
+  const [tvSettled, setTvSettled] = useState(false);
+  useEffect(() => {
+    if (!twinOpen) { setSnowFloor(false); setTvSettled(false); return undefined; }
+    setSnowFloor(true);
+    setTvSettled(false);
+    const a = setTimeout(() => setSnowFloor(false), SNOW_MIN);
+    const b = setTimeout(() => setTvSettled(true), SNOW_MAX);
+    return () => { clearTimeout(a); clearTimeout(b); };
+  }, [twinOpen, twinKind, twinCh]);
+  const snow = !!(twinOpen
+                  && (snowFloor || (twinKind === "television" && !tvSettled)));
+
+  const consoleOpen = useRef(false);
+  const [halting, setHalting] = useState(false);
+  useEffect(() => {
+    consoleOpen.current = !!(twinOpen && twin && twin.kind === "console");
+    if (!twinOpen) { setHalting(false); setMachine(null); }
+  }, [twinOpen, twin]);
+
   function closeTwin() {
+    if (consoleOpen.current) { setHalting(true); return; }
+    setTwinOpen(false);
+  }
+  /* the terminal calls this when its halt has finished printing. It closes the
+     overlay, which lands the visitor back on the album — his words. */
+  function consoleHalted() {
+    setHalting(false);
     setTwinOpen(false);
   }
 
@@ -239,11 +463,43 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      no listener yet, which is a dropped press and not an error: the machine
      refuses input while it boots anyway (`[X1]`). */
   const twinFrameRef = useRef(null);
-  const [unitOn, setUnitOn] = useState(false);
+  /* ═══ [2026-08-27] SCROLL AND CLICK REACH TERMINAL.EXE TOO, AND THAT IS THE
+         SAME CONTROL DOING THE SAME JOB ═════════════════════════════════════
+     MIKE: **"In the spirit of the VIIIp it should simply be scroll and click.
+     Scrolling takes you to the next changeable field and click changes it."**
+
+     **THE "SCROLL IS IGNORED" RULING IS NOT BROKEN BY THIS — IT IS SPENT.** Its
+     wording was *"scroll only does what it was originally designed to do, and
+     in all other instances is ignored"*, and the fault it was avoiding was one
+     control meaning two things depending on what is on the glass. It does not
+     mean two things now: the rotary dial moves a selection and a press takes
+     it, on the machine and on the terminal alike. What HAS gone is the case the
+     ruling was written for — television and the test signal do not draw SCROLL
+     at all any more, so there is no longer a surface on which it reaches
+     nothing. **A control that is absent cannot read as an unfinished one.**
+
+     THE FORWARD IS UNCHANGED FOR THE MACHINE: `postMessage` to the twin's own
+     window, `{wb:"portal-control", id}`, carrying no code across a boundary
+     whose document must work with no museum at all.
+
+     **CLICK TEARS WHERE IT IS THE SHUTTER, AND NOT ON THE TERMINAL.** On
+     channel 3 CLICK is MGK-VIIIp's shutter and the rip is what proves the
+     control on the glass did something. On TERMINAL.EXE the press visibly
+     changes a field, so it proves itself — and a rip on every field change
+     would be the texture the H-TEAR block exists to prevent. **The scripted
+     tear is untouched on every surface**, which is the half that carries the
+     meaning. */
   useEffect(() => {
     function onCtl(e) {
       const id = e && e.detail && e.detail.id;
       if (!id) return;
+      if (consoleOpen.current) {
+        /* the terminal's own two inputs. It owns its cursor; this only says
+           which of the two was pressed. */
+        window.dispatchEvent(new CustomEvent("wb-portal-console-input",
+          { detail: { id } }));
+        return;
+      }
       if (id === "click") {
         const step = TEAR_SCRIPT[tearPress.current % TEAR_SCRIPT.length];
         const y = 12 + ((tearPress.current * 29) % 74);
@@ -258,22 +514,21 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
     return () => window.removeEventListener("wb-portal-machine-control", onCtl);
   }, [fireTear]);
 
-  /* THE POWER SLUG MIRRORS THE MACHINE, and it is a mirror rather than a
-     second opinion: the twin posts from `Mon_Power_Sync`, which already rides
-     its 200ms chrome tick precisely because `unitPowered` is written from six
-     places and hooking the call sites is how a state mirror falls out of step.
-     It posts ONLY ON A CHANGE. A channel with no machine clears it, or POWER
-     would sit latched over a television. */
-  useEffect(() => {
-    function onPower(e) {
-      if (e && e.data && e.data.wb === "portal-power") setUnitOn(!!e.data.on);
-    }
-    window.addEventListener("message", onPower);
-    return () => window.removeEventListener("message", onPower);
-  }, []);
-  useEffect(() => {
-    if (!twinOpen || !twin || twin.kind !== "machine") setUnitOn(false);
-  }, [twinOpen, twin]);
+  /* [2026-08-27] THE POWER MIRROR IS GONE WITH THE CONTROL IT FED. Mike:
+     **"POWER COMES OFF the VIIIp's control surface."** `unitOn`, the
+     `wb-portal-power` listener and the clear-on-channel-change effect all
+     existed to keep one slug honest, and there is no slug.
+     **`twin.html` STILL POSTS `{wb:"portal-power"}`** from `Mon_Power_Sync` on
+     its 200ms chrome tick, into a room with no listener. It is left posting:
+     that document is single-file by a standing constraint and must work with no
+     museum at all, so its own chrome sync is not the museum's to remove.
+     **Named here because an event with no receiver is exactly what cost the B7
+     round a real minute** — this one is deliberate and this sentence is the
+     receipt.
+     AND THE MACHINE IS STILL ON WITHOUT IT — measured before the cut, on the
+     served page: `unitPowered=true` inside the frame with POWER never pressed,
+     because every arming bank carries `power:"on"`. `PortalScreen.jsx`'s
+     `MON_CTL` note carries both readings. */
 
   /* [B6] ONE KEY HANDLER, AND IT KNOWS WHICH SURFACE IS UP. It used to call
      closeTwin() on every Escape anywhere in the wing, which fired the
@@ -354,15 +609,43 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
   useEffect(() => {
     function open(e) {
       const d = (e && e.detail) || {};
-      /* [2026-08-21] THE SCREEN'S OWN FIELDS RIDE EVERY KIND. `bezel`, `ch`,
-         `chList` and `note` describe the SET, not what is on it, so they are
-         read off the detail before the kinds diverge and are the same three
-         lines for all three. The engine still learns nothing: a frame
-         declaration, a list of numbers and a string it prints. */
+      /* [2026-08-21] THE SCREEN'S OWN FIELDS RIDE EVERY KIND. `bezel`, `ch`
+         and `note` describe the SET, not what is on it, so they are read off
+         the detail before the kinds diverge and are the same lines for all of
+         them. The engine still learns nothing: a frame declaration, a number
+         and a string it prints.
+         [2026-08-27] `chList` LEFT AND CAME BACK THE SAME DAY, AND THE ROUND
+         TRIP IS WORTH ONE SENTENCE. It went when the four digits did, on
+         *"You do not change channels, as there are none"*; it is back because
+         Mike scoped that ruling to **the bare terminal** once he found himself
+         with no way to change channel on the television. **The field is not
+         restored on a guess — the strip that reads it is on the glass again.**
+         `ch` never left: it is which channel is open, which is mechanism state
+         the set genuinely has whether or not anything draws a digit. */
       const screen = { bezel: d.bezel || null, ch: d.ch,
-                       chList: d.chList, note: d.note || "" };
+                       chList: d.chList, note: d.note || "",
+                       };
       if (d.kind === "test") {
         setTwin({ ...screen, kind: "test", title: d.frameTitle || "" });
+        setTwinOpen(true);
+        return;
+      }
+      /* ═══ [2026-08-26] TERMINAL.EXE — `kind: "console"`, AND IT IS DRAWN ═══
+         MIKE: **"Instead of the feed panel, I want to put the controls of the
+         feed panel on a Portal screen."** So this kind carries no address, for
+         the same reason `test` carries none: what it opens is DRAWN, and a
+         `src` would be a page that does not exist.
+         **IT IS TESTED ABOVE THE `!d.src` GUARD** — the same ordering note the
+         block above already states for `test` and `television`, and the same
+         reason: a drawn kind refused for having no address would be refused
+         for the thing that makes it drawn.
+         `boot` and `panel` ride the detail exactly as `ytId` and `src` do. The
+         listener still learns nothing: an array of strings it forwards and a
+         declaration it forwards. */
+      if (d.kind === "console") {
+        if (d.panel) setFeedDecl(d.panel);
+        setTwin({ ...screen, kind: "console", boot: d.boot, halt: d.halt,
+                  panel: d.panel, title: d.frameTitle || "" });
         setTwinOpen(true);
         return;
       }
@@ -388,12 +671,28 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
       const q = new URLSearchParams({ user: "1" });
       if (d.preset) q.set("preset", String(d.preset));
       if (d.day) q.set("day", String(d.day));
+      /* [2026-08-27] THE VIEW IS NOT IN THE ADDRESS ANY MORE, AND THAT IS
+         WHAT STOPS THE REBOOT. It was `q.set("view", ...)` here, which made
+         channel 4's src differ from channel 3's by one parameter — and a
+         changed `src` is a document load. Mike: **"Changing channels should not
+         cause a VIIIp reboot."** The view is posted to the live machine instead
+         (`portal-view`, above), and the address below is a function of the
+         PRESET alone so a channel change cannot move it.
+         `d.view` still rides the payload and is read by the poster; only its
+         route changed, from the URL to a message. */
       /* [2026-08-26] this branch names itself `machine` now. It was the only
          one carrying no `kind` at all, which read as "the default" and is not:
          it is the one kind that is a live DOCUMENT, and the four machine
          controls are forwarded to it and to nothing else. A kind that has to be
          recognised by the absence of a field is a kind nobody can grep for. */
-      setTwin({ ...screen, kind: "machine", src: `${d.src}?${q.toString()}`,
+      const src = `${d.src}?${q.toString()}`;
+      /* the machine is remembered here and never cleared — see the element. A
+         preset change gives a different `src`, which is the one case that is
+         meant to reload. */
+      setMachine(m => (m && m.src === src ? m
+        : { src, title: d.frameTitle || "" }));
+      setTwin({ ...screen, kind: "machine", view: d.view || "",
+                exact: !!d.exact,
                 title: d.frameTitle || "" });
       setTwinOpen(true);
     }
@@ -598,16 +897,93 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
                 ruling that CH3's surface is the target for all four channels
                 covers this too. `PortalScreen` takes a number and applies it;
                 it still knows nothing about tears. */}
-            <PortalScreen bezel={twin && twin.bezel} ch={twin && twin.ch}
-                          chList={twin && twin.chList}
+            <PortalScreen bezel={twin && twin.bezel}
                           note={twin && twin.note}
+                          /* [2026-08-26] THE CONSOLE JOINS THE FEED PLACEMENT,
+                             AND IT IS A CORRECTION MADE ON A MEASUREMENT. On
+                             `canvas` its box is 3200 canvas units wide against
+                             the opening's 2539, so the hole is inset 98px a
+                             side at the served size and the boot's first
+                             characters drew UNDER THE BEZEL — measured, 46.3px
+                             of every line hidden and the top line 20.3px high.
+                             The feed rect is the opening's own rect and insets
+                             by 87 units instead. It is the same placement the
+                             test card takes, and for the same reason: a DRAWN
+                             signal has no opinion about the canvas. */
                           place={(twin && (twin.kind === "test"
+                                        || twin.kind === "console"
                                         || twin.kind === "television"))
                                  ? "feed" : "canvas"}
                           slip={tear ? tear.slip : 0}
-                          unitOn={unitOn}
+                          /* [2026-08-27] THE RIP GOES IN WITH THE SLIP NOW.
+                             MIKE: **"Tears must only happen on the Monitor
+                             Screen (not bezel, background, etc)"** — so the
+                             band is drawn inside the picture by `PortalScreen`
+                             and cropped by the opening, instead of being a
+                             sibling of this whole overlay. The reversal is
+                             recorded at the H-TEAR block above. */
+                          tear={tear}
+                          /* [2026-08-27] the transition is snow and not black
+                             — his words. The screen draws it; this file is the
+                             one that knows a channel changed. */
+                          snow={snow}
+                          /* [2026-08-27] what the picture is doing, so the
+                             controls can do it too — T7. The twin's own glitch
+                             arrives by message and the museum's tear slip is
+                             already here; they compose into one offset. */
+                          jitX={jit.x} jitY={jit.y}
+                          exact={!!(twin && twin.exact)}
+                          /* ═══ [2026-08-27] THE THREE CONTROL SETS, HIS ══════
+                             MIKE: **"it's OK for TV channels to have a
+                             different control set than the VIIIp controls."**
+
+                               Television     1 2 3 4 X
+                               Channel 3      SCROLL, CLICK, SHAKE, 1 2 3 4 X
+                               TERMINAL.EXE   SCROLL, CLICK, X
+
+                             THE SETS ARE RESOLVED HERE BECAUSE THIS IS THE ONE
+                             FILE THAT KNOWS WHICH SURFACE IS UP. `PortalScreen`
+                             draws what it is handed and `portal.js` never
+                             learns what a SCROLL is — the same seam the bezel
+                             and the note already ride.
+
+                             **THE TEST SIGNAL IS NOT ONE OF HIS THREE AND IS
+                             READ AS TELEVISION'S**, stated so it can be
+                             corrected in one word. It is what a channel with no
+                             unit carries — a broadcast-shaped picture with no
+                             machine behind it — so the controls that make sense
+                             on it are the ones that change channel, and SCROLL
+                             would reach nothing. A visitor who lands on it
+                             needs a way off it more than any other surface.
+
+                             `picture` KEEPS THE MACHINE'S SET because channel 4
+                             is channel 3 by his ruling of the same day; if a
+                             still is ever declared again it is a picture with
+                             no machine behind it and this is the line that
+                             decides what it carries. */
+                          words={twin && twin.kind === "console"
+                                   ? ["scroll", "click"]
+                                   : (twin && (twin.kind === "machine"
+                                            || twin.kind === "picture"))
+                                     ? ["scroll", "click", "shake"] : []}
+                          channels={twin && twin.kind === "console"
+                                      ? null : (twin && twin.chList)}
+                          ch={twin && twin.ch}
                           onClose={closeTwin}>
-              {twin && twin.kind === "test" ? (
+              {twin && twin.kind === "console" ? (
+                /* [2026-08-26] TERMINAL.EXE, REBUILT IN MONITOR CHARACTER THE SAME
+                   DAY. The first cut drew the album page's `InstrumentPanel`
+                   on the glass and called it a placement; Mike named that the
+                   foolish version — **"Do not map every control as-is to the
+                   monitor"** — and he was describing exactly what it was.
+                   The console now prints the boot and then writes the feed's
+                   settings as terminal lines in `Mon_DOS`'s own register. The
+                   FUNCTION is `feed-control.js`, owned above so it survives
+                   this component being replaced by whatever the latch opens. */
+                <PortalConsole boot={twin.boot} halt={twin.halt}
+                               decl={twin.panel} feed={feed}
+                               halting={halting} onHalted={consoleHalted} />
+              ) : twin && twin.kind === "test" ? (
                 <TestSignal title={twin.title} />
               ) : twin && twin.kind === "television" ? (
                 /* keyed on the id AND the join second, so choosing a second
@@ -616,6 +992,12 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
                    destroyed on unmount before the new one is built. */
                 <Television key={twin.ytId + ":" + twin.startSeconds}
                             ytId={twin.ytId} startSeconds={twin.startSeconds}
+                            /* [2026-08-27] the set says when it is actually
+                               playing, and the snow above comes down then. It
+                               is the only kind whose arrival is not immediate,
+                               and guessing a duration for it is what would put
+                               the black back. */
+                            onLive={() => setTvSettled(true)}
                             title={twin.title} />
               ) : twin && twin.kind === "picture" ? (
                 /* [2026-08-26] A PHOTOGRAPH IS AN `<img>`. It is cut on the
@@ -626,30 +1008,62 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
                    `<iframe>` that rule was INERT — object-fit does not apply to
                    one — and what drew was the browser's own image viewer. */
                 <img src={twin.src} alt="" />
-              ) : (
+              ) : null}
+
+              {/* ═══ [2026-08-27] THE MACHINE IS MOUNTED ONCE AND NEVER
+                  UNMOUNTED — MIKE'S RULING, AND IT IS A STORY FACT ═══════════
+                  **"Changing channels should not cause a VIIIp reboot. These
+                  are to be different camera views of the same live unit."** And
+                  on whether that reaches the television channels too:
+                  **"running regardless of how you spent your time."**
+
+                  THE DEFECT, MEASURED FOUR TIMES BEFORE IT WAS TOUCHED. The
+                  twin used to be the last branch of the same ternary as
+                  television and the test card, with `src={twin.src}`. So a
+                  switch to channel 4 CHANGED THE SRC (it carried `&view=`) and
+                  a switch to television UNMOUNTED THE ELEMENT — both a full
+                  document load. Stamping the frame's `window` and reading
+                  `performance.timeOrigin` back: **a new origin, a new stamp and
+                  an uptime of ~3.6s on every single channel change.** The unit
+                  was rebooting every time he looked away.
+
+                  SO IT LIVES OUTSIDE THE TERNARY. Once a machine channel has
+                  been opened the element stays in the tree for the rest of the
+                  visit, and the other kinds render OVER it — which is why the
+                  branch above now ends in `null` rather than in this element.
+                  **It is covered, not unmounted, and not `display:none`:** the
+                  machine's clocks are `setInterval` (`osTick` at 50ms,
+                  `refreshChrome` at 200ms, the feed glitch at 760ms), and a
+                  frame that is still in the render tree keeps them. Hiding it
+                  with `display:none` would have been the version that LOOKS
+                  fixed while the machine quietly stops — which is the shape
+                  CH3's resize was fixed in once before, and it came back.
+
+                  **THE SRC IS A FUNCTION OF THE PRESET AND OF NOTHING ELSE**,
+                  so a channel change cannot touch it. The VIEW is a message now
+                  (`portal-view`), handled below. A PRESET change still reloads,
+                  and that is correct rather than an oversight: a bank is a
+                  START MODE — `PATCHED`, `COLD START`, `FIRST RUN` — and those
+                  recipes exist to boot the machine differently. Changing the
+                  camera must not reboot it; changing how it starts must. */}
+              {machineSrc && (
                 <iframe
                   ref={twinFrameRef}
-                  src={twin ? twin.src : undefined}
-                  title={twin ? twin.title : ""} />
+                  key={machineSrc}
+                  className={"ps-machine" + (showingMachine ? "" : " ps-machine--behind")}
+                  src={machineSrc}
+                  title={machineTitle} />
               )}
             </PortalScreen>
           </div>
-          {/* the rip itself: a bright hairline with a smeared band under it,
-              sitting OVER the whole view. The picture slips sideways for the
-              same 130ms, so the band reads as the seam the slip happened at
-              rather than as a bar laid on top of a still image. */}
-          {tear && (
-            <div aria-hidden="true" style={{
-              position: "absolute", left: 0, right: 0,
-              top: `${tear.y}%`, height: `${tear.h}vh`,
-              pointerEvents: "none", zIndex: 2,
-              background:
-                "linear-gradient(180deg,rgba(255,255,255,.55) 0 1px," +
-                "rgba(255,255,255,.10) 1px 40%,rgba(0,0,0,.35) 40% 100%)",
-              backdropFilter: "brightness(1.45) contrast(.82)",
-              WebkitBackdropFilter: "brightness(1.45) contrast(.82)",
-            }} />
-          )}
+          {/* [2026-08-27] THE RIP IS NO LONGER DRAWN HERE. It was an inline
+              element at this level, `left:0;right:0` with its height in `vh`,
+              sitting over the ground and the bezel and the picture together.
+              Mike ruled it onto the monitor screen; it is `.ps-tear` inside
+              `PortalScreen`'s feed box now, and its declaration went with it
+              into `PortalScreen.css` rather than staying here as a style
+              object one file away from the element it dresses. The reversal is
+              argued at the H-TEAR block above, where the old rule was. */}
         </div>
       )}
 

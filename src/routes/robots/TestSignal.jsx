@@ -58,6 +58,69 @@ const HUM_HZ = 60, HUM_LEVEL = 0.030, HUM_BITE = 0.006;
 const HUM_WOBBLE_HZ = 0.09, HUM_WOBBLE = 0.010;
 const HUM_DRIFT_HZ = 0.13, HUM_DRIFT = 0.55;
 
+/* ═══ [2026-08-27] THE BARREL — MIKE'S RULING, AND THE SIGN MATTERS ════════
+   **ON: the test signal image.** OFF: the YouTube video, the VIIIp and the
+   terminal, *"first pass, explicitly"*.
+
+   THE CARD IS DRAWN IN A 400x300 BOX AND EVERY MARK IS EMITTED THROUGH
+   `bend()`. Normalised coordinates put the box's centre at 0 and its own
+   corners at r-squared = 2:
+
+       f(r2) = (1 - K*r2) / (1 - K*RPIN)
+
+   **THE MINUS SIGN IS THE WHOLE DIFFERENCE BETWEEN BARREL AND PINCUSHION, AND
+   IT WAS GOT WRONG ONCE ON PAPER BEFORE IT WAS GOT RIGHT.** The intuitive
+   `r' = r(1 + k r²)` moves the CORNERS further than the mid-edge points, which
+   pulls every edge inward at its middle — that is PINCUSHION. Barrel is the
+   other sign: corners drawn IN harder than edge centres, so each edge bows
+   outward. Checked on the border's own numbers before a line was drawn: the top
+   edge's centre sits at r2 = 0.64 and its corner at r2 = 1.28, and it is the
+   ratio between those two displacements that decides which way the line bends.
+
+   `RPIN` IS THE BORDER'S CORNER, SO THE COMPOSITION DOES NOT MOVE. Dividing by
+   `f` at that radius pins the card's four corners exactly where they were and
+   lets everything inside bow — the centre magnifies a little, the frame bulges,
+   and the card still fills the same rectangle it always did. Without the pin
+   the whole drawing would shrink and read as a smaller card rather than a bent
+   one.
+
+   K IS ONE NUMBER AND IT IS HIS TO MOVE. At 0.08 the card's mid-edges bow out
+   by about 3% of its width and the centre magnifies by 9%. */
+const BARREL_K = 0.08;
+const RPIN = (160 / 200) ** 2 + (120 / 150) ** 2;   /* the border's own corner */
+
+function bend(x, y) {
+  const dx = (x - 200) / 200, dy = (y - 150) / 150;
+  const f = (1 - BARREL_K * (dx * dx + dy * dy)) / (1 - BARREL_K * RPIN);
+  return [200 + dx * 200 * f, 150 + dy * 150 * f];
+}
+/* a straight run becomes a sampled polyline. 12 segments is where the bow stops
+   being visibly faceted at this card's size — measured by eye against 6 and 24,
+   and 24 costs path length for no difference. */
+const SEG = 12;
+const pt = (x, y) => { const p = bend(x, y); return `${p[0].toFixed(2)},${p[1].toFixed(2)}`; };
+function run(x1, y1, x2, y2) {
+  let d = "";
+  for (let i = 0; i <= SEG; i++) {
+    const t = i / SEG;
+    d += (i ? "L" : "") + pt(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t);
+  }
+  return d;
+}
+const bentLine = (x1, y1, x2, y2) => "M" + run(x1, y1, x2, y2);
+const bentBox = (x, y, w, h) =>
+  "M" + run(x, y, x + w, y) + "L" + run(x + w, y, x + w, y + h) +
+  "L" + run(x + w, y + h, x, y + h) + "L" + run(x, y + h, x, y) + "Z";
+function bentCircle(cx, cy, r) {
+  let d = "";
+  const N = 72;
+  for (let i = 0; i <= N; i++) {
+    const a = (i / N) * Math.PI * 2;
+    d += (i ? "L" : "M") + pt(cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+  }
+  return d + "Z";
+}
+
 export default function TestSignal({ title }) {
   const humRef = useRef(null);
 
@@ -117,38 +180,56 @@ export default function TestSignal({ title }) {
      step ramp and the circle that says the geometry is right.
      IT CARRIES NO WORDS. A test card that said TEST SIGNAL would be the museum
      narrating the machine — Doctrine 11's corollary — and a 1965 monoscope
-     carries a station's own mark, which this channel does not have. */
+     carries a station's own mark, which this channel does not have.
+
+     ═══ [2026-08-27] IT IS BENT NOW, AND ON A TEST CARD THAT IS THE POINT ════
+     MIKE ruled barrel distortion **ON "the test signal image"** and OFF the
+     YouTube video, the VIIIp and the terminal — *"first pass, explicitly"*.
+
+     **THE GEOMETRY IS BENT, NOT FILTERED, AND THAT IS THE WHOLE OF WHY THIS
+     LOOKS RIGHT.** A CSS or SVG filter over the finished card would resample
+     hairlines that are already sub-pixel and turn a 0.7-wide grid rule into
+     mush. Every mark here is drawn by us, so each one is emitted through
+     `bend()` at the coordinates it should have on a curved tube — the lines
+     stay one stroke wide and land where the glass would put them.
+
+     **AND A MONOSCOPE IS THE ONE PICTURE THAT IS ABOUT THIS.** Its whole job is
+     to show whether the geometry is right: the circle and the frame are there
+     so an engineer can see the tube bowing them. A test card drawn flat on a
+     curved screen is the only object in the wing that would have been actively
+     saying something false. */
   return (
     <div className="ts-root" role="img" aria-label={title || "Test signal"}>
       <svg className="ts-card" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet"
            aria-hidden="true">
         <rect x="0" y="0" width="400" height="300" fill="#141311" />
-        {/* the grid — the geometry check */}
+        {/* the grid — the geometry check, and now it is a check that reports */}
         <g stroke="#4a4740" strokeWidth="0.7" fill="none">
           {[...Array(9)].map((_, i) => (
-            <line key={"v" + i} x1={40 + i * 40} y1="30" x2={40 + i * 40} y2="270" />
+            <path key={"v" + i} d={bentLine(40 + i * 40, 30, 40 + i * 40, 270)} />
           ))}
           {[...Array(7)].map((_, i) => (
-            <line key={"h" + i} x1="40" y1={30 + i * 40} x2="360" y2={30 + i * 40} />
+            <path key={"h" + i} d={bentLine(40, 30 + i * 40, 360, 30 + i * 40)} />
           ))}
         </g>
-        <circle cx="200" cy="150" r="120" fill="none" stroke="#8d887a" strokeWidth="1.4" />
-        <rect x="40" y="30" width="320" height="240" fill="none"
-              stroke="#8d887a" strokeWidth="1.4" />
+        <path d={bentCircle(200, 150, 120)} fill="none" stroke="#8d887a"
+              strokeWidth="1.4" />
+        <path d={bentBox(40, 30, 320, 240)} fill="none" stroke="#8d887a"
+              strokeWidth="1.4" />
         {/* the greyscale step ramp */}
         {[...Array(8)].map((_, i) => (
-          <rect key={"s" + i} x={80 + i * 30} y="200" width="30" height="28"
+          <path key={"s" + i} d={bentBox(80 + i * 30, 200, 30, 28)}
                 fill={`rgb(${18 + i * 30},${18 + i * 30},${17 + i * 28})`} />
         ))}
         {/* the resolution wedge */}
         {[...Array(14)].map((_, i) => (
-          <rect key={"w" + i} x={110 + i * 12} y="72" width={6 - i * 0.32} height="26"
+          <path key={"w" + i} d={bentBox(110 + i * 12, 72, 6 - i * 0.32, 26)}
                 fill="#c9c4b6" />
         ))}
         {/* the centre cross */}
-        <g stroke="#e6e1d4" strokeWidth="1.6">
-          <line x1="200" y1="128" x2="200" y2="172" />
-          <line x1="178" y1="150" x2="222" y2="150" />
+        <g stroke="#e6e1d4" strokeWidth="1.6" fill="none">
+          <path d={bentLine(200, 128, 200, 172)} />
+          <path d={bentLine(178, 150, 222, 150)} />
         </g>
       </svg>
       {/* the raster. A slow horizontal band and a fine scan texture over the

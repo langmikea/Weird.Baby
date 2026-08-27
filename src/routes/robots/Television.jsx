@@ -70,7 +70,7 @@ const TV_VARS = {
   cc_load_policy: 0,
 };
 
-export default function Television({ ytId, startSeconds, title }) {
+export default function Television({ ytId, startSeconds, title, onLive }) {
   const boxRef = useRef(null);
   const ytRef = useRef(null);
   /* silent === the browser refused sound and we fell back to a muted picture */
@@ -109,7 +109,12 @@ export default function Television({ ytId, startSeconds, title }) {
     let tries = 0;
     const t = setInterval(() => {
       const st = yt.getState();
-      if (st.playing) { clearInterval(t); return; }
+      /* [2026-08-27] THE SAME WATCHER SAYS WHEN THE SET IS LIVE, and it is not
+         a second job bolted on: this loop exists precisely because PLAYING is
+         the one state nothing else reports, and the snow that covers the join
+         needs exactly that moment. It is called once, on the tick that stops
+         the watcher. See the snow block in `RobotsExhibitFlow.jsx`. */
+      if (st.playing) { clearInterval(t); if (onLive) onLive(); return; }
       tries += 1;
       if (tries === 5) { yt.setMuted(true); yt.play(); setSilent(true); }
       if (tries > 12) clearInterval(t);

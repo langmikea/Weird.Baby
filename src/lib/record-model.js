@@ -267,6 +267,15 @@ export function attachmentsOf(entry) {
         openable: !!img,
         extract: doc.extract || null,
         note: doc.note || null,
+        /* [2026-08-26] A DOCUMENT MAY BE A DOOR. `docs/BACKLOG.md` item 5 named
+           this as the missing half — *"a `door` field on a `docs` row (one
+           branch)"* — and it is that one branch: the field is carried through
+           untouched and this file decides nothing about it. A row that declares
+           no `door` is byte-for-byte what it was.
+           IT IS NOT `openable`. `openable` means *there is a picture behind
+           this and the wing's reader can show it*; a door means *this runs*.
+           Conflating them would have put a program in an image viewer. */
+        door: doc.door || null,
         set: Array.isArray(doc.plates) && doc.plates.length
           ? doc.plates : (img ? [{ img, label: doc.title }] : null),
         index: 0,

@@ -130,7 +130,7 @@
    "t": "The Record",
    "p": "spine[].tracks[].title",
    "c": "RESTATED",
-   "r": "8cdb4fca77866b42"
+   "r": "cc1e0a221d72774e"
   },
   "5470eb87a7f130f6": {
    "f": "src/data/artists/robots.js",
@@ -7886,48 +7886,6 @@
    "p": "BannerTransport{}.<div>.<input>.@aria-label",
    "c": "HOUSE"
   },
-  "3564c3faa152308e": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1116,
-   "t": "▲",
-   "p": "InstrumentPanel{}.<div>.<div>.<div>.<div>.<button>",
-   "c": "HOUSE"
-  },
-  "e071022f0eed5b0b": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1128,
-   "t": "▼",
-   "p": "InstrumentPanel{}.<div>.<div>.<div>.<div>.<button>",
-   "c": "HOUSE"
-  },
-  "3d42534fe0f6c6ae": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1158,
-   "t": "source: ",
-   "p": "InstrumentPanel{}.<div>.<div>.<div>.<div>.<button>.@aria-label",
-   "c": "HOUSE"
-  },
-  "c6dc492cb5b9a38f": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1210,
-   "t": "LATCH",
-   "p": "InstrumentPanel{}.<div>.<div>.<button>.<span>",
-   "c": "HOUSE"
-  },
-  "212e98acc7638564": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1215,
-   "t": "ARMED",
-   "p": "InstrumentPanel{}.<div>.<div>.<div>.<span>",
-   "c": "HOUSE"
-  },
-  "1394c9fd451926cd": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1216,
-   "t": "NOT ARMED",
-   "p": "InstrumentPanel{}.<div>.<div>.<div>.<span>",
-   "c": "HOUSE"
-  },
   "b8f158c8931c098a": {
    "f": "src/routes/exhibit/Exhibit.jsx",
    "l": 2519,
@@ -12967,7 +12925,7 @@
    "f": "src/data/artists/portal.js",
    "l": 85,
    "t": "The Portal",
-   "r": "8cdb4fca77866b42"
+   "r": "cc1e0a221d72774e"
   },
   "4e522d0189713c4e": {
    "c": "VERIFIED",
@@ -12975,12 +12933,6 @@
    "l": 92,
    "t": "MGK-VIIIp — the glass carrying the machine's own opening beat.",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "8cdb4fca77866b42": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 192,
-   "t": "MGK-VIIIp"
   },
   "22185ac737e8b1d6": {
    "c": "HOUSE",
@@ -14969,42 +14921,6 @@
    "c": "HOUSE",
    "s": "Ops' own word - the frame title on a channel with no unit on it. MIKE ruled the object and the phrase is his: 'the reason the fourth has a test signal is unknown'. It is a fact about the machine and not an absence, so it is named rather than apologised for."
   },
-  "dcc9b6d548fabbd0": {
-   "f": "src/data/artists/portal.js",
-   "t": "SIGNAL PRESENT.",
-   "c": "HOUSE",
-   "s": "Ops' own words - the readout under the latch when a machine's signal reaches the selected channel. Deliberately does NOT name the machine: the drum is already engraved with it two bays to the left, and a readout repeating the engraving is the second object saying what the first already said (H6)."
-  },
-  "c02247659dad27c9": {
-   "f": "src/data/artists/portal.js",
-   "t": "TEST SIGNAL. NO UNIT ON THIS CHANNEL.",
-   "c": "HOUSE",
-   "s": "Ops' own words - the readout under the latch on a channel the routing leaves listening and no machine is assigned to. It states the fact and stops. Mike's ruling is that the test signal is a foothold and must not be explained: 'Maybe one of the switches needs flipped? Or maybe there is another module that will come on line?' - so nothing here answers it."
-  },
-  "062a6a5b72860624": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "t": "machine",
-   "c": "HOUSE",
-   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
-  },
-  "41705bbdb1214312": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "t": "none",
-   "c": "HOUSE",
-   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
-  },
-  "d54364f676dd25aa": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "t": "television",
-   "c": "HOUSE",
-   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
-  },
-  "cc6c97c318d08d8f": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "t": "test",
-   "c": "HOUSE",
-   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
-  },
   "f33e72e18a7ecfcd": {
    "f": "src/routes/robots/TestSignal.jsx",
    "t": "sine",
@@ -15315,62 +15231,6 @@
    "c": "HOUSE",
    "s": "the rebuilt FEED bay's first bank state. House word for a patch panel's resting state; the other four states (COLD START / FIRST RUN / LAST STATE / TEST BENCH) are Mike's own engravings, carried unchanged from the drum they replace."
   },
-  "d065ed957ebc12a2": {
-   "f": "src/data/artists/portal.js",
-   "l": 338,
-   "t": "MGK-VIIIp - the close-up",
-   "c": "HOUSE",
-   "s": "frame title for channel 4's photograph. CH4 2026-08-12, MIKE: 'channel 4 is a close-up of the MGK-VIIIp'. The hyphen replaces an em dash; the words are his."
-  },
-  "c2443eb66954dda1": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1579,
-   "t": "wb-robots-open-twin",
-   "c": "HOUSE",
-   "s": "an event name, not a visitor-facing string. Never rendered."
-  },
-  "c4826d227e58caa9": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1663,
-   "t": "FEED",
-   "c": "MIKE",
-   "s": "the FEED bay's engraved legend, unchanged from the drum it replaces. On the panel since R6 and on QC_101 in the installer's hand: 'BROADCASTS ON ......... FEED NO. 3'."
-  },
-  "890430794569ef9f": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1665,
-   "t": "previous bank",
-   "c": "HOUSE",
-   "s": "aria-label on the FEED stepper's up arrow. Assistive text for an unlabelled control; never drawn."
-  },
-  "77ce261d3e95a41d": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1670,
-   "t": "next bank",
-   "c": "HOUSE",
-   "s": "aria-label on the FEED stepper's down arrow. Assistive text for an unlabelled control; never drawn."
-  },
-  "050b2c6bfc7147c6": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1685,
-   "t": "channel {}",
-   "c": "HOUSE",
-   "s": "aria-label on a numbered control - the ANTENNA switch and the screen's channel button. Assistive text; the control itself draws only its number."
-  },
-  "19d951e54f7e3dab": {
-   "f": "src/routes/robots/PortalScreen.jsx",
-   "l": 89,
-   "t": "channel",
-   "c": "HOUSE",
-   "s": "aria-label on the screen's channel button group. Assistive text; never drawn."
-  },
-  "07b5174f16e18049": {
-   "f": "src/routes/robots/PortalScreen.jsx",
-   "l": 94,
-   "t": "channel {}",
-   "c": "HOUSE",
-   "s": "aria-label on a numbered control - the ANTENNA switch and the screen's channel button. Assistive text; the control itself draws only its number."
-  },
   "4719402ae5cb7696": {
    "f": "src/routes/robots/PortalScreen.jsx",
    "l": 106,
@@ -15641,13 +15501,6 @@
    "p": "withSetCookie{}.header",
    "c": "HOUSE"
   },
-  "b8b35faf64daba58": {
-   "c": "MIKE",
-   "f": "src/data/artists/portal.js",
-   "l": 156,
-   "t": "Launch the Portal",
-   "s": "MIKE, 2026-08-26: rename the Portal track to `Launch the Portal`. IT IS A REVERSAL AND NOT A CORRECTION, and the two must stay tellable apart: `Portal` was ruled 2026-08-13, re-confirmed and applied 2026-08-20, MIS-RECORDED by Ops the same day as \"drops `Portal`, keeps `Portal Feed Controller`\" - the opposite of his ruling - and corrected in docs/canon/06-PORTAL.md §4. The correction was Ops fixing its own write-up; this is Mike saying something different, six days later. The `id` stays `portal`."
-  },
   "fb5050b2ea9b504e": {
    "c": "HOUSE",
    "f": "src/routes/robots/PortalScreen.jsx",
@@ -15710,13 +15563,6 @@
    "l": 151,
    "t": "CLICK",
    "s": "MIKE's control legend - the machine's shutter - same supply and same move as SCROLL: `MON_CTL` in public/robots/twin.html, 2026-07-28, his 2x2 order 2026-07-29, carried onto all four channels by his ruling of 2026-08-26."
-  },
-  "e418854c77c6b911": {
-   "c": "MIKE",
-   "f": "src/routes/robots/PortalScreen.jsx",
-   "l": 152,
-   "t": "POWER",
-   "s": "MIKE's control legend - the machine's power switch - same supply and same move as SCROLL. It is the one of the four that latches, and it wears the strip's own ON-AIR register (T6)."
   },
   "8f67818b930b53b9": {
    "c": "MIKE",
@@ -15830,33 +15676,440 @@
    "c": "MIKE",
    "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
-  "c56f474b9663cd4a": {
-   "f": "src/routes/WbHome.jsx",
-   "t": "Weird.Baby \\Robots",
-   "l": 964,
-   "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  "37f626fb08688214": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 92,
+   "t": "none",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
   },
-  "dd9a4da545c4fe5b": {
-   "f": "src/routes/WbHome.jsx",
-   "t": "Weird.Baby \\Music",
-   "l": 980,
-   "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  "73161cf5e72a5365": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 93,
+   "t": "television",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
   },
-  "a9395b71d8e971a9": {
-   "f": "src/routes/WbHome.jsx",
-   "t": "Weird.Baby \\Worth a Listen",
-   "l": 1019,
-   "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+  "bf50ef73527cf6e9": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 94,
+   "t": "machine",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
   },
-  "507d99328f9a2473": {
-   "f": "src/routes/WbHome.jsx",
-   "t": "Weird.Baby \\Foundation",
-   "l": 1051,
+  "c1fed9842900f46b": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 94,
+   "t": "test",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "88f0830dcbef791e": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 298,
+   "t": "wb-robots-open-twin",
+   "c": "HOUSE",
+   "s": "an event name, not a visitor-facing string. Never rendered."
+  },
+  "fcd82130d2e316aa": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 389,
+   "t": "FEED",
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "the FEED bay's engraved legend, unchanged from the drum it replaces. On the panel since R6 and on QC_101 in the installer's hand: 'BROADCASTS ON ......... FEED NO. 3'."
+  },
+  "46234b83e002026a": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 391,
+   "t": "previous bank",
+   "c": "HOUSE",
+   "s": "aria-label on the FEED stepper's up arrow. Assistive text for an unlabelled control; never drawn."
+  },
+  "79db494690324357": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 391,
+   "t": "▲",
+   "c": "HOUSE"
+  },
+  "a7b872c07dd75830": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 396,
+   "t": "next bank",
+   "c": "HOUSE",
+   "s": "aria-label on the FEED stepper's down arrow. Assistive text for an unlabelled control; never drawn."
+  },
+  "c1377306b7ca4783": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 396,
+   "t": "▼",
+   "c": "HOUSE"
+  },
+  "935283dce00ff568": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 411,
+   "t": "channel {}",
+   "c": "HOUSE",
+   "s": "aria-label on a numbered control - the ANTENNA switch and the screen's channel button. Assistive text; the control itself draws only its number."
+  },
+  "ee55c799ed984cbb": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 430,
+   "t": "source: ",
+   "c": "HOUSE"
+  },
+  "f77588c410d4528d": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 453,
+   "t": "LATCH",
+   "c": "HOUSE"
+  },
+  "1e4a5d1c0b3fa483": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 458,
+   "t": "ARMED",
+   "c": "HOUSE"
+  },
+  "47a9d3c97e5342d4": {
+   "f": "src/routes/exhibit/instrument-panel.jsx",
+   "l": 459,
+   "t": "NOT ARMED",
+   "c": "HOUSE"
+  },
+  "9c3799b7e0ec2afe": {
+   "f": "src/data/artists/portal.js",
+   "l": 568,
+   "t": "TERMINAL.EXE",
+   "c": "MIKE",
+   "s": "the filename Record 004's cracked-ZIP listing carries, verbatim. Mike: \"use the filenames the Record already carries.\" Not authored here - the only runnable file in that listing."
+  },
+  "1782dd5069e3d105": {
+   "f": "src/data/artists/portal.js",
+   "l": 588,
+   "t": "> TERMINAL.EXE",
+   "c": "MIKE",
+   "s": "boot line 1. The filename from Record 004's listing, in the shape Mike gave: \"Monitor pops up: > program.bat_or_exe_or_?\""
+  },
+  "5b628f17bfdc2c1e": {
+   "f": "src/data/artists/portal.js",
+   "l": 589,
+   "t": "> UNIX-6x Emulator",
+   "c": "MIKE",
+   "s": "boot line 2. Record 005's own words - \"Portal is now up and running on our UNIX-6x Emulator.\" Canon 06-PORTAL 10.1 permits the name and forbids explaining it."
+  },
+  "ef00a060d58e49e1": {
+   "f": "src/data/artists/portal.js",
+   "l": 590,
+   "t": "> Loading......",
+   "c": "MIKE",
+   "s": "boot line 3. Mike's own, verbatim, his six dots: \"> Loading......\""
+  },
+  "4269d892e207f39f": {
+   "f": "src/data/artists/portal.js",
+   "l": 591,
+   "t": "> PORTAL_2v16.CFG",
+   "c": "MIKE",
+   "s": "boot line 4. The config filename from Record 004's listing, its lowercase v intact. Mike: \"maybe mention the cfg file.\""
+  },
+  "3242beb6f1763748": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 662,
+   "t": "TERMINAL.EXE",
+   "c": "MIKE",
+   "s": "the filename Record 004's cracked-ZIP listing carries, verbatim. Mike: \"use the filenames the Record already carries.\" Not authored here - the only runnable file in that listing."
+  },
+  "d72277c18fd42f8d": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 663,
+   "t": "ROOT/PORTAL",
+   "c": "MIKE",
+   "s": "the attachment's source line. The path Record 004's own listing draws - ROOT, then /PORTAL, with TERMINAL.EXE inside it."
+  },
+  "0ab6ac17567f4b07": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 664,
+   "t": "Runs on the UNIX-6x Emulator. Reads PORTAL_2v16.CFG.",
+   "c": "HOUSE",
+   "s": "the attachment's extract - Ops' one sentence, assembled from two published facts and no third: Record 005's emulator line and Record 004's listing. Nothing about what UNIX-6x IS."
+  },
+  "e9e288630aab9101": {
+   "f": "src/routes/exhibit/RecordAttachments.jsx",
+   "l": 143,
+   "t": "run {}",
+   "c": "HOUSE",
+   "s": "the run row's tooltip frame, assembled at runtime around the attachment's own name. Chrome, not content - the same shape as the door icons' 'open ... in the reader'."
+  },
+  "a68e6280a476bad3": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 104,
+   "t": "finish loading",
+   "c": "HOUSE",
+   "s": "aria-label on the invisible node that finishes the boot on a press. Assistive text for a control that carries no lettering on purpose - a caption saying SKIP would be the museum explaining its own machine."
+  },
+  "d989855b37d136b1": {
+   "f": "src/routes/robots/feed-control.js",
+   "l": 49,
+   "t": "test",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "5a3b5f2cb588f9ee": {
+   "f": "src/routes/robots/feed-control.js",
+   "l": 48,
+   "t": "television",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "38029a6e45758084": {
+   "f": "src/routes/robots/feed-control.js",
+   "l": 49,
+   "t": "machine",
+   "c": "HOUSE",
+   "s": "a channel resolution, one of four. an internal identifier, not a visitor-facing string - the same class as the lamp names `warm` and `amber` two bays over, filed the same way."
+  },
+  "b4c2616b1685b3f4": {
+   "f": "src/routes/robots/feed-control.js",
+   "l": 180,
+   "t": "wb-robots-open-twin",
+   "c": "HOUSE",
+   "s": "an event name, not a visitor-facing string. Never rendered."
+  },
+  "c30b0edd84090ca6": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 115,
+   "t": "FEED",
+   "c": "MIKE",
+   "s": "the feed command's word on the console, and it is the panel's engraved legend carried onto the monitor unchanged. On QC_101 in the installer's hand: 'BROADCASTS ON ......... FEED NO. 3'. Mike's ruling moved the FUNCTION to the monitor; the word is his either way."
+  },
+  "f4e1b3c7d64bcd3a": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 127,
+   "t": "channel {}",
+   "c": "HOUSE",
+   "s": "aria-label frame on one of the antenna's four digits, assembled around the channel number. Assistive text for a control whose whole lettering is a 1 or a 0."
+  },
+  "d7dcd5b6d743b796": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 160,
+   "t": "RUN",
+   "c": "HOUSE",
+   "s": "Ops' word for the command that was the LATCH. `Mon_DOS` runs COMMANDS rather than throwing switches, so a latch becomes a verb when it moves onto the monitor - Mike's 'Make it MONITOR-esque'. The latch's own legend is HOUSE too."
+  },
+  "6bb066674db393ba": {
+   "f": "src/routes/robots/PortalConsole.css",
+   "l": 133,
+   "t": "\\2588",
+   "c": "HOUSE",
+   "s": "the blinking block cursor at the console's prompt, written as a CSS escape in a `content` property. `Mon_DOS` in twin.html blinks a filled rect in exactly this position; this is that mark in a stylesheet. It is a glyph, not a word - nothing reads it and nothing is being said."
+  },
+  "412bf3c780a14eb8": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 996,
+   "t": "\\Robots",
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Robots' to '\\Robots'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Robots is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
+  },
+  "2b6526a2010d5ea4": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 1012,
+   "t": "\\Music",
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Music' to '\\Music'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Music is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
+  },
+  "4660e85315ae2175": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 1068,
+   "t": "\\Worth a Listen",
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Worth a Listen' to '\\Worth a Listen'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Worth a Listen is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
+  },
+  "351385bda6da67c6": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 1100,
+   "t": "\\Foundation",
+   "c": "MIKE",
+   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Foundation' to '\\Foundation'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Foundation is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
+  },
+  "9fc14119360b5771": {
+   "f": "src/data/artists/portal.js",
+   "l": 558,
+   "t": "> Closing......",
+   "c": "HOUSE",
+   "s": "Ops' word, in Mike's shape, and filed HOUSE rather than MIKE ON PURPOSE. He ruled the ACT - \"X RUNS A VISIBLE CLEAN SHUTDOWN - quick, but it happens - then lands back on the ALBUM\" - and the halt is his own boot played backwards so that it names no noun the museum has not already published: `TERMINAL.EXE` and `PORTAL_2v16.CFG` are Record 004's cracked-ZIP listing and `UNIX-6x Emulator` is Record 005's line, all three already declared MIKE. **THE ONE WORD THAT IS NOT HIS IS `Closing`**, which Ops substituted for his `Loading`. The six dots ARE his punctuation, carried from `> Loading......` as typed. A word Ops chose must not sit in his class: a paraphrase filed as MIKE is indistinguishable from his own sentence a week later, which is the whole reason the three-mark scheme exists. Round log: docs/MUSEUM_TERMINAL_AND_CONTROLS_LOG-20260827.md."
+  },
+  "c8a8d930a6cba239": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 264,
+   "t": "feed",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a cursor stop key - the FEED row, one of the fields SCROLL can land on. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "1c5af554acec4270": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 277,
+   "t": "ant",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a cursor stop key - one of the aerial's four switch positions. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "1ed7b1fcd3ed6f8c": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 291,
+   "t": "dial",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a cursor stop key - the SOURCE row. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "b27b7bef3299d8c8": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 305,
+   "t": "run",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a cursor stop key - the RUN row, which leaves the rotation entirely while the feed will not start. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "07f027440b91434f": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 164,
+   "t": "halt",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - the name of TERMINAL.EXE's third phase, the visible clean shutdown Mike ruled the [X] must run. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "a9ce02a59585bcc1": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 164,
+   "t": "panel",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - the name of TERMINAL.EXE's second phase, after the screen clears and the CGA-fat launch panel is drawn. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "7f425a82b59bbec6": {
+   "f": "src/routes/robots/PortalConsole.jsx",
+   "l": 164,
+   "t": "boot",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - the name of TERMINAL.EXE's first phase, while the four boot lines type themselves out. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "19d951e54f7e3dab": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 465,
+   "t": "channel",
+   "c": "HOUSE",
+   "s": "aria-label on the screen's channel button group. Assistive text; never drawn. IT WAS PRUNED ON 2026-08-27 AND RESTORED THE SAME DAY: Mike ruled the four digits away (\"You do not change channels, as there are none\"), then scoped that ruling to the bare terminal once he found himself with no way to change channel on the television - so the strip is back on the surfaces that carry a channel and absent from the one that does not. The row is the row it always was; nothing about the string or its class moved."
+  },
+  "07b5174f16e18049": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 472,
+   "t": "channel {}",
+   "c": "HOUSE",
+   "s": "aria-label on a numbered control - the ANTENNA switch and the screen's channel button. Assistive text; the control itself draws only its number. Pruned and restored on 2026-08-27 with the digit strip; see the `channel` row for why it made the round trip."
+  },
+  "346758a5c6dfc8d9": {
+   "f": "src/routes/robots/TestSignal.jsx",
+   "l": 101,
+   "t": "{},{}",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG PATH SYNTAX that draws the barrel-bent monoscope card. Every mark on that card is emitted through `bend()` so its geometry is the geometry a curved tube would give it, which means the straight primitives (`<line>`, `<rect>`, `<circle>`) are gone and each mark is a sampled path. These literals are the `M`, `L` and `Z` commands and the coordinate separator that assemble one. Kept to six fragments rather than dozens for the reason the knockout's own note gives: a register full of markup trains everyone to skim the list. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "bb388884937478d9": {
+   "f": "src/routes/robots/TestSignal.jsx",
+   "l": 119,
+   "t": "L",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG PATH SYNTAX that draws the barrel-bent monoscope card. Every mark on that card is emitted through `bend()` so its geometry is the geometry a curved tube would give it, which means the straight primitives (`<line>`, `<rect>`, `<circle>`) are gone and each mark is a sampled path. These literals are the `M`, `L` and `Z` commands and the coordinate separator that assemble one. Kept to six fragments rather than dozens for the reason the knockout's own note gives: a register full of markup trains everyone to skim the list. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "1e172509ae41cc4f": {
+   "f": "src/routes/robots/TestSignal.jsx",
+   "l": 110,
+   "t": "M{}",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG PATH SYNTAX that draws the barrel-bent monoscope card. Every mark on that card is emitted through `bend()` so its geometry is the geometry a curved tube would give it, which means the straight primitives (`<line>`, `<rect>`, `<circle>`) are gone and each mark is a sampled path. These literals are the `M`, `L` and `Z` commands and the coordinate separator that assemble one. Kept to six fragments rather than dozens for the reason the knockout's own note gives: a register full of markup trains everyone to skim the list. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "d38dcfda225fc6d3": {
+   "f": "src/routes/robots/TestSignal.jsx",
+   "l": 112,
+   "t": "M{}L{}L{}L{}Z",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG PATH SYNTAX that draws the barrel-bent monoscope card. Every mark on that card is emitted through `bend()` so its geometry is the geometry a curved tube would give it, which means the straight primitives (`<line>`, `<rect>`, `<circle>`) are gone and each mark is a sampled path. These literals are the `M`, `L` and `Z` commands and the coordinate separator that assemble one. Kept to six fragments rather than dozens for the reason the knockout's own note gives: a register full of markup trains everyone to skim the list. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "f04221b391b78276": {
+   "f": "src/routes/robots/TestSignal.jsx",
+   "l": 119,
+   "t": "M",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG PATH SYNTAX that draws the barrel-bent monoscope card. Every mark on that card is emitted through `bend()` so its geometry is the geometry a curved tube would give it, which means the straight primitives (`<line>`, `<rect>`, `<circle>`) are gone and each mark is a sampled path. These literals are the `M`, `L` and `Z` commands and the coordinate separator that assemble one. Kept to six fragments rather than dozens for the reason the knockout's own note gives: a register full of markup trains everyone to skim the list. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "20d96b87a5478d81": {
+   "f": "src/routes/robots/TestSignal.jsx",
+   "l": 121,
+   "t": "{}Z",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - a fragment of the SVG PATH SYNTAX that draws the barrel-bent monoscope card. Every mark on that card is emitted through `bend()` so its geometry is the geometry a curved tube would give it, which means the straight primitives (`<line>`, `<rect>`, `<circle>`) are gone and each mark is a sampled path. These literals are the `M`, `L` and `Z` commands and the coordinate separator that assemble one. Kept to six fragments rather than dozens for the reason the knockout's own note gives: a register full of markup trains everyone to skim the list. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "d065ed957ebc12a2": {
+   "f": "src/data/artists/portal.js",
+   "l": 363,
+   "t": "MGK-VIIIp - the close-up",
+   "c": "HOUSE",
+   "s": "Ops' own words - the accessible name of channel 4, which is the same machine as channel 3 at a closer framing. It names the FRAMING because that is the only thing that distinguishes the two channels; a screen reader told 'MGK-VIIIp' twice would be told nothing. **IT WAS PRUNED AND RESTORED ON 2026-08-27.** Ops read Mike's *\"should show EXACTLY what CH3 shows\"* as IDENTICAL and deleted the channel's own framing with the static photograph it was attached to; he corrected it the same day - *\"Channel 4 is showing me the content that is to live on channel 3 (unzoomed front and top views) instead of the zoomed version\"* - and the words are the words they were. The row is filed HOUSE as it was before: it is assistive text, not a legend on the glass. Round log: docs/MUSEUM_FOUR_RULINGS_LOG-20260827.md."
+  },
+  "bb575d73c9be65d4": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 345,
+   "t": "wb-portal-screen-size",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - the sessionStorage key the monitor's dragged size is held under for the visit. Session and not local, on the twin's own standing rule for the same kind of value: a reload inside a visit keeps the size and a new tab starts at the fit. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "18ce1f8dff769a8c": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 679,
+   "t": "drag to size the monitor",
+   "c": "HOUSE",
+   "s": "Ops' own words - the accessible name of the corner grip that sizes the monitor, the counterpart of `machine controls` and `channel` on the same surface. **THE GESTURE IS MIKE'S ASK, TWICE OVER:** T3, *\"make the monitor CORNER-DRAGGABLE to scale (a grab handle at the corner, drag = resize, session-persist the result)\"*, and again on 2026-08-27, *\"I seem to have lost the ability to drag size the monitor itself, which would solve some problems.\"* The WORDS are Ops': `twin.html`'s own grip carries `resize the monitor` and this one says what it does on a surface where the monitor is the whole set. Never drawn - the control is a corner bracket with no label."
+  },
+  "d1b5db7a367449d7": {
+   "f": "src/data/artists/portal.js",
+   "l": 375,
+   "t": "closeup",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - the name of the second of Mike's two plates, declared on channel 4 and carried to `twin.html` as `?view=closeup`. It selects a PHOTOGRAPH and the aperture geometry read from that photograph's own marker file; it is a key, not a caption. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "530c25d1881fd041": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 440,
+   "t": "2d",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - the canvas context type used to build the displacement map that bends the controls onto the curved glass. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "544a0e97534f3786": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 471,
+   "t": "ps-bend-{}",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - the id of one of the two SVG filters that bend a control group's ink. One per group, numbered, so each group's own displacement map can be written into its own `feImage`. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "a740277c81b4aadd": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 477,
+   "t": "url(#{})",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - the CSS `filter` reference that points a control group at its bend filter. It is never drawn and never read by anyone: the same class as the channel resolutions `machine` and `none`, and as the SVG that punches the glyph out of the latched slug, and it is filed the same way."
+  },
+  "9af3899f5308c9a4": {
+   "f": "src/routes/robots/RobotsExhibitFlow.jsx",
+   "l": 231,
+   "t": "portal-view",
+   "c": "HOUSE",
+   "s": "Ops' machinery, not a visitor-facing string - the third word of the museum/twin message contract, beside `portal-control` and `portal-power`. It tells the LIVE machine which of Mike's two plates the camera is pointed at, so a channel change swaps the picture without reloading the document. **IT EXISTS BECAUSE OF HIS RULING** - \"Changing channels should not cause a VIIIp reboot. These are to be different camera views of the same live unit\" - and it replaced a `?view=` query parameter, which was an ADDRESS and therefore a reload. It is never drawn and never read by anyone: the same class as `portal-control`, and filed the same way."
+  },
+  "75c345cdebea4eef": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 665,
+   "t": "{}%",
+   "s": "Ops' machinery, not a visitor-facing string - the percentage unit on each of the four insets of the frame-shape clip, written once in a helper so the four sides cannot disagree about their unit. It is a CSS unit inside a computed value, never drawn and never read by anyone: the same class as the SVG fragments above it, filed the same way. The numbers it formats are `latch.bezel.safe` in src/data/artists/portal.js, measured off the bezel plate's own alpha channel."
+  },
+  "e3ae2d7ce292636f": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/RobotsExhibitFlow.jsx",
+   "l": 258,
+   "t": "portal-audio",
+   "s": "Ops' machinery, not a visitor-facing string - the fourth word of the museum/twin message contract, beside `portal-control`, `portal-view` and `portal-power`. It tells the LIVE machine to stop being heard while another channel is the picture, and to be heard again when it comes back. **IT EXISTS BECAUSE OF HIS RULING** - 'Sound from VIIIp is heard when on non-VIIIp channels. Fix pls.' - and it mutes the OUTPUT only: the unit keeps running, which is his earlier ruling and is not undone. It is never drawn and never read by anyone: the same class as `portal-view`, and filed the same way."
   }
  }
 }

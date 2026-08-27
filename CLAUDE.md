@@ -789,6 +789,506 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-27 -> ONE LIVE UNIT: THE REBOOT, THE TWO BEZELS, THE STILL CONTROLS (fourteenth packet)
+- **NOTHING NEW NEEDS MIKE.** **NOTHING IS COMMITTED.** Gates: lint **9/7 =
+  baseline** - build green - launch green - provenance **PASS** (1 added, 1
+  pruned) - `reveal:check` - `parity:gate` - `instory:gate` -
+  `docs:numbers:gate` **PASS** - `reveal:day` nothing to move. Log:
+  `docs/MUSEUM_ONE_LIVE_UNIT_LOG-20260827.md`, copy at
+  `C:\AI\_night-20260827\ROUND_LOG_6-20260827.md`.
+- **THE UNIT REBOOTED ON EVERY CHANNEL CHANGE, MEASURED FOUR TIMES BEFORE IT WAS
+  TOUCHED.** Stamping the twin's `window` and reading `performance.timeOrigin`:
+  **a new origin, a new stamp and an uptime of 3.6s on every switch.** Two causes
+  in one line of JSX — CH3->CH4 changed the `src` (channel 4 carried
+  `&view=closeup`) and CH3->television UNMOUNTED the element.
+- **THE FRAME LEFT THE TERNARY AND IS NOW COVERED, NOT UNMOUNTED.** Verified:
+  **one stamp across five channel changes, uptime 3.6 -> 6.1 -> 8.6 -> 11.1 ->
+  13.6s.** **NOT `display:none`, and that is the load-bearing choice** — the
+  emulator's clocks are `setInterval` (`osTick` 50ms, `refreshChrome` 200ms) and
+  a frame outside the render tree is one a browser may stop servicing. That
+  would have been **the version that looks fixed while the unit quietly stops**,
+  which is the shape CH3's resize was fixed in once before and it came back.
+- **THE VIEW BECAME A MESSAGE.** `?view=` is an ADDRESS and therefore a reload;
+  `{wb:"portal-view"}` is a word to a running machine — one `img.src` and one
+  class, the emulator untouched. **A PRESET change still reloads and that is
+  correct**: a bank is a START MODE and those recipes exist to boot it
+  differently. Changing the camera must not reboot it; changing how it starts
+  must.
+- **"TWO BEZELS" — HIS PLATE HAS THE FRAME COMPOSITED INTO IT.** Measured on the
+  two files: where the museum's bezel is opaque **the close-up's pixels are
+  IDENTICAL to it** (31/31, 41/41, 18/18, 26/26, 60/60, 20/20) and the alpha
+  runs match to the pixel. **The 4:3 enlargement scaled his copy 1.0667x against
+  a museum bezel at 1.0**, so both edges showed — nothing wrong with either
+  object, they were drawn at two scales.
+- **`exact: true` DRAWS A REGISTERED PLATE UNTOUCHED.** CH4's feed box is now
+  **100.00% at 0.00%**; CH3 keeps **106.67% at -3.33%**. **The Portal's bezel is
+  NOT suppressed and did not need to be** — his copy stops being visible because
+  it is exactly where the museum's is. **A plate cut on the bezel's own canvas
+  is REGISTERED with the opening, not FITTED to it**, and enlarging a registered
+  picture is the one operation that can only break it.
+- **THE STILL CONTROLS ARE HIS OWN T7 DEFECT, ONE LAYER OUT.** T7, 2026-07-29:
+  *"the control panel must move WITH the glitch."* The fix then was structural —
+  `#feedgroup` holds everything down the wire. **Then the chyron left the twin
+  on 2026-08-26** and became a sibling of the moving group again, further out
+  than where T7 fixed it. **The same defect, reintroduced by a migration.**
+- **THE MACHINE REPORTS ITS OWN DISPLACEMENT** (`portal-jit`, on change only,
+  always returning to 0,0) and the museum composes it with its own tear slip.
+  Verified: at rest none; twin's glitch -> both groups `translate(1px, 0px)`;
+  the tear -> picture `translateX(7px)` and both groups `translate(7px, 0px)`;
+  **the bezel `none` throughout, inline and computed.** That is the other half
+  of T7. And the hit areas travel with them, because it is a transform.
+- **NEW `MG-a`:** one live emulator now runs behind a television for as long as
+  the Portal is open. The honest reading of *"running regardless"*, and a cost
+  nobody has measured — stated so a later round meets it as a decision.
+
+### 2026-08-27 -> CH4's THREE MARKERS, AND THE SEARCH THAT MISSED TWICE (thirteenth packet)
+- **ONE THING NEEDS MIKE'S EYE and it is old.** **NOTHING IS COMMITTED.** Gates:
+  lint **9/7 = baseline** - build green - launch green - provenance **PASS** -
+  `reveal:check` - `parity:gate` - `instory:gate` - `docs:numbers:gate` **PASS**.
+  Log: `docs/MUSEUM_CH4_MARKERS_LOG-20260827.md`, copy at
+  `C:\AI\_night-20260827\ROUND_LOG_5-20260827.md`.
+- **HIS FOLDER IS REACHABLE AND THE TREE ALREADY HELD HIS FILES.**
+  `OneDrive\Desktop - Laptop\ADD TO REPOS\TEMP - Use it or lose it!\Weird.Baby
+  Files\EDITED IMAGES - VIIIp`. **The repo copies are BYTE-IDENTICAL** — marker
+  `d9e04fc1…` and plate `d5d71828…`, both matching. **The only difference is the
+  NAME**: his spaces became underscores on the way in, **which is exactly the
+  shape that makes a filename search miss.** Outside git, same class as
+  `C:\AI\START_HERE.md`; recorded now at the site that uses it.
+- **THE THREE MARKERS ARE HIS THREE, IN HIS ORDER.** Sorted top-to-bottom then
+  left-to-right they come out exactly as he listed: front (863.4, 692.6), top
+  (2139.5, 693.6), both 1071x522; lens dot (861.2, 1935.5), 141x143. **The dot's
+  fill ratio is 0.786 against pi/4 = 0.7854** — the arithmetic saying it is a
+  circle, so the flash keeps its shape and only moves.
+- **CH4 IS FOUR CSS OVERRIDES, NOT A SECOND IMPLEMENTATION.**
+  `body.monbase.closeup` carries one extra class so it outranks `body.monbase`
+  on `left/top/width/height` **while every other property still comes from CH3's
+  rule** — the content, the radius, the gradient, the shadow, the
+  `shutterflash` animation, the S9a feather, the W9 rolling band. Change how a
+  screen behaves and both channels move together.
+- **ALL THREE ELEMENTS VERIFIED LIVE ON BOTH CHANNELS**, to three decimals
+  against his marker, including firing `Click_Flash()` and reading the
+  pseudo-element back. **The toggle is seamless STRUCTURALLY**: both plates are
+  3000x2400, so both stages are 1.25 and the frame does not reflow — measured
+  1052x842 on each.
+- **HE WAS RIGHT TWICE AND OPS HAD REPORTED BOTH AS NEVER-EXISTED.** Monitor
+  resize is `Portal_Grip_In()`, built at `fc4cc80` to his own T3 ask, **still in
+  the file**, made inert by `efc379f` on 2026-08-22 — disabled, not deleted.
+  Channel 4 arrived at **`8e67b5b`, 2026-08-12**, carrying his close-up plate as
+  a static picture on drum position 4. **And `docs/MUSEUM_CHANNEL_4_LOG-20260812.md`
+  was in `docs/` the whole time**, with a section that answers the question
+  outright — including that his marker was filed `role: source`, `ref: null`,
+  **catalogued and never wired.**
+- **THE LIVE TWO-SCREEN CH4 NEVER EXISTED, AND THAT WAS PROVED PROPERLY.**
+  Pickaxe over ALL refs in BOTH repos on the marker centroids and the aperture
+  fractions: **zero.** `--diff-filter=D`: nothing. `git fsck --lost-found`
+  content-scanned: zero. No `closeup` tier in any revision of either twin.
+  **`28.78` returns one commit in all history and it is a Bandcamp audio
+  ingest.**
+- **THE PATTERN IS NOW A §8 HAZARD ROW, because it is a method and not an
+  incident.** A grep of HEAD is blind by construction to the four states lost
+  work is in — **deleted, renamed, in the OTHER repo, or outside git**. **A
+  silence from `grep` is evidence about HEAD and nothing else.** The search that
+  would find it, cheapest first: **(1) read the round log of the day it landed**
+  — one `grep -il` over `docs/`, skipped twice; **(2) `git log --all -S` on
+  CONTENT not NAME**, because the name is what changes; (3) `--diff-filter=D`;
+  (4) **the other repository**; (5) `git fsck --lost-found`; (6) off-git disk.
+  **Steps 1 and 2 alone would have answered both.**
+- **ALMOST NOTHING CHANGED IN THE TREE AND THE REPORT SAYS SO.** The
+  three-element CH4 was built in the twelfth packet and is correct; this round
+  proved it against his artefact and recorded the provenance. **No coordinate
+  moved.**
+- **`CH-d` FROM 2026-08-12 IS REOPENED AS `MF-a`:** his close-up is a composite
+  with an **unfilled lower-right panel** and unread embossed lettering. It sat
+  behind a static picture for a fortnight and is now the live plate at 3.27x.
+
+### 2026-08-27 -> THE MARKERS AND THE GRIP (twelfth packet)
+- **NOTHING NEW NEEDS MIKE BEYOND A LOOK.** Two rulings said INSPECT AND REPORT
+  FIRST and both investigations ran before a line changed. **NOTHING IS
+  COMMITTED.** Gates: lint **9/7 = baseline** - build green - launch green -
+  provenance **PASS** (5 added, 3 pruned) - `reveal:check` - `parity:gate` -
+  `instory:gate` - `docs:numbers:gate` **PASS** - `reveal:day` nothing to move.
+  Log: `docs/MUSEUM_MARKERS_AND_GRIP_LOG-20260827.md`, copy at
+  `C:\AI\_night-20260827\ROUND_LOG_4-20260827.md`.
+- **CH3 AND CH4 ARE TWO PLATES WITH TWO MARKER SETS, AND BOTH MARKER FILES ARE
+  IN THE TREE.** Resolved by connected-component scan, not by eye:
+  `monitor_base_markers.png` (CH3) front **(869.2, 1047.1)** top
+  **(2118.2, 764.0)**, both 327x159; `MGK-TWIN_MONITOR_CLOSE_UP_MARKERS.png`
+  (CH4) front **(863.4, 692.6)** top **(2139.5, 693.6)**, both **1071x522**.
+  Each also carries a lens dot.
+- **CH3's LIVE NUMBERS WERE ALREADY HIS, AND THAT WAS VERIFIED NOT ASSUMED.**
+  `twin.html`'s 28.9667%/43.6250%, 70.6000%/31.8333%, 10.9%x6.625% and the
+  59.4583% flash all match his marker **to a tenth of a pixel**. Nothing about
+  CH3 was ever eyeballed.
+- **AND CH4 IS NOT A CROP OF CH3 — THE MARKERS PROVE IT.** In CH3 the two
+  screens sit **283px apart vertically**; in CH4 they sit **one pixel apart**.
+  No crop, scale or pan produces that. Two shots, two poses, exactly as he said.
+- **OPS WAS WRONG ABOUT THIS TWICE AND THE SECOND TIME WAS WORSE.** First
+  "EXACTLY" was read as identical, deleting the channel; told that was wrong,
+  Ops made it a **3.2x crop of CH3's photograph**, derived by comparing a glass
+  feature between the two images. **A number measured correctly, answering a
+  relationship that does not exist** — which looked like diligence. Both
+  readings threw his artwork away.
+- **`view: "closeup"` -> `?view=closeup` SELECTS THE PLATE AND ITS MARKER
+  GEOMETRY TOGETHER**, because they are the same fact. Verified served: CH4
+  draws `CLOSE_UP.png` with apertures **375.6 x 183.0 at 28.78%/28.86% and
+  71.32%/28.90%** — his marker converted against the canvas, landing exactly —
+  and is live (`unitPowered` true). **CH3's address is unchanged to the
+  character**; a standalone twin is untouched. The derived 3.2x zoom mechanism
+  is **deleted, not left behind a falsy prop**.
+- **THE DRAG-RESIZE'S SHAPE WAS REPORTED BEFORE IT WAS BUILT**, and the report
+  found a real defect. `.ps` scales as one object (everything inside is already
+  `cqw` or % of it), 0.35 to the fit, session-persisted on release, double-click
+  resets. **The ceiling is the fit because above it `.ps-wrap` CROPS THE
+  BEZEL** — the frame is the object.
+- **THE CONSEQUENCE THAT WOULD HAVE BEEN DISCOVERED RATHER THAN NAMED:** the
+  bend is measured from client rects, and a drag writes a CSS variable without
+  a React render or a `resize` event. **Measured before the fix: dragging
+  1000x800 to 700x560 left the `[X]` carrying `translate(12.19px, 5.04px)
+  rotate(6.43deg)` BYTE FOR BYTE** — a bend sized for a frame 43% larger. The
+  drag calls the bend now; verified the scales go 32.41 -> 22.68, exactly 0.7x.
+- **AND ONE MORE, MEASURED:** `@container (max-width: 640px)` on `.pc-root` and
+  `.ps-note` now fires at a size the VISITOR chooses. TERMINAL.EXE reads **27px
+  at the fit, 21.6px at 0.60, 12.6px at 0.35.** Left alone — a dragged-small
+  frame is a small frame — but stated. Row `ME-b`.
+- **THE BARREL MOVED FROM A TRANSFORM TO AN `feDisplacementMap`, WHICH IS THE
+  BETTER MECHANISM.** A CSS filter moves PIXELS and does not touch hit testing,
+  so the ink bends while the box stays on the twin's measured grid. Measured:
+  both groups filtered, maps 1634/1646 bytes, **displacement scales 32.41 and
+  36.86** (±16.2px and ±18.4px of ink), **no button carries a transform**, and
+  **all eight hit tests land on their own button**. The target does not move
+  with the ink — it never moves.
+- **A COMMENT BOUNDARY BROKE FOR THE FOURTH TIME TODAY, THE OTHER WAY ROUND.**
+  The first three orphaned a `*/`; this one SWALLOWED one and `portal.js` would
+  not parse. **The class is not "I append past a closed comment" — it is that I
+  edit comment blocks by text replacement without checking the delimiters
+  survive.**
+
+### 2026-08-27 -> THE CURSOR, THE BARREL, CH4's ZOOM AND THE GRIP (eleventh packet)
+- **ONE LOOK NEEDS MIKE.** He reviewed the tenth packet (*"NICE!!!"*) and ruled
+  four things; two said INSPECT FIRST and both investigations ran before a line
+  changed. **NOTHING IS COMMITTED.** Gates: lint **9/7 = baseline** - build green
+  - launch build green - provenance **PASS** (6 added, 2 pruned, 0 inbound
+  chains) - `reveal:check` - `parity:gate` - `instory:gate` -
+  `docs:numbers:gate` **PASS**. Log:
+  `docs/MUSEUM_FOUR_RULINGS_LOG-20260827.md`, copy at
+  `C:\AI\_night-20260827\ROUND_LOG_3-20260827.md`.
+- **"THE ONSCREEN CONTROLS HAVE NO EFFECT APPLIED" — HE WAS RIGHT, AND THE
+  MEASUREMENT SAID WHY.** The ink WAS moving (up to 12.33px) but **no button was
+  reshaped — width and height changed by 0.000 on all five, tilt 0°.** A
+  translation is not a distortion. And **the group sits entirely in one
+  quadrant**, so a radial field gives it a near-constant gradient: all five keys
+  moved the same way by almost the same amount, which reads as nothing.
+- **THE FIX WAS TO SUBTRACT THE MEAN AND ADD THE SHEAR.** The uniform part was
+  invisible AND was the part that would relocate the group off the twin's own
+  measured coordinates. With it gone the coefficient can rise: now **tilt 1.20°
+  -> 6.43° across the strip, scale 0.984 -> 0.965, every button reshaped.**
+- **AND THE POSITIONAL TERM HAD TO BE HELD BACK.** A first pass at 0.34 measured
+  **70.05px of spread along the strip against 29.24px across it** — five keys
+  that exactly fill a 311px box cannot fan out by 70px without becoming a
+  different object, and the 2x2 above shares that box's edge by arithmetic.
+  **A lens bows a row of keys; it does not pull them apart.**
+- **HIS INVARIANT PROVED, NOT ASSERTED:** every part of the bend is a
+  `transform`, so hit testing travels with the ink. `elementFromPoint` at each
+  warped key's visual centre returns that key, **five of five**.
+- **THE DRAG-RESIZE WAS NEVER REMOVED — IT HAS BEEN INERT SINCE 2026-08-22.**
+  `git log -S "Framed_Fit"` gives `efc379f` (introduced) and `b56cc0e` (touched).
+  **`b56cc0e`, the 4:3 crop and the obvious suspect, is NOT the cause** — the
+  disabling rule is byte-identical in both and at HEAD. Measured in a framed
+  twin: the grip is in the DOM at `opacity:.34`, `Portal_Size_Set` RUNS, and the
+  stage reads **1185x948 before, at 140vh and at 50vh**. He was pulling a
+  control that was drawn, wired, and moved nothing.
+- **`efc379f`'s RULE STANDS; THE HANDLE WAS THE DEFECT.** A picture that resizes
+  under a frame that cannot resize with it would never register — correct, and
+  not reversed. What was wrong was leaving the handle drawn. Hidden framed now
+  (standalone unchanged), and **the gesture is restored one layer out** on
+  `.ps` — bezel, picture, controls and way out together, the twin's own mapping
+  and its session rule. Measured: **1000x800 -> 740x592**, aspect held,
+  persisted `0.74`, double-click back to fit.
+- **"EXACTLY" WAS OPS' PARAPHRASE AND IT COST CH4 ITS ZOOM.** The brief said
+  *"should show EXACTLY what CH3 shows"*; he meant RESPONSIVE like CH3, and
+  **his own next sentence said so** — *"two zooms of the same unit."* CH4 is the
+  live twin at **exactly 3.200x**, verified, with the scale **derived from the
+  plate it replaces** (the same glass feature: 1014px vs 324px, and 981 vs 297).
+  **It is layout, not `transform: scale()`** — a bigger iframe BOX, so the twin
+  lays out larger and is sharp, which is the failure the top-screen enlargement
+  was reverted for this morning. The top glass draws **370.4 x 180.1** against
+  114.66 x 55.75 on CH3.
+- **AND CH4 IS NOT THE ANSWER TO `MD-a`, WHICH IS SAID PLAINLY:** the canvas is
+  still 384x192, so it is the same pixels drawn larger.
+- **THE CURSOR LANDS ON THE VALUE NOW** — *"Scroll to READY (not to RUN)."* The
+  first cut contradicted its own argument by marking the one half of the row
+  that never changes. **The aerial was already right and is the proof of the
+  rule.** Measured: `READY` computes the ink background, `RUN` computes
+  transparent.
+- **THREE DEFECTS OF MY OWN.** I appended prose past a closed comment **for the
+  third time** (vite 500, empty page). **My own regex reported the barrel's
+  translate as zero when it was not** — Chrome normalises `translate(-28.62px,
+  -12.11px)` with a space after the comma and my pattern had none, so I nearly
+  diagnosed a working feature as broken; **a regex over a normalised value is a
+  probe, and §0 applies to it.** And the rig served a pre-edit module once.
+
+### 2026-08-27 -> TERMINAL.EXE, THE CONTROL SETS AND THE BARREL (tenth packet)
+- **FIVE THINGS NEED MIKE AND FOUR ARE ONE WORD EACH.** He reviewed the ninth
+  packet served (*"Overall looks good"*) and ruled this one whole. **NOTHING IS
+  COMMITTED.** Gates: lint **9/7 = baseline** - build green - launch build green
+  - provenance **PASS** (18 added, 5 pruned, 0 inbound chains) - `reveal:check` -
+  `parity:gate` - `instory:gate` - `docs:numbers:gate` **PASS**. Log:
+  `docs/MUSEUM_TERMINAL_AND_CONTROLS_LOG-20260827.md`, copy at
+  `C:\AI\_night-20260827\ROUND_LOG_2-20260827.md`.
+- **"MODE A" AND "MODE B" ARE RETIRED, AND THE NAME WAS CAUSING THE BUG.** Mike:
+  *"stop calling it Mode A and Mode B. This one is TERMINAL.EXE."* There was
+  never a Mode A — there is the television, the machine on channel 3, the test
+  signal, and TERMINAL.EXE. Naming three surfaces after the fourth's absence is
+  what produced a single boolean `controls` gating the word group and the digit
+  strip **together**, which is why the wrong controls were on the wrong screens.
+  **17 substitutions across 8 files, all comment text**; checked first that zero
+  register rows carry either phrase in a visitor-facing string.
+- **THREE CONTROL SETS, DECLARED NOT BRANCHED.** *"It's OK for TV channels to
+  have a different control set than the VIIIp controls."* Television `1 2 3 4 X`
+  · CH3 `SCROLL CLICK SHAKE 1 2 3 4 X` · TERMINAL.EXE `SCROLL CLICK X` — all
+  three verified served. **The boolean could not express what he ruled**: words
+  without digits was not expressible at all. Two independent declarations now.
+- **POWER CAME OFF, AND IT WAS MEASURED BEFORE IT WAS CUT.** `Power_Standby()`
+  says the unit arrives OFF and POWER starts it — if true, removing POWER would
+  have left channel 3 permanently dead. **Two readings taken first:**
+  `unitPowered=true` inside the frame with POWER never pressed, and the museum's
+  own mirror latched. Every arming bank carries `power:"on"`. **Reading the
+  recipe would not have been evidence; the page was.**
+- **1 2 3 4 X CAME BACK AND IT IS A SCOPE, NOT A REVERSAL** — *there are no
+  channels* was about the bare terminal, and he got stuck with no way to change
+  channel on the TV. `feedChannel` still decides what RUN opens; nothing from
+  yesterday is undone. **The round trip cost one line each way, which is the
+  argument for having deleted both ends**: a dead listener would have made the
+  restoration invisible in the diff.
+- **SCROLL AND CLICK, AND A NON-CHANGEABLE FIELD CANNOT TAKE THE CURSOR.**
+  Measured: seven stops wrapping `ANT1..4 -> SOURCE -> RUN -> FEED`; CLICK acts
+  on the stop it stands on. With a bank that does not arm, **RUN reads NOT READY
+  in the open and the rotation drops to six with RUN unreachable.** *"A cursor
+  that can only stand on a changeable field IS the mark"* — which is why he
+  struck his own idea of underlines and asterisks.
+- **THE SCREEN CLEARS, THE PANEL IS CGA-FAT, AND THE HALT IS THE BOOT
+  BACKWARDS.** `> PORTAL_2v16.CFG / > Closing...... / > UNIX-6x Emulator / >
+  TERMINAL.EXE` — **no noun that was not already published**, his six dots
+  carried. **`Closing` is Ops' word and is filed HOUSE, not MIKE.** Measured:
+  panel gone at 110ms, four lines out by 770ms, **overlay closed at 880ms**.
+- **THE BARREL'S SIGN WAS WRONG ON PAPER FIRST.** `r(1+kr²)` moves corners
+  further than mid-edges, which is **pincushion**. Verified on the rendered
+  path: top edge midpoint **6.84 units ABOVE its pinned corners** — barrel. The
+  card's geometry is BENT, not filtered (42 paths, 0 straight primitives): a
+  filter would resample 0.7-wide hairlines into mush.
+- **AND THE CONTROLS BENT THE WRONG WAY FIRST, PAST MY OWN WRITTEN REASONING.**
+  The comment explaining why `offsetLeft` was the right choice was already in
+  the file; **`offsetLeft` is relative to the nearest POSITIONED ancestor**,
+  which is `.ps-ctl`, not the frame. Measured `SCROLL translate(-30.32px,
+  -26.33px)` for a button in the lower-RIGHT quadrant. **A stated rationale is
+  not a measurement.** Fixed with rects + a clear-first pass.
+- **THE PANE'S VIEWPORT COLLAPSED TO `innerWidth: 0` MID-ROUND**, and every rect
+  went to zero — which looked exactly like a regression in the component I had
+  just rewritten, with §8's *circular size resolves to zero* describing that very
+  element. **Settled by walking the ancestor chain**: `.ex-root` was 16px too.
+  Fixed by a sized same-origin iframe rig (1280x800); every geometric claim was
+  re-taken in it. Three more probe faults, same family: a period-6 scroll walk
+  that was really 7 (React had not committed), `MutationObserver` reporting 0
+  mutations, and a boot that looked stuck for 8s then advanced (coalesced
+  timers). **None of them was the build.**
+- **THE LINTER FOUND TWO REAL DEFECTS AND BOTH WERE FIXED, NOT SUPPRESSED**:
+  `set-state-in-effect` on the phase (**the same rule this wing corrected itself
+  on last round**) and a component created during render, which resets its
+  subtree every pass — fatal on a screen whose whole job is a cursor sitting
+  still. **And one invented string was REMOVED rather than declared:** a
+  `|| "SOURCE"` fallback legend the code it replaced did not have.
+- **THE TOP SCREEN IS REVERTED ON HIS LOOK** — *"put it back how it was because
+  at least it was readable"*. `maskTop` and `maskFront` now measure identically.
+  **Why bigger was worse:** the glass is a fixed 128x64 canvas, so enlarging
+  adds no pixels of type — it magnifies the scanline gaps with it. The
+  readability question is FILED (`MD-a`), not solved.
+- **THE TITLE BARS ALREADY COMPLIED** and nothing changed; three other surfaces
+  still carry the full form and **none is a title bar** — flagged, not changed,
+  because one of them is a full form he ruled on purpose.
+
+### 2026-08-27 -> THE CHANNELS, THE TEARS AND THE BOARD (ninth packet)
+- **TWO THINGS NEED MIKE AND BOTH ARE LOOKS WITH A NUMBER ATTACHED**, plus the
+  review he asked for and did not get last round. **NOTHING IS COMMITTED.**
+  Gates: lint **9/7 = baseline** - build green - launch build green - provenance
+  **PASS** (5 added, 7 pruned, **0 surviving rows changed**) - `reveal:check` -
+  `parity:gate` - `instory:gate` - `docs:numbers:gate` **PASS** - `reveal:day`
+  nothing to move. Log: `docs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md`, copy
+  at `C:\AI\_night-20260827\ROUND_LOG-20260827.md`. Served at
+  `http://localhost:5173/robots` -> Portal -> `01 TERMINAL.EXE`.
+- **THE CHANNEL STRIP WAS A CONTROL THAT DID NOTHING, AND THAT WAS MEASURED
+  BEFORE IT WAS TOUCHED.** At the declared default `1111` all four positions
+  resolve to television, so pressing `3` lit the `3` and left the same picture
+  playing. Mike's ruling — *"You do not change channels, as there are none. The
+  channels are inherent to the feed"* — is the correct diagnosis, not a
+  preference. The four digits and `wb-portal-select-channel` went **both ends
+  together**; `feedChannel` makes the ROUTING the selection (lowest CAB
+  position, else channel 1), which is the declaration's own sentence: *"every
+  channel taken, nothing listening."* **RUN was `chRows[0].ch`** — his own
+  *launches it, on channel 1* — and with the buttons gone that one line would
+  have made three channels of four unreachable. Verified served: `1111` ->
+  television, `0111` -> test signal, `1101` and `1110` -> the machine.
+- **FOUR REVERSALS, EACH RECORDED AS A REVERSAL AT THE SITE WHERE THE OLD RULE
+  WAS ARGUED** — the channel strip, the view-wide tear (CR1/FORK A (b)), CH4's
+  close-up, and `f366d37`'s house name on the board. **None of the four old
+  arguments was deleted**; three are still correct about what they were arguing
+  and were outweighed rather than refuted. §8 of the round log tabulates all
+  four in one place for a session that later finds the tree contradicting canon.
+- **THE TEAR IS CROPPED BY THE OPENING AND NOTHING WAS ADDED TO MAKE IT.**
+  `.ps-feed` is `z-index:0` (a stacking context) under `.ps-bezel` at `z-index:1`
+  — the same mechanism that makes the curved edge a crop — and the bezel PNG is
+  opaque across the band (measured on its own alpha: opaque `1..221`, opening
+  `222..2773`, opaque `2774..2989`). It is a **sibling of `.ps-slip`, not a
+  child**: the slip moves the picture, the tear is the seam it moved AT.
+  Height is now a share of the picture; `1.1` drew 7.92px as `vh` and **7.9px**
+  as `%`. No number in `TEAR_SCRIPT` changed.
+- **THE 08-26 RESIZE FIX WAS ONE OF THREE STATES AND ITS PROBE COULD NOT SEE THE
+  OTHER TWO.** It verified by removing the injected rule from an already-settled
+  twin, which only ever measures that rule. Measured live pre-fix: **679.8 x
+  332.9 @16.8 -> 546.1 x 436.9 @16.8 -> 944.8 x 755.8 @0**, the last scheduled by
+  the network fetch that adds `body.portal`. Uncapping was not enough because
+  each tier declares its own `display` and `aspect-ratio`; the framed stage is
+  now declared whole. Proved by construction: **945 x 756 at x 0 in all three
+  tiers**, against 945 x **8736** in the first tier under the 08-26 rule alone.
+- **THE FRONT-GLASS VIGNETTE WAS FOUND BY ELIMINATION, NOT ASSUMED.**
+  `elementsFromPoint` down the stack at `#maskFront`'s centre: the only mask,
+  filter, opacity or blend anywhere on it is S9a's feather. Halved on the front
+  ONLY (4% -> 2%, 1.2% -> 0.6%); T keeps it, because T also carries the W9
+  rolling band and he named the front.
+- **I LOOKED AS HE ASKED AND MY NUMBER IS NOT HIS, SO BOTH ARE ON THE RECORD.**
+  The top aperture is +19.99% as ruled, but the photographed glass measures
+  **~304 x 108** against an aperture that was **327 x 159 before** — already
+  taller than the glass. *"Go look, but I est 20%"* asks for a number back, not
+  a substitution: his number is built, the measurement is row `MC-b`.
+- **THE BACKSLASH HAZARD FIRED TWICE BEFORE A SINGLE CHARACTER WAS VERIFIED** —
+  a shell counter died on `grep: Trailing backslash` and a `node -e` on
+  `Unterminated regexp literal`. Both probes moved to files. **Counted on disk:**
+  one backslash in each of the four labels and each of the four new register
+  rows. All four glyphs land at **x 167.85** desktop and **x 58.70** at a true
+  390px. The row that was C36's binding case went from F7's 16px of slack to
+  **125.41px**.
+- **THREE STALE-EVIDENCE CLASSES CAUGHT IN ONE ROUND, ALL BY SUSPECTING THE
+  PROBE.** `ResizeObserver` delivered **zero** callbacks (delivery rides the
+  rendering steps, which this pane does not run — the rAF family again);
+  `elementsFromPoint` named the iframe as topmost over the tear because both the
+  tear and the bezel are `pointer-events:none`, so **a hit test cannot answer a
+  paint-order question**; and the prune removed **seven** rows where six were
+  predicted — the seventh was checked rather than accepted and was correct.
+- **I WROTE A FALSE CLAIM AND THE GREP THAT PROVED IT WAS MINE.** A note said
+  *"zero references to `wb-portal-select-channel` remain in either repository"*;
+  `instrument-panel.jsx` still has one, on purpose. Corrected at the site — a
+  retired component's internals are its account of itself, it mounts on
+  `face.panel`, nothing declares that, and **unmounted code registers nothing.**
+- **NO PIXEL SCREENSHOT** — the pane did not composite on any attempt.
+
+### 2026-08-26 -> THE BIG CHANGE: THE FEED GOES ON THE MONITOR (eighth packet)
+- **NOTHING BLOCKS IT AND NOTHING IS COMMITTED — Mike reviews the look first.**
+  Gates: lint **9/7 = baseline** - build green - provenance **PASS** -
+  `reveal:check` - `parity:gate` - `instory:gate` - `docs:numbers:gate` **PASS**.
+  Log: `docs/MUSEUM_BIG_CHANGE_LOG-20260826.md`; served at
+  `http://localhost:5173/robots` -> Portal -> `01 TERMINAL.EXE`.
+- **"TV - I CANNOT CHANGE CHANNELS" WAS REAL, LIVE AND MINE.** Measured both
+  routes: via the album panel the face stays mounted behind the overlay and
+  pressing 3 lit 3; **via Mode B the `.ip` count went 1 -> 0 at the same instant
+  the digit strip appeared.** `wb-portal-select-channel` was answered inside the
+  panel COMPONENT, and Mode B's console IS the overlay's content — **the strip's
+  only listener was destroyed by the act that showed the strip.** Closed by
+  moving the state to `feed-control.js`, owned by `RobotsExhibitFlow`, which owns
+  the overlay: **the listener now outlives the strip.**
+- **"HW Feed Monitor" NAMES NO OBJECT IN EITHER REPO**, so the reading is stated
+  with its evidence rather than assumed: `Launch the Portal`'s FACE *was* the
+  hardware feed panel and nothing else drew it, so his two rulings are one act.
+- **THE SIGNAL MESSAGES WERE LOOKED UP BEFORE BEING DELETED**, because *"unless
+  I prescribed it"* is the whole instruction. Both read **HOUSE** and both
+  sources say *"Ops' own words"*. **`Test signal` and `Television` SURVIVE** —
+  they are accessible NAMES, not messages, and deleting them would leave two
+  channels unnamed for assistive tech.
+- **THE MONITOR'S CHARACTER WAS NOT INVENTED.** `twin.html`'s `Mon_DOS` already
+  writes a `>` prompt, a short uppercase command typed a character at a time,
+  terse output lines and a blinking block — under its own rule **"OS voice, zero
+  personality"** — and `Mon_EventsLine` writes ALL-CAPS state lines. **A bay
+  becomes a line.** No knob, no lamp, no 2x2: that is the foolish version he
+  named and it is what Mode B's first cut did.
+- **ONE INK, AND ON IS INVERTED RATHER THAN BRIGHTER.** He struck the `[X]`
+  partly for being *"bright instead of matching the other text on this screen"*,
+  so the console has exactly one value — the twin's own `CARD_OFF` — and a live
+  control knocks out instead of lighting up, which is what the digit strip
+  already does.
+- **THE PHONE CASE STOPPED BEING A CONSTRAINT, AND THAT IS EVIDENCE.** The
+  hardware panel fitted a 251px opening by **1.4px** and the boot had to be
+  hidden. A terminal is nine lines and reflows by one size: **all nine rows
+  inside at 375px with the boot KEPT.** `MB-b` closes because the thing it
+  described no longer exists.
+- **FOUR DEFECTS OF MY OWN.** The antenna defaulted **`0000` against a declared
+  `1111`** — the hook mounts before the declaration arrives and `useState`
+  initialises once, so RUN landed on the test signal instead of television;
+  fixed with the *adjust-state-when-a-prop-changes* pattern during render, NOT an
+  effect. The prune **broke two `RESTATED` chains** (§9's named hazard),
+  repointed onto the live `MGK-VIIIp` row. I appended prose past a closed comment
+  for the **second time this session**. And **the dev server served one module as
+  EMPTY while the build was green** — a stale vite transform cache, found by
+  curling the module and comparing bytes, cleared by a byte-identical rewrite.
+  **§8's *suspect the probe before the site* reaches the dev server too.**
+- **`InstrumentPanel` HAS NO CALLER AND IS KEPT** as the only written form of how
+  the hardware panel was built; nothing declares `face.panel`, the mount
+  mechanism stays live, revival is one declaration. **Two ledger rows are flagged
+  rather than cut** — deleting one is the M99 guard's own question. Row `MB-c`.
+- **NO PIXEL SCREENSHOT** — the pane did not composite on any attempt. Every
+  claim is painted-DOM and geometry against the bezel's own coordinates.
+
+### 2026-08-26 -> MODE B, THE CONSOLE (seventh packet)
+- **ONE WORD NEEDS MIKE:** does the album page keep its feed panel now that Mode
+  B has one? His *"instead of the feed panel"* could mean delete it, and that is
+  a decision about what a visitor meets. Both exist today and **read ONE object,
+  so they cannot drift.** Row **MB-a**. Gates: lint **9/7 = baseline** - build
+  green - provenance **PASS** - `reveal:check` **PASS** - `parity:gate` -
+  `instory:gate` - `docs:numbers:gate` **PASS**. Log:
+  `docs/MUSEUM_MODE_B_LOG-20260826.md`; served at
+  `http://localhost:5173/robots` -> Portal -> `02 TERMINAL.EXE` -> RUN.
+- **THERE IS NO `.bat` AND THE LISTING SETTLED IT.** Record 004's cracked ZIP
+  carries **three files** - `TERMINAL.EXE`, `PORTAL_2v16.CFG`, `QC_101.TIF` -
+  and zero `.bat` exists in either repo, in or out of story. So the file that
+  runs is the one that is there; nothing was invented to stand in front of it.
+  **The listing also already named Mode A** - `/ANTENNA (PWD)` and
+  `/CHANNEL_SELECT(PWD)`, written before either shipped.
+- **THE PANEL NEEDED NO CHANGE - IT NEEDED A MOVE.** `InstrumentPanel` was
+  already `decl` in / panel out and already scaled to its parent, so it did not
+  know it was on a CRT. It left `Exhibit.jsx` for its own module because a
+  second caller would have cost `react-refresh/only-export-components` - the
+  `use-yt-player.js` trade exactly. **Measured before the cut:** its six helpers
+  are each referenced twice and by nothing outside that file.
+- **A MOVE RE-KEYS THE REGISTER, AND THAT IS THE THING TO KNOW BEFORE THE NEXT
+  EXTRACTION.** A row is keyed on `sha256(file + " " + string)`, so moving 438
+  lines staled **15 rows**. They were **CARRIED** - each new row took the old
+  row's `c` and `s` verbatim, because **a move must never become a
+  re-classification** - then pruned with the sweep's own `--prune` after a hand
+  probe disagreed with it (22 against 15).
+- **`reveal:check` CAUGHT THE BEST DEFECT IN THE ROUND.** Record 005's new
+  attachment declares `door`, and the editor's reader did not know the field:
+  **Mike's first save from the day editor would have silently deleted it.**
+  Fixed the way `record-entries.mjs` itself rules - the reader carries it
+  through AND the set is widened, because `door` is an OBJECT and `val()` would
+  have returned null and gone quiet.
+- **FOUR DEFECTS OF MY OWN, ALL FOUND BY MEASURING THE SERVED PAGE:** the `[X]`
+  and the frame were missing (no `bezel` on the action - counted `.ps-chy-x` = 0);
+  the boot drew **under the bezel** (46.3px of every line hidden on `canvas`
+  placement); the panel escaped its box at 375px because **a transform does not
+  change the layout box** and `align-items:center` centred the unscaled height;
+  and `PORTAL_2V16.CFG` - **a filename the listing does not contain** - because
+  `.vp-face-sub` uppercases. **A filename's casing is its identity**; removed
+  from the label slot rather than patched.
+- **MODE B IS ITS OWN SCREEN AND THE `[X]` IS NOT A MODE A CONTROL.** 2x2 gone,
+  digits gone, note gone - all measured 0. The way out stays, at the same pixel
+  (S4: an exit that disappears when the picture changes is not an exit). **And
+  the LATCH still launches Mode A** - measured, television came up with Mode A's
+  controls back on it.
+- **AT 375px THE PANEL FITS BY 1.4 PIXELS**, clamped at its 0.60 legibility
+  floor: 250.1px drawn into a 251.5px hole. Boot hidden, safe area zeroed,
+  1.0/1.6px overhang, **latch inside**. Row **MB-b** - the edge of what a CRT
+  opening can hold, stated rather than tuned until it passes.
+- **NO PIXEL SCREENSHOT** - the pane did not composite (rAF family), four
+  timeouts across two tabs. Geometry against the bezel's own coordinates says
+  what is where and nothing about how it looks.
+
 ### 2026-08-26 -> TELEVISION FILLS THE OPENING (sixth packet)
 - **NOTHING IS WAITING ON MIKE.** He ruled the bars out and, mid-round on what
   looking found, ruled captions out too: **"I do not want closed captions."**

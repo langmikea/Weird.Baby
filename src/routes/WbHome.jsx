@@ -943,10 +943,42 @@ export default function WbHome() {
                      his — it is the casing `house-copy.js`'s AFFILIATION
                      already carries in his own sentence.
 
-                THE BOARD CARRIES THE FULL FORM. It is a list of where things
-                are and a stranger reading it must be able to tell whose work
-                each room holds; that is M8's whole argument and it is
-                unchanged. What changed is the SHAPE the house name attaches by.
+                ═══ [2026-08-27] AND POINT 3 IS REVERSED. THE BOARD TAKES THE
+                SHORT FORM ON ALL FOUR ROWS — MIKE'S RULING ═══════════════════
+                **"RENAME 'Weird.Baby \Worth a Listen' to '\Worth a Listen'. In
+                the directory, all of the '\' should line up vertically."** And
+                the reasoning, which is the substance and not the instruction:
+                **"\Worth a Listen is parallel to \Music in this context."**
+
+                **THIS IS A REVERSAL, NOT A CORRECTION.** `f366d37` carried out
+                his ruling of 2026-08-26 exactly as he gave it — *"/wal TAKES
+                THE HOUSE NAME… Every wing takes it"* — and the board read
+                `Weird.Baby \Worth a Listen` because he said so. He has now
+                ruled the other way for the board, and both rulings are his.
+                Nothing here is Ops improving on either.
+
+                **THE FULL FORM IS NOT RETIRED.** Point 1 stands whole: the two
+                forms are still `Weird.Baby \Wing` and `\Wing`, both his. What
+                moved is which form THIS SURFACE takes.
+
+                **THE HOUSE IS NAMED ONCE, ABOVE — AND THAT IS WHAT ALIGNS THE
+                BACKSLASHES.** The wordmark sits at the head of this column
+                (`.wb-logo`, `alt="Weird.Baby"`), so repeating `Weird.Baby` down
+                four consecutive rows under it named the house five times on one
+                screen. With it named once, the four rows are the same kind of
+                thing starting in the same place — which is what puts the four
+                backslashes on one vertical, with no rule doing it. **The
+                alignment is a consequence of the naming, not a layout applied
+                on top of it**; F7's indent is gone for the same reason, and its
+                block below says so.
+
+                M8's ARGUMENT SURVIVES AND IS WHY THIS IS NOT A LOSS. His board
+                had to let a stranger tell whose work each room holds, and the
+                ORDER is what carries that — ours, ours, theirs, then the desk.
+                The order is untouched. What the board no longer does is repeat
+                the house's name to say it, which the wordmark above already
+                said. Verified on disk rather than in the editor, per §8:
+                exactly one backslash in each of the four labels.
 
                 THE SHOP AND THE DESK ARE NOT TOUCHED, AND THAT IS AN OPS
                 READING OF "every wing", FLAGGED FOR HIS WORD. His own M8 list
@@ -961,7 +993,7 @@ export default function WbHome() {
                 *"Directory loses 'The'"* — no board row gains one back. */}
             {ROBOTS_OPEN && (
               <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
-                <span>Weird.Baby \Robots</span><span className="wb-dir-arrow">→</span>
+                <span>\Robots</span><span className="wb-dir-arrow">→</span>
               </button>
             )}
             {/* [L1 2026-08-06] THE RECORD IS OFF THE BOARD. MIKE: it is clutter
@@ -977,7 +1009,7 @@ export default function WbHome() {
                 (App.jsx) and still opens the wing with the Record selected —
                 the door is not bricked up, it is off the board. */}
             <button className="wb-dir-entry" onClick={() => navigate("/wb")}>
-              <span>Weird.Baby \Music</span><span className="wb-dir-arrow">→</span>
+              <span>\Music</span><span className="wb-dir-arrow">→</span>
             </button>
             {/* [WAL 2026-08-02] listed exactly like the others: same button,
                 same arrow, same navigate call. A new exhibit is one entry here
@@ -1003,20 +1035,37 @@ export default function WbHome() {
                 *"the first two lines are the house's own, this one is
                 everybody else's."*
 
-                MIKE'S RULING TODAY TAKES THE WORD "Other" OFF THE BOARD AND
-                GIVES THIS ROW THE HOUSE NAME. All four wings now read
-                `Weird.Baby \…`, so the distinction the indent was drawing is
-                no longer one the board draws anywhere else — and the room it
-                points at still holds other people's records, which is the fact
-                F7 wanted visible.
+                MIKE'S 08-26 RULING TOOK THE WORD "Other" OFF THE BOARD. The
+                distinction the indent was drawing stopped being one the board
+                draws anywhere else — and the room it points at still holds
+                other people's records, which is the fact F7 wanted visible.
 
-                THE INDENT STAYS UNTIL HE RULES ON IT. He ruled the NAME; he
-                did not rule the layout, and Ops does not take a visible
-                decision of his off the glass on an inference. Same for M8's
-                ORDER, which encodes the same reading and is likewise untouched.
-                Both are in this round's report for his word. */}
-            <button className="wb-dir-entry wb-dir-entry-sub" onClick={() => navigate("/wal")}>
-              <span>Weird.Baby \Worth a Listen</span><span className="wb-dir-arrow">&rarr;</span>
+                THE INDENT STAYED, FLAGGED, BECAUSE HE HAD RULED THE NAME AND
+                NOT THE LAYOUT, and Ops does not take a visible decision of his
+                off the glass on an inference.
+
+                ═══ [2026-08-27] AND HE HAS NOW RULED THE LAYOUT ══════════════
+                **"In the directory, all of the '\' should line up
+                vertically."** A row indented by 14px does not line up with the
+                three that are not, so `wb-dir-entry-sub` is gone from this
+                button and its rule is gone from `WbHome.css`, where the reason
+                is written out.
+
+                **THE FLAG CLOSED ON AN ANSWER, WHICH IS THE ONLY WAY A FLAG OF
+                THIS KIND MAY CLOSE.** A later round finding an old flag and
+                deciding it had waited long enough would be the inference this
+                one refused to make.
+
+                **AND HIS REASONING IS WHY THE INDENT IS NOT REPLACED BY A
+                SMALLER ONE.** *"\Worth a Listen is parallel to \Music in this
+                context."* Parallel is the whole instruction: the four rows are
+                one kind of thing, so they start in one place. F7's argument was
+                that this row is a DIFFERENT kind of thing and should say so by
+                sitting apart; that argument is not refuted, it is overruled.
+                M8's ORDER still carries it — ours, ours, theirs, then the desk
+                — and the order is untouched. */}
+            <button className="wb-dir-entry" onClick={() => navigate("/wal")}>
+              <span>\Worth a Listen</span><span className="wb-dir-arrow">&rarr;</span>
             </button>
             {/* [N1 2026-08-04] THE BOOTH LEAVES THIS POSITION — see the note at
                 the foot of the board, where it now stands. */}
@@ -1048,7 +1097,7 @@ export default function WbHome() {
                 heading still say what they said. A board is a list of where
                 things are; the door still carries the full name. */}
             <button className="wb-dir-entry" onClick={() => navigate("/foundation")}>
-              <span>Weird.Baby \Foundation</span><span className="wb-dir-arrow">→</span>
+              <span>\Foundation</span><span className="wb-dir-arrow">→</span>
             </button>
             <button className="wb-dir-entry" onClick={() => navigate("/shop")}>
               <span>Gift Shop</span><span className="wb-dir-arrow">→</span>

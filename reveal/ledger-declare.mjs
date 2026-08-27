@@ -364,6 +364,21 @@ R("portal.album", "THE PORTAL — the album: the door, the feed controller, and 
        DECLARATION is the half that has to be moved by hand. */
     assets: ["/robots/art/portal-cover.png", "/robots/art/viiip-v2.png"],
     note: "Held from launch. The album is a dynamic import Robots.jsx asks for only behind the password on /admin; the deck closes up to four albums without it, and the splice index is PORTAL_AT so the position Mike gave it survives the hold." });
+/* ═══ [2026-08-26] THE NEXT TWO ROWS DESCRIBE A TRACK AND A FACE THAT NO
+   LONGER EXIST, AND THEY ARE FLAGGED RATHER THAN CUT ══════════════════════
+   MIKE: **"\Robots — DELETE 'Launch the Portal'"** and **"KILL THE HW Feed
+   Monitor."** The track is gone from `portal.js` and its face — the hardware
+   feed panel — went with it. `portal.door` and `viiip.portal` are now legends
+   for nothing.
+
+   THEY ARE NOT DELETED HERE BECAUSE DELETING A LEDGER ROW IS THE M99 GUARD'S
+   OWN QUESTION. `--write` diffs row ids and REFUSES a deletion, by design and
+   after the 2026-08-22 case where eight renamed rows took `reveal/transfers.mjs`
+   down with them. Getting past it is a deliberate act with its own checks, and
+   doing it inside a round that is already rebuilding two surfaces is how the
+   §0 lesson gets paid for a fifth time. **It is a separate, mechanical job** —
+   the same call the wing-names round made about seven stale `name` fields, and
+   for the same reason. Registered as MB-c. */
 R("portal.door", "THE PORTAL — the first track, and the way in.",
   "surface", "src/data/artists/portal.js", "LIVE", "the Portal album, track 01", "REVEALED",
   { deps: ["Mike's ruling on when the Portal opens"],

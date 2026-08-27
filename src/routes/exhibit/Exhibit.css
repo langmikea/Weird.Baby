@@ -5332,3 +5332,16 @@ button.vp-rec-att-thumb:hover,button.vp-rec-att-thumb:focus-visible{
 .vp-fe-link-out .vp-fe-link-text { color: var(--wb-gold); }
 .vp-fe-link-out:hover, .vp-fe-link-out:focus-visible { border-bottom-color: var(--wb-gold); }
 
+
+/* [2026-08-26] AN ATTACHMENT THAT RUNS. Same type, same weight and same colour
+   as `.vp-rec-att-name` — a door is not louder than a document, it is a
+   different KIND — with the underline that says a name is pressable and the
+   Record's own plain face. Doctrine 23: what is borrowed from a mail program is
+   the register only, and a file you can open is exactly what an attachment row
+   already means. */
+.vp-rec-att-run{
+  appearance:none;background:none;border:0;padding:0;margin:0;
+  font:inherit;color:inherit;text-align:left;cursor:pointer;
+  text-decoration:underline;text-underline-offset:2px;
+  text-decoration-thickness:1px}
+.vp-rec-att-run:hover,.vp-rec-att-run:focus-visible{text-decoration-thickness:2px}

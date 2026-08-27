@@ -68,6 +68,44 @@ export default function Robots({ open = null }) {
     return () => { live = false; };
   }, []);
 
+  /* ═══ [2026-08-26] THE RECORD ASKS; THIS FILE ANSWERS ══════════════════════
+     Record 005's `TERMINAL.EXE` attachment dispatches `wb-portal-run-console`
+     and nothing else. It has to: `robots-record.js` is a PUBLIC module and the
+     console's declaration — the boot lines, the bezel, the whole panel — lives
+     in `portal.js`, which this file loads as its own chunk and which nothing
+     else imports. Naming that detail in the Record would pull the Portal's
+     panel into the public entry and collapse the split.
+
+     SO THIS IS THE ONE PLACE THAT CAN JOIN THEM, and it is the place that
+     already holds both: the module is in state above, and the listener reads
+     the console track's OWN action rather than a second copy of it. If the
+     album is not loaded — a visitor whose chunk request failed — the press
+     does nothing, which is the same place H1's forger and flat tyre land.
+
+     IT REUSES THE TRACK'S DECLARATION AND DOES NOT RESTATE IT. One object
+     describes TERMINAL.EXE; the track's RUN button and the Record's attachment both
+     open it, so the two doors cannot drift into opening different things —
+     which is `docs/BACKLOG.md` item 5's own rule, read one level out. */
+  useEffect(() => {
+    if (!portal) return undefined;
+    function run() {
+      /* [2026-08-26] IT READS THE TRACK'S `run`, WHICH IS WHERE THE
+         DECLARATION MOVED WHEN THE ROW STOPPED HAVING A FACE. Mike ruled the
+         click should RUN rather than open a page, so `face.action` went and
+         `run` took its place; this re-dispatch follows the declaration rather
+         than carrying a second copy of it. One object still describes TERMINAL.EXE
+         and both doors still open exactly it. */
+      const track = (portal.PORTAL_ALBUM.tracks || [])
+        .find(t => t && t.run && t.run.detail
+                && t.run.detail.kind === "console");
+      if (!track) return;
+      window.dispatchEvent(new CustomEvent(track.run.event,
+        { detail: track.run.detail }));
+    }
+    window.addEventListener("wb-portal-run-console", run);
+    return () => window.removeEventListener("wb-portal-run-console", run);
+  }, [portal]);
+
   const artist = useMemo(() => {
     if (!portal) return robotsExhibit;
     const spine = [...robotsExhibit.spine];

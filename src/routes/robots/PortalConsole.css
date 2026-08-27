@@ -1,0 +1,237 @@
+/* TERMINAL.EXE. See PortalConsole.jsx for why this exists.
+   [2026-08-26, rebuilt in monitor character the same day; the panel made
+    CGA-fat and given a cleared screen 2026-08-27]
+
+   **MIKE: "stop calling it Mode A and Mode B. This one is TERMINAL.EXE."**
+
+   IT IS SCOPED TO `.pc-*` AND IMPORTED BY `PortalConsole.jsx` ONLY. It draws no
+   bezel and no way out: those belong to `PortalScreen`, which is what this is
+   drawn inside. The console is what is ON the glass, as television and the test
+   signal are.
+
+   ═══ THE CHARACTER IS THE TWIN'S OWN MONITOR, NOT A NEW LOOK ═══════════════
+   Monospace, ALL CAPS, a `>` caret on the boot, a legend in one column and its
+   data in the next, a blinking block while the machine is still working. That
+   is `Mon_DOS()` and `Mon_EventsLine()` in `twin.html` — *"OS voice, zero
+   personality"* — and this file is those rules in CSS.
+
+   THE INK IS THE MONOSCOPE'S OFF-WHITE, `#dcd9d2` — the twin's `CARD_OFF`, the
+   lightest value the no-signal card is allowed. **AND NOTHING ON THIS SCREEN IS
+   BRIGHTER THAN IT.** Mike struck the `[X]` partly on that ground — *"the format
+   is poor (bright instead of matching the other text on this screen)"* — so
+   every mark here is that one ink or a dimmed step of it, and there is no white
+   anywhere. A control that is ON is not brighter; it is INVERTED, which is what
+   the machine's own strip does for its live channel.
+
+   THE GROUND IS THE FEED'S OWN BLACK. `.ps-feed` already paints `#000`, so this
+   sets no background and cannot disagree with it.
+
+   EVERYTHING SIZES IN `cqw` OF THE FRAME, for the reason the chyron does: the
+   screen is a picture that scales, so a px size would be right at one width and
+   wrong at every other. `.ps` opens the container these resolve against. */
+
+/* ═══ THE SAFE AREA IS THE OPENING, NOT THE BOX ═══════════════════════════
+   The feed rect is deliberately BIGGER than the barrel-curved hole — that
+   overscan is what stops the page ground leaking in, and it means the box's own
+   corners are under opaque frame. Type laid to the box is type laid partly
+   under the bezel, which is what the first cut did: measured on the served
+   page, 46.3px of every boot line was hidden on the left and the first line sat
+   20.3px above the opening. So the console insets itself to the HOLE, with room
+   for the CURVE on top of the rectangle's inset. */
+.pc-root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  padding: 5.5% 8%;
+  box-sizing: border-box;
+  color: #dcd9d2;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2.7cqw;
+  line-height: 1.58;
+  letter-spacing: .04em;
+}
+
+.pc-scr { display: block; white-space: pre; }
+.pc-line { display: block; }
+
+/* ═══ [2026-08-27] THE LAUNCH PANEL — CGA-FAT, ON A CLEARED SCREEN ═════════
+   MIKE: **"When you get to the point where you're launching into the launch
+   panel, feel free to use more of a CGA fat graphic, then simple ASCII."** And
+   what that settles: **"Using the CGA fat graphics on its freshly cleared
+   screen will address the problem"** — the problem being that the first cut
+   read as an inline menu of dimmed `>` prompts.
+
+   SO THERE ARE TWO WEIGHTS ON THIS SCREEN AND THEY MEAN TWO DIFFERENT THINGS:
+   the LEGEND is fat — double-width, heavy, tracked, the way a CGA text mode
+   draws forty columns in the space of eighty — and the DATUM beside it is the
+   same simple ASCII the boot is set in. One weight for what a thing IS, another
+   for what it is SET TO, which is what makes the panel readable at a glance
+   rather than as a list of similar lines.
+
+   THE RULES ARE DRAWN AS SOLID BARS RATHER THAN AS BLOCK CHARACTERS. `█` would
+   be the literal CGA way and it would also be a visitor-facing STRING — a row
+   in the origin register for a piece of furniture, which is the noise the
+   sweep's own header warns about. A bar of the same ink at the same height
+   renders identically and declares nothing.
+
+   **NO `>` ON A PANEL ROW.** The caret is `Mon_DOS`'s prompt and it belongs to
+   the boot, where Mike likes it. Carrying it onto the panel is what made the
+   panel read as more log.
+
+   THE TWO COLUMNS ARE A GRID AND NOT A PAD, AND THAT IS THE ONE NON-OBVIOUS
+   CHOICE HERE. A stretched `inline-block` keeps its UNSCALED layout width, so
+   padding the legend to N characters in JS and stretching it in CSS puts the
+   datum column N × (scale − 1) characters too far left — and fixing that with a
+   compensating margin makes this file depend on a constant that lives in
+   `PortalConsole.jsx`. **Two declarations that must agree is the defect this
+   repository keeps paying for.** A grid column sized to hold the stretched
+   legend needs no arithmetic on either side, and the JS pad went with it. */
+.pc-panel { display: block; }
+
+.pc-rule {
+  height: .46em;
+  margin: .55em 0 .7em;
+  background: #dcd9d2;
+}
+.pc-panel .pc-rule:last-of-type { margin: .7em 0 .55em; }
+
+/* the row: a whole-width press target with no chrome, exactly as the command
+   line was. What changed is the weight of its two halves. */
+.pc-row {
+  display: grid;
+  /* 10 characters of legend stretched by 1.62 is 16.2ch; 18 leaves the gutter
+     the boot's own column has. Nothing in JS has to know this number. */
+  grid-template-columns: 18ch 1fr;
+  align-items: baseline;
+  width: 100%;
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: .08em 0;
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  white-space: pre;
+}
+.pc-row--static { cursor: default; }
+.pc-row:focus-visible { outline: none; }
+
+/* THE FAT HALF. `scaleX` rather than a wider font, because the face is
+   Courier and a monospace stretched horizontally is precisely what a CGA
+   40-column glyph is — the same cell, drawn twice as wide. `inline-block` and
+   a left origin so the column start does not move. */
+.pc-fat {
+  display: inline-block;
+  justify-self: start;
+  font-weight: 700;
+  letter-spacing: .12em;
+  transform: scaleX(1.62);
+  transform-origin: left center;
+}
+.pc-val { opacity: .78; }
+
+/* ═══ THE CURSOR IS THE MARK, AND IT IS AN INVERSION ══════════════════════
+   MIKE, having replaced his own earlier idea of underlines or asterisks:
+   **"We don't have that problem now that we're going with scroll and click."**
+   The cursor can only stand on a field that changes, so standing there is the
+   whole of the marking. It INVERTS — ink and ground swap — because nothing on
+   this screen is allowed to be brighter than anything else.
+
+   ═══ [2026-08-27] AND IT STANDS ON THE VALUE, NOT ON THE LEGEND ════════════
+   MIKE: **"Scroll to the CHANGEABLE part of the line (not the label). Scroll
+   to READY (not to RUN)."**
+
+   **THE FIRST CUT INVERTED THE LEGEND AND THAT CONTRADICTED ITS OWN RULE.**
+   The whole argument for having no underlines or asterisks is that *a cursor
+   which can only stand on a changeable field IS the mark* — and then it stood
+   on `RUN`, which is the one half of that row that never changes. It marked the
+   name of the thing instead of the thing. `READY` is what a press alters, so
+   `READY` is what the cursor sits on.
+
+   THE AERIAL WAS ALREADY RIGHT AND IS THE PROOF OF THE RULE: its four digits
+   are values with no legend of their own, and the cursor has always inverted
+   the digit. The other three rows now behave the way that one already did. */
+.pc-row.pc-live .pc-val { background: #dcd9d2; color: #000; opacity: 1; }
+.pc-bit.pc-live { background: #dcd9d2; color: #000; opacity: 1; }
+/* the legend brightens to full while the cursor is on its row — it is not
+   selected itself, so it must not invert. Same for the aerial's, whose four
+   positions sit in the value column. */
+.pc-row.pc-live .pc-fat,
+.pc-row--static.pc-live-in .pc-fat { opacity: 1; }
+
+/* [2026-08-27] `.pc-cmd`, `.pc-caret`, `.pc-word`, `.pc-gap`, `.pc-run` AND
+   `.pc-prompt` ARE GONE, WITH THE INLINE MENU THEY DRESSED. That shape was the
+   first cut's — a running list of `> WORD  DATA` rows under the boot — and Mike
+   replaced it whole: the screen clears and the panel is drawn CGA-fat. The
+   rules above are what replaced them, and the dead ones are deleted rather than
+   left commented: a selector nothing matches is a second design waiting to be
+   revived by somebody who does not know it was ruled away.
+   **THE BOOT'S OWN CARET AND BLINK SURVIVE** — they are the part he said he
+   likes, and they are further down this file. */
+
+/* ---- THE ANTENNA'S FOUR BITS ------------------------------------------
+   Four independent switches become four digits in a row — which is what the
+   machine's own channel strip already is, and what QC_101 writes them as. The
+   digit itself carries the routing (`1` is ANT, `0` is CAB); the inversion is
+   the CURSOR and means only that SCROLL is standing here. */
+.pc-bits { display: inline-block; }
+.pc-bit {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0 .34em;
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  opacity: .78;
+  cursor: pointer;
+}
+.pc-bit:focus-visible { outline: 1px solid #dcd9d2; outline-offset: -1px; }
+/* [2026-08-27] `.pc-bit.pc-on` IS GONE AND THE REASON IS A ONE-REGISTER RULE.
+   It inverted a position that was routed to ANT, and the cursor now inverts the
+   position SCROLL is standing on — two meanings for one mark, on a screen whose
+   whole discipline is that there is exactly one. **The digit already says the
+   value**: it reads `1` or `0`, in the open, which is more than an inversion
+   ever said. So inversion means *the cursor is here* and nothing else. */
+
+@keyframes pc-blink { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+.pc-root:has(.pc-skip) .pc-line:last-child::after {
+  content: "\2588";
+  margin-left: .5em;
+  animation: pc-blink 1.06s steps(1, end) infinite;
+}
+
+/* REDUCED MOTION TAKES THE BLINK AND NOTHING ELSE. The boot's own pacing is
+   information — it is what says the machine is working — so it is not a
+   candidate for removal; a blinking block is decoration and is. */
+@media (prefers-reduced-motion: reduce) {
+  .pc-root:has(.pc-skip) .pc-line:last-child::after { animation: none }
+}
+
+/* ---- THE SKIP ---------------------------------------------------------
+   Invisible, over the text, present only while the boot is running. Same shape
+   as `Television`'s sound catcher: the thing a visitor will press is the
+   picture, so the catcher has to BE the picture. */
+.pc-skip {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ═══ AT A PHONE'S WIDTH THE TYPE STEPS DOWN AND NOTHING ELSE CHANGES ══════
+   The old cut had to HIDE the boot here, because a 415px-tall hardware panel
+   could not share a 251px opening with it. **A terminal has no such problem** —
+   it is nine lines of text and it reflows by changing one size. That is the
+   clearest evidence the monitor form was the right answer and not only the
+   asked-for one. */
+@container (max-width: 640px) {
+  .pc-root { font-size: 3.6cqw; padding: 5% 7%; line-height: 1.5; }
+}

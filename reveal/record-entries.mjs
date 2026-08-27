@@ -106,8 +106,17 @@ const READ_SECTION_FIELDS = new Set(["label", "body"]);
    untouched instead, which is the U-round rule (a generator may remove a
    field, never the answer that was in it). Titles are still the only thing
    the workbook path can PRODUCE - these travel, they are not authored there. */
+/* [2026-08-26] `door` — AN ATTACHMENT THAT RUNS RATHER THAN OPENS. Record 005
+   carries `TERMINAL.EXE`, and Mike's ask was a SHORTCUT: *"R005 - ADD
+   attachment: Shortcut to the Feed screen."* It is an OBJECT, not a scalar, so
+   widening this set alone would not have been enough — `val()` reads literals
+   and would have returned null while the check went quiet. It is carried
+   through below, beside `plates`, which is the other object field and the
+   precedent this follows. **A generator may remove a field; it may never remove
+   the answer that was in it.** */
 const READ_DOC_FIELDS = new Set(
-  ["title", "source", "date", "pages", "scan", "extract", "note", "plates"]);
+  ["title", "source", "date", "pages", "scan", "extract", "note", "plates",
+   "door"]);
 
 /* ---- tiny AST helpers ----------------------------------------------------
    `strOf` folds the string concatenation this codebase writes everywhere —
@@ -782,6 +791,15 @@ export function draftEntries(src) {
           const pagesNode = propOf(d, "pages");
           if (pagesNode && pagesNode.type === "Literal" && typeof pagesNode.value === "number")
             doc.pages = pagesNode.value;
+          /* [2026-08-26] `door` travels whole. Only `event` is read, because
+             only `event` exists — a door that grew a payload would land here as
+             a field this reader does not know, which is the same warning that
+             produced this branch rather than a silent loss. */
+          const doorNode = propOf(d, "door");
+          if (doorNode && doorNode.type === "ObjectExpression") {
+            const ev = val(propOf(doorNode, "event"));
+            if (ev !== null) doc.door = { event: ev };
+          }
           const dPlatesNode = propOf(d, "plates");
           if (dPlatesNode && dPlatesNode.type === "ArrayExpression") {
             doc.plates = platesOf(dPlatesNode, val, (m) =>
