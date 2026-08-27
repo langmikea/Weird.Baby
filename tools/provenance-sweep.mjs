@@ -165,6 +165,15 @@ const SINK_ALL = new Set([
   "toUpperCase", "test", "exec", "getComputedStyle", "requestAnimationFrame",
   "clearTimeout", "clearInterval", "assign", "hasOwnProperty", "getTime",
   "toISOString", "toLocaleDateString", "toLocaleTimeString",
+  /* [2026-08-26] `unloadModule` — the YouTube IFrame API's own module control.
+     Its argument is a MODULE NAME (`captions`, `cc`), which is a word in
+     Google's API and never a word on the glass. Added when Mike ruled closed
+     captions off the Portal's television and the sweep correctly refused two
+     undeclared strings: this list is the named, counted way to answer that,
+     and declaring `"cc"` as museum content would have been the wrong shape.
+     ONE ENTRY, NOT A FAMILY: `loadModule` and the rest are not added, because
+     this file's own §3 rule is that an over-broad look-away is the defect. */
+  "unloadModule",
 ]);
 const SINK_FIRST_ARG = new Set([
   "setAttribute", "setProperty", "add", "remove", "toggle", "contains",

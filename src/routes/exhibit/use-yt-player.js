@@ -308,6 +308,22 @@ export function useYTPlayer({ containerRef, onEnded, hasVideo, playerVars }) {
     };
   }, []);
 
+  /* [2026-08-26] A THIN PASSTHROUGH TO THE PLAYER'S OWN MODULE API, ADDED FOR
+     ONE CALLER AND DEFAULTING TO NOTHING. Mike ruled closed captions off on the
+     Portal's television. `cc_load_policy` cannot carry that on its own — YouTube
+     documents `1` as *force on* and treats everything else as *the viewer's own
+     preference*, so a visitor who has captions switched on in their account gets
+     them regardless of the parameter. `unloadModule("captions")` is the API's
+     own answer and is the only one that does not depend on the viewer.
+     IT IS A PASSTHROUGH AND NOT A POLICY: /hr and /wal never call it, so their
+     behaviour is unchanged to the character. The guard is the same one every
+     other control here uses. */
+  const unloadModule = useCallback((name) => {
+    const p = playerRef.current;
+    if (!p || !readyRef.current || typeof p.unloadModule !== "function") return;
+    try { p.unloadModule(name); } catch { /* module absent is not an error */ }
+  }, []);
+
   return { loadVideo, cueVideo, playVideoAt, play, pause, togglePlay,
-           toggleMute, setMuted, setVolume, getState, destroy };
+           toggleMute, setMuted, setVolume, getState, unloadModule, destroy };
 }

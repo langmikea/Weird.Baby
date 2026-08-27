@@ -399,7 +399,27 @@ export const PORTAL_ALBUM = {
               /* A/V Geeks 16mm Films - "Assorted 1960s TV Commercials".
                  PROVED PLAYABLE in a real nocookie iframe 2026-08-21, and
                  re-proved on the live site the same day (`onReady`, no
-                 `onError`, duration read back). */
+                 `onError`, duration read back).
+
+                 ═══ [2026-08-26] READ THIS BEFORE SWAPPING THIS ID ═══════════
+                 THIS SOURCE IS 16:9 WITH A 4:3 PICTURE MATTED INSIDE IT, and
+                 the placement that fills the opening depends on that. Measured
+                 on four frames at four timestamps at native resolution: the
+                 matte edge is at 12.97% of the frame width on each side and is
+                 centred to the pixel (left bar - right bar = 0 on every frame),
+                 giving a picture of 1.3167 - within 1.25% of 4:3 and NARROWER
+                 than it, which is the direction that matters.
+
+                 `Television.css` sizes the player to the feed box's HEIGHT, so
+                 it always crops **12.5% of the frame width from each side**.
+                 Here that lands inside the 12.97% matte and eats only black.
+
+                 **THAT IS A PROPERTY OF THIS FILE, NOT OF THE PLACEMENT.** The
+                 crop is unconditional. A genuine 16:9 clip with picture to the
+                 edges would lose a quarter of its width to the same rule, and
+                 about 30% of it once the bezel is counted, with nothing
+                 reporting it. **Measure any replacement's matte before it
+                 ships** - `docs/OPEN_ACTIONS.md` T-a. */
               ytId: "aA5oKoCRjWw",
               /* the true length, and the modulo depends on it: if the source is
                  ever re-uploaded or trimmed this number is wrong and every phase

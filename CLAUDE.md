@@ -789,6 +789,69 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-26 -> TELEVISION FILLS THE OPENING (sixth packet)
+- **NOTHING IS WAITING ON MIKE.** He ruled the bars out and, mid-round on what
+  looking found, ruled captions out too: **"I do not want closed captions."**
+  Both are built and verified served. Gates: lint **9/7 = baseline** - build
+  green - provenance **PASS** (after one `SINK_ALL` entry, below) -
+  `reveal:check` - `parity:gate` - `instory:gate` - `docs:numbers:gate` **PASS**.
+  Log: `docs/MUSEUM_TELEVISION_FILL_LOG-20260826.md`; served at
+  `http://localhost:5173/robots` -> the Portal album -> LATCH.
+- **THE LETTERBOX WAS IN THE SOURCE AND MIKE READ IT RIGHT.** `aA5oKoCRjWw` is
+  16:9 with the picture matted inside it. Measured on **four frames at four
+  timestamps** at native resolution: matte edge at **12.97% of the frame width
+  each side**, **centred to the pixel** (left bar - right bar = **0** on every
+  frame), hard edge rather than a fade (x=165 reads 4.72, x=166 reads 168.60,
+  identical at every threshold 12-56).
+- **IT IS 1.3167, NOT 4:3 - 1.25% NARROWER, WHICH IS THE SAFE DIRECTION.** The
+  brief said stop if it is not 4:3, *because a crop that eats his picture is
+  worse than bars*. Narrower means the crop lands FURTHER inside the black: it
+  takes **12.5% a side** and stops **0.47% of the frame width short of his
+  picture**. Reported rather than stopped, on the stop's own reason. Wider by
+  the same margin would have been a stop.
+- **THE PREVIOUS ROUND MEASURED HALF THE BLACK.** Its `303.6 -> 254.5px` are the
+  player's own letterbox, top and bottom. The SOURCE's matte was putting a
+  further **10.4% of the opening's width down each side** and nothing had
+  measured it. Before: **10.43 / 10.39 / 12.26 / 11.81%** of the opening. After:
+  **0 on all four**, at 800px and again at a true 375px.
+- **A WRAPPER, NOT A SPECIFICITY FIGHT.** `PortalScreen.css` owns the feed box
+  and its `.ps-feed iframe` rule `(0,1,1)` outweighs anything `Television.css`
+  could write against the same element. So `Television.css` sizes `.tv-fit`,
+  which it owns outright, and that rule keeps doing exactly what it says.
+  **`!important` was reached for first** - §8 calls it the honest answer to a
+  two-owner layout - **and was not needed.** `aspect-ratio: 16/9` rather than
+  `width: 133.333%`: the latter is right by coincidence at a 4:3 box and breaks
+  silently the day the box moves.
+- **THE PLACEMENT IS UNCONDITIONAL; ONLY THE SOURCE DECIDES WHAT IT COSTS.** It
+  always crops 12.5% a side and only **70.15%** of the frame is inside the hole.
+  Here that is all matte; **a true 16:9 clip would lose ~30% of its picture**
+  with nothing reporting it, because no gate here can read a cross-origin
+  frame's pixels. Filed at the swap site beside `ytId` and as row **T-a**.
+- **THE CAPTION FIX NEEDED TWO MECHANISMS AND ONLY ONE BINDS.**
+  `cc_load_policy: 0` is the weak half - YouTube documents `1` as *force on* and
+  reads anything else as **the viewer's own preference**.
+  `unloadModule("captions")` is the half that does not depend on the viewer, via
+  a three-line passthrough on `useYTPlayer` that /hr and /wal never call.
+  **It runs on its OWN 500ms timer**, because the refusal watcher stops the
+  moment the set is playing - the moment before the module exists - and the
+  module comes back on **every** `loadVideoById`, once every 1,743s on the loop.
+  Verified on a browser that had captions ON.
+- **`provenance:gate` FAILED ON `"captions"` AND `"cc"` AND WAS RIGHT TO.** It is
+  default-DENY. Declaring a YouTube module name as museum content would have
+  been the wrong shape, so `unloadModule` joins **`SINK_ALL`**, the sweep's named
+  list of call targets whose string arguments are machinery, beside
+  `postMessage`. **One entry, not a family** - the sweep's own rule is that an
+  over-broad look-away is the defect. Counted: machinery-call **218**, up 2.
+- **I BROKE THE PAGE AND THE PAGE SAID SO.** The caption note was appended to a
+  block comment that was **already closed**, orphaning a `*/`; vite 500'd,
+  HMR refused, `/robots` drew 30 elements and no text. Found by looking, named
+  by the console on the first read. **And the two `POST /api/visits` 500s are
+  NOT mine** - that endpoint needs the worker's D1, which `vite dev` does not
+  serve.
+- **THE 5173 DEV SERVER IS THE 16:25 ROUND'S LEFTOVER**, the hazard the third
+  packet recorded. This round used it rather than starting a second, and killed
+  nothing on Mike's machine.
+
 ### 2026-08-26 -> THE COVER FENCES (fifth packet)
 - **NOTHING BLOCKS IT, AND TWO THINGS WAIT ON MIKE'S EYE RATHER THAN ON A
   BUILD.** He ruled A / B / B on the album art and said what the rulings are

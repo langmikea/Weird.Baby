@@ -58,10 +58,16 @@ import "./Television.css";
    reloaded, and a 1965 television has no scrub bar either, so the fix and the
    period register want the same thing.
    `autoplay: 1` IS THE REQUEST, NOT THE TRICK: it is what the API needs to try
-   at all. Whether it is granted is the browser's call and is handled below. */
+   at all. Whether it is granted is the browser's call and is handled below.
+   `cc_load_policy: 0` IS HALF OF THE CAPTION RULING AND IT IS THE WEAK HALF.
+   MIKE, 2026-08-26: **"I do not want closed captions."** YouTube documents `1`
+   as *force on* and reads anything else as *the viewer's own preference*, so
+   this parameter alone leaves captions on for any visitor whose account has
+   them switched on. The half that binds is `unloadModule("captions")` below. */
 const TV_VARS = {
   autoplay: 1, controls: 0, disablekb: 1, rel: 0,
   iv_load_policy: 3, playsinline: 1, modestbranding: 1,
+  cc_load_policy: 0,
 };
 
 export default function Television({ ytId, startSeconds, title }) {
@@ -112,6 +118,38 @@ export default function Television({ ytId, startSeconds, title }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ytId]);
 
+  /* ═══ [2026-08-26] NO CLOSED CAPTIONS, AND IT IS A STANDING JOB RATHER THAN
+         A ONE-SHOT ═══════════════════════════════════════════════════════════
+     MIKE: **"I do not want closed captions."**
+
+     IT IS ITS OWN TIMER AND NOT A LINE IN THE REFUSAL WATCHER ABOVE, because
+     the two have different lifetimes and entangling them broke both: that one
+     STOPS the moment the set is playing, which is the moment before the caption
+     module is loaded.
+
+     IT REPEATS BECAUSE THE MODULE COMES BACK. `unloadModule` only removes what
+     is loaded now, and YouTube re-creates captions on every `loadVideoById` —
+     which this component does on the wall-clock join AND on every loop, once
+     every 1,743 seconds. A single unload on ready would read correctly and be
+     gone by the second reel.
+
+     WHY NOT `cc_load_policy` ALONE: it is in `TV_VARS` and it is the weak half.
+     YouTube documents `1` as *force on* and reads anything else as the viewer's
+     own preference, so a visitor with captions switched on in their account
+     keeps them. This is the half that does not depend on the viewer.
+
+     THE COST IS ONE GUARDED CALL EVERY 500ms while a channel is open, and it
+     stops with the channel. Both module names are asked for: `captions` is
+     current, `cc` is the legacy name, and unloading one that is absent is not
+     an error. */
+  useEffect(() => {
+    const off = () => { yt.unloadModule("captions"); yt.unloadModule("cc"); };
+    off();
+    const t = setInterval(off, 500);
+    return () => clearInterval(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ytId]);
+
   /* ═══ THE SOUND COMES BACK ON THE FIRST TOUCH, AND THE LISTENER CANNOT BE ON
          `window` — THAT WAS BUILT, MEASURED AND WRONG ═════════════════════════
      The first cut listened on `window` for `pointerdown`. **It can never fire.**
@@ -139,9 +177,18 @@ export default function Television({ ytId, startSeconds, title }) {
 
   return (
     <div className="tv-root" aria-label={title || "Television"}>
-      {/* the API REPLACES this node with its own iframe, which is why it is a
-          bare div with nothing in it and nothing under it. */}
-      <div ref={boxRef} className="tv-screen" />
+      {/* [2026-08-26] THE FIT WRAPPER. It carries the 16:9 the player needs at
+          the box's full HEIGHT, so the frame overflows sideways and `.tv-root`
+          clips it. The API replaces the node INSIDE it, so the iframe lands as
+          a child of the wrapper and `PortalScreen.css`'s `.ps-feed iframe`
+          sizes it to 100% of the wrapper rather than of the box — which is the
+          whole reason the wrapper exists rather than a competing rule. See
+          `Television.css`. */}
+      <div className="tv-fit">
+        {/* the API REPLACES this node with its own iframe, which is why it is a
+            bare div with nothing in it and nothing under it. */}
+        <div ref={boxRef} className="tv-screen" />
+      </div>
       {/* the sound catcher — present only while the browser has refused it.
           It carries no lettering: a caption saying CLICK FOR SOUND would be the
           museum explaining its own machine, and the set is already playing. */}

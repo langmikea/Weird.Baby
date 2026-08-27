@@ -17,10 +17,52 @@
   overflow: hidden;
 }
 
+/* ═══ [2026-08-26] THE SET FILLS THE OPENING. NO BLACK ON ANY SIDE ══════════
+   MIKE: **"I want the YT video scaled up so that none of the edges of the video
+   are exposed... No black bars, pls."** And the fact that decides the shape:
+   **"The usable part of the video is 4:3, and I want to lose the black bars
+   completely."**
+
+   THE LETTERBOX IS IN THE SOURCE, NOT THE PLAYER'S. `aA5oKoCRjWw` is a 16:9
+   file with a 4:3 picture matted inside it. Measured on four frames at four
+   timestamps, at native resolution: the matte edge is at **12.97% of the frame
+   width on each side, and it is centred to the pixel** (left bar − right bar =
+   0 on every frame). So enlarging until the picture fills the opening crops
+   YouTube's black, not his content.
+
+   THE MECHANISM IS PLACEMENT, NOT `object-fit`. `object-fit` is INERT on an
+   iframe — that is the defect that put channel 4 in an `<img>` — so a wider box
+   only changes how YouTube letterboxes *inside* it and can never make the video
+   cover. The player is therefore sized to the box's HEIGHT and allowed to
+   overflow sideways; `.tv-root`'s `overflow: hidden` and the bezel over it do
+   the cutting.
+
+   WHY A WRAPPER AND NOT A RULE ON THE IFRAME. `PortalScreen.css` owns the feed
+   box and sets `.ps-feed iframe { width:100%; height:100% }`, which outweighs
+   any single-class rule this file could write against the same element. So this
+   file sizes a wrapper it owns outright and lets that rule keep doing exactly
+   what it says — 100% of the wrapper. **Two owners, one seam, and no
+   specificity fight**; `!important` was reached for first and was not needed.
+
+   `aspect-ratio` RATHER THAN A PERCENTAGE, DELIBERATELY. The feed box is 4:3
+   today, so `width: 133.333%` would compute the same number — and it would be
+   right by coincidence and would break silently the day the box's shape moves.
+   `height: 100%` plus a ratio is a statement about the PLAYER and is true at
+   any box. */
+.tv-fit {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: auto;
+  aspect-ratio: 16 / 9;
+}
+
 /* The IFrame API replaces this node with its own iframe and copies the width
    and height it was given (100%/100%), so the sizing has to be on the element
    it replaces AND survive the replacement — hence both rules below. */
-.tv-root > *,
+.tv-fit > *,
 .tv-screen {
   width: 100%;
   height: 100%;
