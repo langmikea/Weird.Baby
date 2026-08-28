@@ -229,3 +229,39 @@ docs/MUSEUM_SHORTS_GATE_LOG-20260828.md   ??  this file
 
 `docs/DEPLOYED.md` is also untracked and is not this round's — it is the deploy
 record, written after the 2026-08-28 upload and never committed.
+
+---
+
+## 7. WHAT ACTUALLY LANDED — `6307286`, AND THE DEPLOY RECORD RODE WITH IT
+
+**[2026-08-28, written after the commit.]** This section exists because §6 above
+predicted two commits and one happened.
+
+**`docs/DEPLOYED.md` WENT INTO `6307286`.** The runbook's step 15 says
+otherwise, in the imperative: *"Do not batch it with anything. One file, one
+commit, now,"* with its RIGHT condition being *"`docs/DEPLOYED.md` was the only
+file listed."* **That condition was not met.** It stands as committed —
+rewriting published history for a file placement is worse than the placement,
+the same reading CLAUDE.md already applied to the trailer at `73179dc`.
+
+**AND THE COMMIT MESSAGE DOES NOT ACCOUNT FOR IT.** `6307286`'s message is
+entirely about the shorts gate and contains no occurrence of *deploy record* or
+*DEPLOYED.md*; it even states *"nothing under `src/` changed"* while carrying a
+32-line file whose subject is a deployment. **So the one commit in this
+repository's history that finally lands the deploy record is the one commit
+nobody searching for it would open.** Written here because that is what a
+breadcrumb is for, and because §8's own lesson is that a search of HEAD is blind
+to exactly this.
+
+**THE FACT WORTH CARRYING FORWARD:** the deploy record for `ad0d73d` — launch,
+`2026-08-28T14:03:16.142Z`, worker sha256 `ddd735e8d99d0f0b` — **first entered
+git history at `6307286`**, batched, on the fourth deploy since the tool that
+writes it landed on 2026-08-24.
+
+**THE RUNBOOK IS NOW STALE IN ONE CLAUSE AND IS NOT EDITED HERE.**
+`docs/THURSDAY-20260827.md` says *"`docs/DEPLOYED.md` has never existed in git
+history"* and *"THE ONE THAT HAS NEVER ONCE BEEN DONE."* Both were true when
+written and the first is now false. **Flagged, not fixed** — the runbook is a
+dated document and OPERATIONS §8 already carries the row saying a dated
+runbook's values are prose that goes stale; whoever runs it next reads this
+line first.

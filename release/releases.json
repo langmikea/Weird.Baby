@@ -1,0 +1,108 @@
+{
+ "_": "RELEASES — reels that exist and are not part of the museum's story. Read release/README.md before editing. The shape is declared in release/release-shape.mjs and checked by `npm run release:check`. NOTHING IN THIS FILE MAY BE IMPORTED BY src/ AND NO STRING IN IT MAY APPEAR THERE — that is the canon line and the gate refuses the build, it is not a convention.",
+ "version": 1,
+ "saved": "2026-08-28",
+ "runs": [
+  {
+   "id": "coconuts",
+   "what": "Coconuts — the single, and its reels.",
+   "c": "HOUSE",
+   "_": "A RUN IS A SINGLE AND ITS REELS. Mike, 2026-08-28: Coconuts is a single, E.D. Yahdah is the next single, and how Coconuts does informs how E.D. Yahdah is released. That sentence is why `outcome` exists and why a run is a thing at all.",
+   "promotes": {
+    "_": "THE ONE-DIRECTIONAL POINTER, AND THE ANSWER TO 'SHOULD THE SYSTEM KNOW'. This release points INTO the museum by the museum's own id. That is the ALLOWED direction — story to promotion — and it crosses nothing: the museum learns nothing, gains no field and does not know this file exists. The forbidden direction is a release string reaching src/, and this is its exact inverse. E.D. Yahdah will carry the identical shape when its reels exist; it already has a museum video, landed 2026-08-26 at 6c80c1c, and that fact needs no new mechanism to be known here.",
+    "track": "coconuts",
+    "museumRef": "c1vODrVXOg0",
+    "from": "src/data/artists/weird-baby.js",
+    "c": "RESTATED"
+   },
+   "releases": [
+    {
+     "id": "coconuts-q1",
+     "seq": 1,
+     "what": "Coconuts, first quarter of the song.",
+     "c": "HOUSE",
+     "shape": "9:16",
+     "source": null,
+     "sourceNote": "Made by Mike, not compiled from a recipe on the shorts bench. `null` is the honest value and a blank would not be.",
+     "postings": [
+      {
+       "surface": "youtube",
+       "state": "staged",
+       "ref": null,
+       "refNote": "UPLOADED AND PRIVATE (Mike, 2026-08-28). The video is on YouTube; its address has not been supplied, so `ref` is null and `release:check` counts it. Ops does not invent an id."
+      }
+     ]
+    },
+    {
+     "id": "coconuts-q2",
+     "seq": 2,
+     "what": "Coconuts, second quarter of the song.",
+     "c": "HOUSE",
+     "shape": "9:16",
+     "source": null,
+     "sourceNote": "Made by Mike, not compiled from a recipe on the shorts bench.",
+     "postings": [
+      {
+       "surface": "youtube",
+       "state": "staged",
+       "ref": null,
+       "refNote": "Uploaded and private. Address not yet supplied."
+      }
+     ]
+    },
+    {
+     "id": "coconuts-q3",
+     "seq": 3,
+     "what": "Coconuts, third quarter of the song.",
+     "c": "HOUSE",
+     "shape": "9:16",
+     "source": null,
+     "sourceNote": "Made by Mike, not compiled from a recipe on the shorts bench.",
+     "postings": [
+      {
+       "surface": "youtube",
+       "state": "staged",
+       "ref": null,
+       "refNote": "Uploaded and private. Address not yet supplied."
+      }
+     ]
+    },
+    {
+     "id": "coconuts-q4",
+     "seq": 4,
+     "what": "Coconuts, fourth quarter of the song.",
+     "c": "HOUSE",
+     "shape": "9:16",
+     "source": null,
+     "sourceNote": "Made by Mike, not compiled from a recipe on the shorts bench.",
+     "postings": [
+      {
+       "surface": "youtube",
+       "state": "staged",
+       "ref": null,
+       "refNote": "Uploaded and private. Address not yet supplied."
+      }
+     ]
+    },
+    {
+     "id": "coconuts-full",
+     "seq": null,
+     "what": "Coconuts, the full reel.",
+     "c": "HOUSE",
+     "undecidedNote": "IT HAS NO PLACE YET AND THAT IS A RULING, NOT A GAP. Mike, 2026-08-28, asked where it goes: \"I don't know. I had it, so I included it.\" Ops ruled it stays UNDECIDED — the system holds a release with no slot rather than forcing it a position. DO NOT GUESS WHERE THIS GOES. It is the sit-down's own first question once the quarters have run, and a later round that gives it a number to tidy the list has answered a question Mike deliberately left open.",
+     "shape": "9:16",
+     "source": null,
+     "sourceNote": "Made by Mike, not compiled from a recipe on the shorts bench.",
+     "postings": [
+      {
+       "surface": "youtube",
+       "state": "staged",
+       "ref": null,
+       "refNote": "Uploaded and private. Address not yet supplied."
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
