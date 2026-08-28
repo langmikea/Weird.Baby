@@ -649,7 +649,11 @@ const routes = {
        reported it, because no gate counts these rows. **And the dates are gone
        from this note deliberately**: Ruling C moved `RECORD_EPOCH` to
        2026-08-31 and every one of the seven re-dated with it, so a date quoted
-       here would be the third thing in this comment to go stale. The schedule
+       here would be the third thing in this comment to go stale.
+       [2026-08-28] **THAT PREDICTION IS NOW A MEASUREMENT.** Ruling D moved the
+       epoch again, to 2026-09-07, and all seven re-dated a second time — four
+       days after the sentence above was written. Because no day is named in it,
+       nothing in this comment had to move with them. The schedule
        derives; read it from `__WB_RECORD_ASSETS__`, never from prose.
        IT IS ALSO THE LIVE PRECEDENT FOR THE STAGE DOOR, which is why the
        correction is worth more than tidiness: `heldOutOfLaunch` was removed on
@@ -938,6 +942,11 @@ const routes = {
            became **SEVEN**.
          · **2026-08-24, Ruling C** — `RECORD_EPOCH` moved to 2026-08-31, so all
            seven re-dated into the future. Future-dated assets: **SEVEN.**
+         · **2026-08-28, Ruling D** — the epoch moved again, to **2026-09-07**.
+           Still seven, still all future-dated, and now further out. The COUNT
+           is what this note turns on and the count did not move; the days are
+           deliberately not re-typed here, for the reason the schedule comment
+           above gives.
        SO THE LATENT CASE IS NOW THE LIVE ONE. Every one of the seven files is
        physically at its public path AND refused by the branch above until its
        new day, which is the mechanism working — but it also means a previewer

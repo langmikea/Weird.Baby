@@ -36,10 +36,16 @@
    OPERATIONS §8's own class: an instrument that returns healthy because it
    cannot see the failure mode.
 
-   IT IS HARMLESS TODAY AND THAT IS LUCK, NOT DESIGN. Ruling C put day one on
-   2026-08-31, which is a Monday, so the cycle and the calendar agree — the same
-   luck the outline's ten `MON…FRI` rows are running on. The day either of them
-   stops being a Monday is the day this is a defect and not a note.
+   IT IS HARMLESS TODAY AND THAT IS LUCK, NOT DESIGN. Ruling D put day one on
+   **2026-09-07**, which is a Monday, so the cycle and the calendar agree — the
+   same luck the outline's ten `MON…FRI` rows are running on. The day either of
+   them stops being a Monday is the day this is a defect and not a note.
+   **[2026-08-28] THE EPOCH HAS NOW MOVED TWICE AND LANDED ON A MONDAY BOTH
+   TIMES** (2026-08-24 → 08-31, 2026-08-28 → 09-07). That is two draws from the
+   same lucky urn, not evidence the urn is safe: nothing in this file, and no
+   gate anywhere, would have said a word if either had landed on a Tuesday.
+   `npm run dictation` would have refused; `npm run arc:check` would have
+   passed on a wrong table.
 
    NOT FIXED HERE. The fix is one import and one call, but this file's whole
    virtue is that it is a small hand-rolled reader that keeps working when the

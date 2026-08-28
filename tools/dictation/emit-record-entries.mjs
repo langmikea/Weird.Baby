@@ -216,7 +216,36 @@ if (argv.includes("--verify")) {
    against `RECORD_EPOCH` at build time, so the index has to be measured from the
    same origin the call will be read against. A draft carrying a stale epoch —
    which is the state that made this a bug worth finding — then lands correctly
-   rather than landing its staleness. */
+   rather than landing its staleness.
+
+   ═══ [FLAG 2026-08-28 · measured, placed not fixed] AND AN EPOCH MOVE MAKES THAT
+       PARAGRAPH PRODUCE NEGATIVE DAYS ════════════════════════════════
+   Ruling D moved `RECORD_EPOCH` from 2026-08-31 to 2026-09-07 while the saved
+   draft still carried the five days it was written against. A dry run then
+   printed `date: recordDay(-6)` through `recordDay(-2)` — the five Records dated
+   a WEEK BEFORE day one, which is the epoch move being silently undone by a
+   file nobody thought of as a date source.
+
+   WHAT IT COSTS ON THE GLASS, MEASURED RATHER THAN GUESSED: `entryWeek()` in
+   `src/lib/record-model.js` returns `null` for any date before the epoch — its
+   own line reads *"before day one is not week zero"* — so the dateline **drops
+   `Week 1` and prints `Monday · Record 001`**. Nothing throws and nothing prints
+   a warning.
+
+   THE `--write` GUARD DOES NOT COVER IT. `treeMovedAt()` below consults
+   `robots-record.js` and its git log, and NOTHING ELSE. `record-epoch.js` is not
+   in it, so an epoch move on its own leaves the draft looking newer than the
+   Record and the refusal never fires. It fired on 2026-08-28 only because that
+   round also touched `robots-record.js` — luck, and named as luck.
+
+   NOT FIXED, AND THE REASON IS THAT IT MAY NOT BE A DEFECT. The header above
+   rules that THE ENTRY'S OWN DAY IS THE AUTHORITY; on that reading, preserving
+   Mike's drafted days across an epoch move is this function working. On the
+   other reading, D1's whole rule is that one line moves and EVERYTHING follows.
+   **Those two rules genuinely disagree here and it is Mike's call, not a typo
+   correction.** Until it is made: **after moving the epoch, open the day editor
+   and save before anybody runs `record:land -- --write`.** Filed in OPERATIONS
+   §8. */
 const EPOCH_MS = Date.parse(recordEpoch() + "T00:00:00Z");
 function dayIndex(iso) {
   const t = Date.parse(iso + "T00:00:00Z");

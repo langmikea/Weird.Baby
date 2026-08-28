@@ -43,9 +43,13 @@
    qualification and is the reason this is a constant and not a decision.
 
    AND IT AGREES WITH HIS OWN TEXT, which was checked rather than assumed:
-   2026-08-31 is a **Monday** — his report says the site went live *"at 12:00 am
-   Monday morning"* — and his `FRIDAY DAY (-3)` heading lands on 2026-08-28,
+   2026-09-07 is a **Monday** — his report says the site went live *"at 12:00 am
+   Monday morning"* — and his `FRIDAY DAY (-3)` heading lands on 2026-09-04,
    which is a **Friday**. Nothing was adjusted to make that true.
+   [2026-08-28] BOTH DATES IN THAT PARAGRAPH MOVED WITH THE EPOCH AND NEITHER
+   CLAIM DID, which is the second time it has held: what it asserts is a SHAPE —
+   day one is a Monday and his minus-three is a Friday — and the shape survives
+   any Monday. See RULING D below.
 
    ═══ [2026-08-24] THE DATE MOVED TO 2026-08-31, AND THE MECHANISM IS WHAT LET
        IT ════════════════════════════════════════════════════════════════════
@@ -70,8 +74,46 @@
    WHAT THOSE FIVE ENTRIES *ARE* IS A SEPARATE FACT AND IT IS NOT RECORDED HERE.
    This file holds the clock. The state of the five — what a visitor did or did
    not read — is Mike's, and it lands in `docs/MUSEUM_RULINGS-20260817.md` and
-   `docs/canon/09-PUBLISHED.md`. */
-export const RECORD_EPOCH = "2026-08-31";
+   `docs/canon/09-PUBLISHED.md`.
+
+   ═══ [2026-08-28] RULING D — THE DATE MOVED AGAIN, TO 2026-09-07, AND IT MOVED
+       BEFORE THE DEPLOY RATHER THAN AFTER IT ════════════════════════
+   MIKE, ruling B then A on the two questions the catch-up deploy raised: **move
+   the epoch first, then deploy.** The new day one is **Monday 7 September 2026**
+   — his dad's birthday and Labor Day, and the relaunch date he named.
+
+   WHY THE ORDER IS THE RULING AND NOT A PREFERENCE. The museum reads the clock
+   at REQUEST time. A deploy does not ask this constant and back-burnering the
+   launch does not reach it, so shipping the tree with day one four days out
+   ARMS an unattended opening that nobody has to type anything to cause. His
+   ruling is that the arming is decided here, in the tree, before the wire — not
+   discovered on the day it fires. **THE COROLLARY IS THE PART A LATER SESSION
+   NEEDS:** if the workflow is not ready when 7 September comes round, this line
+   moves again BEFORE that day, because nothing and nobody has to act for the
+   museum to open on it.
+
+   IT COST ONE LINE AGAIN, AND THAT IS NOW A MECHANISM WITH TWO PROOFS RATHER
+   THAN ONE. Five entry dates, the stamps, the weekdays, the week numbers, the
+   datelines, both build bakes, the share cards, the wing and the lobby
+   countdown all followed. **The five entries were not edited.** Not one of them
+   carries a literal date; `recordDay(n)` did the move, exactly as it did on
+   2026-08-24.
+
+   AND THE WEEKDAYS SURVIVED A SECOND TIME. 7 September is a Monday, so the
+   outline's ten `MON…FRI` rows in `reveal/week-one.mjs` and `reveal/week-two.mjs`
+   are untouched and `npm run dictation` still builds. **That is still luck and
+   not design, and there is a named place where the luck is load-bearing:**
+   `tools/arc.mjs` derives its day column from the ENTRY NUMBER and never reads
+   this constant, so a non-Monday would leave `docs/ARC.md` wrong while
+   `npm run arc:check` printed PASS. Flagged at that file since 74223d2, still
+   not fixed, and still correct only while day one is a Monday.
+
+   RULING C'S BLOCK ABOVE IS LEFT AS IT WAS WRITTEN. It records what happened on
+   2026-08-24 and it is accurate as history; its *"The site restarts Sunday
+   30 August"* is superseded by this block and not by an edit to it (OPERATIONS
+   §0, VERBATIM — a paraphrase filed in his class is indistinguishable from his
+   own sentence a week later). */
+export const RECORD_EPOCH = "2026-09-07";
 
 /* [L4 2026-08-09] EVERY OTHER ENTRY'S DATE IS COUNTED FROM IT, NOT TYPED.
    Mike: "DATES from the epoch: D1 = 2026-08-17 Monday, D2 = 08-18, D3 = 08-19,
@@ -81,8 +123,12 @@ export const RECORD_EPOCH = "2026-08-31";
    class is indistinguishable from his own sentence a week later). The SHAPE of
    what he said is what survived and it is the whole point of this function:
    five consecutive days counted off day one. Against the epoch above, the same
-   five days are **D1 = 2026-08-31 Monday, D2 = 09-01, D3 = 09-02, D4 = 09-03,
-   D5 = 09-04** — derived, not typed, and nobody edited an entry to get them.
+   five days are **D1 = 2026-09-07 Monday, D2 = 09-08, D3 = 09-09, D4 = 09-10,
+   D5 = 09-11** — derived, not typed, and nobody edited an entry to get them.
+   [2026-08-28] Re-typed for RULING D, and *re-typed* is the right word: this
+   list is the one place in the file that quotes derived values, it has now gone
+   stale twice, and it is kept only because it is the worked example the
+   paragraph is about.
    Five literals would be five things a slip has to
    find; this is the same one-field rule the epoch's own note states, extended
    to the entries that follow it. Day 1 IS the epoch, so `recordDay(1)` and

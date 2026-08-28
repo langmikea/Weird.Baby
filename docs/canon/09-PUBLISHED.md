@@ -38,16 +38,24 @@ entry names, and a file the worker refuses is not in the page at all.
 
 | | |
 |---|---|
-| **Epoch** | `RECORD_EPOCH = "2026-08-17"` — **one constant**, `src/data/artists/record-epoch.js`. A slip is that one line and nothing else. |
+| **Epoch** | `RECORD_EPOCH = "2026-09-07"` — **one constant**, `src/data/artists/record-epoch.js`. A slip is that one line and nothing else. **Moved twice: 2026-08-17 → 08-31 (Ruling C, 2026-08-24) → 09-07 (Ruling D, 2026-08-28).** |
 | **Timezone** | `America/New_York` |
 | **Posting hour** | **17:00** — *"Records post at 17:00 America/New_York on their day. Record N becomes visible at 5pm on day N."* |
 | **Dating** | `recordDay(n)`, UTC arithmetic, counted from the epoch. **Not typed.** |
 | **Whose clock** | **The museum's, on the server.** `src/worker.js` injects `window.__WB_TODAY__` on every HTML response. **Not the browser's** — *"a browser clock belongs to the visitor: it can be wrong by accident or on purpose."* |
 
-**RECORD 001 IS THE EXCEPTION AND IT STAYS ONE.** It posted at **00:00 Monday**.
-Not backdated, not hidden. **Its own text says the site went live *"at 12:00 am
-Monday morning"* and that is canon and untouched.** `/robots` opened at 00:00
-Monday and stays open.
+**RECORD 001'S OWN TEXT SAYS THE SITE WENT LIVE *"at 12:00 am Monday morning"*
+AND THAT IS CANON AND UNTOUCHED.** It is STORY, carried verbatim.
+
+> **[2026-08-28] WHAT THIS PARAGRAPH USED TO CLAIM AROUND IT IS STRUCK.** It read
+> *"RECORD 001 IS THE EXCEPTION AND IT STAYS ONE. It posted at 00:00 Monday. Not
+> backdated, not hidden. `/robots` opened at 00:00 Monday and stays open."*
+> **Nothing has posted.** RULING C, 2026-08-24: *last week was design and
+> development, the site was never live.* The wing is derived — `wing-open.js`
+> opens it when the Record has a visible entry — and on the museum's own clock
+> the first visible entry arrives **at 17:00 on Monday 7 September**, not at
+> 00:00. **The 00:00 exception was a description of a launch that did not
+> happen, and this page went on describing it for four days after the ruling.**
 
 **AND THE BOUNDARY IS READ OFF THE WALL CLOCK, NOT BY SUBTRACTING 17 HOURS.** On
 8 March 2026 a flat subtraction posts the Record an hour late, because the day is
@@ -69,14 +77,35 @@ under an older date.** *Never label it as seeing the past.* The honest answer to
 ## THE FIVE ENTRIES
 <a id="entries"></a>
 
-| no | date | title | state as of the museum's 2026-08-21 |
+| no | date | title | state as of **2026-08-28** |
 |---:|---|---|---|
-| **001** | 2026-08-17 | INITIAL LAUNCH - Weird.Baby Website | **PUBLISHED** |
-| **002** | 2026-08-18 | GENERAL STATUS UPDATE | **PUBLISHED** |
-| **003** | 2026-08-19 | DATA RECOVERY - LEVEL 1 - SUCCESS! | **PUBLISHED** |
-| **004** | 2026-08-20 | GENERAL STATUS UPDATE | **PUBLISHED** |
-| **005** | 2026-08-21 | **PORTAL CONNECTION ONLINE** | **SCHEDULED** — posts 17:00 today |
+| **001** | 2026-09-07 | INITIAL LAUNCH - Weird.Baby Website | **SCHEDULED** — posts 17:00 Mon 7 Sep |
+| **002** | 2026-09-08 | GENERAL STATUS UPDATE | **SCHEDULED** |
+| **003** | 2026-09-09 | DATA RECOVERY - LEVEL 1 - SUCCESS! | **SCHEDULED** |
+| **004** | 2026-09-10 | GENERAL STATUS UPDATE | **SCHEDULED** |
+| **005** | 2026-09-11 | **PORTAL CONNECTION ONLINE** | **SCHEDULED** |
 | **013** | — | *the prototype* | see [Record 013](#record-013) |
+
+> **[2026-08-28] EVERY DATE AND EVERY STATE IN THAT TABLE MOVED, AND THE STATES
+> ARE THE PART TO READ.** The dates are arithmetic — `recordDay(n)` off the
+> epoch, re-derived twice (Ruling C, then Ruling D) and typed here because this
+> is a catalogue and a catalogue prints values.
+>
+> **THE STATES ARE A RULING BEING APPLIED FOUR DAYS LATE.** This table said
+> 001–004 were **PUBLISHED** and 005 **SCHEDULED — posts 17:00 today**, as of
+> the museum's 2026-08-21. **RULING C, 2026-08-24, says the site was never
+> live** — *"nothing is unpublished because nothing was published, so we never
+> go backwards is not broken."* **So none of the five has ever been read by
+> anybody, and all five are SCHEDULED.**
+>
+> **WHY THAT MATTERS MORE THAN THE DATES:** this page is the answer to the
+> index's fourth question — *"Can I change this, or has a visitor read it?"* —
+> and it was answering **four Records cannot be changed** when the ruling says
+> all five can. **A catalogue that is wrong about what is frozen is worse than
+> no catalogue**, which is the thing INDEX.md's own opening says about picking
+> winners quietly. Flagged in the round log as question 2: **Ops applied Ruling C
+> here rather than leaving a known falsehood standing, and Mike confirming that
+> reading is the last step.**
 
 ---
 

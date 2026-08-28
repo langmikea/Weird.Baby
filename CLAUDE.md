@@ -656,8 +656,8 @@ dateline, the stamp and the mark rail: the register governs the WRITER'S WORDS.
 **THE STORY PLAYS OUT IN REAL TIME, ON REAL DATES** — *"an entry's date is the
 actual calendar day it is published, not a fictional offset."* Mirrored in
 `STATE.md`; the mechanism is `OPERATIONS.md` §5's THE STORY RUNS ON REAL DATES
-row. Day one is **2026-08-17** and it is **ONE CONSTANT**, `RECORD_EPOCH` in
-`src/data/artists/robots.js`, read by Record 001's `date`, the face's
+row. Day one is **2026-09-07** and it is **ONE CONSTANT**, `RECORD_EPOCH` in
+`src/data/artists/record-epoch.js`, read by Record 001's `date`, the face's
 `recordEpoch` and (via `recordEpoch()` in `reveal/record-entries.mjs`) every day
 of the worksheet's outline. **A slip is one line — proved, not assumed:** one
 date-shaped literal in the file, both consumers identifier references, and the
@@ -666,6 +666,26 @@ with nothing reporting it. **`C8` closes; the month band did NOT turn on** and
 `C1` says so (14 entries across >1 month; the volume holds two). **The worksheet
 generator refuses to build if a derived weekday disagrees with the outline's
 declared `MON…FRI`.**
+
+**[2026-08-28] THE DAY HAS MOVED TWICE AND THIS PARAGRAPH HAD NOT MOVED ONCE.**
+It said **2026-08-17** and `src/data/artists/robots.js`; the constant left
+`robots.js` at the 2026-08-11 split, **Ruling C** put day one on 2026-08-31 on
+2026-08-24, and **Ruling D** put it on **Monday 2026-09-07** on 2026-08-28. Both
+references are corrected above rather than flagged, because this file is
+orientation and an orientation doc that publishes a wrong constant disables the
+constant — the same argument the lint-baseline note in the pre-flight section
+makes about a wrong tripwire number.
+
+**AND THE DATE FIRES ON ITS OWN — THIS IS THE PART THAT IS NOT A NUMBER.**
+**Nobody runs anything on 7 September.** No cron, no queue, no scheduled job.
+The deployed worker plays the bundle against **request time**, so at **17:00
+America/New_York on Monday 7 September** Record 001 posts, the Robots wing
+opens, the lobby countdown removes itself, the share cards start naming the
+robots, and the seven governed pictures begin publishing on the days after.
+**A deploy does not decide that date — it ARMS it**, and the only way to not
+have the day is to move `RECORD_EPOCH` **before it arrives**. Mike's RULING D
+is the ORDER as much as the date: **move the epoch first, then deploy.** The
+full account is OPERATIONS §0 → **THE DEPLOY ARMS A DATE**.
 
 **A PREVIEW OF THE MUSEUM RENDERS THE MUSEUM'S OWN COMPONENTS, AT THE MUSEUM'S
 OWN VIEWPORT** — §5's THE LIVE PREVIEW row. The ramp is

@@ -179,6 +179,14 @@ import { recordDay } from "./record-epoch.js";
                deliberately not quoted above any more — quoting a derived value
                is how the last one went stale.
 
+               **[2026-08-28] IT MOVED A SECOND TIME AND THIS ENTRY STILL DID
+               NOT.** Ruling D put day one on **Monday 7 September 2026**. Same
+               one constant, same untouched entry, same `Week 1 · Monday`
+               — 7 September is a Monday too. **Two moves is where a claim
+               about a mechanism stops being a claim.** The date is named here
+               and nowhere in the data below it; if a third move comes, this
+               paragraph is the only thing in this file that has to be written.
+
                DOCTRINE 11 IS SETTLED HERE AND NOT RE-ASKED. S-a asked whether
                this report is an event in the story or a real report about
                building this website. MIKE RULED IT AS A GENERAL RULE, not as an

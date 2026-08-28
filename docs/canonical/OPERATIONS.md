@@ -129,6 +129,31 @@ of them runs at deploy time.**
 any script that does, never touches the guard. **Do not run one.** This block
 deliberately does not print that form.
 
+#### THE DEPLOY ARMS A DATE, AND NOBODY RUNS ANYTHING ON IT (2026-08-28)
+
+**`RECORD_EPOCH` IS `2026-09-07`, A MONDAY, AND THE MUSEUM OPENS ITSELF AT 17:00
+AMERICA/NEW_YORK ON IT.** There is **no cron, no queue, no scheduled job and no
+person in the loop.** The worker plays the deployed bundle against **request
+time**, so the day arrives on its own: Record 001 posts, `wing-open.js` opens
+`/robots`, the countdown removes itself, the share cards start naming the robots,
+and the seven governed pictures publish on the days after.
+
+**SO A DEPLOY DOES NOT DECIDE THE DATE — IT ARMS IT.** Nothing about the command
+above asks this constant, and nothing about calling the relaunch back-burner
+reaches it. **Whatever day one says when you deploy is the day the museum opens,
+whether or not anybody is watching**, and the only way to not have that day is
+to move it **before it arrives** — one line in `src/data/artists/record-epoch.js`,
+which moves the entries, the wing, the countdown and the pictures together.
+**Deploying and then deciding is not available.** Mike's RULING D, 2026-08-28,
+is the ORDER as much as the date: asked deploy-first or move-first, he answered
+**move first**.
+
+**IT MUST LAND ON A MONDAY.** `npm run dictation` refuses to build when the
+epoch's weekday disagrees with the outline's ten declared `MON…FRI` rows — but
+`docs/ARC.md` goes on printing `MON` for Record 001 whatever the epoch says, and
+`arc:check` passes on the wrong table. Two moves, two Mondays, both luck. See
+[D-a](../OPEN_ACTIONS.md#d-a).
+
 **THE COST — TWO NUMBERS, BOTH TRUE.**
 
 - **137 files (186,888,028 bytes)** become publicly readable.
@@ -405,11 +430,14 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ## 8. Known hazards (environment quirks)
 
-> **LEAD LINES, AND EVERY BODY THAT HAS BEEN CUT IS IN THE ARCHIVE — in TWO
+> **LEAD LINES, AND EVERY BODY THAT HAS BEEN CUT IS IN THE ARCHIVE — in THREE
 > cuts**, because §0 rules an archive a snapshot that is never edited:
-> `OPERATIONS_ARCHIVE/08-KNOWN-HAZARDS.md` at HEAD `b3812cc`, and
-> `08-KNOWN-HAZARDS-II.md` at HEAD `2f94fd7` for everything raised after it.
-> Each is true of its own moment.
+> `OPERATIONS_ARCHIVE/08-KNOWN-HAZARDS.md` at HEAD `b3812cc`,
+> `08-KNOWN-HAZARDS-II.md` at HEAD `2f94fd7`, and `08-KNOWN-HAZARDS-III.md` at
+> HEAD `35f805b`. Each is true of its own moment.
+> **[2026-08-28] THE THIRD CUT WAS TAKEN BY THE CEILING, NOT BY TASTE** — the
+> epoch round pushed this file to 108% and `ops:size` printed the remedy.
+> **No bodied entry is left in §8**, which is the state this preamble asks for.
 >
 > **A HAZARD RAISED SINCE THE LAST CUT CARRIES ITS BODY HERE, AND THAT IS THE
 > CYCLE RATHER THAN AN EXCEPTION.** A snapshot cannot be appended to without
@@ -435,9 +463,12 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 > came from **a hazard being written into a RITUAL section rather than a hazard
 > one.** §9's copy is gone; the lead line below is the home.
 
-- **A PUBLISH SCOPE RESOLVED FROM CODE REACHABILITY IS NOT THE SAME QUESTION AS THE LAW THAT GOVERNS THE CONTENT, AND ON 2026-08-22 ONLY THE FIRST WAS ASKED (2026-08-25).** `efc379f` moved eight files out from behind the stage door, **six of them photographs of the physical unit.** It was scoped properly by every measure this repo owns: `docs/MUSEUM_PORTAL_PUBLISH_SCOPE-20260821.md` names each file with its byte count, resolves the set from `portal.js` and `twin.html`'s loader ladder, states *"the move is per-file, so nothing rides along unless it is named"*, and puts the hard half — *"said plainly: it publishes MGK-VIIIp"* — to Mike rather than inferring it. **AND THE OBFUSCATION LAW WAS NEVER OPENED:** grep both Portal documents for `obfuscation | article [1-5] | silhouette | law` and you get **zero hits**. That law is the robots repo's `docs/canonical/OBFUSCATION_LAW.md` and its authority clause is exactly this material — *"every image, clip, still, plate, thumbnail, poster, share card and preview the museum publishes of a physical MGK unit."* Its Articles 1–3 (silhouette · cut at a joint · reveal economy) are visual judgements and are **Mike's eye, which is the point**: nobody put the pictures in front of him under that law. **MIKE RULED IT 2026-08-25 — RULING A: a visitor sees the real machine; photographs of the hardware stay public; the six stand.** **THIS ENTRY EXISTS BECAUSE THE ANSWER WAS YES.** A scope that asks *what does the code reach for* and never *what is this material* returns the right file list and the wrong question, and the next time the answer will not be yes. The reachability walk is necessary and it is not sufficient; the law is a second pass and it has an owner who is not Ops.
+- **A PUBLISH SCOPE RESOLVED FROM CODE REACHABILITY IS NOT THE SAME QUESTION AS
+  THE LAW THAT GOVERNS THE CONTENT, AND ON 2026-08-22 ONLY THE FIRST WAS ASKED
+  (2026-08-25).** Ruled 2026-08-25 — RULING A, the six photographs stand.
 
-- **`CF-Cache-Status` IS APPENDED BY THE ASSET WORKER, NOT BY THE ZONE CDN, AND READING IT AS THE EDGE'S VERDICT PUT A DISPROVED CLAIM IN A PUSHED COMMIT (2026-08-24).** The class this section already names, with the instrument being a HEADER: it returns `HIT` about the asset store's own lookup and cannot see the edge at all, so it answers a question nobody asked it and looks like an answer to the one they did. **THE MEASUREMENT THAT SETTLED IT:** two fetches of `https://weird.baby/` **3.2 seconds apart, both reading `CF-Cache-Status: HIT`, with `__WB_NOW__` differing by exactly 3.2 seconds** — the worker ran both times, so the HTML is NOT edge-cached and a deploy takes effect on the next request. A cache-busted URL reads `HIT` too, which is the tell. The header is appended at `asset-worker/index.js:5078`, inside the bundle this repo ships. **`e08e2b4`'s COMMIT MESSAGE STATES THE DISPROVED VERSION** — that it proved the edge caches worker responses — and a pushed message cannot be rewritten, so the correction lives here and this line is the one that is true. **`5acff0e`'s MARKS REMAIN CORRECT ON THEIR OWN REASONING, WHICH NEVER DEPENDED ON THIS:** a cookie-decided body was leaving with `Cache-Control: public`, which is wrong for any browser or shared proxy, and that was established from the code rather than from a probe. **AND THE PRACTICAL CONSEQUENCE IS A DEPLOY STEP THAT IS NOT NEEDED:** no cache purge for HTML. What this does NOT establish is the same for images — HTML carries a per-request `__WB_NOW__` to diff and an image carries no such marker, so that half is unmeasured rather than proven either way.
+- **`CF-Cache-Status` IS APPENDED BY THE ASSET WORKER, NOT BY THE ZONE CDN
+  (2026-08-24).** The HTML is not edge-cached: **no cache purge for HTML.**
 
 - **[2026-08-17] `assets:scan` WALKS DISK, AND DISK INCLUDES GITIGNORED TREES.
   A ROW IS COMMITTED; THE FILE MAY NOT BE, AND THEN THE ROW IS BORN AN ORPHAN.**
@@ -500,6 +531,14 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ### ON THIS SITE A MISSING IMAGE IS A 200, AND ONLY THE DECODE TELLS THE TRUTH
 ### (2026-08-22)
+
+### MOVING THE EPOCH DOES NOT MAKE THE SAVED DRAFT STALE, AND `record:land`
+### WOULD LAND IT AS NEGATIVE DAYS (2026-08-28)
+
+- **A stale draft lands `recordDay(-6)`…`(-2)` and `Week 1` vanishes from the
+  dateline; the `--write` guard reads `robots-record.js` and never the epoch.
+  AFTER MOVING THE EPOCH, OPEN THE DAY EDITOR AND SAVE** before anybody runs
+  `record:land -- --write`.
 
 
 ## 9. Session-close ritual

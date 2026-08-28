@@ -388,20 +388,29 @@ leading.
 
 Canonical: `docs/canonical/OPERATIONS.md` §5, THE STORY RUNS ON REAL DATES row.
 
-Day one is **2026-08-17**, pending the launch happening that day, and it is
-**one constant** — `RECORD_EPOCH` in `src/data/artists/robots.js` — read by
+Day one is **2026-09-07** (Mike's RULING D, 2026-08-28) and it is
+**one constant** — `RECORD_EPOCH` in `src/data/artists/record-epoch.js` — read by
 Record 001's `date`, by the face's `recordEpoch`, and by the worksheet's outline
 through `recordEpoch()`. **A slip is that one line and nothing else, and it was
 proved rather than assumed:** one date-shaped literal in the file, both consumers
 identifier references, and the half-updated two-literal case prints *"Week 2 ·
 Monday · Record 001"* on day one with nothing reporting it.
 
-**What it turned on:** the register stamp `17 AUG 26`, the weekday, the week
+**What it turned on:** the register stamp, the weekday, the week
 number, and a dateline of `Week 1 · Monday · Record 001` where one part printed
 before. **What it did not:** the month band — `shouldBand` wants fourteen entries
 across more than one month and the volume holds two (`C1`). **His own text checks
-out:** the 17th is a Monday, and his `FRIDAY DAY (-3)` lands on a Friday.
+out:** day one is a Monday, and his `FRIDAY DAY (-3)` lands on a Friday.
 `C8` closes. 013 stays undated, per B2.
+
+**[2026-08-28] THIS SECTION HAD TWO STALE FACTS AND THEY WERE BOTH IN THE FIRST
+SENTENCE.** It said day one was **2026-08-17** and that the constant lived in
+`src/data/artists/robots.js`. Day one has moved twice since — **Ruling C,
+2026-08-24, to 08-31; Ruling D, 2026-08-28, to 09-07** — and the constant moved
+out of `robots.js` into its own module at the 2026-08-11 split. **Both were true
+when written and neither has been true for weeks.** The stamp `17 AUG 26` is
+struck rather than re-typed for the reason the file it describes now gives:
+quoting a derived value is how the last one went stale.
 
 **And the outline's ten days now derive their dates from it**, checked against
 their own declared `MON…FRI` — the worksheet generator **fails the build** if

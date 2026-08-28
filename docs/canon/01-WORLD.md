@@ -31,13 +31,28 @@ fiction and it has never been on a page or a glass.
 | **2023 / 1 Jan 2024** | Weird.Baby receives three anonymous crates, note signed **"-W.O."** | STORY | — | [K-23](CONFLICTS.md#k-23) |
 | **2024** | The Record — the weekly blog — documents the reverse-discovery, upgrades the PHVDC adapters to USB, restores the cases, sells OPA prints and T-shirts. | STORY | — | [K-01](CONFLICTS.md#k-01) |
 | **2026-02-25** | The Weird.Baby project closes. | OPS (real) | — | |
-| **2026-08-17** | **`RECORD_EPOCH`.** Day one of the museum's Record. The story from here runs on real calendar days. | OPS mechanism / STORY dates | **PUB** | |
+| **2026-09-07** | **`RECORD_EPOCH`.** Day one of the museum's Record. The story from here runs on real calendar days. | OPS mechanism / STORY dates | **PENDING** | |
 
-**AND THE DATES FROM 2026-08-17 ONWARD ARE REAL DATES.** *"An entry's date is the
+**AND THE DATES FROM 2026-09-07 ONWARD ARE REAL DATES.** *"An entry's date is the
 actual calendar day it is published, not a fictional offset."* One constant,
 `RECORD_EPOCH` in `museum:src/data/artists/record-epoch.js`. Records post at
-**17:00 America/New_York** on their day — Record 001 excepted, which posted at
-00:00 Monday and stays. See [PUBLISHED](09-PUBLISHED.md).
+**17:00 America/New_York** on their day. See [PUBLISHED](09-PUBLISHED.md).
+
+> **[2026-08-28] THIS ROW SAID `2026-08-17` AND HAD SAID IT FOR FOUR DAYS TOO
+> MANY.** The catalogue was written on 2026-08-20; **RULING C moved day one to
+> 31 August on 2026-08-24 and this page was not brought along**, so for four days
+> the one document whose job is answering *"has a visitor read this?"* carried
+> the wrong day one. **RULING D moved it again on 2026-08-28, to Monday
+> 7 September**, and both moves are collected here in one edit.
+>
+> **THE `PUB` MARKER WENT WITH IT.** It read **PUB** — already on the glass —
+> and Ruling C's own words are *"the site was never live"*: nothing has been
+> published, so nothing about day one is on the glass yet. It is **PENDING**.
+> **The sentence about Record 001 posting at 00:00 Monday has been struck**, for
+> the same reason: it described a launch that Ruling C says did not happen.
+> Record 001's own text still says the site went live *"at 12:00 am Monday
+> morning"* and that is STORY, carried verbatim, and is not a claim about this
+> museum's own deployment history.
 
 ---
 

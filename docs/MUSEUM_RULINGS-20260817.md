@@ -771,6 +771,67 @@ link — no. Those are still refused.
 
 ---
 
+## 27 — RULING C: THE SITE WAS NEVER LIVE, AND DAY ONE MOVES TO 31 AUGUST (2026-08-24)
+
+> *"Last week was design and development. **The site was never live.** Nothing is
+> unpublished because nothing was published, so *we never go backwards* is not
+> broken by this — there is nothing behind us to go back to."*
+
+**FILED FOUR DAYS LATE, AND THAT IS THE FIRST THING TO SAY ABOUT IT.** The
+ruling landed in code on 2026-08-24 at `74223d2` and in the constant's own header
+comment, and **it never reached this file, `docs/canon/01-WORLD.md`, or
+`docs/canon/09-PUBLISHED.md`** — which is exactly the failure this file exists to
+prevent, arriving in the file that exists to prevent it. The canon went on saying
+day one was 2026-08-17 and that four Records were **PUBLISHED**, for four days,
+in the one document whose job is answering *"has a visitor read this?"*
+
+**WHAT IT DECIDED.** Day one → **2026-08-31**, Record 001 posting 17:00
+America/New_York; the relaunch framed as a restart rather than a continuation.
+
+**WHAT IT COST:** one literal and one register row. No entry was edited —
+`recordDay(n)` moved all five.
+
+**ITS REMAINDER IS SUPERSEDED** by ruling 28 below, which is why it is filed here
+rather than acted on.
+
+---
+
+## 28 — RULING D: MOVE THE EPOCH BEFORE DEPLOYING, AND DAY ONE IS MONDAY 7 SEPTEMBER (2026-08-28)
+
+**MIKE RULED B THEN A** on the two questions the catch-up deploy raised: **move
+the epoch first, then deploy.** Day one is **Monday 2026-09-07** — **his dad's
+birthday and Labor Day, and the relaunch date he named.**
+
+**THE ORDER IS THE RULING, NOT A PREFERENCE, AND IT IS THE REUSABLE HALF.** The
+museum reads its clock at **request time**. A deploy neither asks `RECORD_EPOCH`
+nor needs anybody to type anything for the day it names to arrive: there is no
+cron, no queue and no person in the loop. **So a deploy does not decide the date
+— it arms it**, and a date decided after the deploy is a date decided too late.
+The standing version of that sentence is in **OPERATIONS §0 → THE DEPLOY ARMS A
+DATE**, in `CLAUDE.md`'s standing-rules section, and in the epoch constant's own
+header. **It is written in three places on purpose**, because the one place it
+was written last time — a round log — is the place nobody read.
+
+**THE COROLLARY, STATED SO IT IS NOT INFERRED:** if 7 September comes round and
+the workflow is not ready, `RECORD_EPOCH` **moves again before that day**. Not
+after. His standing condition is unchanged — *"launching with a fully equipped
+workflow supporting us is non-negotiable"* — and this ruling does not spend it.
+
+**WHAT IT COST:** one literal, one register row (`40201658f6504625` →
+`7ac60b4d08f97dce`), and the comments that named the old day. **The five entries
+were not edited**; `recordDay(n)` moved them to 7–11 September. **7 September is
+a Monday**, so the outline's ten `MON…FRI` rows are untouched and
+`npm run dictation` still builds — twice now, and **twice by luck**: see
+[D-a](OPEN_ACTIONS.md#d-a) for the file that would go wrong quietly on a
+non-Monday.
+
+**WHAT IS STILL MIKE'S**, and is asked in the round log rather than decided here:
+whether `docs/THURSDAY-20260827.md` is re-dated a second time, and whether Ops
+applying ruling 27's *never live* to the canon's five-entry table (all five now
+**SCHEDULED**) reads as he intends.
+
+---
+
 ## HOW THIS FILE IS MEANT TO BE USED
 
 **Read it before re-opening any of them.** Each ruling here cost a round to

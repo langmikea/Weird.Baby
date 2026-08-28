@@ -32,15 +32,22 @@ import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
    This is the thing a visitor should see first. It carries the 'you found
    something' feeling that the current copy states in words."
 
-   THE TARGET IS DERIVED, NOT TYPED: `RECORD_EPOCH` (2026-08-31) resolved to an
-   instant in `RECORD_TZ` (America/New_York) = 2026-08-31T04:00:00Z. His ruling,
+   THE TARGET IS DERIVED, NOT TYPED: `RECORD_EPOCH` (2026-09-07) resolved to an
+   instant in `RECORD_TZ` (America/New_York) = 2026-09-07T04:00:00Z. His ruling,
    after reversing an earlier local-to-the-visitor reading: *"The museum's own
    clock, matching the doors."* A launch slip still moves one field.
    [2026-08-24] AND IT MOVED — Ruling C put day one on 31 August, this comment's
    two dates are the only thing in this file that had to follow, and the counter
    re-armed itself. It had already run to zero on the old epoch and returned
    `null`; it now has days on it again, which is the correct reading of a museum
-   whose doors open on Monday 31 August.
+   whose doors open on a Monday still ahead of it.
+   [2026-08-28] AND IT MOVED AGAIN — Ruling D put day one on **Monday
+   7 September**. The same two dates in the paragraph above followed and nothing
+   else in this file did. It does not re-arm this time, because it was never at
+   zero: it goes from days to more days. **THE READOUT WAS CHECKED FOR THE
+   TWO-DIGIT CASE** — `cell()` pads with `padStart(2, "0")` and does not clamp,
+   so a ten-day reading prints `10 DAYS` and no cell needs widening. A three-day
+   gap and a ten-day gap render in the same four cells.
 
    ═══ [2026-08-24 · SECOND CORRECTION, AND IT IS THE LOAD-BEARING ONE] THE
        TARGET IS `recordVisibleAt`, NOT `dayStartInRecordTz` ═══════════════════

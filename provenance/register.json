@@ -13321,14 +13321,14 @@
    "t": "INDEX",
    "c": "HOUSE"
   },
-  "40201658f6504625": {
+  "7ac60b4d08f97dce": {
    "f": "src/data/artists/record-epoch.js",
-   "l": 74,
-   "t": "2026-08-31",
+   "l": 116,
+   "t": "2026-09-07",
    "p": "RECORD_EPOCH — the day the five entries count from, and the face's `recordEpoch`",
    "c": "MIKE",
-   "s": "Mike's RULING C, 2026-08-24: last week was design and development and the site \"was never live\" — nothing is unpublished because nothing was published, so \"we never go backwards\" is not broken. The site restarts Sunday 30 August and Record 001 posts Monday 31 August at 17:00 America/New_York. The standing rule above the date is unchanged and is D1's: an entry's date is the actual calendar day it is published, not a fictional offset. The ruling record itself lands in docs/MUSEUM_RULINGS-20260817.md and docs/canon/09-PUBLISHED.md as its own step and is not written by this packet.",
-   "n": "IT IS THE DATE ITSELF AND NOT A STRING ON THE GLASS. Nothing prints these ten characters: the register stamp derives `31 AUG 26` and the dateline derives `Week 1 · Monday`, both by arithmetic in src/lib/record-model.js. It is declared MIKE because it is his fact, and it is the one field a launch slip moves. [2026-08-24] IT MOVED, AND THE MOVE IS THE PROOF OF THE CLAIM: this row and one literal were the whole edit; no entry date, no stamp and no dateline was touched. Its prior key was 70c2e7724abf2808 at t=2026-08-17, sourced to docs/MUSEUM_DATE_PREVIEW_LOG-20260808.md §0 — that citation dated Record 001 to 17 August pending a launch that day, and Ruling C is what supersedes it. Nothing RESTATED the old key, so no chain broke."
+   "s": "Mike's RULING D, 2026-08-28: move the epoch BEFORE deploying, and day one is Monday 7 September 2026 — his dad's birthday and Labor Day, and the relaunch date he named. He ruled B then A on the two questions the catch-up deploy raised, and the ORDER is the ruling: the museum reads its clock at request time, so a deploy neither asks this constant nor needs anybody to type anything for the day it names to arrive. The standing rule above the date is unchanged and is D1's: an entry's date is the actual calendar day it is published, not a fictional offset. It supersedes RULING C, 2026-08-24, which put day one on Monday 31 August; C in turn superseded Mike 2026-08-08 dating Record 001 to 17 August pending a launch that day. The ruling record itself lands in docs/MUSEUM_RULINGS-20260817.md and docs/canon/09-PUBLISHED.md as its own step and is not written by this packet.",
+   "n": "IT IS THE DATE ITSELF AND NOT A STRING ON THE GLASS. Nothing prints these ten characters: the register stamp derives 07 SEP 26 and the dateline derives Week 1 · Monday, both by arithmetic in src/lib/record-model.js. It is declared MIKE because it is his fact, and it is the one field a launch slip moves. [2026-08-24] IT MOVED, AND THE MOVE IS THE PROOF OF THE CLAIM: this row and one literal were the whole edit; no entry date, no stamp and no dateline was touched. Its prior key was 70c2e7724abf2808 at t=2026-08-17, sourced to docs/MUSEUM_DATE_PREVIEW_LOG-20260808.md §0 — that citation dated Record 001 to 17 August pending a launch that day, and Ruling C is what supersedes it. Nothing RESTATED the old key, so no chain broke. [2026-08-28] IT MOVED A SECOND TIME, ON RULING D, AND THE SECOND MOVE COST THE SAME ONE LITERAL AND THIS ONE ROW. Its prior key was 40201658f6504625 at t=2026-08-31, sourced to Ruling C above; nothing RESTATED that key either, checked the same way, so again no chain broke. THE KEY IS DERIVED FROM THE TEXT — sha256(file NUL text) truncated to 16 — which is why a date change is a re-key and not an edit in place, and why a re-key is the only honest record of one."
   },
   "21e0467885e5b524": {
    "f": "src/data/artists/robots-record.js",

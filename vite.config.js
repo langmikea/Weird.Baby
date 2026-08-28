@@ -603,7 +603,10 @@ export default defineConfig({
        sat wrong in three comments for three days. **The dates are deliberately
        not quoted any more.** Ruling C moved `RECORD_EPOCH` to 2026-08-31 and
        every row re-dated; a day named in this comment would go stale on the
-       next move, which is what happened to the last one. The schedule is
+       next move, which is what happened to the last one. **[2026-08-28] AND THE
+       NEXT MOVE CAME FOUR DAYS LATER** — Ruling D, epoch 2026-09-07, every row
+       re-dated again, and this comment needed no edit because it names no day.
+       The schedule is
        derived from the entries' own `assets` arrays and their own dates — read
        the object, never the prose. */
     __WB_RECORD_ASSETS__: JSON.stringify(
