@@ -44,7 +44,8 @@ import * as acorn from "acorn";
 import jsxPlugin from "acorn-jsx";
 
 import {
-  SURFACES, POSTING_STATES, UNDECIDED, RULES, inOrder, postingOn,
+  SURFACES, SURFACE_KEYS, surfaceOf, HANDLE, POSTING_STATES, UNDECIDED,
+  RULES, inOrder, postingOn,
 } from "../release/release-shape.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
@@ -234,7 +235,7 @@ function restatedResolve() {
 function outOfOrder() {
   for (const run of runs) {
     const seqd = (run.releases || []).filter(r => r.seq !== UNDECIDED);
-    for (const surface of SURFACES) {
+    for (const surface of SURFACE_KEYS) {
       const out = seqd.filter(r => {
         const p = postingOn(r, surface);
         return p && p.state === "out";
@@ -276,7 +277,7 @@ function honesty() {
       for (const p of r.postings || []) {
         const st = POSTING_STATES[p.state];
         if (!st) { fault(`${r.id}/${p.surface}: unknown state ${JSON.stringify(p.state)}.`); continue; }
-        if (!SURFACES.includes(p.surface)) fault(`${r.id}: unknown surface ${JSON.stringify(p.surface)}.`);
+        if (!SURFACE_KEYS.includes(p.surface)) fault(`${r.id}: unknown surface ${JSON.stringify(p.surface)}.`);
         if ("due" in p) fault(`${r.id}/${p.surface}: carries a \`due\` key. THERE IS NO DUE DATE.`);
 
         if (p.state !== "out" && p.posted)
@@ -310,6 +311,25 @@ function honesty() {
           fault(`${r.id}/${p.surface}: \`ref\` is null with no \`refNote\`. A silent blank is indistinguishable from a bug.`);
         if (p.state === "staged" && p.ref === null)
           notes.push(`${r.id}/${p.surface}: staged, address not supplied`);
+
+        /* [2026-08-28] THE PRECONDITION, CHECKED RATHER THAN HOPED FOR.
+           Mike ruled the TikTok account a PRECONDITION and not a task — he sets
+           it up, nothing here creates it. A precondition nothing checks is a
+           wish, and the failure it prevents is specific: a posting recorded as
+           PUBLIC on a surface that has no account is a false entry in the one
+           file whose whole job is to be true about what went out.
+           IT DOES NOT BLOCK `planned` OR `staged`. Planning a TikTok post
+           before the account exists is exactly right, and saying so is the
+           point of the state. */
+        const sf = surfaceOf(p.surface);
+        if (p.state === "out" && sf && sf.account.exists === false) {
+          fault(`${r.id}/${p.surface}: is OUT, and the ${p.surface} account does not exist. `
+            + `${sf.account.note}`);
+        }
+        if (p.state === "out" && sf && sf.account.exists === null) {
+          fault(`${r.id}/${p.surface}: is OUT, and nobody has said whether the ${p.surface} `
+            + `account exists. Ops does not infer it.`);
+        }
       }
     }
   }
@@ -336,6 +356,20 @@ console.log(`    UNDECIDED           ${nUndecided}   (held with no slot, on purp
 console.log(`  public on any surface ${nOut}`);
 console.log(`  src/ files walked     ${FILES.length}`);
 console.log(`  rules declared        ${RULES.length}   (${RULES.filter(r => r.silent).length} that no gate can check)`);
+
+/* THE SURFACES PRINT IN THE RULED ORDER, EVERY RUN. The order is the point and
+   a list nobody sees is a list that gets reordered. `release/README.md` carries
+   why it is this order; this says what it is. */
+console.log(`\n  THE SURFACES — in the ruled order`);
+for (const s of SURFACES) {
+  const a = s.account;
+  const acct = a.exists === false ? "NO ACCOUNT YET"
+    : a.exists === null ? "account unstated"
+    : a.handle ? `@${a.handle}` : "account exists · handle not supplied (M60)";
+  console.log(`    ${s.key.padEnd(10)} ${s.is.padEnd(12)} ${acct}`);
+}
+console.log(`    handle order: ${HANDLE.preferred.join(" · ")}`);
+console.log(`    ${HANDLE.constraint} So: ${HANDLE.shape}`);
 
 for (const run of runs) {
   console.log(`\n  ${run.id.toUpperCase()}`);
