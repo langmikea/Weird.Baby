@@ -21,11 +21,11 @@
      RELEASE -> STORY   FORBIDDEN. No release string, id or platform ref may
                         appear under `src/` or in the built bundle.
 
-   ═══ ONE VIDEO, THREE SURFACES, THREE POSTING EVENTS ═══════════════════════
-   Mike's reels are 9:16, which is what YouTube Shorts, Instagram and Facebook
-   Reels all want, so ONE video goes to all three uncut. A release is therefore
-   the VIDEO, and `postings[]` is a list inside it rather than a second object —
-   a posting has no existence apart from the video it posts.
+   ═══ ONE VIDEO, FOUR SURFACES, FOUR POSTING EVENTS ════════════════════════
+   Mike's reels are 9:16, which is what TikTok, Instagram Reels, YouTube Shorts
+   and Facebook Reels all want, so ONE video goes to all four UNCUT. A release
+   is therefore the VIDEO, and `postings[]` is a list inside it rather than a
+   second object — a posting has no existence apart from the video it posts.
 
    ═══ THE RUN ══════════════════════════════════════════════════════════════
    A single and its reels. Coconuts is a single; E.D. Yahdah is the next one.
@@ -33,11 +33,88 @@
    reason `outcome` exists and the reason a run is a thing at all.
    =========================================================================== */
 
-/* ═══ THE SURFACES ═════════════════════════════════════════════════════════
-   Three, and they are NOT interchangeable: YouTube is the only one Mike has
-   said he schedules on, and the other two are posted by hand. The gate does
-   not care — it is the spec that says which surfaces a release is due on. */
-export const SURFACES = ["youtube", "facebook", "instagram"];
+/* ═══ THE SURFACES — FOUR, AND THE ORDER IS THE POINT ══════════════════════
+   [2026-08-28] Mike ruled TikTok in and ruled the ORDER. **This array is
+   ordered and the order is load-bearing**, which is the whole reason it is a
+   list of objects rather than four strings: a set of names can be reordered by
+   anyone tidying an alphabetical list, and nothing would notice.
+
+   **THE ORDER IS DECLARED HERE. THE STRATEGY BEHIND IT IS IN
+   `release/README.md`.** A data file is the wrong place to argue a position —
+   what belongs here is the fact that the order exists, what each surface IS in
+   one line, and enough of the reason that nobody reorders it by accident. The
+   case for it, and the warning against treating four surfaces as
+   interchangeable, is prose and lives with the prose.
+
+   `is` is the one-line role. `why` is the shortest honest reason. Neither is a
+   substitute for the README and both exist so a reader of THIS file cannot
+   mistake the order for arbitrary. */
+export const SURFACES = [
+  { key: "tiktok",
+    is: "THE DOOR",
+    why: "the only one built to show work to strangers — its algorithm surfaces "
+       + "small accounts to new audiences",
+    account: { exists: false, handle: null, displayName: null,
+      note: "THE ACCOUNT DOES NOT EXIST YET. Mike sets it up. This is a "
+          + "PRECONDITION, not a task — nothing here creates it and nothing "
+          + "should list it as work." },
+    dots: false },
+
+  { key: "instagram",
+    is: "THE BRAND",
+    why: "where the house looks like itself",
+    account: { exists: null, handle: null, displayName: null,
+      note: "UNSTATED. Mike has said YouTube and Facebook exist; he has not "
+          + "said either way about Instagram, and Ops does not infer it." },
+    dots: true },
+
+  { key: "youtube",
+    is: "THE ARCHIVE",
+    why: "content compounds — a video from two years ago still drives streams",
+    account: { exists: true, handle: null, displayName: null,
+      note: "The account exists, as Weird.Baby. The HANDLE has never been "
+          + "supplied — register M60, open since 2026-08-05." },
+    dots: true },
+
+  { key: "facebook",
+    is: "LAST",
+    why: "it is there because he has an account",
+    account: { exists: true, handle: null, displayName: null,
+      note: "The account exists, as Weird.Baby. Handle not supplied — M60." },
+    dots: true },
+];
+
+/** the keys alone, in the ruled order. */
+export const SURFACE_KEYS = SURFACES.map(s => s.key);
+
+/** the surface row for a key, or null. */
+export function surfaceOf(key) {
+  return SURFACES.find(s => s.key === key) || null;
+}
+
+/* ═══ THE HANDLE ═══════════════════════════════════════════════════════════
+   [2026-08-28] MIKE'S PREFERENCE ORDER, IN HIS ORDER, AND THE CONSTRAINT THAT
+   BENDS IT. He wants `Weird.Baby` first. **TikTok does not permit a dot in a
+   handle**, so his first preference is unavailable on the surface he ruled
+   first — and the resolution is not to drop the dot but to MOVE it:
+
+     THE DOT LIVES IN THE NAME, NOT IN THE HANDLE.
+
+   A handle of `WeirdBaby` or `weirdbaby` with a DISPLAY NAME of `Weird.Baby`
+   satisfies his order everywhere it can be satisfied and costs the dot only in
+   the one place no platform will carry it.
+
+   **NOTHING IS CHOSEN HERE.** `handle` is null on all four surfaces above: no
+   handle has ever been supplied for any platform, which is register M60, open
+   since 2026-08-05 — and a handle is not something Ops may invent. This block
+   records what he PREFERS and what is POSSIBLE, and the two are not the same
+   thing on one of the four. */
+export const HANDLE = {
+  preferred: ["Weird.Baby", "WeirdBaby", "weirdbaby"],
+  constraint: "TikTok does not permit dots in handles.",
+  shape: "handle `WeirdBaby` or `weirdbaby`, display name `Weird.Baby`.",
+  register: "M60",
+};
 
 /* ═══ A POSTING'S STATE ════════════════════════════════════════════════════
    THREE, AND THE MIDDLE ONE IS THE WHOLE REASON THIS IS NOT A BOOLEAN.

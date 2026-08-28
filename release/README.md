@@ -20,9 +20,11 @@ npm run release:check    the same, and exit 1 on any fault
 
 ## THE THREE THINGS THIS HOLDS, AND NOTHING ELSE
 
-**A RELEASE** — one video. The three surfaces are not three releases; the reels
-are 9:16, which is what YouTube Shorts, Instagram and Facebook Reels all want,
-so **one video goes to all three uncut** and `postings[]` is a list inside it.
+**A RELEASE** — one video. The four surfaces are not four releases; the reels
+are 9:16, which is what TikTok, Instagram Reels, YouTube Shorts and Facebook
+Reels all want, so **one video goes to all four uncut** and `postings[]` is a
+list inside it. **The surfaces are ordered and the order is ruled** — see THE
+FOUR SURFACES below.
 
 **AN OUTCOME** — views, and what was concluded. Lives inside a posting, because
 the numbers are per-surface.
@@ -38,6 +40,64 @@ to see → that spec's *watching* section.
 the next session* — `docs/HANDOFF_next_session.md` — ruled that facts may not go
 in it, and watched it rot: last touched 2026-08-23, ten rounds ago. Truth
 ranking puts it below git log. Do not turn this into one.
+
+---
+
+## THE FOUR SURFACES, AND WHY THE ORDER IS THE ORDER
+
+**Read this before planning a release.** The order is declared in
+`release-shape.mjs` because a machine needs it; **the reason is here because a
+data file is the wrong place to argue a position.** The two must not drift — if
+you reorder the array, this section is what you are contradicting.
+
+**THE FAILURE THIS EXISTS TO PREVENT: treating four surfaces as
+interchangeable.** They are not four copies of one act. Each is doing a
+different job, and a release planned as *post it everywhere* has no strategy in
+it at all.
+
+| | | why |
+|---|---|---|
+| **1** | **TikTok — THE DOOR** | **The only one built to show work to strangers.** Its algorithm surfaces content from small accounts to new audiences; an account with 200 followers can reach 100,000 people. Nothing else on this list does that. |
+| **2** | **Instagram — THE BRAND** | Where the house looks like itself. |
+| **3** | **YouTube — THE ARCHIVE** | **Content compounds.** A video from two years ago still drives streams. It is the only surface where an old post keeps working. |
+| **4** | **Facebook — LAST** | It is there because he has an account. |
+
+**THE DOOR AND THE ARCHIVE ARE THE TWO THAT EARN THEIR PLACE**, and they earn it
+for opposite reasons — one reaches people who have never heard of the house, the
+other keeps working long after it was posted. Instagram is the face; Facebook is
+inventory. **A reel that only ever goes to YouTube is filed and not shown.**
+
+**One video, 9:16, fits all four UNCUT.** So the cost of a fourth surface is a
+posting event, not a re-edit — which is why four is affordable at all.
+
+### The accounts — and one precondition
+
+**THE TIKTOK ACCOUNT DOES NOT EXIST YET. Mike sets it up.** It is recorded as a
+**precondition, not a task**: nothing here creates it, nothing should list it as
+work, and no round should "action" it. **The gate refuses a TikTok posting that
+claims to be `out`** while the account does not exist — a precondition nothing
+checks is a wish. Planning or staging one is fine and is the honest state.
+
+**Instagram is UNSTATED.** Mike has said YouTube and Facebook exist, as
+Weird.Baby. He has said nothing either way about Instagram, and **Ops does not
+infer it** — the gate refuses an `out` posting there too, for that reason and
+with that wording.
+
+### The handle, and where the dot goes
+
+**Mike's preference order, his order:** `Weird.Baby` · `WeirdBaby` · `weirdbaby`.
+
+**TikTok does not permit a dot in a handle** — so his first preference is
+unavailable on the surface he ruled first. **The resolution is not to drop the
+dot but to move it:**
+
+> **THE DOT LIVES IN THE NAME, NOT IN THE HANDLE.**
+> Handle `WeirdBaby` or `weirdbaby`, **display name `Weird.Baby`.**
+
+**No handle has been supplied for any platform** — register
+[`M60`](../docs/OPEN_ACTIONS.md#m60), open since 2026-08-05 — and **a handle is
+not something Ops may invent.** What is recorded here is what he PREFERS and
+what is POSSIBLE, which are not the same thing on one of the four.
 
 ---
 
@@ -176,10 +236,13 @@ have not been supplied. `release:check` counts them under **WITHHELD** rather
 than leaving a silent blank — *a silent filter is indistinguishable from a bug.*
 **Ops does not invent a platform id.**
 
-**Facebook and Instagram carry no posting at all yet** — not `planned`, absent.
-Nothing exists there and nothing has been decided about when it will.
+**TikTok, Instagram and Facebook carry no posting at all yet** — not `planned`,
+absent. Nothing exists on any of the three and nothing has been decided about
+when it will. **Every one of the five releases is YouTube-only today**, which by
+the order above means the whole run currently reaches nobody who has not already
+found the house: **the door is not open.**
 
-**And no handle is known for any of the three accounts.** Register row
+**And no handle is known for any of the four accounts.** Register row
 [`M60`](../docs/OPEN_ACTIONS.md#m60), open since 2026-08-05, and the site still
 carries Mike's own *"Follow us on social media"* with nothing behind it.
 
