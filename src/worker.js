@@ -228,8 +228,41 @@ async function previewOpen(request, env) {
   return got === await recordToken(env.RECORD_KEY);
 }
 
+/* ═══ [2026-08-27 · C-asof1] THE DATE WINS, AND THIS LINE IS THE WHOLE RULE ══
+   OPS RULED IT: *"Preview and `?as-of=` answer the same question, and letting
+   the door override the clock shows a day that never existed."*
+
+   WHAT IT WAS. `wb_record` defeats the Record's date filter outright — every
+   entry, whatever its date. Driving needs `wb_record` to MINT, so every driven
+   session began holding the thing that cancelled it: the driven day moved the
+   countdown and the share cards and nothing else. The only way to see one day
+   was open the door, drive, then CLOSE the door and keep driving — a sequence
+   that worked, was written down nowhere, and is the defect stating itself.
+
+   WHAT IT IS NOW. **While the clock is driven, the preview override is
+   SUSPENDED.** Not revoked — suspended, for exactly as long as a day is being
+   driven. Clear the drive and the door is open again with nothing to re-enter.
+     · not driven + door open  -> every entry          (unchanged)
+     · DRIVEN   + door open    -> the driven day alone  (this is the change)
+     · driven   + door shut    -> the driven day alone  (unchanged)
+
+   THE KEY CHECK IS NOT TOUCHED AND DID NOT NEED TO BE. Minting still requires
+   `wb_record` — the date parameter has no secret of its own and borrows the
+   Record key's proof-of-holder for the one moment of minting. What changes is
+   what the cookie DOES once held, never who may hold it. The three-step
+   sequence collapses to two on its own: open the door, drive, look.
+
+   ONE DECLARATION, THREE READERS (Doctrine 17) — the asset door, `/api/record`
+   and the injection all ask THIS function rather than each testing the cookie
+   and the clock for themselves. A second copy of `previewing && !driven` is
+   exactly how one of the three drifts and shows a day that never existed. */
+const showEveryRecord = (previewing, clock) => previewing && !clock.driven;
+
 /* ═══ [2026-08-24] THE DATE PARAMETER — A FOURTH DOOR, AND IT MOVES THE CLOCK ══
-   MIKE/OPS: drive the museum to a past day and see what that day showed.
+   MIKE/OPS: drive the museum to ANY day and see what it shows on that day.
+   [2026-08-27 · RULING A] IT WAS BACKWARDS-ONLY FOR THREE DAYS, from f2dc391 to
+   this commit. What changed, why, and what the old rule said is in ANY
+   DIRECTION, AND NO CEILING below — read it before restoring anything.
 
    ═══ IT MOVES THE CLOCK AND NEVER THE STORY ════════════════════════════════
    THIS IS THE WHOLE DESIGN AND EVERY OTHER PROPERTY FALLS OUT OF IT. The
@@ -265,9 +298,27 @@ async function previewOpen(request, env) {
    image it names was fetched on the real one — and the asset door would refuse
    exactly the pictures the visit exists to look at.
    ITS OWN COOKIE, NOT A SEAT ON `wb_record`. A new reason gets a new door (§8).
-   `wb_record` shows FUTURE entries; this moves the clock BACKWARDS. They are
-   opposite motions and folding them together would mean one control doing two
-   things nobody asked it to do at once.
+   [2026-08-27] THE REASON THIS SENTENCE USED TO GIVE IS DEAD AND THE RULE IT
+   SUPPORTED IS NOT. It said *"`wb_record` shows FUTURE entries; this moves the
+   clock BACKWARDS — they are opposite motions"*, and Ruling A pointed them the
+   same way. THE DOORS STILL DO NOT MERGE, on the reason that was underneath it
+   the whole time: THEY ANSWER DIFFERENT QUESTIONS. `wb_record` is *show me
+   everything at once, whatever its date*; `wb_asof` is *show me one day, as
+   that day will look*. One defeats the filter, the other moves the clock.
+   Merging them would leave no way to ask the second question — which is the one
+   Mike made the deploy conditional on.
+
+   ═══ [2026-08-27 · CLOSED SAME DAY] THE OVERLAP — AND THE DATE NOW WINS ════
+   IT WAS RAISED HERE AS FLAGGED-NOT-FIXED AND OPS RULED IT WITHIN THE ROUND.
+   `wb_record` defeated the date filter outright, and minting requires
+   `wb_record`, so every driven session began holding the thing that cancelled
+   it — the driven day moved the countdown and the share cards and nothing else.
+   The workaround was open the door, drive, then CLOSE the door and keep
+   driving; it worked and was written down nowhere.
+   **THE RULE IS NOW `showEveryRecord` — see its block above.** While a day is
+   being driven the preview override is suspended, so the sequence is open the
+   door, drive, look. The workaround is not documented anywhere because it no
+   longer exists, which is the outcome to prefer over documenting it.
 
    ═══ WHAT IS BEHIND THE KEY, AND WHAT IS NOT ═══════════════════════════════
    MINTING is behind the Record key: the requester must already hold `wb_record`
@@ -280,11 +331,28 @@ async function previewOpen(request, env) {
    fails every test below must still be removable, and giving up a privilege is
    not a privileged act — the same reasoning `/api/record {close:true}` carries.
 
-   ═══ BACKWARDS ONLY, AND A REFUSAL IS SAID OUT LOUD ════════════════════════
-   Forwards is REFUSED, never clamped to today. A clamp would answer a question
-   nobody asked and look like it had worked. A malformed value is refused and
-   the refusal NAMES WHICH CHECK FAILED, because "as-of refused" on its own
-   sends the reader back to guess between four things.
+   ═══ [2026-08-27 · RULING A] ANY DIRECTION, AND NO CEILING ═════════════════
+   MIKE: **a key-holder may drive the clock FORWARD.** This is the switch he
+   made the deploy conditional on — *"I want the website updated so I can always
+   see what it is I am actually getting"* — and what he is getting is next
+   week's Record, which backwards cannot reach.
+   WHAT IT REPLACED, WRITTEN DOWN SO A LATER ROUND DOES NOT RESTORE IT. From
+   f2dc391 (2026-08-24) until this commit `badDay` refused any `day > realToday`
+   with *"Backwards is honoured; forwards is refused, not clamped"*. THE CLAMP
+   HALF OF THAT REASONING STANDS and is why nothing is clamped now either: a
+   clamp answers a question nobody asked and looks like it worked. What fell is
+   the DIRECTION, and it fell on arithmetic — every entry, the wing and all
+   seven governed files sit in the future of every day the old rule could reach,
+   so the whole backwards range was one state, and that state was *shut*.
+   THERE IS NO CEILING AND THERE IS NOT GOING TO BE ONE. Ops ruled it: a bound
+   is a number somebody has to maintain, and it is wrong the first time an entry
+   moves. **The honest answer is whatever the entries say.** Drive past the last
+   entry and the museum shows what it has — every entry drawn, wing open,
+   countdown gone, because it has already fired. That is the answer, not an edge
+   case, and nothing special-cases it.
+   A REFUSAL IS STILL SAID OUT LOUD. Two checks remain — the shape, and whether
+   the date is a real calendar day — and the refusal NAMES WHICH ONE FAILED,
+   because "as-of refused" on its own sends the reader back to guess.
 
    ═══ RULING B: A BARE QUERY FROM A STRANGER IS IGNORED ═════════════════════
    **DO NOT "FIX" THIS INTO A REFUSAL.** An earlier draft refused every
@@ -315,13 +383,12 @@ function realCalendarDay(day) {
 }
 
 /** which check a candidate day fails, in words, or null when it passes */
-function badDay(day, realToday) {
+/* [2026-08-27 · RULING A] THE THIRD CHECK IS GONE AND `realToday` WITH IT. It
+   refused `day > realToday`; a key-holder may now drive forward without a
+   ceiling. See ANY DIRECTION, AND NO CEILING above before restoring either. */
+function badDay(day) {
   if (!ISO_DAY.test(day)) return "malformed — expected YYYY-MM-DD";
   if (!realCalendarDay(day)) return `not a real calendar day — ${day} does not exist`;
-  if (day > realToday) {
-    return `forward-dated — ${day} is after ${realToday}. `
-         + "Backwards is honoured; forwards is refused, not clamped";
-  }
   return null;
 }
 
@@ -356,7 +423,7 @@ function drivenReadOnly(cors, clock) {
 }
 
 /** `{}` = not driven · `{day}` = driven · `{cookie}` = mint/clear · `{refusal}` */
-async function resolveAsOf(request, env, url, realToday) {
+async function resolveAsOf(request, env, url) {
   const q = url.searchParams.get("as-of");
 
   /* CLEAR FIRST, BEFORE ANY VALIDATION — see the note above. */
@@ -368,7 +435,7 @@ async function resolveAsOf(request, env, url, realToday) {
        never becomes an error page. */
     if (!env.RECORD_KEY) return {};
     if (!await previewOpen(request, env)) return {};
-    const why = badDay(q, realToday);
+    const why = badDay(q);
     if (why) return { refusal: refuseAsOf(400, why) };
     return { day: q, cookie: AS_OF_SET(`${q}.${await asOfToken(env.RECORD_KEY, q)}`) };
   }
@@ -380,13 +447,15 @@ async function resolveAsOf(request, env, url, realToday) {
   const cut = raw.lastIndexOf(".");
   if (cut < 0) return { refusal: refuseAsOf(400, "cookie is malformed") };
   const day = raw.slice(0, cut);
-  const why = badDay(day, realToday);
+  const why = badDay(day);
   if (why) return { refusal: refuseAsOf(400, why) };
   if (!env.RECORD_KEY) return { refusal: refuseAsOf(503, NO_RECORD_KEY_NOTE) };
-  /* re-checked on every request, not only at the mint. A day minted behind the
-     real one can never become a day ahead of it, so this cannot fire on an
-     honest cookie — it is here so the cookie cannot drive forward under any
-     circumstance a later round has to reason about. */
+  /* THE DIGEST IS THE WHOLE OF THE COOKIE'S AUTHORITY. It binds the DAY to this
+     deployment's key, so a driver cannot hand-edit the day in their own jar —
+     in either direction, and that is unchanged by Ruling A.
+     [2026-08-27] IT IS NOW THE ONLY THING GUARDING THE DAY. The forward check
+     that used to stand above it is gone; `badDay` is left here as a cheap shape
+     test before the hash, and it can no longer refuse a well-formed date. */
   if (raw.slice(cut + 1) !== await asOfToken(env.RECORD_KEY, day)) {
     return { refusal: refuseAsOf(403, "cookie does not verify against this deployment's key") };
   }
@@ -597,7 +666,11 @@ const routes = {
        lookup on a build-time table, and `previewOpen` is still reached only
        when a path is governed, exactly as the short-circuit did before. */
     const governed = assetWithheld(__WB_RECORD_ASSETS__, url.pathname, recordToday);
-    if (governed && !await previewOpen(request, env)) {
+    /* [2026-08-27 · C-asof1] `showEveryRecord` RATHER THAN `previewOpen`, so a
+       driven session's asset door answers the DRIVEN day even with the Record
+       door open. `governed` still short-circuits, so the cookie is read only
+       when a path is actually on the schedule — unchanged from before. */
+    if (governed && !showEveryRecord(await previewOpen(request, env), clock)) {
       return noStore(new Response("Not found", { status: 404 }));
     }
 
@@ -844,8 +917,10 @@ const routes = {
           half cannot lie.
 
        2. FETCHING A FUTURE ENTRY'S ASSET — **can lie, by the identical
-          mechanism.** The branch above skips `assetWithheld` for a previewer and
-          falls through to `env.ASSETS.fetch`. If the entry names a picture that
+          mechanism.** The branch above skips `assetWithheld` for a previewer
+          **who is not driving** ([2026-08-27] `showEveryRecord`; a driven
+          session's asset door answers the driven day) and falls through to
+          `env.ASSETS.fetch`. If the entry names a picture that
           `reveal:day --place` has not yet renamed out of `public/held/`, the
           file is not at the public path the schedule names, the store misses,
           and `not_found_handling` returns the app HTML at 200 — the held door's
@@ -881,7 +956,16 @@ const routes = {
       return new Response(JSON.stringify({
         today: recordToday,
         tz: RECORD_TZ,
+        /* [2026-08-27 · C-asof2] `previewing` STILL MEANS *THIS BROWSER HOLDS
+           THE COOKIE*, and it must, because `/admin` draws its open/close
+           button from it — a page that read this as "showing everything" would
+           offer to open a door that is already open the moment a day is driven.
+           WHAT IS SHOWING IS A SECOND QUESTION AND IT GETS A SECOND FIELD. */
         previewing: await previewOpen(request, env),
+        /* [2026-08-27 · C-asof1] THE EFFECTIVE ANSWER, from the one declaration
+           the asset door and the injection also read. `previewing && !driven`
+           is NOT restated here or on any page — see `showEveryRecord`. */
+        showingAll: showEveryRecord(await previewOpen(request, env), clock),
         configured: !!env.RECORD_KEY,
         note: env.RECORD_KEY ? null : NO_RECORD_KEY_NOTE,
         /* the LIFETIME, not the deadline. The cookie is HttpOnly and carries no
@@ -915,7 +999,8 @@ const routes = {
        `injectClock` is where both are stamped — see the two notes in it. */
     return injectClock(
       await env.ASSETS.fetch(request), clock,
-      await previewOpen(request, env), wingOpenOn(recordToday), governed);
+      showEveryRecord(await previewOpen(request, env), clock),
+      wingOpenOn(recordToday), governed);
   }
 };
 
@@ -943,7 +1028,7 @@ export default {
        it is this line. Nothing counts them — see THE DATE PARAMETER above. */
     const realToday = todayInRecordTz();
 
-    const asOf = await resolveAsOf(request, env, url, realToday);
+    const asOf = await resolveAsOf(request, env, url);
     if (asOf.refusal) return asOf.refusal;
 
     /* THE INSTANT FOLLOWS THE DAY, or the Record is on one day and the lobby

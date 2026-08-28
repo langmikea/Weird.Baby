@@ -42,12 +42,23 @@ export const SERVER_TODAY =
     ? G.__WB_TODAY__
     : null;
 
-/** true when this visitor holds the admin preview cookie (A4) */
+/** true when this page was served with the Record filter defeated (A4)
+    [2026-08-27 · C-asof1] IT IS NOT *"HOLDS THE COOKIE"* ANY MORE, AND THE NAME
+    IS THE ONLY THING THAT STILL SOUNDS LIKE IT. The worker injects
+    `previewing && !driven` — Ops ruled that a driven day OUTRANKS the preview
+    cookie, because a door that overrides the clock shows a day that never
+    existed. The rule is declared once, in `showEveryRecord` in `src/worker.js`,
+    and this file must not restate it: nothing here may test a clock, and there
+    is no driven flag on the glass to test it with. */
 export const PREVIEWING_ALL = G.__WB_RECORD_ALL__ === true;
 
 /* ── THE FALLBACK, AND WHY IT LEANS THE WAY IT DOES ─────────────────────────
    Three cases, and only the third is a judgement call:
-     1. PREVIEWING     Mike's code is in play — everything, always.
+     1. PREVIEWING     Mike's code is in play — everything, UNLESS a day is
+                       being driven. [2026-08-27 · C-asof1] It read "everything,
+                       always" until Ops ruled the date wins; the worker decides
+                       it and injects the answer, so this file still cannot tell
+                       the two apart and does not need to.
      2. DEVELOPMENT    everything. This is the museum's own standing rule
                        (`reveal/stage.mjs`): during development, show everything
                        that is PLACED, because Mike cannot direct what he cannot

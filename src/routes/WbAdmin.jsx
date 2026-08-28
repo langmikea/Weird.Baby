@@ -212,9 +212,17 @@ function HeldDoor() {
    moves the Record and what follows from the Record, and nothing else. */
 function RecordDoor() {
   const navigate = useNavigate();
+  /* [2026-08-27 · C-asof2] `driven`, `realToday` AND `showingAll` ARE CARRIED
+     NOW. `/api/record` has sent all of them and this page destructured them
+     away, so it printed the DRIVEN day under the label "Museum day" as though
+     it were today — and a driven day is routinely a day that has not happened.
+     The worker's own note says why all of them ship together: *"`today` alone
+     reads as the truth on any day it has been driven."* This is the reader
+     half of that sentence, which had never been written. */
   const [state, setState] = useState({
     open: false, configured: true, note: null, checked: false,
     today: null, maxAgeDays: null,
+    driven: false, realToday: null, showingAll: false,
   });
   const [key, setKey] = useState("");
   const [msg, setMsg] = useState(null);
@@ -233,6 +241,11 @@ function RecordDoor() {
         setState({
           open: !!d.previewing, configured: !!d.configured, note: d.note || null,
           checked: true, today: d.today || null, maxAgeDays: d.maxAgeDays ?? null,
+          driven: !!d.driven, realToday: d.realToday || null,
+          /* NOT `d.previewing && !d.driven` — that rule is declared once, in
+             `showEveryRecord` in src/worker.js, and a second copy here is how
+             the page and the museum come to disagree (Doctrine 17). */
+          showingAll: !!d.showingAll,
         });
       })
       .catch(() => { if (!gone) setState(s => ({ ...s, checked: true })); });
@@ -296,18 +309,51 @@ function RecordDoor() {
         does not touch the held rooms above &mdash; those are held for reasons that are not the
         clock, and no key here opens one.
       </p>
+      <p className="adm-held-note">
+        While a day is being driven this door stands down and the date decides instead, so you
+        see that one day rather than all of them. Stop driving and it takes over again.
+      </p>
+      {/* [2026-08-27 · C-asof2] THE LABEL MOVES, NOT JUST THE VALUE. A driven
+          day printed under a plain "Museum day" is the lie: it reads as today,
+          and it is routinely a day that has not happened. The label is where a
+          reader's eye lands first, so the label is what has to say it. */}
       {state.checked && state.today && (
         <p className="adm-held-stage">
-          <span className="adm-held-stage-k">Museum day</span>
+          <span className="adm-held-stage-k">
+            {state.driven ? "Museum day, driven" : "Museum day"}
+          </span>
           <span className="adm-held-stage-v">{state.today}</span>
+        </p>
+      )}
+      {/* BOTH DAYS OR NEITHER — the worker's own rule for `/api/record`, which
+          is where these two values come from, applied at the reader. */}
+      {state.checked && state.driven && state.realToday && (
+        <p className="adm-held-stage">
+          <span className="adm-held-stage-k">The real day</span>
+          <span className="adm-held-stage-v">{state.realToday}</span>
         </p>
       )}
       {state.checked && (
         <p className="adm-held-stage">
           <span className="adm-held-stage-k">Showing</span>
+          {/* `showingAll` COMES FROM THE WORKER, not from `state.open`. With a
+              day driven the Record door no longer decides this — the date does
+              — so reading the button's own state here would print the opposite
+              of what the museum is drawing. */}
           <span className="adm-held-stage-v">
-            {state.open ? "Every Record, and its files" : "Only what has posted"}
+            {state.showingAll
+              ? "Every Record, and its files"
+              : state.driven
+                ? "Only what had posted by that day"
+                : "Only what has posted"}
           </span>
+        </p>
+      )}
+      {state.checked && state.driven && (
+        <p className="adm-held-note">
+          The clock is being driven, in this browser only. Everybody else is on
+          the real day. Put <code>?as-of=off</code> on any address to stop, or
+          <code>?as-of=</code> and a date to move it.
         </p>
       )}
       {state.open ? (

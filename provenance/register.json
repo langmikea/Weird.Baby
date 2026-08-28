@@ -15417,20 +15417,6 @@
    "p": "badDay{}.calendar",
    "c": "HOUSE"
   },
-  "2461349ff753451e": {
-   "f": "src/worker.js",
-   "l": 322,
-   "t": "forward-dated — {} is after {}. ",
-   "p": "badDay{}.forward",
-   "c": "HOUSE"
-  },
-  "57d7ae17715cd16d": {
-   "f": "src/worker.js",
-   "l": 323,
-   "t": "Backwards is honoured; forwards is refused, not clamped",
-   "p": "badDay{}.forward",
-   "c": "HOUSE"
-  },
   "301e1d9c6bd72977": {
    "f": "src/worker.js",
    "l": 332,
@@ -16110,6 +16096,71 @@
    "l": 258,
    "t": "portal-audio",
    "s": "Ops' machinery, not a visitor-facing string - the fourth word of the museum/twin message contract, beside `portal-control`, `portal-view` and `portal-power`. It tells the LIVE machine to stop being heard while another channel is the picture, and to be heard again when it comes back. **IT EXISTS BECAUSE OF HIS RULING** - 'Sound from VIIIp is heard when on non-VIIIp channels. Fix pls.' - and it mutes the OUTPUT only: the unit keeps running, which is his earlier ruling and is not undone. It is never drawn and never read by anyone: the same class as `portal-view`, and filed the same way."
+  },
+  "47c426b7922ec744": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 312,
+   "t": "While a day is being driven this door stands down and the date decides instead, so you\n        see that one day rather than all of them. Stop driving and it takes over again.",
+   "c": "HOUSE",
+   "p": "RecordDoor{}.adm-held-note",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. [2026-08-27 C-asof2] It says when the museum's clock is being driven and what is consequently on the glass; the rule it reports is declared once in `showEveryRecord` in src/worker.js and is not restated here. No sentence of the Record or of any exhibit is reused."
+  },
+  "17820346726513aa": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 323,
+   "t": "Museum day, driven",
+   "c": "HOUSE",
+   "p": "RecordDoor{}.<p>.adm-held-stage-k"
+  },
+  "4dc3b5246694d008": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 332,
+   "t": "The real day",
+   "c": "HOUSE",
+   "p": "RecordDoor{}.<p>.adm-held-stage-k"
+  },
+  "7595217925342ba4": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 347,
+   "t": "Only what had posted by that day",
+   "c": "HOUSE",
+   "p": "RecordDoor{}.<p>.adm-held-stage-v"
+  },
+  "4e4869f8565f6e06": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 353,
+   "t": "The clock is being driven, in this browser only. Everybody else is on\n          the real day. Put",
+   "c": "HOUSE",
+   "p": "RecordDoor{}.adm-held-note",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. [2026-08-27 C-asof2] It says when the museum's clock is being driven and what is consequently on the glass; the rule it reports is declared once in `showEveryRecord` in src/worker.js and is not restated here. No sentence of the Record or of any exhibit is reused."
+  },
+  "eeaf41f31844eaeb": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 355,
+   "t": "?as-of=off",
+   "c": "HOUSE",
+   "p": "RecordDoor{}.<p>.<code>"
+  },
+  "c11faa27aa4bd8e1": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 355,
+   "t": "on any address to stop, or",
+   "c": "HOUSE",
+   "p": "RecordDoor{}.<p>"
+  },
+  "420c2ebc457c786c": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 356,
+   "t": "?as-of=",
+   "c": "HOUSE",
+   "p": "RecordDoor{}.<p>.<code>"
+  },
+  "e94202a2ff0d86c4": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 356,
+   "t": "and a date to move it.",
+   "c": "HOUSE",
+   "p": "RecordDoor{}.<p>"
   }
  }
 }
