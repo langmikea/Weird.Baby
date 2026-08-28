@@ -22,9 +22,12 @@ import { flashbangAlpha } from "./shorts-recipe.mjs";
    flattened onto black while the compiler had started padding white, and
    reported +159.76 luma on a file that was correct. */
 import { padColourOf } from "./shorts-pad.mjs";
+/* the publish bars, the compiler's own module — see tools/shorts-gate.mjs */
+import { enforce, readTable } from "./shorts-gate.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
+const ROOT = { museum: REPO, robots: path.resolve(REPO, "..", "weird-baby-robots") };
 const argv = process.argv.slice(2);
 const after = (f) => { const i = argv.indexOf(f); return i >= 0 ? argv[i + 1] : null; };
 
@@ -36,6 +39,24 @@ const lib = JSON.parse(fs.readFileSync(recipeFile, "utf8"));
 const recipe = (lib.recipes || [lib])[0];
 const blocks = recipe.blocks;
 const FPS = recipe.fps || 30;
+
+/* ═══ [2026-08-28] THE SAME GATE THE COMPILER RUNS, AND IT RUNS FIRST ═══════
+   THIS TOOL OPENS THE SOURCE FILES TOO. `plateLuma()` below reads each plate
+   off disk to get the luma the curve is checked against, so it reaches exactly
+   the material the compiler reaches and had exactly the same nothing standing
+   in front of it. It writes no MP4, which makes it the quieter half of the hole
+   and not a smaller one — a tool that decodes a never-published file is reading
+   it. Same module, same bars, same flag.
+
+   IT SITS ABOVE THE ffprobe BLOCK ON PURPOSE. Nothing barred was ever opened
+   with the gate lower down — ffprobe reads the `--mp4` argument, not the source
+   — but a refusal printed underneath eight lines of healthy-looking report
+   reads like a footnote, and the refusal is the thing to see first. */
+const TABLE = readTable();
+enforce(recipe, TABLE, {
+  allowHeld: argv.includes("--held-is-intended"),
+  tool: "shorts:verify",
+});
 const seconds = blocks.reduce((a, b) => a + (b.seconds || 0), 0);
 const FRAMES = Math.round(seconds * FPS);
 
@@ -105,10 +126,15 @@ const lumaOfFile = async (file, w, h, fit, pad) => {
   return rec709(data);
 };
 
-const TABLE = JSON.parse(fs.readFileSync(path.join(REPO, "provenance/asset-table.json"), "utf8")).entries;
 async function plateLuma(asset, fit, block) {
   const row = TABLE.find(r => r.uid === asset.uid);
-  const file = path.join(REPO, row.path);
+  /* [2026-08-28] `row.repo` IS HONOURED NOW. This built its path as
+     `join(REPO, row.path)` and the compiler builds it as
+     `join(ROOT[row.repo], row.path)` — so a robots-repo asset resolved to a
+     museum-repo address here and the two tools disagreed about which file they
+     were measuring. No recipe in the tree names one today, which is why it has
+     never fired; it is corrected rather than left as a trap. */
+  const file = path.join(ROOT[row.repo] || REPO, row.path);
   const pad = await padColourOf(file, block);
   return lumaOfFile(file, v.width, v.height, fit, pad);
 }

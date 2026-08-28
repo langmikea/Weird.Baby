@@ -114,6 +114,57 @@ export function neverPublished(p) {
   return NEVER_PUBLISHED.find((r) => r.test(p)) || null;
 }
 
+/** the RULED_OUT reason for this path's BASENAME, or null.
+    KEYED ON THE BASENAME AND THAT IS NOT AN OVERSIGHT — §8's *a governed
+    picture has two addresses*. A path test would let a ruled-out picture back
+    in through its other address, which is the exact shape that failure takes. */
+export function ruledOut(p) {
+  const base = p.split("/").pop();
+  return Object.prototype.hasOwnProperty.call(RULED_OUT, base)
+    ? RULED_OUT[base] : null;
+}
+
+/* ═══ [2026-08-28] THE TWO BARS, ASKED ABOUT ONE ROW ════════════════════════
+   `buildShelf()` answers *what may Mike PICK FROM*, and it answers it for the
+   whole table at once. **Nothing could ask about ONE asset**, so every tool
+   downstream of the bench — the compiler, the verifier — either re-derived the
+   question or, in fact, never asked it at all.
+
+   THIS IS THE SAME TWO BARS, EXPOSED PER ROW. It is not a third list and it
+   invents no rule: `buildShelf` below calls it, so the bench and every later
+   reader provably ask the same question. The proof that the move added and
+   removed nothing is the shelf itself — same rows, same drop counts, before
+   and after.
+
+   HELD IS DELIBERATELY NOT ONE OF THESE, AND THAT IS THE LOAD-BEARING PART.
+   Six of the eight SECTIONS above match `public/held/robots/…` only: the shelf
+   is 132 held rows out of 138, and the manual IS the ingredients. A held bar
+   here would empty the bench and refuse every recipe in the tree. **Held is a
+   TIMING state — the door changes, not the payload** — and the question *is
+   this due yet* is `reveal/day.mjs`'s, not this file's. Anything that must not
+   go out AT ALL belongs in one of the two lists above, where it can carry its
+   reason.
+
+   THE ORDER IS `buildShelf`'s OWN AND IS COPIED RATHER THAN CHOSEN — ruled-out
+   before never-published — so that a row which ever matched both could not
+   change which `drop` bucket it lands in by this function being introduced.
+   No row matches both today (the three RULED_OUT basenames are `.png`, the
+   never-published class is `audio/burps/*.wav`); the order is fixed anyway,
+   because a refactor must not be able to move a count.
+
+   Returns null when the row may be used, or `{ bar, reason, citation? }`. */
+export function publishRefusal(row) {
+  const p = row.path;
+  const ro = ruledOut(p);
+  if (ro) return { bar: "RULED OUT", reason: ro };
+  const np = neverPublished(p);
+  if (np) {
+    return { bar: "NEVER PUBLISHED", what: np.what,
+      reason: np.reason, citation: np.citation };
+  }
+  return null;
+}
+
 /* ═══ THE LABEL ════════════════════════════════════════════════════════════ */
 const TITLE = s => s.charAt(0).toUpperCase() + s.slice(1);
 export function labelOf(e) {
@@ -181,8 +232,11 @@ export function buildShelf() {
 
   for (const s of SECTIONS) {
     for (const e of table.filter(r => r.repo === "museum" && s.test(r))) {
-      const base = e.path.split("/").pop();
-      if (Object.prototype.hasOwnProperty.call(RULED_OUT, base)) { drop.ruled++; continue; }
+      /* [2026-08-28] THESE TWO WERE INLINE AND ARE NOW THE EXPORTED PRIMITIVES,
+         so that the claim "the compiler asks the same question as the bench" is
+         provable rather than asserted. Same tests, same order, same buckets —
+         the shelf was measured identical across the move. */
+      if (ruledOut(e.path)) { drop.ruled++; continue; }
       /* [2026-08-25] BEFORE the `missing` test on purpose: never-published is a
          fact about the CLASS and is true whether or not the file is on disk
          today. Counting one of these as "absent" would file a standing rule

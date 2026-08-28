@@ -50,6 +50,10 @@ import { SHAPES, flashbangAlpha, paceDurations } from "./shorts-recipe.mjs";
 /* the pad rule is its own module so the compiler and the verifier cannot
    answer the question differently — see tools/shorts-pad.mjs */
 import { padColourOf } from "./shorts-pad.mjs";
+/* and the publish bars are their own module for the same reason, one level up:
+   two implementations of *may this be published* is two answers — see
+   tools/shorts-gate.mjs, which reads shelf.mjs's own judgement */
+import { enforce, readTable } from "./shorts-gate.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -79,9 +83,22 @@ const shape = SHAPES.find(s => s.key === recipe.shape) || SHAPES[0];
 const W = shape.w, H = shape.h, FPS = recipe.fps || 30;
 
 /* ── resolve an asset to a full-frame raw RGB buffer, once ────────────────── */
-const TABLE = JSON.parse(fs.readFileSync(
-  path.join(REPO, "provenance", "asset-table.json"), "utf8")).entries;
+const TABLE = readTable();
 const ROOT = { museum: REPO, robots: path.resolve(REPO, "..", "weird-baby-robots") };
+
+/* ═══ [2026-08-28] THE GATE, AND IT RUNS HERE FOR A REASON ══════════════════
+   BEFORE the first `sharp()`, before `fs.mkdirSync`, before ffmpeg is spawned.
+   This tool's output is the one artifact in the project that leaves without
+   passing the worker or the door, and until today it asked NOTHING of the
+   material it compiled: `sourceFor()` below resolves a uid and reads the file.
+   The bench's filters never applied here, because `--recipe <path>` takes a
+   file from anywhere and a recipe need never have been near the bench.
+   The judgement is `shelf.mjs`'s and the walk is `shorts-gate.mjs`'s; this line
+   is the whole of the compiler's part in it. */
+enforce(recipe, TABLE, {
+  allowHeld: argv.includes("--held-is-intended"),
+  tool: "shorts:render",
+});
 
 /* A SOURCE, DECODED ONCE. Push and pull crops a different rectangle every
    frame, so the image is decoded to raw at native size once and every frame
