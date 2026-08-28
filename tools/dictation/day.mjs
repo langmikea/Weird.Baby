@@ -483,7 +483,8 @@ const WD = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "S
    > step and kills the importing process — measured here, the first build of
    > this file produced `reveal:day`'s output and none of its own. So its one
    > export is unreachable and `npm run reveal:day` is the only way to ask it
-   > anything. NOT FIXED HERE: that file is step 12 of `SUNDAY-20260830.md` and
+   > anything. NOT FIXED HERE: that file is step 12 of `THURSDAY-20260827.md`
+   > (renamed from `SUNDAY-20260830.md` on 2026-08-27; same step number) and
    > this piece is additive; a main guard is a one-line change to a runbook
    > dependency and belongs in its own round.
 
