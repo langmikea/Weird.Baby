@@ -10,11 +10,12 @@ provenance pointer, so a correction goes in the file, not here.
 | `07-WORKING-DOCTRINE.md` | 45,287 | §7 Working Doctrine | `b3812cc` |
 | `08-KNOWN-HAZARDS-II.md` | 11,870 | §8 Known hazards (second cut) and the hazard narrative that had accreted in §9 | `2f94fd7` |
 | `08-KNOWN-HAZARDS-III.md` | 7,399 | §8 Known hazards (third cut) | `35f805b` |
+| `08-KNOWN-HAZARDS-IV.md` | 7,768 | §8 Known hazards (fourth cut) | `09efc03` |
 | `08-KNOWN-HAZARDS.md` | 31,593 | §8 Known hazards | `b3812cc` |
 | `09-SESSION-CLOSE.md` | 3,963 | §9 Session-close ritual | `2f94fd7` |
 | `ROUND-LOGS.md` | 79,001 | the round-log preamble (the `Last verified against live tree` chain) | `b3812cc` |
-| **total** | **290,748** | | |
+| **total** | **298,516** | | |
 
-The ground state `docs/canonical/OPERATIONS.md` holds 38,867 bytes.
+The ground state `docs/canonical/OPERATIONS.md` holds 35,143 bytes.
 It keeps every archived section's heading and a pointer to the file below,
 so the section inventory is readable without opening any of them.
