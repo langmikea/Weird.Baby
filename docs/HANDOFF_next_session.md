@@ -49,14 +49,20 @@ worker sha256 `85ac466ac948642c`, from `83f06a0` with
 `docs/canonical/OPERATIONS.md` uncommitted. Nobody asked for it.
 
 A `node -e` string with an escaped single quote broke out of shell
-quoting and bash executed repo files. **The line that ran the deploy is
-NOT ESTABLISHED.** `OPERATIONS.md` does not fire it at `442495f`,
-`83f06a0`, `019fbd3` or `4a2bfc3` under bash in isolation — it fires
-`npm run mock` and `npm run dictation`. Isolation cannot reproduce
-relative-path recursion, and **eight tracked files DO fire a deploy**,
-including `docs/DEPLOYED.md:4` and four `tools/*.mjs`; the manual
-recursively executes repo files it names, and that chain is the leading
-hypothesis and is open.
+quoting and bash executed repo files. **THE CAUSE IS UNESTABLISHED AND IS
+EXPECTED TO REMAIN SO** — the entry point cannot be recovered from what
+the mangled command left behind. **Two hypotheses were tested and both
+measured false:** `OPERATIONS.md` as entry point, which fires the deploy
+at none of `442495f`, `83f06a0`, `019fbd3` or `4a2bfc3`; and the
+recursion chain, run in-repo with recursion live and every command
+stubbed, which fired no deploy at any depth. **Stop replacing this with a
+better story each round.**
+
+What IS established: **eight tracked files fired a deploy under bash** —
+`docs/DEPLOYED.md`, three round logs and four `tools/*.mjs` — the
+exposure is **bash-specific and does not reproduce under pwsh**, where
+the backtick is an escape character rather than command substitution, and
+**all eight are now guarded**, verified by execution.
 
 **It changed nothing a visitor sees.** Every diff since the clean
 `124b7dd` deploy at 12:30Z is under `docs/`, which the site build does not

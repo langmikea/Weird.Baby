@@ -1,3 +1,5 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
+
 # DEPLOYED — what is live at weird.baby
 
 Written by `tools/deploy-record.mjs`, which is the last link of both deploy

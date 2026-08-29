@@ -1,3 +1,4 @@
+/* ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. */
 /* tools/deploy-guard.mjs — YOU CANNOT PUBLISH THE WRONG STAGE BY ACCIDENT.
    [CH5 2026-08-12]
    ---------------------------------------------------------------------------

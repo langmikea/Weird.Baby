@@ -884,15 +884,36 @@ Executed under bash in an isolated directory with `npm`, `npx`, `wrangler`,
 prose**, because markdown inline code is backtick-delimited and a backtick is
 command substitution. Line 117 sits inside a ``` fence and is inert.
 
-**WHAT IS ESTABLISHED IS WORSE AND WIDER.** Isolation cannot reproduce
-relative-path recursion, and the manual **recursively executes repo files it
-names** — `LICENSE.txt`, `record-epoch.js`, `week-one.mjs`, `week-two.mjs` and a
-round log, measured. Of the 70 tracked files in both repositories that mention a
-deploy invocation, **eight actually fire one when executed**: `docs/DEPLOYED.md`
+**THE RECURSION CHAIN WAS THE SECOND HYPOTHESIS AND IT IS ALSO MEASURED FALSE.**
+The manual does **recursively execute repo files it names** — `LICENSE.txt`,
+`record-epoch.js`, `week-one.mjs`, `week-two.mjs` and a round log, measured — so
+the chain is real. Run **in-repo with that recursion live** and with `npm`,
+`npx`, `wrangler`, `git`, `node`, `rm`, `curl`, `mv` and `cp` stubbed, it fired
+**no deploy at any depth**: only `npm run mock` and `npm run dictation`.
+
+**SO THE CAUSE OF 14:03:26Z IS UNESTABLISHED AND IS EXPECTED TO REMAIN SO.** The
+entry point cannot be recovered from what the mangled command left behind. Two
+hypotheses were tested and both are false. **This ruling has now carried two
+wrong causes in one day, each replaced by a better story, and that is the thing
+to stop.** `docs/DEPLOYED.md` records the publish; the cause line is *unknown*
+and stays *unknown*.
+
+**WHAT IS ESTABLISHED.** Of the 70 tracked files in both repositories that
+mention a deploy invocation, **eight fire one when executed**: `docs/DEPLOYED.md`
 line 4, three round logs, and four `tools/*.mjs` — `deploy-guard`,
 `deploy-record`, `serve-mock` and `stage-build`, live because their header
-comments carry backticked commands. **That recursion chain is the leading
-hypothesis for 14:03:26Z and it is open.** The robots repo fires nothing.
+comments carry backticked commands. The robots repo fires nothing. **The
+exposure is bash-specific and that was measured, not assumed:** PowerShell
+refuses a non-`.ps1` to `-File`, and its backtick is an ESCAPE character rather
+than substitution, so the same lines are inert under `pwsh` — `$( )` is not.
+**Mike runs pwsh; his own hands were never the risk. Code's bash was.**
+
+**ALL EIGHT ARE NOW GUARDED**, each verified by execution rather than argument:
+a SHELL-STOP in an HTML comment for the documents, in a block comment for the
+`.mjs` files, and for `docs/DEPLOYED.md` — which is generated and says *do not
+edit by hand* — emitted from `deploy-record.mjs`'s own header template, with the
+byte-identical line placed in the file that exists today so the next deploy
+rewrites it unchanged.
 
 **THE MANUAL NOW CARRIES A SHELL-STOP** at its head — one HTML comment holding
 an unbalanced `)`, invisible when rendered, which aborts bash at line 3 with

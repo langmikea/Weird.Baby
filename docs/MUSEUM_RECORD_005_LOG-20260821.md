@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # RECORD 005 LANDED + THE QUEUE FILED — 2026-08-21
 
 **Nothing is waiting on Mike. Deploy before 17:00: `npm run deploy:launch`.**

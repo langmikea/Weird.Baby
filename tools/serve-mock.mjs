@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. */
 /* ===========================================================================
    `npm run mock` — SERVE `docs/` OVER HTTP SO OPS CAN LOOK BEFORE MIKE DOES.
    [2026-08-21]

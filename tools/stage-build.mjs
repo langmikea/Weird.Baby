@@ -1,3 +1,4 @@
+/* ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. */
 /* tools/stage-build.mjs — BUILD THE LAUNCH STATE. [V1 2026-08-06]
    ---------------------------------------------------------------------------
    `WB_STAGE=launch vite build` is one line on a Mac and three different lines

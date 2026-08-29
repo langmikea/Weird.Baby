@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # THE PANEL REBUILD + THE PORTAL'S OWN SCREEN
 2026-08-21 · both defects, built as one change
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. */
 /* tools/deploy-record.mjs — WRITES docs/DEPLOYED.md. The only path it touches.
    [2026-08-24]
    ---------------------------------------------------------------------------
@@ -89,6 +90,8 @@ const dirtyPaths = porcelainLines.map(l => l.slice(3)).filter(Boolean);
 const when = new Date().toISOString();
 
 const HEADER = [
+  "<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->",
+  "",
   "# DEPLOYED — what is live at weird.baby",
   "",
   "Written by `tools/deploy-record.mjs`, which is the last link of both deploy",
