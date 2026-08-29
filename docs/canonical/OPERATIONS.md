@@ -180,8 +180,22 @@ use it to check the door.** Flagged 2026-08-22, not fixed.
 
 > **[FLAG 2026-08-23 · verified probe, placed not fixed]**
 > `/held/robots/art/mgk-niac-cover.png` returns 404 `Not found`, 9 bytes, from
-> `src/worker.js:284–288`, refusal at `:286`. The moved file serves at
+> `src/worker.js:625–630`, refusal at `:627`. The moved file serves at
 > `/robots/art/portal-cover.png`, 200 `image/png`, 641,677 bytes.
+> **[2026-08-29] THE MEASUREMENT REPRODUCED AND ONLY ITS CITATION WAS STALE** —
+> it read `:284–288`, refusal at `:286`, which is now the as-of clock note. Line
+> numbers in a citation rot; the measurement did not. `npm run door:check` took
+> the same reading cookie-free and got the same 404 at 9 bytes.
+
+**`/api/held` REPORTS `stage` WITHOUT THE KEY. Only `commit`, `served` and
+`probe` are gated on `open`, so the live stage is publicly measurable** —
+`stage: __WB_STAGE__` is unconditional in the GET branch.
+
+**AND A PROBE FROM A BROWSER ON THE KEY-HOLDER'S MACHINE ALWAYS ANSWERS `open`
+AND PROVES NOTHING ABOUT THE DOOR.** Measured 2026-08-29: four held paths
+returned 200 in that browser and 404 to a cookie-free client in the same minute.
+**Check the door with `npm run door:check`, which sends no cookie and needs no
+key** — it is not a gate and is not in §9; its home is after a deploy.
 
 Counted **2026-08-22** at HEAD **`ee94ee0`**. Definition: files behind the door
 as reported by `reveal:day` and present under `public/held`.

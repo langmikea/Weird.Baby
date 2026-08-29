@@ -78,6 +78,7 @@
     "conduit": "node tools/conduit-drop.mjs",
     "ops:size": "node tools/ops-size-gate.mjs",
     "shellstop:gate": "node tools/shell-stop-gate.mjs",
+    "door:check": "node tools/door-probe.mjs",
     "ops:archive": "node tools/ops-archive-index.mjs"
   },
   "dependencies": {
