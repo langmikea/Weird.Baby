@@ -869,10 +869,39 @@ and still binding** — `git status --short` re-read, the new hash confirmed in
 
 **AND THE ROUND THAT LANDED IT PROVED A HAZARD NOBODY HAD NAMED.** Building the
 insert for this very section as an inline `node -e` string, an escaped quote
-broke out of the shell's quoting and bash executed `OPERATIONS.md` itself, line
-by line. **Line 117 of the manual is the body of the §0 DEPLOY block**, so the
-museum published — stage launch, 2026-08-29T14:03:26.328Z, worker sha256
-`85ac466ac948642c`, off `83f06a0` with one file uncommitted. **Ops ruled that
+broke out of the shell's quoting and bash executed repo files. **A deploy
+published — stage launch, 2026-08-29T14:03:26.328Z, worker sha256
+`85ac466ac948642c`, off `83f06a0` with one file uncommitted**, and
+`docs/DEPLOYED.md` records it.
+
+**THE LINE THAT RAN IT IS NOT ESTABLISHED, AND THE FIRST ACCOUNT OF IT WAS
+WRONG.** This ruling and §8 both said *line 117 of the manual is the body of the
+§0 DEPLOY block, so the museum published.* **That does not reproduce.**
+Executed under bash in an isolated directory with `npm`, `npx`, `wrangler`,
+`git`, `node`, `rm` and `curl` stubbed, `OPERATIONS.md` fires the deploy at
+**none** of `442495f`, `83f06a0`, `019fbd3` or `4a2bfc3` — it fires
+`npm run mock` and `npm run dictation`, both of them **inline backticks in
+prose**, because markdown inline code is backtick-delimited and a backtick is
+command substitution. Line 117 sits inside a ``` fence and is inert.
+
+**WHAT IS ESTABLISHED IS WORSE AND WIDER.** Isolation cannot reproduce
+relative-path recursion, and the manual **recursively executes repo files it
+names** — `LICENSE.txt`, `record-epoch.js`, `week-one.mjs`, `week-two.mjs` and a
+round log, measured. Of the 70 tracked files in both repositories that mention a
+deploy invocation, **eight actually fire one when executed**: `docs/DEPLOYED.md`
+line 4, three round logs, and four `tools/*.mjs` — `deploy-guard`,
+`deploy-record`, `serve-mock` and `stage-build`, live because their header
+comments carry backticked commands. **That recursion chain is the leading
+hypothesis for 14:03:26Z and it is open.** The robots repo fires nothing.
+
+**THE MANUAL NOW CARRIES A SHELL-STOP** at its head — one HTML comment holding
+an unbalanced `)`, invisible when rendered, which aborts bash at line 3 with
+exit 2 so no line below it can run. Verified by executing the file with the
+line and again with it stripped: guarded, nothing fires and zero commands are
+attempted; unguarded, `npm run mock` fires. **It protects only what is below it,
+it is bash-family specific, and it must survive any re-flow of the file's head.**
+
+**Ops ruled that
 deploy STANDS and is not re-published:** every change since the previous deploy
 was docs-only, the site build does not read `docs/`, the worker hash moved only
 because `vite.config.js` stamps `__BUILD_TIME__` into every build, and

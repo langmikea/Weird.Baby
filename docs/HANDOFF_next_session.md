@@ -49,8 +49,14 @@ worker sha256 `85ac466ac948642c`, from `83f06a0` with
 `docs/canonical/OPERATIONS.md` uncommitted. Nobody asked for it.
 
 A `node -e` string with an escaped single quote broke out of shell
-quoting; bash then executed `docs/canonical/OPERATIONS.md` line by line,
-and **line 117 is the §0 deploy block's body**.
+quoting and bash executed repo files. **The line that ran the deploy is
+NOT ESTABLISHED.** `OPERATIONS.md` does not fire it at `442495f`,
+`83f06a0`, `019fbd3` or `4a2bfc3` under bash in isolation — it fires
+`npm run mock` and `npm run dictation`. Isolation cannot reproduce
+relative-path recursion, and **eight tracked files DO fire a deploy**,
+including `docs/DEPLOYED.md:4` and four `tools/*.mjs`; the manual
+recursively executes repo files it names, and that chain is the leading
+hypothesis and is open.
 
 **It changed nothing a visitor sees.** Every diff since the clean
 `124b7dd` deploy at 12:30Z is under `docs/`, which the site build does not
@@ -72,9 +78,14 @@ to change nothing.
 ## 3 — Open, and deliberately not decided: defusing §0
 
 The §0 DEPLOY block prints a live command inside a file that is
-executable. Today proved that is not theoretical. **The block was not
-touched** — defusing it is a real decision and nobody has made it. The
-hazard is a §8 lead line.
+executable. **The block was not touched, and measurement says it is inert
+anyway** — the fence's own backticks leave it unexecuted at all four of
+today's revisions. What the file now carries instead is a SHELL-STOP at
+its head: one HTML comment holding an unbalanced `)`, invisible when
+rendered, which aborts bash at line 3 with exit 2 so nothing below it can
+run. Verified by executing the file with and without it. Defusing §0
+itself is still a real decision and nobody has made it. The hazard is a
+§8 lead line.
 
 ---
 
