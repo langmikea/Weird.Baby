@@ -81,7 +81,8 @@ hazard is a §8 lead line.
 ## 4 — The ceiling is close
 
 `ops:size` **PASS at 39,475 / 40,000 — 98.7%, 525 bytes left.** Today
-spent 477 across three commits.
+spent 608 across three commits — 38,867 at `442495f`, then +131, +346,
++131.
 
 **The next substantive round probably takes a cut.** The procedure is §9's
 and `npm run ops:archive` regenerates the index. **Measure before cutting**
