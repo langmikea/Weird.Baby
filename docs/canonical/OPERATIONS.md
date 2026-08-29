@@ -432,6 +432,8 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     (Mike, 2026-08-20 — STANDING).**
 28. **ONE SUMMARY, ONE EXIT (Mike, 2026-08-29 — STANDING, every Ops
     message).** Body: `docs/OPS-RESPONSE-SHAPE-20260829.md`.
+29. **OPS BOOTS FROM A FILE, NEVER FROM A PASTED MESSAGE (Ops,
+    2026-08-29 — STANDING).** Body: `docs/canonical/OPS_BOOT.md`.
 
 ## 8. Known hazards (environment quirks)
 

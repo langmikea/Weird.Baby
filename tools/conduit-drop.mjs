@@ -110,9 +110,15 @@ const ALLOW_DIRTY = process.argv.includes("--allow-dirty");
    is a document in its own right; the fourteen it links to are resolved below
    rather than typed.
 
-   ORDER IS MEANING, AND `docs/HANDOFF_next_session.md` IS FIRST DELIBERATELY.
-   It is what a fresh Ops reads immediately after MANIFEST.md, so it is what
-   the drop lists first. THE PATH IS FIXED RATHER THAN DATED, and that is the
+   ORDER IS MEANING. [2026-08-29] `docs/canonical/OPS_BOOT.md` IS FIRST AND
+   `docs/HANDOFF_next_session.md` IS SECOND: the boot file tells a fresh Ops who
+   it is and what to read, the handoff tells it what the last round left, and
+   that is the order it needs them in after MANIFEST.md. Doctrine 29 — Ops boots
+   from a file, never from a pasted message — is what put the first line here,
+   and carrying it in the drop is what makes that doctrine true without Mike
+   pasting anything.
+
+   THE HANDOFF'S PATH IS FIXED RATHER THAN DATED, and that is the
    whole repair: on 2026-08-22 `docs/opsday-20260822/HANDOFF-20260822.md` was
    written, committed and pushed, and the drop that followed carried twenty
    files without it — the one document the reader most needed was the one
@@ -123,6 +129,7 @@ const ALLOW_DIRTY = process.argv.includes("--allow-dirty");
    dated copy stays where it is as the record of its day, and this line never
    needs editing again. */
 const DOCUMENTS = [
+  "docs/canonical/OPS_BOOT.md",
   "docs/HANDOFF_next_session.md",
   "STATE.md",
   "docs/canonical/OPERATIONS.md",
