@@ -47,7 +47,7 @@ above it is edited.**
 **The exposure is bash-specific.** Under pwsh, backtick is an escape
 character and does not fire; `$( )` does. Mike runs pwsh.
 
-**57 files now carry a shell-stop** — 54 museum, 3 robots — each an
+**61 files now carry a shell-stop** — 58 museum, 3 robots — each an
 invisible comment that adds a line and alters nothing.
 `npm run shellstop:gate` fails on any tracked file naming a deploy in a
 runnable position without one. **884ms, wired into §9.**
