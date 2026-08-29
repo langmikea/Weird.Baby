@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # Exhibit-Backfill Deploy Run Report — Scope C + 36-row catch-up
 
 **Date:** 2026-05-25 (session ~10:23–11:30 UTC, report written 2026-05-25 ~11:35 UTC)

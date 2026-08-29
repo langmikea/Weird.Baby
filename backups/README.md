@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # weird.baby guestbook / D1 backups
 
 Durable, in-repo copies of the weird-baby D1 database (the server-side store

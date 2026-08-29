@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # Handoff — Render FB artifacts as post embeds (fix crop) + letterbox fallback
 
 **Created:** 2026-05-31 (session stalled on sandbox I/O; operator chose to restart and re-run).

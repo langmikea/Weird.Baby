@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # Card-Shape Fix — Run Report (RC-A + RC-B, IG build adopted)
 
 **Date:** 2026-06-01 17:54

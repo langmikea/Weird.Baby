@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # FactScroller Re-Plumb + First Recipe Cards — RUN LOG
 
 **Brief:** `FACTSCROLLER_REPLUMB_BRIEF-20260707.md` · **Authority:** FACTSCROLLER_SPEC_v1.0.md > PUV_FACT_MODEL_SPEC.md > brief.

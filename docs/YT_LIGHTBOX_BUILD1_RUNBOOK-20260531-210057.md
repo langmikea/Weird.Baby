@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # YouTube In-Site Lightbox — Build 1 of 6 — Runbook & Run Report
 
 **Date:** 2026-05-31

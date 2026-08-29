@@ -579,7 +579,10 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
    true fact to it, and "did I touch a spec face" is exactly the question a
    session that just added one answers wrongly (Doctrine 18)** → **[2026-08-13]
    `npm run docs:numbers:gate` (exit 0) on EVERY packet — see the row below** →
-   the lap.
+   **[2026-08-29] `npm run shellstop:gate` (exit 0) on EVERY packet — a tracked
+   file that names a deploy where a shell would run it must carry a SHELL-STOP.
+   It is MUSEUM-SCOPED and says so on every run; the robots repo's three
+   matches are their own packet** → the lap.
 
 1. Commit + push everything durable (explicit paths).
 1a. **Update `docs/OPEN_ACTIONS.md`** (Doctrine 14) — statuses flipped for what

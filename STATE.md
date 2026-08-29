@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 <!-- ============================================================= -->
 <!-- LIVE LEDGER — source of truth. Read this block first.          -->
 <!-- Last updated: 2026-07-06. Below this block: durable reference. -->

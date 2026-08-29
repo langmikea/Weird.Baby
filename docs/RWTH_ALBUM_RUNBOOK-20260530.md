@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # Run With The Hunt — Album Card Runbook (Path 2)
 
 **Date:** 2026-05-30

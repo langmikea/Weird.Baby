@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # THE VISIBILITY RULE + FORMAT CONFORMANCE — round log
 
 **2026-08-06 · V1 · F1 · F2 · G1 · C1 · autonomous, single agent, drafting lane,

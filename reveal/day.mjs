@@ -1,3 +1,4 @@
+/* ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. */
 /* ===========================================================================
    THE DAY'S STEP — the ninety-day performance, run one command at a time.
    [R1/R2 2026-08-07, THE REVEAL MECHANISM]

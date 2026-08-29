@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 <!-- CONDUIT: HEAD 427140b · 2026-08-22T13:42:24Z -->
 
 # THE CONDUIT DROP BECOMES A COMMAND

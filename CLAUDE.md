@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # Claude session notes
 
 **READ FIRST: docs/canonical/OPERATIONS.md — the operating manual. It governs process; this file is reference.**

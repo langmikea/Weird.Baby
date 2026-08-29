@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # THE RUNBOOK RE-DATED — SUNDAY 30 AUGUST BECOMES THURSDAY 27 AUGUST
 
 **2026-08-27.** Tree clean at **`7b687cf`**. Nothing committed by Ops.

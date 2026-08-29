@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # CHANNEL 4, THE DELETES, AND THE LOADED COMMAND
 2026-08-12 · write packet · **not committed, not pushed, not deployed**
 HEAD at start: `1e45ae2`.

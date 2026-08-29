@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # THE REVEAL MECHANISM + THE 12-WEEK TABLE — round log
 
 **2026-08-07 · R1 · R2 · R3 · T1 — four instructions, all four answered.**

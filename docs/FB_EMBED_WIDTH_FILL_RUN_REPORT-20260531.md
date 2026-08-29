@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # Run report — FB embed width-fill (Option 3: kill the white gutters)
 
 **Session:** 2026-05-31 (cowork)

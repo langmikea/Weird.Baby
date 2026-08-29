@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # Instagram Photo Lightbox — Run Report (Universal-Lightbox Build 4)
 
 **Date:** 2026-06-01 17:06

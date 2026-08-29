@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # FB cards — remove redundant foot + close the trailing void — Run Report
 
 **Date:** 2026-06-01 23:47 UTC

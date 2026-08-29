@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # COPY + THE RECORD LAYOUT — round log, 2026-08-17
 
 Two batches. **Batch 1 is done, verified on the built bundle, and needs a

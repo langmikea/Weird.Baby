@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # Phase 1.5b — Port the v28 prototype dock into a new HrExhibitFlow.jsx
 
 **Date:** 2026-05-02

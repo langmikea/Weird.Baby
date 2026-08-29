@@ -1,3 +1,4 @@
+/* ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. */
 /* ═══ [H1 2026-08-06] THE HELD WING'S DOOR ═══════════════════════════════════
    MIKE'S RULING: `/hr` is not public. It stays online and reachable by him and
    by Ops, behind A PASSWORD entered on the ADMIN PAGE.

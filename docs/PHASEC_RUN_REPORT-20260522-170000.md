@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # Phase C Run Report — Audio Delivery, sync + render
 
 **Date:** 2026-05-22 (session ~14:00–17:00 UTC, report written 2026-05-22 17:00 UTC)

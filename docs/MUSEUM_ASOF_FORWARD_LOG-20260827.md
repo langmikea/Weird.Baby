@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # RULING A — THE CLOCK DRIVES FORWARD
 
 **2026-08-27.** Built on HEAD `a716017`, clean tree. Nothing committed by Ops.

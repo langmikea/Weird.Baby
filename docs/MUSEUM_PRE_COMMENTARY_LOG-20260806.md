@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # THE PRE-COMMENTARY ROUND — H1…H8
 
 **2026-08-06. Autonomous, single agent, drafting lane. Mike holds his

@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # THE NIGHT DESK — S1–S4, 2026-08-07
 
 **Round type:** remote-control, autonomous, single agent, drafting lane.

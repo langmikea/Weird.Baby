@@ -1,3 +1,4 @@
+/* ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. */
 import { defineConfig } from 'vite'
 /* [2026-08-20] `node:fs` and `node:path` LEFT WITH `heldOutOfLaunch`. They were
    imported for that plugin alone — it was the only thing in this file that

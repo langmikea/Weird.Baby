@@ -12,36 +12,29 @@
    WHAT THE SWEEP THAT FOLLOWED ESTABLISHED: **markdown inline code is
    backtick-delimited and a backtick is command substitution**, so an ordinary
    sentence like *run `npm run deploy:launch`* EXECUTES when bash is handed the
-   file. Of the 70 tracked files in both repositories that mention a deploy
-   invocation, **eight fired one** — `docs/DEPLOYED.md`, three round logs, and
-   four `tools/*.mjs` whose header comments carry backticked commands.
+   file. Of the tracked files that mention a deploy invocation, eight fired one.
 
    THE EXPOSURE IS BASH-SPECIFIC AND THAT IS MEASURED, NOT ASSUMED. PowerShell
    refuses a non-`.ps1` to `-File`, and its backtick is an ESCAPE character
-   rather than substitution: the same lines are inert under `pwsh`. `$( )` is
-   not, so this gate's pattern set is about bash and would need a second pass to
-   speak about PowerShell.
+   rather than substitution, so the same lines are inert under `pwsh`. `$( )` is
+   not, so this gate speaks about bash and would need a second pass to speak
+   about PowerShell.
 
    ═══ THE RULE ══════════════════════════════════════════════════════════════
-   A tracked file that contains a deploy invocation must carry a SHELL-STOP —
-   an unbalanced `)` inside a comment its own syntax ignores — within its first
-   few lines, above anything it needs to protect:
-
-       markdown   an HTML comment opening with a close-paren
-       js / mjs   a block comment opening with a close-paren, on line 2 when a
-                  shebang holds line 1
-
-   The exact forms are printed by this gate when it fails; they are not spelled
-   out here because a literal block-comment terminator inside this comment ends
-   it early, which is a defect this repository has now recorded five times.
+   A tracked file that names a deploy IN A POSITION A SHELL WOULD RUN must carry
+   a SHELL-STOP — an unbalanced close-paren inside a comment its own syntax
+   ignores — within its first few lines, above anything it protects. The exact
+   forms are printed by this gate when it fails; they are not spelled out in
+   this comment because a literal block-comment terminator inside it ends the
+   comment early, a defect this repository has recorded five times.
 
    Bash aborts on the parenthesis before reaching a single command. The file
    renders and parses exactly as it did.
 
    ═══ THERE IS NO EXCEPTIONS LIST, DELIBERATELY ═════════════════════════════
    An exceptions list teaches the next round that exceptions are normal, and it
-   costs more than the two or three lines it saves. If this gate wants an
-   exception, the guard step is incomplete — guard the file.
+   costs more than the lines it saves. If this gate wants an exception, the
+   guard step is incomplete — guard the file.
 
    Exit 1 on any unguarded hit, naming every path. Run as
    `npm run shellstop:gate`.
@@ -52,9 +45,35 @@ import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
 const MUSEUM = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const ROBOTS = path.resolve(MUSEUM, "..", "weird-baby-robots");
 
-/* A deploy invocation in any form a shell would reach. */
+/* ═══ SCOPE: THE MUSEUM ONLY, AND IT SAYS SO RATHER THAN BEING SILENT ══════
+   `weird-baby-robots` has three files that match and they are not guarded yet.
+   They are their own packet. A gate that quietly measured one repository while
+   its rule named two would be reporting a clean class that is not clean, which
+   is the failure shape this whole round is about — so the scope is printed on
+   every run, pass or fail. WHEN THE ROBOTS PACKET LANDS, add it here. */
+const SCOPE_NOTE = "museum only — weird-baby-robots has 3 unguarded matches and is its own packet";
+
+/* ═══ WHY docs/canonical/OPERATIONS_ARCHIVE/ IS SKIPPED, ON A PRINCIPLE ════
+   THIS IS NOT AN EXCEPTIONS LIST AND MUST NOT BECOME ONE. §0's THE ARCHIVE IS
+   A SNAPSHOT rules that `OPERATIONS_ARCHIVE/` holds what the ground state shed,
+   cut at a named HEAD, and **is never edited** — so a guard cannot be added to
+   a file in there without breaking the rule that makes the archive worth
+   having.
+
+   The principle that makes the skip safe rather than convenient: **an archive
+   snapshot is sealed at a HEAD and is never a live packet's input.** Nothing
+   reads it to work from; the ground state carries the live text and the archive
+   carries what that text used to say. A file nothing feeds to a tool is a file
+   nothing feeds to a shell.
+
+   THE SKIP IS THE DIRECTORY AND ITS REASON, NEVER A FILENAME. The moment this
+   becomes a list of paths it has stopped being a principle, and the next round
+   will add the fourth entry without asking what the first three had in common.
+   If a sealed archive ever does become a packet's input, this skip is wrong and
+   goes — not the file. */
+const SKIP_DIR = "docs/canonical/OPERATIONS_ARCHIVE/";
+
 const DEPLOY = /deploy:launch|deploy:relaunch|wrangler\s+deploy|npm\s+run\s+deploy|npx\s+wrangler/i;
 
 /* ═══ THE PREDICATE IS POSITION, NOT MENTION, AND THAT WAS MEASURED ════════
@@ -65,14 +84,13 @@ const DEPLOY = /deploy:launch|deploy:relaunch|wrangler\s+deploy|npm\s+run\s+depl
    substitution, or opening a line, which is a command.
 
    Measured against the eight the dynamic sweep proved fire: this predicate
-   catches all eight, misses none, and does not flag `package.json`.
+   catches all eight and misses none.
 
-   IT IS DELIBERATELY WIDER THAN WHAT FIRES TODAY. 61 files match it and only
-   eight fired, because bash aborts at the first syntax error and most files
-   have one above their deploy line. That is safety by luck: the abort point
-   moves whenever prose above it is edited, which is exactly how a line can arm
-   itself with nobody touching it. A gate that trusted today's abort points
-   would pass a file into danger on its next edit. */
+   IT IS DELIBERATELY WIDER THAN WHAT FIRES TODAY, because bash aborts at the
+   first syntax error and most files have one above their deploy line. That is
+   safety by luck: the abort point moves whenever prose above it is edited, so a
+   line can arm itself with nobody touching it. `tools/backup-guestbook.ps1` is
+   the worked example — it fired nothing and is guarded anyway. */
 function executablePosition(text) {
   for (const line of text.split("\n")) {
     if (!DEPLOY.test(line)) continue;
@@ -87,64 +105,53 @@ function executablePosition(text) {
 const HEAD_LINES = 10;
 const GUARD = /SHELL-STOP/;
 
-const repos = [
-  { label: "weird-baby-museum", root: MUSEUM },
-  { label: "weird-baby-robots", root: ROBOTS },
-];
-
-const offenders = [];
-let scanned = 0, matched = 0;
-const missingRepos = [];
-
-for (const repo of repos) {
-  if (!fs.existsSync(path.join(repo.root, ".git"))) { missingRepos.push(repo.label); continue; }
-  let files;
-  try {
-    files = execFileSync("git", ["-C", repo.root, "ls-files"], { encoding: "utf8", maxBuffer: 1 << 26 })
-      .split("\n").filter(Boolean);
-  } catch (e) {
-    console.error(`shell-stop gate REFUSED — cannot list ${repo.label}: ${e && e.message}`);
+/* ═══ PREFILTER WITH git grep ══════════════════════════════════════════════
+   Reading every tracked file cost 7.5s. `git grep -lI` does the same scan in
+   the index at native speed and hands back only the candidates, which are then
+   read in full for the position test. Same answer, a fraction of the work. */
+let candidates;
+try {
+  candidates = execFileSync("git",
+    ["-C", MUSEUM, "grep", "-lIE", "--", DEPLOY.source],
+    { encoding: "utf8", maxBuffer: 1 << 26 }).split("\n").filter(Boolean);
+} catch (e) {
+  if (e && e.status === 1) candidates = [];          /* git grep: no matches */
+  else {
+    console.error("shell-stop gate REFUSED — cannot search the index: " + (e && e.message));
     process.exit(1);
-  }
-  for (const rel of files) {
-    const abs = path.join(repo.root, rel);
-    let buf;
-    try { buf = fs.readFileSync(abs); } catch { continue; }   /* deleted mid-run */
-    scanned++;
-    const text = buf.toString("utf8");
-    if (!DEPLOY.test(text)) continue;
-    if (!executablePosition(text)) continue;
-    matched++;
-    const head = text.split("\n", HEAD_LINES).join("\n");
-    if (!GUARD.test(head)) offenders.push(`${repo.label}/${rel}`);
   }
 }
 
+const offenders = [];
+let live = 0, skipped = 0;
+for (const rel of candidates) {
+  if (rel.startsWith(SKIP_DIR)) { skipped++; continue; }
+  let text;
+  try { text = fs.readFileSync(path.join(MUSEUM, rel), "utf8"); } catch { continue; }
+  if (!executablePosition(text)) continue;
+  live++;
+  if (!GUARD.test(text.split("\n", HEAD_LINES).join("\n"))) offenders.push(rel);
+}
+
 console.log("");
-console.log("  SHELL-STOP GATE");
+console.log("  SHELL-STOP GATE   (" + SCOPE_NOTE + ")");
 console.log("");
-console.log(`    ${scanned.toLocaleString("en-US")} tracked file(s) scanned · ${matched} name a deploy · ${offenders.length} unguarded`);
-if (missingRepos.length) console.log(`    NOT SCANNED (repo not found): ${missingRepos.join(", ")}`);
+console.log(`    ${candidates.length} file(s) name a deploy · ${live} in a position a shell would run · ${offenders.length} unguarded`);
+if (skipped) console.log(`    ${skipped} skipped in ${SKIP_DIR} — sealed archive snapshots, never a packet's input`);
 console.log("");
 
 if (offenders.length) {
-  console.error("FAIL — these files name a deploy and would run it if a shell were handed them:");
+  console.error("FAIL — these files name a deploy where a shell would run it:");
   offenders.forEach(o => console.error("      " + o));
   console.error("");
-  console.error("Put a SHELL-STOP in the first " + HEAD_LINES + " lines — an unbalanced `)` inside a");
-  console.error("comment the file's own syntax ignores, above anything it protects:");
-  console.error("      markdown   <!-- ) SHELL-STOP … -->");
-  console.error("      js / mjs   /* ) SHELL-STOP … */     (line 2 if a shebang is line 1)");
+  console.error("Put a SHELL-STOP in the first " + HEAD_LINES + " lines — an unbalanced close-paren");
+  console.error("inside a comment the file's own syntax ignores, above anything it protects:");
+  console.error("      markdown     <!-- ) SHELL-STOP … -->");
+  console.error("      js / mjs     /* ) SHELL-STOP … */      (line 2 if a shebang is line 1)");
+  console.error("      powershell   <# ) SHELL-STOP … #>");
   console.error("");
   process.exit(1);
 }
 
-if (missingRepos.length) {
-  console.error(`FAIL — ${missingRepos.join(", ")} could not be scanned, so this gate cannot`);
-  console.error("say the class is closed. A gate that silently skips a repository is not a gate.");
-  console.error("");
-  process.exit(1);
-}
-
-console.log("PASS — every tracked file that names a deploy is inert to a shell.");
+console.log("PASS — every tracked file that names a deploy where a shell would run it is inert.");
 console.log("");

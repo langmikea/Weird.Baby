@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # STATUS_SURFACE.md (v0.1)
 
 **Filed:** 2026-04-26 (Phase 2 build, system review bite 9)

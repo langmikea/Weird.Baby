@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. */
 // tools/lap.mjs — THE PHONE-WIDTH LAP RIG. [N5 2026-08-06]
 //
 // ═══ WHAT IT ENDS ═══════════════════════════════════════════════════════════

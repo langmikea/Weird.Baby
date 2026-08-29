@@ -1,3 +1,4 @@
+<!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # FB masonry — over-reserve jaggies + column-3 clip → quiescence settle fix — Run Report
 
 **Date:** 2026-06-02 00:17 UTC
