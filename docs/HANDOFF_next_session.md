@@ -1,148 +1,126 @@
 # HANDOFF — for the next session
 
-Rewritten **2026-08-29** at HEAD `0f23e96`, after an Ops handoff triggered
-by the two-error rule.
+Rewritten **2026-08-29** at museum HEAD `011c2d9`, robots `ea5450b`.
 
-**Session-scoped context only.** Process and standing facts went into
+**Session-scoped context only.** Process and standing facts are in
 `docs/canonical/OPERATIONS.md`, `docs/canonical/OPS_BOOT.md` and
-`docs/MUSEUM_RULINGS-20260817.md` today, and are not restated here.
-**Nothing below is a standing order.** Run `git log --oneline -5` and
-`git status --short` and believe those.
+`docs/MUSEUM_RULINGS-20260817.md`. **Nothing below is a standing order.**
+Run `git log --oneline -8` and `git status --short` and believe those.
 
 ---
 
-## The day, in three commits
+## 1 — What the day did
 
-Base was `442495f`.
+**Morning: how Ops works got written down.** Doctrine 28 — one summary,
+one exit — with its body at `docs/OPS-RESPONSE-SHAPE-20260829.md`.
+Ruling 29 narrowed `[MIKE]` to the deploy alone; it now appears once in
+the manual. Doctrine 29 and `docs/canonical/OPS_BOOT.md` ended the
+practice of booting Ops from a message Mike hand-edits.
 
-| hash | what it did |
-|---|---|
-| `83f06a0` | Doctrine 28 — ONE SUMMARY, ONE EXIT — with its body at `docs/OPS-RESPONSE-SHAPE-20260829.md`. |
-| `019fbd3` | Ruling 29 in full; the §8 executable-manual hazard; `DEPLOYED.md` as the accidental deploy wrote it. |
-| `0f23e96` | `docs/canonical/OPS_BOOT.md`; doctrine 29; `tools/conduit-drop.mjs` carries the boot file, placed first. |
-
-The robots repo was not touched.
-
----
-
-## 1 — Ops now boots from a file
-
-`docs/canonical/OPS_BOOT.md` is what Mike pastes to open a fresh Ops
-session, whole and unedited, every time. **It holds no per-session values
-by design** — no HEAD, no dates, no task lists — because a value Mike has
-to hand-update is a value that will be wrong the first time he forgets.
-
-It also holds the three carry rules, which until today lived nowhere in
-the tree and rode in a pasted message.
-
-**If a future session needs Mike to edit that file before sending it, the
-file has a defect. Fix the file.**
-
-It travels in the conduit, first in the drop, ahead of this handoff.
+**Afternoon: an entire class of fault was closed.** It began as *defuse
+one line* and became a gated class across both repositories.
 
 ---
 
-## 2 — The unauthorized deploy, and why it stands
+## 2 — The deploy at 14:03:26Z: the cause is unknown and stays unknown
 
-At **2026-08-29T14:03:26.328Z** the museum published at stage launch,
-worker sha256 `85ac466ac948642c`, from `83f06a0` with
-`docs/canonical/OPERATIONS.md` uncommitted. Nobody asked for it.
+A deploy ran at **2026-08-29T14:03:26.328Z** during a shell runaway.
+`DEPLOYED.md` records it. It changed nothing a visitor sees.
 
-A `node -e` string with an escaped single quote broke out of shell
-quoting and bash executed repo files. **THE CAUSE IS UNESTABLISHED AND IS
-EXPECTED TO REMAIN SO** — the entry point cannot be recovered from what
-the mangled command left behind. **Two hypotheses were tested and both
-measured false:** `OPERATIONS.md` as entry point, which fires the deploy
-at none of `442495f`, `83f06a0`, `019fbd3` or `4a2bfc3`; and the
-recursion chain, run in-repo with recursion live and every command
-stubbed, which fired no deploy at any depth. **Stop replacing this with a
-better story each round.**
+**Two hypotheses were tested and both measured false:** `OPERATIONS.md`
+as entry point, and the recursion chain. The entry point cannot be
+recovered.
 
-What IS established: **eight tracked files fired a deploy under bash** —
-`docs/DEPLOYED.md`, three round logs and four `tools/*.mjs` — the
-exposure is **bash-specific and does not reproduce under pwsh**, where
-the backtick is an escape character rather than command substitution, and
-**all eight are now guarded**, verified by execution.
-
-**It changed nothing a visitor sees.** Every diff since the clean
-`124b7dd` deploy at 12:30Z is under `docs/`, which the site build does not
-read. The worker sha256 moved because `vite.config.js` stamps
-`__BUILD_TIME__` into every build. The guard passed, the stage matched.
-`RECORD_EPOCH` was never touched.
-
-**Ops verified the live site by eye at ~14:42Z** — directory intact, guest
-book at seven signatures, and the countdown reading 9 days 6 hours 18
-minutes, which resolves to Monday 2026-09-07 at 17:00 Eastern. That
-render is the evidence the epoch is intact, not the constant.
-
-**Ops ruled the deploy stands.** `DEPLOYED.md` keeps its dirty-tree record
-because it is true, and a tidying re-publish would spend Mike's one line
-to change nothing.
+**Do not supply a third.** This record carried two wrong causes in one
+day, each stated confidently. Unknown is the finding.
 
 ---
 
-## 3 — Open, and deliberately not decided: defusing §0
+## 3 — What IS established, and what closed it
 
-The §0 DEPLOY block prints a live command inside a file that is
-executable. **The block was not touched, and measurement says it is inert
-anyway** — the fence's own backticks leave it unexecuted at all four of
-today's revisions. What the file now carries instead is a SHELL-STOP at
-its head: one HTML comment holding an unbalanced `)`, invisible when
-rendered, which aborts bash at line 3 with exit 2 so nothing below it can
-run. Verified by executing the file with and without it. Defusing §0
-itself is still a real decision and nobody has made it. The hazard is a
-§8 lead line.
+Markdown inline backticks are command substitution in **bash**, so a
+backticked command in ordinary prose executes if a file is handed to a
+shell. Files were inert only because bash aborted on a syntax error
+above their deploy line — **and that abort point moves whenever prose
+above it is edited.**
 
----
+**The exposure is bash-specific.** Under pwsh, backtick is an escape
+character and does not fire; `$( )` does. Mike runs pwsh.
 
-## 4 — The ceiling is close
+**57 files now carry a shell-stop** — 54 museum, 3 robots — each an
+invisible comment that adds a line and alters nothing.
+`npm run shellstop:gate` fails on any tracked file naming a deploy in a
+runnable position without one. **884ms, wired into §9.**
 
-`ops:size` **PASS at 39,475 / 40,000 — 98.7%, 525 bytes left.** Today
-spent 608 across three commits — 38,867 at `442495f`, then +131, +346,
-+131.
+It **skips `OPERATIONS_ARCHIVE/`** on a stated principle, not a list: a
+sealed snapshot is never a live packet's input. **It refuses rather
+than skipping if the robots clone is missing** — measuring one of two
+repositories and reporting clean is the failure it exists to catch.
 
-**The next substantive round probably takes a cut.** The procedure is §9's
-and `npm run ops:archive` regenerates the index. **Measure before cutting**
-— it may have moved either way.
-
----
-
-## 5 — Gates at close
-
-`ops:size` **PASS** — 39,475 bytes.
-`docs:numbers:gate` **PASS** via npm, exit 0 — 11 claims across 8
-documents, 128s.
-`npm run conduit` clean at `0f23e96` — 23 files plus manifest.
-
-The full packet gate list is §9's and did not run — no source, no ledger
-and no asset changed. **If your round touches any of those, run the list.**
+`§0 THE ARCHIVE IS A SNAPSHOT` was **not** amended. It was the pressure
+point and it held.
 
 ---
 
-## 6 — Waiting on Mike, untouched
+## 4 — Gates and headroom at close
+
+`ops:size` **PASS — 35,860 / 40,000, 89.6%, 4,140 left.** §8 took its
+fourth cut today at `09efc03`; `OPERATIONS_ARCHIVE/08-KNOWN-HAZARDS-IV.md`
+holds seven bodied entries.
+
+**The cut procedure is NOT in §9.** §9 is the session-close ritual. The
+procedure is in `tools/ops-size-gate.mjs`'s failure text and §8's
+preamble. Ops asserted §9 twice today and was wrong twice.
+
+`docs:numbers:gate` **PASS** — 11 claims, 8 documents, 121s.
+`shellstop:gate` **PASS** — 71 name a deploy, 61 runnable, 0 unguarded.
+
+---
+
+## 5 — Where the platform stands
+
+Mike's goal: **a proven stable platform for editing, publishing,
+promoting and adding content.** Ops ordered the backlog against it.
+
+- **Editing** — has a proven surface. The day editor.
+- **Publishing** — safe as of today. This was item 1 and it is done.
+- **Adding content** — *no surface.* The media intake pipeline,
+  backlog item 5, no register row. **This is next.**
+- **Promoting** — *no surface.* Social, item 3, `M60`. Mike's
+  constraint: public reads only, no credentials, do not work too far
+  ahead.
+
+Below the line: the shared plate reader — the `/wb` photographs that
+will not open. About a round, and it gets more expensive per wing.
+
+---
+
+## 6 — Waiting on Mike
 
 The TikTok bio · the guest book row he wants removed · the arc's blank
-weeks 6, 7 and 8 · **the dress-rehearsal ruling, still never landed in the
-tree** · Audie Cornish on `/wal`, which he ruled *wait*.
+weeks 6, 7 and 8 · **the dress-rehearsal ruling, still never landed in
+the tree** · Audie Cornish on `/wal`, ruled *wait* · the portal FAQ's
+known-false line, his to rewrite · the About the Artist rewrite.
 
 ## 7 — Ops' and unstarted
 
-Public reads of his social accounts — public only, no credentials, and his
-constraint is *do not work too far ahead* · the gift shop · R001's dry-run
+Public reads of his social accounts · the gift shop · R001's dry-run
 note · the grey album covers · Mode B leftovers · the trailer gate.
 
 ---
 
-## 8 — Why this handoff exists
+## 8 — For whoever reads this next
 
-Ops made five errors Mike caught in one session: host-command phrasing on
-a packet; calling for a gate route that had already run; sending Mike a
-re-publish decision that was Ops'; asking Mike to rule on Ops' own error
-count; and closing with jargon that would have required Mike to hand-edit
-a pasted instruction.
+**`RECORD_EPOCH` is 2026-09-07 at 17:00 Eastern and it fires on its
+own.** Nobody runs anything. If the workflow is not ready, the epoch
+moves BEFORE that day — Ruling D: move first, deploy second.
 
-**They share one shape: deciding by pattern instead of reading what was in
-front of it.** The last one is why `OPS_BOOT.md` exists — the defect was
-load-bearing, not cosmetic, and it got fixed on the way out.
+Ops was replaced once today under the two-error rule and the
+replacement made three more, all of the same shape: **naming a thing
+from its likely shape instead of reading it.** §9 holding the cut
+procedure. Line 117 firing the deploy. The recursion chain. Every one
+plausible; every one wrong; every one caught by Code checking rather
+than obeying, or by Mike reading.
 
-A fresh session inherits the tree, not the habit.
+**That checking is the load-bearing part of this system. Do not
+optimise it away.**
