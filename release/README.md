@@ -70,34 +70,62 @@ inventory. **A reel that only ever goes to YouTube is filed and not shown.**
 **One video, 9:16, fits all four UNCUT.** So the cost of a fourth surface is a
 posting event, not a re-edit — which is why four is affordable at all.
 
-### The accounts — and one precondition
+### The accounts
 
-**THE TIKTOK ACCOUNT DOES NOT EXIST YET. Mike sets it up.** It is recorded as a
-**precondition, not a task**: nothing here creates it, nothing should list it as
-work, and no round should "action" it. **The gate refuses a TikTok posting that
-claims to be `out`** while the account does not exist — a precondition nothing
-checks is a wish. Planning or staging one is fine and is the honest state.
+**[2026-08-28] THE TIKTOK ACCOUNT EXISTS.** Mike made it:
+**`@papaweird.baby`**, display name **Weird.Baby**, bio empty. It was recorded
+as a precondition for a few hours and is now an observed fact.
 
-**Instagram is UNSTATED.** Mike has said YouTube and Facebook exist, as
-Weird.Baby. He has said nothing either way about Instagram, and **Ops does not
-infer it** — the gate refuses an `out` posting there too, for that reason and
-with that wording.
+**The precondition MECHANISM stays**, because it is about any surface and not
+about TikTok: **the gate refuses a posting that claims to be `out` on a surface
+whose account does not exist.** A precondition nothing checks is a wish.
+Planning or staging one is fine and is the honest state.
 
-### The handle, and where the dot goes
+**Instagram is UNSTATED.** Mike has said YouTube and Facebook exist. He has said
+nothing either way about Instagram, and **Ops does not infer it** — the gate
+refuses an `out` posting there too, in those words.
 
-**Mike's preference order, his order:** `Weird.Baby` · `WeirdBaby` · `weirdbaby`.
+### The handles — and a correction Ops owes
 
-**TikTok does not permit a dot in a handle** — so his first preference is
-unavailable on the surface he ruled first. **The resolution is not to drop the
-dot but to move it:**
+| | | |
+|---|---|---|
+| TikTok | **`@papaweird.baby`** · display name `Weird.Baby` | **observed** |
+| YouTube | **`@PapaWeirdBaby`** | **observed** |
+| Instagram | unset | account itself unstated |
+| Facebook | unset | account exists, handle not supplied |
 
-> **THE DOT LIVES IN THE NAME, NOT IN THE HANDLE.**
-> Handle `WeirdBaby` or `weirdbaby`, **display name `Weird.Baby`.**
+**The two observed handles are close but NOT identical** — different casing, and
+only one has the dot. **They are recorded as two real handles rather than
+reconciled into one**, and neither unset handle is inferred from them: a pattern
+across two surfaces is not a fact about a third. Register
+[`M60`](../docs/OPEN_ACTIONS.md#m60) stays open for the other two.
 
-**No handle has been supplied for any platform** — register
-[`M60`](../docs/OPEN_ACTIONS.md#m60), open since 2026-08-05 — and **a handle is
-not something Ops may invent.** What is recorded here is what he PREFERS and
-what is POSSIBLE, which are not the same thing on one of the four.
+**Mike asked for `Weird.Baby` · `WeirdBaby` · `weirdbaby`, in that order** — and
+the handles he actually made carry **`Papa`**, which is in none of the three. So
+the preference list is a record of what he asked for, **not a rule the observed
+handles break.**
+
+> ### OPS WAS WRONG ABOUT THE DOT, AND THIS IS THE RECORD OF IT
+>
+> **Ops told Mike that TikTok does not permit dots in handles. That is false** —
+> `@papaweird.baby` has one.
+>
+> **The claim was asserted from memory as a platform fact and nothing checked
+> it.** It was not measured, not looked up, and not carried as unverified where
+> it mattered. It reached Mike as a constraint, and a recommendation was built
+> on top of it: that the dot should move out of the handle and into the display
+> name. **He did not need that advice and it was wrong.**
+>
+> **THE LESSON: a platform's rules are not in this repository and Ops cannot
+> read them from memory.** They change, they differ per surface, and they are
+> exactly the class of fact this project already refuses to invent — a handle is
+> not something Ops may invent, and neither is the rule about what a handle may
+> contain. **If a platform constraint is load-bearing, it is observed on the
+> platform, or it is carried as UNVERIFIED and named as such.**
+>
+> The claim is kept in `release-shape.mjs` as `HANDLE.retractedClaim`, marked
+> false rather than deleted — **a struck claim that is removed reads to a later
+> round as a claim nobody ever made, and this one reached Mike.**
 
 ---
 
@@ -242,9 +270,12 @@ when it will. **Every one of the five releases is YouTube-only today**, which by
 the order above means the whole run currently reaches nobody who has not already
 found the house: **the door is not open.**
 
-**And no handle is known for any of the four accounts.** Register row
+**Two of the four handles are known** — `@papaweird.baby` and
+`@PapaWeirdBaby` — and Instagram's and Facebook's are not. Register row
 [`M60`](../docs/OPEN_ACTIONS.md#m60), open since 2026-08-05, and the site still
-carries Mike's own *"Follow us on social media"* with nothing behind it.
+carries Mike's own *"Follow us on social media"* with nothing behind it: **a
+handle the museum knows and a handle the museum PRINTS are still two different
+things**, and nothing has put either of these on the glass.
 
 ## THE RUN AFTER THIS ONE
 

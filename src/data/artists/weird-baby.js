@@ -830,6 +830,44 @@ const spine = [
          the 403 was a property of the video rather than of the network. Mike
          made it public; re-probed at write time it reads
          `playabilityStatus: OK`, `playableInEmbed: true`, `isPrivate: false`. */
+      /* ═══ [2026-08-28] AN EARLY TAKE JOINS, AND IT LANDS IN THE MIDDLE ═════
+         MIKE supplied it as one line: *"Coconuts - Weird.Baby - Early Front
+         Porch"*, `https://youtu.be/YibpBtf9IU8`. The label is HIS WORDS —
+         `Early Front Porch`, carried, not composed.
+
+         WHERE IT SITS IS OPS' SEQUENCING AND IT DISTURBS NEITHER RULING. Two
+         rulings already bind this track: the video is FIRST (2026-08-20) and
+         the `first pass` audio is the other one, beneath it. A third rendition
+         has no ruled position, so it takes the only slot that leaves both
+         ruled ENDS where they were — official at the top, `first pass` at the
+         bottom, the early take between. **If Mike wants it elsewhere it is one
+         line and no other row moves.**
+
+         `type: "early"` IS NOT IN `TYPE_META`, AND THAT IS THE WHOLE POINT.
+         **A VALUE HERE IS NOT A FIFTH TYPE.** The declared vocabulary lives in
+         ONE place — `TYPE_META` at `Exhibit.jsx:52` — and a type is only
+         created by adding a row THERE. Nothing in this file can create one.
+
+         So this lands the videos without taking the decision. Measured, not
+         reasoned: `typeLabel()` is `TYPE_META[t]?.label ?? t.toUpperCase()` and
+         `typeColor()` is `?? "#888"`, so `"early"` renders a grey **EARLY**
+         chip; `undefined` and `null` both THROW in `toUpperCase()`, so omitting
+         the field is not available. **No gate anywhere reads a rendition type**
+         — checked across `tools/`, `reveal/` and `provenance/` — so nothing
+         would have caught a fifth type arriving as a side effect. That is why
+         it is named here instead.
+
+         WHY NOT AN EXISTING KEY. Not `official` — there is already an official
+         video on this track and the chip would print OFFICIAL twice. Not `live`
+         — nothing says it was performed live, and inferring that from the words
+         *Front Porch* would be Ops asserting a fact about a recording it has
+         not heard. Not `clip` — CLAUDE.md's taxonomy ruling is *clips don't
+         belong in tracklists*. Not `audio` — it is a video.
+
+         **OPEN FOR OPS: whether `early` becomes a declared fifth type.** That
+         is a `TYPE_META` row, a label, a colour, and an amendment to the
+         Official / Live / Lyrics / Cover vocabulary Mike settled in May 2026.
+         **It is not taken here and it did not arrive by side effect.** */
       {
         id: "coconuts",
         title: "Coconuts",
@@ -839,6 +877,22 @@ const spine = [
           audioUrl: null,
           label: "Official Music Video",
           type: "official",
+        }, {
+          id: "YibpBtf9IU8",
+          ytId: "YibpBtf9IU8",
+          audioUrl: null,
+          /* [2026-08-29] MIKE RULED THE CHIP: **Coconuts — EARLY**, against
+             E.D. Yahdah's **EARLY INSTRUMENTAL**. His supplied line called this
+             one *Early Front Porch*; the chip he ruled is shorter, so the LABEL
+             is what moved and nothing else did.
+             THE CHIP IS THE LABEL, NOT THE TYPE — `tidyDesc()` in Exhibit.jsx
+             is `(v.label || typeLabel(v.type))` uppercased, so the label wins
+             wherever both exist. Measured: this renders `EARLY`, and
+             `"Early Instrumental"` on the other track renders
+             `EARLY INSTRUMENTAL`. **Two different chips, one shared `type`, no
+             new type.** */
+          label: "Early",
+          type: "early",
         }, {
           id: "audio_wb_06_coconuts_2026_06_17_mp3",
           ytId: null,
@@ -915,6 +969,21 @@ const spine = [
          in that run. An unlisted video embeds exactly as a listed one does —
          proved above — but it does not appear on the channel. Flagged for Mike,
          not acted on: which of his videos are listed is his call. */
+      /* ═══ [2026-08-28] THE SAME SHAPE, THE SAME SLOT ══════════════════════
+         MIKE's line: *"E.D. Yahdah - Weird.Baby - Early Instrumental"*,
+         `https://youtu.be/WOWS-RWywgA`. Label carried from his words.
+
+         SECOND OF THREE, for Coconuts' reason exactly — and this is what
+         SED looks like when it is working: the second track needed no new
+         field, no new component and no second argument. Same three rows, same
+         order, same undeclared `early` type.
+
+         **AND THE SPELLING IS `Yahdah` AND IT DOES NOT MOVE.** Mike confirmed
+         the copyright. YouTube's own title for this video reads *Yadah* —
+         **the channel is wrong, not the museum** — so the title is taken from
+         him and never from the platform. A later round syncing titles off
+         YouTube would break it, which is why this sits here and not only in a
+         round log. */
       {
         id: "ed_yahdah",
         title: "E.D. Yahdah",
@@ -924,6 +993,12 @@ const spine = [
           audioUrl: null,
           label: "Official Music Video",
           type: "official",
+        }, {
+          id: "WOWS-RWywgA",
+          ytId: "WOWS-RWywgA",
+          audioUrl: null,
+          label: "Early Instrumental",
+          type: "early",
         }, {
           id: "audio_wb_05_ed_yahdah_2026_06_16_mp3",
           ytId: null,

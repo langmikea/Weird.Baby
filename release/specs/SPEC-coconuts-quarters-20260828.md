@@ -37,11 +37,13 @@ to YouTube is filed rather than shown.
 precondition rather than a decision.** The reels are 9:16 and go uncut to all
 four, so nothing has to be remade — what blocks them is accounts, not editing:
 
-- **TikTok does not exist yet. Mike sets it up.** A precondition, not a task.
+- **[2026-08-28] TikTok EXISTS now** — `@papaweird.baby`, display name
+  `Weird.Baby`, bio empty. The door has a door.
 - **Instagram is unstated** — nobody has said whether the account exists, and
   Ops does not infer it.
-- **No handle is known for any of the four** (register `M60`, open since
-  2026-08-05), so nothing can link back from any surface today.
+- **Two of the four handles are known** — `@papaweird.baby` and
+  `@PapaWeirdBaby`. Instagram's and Facebook's are unset and are not inferred
+  from the other two (register `M60`, open since 2026-08-05).
 
 ## WHAT IT POINTS AT
 
@@ -103,10 +105,9 @@ computes a rate, a total or a best-performing.
    entirely outside the building?
 4. **The five addresses.** All five are `ref: null` — uploaded and private, and
    their YouTube addresses have not been supplied. Ops does not invent one.
-5. **The TikTok account.** It does not exist; Mike sets it up. Recorded as a
-   precondition, and until it exists the door in the ruled order is shut.
-6. **The four handles.** `M60`. His order is `Weird.Baby` · `WeirdBaby` ·
-   `weirdbaby`; TikTok permits no dot, so the dot lives in the DISPLAY NAME.
+5. **Instagram and Facebook handles.** `M60`. TikTok and YouTube are known and
+   are NOT identical — `@papaweird.baby` and `@PapaWeirdBaby` — so the other two
+   cannot be guessed from them.
 
 ---
 

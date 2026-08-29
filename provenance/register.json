@@ -16161,6 +16161,34 @@
    "t": "and a date to move it.",
    "c": "HOUSE",
    "p": "RecordDoor{}.<p>"
+  },
+  "06bc9b47d41c695f": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 867,
+   "t": "YibpBtf9IU8",
+   "c": "VERIFIED",
+   "s": "the video Mike supplied on 2026-08-28 as `Coconuts - Weird.Baby - Early Front Porch`, https://youtu.be/YibpBtf9IU8. **VERIFIED ON MIKE'S ATTESTATION, WHICH IS WHAT THE CITATION IS.** OPERATIONS §8 makes SEEN PLAYING the only probe it accepts for an embed, and Ops could not run it: the Browser pane measured `document.hidden true`, `visibilityState hidden`, `innerWidth 0`, `innerHeight 0`, and the control `c1vODrVXOg0` — already adopted and live — read `unstarted` with `currentTime` flat for 14s in the same harness, so Ops could not tell a playing video from a refusing one. **MIKE SAW IT PLAY AND RULED IT LANDED on 2026-08-29; the observation is his and not Ops'.** Harness `docs/shorts/out/adopt.html`; log docs/MUSEUM_EARLY_TAKES_LOG-20260828.md."
+  },
+  "9efa1d612b98476c": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 973,
+   "t": "WOWS-RWywgA",
+   "c": "VERIFIED",
+   "s": "the video Mike supplied on 2026-08-28 as `E.D. Yahdah - Weird.Baby - Early Instrumental`, https://youtu.be/WOWS-RWywgA. **VERIFIED ON MIKE'S ATTESTATION, WHICH IS WHAT THE CITATION IS.** OPERATIONS §8 makes SEEN PLAYING the only probe it accepts for an embed, and Ops could not run it: the Browser pane measured `document.hidden true`, `visibilityState hidden`, `innerWidth 0`, `innerHeight 0`, and the control `c1vODrVXOg0` — already adopted and live — read `unstarted` with `currentTime` flat for 14s in the same harness, so Ops could not tell a playing video from a refusing one. **MIKE SAW IT PLAY AND RULED IT LANDED on 2026-08-29; the observation is his and not Ops'.** Harness `docs/shorts/out/adopt.html`; log docs/MUSEUM_EARLY_TAKES_LOG-20260828.md."
+  },
+  "2ad4eb2c6f07c7bc": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 975,
+   "t": "Early Instrumental",
+   "c": "MIKE",
+   "s": "Mike's own words, carried not composed — his line of 2026-08-28: `E.D. Yahdah - Weird.Baby - Early Instrumental`. The label is the second half of it, verbatim."
+  },
+  "1401a7ed66ecb16e": {
+   "c": "MIKE",
+   "f": "src/data/artists/weird-baby.js",
+   "l": 894,
+   "t": "Early",
+   "s": "Mike's ruling of 2026-08-29 on the chip: **Coconuts — EARLY**, against E.D. Yahdah's **EARLY INSTRUMENTAL**. It replaces the label from his own supplied line of 2026-08-28 (`Coconuts - Weird.Baby - Early Front Porch`), which is why the longer string is no longer in `src/` and its row was retired with it. **FILED MIKE BECAUSE THE CLASS IS `supplied by the operator — his words, his facts, his rulings` (provenance/README.md) and this is a ruling of his.** It is not VERIFIED: that class is `external and sourced`, and a word Mike chose is neither."
   }
  }
 }

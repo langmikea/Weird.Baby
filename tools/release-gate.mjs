@@ -368,8 +368,8 @@ for (const s of SURFACES) {
     : a.handle ? `@${a.handle}` : "account exists · handle not supplied (M60)";
   console.log(`    ${s.key.padEnd(10)} ${s.is.padEnd(12)} ${acct}`);
 }
-console.log(`    handle order: ${HANDLE.preferred.join(" · ")}`);
-console.log(`    ${HANDLE.constraint} So: ${HANDLE.shape}`);
+console.log(`    handle order asked for: ${HANDLE.preferred.join(" · ")}`);
+console.log(`    RETRACTED — "${HANDLE.retractedClaim.said}" ${HANDLE.retractedClaim.status}`);
 
 for (const run of runs) {
   console.log(`\n  ${run.id.toUpperCase()}`);

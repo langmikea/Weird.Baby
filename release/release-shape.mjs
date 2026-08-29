@@ -54,33 +54,37 @@ export const SURFACES = [
     is: "THE DOOR",
     why: "the only one built to show work to strangers — its algorithm surfaces "
        + "small accounts to new audiences",
-    account: { exists: false, handle: null, displayName: null,
-      note: "THE ACCOUNT DOES NOT EXIST YET. Mike sets it up. This is a "
-          + "PRECONDITION, not a task — nothing here creates it and nothing "
-          + "should list it as work." },
-    dots: false },
+    /* [2026-08-28, CORRECTED] THE ACCOUNT EXISTS. Mike made it. The previous
+       value here said it did not, and that was true for a few hours. */
+    account: { exists: true, handle: "papaweird.baby", displayName: "Weird.Baby",
+      note: "Made by Mike 2026-08-28. Bio empty." },
+    dots: true },
 
   { key: "instagram",
     is: "THE BRAND",
     why: "where the house looks like itself",
     account: { exists: null, handle: null, displayName: null,
-      note: "UNSTATED. Mike has said YouTube and Facebook exist; he has not "
-          + "said either way about Instagram, and Ops does not infer it." },
+      note: "UNSTATED, and HANDLE UNSET. Nobody has said whether the account "
+          + "exists, and the handle is not inferred from the other two. "
+          + "Ops does not fill this in from a pattern." },
     dots: true },
 
   { key: "youtube",
     is: "THE ARCHIVE",
     why: "content compounds — a video from two years ago still drives streams",
-    account: { exists: true, handle: null, displayName: null,
-      note: "The account exists, as Weird.Baby. The HANDLE has never been "
-          + "supplied — register M60, open since 2026-08-05." },
+    account: { exists: true, handle: "PapaWeirdBaby", displayName: null,
+      note: "Supplied 2026-08-28. NOTE THE HANDLE IS NOT THE TIKTOK ONE: "
+          + "`PapaWeirdBaby` here, `papaweird.baby` there. Close, not "
+          + "identical, and recorded as observed rather than reconciled — "
+          + "Ops does not tidy two real handles into one." },
     dots: true },
 
   { key: "facebook",
     is: "LAST",
     why: "it is there because he has an account",
     account: { exists: true, handle: null, displayName: null,
-      note: "The account exists, as Weird.Baby. Handle not supplied — M60." },
+      note: "The account exists, as Weird.Baby. HANDLE UNSET — not supplied, "
+          + "and not inferred from the other two. M60." },
     dots: true },
 ];
 
@@ -93,26 +97,53 @@ export function surfaceOf(key) {
 }
 
 /* ═══ THE HANDLE ═══════════════════════════════════════════════════════════
-   [2026-08-28] MIKE'S PREFERENCE ORDER, IN HIS ORDER, AND THE CONSTRAINT THAT
-   BENDS IT. He wants `Weird.Baby` first. **TikTok does not permit a dot in a
-   handle**, so his first preference is unavailable on the surface he ruled
-   first — and the resolution is not to drop the dot but to MOVE it:
+   [2026-08-28] MIKE'S PREFERENCE ORDER, IN HIS ORDER: `Weird.Baby`,
+   `WeirdBaby`, `weirdbaby`.
 
-     THE DOT LIVES IN THE NAME, NOT IN THE HANDLE.
+   ═══ AND OPS WAS WRONG ABOUT THE DOT — THE CORRECTION IS THE POINT OF THIS
+       BLOCK ═══════════════════════════════════════════════════════════════
+   **OPS TOLD MIKE THAT TIKTOK DOES NOT PERMIT DOTS IN HANDLES. THAT IS FALSE.**
+   The account he made is **`@papaweird.baby`** and the dot is in it.
 
-   A handle of `WeirdBaby` or `weirdbaby` with a DISPLAY NAME of `Weird.Baby`
-   satisfies his order everywhere it can be satisfied and costs the dot only in
-   the one place no platform will carry it.
+   **The claim was asserted from memory as a platform fact and nothing checked
+   it.** It was not measured, not looked up, and not marked as unverified where
+   it mattered — it went to Mike as a constraint, and a whole recommendation was
+   built on top of it: that the dot must move out of the handle and live in the
+   display name instead. **He did not need that advice and it was wrong.**
 
-   **NOTHING IS CHOSEN HERE.** `handle` is null on all four surfaces above: no
-   handle has ever been supplied for any platform, which is register M60, open
-   since 2026-08-05 — and a handle is not something Ops may invent. This block
-   records what he PREFERS and what is POSSIBLE, and the two are not the same
-   thing on one of the four. */
+   THE GENERAL LESSON, WHICH IS THE HALF WORTH KEEPING: **a platform's rules are
+   not in this repository and Ops cannot read them from memory.** They change,
+   they differ per surface, and they are exactly the class of fact this project
+   already refuses to invent everywhere else — a handle is not something Ops may
+   invent, and neither is the rule about what a handle may contain. **If a
+   platform constraint is load-bearing, it is observed on the platform or it is
+   carried as UNVERIFIED and named as such.**
+
+   ═══ WHAT IS OBSERVED, WHICH IS ALL THAT IS RECORDED NOW ═══════════════════
+   TikTok    `@papaweird.baby`, display name `Weird.Baby`, bio empty. OBSERVED.
+   YouTube   `@PapaWeirdBaby`. OBSERVED. **Not identical to the TikTok one** —
+             different casing, and no dot. Recorded as two real handles rather
+             than reconciled into one.
+   Instagram UNSET, and the account itself is unstated.
+   Facebook  UNSET. The account exists; the handle has not been supplied.
+
+   **NEITHER UNSET HANDLE IS INFERRED FROM THE TWO THAT EXIST.** A pattern
+   across two surfaces is not a fact about a third, and `M60` stays open for
+   them. Note also that **the handles he actually made carry `Papa`**, which is
+   in none of his three stated preferences — so the preference list is a record
+   of what he asked for and NOT a rule the observed handles break. */
 export const HANDLE = {
   preferred: ["Weird.Baby", "WeirdBaby", "weirdbaby"],
-  constraint: "TikTok does not permit dots in handles.",
-  shape: "handle `WeirdBaby` or `weirdbaby`, display name `Weird.Baby`.",
+  observed: { tiktok: "papaweird.baby", youtube: "PapaWeirdBaby",
+    instagram: null, facebook: null },
+  /* [2026-08-28] KEPT, MARKED FALSE, AND NOT DELETED. A struck claim that is
+     removed reads to a later round as a claim nobody ever made — and this one
+     reached Mike. */
+  retractedClaim: {
+    said: "TikTok does not permit dots in handles.",
+    status: "FALSE — @papaweird.baby carries one",
+    how: "asserted by Ops from memory; never checked against the platform",
+  },
   register: "M60",
 };
 
