@@ -427,6 +427,8 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 26. **LEAD WITH WHAT HE MUST DO OR DECIDE (Mike, 2026-08-09 — STANDING).**
 27. **AN ASSET CULL ASKS WHAT BUILDS FROM A FILE, NOT ONLY WHAT DISPLAYS IT
     (Mike, 2026-08-20 — STANDING).**
+28. **ONE SUMMARY, ONE EXIT (Mike, 2026-08-29 — STANDING, every Ops
+    message).** Body: `docs/OPS-RESPONSE-SHAPE-20260829.md`.
 
 ## 8. Known hazards (environment quirks)
 
