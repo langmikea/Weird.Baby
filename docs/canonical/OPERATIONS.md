@@ -96,13 +96,16 @@ not Ops being slow.
 
 ### MIKE IS THE LOCK
 
-He alone runs git and deploy. Ops edits, verifies and reports; **Ops never
-commits, never pushes, never deploys.**
+He runs the one line that publishes. Ops edits, verifies, reports, commits
+and pushes; **Ops never deploys.**
 
 **THE MARKER IS `[MIKE]`.** Anywhere in this file, a clause marked **[MIKE]**
 is his: Code prepares it, **stops there, and does not go on until he has run
 it.** It attaches to the clause that is his, never to the whole step — mark
 the step and a session hands him its own work and waits for it.
+
+**[2026-08-29] Mike's ruling: the marker narrowed to the deploy alone — commit
+and push are Code's, and `npm run deploy:launch` is the only clause still his.**
 
 **THERE IS ONE DEPLOY.** See §0 DEPLOY — THE ONLY ACCOUNT, immediately below.
 The short form has been written five times and caught five times; the sixth time
@@ -253,11 +256,11 @@ surprising, the first thing to re-measure is the measurement.
 
 ## 1. Roles & the carry model
 
-- **Mike** owns all UX-facing / UX-impactful calls, alone runs **commit,
-  push and deploy**, and **carries** material between the three surfaces
-  below. Nothing moves between surfaces unless Mike moves it.
+- **Mike** owns all UX-facing / UX-impactful calls, alone runs **the
+  deploy**, and **carries** material between the three surfaces below.
+  Nothing moves between surfaces unless Mike moves it.
 - **Claude (any surface)** owns Ops: scoping, briefs, verification,
-  drafting. Claude never pushes, never deploys, never decides UX.
+  drafting, **commit and push**. Claude never deploys, never decides UX.
 - Questions to Mike: one at a time, only when genuinely load-bearing and
   undecidable; phrased in UX-impactful terms, concise bullets, plain
   syntax. Otherwise assume-and-state.
@@ -267,8 +270,8 @@ surprising, the first thing to re-measure is the measurement.
 | Surface | Repo reach | Can write repo | May push/deploy | Role |
 |---|---|---|---|---|
 | **Chat Claude** (claude.ai) | NONE. No filesystem access to `C:\AI`. Has: Google Drive connector, Chrome browser, web, chat uploads. | No | No — and no way to | Scoping, briefs, doctrine, reading conduit drops |
-| **Code** (Claude Code, on the host) | Full, native, as Mike's account | Yes — straight to the tree | **Has them. Never uses them.** | Repo reads/writes, verification, drafting, reports |
-| **Host pwsh** (Mike) | Full, native | Yes | **YES — the only permitted path** | Push, deploy, MV launch, anything load-bearing |
+| **Code** (Claude Code, on the host) | Full, native, as Mike's account | Yes — straight to the tree | **Pushes. Never deploys.** | Repo reads/writes, verification, drafting, reports, commit and push |
+| **Host pwsh** (Mike) | Full, native | Yes | **Deploy — the only permitted path** | Deploy, MV launch |
 
 Facts every session must hold without rediscovering them:
 - Chat Claude has NO filesystem and no tool that reaches one. It writes
@@ -277,8 +280,8 @@ Facts every session must hold without rediscovering them:
   output folder, nothing to carry out. A file Code writes IS the file.
 - There is no CI. Deploy is manual and host-side only.
   See §0 DEPLOY — THE ONLY ACCOUNT.
-- Code runs as Mike's own account and is NOT fenced off from his push
-  and deploy credentials. Nothing technical stops it. §0 does.
+- Code runs as Mike's own account and shares his push and deploy
+  credentials. It commits and pushes; the deploy is §0's and his.
 
 ## 3. Conduit protocols (how material moves)
 
@@ -291,9 +294,9 @@ so in chat; the file is the record. To reach a session that cannot see
 disk, Mike runs `npm run conduit` (below) or uploads directly — Drive is
 preferred for code files (chat Claude reads them via the Drive connector).
 
-**Host → Code:** Mike runs what Code may not — `git push`,
-`npm run deploy:launch` — and pastes the output back. Everything else Code
-runs itself and reports. A paste-back is for what is gated, not for size.
+**Host → Code:** Mike runs what Code may not — `npm run deploy:launch` — and
+pastes the output back. Everything else Code runs itself and reports. A
+paste-back is for what is gated, not for size.
 
 **The Drive conduit — `G:\My Drive\_conduit\`:**
 - A dedicated folder. Everything in it is a **transfer payload**, not a
@@ -508,6 +511,7 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 - **A GENERATOR'S FENCE PROTECTS THE TOOL IT LIVES IN AND NOTHING ELSE, AND FOUR OF FIVE COVER TOOLS HAD NONE (2026-08-26).** `make_unit_covers.py` carried the hand-authored fence alone from 2026-08-10 — on the retired tool that writes nothing — while `make_house_covers.py`, `make_robots_cover.py`, `make_template_covers.py` and `make_foundation_covers.py` wrote those exact paths unguarded. **The fence's own sentence is the diagnosis read one step out:** *a fence that only lists what a tool happens to write today stops being a fence.* One set now, `tools/cover_fences.py`, keyed on the BASENAME because a governed picture has two addresses. Body: `docs/MUSEUM_COVER_FENCES_LOG-20260826.md` §1.
 - **`npm run mock` NEVER READS `req.method`, SO A POST TO IT IS A 404 — AND ON AN http ORIGIN `showSaveFilePicker` EXISTS, SO `record.html`'s FALLBACK THEN OPENS A FOLDER DIALOG AND REPORTS SUCCESS ABOUT A FILE OUTSIDE THE REPO (2026-08-26).** `tools/serve-mock.mjs:76` treats every request as a file GET. The day editor has **no picker at all** for this reason — its only fallback is the text on the screen. **`record.html` still has one and is unfixed**, so serve an editor with `npm run day:serve`, never with the mock.
 - **A GREP OF THE WORKING TREE CANNOT SEE LOST WORK, AND REPORTING ITS SILENCE AS ABSENCE HAS NOW MISSED TWICE IN ONE DAY (2026-08-27).** **MIKE, correcting the record: *"You have had them before; you have had CH4 working completely and correctly at one time, just like you had monitor resize."* He was right both times and Ops had reported both as never-existed.** THE MONITOR RESIZE is `Portal_Grip_In()` in `twin.html`, built at `fc4cc80` to his own T3 ask, **still in the file today**, made inert inside the museum by `efc379f` on 2026-08-22 — disabled by a rule with a stated reason, not deleted. CHANNEL 4 arrived at **`8e67b5b`, 2026-08-12** (*"Channel 4 arrives"*) carrying his close-up plate on drum position 4, and **`docs/MUSEUM_CHANNEL_4_LOG-20260812.md` is still in `docs/` and answers the whole question in one section**, including that his marker file was filed as a `spec` with `ref: null` and never wired to anything. **THE COMMON CAUSE IS ONE HABIT: SEARCHING WHAT THE TREE IS RATHER THAN WHAT IT HAS BEEN.** A filename or content grep of HEAD is blind to exactly the four states lost work is in — deleted, renamed, in the OTHER repository, or outside git — which is to say it is blind by construction to the thing it is being asked about. **A silence from `grep` is evidence about HEAD and about nothing else, and must never be written up as *it never existed*.** **WHAT A SEARCH THAT WOULD FIND IT LOOKS LIKE, cheapest first:** **(1) READ THE ROUND LOG OF THE DAY IT LANDED** — `docs/MUSEUM_*_LOG-*.md`, one per round, and the answer to both of today's misses was sitting in `docs/` the whole time. This step costs one `grep -il` over `docs/` and was skipped twice. **(2) `git log --all -S"<content>"`** — the pickaxe, over ALL refs rather than HEAD, and **on the CONTENT rather than the NAME**, because the name is the thing that changes when work is lost. A coordinate, a distinctive number or a phrase beats a filename every time. **(3) `git log --all --diff-filter=D --name-only`** — what was deleted, which no grep of the tree can reach. **(4) THE OTHER REPOSITORY.** This project is TWO repos and `twin.html` lives in one while being referenced from the other; a museum-only search cannot see the robots repo's history and vice versa. **(5) `git fsck --lost-found`** — unreachable commits and blobs, for work lost to a reset or a rebase rather than to a commit. **(6) OFF-GIT DISK** — `_night-*`, `Archive/`, `Salvage/`, `_backups/`, and the OneDrive folders where Mike's own artefacts live. **His marker file for channel 4 is in one of those and the repo copy is byte-identical to it** (sha256 `d9e04fc1394515f6…`, both 556,169 B), which is the shape to expect: the artefact is his, outside git, and the tree holds a renamed copy. **THE CHEAP HALF OF THIS IS STEPS 1 AND 2 AND THEY WOULD HAVE ANSWERED BOTH.**
+- **THIS FILE IS EXECUTABLE, AND §0's DEPLOY BLOCK IS A LIVE COMMAND SITTING IN IT AT LINE 117 — a `node -e` string whose escaped quote broke out of shell quoting handed `OPERATIONS.md` to bash, which ran it line by line and published the museum off `npm run deploy:launch` (2026-08-29).**
 ### AN INSTRUMENT THAT RETURNS HEALTHY IS NOT EVIDENCE OF HEALTH
 ### WHEN IT CANNOT SEE THE FAILURE MODE (2026-08-21)
 
@@ -545,7 +549,7 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ## 9. Session-close ritual
 
-**Code works this ritual, except where marked [MIKE]** — §0 MIKE IS THE LOCK.
+**Code works this ritual end to end** — §0 MIKE IS THE LOCK.
 
 > **The steps stay here; the reasoning under step 0 is in**
 > `OPERATIONS_ARCHIVE/09-SESSION-CLOSE.md`, cut at HEAD `2f94fd7`. The hazard
@@ -569,12 +573,12 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
    `npm run docs:numbers:gate` (exit 0) on EVERY packet — see the row below** →
    the lap.
 
-1. **[MIKE]** Commit + push everything durable (explicit paths).
+1. Commit + push everything durable (explicit paths).
 1a. **Update `docs/OPEN_ACTIONS.md`** (Doctrine 14) — statuses flipped for what
-   closed, rows added for what this round exposed. Same commit **[MIKE]**.
+   closed, rows added for what this round exposed. Same commit.
 2. If facts in THIS FILE or STATE.md changed (file map, hazards,
    protocols, closed decisions) — update them in the same session, same
-   commit discipline **[MIKE]**. An orientation doc more than a few days
+   commit discipline. An orientation doc more than a few days
    behind git log is a defect.
 3. Write/refresh `docs/HANDOFF_next_session.md` only for session-scoped
    context (what's mid-flight, open UX questions). Process and facts do
@@ -594,8 +598,8 @@ MV_VOCAB_RECONCILE_PLAN-20260624 (believed committed 6/24; was untracked until
    path in the tree. Downloads is transit, never storage. Prefer heredoc
    direct-write to target path over browser download. Any file that does
    transit Downloads is copied to the tree and committed in the same
-   session **[MIKE]**.
-2. COMMIT GATE — Mike runs the commit **[MIKE]**; Code verifies it by
+   session.
+2. COMMIT GATE — Code runs the commit, then verifies it by
    re-running `git status --short` and confirming the new hash in `git log`.
    No commit is "done" until that read has happened. Narrating a commit is
    not a commit.

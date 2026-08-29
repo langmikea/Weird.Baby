@@ -832,6 +832,62 @@ applying ruling 27's *never live* to the canon's five-entry table (all five now
 
 ---
 
+## 29 — CODE RUNS EVERYTHING; MIKE RUNS THE ONE LINE THAT PUBLISHES (2026-08-29)
+
+> **"Code runs everything. Mike runs the one line that publishes. Mike decides
+> and rules; he does not verify output he cannot read."**
+
+**THE `[MIKE]` MARKER MOVES OFF EVERY GIT OPERATION AND ONTO THE DEPLOY ALONE.**
+Commit and push become Code's, like every other command Code already runs.
+**Mike's authority is unchanged:** he still rules, still decides UX, and still
+owns the one publishing command.
+
+**WHY IT IS A RULING AND NOT A CONVENIENCE.** The old shape had Mike pasting
+`git add` / `git commit` / `git push` blocks and pasting their output back so
+Code could read what happened. That spent his buffer on text he cannot use — a
+commit hash and a `git status --short` are not decisions, and reading them back
+is not ruling. **He does not verify output he cannot read.** The gate that
+mattered was never the typing; it was that somebody looked, and Code is the
+surface that can look. The paste-back on git bought nothing and cost the scarce
+thing.
+
+**WHAT THE MARKER MEANS NOW.** `[MIKE]` marks the deploy and nothing else.
+`npm run deploy:launch` stays his, stays the sole deploy, and stays governed by
+**OPERATIONS §0 → DEPLOY — THE ONLY ACCOUNT**, which this ruling does not touch.
+Neither does it touch **RULING D (2026-08-28)**: the epoch still moves first and
+the deploy still comes second. **This ruling narrows who types; it does not
+widen what publishes.**
+
+**WHAT CHANGED IN THE MANUAL** — `docs/canonical/OPERATIONS.md`, thirteen edits
+across §0, §1, §2, §3, §9 and the Delivery & Commit Gates. §0 MIKE IS THE LOCK
+now reads *he runs the one line that publishes*; the roles list and the surfaces
+matrix give commit and push to Code; §3's **Host → Code** carry drops `git push`
+and keeps the deploy; §9 works end to end; and the COMMIT GATE has Code running
+the commit and verifying it. **The verification half of that gate is untouched
+and still binding** — `git status --short` re-read, the new hash confirmed in
+`git log`, and narrating a commit is still not a commit.
+
+**AND THE ROUND THAT LANDED IT PROVED A HAZARD NOBODY HAD NAMED.** Building the
+insert for this very section as an inline `node -e` string, an escaped quote
+broke out of the shell's quoting and bash executed `OPERATIONS.md` itself, line
+by line. **Line 117 of the manual is the body of the §0 DEPLOY block**, so the
+museum published — stage launch, 2026-08-29T14:03:26.328Z, worker sha256
+`85ac466ac948642c`, off `83f06a0` with one file uncommitted. **Ops ruled that
+deploy STANDS and is not re-published:** every change since the previous deploy
+was docs-only, the site build does not read `docs/`, the worker hash moved only
+because `vite.config.js` stamps `__BUILD_TIME__` into every build, and
+`RECORD_EPOCH` was never touched — so day one is still Monday 2026-09-07 and
+Ruling D is intact. `docs/DEPLOYED.md` keeps the dirty-tree record exactly as the
+deploy wrote it, because it is a true record of a real publish. **The manual is
+now an executable hazard and §8 carries the lead line; defusing the §0 block is a
+separate decision and has not been made.**
+
+**WHAT IS STILL MIKE'S**, and is not weakened by any of the above: every
+UX-facing call, every ruling in this file, the deploy, and the carry between
+surfaces that no tool can do for him.
+
+---
+
 ## HOW THIS FILE IS MEANT TO BE USED
 
 **Read it before re-opening any of them.** Each ruling here cost a round to
