@@ -18,18 +18,19 @@ form). Ask the wire.
 
 | field | value |
 |---|---|
-| commit | `83f06a0` **— DIRTY TREE** |
-| full sha | `83f06a095e2833580400fd9c3882f923694b6e82` |
-| subject | ops: one summary, one exit — the response shape lands as doctrine 28 |
+| commit | `3ccbad9` |
+| full sha | `3ccbad9fb0d98f1ae05c03e1ca53fabfcc99e7db` |
+| subject | handoff: the shell-stop count is 61, not 57 |
 | stage | **launch** |
-| deployed at | 2026-08-29T14:03:26.328Z |
-| worker sha256 | `85ac466ac948642c` (first 16) |
-| tree clean | **NO** — 1 path(s): `docs/canonical/OPERATIONS.md` |
+| deployed at | 2026-08-29T21:36:59.254Z |
+| worker sha256 | `5a767b8ac5145f7b` (first 16) |
+| tree clean | yes |
 
 ## History
 
 | commit | stage | deployed at | worker sha256 | subject |
 |---|---|---|---|---|
+| `3ccbad9` | launch | 2026-08-29T21:36:59.254Z | `5a767b8ac5145f7b` | handoff: the shell-stop count is 61, not 57 |
 | `83f06a0` (dirty) | launch | 2026-08-29T14:03:26.328Z | `85ac466ac948642c` | ops: one summary, one exit — the response shape lands as doctrine 28 |
 | `124b7dd` | launch | 2026-08-29T12:30:16.224Z | `2ca498cc3e49c614` | handoff: rewritten at the close of the social-pipeline session |
 | `ad0d73d` (dirty) | launch | 2026-08-28T14:03:16.142Z | `ddd735e8d99d0f0b` | epoch: RECORD_EPOCH moves to 2026-09-07 on Mike's ruling D |
