@@ -16,17 +16,18 @@ form). Ask the wire.
 
 | field | value |
 |---|---|
-| commit | `ad0d73d` **— DIRTY TREE** |
-| full sha | `ad0d73d024211b09a7c4e039f7b3cf3e8b6bb613` |
-| subject | epoch: RECORD_EPOCH moves to 2026-09-07 on Mike's ruling D |
+| commit | `124b7dd` |
+| full sha | `124b7dd018a772481bcb459cdc3eb472b6ec4456` |
+| subject | handoff: rewritten at the close of the social-pipeline session |
 | stage | **launch** |
-| deployed at | 2026-08-28T14:03:16.142Z |
-| worker sha256 | `ddd735e8d99d0f0b` (first 16) |
-| tree clean | **NO** — 1 path(s): `docs/DEPLOYED.md` |
+| deployed at | 2026-08-29T12:30:16.224Z |
+| worker sha256 | `2ca498cc3e49c614` (first 16) |
+| tree clean | yes |
 
 ## History
 
 | commit | stage | deployed at | worker sha256 | subject |
 |---|---|---|---|---|
+| `124b7dd` | launch | 2026-08-29T12:30:16.224Z | `2ca498cc3e49c614` | handoff: rewritten at the close of the social-pipeline session |
 | `ad0d73d` (dirty) | launch | 2026-08-28T14:03:16.142Z | `ddd735e8d99d0f0b` | epoch: RECORD_EPOCH moves to 2026-09-07 on Mike's ruling D |
 | `ad0d73d` | launch | 2026-08-28T13:41:14.048Z | `0ee2aba3bf91fbb3` | epoch: RECORD_EPOCH moves to 2026-09-07 on Mike's ruling D |
