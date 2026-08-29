@@ -46,13 +46,30 @@ import { execFileSync } from "node:child_process";
 
 const MUSEUM = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-/* ═══ SCOPE: THE MUSEUM ONLY, AND IT SAYS SO RATHER THAN BEING SILENT ══════
-   `weird-baby-robots` has three files that match and they are not guarded yet.
-   They are their own packet. A gate that quietly measured one repository while
-   its rule named two would be reporting a clean class that is not clean, which
-   is the failure shape this whole round is about — so the scope is printed on
-   every run, pass or fail. WHEN THE ROBOTS PACKET LANDS, add it here. */
-const SCOPE_NOTE = "museum only — weird-baby-robots has 3 unguarded matches and is its own packet";
+/* ═══ SCOPE: BOTH REPOSITORIES, AND A MISSING ONE IS A REFUSAL ════════════
+   [2026-08-29] This ran museum-only for one round while the robots three were
+   their own packet. They are guarded now and the scope line is gone, because a
+   scope note that outlives its scope is the stale-number defect wearing a
+   different hat.
+
+   HOW A MUSEUM TOOL REACHES THE ROBOTS TREE: the sibling-directory convention
+   this repository already uses in `asset-table.mjs`, `contact-sheet.mjs` and
+   `shorts-compile.mjs` — `path.resolve(REPO, "..", "weird-baby-robots")`. It
+   was chosen over a second copy of this gate living in the robots repo for one
+   reason: **two gates drift, and the one that drifts is the one nobody is
+   running.** The predicate here is the whole value of the tool; duplicating it
+   duplicates the thing that must stay identical.
+
+   A MISSING ROBOTS TREE REFUSES RATHER THAN SKIPPING. §8 already records that a
+   museum-only search is blind by construction to the other repository, and this
+   project is two repos. A gate that quietly measured one of them would report a
+   clean class that is not clean — the exact failure shape this whole round is
+   about. If the clone is not beside the museum, this exits 1 and says so. */
+const ROBOTS = path.resolve(MUSEUM, "..", "weird-baby-robots");
+const REPOS = [
+  { label: "weird-baby-museum", root: MUSEUM },
+  { label: "weird-baby-robots", root: ROBOTS },
+];
 
 /* ═══ WHY docs/canonical/OPERATIONS_ARCHIVE/ IS SKIPPED, ON A PRINCIPLE ════
    THIS IS NOT AN EXCEPTIONS LIST AND MUST NOT BECOME ONE. §0's THE ARCHIVE IS
@@ -109,34 +126,48 @@ const GUARD = /SHELL-STOP/;
    Reading every tracked file cost 7.5s. `git grep -lI` does the same scan in
    the index at native speed and hands back only the candidates, which are then
    read in full for the position test. Same answer, a fraction of the work. */
-let candidates;
-try {
-  candidates = execFileSync("git",
-    ["-C", MUSEUM, "grep", "-lIE", "--", DEPLOY.source],
-    { encoding: "utf8", maxBuffer: 1 << 26 }).split("\n").filter(Boolean);
-} catch (e) {
-  if (e && e.status === 1) candidates = [];          /* git grep: no matches */
-  else {
-    console.error("shell-stop gate REFUSED — cannot search the index: " + (e && e.message));
+const offenders = [];
+let named = 0, live = 0, skipped = 0;
+
+for (const repo of REPOS) {
+  if (!fs.existsSync(path.join(repo.root, ".git"))) {
+    console.error("");
+    console.error(`shell-stop gate REFUSED — ${repo.label} is not beside the museum:`);
+    console.error("      " + repo.root);
+    console.error("");
+    console.error("This project is TWO repositories and §8 records that a museum-only search is");
+    console.error("blind by construction to the other one. Measuring one and reporting a clean");
+    console.error("class would be the failure this gate exists to prevent, so it refuses instead.");
+    console.error("");
     process.exit(1);
+  }
+  let candidates;
+  try {
+    candidates = execFileSync("git",
+      ["-C", repo.root, "grep", "-lIE", "--", DEPLOY.source],
+      { encoding: "utf8", maxBuffer: 1 << 26 }).split("\n").filter(Boolean);
+  } catch (e) {
+    if (e && e.status === 1) candidates = [];          /* git grep: no matches */
+    else {
+      console.error(`shell-stop gate REFUSED — cannot search ${repo.label}: ` + (e && e.message));
+      process.exit(1);
+    }
+  }
+  named += candidates.length;
+  for (const rel of candidates) {
+    if (repo.root === MUSEUM && rel.startsWith(SKIP_DIR)) { skipped++; continue; }
+    let text;
+    try { text = fs.readFileSync(path.join(repo.root, rel), "utf8"); } catch { continue; }
+    if (!executablePosition(text)) continue;
+    live++;
+    if (!GUARD.test(text.split("\n", HEAD_LINES).join("\n"))) offenders.push(repo.label + "/" + rel);
   }
 }
 
-const offenders = [];
-let live = 0, skipped = 0;
-for (const rel of candidates) {
-  if (rel.startsWith(SKIP_DIR)) { skipped++; continue; }
-  let text;
-  try { text = fs.readFileSync(path.join(MUSEUM, rel), "utf8"); } catch { continue; }
-  if (!executablePosition(text)) continue;
-  live++;
-  if (!GUARD.test(text.split("\n", HEAD_LINES).join("\n"))) offenders.push(rel);
-}
-
 console.log("");
-console.log("  SHELL-STOP GATE   (" + SCOPE_NOTE + ")");
+console.log("  SHELL-STOP GATE   (" + REPOS.map(r => r.label).join(" + ") + ")");
 console.log("");
-console.log(`    ${candidates.length} file(s) name a deploy · ${live} in a position a shell would run · ${offenders.length} unguarded`);
+console.log(`    ${named} file(s) name a deploy · ${live} in a position a shell would run · ${offenders.length} unguarded`);
 if (skipped) console.log(`    ${skipped} skipped in ${SKIP_DIR} — sealed archive snapshots, never a packet's input`);
 console.log("");
 
