@@ -1,18 +1,18 @@
 {
  "_": "Mike's working copy of the Record. Written by docs/dictation-20260807/day.html (tools/dictation/day.mjs), read by tools/dictation/emit-record-entries.mjs. Curly braces are notes to Ops. Ops does not hand-edit this file.",
  "key": "wb.day.2026-08-26",
- "saved": "2026-08-26T13:17:10.927Z",
- "epoch": "2026-08-31",
+ "saved": "2026-08-30T14:36:15.298Z",
+ "epoch": "2026-09-07",
  "source": {
   "file": "src/data/artists/robots-record.js",
-  "sha256": "20f4c8aaae14f91a5cd3363a0142c0ecd775db3473716bfec5a119769590891e",
-  "mtime": "2026-08-26T12:49:06.876Z",
-  "bytes": 50239
+  "sha256": "fa5cdcd9fcfa9112937f8ec373481594ccded00deba64ffb674407121f8ad015",
+  "mtime": "2026-08-30T14:28:03.398Z",
+  "bytes": 42064
  },
  "entries": [
   {
    "no": 1,
-   "date": "2026-08-31",
+   "date": "2026-09-07",
    "title": "INITIAL LAUNCH - Weird.Baby Website",
    "line": "> Weird.Baby website went live\n> Alert - Incoming Server Load  (contained)",
    "sections": [
@@ -51,7 +51,7 @@
   },
   {
    "no": 2,
-   "date": "2026-09-01",
+   "date": "2026-09-08",
    "title": "GENERAL STATUS UPDATE",
    "line": "> Weird.Baby Integrity Management Plan remains on-track without anomalies.\n> Incoming Server Data Assault has ceased; no impact.",
    "sections": [
@@ -131,7 +131,7 @@
     }
    ],
    "no": 3,
-   "date": "2026-09-02",
+   "date": "2026-09-09",
    "title": "DATA RECOVERY - LEVEL 1 - SUCCESS!",
    "line": "> Weird.Baby Website - All Systems Favorable\n> Robots - Nothing to Report",
    "sections": [
@@ -171,7 +171,7 @@
     }
    ],
    "no": 4,
-   "date": "2026-09-03",
+   "date": "2026-09-10",
    "title": "GENERAL STATUS UPDATE",
    "line": "> Weird.Baby Website - All Systems Favorable\n> /Robots ZIP File Cracked",
    "sections": [
@@ -194,8 +194,18 @@
    ]
   },
   {
+   "docs": [
+    {
+     "title": "TERMINAL.EXE",
+     "source": "ROOT/PORTAL",
+     "extract": "Runs on the UNIX-6x Emulator. Reads PORTAL_2v16.CFG.",
+     "door": {
+      "event": "wb-portal-run-console"
+     }
+    }
+   ],
    "no": 5,
-   "date": "2026-09-04",
+   "date": "2026-09-11",
    "title": "PORTAL CONNECTION ONLINE",
    "line": "> Portal Data Link - Connection Achieved\n> ZIP Extraction - Outer Layers Complete / Stopped",
    "sections": [
