@@ -453,17 +453,19 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ## 8. Known hazards (environment quirks)
 
-> **LEAD LINES, AND EVERY BODY THAT HAS BEEN CUT IS IN THE ARCHIVE — in FOUR
+> **LEAD LINES, AND EVERY BODY THAT HAS BEEN CUT IS IN THE ARCHIVE — in FIVE
 > cuts**, because §0 rules an archive a snapshot that is never edited:
 > `OPERATIONS_ARCHIVE/08-KNOWN-HAZARDS.md` at HEAD `b3812cc`,
 > `08-KNOWN-HAZARDS-II.md` at HEAD `2f94fd7`, `08-KNOWN-HAZARDS-III.md` at HEAD
-> `35f805b`, and `08-KNOWN-HAZARDS-IV.md` at HEAD `09efc03`. Each is true of
-> its own moment.
+> `35f805b`, `08-KNOWN-HAZARDS-IV.md` at HEAD `09efc03`, and
+> `08-KNOWN-HAZARDS-V.md` at HEAD `3602915`. Each is true of its own moment.
 > **[2026-08-29] THE FOURTH CUT WAS ALSO TAKEN BY THE CEILING** — the day's
 > doctrines and the SHELL-STOP left 244 bytes, and the deploy sweep that comes
 > next needs room for a hazard line. **Seven bodied entries went, 6,050 bytes.**
-> The third cut was taken the same way at 108%. **The one bodied entry left is
-> 2026-08-29's, which is the cycle below rather than an exception.**
+> The third cut was taken the same way at 108%.
+> **[2026-08-30] THE FIFTH CUT TOOK THE LAST BODIED ENTRY AND BOUGHT 264 BYTES.
+> A SIXTH HAS NOTHING TO TAKE** — §8's mass is now the lead lines. The arithmetic
+> and what to do about it are in `08-KNOWN-HAZARDS-V.md`.
 >
 > **A HAZARD RAISED SINCE THE LAST CUT CARRIES ITS BODY HERE, AND THAT IS THE
 > CYCLE RATHER THAN AN EXCEPTION.** A snapshot cannot be appended to without
@@ -567,11 +569,6 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ### MOVING THE EPOCH DOES NOT MAKE THE SAVED DRAFT STALE, AND `record:land`
 ### WOULD LAND IT AS NEGATIVE DAYS (2026-08-28)
-
-- **A stale draft lands `recordDay(-6)`…`(-2)` and `Week 1` vanishes from the
-  dateline; the `--write` guard reads `robots-record.js` and never the epoch.
-  AFTER MOVING THE EPOCH, OPEN THE DAY EDITOR AND SAVE** before anybody runs
-  `record:land -- --write`.
 
 
 ## 9. Session-close ritual
