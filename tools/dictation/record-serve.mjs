@@ -250,30 +250,50 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  /* ---- THE RECORD EDITOR'S SAVE — UNCHANGED SINCE 2026-08-11 ------------ */
+  /* ═══ [F7 2026-08-30] THE RECORD EDITOR'S SAVE — CLOSED, AND IT WRITES ═════
+         NOTHING ═══════════════════════════════════════════════════════════
+     IT WROTE THE SAME FILE `/day/save` WRITES AND CHECKED NOTHING. One
+     `fs.writeFileSync(DRAFT, body)` with the request body straight through: no
+     sha256 against the Record it was seeded from, so a page built hours ago
+     could overwrite one built since; no `saved` stamp and no `source` block, so
+     `record:land`'s guard 8 — which compares the STAMP, not the words — had
+     nothing to read and the draft it left could not be judged stale by
+     anything. `/day/save` above earns its write: it answers 409 by sha and
+     normalises both fields (see the block at `/day/save`).
+
+     WHY IT IS REFUSED RATHER THAN DELETED, WHICH WAS THE CHOICE. `record.html`
+     is still on disk, still served by this file, and its client still posts
+     here (`record-edit.client.js`, `saveViaServer`). Deleting the route would
+     answer that POST with a 404 — the same fall-through, and not one word about
+     why. **A refusal that names itself is the smaller edit and the honest one.**
+
+     NOTHING IS LOST BY REFUSING, AND THAT IS THE CLIENT'S OWN DESIGN, not a
+     hope: `saveViaServer` resolves false on any non-ok response and `saveToRepo`
+     falls straight into `saveByPicker`, then into a download — *"A bridge that
+     fails must fail into the old road, not into silence."* His words still land
+     in a file; they land through a dialog instead of through this socket.
+
+     THE ROAD IS `/day/save`, from `day.html`. That is the surface this file's
+     own header describes and the one `day:proof` measures.
+
+     THIS ENDPOINT WAS NEVER REACHABLE FROM THE WIRE. `wrangler.jsonc` ships
+     `src/worker.js` and a static asset directory; `tools/` is neither, the
+     deployed worker carries no `/save` route, and this server binds 127.0.0.1.
+     Closing it removes a way to damage the draft from the machine it runs on,
+     which is where the damage would have come from. See F7 and
+     docs/FINDING-save-endpoint.md. */
   if (req.method === "POST" && route === "/save") {
-    let body = "";
-    req.on("data", c => {
-      body += c;
-      if (body.length > 8 * 1024 * 1024) { req.destroy(); }
-    });
-    req.on("end", () => {
-      let parsed;
-      try { parsed = JSON.parse(body); }
-      catch (e) { res.writeHead(400, { "content-type": "text/plain" }); res.end("not JSON: " + e.message); return; }
-      if (!parsed || !Array.isArray(parsed.entries)) {
-        res.writeHead(400, { "content-type": "text/plain" });
-        res.end("no `entries` array — refusing to leave an unreadable draft where the lander looks");
-        return;
-      }
-      fs.writeFileSync(DRAFT, body);
-      const where = path.relative(REPO, DRAFT).replace(/\\/g, "/");
-      console.log(`  saved  ${where}  ${body.length.toLocaleString()} bytes, `
-        + `${parsed.entries.length} record(s)`);
-      res.writeHead(200, { "content-type": "application/json" });
-      res.end(JSON.stringify({ ok: true, path: where, bytes: body.length,
-                               records: parsed.entries.length }));
-    });
+    res.writeHead(410, { "content-type": "text/plain", "cache-control": "no-store" });
+    res.end(
+      "/save is closed (F7, 2026-08-30). It wrote docs/dictation-20260807/"
+      + "record-draft.json with no sha256 check against the Record it was seeded\n"
+      + "from and no `saved` stamp, so a stale page could overwrite a newer draft\n"
+      + "and nothing downstream could tell. Write through /day/save from day.html,\n"
+      + "which refuses a stale page by sha with a 409.\n\n"
+      + "Nothing you have typed is lost: this page falls through to its file\n"
+      + "picker and then to a download, which is what it was built to do when\n"
+      + "the bridge fails.\n");
+    console.log("  refused  POST /save — closed at F7; the road is /day/save");
     return;
   }
 
