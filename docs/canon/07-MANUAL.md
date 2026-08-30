@@ -18,6 +18,16 @@
 | **Extent** | **63 pages · 12 roman sections · 8 appendices · 108 paragraph positions (93 principal + 15 subordinate) · 30 reserved tables · 10 figures · 94 index entries.** **The page count is counted off the generator's own pagination** — the two-pass `layout()` in `robots:tools/manual_structure_build.py`, `len(doc.pages)` — re-measured 2026-08-25 and agreeing exactly with the 63 rendered pages on disk. **The other six come off `BODY` and `INDEX` in that generator, and they were never wrong.** *[2026-08-25] THIS CELL SAID 61 AND THE DEFECT WAS NOT ARITHMETIC. The generator prints one summary line — `%d sections, %d appendices, %d paragraph positions, %d tables, %d figures, %d index entries` — and **that line has no page count in it.** The six numbers here are that line; "61 pages" was prepended from somewhere else and then went stale on 2026-08-19, when the first body text took the manual from 61 to 63. Counting "off `BODY`" also cannot see it: `BODY_7_19`, `BODY_7_14` and `BODY_B_1` are constants **outside** `BODY`, so anything counting that array is blind to them by construction. **Two numbers here are still unchased, both one out and both harmless:** the generator prints `tabs + 1` = **31** where this says 30 reserved tables, and the older build log says 107 / 31 / 93. Whether "reserved" excludes the +1 is a definition nobody has settled, and it is recorded rather than ruled.* |
 | **Museum's description** | **PUB:** *"Held. Incomplete, assembled out of copies caught at different stages."* |
 
+**[F4 · 2026-08-29] THE RULING THAT KEEPS THE MANUAL OFFLINE STILL SAYS 61.**
+[M61](../OPEN_ACTIONS.md#m61) names *“the 61-page STRUCTURE ISSUE”*, and says it
+again inside Mike's own quoted words. **The Extent cell above is the measured
+number and it is 63** — `npm run reveal:check` counts the pages off
+`robots/mgk-viiip/manual/structure/pages` rather than reading a declaration, and
+printed *“the manual is 63 pages”* on 2026-08-29. **The stale number is in the
+ruling's prose, not in the ruling:** M61 is RULED — HELD, its wording is Mike's,
+and it is flagged here rather than corrected there. `docs/ASSET_TIMELINE.md:256`
+and `:271` carry the same 61 as dated narrative.
+
 **THE STRUCTURE WAS RESEARCHED, NOT CHOSEN.** Models cited: **HP 465A (March
 1965) · Tektronix 561A · TM 11-5556 · MIL-M-38784.**
 

@@ -534,6 +534,7 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 - **A GREP OF THE WORKING TREE CANNOT SEE LOST WORK, AND REPORTING ITS SILENCE AS ABSENCE HAS NOW MISSED TWICE IN ONE DAY (2026-08-27).**
 - **A MARKDOWN FILE IS EXECUTABLE AND ITS INLINE BACKTICKS ARE COMMAND SUBSTITUTION — a `node -e` string broke out of its quoting on 2026-08-29, bash ran repo files, and a deploy published at 14:03:26.328Z. THE LINE THAT DEPLOYED IS NOT ESTABLISHED: this file fires only `npm run mock` and `npm run dictation` in isolation, eight other tracked files DO fire a deploy, and the SHELL-STOP at the head of this file now aborts bash before any of it. Body: ruling 29.**
 - **CONTENT MUST NEVER CROSS A SHELL QUOTE BOUNDARY — BUILD A SCRIPT AS A FILE AND RUN IT WITH `node <path>` (2026-08-29).** `node -e` with escaped quotes inside a quoted shell string is what published the museum at 14:03:26.328Z, and the cause beyond that is unestablished and expected to stay so. Prose, paths and markdown go in the file; the shell sees only the path.
+- **A PROVENANCE ROW'S MASTER-RENDER PATH IS UNCHECKED PROSE, AND FIVE OF THE SIX MANUAL SCANS NAME ONE THAT DOES NOT EXIST — the leaves are a directory deeper, under `structure/pages/` (F1, 2026-08-29).** `BELL-103.md` flagged `scan-31-a` alone on 2026-08-26; it holds for all five. No gate resolves a path a provenance row cites, so the row reads VERIFIED either way.
 ### AN INSTRUMENT THAT RETURNS HEALTHY IS NOT EVIDENCE OF HEALTH
 ### WHEN IT CANNOT SEE THE FAILURE MODE (2026-08-21)
 

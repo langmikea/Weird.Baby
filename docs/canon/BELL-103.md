@@ -253,7 +253,7 @@ drum.
 |---|---|---|
 | The four values | **RULED** | `manual_structure_build.py:1577`, in the generator's own comment block |
 | The pen-strike mechanism | **RULED** (`PZ-a` closed) and **BUILT** | `manual_structure_build.py:1565-1611` |
-| `marked-01-a.webp` | **RENDERED, ON DISK, UNCOMMITTED** | `museum:public/robots/manual/marked-01-a.webp` — untracked in git |
+| `marked-01-a.webp` | **RENDERED, ON DISK, COMMITTED** | `museum:public/robots/manual/marked-01-a.webp` — tracked in git. **[CORRECTED 2026-08-29]** this cell read *“UNCOMMITTED … untracked in git”*; measured tracked, and [09-PUBLISHED](09-PUBLISHED.md) has read *“committed 2026-08-19; corrected here 2026-08-21”* since. |
 | Record 003's fourth attachment | **WRITTEN, UNCOMMITTED** | `museum:src/data/artists/robots-record.js`, working-tree change |
 | **A visitor has seen it** | **NO** | Neither file is committed or deployed |
 
