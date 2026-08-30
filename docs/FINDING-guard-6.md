@@ -173,6 +173,35 @@ pair; those are binary coincidences, not line endings.)*
 **So there is no ending to preserve across the move beyond LF**, which any
 ordinary edit keeps.
 
+### 4.1a · [CORRECTION 2026-08-30] IT GOES FURTHER: NO SOURCE FILE IS CRLF IN THE REPOSITORY
+
+**The error was mine before it was the packet's, and the correction is bigger
+than "wrong file".** RUN, `.gitattributes:4`:
+
+```
+* text=auto eol=lf
+```
+
+**Every text file is stored LF in the committed blob** — RUN, `git show HEAD:` of
+`robots-record.js`, `robots.js` and `robots-units.js` all return **0** CRLF pairs.
+The CRLF measured in the *working tree* is a local checkout artifact that git
+normalises away on the way in, and it is invisible to a diff. Its own header
+says why the rule exists: *"Cowork (Linux) and Mike (Windows) co-author this
+repo; without this, files churn CRLF↔LF on every cross-platform commit."*
+
+**Where the claim came from.** I wrote *"`robots.js` is the only CRLF file in
+`src/`"* in the ROBOTS_OPEN landing round (2026-08-30, `9e28201`), reporting it
+as a deliberate act; the next packet inherited it and moved the name to
+`robots-record.js`. **Both halves are wrong** — the file is not CRLF, and no
+source file is.
+
+**And the act it justified was a no-op.** In that round I converted an appended
+block in `robots.js` to CRLF "to match the file". Because `eol=lf` normalises on
+commit, **that changed not one committed byte**; it made the working copy
+internally consistent and moved it further from the stored form. Recorded here
+rather than quietly dropped, because the round's report presents it as a
+correction that mattered.
+
 ### 4.2 · Indentation — the one place bytes would move, and no word would
 
 The block is indented **14 spaces** before `/*`, and every continuation line

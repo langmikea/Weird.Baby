@@ -995,6 +995,23 @@ const commentChars = (s) => (s.match(/\/\*[\s\S]*?\*\//g) || []).reduce((a, b) =
     console.error("");
     console.error("Nothing was written. The emitter has to carry these blocks through before");
     console.error("--write can land a Record into a commented file.");
+    /* [2026-08-30] THE SEQUENCE, PRINTED WHERE THE PERSON IS STANDING. It was
+       written in a finding first, which is the wrong surface: whoever meets this
+       refusal is at a console, not in docs/. Ops has NOT ruled the move. */
+    console.error("");
+    console.error("IF MIKE RULES THE MOVE, THE ORDER IS:");
+    console.error("  1. lift the block above the array — before `export const RECORD_ENTRIES = [`.");
+    console.error("     Purely positional: not one byte of his prose changes. It is the only");
+    console.error("     comment inside the array, and it is Record 005's.");
+    console.error("  2. MIKE SAVES AGAIN in the day editor. The move rewrites this file, and");
+    console.error("     guard 8 compares timestamps — a draft saved before the move is stale.");
+    console.error("  3. record:land -- --write, WITH NO `npm run day:proof` IN BETWEEN.");
+    console.error("     day:proof rewrites this file byte-identically and bumps its mtime,");
+    console.error("     which re-closes guard 8. The window is save -> write.");
+    console.error("");
+    console.error("CITATIONS THAT MOVE WITH IT: docs/opsday-20260822/ANSWER_KEY.md:181 points");
+    console.error("INSIDE the block (robots-record.js:648-660) and travels with it. Fourteen");
+    console.error("others shift by 26 lines across seven documents, all prose, no code.");
     process.exit(1);
   }
 }
