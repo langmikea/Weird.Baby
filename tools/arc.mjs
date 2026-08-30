@@ -47,14 +47,24 @@
    `npm run dictation` would have refused; `npm run arc:check` would have
    passed on a wrong table.
 
-   NOT FIXED HERE. The fix is one import and one call, but this file's whole
-   virtue is that it is a small hand-rolled reader that keeps working when the
-   Record's shape moves, and adding the epoch is a scoping call rather than a
-   typo correction. Flagged at the site so the next session meets it here.
+   **[D-a 2026-08-30] FIXED, AND IT WAS THE ONE IMPORT AND THE ONE CALL.** The
+   day column is now the weekday of `recordDay(n)`, so it moves with the epoch;
+   `DAYS` went from five entries to seven, because the old array could not have
+   named a Saturday even once the arithmetic was right. Everything above this
+   line is left exactly as it was written — it is the record of what was wrong
+   and how long it stood, and the flag being answered does not make it untrue.
+   THE READER IS UNCHANGED: `published()` still scrapes `no` and `title` by
+   hand, so this file still survives the Record's shape moving. What is still
+   assumed — that an entry's number is its offset — is written at the call and
+   carried on D-a's row.
    =========================================================================== */
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+/* [D-a 2026-08-30] THE ONE IMPORT. The museum has exactly one date
+   declaration and this is it; the day column is now arithmetic on it rather
+   than a cycle that happened to agree with it. */
+import { recordDay } from "../src/data/artists/record-epoch.js";
 
 const REPO = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), "..");
 const ARC = path.join(REPO, "docs/ARC.md");
@@ -62,7 +72,11 @@ const SRC = path.join(REPO, "src/data/artists/robots-record.js");
 
 const BEGIN = "<!-- RECORDS:BEGIN";
 const END = "<!-- RECORDS:END -->";
-const DAYS = ["MON", "TUE", "WED", "THU", "FRI"];
+/* [D-a 2026-08-30] SEVEN, NOT FIVE. The old five-day array could not name a
+   Saturday or a Sunday, so an epoch that moved onto a weekend had nowhere to
+   land even once the arithmetic was right. Indexed by `getUTCDay()`, which is
+   0 = Sunday, so the array starts there. */
+const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const CHECK = process.argv.includes("--check");
 
 /* the entries, in order, with the headline as published. Deliberately a small
@@ -93,11 +107,25 @@ const table = [
   "",
   "| # | day | published headline |",
   "|---|---|---|",
-  /* [FLAG 2026-08-24] THIS IS THE LINE THE HEADER'S FLAG IS ABOUT: the day is a
-     fixed MON…FRI cycle on the entry number and owes nothing to `RECORD_EPOCH`.
-     Correct only while day one is a Monday. Not fixed — see the header. */
+  /* [D-a 2026-08-30] THE ONE CALL, AND THE FLAG ABOVE IT IS ANSWERED.
+     Was `DAYS[(r.no - 1) % 5]` — a fixed MON…FRI cycle that owed nothing to
+     `RECORD_EPOCH` and was correct only while day one was a Monday, while
+     `arc:check` compared a wrong table against a wrong file and printed PASS.
+     Now the day is the weekday of the entry's own date, and that date is
+     `recordDay()` — the same arithmetic `robots-record.js` dates itself with.
+     Move the epoch to a Tuesday and this column moves with it.
+
+     WHAT IS STILL ASSUMED, AND IT IS THE FILE'S OWN STATED MODEL: that an
+     entry's NUMBER is its offset from the epoch. The header says so — *"Record
+     N falls on weekday N of the run"* — and it is true of 001–005. It is NOT
+     true in general: `record-epoch.js` rules that a gap in the numbers is not a
+     defect, so 001–005 followed by 008 would date 008 as the eighth day whether
+     or not it is. Reading each entry's real date needs the AST reader, and this
+     file's whole virtue is that it is a small hand-rolled one that survives the
+     Record's shape moving. **Narrowed, not closed — carried on D-a's row.** */
   ...rows.map(r =>
-    `| ${String(r.no).padStart(3, "0")} | ${DAYS[(r.no - 1) % 5]} | ${r.title} |`),
+    `| ${String(r.no).padStart(3, "0")} | ${
+      DAYS[new Date(recordDay(r.no) + "T00:00:00Z").getUTCDay()]} | ${r.title} |`),
   "",
 ].join("\n");
 

@@ -1288,6 +1288,13 @@ table.dy-t td:first-child{opacity:.5;white-space:nowrap;width:1%}
 .dy-pick .g img{width:52px;height:auto;background:#fff;border:1px solid #2a2620;cursor:zoom-in}
 .dy-pick .g .noimg{width:52px;height:34px;border:1px dashed #2a2620;border-radius:2px}
 .dy-note{font-size:10px;opacity:.5;line-height:1.45;margin:8px 0 0}
+/* [F12 2026-08-30] THE MIXED-DEPTH NOTE IS NOT A HINT AND MAY NOT BE FAINT.
+   The note class above is 50% opacity because most of them are asides he can
+   skip; this one is the only thing standing between an ordinary-looking box
+   and his own spacing being rewritten, so it takes full weight and a rule
+   beside it. (No backticks in this block: it lives inside a template
+   literal, and a backtick here closes the stylesheet.) */
+.dy-mixed{opacity:1;border-left:2px solid currentColor;padding-left:8px}
 
 #dy-view{position:fixed;inset:0;z-index:90;background:rgba(9,8,6,.96);display:none;
   padding:12px;overflow:auto}
@@ -1492,10 +1499,39 @@ function elementHtml(el) {
         data-uid="${esc(b.uid)}" data-kind="strs" spellcheck="true"
         value="${esc(b.text)}">`;
     }
+    /* ═══ [F12 2026-08-30] A BOX WHOSE PARAGRAPHS START AT DIFFERENT DEPTHS
+           SAYS SO, IN THE BOX ══════════════════════════════════════════════
+       `blockOut` (day-collect.js) puts the leading spaces back BY POSITION:
+       paragraph 1 gets the first cut, paragraph 2 the second. Edit the words
+       and every paragraph keeps its own depth. Insert, delete or reorder one
+       and the depths stay where they are while the paragraphs move through
+       them — his characters survive and his spacing does not.
+
+       IT IS DERIVED, NOT NAMED. The alternative was to match the section
+       header, and there are two ADDENDUM 02s in this Record — 001's Weekend
+       Summary and 003's Personnel Folders — of which only the second is mixed.
+       A warning hung on a title would have fired on the wrong box and stayed
+       silent on the next mixed block anybody writes. This asks the block.
+
+       TODAY IT FIRES ONCE, on Record 003's ADDENDUM 02 (depths 4 and 2), and
+       that is the whole of the exposure measured on 2026-08-30. It was written
+       in two reports before this and in neither place he reads.
+
+       WHY THE WORDING IS A PERMISSION FIRST. The transform is silent and the
+       box looks ordinary, so the sentence has to say what is SAFE before what
+       is not, or it reads as "do not touch this" and costs him the edit he
+       came to make. */
+    const depths = Array.isArray(b.cuts) ? [...new Set(b.cuts)] : [];
+    const mixed = !isPre && depths.length > 1;
     return `<textarea class="dy-box-l dy-edit${isPre ? " pre" : ""}" data-role="block"
       data-uid="${esc(b.uid)}" data-kind="${esc(b.kind)}"
       spellcheck="true"${hint(isPre ? "a listing — it stays one however you edit it"
-        : measure(b))}>${esc(b.text)}</textarea>`;
+        : measure(b))}>${esc(b.text)}</textarea>${mixed ? `
+      <p class="dy-note dy-mixed">THE PARAGRAPHS IN THIS BOX START AT DIFFERENT
+      DEPTHS. Change the words as much as you like — every paragraph keeps its
+      own spacing. But do not add a paragraph here, take one out, or swap their
+      order: the spacing is put back by position, so a paragraph that moves
+      comes back wearing the other one&rsquo;s indent.</p>` : ""}`;
   };
 
   const linesBox = el.kind === "attachment"
