@@ -359,6 +359,12 @@ paste-back is for what is gated, not for size.
 > **A ROW RAISED SINCE THAT CUT CARRIES ITS BODY HERE** — §8's own cycle, for
 > §8's own reason: a snapshot cannot be appended to without ceasing to be one.
 
+- **[2026-08-30] A FILE WHOSE CONTENTS YOU DID NOT PUT THERE IS NOT YOURS TO
+  DISCARD. ESTABLISH WHO WROTE IT BEFORE RESTORING IT, NOT AFTER.** Cost: a
+  complete save of Mike's draft was `git checkout`ed away before its origin was
+  established, and a working-tree file has no reflog. `checkout`, `restore`,
+  `stash` and `clean` all destroy silently and none of them asks.
+
 - **[2026-08-25] `approve:check` IS RED BY DESIGN, IS NOBODY'S PACKET GATE, AND
   WAS PARKED ON PURPOSE — 11 of 11 pages, and that is the expected reading.**
   It is Doctrine 15's shape exactly: it checks **whether MIKE HAS LOOKED**, not
