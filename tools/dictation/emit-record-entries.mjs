@@ -122,6 +122,19 @@ const q = (s) => JSON.stringify(s);
 const plate = (pl) => pl && pl.label
   ? `{ img: ${q(pl.img)}, label: ${q(pl.label)} }`
   : `{ img: ${q(pl.img)} }`;
+/* [2026-08-29] one door, the mirror of the reader's `door` branch — the same
+   construction as `plate` above and for the same reason: both ends of one round
+   trip, written once each, facing each other.
+
+   IT IS AN OBJECT AND IT STAYS ONE. `{ event }` and not `doorEvent`, because
+   `record-model.js` reads `doc.door` and `Robots.jsx` dispatches what is inside
+   it; a flattened key would be a third spelling of a thing that already has
+   two ends agreeing. `event` is the only key the reader can produce
+   (reveal/record-entries.mjs, the `doorNode` branch), so it is the only key
+   written — and a door that grows a second one is REFUSED by name in
+   `emitFaults` rather than dropped here, which is this file's own rule about
+   the silent half of a round trip applied one level further down. */
+const door = (d) => `{ event: ${q(d.event)} }`;
 const wrap = (s, indent) => {
   /* one literal per paragraph, broken across lines only where a space allows,
      so the file stays readable and the string stays exact.
@@ -327,6 +340,12 @@ function generate(e) {
         if (typeof d[k] === "string" && d[k] !== "") out.push(`                  ${k}: ${q(d[k])},`);
       }
       if (typeof d.pages === "number") out.push(`                  pages: ${d.pages},`);
+      /* [2026-08-29] BESIDE `pages` AND BEFORE `plates`, WHICH IS THE ORDER THE
+         READER READS THEM IN. Ordering an emitter by anything other than its
+         reader is how the two drift while both stay correct on their own. */
+      if (d.door && typeof d.door.event === "string" && d.door.event !== "") {
+        out.push(`                  door: ${door(d.door)},`);
+      }
       if (Array.isArray(d.plates) && d.plates.length) {
         out.push(`                  plates: [`);
         for (const pl of d.plates) out.push(`                    ${plate(pl)},`);
@@ -369,8 +388,25 @@ const EMITTED_ENTRY_FIELDS = new Set([
   "no", "date", "stamp", "title", "line", "lead", "still", "stillCaption",
   "sections", "docs", "wire", "plates", "note", "tomb",
 ]);
+/* [2026-08-29] `door` JOINS THE SET, AND IT IS A MECHANISM CALL RATHER THAN A
+   RULING TO ASK FOR. The Portal's console door already exists, already works
+   and was already ruled on 2026-08-26; `READ_DOC_FIELDS` has carried it since
+   that day. This end had not been taught to write it, so a fresh draft — one
+   holding Record 005's attachment whole — was REFUSED by `emitFaults` below,
+   on the dry run as well as on `--write`. **The guard was right and the
+   emitter was the thing to move**, which is the same shape as the 2026-08-25
+   round that added `source`, `pages` and `plates` to this list.
+   MEASURED BEFORE THE CHANGE (docs/FINDING-day-editor-save.md): the fault did
+   not fire against the draft ON DISK, because that draft is stale and has no
+   `docs` on 005 at all. It fired against the TREE. A guard that only goes
+   quiet when the data is incomplete is not a guard that has passed. */
 const EMITTED_DOC_FIELDS = new Set(
-  ["title", "source", "date", "scan", "extract", "note", "pages", "plates"]);
+  ["title", "source", "date", "scan", "extract", "note", "pages", "plates",
+   "door"]);
+/* the door's own key set, for the same reason the doc set exists one level up:
+   `event` is what both ends know, and anything else must be taught rather than
+   quietly dropped inside an object this file has declared it can write. */
+const EMITTED_DOOR_FIELDS = new Set(["event"]);
 
 function emitFaults(list) {
   const out = [];
@@ -387,6 +423,17 @@ function emitFaults(list) {
         if (EMITTED_DOC_FIELDS.has(k)) continue;
         out.push(`${who}: attachment ${i + 1} carries \`${k}\` and this emitter cannot `
           + `write it. Teach generate(), or add it to EMITTED_DOC_FIELDS with the ruling.`);
+      }
+      /* the door is an OBJECT this file writes key by key, so the same question
+         has to be asked inside it — otherwise `door` being in the set above
+         would license dropping whatever it grew next. */
+      if (d && d.door && typeof d.door === "object") {
+        for (const k of Object.keys(d.door)) {
+          if (EMITTED_DOOR_FIELDS.has(k)) continue;
+          out.push(`${who}: attachment ${i + 1}'s \`door\` carries \`${k}\` and this `
+            + `emitter writes only \`event\`. Teach generate(), or add it to `
+            + `EMITTED_DOOR_FIELDS with the ruling.`);
+        }
       }
     });
   }

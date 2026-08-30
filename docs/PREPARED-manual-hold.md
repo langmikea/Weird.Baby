@@ -338,12 +338,42 @@ attachments without their plates.
 
 ```bash
 npm run day          # rebuilds the editor page from the tree
-npm run day:serve    # serves it on 127.0.0.1:8971
+npm run day:serve    # serves it on 127.0.0.1:8899
 ```
 
 **Then Mike opens it and presses Save. Ops does not press it** — §0, MIKE IS THE
 LOCK, and `day.mjs:2425` says the save is what writes his words.
 **Nothing below should be run until he has.**
+
+> **[2026-08-29 · THE PRECONDITION IS MET, AND THE ORDER WAS ABOUT TO BE
+> WRONG.]** This section was written when the emitter could not write an
+> attachment's `door`, and it presented the save as the thing that unblocks
+> `record:land`. **It was the other way round.** A save taken before the emitter
+> carried `door` would have regenerated the draft with Record 005's attachment
+> whole — and `emitFaults()` would then have refused it, on the dry run as well
+> as on `--write`. The guard would have held and **his one shot would have been
+> spent on a save that could not land.**
+>
+> **OPS RULED IT A MECHANISM CALL AND LANDED IT THIS COMMIT.** The Portal's
+> console door already exists, already works and was already ruled on
+> 2026-08-26; carrying an existing behaviour through a round trip is not a
+> question for Mike. `door` is in `EMITTED_DOC_FIELDS` and `generate()` writes
+> it — `tools/dictation/emit-record-entries.mjs`. Proved: `collect(modelOf(e))`
+> deep-equals `e` **5/5 with the door included**, `--verify` still prints
+> **ALL 51 STRINGS ROUND-TRIP** at exit 0, and `emitFaults()` over the tree
+> raises **none**.
+>
+> **SO THE ORDER IS EMITTER FIRST, SAVE SECOND, AND THE EMITTER HALF IS DONE.**
+> The save is still worth taking for the reason it was always worth taking: the
+> draft on disk would delete the Portal's door if guard 8 ever slipped.
+> **What the save still does NOT do is turn `day:proof` green** — see
+> [`FINDING-day-editor-save.md`](FINDING-day-editor-save.md) §5.4 for what stays
+> red, and §8 there for the correction this note supersedes.
+>
+> **ONE THING FOR HIS INSTRUCTIONS RATHER THAN FOR A FIX:** in Record 003's
+> `ADDENDUM 02` box he may edit words freely, but **he must not insert, delete
+> or reorder a paragraph** — that block is the one in the Record with mixed
+> indents (4 and 2), and `blockOut` re-indents by position.
 
 ### 6.2 · The gate sequence
 
