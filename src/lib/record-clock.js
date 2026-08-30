@@ -135,7 +135,15 @@ export function museumNow() {
 /** true while every entry is shown regardless of its date */
 export const showingAll = () => PREVIEWING_ALL || STAGE !== "launch";
 
-/** the entries this page may draw */
-export function recordEntriesForToday(entries) {
-  return visibleEntries(entries, TODAY, showingAll());
+/* [L-e 2026-08-30] `day` IS A PARAMETER NOW, AND THE DEFAULT IS THE OLD
+   BEHAVIOUR EXACTLY. Every existing caller passes nothing and gets `TODAY` —
+   the day this document was served on — which is what they got before. A
+   caller that HAS the live day (`useMuseumDay`) passes it, and the same three
+   folds still apply: the injected date, the admin preview code and the stage.
+   ONE FILTER, TWO CLOCKS, NEVER TWO FILTERS. The alternative was a second
+   function beside this one that took a day, and then two places would decide
+   what a visitor may draw. */
+/** the entries a page may draw on `day` (default: the day it was served) */
+export function recordEntriesForToday(entries, day = TODAY) {
+  return visibleEntries(entries, day, showingAll());
 }

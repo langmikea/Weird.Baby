@@ -52,5 +52,33 @@ import { launched } from "./placement.js";
      · admin previewing -> open (he sees the Record, so he sees the wing)
      · LAUNCH, no entry -> shut
      · LAUNCH, 001 up   -> open */
-export const ROBOTS_OPEN =
-  !launched() || recordEntriesForToday(RECORD_ENTRIES).length > 0;
+export const ROBOTS_OPEN = robotsOpenOn();
+
+/* ═══ [L-e 2026-08-30] THE SAME DERIVATION, ASKED ABOUT A DAY ══════════════
+   `ROBOTS_OPEN` above is this function asked about the day the document was
+   served on, and it stays because that is the right answer for every visitor
+   who loads or reloads a page — which is every visitor except one.
+
+   THE ONE IT IS WRONG FOR was measured on 2026-08-30 and is written up in
+   `docs/FINDING-robots-open-consumers.md`: a tab already open when the museum's
+   day turns at 17:00 holds the const at `false` for as long as it stays open,
+   so the wing has no door on the board and `/robots` renders the lobby, while
+   the countdown three lines above it has already removed itself on the museum's
+   clock. Four sites read this const and only one of them had ever been traced.
+
+   THE RULE UNDERNEATH IS UNCHANGED AND THIS FILE STILL HAS NO DATE IN IT.
+   The wing opens when THE RECORD HAS AN ENTRY — the scripted event, not the
+   calendar. All that moves is WHICH DAY the question is asked about, and the
+   day comes from `useMuseumDay()`, which asks `museumNow()` and
+   `todayInRecordTz`. There is still exactly one date declaration in the museum
+   and it is `RECORD_EPOCH`.
+
+   THE COUPLING IN §4.3 OF THAT REPORT IS WHY THIS LANDED WITH THREE OTHER
+   SITES AND NOT ALONE: opening the route in that tab without also re-filtering
+   the Record's own entry list would have opened the wing onto *"Nothing has
+   been entered in the Record yet."* — a worse page than the shut route. */
+/** has the Record announced the wing, as of `day`? */
+export function robotsOpenOn(day) {
+  return !launched()
+    || recordEntriesForToday(RECORD_ENTRIES, day).length > 0;
+}

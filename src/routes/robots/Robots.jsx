@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import Exhibit from "../exhibit/Exhibit.jsx";
-import { robotsExhibit } from "../../data/artists/robots.js";
+import { robotsExhibitOn } from "../../data/artists/robots.js";
+/* [L-e 2026-08-30] the museum's day, live — so a tab already open when the
+   day turns gains that day's Record entry without a reload. The wing's own
+   door moves with it in App.jsx; the two are one repair. */
+import { useMuseumDay } from "../../lib/use-museum-day.js";
 
 /* /robots — walk-six structural rebuild (2026-07-25, STAGED ONLY):
    Robots IS the museum's shared exhibit machinery now — an artist config
@@ -106,12 +110,19 @@ export default function Robots({ open = null }) {
     return () => window.removeEventListener("wb-portal-run-console", run);
   }, [portal]);
 
+  const day = useMuseumDay();
   const artist = useMemo(() => {
-    if (!portal) return robotsExhibit;
-    const spine = [...robotsExhibit.spine];
+    /* [L-e 2026-08-30] THE BASE IS ASKED ABOUT THE DAY BEFORE THE PORTAL IS
+       SPLICED IN, and the order matters: the splice inserts an album, the day
+       re-filters a track inside a different one, and doing the splice second
+       means the Portal is never copied twice. `robotsExhibitOn` returns the
+       module-load object unchanged when the day has not moved. */
+    const base = robotsExhibitOn(day);
+    if (!portal) return base;
+    const spine = [...base.spine];
     spine.splice(Math.min(portal.PORTAL_AT, spine.length), 0, portal.PORTAL_ALBUM);
-    return { ...robotsExhibit, spine };
-  }, [portal]);
+    return { ...base, spine };
+  }, [portal, day]);
 
   return <Exhibit artist={artist} open={open} />;
 }

@@ -921,3 +921,43 @@ export const robotsExhibit = {
      they are the VIEWER's poster and predate the plate. */
   exhibitFlow: RobotsExhibitFlow,
 };
+
+/* ═══ [L-e 2026-08-30] THE SAME EXHIBIT, ASKED ABOUT A DAY ══════════════════
+   `robotsExhibit` above resolves `entries: recordEntriesForToday(RECORD_ENTRIES)`
+   inside a top-level literal, so the Record's entry list is fixed when this
+   module loads. That is right for every visitor who loads or reloads the page,
+   and wrong for the one whose tab was already open when the museum's day turned
+   at 17:00 — measured and written up in
+   `docs/FINDING-robots-open-consumers.md`, filed as `L-e`.
+
+   **IT IS THE FIFTH SITE OF THAT CLASS AND IT LANDED WITH THE OTHER FOUR ON
+   PURPOSE.** Opening `/robots` in that tab without also re-filtering here would
+   have opened the wing onto its own empty state — *"Nothing has been entered in
+   the Record yet."* — which is a worse page than the shut route it replaced.
+   The route and this function are one repair, not two.
+
+   THE WALK IS BY `id`, NOT BY INDEX. `record` is the only track in this file
+   carrying that id (checked), and an index would be a second place that has to
+   agree with the spine's order every time somebody adds an album.
+
+   NO DATE LITERAL, NO SECOND CLOCK: `day` comes from `useMuseumDay()`, which
+   asks `museumNow()` and `todayInRecordTz`. Called with nothing it returns the
+   module-load object unchanged, byte for byte, so the default path is the one
+   that was there before. */
+export function robotsExhibitOn(day) {
+  if (!day) return robotsExhibit;
+  const entries = recordEntriesForToday(RECORD_ENTRIES, day);
+  return {
+    ...robotsExhibit,
+    spine: robotsExhibit.spine.map((album) => {
+      const tracks = album && Array.isArray(album.tracks) ? album.tracks : null;
+      if (!tracks || !tracks.some((t) => t && t.id === "record")) return album;
+      return {
+        ...album,
+        tracks: tracks.map((t) => (t && t.id === "record"
+          ? { ...t, face: { ...t.face, entries } }
+          : t)),
+      };
+    }),
+  };
+}

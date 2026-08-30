@@ -14,7 +14,9 @@ import WbAdmin    from "./routes/WbAdmin.jsx";
    Read src/routes/HeldWing.jsx before changing either line. */
 import HeldWing   from "./routes/HeldWing.jsx";
 /* [CH6 2026-08-12] has the Robots wing arrived? — src/lib/wing-open.js */
-import { ROBOTS_OPEN } from "./lib/wing-open.js";
+import { robotsOpenOn } from "./lib/wing-open.js";
+/* [L-e 2026-08-30] the museum's day, live — src/lib/use-museum-day.js */
+import { useMuseumDay } from "./lib/use-museum-day.js";
 const HrSpine   = lazy(() => import("./routes/hr/HrSpine.jsx"));
 const HrArchive = lazy(() => import("./routes/hr/HrArchive.jsx"));
 import WbSpine    from "./routes/wb/WbSpine.jsx";
@@ -64,6 +66,14 @@ function PresetLanding() {
 }
 
 export default function App() {
+  /* [L-e 2026-08-30] THE WING'S SWITCH IS ASKED LIVE, NOT AT MODULE LOAD.
+     `ROBOTS_OPEN` is still the right answer for a page that is loaded — and it
+     is what `useMuseumDay()` seeds from, so the first render of this component
+     is byte for byte what it was before this line existed. What changes is the
+     tab that was already open when the museum's day turned: it now gets a door.
+     `robotsOpenOn` is the same derivation `ROBOTS_OPEN` is; only the day it is
+     asked about moves. See src/lib/wing-open.js and L-e. */
+  const robotsOpen = robotsOpenOn(useMuseumDay());
   return (
     <BrowserRouter>
       <KeyWatcher />
@@ -157,7 +167,7 @@ export default function App() {
             different wing for a different reason, and §8's rule is that a new
             reason gets its own door rather than a seat at an existing one. The
             shape is borrowed; the switch is its own. */}
-        <Route path="/robots" element={ROBOTS_OPEN ? <Robots /> : <WbHome />} />
+        <Route path="/robots" element={robotsOpen ? <Robots /> : <WbHome />} />
         {/* [R1 2026-08-05] THE RECORD GETS AN ADDRESS, because it got a line on
             the lobby directory. MIKE: the Record applies to ALL things robots,
             not just the VIIIp — so it moved off the MGK-VIIIp album onto the
@@ -170,7 +180,7 @@ export default function App() {
             Record would be a control that does not do what its label says. */}
         {/* [CH6] shut with the wing it lives in — see /robots above. */}
         <Route path="/robots/record"
-               element={ROBOTS_OPEN ? <Robots open="record" /> : <WbHome />} />
+               element={robotsOpen ? <Robots open="record" /> : <WbHome />} />
         <Route path="/wal" element={<Wal />} />
         <Route path="/p/:id" element={<PresetLanding />} />
         {/* ==== [E2 2026-08-03] THE CATCH-ALL. MIKE'S RULING ================

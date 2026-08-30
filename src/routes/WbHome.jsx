@@ -19,8 +19,17 @@ import { useNavigate } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
-/* [CH6 2026-08-12] has the Robots wing arrived? — src/lib/wing-open.js */
-import { ROBOTS_OPEN } from "../lib/wing-open.js";
+/* [CH6 2026-08-12] has the Robots wing arrived? — src/lib/wing-open.js
+   [L-e 2026-08-30] BOTH ARE IMPORTED AND THAT IS DELIBERATE, NOT A LEFTOVER.
+   `robotsOpenOn` is asked about the LIVE day and decides the board's `\Robots`
+   row; `ROBOTS_OPEN` is the day this document was SERVED on and still decides
+   the note below it. The note is Mike's — option 3 of 2026-08-15 §14.3, "at
+   zero it removes itself and the copy beneath stands", recorded as his ruling
+   at the countdown's own comment — so it is parked until he rules again and
+   this file must not quietly make it live. See L-e and
+   docs/FINDING-robots-open-consumers.md §4.2. */
+import { ROBOTS_OPEN, robotsOpenOn } from "../lib/wing-open.js";
+import { useMuseumDay } from "../lib/use-museum-day.js";
 /* [2026-08-16] the countdown's clock — the server's instant, and the moment the
    doors open, both from the museum's own declarations. */
 import { museumNow, SERVER_NOW } from "../lib/record-clock.js";
@@ -812,6 +821,9 @@ export default function WbHome() {
   /* [R5] this room owns the page ground while it is mounted — see
      src/lib/use-room.js and the header of this route's stylesheet. */
   useRoom("lobby");
+  /* [L-e 2026-08-30] the museum's day, live — so the board grows its door at
+     17:00 in a tab that was already open, rather than at the next reload. */
+  const robotsOpen = robotsOpenOn(useMuseumDay());
   /* [M2 2026-08-03] MIKE: "THE HOMEPAGE ALWAYS starts clean at the top, every
      time — that's our space and we keep it neat." `always`, where every other
      room in the museum resets only on the first visit of a session. */
@@ -998,7 +1010,9 @@ export default function WbHome() {
 
                 N1'S RULING IS UNTOUCHED AND IS WHY THIS LINE HAS NO ARTICLE.
                 *"Directory loses 'The'"* — no board row gains one back. */}
-            {ROBOTS_OPEN && (
+            {/* [L-e 2026-08-30] LIVE, unlike the note below it — see the import
+                block at the head of this file for why the two differ. */}
+            {robotsOpen && (
               <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
                 <span>\Robots</span><span className="wb-dir-arrow">→</span>
               </button>
