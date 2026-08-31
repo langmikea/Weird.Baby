@@ -308,8 +308,8 @@ For the Influences track. **His images; not supplied yet.** Pairs with item 2.
 
 ## WHAT THIS PAGE IS NOT
 
-**It is not the register.** `OPEN_ACTIONS.md` carries **172 rows**, of which
-**163 are OPEN and 134 are owned by Mike** — most of them one-word rulings,
+**It is not the register.** `OPEN_ACTIONS.md` carries **175 rows**, of which
+**166 are OPEN and 134 are owned by Mike** — most of them one-word rulings,
 records and notes rather than work with a date. **This page ranks the WORK.** A
 row that is not named here has not been closed, dropped or demoted; it is
 waiting in the register, where it has always been.
