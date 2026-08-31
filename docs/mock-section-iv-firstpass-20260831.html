@@ -1,0 +1,86 @@
+<!doctype html><meta charset="utf-8"><title>Section IV first pass</title>
+<style>
+:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2}
+html,body{margin:0;padding:0;background:#d8d6c8;color:var(--ink);
+  font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{max-width:none;padding:14px}
+figure{margin:0 0 18px 0;background:var(--chrome);border:1px solid var(--edge)}
+.bar{display:flex;align-items:center;gap:14px;padding:7px 10px;
+  border-bottom:1px solid var(--edge)}
+figcaption{font-weight:700;letter-spacing:.09em;font-size:14px}
+.bar button{font:inherit;padding:3px 11px;border:1px solid var(--edge);
+  background:var(--paper);color:var(--ink);cursor:pointer;border-radius:2px}
+.bar button[aria-pressed="true"]{background:var(--ink);color:var(--paper);
+  border-color:var(--ink)}
+.hint{margin-left:auto;opacity:.55;font-size:12px}
+.view{overflow:auto;background:var(--paper);height:82vh;
+  cursor:grab;overscroll-behavior:contain}
+.view.drag{cursor:grabbing}
+.view img{display:block;image-rendering:auto}
+.view[data-zoom="25"],.view[data-zoom="50"]{height:auto;cursor:default}
+.view[data-zoom="25"] img{width:25%;height:auto;margin:0 auto}
+.view[data-zoom="50"] img{width:50%;height:auto;margin:0 auto}
+.view[data-zoom="fit"] img{width:100%;height:auto}
+.view[data-zoom="100"] img{width:1700px;height:2200px;max-width:none}
+.view[data-zoom="200"] img{width:3400px;height:4400px;max-width:none}
+</style>
+<div class="wrap">
+<figure>
+<div class="bar"><figcaption>4-1</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
+<div class="view" data-zoom="fit"><img alt="4-1" src="plates-20260831-iv/sheet-20_4-1.webp"></div>
+</figure>
+<figure>
+<div class="bar"><figcaption>4-2</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
+<div class="view" data-zoom="fit"><img alt="4-2" src="plates-20260831-iv/sheet-21_4-2.webp"></div>
+</figure>
+<figure>
+<div class="bar"><figcaption>4-3</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
+<div class="view" data-zoom="fit"><img alt="4-3" src="plates-20260831-iv/sheet-22_4-3.webp"></div>
+</figure>
+<figure>
+<div class="bar"><figcaption>4-4</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
+<div class="view" data-zoom="fit"><img alt="4-4" src="plates-20260831-iv/sheet-23_4-4.webp"></div>
+</figure>
+<figure>
+<div class="bar"><figcaption>4-5</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
+<div class="view" data-zoom="fit"><img alt="4-5" src="plates-20260831-iv/sheet-24_4-5.webp"></div>
+</figure>
+</div>
+<script>
+document.querySelectorAll('figure').forEach(function (fig) {
+  var view = fig.querySelector('.view');
+  var img = view.querySelector('img');
+  fig.querySelectorAll('button[data-zoom]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var w = view.scrollWidth || 1, h = view.scrollHeight || 1;
+      var cx = (view.scrollLeft + view.clientWidth / 2) / w;
+      var cy = (view.scrollTop + view.clientHeight / 2) / h;
+      view.dataset.zoom = b.dataset.zoom;
+      fig.querySelectorAll('button[data-zoom]').forEach(function (o) {
+        o.setAttribute('aria-pressed', String(o === b));
+      });
+      requestAnimationFrame(function () {
+        view.scrollLeft = cx * view.scrollWidth - view.clientWidth / 2;
+        view.scrollTop = cy * view.scrollHeight - view.clientHeight / 2;
+      });
+    });
+  });
+  var down = false, sx = 0, sy = 0, ox = 0, oy = 0;
+  view.addEventListener('pointerdown', function (e) {
+    down = true; sx = e.clientX; sy = e.clientY;
+    ox = view.scrollLeft; oy = view.scrollTop;
+    view.classList.add('drag'); view.setPointerCapture(e.pointerId);
+  });
+  view.addEventListener('pointermove', function (e) {
+    if (!down) return;
+    view.scrollLeft = ox - (e.clientX - sx);
+    view.scrollTop = oy - (e.clientY - sy);
+  });
+  ['pointerup', 'pointercancel'].forEach(function (t) {
+    view.addEventListener(t, function () {
+      down = false; view.classList.remove('drag');
+    });
+  });
+  img.addEventListener('dragstart', function (e) { e.preventDefault(); });
+});
+</script>
