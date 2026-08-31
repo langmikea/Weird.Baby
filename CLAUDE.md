@@ -476,9 +476,13 @@ MAY NOT SHOW MORE PICTURES.** Two buckets: **PRECIOUS** — genuine reveals, two
 three **a week**, the ceiling is on these — and **DUMP** — everything else, **no
 ceiling**, because ten manual pages arriving is ONE point of focus. The law and
 both runways are **`reveal/focus.mjs`**; the judged field is **`bucket`** on
-`provenance/asset-table.json`, **Mike's, null on all 475 rows (re-measured
-2026-08-21 when QC_101 landed; this said 460, 459, 404, 397 and 315 before
-that), and Ops does not derive it**. **PRECIOUS divides into weeks; DUMP divides into nothing** — the old
+`provenance/asset-table.json`, **Mike's, unset on every row — 0 rows carry a non-null `bucket` (re-measured
+2026-08-31; this published the table's ROW COUNT until then, and the row count
+went stale three times doing it — 475 against a measured 489, and 460, 459, 404,
+397 and 315 before that. A row count moves whenever any file lands anywhere in
+either repo, so it was never the claim: the number of rows Mike has JUDGED is
+what Doctrine 20 rests on, and it stands at any table size), and Ops does not
+derive it**. **PRECIOUS divides into weeks; DUMP divides into nothing** — the old
 tracker divided PHOTOGRAPHS by a ceiling on ATTENTION and printed *"16 pictures =
 6–8 days"*, which is **VOID** and kept with its cause in `focus.mjs` `VOIDED`.
 **Before writing any instrument that counts what the museum can show, read

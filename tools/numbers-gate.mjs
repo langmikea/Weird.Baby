@@ -83,11 +83,39 @@ const DOCS = [
      keeps it honest is SHAPE, not SCOPE: every check carries a `near` phrase.
      Whether this file should instead be excluded whole like `STATE.md` is a
      live question; the cost of excluding it is the `bucket … null on all 475
-     rows` claim going ungated. */
+     rows` claim going ungated.
+     ═══ [2026-08-31] THAT LIVE QUESTION IS ANSWERED, AND SHAPE WAS NOT ENOUGH ══
+     `near` pins a check to the sentence that PUBLISHES a value; it cannot tell
+     whether that sentence is a tripwire or a record, because in this repository
+     a sealed round entry states its readings in the same prose a standing rule
+     uses. Proof: `CLAUDE.md`'s `## TWO STANDING RULES ADDED 2026-08-07 (THE TWO
+     BUCKETS + 013)` and this file's `Previously 2026-08-07 (THE TWO BUCKETS +
+     013` are the same round, the same date and nearly the same sentence — and
+     one must be corrected while the other must never be touched.
+     WHAT IT COST: the table moved 475 → 489 and the gate failed on
+     ROUND-LOGS.md:491, a sealed entry reporting what was true on 2026-08-07,
+     while printing `Correct the document — and never a round log.` It forbade
+     the only edit that would clear it. A gate that cannot be satisfied without
+     falsifying the record is switched off by the end of the week.
+     SO SCOPE DOES THE WORK, AND NO NEW MECHANISM IS NEEDED. This file is a
+     round log end to end — line 1 is the cut stamp, line 2 is blank, and lines
+     3-932 are 33 dated entries in one unbroken chain with NO headings anywhere
+     in it. One cut, everything below it to EOF, is therefore the file exactly,
+     and the `**Last verified against live tree:**` line that opens the chain is
+     the boundary. Nothing under it is a claim about today.
+     THE COST THIS COMMENT NAMED IS PAID RATHER THAN DODGED: the `bucket` claim
+     is no longer a row count. `CLAUDE.md` now publishes how many rows carry a
+     JUDGED bucket — 0 — which only Mike can move. See `asset-bucket-unjudged`.
+     WHAT WAS REJECTED: a general rule reading a dated heading as history. It is
+     blind to this file, which has no headings at all, and it would have taken
+     out five live claims that sit under dated headings — including §0 DEPLOY's
+     `137 files (186,888,028 bytes)`, the highest-consequence pair in the manual.
+     In this repository a date on a heading marks when a rule was ADDED. */
   { file: "docs/canonical/OPERATIONS_ARCHIVE/ROUND-LOGS.md",
-    historyFrom: null,
-    note: "the round log cut out of OPERATIONS.md 2026-08-23 — read on the "
-        + "terms it was read on before the cut" },
+    historyFrom: /^\*\*Last verified against live tree:\*\*/m,
+    note: "the round log cut out of OPERATIONS.md 2026-08-23. History begins at "
+        + "the `Last verified` line and runs to EOF, so only the cut stamp above "
+        + "it is in scope — this file publishes nothing about today" },
   { file: "docs/canonical/OPERATIONS_ARCHIVE/05-FILE-MAP.md",
     historyFrom: null,
     note: "OPERATIONS §5, cut out 2026-08-23 — a stamped reference, not a log" },
@@ -237,23 +265,39 @@ const CHECKS = [
     what: "the lint baseline",
     measured: async () => { const l = measure.lint(); return l && [l.errors, l.warnings]; } },
 
-  { id: "asset-rows",
-    find: /\*{0,2}(\d[\d,]*)\s*rows?\*{0,2}[^.\n]{0,40}asset[- ]table|asset-table\.json[^.\n]{0,30}?\*{0,2}(\d[\d,]*)\s*rows/gi,
-    near: /asset[- ]table|asset-table\.json/i,
-    what: "the asset table's row count",
-    measured: async () => [measure.assetRows()] },
+  /* ═══ [2026-08-31] `asset-rows` IS DELETED, NOT LEFT POINTING AT NOTHING ════
+     It matched exactly ONE sentence in the whole read-set — `CLAUDE.md`'s
+     `bucket` line — and that sentence no longer publishes a row count. The
+     count had moved eight times in twenty days (251 → 253 → 385 → 397 → 404 →
+     459 → 460 → 475 → 489) and gone stale three times doing it, because it
+     moves whenever any media file lands anywhere in either repo. With the
+     sentence recut there is nothing left in scope for this check to read.
+     A CHECK THAT MATCHES NOTHING IS DELETED RATHER THAN KEPT, on this file's
+     own 2026-08-25 finding one screen up: an inert check is still counted as
+     coverage and still prints a verdict, which is how `manual-pages` published
+     PASS over a stale directory. `measure.assetRows()` STAYS — it feeds the
+     measured-tonight summary, which reports a number without gating a sentence,
+     and that is the honest home for a value no document publishes. */
 
   /* ═══ "null on all N rows" IS SAID ABOUT TWO DIFFERENT TABLES ══════════════
      One pattern, two subjects: the asset table's `bucket` (385 rows) and the
      ledger's `when` (166). The first cut had a single check and confidently
      reported the ledger's claim as the asset table's — right that it was stale,
      wrong about what it counted, which is the kind of finding that gets a gate
-     distrusted. The subject is now part of the match. */
-  { id: "asset-null-bucket",
-    find: /(?:bucket|asset[- ]table)[\s\S]{0,200}?null on all\s*(\d[\d,]*)\s*rows/gi,
-    near: /null on all/i,
-    what: "the asset table's row count (the all-null `bucket` claim)",
-    measured: async () => [measure.assetRows()] },
+     distrusted. The subject is now part of the match.
+     [2026-08-31] THE ASSET HALF IS REPOINTED; THE LEDGER HALF IS UNCHANGED.
+     `asset-null-bucket` published the TABLE'S SIZE in order to say something
+     about the BUCKET, so every scan falsified a sentence about a field no scan
+     touches. The claim Doctrine 20 actually rests on is that NOT ONE ROW IS
+     JUDGED, and its measure is `assetBucketed()` — which moves only when Mike
+     judges a row. That is the event this tripwire exists for, and it is the
+     same shape as the 2026-08-25 ruling that the manual's length is derived
+     and never declared: publish what cannot drift under you. */
+  { id: "asset-bucket-unjudged",
+    find: /\*{0,2}(\d[\d,]*)\s*rows?\*{0,2}\s*carry a non-null `bucket`/gi,
+    near: /non-null `bucket`/i,
+    what: "how many asset-table rows carry a judged `bucket` (Mike's; Ops never derives it)",
+    measured: async () => [measure.assetBucketed()] },
 
   { id: "ledger-null-when",
     find: /`when`[\s\S]{0,200}?null on all\s*(\d[\d,]*)\s*rows/gi,
