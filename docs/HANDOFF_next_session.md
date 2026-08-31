@@ -1,153 +1,199 @@
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — for the next Ops session
 
-**Written 2026-08-30, at the close.** Session-scoped only: what happened, what it
-cost, and what is waiting. Process lives in `docs/canonical/OPERATIONS.md`;
-standing rules are not repeated here.
+**Written 2026-08-31, at the close.** Session-scoped only: what Mike ruled,
+what landed, and what is waiting. Process lives in
+`docs/canonical/OPERATIONS.md`; standing rules are not repeated here.
+
+**This was a writing session.** The manual stopped being a structure and
+started being a document.
 
 ---
 
-## 1 · MIKE SAVED. THE DRAFT IS HIS AND IT IS COMMITTED
+## 1 · MIKE'S RULINGS, AND THEY ARE THE SPINE OF EVERYTHING BELOW
 
-**`bb8422a` — `record-draft.json`, 8,464 bytes, `eda603e7…`, saved 10:36:15.**
-Committed byte for byte: not regenerated, not rebuilt, not normalised.
+**THE FIVE BLANK SCANS DO NOT PUBLISH.** The six-file hold is dead and
+replaced. `scan-31-a.webp` is **killed** — it is the unmarked twin of
+`marked-01-a.webp` and the museum does not need both. The four remaining
+blank scans come off the 2026-09-09 schedule. **`marked-01-a.webp` stands on
+the ninth exactly as it is.**
 
-**Do not run `git checkout`, `restore`, `stash` or `clean` on that file or on
-`readiness.json`, ever.** If they look modified, that is Mike writing. The rule
-is in `OPERATIONS.md` §5 and it was paid for — see §6 below.
+**THE MANUAL IS OPS' TO WRITE.** Not held, not deferred, not waiting on a
+photograph — written, with seeds requested from Mike where the corpus fixes
+nothing. That is the reversal the whole session runs on, and it is why
+Appendix B and Section V now carry prose.
 
-**What his save fixed:** all five entries are now identical to the tree, the four
-dates that were a week behind are current, and Record 005's `docs` block —
-`TERMINAL.EXE` and the Portal's door — is back in the draft it had been missing
-from. `record:land` dry run now exits **0** with no refusal, emitting
-`recordDay(1)`…`(5)` where the stale draft produced `recordDay(-6)`…`(-2)`.
-`--verify` reports **52 strings round-trip**, up from 51: the extra one is 005's
-attachment text, which the stale draft could never cover.
+**`CODE:` PRINTS ON EVERY ROW OF TABLES B-1 AND B-2, AND IT IS NOT A
+PLACEHOLDER.** A bracketed `[ ... REQUIRED ]` is Ops telling Ops a position is
+unwritten. `CODE:` is the document telling whoever holds the sheet that a code
+goes here and the sheet is where it gets written. It is the printed half of
+the pen channel.
 
----
+**`Offensive` RANKS BELOW `Uncouth`, AND THE DEFINITIONS DO NOT TRAVEL WITH
+THE LABELS.** The NAME column keeps the sequence it had; the label above it
+changes. `Offensive` took what `Uncouth` said and `Uncouth` took what
+`Offensive` said. Rows three to five are unmoved in both columns.
 
-## 2 · THE LANDER IS CLEAN EXCEPT FOR TWO GUARDS
+**THE DOOR IS SETTINGS, NOT PREFERENCES.** The menu map's four doors are
+ANSWERS / PROGRAMS / MESSAGES / SETTINGS. `Preferences` is the firmware's own
+row name and is a real-build fact; the map is the in-story authority.
+**Whether there are three doors or four stays open** and B-3 does not touch
+it.
 
-**`record:land -- --write` still refuses, and for two reasons, not one.**
-
-**Guard 6 — the comment.** `robots-record.js:643-668` holds a 1,727-character
-block inside the entries array: Record 005's TERMINAL.EXE reasoning. A draft
-carries no comments, so a write would take it silently, and guard 6 counts
-comment characters and refuses on any loss. **Record 005 is the only entry with
-one.** Fully scoped in `docs/FINDING-guard-6.md`, quoted whole so Mike can rule
-on where it lives. **Ops has NOT ruled the move.**
-
-**Guard 8 — the window, and this is the one that will surprise you.**
-`npm run day:proof` writes the Record's snapshot back **byte-identically** and
-bumps its mtime. It is a §9 gate. So the last step of every session close makes a
-fresh draft look stale to guard 8, which compares timestamps rather than words.
-Measured: content unmodified in git either side, mtime `10:39:43 → 10:50:21`.
-
-> **A draft lands only in the window between Mike's save and the next
-> `day:proof`.** Filed as a §8 lead line today.
-
-**The sequence, if he rules the move, is printed by guard 6's own refusal** —
-`emit-record-entries.mjs`, where whoever is landing will actually be standing:
-lift the block, **Mike saves again**, then `--write` with no `day:proof` between.
-`ANSWER_KEY.md:181` cites inside the block and travels with it; fourteen other
-citations shift by 26 lines across seven documents, all prose, no code.
+**INCLINATION GETS NO ROUTE.** Only Polarity and Clarity are reached from the
+Settings door. Inclination keeps its mention in B-1 and its reserved Table
+B-3 and gains nothing else. The object agrees by saying nothing: `inclination`
+appears nowhere in the firmware.
 
 ---
 
-## 3 · WHAT LANDED TODAY, AND WHAT EACH COST
+## 2 · WHAT LANDED
 
-| | cost |
-|---|---|
-| **`342dd59`** the emitter carries an attachment's `door` | Ops call, not Mike's. It also fixed an ordering trap: a save taken before it would have regenerated the draft whole and been refused, spending his one shot. |
-| **`9e28201`** four `ROBOTS_OPEN` sites read the museum's live day | A tab open across 17:00 had no door to the wing. Proved on the launch bundle at a served origin, both visitors. |
-| **`dc3bf5c`** `/save` closed | It wrote the draft with no sha and no stamp. **My F7 said "a door nobody uses" and it had a live caller** — `record-edit.client.js:928`. Refused rather than deleted, so that caller gets a reason. |
-| **`3602915` · `8c25757`** eight CH/N-c/V-B ids became real rows | 22 citations pointed at rows that never existed. One was already done the day before it was listed. |
-| **`c442b32`** F12 on the page · D-a repaired | The ADDENDUM 02 warning renders in the box, derived from mixed indentation rather than the section name — there are two ADDENDUM 02s and only one is mixed. `arc.mjs` now follows the epoch; at a Tuesday epoch the old code was wrong on 5 of 5 rows while `arc:check` printed PASS. |
-| **`bb8422a`** Mike's save | §1. |
-| **`79ca5c5`** guard 6 scoped | §2. |
+| commit | repo | what |
+|---|---|---|
+| **`656d037`** | robots | `emit_table` and its dispatcher learn to carry rows and a foot. Appendix B's `B-3` written; Tables B-1 and B-2 filled. Section V's nine paragraphs and Table 5-1 written; `5-15` and Figure 5-1 reserved on purpose. |
+| **`a878206`** | museum | `docs/FINDING-manual-index-drift-20260830.md`. The sheet index moves under growth and the printed label does not; today's drift measured per published asset; nothing repointed. |
+| **`80f1874`** | robots | Per-table column stops. `CODE:` per row. B-2 re-ranked with the definitions held still. B-3 rewritten in the document's own vocabulary. Inclination given no route. |
+| **`146136c`** | museum | The two viewer pages — five zoom steps, 25% and 50% below fit for page mass, 100% and 200% with drag-to-pan for type. |
+| **`e31b4d6`** | museum | The seven plates at 1700x2200 WebP q82, 0.73 MB. A clone can now open the viewer without re-rendering anything. |
 
----
-
-## 4 · SEVEN THINGS WAIT ON MIKE
-
-Not a list of everything open — 141 rows name him. These are the ones this
-session put in front of him and that nothing else can move.
-
-1. **[M61](OPEN_ACTIONS.md#m61) — the six manual scans, and the clock is on it.**
-   They publish **2026-09-09 at 17:00 America/New_York**. M61 is RULED — HELD:
-   the manual stays offline until real pages exist. Whether these six are those
-   pages is his call and has never been made. `docs/PREPARED-manual-hold.md`
-   holds the exact, unapplied change if he says hold; it is three files, not two,
-   and the third is a published number.
-2. **Guard 6's comment** — move it above the array, or leave it and accept that
-   `--write` cannot land. §2.
-3. **[CH5-a](OPEN_ACTIONS.md#ch5-a) / [CH5-b](OPEN_ACTIONS.md#ch5-b)** — future
-   entries and hidden rooms ship in the public chunk. The citations disagree
-   about whether this is an accepted limit or an outstanding job; the rows record
-   the disagreement rather than resolving it.
-4. **[CH6-b](OPEN_ACTIONS.md#ch6-b)** — three console values from his own screen.
-   No gate can supply them.
-5. **[V-B](OPEN_ACTIONS.md#v-b)** — 28 authored song paragraphs rendered by
-   nothing. Re-home or strike. Waiting 24 days.
-6. **[L-e](OPEN_ACTIONS.md#l-e)'s fourth consumer** — the lobby note still reads
-   from the served day. Making it live reverses option 3, which is his ruling.
-7. **[M40's class](OPEN_ACTIONS.md)** — nothing. Listed so the count is honest:
-   M40 itself is closed and was my own false positive.
+**Nothing deployed.** Deployed is still `3ccbad9`, stage **launch**, 2026-08-29.
 
 ---
 
-## 5 · `OPERATIONS.md` IS AT ITS CEILING AND THERE IS NO CUT LEFT
+## 3 · THE STATE THAT MATTERS, AND IT IS A TRAP
 
-**39,281 of 40,000 — 98.2%. 719 bytes.**
+**THE DOCUMENT LAYS OUT AT 64 SHEETS. THE RENDERED LEAVES ON DISK ARE 63.**
 
-The fifth cut was taken today and **took everything a cut can take**: there was
-one bodied entry left, it recovered 263 bytes, and naming the archive cost 165
-back. Net **98**. `08-KNOWN-HAZARDS-V.md` is at HEAD `3602915`.
+`structure/pages/` has not been touched since before this session began —
+`dc38450e1036a4231de86f34526d2252593d2cdc47909830611ed3ce1bee96ee` over its 63
+leaves and the one marked page, byte-identical at every checkpoint today.
+Every render this session went to a scratch directory. `main()` was never
+called, because `main()` deletes every PNG in `pages/` and in `pages/marked/`
+before rewriting them.
 
-**Do not create a sixth archive — there are no bodies to move.** §8's mass is now
-lead lines: 42 of them, 7,253 bytes, averaging 172 against the 102 the pointer
-block quotes as the rate. The only lever left is **shortening or dropping
-existing lines**, and that is a decision about the record rather than a tidy-up.
-Eleven heading-only stubs (1,038 bytes) whose bodies are already archived are the
-obvious candidate and need a ruling first.
+**EVERY GATE IS GREEN BECAUSE EVERY GATE MEASURES DISK.** `manualPages()`
+reads the highest `NN` off the files in `structure/pages/`, so it answers
+**63**, and `OPEN_ACTIONS.md` row E-b's *"The manual is 63 pages"* matches it.
+
+> **THE FIRST DEFAULT-PATH RUN OF THE GENERATOR TURNS ROW E-b RED.** The
+> moment somebody runs `python tools/manual_structure_build.py` with no flags,
+> `pages/` becomes 64 leaves, `manualPages()` answers 64, and
+> `docs:numbers:gate` fails on a claim that is true this minute. That row's
+> count is one the gate's own note says is *"REPORTED, NEVER CORRECTED:
+> editing them edits the sentence Mike is being asked to rule on."*
+
+**And at the same instant the four `MANUAL_PAGE(32/33/34/47)` literals start
+naming different leaves, and nothing will refuse them** — 32, 33, 34 and 47
+are all still ≤ 64 and all four files still exist. That is the drift
+`a878206` measured. **Nothing is repointed and nothing should be until the
+writing stops**, because every section written moves it again: this session
+moved it twice and moved it back once.
 
 ---
 
-## 6 · TWO OPS ERRORS THIS SESSION, BOTH MINE
+## 4 · THE INVENTORY — 134 reserved positions, classified
 
-**They are here because a handoff that only carries wins is not a handoff.**
+Taken off `BODY` this session. **95 `[ TEXT REQUIRED ]` · 10 `[ ART REQUIRED ]`
+· 27 `[ ENTRIES REQUIRED ]` · 2 `[ EXPANSION REQUIRED ]`.**
 
-**(a) The packet that failed to protect Mike's save.** At 10:15:45 a complete,
-correct save appeared — his epoch, his dates, the current fingerprint. I ran
-`git checkout` on it **before establishing what had written it**, on the
-assumption it was a stray from my own tooling. Every candidate of mine was then
-ruled out by experiment; none had written it. A working-tree file has no reflog,
-so it was gone, and he saved again at 10:36:15. **The cost was one repeated save,
-not his words** — the prose was identical either way. The rule is now
-`OPERATIONS.md` §5: *establish who wrote it before restoring it, not after.*
-Written up in `docs/FINDING-f12-and-da.md` §5.
+| | count | meaning |
+|---|---:|---|
+| **WRITE** | **62** | the corpus already holds enough to write it |
+| **SEED** | **55** | needs one fact from Mike; each named in one sentence in the round report |
+| **CUT** | **17** | nothing behind it and the document is better without it |
 
-**(b) The CRLF claim, and it was wrong twice.** I reported in the ROBOTS_OPEN
-round that `robots.js` was "the only CRLF file in `src/`" and normalised an
-appended block to match it. The next packet inherited the claim and moved the
-name to `robots-record.js`. **Both are wrong.** `.gitattributes` sets
-`* text=auto eol=lf`, so **every text file is LF in the committed blob** —
-working-tree CRLF is a local artifact git normalises away and never shows in a
-diff. **The normalisation I reported as deliberate changed not one committed
-byte.** Corrected at `docs/FINDING-guard-6.md` §4.1a with its origin named.
+Roughly half the document can be written from what the corpus already holds.
+About a quarter of the SEEDs are art, which is Mike's camera or Mike's hand.
+
+> **THE CUTS WAIT UNTIL THE WRITING IS DONE.** Cutting a position renumbers
+> everything after it, and **paragraph numbers are what the pen points at** —
+> `marked-01-a` carries `SEE 7-14` in Mike's own hand, and B-1's published
+> prose points at B-3 and at three tables. A cut made now silently re-aims a
+> mark that is already on a published sheet. Do the writing, then cut, then
+> re-render once.
+
+---
+
+## 5 · WHAT IS WAITING, AS OF THIS PACKET
+
+**Mike's, none blocking:**
+
+- **The marked-copy pin.** `MARKED_PAGES` is keyed on the page label, so `B-1`
+  survived moving from sheet 47 to 48 this session where an index key would
+  have laid four strike-throughs across Appendix A. What that does *not* solve
+  is a label staying correct while the page under it changes: `ASK ENGINEERING`
+  was written beside B-3's `[ TEXT REQUIRED ]` and B-3 is prose now. Five
+  options were put with their costs and none ranked.
+- **`entry`** carries eight occurrences in B-3 and `MANUAL_VOCABULARY` fixes no
+  meaning for it. It is the paragraph's most-loaded noun and the only one with
+  no attestation.
+- **`the Factor`** as a second-reference short form is unattested; **`Bias
+  Strength Factor`** is the expansion the retired draft gives for `BS-Factor`
+  and the live document carries it nowhere, including Appendix G.
+- **Table B-2's rank against the passcode order.** The firmware enum and the
+  2024 manual's passcodes run `Uncouth · Offensive · …`; the printed table now
+  runs the other way. A code travels with the enum position, not the printed
+  row. Matters the day the CODE column is filled.
+- **Figure 5-1's 84 mm** would not fit under Table 5-1, so it pushed to sheet
+  5-2 and left about thirteen blank rows at the foot of 5-1.
+- **Section V holds nine paragraph positions** against a packet that said
+  eight.
+- **The `Co-Authored-By` trailers** on all five of this session's commits, kept
+  because this repository's history carries them on every commit.
+- **¶5-15 COMPLETION OF THE FACTORY TEST** is Egg 1's printed half. The
+  diagnostic monitor's graph window has read `TEST` since the factory and what
+  the procedure *is* has never been written down by anybody.
+
+**Ops', none blocking:**
+
+- **`docs/FINDING-manual-index-drift-20260830.md` says 65 in its prose** and
+  the document is 64. Its drift table is still exact; only the total went
+  stale, inside one packet, which is the thing the finding predicted.
+- **`docs/canon/07-MANUAL.md`'s Extent cell** says 63 pages and asserts that
+  `len(doc.pages)` and the leaves on disk *"agree exactly"*. They no longer do.
+  Its *"30 reserved tables"* is now 27 reserved and 3 filled. Not in
+  `numbers-gate`'s scope, so nothing reports it.
+- **`mock-manual-six-20260830.html`** is untracked and superseded — it inlines
+  base64 of the six already-published scans and predates the viewer.
+
+---
+
+## 6 · THE MANUAL HOLD IS STILL UNAPPLIED AND M61'S CLOCK IS RUNNING
+
+**`docs/PREPARED-manual-hold.md` has not been applied and nothing in it was
+touched all session.** It is the one-commit landing for holding the six manual
+scans behind the stage door, and it remains what it has always been: the
+change written out, not the change.
+
+**M61's clock is 2026-09-09 at 17:00 America/New_York.** Read out of
+`__WB_RECORD_ASSETS__` (`vite.config.js:613-614`) and `RECORD_HOUR`
+(`reveal/record-clock.mjs:89`), not computed. On that day, as the tree stands,
+all six publish.
+
+**Mike's ruling this session changes what should be on that schedule** — five
+of the six do not publish and `scan-31-a` is dead — **and nothing has been
+built to carry it.** That is the largest single thing waiting.
 
 ---
 
 ## 7 · STATE, IN ONE READING
 
-- **Deployed:** `3ccbad9`, stage **launch**, 2026-08-29. Nothing has deployed
-  since; every commit today is docs, tools or client code not yet shipped.
-- **`day:proof`:** 1 of 49, exit 1. The residual is Record 005 refused by guard
-  6 — the same comment. It has not moved all week and moving it is §2.
-- **Gates:** all green except `lint` (9 errors / 7 warnings, the standing
-  baseline, zero new) and `assets:gate` (the Mike-approval gate, 0 of 49 signed,
-  red by design).
+- **Deployed:** `3ccbad9`, stage **launch**, 2026-08-29. Nothing deployed since.
+- **`day:proof`:** 1 of 49, exit 1 — the standing residual, Record 005 refused
+  by guard 6. **Read, never run this session.** Running it bumps the Record's
+  mtime and closes guard 8's landing window; both files still stamp
+  `2026-08-30 11:03:14`, exactly where the last handoff left them.
+- **Gates:** `lint` 9 errors / 7 warnings (the standing baseline, zero new) ·
+  `build` 0 · `provenance:gate` 0 · `docs:numbers:gate` 0 · `shellstop:gate` 0.
+  `assets:gate` is red by design — the Mike-approval gate, 0 of 49 signed.
+- **The protected set:** `structure/pages/` and `structure/pages/marked/` at
+  `dc38450e…`, 63 leaves and 1 marked, unchanged all session. The PDF was not
+  rebuilt.
 - **The next autonomous event is 2026-09-07 at 17:00** — the wing opens, Record
-  001 appears, the countdown removes itself and the share cards stop being
-  rewritten. Nothing has to be deployed for it. `docs/FINDING-autonomous-timeline.md`
-  is the day-by-day.
+  001 appears, the countdown removes itself. Nothing has to be deployed for it.
+  `docs/FINDING-autonomous-timeline.md` is the day-by-day.
+- **To read this session's work:** `npm run mock`, then
+  `http://127.0.0.1:8899/mock-appendix-b-firstpass-20260830.html` and
+  `…/mock-section-v-firstpass-20260830.html`. The plates are in the tree; no
+  re-render is needed.
