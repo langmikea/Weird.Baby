@@ -1,121 +1,129 @@
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
-# HANDOFF — 2026-08-31, the manual rounds
+# HANDOFF — 2026-09-01, the close of the draw session
 
 Session-scoped. Process and standing facts are not here — they are in
-`docs/canonical/OPERATIONS.md`, `STATE.md`, and for the manual specifically in
-`robots:docs/MANUAL_WRITING_BOOT.md`, which gained a **§0** today that governs
-everything else in it.
+`docs/canonical/OPERATIONS.md` and `STATE.md`. **Truth ranking puts this file
+below git log; if it disagrees with the tree, the tree is right.**
 
 ---
 
-## MIKE'S RULINGS TODAY — read these before writing a word
+## WHAT THE NEXT SESSION IS FOR — read this before anything else
 
-**1 · THE ENCABULATOR IS RETIRED. THE MANUAL IS PLAIN INSTRUCTION PROSE.**
-His words: it describes meaningless technical specifications, and this manual
-gives meaningful instructions, and the two are not the same job. **Write a
-plain, direct instruction manual. Use the lore as factual material. No voice,
-no period pastiche, no register exercise. Plain enough that a person following
-it can do the thing.** It is `MANUAL_WRITING_BOOT.md` §0. **The reader is
-addressed as "you."** Paragraph 9-1 is the only paragraph in the document
-written this way; it is the sample he approved the direction from.
+> # MIKE IS LEADING AN INVESTIGATION INTO THE WORKFLOW THAT OCCURS AFTER A REEL HAS BEEN PRODUCED.
 
-**2 · THE DOCUMENT IS AN ABEAL INTERNAL PRELIMINARY ENGINEERING COPY OF A
-MANUAL THAT NEVER SHIPPED.** This is the ruling that licenses the rest. It is
-why the register may be mixed, why the imperfections belong, why positions
-stand reserved with placeholders on the page, and why it does not have to read
-like a finished consumer document. **It is not a published manual and must not
-be smoothed into one.**
+**HE WILL HAVE CONTENT. NOTHING EXISTS TO MOVE IT.** That is the whole shape of
+it: a finished reel, and no route from the file to a surface. The investigation
+is his, he is leading it, and the next session's job is to help him look.
 
-**3 · SERVICE IS "any authorized ABEAL Service Center near you."** That is the
-phrase. Section XI and Appendix H are written to it.
+> ### **OPS IS NOT TO PROPOSE A BUILD.**
+>
+> Not a tool, not a script, not a pipeline, not a schema, not a directory.
+> **He is investigating a workflow, not commissioning software**, and an Ops
+> that answers an investigation with a design has changed the subject and taken
+> the question off him. If a build is the answer it will be the answer after he
+> has looked, and it will be his.
 
-**4 · A HANDWRITTEN NOTE READING `GOLD dealers only!!!` GOES BESIDE THE SERVICE
-ADDRESS — AND IT WAITS ON MIKE WITH A PEN AND A CAMERA.** It cannot be
-assembled from the existing pen cuts: **the pen has no alphabet.** The marks in
-`robots/mgk-viiip/manual/marks/` are strikes and scribbles, not letterforms.
-Do not attempt to synthesise it and do not letter it in a font. It is a
-photograph of his handwriting or it is nothing.
-
-**5 · THE TROUBLE CHART CARRIES ONLY REAL FAULTS.** Table 9-1 went from eleven
-rows to five. Six described the instrument working correctly, and a trouble
-chart that lists correct behaviour sends a reader hunting a fault that is not
-there. **This generalises: no chart, table or list in this manual may carry a
-row whose subject is the machine behaving as designed.**
+**What Ops may do:** read what is there, measure it, say plainly what exists
+and what does not, and answer what he asks. `release/README.md` and the two
+specs in `release/specs/` are the standing description of what this system
+holds today — **including that it holds no route to a surface** and that every
+posting in it is YouTube-only and staged.
 
 ---
 
 ## THE STATE
 
-**Robots `68b4b75` · museum `3cddf36`.** Both level with their remotes, both
-working trees clean but for six untracked scratch render dirs in robots.
+**Museum `01b64ef`, level with origin, on `main`.** Working tree carries two
+modified paths and **both are Mike's, both are to be left alone** —
+`docs/dictation-20260807/readiness.json` and `.../record-draft.json`. **He is
+writing in the day editor on 8899.** Do not bind 8899. Do not touch
+`docs/dictation-20260807/`.
 
-**What landed today, in order:** Sections IV, VIII and IX written; the
-diagnostic monitor's windows named only where the manual had already named one;
-Table 9-2 corrected off the twin's superseded `CHECK OWNERS MANUAL` onto
-`SEE MANUAL`, which is what the instrument prints; the `[PAPA]` maintenance-card
-slot in `HEALTH.ino` answered, so the firmware's three card strings are now the
-manual's; 8-9 written for a reader arriving from `SEE MANUAL` on the glass,
-which closes **D-10**, the only hole the machine itself was built to point at;
-Appendix F given F-1 and the case convention; the power control / power switch
-divergence recorded rather than resolved; the trouble chart cut to five rows and
-its depth closed on the last of them; **9-1 rewritten plain**; all six viewers
-rebuilt; six findings registered as R12–R16 and C44.
+**Robots `1890382`**, level with origin, clean but for seven untracked scratch
+render directories.
 
-**The protected set is untouched and was read fresh at every packet.** 63
-leaves, 1 marked page, digest
-`dc38450e1036a4231de86f34526d2252593d2cdc47909830611ed3ce1bee96ee`, PDF mtime
-still 19 August. `structure/pages/` has 0 lines in `git status` all day.
+### The deploy, and everything after it
 
-**THE 75-AGAINST-63 GAP, AND IT WIDENED TODAY.** The document lays out at
-**74 sheets**; `structure/pages/` holds **63 rendered leaves**. It was 67 at the
-start of the day, went to 75 as three sections were written, and came back to 74
-when Table 9-1's depth closed. **The gap is not a defect and it must not be
-closed casually.** `manualPages()` reads the highest `NN` off `pages/`, the
-museum's `docs:numbers` gate publishes 63 off it, and four `MANUAL_PAGE()`
-literals name leaves by number. The moment `pages/` is regenerated the gate goes
-red on a claim that was true that minute and those four literals silently begin
-naming different leaves, with nothing in either repository refusing them.
-**`main()` is never called. See the boot file §1 and §2.**
+**THE MUSEUM IS LIVE AT `8f5888d`, stage `launch`, deployed
+2026-09-01T15:50:41.318Z** — `docs/DEPLOYED.md`, recorded dirty against the two
+day-editor paths above. **Two commits landed after it and neither changes what
+is served:** `67339d7` and `01b64ef` are Record entries about the deploy and
+about the TikTok bio. **Nothing is waiting on a deploy.**
 
----
+### What landed today, in order
 
-## NEXT — and the order is the point
+`cc77a51` the front-page viewer and its four plates · `d6fc88b` the index-drift
+finding brought current at 74 sheets · `7e60e46` the site description replaced
+and the worker's rewrite dropped · **`8f5888d` the lobby note follows the live
+day, superseding §14.3 option 3 — this is the deploy** · `67339d7` and
+`01b64ef` the two Records.
 
-**1 · THE REGISTER PASS COMES BEFORE ANY NEW POSITION.** Sections IV, V, VI and
-VIII and Appendix B are written in the voice Mike could not follow. That is
-**54 of the 55 written positions**; only 9-1 is in the new register. Rewriting
-them is not tidying — it is the difference between a document he can use and one
-he cannot. **Do not start Section I.** `docs/FINDING-manual-survey-20260831.md`
-§6 exists specifically to stop a reader of §1 doing exactly that.
-
-**2 · ONE PARAGRAPH AT A TIME UNTIL HE SAYS THE REGISTER IS RIGHT.** 9-1 is the
-sample and the direction is approved; the register is not settled. A whole
-section rewritten to a voice he has not signed off is the same mistake at scale.
-
-**3 · THEN S1's REMAINING HALF, WHICH UNBLOCKS TEN POSITIONS.** Answering it
-releases them; the survey names which.
-
-**4 · THE SURVEY IS INCOMPLETE AND SAYS SO.** Its §0 records that the sixteen
-seed clusters were produced in a packet the writing session could not read and
-are deliberately not reconstructed. **If that analysis exists in another window,
-paste it under that heading.** Everything else in the file is measured off the
-generator and re-takeable.
+**Then this packet:** `docs/FINDING-the-draw-20260901.md` — **the session's
+substance, and it exists nowhere else**; the TikTok operating definition at
+`release/specs/SPEC-tiktok-operating-definition-20260901.md`; four register
+rows and one amendment; and `docs/PREPARED-ops-standing-rule-20260901.md`.
 
 ---
 
-## TWO THINGS THAT WILL BITE
+## THREE THINGS THAT ARE TRUE ON A CLOCK
 
-**A PLATE GOES STALE THREE WAYS AND ONLY ONE CHANGES A FILENAME** — its section
-grows, its section merely moves, or its own text changes. The middle one is the
-surprise: `render_page` seeds its random stream from the page number, so a
-section that moves re-renders differently even when not one word of it changed.
-Appendix B was stale by eleven sheets today and nothing caught it. The viewer
-generator now refuses a plate directory that does not match the layout, which
-catches two of the three and is blind to the third. Register
-[R14](OPEN_ACTIONS.md#r14).
+**1 · THE WING OPENS ON 2026-09-07 AT 17:00 AND NEEDS NO DEPLOY.** `RECORD_EPOCH`
+is `2026-09-07` (`src/data/artists/record-epoch.js:116`) and `RECORD_HOUR` is
+`17` (`reveal/record-clock.mjs:89`). **The clock is read at request time, not at
+build time**, and since `8f5888d` the lobby note turns with the live day in a
+tab that is already open. `npm run reveal:day` reports **nothing to move** —
+the tree and the Record agree, 10 pictures public and 137 behind the door.
+**Nobody has to do anything on the seventh for the doors to open.**
 
-**THE MOCK VIEWERS ARE GENERATED, NOT HAND-EDITED.** One script builds all six
-pages, re-renders only the plate directories that do not match the current
-layout, and dumps each sheet's selectable text from the same page ops the plate
-renders from. Editing a mock page by hand puts the text and the picture on
-different sources, which is the drift the design exists to prevent.
+**2 · TWO ROWS FIRE INSIDE TEN DAYS AND BOTH ARE MIKE'S.**
+[M111](OPEN_ACTIONS.md#m111) — *"the first 100"* goes live on the **7th** and
+nothing in the tree counts to 100; every signature is stamped `Founding
+Visitor`. [M109](OPEN_ACTIONS.md#m109) — Record 003 publishes on the **9th**
+carrying a DETAILED REPORT that still names three manual pages the entry no
+longer shows.
+
+**3 · MIKE'S RECORD 001 EDITS ARE UNLANDED, AND THERE WILL BE MANY MORE BEFORE
+THE SEVENTH.** They live in the day editor's own files and have not been
+landed. **Do not run `record:land`, do not run `day:proof`, and do not tidy
+those two paths.** Expect the working tree to be dirty there on every session
+between now and the opening; that is him working, not a defect.
+
+---
+
+## THE MANUAL — FINISHED AS FAR AS IT GOES
+
+**Three sheets are approved. The rest is honestly unwritten, and it should stay
+described that way.**
+
+The front-page round put four plates on the desk at `cc77a51` —
+`docs/plates-20260901-front/`, viewer `docs/mock-front-page-20260901.html`:
+the **cover**, **leaf ii**, **leaf iv**'s scope statement, and **5-3**. **The
+round named three of them; leaf ii was added by Ops** because the issue date
+landed on it and a viewer that omits the sheet being ruled on cannot answer the
+question.
+
+**The census, measured 2026-08-31 and unchanged in shape:** 150 positions, 55
+written, 95 left — `docs/FINDING-manual-survey-20260831.md`. **That file's §0
+says what it does not contain and why**, and its §6 exists specifically to stop
+a reader starting Section I.
+
+**No number in this section was re-measured today.** It carries the 08-31 date
+because that is when it was taken.
+
+---
+
+## THE ONE THING OPS RULED TODAY THAT TOUCHES A DOCUMENT
+
+**The standing rule about determined decisions did not land in the manual, and
+it is not lost.** `docs/canonical/OPERATIONS.md` is **39,357 bytes against a
+40,000 ceiling** — 643 of headroom, and the rule is 714. **It breaches, so it
+was not landed.** The complete text, the arithmetic, and the section it belongs
+in are in `docs/PREPARED-ops-standing-rule-20260901.md`. **Landing it means
+first cutting the oldest complete section to `OPERATIONS_ARCHIVE/`**, which is
+the remedy `tools/ops-size-gate.mjs` prints and is a section-sized decision
+nobody has taken.
+
+**The rule itself is in force whether or not it is filed.** It reads: *Ops does
+not bring Mike a decision whose answer is determined* — and its pair, *when Ops
+has ruled something that touches what Mike sees, it goes at the top of the
+message, on its own line, flagged as Ops' decision.*
