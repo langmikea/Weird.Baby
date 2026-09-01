@@ -472,17 +472,6 @@ async function resolveAsOf(request, env, url) {
    the wrong thing is on the glass. The bundle is unchanged by this — it reads
    two globals that the document happens to define.
    IT ONLY EVER TOUCHES HTML. Assets stream through untouched. */
-/* ── [CH6 2026-08-12] THE SHARE CARDS MAY NOT PROMISE A HIDDEN WING ─────────
-   Two of the three descriptions in `index.html` name the MGK robots, and until
-   Record 001 announces the wing that sentence is false to anybody who shares
-   the link. `twitter:description` already says the true thing in both states
-   and is REUSED verbatim rather than a third sentence being written — the
-   museum has one honest description of itself and does not need two.
-   IT IS A HOLD, NOT AN EDIT: `index.html` still ships Mike's wording, and the
-   day the wing arrives the worker stops touching it. */
-const CARD_WHILE_SHUT =
-  "A museum of weird things worth keeping. No ads, no affiliate links, "
-  + "no cut of anything you buy from an artist.";
 
 function injectClock(response, clock, previewing, wingOpen, governed) {
   const type = response.headers.get("Content-Type") || "";
@@ -542,19 +531,10 @@ function injectClock(response, clock, previewing, wingOpen, governed) {
     `window.__WB_TODAY__=${JSON.stringify(clock.today)};` +
     `window.__WB_NOW__=${clock.nowMs};` +
     `window.__WB_RECORD_ALL__=${previewing ? "true" : "false"};`;
-  let r = new HTMLRewriter()
+  const r = new HTMLRewriter()
     .on("head", {
       element(el) { el.prepend(`<script>${payload}</script>`, { html: true }); },
     });
-  if (!wingOpen) {
-    r = r
-      .on('meta[name="description"]', {
-        element(el) { el.setAttribute("content", CARD_WHILE_SHUT); },
-      })
-      .on('meta[property="og:description"]', {
-        element(el) { el.setAttribute("content", CARD_WHILE_SHUT); },
-      });
-  }
   /* transformed AFTER the mark, not before: `transform` carries the response's
      headers across, so stamping first is the ordering that cannot lose it. */
   return r.transform(marked);

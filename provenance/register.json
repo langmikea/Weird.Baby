@@ -13546,12 +13546,6 @@
    "c": "MIKE",
    "s": "the Lobby's founding-visitor copy, Mike's own, on the page"
   },
-  "eb9e93e5aa17b0eb": {
-   "f": "src/worker.js",
-   "l": 159,
-   "t": "A museum of weird things worth keeping. No ads, no affiliate links, no cut of anything you buy from an artist.",
-   "c": "HOUSE"
-  },
   "7352ea325d531b18": {
    "f": "src/lib/use-arrival.js",
    "l": 66,
@@ -14716,12 +14710,12 @@
    "c": "HOUSE",
    "s": "the site's own canonical address. Protocol plumbing rather than copy: without it a scraper keys its cached card on whatever URL it was handed, so the same site can cache twice under two identities."
   },
-  "02314869de7295ce": {
+  "223a1941d66d49b0": {
    "f": "index.html",
-   "l": 101,
-   "t": "A free museum of weird things worth keeping. Robots arriving one day at a time, music worth a listen, and a guest book that remembers who got here early.",
+   "l": 49,
+   "t": "A museum of cool, edgy, rebel without a clue type of weird stuff worth sharing. Get Weird.Baby!",
    "c": "MIKE",
-   "s": "Mike's link-preview copy, ruled 2026-08-17 and carried verbatim. ONE ROW COVERS THREE TAGS, and that is the register telling the truth about the source rather than a shortcut: the key is file+text, so `og:description`, `twitter:description` AND `name=\"description\"` collapse to this single row BECAUSE they are the same string. They were three different sentences this morning - the og/twitter pair had already forked to two lengths of the C4 wording, and the search tag carried R1's. If this row ever splits back into two, the strings have drifted. Named once, what it replaced: \"A museum of weird things worth keeping. The MGK robots, and music worth a listen. No ads, no affiliate links, no cut of anything you buy from an artist.\" and \"Weird.Baby Museum. Exhibiting the MGK robots and Worth A Listen.\" See docs/MUSEUM_RULINGS-20260817.md."
+   "s": "Mike's site description, ruled 2026-09-01 and carried verbatim. ONE ROW COVERS THREE TAGS, and that is the register telling the truth about the source rather than a shortcut: the key is file+text, so `og:description`, `twitter:description` AND `name=\"description\"` collapse to this single row BECAUSE they are the same string. If this row ever splits back into two, the strings have drifted. AND THE THREE ARE NOW THE WHOLE OF WHAT SHIPS: `src/worker.js` used to rewrite the search and og tags to a fourth sentence while the wing was shut (`CARD_WHILE_SHUT`, register row eb9e93e5aa17b0eb, both retired this round) - it existed because the old description named the robots before the wing opened, and this one names nothing that is not true today. Named once, what it replaced: \"A free museum of weird things worth keeping. Robots arriving one day at a time, music worth a listen, and a guest book that remembers who got here early.\""
   },
   "a8757c414daaa907": {
    "f": "index.html",
