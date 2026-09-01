@@ -18,18 +18,19 @@ form). Ask the wire.
 
 | field | value |
 |---|---|
-| commit | `3ccbad9` |
-| full sha | `3ccbad9fb0d98f1ae05c03e1ca53fabfcc99e7db` |
-| subject | handoff: the shell-stop count is 61, not 57 |
+| commit | `8f5888d` **— DIRTY TREE** |
+| full sha | `8f5888df066fe017a2917a4d006dbf144259f204` |
+| subject | fix(lobby): the note follows the live day — Mike supersedes §14.3 option 3 |
 | stage | **launch** |
-| deployed at | 2026-08-29T21:36:59.254Z |
-| worker sha256 | `5a767b8ac5145f7b` (first 16) |
-| tree clean | yes |
+| deployed at | 2026-09-01T15:50:41.318Z |
+| worker sha256 | `cd5958c18986ddd4` (first 16) |
+| tree clean | **NO** — 3 path(s): `docs/dictation-20260807/day.html`, `docs/dictation-20260807/readiness.json`, `docs/dictation-20260807/record-draft.json` |
 
 ## History
 
 | commit | stage | deployed at | worker sha256 | subject |
 |---|---|---|---|---|
+| `8f5888d` (dirty) | launch | 2026-09-01T15:50:41.318Z | `cd5958c18986ddd4` | fix(lobby): the note follows the live day — Mike supersedes §14.3 option 3 |
 | `3ccbad9` | launch | 2026-08-29T21:36:59.254Z | `5a767b8ac5145f7b` | handoff: the shell-stop count is 61, not 57 |
 | `83f06a0` (dirty) | launch | 2026-08-29T14:03:26.328Z | `85ac466ac948642c` | ops: one summary, one exit — the response shape lands as doctrine 28 |
 | `124b7dd` | launch | 2026-08-29T12:30:16.224Z | `2ca498cc3e49c614` | handoff: rewritten at the close of the social-pipeline session |
