@@ -20,15 +20,23 @@ import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
 /* [CH6 2026-08-12] has the Robots wing arrived? — src/lib/wing-open.js
-   [L-e 2026-08-30] BOTH ARE IMPORTED AND THAT IS DELIBERATE, NOT A LEFTOVER.
-   `robotsOpenOn` is asked about the LIVE day and decides the board's `\Robots`
-   row; `ROBOTS_OPEN` is the day this document was SERVED on and still decides
+   [L-e 2026-08-30] BOTH WERE IMPORTED AND THAT WAS DELIBERATE, NOT A LEFTOVER.
+   `robotsOpenOn` was asked about the LIVE day and decided the board's `\Robots`
+   row; `ROBOTS_OPEN` was the day this document was SERVED on and still decided
    the note below it. The note is Mike's — option 3 of 2026-08-15 §14.3, "at
    zero it removes itself and the copy beneath stands", recorded as his ruling
-   at the countdown's own comment — so it is parked until he rules again and
-   this file must not quietly make it live. See L-e and
-   docs/FINDING-robots-open-consumers.md §4.2. */
-import { ROBOTS_OPEN, robotsOpenOn } from "../lib/wing-open.js";
+   at the countdown's own comment — so it was parked until he ruled again and
+   this file was not to quietly make it live. See L-e and
+   docs/FINDING-robots-open-consumers.md §4.2.
+   [2026-09-01] HE HAS RULED AGAIN, AND ONE IMPORT IS NOW ENOUGH. MIKE: *"the
+   lobby note tells the truth"* — the note turns with the door. Both readers on
+   this page now ask `robotsOpenOn` about the LIVE day, so `ROBOTS_OPEN` has no
+   reader left in this file, and an unused import is a lint error in this
+   repo's baseline. The const is NOT deleted: it is still the right answer for
+   a page that is LOADED, it is still what `useMuseumDay()` seeds from, and its
+   own header carries the reasoning. **It now has zero consumers anywhere in
+   `src/`** — flagged, not swept. */
+import { robotsOpenOn } from "../lib/wing-open.js";
 import { useMuseumDay } from "../lib/use-museum-day.js";
 /* [2026-08-16] the countdown's clock — the server's instant, and the moment the
    doors open, both from the museum's own declarations. */
@@ -89,6 +97,42 @@ import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
    new copy needed. It does this LIVE, in a tab left open across midnight: the
    interval is still running and the render that crosses zero is the render that
    returns null.
+
+   ═══ [2026-09-01] THAT RULING IS SUPERSEDED. THE PARAGRAPH ABOVE IS KEPT
+       BECAUSE A RULING THAT VANISHES GETS RE-MADE ═══════════════════════════
+   WHAT IT WAS. Option 3 of `docs/MUSEUM_SITE_CHANGES_LOG-20260815.md` §14.3 —
+   *"The counter removes itself and leaves the copy beneath it standing."* Ruled
+   and built 2026-08-16 (`70fb390`); it left the note below parked on
+   `ROBOTS_OPEN`, the day this document was SERVED on.
+
+   MIKE, 2026-09-01, SUPERSEDING IT: **the lobby note tells the truth.** *"When
+   the robots door appears in an already-open tab at 17:00 on the seventh, the
+   paragraph beside it turns with it rather than still reading 'We're not open
+   yet.'"* That is §14.3's OPTION 1 — *"the counter is replaced by the
+   open-state copy it was counting toward… needs the countdown to trigger the
+   same swap `ROBOTS_OPEN` performs, in-tab, so the two cannot disagree."*
+
+   WHY IT COULD NOT HAVE BEEN RULED THIS WAY IN AUGUST, which is the half a
+   future session would otherwise re-litigate. §14.3 was written when the door
+   COULD NOT APPEAR WITHOUT A RELOAD. In that tab the note was stale and the
+   door was shut, and the page was at least consistent with itself — a frozen
+   note was never visible BESIDE an open door, so option 3 cost nothing a
+   visitor could see. The four-site live-day fix (`9e28201`, L-e, 2026-08-30) is
+   what put a `\Robots` row on that board while the note under it still said the
+   museum was shut. **That fix is what makes the parked note visible, and the
+   visible disagreement is what this ruling answers.**
+
+   AND IT REPAIRS THE SENTENCE FOUR LINES ABOVE RATHER THAN CONTRADICTING IT.
+   `docs/FINDING-robots-open-consumers.md` §5.1 measured *"nothing stale on the
+   glass"* as FALSE in the exact case the next sentence names — a tab held open
+   across the boundary, where the copy beneath was
+   `ROBOTS_OPEN ? welcome : "We're not open yet."` with a frozen `false`. That
+   is F11 of the same report's §7. The note now reads the live day, so the
+   claim is true for the first time since it was written.
+
+   THE COUNTDOWN ITSELF IS NOT TOUCHED. It still returns `null` at zero and it
+   still removes itself. What moved is the copy beneath it, which now turns on
+   the same clock instead of on the const.
 
    ONE SECOND, NOT ONE FRAME. `setInterval` at 1000ms is what a
    seconds-resolution readout needs; `requestAnimationFrame` would tick 60x for
@@ -1212,7 +1256,13 @@ export default function WbHome() {
               (src/lib/wing-open.js), derived from the Record and read by the
               worker at request time, and Sunday night is when it turns. Nothing
               here counts to 100 — "the first 100" is a promise in his copy, and
-              what happens AT 100 is his own TBD, deliberately not built. */}
+              what happens AT 100 is his own TBD, deliberately not built.
+              [2026-09-01] THE THRESHOLD IS STILL UNCHANGED AND ONLY THE DAY IT
+              IS ASKED ABOUT MOVED. `robotsOpenOn` is the same derivation from
+              the same Record; it is handed the LIVE day rather than the served
+              one. Sunday night still turns this sentence, and it now turns it
+              in a tab that was already open. See the countdown's block at the
+              head of this file. */}
           {/* [2026-08-16] THE COUNTDOWN SITS ABOVE THE NOTE, and it is rendered
               unconditionally rather than inside the `ROBOTS_OPEN` branch. That
               is the point: `ROBOTS_OPEN` is a module-load const, so in a tab
@@ -1220,9 +1270,29 @@ export default function WbHome() {
               must remove itself on the museum's clock, not on that const. The
               component decides for itself and returns null once the doors are
               open, so an already-open museum renders exactly what it rendered
-              before this existed. */}
+              before this existed.
+              [2026-09-01] AND THE NOTE BENEATH IT NOW READS THE SAME CLOCK. The
+              reason this block gives for the countdown standing OUTSIDE the
+              branch was a difference between the two objects; it is now the
+              rule both of them keep. The branch below is `robotsOpen` — the
+              live day, from `useMuseumDay()` at the top of this component — not
+              the const this paragraph names. */}
           <Countdown />
-          {ROBOTS_OPEN ? (
+          {/* ═══ [2026-09-01] MIKE'S RULING: THE LOBBY NOTE TELLS THE TRUTH ═══
+              *"When the robots door appears in an already-open tab at 17:00 on
+              the seventh, the paragraph beside it turns with it rather than
+              still reading 'We're not open yet.'"*
+              NO STRING MOVES. Both arms are already his and both were already
+              on this page; the only thing that changed is WHICH DAY the
+              question is asked about — `robotsOpen`, the same live value the
+              `\Robots` row on the board has read since L-e landed. It is
+              §14.3's option 1 reached by option 1's own stated means: *"the
+              same swap `ROBOTS_OPEN` performs, in-tab, so the two cannot
+              disagree."*
+              IT SUPERSEDES OPTION 3, AND THE SUPERSEDED RULING IS KEPT WHERE IT
+              WAS MADE — the countdown's comment block at the head of this file,
+              amended rather than deleted. */}
+          {robotsOpen ? (
             <p className="wb-note">
               Welcome.<br /><br />
               The first 100 people who sign the guest book<br />
