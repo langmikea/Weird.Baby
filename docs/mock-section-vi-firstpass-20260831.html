@@ -1,94 +1,351 @@
-<!doctype html><meta charset="utf-8"><title>Section VI first pass, complete</title>
+<!doctype html><meta charset="utf-8"><title>Section VI  ·  Operating Instructions</title>
 <style>
-:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2}
+:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2;--w:1275px}
 html,body{margin:0;padding:0;background:#d8d6c8;color:var(--ink);
-  font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.wrap{max-width:none;padding:14px}
-figure{margin:0 0 18px 0;background:var(--chrome);border:1px solid var(--edge)}
-.bar{display:flex;align-items:center;gap:14px;padding:7px 10px;
-  border-bottom:1px solid var(--edge)}
-figcaption{font-weight:700;letter-spacing:.09em;font-size:14px}
-.bar button{font:inherit;padding:3px 11px;border:1px solid var(--edge);
+  font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:16px;
+  padding:9px 16px;background:var(--chrome);border-bottom:1px solid var(--edge)}
+.bar b{font-size:15px;letter-spacing:.06em}
+.bar button{font:inherit;padding:4px 14px;border:1px solid var(--edge);
   background:var(--paper);color:var(--ink);cursor:pointer;border-radius:2px}
 .bar button[aria-pressed="true"]{background:var(--ink);color:var(--paper);
   border-color:var(--ink)}
-.hint{margin-left:auto;opacity:.55;font-size:12px}
-.view{overflow:auto;background:var(--paper);height:82vh;
-  cursor:grab;overscroll-behavior:contain}
-.view.drag{cursor:grabbing}
-.view img{display:block;image-rendering:auto}
-.view[data-zoom="25"],.view[data-zoom="50"]{height:auto;cursor:default}
-.view[data-zoom="25"] img{width:25%;height:auto;margin:0 auto}
-.view[data-zoom="50"] img{width:50%;height:auto;margin:0 auto}
-.view[data-zoom="fit"] img{width:100%;height:auto}
-.view[data-zoom="100"] img{width:1700px;height:2200px;max-width:none}
-.view[data-zoom="200"] img{width:3400px;height:4400px;max-width:none}
+.hint{margin-left:auto;opacity:.6;font-size:12.5px}
+.wrap{padding:18px 16px 90px}
+.leaf{margin:0 0 34px}
+.lab{font-weight:700;letter-spacing:.09em;font-size:13px;opacity:.75;
+  margin:0 0 6px}
+.leaf img{display:block;width:var(--w);max-width:100%;height:auto;
+  border:1px solid var(--edge);background:var(--paper)}
+.txt{width:var(--w);max-width:100%;box-sizing:border-box;margin:0;
+  padding:14px 16px;background:var(--paper);border:1px solid var(--edge);
+  border-top:0;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,
+  monospace;white-space:pre-wrap;overflow-wrap:anywhere;
+  -webkit-user-select:text;user-select:text}
 </style>
+<div class="bar"><b>Section VI  ·  Operating Instructions</b>
+<button data-z="850" aria-pressed="false">50%</button>
+<button data-z="1275" aria-pressed="true">75%</button>
+<button data-z="1700" aria-pressed="false">100%</button>
+<span class="hint">7 sheets, one scroll &middot; the text under each plate is
+selectable &mdash; drag a line and copy it</span></div>
 <div class="wrap">
-<figure>
-<div class="bar"><figcaption>6-1</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-1" src="plates-20260831/sheet-29_6-1.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>6-2</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-2" src="plates-20260831/sheet-30_6-2.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>6-3</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-3" src="plates-20260831/sheet-31_6-3.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>6-4</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-4" src="plates-20260831/sheet-32_6-4.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>6-5</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-5" src="plates-20260831/sheet-33_6-5.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>6-6</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-6" src="plates-20260831/sheet-34_6-6.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>6-7</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-7" src="plates-20260831/sheet-35_6-7.webp"></div>
-</figure>
+<div class="leaf">
+<p class="lab">6-1</p>
+<img alt="6-1" src="plates-20260831/sheet-29_6-1.webp">
+<pre class="txt">                                  SECTION VI
+
+                            OPERATING INSTRUCTIONS
+
+
+6-1.    GENERAL.
+
+        This section describes the instrument in use: the menu system by which
+        its functions are reached, the taking of a determination, and the
+        settings the operator may work. How the instrument is built is not
+        described here and is the matter of Section VII.
+
+        Starting the instrument is the matter of Section V and is not
+        repeated. The Bias Settings, and the procedure by which they are
+        enabled, set and adjusted, are the matter of Appendix B.
+
+6-3.    THE MENU SYSTEM.
+
+        The functions of the instrument are reached through the menu system.
+        It opens at four doors, each named for what stands behind it:
+        MGK-VIIIp, Messages, Programs and Preferences. Table 6-1 gives them
+        and says where each is described.
+
+        A door opens on a level. A level is a table of rows, and the rows are
+        presented one at a time. The dial moves through the rows and does not
+        choose; the shutter takes the row the dial has arrived at. A row
+        either opens a further level or runs the function it names.
+
+        The MGK-VIIIp door stands before the instrument&#x27;s own work and has no
+        paragraph apart from this one. Behind it are the answer engines, from
+        which a determination is taken; the predictions and the probabilities,
+        which are drawn rather than determined; the advisory functions, which
+        counsel by subject; and the detectors, which report upon what they
+        hear. Each is described in its own paragraph below.
+
+
+                          Table 6-1.  THE FOUR DOORS
+
+-----------------------------------------------------------------------------
+  DOOR           CONTENTS                                       REFERENCE
+-----------------------------------------------------------------------------
+  MGK-VIIIp      The instrument&#x27;s own questions and answers.    6-3
+  Messages       The instrument&#x27;s own correspondence.           6-23
+  Programs       The diversions and the code utilities.         6-19
+  Preferences    The bias settings and the operator record.     6-25
+-----------------------------------------------------------------------------</pre>
+</div>
+<div class="leaf">
+<p class="lab">6-2</p>
+<img alt="6-2" src="plates-20260831/sheet-30_6-2.webp">
+<pre class="txt">                              [ ART REQUIRED ]
+
+
+
+
+
+
+
+
+
+
+                   Figure 6-1.  MENU SYSTEM, LEVEL DIAGRAM
+
+    6-4.    Rows, passages, and rows not shown.  A row that returns the
+            operator to the level above is a passage. It takes no other action
+            and runs no function.
+
+            Not every row of a level is shown. A row appears when the
+            instrument has cause to show it, and read access decides. The
+            absence of a row is not a fault and is not to be reported as one.
+
+            An access code opens a level. It does not open a setting, and no
+            code in this manual is given against one. A code may be accepted
+            before the function it reveals is present in the instrument; it is
+            retained, and it takes effect when the function arrives.
+
+6-5.    OBTAINING A DETERMINATION.
+
+        The operator puts the question to the instrument and calls for a
+        determination.
+
+        The instrument reports that its output is redirected. The
+        determination forms at the fluidic suspension and is presented there.
+        Figure 6-2 gives the sequence in outline.</pre>
+</div>
+<div class="leaf">
+<p class="lab">6-3</p>
+<img alt="6-3" src="plates-20260831/sheet-31_6-3.webp">
+<pre class="txt">        The determination is given as it stands. The instrument does not
+        qualify it and does not account for it, the grounds of a determination
+        being no part of what is asked for.
+
+
+
+
+
+
+
+
+
+
+
+                              [ ART REQUIRED ]
+
+
+
+
+
+
+
+
+
+
+           Figure 6-2.  OBTAINING A DETERMINATION, SIMPLIFIED FLOW
+
+    6-6.    The minimum reading interval.  A determination is held for not
+            less than two and a half seconds before a further request is
+            accepted. The interval is fixed and is not an adjustment.
+
+            When it has passed the determination stands. It is not withdrawn
+            after any period, and the instrument waits.
+
+    6-7.    Requesting a further determination.  A further determination is
+            called for by shaking the instrument again.
+
+            A shake made while a determination is still standing does not
+            produce another. What is drawn is the determination already given,
+            shown a second time. The instrument does not determine a question
+            twice, and the determination it has given is the determination
+            that stands.
+
+            Shakes made early and repeatedly, before a question has been put,
+            are not read as requests. They call instead for the recalibration
+            of paragraph 8-7.</pre>
+</div>
+<div class="leaf">
+<p class="lab">6-4</p>
+<img alt="6-4" src="plates-20260831/sheet-32_6-4.webp">
+<pre class="txt">6-9.    THE ANSWER ENGINES.
+
+        An engine holds the response set from which a determination is drawn
+        and the bias by which it is drawn. The prediction engine receives the
+        request and passes it to the engine in use, and the instrument answers
+        at that engine until another is taken.
+
+        Engines are fitted as standard. There are further engine positions
+        that are not fitted in instruments of general issue, and a position
+        not fitted is dealt with at paragraph 6-29.
+
+        The engines, and what distinguishes one from another in presentation,
+        are scheduled at Appendix C.
+
+6-11.   PREDICTIONS.
+
+        The predictions are determinations upon what has not yet come to pass.
+        They are called for and presented in the manner of paragraph 6-5, and
+        the Bias Settings bear upon them as upon any other determination.
+
+        A prediction names no event and fixes no time. What the instrument
+        offers under this head is its reading of what stands before the
+        operator, and it is to be read as a determination and not as a report.
+
+6-13.   PROBABILITIES.
+
+        Under this head the instrument stands in the place of an object: a
+        coin, a card, a pair of dice. An operator with no such object to hand
+        has the instrument instead, and the instrument is put to the same use.
+
+        What is given is a plain mechanical selection. It is not drawn from a
+        response set, nothing in Appendix B bears upon it, and it is not a
+        determination. The instrument neither leans toward the selection it
+        makes nor accounts for it.
+
+6-15.   ADVICE.
+
+        The advisory functions counsel by subject. What is asked for under
+        this head is not a determination: a determination settles a question
+        put to the instrument, and counsel bears upon a situation the operator
+        is already in.
+
+        The distinction governs how the two are read. A determination is given
+        and stands. Counsel is offered upon a state of affairs the instrument
+        has not been told the whole of, and the operator, who has, is left to
+        weigh it.</pre>
+</div>
+<div class="leaf">
+<p class="lab">6-5</p>
+<img alt="6-5" src="plates-20260831/sheet-33_6-5.webp">
+<pre class="txt">        An advisory function not fitted to the instrument is dealt with at
+        paragraph 6-29.
+
+6-17.   DETECTORS.
+
+        A detector reads the room and not the question. The reading is taken
+        from the sound about the instrument, through the sound input, and it
+        is taken while the subject speaks.
+
+        The needle rises with what is heard and the verdict is reported when
+        the reading is complete. The deflection is a true measure of the
+        sound; the verdict is a measure of nothing, and the detectors are a
+        novelty and to be treated as such.
+
+6-19.   DIVERSIONS.
+
+        The diversions are provided for the idle instrument. They occupy the
+        operator and they determine nothing: an instrument that diverts is not
+        answering, and no diversion draws upon a response set or upon the Bias
+        Settings.
+
+        A score is kept for the session in which it is made and is not carried
+        to the next.
+
+6-21.   ANCILLARY PROGRAMS.
+
+        The ancillary programs are the code utilities. They are provided for
+        service use and take no part in the determination.
+
+        The built-in self test, and each of the utilities in turn, are the
+        matter of Section X and are not described here. The codes by which
+        they are reached, and the manner of entering and retaining a code, are
+        the matter of Appendix A.
+
+6-23.   MESSAGES.
+
+        The instrument maintains correspondence of its own. What stands under
+        this head are messages the instrument holds for the operator, and not
+        messages the operator composes; no provision is made for composing
+        one.
+
+        Certain items are present from installation. They were not sent and
+        have always been there. Others arrive when the instrument has cause to
+        deliver them: an item that has not arrived is not listed, and the
+        instrument neither announces an arrival nor repeats it.
+
+        Table 6-2 gives the classes under which correspondence is kept, the
+        states a message stands in, and how each is made known.</pre>
+</div>
+<div class="leaf">
+<p class="lab">6-6</p>
+<img alt="6-6" src="plates-20260831/sheet-34_6-6.webp">
+<pre class="txt">                    Table 6-2.  MESSAGE CLASSES AND STATES
+
+-----------------------------------------------------------------------------
+  CLASS       STATE                          INDICATION
+-----------------------------------------------------------------------------
+  Voice       Held, shown, then spent.       Marked until played.
+  Text        Held, shown, then spent.       Marked until read.
+  System      Held or shown.                 By lamp and keyed signal.
+-----------------------------------------------------------------------------
+
+6-25.   PREFERENCES.
+
+        The Preferences door carries what the operator may set. The Bias
+        Settings are set from it and are the matter of Appendix B, where the
+        manner of enabling, setting and adjusting them is given; it is not
+        repeated here.
+
+        Also set from this door are the output mode, the enunciator voice, and
+        the operator record. The operator record is the matter of paragraph
+        6-27.
+
+6-27.   THE OPERATOR RECORD.
+
+        The instrument keeps a record of the operator: a name to address the
+        operator by, and the date from which a reading proper to the operator
+        is taken. Both are entered at this door and both stand until they are
+        changed.
+
+        Where no name is on file the instrument does not invent one and does
+        not proceed as though it had one. Every surface that would carry a
+        name states instead that none is held, and the instrument addresses
+        the operator as it must until a name is entered.
+
+        The record is a record and it is not an acquaintance. Nothing kept
+        here is turned to any other end: a name is held so that the operator
+        may be addressed by it, and a determination is what the question and
+        the Bias Settings produce and nothing else. What the instrument has of
+        the operator it has been given.
+
+6-29.   FUNCTIONS NOT FITTED.
+
+        A row may be present and lead nowhere. Where the menu system names a
+        function that is not fitted to the instrument, the row stands and is
+        shown, and the instrument states plainly upon reaching it that the
+        function is not installed.</pre>
+</div>
+<div class="leaf">
+<p class="lab">6-7</p>
+<img alt="6-7" src="plates-20260831/sheet-35_6-7.webp">
+<pre class="txt">        An engine position not fitted is met in the same manner and is
+        scheduled at Appendix C.
+
+        A row that is not shown at all is a different matter and is dealt with
+        at paragraph 6-4. A function not fitted is absent from the instrument
+        and says so; a row not shown is present and waits upon cause.</pre>
+</div>
 </div>
 <script>
-document.querySelectorAll('figure').forEach(function (fig) {
-  var view = fig.querySelector('.view');
-  var img = view.querySelector('img');
-  fig.querySelectorAll('button[data-zoom]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var w = view.scrollWidth || 1, h = view.scrollHeight || 1;
-      var cx = (view.scrollLeft + view.clientWidth / 2) / w;
-      var cy = (view.scrollTop + view.clientHeight / 2) / h;
-      view.dataset.zoom = b.dataset.zoom;
-      fig.querySelectorAll('button[data-zoom]').forEach(function (o) {
-        o.setAttribute('aria-pressed', String(o === b));
-      });
-      requestAnimationFrame(function () {
-        view.scrollLeft = cx * view.scrollWidth - view.clientWidth / 2;
-        view.scrollTop = cy * view.scrollHeight - view.clientHeight / 2;
-      });
+var root = document.documentElement;
+document.querySelectorAll('.bar button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    root.style.setProperty('--w', b.dataset.z + 'px');
+    document.querySelectorAll('.bar button').forEach(function (o) {
+      o.setAttribute('aria-pressed', String(o === b));
     });
+    try { localStorage.setItem('plateZoom', b.dataset.z); } catch (e) {}
   });
-  var down = false, sx = 0, sy = 0, ox = 0, oy = 0;
-  view.addEventListener('pointerdown', function (e) {
-    down = true; sx = e.clientX; sy = e.clientY;
-    ox = view.scrollLeft; oy = view.scrollTop;
-    view.classList.add('drag'); view.setPointerCapture(e.pointerId);
-  });
-  view.addEventListener('pointermove', function (e) {
-    if (!down) return;
-    view.scrollLeft = ox - (e.clientX - sx);
-    view.scrollTop = oy - (e.clientY - sy);
-  });
-  ['pointerup', 'pointercancel'].forEach(function (t) {
-    view.addEventListener(t, function () {
-      down = false; view.classList.remove('drag');
-    });
-  });
-  img.addEventListener('dragstart', function (e) { e.preventDefault(); });
 });
+try {
+  var z = localStorage.getItem('plateZoom');
+  if (z) {
+    var hit = document.querySelector('.bar button[data-z="' + z + '"]');
+    if (hit) hit.click();
+  }
+} catch (e) {}
 </script>

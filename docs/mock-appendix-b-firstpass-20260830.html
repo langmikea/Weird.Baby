@@ -1,80 +1,191 @@
-<!doctype html><meta charset="utf-8"><title>Appendix B first pass</title>
+<!doctype html><meta charset="utf-8"><title>Appendix B  ·  Bias Settings</title>
 <style>
-:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2}
+:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2;--w:1275px}
 html,body{margin:0;padding:0;background:#d8d6c8;color:var(--ink);
-  font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.wrap{max-width:none;padding:14px}
-figure{margin:0 0 18px 0;background:var(--chrome);border:1px solid var(--edge)}
-.bar{display:flex;align-items:center;gap:14px;padding:7px 10px;
-  border-bottom:1px solid var(--edge)}
-figcaption{font-weight:700;letter-spacing:.09em;font-size:14px}
-.bar button{font:inherit;padding:3px 11px;border:1px solid var(--edge);
+  font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:16px;
+  padding:9px 16px;background:var(--chrome);border-bottom:1px solid var(--edge)}
+.bar b{font-size:15px;letter-spacing:.06em}
+.bar button{font:inherit;padding:4px 14px;border:1px solid var(--edge);
   background:var(--paper);color:var(--ink);cursor:pointer;border-radius:2px}
 .bar button[aria-pressed="true"]{background:var(--ink);color:var(--paper);
   border-color:var(--ink)}
-.hint{margin-left:auto;opacity:.55;font-size:12px}
-.view{overflow:auto;background:var(--paper);height:82vh;
-  cursor:grab;overscroll-behavior:contain}
-.view.drag{cursor:grabbing}
-.view img{display:block;image-rendering:auto}
-.view[data-zoom="25"],.view[data-zoom="50"]{height:auto;cursor:default}
-.view[data-zoom="25"] img{width:25%;height:auto;margin:0 auto}
-.view[data-zoom="50"] img{width:50%;height:auto;margin:0 auto}
-.view[data-zoom="fit"] img{width:100%;height:auto}
-.view[data-zoom="100"] img{width:1700px;height:2200px;max-width:none}
-.view[data-zoom="200"] img{width:3400px;height:4400px;max-width:none}
+.hint{margin-left:auto;opacity:.6;font-size:12.5px}
+.wrap{padding:18px 16px 90px}
+.leaf{margin:0 0 34px}
+.lab{font-weight:700;letter-spacing:.09em;font-size:13px;opacity:.75;
+  margin:0 0 6px}
+.leaf img{display:block;width:var(--w);max-width:100%;height:auto;
+  border:1px solid var(--edge);background:var(--paper)}
+.txt{width:var(--w);max-width:100%;box-sizing:border-box;margin:0;
+  padding:14px 16px;background:var(--paper);border:1px solid var(--edge);
+  border-top:0;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,
+  monospace;white-space:pre-wrap;overflow-wrap:anywhere;
+  -webkit-user-select:text;user-select:text}
 </style>
+<div class="bar"><b>Appendix B  ·  Bias Settings</b>
+<button data-z="850" aria-pressed="false">50%</button>
+<button data-z="1275" aria-pressed="true">75%</button>
+<button data-z="1700" aria-pressed="false">100%</button>
+<span class="hint">3 sheets, one scroll &middot; the text under each plate is
+selectable &mdash; drag a line and copy it</span></div>
 <div class="wrap">
-<figure>
-<div class="bar"><figcaption>B-1</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="B-1" src="plates-20260830/sheet-48_B-1.webp?v=20260831"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>B-2</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="B-2" src="plates-20260830/sheet-49_B-2.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>B-3</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="B-3" src="plates-20260830/sheet-50_B-3.webp"></div>
-</figure>
+<div class="leaf">
+<p class="lab">B-1</p>
+<img alt="B-1" src="plates-20260830/sheet-59_B-1.webp">
+<pre class="txt">                                  APPENDIX B
+
+                                BIAS SETTINGS
+
+
+B-1.    GENERAL.
+
+        This appendix carries the Bias Settings of the instrument. They are of
+        two kinds and they are not interchangeable.
+
+        The first kind shapes the determination. Polarity, Clarity and
+        Inclination are set by the keeper, are enabled, set and adjusted by
+        the procedure of paragraph B-3, and are given in Tables B-1, B-2 and
+        B-3. They alter what the instrument says. They do not decide whether
+        it says anything.
+
+        The second kind is the communications parity bias. It is not set to a
+        preference. It is set to agree with the far end, and until it agrees
+        the instrument holds its peace.
+
+        Four settings. The unit will not speak until all four agree with the
+        far end.
+
+        The settings are:
+
+            1  PARITY    ODD / EVEN
+            2  DUPLEX    HALF / FULL
+            3  WORD      7 BIT / 8 BIT
+            4  STOP      1 / 2
+
+        The values are not given in this manual. They are established at the
+        far end and are entered on the installation record at the time the
+        link is made. An instrument moved to another far end is to be set
+        again.
+
+        A disagreement in any one of the four is reported as a parity bias
+        setting mismatch. The report names the condition and does not name the
+        setting at fault, there being no means at this end of knowing which of
+        them is wrong.
+
+B-3.    ENABLE, SET, ADJUST.
+
+        Polarity and Clarity are reached from the Preferences door. The dial
+        moves through the rows. The shutter takes the row the dial has arrived
+        at. The dial does not choose and the shutter does not move.</pre>
+</div>
+<div class="leaf">
+<p class="lab">B-2</p>
+<img alt="B-2" src="plates-20260830/sheet-60_B-2.webp">
+<pre class="txt">        ENABLE. A Bias Setting is enabled when its entry is taken from the
+        table. Until it is taken the instrument answers at the entry it was
+        left with, that entry being the one given at the foot of the table.
+
+        SET. Move to the row required and take it. The instrument answers in
+        that register from that determination forward and does not return to
+        the previous entry of its own accord.
+
+        ADJUST. Each Bias Setting carries a BS-Factor in addition to its
+        entry. The Factor is not an entry of the table and is not named at the
+        glass. It moves the setting within its entry and not between entries,
+        the blending of user bias with systemic bias being the matter of
+        paragraph B-5. A setting at its table entry and at no Factor answers
+        as the table describes it.
+
+        The settings of this appendix take effect at the next determination. A
+        determination already given is not altered, and neither is the record
+        of one. An entry taken is not a determination made.
+
+
+                        Table B-1.  POLARITY SETTINGS
+
+-----------------------------------------------------------------------------
+  SETTING          NAME                                          CODE
+-----------------------------------------------------------------------------
+  Negative         Answers against the question.                 CODE:
+  Pessimistic      Leans against the question.                   CODE:
+  Neutral          Neither leans nor is weighed.                 CODE:
+  Favorable        Leans toward the question.                    CODE:
+  Optimistic       Answers toward the question.                  CODE:
+-----------------------------------------------------------------------------
+Factory setting: Neutral, at no bias.
+
+
+                         Table B-2.  CLARITY SETTINGS
+
+-----------------------------------------------------------------------------
+  SETTING          NAME                                          CODE
+-----------------------------------------------------------------------------
+  Offensive        Plainly, and without courtesy of any kind.    CODE:
+  Uncouth          Plainly, and at the keeper&#x27;s expense.         CODE:
+  Discourteous     Plainly, and without softening.               CODE:
+  Impartial        Plainly.                                      CODE:
+  Mannerly         Plainly, and with the courtesies.             CODE:
+-----------------------------------------------------------------------------
+Factory setting: Impartial.</pre>
+</div>
+<div class="leaf">
+<p class="lab">B-3</p>
+<img alt="B-3" src="plates-20260830/sheet-61_B-3.webp">
+<pre class="txt">                       Table B-3.  INCLINATION SETTINGS
+
+------------------------------------------------------------------------------
+  SETTING             NAME                   CODE
+------------------------------------------------------------------------------
+
+
+
+
+                             [ ENTRIES REQUIRED ]
+
+
+
+
+------------------------------------------------------------------------------
+
+B-5.    THE BLENDING MATRIX.
+
+        [ TEXT REQUIRED ]
+
+
+                       Table B-4.  BIAS BLENDING MATRIX
+
+------------------------------------------------------------------------------
+  USER BIAS           SYSTEMIC BIAS          RESULT
+------------------------------------------------------------------------------
+
+
+
+
+                             [ ENTRIES REQUIRED ]
+
+
+
+
+------------------------------------------------------------------------------</pre>
+</div>
 </div>
 <script>
-document.querySelectorAll('figure').forEach(function (fig) {
-  var view = fig.querySelector('.view');
-  var img = view.querySelector('img');
-  fig.querySelectorAll('button[data-zoom]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      // keep whatever is in the middle of the frame in the middle
-      var w = view.scrollWidth || 1, h = view.scrollHeight || 1;
-      var cx = (view.scrollLeft + view.clientWidth / 2) / w;
-      var cy = (view.scrollTop + view.clientHeight / 2) / h;
-      view.dataset.zoom = b.dataset.zoom;
-      fig.querySelectorAll('button[data-zoom]').forEach(function (o) {
-        o.setAttribute('aria-pressed', String(o === b));
-      });
-      requestAnimationFrame(function () {
-        view.scrollLeft = cx * view.scrollWidth - view.clientWidth / 2;
-        view.scrollTop = cy * view.scrollHeight - view.clientHeight / 2;
-      });
+var root = document.documentElement;
+document.querySelectorAll('.bar button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    root.style.setProperty('--w', b.dataset.z + 'px');
+    document.querySelectorAll('.bar button').forEach(function (o) {
+      o.setAttribute('aria-pressed', String(o === b));
     });
+    try { localStorage.setItem('plateZoom', b.dataset.z); } catch (e) {}
   });
-  // drag to pan
-  var down = false, sx = 0, sy = 0, ox = 0, oy = 0;
-  view.addEventListener('pointerdown', function (e) {
-    down = true; sx = e.clientX; sy = e.clientY;
-    ox = view.scrollLeft; oy = view.scrollTop;
-    view.classList.add('drag'); view.setPointerCapture(e.pointerId);
-  });
-  view.addEventListener('pointermove', function (e) {
-    if (!down) return;
-    view.scrollLeft = ox - (e.clientX - sx);
-    view.scrollTop = oy - (e.clientY - sy);
-  });
-  ['pointerup', 'pointercancel'].forEach(function (t) {
-    view.addEventListener(t, function () {
-      down = false; view.classList.remove('drag');
-    });
-  });
-  img.addEventListener('dragstart', function (e) { e.preventDefault(); });
 });
+try {
+  var z = localStorage.getItem('plateZoom');
+  if (z) {
+    var hit = document.querySelector('.bar button[data-z="' + z + '"]');
+    if (hit) hit.click();
+  }
+} catch (e) {}
 </script>

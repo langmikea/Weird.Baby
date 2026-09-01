@@ -1,86 +1,239 @@
-<!doctype html><meta charset="utf-8"><title>Section IV first pass</title>
+<!doctype html><meta charset="utf-8"><title>Section IV  ·  Controls and Indicators</title>
 <style>
-:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2}
+:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2;--w:1275px}
 html,body{margin:0;padding:0;background:#d8d6c8;color:var(--ink);
-  font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.wrap{max-width:none;padding:14px}
-figure{margin:0 0 18px 0;background:var(--chrome);border:1px solid var(--edge)}
-.bar{display:flex;align-items:center;gap:14px;padding:7px 10px;
-  border-bottom:1px solid var(--edge)}
-figcaption{font-weight:700;letter-spacing:.09em;font-size:14px}
-.bar button{font:inherit;padding:3px 11px;border:1px solid var(--edge);
+  font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:16px;
+  padding:9px 16px;background:var(--chrome);border-bottom:1px solid var(--edge)}
+.bar b{font-size:15px;letter-spacing:.06em}
+.bar button{font:inherit;padding:4px 14px;border:1px solid var(--edge);
   background:var(--paper);color:var(--ink);cursor:pointer;border-radius:2px}
 .bar button[aria-pressed="true"]{background:var(--ink);color:var(--paper);
   border-color:var(--ink)}
-.hint{margin-left:auto;opacity:.55;font-size:12px}
-.view{overflow:auto;background:var(--paper);height:82vh;
-  cursor:grab;overscroll-behavior:contain}
-.view.drag{cursor:grabbing}
-.view img{display:block;image-rendering:auto}
-.view[data-zoom="25"],.view[data-zoom="50"]{height:auto;cursor:default}
-.view[data-zoom="25"] img{width:25%;height:auto;margin:0 auto}
-.view[data-zoom="50"] img{width:50%;height:auto;margin:0 auto}
-.view[data-zoom="fit"] img{width:100%;height:auto}
-.view[data-zoom="100"] img{width:1700px;height:2200px;max-width:none}
-.view[data-zoom="200"] img{width:3400px;height:4400px;max-width:none}
+.hint{margin-left:auto;opacity:.6;font-size:12.5px}
+.wrap{padding:18px 16px 90px}
+.leaf{margin:0 0 34px}
+.lab{font-weight:700;letter-spacing:.09em;font-size:13px;opacity:.75;
+  margin:0 0 6px}
+.leaf img{display:block;width:var(--w);max-width:100%;height:auto;
+  border:1px solid var(--edge);background:var(--paper)}
+.txt{width:var(--w);max-width:100%;box-sizing:border-box;margin:0;
+  padding:14px 16px;background:var(--paper);border:1px solid var(--edge);
+  border-top:0;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,
+  monospace;white-space:pre-wrap;overflow-wrap:anywhere;
+  -webkit-user-select:text;user-select:text}
 </style>
+<div class="bar"><b>Section IV  ·  Controls and Indicators</b>
+<button data-z="850" aria-pressed="false">50%</button>
+<button data-z="1275" aria-pressed="true">75%</button>
+<button data-z="1700" aria-pressed="false">100%</button>
+<span class="hint">5 sheets, one scroll &middot; the text under each plate is
+selectable &mdash; drag a line and copy it</span></div>
 <div class="wrap">
-<figure>
-<div class="bar"><figcaption>4-1</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="4-1" src="plates-20260831-iv/sheet-20_4-1.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>4-2</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="4-2" src="plates-20260831-iv/sheet-21_4-2.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>4-3</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="4-3" src="plates-20260831-iv/sheet-22_4-3.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>4-4</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="4-4" src="plates-20260831-iv/sheet-23_4-4.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>4-5</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="4-5" src="plates-20260831-iv/sheet-24_4-5.webp"></div>
-</figure>
+<div class="leaf">
+<p class="lab">4-1</p>
+<img alt="4-1" src="plates-20260831-iv/sheet-20_4-1.webp">
+<pre class="txt">                                  SECTION IV
+
+                           CONTROLS AND INDICATORS
+
+
+4-1.    GENERAL.
+
+        This section identifies the controls, the indicators and the inputs of
+        the instrument, and says what each is for. They are shown in Figure
+        4-1 and are listed in Table 4-1.
+
+        How the instrument is used is the matter of Section VI and how it is
+        built is the matter of Section VII. Neither is repeated here. This
+        section is concerned with what the operator meets on the outside of
+        the instrument and with nothing behind it.
+
+        The instrument asks little of the operator&#x27;s hands. The dial and the
+        shutter carry the whole of the menu system between them and are
+        described at paragraph 4-3. What else the instrument reads it reads
+        from being handled: from movement, at paragraph 4-5, and from sound,
+        at paragraph 4-7.
+
+        The designations under which the inputs are scheduled are given in
+        Table 2-2 and are not repeated in this section.</pre>
+</div>
+<div class="leaf">
+<p class="lab">4-2</p>
+<img alt="4-2" src="plates-20260831-iv/sheet-21_4-2.webp">
+<pre class="txt">                              [ ART REQUIRED ]
+
+
+
+
+
+
+
+
+
+
+
+
+           Figure 4-1.  CONTROLS AND INDICATORS, FORWARD AND UPPER</pre>
+</div>
+<div class="leaf">
+<p class="lab">4-3</p>
+<img alt="4-3" src="plates-20260831-iv/sheet-22_4-3.webp">
+<pre class="txt">                     Table 4-1.  CONTROLS AND INDICATORS
+
+ -----------------------------------------------------------------------------
+   INDEX NO.    CONTROL OR INDICATOR     FUNCTION
+ -----------------------------------------------------------------------------
+   1            Forward display          Carries the menu system and what
+                                         the instrument puts to the
+                                         operator. 7-13.
+   2            Upper display            Carries the diagnostic monitor at
+                                         rest, the fluidic suspension, and
+                                         the video link. 7-13.
+   3            Rotary dial              Moves through the rows. Does not
+                                         choose. 4-3.
+   4            Shutter                  Chooses. Takes the row the dial
+                                         has arrived at. 4-3.
+   5            Indicator lamp           Narrates the state of the
+                                         instrument. Table 4-2.
+                Power port               Receives the adapter. Supply and
+                                         data channel on one pair. 7-19.
+                Power control            Starting and shutting down. 5-1,
+                                         5-17.
+ -----------------------------------------------------------------------------
+ The power port and the power control do not appear in Figure 4-1.
+
+4-3.    THE DIVISION OF CONTROL.
+
+        The dial and the shutter are the controls of the instrument and their
+        duties do not overlap. The distinction between them is the one thing
+        an operator must hold, and every operation of the menu system follows
+        from it.
+
+        The dial moves and does not choose. It carries the operator through
+        the rows in the order they stand in, and it does nothing else. Turning
+        it commits nothing. A row the dial has reached is a row arrived at and
+        not a row taken, and the instrument does not act upon it.
+
+        The shutter chooses. It takes the row the dial has arrived at, and
+        taking is the whole of its office. The shutter does not move between
+        rows and cannot be made to.
+
+        They are therefore not interchangeable and neither will do the other&#x27;s
+        work. An operator who has turned the dial has not chosen; an operator
+        who has used the shutter has taken the row the dial was resting upon.
+        The procedure of paragraph B-3 is written in these terms, and every
+        operation described in Section VI is worked with these controls and no
+        others.</pre>
+</div>
+<div class="leaf">
+<p class="lab">4-4</p>
+<img alt="4-4" src="plates-20260831-iv/sheet-23_4-4.webp">
+<pre class="txt">        The division holds everywhere upon the instrument. There is no surface
+        on which the dial takes a row and none on which the shutter moves
+        between them.
+
+4-5.    MOTION INPUT.
+
+        The instrument reads its own movement. This is an input and not a
+        control: there is nothing to set and nothing to aim, and the
+        instrument is simply handled.
+
+        A shake is a request for a determination. The manner of putting a
+        question and taking the determination is given at paragraph 6-5, and a
+        further determination at paragraph 6-7; neither is repeated here.
+
+        The same movement is read differently according to when it is made. A
+        shake made before a question has been put is not read as a request,
+        and shakes made early and repeatedly call instead for the
+        recalibration of paragraph 8-7. A shake made while a determination is
+        still standing does not produce another.
+
+        Stillness is read as well as movement. The maintenance routine of
+        paragraph 8-7 requires the instrument to be held still and does not
+        proceed while it is handled.
+
+        Movement is read whenever the instrument is in service. It is not read
+        while the instrument is off; see paragraph 7-19.
+
+4-7.    ACOUSTIC INPUT.
+
+        The instrument hears. This also is an input and not a control, and it
+        requires nothing of the operator.
+
+        Voice control is offered as a novelty and is to be treated as such. It
+        is not the means by which the instrument is worked. Every function of
+        the instrument is reached with the dial and the shutter, and an
+        operator who never speaks to it is prevented from nothing.
+
+        The instrument does not take a spoken word for an instruction, and a
+        determination asked for aloud is not asked for. A determination is
+        called for by the movement of paragraph 4-5 and by no other means.
+
+        What the instrument makes of what it hears is not described in this
+        manual.
+
+        The audible output is a separate system and is not the matter of this
+        paragraph. It is given at paragraph 7-17.</pre>
+</div>
+<div class="leaf">
+<p class="lab">4-5</p>
+<img alt="4-5" src="plates-20260831-iv/sheet-24_4-5.webp">
+<pre class="txt">4-9.    INDICATOR LAMP.
+
+        The indicator lamp narrates. It states what the instrument is about,
+        in a form which can be read across a room and without the glass being
+        looked at. It is not a control and there is nothing to set upon it.
+
+        The conditions it shows are given in Table 4-2. The lamp reports and
+        it does not warn: a colour shown is a state the instrument is in, and
+        no colour upon the lamp is a fault reported. Faults are the matter of
+        Section IX.
+
+        At starting the lamp narrates the sequence. It shows red while the
+        instrument is coming up and the displays are not yet driven, green
+        when they are driven and the sequence is running, and orange when the
+        start is complete. The sequences themselves are the matter of Section
+        V.
+
+        The lamp is also how the instrument makes a system message known. It
+        shows that a message is held; it does not announce an arrival, and
+        paragraph 6-23 governs. The message itself is read at the Messages
+        door; see paragraph 6-23 and Table 6-2.
+
+
+                    Table 4-2.  INDICATOR LAMP CONDITIONS
+
+------------------------------------------------------------------------------
+  CONDITION                                INDICATION           REFERENCE
+------------------------------------------------------------------------------
+  Starting; the displays not yet           Red.                 5-1
+  driven.
+  Starting; the displays driven, the       Green.               5-1
+  sequence running.
+  The start complete.                      Orange.              5-1
+  A system message held.                   Keyed signal.        6-23
+
+
+------------------------------------------------------------------------------</pre>
+</div>
 </div>
 <script>
-document.querySelectorAll('figure').forEach(function (fig) {
-  var view = fig.querySelector('.view');
-  var img = view.querySelector('img');
-  fig.querySelectorAll('button[data-zoom]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var w = view.scrollWidth || 1, h = view.scrollHeight || 1;
-      var cx = (view.scrollLeft + view.clientWidth / 2) / w;
-      var cy = (view.scrollTop + view.clientHeight / 2) / h;
-      view.dataset.zoom = b.dataset.zoom;
-      fig.querySelectorAll('button[data-zoom]').forEach(function (o) {
-        o.setAttribute('aria-pressed', String(o === b));
-      });
-      requestAnimationFrame(function () {
-        view.scrollLeft = cx * view.scrollWidth - view.clientWidth / 2;
-        view.scrollTop = cy * view.scrollHeight - view.clientHeight / 2;
-      });
+var root = document.documentElement;
+document.querySelectorAll('.bar button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    root.style.setProperty('--w', b.dataset.z + 'px');
+    document.querySelectorAll('.bar button').forEach(function (o) {
+      o.setAttribute('aria-pressed', String(o === b));
     });
+    try { localStorage.setItem('plateZoom', b.dataset.z); } catch (e) {}
   });
-  var down = false, sx = 0, sy = 0, ox = 0, oy = 0;
-  view.addEventListener('pointerdown', function (e) {
-    down = true; sx = e.clientX; sy = e.clientY;
-    ox = view.scrollLeft; oy = view.scrollTop;
-    view.classList.add('drag'); view.setPointerCapture(e.pointerId);
-  });
-  view.addEventListener('pointermove', function (e) {
-    if (!down) return;
-    view.scrollLeft = ox - (e.clientX - sx);
-    view.scrollTop = oy - (e.clientY - sy);
-  });
-  ['pointerup', 'pointercancel'].forEach(function (t) {
-    view.addEventListener(t, function () {
-      down = false; view.classList.remove('drag');
-    });
-  });
-  img.addEventListener('dragstart', function (e) { e.preventDefault(); });
 });
+try {
+  var z = localStorage.getItem('plateZoom');
+  if (z) {
+    var hit = document.querySelector('.bar button[data-z="' + z + '"]');
+    if (hit) hit.click();
+  }
+} catch (e) {}
 </script>

@@ -1,86 +1,261 @@
-<!doctype html><meta charset="utf-8"><title>Section IX first pass</title>
+<!doctype html><meta charset="utf-8"><title>Section IX  ·  Troubleshooting</title>
 <style>
-:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2}
+:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2;--w:1275px}
 html,body{margin:0;padding:0;background:#d8d6c8;color:var(--ink);
-  font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.wrap{max-width:none;padding:14px}
-figure{margin:0 0 18px 0;background:var(--chrome);border:1px solid var(--edge)}
-.bar{display:flex;align-items:center;gap:14px;padding:7px 10px;
-  border-bottom:1px solid var(--edge)}
-figcaption{font-weight:700;letter-spacing:.09em;font-size:14px}
-.bar button{font:inherit;padding:3px 11px;border:1px solid var(--edge);
+  font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:16px;
+  padding:9px 16px;background:var(--chrome);border-bottom:1px solid var(--edge)}
+.bar b{font-size:15px;letter-spacing:.06em}
+.bar button{font:inherit;padding:4px 14px;border:1px solid var(--edge);
   background:var(--paper);color:var(--ink);cursor:pointer;border-radius:2px}
 .bar button[aria-pressed="true"]{background:var(--ink);color:var(--paper);
   border-color:var(--ink)}
-.hint{margin-left:auto;opacity:.55;font-size:12px}
-.view{overflow:auto;background:var(--paper);height:82vh;
-  cursor:grab;overscroll-behavior:contain}
-.view.drag{cursor:grabbing}
-.view img{display:block;image-rendering:auto}
-.view[data-zoom="25"],.view[data-zoom="50"]{height:auto;cursor:default}
-.view[data-zoom="25"] img{width:25%;height:auto;margin:0 auto}
-.view[data-zoom="50"] img{width:50%;height:auto;margin:0 auto}
-.view[data-zoom="fit"] img{width:100%;height:auto}
-.view[data-zoom="100"] img{width:1700px;height:2200px;max-width:none}
-.view[data-zoom="200"] img{width:3400px;height:4400px;max-width:none}
+.hint{margin-left:auto;opacity:.6;font-size:12.5px}
+.wrap{padding:18px 16px 90px}
+.leaf{margin:0 0 34px}
+.lab{font-weight:700;letter-spacing:.09em;font-size:13px;opacity:.75;
+  margin:0 0 6px}
+.leaf img{display:block;width:var(--w);max-width:100%;height:auto;
+  border:1px solid var(--edge);background:var(--paper)}
+.txt{width:var(--w);max-width:100%;box-sizing:border-box;margin:0;
+  padding:14px 16px;background:var(--paper);border:1px solid var(--edge);
+  border-top:0;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,
+  monospace;white-space:pre-wrap;overflow-wrap:anywhere;
+  -webkit-user-select:text;user-select:text}
 </style>
+<div class="bar"><b>Section IX  ·  Troubleshooting</b>
+<button data-z="850" aria-pressed="false">50%</button>
+<button data-z="1275" aria-pressed="true">75%</button>
+<button data-z="1700" aria-pressed="false">100%</button>
+<span class="hint">5 sheets, one scroll &middot; the text under each plate is
+selectable &mdash; drag a line and copy it</span></div>
 <div class="wrap">
-<figure>
-<div class="bar"><figcaption>9-1</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="9-1" src="plates-20260831-ix/sheet-46_9-1.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>9-2</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="9-2" src="plates-20260831-ix/sheet-47_9-2.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>9-3</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="9-3" src="plates-20260831-ix/sheet-48_9-3.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>9-4</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="9-4" src="plates-20260831-ix/sheet-49_9-4.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>9-5</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="9-5" src="plates-20260831-ix/sheet-50_9-5.webp"></div>
-</figure>
+<div class="leaf">
+<p class="lab">9-1</p>
+<img alt="9-1" src="plates-20260831-ix/sheet-46_9-1.webp">
+<pre class="txt">                                  SECTION IX
+
+                               TROUBLESHOOTING
+
+
+9-1.    GENERAL.
+
+        Use this section when the instrument does not do what this manual says
+        it does.
+
+        The instrument reports its condition. It does not work out what is
+        wrong with it. It cannot test itself, so it tells you the state it is
+        in and stops there. Finding the cause is your job.
+
+        Start with what the instrument showed. If it printed a report on the
+        upper display, look that report up in Table 9-2. The table gives what
+        it means and what to do.
+
+        If the trouble is something you can see but the instrument has not
+        reported, use the trouble chart at Table 9-1. It gives the fault, the
+        likely cause, and the action.
+
+        Run the maintenance routine at paragraph 8-7 before you treat anything
+        as a fault. A good part of what is sent in for service needs nothing
+        else.
+
+        Not everything the instrument reports is a fault. A retry while
+        starting, a determination it will not give again at once, no signal
+        while a link is up, and a notice that the cell wants attention are all
+        normal. Each is described where it belongs: paragraphs 5-13, 6-6, 7-14
+        and 7-19.
+
+        If this section does not put the instrument right, take it out of
+        service and return it. Section XI says how.</pre>
+</div>
+<div class="leaf">
+<p class="lab">9-2</p>
+<img alt="9-2" src="plates-20260831-ix/sheet-47_9-2.webp">
+<pre class="txt">                          Table 9-1.  TROUBLE CHART
+
+------------------------------------------------------------------------------
+ OBSERVATION                PROBABLE CAUSE             ACTION
+------------------------------------------------------------------------------
+ Traffic passes and         PARITY disagrees. Each     Set to agree with
+ nothing is trusted.        character fails its        the far end. B-1.
+                            check.
+ Everything doubles.        DUPLEX disagrees. Both     Set to agree with
+                            ends echo.                 the far end. B-1.
+ Characters garbled the     WORD disagrees. The        Set to agree with
+ same way each time.        check bit is read as       the far end. B-1.
+                            character.
+ Noise after the first      STOP disagrees. Framing    Set to agree with
+ character. Sync is         is lost at the first       the far end. B-1.
+ lost.                      character.
+ A control is answered      The instrument is not      Withdraw from
+ while off.                 off.                       service. Section
+                                                       XI.
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------
+The communications rows are observations of the line. See also Table 9-2.
+
+9-3.    THE DIAGNOSTIC MONITOR AS A SERVICE AID.
+
+        The diagnostic monitor is the resting face of the upper display and is
+        described at paragraph 7-13. It is put to a second use here. What it
+        shows while the instrument is worked is the readiest account of the
+        instrument&#x27;s state there is, and it is had without opening anything
+        and without interrupting the operator.</pre>
+</div>
+<div class="leaf">
+<p class="lab">9-3</p>
+<img alt="9-3" src="plates-20260831-ix/sheet-48_9-3.webp">
+<pre class="txt">        The glass is ruled into windows, each with a duty of its own. The
+        window at the left shows the instrument&#x27;s own working. The graph
+        window, beside it, shows a measure taken over time, and shows signal
+        in its place while a link is up; see paragraph 7-14. The window along
+        the foot carries the process then running and the conditions the
+        instrument reports.
+
+        The window at the left does not stand at one thing. It goes between
+        the working of the instrument, a readout of its present figures, and a
+        prompt at which the instrument puts a short enquiry to itself and
+        prints the reply. The enquiries are the instrument&#x27;s own and are not
+        put to it by the operator. They are read as they pass.
+
+        The enquiries, and what each of them answers, are:
+
+            STAT    the processes running, and the condition
+            MEM     the state of what is compiled in
+            SYNC    whether a link is up
+            AGE     how often the instrument has been brought into service
+            CHK     whether the condition warrants attention
+
+        The monitor is a report and it is not a test. Nothing in it is run,
+        and nothing in it is to be taken as a test having been performed; the
+        instrument&#x27;s tests are the matter of Section X. What the monitor shows
+        is the instrument&#x27;s own account of itself while it works, and it is
+        worth reading before anything is taken apart.
+
+        The conditions carried along the foot are given at paragraph 9-7 and
+        in Table 9-2.
+
+9-5.    SELF-CORRECTION.
+
+        Self-correction during starting is given at paragraph 5-13 and is not
+        repeated here. This paragraph is concerned with the same behaviour met
+        in service.
+
+        The instrument corrects itself in service as it does at starting. A
+        step errors, is attempted again, and succeeds. Nothing is required of
+        the operator and nothing is lost. The instrument reports that it has
+        recovered, and carries how often it has done so with its other
+        condition readings; see paragraph 8-9 and Table 8-2.
+
+        The frequency is not fixed and it rides the condition of the
+        instrument. One in good condition corrects itself seldom. One long in
+        service without attention corrects itself often, and a frequency which
+        is rising is the earliest notice there is of a condition falling. It
+        is read as a trend and not as an event: a single recovery is not a
+        fault reported.</pre>
+</div>
+<div class="leaf">
+<p class="lab">9-4</p>
+<img alt="9-4" src="plates-20260831-ix/sheet-49_9-4.webp">
+<pre class="txt">        Where the instrument corrects itself repeatedly it does not leave the
+        matter upon the glass. It sends the operator a message, which is held
+        with the others and is dealt with at paragraph 6-23.
+
+        Run the maintenance routine of paragraph 8-7 and read the condition
+        again at paragraph 8-9. Where the frequency does not fall, the
+        instrument is to be withdrawn from service.
+
+9-7.    CONDITIONS REPORTED ON THE UPPER DISPLAY.
+
+        The instrument reports its condition on the upper display, along the
+        foot of the diagnostic monitor. The reports are given in Table 9-2
+        with what each of them means and what each of them requires. A report
+        states the instrument&#x27;s state and carries no cause with it.
+
+        The greater part of them state that the instrument is in order and are
+        shown in the ordinary course of work. A report which is not carried in
+        Table 9-2 is not a condition this section deals with.
+
+        The parity bias setting mismatch is reported here. The communications
+        settings are the matter of Appendix B, paragraph B-1. Where any one of
+        the four disagrees with the far end the instrument does not open the
+        link, and reports the disagreement. The report names the condition and
+        does not name the setting at fault, there being no means at this end
+        of knowing which of them is wrong.
+
+        The four are therefore to be checked in turn against the record made
+        at the time the link was established. What a disagreement in each of
+        them does to the traffic is given in Table 9-1, that being the means
+        of telling them apart.
+
+        Where the instrument advises attention it advises it and does not
+        withhold service. Attention advised is not a fault reported. Run the
+        maintenance routine of paragraph 8-7.</pre>
+</div>
+<div class="leaf">
+<p class="lab">9-5</p>
+<img alt="9-5" src="plates-20260831-ix/sheet-50_9-5.webp">
+<pre class="txt">                       Table 9-2.  REPORTED CONDITIONS
+
+------------------------------------------------------------------------------
+  REPORT                   MEANING                          ACTION
+------------------------------------------------------------------------------
+  SYSTEM OK                Running, and in order.           None.
+  WAITING FOR USER         At the menu, and idle.           None.
+  INPUT
+  UPTIME                   The time run since starting,     None. 8-11.
+                           in minutes.
+  PROCESSES                The processes then running.      None.
+  EFFICIENCY               A condition reading. 8-9.        8-7 where low.
+  RETRIES                  Steps retried at this start.     None.
+                           5-13.
+  RETRYING                 A step is being attempted        None. Not a
+                           again.                           fault.
+  RECOVERED                Steps which errored and then     Read the
+                           succeeded. 9-5.                  frequency of
+                                                            recovery.
+  AUDIO NOT DETECTED       The audible system is not        Maintenance
+                           answering. 7-17.                 routine, 8-7.
+  SEE MANUAL               The condition has fallen to      Maintenance
+                           where attention is advised.      routine, 8-7.
+                           8-9.
+  Parity bias setting      A communications setting         Table 9-1.
+  mismatch                 disagrees with the far end.
+                           B-1.
+  CONNECTION STARTED       A transfer is in hand. The       None.
+                           reports which follow it, to
+                           CONNECTION CLOSED, narrate
+                           it. 5-9.
+------------------------------------------------------------------------------</pre>
+</div>
 </div>
 <script>
-document.querySelectorAll('figure').forEach(function (fig) {
-  var view = fig.querySelector('.view');
-  var img = view.querySelector('img');
-  fig.querySelectorAll('button[data-zoom]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var w = view.scrollWidth || 1, h = view.scrollHeight || 1;
-      var cx = (view.scrollLeft + view.clientWidth / 2) / w;
-      var cy = (view.scrollTop + view.clientHeight / 2) / h;
-      view.dataset.zoom = b.dataset.zoom;
-      fig.querySelectorAll('button[data-zoom]').forEach(function (o) {
-        o.setAttribute('aria-pressed', String(o === b));
-      });
-      requestAnimationFrame(function () {
-        view.scrollLeft = cx * view.scrollWidth - view.clientWidth / 2;
-        view.scrollTop = cy * view.scrollHeight - view.clientHeight / 2;
-      });
+var root = document.documentElement;
+document.querySelectorAll('.bar button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    root.style.setProperty('--w', b.dataset.z + 'px');
+    document.querySelectorAll('.bar button').forEach(function (o) {
+      o.setAttribute('aria-pressed', String(o === b));
     });
+    try { localStorage.setItem('plateZoom', b.dataset.z); } catch (e) {}
   });
-  var down = false, sx = 0, sy = 0, ox = 0, oy = 0;
-  view.addEventListener('pointerdown', function (e) {
-    down = true; sx = e.clientX; sy = e.clientY;
-    ox = view.scrollLeft; oy = view.scrollTop;
-    view.classList.add('drag'); view.setPointerCapture(e.pointerId);
-  });
-  view.addEventListener('pointermove', function (e) {
-    if (!down) return;
-    view.scrollLeft = ox - (e.clientX - sx);
-    view.scrollTop = oy - (e.clientY - sy);
-  });
-  ['pointerup', 'pointercancel'].forEach(function (t) {
-    view.addEventListener(t, function () {
-      down = false; view.classList.remove('drag');
-    });
-  });
-  img.addEventListener('dragstart', function (e) { e.preventDefault(); });
 });
+try {
+  var z = localStorage.getItem('plateZoom');
+  if (z) {
+    var hit = document.querySelector('.bar button[data-z="' + z + '"]');
+    if (hit) hit.click();
+  }
+} catch (e) {}
 </script>

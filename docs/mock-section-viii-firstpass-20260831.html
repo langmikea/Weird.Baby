@@ -1,86 +1,254 @@
-<!doctype html><meta charset="utf-8"><title>Section VIII first pass</title>
+<!doctype html><meta charset="utf-8"><title>Section VIII  ·  Maintenance</title>
 <style>
-:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2}
+:root{--ink:#211f1c;--paper:#fff;--edge:#c9c6bb;--chrome:#efece2;--w:1275px}
 html,body{margin:0;padding:0;background:#d8d6c8;color:var(--ink);
-  font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.wrap{max-width:none;padding:14px}
-figure{margin:0 0 18px 0;background:var(--chrome);border:1px solid var(--edge)}
-.bar{display:flex;align-items:center;gap:14px;padding:7px 10px;
-  border-bottom:1px solid var(--edge)}
-figcaption{font-weight:700;letter-spacing:.09em;font-size:14px}
-.bar button{font:inherit;padding:3px 11px;border:1px solid var(--edge);
+  font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:16px;
+  padding:9px 16px;background:var(--chrome);border-bottom:1px solid var(--edge)}
+.bar b{font-size:15px;letter-spacing:.06em}
+.bar button{font:inherit;padding:4px 14px;border:1px solid var(--edge);
   background:var(--paper);color:var(--ink);cursor:pointer;border-radius:2px}
 .bar button[aria-pressed="true"]{background:var(--ink);color:var(--paper);
   border-color:var(--ink)}
-.hint{margin-left:auto;opacity:.55;font-size:12px}
-.view{overflow:auto;background:var(--paper);height:82vh;
-  cursor:grab;overscroll-behavior:contain}
-.view.drag{cursor:grabbing}
-.view img{display:block;image-rendering:auto}
-.view[data-zoom="25"],.view[data-zoom="50"]{height:auto;cursor:default}
-.view[data-zoom="25"] img{width:25%;height:auto;margin:0 auto}
-.view[data-zoom="50"] img{width:50%;height:auto;margin:0 auto}
-.view[data-zoom="fit"] img{width:100%;height:auto}
-.view[data-zoom="100"] img{width:1700px;height:2200px;max-width:none}
-.view[data-zoom="200"] img{width:3400px;height:4400px;max-width:none}
+.hint{margin-left:auto;opacity:.6;font-size:12.5px}
+.wrap{padding:18px 16px 90px}
+.leaf{margin:0 0 34px}
+.lab{font-weight:700;letter-spacing:.09em;font-size:13px;opacity:.75;
+  margin:0 0 6px}
+.leaf img{display:block;width:var(--w);max-width:100%;height:auto;
+  border:1px solid var(--edge);background:var(--paper)}
+.txt{width:var(--w);max-width:100%;box-sizing:border-box;margin:0;
+  padding:14px 16px;background:var(--paper);border:1px solid var(--edge);
+  border-top:0;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,
+  monospace;white-space:pre-wrap;overflow-wrap:anywhere;
+  -webkit-user-select:text;user-select:text}
 </style>
+<div class="bar"><b>Section VIII  ·  Maintenance</b>
+<button data-z="850" aria-pressed="false">50%</button>
+<button data-z="1275" aria-pressed="true">75%</button>
+<button data-z="1700" aria-pressed="false">100%</button>
+<span class="hint">5 sheets, one scroll &middot; the text under each plate is
+selectable &mdash; drag a line and copy it</span></div>
 <div class="wrap">
-<figure>
-<div class="bar"><figcaption>8-1</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="8-1" src="plates-20260831-viii/sheet-41_8-1.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>8-2</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="8-2" src="plates-20260831-viii/sheet-42_8-2.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>8-3</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="8-3" src="plates-20260831-viii/sheet-43_8-3.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>8-4</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="8-4" src="plates-20260831-viii/sheet-44_8-4.webp"></div>
-</figure>
-<figure>
-<div class="bar"><figcaption>8-5</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="8-5" src="plates-20260831-viii/sheet-45_8-5.webp"></div>
-</figure>
+<div class="leaf">
+<p class="lab">8-1</p>
+<img alt="8-1" src="plates-20260831-viii/sheet-41_8-1.webp">
+<pre class="txt">                                 SECTION VIII
+
+                                 MAINTENANCE
+
+
+8-1.    GENERAL.
+
+        This section gives the care of the instrument. What there is of it is
+        given here in full, and nothing beside it is required.
+
+        Nothing within the instrument is an operator-serviceable item. The
+        cell is not replaceable by the operator and is dealt with at paragraph
+        7-19. No cover is to be removed and no adjustment is provided. An
+        instrument wanting work of that kind is withdrawn from service and
+        returned; see Section XI.
+
+        What maintenance does upon this instrument is keep its condition up.
+        Condition is a real state of the instrument and not a manner of
+        speaking. The instrument keeps it, reports it among the readings of
+        paragraph 8-9, and shows it falling and recovering. It falls with use
+        and it is restored by the routine of paragraph 8-7 and by nothing
+        else.
+
+        Maintenance is not a repair and does not stand in for one. It restores
+        nothing that is broken and puts nothing right that was wrong. An
+        instrument in poor condition is not a faulty instrument: it answers as
+        it always answered, it withholds nothing, and no function of it is
+        closed by neglect. What falls away is the ease of its working, and
+        that is what the routine restores.
+
+        Conditions the instrument reports as faults are not the matter of this
+        section and are given in Section IX.
+
+8-3.    PREVENTIVE MAINTENANCE.
+
+        The whole of the preventive maintenance of this instrument is the
+        routine of paragraph 8-7. There is no second procedure and nothing is
+        scheduled beside it.
+
+        It is run by the operator. It requires no tool and no material, the
+        instrument is not opened for it, and it is done where the instrument
+        stands.</pre>
+</div>
+<div class="leaf">
+<p class="lab">8-2</p>
+<img alt="8-2" src="plates-20260831-viii/sheet-42_8-2.webp">
+<pre class="txt">        No interval is prescribed in this paragraph. The instrument advises
+        attention when it wants it, and that advice is the schedule: the
+        routine is run when the instrument advises it, and at such other times
+        as the keeper sees fit. Where a fixed schedule is required it is given
+        in Table 8-1.
+
+        The routine may be run when it is not wanted and no harm follows. An
+        instrument already in good condition is left in good condition.
+
+        Cleaning is a separate matter and is given at paragraph 8-5.
+
+
+                 Table 8-1.  PREVENTIVE MAINTENANCE SCHEDULE
+
+------------------------------------------------------------------------------
+  INTERVAL            ATTENTION              REFERENCE
+------------------------------------------------------------------------------
+
+
+
+
+                             [ ENTRIES REQUIRED ]
+
+
+
+------------------------------------------------------------------------------
+
+8-5.    CLEANING.
+
+        [ TEXT REQUIRED ]
+
+8-7.    THE MAINTENANCE ROUTINE.
+
+        The routine is entered at the Maintenance row of the Preferences door.
+        The door is described at paragraph 6-25.
+
+        The instrument gives the routine upon both glasses. The forward
+        display carries the heading and the step in hand. The upper display
+        carries the card, which states the routine, gives the instruction for
+        the step, and shows the instrument&#x27;s efficiency as it stands.
+
+        The routine is:
+
+            1  Take the Maintenance row with the shutter.
+            2  Set the instrument level and hold it still.
+            3  Give three clicks of the shutter when they are called for.
+            4  The instrument reports the service complete.</pre>
+</div>
+<div class="leaf">
+<p class="lab">8-3</p>
+<img alt="8-3" src="plates-20260831-viii/sheet-43_8-3.webp">
+<pre class="txt">        At the second step the card carries a gauge which fills while the
+        instrument is held still. Movement empties it and the step is begun
+        again. No figure is given and none is wanted: the instrument is held
+        until the gauge is full.
+
+        At the third step the clicks are given at the shutter and are counted
+        as they are made. Movement at this step returns the routine to the
+        second, and the clicks are given again.
+
+        The card states each step in the instrument&#x27;s own words. It shows, in
+        turn:
+
+            HOLD THE UNIT STILL.
+            NOW: THREE CLICKS.
+            SERVICE COMPLETE.
+
+        The routine may be left at any point with the dial. Nothing is lost by
+        leaving it and nothing is gained: the condition stands where it stood.
+
+        When the routine is completed the condition is raised and the
+        instrument holds the new figure. It is read again at paragraph 8-9.
+
+8-9.    CONDITION READINGS.
+
+        The instrument shows SEE MANUAL upon the upper display when its
+        condition has fallen to the point at which attention is advised. This
+        paragraph is what it means by it.
+
+        Nothing is wrong. SEE MANUAL is an advice and it is not a fault
+        reported: the instrument is working, it will go on working, and it
+        withholds nothing while the notice stands. What it is saying is that
+        it has been in service for some while without attention and that the
+        routine of paragraph 8-7 is now wanted. Run the routine. The notice is
+        withdrawn when the condition has recovered.
+
+        Condition is the instrument&#x27;s account of its own state. It is kept as
+        one figure, it is carried across a shutting down, and it falls with
+        use: with the times the instrument has been started, the questions put
+        to it, the hours it has run, and the corrections it has made of
+        itself. It is restored by the routine and by nothing else.
+
+        The readings the instrument gives of its condition are listed in Table
+        8-2 with what each is taken from and when each is shown. They are
+        reports. None of them requires anything of itself, and where the
+        instrument wants attention it advises it.</pre>
+</div>
+<div class="leaf">
+<p class="lab">8-4</p>
+<img alt="8-4" src="plates-20260831-viii/sheet-44_8-4.webp">
+<pre class="txt">        A condition reading is not a fault report. Faults are the matter of
+        Section IX, and the conditions the instrument reports upon the upper
+        display are given at paragraph 9-7 and in Table 9-2.
+
+
+               Table 8-2.  CONDITION READINGS AND THEIR SOURCES
+
+------------------------------------------------------------------------------
+  READING              SOURCE                           SHOWN WHEN
+------------------------------------------------------------------------------
+  EFFICIENCY           The condition itself.            Always.
+  RETRIES              Steps retried at the last        After a start with
+                       start. 5-13.                     retries.
+  POWER CYCLES         The times the instrument has     With the other
+                       been started.                    readings.
+  UPTIME               The running time since           With the other
+                       starting. 8-11.                  readings.
+  LOAD                 The working of the               With the readout,
+                       instrument, measured.            in its turn.
+  The load graph       The working of the               In the graph
+                       instrument, drawn over time.     window, in its
+                                                        turn.
+  The condition        The condition over time.         In the graph
+  history                                               window, in its
+                                                        turn.
+  SEE MANUAL           That attention is advised.       When the condition
+                       8-7.                             is low.
+------------------------------------------------------------------------------
+
+8-11.   SERVICE NOTICES.
+
+        The instrument sends the operator a notice of its own accord as it
+        accumulates running time. A service notice is a message: it is held
+        with the rest of the correspondence, it is read at the Messages door,
+        and it is dealt with at paragraph 6-23.
+
+        A service notice marks running time and nothing else. It is not a
+        fault reported and it is not an advice that the condition has fallen;
+        the instrument sends it whether its condition is good or poor. The two
+        are commonly met together and they are not the same notice.
+
+        A notice sent is not sent again. The instrument neither announces its
+        arrival nor repeats it, in the manner of paragraph 6-23.
+
+        The attention a service notice asks for is the routine of paragraph
+        8-7.</pre>
+</div>
+<div class="leaf">
+<p class="lab">8-5</p>
+<img alt="8-5" src="plates-20260831-viii/sheet-45_8-5.webp">
+<pre class="txt">        Running time is carried among the condition readings as well; see
+        paragraph 8-9 and Table 8-2.</pre>
+</div>
 </div>
 <script>
-document.querySelectorAll('figure').forEach(function (fig) {
-  var view = fig.querySelector('.view');
-  var img = view.querySelector('img');
-  fig.querySelectorAll('button[data-zoom]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var w = view.scrollWidth || 1, h = view.scrollHeight || 1;
-      var cx = (view.scrollLeft + view.clientWidth / 2) / w;
-      var cy = (view.scrollTop + view.clientHeight / 2) / h;
-      view.dataset.zoom = b.dataset.zoom;
-      fig.querySelectorAll('button[data-zoom]').forEach(function (o) {
-        o.setAttribute('aria-pressed', String(o === b));
-      });
-      requestAnimationFrame(function () {
-        view.scrollLeft = cx * view.scrollWidth - view.clientWidth / 2;
-        view.scrollTop = cy * view.scrollHeight - view.clientHeight / 2;
-      });
+var root = document.documentElement;
+document.querySelectorAll('.bar button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    root.style.setProperty('--w', b.dataset.z + 'px');
+    document.querySelectorAll('.bar button').forEach(function (o) {
+      o.setAttribute('aria-pressed', String(o === b));
     });
+    try { localStorage.setItem('plateZoom', b.dataset.z); } catch (e) {}
   });
-  var down = false, sx = 0, sy = 0, ox = 0, oy = 0;
-  view.addEventListener('pointerdown', function (e) {
-    down = true; sx = e.clientX; sy = e.clientY;
-    ox = view.scrollLeft; oy = view.scrollTop;
-    view.classList.add('drag'); view.setPointerCapture(e.pointerId);
-  });
-  view.addEventListener('pointermove', function (e) {
-    if (!down) return;
-    view.scrollLeft = ox - (e.clientX - sx);
-    view.scrollTop = oy - (e.clientY - sy);
-  });
-  ['pointerup', 'pointercancel'].forEach(function (t) {
-    view.addEventListener(t, function () {
-      down = false; view.classList.remove('drag');
-    });
-  });
-  img.addEventListener('dragstart', function (e) { e.preventDefault(); });
 });
+try {
+  var z = localStorage.getItem('plateZoom');
+  if (z) {
+    var hit = document.querySelector('.bar button[data-z="' + z + '"]');
+    if (hit) hit.click();
+  }
+} catch (e) {}
 </script>
