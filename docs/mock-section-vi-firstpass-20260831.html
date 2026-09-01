@@ -27,31 +27,31 @@ figcaption{font-weight:700;letter-spacing:.09em;font-size:14px}
 <div class="wrap">
 <figure>
 <div class="bar"><figcaption>6-1</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-1" src="plates-20260831/sheet-27_6-1.webp?v=6"></div>
+<div class="view" data-zoom="fit"><img alt="6-1" src="plates-20260831/sheet-29_6-1.webp"></div>
 </figure>
 <figure>
 <div class="bar"><figcaption>6-2</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-2" src="plates-20260831/sheet-28_6-2.webp?v=6"></div>
+<div class="view" data-zoom="fit"><img alt="6-2" src="plates-20260831/sheet-30_6-2.webp"></div>
 </figure>
 <figure>
 <div class="bar"><figcaption>6-3</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-3" src="plates-20260831/sheet-29_6-3.webp?v=6"></div>
+<div class="view" data-zoom="fit"><img alt="6-3" src="plates-20260831/sheet-31_6-3.webp"></div>
 </figure>
 <figure>
 <div class="bar"><figcaption>6-4</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-4" src="plates-20260831/sheet-30_6-4.webp?v=6"></div>
+<div class="view" data-zoom="fit"><img alt="6-4" src="plates-20260831/sheet-32_6-4.webp"></div>
 </figure>
 <figure>
 <div class="bar"><figcaption>6-5</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-5" src="plates-20260831/sheet-31_6-5.webp?v=6"></div>
+<div class="view" data-zoom="fit"><img alt="6-5" src="plates-20260831/sheet-33_6-5.webp"></div>
 </figure>
 <figure>
 <div class="bar"><figcaption>6-6</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-6" src="plates-20260831/sheet-32_6-6.webp?v=6"></div>
+<div class="view" data-zoom="fit"><img alt="6-6" src="plates-20260831/sheet-34_6-6.webp"></div>
 </figure>
 <figure>
 <div class="bar"><figcaption>6-7</figcaption><button data-zoom="25" aria-pressed="false">25%</button><button data-zoom="50" aria-pressed="false">50%</button><button data-zoom="fit" aria-pressed="true">Fit</button><button data-zoom="100" aria-pressed="false">100%</button><button data-zoom="200" aria-pressed="false">200%</button><span class="hint">25% and 50% are below fit &middot; drag to pan at 100% and 200%</span></div>
-<div class="view" data-zoom="fit"><img alt="6-7" src="plates-20260831/sheet-33_6-7.webp?v=6"></div>
+<div class="view" data-zoom="fit"><img alt="6-7" src="plates-20260831/sheet-35_6-7.webp"></div>
 </figure>
 </div>
 <script>
@@ -60,7 +60,6 @@ document.querySelectorAll('figure').forEach(function (fig) {
   var img = view.querySelector('img');
   fig.querySelectorAll('button[data-zoom]').forEach(function (b) {
     b.addEventListener('click', function () {
-      // keep whatever is in the middle of the frame in the middle
       var w = view.scrollWidth || 1, h = view.scrollHeight || 1;
       var cx = (view.scrollLeft + view.clientWidth / 2) / w;
       var cy = (view.scrollTop + view.clientHeight / 2) / h;
@@ -74,7 +73,6 @@ document.querySelectorAll('figure').forEach(function (fig) {
       });
     });
   });
-  // drag to pan
   var down = false, sx = 0, sy = 0, ox = 0, oy = 0;
   view.addEventListener('pointerdown', function (e) {
     down = true; sx = e.clientX; sy = e.clientY;
