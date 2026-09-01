@@ -73,8 +73,35 @@ posting event, not a re-edit — which is why four is affordable at all.
 ### The accounts
 
 **[2026-08-28] THE TIKTOK ACCOUNT EXISTS.** Mike made it:
-**`@papaweird.baby`**, display name **Weird.Baby**, bio empty. It was recorded
+**`@papaweird.baby`**, display name **Weird.Baby**. It was recorded
 as a precondition for a few hours and is now an observed fact.
+
+> **[2026-09-01, CORRECTED] IT WAS NEVER WAITING ON HIM, AND `bio empty` WAS
+> WRONG FOR FOUR DAYS.** The line above read *bio empty* from 2026-08-28 until
+> today, and the row that preceded it recorded the account itself as a
+> precondition **waiting on Mike**. Neither was the state of the account. **The
+> correction is marked rather than swept**, because a wrong claim that is
+> silently rewritten reads to a later round as a claim nobody ever made — the
+> same reason `HANDLE.retractedClaim` is kept and marked false.
+
+**THE BIO IS SET AND IT IS LIVE ON THE ACCOUNT.** It is **MIKE's**, so it is
+carried verbatim — his casing, his punctuation, his line — and **FLAG, NEVER
+FIX** applies to it the day it goes stale:
+
+> That's just Weird.Baby! Something new every day. Come see.
+
+**And the profile's WEBSITE FIELD carries `weird.baby`.** THE DOOR POINTS BACK
+AT THE HOUSE. It is the first thing in this system that connects the two
+directions, and it runs the way round the canon line allows: the door names the
+museum, the museum learns nothing.
+
+**NOTHING IN THIS REPOSITORY READS EITHER STRING.** They are recorded in
+`release-shape.mjs` beside the handle because **a fact is filed where the fact
+belongs**, not because a gate wants them — the gate's only question about an
+account is whether it EXISTS. Neither string is on the museum's glass, so
+neither is a visitor-facing string and neither is declared in
+`provenance/register.json`. **The day one of them is printed on the site, it
+becomes a museum string and the register is where it goes.**
 
 **The precondition MECHANISM stays**, because it is about any surface and not
 about TikTok: **the gate refuses a posting that claims to be `out` on a surface

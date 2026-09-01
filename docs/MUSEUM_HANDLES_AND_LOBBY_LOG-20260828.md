@@ -14,7 +14,7 @@ adoption rule doing its job.**
 
 | surface | handle | |
 |---|---|---|
-| TikTok | **`@papaweird.baby`** · display name **Weird.Baby**, bio empty | **the account EXISTS.** Mike made it. |
+| TikTok | **`@papaweird.baby`** · display name **Weird.Baby**, bio empty **[2026-09-01: the bio is SET — see `release/README.md`; this row is what was observed on the day]** | **the account EXISTS.** Mike made it. |
 | YouTube | **`@PapaWeirdBaby`** | observed |
 | Instagram | unset | account itself unstated |
 | Facebook | unset | account exists, handle not supplied |

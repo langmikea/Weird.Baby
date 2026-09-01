@@ -38,7 +38,8 @@ precondition rather than a decision.** The reels are 9:16 and go uncut to all
 four, so nothing has to be remade — what blocks them is accounts, not editing:
 
 - **[2026-08-28] TikTok EXISTS now** — `@papaweird.baby`, display name
-  `Weird.Baby`, bio empty. The door has a door.
+  `Weird.Baby`. The bio is set, in his own words, and the profile's website
+  field carries `weird.baby`. The door has a door.
 - **Instagram is unstated** — nobody has said whether the account exists, and
   Ops does not infer it.
 - **Two of the four handles are known** — `@papaweird.baby` and

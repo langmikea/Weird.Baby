@@ -55,9 +55,22 @@ export const SURFACES = [
     why: "the only one built to show work to strangers — its algorithm surfaces "
        + "small accounts to new audiences",
     /* [2026-08-28, CORRECTED] THE ACCOUNT EXISTS. Mike made it. The previous
-       value here said it did not, and that was true for a few hours. */
+       value here said it did not, and that was true for a few hours.
+       [2026-09-01, CORRECTED AGAIN] AND `Bio empty` WAS WRONG. It sat in the
+       note below from 2026-08-28 until today. The bio is set and live, and it
+       is MIKE's own sentence — carried VERBATIM, his casing and his
+       punctuation, and FLAG NEVER FIX applies to it. The website field carries
+       `weird.baby`: the door points back at the house, which is the direction
+       the canon line allows.
+       NOTHING READS `bio` OR `website`. The gate's only question about an
+       account is `exists`. They are here because a fact is filed where the fact
+       belongs, and because the alternative — a fact that lives only on a
+       platform Ops cannot read — is how `bio empty` survived four days. */
     account: { exists: true, handle: "papaweird.baby", displayName: "Weird.Baby",
-      note: "Made by Mike 2026-08-28. Bio empty." },
+      bio: "That's just Weird.Baby! Something new every day. Come see.",
+      bioClass: "MIKE", bioObserved: "2026-09-01",
+      website: "weird.baby",
+      note: "Made by Mike 2026-08-28. Bio and website set, observed 2026-09-01." },
     dots: true },
 
   { key: "instagram",
@@ -120,7 +133,11 @@ export function surfaceOf(key) {
    carried as UNVERIFIED and named as such.**
 
    ═══ WHAT IS OBSERVED, WHICH IS ALL THAT IS RECORDED NOW ═══════════════════
-   TikTok    `@papaweird.baby`, display name `Weird.Baby`, bio empty. OBSERVED.
+   TikTok    `@papaweird.baby`, display name `Weird.Baby`. OBSERVED.
+             **[2026-09-01] BIO AND WEBSITE OBSERVED SET** — the bio is Mike's
+             own sentence, verbatim in `SURFACES`, and the website field carries
+             `weird.baby`. `bio empty` was carried here for four days and was
+             wrong; it is corrected rather than deleted.
    YouTube   `@PapaWeirdBaby`. OBSERVED. **Not identical to the TikTok one** —
              different casing, and no dot. Recorded as two real handles rather
              than reconciled into one.

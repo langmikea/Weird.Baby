@@ -2,6 +2,26 @@
 
 **2026-08-28.** HEAD at start `fb21109`. Nothing committed by Code; Mike commits.
 
+> **[2026-09-01] SUPERSEDED IN TWO PLACES, AND THIS LOG IS NOT REWRITTEN — IT IS
+> A ROUND LOG AND ROUND LOGS ARE THE NARRATIVE.** Read the pointer before you
+> read §3 and §5 as the state of anything.
+>
+> **§3 and §5's `NO ACCOUNT YET`** was corrected the same day: **the TikTok
+> account EXISTS** — `@papaweird.baby`, display name `Weird.Baby` — and it was
+> never waiting on Mike. **§5's `TikTok does not permit a dot in a handle` is
+> FALSE**, asserted from memory and never checked. Both corrections, and the
+> lesson under the second, are in
+> [`MUSEUM_HANDLES_AND_LOBBY_LOG-20260828.md`](MUSEUM_HANDLES_AND_LOBBY_LOG-20260828.md).
+>
+> **[2026-09-01] And the bio is set** — Mike's own sentence, live on the
+> account, with the profile's website field carrying `weird.baby`. Recorded in
+> `release/README.md` and in `release-shape.mjs`'s `SURFACES`, which are the
+> current state; this log is the day.
+>
+> **What §3 says about the MECHANISM still stands** — the gate refuses an `out`
+> posting on a surface whose account does not exist, and that is about any
+> surface rather than about TikTok.
+
 ---
 
 ## 1. WHERE THE ORDERING BELONGS — ANSWERED PLAINLY
