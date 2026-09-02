@@ -225,6 +225,13 @@ const INSTRUMENTS = [
      treat it like that please." A list he has to remember a path to is a list
      he does not read. It is HTML, so the desk can link it straight — the
      download trap below only bites on files a browser cannot render. */
+  /* [2026-09-02] THE CALENDAR — Mike's ruling A on Reach: two lanes from week
+     two. What is due, by lane and weekday, and who owes it. He asks, Ops
+     answers (`npm run calendar`); this is the page behind the answer. */
+  { name: "The calendar",
+    file: "calendar/CALENDAR.html",
+    what: "What posts this week and what must be prepared for next, by lane and weekday, with who owes it.",
+    rebuild: "npm run calendar" },
   { name: "The scroller facts",
     file: "SCROLLER_FACTS.html",
     what: "Every fact the pop-up scroller can serve, every artist. Quote or paraphrase, word count, source.",

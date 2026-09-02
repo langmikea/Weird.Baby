@@ -1,0 +1,56 @@
+{
+  "_": "THE WEEK-TWO CALENDAR. Two lanes (Mike's ruling A, 2026-09-02): the Record, posted by the site at 17:00 New York; Mike playing, posted by Mike. Rows are lanes, columns are weekdays. Ops keeps this file current from what Mike says; Mike never edits it. He asks, Ops answers: `npm run calendar`. The rule of preparation is the week before: what posts in week N is prepared by the Friday of week N-1.",
+  "post_time": "17:00 America/New_York",
+  "prepared_by": "Friday of the week before",
+  "lanes": [
+    { "id": "record",  "name": "The Record",   "writes": "Mike", "posts": "the site, on the clock", "per_week": 5 },
+    { "id": "playing", "name": "Mike playing", "writes": "Mike", "posts": "Mike, from the phone", "per_week": 5, "starts_week": 2 }
+  ],
+  "weeks": [
+    {
+      "n": 1, "monday": "2026-09-07", "note": "The wing opens itself at the first Record. No advertising yet.",
+      "record": [
+        { "day": "MON", "piece": "Record 001 — INITIAL LAUNCH", "state": "in the site · Mike's rewrite saved, not landed" },
+        { "day": "TUE", "piece": "Record 002 — GENERAL STATUS UPDATE", "state": "in the site" },
+        { "day": "WED", "piece": "Record 003 — DATA RECOVERY", "state": "in the site · five manual scans came off it; nothing replaces them yet" },
+        { "day": "THU", "piece": "Record 004 — GENERAL STATUS UPDATE", "state": "in the site" },
+        { "day": "FRI", "piece": "Record 005 — PORTAL CONNECTION ONLINE", "state": "in the site" }
+      ],
+      "playing": []
+    },
+    {
+      "n": 2, "monday": "2026-09-14", "note": "Advertising starts. Both lanes run.",
+      "record": [
+        { "day": "MON", "piece": "Record 006", "state": "not written" },
+        { "day": "TUE", "piece": "Record 007", "state": "not written" },
+        { "day": "WED", "piece": "Record 008", "state": "not written" },
+        { "day": "THU", "piece": "Record 009", "state": "not written" },
+        { "day": "FRI", "piece": "Record 010", "state": "not written" }
+      ],
+      "playing": [
+        { "day": "MON", "piece": "Reel 1 — Coconuts, quarter 1", "state": "video exists, private on YouTube · caption unwritten · door not chosen" },
+        { "day": "TUE", "piece": "Reel 2 — Coconuts, quarter 2", "state": "video exists, private · caption unwritten" },
+        { "day": "WED", "piece": "Reel 3 — Coconuts, quarter 3", "state": "video exists, private · caption unwritten" },
+        { "day": "THU", "piece": "Reel 4 — Coconuts, quarter 4", "state": "video exists, private · caption unwritten" },
+        { "day": "FRI", "piece": "Reel 5 — Coconuts, full (or a new take)", "state": "video exists, private · Mike undecided whether the full cut posts" }
+      ]
+    },
+    {
+      "n": 3, "monday": "2026-09-21", "note": "",
+      "record": [
+        { "day": "MON", "piece": "Record 011", "state": "not written" },
+        { "day": "TUE", "piece": "Record 012", "state": "not written" },
+        { "day": "WED", "piece": "Record 013", "state": "not written" },
+        { "day": "THU", "piece": "Record 014", "state": "not written" },
+        { "day": "FRI", "piece": "Record 015", "state": "not written" }
+      ],
+      "playing": [
+        { "day": "MON", "piece": "Reel 6", "state": "not recorded" },
+        { "day": "TUE", "piece": "Reel 7", "state": "not recorded" },
+        { "day": "WED", "piece": "Reel 8", "state": "not recorded" },
+        { "day": "THU", "piece": "Reel 9", "state": "not recorded" },
+        { "day": "FRI", "piece": "Reel 10", "state": "not recorded" }
+      ]
+    }
+  ]
+}
