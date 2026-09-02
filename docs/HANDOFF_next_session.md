@@ -46,10 +46,17 @@ nothing served has changed. Nothing waits on a deploy.
   carries the headlines through week 8.
 - The manual: Mike's ruling A (Ops drafts by section). The register test is
   served (`C:\AI\REVIEW-20260902\register-test.html`); his pick is pending.
-  The facts sitting is written and served (`docs/MANUAL_FACTS_SITTING-20260902.md`,
-  26 numbered rulings, A/B/C, answered at his pace). Then Sections IV, VI,
-  VIII and Appendix B rewritten in the chosen voice, then new sections.
-  Masters regenerate after 09-09.
+  The facts sitting is CLOSED (rulings in `docs/PILLARS_RULINGS-20260902.md`,
+  "The manual's facts sitting"): the firmware rules for the machine's facts;
+  all 26 answered; the seven first-boot questions answered. Writing starts on
+  his register pick: Sections IV, VI, VIII and Appendix B rewritten in that
+  voice, then the unwritten sections drafted against the rulings, served as
+  rendered pages. Masters regenerate after 09-09.
+- After Sunday, robots repo: the Everyday takes serial −01 and the Housewife
+  Nano moves to −02 (`unit_registry.csv`, the STATE registry, the built
+  `units/02` directory); the twin's wake-order race is fixed (two awaits) so
+  the front glass wakes first as canon says; the canon catalogue's CONFLICTS
+  and HOLES entries touched by the sitting are marked ruled.
 - Branch `zip-and-parcels` (pushed) holds the first two modules of the build
   brief (`docs/BUILD-BRIEF-day-gating-and-zip-20260902.md`): `src/lib/schedule.js`
   and `src/lib/twin-keys.js`, unwired, lint clean. Next on it, after Sunday:
