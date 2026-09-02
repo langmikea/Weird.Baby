@@ -46,8 +46,15 @@ nothing served has changed. Nothing waits on a deploy.
   carries the headlines through week 8.
 - The manual: Mike's ruling A (Ops drafts by section). The register test is
   served (`C:\AI\REVIEW-20260902\register-test.html`); his pick is pending.
-  Then one facts sitting, then Sections IV, VI, VIII and Appendix B rewritten
-  in the chosen voice, then new sections. Masters regenerate after 09-09. Pass 5 ruling (Mike, 2026-09-02): the desk stays for the Record editor;
+  The facts sitting is written and served (`docs/MANUAL_FACTS_SITTING-20260902.md`,
+  26 numbered rulings, A/B/C, answered at his pace). Then Sections IV, VI,
+  VIII and Appendix B rewritten in the chosen voice, then new sections.
+  Masters regenerate after 09-09.
+- Sunday, after the Record lands: one edit in `reveal/ledger-declare.mjs` so
+  `R()` takes `when` from `reveal/schedule.json` by id when `extra.when` is
+  absent; rebuild the ledger; run `reveal:check` (transfers.mjs compares
+  `when` against class arrival weeks and may fault; read each fault before
+  moving a date). Pass 5 ruling (Mike, 2026-09-02): the desk stays for the Record editor;
   the light table stays; facts, assets and reveal instruments are Ops' to keep
   or drop.
 - Guard 6 blocks four of five Record entries from landing; ruled a bug or a rule (Sunday).
