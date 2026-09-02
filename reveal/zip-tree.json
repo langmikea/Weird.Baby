@@ -1,0 +1,145 @@
+{
+  "_": "THE ZIP, AS A TREE — the in-story password-protected archive the Record has been peeling since Record 002 (31.4 GB, password 355113 per Record 004). This is the data half of the ZIP browser Mike asked for on 2026-09-02 (a browsable in-story surface, no download). Each entry names the story week it becomes readable (`week`, counting from RECORD_EPOCH; null = still locked and shown as such), what it renders (`renders`: a plate path, a document, a note, or the folder it opens), and the ledger id it corresponds to. Weeks follow reveal/schedule.json (Mike's ruling A, third cut). Nothing in src reads this yet; the browser build after Sunday does. Entries the Record has already published as names are `published: true` and may not be renamed.",
+  "root": "ROOT",
+  "password": "355113",
+  "size": "31.4 GB",
+  "folders": [
+    {
+      "path": "MGK-VIIIp/MANUAL",
+      "published": true,
+      "note": "the operator's manual, a page at a time, as it is recovered",
+      "entries": [
+        { "name": "00-FRONTMATTER.tif", "published": true, "week": 2, "renders": "manual front matter (scope statement) once rendered in the chosen register", "ledger": "doc.manual" },
+        { "name": "07-POWER-SYSTEM.tif", "published": true, "week": 1, "renders": "recovered per Record 003's text; plate withheld pending the manual rebuild", "ledger": "doc.manual" },
+        { "name": "11-VID-LINK.tif", "published": true, "week": 1, "renders": "recovered per Record 003's text; plate withheld pending the manual rebuild", "ledger": "doc.manual" },
+        { "name": "31-PARITY-BIAS.tif", "published": true, "week": 1, "renders": "/robots/manual/marked-01-a.webp (the marked copy, Record 003)", "ledger": "doc.manual.page.47" },
+        { "name": "SECTION-IV-CONTROLS.tif", "week": 2, "renders": "manual Section IV pages", "ledger": "doc.manual" },
+        { "name": "SECTION-V-STARTING.tif", "week": 2, "renders": "manual Section V pages", "ledger": "doc.manual" },
+        { "name": "SECTION-VI-OPERATING.tif", "week": 2, "renders": "manual Section VI pages", "ledger": "doc.manual" },
+        { "name": "SECTION-VIII-MAINTENANCE.tif", "week": 5, "renders": "manual Section VIII pages", "ledger": "doc.manual" },
+        { "name": "SECTION-IX-TROUBLESHOOTING.tif", "week": 5, "renders": "manual Section IX pages", "ledger": "doc.manual" },
+        { "name": "(further sections)", "week": 7, "renders": "whatever stands written and approved by 10-23", "ledger": "doc.manual" },
+        { "name": "APPENDIX-C-ENGINES.tif", "week": 11, "renders": "after ruling K-12", "ledger": "doc.manual" },
+        { "name": "APPENDIX-E-VOICES.tif", "week": 11, "renders": "after ruling K-13", "ledger": "doc.manual" },
+        { "name": "APPENDIX-D-MENU-INDEX.tif", "week": 12, "renders": "the honest last dump", "ledger": "doc.manual" },
+        { "name": "APPENDIX-G-ABBREVIATIONS.tif", "week": 12, "renders": "the honest last dump", "ledger": "doc.manual" },
+        { "name": "ORIGINALS/", "week": 8, "renders": "photographs of the physical printed manuals", "ledger": "phys.manual.original" }
+      ]
+    },
+    {
+      "path": "PERSONNEL",
+      "published": true,
+      "note": "four folders named in Record 002; characterised in Record 003",
+      "entries": [
+        { "name": "EVERYDAY/", "published": true, "week": 2, "renders": "the dossier; the unboxing photographs", "ledger": "persona.everyman", "record_says": "not yet opened" },
+        { "name": "GAMBLER/", "published": true, "week": 3, "renders": "the dossier; the case: the marked deck, five blue glass dice, the chips, the half dollars; later the book, the coin, the bullets", "ledger": "persona.gambler", "record_says": "not yet opened" },
+        { "name": "CEO/", "published": true, "week": 4, "renders": "past the letterhead: the attaché, the ADDIMULT adder, the pocket stapler, the PHRASE-O-SCOPE; later the coins, the clock, the razor, the pen knife", "ledger": "persona.ceo", "record_says": "one page, redacted to the letterhead" },
+        { "name": "INFORMER/", "published": true, "week": 5, "renders": "past the photographs: the spy kit, the two cover business cards; later the picks and keys, the coil pickup, the camera modules; Sniper filed here too", "ledger": "persona.informer", "record_says": "photographs only, no text" }
+      ]
+    },
+    {
+      "path": "PORTAL",
+      "published": true,
+      "note": "the cracked tree of Record 004",
+      "entries": [
+        { "name": "TERMINAL.EXE", "published": true, "week": 1, "renders": "the door that fires the Portal console (Record 005); quarantined by QC rule", "ledger": "portal" },
+        { "name": "PORTAL_2v16.CFG", "published": true, "week": 9, "renders": "what the far end is (arc: Machines Know Each Other)", "ledger": "album.niac" },
+        { "name": "ANTENNA (PWD)/", "published": true, "week": 8, "renders": "the antenna selector's four routings", "ledger": "portal.antenna" },
+        { "name": "CHANNEL_SELECT (PWD)/", "published": true, "week": 8, "renders": "the channel selector", "ledger": "portal.antenna" },
+        { "name": "CH3-STANDARD/", "published": true, "week": 9, "renders": "the Portal's channel 3", "ledger": "portal.feed.standard" },
+        { "name": "CH4-DETAIL/", "published": true, "week": 9, "renders": "the Portal's channel 4, the VIIIp close-up", "ledger": "portal.feed.idling-updated" },
+        { "name": "INSTALL/QC_101.TIF", "published": true, "week": 1, "renders": "/robots/portal/qc-101-a.webp (Record 004)", "ledger": "doc.qc101" }
+      ]
+    },
+    {
+      "path": "ENGINES",
+      "week": 2,
+      "note": "cracks Monday of week two; the three acts",
+      "entries": [
+        { "name": "MGK-NIAC.bin", "week": 2, "renders": "the 1945 engine: the twenty", "ledger": "twin.app.answers" },
+        { "name": "MGK-v2.0.bin", "week": 4, "renders": "the second engine: EZClick, Clarity", "ledger": "engine.v2" },
+        { "name": "MGK-65.bin", "week": 7, "renders": "the 1965 engine: sounds, the SAM voice, the diamond reveal", "ledger": "engine.65" }
+      ]
+    },
+    {
+      "path": "PROGRAMS",
+      "week": 2,
+      "entries": [
+        { "name": "PROBABILITIES/", "week": 2, "ledger": "twin.app.probabilities" },
+        { "name": "GAMES/SNOW-GLOBE", "week": 3, "ledger": "twin.game.snowglobe" },
+        { "name": "GAMES/TIC-TAC-TOE", "week": 3, "ledger": "twin.game.tictactoe" },
+        { "name": "CASINO/", "week": 3, "renders": "Slots, Craps, Blackjack, Roulette, behind code 2121", "ledger": "twin.game.slots" },
+        { "name": "DETECTORS/BULLSHIT", "week": 3, "ledger": "twin.app.detectors" },
+        { "name": "DETECTORS/STUD", "week": 5, "ledger": "twin.app.detectors" },
+        { "name": "DETECTORS/TRUSTWORTHY", "week": 5, "ledger": "twin.app.detectors" },
+        { "name": "DETECTORS/ATTRACTIVENESS", "week": 5, "ledger": "twin.app.detectors" },
+        { "name": "DETECTORS/SPY", "week": 5, "renders": "the Informer's", "ledger": "twin.app.detectors" },
+        { "name": "EXCUSES", "week": 5, "ledger": "twin.app.appp" },
+        { "name": "LINES", "week": 5, "ledger": "twin.app.appp" },
+        { "name": "PREDICTIONS/FORTUNE", "week": 5, "ledger": "twin.app.fortune" },
+        { "name": "PREDICTIONS/HOROSCOPE", "week": null, "renders": "locked until Mike's twelve slots", "ledger": "twin.app.horoscope" },
+        { "name": "GAMES/TILT-DRIVE", "week": 6, "ledger": "twin.game.tilt-drive" },
+        { "name": "GAMES/GOBBLE", "week": 6, "ledger": "twin.game.gobble" },
+        { "name": "GAMES/AVOIDSTEROIDS", "week": 6, "ledger": "twin.game.avoidsteroids" },
+        { "name": "GAMES/MAIL-RUN", "week": 6, "ledger": "twin.game.mailrun" },
+        { "name": "GAMES/SNIPER", "week": 6, "renders": "the Informer's", "ledger": "twin.game.sniper" },
+        { "name": "GAMES/STOP-ON-A-NUMBER", "week": 6, "ledger": "twin.game.stopnum" },
+        { "name": "ADVICE/EVERYDAY", "week": 6, "ledger": "twin.app.advice.panel" },
+        { "name": "ADVICE/CAREER", "week": 6, "ledger": "twin.app.advice.panel" },
+        { "name": "ADVICE/CAREER-CHOOSER", "week": 4, "renders": "with the CEO", "ledger": "twin.app.advice.panel" },
+        { "name": "ADVICE/(five more, locked)", "week": null, "renders": "not built; stays locked", "ledger": "twin.app.advice.rest" },
+        { "name": "CALCULATOR", "week": 6, "renders": "(not installed)", "ledger": "twin.app.calc" },
+        { "name": "NOTEPAD", "week": 6, "renders": "(not installed)", "ledger": "twin.app.note" },
+        { "name": "ELIZ", "week": 2, "renders": "with the Everyday", "ledger": "twin.app.eliza" },
+        { "name": "BRAIN-TRAINING", "week": 2, "renders": "with the Everyday", "ledger": "twin.app.brain" },
+        { "name": "INKBLOTS", "week": 2, "renders": "with the Everyday", "ledger": "twin.app.ink" },
+        { "name": "RADIO", "week": 5, "renders": "with the Informer", "ledger": "twin.app.radio" },
+        { "name": "PHONE-TAP", "week": 5, "renders": "with the Informer", "ledger": "twin.app.tap" }
+      ]
+    },
+    {
+      "path": "PREFERENCES",
+      "week": 4,
+      "entries": [
+        { "name": "POLARITY", "week": 4, "ledger": "twin.app.polarity" },
+        { "name": "CLARITY", "week": 4, "ledger": "twin.app.clarity" },
+        { "name": "MGK-MODEL", "week": null, "renders": "not built; stays locked", "ledger": "twin.app.mgkmodel" }
+      ]
+    },
+    {
+      "path": "USER",
+      "week": 4,
+      "entries": [
+        { "name": "NAME", "week": 4, "ledger": "twin.app.user.name" },
+        { "name": "RECORD/", "week": 7, "renders": "the five-page house register", "ledger": "twin.userrecord" },
+        { "name": "SECURITY", "week": null, "renders": "not built; stays locked", "ledger": "twin.app.user.security" }
+      ]
+    },
+    {
+      "path": "AUDIO",
+      "week": 7,
+      "entries": [
+        { "name": "SLOSH-0..4", "week": 7, "ledger": "sound.slosh" },
+        { "name": "ELECTRICAL-SHORT", "week": 7, "ledger": "sound.electrical-short" },
+        { "name": "DATATRANSFER", "week": 7, "renders": "the modem screech", "ledger": "sound.datatransfer" },
+        { "name": "VOICES/", "week": 7, "renders": "eleven slots", "ledger": "twin.app.voice" }
+      ]
+    },
+    {
+      "path": "MESSAGES",
+      "week": 2,
+      "entries": [
+        { "name": "WELCOME.TXT", "week": 2, "ledger": "twin.app.messages" },
+        { "name": "START-UP-PROCEDURE.TXT", "week": 2, "ledger": "twin.app.messages" },
+        { "name": "NEW-FEATURE-ADDED.TXT", "week": 2, "renders": "the reveal channel; re-dated on every update day", "ledger": "twin.app.messages" },
+        { "name": "SYSTEM/", "week": 10, "renders": "the Morse message; the passcodes recording (Mike's call: eggs are found, not announced)", "ledger": "egg.morse" }
+      ]
+    },
+    {
+      "path": "CODES",
+      "week": null,
+      "note": "scaffold; not built; stays locked and says so",
+      "entries": []
+    }
+  ]
+}
