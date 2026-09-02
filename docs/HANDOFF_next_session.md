@@ -29,10 +29,14 @@ nothing served has changed. Nothing waits on a deploy.
 
 ## OPS OWES
 - The System, what remains: narrow the provenance gate to Mike's words and
-  the scroller (after the 7th); the robots repo's round documents and 600 KB
-  ledger (17 robots docs are read by museum tools, map first); a proven backup
-  for `weird_baby_vol1`; source-file comments quoting old numbers (after the
-  7th). Pass 5 ruling (Mike, 2026-09-02): the desk stays for the Record editor;
+  the scroller (after the 7th); the robots repo's 600 KB STATE.md ledger;
+  source-file comments quoting old numbers (after the 7th). Done 09-02: the
+  robots round documents (53 archived, `robots:docs/archive/README.md`), the
+  album mirror.
+- The manual: Mike's ruling A (Ops drafts by section). The register test is
+  served (`C:\AI\REVIEW-20260902\register-test.html`); his pick is pending.
+  Then one facts sitting, then Sections IV, VI, VIII and Appendix B rewritten
+  in the chosen voice, then new sections. Masters regenerate after 09-09. Pass 5 ruling (Mike, 2026-09-02): the desk stays for the Record editor;
   the light table stays; facts, assets and reveal instruments are Ops' to keep
   or drop.
 - Guard 6 blocks four of five Record entries from landing; ruled a bug or a rule (Sunday).
