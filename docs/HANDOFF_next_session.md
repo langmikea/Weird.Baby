@@ -18,8 +18,6 @@ nothing served has changed. Nothing waits on a deploy.
 ## MIKE OWES
 - Record 001 edits in the day editor, unlanded and expected; leave
   `docs/dictation-20260807/` alone and do not run `record:land` or `day:proof`.
-- One `wrangler login` at the PC: the guest book backup has failed since July
-  on an authentication error (code 10000) at the D1 export.
 - The paragraph that replaces the April vision; his words stand meanwhile in
   `docs/canonical/WHAT_WEIRD_BABY_IS.md`.
 
