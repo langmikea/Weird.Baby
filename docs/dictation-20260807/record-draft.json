@@ -1,44 +1,41 @@
 {
  "_": "Mike's working copy of the Record. Written by docs/dictation-20260807/day.html (tools/dictation/day.mjs), read by tools/dictation/emit-record-entries.mjs. Curly braces are notes to Ops. Ops does not hand-edit this file.",
  "key": "wb.day.2026-08-26",
- "saved": "2026-08-30T14:36:15.298Z",
+ "saved": "2026-09-01T15:20:30.728Z",
  "epoch": "2026-09-07",
  "source": {
   "file": "src/data/artists/robots-record.js",
-  "sha256": "fa5cdcd9fcfa9112937f8ec373481594ccded00deba64ffb674407121f8ad015",
-  "mtime": "2026-08-30T14:28:03.398Z",
-  "bytes": 42064
+  "sha256": "5c5f156de743ef86f357b18fc4d1227d7c1d0147b5a73dc7aaa08fddbd05d54c",
+  "mtime": "2026-08-31T13:23:25.126Z",
+  "bytes": 40864
  },
  "entries": [
   {
    "no": 1,
    "date": "2026-09-07",
    "title": "INITIAL LAUNCH - Weird.Baby Website",
-   "line": "> Weird.Baby website went live\n> Alert - Incoming Server Load  (contained)",
+   "line": "> Weird.Baby website went live (ontrack)\n> Alert - Incoming Server Load (contained)",
    "sections": [
     {
      "label": "EXECUTIVE SUMMARY",
      "body": [
-      "  > Weird.Baby launched on schedule. No deviations; f(Ump) = 100%\n  > Operations has hands-on-the-ball. Handoff is on track (T-6);"
+      "  > Weird.Baby launched on scope and on schedule. f(Ump) = 100%\n  > Operations has hands-on-the-ball. Ownership is on track (T-6)."
      ]
     },
     {
      "label": "DETAILED REPORT",
      "body": [
-      "  > ALARM - Incoming Server Load >1000x nominal\n  > Operations remains unaffected.\n  > Multi-source swarm payloads precludes IP/Domain blocking\n  ? RX ended abruptly and coincident with Weird.Baby launch"
+      "  Launch was successful, with two anomalies; ",
+      "  1) We had an alarm condition resulting from a massive, unexpected, surge of incoming data within minutes of turning on the preflight server. (ALARM: Incoming Server Load >= 1K * nom.)",
+      "  2) Multisource swarm-payloads precluded IP/Domain blocking.\n  - ",
+      "  The decision to resume was determined to be low risk, reversible, and a real-world stress test.\n  Data surge ended abruptly and coincident with Weird.Baby launch.",
+      "  > The remainder of the day was completely uneventful.\n  > Weird.Baby uptime - 100%, no further anomalies.\n  > ADDED PAGE - W.B/Robots added (to track what happened, just for a few days)\n     HASH: 982056&363=$^6/Tx=0...........SUCCESS!"
      ]
     },
     {
-     "label": "ADDENDUM 01 - Event Log - Friday (Launch - 2)",
+     "label": "ADDENDUM 01 - Event Log",
      "body": [
-      "    15:00 - Weird.Baby Incoming Server - Scheduled Early Auto Start (Retired)\n    15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%\n    15:04 - First data packet received\n    15:58 - Second data packet received\n    16:00 - Instantaneous - RX sustained FULL LOAD - Packet Rejects = n!\n    16:10 - Server auto-shutdown, auto-containment, and auto-alerts\n    16:13 - REACT - Team is convened\n    23:30 - REACT RULING - Restart with 5Kx Incoming Server Resources",
-      "    > The decision to resume was determined to be low risk, reversible, and a real-world stress test.\n    > The engineering team was more intrigued than concerned, and not involved in the determination."
-     ]
-    },
-    {
-     "label": "ADDENDUM 02 - Weekend Summary",
-     "body": [
-      "    > Staff onsite to support Weird.Baby launch - Nothing to report.\n    > The time was put to use reviewing the incoming data.\n    > Pages of hexadecimal numbers; presumably to be compiled into something of use."
+      "    15:00 - Scheduled Early Auto Start: Incoming Server \n    15:01 - System BIST - No deviations; f(Ump) = 100%\n    15:04 - First data packet received (31 KB)\n    15:58 - Second data packet received (628 KB)\n    16:00 - Instantaneous - RX sustained FULL LOAD - Packet Rejects = n!\n    16:10 - Server auto-shutdown, auto-containment, and auto-alerts\n    16:13 - REACT - Team is convened\n    23:30 - REACT RULING - Restart with 5K Incoming Server Resources\n    00:00 - WB Go-Live went off without a hitch.\n    00:02 - Incoming data stream ends\n"
      ]
     },
     {
@@ -77,47 +74,6 @@
   },
   {
    "docs": [
-    {
-     "title": "Scan 07 - Power supply and distribution",
-     "source": "ABEAL 8P-OMI-1",
-     "pages": 2,
-     "plates": [
-      {
-       "img": "/robots/manual/scan-07-a.webp",
-       "label": "Power supply and distribution, first page"
-      },
-      {
-       "img": "/robots/manual/scan-07-b.webp",
-       "label": "Power supply and distribution, second page"
-      }
-     ]
-    },
-    {
-     "title": "Scan 11 - The video link",
-     "source": "ABEAL 8P-OMI-1",
-     "pages": 2,
-     "plates": [
-      {
-       "img": "/robots/manual/scan-11-a.webp",
-       "label": "The video link, first page"
-      },
-      {
-       "img": "/robots/manual/scan-11-b.webp",
-       "label": "The video link, second page"
-      }
-     ]
-    },
-    {
-     "title": "Scan 31 - Bias settings",
-     "source": "ABEAL 8P-OMI-1",
-     "pages": 1,
-     "plates": [
-      {
-       "img": "/robots/manual/scan-31-a.webp",
-       "label": "Bias settings, the four communications settings"
-      }
-     ]
-    },
     {
      "title": "Marked copy 01 - Bias settings",
      "source": "ABEAL 8P-OMI-1",
