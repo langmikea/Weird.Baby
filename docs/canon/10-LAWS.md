@@ -243,7 +243,7 @@ rather than with the Ops doctrines for that reason.
 
 | article | |
 |---|---|
-| **1** | **NO PUBLISHED ASSET CARRIES THE UNIT'S FULL SILHOUETTE.** *"This is the article that kills wide shots, and it kills them even when the wide shot is the best-looking frame in the file."* |
+| **1** | ~~**NO PUBLISHED ASSET CARRIES THE UNIT'S FULL SILHOUETTE.**~~ **STRUCK by Mike, 2026-09-02:** *"We're gonna be putting the portal up at the end of the first week so we don't have much about the silhouette rule to worry about anymore. Kill that."* The Portal (Record 005, Friday of week one) shows the machine whole; wide shots are no longer barred. Articles 2 to 5, the room clause, the B&W law and the re-encode rule stand. |
 | **2** | **EVERY CROP IS CUT AT A JOINT, A PANEL, OR AN EDGE.** *"A crop that slices through open air reads as a crop; a crop that stops at a joint reads as a CHOICE, and the machine keeps its dignity."* |
 | **3** | **ENOUGH TO PROVE THE MACHINE IS REAL — NEVER ENOUGH TO SPEND THE REVEAL.** Two-sided and **both sides bind.** ***The reveal is spent once.*** |
 | **4** | **B&W IS A GLASS-LEVEL TREATMENT. IT IS NEVER BAKED.** *"An asset that arrives already monochrome has thrown away information the museum cannot recover, and it is not a master — it is one styling of a master that no longer exists."* |
