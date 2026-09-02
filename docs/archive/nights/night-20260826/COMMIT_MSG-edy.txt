@@ -1,0 +1,50 @@
+E.D. Yahdah gains its video, and the spelling stands
+
+The video is -IwcOSnyNBI, first in the renditions with `first pass` second —
+Coconuts' ruled shape, Mike's order, quoted at that track. Nothing new is
+built: `hasVideo` was already true from Coconuts, so the player and the
+picker were already drawing. Only the id crosses; the museum writes no embed
+URL, and useYTPlayer points the player at the nocookie host.
+
+It was seen playing before it was written, which is the only probe §8's
+adoption rule accepts. In a real youtube-nocookie.com/embed/-IwcOSnyNBI
+iframe, built by the museum's own useYTPlayer with the museum's own five
+playerVars, on the live weird.baby origin: state went unstarted to buffering
+to PLAYING, and getCurrentTime read 10.401s then 15.407s across 5.0 seconds
+of wall clock — one to one, read twice after it settled. Coconuts ran as a
+control in the same page and the same minute and also reached PLAYING, so a
+refusal would have been a property of this video and not of the host.
+
+The spelling does not move. Mike ruled that E.D. Yahdah is correct and that
+YouTube's "E.D. Yadah" is the side that is wrong; he fixes the title there
+when convenient. The reason is worth carrying: four references spell it
+yahdah and none of them can move — the track id is identity, the rendition id
+is derived from the path, the path must match the file, and the file is an
+asset-table row with a sha256 under it. Correcting the glass alone would have
+left the identity spelled the other way, which is the wrong half to change if
+that spelling is what the recording was registered under. That reasoning and
+the flag pointing at YouTube rather than at this tree are both written above
+the track, so a later round does not read the mismatch as a defect here.
+
+One register row is added: the video's id, class VERIFIED, carrying the whole
+probe and both flags. The label needed no row — it is the same string in the
+same file as Coconuts' and hashes to the same key. Register 2060 to 2061.
+
+Gates: lint 9/8 baseline, build and launch build green, provenance PASS,
+reveal:check PASS, parity:gate PASS, instory:gate PASS, docs:numbers PASS,
+reveal:day nothing to move, assets:orphans 13 unchanged. Stale register rows
+measured at 22 before and after. On the launch bundle E.D. Yahdah appears
+once and E.D. Yadah zero times. Measured at 390px: zero horizontal overflow
+and all six rows still 36px, the new picker being the one the row above
+already ships.
+
+Flagged and deliberately not fixed: the video is unlisted where Coconuts is
+listed, which is Mike's call; a third spelling, "E. D. Yadah", sits in two
+worth-a-listen.js comments dated 2026-08-02 recording it as one of his own
+song titles, and it is recorded rather than acted on; and
+tools/make_house_covers.py still lists vol1-cover.png with the retired title
+THE MAKING OF BOWB V1 while the file on disk is his own vinyl artwork, so
+running that generator would overwrite his art with a sleeve carrying a dead
+name. The round log for all of this is at
+C:\AI\_night-20260826\MUSEUM_EDY_SPELLING_AND_VIDEO_LOG-20260826.md and
+nothing was deployed.

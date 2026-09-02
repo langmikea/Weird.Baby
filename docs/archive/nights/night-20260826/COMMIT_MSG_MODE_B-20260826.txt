@@ -1,0 +1,75 @@
+Build Mode B: the feed panel's controls on their own Portal screen
+
+Mike defined it: "Instead of the feed panel, I want to put the controls
+of the feed panel on a Portal screen", reached by "You run the file we
+got. Monitor pops up: > program.bat_or_exe_or_? / > Loading...... / >
+maybe mention the cfg file", through two doors - "Rec attachment" and
+"\Robots Track= filename". And he ruled it its own screen: Mode A's
+controls are not on it.
+
+THE FILENAMES ARE THE RECORD'S AND THERE IS NO .bat. Record 004's
+cracked-ZIP listing carries three files - TERMINAL.EXE,
+PORTAL_2v16.CFG, QC_101.TIF - and a search of both repositories returns
+zero in-story .bat. So the file that runs is the one that is there and
+nothing was invented to stand in front of it. UNIX-6x Emulator is
+Record 005's own line; canon permits the name and forbids explaining
+it, so the screen names it and stops. That listing had already named
+Mode A too, in /ANTENNA (PWD) and /CHANNEL_SELECT(PWD).
+
+THE PANEL NEEDED NO CHANGE, ONLY A MOVE. InstrumentPanel was already
+decl-in/panel-out and already scaled itself to its parent, so it did
+not know whether it was on an album page or inside a CRT. It left
+Exhibit.jsx for its own module because a second caller would otherwise
+cost react-refresh/only-export-components - the trade use-yt-player.js
+was extracted for. Measured before the cut: its six helpers are each
+referenced twice and by nothing outside that file. The panel is one
+object now, read by both surfaces, so they cannot drift.
+
+MODE B IS ITS OWN SCREEN, VERIFIED SERVED. The 2x2, the digit strip and
+the channel note all measure 0 on it; the bezel and the [X] stay,
+because the way out is not a Mode A control and an exit that disappears
+when the picture changes is not an exit. The LATCH still launches Mode
+A - measured, television came up with Mode A's controls back on it.
+
+BOTH DOORS OPEN THE SAME OBJECT BY CONSTRUCTION. The track is
+face.action, which already existed. The attachment is backlog item 5's
+missing branch. Its recommended destination was not used and the reason
+is measured: robots-record.js is a public module and portal.js is
+deliberately its own dynamic chunk, so naming the console's detail in
+the Record would collapse that split. The Record asks
+(wb-portal-run-console) and Robots.jsx - the one file already holding
+the module - answers from the track's own action. Item 5's "both must
+open the same thing" reaches a Record and a track because its reasoning
+never mentioned Records, and here it is satisfied by there being one
+object rather than by discipline.
+
+reveal:check caught the best defect in the round: the attachment's
+`door` field was unknown to the Record editor's reader, so Mike's first
+save from the day editor would have silently deleted it. Fixed the way
+record-entries.mjs itself rules - the reader carries it through AND the
+set is widened, because `door` is an object and val() would have
+returned null and gone quiet.
+
+Four defects of my own, all found by measuring the served page: the [X]
+and the frame were missing because the action carried no bezel; the
+boot drew under the bezel, 46.3px of every line hidden; the panel
+escaped its box at 375px because a transform does not change the layout
+box; and PORTAL_2V16.CFG was a filename the listing does not contain,
+because the subtitle slot uppercases. A filename's casing is its
+identity, so it left the label slot rather than being patched.
+
+The move re-keyed the register - a row is keyed on sha256(file +
+string) - staling 15 rows. They were carried rather than re-declared,
+each new row taking the old row's class and source verbatim, then
+pruned with the sweep's own --prune after a hand probe disagreed with
+it 22 against 15.
+
+At 375px the panel fits by 1.4 pixels, clamped at its 0.60 legibility
+floor, with the latch inside and 1.0/1.6px of frame over the curve.
+Stated rather than tuned until it passes: row MB-b. The album page
+keeps its panel until Mike says otherwise: row MB-a.
+
+Gates: lint 9/7 baseline, build green, provenance PASS, reveal:check,
+parity:gate, instory:gate and docs:numbers:gate all PASS. No pixel
+screenshot - the pane did not composite. The round log is at docs/
+MUSEUM_MODE_B_LOG-20260826.md and nothing was deployed.

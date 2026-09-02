@@ -1,0 +1,85 @@
+refresh the draft so unblocking guard 6 cannot revert Record 004
+
+Commit 0 of five. Ops scoped the guard 6 work to one entry per commit and ruled
+that the draft refresh belongs to none of them, so it lands first and alone.
+
+WHY IT IS A PRECONDITION AND NOT A TIDY-UP. record-draft.json was stamped
+2026-08-24 and Record 004 had drifted: the draft held the folder tree as a plain
+string where the tree holds {pre}. That is the loss a3356c6 repaired, sitting in
+the draft, held back only because 004 is blocked by its comments. Unblocking 004
+would have made it live - 004 reads as CHANGED, regenerates, and the listing
+lands as a paragraph. The guard's own header predicted exactly this: "the day
+somebody does the work this guard exists to force, the reversion becomes live."
+
+WHAT THE REFRESH CHANGES. One thing, and not a character of his is involved:
+Record 004's folder tree regains its {pre} marker. 001, 002, 003 and 005 are
+unchanged. Measured as a set - 75 strings in the old draft, 75 in the new, and
+0 present before and absent after. The characters are identical and only the
+wrapper moved. The draft now deep-equals the tree on all five entries.
+
+Two shape changes, both because the surface changed under Ruling A: the file
+gains a `source` block, which is the sha256 and mtime of robots-record.js the
+draft was written against, and `key` goes from wb.record.2026-08-09 to
+wb.day.2026-08-26. Nothing reads `key` - swept, the lander reads draft.entries
+and draft.saved and nothing else. Key order differs on 003 and 004 because the
+collector spreads rest before the fields it owns, and key order is not data.
+
+THE FILE WAS WRITTEN BY THE PAGE, NOT BY A SCRIPT. The refresh is a save from
+the day editor with nothing typed, which removes the question of whether a
+script's shape matches the surface's: the committed file is what the surface
+writes. Cross-checked against a draft computed independently from
+draftEntries() - deep-equal ignoring key order.
+
+PROVED ON THE REAL TREE. A real --write from the refreshed draft, snapshotted
+and restored around it: "carried through untouched: 001 002 003 004 005",
+49535 -> 49535 bytes, and sha256 identical before and after. The lander's own
+counter independently confirms the register's corrected number - "comment
+characters: 21486 before, 21486 after".
+
+C-day2 IS CORRECTED. It said 38,229 of 49,535 characters. That is the whole
+file's comment total and 16,743 of it is already above the array, outside every
+entry span. The blockage is 21,486 characters in seventeen blocks across four
+entries - 002 two, 003 two, 004 seven, 005 six, and 001 none, which is the whole
+reason it lands. The row now also carries the classification (28% standing and
+mostly a restatement of rulings already in MUSEUM_RULINGS-20260817.md, 58%
+entry-specific, 14% neither), Ops' destinations, and the five-commit plan.
+
+TWO FINDINGS THE REFRESH TURNED UP, NEITHER OF THEM THE DRAFT.
+
+A save from a browser that has been used for testing carries the test's marks.
+The first save wrote readiness.json with a notReady mark on "section:EXECUTIVE
+SUMMARY RENAMED" - left in localStorage by an interaction test two rounds ago.
+Disk had been restored that round; the browser had not. The store is doing what
+it is designed to do, the browser is the working copy and it wins, and that is
+precisely how a test artefact reaches a commit. Cleared, re-saved, and
+readiness.json is byte-identical to HEAD. Restoring a file on disk does not
+restore the browser that writes it.
+
+And day.html is not reproducible, which is mine. SOURCE_STATE bakes the source
+file's mtime, and day:proof writes-and-restores that file on every run, so its
+mtime moves without its content moving and the next npm run day produces a
+different page. The sha256 is identical; only the mtime line differs. Nothing
+compares mtime - record-serve.mjs:192 and day.mjs:2168 both test sha256 and
+nothing else - so it is cosmetic today and still wrong. day.html was restored
+rather than rebuilt this round; the fix is its own change and not part of a
+commit 0 scoped to one file.
+
+P6 IS NOT HERE AND WOULD HAVE NOTHING TO SAY IF IT WERE. No block has moved
+yet, so a manifest of moved blocks is empty, and a check that asserts an empty
+list cannot be shown going red - which is this proof's whole standard. P6 lands
+with Record 002, against that entry's blocks, with the deletion demonstrated on
+one of them.
+
+Nothing in src/ changed, so the museum lap does not apply. robots-record.js,
+readiness.json and day.html are byte-identical to HEAD; the only files here are
+the draft and the register.
+
+Gates: lint 1 (baseline 9/8, zero new) · build 0 · provenance:gate 0 ·
+reveal:check 0 · instory:gate 0 · parity:gate 0 · arc:check 0 · ops:size 0 ·
+docs:numbers:gate 0 · record:land --verify 0 (51/51) · day:proof 0 (45/45,
+9 shown losing first) · reveal:day nothing to move · lap:clean nothing left.
+
+Next is Record 002, two blocks and 2,579 characters, with P6 beside it. The
+round log is at C:\AI\_night-20260826\COMMIT0_DRAFT_REFRESH-20260826.md and the
+scoping it implements is at C:\AI\_night-20260826\GUARD6_SCOPING-20260826.md,
+and nothing was deployed.

@@ -1,0 +1,110 @@
+the runbook carries the rule that keeps it true, and the desk points at the workbook he writes in
+
+THE FREEZE WAS A MISREADING OF STEP 1 AND IT COST FIVE DEFERRALS. Five items
+were held back on the reading that SUNDAY-20260830.md step 1 requires a clean
+tree from now until the night. It does not. Step 1 is a check at the moment of
+deploy, its own remedy is "Commit or stash first" — a rule that forbade commits
+could not prescribe one as the cure — and `-dirty` is `git status --porcelain`
+evaluated inside `npm run build:launch` at step 13 (vite.config.js, THE COMMIT
+TRAVELS WITH THE BUNDLE), which cannot see a commit made days earlier. Only an
+uncommitted change on the night was ever the problem.
+
+THE RULE THAT REPLACES IT IS BOXED AT THE HEAD OF THE RUNBOOK: a commit before
+Sunday is free if it moves no value printed in that document; if it moves one,
+the document moves with it in the same commit. The box names the seven values
+so a later round can check its own change against a list rather than against a
+feeling — step 3's lint baseline, step 8's parity pair, step 12's expected
+line, step 20's seven and six and one, step 22's eighteen hours, the five-line
+summary's countdown and seven pictures, and the deploy's file and byte cost
+where it is quoted.
+
+IT IS ADDRESSED TO WHOEVER EDITS THE TREE AND ITS FIRST LINE TELLS MIKE TO SKIP
+IT. The document promises "Do not read anything else" and Doctrine 25 refuses a
+briefing above the work, so the box says whose it is before it says anything
+else. The night's procedure is untouched: 60 lines inserted, 0 deleted, and
+every step value is where it was.
+
+STEP 20's NUMBERS ARE A COMPUTATION AND THE BOX SAYS SO. Measured this round:
+`delivered()` returns exactly seven paths, six dated 2026-09-02 on Record 003
+and one dated 2026-09-03 on Record 004. The seven, the six and the one are that
+set typed into a sentence. The attachment join, when it lands, moves all three.
+
+AND THE REASON THE RULE IS PROSE IS RECORDED WITH IT. SUNDAY-20260830.md is not
+in `docs:numbers:gate`'s document set — the gate reads eight files and grepping
+`tools/numbers-gate.mjs` for SUNDAY returns nothing — so every number in it is
+exactly the defect that gate was built for, sitting in the one document nothing
+checks. The failure mode is named too, because it is not a red gate: it is a
+tired man at 11pm reading NOT RIGHT and stopping a deploy that was fine.
+Whether the runbook should join the gate's set is left open rather than decided.
+
+THE DESK DOOR POINTED AT A SUPERSEDED WORKBOOK FOR NINE DAYS. The card read
+`C:/AI/_week01/WEEK01_records-001-to-005.xlsx`; Mike stopped writing in it on
+2026-08-16. Compared cell by cell against what shipped: V3's Record 001 title
+and both deck lines match the tree exactly, down to the double space in
+"Server Load  (contained)", and 002 likewise, while WEEK01's 001 reads
+"INITIAL LAUNCH REPORT - Weird.Baby" with a mojibake em dash and its Day 4 and
+Day 5 tabs are empty. `workbook_to_draft.py` and sixteen rows of
+provenance/register.json both name V3 as the source of truth.
+
+THE DESK COULD NOT HAVE CAUGHT IT. Its standing rule is that it never links to
+a file that is not there, so it models ABSENT and has no idea of WRONG: the
+stale path existed, the card rendered green, printed "10 days ago", and told him
+in bold not to edit a copy while pointing at one. The card now prints "9 days
+ago", which is the workbook's real age and was previously hidden behind the
+wrong file.
+
+`Type in the white cells` went with the repoint rather than being carried over.
+It was written about the generated workbook, whose input cells were deliberately
+unfilled; V3 is his own build and 108 of REC 1.1's 150 cells carry a solid fill,
+so the sentence describes a different file. The tab names replace it, because
+`REC 1.1` to `REC 1.5` is how he can tell at a glance that the file he has open
+is the one `record:workbook` reads.
+
+THE REAL FIX IS NOT THIS LINE AND THE COMMENT SAYS SO. A literal repointed by
+hand goes stale the next time he builds a V4, exactly as this one did. Nothing
+today records which workbook produced the Records — both ends assert a path and
+neither derives one — so the fix is for the reader to stamp the path it actually
+read and for the card to print that stamp. That is a mechanism change and is
+deferred under ONE THING AT A TIME, not under the freeze.
+
+GUARD 8 IS INERT ON THE WORKBOOK PATH, FLAGGED AT THE SITE. `record:land`'s
+staleness guard refuses a draft older than the Record it would overwrite by
+comparing the draft's `saved` stamp to when the Record last moved. That works
+for the editor, which stamps `saved` when Mike presses Save. `workbook_to_draft.py`
+stamps `now()` — a fact about the reader — so a workbook of any age passes,
+always, by construction.
+
+IT IS NOT HYPOTHETICAL. NEW_RECORD_MAKER_V3.xlsx is nine days behind the tree:
+Records 003, 004 and 005 were revised after it through round logs and written
+briefs, and the workbook still carries GENERAL STATUS UPDATE for 003 and 005,
+004's old second deck line, and ADDENDUM 01 - The Four Settings, as printed,
+which the tree struck on 2026-08-20. The reader overlays the workbook onto the
+tree and the workbook wins, so all three would land as CHANGED. What is actually
+holding the door is the comment refusal, firing because those entries happen to
+carry reasoning — which is guard 8's own header describing itself: "a protection
+that fires for an unrelated reason is not a protection; it is a coincidence with
+a good record so far."
+
+FLAGGED, NOT FIXED, AND THE FIX IS NAMED AS A DECISION RATHER THAN A TYPO. The
+honest stamp is the workbook's mtime, and an mtime moves when Excel touches the
+file for any reason, so whoever fixes it settles that first. The comment says
+plainly not to "repair" guard 8 by tightening the comment refusal, which would
+remove the only thing currently standing there and call it a cleanup.
+
+TWO LEAD LINES IN OPERATIONS §8, BODIES AT THEIR SITES, which is that section's
+own cycle. 552 bytes; the ground state is 33,972 of a 40,000 ceiling.
+
+CHECKED AGAINST THE RULE THIS COMMIT WRITES: it moves no value printed in the
+runbook. The `.py` and `.html` changes are outside eslint's reach, an `.xlsx` is
+not what changed, and nothing here touches a Record, an album, the ledger or the
+epoch.
+
+GATES, ALL TEN, ON THIS TREE: lint 17 problems (9 errors, 8 warnings), zero new
+· build green · provenance GATE: PASS · reveal:check no FAIL · parity 4 shared,
+0 divergences · instory PASS · arc:check PASS · ops:size PASS at 84.9% of
+ceiling · docs:numbers:gate PASS, 11 claims in 8 documents · reveal:day
+"Nothing to move. The tree and the Record agree."
+
+NOT IN THIS COMMIT, DELIBERATELY: the workbook copy into git, which wants its
+own round; ARC.W4's landing, which is blocked on Mike's rail and not on the
+tree; and the draft-stamps-its-own-source writer, above.

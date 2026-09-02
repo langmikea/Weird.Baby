@@ -1,0 +1,47 @@
+The centre 4:3 behind the bezel, and the resize that needed no cover
+
+The aperture cannot be made 4:3 and that is what decides the reading. The
+opening measures 2532 by 2003, which is 1.264, and it is barrel-curved art on a
+plate whose replacement is shelved, so no amount of code makes the visible hole
+1.333. The centre 4:3 area is therefore a fact about the picture, and the
+instruction means what it says: enlarge what is behind until the hole frames the
+middle of it.
+
+The three candidates the survey offered were three answers to which rectangle
+counts as the screen, and each placement already knows its own, so the rule is
+written once. The canvas placement takes 3000 by 2400 to 3200 by 2400 at x -100,
+which enlarges the plates by exactly sixteen fifteenths; the feed placement takes
+2540 by 2036 to 2714.67 by 2036. Both are the centre 4:3 that covers the rect
+rather than one inscribed in it, because inscribing letterboxes and that is the
+opposite of enlarging, and the object-fit already declared does the rest. The
+measured opening is the one deliberately not used: the feed rect is taller than
+the hole on purpose so no page ground can leak in, and cropping to the hole's own
+bounding box would hand that guarantee back to buy thirteen pixels.
+
+It takes a sixth off television's black and does not close it -- 303.6 pixels a
+side down to 254.5, thirty per cent of the opening down to twenty-five. The root
+is the same one that put channel 4 in an iframe: object-fit is inert on one, so a
+wider box only changes how the player letterboxes inside it. Closing it means
+sizing the player to the box's height and overflowing its width, which is a
+change to how television is placed rather than to the crop, and it is not built.
+
+Shape B was reported and neither shape was built, because B would not have fixed
+what was reported. B keeps the twin mounted so returning to channel 3 costs no
+reload, and the resize happens on the first open too. The cause was measured by
+construction instead: removing the injected framedfit rule from a live framed
+twin gives 828 by 662 at x 36 against 900 by 720 at x 0, an 8.7 per cent growth
+and a 36 pixel shift, scheduled by a network fetch. Framed_Fit now runs in setup
+before Unit_LoadPhotos. Nothing in it ever needed the probe -- it adds a class
+and injects CSS, and Framed is a synchronous window test -- and setup runs from
+an inline script at the end of the body, so it lands before the stage is painted
+once. It also fixes the missing-base-plate case, where framed styling had never
+run at all and the NO SIGNAL card drew in the small centred stage.
+
+So there is nothing left to cover. A cover would have been a thing a visitor
+looks at and therefore Mike's word rather than Ops', but the resize is gone
+rather than hidden and what remains is a load, which is what every channel does.
+
+First-paint timing could not be measured and the probe says so rather than
+guessing: the pane does not composite, a 25ms sampler returned five samples
+across 4,682ms, and the twin's own paint entries come back empty. The round log
+is at docs/MUSEUM_CROP_AND_COVER_LOG-20260826.md and nothing was deployed.

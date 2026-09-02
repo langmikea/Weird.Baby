@@ -1,0 +1,77 @@
+count: the manual is read off its source, and step 18 claims less
+
+The manual-pages check has been passing on two stale halves. There were
+two manualPages() in this repo: reveal/schema.mjs counted the robots
+source and got 63, tools/numbers-gate.mjs counted public/held/robots/
+manual and got 61. The published claim it checks - OPEN_ACTIONS row E-b,
+"the manual is 61 pages" - was stale by the same two pages in the same
+direction, so the two matched and the gate printed PASS.
+
+That is the finding rather than the staleness. A check whose two failure
+modes cancel is worse than one pointed at nothing, because an inert check
+is visibly inert and this one published a verdict.
+
+numbers-gate now calls schema.mjs instead of deriving a second answer
+beside it, and it is guarded, which it was not: the old body was a bare
+readdirSync with no existsSync anywhere in the file, called
+unconditionally in the summary as well as inside the rule, so a missing
+directory would have killed the gate with ENOENT rather than reporting a
+fault. It returns null when the robots tree is unreachable and the
+runner's existing !measured branch names it in skipped. Proved by
+evaluating both branches: source ok compares 63, source missing skips.
+E-b moves to 63 in the same change, marked in place so the correction
+cannot read next year as Mike's own sentence. Its count sits in Known,
+not in the question he is being asked to rule on, which is untouched.
+
+Canon's Extent cell moves to 63 and the defect it records is not
+arithmetic. The generator prints one summary line - sections,
+appendices, paragraph positions, tables, figures, index entries - and
+that line has no page count in it. The six numbers in the cell are that
+line and were never wrong; "61 pages" was prepended from elsewhere and
+went stale on 2026-08-19, when the first body text took the manual from
+61 to 63. Counting "off BODY" cannot see it either: BODY_7_19,
+BODY_7_14 and BODY_B_1 sit outside that array. The cell is sourced to
+the generator's own two-pass layout(), len(doc.pages), and not to a
+--count flag, because that flag does not exist yet and citing one that
+does not is the defect this round exists to fix.
+
+SUNDAY step 18 claimed more than it proved and now claims what it does.
+The worker refuses /held/* by prefix before it looks for a file, so a
+404 proves three things at once - the request reached this worker first
+for that prefix, the built worker's stage is launch, and the door
+refused a request with no key - and a 200 means one of those failed,
+which is the leak the step exists to catch. What it cannot prove is that
+anything is behind the address; a path with no file answers the same 404
+from the same line, which is the hazard already biting /api/held. From
+outside, without the key, the two states cannot be told apart: same
+status, same nine-byte body. With the key they separate, and step 19
+already mints the cookie, so the other half is one line inside 19 rather
+than a rewrite of 18 - 200 image/png at a size in the millions means the
+door is shut on something that is really there, 404 means the address is
+empty and 18 proved nothing that night. 18 stays the rollback trigger on
+its own for a night that runs short.
+
+M2 and portal.js are flagged and M2 stays open, because it is Mike's.
+The plate is rotated 180 degrees, not mirrored, and the horizontal flip
+M2 asks for does not fix it - established on 2026-08-11 by applying the
+flip and looking, re-measured now: rot180 true, flip-horizontal false,
+identical pixel histogram, and the museum's pre-edit blob is
+byte-identical to the robots master as it stands. What is still open is
+therefore the robots master, not the museum's file.
+
+Nothing under public/held/robots/manual was deleted. Doctrine 27 caught
+the premise that it has no consumer: role "unreferenced" answers the
+displaying question only, and six things build from those files -
+including SUNDAY-20260830.md itself, whose step 18 probes one of them.
+The 64 files and their asset-table rows are held until after the
+30 August launch, so §0's held-cost pair does not move.
+
+Gates: lint 9/8 = baseline - build green - provenance PASS -
+reveal:check PASS - parity:gate PASS - instory:gate PASS -
+docs:numbers:gate PASS, now reading 63 (robots source) and checking 11
+published claims in 8 documents. The lap was not run and the reason is
+measured: the only change under src/ is ten lines inside an existing
+block comment in portal.js, and grepping the built bundle for the flag's
+own text returns nothing, so the lap has nothing it could see. The round
+log is at C:\AI\_night-20260825\MANUAL_ROUND_LOG-20260825.md and nothing
+was deployed.

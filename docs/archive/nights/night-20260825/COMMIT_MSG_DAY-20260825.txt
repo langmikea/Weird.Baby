@@ -1,0 +1,186 @@
+the day editor, piece one: one day whole, read-only, in his vocabulary, and the viewer works when it is served
+
+NOTHING SHOWED ONE DAY WHOLE. Every surface showed one facet across five days,
+or five days across one facet: record.html the entry's prose and only five field
+kinds of it, assign.html the attachments, arc.html the WEEK, artifacts.html the
+assets, eggs.html the eggs, the desk a list of links. This shows a day whole, in
+the same shape every day.
+
+MIKE USED IT AND REPORTED SEVEN THINGS, AND ALL SEVEN ARE IN THIS COMMIT. The
+build and its corrections land together because the file had not been committed
+when he read it. Every one of the seven is either SHAPE or SUBTRACTION; the
+reasons are in the file's own header and the round is
+C:\AI\_night-20260825\DAY_EDITOR_FIXES_LOG-20260825.md.
+
+SED IS DEFINED IN THE TREE FOR THE FIRST TIME. Mike ruled it 2026-08-25: SAME
+EXCEPT DATA - one shape, many instances, differing only in what fills it. The
+six existing uses of "SED" all name a different, narrower ruling about the
+calendar. The definition is in the spec and repeated in this file's header
+because this is the first thing built under it, and every part of the file is
+marked [SHAPE] or [WEIRD.BABY] at the site. Spec:
+C:\AI\_night-20260825\DAY_EDITOR_SPEC-20260825.md.
+
+A SECTION IS A HEADER AND ITS LINES, AND THAT IS THE TERMINOLOGY RATHER THAN A
+DESCRIPTION OF ONE. His words: "SECTIONS exist. They start with a HEADER which
+always fits the constraints and displays per the standard recipe. The text
+following the header is the LINES, always formatted the same, indented, etc."
+Two functions, headerHtml and linesHtml, and no third path anywhere on the page.
+The LINES are monospace and pre-wrap on the data's own evidence - Record 004's
+folder tree hangs PORTAL.CFG under TERMINAL.EXE at column 26 and 002's addendum
+is a file manifest, the same finding that made RecordEntry.jsx opt one paragraph
+into pre. Here it is not an opt-in: one recipe, every time, so the editor cannot
+show him a shape the section does not have. And his paragraphs are NOT joined -
+each run of lines draws as its own block through the same recipe, because
+joining them would be Ops smoothing his writing.
+
+SHOW THE TEXT, NEVER DESCRIBE IT. The page printed "1 paragraph" where the
+paragraph itself fits; it prints the paragraph. 16 sections across 5 days, 73
+lines, all drawn. And the plate labels reached no surface at all - every plate
+in an attachment carries a written label, "The video link, first page", "Bias
+settings, returned marked", and the tile drew a filename while the sentence
+describing the page sat on the floor. It is a caption on the tile now and it
+travels into the viewer.
+
+EVERY ICON AND EVERY MARK SAYS WHAT IT MEANS AND WHAT IT READ. Two lines on
+every hover from one function: line one is the MEANING and is the same sentence
+every time that mark appears on any day, line two is what it READ on this one. A
+hint that only describes leaves him deriving the reading from the glyph; a hint
+that only reports leaves him deriving the rule from the reading. The budget
+halves are quoted from record-shape.mjs rather than retyped, because a hint that
+restates a limit is a second declaration of it. MEASURED ON THE SERVED PAGE: 338
+marks, 338 two-line hints, zero bare, zero single-line, and querySelectorAll
+'[title]' returns exactly 338 so nothing outside the mark set wears one either.
+The probe found one gap worth recording - the x2 button's hint was written by
+draw() and therefore did not exist until a picture was open, which is the thing
+the item is about.
+
+THE VIEWER'S FINAL STEP IS x2 AND IT IS A SECOND IMAGE, NOT A SCALE. "It is not
+enough today" was measuring something real: the sources are 1700x2200, VIEW_PX
+fits them inside 480, so the viewer drew 371x480 - its own natural size. Scaling
+that up would show exactly the detail x1 already showed, at twice the size, and
+say it was showing more. So the day's pictures are inlined twice, at 480 and at
+960, and the step swaps the source. Measured served: x1 371x480 natural, x2
+742x960 natural - naturalWidth actually doubles. The cost was measured before it
+was spent, ~45KB of base64 each against ~20KB. The shelf gets no second copy -
+138 tiles would be about eight megabytes to answer a question the light table
+already answers - so x2 is DISABLED for a shelf picture and its hint says why,
+rather than upscaling and calling it a zoom.
+
+THE DEPOSIT LINE IS OUT. It printed "no attachments - not a hole. Week one is all
+deposit." That is Ops prose in Mike's own voice on a surface he reads, and
+reassurance is a judgement. The header states the count and stops.
+
+THE LEDGER ROWS PANEL IS OFF, WHOLE - "Ops bookkeeping on his page; he will
+never act on it." calledBy, the reveal/ledger.json read and the LEDGER constant
+went with it rather than being left computed for nobody.
+
+THE FILES PANEL IS THE LIST AND NOTHING ELSE. The note explaining that anything
+path-shaped gets published is gone and nothing replaced it: Mike has ruled that
+mechanism a hack being replaced and its replacement is a later round, so the page
+does not teach it. And the panel now holds the list its own header names - it
+used to show only the files NOT inside an attachment, which on every day that has
+files is none of them, so "FILES THIS RECORD NAMES 6" drew an empty panel with a
+paragraph of explanation under it. That put a file on the page twice, so the
+viewer's walk dedupes by public address: 12 tiles in Record 003's DOM, 6 unique
+addresses, and the viewer says 1 of 6.
+
+IT DERIVES NOTHING IT CAN READ. The shelf is shelf.mjs - the same list
+assign.html reads, "not a parallel list". The budgets and the section header's
+own rule are record-shape.mjs. The entry is draftEntries(). The assets come from
+entries(). The brace test is reveal:check's own regex, so what the page shows and
+what refuses a packet cannot disagree.
+
+AND IT INVENTS NO JUDGEMENT. No completeness score, no percentage, no ranking of
+days. A mark is red only where a gate that EXISTS would refuse the packet.
+Nothing in the tree gates a section header - CONSTRAINTS says enforcedBy nothing
+- so the header's character count lives in the hover and no number is set on the
+glass beside it. The one red a header raises is Mike's own ruling: a header whose
+LINES are empty is dropped entirely, header included, and nothing said so before
+this page.
+
+THE SIX ICONS READ FACTS THAT ALREADY EXIST - headline, deck headroom,
+attachments and their files, files not yet placed, a section that would be
+silently dropped, unresolved brace. An icon says a STATE and never an
+instruction, and a zero on an optional thing is not red.
+
+THE CALENDAR CARRIES THE SAME SIX MARKS, from the same function, which is the SED
+test applied to the page's own two views. It immediately showed something no
+surface has ever shown: RECORD 002's deck is 128 of 130, one edit from failing
+reveal:check.
+
+THE VIEWER FAULT IS FIXED, AND IT WAS OPS' DEFECT. Mike opened the manual,
+clicked a thumbnail and got "This file could not be loaded. There is nothing to
+look at." Two mechanisms draw a picture and they disagreed about where the page
+is: the tile is an inline data-URI and always renders; the viewer loaded the FULL
+FILE through diskHref, ../../public/..., resolved against wherever the page sits.
+Measured both ways: double-clicked from docs/dictation-20260807/ all 138 resolve;
+SERVED by npm run mock all of them 404, because that server's root is docs/ and
+the path climbs out of it.
+
+THE TRAP POINTED AT OPS RATHER THAN AT HIM: OPERATIONS section 8 obliges Ops to
+serve every mock because Ops cannot see file://, so the way Ops is REQUIRED to
+look was the way that breaks. This page references no path at all - the x2
+images included - so it renders identically however it is opened. VERIFIED
+SERVED at 127.0.0.1:8931: ONE network request for the whole page, the HTML, 200,
+and nothing else fetched. Zero console errors, zero broken tiles, page overflow
+zero at desktop and at 390px, and at 390px the x2 picture is still a true 742px
+wide with the overlay scrolling inside its own box.
+
+THUMBNAILS: FAINT, NOT SMALL, AND THE MEASUREMENT KILLED THE CROP. The manual
+pages are 2040x2640, mean luminance 246-250 of 255, with 91-97% of every page in
+the brightest band and ink below 200 at 0.3%-1.8% of pixels. The ink's bounding
+box is 61-92% of the page, so cropping to it buys x1.00 to x1.24; sharp.trim() is
+worse at 98.4-99.7%; and no single band is representative, the densest 25%
+holding 34-51%. So: a percentile contrast stretch at a bigger size. On page-07
+ink goes 1.8% -> 9.8% at normalise 2/98; 1/99 is weak at 6.8% and 5/95 blows out
+at 88.9%. normalise() is NOT a min/max stretch, which is why it works - these
+pages already hold a true 0 and a true 255.
+
+IT IS APPLIED PER IMAGE ON THE IMAGE'S OWN EVIDENCE AND NEVER TO A PHOTOGRAPH.
+stretch:"auto" reads each image's greyscale mean and stretches only above 235: a
+manual page is 246, the machine photograph front_screen.png is 108, so the gate
+skips every photograph by a margin of 127. The cache key carries the size and the
+treatment, so 480 and 960 of the same file are two entries and neither can serve
+the other's request. lighttable.mjs's change is additive - both existing callers
+pass no stretch and are byte-unchanged.
+
+FLAGGED, NOT FIXED - reveal/day.mjs EXPORTS plan() AND NOTHING CAN IMPORT IT.
+That module is a script: it runs its whole report at the top level and ends in
+process.exit(), with no main guard. Importing it prints the day's step and kills
+the importing process - measured, the first build of this file produced
+reveal:day's output and none of its own. NOT FIXED HERE: it is step 12 of
+SUNDAY-20260830.md and this piece is additive. The door state is read off the
+asset table's own path instead, which is the door itself and not a second opinion.
+
+FLAGGED, NOT FIXED - STAGE_PREFIX is imported by day.mjs and used by nothing. It
+was dead before the corrections round and is left alone because that round's
+instruction was that nothing else changes.
+
+NOT THIS PIECE, ON INSTRUCTION: editing anything, eggs, and the shelf's own
+behaviour beyond appearing. Eggs are on the backlog with their reason - measured,
+no egg is linked to a day by anything: 15 rows, zero carry a `when`, zero name a
+record in deps, so an egg panel is a new FIELD and not a view. record.html does
+NOT die; it folds in when the day editor can do what it does, and it cannot yet.
+
+CHECKED AGAINST THE RULE AT THE HEAD OF SUNDAY-20260830.md: this moves no value
+printed in the runbook. No Record, no album, no ledger row, no epoch, nothing
+under public/. Lint was the only one that could move and it is exactly at
+baseline.
+
+GATES, ALL ELEVEN: lint 17 problems (9 errors, 8 warnings), zero new · build
+green · provenance PASS exit 0 · reveal:check exit 0 · parity 4 shared, 0
+divergences · instory PASS, 21 strings, 0 findings · arc:check PASS · ops:size
+PASS, OPERATIONS.md 33,972 of 40,000 · docs:numbers:gate PASS, 11 claims in 8
+documents · reveal:day "Nothing to move. The tree and the Record agree." ·
+lap:clean, nothing left in public/.
+
+THE MUSEUM LAP WAS NOT RUN AND THE REASON IS THAT NOTHING IT MEASURES MOVED. The
+lap copies a harness into public/ and needs a build and wrangler dev to lap
+MUSEUM routes; nothing in src/, public/ or any data file changed. The
+measurements it exists to take were taken directly on the page that did change,
+over http, at 390px and at desktop.
+
+ONE LINE DELIBERATELY NOT WRITTEN: the day editor has no card on the Ops desk.
+The spec says it becomes the lead card, but adding it was not in this piece's
+scope and it would regenerate five desk pages. It is one entry in ops-desk.mjs
+whenever it is wanted.

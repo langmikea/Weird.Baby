@@ -1,0 +1,114 @@
+assign captures an attachment now, not a day, so a title cannot exist without its files
+
+MIKE RULED IT: he names the attachment while he picks the pictures. Title and
+files are born in one act. This is the surface only — nothing writes to the tree
+and the writer that lands a capture into record-draft.json is a separate step.
+
+THE QUESTION CHANGED BECAUSE THE OLD ONE COULD NOT BE ANSWERED. A day-picker
+captures (day, file) and leaves the title to be paired afterwards, and that
+pairing is not derivable: Record 003 is four titles over six files, grouped
+2/2/1/1, with one page in two scans, which no positional zip can produce. The
+old STATE[day] was built by setDay filtering an id out of every day and PUSHING
+it, so it recorded LAST-CLICK ORDER — reading that as intent is reading click
+history. Both problems are gone rather than solved, because grouping is now the
+thing he is doing.
+
+AND IT IS A RULING HE ALREADY MADE ONCE, THE HARD WAY. On 2026-08-16 his
+workbook's two ATTACHMENTS lines — View of the portal screen and Manual ref to
+Portal — landed on Record 004 as docs rows carrying a title and nothing else. On
+2026-08-20 he struck both: "Remove the docs field entirely. The ATTACHMENTS 2
+badge goes with it." Ruling 9's own shape — "the Record may withhold and the
+Record may not promise." A title with no files is a promise; docState() resolves
+a plateless row to held, which draws not here yet; and one of the two named a
+scan Record 003 had already delivered, so Thursday would have said the museum
+lacks a thing it showed on Wednesday.
+
+THIS SURFACE MAKES THAT FAILURE IMPOSSIBLE RATHER THAN FORBIDDEN, and the header
+says so where the next round meets it: a title cannot exist here without the
+files it names, because naming is what CLOSES a set that already has files in
+it. There is no order of operations that produces an empty docs row. A later
+round must not simplify it back into a day-picker.
+
+WHAT THE SURFACE IS. One button per tile, add or remove, into a working set. The
+set is shown in order with move-up and move-down, because plates render in array
+order and order is real INSIDE a set — order ACROSS sets never meant anything and
+is not recorded. Then a title, then the Record, then close. The close button
+refuses an empty set and an unnamed one, which is what makes the guarantee
+structural rather than a rule somebody follows.
+
+THREE GUARDS, AND ONE OF THEM HAD TO BE PROVED BY INJECTION. A file already
+inside a closed attachment cannot join a second one. A file the chosen Record
+already delivers cannot be added, and changing the Record re-asks the question
+and sweeps an offending file OFF the bench with a banner rather than leaving it
+sitting there looking chosen — that is exactly the check that would have caught
+Manual ref to Portal.
+
+ITS POPULATION IS EMPTY TODAY AND THE HEADER SAYS SO. Measured on the built
+page: the seven paths delivered() returns have NO TILE, because the shelf's
+supersededBy filter drops all seven — so the guard cannot fire against anything
+currently on the shelf and a clean run proves nothing about it. Proved by
+injection instead: a delivered path pushed into ALREADY at runtime disabled the
+button, printed "already in this Record", refused the click, and was swept off
+the bench on a Record switch. This is the orphan check's own defect one room
+over — --orphans counted a population that was empty by construction and read 0
+for its whole life — so the emptiness is written down rather than left to be
+discovered by somebody who trusts a green run.
+
+THE CAPTURE IS wb.assign.v2 AND IT IS THE docs ROW THE LANDER ALREADY READS,
+minus the two fields that are Ops' wiring: no source, and no pages — pages counts
+PAGES, not FILES, and ruling 12's one-page-in-two-scans case is why those are not
+the same number. A plate needs no label either; RecordAttachments.jsx falls back
+to the file's own name, "a fact rather than a caption Ops made up for the row".
+It carries out in the rescue-dump shape rescue-import.mjs already reads. The
+download is attachments.txt.
+
+THE OLD CAPTURE IS NOT MIGRATED AND THE HEADER SAYS WHY. wb.assign.week1.v1
+stands as a record and this page does not read it. Its 22 ids are banked and
+resolved in C:\AI\_night-20260825\BROWSER_RESCUE-20260825.md; 18 name files in
+the ROBOTS repo whose museum counterpart is a DIFFERENT FILE — page-01 is sha
+af4abdef0832 at 1,926,945 bytes here against 6d0276faa168 at 2,218,869 bytes
+there — so re-pointing decides which file the museum shows, which is Mike's call
+and not a migration. Re-picking costs one sitting and carries no inference.
+
+THE STORY EVENTS KEEP THEIR ROWS AND LOSE THEIR CONTROL. A story event's day is
+when: on its ledger row and reveal:cards already asks for it one card at a time.
+Leaving the row visible keeps what the museum is holding in view; leaving a
+control on it would take an answer nothing reads. Nothing left his view.
+
+FLAGGED, NOT FIXED — when's UNIT IS UNDECIDED IN PROSE AND DECIDED AS A WEEK BY
+ITS ONLY READER. reveal/README.md calls it "the story day or week"; reveal-ledger
+asks "what day something comes out" and heads a section ASSETS CLUSTERING ON ONE
+DAY; the one consumer, reveal/transfers.mjs, does typeof r.when === "number" and
+compares it to a transfer WEEK. A day written into it would be compared against a
+week and fault silently. All 176 rows are null, so the ambiguity has never been
+paid for. This file writes no when and never did.
+
+THE HEADER'S OWN STALE CLAIM WENT WITH THE CHANGE. "WHAT A TILE DOES NOW" still
+described five numbered buttons "because the day is the decision". It is
+corrected in place with the old sentence quoted, because a header describing a
+surface that no longer exists is how the next round rebuilds the thing that was
+replaced.
+
+DRIVEN END TO END BEFORE REPORTING, SERVED OVER HTTP because Ops cannot see
+file:// — http://127.0.0.1:8931/dictation-20260807/assign.html via npm run mock.
+Two tiles picked, reordered, named, assigned and closed; the capture came back
+in the specified shape; all three guards fired; every choice cleared afterwards.
+The state was read out of the page's own model rather than inferred from the
+markup.
+
+OBSERVED AND NOT FIXED, because it is not this round's: the tool's last console
+line reads "delivered by the Record today: 0" and always has. `del` is a Set and
+the line does Object.keys(del).length, which is 0 for any Set. It is a printed
+number that is wrong; it is pre-existing, it touches nothing, and correcting it
+here would put an unrelated fix inside a surface change.
+
+CHECKED AGAINST THE RULE AT THE HEAD OF SUNDAY-20260830.md: this moves no value
+printed in the runbook. Nothing lands, so delivered() is unchanged at seven and
+step 20's seven, six and one stand. No Record, no album, no ledger row, no epoch,
+nothing under public/.
+
+GATES, ALL TEN: lint 17 problems (9 errors, 8 warnings), zero new · build green ·
+provenance GATE: PASS · reveal:check no FAIL · parity 4 shared, 0 divergences ·
+instory PASS · arc:check PASS · ops:size PASS · docs:numbers:gate PASS, 11 claims
+in 8 documents · reveal:day "Nothing to move. The tree and the Record agree." ·
+lap:clean, nothing left in public/.

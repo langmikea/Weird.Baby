@@ -1,0 +1,56 @@
+release: the gate reads the declaration 48fbee2 landed
+
+48fbee2 CHANGED THE DECLARATION AND DID NOT LAND THE FILE THAT READS IT, SO
+HEAD IS BROKEN AND THIS IS A REPAIR RATHER THAN A FEATURE. That commit made
+SURFACES an ordered array of objects instead of four strings, which was the
+point of it, and tools/release-gate.mjs still checked membership with
+SURFACES.includes(p.surface). Measured on a clean tree at 48fbee2 by
+stashing this commit's two files: npm run release:check exits 1 and reports
+five faults, one per posting, each reading unknown surface "youtube".
+
+AND IT FAILS IN THE WORSE OF THE TWO WAYS. It does not refuse to start. It
+runs, prints a full report, and confidently names five faults that do not
+exist — which is exactly the shape this project has paid for before, where
+a green-looking instrument and a wrong one are indistinguishable until
+somebody reads the probe.
+
+THE OTHER FILE IS THE SPEC, AND IT IS STALE IN THE SAME DIRECTION. At HEAD
+it still says Facebook and Instagram carry no posting, still says all three,
+and still asks for the three handles — describing a three-surface world one
+commit after it stopped existing. It now carries the ruled order, names
+YouTube as third and says plainly that everything which exists today sits on
+the archive while the door is not open, records the TikTok account as a
+precondition and Instagram as unstated, carries the handle order with the
+dot constraint, and gains two open items for the sit-down.
+
+WHAT THE GATE GAINS, WHICH IS WHAT 48fbee2's MESSAGE ALREADY DESCRIBED. It
+imports SURFACE_KEYS, surfaceOf and HANDLE; iterates and validates against
+the ordered keys; refuses a posting that claims to be OUT on a surface whose
+account does not exist, and refuses one on a surface nobody has said either
+way about; and prints the four surfaces in the ruled order on every run with
+each account's state and the handle rule beneath them, because a list nobody
+sees is a list that gets reordered.
+
+THREE CHECKS PROVED BY TRIPPING THEM, EACH AGAINST A COPY WITH THE TREE
+RESTORED AFTER. A TikTok posting set OUT was refused with the precondition
+note printed. An Instagram posting set OUT was refused as unstated. A TikTok
+posting set PLANNED passed, and that one matters as much as the two
+failures: a precondition that blocked planning would have made the honest
+state unrecordable. The seven checks from fb21109 were re-run and pass
+unchanged.
+
+48fbee2 STANDS AND ITS MESSAGE OVER-DESCRIBES IT, WHICH IS WORTH WRITING
+DOWN. That message accounts for the precondition checks, the ordered report
+and the trip tests, and it ends on a gate line reading release:check PASS,
+while the commit contains zero lines of tools/release-gate.mjs. The gate
+line was true of the tree it was measured on and false of the commit made
+from it. Rewriting published history for that is worse than the record, so
+it is named here instead: between 48fbee2 and this commit, release:check
+was red on a clean tree, and any round that ran it in that window saw five
+faults that were the gate's and not the data's.
+
+Gates, on the tree this commit makes: release:check PASS, lint 9 errors 7
+warnings at baseline with zero new, build green, build:launch green,
+provenance:gate PASS, reveal:check PASS, parity:gate PASS, instory:gate
+PASS, docs:numbers:gate PASS, reveal:day nothing to move. Nothing under src
+changed and releases.json is untouched by this round, as it was by the last.

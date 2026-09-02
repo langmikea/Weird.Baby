@@ -1,0 +1,74 @@
+approve: the gate was parked on purpose, and nothing said so
+
+approve:check reads 11 of 11 red and is named in no governing document.
+Ten pages have never been signed and one - "/" - dropped a signature it
+briefly had. Nobody had ever seen it red because nobody had ever run it.
+
+It is neither a defect nor a superseded mechanism. The tool was closed
+as a backlog item on 2026-08-17 in c5b7943, and the closure in
+docs/OPEN_ACTIONS_CLOSED.md says why: "a stamp with no consumer - npm
+run approve writes a signature and nothing reads it back", and "THE
+APPROVAL LAW IS NOT CLOSED AND IS NOT WEAKENED". It returns when it
+feeds the quality box, which BACKLOG.md files under PARKED - no date.
+Mike signed "/" at 21:13 on 2026-08-16 and the tool was closed at 00:07
+on 08-17, two hours and fifty-four minutes later.
+
+Nothing links to that closure, so a session finding the gate red has no
+way to learn it was parked - which is how a later round "fixes"
+something that was left alone deliberately. OPERATIONS.md §5 now
+carries a row saying what Doctrine 15 says about assets:gate: red by
+design, nobody's packet gate, must never join §9's list, because it
+checks whether Mike has looked rather than anything Ops can fix, and
+putting it in the packet would block every commit on an inspection
+nobody asked for. The row cites the closure by file and date and names
+the return condition. It went in the live ground state rather than the
+archive because §0 rules the archive a snapshot that is never edited to
+track this file and §8 states the cycle; §5 gained a pointer line
+saying so, since it previously said only that it had moved whole.
+
+DEPLOY_GROUND_TRUTH.md:180 listed eight commands as packet discipline
+"enforced by a human reading OPERATIONS.md". Two of them are not, and
+OPERATIONS had never named one of them - no human reading it could have
+been enforcing approve:check, because until today it did not know the
+command existed. assets:gate is not packet discipline either; Doctrine
+15 says so in as many words. The correction is appended and dated
+rather than written over the sentence, because that document is a past
+day's record and rewriting a measurement falsifies it. Its hooks
+reading, its deploy commands and the guard are untouched and stand.
+
+The over-reach is recorded at the head of reveal/approval.mjs, where
+the fingerprint is computed, as the thing the quality-box round must
+solve before any page is worth signing. Reachability is the import
+graph, not what renders: "/" is the Lobby and reaches robots-record.js
+for the countdown and the wing gate, so every asset any Record carries
+counts as a picture on the Lobby. That is what killed the only
+signature this repository has ever held - signed against one picture,
+the house mark, then Records 003 and 004 attached six manual scans and
+qc-101 between 08-19 and 08-21, the pictures part went 1 to 8, and the
+signature stopped applying. He signed the Lobby and it was dropped by
+seven pictures no Lobby visitor sees. Under this design "/" cannot hold
+a signature for more than a few days.
+
+tools/approval-proof.mjs records that it would report INCONCLUSIVE and
+exit 1 today: the third tell is a route-date pair from approvals.json,
+the define admits only approved pages, nothing is approved, so the
+development map is empty and the pair is in neither bundle. Tells 1 and
+2 still pass. That is the WEAK branch working rather than failing. And
+the 2026-08-14 PROVED was two of three tells - no page was signed until
+08-16, so the third was skipped; the tool printed that note and the
+Friday log's one word did not carry it. The launch fold is not in
+doubt. Read off the code path, not run: that file shells out to
+build:launch.
+
+Not touched, by ruling: provenance/approvals.json, which is
+byte-identical to HEAD, the approve tool, the Approval Law, and the
+fingerprint's behaviour. The over-reach is recorded, not fixed.
+
+Gates: lint 9/8 = baseline - build green - provenance PASS -
+reveal:check PASS - parity:gate PASS - instory:gate PASS -
+docs:numbers:gate PASS - ops:size PASS at 79.2% of ceiling -
+approve:check still 11 of 11, which is the correct reading. The lap was
+not run because nothing under src/ changed at all; all four edits are
+comment or prose and no executable line moved. The round log is at
+C:\AI\_night-20260825\APPROVE_CHECK_ROUND_LOG-20260825.md and nothing
+was deployed.

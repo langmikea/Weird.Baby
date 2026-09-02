@@ -1,0 +1,75 @@
+docs: the social pipeline scoped, and the deploy record's breadcrumb
+
+SCOPED AND UNBUILT, the shape docs/HIDDEN_LINKS_SCOPING-20260807.md already
+uses in this directory. Nothing in this commit is a mechanism; it is the
+shape a build would take, written before the build so the shape can be
+argued rather than discovered.
+
+MIKE RULED FOUR THINGS AND THEY DECIDE THE ARCHITECTURE BETWEEN THEM. The
+museum does not assemble reels, he makes them, so there is no encoder in
+this. The museum runs daily operations but YOUTUBE'S OWN SCHEDULER
+publishes, so nothing here calls an API, holds a token or fires at nine in
+the morning. Facebook is a channel with no scheduler, captured when he
+posts it, because its scheduling moves every year and lives behind a
+Business Suite that is not stable to build against, and one platform
+working beats two half-wired. What those four force is that the museum
+holds the intention and the record while the platform holds the mechanism,
+and every hard problem left is therefore a file problem.
+
+A POST IS ONE OBJECT AND NOT TWO. It starts as an intention and becomes a
+receipt, which is the Record's own property and the most valuable thing in
+the building to copy: there is no second file recording that Record 003
+went out, because the entry's existence IS that record. Four states rather
+than three, and the fourth is forced by the ruling: staged means uploaded
+and scheduled at YouTube and invisible to the museum, and without it
+nothing can tell "not made" from "made and waiting", which is the whole
+difference between a gap and a false alarm.
+
+A SCHEDULE IS A RULE THAT GENERATES DUE DATES AND NOT A LIST SOMEBODY
+FILLS. The argument is not preference and the proof is already in the
+tree: SURFACING_LOG.md is a good instrument meant to run at every session
+close and it stopped on 2026-08-06, twenty-two days and sixteen rounds
+ago. But the rule generates a QUESTION rather than an obligation, because
+a gap in the numbers is not a defect and a later round must not fix one.
+The house's silence is a DECLARED schedule carrying its reason, never an
+absence, or a later round finds a wing without one and helpfully gives it
+one.
+
+PERFORMANCE IS A DATED READING HE PASTES, APPEND-ONLY, and stamped with
+the day he READ it rather than the day he typed it, which is the hazard
+this tree has already filed twice about tools that stamp saved at the
+moment of saving. A count overwritten in place destroys the trend and the
+trend is the entire point.
+
+WHAT MUST NOT BE BUILT TWICE IS NAMED ROW BY ROW: the shelf, because a
+second reader of it would be a parallel list on the day it was written;
+record-shape.mjs's budgets-and-constraints pattern with its silent:true
+column; the day editor, because a separate post editor would be the SED
+test failing on its own first instance; reveal/day.mjs's report shape;
+and surfacing.mjs, which already asks what a planner would ask and should
+be restarted rather than reimplemented. A post is NOT a Record entry and
+must not become one, and the one real duplication risk is the calendar:
+the schedules take their own anchors and must not read RECORD_EPOCH, or
+moving the epoch silently reschedules a quarter of social.
+
+SIX QUESTIONS FOR MIKE ARE NUMBERED AT THE FOOT, to be put to him one at a
+time with no mechanism in them, and the first one decides the round. One
+thing is his to SUPPLY rather than decide: the handles, M60, open since
+2026-08-05, and everything that links outward is blocked on that paste.
+
+AND THE ROUND LOG GAINS A SECTION SEVEN, WHICH IS THE HALF OF THIS COMMIT
+THAT IS A CORRECTION. docs/DEPLOYED.md rode into 6307286 against the
+runbook's step 15, which says in the imperative not to batch it and whose
+RIGHT condition is that it be the only file listed. It stands, because
+rewriting published history for a file placement is worse than the
+placement. But 6307286's message is entirely about the shorts gate and
+mentions neither the deploy record nor DEPLOYED.md, and states that
+nothing under src changed while carrying a thirty-two line file whose
+subject is a deployment, so the one commit that finally lands the deploy
+record is the one nobody searching for it would open. The fact is written
+down where a search will meet it: the record for ad0d73d, launch,
+2026-08-28T14:03:16.142Z, worker sha256 ddd735e8d99d0f0b, first entered
+history at 6307286 on the fourth deploy since the tool landed. The
+runbook's own claim that it has never once been done is now false in one
+clause and is flagged rather than edited, because it is a dated document
+and whoever runs it next reads the log first.

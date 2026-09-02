@@ -1,0 +1,37 @@
+docs: the deploy record's own breadcrumb, at 6307286
+
+THE ONE COMMIT THAT FINALLY LANDS THE DEPLOY RECORD IS THE ONE NOBODY
+SEARCHING FOR IT WOULD OPEN, and that is worth thirty-six lines to fix.
+docs/DEPLOYED.md rode into 6307286 against the runbook's step 15, which
+says in the imperative not to batch it and whose RIGHT condition is that
+it be the only file listed. It stands, because rewriting published
+history for a file placement is worse than the placement, which is the
+reading CLAUDE.md already applied to the trailer at 73179dc.
+
+BUT 6307286's MESSAGE DOES NOT ACCOUNT FOR IT. Measured: zero
+occurrences of "deploy record" or "DEPLOYED.md" in that message, and it
+states that nothing under src changed while carrying a thirty-two line
+file whose whole subject is a deployment. A future session looking for
+when the deploy record first entered history greps for deploy and finds
+the epoch commit, not this one.
+
+SO THE FACT IS FILED WHERE A SEARCH WILL MEET IT, which is what a
+breadcrumb is for and what section 8's own lesson says about a grep of
+HEAD being blind to exactly this. The record for ad0d73d, launch,
+2026-08-28T14:03:16.142Z, worker sha256 ddd735e8d99d0f0b, first entered
+git history at 6307286, batched, on the fourth deploy since the tool that
+writes it landed on 2026-08-24.
+
+AND THE RUNBOOK IS NOW STALE IN ONE CLAUSE, FLAGGED RATHER THAN EDITED.
+docs/THURSDAY-20260827.md says docs/DEPLOYED.md has never existed in git
+history and calls step 15 the one that has never once been done. The
+first is now false. It is a dated document and section 8 already carries
+the row saying a dated runbook's values are prose that goes stale, so
+whoever runs it next reads the log first rather than a corrected runbook
+that has drifted somewhere else in the meantime.
+
+Nothing else is in this commit. The social scoping document written in
+the same round is deliberately not here: Mike reshaped the work after it
+was written and it proposed a schedule and a calendar that his own ruling
+reverses, so it was removed rather than landed and its surviving argument
+is carried forward in the survey that replaced it.

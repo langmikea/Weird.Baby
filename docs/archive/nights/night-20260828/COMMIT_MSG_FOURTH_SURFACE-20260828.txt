@@ -1,0 +1,80 @@
+release: TikTok is the door, and the order is structural
+
+FOUR SURFACES NOW, AND THE ORDERING IS SPLIT BETWEEN TWO FILES ON PURPOSE.
+The ORDER itself is declared in release-shape.mjs because a machine needs
+it, and SURFACES is an ordered array of objects rather than four strings
+for one reason: a set of names can be reordered by anybody tidying an
+alphabetical list and nothing would notice. THE STRATEGY BEHIND THE ORDER
+IS IN release/README.md, because a data file is the wrong place to argue a
+position. And releases.json gets nothing at all — it names a surface per
+posting and says nothing about why. The declaration carries one line per
+surface, the role and the shortest honest reason, so that a reader of that
+file cannot mistake the order for arbitrary; the case for it lives with the
+prose, and the README says outright that reordering the array contradicts
+that section.
+
+THE STRATEGY IS RECORDED WHERE THE NEXT OPS READS IT, AND IT LEADS WITH THE
+FAILURE IT EXISTS TO PREVENT: treating four surfaces as interchangeable.
+They are not four copies of one act. TikTok is THE DOOR, the only one built
+to show work to strangers, where an account with two hundred followers can
+reach a hundred thousand people. Instagram is THE BRAND. YouTube is THE
+ARCHIVE, where content compounds and a video from two years ago still
+drives streams. Facebook is LAST and is there because he has an account.
+The door and the archive earn their place for opposite reasons — one
+reaches people who have never heard of the house, the other keeps working
+long after it was posted — and a reel that only ever goes to YouTube is
+filed rather than shown. The honest reading of today is written beside it:
+all five releases are YouTube-only, so the run currently reaches nobody who
+has not already found the house. The door is not open.
+
+THE TIKTOK ACCOUNT IS A PRECONDITION AND IT IS CHECKED RATHER THAN HOPED
+FOR. Mike sets it up; nothing here creates it and no round should list it
+as work. A precondition nothing checks is a wish, so the surface carries
+account.exists and the gate refuses a posting that claims to be OUT on a
+surface whose account does not exist. The failure that prevents is
+specific: a posting recorded as public on a surface with no account is a
+false entry in the one file whose whole job is to be true about what went
+out. It deliberately does not block planned or staged, because planning a
+TikTok post before the account exists is exactly right and saying so is
+what the state is for.
+
+INSTAGRAM IS UNSTATED AND IS ITS OWN CASE. He has said YouTube and Facebook
+exist; he has said nothing either way about Instagram, so exists is null
+and the gate refuses an OUT posting there for that reason and in those
+words. Ops does not infer an account into existence.
+
+THE HANDLE ORDER IS HIS AND THE CONSTRAINT MOVES THE DOT RATHER THAN
+DROPPING IT. He wants Weird.Baby, then WeirdBaby, then weirdbaby. TikTok
+does not permit a dot in a handle, so his first preference is unavailable
+on the surface he ruled first, and the resolution is that the dot lives in
+the NAME and not in the handle: handle WeirdBaby or weirdbaby, display name
+Weird.Baby. Nothing is chosen — handle is null on all four, because no
+handle has been supplied for any platform, which is register M60 open since
+2026-08-05, and a handle is not something Ops may invent. What is recorded
+is what he prefers and what is possible, and on one of the four those are
+not the same thing.
+
+THE REPORT PRINTS THE SURFACES IN THE RULED ORDER ON EVERY RUN, WITH EACH
+ACCOUNT'S STATE AND THE HANDLE RULE UNDER THEM, because a list nobody sees
+is a list that gets reordered.
+
+THE TWO NEW CHECKS WERE PROVED BY TRIPPING THEM, EACH AGAINST A COPY WITH
+THE TREE RESTORED AFTER. A TikTok posting set OUT was refused with the
+precondition note printed. An Instagram posting set OUT was refused as
+unstated. And a TikTok posting set PLANNED passed, which matters as much as
+the two failures: a precondition that blocked planning would have made the
+honest state unrecordable. The seven checks from fb21109 were re-run and
+still pass unchanged.
+
+NOTHING GREW THAT DID NOT HAVE TO. No new object — a surface is a field on
+a posting exactly as before. No new file; four touched, none added. No
+strategy in the data file, which this round does not modify at all. And no
+new posting rows: TikTok, Instagram and Facebook carry no posting
+whatsoever, not planned but absent, because nothing exists on them and
+nothing was invented to look ready.
+
+Gates: release:check PASS, lint 9 errors 7 warnings at baseline with zero
+new, build green, build:launch green, provenance:gate PASS, reveal:check
+PASS, parity:gate PASS, instory:gate PASS, docs:numbers:gate PASS,
+reveal:day nothing to move. Nothing under src/ changed, and a sweep for
+stale three-surface wording across the release directory returns none.

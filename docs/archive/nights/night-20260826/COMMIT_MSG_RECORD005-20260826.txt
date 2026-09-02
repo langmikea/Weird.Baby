@@ -1,0 +1,85 @@
+Record 005 accepts an edit, and one paragraph was carried not deleted
+
+Commit 3 of five. One entry: 004 is untouched and it is the last.
+
+ALL SIX CLASSIFIED. Five are duplicates in full. One paragraph in the sixth was
+written down nowhere else, and it is the same shape as 003's - a fact about why
+a mechanism exists, which no register field holds.
+
+MUSEUM_RULINGS_APPLIED_LOG-20260820.md section 005 carries four of the six, and
+blocks 1 and 2 in a single line: "Deck and EXECUTIVE SUMMARY reordered - Portal
+first, ZIP second, same sentences. DETAILED REPORT replaced by its first line.
+ADDENDUM 01 - The Four Settings, as printed struck entire, both closing lines
+with it." It also carries the four-settings paragraph verbatim, the
+{Mike to rewrite} braces and wb-ops-braces, and at section 240 "The requisition
+lives in 005 only", which is block 4.
+
+docs/canon/09-PUBLISHED.md carries the headline ruling with its reasoning - the
+week's payoff, the cheapest signal a Record has - the two first appearances
+filed as canon, and both Doctrine 21 flags verbatim: his Portal against his The
+Portal, and etc. with the period doing double duty. MUSEUM_RECORD_005_LOG
+carries the same plus the rewrite that closed the note.
+
+THE ONE THAT WAS CARRIED is block 5's middle paragraph: that striking ADDENDUM
+01 took a {pre} with it, leaving Record 004's folder tree as the only case the
+mechanism still has, and that this is the reason the shape exists. No register
+field holds a count of how many body items use a shape, so nothing else could
+have said it. Swept: RecordEntry.jsx, Exhibit.css, the rulings and the canon
+pages carry the Listing's why - the Arial column spread - but not that it is
+down to one case. The one near-miss, RecordEntry.jsx:732's "the only entry
+carrying one", is about 013's plate, not the {pre}.
+
+And it is the reading under which somebody deletes the Listing: a mechanism
+serving a single body item looks like dead weight to a cleanup round, and this
+paragraph is the argument that it is not. Carried into RecordEntry.jsx beside
+the Listing's own argument, with the count dated 2026-08-26 and marked
+re-measurable, because it is a count and counts move.
+
+This is the second time in three entries that the only unique thing in a block
+was of that kind. 003's was why there are two renders; 005's is how many cases
+the shape has left. Both are facts about a mechanism's reason to exist and
+neither has a field.
+
+STALENESS: all eight factual claims re-measured against the tree and none stale.
+005's title is still PORTAL CONNECTION ONLINE at 24 characters, 002 and 004
+still share GENERAL STATUS UPDATE at 21 each, the deck and the EXECUTIVE SUMMARY
+still lead with the Portal line, the DETAILED REPORT is still the three lines he
+wrote with UNIX-6x and the COMM payload in them, his Portal and The Portal are
+both still there, there is no RAISED section anywhere in the volume, and exactly
+one entry still carries a {pre}. 002's closing sentence had gone stale, 003's
+had not, and none of 005's has.
+
+P6 CAUGHT TWO MORE PHRASES BEFORE THE MANIFEST WAS WRITTEN. Fourteen candidates
+run through the present-and-on-one-line check first: "the cheapest signal"
+crosses a wrap in 09-PUBLISHED.md, and "the reason the shape exists" crosses a
+wrap in RecordEntry.jsx - which is the sharper one, because it was a phrase in
+prose I had just written. Both replaced with wrap-safe substitutes. Three
+rounds, three catches, every one before it could rot. The manifest is now 10
+blocks, 44 claims, 7 files, green on all 44, and its breakage still names the
+block and the line.
+
+PROOF. draftEntries() deep-equal: all five entries identical to the committed
+draft. In-span comment characters 15,574 -> 11,592, removed 3,982, which is the
+six blocks exactly; preamble 21,802 -> 24,204 for the audit block, outside every
+span. P1.3 now reads 001, 002, 003 and 005 land, 004 refused - 005 flipped and
+004 did not move. day.html's baked sha matches the edited source. record:land
+--verify 51 of 51. Remaining blockage is 11,592 characters in seven blocks, all
+in Record 004, which is 86% of that entry's span.
+
+src/ changed in two files and the museum lap was not driven. The Record change
+is comments in a data file; the RecordEntry.jsx change is a comment inside a JSX
+expression container, not a rendered element. Comments do not ship, the parsed
+entries are deep-equal, and reveal:check and the build are green.
+
+The two lander defects flagged at commit 2 are carried unchanged:
+emit-record-entries.mjs:747's reference comparison on a body item, and the
+refusal pointing at the retired npm run record.
+
+Gates: lint 1 (baseline 9/8, zero new) · build 0 · provenance:gate 0 ·
+reveal:check 0 · instory:gate 0 · parity:gate 0 · arc:check 0 · ops:size 0 ·
+docs:numbers:gate 0 · record:land --verify 0 (51/51) · day:proof 0 (49/49,
+10 shown losing first) · reveal:day nothing to move · lap:clean nothing left.
+
+Next is Record 004 and it is the last - seven blocks, 11,592 characters, every
+class in it. The round log is at
+C:\AI\_night-20260826\COMMIT3_RECORD005-20260826.md and nothing was deployed.

@@ -1,0 +1,187 @@
+{
+ "_": "Mike's Records, read out of the workbook by tools/dictation/workbook_to_draft.py. Fed to `npm run record:land`.",
+ "key": "wb.record.2026-08-09",
+ "saved": "2026-08-14T01:06:01.326369Z",
+ "epoch": "2026-08-17",
+ "entries": [
+  {
+   "no": 1,
+   "date": "2026-08-17",
+   "title": "INITIAL LAUNCH REPORT - Weird.Baby",
+   "line": "Weird.Baby website is live\nAlert — Incoming Email Server Load (contained)",
+   "sections": [
+    {
+     "label": "EXECUTIVE SUMMARY",
+     "body": [
+      "Weird.Baby launched on schedule. No deviations; f(Ump) = 100%",
+      "Handoff is on track (T-6); Operations has hands-on-the-ball."
+     ]
+    },
+    {
+     "label": "DETAILED REPORT",
+     "body": [
+      "ALARM - Incoming Email Server Load 1000x",
+      "o Operations remains unaffected.",
+      "o Not single sourced, so not as simple as \"turn it off.\"",
+      "o Data transmissions went silent shortly after WB launch."
+     ]
+    },
+    {
+     "label": "ADDENDUM 01 - Event Log - Friday Launch(-2)",
+     "body": [
+      "15:00 - Weird.Baby email server Scheduled Early Auto Start",
+      "15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%",
+      "15:14 - First data packet received",
+      "15:58 - Second data packet received",
+      "16:00 - Incoming data crosses 86% vs threshold",
+      "16:10 - Server auto-shutdown, auto-containment, and auto-alerts",
+      "16:13 - REACT - Team is convened",
+      "23:30 - REACT RULING - Restart with 5000x resources.",
+      "The decision to resume was determined to be low risk, reversible, and a real world stress test.",
+      "The engineering team was more intrigued than concerned, and not involved in the determination."
+     ]
+    },
+    {
+     "label": "ADDENDUM 02 - Weekend Summary",
+     "body": [
+      "Staff onsite to support Weird.Baby launch - Nothing to report.",
+      "The time was put to use reviewing the incoming data.",
+      "Pages of hexadecimal numbers; presumably needs to be compiled and assembled into something usable."
+     ]
+    },
+    {
+     "label": "ADDENDUM 03 - Event Log - Monday Day(1)",
+     "body": [
+      "00:00 - WB Go-Live went off without a hitch.",
+      "00:02 - Incoming data stream ended",
+      "The remainder of the day was completely uneventful.",
+      "Weird.Baby uptime - 100%, no further anomalies.",
+      "We decided to stand up /Robots as a page to track our progress for a few days. It is weird if nothing else. Maybe try to get a little crowdsourcing going on dealing with this, going forward."
+     ]
+    }
+   ]
+  },
+  {
+   "no": 2,
+   "title": "GENERAL STATUS UPDATE",
+   "line": "Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.",
+   "sections": [
+    {
+     "label": "EXECUTIVE SUMMARY",
+     "body": [
+      "Weird.Baby uptime: 100%, no anomalies",
+      "Operations Cadence : Favorable, On Pace",
+      "Blockers - Nothing to Report"
+     ]
+    },
+    {
+     "label": null,
+     "body": [
+      "All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.",
+      "The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today."
+     ]
+    }
+   ],
+   "date": "2026-08-18"
+  },
+  {
+   "no": 3,
+   "title": "DATA EXTRACTED - Weekend Robots Anomaly",
+   "line": "Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)",
+   "sections": [
+    {
+     "label": "EXECUTIVE SUMMARY",
+     "body": [
+      "Weird.Baby uptime: 100%, no anomalies",
+      "Operations Cadence : Favorable, On Pace",
+      "Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value."
+     ]
+    },
+    {
+     "label": null,
+     "body": [
+      "Data has been extracted from weekend dump",
+      "IMAGE - Engineering Manual - Assorted pages",
+      "IMAGE - Assorted Evidence Based photos - Unknown Importance",
+      "A new Volume has been created: /Robots/MGK-VIIIp"
+     ]
+    }
+   ],
+   "date": "2026-08-19"
+  },
+  {
+   "no": 4,
+   "title": "TEST ROW DO NOT SHIP THIS IS FILLER FOR THE 314 PIPELINE CHECK",
+   "line": "This deck is filler and exists only to prove the emitter carries it\nto the page twice without wrapping or losing a character.",
+   "sections": [
+    {
+     "label": "FIRST",
+     "body": [
+      "3.1.4"
+     ]
+    },
+    {
+     "label": "SECOND",
+     "body": [
+      "2222"
+     ]
+    },
+    {
+     "label": "THIRD",
+     "body": []
+    },
+    {
+     "label": "FOURTH",
+     "body": [
+      "4444"
+     ]
+    }
+   ],
+   "date": "2026-08-20"
+  },
+  {
+   "no": 5,
+   "title": "REHEARSAL HEADLINE 005",
+   "line": "Rehearsal deck line one for record 005.\nRehearsal deck line two.",
+   "sections": [
+    {
+     "label": "EXECUTIVE SUMMARY",
+     "body": [
+      "Rehearsal paragraph one.",
+      "Rehearsal paragraph two."
+     ]
+    },
+    {
+     "label": "DETAILED REPORT",
+     "body": [
+      "Rehearsal detail paragraph one.",
+      "Rehearsal detail paragraph two."
+     ]
+    }
+   ],
+   "date": "2026-08-21"
+  },
+  {
+   "no": 6,
+   "title": "REHEARSAL HEADLINE 006",
+   "line": "Rehearsal deck line one for record 006.\nRehearsal deck line two.",
+   "sections": [
+    {
+     "label": "EXECUTIVE SUMMARY",
+     "body": [
+      "Rehearsal paragraph one.",
+      "Rehearsal paragraph two."
+     ]
+    },
+    {
+     "label": "DETAILED REPORT",
+     "body": [
+      "Rehearsal detail paragraph one.",
+      "Rehearsal detail paragraph two."
+     ]
+    }
+   ],
+   "date": "2026-08-22"
+  }
+ ]
+}

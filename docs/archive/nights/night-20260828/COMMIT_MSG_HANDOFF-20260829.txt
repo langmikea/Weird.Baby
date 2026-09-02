@@ -1,0 +1,74 @@
+handoff: rewritten at the close of the social-pipeline session
+
+WRITTEN TO BE OUTRANKED, WHICH IS THE ONLY WAY A HANDOFF IN THIS PROJECT
+IS HONEST. Section 6 ranks it fourth — live tree, then git log, then
+STATE.md, then this — and section 9 step 3 rules that process and standing
+facts do not go in it. So it opens by saying so, points every standing
+thing at OPERATIONS.md, STATE.md, the canon and OPEN_ACTIONS.md, and
+closes with what would make it wrong. The previous one had sat since
+2026-08-23 describing a round that closed ten rounds ago, which is the
+rot the ranking exists to describe.
+
+WHAT IS OPEN AND NEEDS MIKE is five numbered items so they can be put to
+him one at a time: the empty TikTok bio with Facebook and Instagram
+handles unset and Instagram's account unstated; the guestbook entry, with
+nothing built and nothing deleted; the arc's weeks 6, 7 and 8, which
+ARC.md:176 says have no headline in its own heading and whose closing line
+is that he writes into that file; the dress-rehearsal ruling; and Audie
+Cornish on /wal, still waiting.
+
+WHAT IS OPS' AND UNSTARTED carries the public-reads work with his
+constraint verbatim — do not work too far ahead — plus the gift shop,
+R001's dry-run note, the grey album covers, the Mode B leftovers and the
+trailer gate.
+
+TWO CLAIMS FROM THE CLOSING BRIEF WERE MEASURED RATHER THAN TRANSCRIBED
+AND BOTH CAME BACK DIFFERENT, WHICH IS WHY THEY ARE CORRECTED IN THE FILE.
+
+Trailers: the brief said three commits carry them. The tree holds 128
+across all history, almost all Co-Authored-By lines from long before the
+rule existed. The rule landed 2026-08-26; 73179dc that same day is the
+Log: trailer CLAUDE.md already names; and since the rule there is exactly
+ONE, a716017 on 2026-08-27, that nobody caught. All six of today's commits
+carry zero, verified one by one, so the message-file discipline held. The
+gate's target is therefore not a backlog of three — it is one escape plus
+a pre-rule tail that is history and stays — while the brief's diagnosis is
+correct and is kept: fresh sessions on the C:\AI root never read the
+project's CLAUDE.md.
+
+Audie Cornish: verified ABSENT by a word-boundary search across src, docs,
+provenance and reveal. Recorded with the probe fault that came first,
+because a careless substring search for "audie" matches "audience" and
+returns ten files — it did here, and a handoff that reported those hits
+would have sent the next session hunting sourcing that does not exist.
+
+THE RECORD OF TODAY IS PLAIN ABOUT THE SESSION'S OWN FAILURES. The site
+went live at ad0d73d after ten days undeployed and a stale dist meant the
+first deploy shipped an older bundle, fixed by one clean redeploy; the
+staleness check reads mtime and cannot see a bundle built from something
+else. Ops reconstructed file lists and message paths TEN times and got all
+ten wrong — wrong log names, wrong message paths, missed modified files,
+invented paths never touched — and every one was caught only because Mike
+pasted the output back. The rule is written for the next Ops: pass Code's
+command block through unchanged, ask if there isn't one, never write one.
+And git status --short collapses a new directory to one line, which is how
+five release/ paths went missing in a single round, so
+--untracked-files=all is the only listing that is ever right.
+
+FOUR THINGS MIKE USED WERE REPORTED AS NEVER-EXISTED. THREE WERE MISSES
+AND ONE WAS FOUND, and the hit is the half the file leads with: "You are
+early. That is noted." shipped at abf628a on 2026-04-13 and killed at
+30d9162 on 2026-07-25, whose own message ends You-are-early killed, found
+in ONE command by the pickaxe over all refs on CONTENT. The method works
+and was simply not used the first three times. Mike ruled the Lobby stays,
+so WbHome.jsx is untouched and .wb-whisper remains an orphan rule.
+
+Two of Ops' own errors are kept rather than smoothed: the false claim that
+TikTok forbids dots in handles, asserted from memory and built upon, and
+the answer that the Cloudflare console was the only path to the guestbook
+while an Ops-built read-only backup tool was already in the tree.
+
+Gates: lint 9 errors 7 warnings at baseline with zero new, provenance:gate
+PASS, release:check PASS, docs:numbers:gate PASS. One file changed and
+nothing else in the tree moved. 1f85f5c touches src and the bundle and has
+not been deployed, which the handoff says under its own heading.

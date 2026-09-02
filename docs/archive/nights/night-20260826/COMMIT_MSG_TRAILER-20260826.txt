@@ -1,0 +1,34 @@
+a path on its own last line is a trailer; house commits end on prose
+
+73179dc's message ends on "Log: C:\AI\_night-20260826\PIECE4_BUILD_LOG-20260826.md"
+and git interpret-trailers parses that as a trailer. Any Key: value line in a
+message's final paragraph is one; the key does not have to be a name git has
+heard of. It is pushed and it stands - rewriting history for one line is worse
+than the line.
+
+The real defect was the CHECK, not the line. That round confirmed "no trailers"
+by grepping the file for trailer NAMES - co-authored-by, signed-off-by,
+generated with - and reported zero hits as proof. A grep for known names cannot
+see trailer SHAPE. The command that can is:
+
+    git interpret-trailers --parse < <message-file>
+
+which must print nothing. Run over the ten messages of 2026-08-25 it returns
+clean on all ten, every one of which ends mid-sentence in prose: the house shape
+was already unanimous and 73179dc is the one message that broke it.
+
+The rule and the command are recorded in CLAUDE.md beside the commit-message
+convention, which is where the next message gets written, rather than in a round
+log that nobody greps for how to end a sentence. OPERATIONS section 0 already
+carries the half of this that generalises - IF A RESULT SURPRISES YOU, SUSPECT
+THE PROBE - and the quieter half is the one that bit here: an UNsurprising green
+is exactly when nobody re-reads the probe.
+
+The message file in C:\AI\_night-20260826\ is left uncorrected on purpose. It is
+a faithful copy of what 73179dc carries, and editing it would make the record
+disagree with the history it records, so it stays the one file either night
+directory holds that the new check flags.
+
+Gates: docs:numbers:gate 0 and ops:size 0, both re-run because a governing
+document changed. Nothing else moved and no page was rebuilt, so the round log
+for this correction is section 10 of the Piece 4 log named above.

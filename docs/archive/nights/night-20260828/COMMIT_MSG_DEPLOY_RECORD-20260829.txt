@@ -1,0 +1,25 @@
+deploy: launch from 124b7dd, 2026-08-29
+
+Step 15 of the runbook, ON ITS OWN AND BATCHED WITH NOTHING, which is what
+that step says in the imperative and what yesterday did not do. The deploy
+record for ad0d73d rode into 6307286 alongside the shorts gate, so the one
+commit that finally landed it was the one nobody searching for it would
+open. This one is the file and nothing else, and its RIGHT condition —
+docs/DEPLOYED.md the only path listed — is met.
+
+The record it carries: 124b7dd, launch, 2026-08-29T12:30:16.224Z, worker
+sha256 2ca498cc3e49c614, two assets uploaded, guard passed. Tree clean
+YES, which is the other difference from yesterday, where the record wrote
+itself uncommitted and then reported the tree dirty on account of its own
+existence.
+
+AND THIS IS THE DEPLOY THAT PUT 1f85f5c ON THE GLASS. The two early takes
+are live: Coconuts YibpBtf9IU8 chipped EARLY and E.D. Yahdah WOWS-RWywgA
+chipped EARLY INSTRUMENTAL, each the middle of three renditions on its own
+track. Everything before it in the session was tooling, data or documents
+that a visitor could not see; this is the first change since ad0d73d that
+one can.
+
+Written by tools/deploy-record.mjs and not by hand. The wire is the
+authority and this file lags it by however long it sits uncommitted, which
+is now zero.

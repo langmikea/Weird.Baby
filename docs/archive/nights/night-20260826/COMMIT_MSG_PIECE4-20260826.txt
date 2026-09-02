@@ -1,0 +1,99 @@
+the day editor takes his keystrokes, and a stale page is refused
+
+[MIKE, 2026-08-25 — RULING A] the day editor becomes where he writes and Excel
+stops being the surface. Piece 4, built on the round-trip repair at a3356c6 and
+proved by losing something first.
+
+WHAT HE ASKED FOR, ALL FOUR:
+  · edit any line          every section body, every header, five string fields
+  · add sections on demand  + add a section, at the foot of the day
+  · insert a row            + on any row, inserting directly below it
+  · delete a row            x on any row — struck through, every character kept,
+                            and reversible until the save lands
+
+The section recipe is his specification and is unchanged: a bold title box, a
+lines box that accepts crlf, expands to as many lines as he gives it, is spaced
+as he wrote it, sits one level indented, and is 68 characters wide — measured on
+the served page at 429.94px of content box, in the monospace face that makes a
+ch honest.
+
+THE SAVE IS ONE POST TO A LOOPBACK ENDPOINT AND IT WRITES TWO FILES:
+record-draft.json (his words) and readiness.json (his marks), together. The
+marks textarea was a clipboard with no writer and is gone — a page where half
+the state is durable and half is a transcription step is the shape that loses
+work.
+
+IT NEVER WRITES THE RECORD. That is npm run record:land -- --write, it is behind
+eight guards, and it is Mike's. The page, the endpoint's reply and the server
+window all say so.
+
+THE GUARD THIS PIECE COULD NOT SHIP WITHOUT — a generated page is a SNAPSHOT and
+until today it did not know which tree it came from. Open the page at 09:00, the
+tree moves at 14:00, type and save at 16:00: the POST stamps `saved` HONESTLY, so
+record:land's guard 8 — which compares the STAMP, not the WORDS — passes it, and
+09:00's copy lands on top of 14:00's. It is OPERATIONS §8's workbook hazard one
+surface over. So the source file's sha256 is baked into the page, the endpoint
+refuses a save that does not match the file on disk now, and the page re-asks on
+every focus. Both ends: the server because it is the thing that writes, the page
+because it is the only end that can tell him in time.
+
+npm run day:proof — 29 checks, 5 of them shown LOSING first. Each breakage is
+the real collector with one behaviour removed, not a stub:
+  · the rest spread removed        Record 003 loses 4 attachments and 6 plates,
+                                   and the emitter CANNOT refuse it — an absent
+                                   field is not something its guard can see
+  · {pre} preservation removed     004's folder tree comes back as prose
+  · the box saves what it shows    opening the page and pressing Save rewrites
+                                   the indentation of every untouched section
+  · the staleness guard absent     the 14:00 paragraph, destroyed and named
+  · a row dropped by a bug         reported identically to his own x — the limit
+                                   is stated: it cannot tell them apart, it can
+                                   only make sure neither is silent
+
+Check zero is that the collector under test is the one he types into: day.html
+inlines day-collect.js verbatim and the proof asserts the bytes match before
+anything else runs.
+
+THE FINDING, MEASURED RATHER THAN ASSUMED — four of the five Records cannot
+accept an edit from this surface. record:land guard 6 refuses a change to an
+entry carrying comment blocks, and the Record is 38,229 of 49,535 characters of
+standing reasoning. 001 lands; 002-005 are refused. THE GUARD IS CORRECT and the
+fix is its own instruction — move an entry's reasoning above it, one at a time.
+Register C-day2, printed by day:proof on every run.
+
+npm run day's printed URL changed in this commit. It named npm run mock, which
+never reads req.method — so a save to it 404s, and on an http origin the Record
+editor's picker fallback then opens a folder dialog and reports success about a
+file outside the repo. A printed instruction that silently loses a save is not a
+doc fix. The day editor has no picker at all; its only fallback is the whole
+draft as text on the screen.
+
+dedent, blocksOf and budgetMark left day.mjs for day-collect.js, which the
+generator now evaluates rather than duplicating. The drawn arrangement of a
+body and the saved arrangement are the two things that must never be able to
+disagree.
+
+Two defects found by looking, neither findable any other way: a hidden element
+has a scrollHeight of zero, so the boot autosize left four of five days' boxes
+one line tall — 16px of box holding 47px of text; and a content-box textarea at
+width:100% overflowed 375px by 18px.
+
+MEASURED SERVED at 127.0.0.1:8899 — one left edge for titles, one for lines, one
+control column, 14px of indent on every row, 0 sideways overflow at desktop and
+375px, 0 page scroll, 7 marks on all five calendar rows, 476 hinted nodes, 0 bare
+titles, 0 console errors. NOT PHOTOGRAPHED: the browser pane would not composite,
+the same refusal as pass five.
+
+C-day1 closes and leaves the register. BACKLOG row A is struck as built.
+Two hazard lead lines added to OPERATIONS §8.
+
+Nothing in src/ changed, so the museum lap does not apply. Nothing was landed:
+robots-record.js, record-draft.json and readiness.json are byte-identical to
+where they started, proved by sha256.
+
+Gates: lint 1 (baseline 9/8, zero new) · build 0 · provenance:gate 0 ·
+reveal:check 0 · instory:gate 0 · parity:gate 0 · arc:check 0 · ops:size 0 ·
+docs:numbers:gate 0 · reveal:day nothing to move · lap:clean nothing left ·
+record:land --verify 0 (51/51) · day:proof 0 (29/29).
+
+Log: C:\AI\_night-20260826\PIECE4_BUILD_LOG-20260826.md

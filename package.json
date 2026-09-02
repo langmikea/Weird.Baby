@@ -9,7 +9,6 @@
     "build:launch": "node tools/stage-build.mjs --launch",
     "lint": "eslint .",
     "preview": "npm run build && wrangler dev",
-    "deploy": "npm run build && node tools/deploy-guard.mjs && wrangler deploy && node tools/deploy-record.mjs",
     "deploy:launch": "npm run build:launch && node tools/deploy-guard.mjs --launch && wrangler deploy && node tools/deploy-record.mjs --launch",
     "export-artifacts": "node tools/export-artifacts.mjs",
     "provenance": "node tools/provenance-sweep.mjs",

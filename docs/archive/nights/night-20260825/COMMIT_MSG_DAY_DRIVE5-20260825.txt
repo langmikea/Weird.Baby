@@ -1,0 +1,73 @@
+the legend comes off the top of the day editor; the calendar rows keep their seven marks
+
+ONE KILL. The shape is settled - "Done! Looks great!" - and this takes the last
+piece of furniture off it. Round:
+C:\AI\_night-20260825\DAY_EDITOR_DRIVE5_LOG-20260825.md.
+
+THE TOP BAR'S H E D S A P {} LEGEND WAS ONLY A KEY FOR THE CALENDAR ROWS. The
+same seven marks were drawn twice, one strip above the other: a legend across
+the top of the page, and the row on every day in the calendar. The rows are how
+five days are read at a glance; the bar told him nothing the rows were not
+already saying about the day he had open. A key that repeats the thing it
+explains, one line above it, is furniture - Doctrine 16 - and it cost the page
+its whole top strip.
+
+WHAT WENT WITH IT RATHER THAN BEING LEFT COMPUTED FOR NOBODY: the .dy-top and
+.dy-bar markup; eight CSS rules (.dy-top, .dy-bar, .dy-ic and its three states);
+MARKSBAR, a JSON blob of every day's seven marks inlined into the page FOR THE
+BAR ALONE, since the calendar is rendered server-side by calHtml; hintAttr(),
+attribute-escaping that had exactly one caller; the empty #dy-navspare spacer;
+and the five-line painter in show() that rebuilt the strip on every day change.
+MEASURED ON THE SERVED PAGE: .dy-top 0, .dy-bar 0, .dy-ic 0, #dy-icons gone,
+#dy-navspare gone, and MARKSBAR and hintAttr both return FALSE against the whole
+document source - nothing left behind in the markup or the script.
+
+AND TWO STRINGS ON THE GLASS WOULD OTHERWISE HAVE BEEN LEFT LYING. The
+calendar's summary hint and its note both read "the same seven marks as the bar
+above" - true until this round and false the moment the strip left. Both
+rewritten, and /bar above/ now returns nothing on the rendered page. The COLUMNS
+block in the source said the same thing in Ops' own words and now records that
+dayMarks() has one caller, which is what that section was always describing.
+
+THE CALENDAR ROWS ARE UNTOUCHED, WHICH WAS THE OTHER HALF OF THE INSTRUCTION:
+five days drawn, SEVEN marks on every row, the order H E D S A P {} identical
+across all five, every mark still carrying its two-line hint, and 7 7 7 7 7
+again at 390px.
+
+THE LAYOUT STILL HOLDS WITHOUT THE BAR, AND IT WAS RE-MEASURED RATHER THAN
+ASSUMED, because the bar was the first item of the body's flex column.
+.dy-wrap starts at 16px and its bottom is inside the viewport; the page cannot
+scroll - window.scrollTo(0,900) plus documentElement.scrollTop plus
+body.scrollTop leaves the total at ZERO - while the record scrolled 534px and
+the calendar and the shelf each moved 0px, both still on screen. Sideways
+overflow 0 at 1280 and at 390, and the phone fallback still releases both html
+and body.
+
+ONE RESIDUE NAMED RATHER THAN REMOVED: .dy-nav still carries margin-left:auto,
+which existed to push the nav to the right end of the bar. Measured, its left
+edge and the record column's left edge are the same 286px, because the rule is
+inert on a block-level flex container with auto width. It is one dead
+declaration inside a rule that is still live for the previous/next buttons, and
+this round is a kill of one thing.
+
+NOTHING ELSE MOVED: 404 marks and 404 two-line hints, zero bare, with
+querySelectorAll '[title]' returning exactly 404 - it was 411, and the seven
+that left are the bar's; one count on the page, 128/130; the indent still one
+level on all five days, first glyph at 343, first section to last; the state
+button still cycling quiet -> loud -> off -> quiet with the store back to {};
+the viewer still opening served at 742x960; zero console errors. NOT
+PHOTOGRAPHED: the browser pane would not composite, so everything above is
+measured through the DOM, computed styles and Range geometry.
+
+GATES, REAL EXIT CODES CAPTURED PER GATE: lint exit 1, which IS the baseline -
+17 problems, 9 errors / 8 warnings, zero new, and eslint exits 1 on any error so
+this gate is read by its counts - build 0 - provenance 0 - reveal:check 0 -
+instory 0 - parity 0 - arc:check 0 - ops:size 0 - docs:numbers:gate 0 -
+reveal:day "Nothing to move. The tree and the Record agree." - lap:clean,
+nothing left in public/. The museum lap was not run: nothing in src/, public/ or
+any data file changed.
+
+STILL OPEN AND CARRIED, NEITHER TOUCHED BY THIS ROUND: STAGE_PREFIX is imported
+by day.mjs and used by nothing, flagged since pass one; and register row C-day1,
+the draft round-trip dropping wire, plates and {pre}, which gates Piece 4 and is
+where his typing goes.

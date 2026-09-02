@@ -1,0 +1,61 @@
+release: the handles as observed, and Ops was wrong about the dot
+
+THE TIKTOK ACCOUNT EXISTS. Mike made it: @papaweird.baby, display name
+Weird.Baby, bio empty. It was recorded here as a precondition for a few
+hours and is now an observed fact. The precondition MECHANISM stays,
+because it was never about TikTok — the gate still refuses a posting that
+claims to be OUT on a surface whose account does not exist, and Instagram,
+still unstated either way, is the row that exercises it now.
+
+AND OPS WAS WRONG ABOUT THE DOT, WHICH IS THE HALF OF THIS COMMIT WORTH
+READING. Ops told Mike that TikTok does not permit dots in handles. That is
+false; @papaweird.baby has one. The claim was asserted from memory as a
+platform fact and nothing checked it — not measured, not looked up, not
+carried as unverified where it mattered. It reached Mike as a constraint
+and a recommendation was built on top of it, that the dot must move out of
+the handle and into the display name. He did not need that advice and it
+was wrong.
+
+THE LESSON IS THE GENERAL ONE AND IT IS RECORDED IN BOTH FILES. A
+platform's rules are not in this repository and Ops cannot read them from
+memory. They change, they differ per surface, and they are exactly the
+class of fact this project already refuses to invent — a handle is not
+something Ops may invent, and neither is the rule about what a handle may
+contain. If a platform constraint is load-bearing it is observed on the
+platform, or it is carried as UNVERIFIED and named as such. The claim is
+kept as HANDLE.retractedClaim and marked false rather than deleted, because
+a struck claim that is removed reads to a later round as a claim nobody
+ever made, and this one reached Mike.
+
+WHAT IS OBSERVED IS ALL THAT IS RECORDED. TikTok @papaweird.baby, YouTube
+@PapaWeirdBaby, Instagram unset with the account itself unstated, Facebook
+unset with the account existing. The two known handles are close but NOT
+identical — different casing, and only one carries the dot — and they are
+recorded as two real handles rather than reconciled into one. Neither unset
+handle is inferred from them, because a pattern across two surfaces is not
+a fact about a third, and M60 stays open for those two. Note also that both
+handles he actually made carry Papa, which appears in none of his three
+stated preferences, so the preference list is a record of what he asked for
+and not a rule the observed handles break.
+
+Nothing under src changed and releases.json is untouched: an account
+existing is not the same as a video being on it, so no posting was added.
+
+Gates: release:check PASS, lint 9 errors 7 warnings at baseline with zero
+new, build green, provenance:gate PASS, reveal:check PASS, instory:gate
+PASS, docs:numbers:gate PASS.
+
+The round log carries two things this commit does not build. The Lobby
+revert Mike asked for is ALREADY LIVE and needed no work — read off the
+site this round, weird.baby shows the countdown at nine days and his exact
+"We're not open yet" copy, because ROBOTS_OPEN turns on the Record having
+an entry for today and Ruling D moved the epoch to 7 September. The epoch
+move did the revert and nobody did it on purpose. The guest book entry he
+wants removed is a row in production D1 and there is no DELETE route
+anywhere in the worker, so it is a host-side statement that is his to run
+and the log prints it. And the two videos are NOT adopted: the harness
+could not see anything play, which was proved by the control — the already
+adopted Coconuts official video does not play in it either — and the cause
+was measured as a hidden zero-by-zero browser pane. The only oracle for
+playback is a person in a foreground tab, so the log hands over the harness
+URLs and the control to run beside them.

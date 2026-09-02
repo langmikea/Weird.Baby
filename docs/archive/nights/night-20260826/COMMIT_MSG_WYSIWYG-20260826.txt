@@ -1,0 +1,103 @@
+the museum preserves what he types, so the editor is WYSIWYG
+
+MIKE, 2026-08-26: "Is it WYSIWYG? If so, that is the test." It was not. The
+editor drew pre-wrap and the museum drew pre-line, so a run of spaces showed in
+the box and collapsed on the page - what he types and what a visitor reads were
+two different strings, and the "2 spaces off" hint existed only to announce the
+gap. His rule: "a long line can be used to make a paragraph; the short line is
+defined when wrapping is not preferred."
+
+THE SWEEP FOUND SEVEN PLACES THE TWO ENDS DISAGREED, NOT ONE, AND ONE OF THEM
+WAS DESTROYING DATA TODAY.
+
+ALL FIVE DECKS ARE TWO LINES. Every `line` carries a newline and the museum has
+drawn them as two since Mike ruled it on 2026-08-10. Piece 4 put the deck in a
+single-line <input>, and a browser strips CR and LF from an input's value, so
+the box held the two lines run together and a save wrote that. Opening the page
+and pressing Save flattened all five decks. Measured on the served page before
+the fix, orig against box against saved, IDENTICAL came back false.
+
+AND day:proof WAS GREEN THE WHOLE TIME, which is the finding underneath the
+finding: P1 through P3 drive modelOf and collect in node, so they prove the
+COLLECTOR and say nothing about the CONTROL it reads. A proof that never types
+into the real control cannot see a control that cannot hold its own data.
+
+FIXED, MUSEUM SIDE: .vp-rec-sect-body and .vp-rec-sum are pre-wrap, and one
+grouped rule gives .vp-rec-lead, .vp-rec-tomb, .vp-rec-sect-label,
+.vp-rec-still-cap and the Record's .vp-fe-note the same declaration - five
+fields that had no white-space at all and would have inherited normal, turning
+a newline into a space, the first time an entry carried one. Latent, closed
+while latent, and scoped to the Record so the shared class does not retype the
+FAQ. Verified in the built bundle rather than the source: all three rules
+present, and vp-rec-sect-body with pre-line returns zero.
+
+FIXED, EDITOR SIDE: the deck is a textarea, and the dedent is gone. dedent,
+reindent, the per-block cut, indentCut, data-cut and the announcement are
+removed rather than defaulted to zero - a transformation that is always the
+identity is one waiting to be switched back on by somebody who does not know
+why it was there.
+
+S-e IS CLOSED BY RULING. The 2026-08-10 note recorded Record 001's "=  86%" as
+not a thing that rule could decide. He decided it.
+
+WHAT A VISITOR SEES CHANGE - 20 strings, 242 characters, measured per Record:
+001 +92 across 7 strings, 25 lines gain an indent at 2/4/7 spaces; 002 +50;
+003 +78 with four inner runs of 2+ spaces; 004 +10; 005 +12. Record 004's
+folder tree is EXCLUDED and that is not an oversight: it is a {pre} item drawn
+by Listing, which derives columns from the text and emits them as grid padding,
+so no white-space value has ever applied to it and counting its 59 characters
+would report a change that does not happen.
+
+MEASURED ON THE REAL BUILT BUNDLE, served from dist/client with Record 001
+opened, the old declaration injected and then removed and the restoration
+proved identical. At 1280 his indent goes 0 -> 8.91px at two spaces and
+0 -> 17.84px at four, and the block height is 719 -> 719, unchanged, because
+nothing re-wraps. At 390 the height goes 1073 -> 1138, +6.1%, two paragraphs
+gaining two lines and one. Sideways overflow 0 at both. He said "I will
+re-edit all of the Recs prior to launch" and this is what he is walking into.
+
+day:proof gains P4 - 38 checks now, 7 of them losses. P4.1 the control can hold
+the data, read off the built markup, with all five decks named; P4.2 both ends
+declare the same white-space; P4.3 his strings survive that declaration. Each
+shown failing first: the deck's box turned back into an input, and pre-line
+eating 242 characters.
+
+TWO BREAKAGES WERE WRONG BEFORE THEY WERE RIGHT AND BOTH ARE RECORDED. The
+dedent mutation first hit outOf and changed nothing, because a strs block
+short-circuits in blockOut and never calls it - it missed the path his bodies
+travel. The deck check first read zero deck boxes, because its search window
+ended before the box: the deck row carries data-budget, the whole budget object
+as JSON, so the control is over a kilobyte behind the attribute naming it. A
+breakage that misses the live path proves the check is asleep.
+
+TWO PLACES STILL DIFFER AND ARE REPORTED RATHER THAN CHANGED. A {pre} listing:
+the editor shows a monospace box, the museum a grid, and that survives on its
+own measurement rather than the one that just went away - in Arial the tree's
+second column spreads 0 to 88.48px because typed spaces only measure in a
+uniform advance, so pre-wrap keeps the spaces and the column still staggers.
+Changing it would undo his 2026-08-20 ruling. The RecordEntry.jsx comment that
+justified the listing by pre-line is rewritten, because that half is now false.
+And the face: the editor is monospace at 68ch, which is 68 characters exactly
+and is what makes the wrap warning honest; the museum is Arial at 68ch, which
+is not. They agree about what is stored and still break lines in different
+places. Closing that means giving up the honest count or giving the museum a
+monospace body, and both are his call.
+
+The museum lap staged its harness and the harness was not driven - it wants
+wrangler dev on 8787. What it measures was measured directly on the same built
+bundle instead, at 1280 and 390, and is reported as that rather than claimed as
+a lap. NOT PHOTOGRAPHED: the pane would not composite. One probe lied and §8's
+rule caught it - a 226px sideways reading was a zero-width viewport, and
+re-measured at 1280 and 390 it is 0 and 0.
+
+Nothing was landed: robots-record.js, record-draft.json and readiness.json are
+byte-identical to where they started.
+
+Gates: lint 1 (baseline 9/8, zero new) · build 0 · provenance:gate 0 ·
+reveal:check 0 · instory:gate 0 · parity:gate 0 · arc:check 0 · ops:size 0 ·
+docs:numbers:gate 0 · record:land --verify 0 (51/51) · day:proof 0 (38/38,
+7 shown losing first) · reveal:day nothing to move · lap:clean removed the
+harness.
+
+The round log is at C:\AI\_night-20260826\WYSIWYG_LOG-20260826.md and nothing
+was deployed.

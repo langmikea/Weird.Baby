@@ -1,0 +1,144 @@
+the day editor: a section is a box he can see the edge of, and every element carries his two marks
+
+MIKE DROVE THE PAGE A SECOND TIME AND RULED EIGHT THINGS, ALL OPS'. Every one
+is SHAPE or SUBTRACTION, and four of the eight take something off the page. The
+round is C:\AI\_night-20260825\DAY_EDITOR_DRIVE2_LOG-20260825.md and each ruling
+is argued at the code that carries it rather than collected in a list.
+
+THE SECTION RECIPE IS HIS SPECIFICATION, INCLUDING THE WIDTH. "[Section Title
+Box - Displays BOLD] [Section text box that accepts crlf and expands. Width is
+sized to show me when I am going to risk wrapping a line. It is spaced like I
+show it, has as many lines as I give it. This section always displays indented
+automatically.]" That is built as written: a bold title box, an indented lines
+box that keeps his line splits and his spacing and has as many lines as he gave
+it, and a width that is the wrap point.
+
+THE WIDTH IS WHAT REPLACED THE CHARACTER COUNTS - the constraint made visible in
+the shape instead of announced as a number - AND EACH ONE COMES FROM THE
+MUSEUM'S OWN BUDGETS. HEADLINE 62: RECORD_TITLE_MAX, the number reveal:check
+refuses over, with TITLE_BUDGET_MEASURED putting the real wrap at 64 at 1280px
+and 36 at 390, so 62 is two tighter than the desktop line and a wrap in the box
+means the gate is about to refuse. DECK 65: RECORD_LINE_MAX 130 over the two
+lines of the index row BUDGETS.line.holds declares, so a second line reaching
+the edge IS the budget. SECTION 68: .vp-rec-sect-body max-width:68ch in
+Exhibit.css, the museum's own body measure, so a line that wraps in the box
+wraps on the glass. MEASURED SERVED: 62 fits and 63 wraps, 65 and 66, 68 and 69.
+
+AND THE FIRST CUT WAS 22% TOO WIDE, WHICH WOULD HAVE BEEN WORSE THAN NO WARNING
+- a wrong one, arriving thirteen characters late. Two causes, both now written
+at the mechanism. A ch resolves in the font of the element that DECLARES the
+max-width, and the box sat in the page's sans face while its paragraphs were
+monospace: 62ch was 62 sans zeros, 479px, against 392px for 62 monospace
+characters. And box-sizing:border-box, the sheet's own reset, let the padding
+and the border eat the measure. The face is on the box and the box is
+content-box, so max-width means the TEXT. It is still a MAXIMUM: at 390px every
+box is narrower than its budget and warns early, which is the safe direction for
+a warning and is stated where it is set.
+
+HEADLINE AND DECK ARE JUST SECTIONS NOW. They were special-cased and they are
+not special: element() builds them and elementHtml() draws them, and that is the
+only row-drawing function on the page - the headline, the deck, every authored
+section and every attachment go through it. No fld(), no separate header and
+lines pair, no special case left. SED.
+
+AND THE FIELDS ARE NOT DELETED, WHICH IS THE PART THAT MATTERS NEXT YEAR. LEAD
+and TOMBSTONE come off on his own rule that what is not required is not
+displayed - five Records have never used either. A field draws when it carries
+something, so the day a lead exists it draws, as a section, in the same recipe.
+Removing them outright is how two Records once landed and drew nothing at all
+while every gate passed.
+
+THE THREE MANDATORY SECTIONS ARE HEADLINE, EXECUTIVE SUMMARY AND DETAILED
+REPORT, one letter each in a fixed column, matched on the header he writes so
+the match is his vocabulary. A MISSING ONE IS DRAWN LOUDLY, because an absent
+thing cannot speak for itself and every other mark on the page reads something
+that is there. PROVED BY BREAKING IT ON PURPOSE - nothing else exercises the
+path, since all five days carry all three: withholding DETAILED REPORT put
+"1 NOT READY: DETAILED REPORT" on all five days in the build log, and on the
+page the D column went loud and the row drew in place with its letter, a red
+box and no lines. Restored and re-verified after.
+
+READINESS ON EVERY ELEMENT, HIS TWO MARKS, BOTH OVERRIDING THE SYSTEM: NOT READY
+even though it may pass the system's test, and NOT REQUIRED - deemed not
+required, not presented, regardless of what the system says. Three voices, his
+words: not ready SPEAKS LOUDLY in red, ready is displayed discretely, and not
+required is not presented - the lines go and one dim dashed title line keeps its
+two boxes so the mark stays reversible.
+
+THE MARKS ARE STORED AND NEVER INFERRED. docs/dictation-20260807/readiness.json
+is the file of record and the generator bakes it into the page, so a wiped
+browser or a different address still opens on his marks - the fix the worksheet
+round already paid for, when his words lived in exactly one browser. The live
+store is localStorage, merged over the baked file with the browser winning, and
+it raises assign.html's red banner rather than losing a tick quietly. The file
+ships holding {"marks":{}} because ABSENCE OF A MARK IS NOT A MARK and Ops does
+not seed one. Only the two booleans are stored; the system's verdict is
+recomputed every build and never written there, because a mark Ops derived and
+filed in his class is indistinguishable from his own a week later.
+
+THE KEY IS AN IDENTITY AND NEVER A POSITION - field:title, field:line,
+section:<the header he wrote>, attachment:<its title> - so inserting a section
+cannot move a mark. AND AN ORPHANED MARK IS SHOWN RATHER THAN DROPPED: renaming
+a header orphans its mark, and a mark of his that vanishes silently is this
+tree's most expensive failure class. Proved by planting one; the page named the
+stale key in a MARKS WITH NO ELEMENT panel.
+
+THE FIRST CUT OF THE MARKS MADE ONE A ONE-WAY DOOR AND THAT IS WORTH RECORDING.
+It rendered only the state the element was in, so clearing NOT REQUIRED in the
+browser had nothing to put back - the lines box had never been written. A mark
+he cannot take off is not a mark, it is a deletion. Every row carries its lines,
+its loud line and its quiet line now, and the class on the row is the only thing
+that changes.
+
+CHARACTER COUNTS COME OFF THE DAY SUMMARY - "only useful when there is a
+problem, and not at Day level". MEASURED ON THE SERVED PAGE: there is exactly
+ONE count in the whole document, 128/130, Record 002's deck sitting one
+character from the gate. The bar and the calendar carry none at any time.
+
+x1 DIED AND x2 IS THE VIEWER. Three buttons - close, previous, next - no steps
+and no state. It opens at 742x960, measured served.
+
+FILES THIS RECORD NAMES CAME OFF ENTIRELY. It was the path-scraping hack's
+output and he can neither read it nor act on it. The door state survives where
+it answers a question he can act on: on the tiles inside an attachment, and in
+the P column. A real panel arrives when the handlers do.
+
+THE SEVEN COLUMNS ARE FIXED AND IT IS MEASURED RATHER THAN ASSERTED - H E D S A
+P {} in one order on every day, an empty column still a column, and every row on
+a day returns the SAME three column positions, sections and attachments alike.
+"Keeping the icons in predefined columns is still a plus" is a statement about
+POSITION, and a bar that packs itself has none.
+
+MARKS APPLY TO SECTIONS AND ATTACHMENTS - the elements he authors. P and {}
+carry no checkbox: they are readouts about files and a gate, not about his work.
+There is no story-point row in the tree to mark, so none was invented.
+
+VERIFIED SERVED at 127.0.0.1:8931, which is the condition that broke here
+before: 473 marks and 473 two-line hints, zero bare, with querySelectorAll
+'[title]' returning exactly 473 so nothing outside the mark set wears one; the
+viewer opening on a real click; ONE network request for the whole page, so no
+path is resolved anywhere; zero console errors; page overflow zero at desktop
+and at 390px; and the copy control refusing honestly - "not verified, press
+Ctrl+C, the text is selected" - rather than claiming a clipboard write it never
+read back.
+
+A PROBE OF MINE WAS WRONG ONCE AND SECTION 8'S RULE CAUGHT IT. A wrap
+measurement returned "62 does not fit" because it read a HIDDEN day, whose
+clientWidth is zero. Suspect the probe before the site; re-measured on the
+visible day, all three widths are exact.
+
+NOT BUILT, AND NAMED RATHER THAN LEFT IMPLIED: the browser-to-file road for the
+marks. The page copies the JSON with a clipboard READ-BACK and Ops lands it;
+record-serve.mjs is the proven POST-to-tree pattern and is the next step. Typing
+into the boxes is still Piece 4 - the BOXES are the shape, and nothing on this
+page edits his words.
+
+FLAGGED, NOT FIXED - STAGE_PREFIX is imported by day.mjs and used by nothing.
+Carried from the first pass.
+
+GATES, ALL ELEVEN: lint 17 problems (9 errors, 8 warnings), zero new · build
+green · provenance PASS exit 0 · reveal:check exit 0 · parity 4 shared, 0
+divergences · instory PASS · arc:check PASS · ops:size PASS · docs:numbers:gate
+PASS exit 0 · reveal:day "Nothing to move. The tree and the Record agree." ·
+lap:clean, nothing left in public/. The museum lap was not run and the reason is
+that nothing it measures moved: no src/, no public/, no data file.

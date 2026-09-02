@@ -1,0 +1,79 @@
+one level of indent, and both ends remove the same leading run
+
+MIKE, on the editor after 698c5b2: "From Exec Summary and on, the indent is
+double indented, should not be."
+
+MEASURED BEFORE ANYTHING WAS TOUCHED, every section of every day at 1280. The
+recipe's structural indent is 23px in the editor and 18px in the museum, on
+every row. His bodies then start a further 12.66px in (a two-space summary) or
+25.3px (a four-space addendum); on the museum, 8.91px and 17.84px. So there are
+THREE left edges, not two - 23/36/48 in the box, 18/27/36 on the glass - and it
+deepens down the page because the summaries carry 2 and the addenda carry 4.
+Ops' hypothesis was right about the mechanism and understated the count.
+
+THE CAUSE IS THE PREVIOUS ROUND AND IT IS SHARPER THAN "THE DEDENT CAME OUT".
+pre-line was doing TWO things and only one of them was wrong. It collapsed runs
+of spaces INSIDE a line - that is what his "Is it WYSIWYG?" was about, and
+pre-wrap fixed it, and that half stands. It also REMOVED the leading indent of
+each line, and the editor's dedent agreed with it, so both ends had always put
+a body at one level. Removing the dedent alongside the collapse fix took the
+leading-run removal off BOTH ends at once.
+
+FIXED AT BOTH ENDS. RecordEntry.jsx gains dedentPara, which removes the common
+leading run of each paragraph at render; pre-wrap stays, so "=  86%" still
+draws with both spaces. The editor's dedent comes back and is put back on save,
+so the DATA is untouched - section 0 VERBATIM, and record:land guard 6 refuses a
+change to four of the five entries anyway (C-day2), which is also why this is a
+render rule rather than the tidier data normalisation. The "2 spaces off"
+announcement does not come back: Mike killed it, and a rule both ends obey has
+nothing to announce.
+
+THE FIRST CUT GOT ONE SECTION WRONG AND IT WAS THE LAST SECTION OF A DAY, which
+is why Ops asked for the last as well as the first. The museum dedents PER
+PARAGRAPH; the box GROUPS paragraphs, and dedenting the joined text takes the
+minimum across the group. Record 003's ADDENDUM 02 holds one paragraph at 4 and
+one at 2, so the box cut 2 and showed "  THE CEO         - one page…" where the
+page showed "THE CEO…". The cut is per paragraph now and each block carries one
+per item; a newly typed paragraph takes the level of the one before it. P5.1 had
+already passed on that section because it compared one BODY ITEM against one
+museum paragraph - the wrong unit. It compares the BOX now, which is what a
+person looks at.
+
+VERIFIED SERVED AT BOTH ENDS, first and last section of every day and every
+Record. The editor: one distinct left edge across all 26 boxes, 23px + 0 spaces.
+The museum, on the real built bundle with all five Records walked by the
+record's own nav: one distinct left edge across all 19 bodies, 18px + 0. And
+what had to survive did - on Record 003 the first line is flush while "Manual
+Pages Recovered" sits at 5 and SCAN 07 at 7 beneath it, and the manifest keeps
+its inner run of nine spaces. Console errors 0 at both ends. NOT PHOTOGRAPHED:
+the pane would not composite, the fourth round running.
+
+day:proof gains P5 - 45 checks, 9 losses. P5.1 the two dedents agree, compared
+at the box; P5.2 no body reaches either surface still indented; P5.3 his
+relative steps and inner runs survive. Each shown failing first: a museum that
+strips ALL leading whitespace instead of the common run disagrees on 2 of 19
+bodies and would flatten every step he authored, and before the cut 19 of 19
+bodies carried a leading run. The two dedents are duplicated because a museum
+component may not import from tools/, so the relation is asserted rather than
+the files merged.
+
+THREE PROBES LIED. A breakage that misses the live path proves the check is
+asleep, and this is the third time in this file: the save-what-you-show mutation
+removed the re-indent and changed nothing, because the untouched short-circuit
+returns the original items first - it removes both halves now. P5.1's unit,
+above. And two patch scripts wrote a literal line break into a JS string through
+a shell heredoc; node --check caught both and the join is a named constant now.
+
+Nothing was landed: robots-record.js, record-draft.json and readiness.json are
+byte-identical to where they started. Exhibit.css is deliberately untouched -
+pre-wrap stays.
+
+Gates: lint 1 (baseline 9/8, zero new) · build 0 · provenance:gate 0 ·
+reveal:check 0 · instory:gate 0 · parity:gate 0 · arc:check 0 · ops:size 0 ·
+docs:numbers:gate 0 · record:land --verify 0 (51/51) · day:proof 0 (45/45,
+9 shown losing first) · reveal:day nothing to move · lap:clean nothing left.
+The museum lap was not driven - it wants wrangler dev - and what it measures was
+measured directly on the same bundle instead.
+
+The round log is at C:\AI\_night-20260826\ONE_LEVEL_LOG-20260826.md and nothing
+was deployed.

@@ -1,0 +1,68 @@
+Fill the Portal's opening with television, and no captions
+
+Mike's rulings, 2026-08-26: "I want the YT video scaled up so that none
+of the edges of the video are exposed... No black bars, pls." and "The
+usable part of the video is 4:3, and I want to lose the black bars
+completely." Then, on what looking found mid-round: "I do not want
+closed captions."
+
+VERIFIED BEFORE BUILDING, because a crop that eats his picture is worse
+than bars. Measured on four frames at four timestamps at native
+resolution: aA5oKoCRjWw is 16:9 with the picture matted inside it, the
+matte edge is at 12.97% of the frame width on each side, and it is
+centred to the pixel - left bar minus right bar is 0 on every frame.
+The picture is 1.3167, which is 1.25% NARROWER than 4:3, and that is
+the safe direction: the placement crops 12.5% a side, so it stops 0.47%
+of the frame width short of his picture and leaves 3.58px of black
+behind a bezel that covers 14.84px.
+
+The mechanism is placement, not object-fit, which is inert on an
+iframe. The player is sized to the feed box's HEIGHT and its width
+overflows into the bezel. It sizes a wrapper Television.css owns rather
+than fighting PortalScreen.css's .ps-feed iframe rule, so two owners
+share one seam with no specificity fight and no !important.
+
+Measured on the served page, A/B'd by injecting the old state. Before:
+black on all four sides - left 10.43%, right 10.39%, top 12.26%, bottom
+11.81% of the opening. After: zero on all four, at 800px and again at a
+true 375px. The previous round measured half of this: its 303.6 and
+254.5px are the player's own letterbox, and the source's matte was
+putting a further 10.4% of the opening's width down each side with
+nothing measuring it.
+
+IT HOLDS FOR THIS SOURCE, NOT FOR EVERY VIDEO. The crop is
+unconditional - 12.5% of the player's width a side, and only 70.15% of
+the frame inside the hole at all. Here that is entirely matte. A
+genuine 16:9 clip would lose about 30% of its picture to the same rule
+with nothing reporting it, because no gate in this tree can read a
+cross-origin frame's pixels. That is a property of the source, not of
+the placement, and it is filed at the swap site beside ytId and as row
+T-a.
+
+The captions ruling needed two mechanisms and only one binds.
+cc_load_policy: 0 is the weak half - YouTube documents 1 as force-on
+and reads anything else as the viewer's own preference. The half that
+does not depend on the viewer is unloadModule("captions"), which needed
+a three-line passthrough on useYTPlayer that /hr and /wal never call.
+It runs on its own 500ms timer rather than in the refusal watcher,
+because that one stops the moment the set is playing and the module
+comes back on every loadVideoById - once every 1,743 seconds on the
+loop. Verified on a browser that had captions on.
+
+provenance:gate failed on "captions" and "cc" and was right to: it is
+default-DENY. Declaring a YouTube module name as museum content would
+have been the wrong shape, so unloadModule joins SINK_ALL, the sweep's
+named list of call targets whose string arguments are machinery, beside
+postMessage and addEventListener. One entry, not a family - the sweep's
+own rule is that an over-broad look-away is the defect. The look-away
+is counted: machinery-call reads 218, up 2.
+
+One defect of my own is on the record: adding the caption note to
+TV_VARS appended prose to a block comment that was already closed,
+orphaning a */ and rendering /robots as 30 elements and no text. Found
+by looking at the page, named by the console on the first read.
+
+Gates: lint 9/7 baseline, build green, provenance PASS after the
+SINK_ALL entry, reveal:check, parity:gate, instory:gate and
+docs:numbers:gate all PASS. The round log is at docs/
+MUSEUM_TELEVISION_FILL_LOG-20260826.md and nothing was deployed.

@@ -1,0 +1,93 @@
+Record 002 accepts an edit, and P6 watches where its reasoning went
+
+Commit 1 of five. One entry, as scoped: 003, 004 and 005 are untouched.
+
+THE JUDGEMENT, AND I EXPECTED A SPLIT THAT ISN'T THERE. Both blocks were read
+whole and every claim in them is already written down elsewhere in fuller form.
+Nothing is standing-and-new; nothing is entry-specific-and-unique. All 2,579 of
+2,579 characters are a delete-and-cite.
+
+Block 0, 1,383 characters, "HIS REWRITE, VERBATIM": three lines for six, the
+ZIP-index and per-file-header lines quoted, the recovered-names line, why the
+invented count is not left in the source, the Ruling 9 quote, and his typography
+as typed. Every one of those is in MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md
+section 27 or MUSEUM_RULINGS-20260817.md section 9 - and section 27 also carries
+the invented count the comment deliberately withheld.
+
+Block 1, 1,196 characters, "THE _tmp/ LINE AND THE CLOSING LINE ARE BOTH
+STRUCK": the _tmp/ line, the closing line, the reasoning that it named "the last
+entry" which WAS _tmp/ so it could not survive it, "A Record names only what it
+can produce", and the manifest's ten lines. All in ruling 9 or section 27-28.
+
+AND ITS LAST SENTENCE WAS STALE, WHICH IS THE ARGUMENT FOR THE WHOLE APPROACH.
+The comment said Record 003 still opens on the tmp folder in its own words.
+Ruling 9 carries that paragraph AND records that the line was replaced on
+2026-08-19 - a correction the source comment never learned. A copy in the source
+is a copy that cannot be told when it goes stale.
+
+ONE THING WAS CHECKED BEFORE ANY DELETION AND IS WORTH NAMING: the three struck
+DETAILED REPORT lines are QUOTED in the source comment and only NAMED in ruling
+9. They are quoted verbatim in section 27 of the round log, so nothing is lost -
+and that is why the manifest cites the log rather than the ruling for those
+three.
+
+THIS HAS BEEN DONE TWICE BEFORE AND BOTH TIMES THE BLOCKS WENT TO THE PREAMBLE -
+Record 001's three and Record 003's one, which is why 001 lands. The precedent
+left its own warning in place: the note above 003's moved block now says the
+entry's text was replaced afterwards, "so the section it describes is not the
+section that is there now". A note parked in a preamble goes stale where nobody
+is reading it. That is the case for Ops' destinations rather than the preamble
+and it is recorded at the new block.
+
+WHAT 09-PUBLISHED.md GAINED is the trail to the words: its RECORD 002 section
+already carried the strike and a ruling 9 citation, and it now names, for each
+of the five struck lines, which file holds its text - plus the typography flag
+and a note that the source carries none of it.
+
+P6 IS BUILT AND IT WENT RED ON ITS FIRST RUN, ON MY OWN CITATION. The manifest
+is docs/dictation-20260807/moved-blocks.json: per block the sha256 of the bytes
+that left, and the claims it made with the file each is cited to. Two blocks,
+sixteen claims, three files, asserted every run. It is the only check in
+day:proof that can go red without the editor changing, because it watches two
+other documents. The first run reported entry 2 block 1's "the closing line,
+verbatim" as ORPHANED - the phrase crosses a line wrap in the markdown. The
+citation was wrong, not the ruling; corrected to a phrase on one line, and the
+constraint is written into the manifest's own note.
+
+Proved by deleting a line, as ruled: P6 removes one cited line from
+MUSEUM_RULINGS-20260817.md and names the block that depended on it - entry 2
+block 0, claim "the doctrine it quoted" - and the line it lost.
+
+PROOF. draftEntries() deep-equal: all five entries identical to the committed
+draft, so the deletion touched only comments. In-span comment characters 21,486
+-> 18,907, removed 2,579, which is block 0 plus block 1 exactly. Preamble 16,743
+-> 19,341 for the audit block, and the preamble is outside every span so it
+re-blocks nothing. P1.3's landing table now reads 001 lands, 002 lands, 003 and
+004 and 005 refused - 002 flipped and the other three did not move. A no-op
+landing is byte-identical. record:land --verify 51 of 51. day.html's baked sha
+matches the edited source. P6 clean at 16 of 16.
+
+The remaining blockage is 18,907 characters in fifteen blocks across three
+entries: 003 two, 004 seven, 005 six.
+
+WHAT THE FIRST EDIT TO 002 WILL DO TO ITS FORMATTING, measured against the real
+tree with a probe edit landed and the tree restored: the span goes 1,624 -> 1,613
+bytes, 34 -> 33 lines, 13 -> 12 folded continuation lines, and the first six
+lines are character-identical. It is not a reformat. The entry was written by
+generate() in the first place, so regenerating it reproduces it; what moves is
+where the string folds fall, because the text got longer. His first save to 002
+changes eleven bytes of source shape and one line, and no character of his prose.
+
+src/ changed and the museum lap was not driven, which is said rather than
+glossed: what changed is comments in a data file, comments do not ship, the
+parsed entries are deep-equal, and reveal:check and the build are green, so no
+visitor-facing string moved.
+
+Gates: lint 1 (baseline 9/8, zero new) · build 0 · provenance:gate 0 ·
+reveal:check 0 · instory:gate 0 · parity:gate 0 · arc:check 0 · ops:size 0 ·
+docs:numbers:gate 0 · record:land --verify 0 (51/51) · day:proof 0 (49/49,
+10 shown losing first) · reveal:day nothing to move · lap:clean nothing left.
+
+Next is Record 003, two blocks and 3,333 characters, the heaviest standing share
+of the four. The round log is at
+C:\AI\_night-20260826\COMMIT1_RECORD002-20260826.md and nothing was deployed.

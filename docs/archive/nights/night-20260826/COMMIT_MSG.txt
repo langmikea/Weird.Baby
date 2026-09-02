@@ -1,0 +1,50 @@
+One surface: the Portal's controls on all four channels
+
+CH3's surface is the target for every channel, so SCROLL, CLICK, POWER and
+SHAKE follow the digit strip out of twin.html and the museum draws both rows
+over television, the test signal, the photograph and the machine alike. It is
+the same structural argument the strip left on in August rather than a second
+one: a control living in that document can only ever appear on one channel of
+four, because the overlay unmounts it. Framed() now removes #monctl exactly as
+it already removed #monlayout, and the four handlers are untouched and still
+the machine's only inputs -- the museum reaches them through a new contract
+word, {wb:"portal-control"}, the mirror of the portal-close the twin has posted
+back since S4. The power lamp travels the other way from Mon_Power_Sync's
+existing 200ms chokepoint, and only on a change.
+
+Two implementations on disk is forced rather than chosen: twin.html is
+single-file and no-network by a standing constraint and must work with no
+museum, so neither side can import the other. What they share is five numbers,
+and every one was measured on the served page.
+
+Scroll keeps its one meaning. Channels do not move to it, so the fault the
+channel-selector scoping named -- one control, two meanings -- is not created,
+and the ignoring on the three machineless channels is written down at the
+listener that does it so a later round does not read a dead control as an
+unfinished one.
+
+Click tears as well as shuttering, and the scripted tear keeps its rarity
+because the two run on separate clocks: a press advances nothing, resets
+nothing and consumes no step. That the tear has no reason is recorded at the
+tear as deliberate; an invented one would be worse than none. The slip moved
+off the iframe onto a wrapper, because it had only ever reached one kind of
+picture and the rip drew over television with nothing moving under it.
+
+Channel 4 becomes an img. The plate always registered with the bezel; what was
+wrong was the element, since object-fit does not apply to an iframe and the
+browser's own image viewer was drawing it. The channel declares picture: true,
+which is data in the same shape as bezel and note.
+
+The selected channel is a hole rather than ink, which T4 and S2 both ordered in
+July and neither reached this strip. Television's "TELEVISION ON THIS CHANNEL."
+is struck with its register row, and the Portal track is renamed to "Launch the
+Portal" -- recorded as a reversal and not as a correction, with canon carrying
+six numbered steps so a later round can tell Ops fixing its own write-up from
+Mike ruling differently.
+
+The lint baseline moves to 9 errors and 7 warnings by a real removal; the first
+cut of that edit silenced the warning with a disable instead, which moves the
+number while changing nothing, and it was undone. monFeed has been pinned at 1
+inside the museum since 2026-08-21 and is flagged rather than fixed as W-a. The
+round log is at docs/MUSEUM_ONE_SURFACE_LOG-20260826.md and nothing was
+deployed.

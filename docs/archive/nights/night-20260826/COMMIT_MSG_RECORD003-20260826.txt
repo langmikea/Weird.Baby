@@ -1,0 +1,94 @@
+Record 003 accepts an edit, and one sentence was carried not deleted
+
+Commit 2 of five. One entry: 004 and 005 are untouched.
+
+THE CLASSIFICATION, READ WITHOUT 002's ANSWER IN HAND. It is not 100%
+duplicate. One sentence in 3,333 characters was written down nowhere else, and
+deleting it would have lost a correct file path.
+
+BLOCK 0, 1,110 characters, "THE THREE SCANS" - duplicate in full. Mike's quote
+on what an attachment is, the filmed-together test, the frame-number ruling, and
+"ONE PAGE IS IN TWO SCANS" are all in MUSEUM_RULINGS-20260817.md rulings 11 and
+12, in better shape: ruling 12 carries the quote with a whole sentence this
+comment dropped ("As we peel the onion that is the ZIP file, the story unfolds")
+and adds the count the comment lacks (three scans, four manual pages, five
+files); ruling 11 adds the vocabulary sweep. The one-page-in-two-scans line is
+the claim I expected to be entry-specific and unique. It is in ruling 12.
+
+BLOCK 1, 2,223 characters, "THE FOURTH ATTACHMENT, BACK-POSTED" - five of six
+claims duplicate. The back-post and "We have had no visitors", ruling B, the
+not-called-a-scan reasoning, the filename ruling and the PEN WRITER credit are
+all in docs/canon/BELL-103.md, which carries them as "Three further rulings sit
+on that attachment", and ruling B has its own heading at
+docs/canon/09-PUBLISHED.md#back-posting.
+
+THE SIXTH WAS CARRIED, NOT DELETED: that the marked page is a SECOND RENDER of
+the same master rather than a retouch, so the pair can be differenced and
+audited. provenance/assets.json records the second render, the generator and the
+marked master's path and sha256 - what it does not record is WHY there are two
+separate renders, or the pairing with the unmarked leaf. Both are in
+BELL-103.md now, as a fourth bullet beside the three rulings already there.
+
+AND DELETING IT WOULD HAVE LOST A CORRECT PATH. Measured on disk:
+structure/page-47.png is ABSENT, structure/pages/page-47.png EXISTS,
+structure/pages/marked/page-47.png EXISTS. provenance/assets.json's scan-31-a
+row names the absent one; the comment being deleted had it right. The correct
+paths are carried into BELL-103.md with the sentence and the discrepancy is
+FLAGGED there and not fixed - this round moves one Record's reasoning and does
+not edit a gated provenance record on the way past.
+
+STALENESS CHECKED, AND NEITHER BLOCK HAD GONE STALE. 002's closing sentence had,
+and the 2026-08-16 precedent block carries a note saying its own subject was
+replaced underneath it, so every factual claim here was re-measured rather than
+assumed: 003 still delivers four attachments, scan-31 is still untouched beside
+the marked copy, the DETAILED REPORT still names SCAN 07, SCAN 11 and SCAN 31,
+the numbers are still 07/11/31, and both master renders are still on disk. All
+five hold.
+
+P6 CAUGHT A SECOND CITATION BEFORE IT LANDED. The phrases were tested against
+the rendered markdown first, which is what last round's orphan taught: thirteen
+candidates run through a present-AND-on-one-line check, and "no public address
+asserts a page of the manual" came back BAD - it crosses a wrap, the same class
+as last round. Replaced with "the practical half of the ruling", which lives on
+one line. The check ran before the manifest was written rather than after. The
+manifest is now 4 blocks, 29 claims, 4 files, green on all 29, and its breakage
+still names the block and the line.
+
+PROOF. draftEntries() deep-equal: all five entries identical to the committed
+draft. In-span comment characters 18,907 -> 15,574, removed 3,333, which is
+block 0 plus block 1 exactly; preamble 19,341 -> 21,802 for the audit block,
+outside every span. P1.3 now reads 001 lands, 002 lands, 003 lands, 004 and 005
+refused - 003 flipped and the other two did not move. day.html's baked sha
+matches the edited source. record:land --verify 51 of 51. Remaining blockage is
+15,574 characters in thirteen blocks across two entries.
+
+TWO DEFECTS IN THE LANDER, FOUND BY RUNNING THIS ROUND'S OWN PROOF, BOTH
+FLAGGED AND NOT FIXED. A no-op record:land --write now refuses and the refusal
+is correct: guard 8 fires because the source has been hand-edited since the
+draft was saved - its clock, not its content. Nothing was written and the source
+is byte-identical. That is the expected shape of this work and Mike will meet
+it. But the refusal names a paragraph that did not change: it reports Record
+004 section 2 paragraph 2 as differing while both sides are byte-identical -
+JSON equal, pre equal, 215 bytes each. The cause is emit-record-entries.mjs:747,
+"if (ab[j] !== bb[j])", a reference comparison on a body item: right for a
+string, always false for a {pre} object, so every listing is reported as changed
+on every stale-draft refusal. It causes no wrong refusal, only a line that sends
+somebody hunting for an edit nobody made. It is the exact pattern the round-trip
+repair already fixed once in record-edit.mjs - indexOf(c.after) became
+findIndex(p => textOf(p) === ...) - and this line was missed. And the refusal
+points at the retired editor, saying "npm run record" where it should say
+"npm run day:serve". The lander is a MIKE command; changing its behaviour
+deserves its own round and its own proof.
+
+src/ changed and the museum lap was not driven, for the same reason as 002:
+comments in a data file do not ship, the parsed entries are deep-equal, and
+reveal:check and the build are green.
+
+Gates: lint 1 (baseline 9/8, zero new) · build 0 · provenance:gate 0 ·
+reveal:check 0 · instory:gate 0 · parity:gate 0 · arc:check 0 · ops:size 0 ·
+docs:numbers:gate 0 · record:land --verify 0 (51/51) · day:proof 0 (49/49,
+10 shown losing first) · reveal:day nothing to move · lap:clean nothing left.
+
+Next is Record 005, six blocks and 3,982 characters, then 004 with seven and
+11,592. The round log is at
+C:\AI\_night-20260826\COMMIT2_RECORD003-20260826.md and nothing was deployed.

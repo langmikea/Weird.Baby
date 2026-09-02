@@ -1,0 +1,104 @@
+the record scrolls in its own column, and the indent he called artificial was the source's own leading spaces
+
+TWO FIXES. Round: C:\AI\_night-20260825\DAY_EDITOR_DRIVE4_LOG-20260825.md.
+
+THE INDENT: THE CAUSE WAS FOUND BEFORE ANYTHING WAS CHANGED, AND IT WAS NOT
+NESTING. Measured on the served page before any edit: every TITLE box on Record
+001 began at x=326 and every LINES box at x=340 - one edge each, first section
+and last - so the recipe's one level was already equal and nothing was
+cumulative in the layout. WHAT DEEPENED WAS THE FIRST GLYPH: 349, 362, 374.
+
+THE DEPTH IS IN THE TEXT. Every section body carries its own leading run of
+spaces - 2 for the summaries, 4 for the addenda, 7 to 10 deeper inside two of
+them - and it reads as deepening down the page because the addenda always follow
+the summaries. That is "artificial indents, each at a deeper level" exactly.
+
+AND IT REACHES NO VISITOR, WHICH IS WHAT MAKES "ARTIFICIAL" THE RIGHT WORD. The
+museum sets a Record body white-space:pre-line, and pre-line COLLAPSES a run of
+spaces. Measured in the browser rather than read off the stylesheet: the same
+string draws its first glyph at 0px under pre-line and 25.3px under pre-wrap. So
+the indentation is an artefact of how the source is typed, the glass has never
+shown it, and only this page's pre-wrap exposed it - my own choice last round,
+made for a real reason (004's folder tree is columnar and pre-line would flatten
+it) with a consequence I did not measure.
+
+SO THE COMMON PREFIX COMES OFF FOR DISPLAY. dedent() removes the SMALLEST
+leading run across the non-empty lines of each body, which takes off exactly the
+uniform artificial level and leaves every relative step he authored. AFTER,
+MEASURED ON ALL FIVE DAYS, FIRST SECTION TO LAST: title edges one value (320),
+box edges one value (334, so one level is 14px), and FIRST GLYPH ONE VALUE
+(343). Before, one day carried three glyph depths; after, every day carries one,
+on the first section and on the last.
+
+HIS STRUCTURE SURVIVED, CHECKED WHERE IT MATTERS. Record 004's folder tree still
+hangs PORTAL_2v16.CFG and TERMINAL.EXE under /PORTAL with QC_101.TIF under
+/INSTALL; Record 003's SCAN 07 / 11 / 31 still sit under Manual Pages Recovered.
+Only the uniform prefix moved. AND IT IS NEVER SILENT: the hint reads "longest
+65 of 68 characters, 4 leading spaces removed", says the museum collapses it
+entirely, and says nothing is written to the data. This page still writes
+nothing.
+
+WHY NOT SIMPLY MATCH THE GLASS WITH pre-line: it collapses EVERY run, so the
+folder tree and the manifest would flatten into prose - worse than the glass,
+which draws a {pre} body as an aligned listing. Dedenting keeps more of what he
+wrote than either rule does.
+
+FLAGGED AND FILED ONTO C-day1 - THE DRAFT LOSES {pre} AS WELL AS wire AND
+plates. robots-record.js declares 004's folder tree as { pre: "..." } and the
+museum renders it through its Listing component; draftEntries() hands this page
+a plain string, so the editor cannot tell a listing from a paragraph. It is a
+THIRD field lost in the same round-trip, and it belongs to the same repair that
+now gates Piece 4.
+
+THE RECORD SCROLLS, NOT THE PAGE. html and body are pinned to the viewport, the
+bar is a fixed-size first item, and the three columns own their own overflow.
+MEASURED AT 1280x800: the page cannot scroll at all - window.scrollTo(0,900)
+plus documentElement.scrollTop=900 plus body.scrollTop=900 leaves the total at
+ZERO - while the record scrolled 567px and the bar, the calendar and the shelf
+each moved 0px, all three still on screen with the record at its bottom. The
+shelf, open with 138 tiles, is 732px tall, its bottom inside the viewport, and
+scrolls inside itself.
+
+TWO DEFECTS IN MY FIRST CUT, BOTH CAUGHT BY MEASURING RATHER THAN LOOKING.
+overflow:hidden ON BODY ALONE DID NOT HOLD THE PAGE - the html element still
+scrolled, and every column sat still while window.scrollTo moved the page 500px,
+so the furniture stayed put only for as long as nobody put a wheel over it.
+html gets it too. AND THE SHELF PANEL SPILLED INSTEAD OF SCROLLING: its content
+measured 2102px tall inside a 732px panel and scrolled nothing, with
+min-height:0 and flex-shrink:1 both already set. The cause is that a panel is
+align-self:start so a CLOSED one is its own height - which makes its height
+AUTO, and max-height only caps the box afterwards, so a flex child laid out
+against that auto height never shrinks. The scroll moved onto the element that
+carries the max-height, which does not depend on any child-sizing rule. The cost
+is stated at the rule: the shelf's own summary scrolls with its tiles.
+
+ONE COLUMN IS A PHONE, AND A PHONE SCROLLS THE PAGE. Below 820px the whole
+mechanism releases - html and body both back to visible, no second scroller.
+Verified at 390px: the page scrolls, sideways overflow 0, and the indent is
+still one level. Three stacked independent scrollers on a phone is a worse
+instrument than the ordinary one.
+
+A PROBE OF MINE READ FALSE FIRST, AND SECTION 8'S RULE CAUGHT IT. The initial
+scroll test reported the layout inert - body overflow visible, page scrollable,
+the shelf 2733px down the document. Suspect the probe: the browser pane was
+UNDER 820px wide, so my own phone fallback was doing exactly what it says.
+Re-measured at 1280x800.
+
+VERIFIED SERVED at 127.0.0.1:8931: 411 marks and 411 two-line hints, zero bare,
+with querySelectorAll '[title]' returning exactly 411; one count on the page,
+128/130; the viewer opening at 742x960; the state button still cycling quiet ->
+loud -> off -> quiet after the layout change with the store back to {}; zero
+console errors. NOT PHOTOGRAPHED: the browser pane would not composite, so
+everything above is measured through the DOM, computed styles and Range
+geometry.
+
+GATES, REAL EXIT CODES CAPTURED PER GATE: lint exit 1, which IS the baseline -
+17 problems, 9 errors / 8 warnings, zero new, and eslint exits 1 on any error so
+this gate is read by its counts - build 0 - provenance 0 - reveal:check 0 -
+instory 0 - parity 0 - arc:check 0 - ops:size 0 - docs:numbers:gate 0 -
+reveal:day "Nothing to move. The tree and the Record agree." - lap:clean,
+nothing left in public/. The museum lap was not run: nothing in src/, public/ or
+any data file changed.
+
+FLAGGED, NOT FIXED - STAGE_PREFIX is imported by day.mjs and used by nothing.
+Carried from pass one.

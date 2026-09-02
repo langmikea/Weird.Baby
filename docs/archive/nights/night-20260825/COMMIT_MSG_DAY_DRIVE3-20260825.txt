@@ -1,0 +1,113 @@
+one box width, one control, and the workbook is recorded as a rescue path rather than the road
+
+THREE FIXES, ALL OPS' AND ALL THE SAME SHAPE OF MISTAKE: a rule that was right
+and a page that was wrong for the person reading it. Round:
+C:\AI\_night-20260825\DAY_EDITOR_DRIVE3_LOG-20260825.md.
+
+RULING A IS RECORDED AND NOT BUILT, AND IT IS THE BIGGEST THING IN THIS COMMIT.
+Mike ruled that THE DAY EDITOR BECOMES WHERE HE WRITES AND EXCEL STOPS BEING THE
+SURFACE, which makes npm run record:workbook a RESCUE PATH rather than the road.
+A round log is the wrong home for that - nobody greps a diary for "is the
+workbook still the road" - so it is filed at the three places a session would
+actually be standing when it needs to know. The head of workbook_to_draft.py,
+because that is where a session goes when it is about to WIDEN the workbook
+chain, and it is exactly that session which must find out first; the script
+keeps working and nothing about its behaviour changed. docs/BACKLOG.md, because
+the backlog is the ORDER and this changes it. And OPEN_ACTIONS.md row C-day1,
+because the register carries the thing that is actually blocking, which is not
+the ruling.
+
+THE PREREQUISITE IS NAMED IN ALL THREE: the draft round-trip SILENTLY DROPS wire
+AND plates - Record 013's defect. A writing surface that loses a field the
+moment he types into it would lose his words on its first day, which is the one
+outcome Piece 4 was sequenced last to avoid. Repair, then Piece 4. Nothing on
+this page takes a keystroke today.
+
+ONE BOX WIDTH, 68, AND A MARK WHERE A LIMIT EXISTS. The first cut sized each
+element to its own budget - 62 for the headline, 65 for the deck, 68 for a
+section - and every number was correct while the page was wrong: he reads a
+COLUMN OF BOXES, and edges that do not line up for a reason he cannot see read
+as sloppiness rather than as information. Every box is now the museum's own body
+measure, .vp-rec-sect-body max-width:68ch, declared once in the sheet with zero
+inline widths left in the markup. Measured served on the visible day: text area
+430.0px, 68 characters 430.0px, so 68 fits and 69 wraps.
+
+AND THE WRAP WARNING ONLY HAS TO BE HONEST WHERE A LIMIT EXISTS. Two fields have
+one, and they get a MARK instead of a narrower box. AMBER when the string is
+within five characters of its budget - it still passes, this is Ops' slack band
+and NOT a gate, and the hint says so, because a mark implying a gate nobody can
+find is the same defect as a gate nobody can read. RED when it is over - reveal
+:check refuses the packet, which is a fact and not a judgement. IT FIRES NOWHERE
+ELSE: measured on the built page there is exactly ONE mark in the whole
+document, 128/130 amber on Record 002's deck. A section has no limit at all and
+never carries a number, because a box or a mark implying one would be inventing
+a gate. The headline's hint still carries the measured wrap points - 64
+characters at 1280px, 58 at 768, 36 at 390 - since the gate is one number and a
+headline is not; it can pass every check here and still wrap on his phone, and
+that is shown rather than turned into a second red.
+
+THE LETTER IDS COME OFF THE SECTION ROWS. Measured: zero letter cells on rows.
+They keep the top bar and the calendar, which is the fixed column that was asked
+for. A letter beside the row it labels is redundant when the row says EXECUTIVE
+SUMMARY in bold, in a box, an inch away.
+
+THE TWO CHECKBOXES BECOME ONE MULTISTATE BUTTON, cycling ready -> not ready ->
+not required -> ready. Measured: zero checkboxes left, one button per row, all
+27x27 in one column position, all tabbable, each with an aria-label naming its
+state. Two boxes could express four combinations for three states and the fourth
+meant nothing; one button cannot say a thing that has no meaning.
+
+IT IS REVERSIBLE FROM EVERY STATE BECAUSE IT IS A CYCLE - the third press comes
+back to ready, so no state is a corner. That is the defect this page was already
+caught committing once: A MARK HE CANNOT TAKE OFF IS A DELETION. Walked five
+presses on the served page: ready, NOT READY, not required with the lines
+hidden, ready with the lines back and the text intact, NOT READY again, with the
+store writing exactly one boolean at each step and emptying to {} at ready. The
+hint names the state it is IN and the state the next press moves to, so the way
+out is never something he has to discover.
+
+THE STORED SHAPE DID NOT CHURN. readiness.json still carries the two booleans; a
+state sets exactly one and clears the other, so a file written by the
+two-checkbox build reads correctly here. Both-true is not a state the button can
+reach, and if a hand-edited file carries it notRequired wins, which is the same
+precedence the generator uses.
+
+VERIFIED SERVED at 127.0.0.1:8931 on the built artifact: 411 marks and 411
+two-line hints, zero bare, with querySelectorAll '[title]' returning exactly 411
+so nothing outside the mark set wears one; one box width across the document;
+one mark on the page; the viewer still three buttons at 742x960; zero console
+errors; page overflow zero at desktop and at 390px, where the button keeps its
+column and every box fits the screen.
+
+TWO PROBES OF MINE WERE WRONG AND SECTION 8'S RULE CAUGHT BOTH.
+
+THE KEYBOARD COULD NOT BE EXERCISED ON THIS HOST AND IS NOT CLAIMED. A real
+Return and a real space on the focused button did nothing, which looks like a
+defect - so suspect the probe: a real Right arrow also did nothing, and THAT
+handler is unchanged since the first build. A dispatched ArrowRight moved the
+day 1 to 2 to 1 immediately, so the handler is wired and the tool's key presses
+are simply not reaching the page. What IS verified: the control is a real
+button, focusable, in the tab order, and a bubbling click event - exactly what a
+native Enter or Space on a button produces - cycles it.
+
+AND docs:numbers:gate READ AS PASSING WHEN IT HAD FAILED, because "| tail -3;
+echo $?" reads TAIL's exit code and not the gate's. Re-read through PIPESTATUS:
+exit 1, two stale published numbers, and they were MY OWN doing - the new
+register row moved OPEN_ACTIONS.md from 139 rows to 140 and from 134 open to
+135, both published in BACKLOG.md. Corrected in the document, which is the
+gate's own instruction, and every gate was then re-run capturing real exit
+codes. Not photographed this round: the browser pane would not composite, so
+everything above is measured through the DOM and computed styles.
+
+FLAGGED, NOT FIXED - STAGE_PREFIX is imported by day.mjs and used by nothing.
+Carried from pass one.
+
+GATES, REAL EXIT CODES CAPTURED PER GATE: lint exit 1, which IS the baseline -
+9 errors / 8 warnings, zero new, and eslint exits 1 on any error so this gate is
+read by its counts and never by its status - build green - provenance 0 -
+reveal:check 0 - instory 0 - parity 0, 4 shared and 0 divergences - arc:check 0
+- ops:size 0 - docs:numbers:gate 0 after the correction above - reveal:day
+"Nothing to move. The tree and the Record agree." - lap:clean, nothing left in
+public/. The museum lap was not run: nothing in src/, public/ or any data file
+changed. One stray removed before sealing, tools/dictation/__pycache__/, left by
+my own py_compile check of the workbook script.

@@ -1,0 +1,81 @@
+Move the feed's function to the monitor, in the monitor's character
+
+Mike's rulings: "BIG CHANGE: Move the FUNCTIONALITY of the feed panel
+to the MONITOR, and IN MONITOR FORMAT AND CHARACTER. Do not map every
+control as-is to the monitor - that would be foolish. Make it
+MONITOR-esque. KILL THE HW Feed Monitor." With four more: delete
+'Launch the Portal'; clicking TERMINAL.EXE should run it rather than
+open a page with a run button; kill the [X] once running, its format
+being bright instead of matching the screen; and kill all messages
+about signal present or not unless he prescribed them.
+
+FOUR THINGS WERE ESTABLISHED BEFORE ANYTHING WAS BUILT.
+
+The channel defect was real, live and mine. Measured both routes: via
+the album panel the face stays mounted behind the overlay and pressing
+3 lit 3; via Mode B the console IS the overlay's content, so latching
+replaced it and the panel count went 1 to 0 at the same instant the
+digit strip appeared. The strip's only listener was destroyed by the
+act that showed the strip.
+
+"HW Feed Monitor" names no object in either repository, so the reading
+is stated with its evidence rather than assumed: Launch the Portal's
+FACE was the hardware feed panel, nothing else in the museum drew it,
+and deleting the track is how that object dies. The two rulings are one
+act.
+
+Both signal messages were checked against the register before being
+touched, because "unless I prescribed it" is the whole instruction.
+Both read HOUSE and both sources say "Ops' own words", so both go with
+the says block that declared them. Test signal and Television survive:
+they are accessible names, not messages, and deleting them would leave
+two channels unnamed for assistive tech.
+
+And the monitor's character was not invented. twin.html's Mon_DOS
+already writes a > prompt, a short uppercase command, terse output
+lines and a blinking block, under its own rule of "OS voice, zero
+personality"; Mon_EventsLine writes ALL-CAPS state lines. A bay becomes
+a line, and that is the whole translation.
+
+WHAT WAS BUILT. feed-control.js carries the function with no opinion
+about form - five banks, four aerial bits, two source positions, the
+arming rule, the session memory and the one resolver - and is owned by
+RobotsExhibitFlow, which owns the overlay. That is where the defect
+closes: the listener now outlives the strip instead of the other way
+round. The console draws it as terminal lines in one ink, the twin's
+own CARD_OFF, with a control that is ON inverted rather than brighter -
+because he struck the [X] partly for being bright against the screen's
+other text.
+
+MEASURED SERVED. From Mode B: RUN lands on television, pressing 3 lights
+3 and changes the kind, pressing 4 lights 4. All nine rows sit inside
+the opening at both widths, and at 375px the boot is KEPT - the
+hardware panel had fitted that opening by 1.4 pixels and had to hide
+the boot to do it, so MB-b closes because the constraint no longer
+exists.
+
+Four defects of my own are on the record. The antenna defaulted to 0000
+against a declared 1111, because the hook mounts before the declaration
+arrives and useState initialises once - RUN landed on the test signal
+where it should have landed on television. The prune broke two RESTATED
+chains, which is the hazard section 9 names, repointed onto the live
+MGK-VIIIp row rather than re-declared. I appended prose past a closed
+comment for the second time this session. And the dev server was
+serving one module as EMPTY while the build was green - a stale vite
+transform cache, diagnosed by curling the module and cleared with a
+byte-identical rewrite.
+
+InstrumentPanel has no caller now and is kept as the only written form
+of how the hardware panel was built; nothing declares face.panel, the
+mount mechanism stays live, and revival is one declaration. Two ledger
+rows describing the deleted track are flagged rather than cut, because
+deleting a ledger row is the M99 guard's own question: row MB-c.
+
+No pixel screenshot - the pane did not composite on any attempt, so
+every claim is painted-DOM reads and geometry against the bezel's own
+coordinates. Mike is the first eye on the look, which is why this is
+served and not committed.
+
+Gates: lint 9/7 baseline, build green, provenance PASS, reveal:check,
+parity:gate, instory:gate and docs:numbers:gate all PASS. The round log
+is at docs/MUSEUM_BIG_CHANGE_LOG-20260826.md and nothing was deployed.

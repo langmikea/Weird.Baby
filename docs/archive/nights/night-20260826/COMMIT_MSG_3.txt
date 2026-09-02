@@ -1,0 +1,62 @@
+The centre 4:3 behind the bezel, and read records dim instead of unread ones
+
+Two packets land together because the tree carries both and only the session
+notes overlap.
+
+THE CROP. The aperture cannot be made 4:3 and that is what decides the reading:
+the opening measures 2532 by 2003, which is 1.264, on a plate whose replacement
+is shelved. So the centre 4:3 area is a fact about the picture, and the
+instruction means what it says. The three candidates the survey offered were
+three answers to which rectangle counts as the screen, and each placement
+already knows its own, so the rule is written once: the canvas takes 3000 by
+2400 to 3200 by 2400 at x -100, which enlarges the plates by exactly sixteen
+fifteenths, and the feed takes 2540 by 2036 to 2714.67 by 2036. Both are the
+centre 4:3 that covers the rect rather than one inscribed in it, since
+inscribing letterboxes and that is the opposite of enlarging. The measured
+opening is deliberately unused: the feed rect is taller than the hole on purpose
+so no ground can leak in, and cropping to the hole's own bounding box would hand
+that back to buy thirteen pixels. It takes a sixth off television's black and
+does not close it, 303.6 pixels a side down to 254.5, because object-fit is
+inert on an iframe; closing it means sizing the player to the box's height, and
+that is a separate job and is not built.
+
+THE RESIZE. Shape B was reported and neither shape was built, because B is about
+returning to channel 3 and the resize happens on the first open too. Measured by
+construction instead: removing the injected framedfit rule from a live framed
+twin gives 828 by 662 at x 36 against 900 by 720 at x 0, an 8.7 per cent growth
+and a 36 pixel shift, scheduled by a network fetch. Framed_Fit now runs in setup
+before Unit_LoadPhotos; nothing in it ever needed the probe, and setup runs from
+an inline script at the end of the body. It also fixes the missing-base-plate
+case, where framed styling had never run at all. So there is nothing left to
+cover, and a cover would have been Mike's word rather than Ops'.
+
+THE MARKING. The rule down the left of every unread row is struck and the
+polarity inverts: a read record has its number and day slightly dimmed. It
+marked the wrong state, and the cost landed on the visitor who matters most --
+a first-time reader has read nothing, so every row grew a rule, loudest exactly
+when it carried no information. The original comment's argument survives the
+flip word for word, because scanning sixty rows was never an argument about
+polarity. The rule was not this week's work: it dates from 8fe959f on 5 August
+and the unread path has been untouched since the 19th; it became visible because
+the read set is localStorage per origin.
+
+Slightly is 0.86, and it is the palette's floor rather than a taste. The first
+figures were computed against a ground that is not there -- vp-face declares
+--wb-ink but the first ancestor that actually paints is vp-face-body at #faf8f3
+-- which made every number wrong in the safe direction. On what really paints,
+the number reads 7.12 to 1 and the day 6.30; at 0.86 they are 5.01 and 4.53 and
+both still AA, and at 0.85 the day drops under. The day binds because
+--wb-gold-mute was raised specifically to clear 4.5 to 1 on this class of small
+mono, and spending that ruling is not Ops' to do. A stronger dim is available at
+0.80 and it is Mike's call.
+
+read is a second prop rather than the absence of unread, because unread carries
+a list-length guard that is about the list and not the row, and styling the
+negation would have dimmed the single row the dictation preview renders -- the
+row Mike writes into.
+
+Also cleared: a comment claiming vp-rec-mark-day was deleted, sitting directly
+under the live rule that was re-added the following day. That is the third
+struck fact reading as a live one in a day, after the panel margin and the
+channel 4 note. The round logs are at docs/MUSEUM_CROP_AND_COVER_LOG-20260826.md
+and docs/MUSEUM_READ_MARKING_LOG-20260826.md, and nothing was deployed.

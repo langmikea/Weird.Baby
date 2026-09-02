@@ -1,0 +1,106 @@
+release: handles as observed, and the whisper Mike remembered is found
+
+TWO ROUNDS IN ONE COMMIT BECAUSE THE FIRST WAS NEVER RUN. The handles
+correction was written, gated and handed over and its commit did not
+happen, so its four files are still modified here and are carried with
+this round's report rather than left behind again.
+
+═══ THE HANDLES, AND OPS WAS WRONG ABOUT THE DOT ═══════════════════════
+
+The TikTok account exists: @papaweird.baby, display name Weird.Baby, bio
+empty. Ops told Mike that TikTok does not permit dots in handles and that
+is FALSE — the handle has one. The claim was asserted from memory as a
+platform fact, nothing checked it, and it reached him as a constraint with
+a recommendation built on top of it, that the dot must move out of the
+handle into the display name. He did not need that advice and it was
+wrong. A platform's rules are not in this repository and Ops cannot read
+them from memory; if a platform constraint is load-bearing it is observed
+on the platform or carried as UNVERIFIED and named as such. The claim is
+kept as HANDLE.retractedClaim, marked false rather than deleted, because a
+struck claim that is removed reads to a later round as a claim nobody ever
+made and this one reached Mike.
+
+What is observed is all that is recorded: TikTok @papaweird.baby, YouTube
+@PapaWeirdBaby, Instagram unset with the account itself unstated, Facebook
+unset with the account existing. The two known handles are close but NOT
+identical and are recorded as two real handles rather than reconciled into
+one, and neither unset handle is inferred from them.
+
+═══ THE WHISPER — MIKE REMEMBERED A LINE AND HE WAS RIGHT ══════════════
+
+He said the Lobby wording he remembers is not in this repo. It is not in
+HEAD and it did exist. At abf628a, 2026-04-13, the note carried a seventh
+line beneath the six that are live today:
+
+    You are early. That is noted.
+
+Killed at 30d9162 on 2026-07-25, whose own commit message ends
+"You-are-early killed." Found by the pickaxe over all refs on CONTENT
+rather than on a filename — one command, which is step 2 of the search
+section 8 already prescribes.
+
+AND THE THIRD MISS ADDS SOMETHING THE HAZARD ROW DOES NOT YET SAY. The
+round that killed the line did the right thing: it left a comment naming
+what was killed and why. That comment was the breadcrumb. Four months
+later 1e45ae2, doing unrelated work on the same paragraph, removed the
+comment as part of rewriting the block — and after that nothing in the
+tree said the line had ever existed. All three of this week's misses share
+that second shape: the marker filed ref null, the resize disabled rather
+than deleted, and now a kill-comment swept away by a rewrite. In every
+case the tree contained the answer and then stopped containing it. A
+comment that records a deletion is not a dead comment; a round that
+rewrites a block containing one carries it or moves it to the round log.
+
+It left an orphan too: .wb-whisper is still a full rule at WbHome.css:113
+and no JSX in the tree uses it. FLAGGED, NOT FIXED — it is the styling for
+a line Mike has just said he misses, and removing it in the same round he
+asked about the words would take the last trace of it.
+
+═══ THE GUESTBOOK — SURVEYED, AND NOTHING WAS TOUCHED ══════════════════
+
+Ops ruled nothing is deleted this round and nothing was: no wrangler
+command was run, read or write. The survey answers what was asked. There
+are two backup tools and both are read-only by their own header. There is
+no tool that writes or deletes, and no DELETE route anywhere in the
+worker. The schema has no audit table, no deleted_at, no hidden and no
+visible column, so a deleted row would leave no trace in the database, no
+trace in the tree and no document saying why.
+
+AND THE BACKUP ANSWER IS THE FINDING. The newest guestbook-only dump is
+2026-06-03 and the newest full-DB export that contains the table is
+2026-07-01, holding three rows. The live site shows seven signatures. Four
+live signatures exist in no backup at all — Sammy B, Mo, Tommy, and the
+2026-08-17 entry Mike wants removed. The scheduled job has failed twice,
+on 2026-07-01 where an npm notice on stdout was captured as an error and
+on 2026-08-01 at the Cloudflare API, and the only record of either is a
+log nobody reads. So the tree has a backup mechanism that worked, stopped
+on 2026-07-01, and has been failing silently since.
+
+The one act that should happen regardless of how he rules is running
+tools/backup-guestbook.ps1 once, because it is read-only and it captures
+four unbacked signatures, three of which are from real visitors and have
+nothing to do with the question. After that, delete, hide or edit are all
+recoverable. And what he objects to may be the note rather than the
+signature: the entry says Weird.Baby is open for business, which Ruling D
+made false, and it sits three lines under a countdown reading nine days.
+One more thing for whoever runs the statement: match on id and never on
+the number on the glass, because the site prints positions and the real
+ids have gaps.
+
+═══ THE TWO VIDEOS ARE NOT IN THIS COMMIT ═════════════════════════════
+
+They were carried into this round as both proved playing. Ops did not
+prove that and holds no reading that says so. What Ops measured, last
+round and again at the top of this one, is a browser pane reporting hidden
+and zero by zero, in which the control — the already adopted Coconuts
+official video, live on the museum — also reads unstarted with currentTime
+flat for fourteen seconds. Landing the renditions on an assertion would
+substitute a claim for the observation the adoption rule exists to
+require, which is the same failure this session already made once today on
+the dot. The harness and the three URLs to run, control third, are in the
+log; the shape is settled and only the evidence is missing.
+
+Gates: lint 9 errors 7 warnings at baseline with zero new, build green,
+provenance:gate PASS, reveal:check PASS, release:check PASS, instory:gate
+PASS, docs:numbers:gate PASS. Nothing in src changed, releases.json is
+untouched, and no row in any database was read or written.

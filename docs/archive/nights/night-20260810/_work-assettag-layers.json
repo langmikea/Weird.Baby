@@ -1,0 +1,254 @@
+[
+  {
+    "idx": 0,
+    "pascal": "BACKGROUND",
+    "luni": "BACKGROUND",
+    "lsct": "",
+    "rect": "0,0 -> 0,0",
+    "op": 255,
+    "flags": 10,
+    "hidden": true,
+    "blend": "norm",
+    "keys": "luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 1,
+    "pascal": "</Layer group>",
+    "luni": "</Layer group>",
+    "lsct": "bounding section divider",
+    "rect": "0,0 -> 0,0",
+    "op": 255,
+    "flags": 24,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lnsr,lyid,lsct,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 2,
+    "pascal": "Layer 3",
+    "luni": "Layer 3",
+    "lsct": "",
+    "rect": "0,0 -> 569,525",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lnsr,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 3,
+    "pascal": "BLACK",
+    "luni": "BLACK",
+    "lsct": "",
+    "rect": "18,17 -> 553,508",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 4,
+    "pascal": "</Layer group>",
+    "luni": "</Layer group>",
+    "lsct": "bounding section divider",
+    "rect": "0,0 -> 0,0",
+    "op": 255,
+    "flags": 24,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lnsr,lyid,lsct,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 5,
+    "pascal": "OUTPUT Field",
+    "luni": "OUTPUT Field",
+    "lsct": "",
+    "rect": "197,304 -> 536,489",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 6,
+    "pascal": "VALUES",
+    "luni": "VALUES",
+    "lsct": "",
+    "rect": "219,311 -> 520,479",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "TySh,luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": [
+      33580,
+      15560
+    ]
+  },
+  {
+    "idx": 7,
+    "pascal": "Spec Points",
+    "luni": "Spec Points",
+    "lsct": "",
+    "rect": "39,311 -> 177,479",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "TySh,luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": [
+      49510,
+      13212
+    ]
+  },
+  {
+    "idx": 8,
+    "pascal": "min nom max",
+    "luni": "min nom max",
+    "lsct": "",
+    "rect": "220,268 -> 515,292",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "TySh,luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": [
+      63104,
+      9508
+    ]
+  },
+  {
+    "idx": 9,
+    "pascal": "OUTPUT",
+    "luni": "OUTPUT",
+    "lsct": "",
+    "rect": "38,262 -> 181,289",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "TySh,luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": [
+      72990,
+      9452
+    ]
+  },
+  {
+    "idx": 10,
+    "pascal": "OUTPUT",
+    "luni": "OUTPUT",
+    "lsct": "open folder",
+    "rect": "0,0 -> 0,0",
+    "op": 255,
+    "flags": 24,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lyid,lsct,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 11,
+    "pascal": "</Layer group>",
+    "luni": "</Layer group>",
+    "lsct": "bounding section divider",
+    "rect": "0,0 -> 0,0",
+    "op": 255,
+    "flags": 24,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lnsr,lyid,lsct,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 12,
+    "pascal": "Model Field",
+    "luni": "Model Field",
+    "lsct": "",
+    "rect": "261,193 -> 536,235",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 13,
+    "pascal": "Model Number",
+    "luni": "Model Number",
+    "lsct": "",
+    "rect": "269,200 -> 508,227",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "TySh,luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": [
+      83882,
+      9496
+    ]
+  },
+  {
+    "idx": 14,
+    "pascal": "MODEL NO.",
+    "luni": "MODEL NO.",
+    "lsct": "",
+    "rect": "39,200 -> 247,227",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "TySh,luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": [
+      93760,
+      9468
+    ]
+  },
+  {
+    "idx": 15,
+    "pascal": "MODEL",
+    "luni": "MODEL",
+    "lsct": "closed folder",
+    "rect": "0,0 -> 0,0",
+    "op": 255,
+    "flags": 24,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lyid,lsct,lspf,lclr,shmd,fxrp,lyvr",
+    "tysh": null
+  },
+  {
+    "idx": 16,
+    "pascal": "ABEAL LOGO",
+    "luni": "ABEAL LOGO",
+    "lsct": "",
+    "rect": "58,35 -> 518,171",
+    "op": 255,
+    "flags": 8,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lyid,clbl,infx,knko,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  },
+  {
+    "idx": 17,
+    "pascal": "ASSET TAG",
+    "luni": "ASSET TAG",
+    "lsct": "open folder",
+    "rect": "0,0 -> 0,0",
+    "op": 255,
+    "flags": 24,
+    "hidden": false,
+    "blend": "norm",
+    "keys": "luni,lyid,lsct,lspf,lclr,shmd,fxrp",
+    "tysh": null
+  }
+]

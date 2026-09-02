@@ -1,0 +1,102 @@
+release: reels the museum promotes and does not tell a story about
+
+THREE OBJECTS, THREE FILES, ONE GATE, AND NOTHING ELSE. Mike's constraint is
+the design constraint: keep it tight and defined, do not let it grow into an
+amorphous blob, do not reinvent wheels, use Doc Control as the Museum has
+it. A release is one video. An outcome is views and what was concluded, and
+it lives inside a posting because the numbers are per surface. A spec is
+what Ops hands him, and it IS a brief, so it inherits the brief rule whole:
+he does not edit briefs, and a wrong one is rewritten rather than amended.
+
+THE LOOP'S MEMORY IS NOT A FOURTH OBJECT. A sit-down produces three things
+and each already had a home: what we concluded, what we decided to do next,
+and what we are waiting to see. It is deliberately not a handoff either,
+because this project already built notes for the next session, ruled that
+facts may not go in them, and watched the file rot — last touched
+2026-08-23, ten rounds ago, and ranked below git log by the manual itself.
+
+OPS ASSUMED A SEPARATE ROOT DIRECTORY KEPT DATA OUT OF THE BUNDLE AND THAT
+IS FALSE. Measured: src/ imports from reveal/ in five places, JSON included,
+at placement.js:26, record-clock.js:31, reveal.js:44, WbHome.jsx:27 and
+worker.js:73. So placement buys legibility and nothing else, and Mike's
+ruling that the canon line be a rule a gate checks rather than a boundary
+Ops trusts is not belt and braces here — it is the only thing holding it.
+
+THE LINE IS ONE-DIRECTIONAL AND THAT HAD TO BE DESIGNED IN. Story to release
+is allowed: a caption may quote the museum and a run points at the museum
+video it promotes by the museum's own id. Release to story is forbidden. A
+gate that blocked both directions would forbid a reel from quoting the thing
+it promotes, which is what a reel is.
+
+RESTATED IS WHAT MAKES THE GATE POSSIBLE, AND THE FIRST RUN PROVED IT BY
+FAILING. A quotation has its string under src/ on purpose, so a gate
+matching raw strings fails the build on correct work. The gate therefore
+matches only what a release declares as its own, and a quotation is exempt
+by carrying a pointer the gate resolves — exempt by evidence, never by
+permission. The first run reported three faults in weird-baby.js for
+carrying the string coconuts, which is the MUSEUM's own track id, written
+there long before this directory existed: the gate was reporting the museum
+for carrying its own word. The run id is exempt now and the exemption is
+checked, because the id must equal promotes.track and that track must really
+be in the museum's source. Two lines, and without them the exemption would
+have been Ops asserting it.
+
+HIS FOUR ANSWERS EACH CHANGED SOMETHING STRUCTURAL. The five videos are
+uploaded and PRIVATE, so the first thing in this system is a plan and not a
+record of history — which forced a third posting state, staged, because
+without it nothing can tell "nothing exists there" from "it exists there and
+the world cannot see it", and those are the two states every row is actually
+in today. The four quarters go in order and 2 cannot precede 1, so seq is a
+CHECK and not a field: a number nothing enforces is a label. The full reel
+has no place yet — "I don't know. I had it, so I included it" — so UNDECIDED
+is a legitimate state the system holds rather than a gap to fill, and a
+release that is UNDECIDED and says nothing about why is itself a fault. And
+Coconuts being a single with E.D. Yahdah next is why a run exists at all and
+why outcome exists at all.
+
+THE HONESTY RULE IS ENFORCED BY ABSENCE RATHER THAN BY A VALUE, which is his
+own sentence turned into a check: a post without numbers reads as not yet
+checked, never as zero, and a field nobody fills is worse than no field. So
+outcome is absent until there is something in it, and the gate refuses an
+empty object, an empty readings array, a null and a views-zero placeholder
+alike. Zero therefore means a real zero somebody read, which is a different
+and useful fact.
+
+EACH CHECK WAS PROVED BY TRIPPING IT, SEVEN TIMES, EACH AGAINST A COPY WITH
+THE TREE RESTORED AFTER. A caption retyped into weird-baby.js was named at
+line 835. An import of releases.json from src/lib/reveal.js was named at
+line 45. Quarter two going public before quarter one was refused. A
+promotes pointer aimed at an id that is not in the museum was refused. An
+empty readings array, a due key, and an UNDECIDED release stripped of its
+ruling were each refused. All seven exit 1.
+
+E.D. YAHDAH ALREADY EXISTS IN THE MUSEUM BEFORE IT EXISTS AS A SINGLE, its
+video having landed at 6c80c1c, and the system should know that — the
+mechanism needed nothing new. A run's promotes block points INTO the museum
+in the allowed direction, and the museum gains no field, no import and no
+knowledge that this directory exists. Coconuts carries one today, so the
+shape is demonstrated on a run that is in scope rather than on one seeded
+ahead of its own facts.
+
+Seeded with what exists: five Coconuts videos, all uploaded and private,
+four sequenced and one unplaced, all on youtube, all with a null address
+because the addresses were not supplied and Ops does not invent a platform
+id. The gate counts those five under WITHHELD rather than leaving a silent
+blank. Facebook and Instagram carry no posting at all — not planned, absent.
+
+Gates: release:check PASS, lint 9 errors 7 warnings at baseline with zero
+new, build green, build:launch green, provenance:gate PASS, reveal:check
+PASS, parity:gate PASS, instory:gate PASS, docs:numbers:gate PASS,
+reveal:day nothing to move. Nothing under src/ changed and no visible
+string, ledger row, asset row or register row moved with it; the only edit
+outside the new directory is two script lines.
+
+The shorts round log is carried in this commit with a section seven it did
+not have, and that half is a correction rather than a feature. docs/DEPLOYED.md
+rode into 6307286 against the runbook's step 15, which says in the imperative
+not to batch it, and 6307286's message mentions neither the deploy record nor
+that file while stating that nothing under src changed — so the one commit
+that finally lands the deploy record is the one nobody searching for it would
+open. The fact is written where a search will meet it: the record for ad0d73d,
+launch, 2026-08-28T14:03:16.142Z, worker sha256 ddd735e8d99d0f0b, first
+entered history at 6307286 on the fourth deploy since the tool landed.

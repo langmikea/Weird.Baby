@@ -1,0 +1,110 @@
+every Record accepts an edit now, and C-day2 closes
+
+Commit 4 of five and the last entry. In-span comment characters across the four
+commits: 21,486 to 0. Mike's editing pass is unblocked.
+
+ALL SEVEN CLASSIFIED. Four are duplicates of one document:
+MUSEUM_RULINGS_APPLIED_LOG-20260820.md section 004 carries the deck line change,
+the OTHER strike with "YOU ADDED A THUR" and ADDENDUM 01 - Bench Description,
+the last two nearly verbatim. 09-PUBLISHED carries the password and Zu
+Chongzhi's ratio, the folder listing, the struck titles and "not meant to seen";
+06-PORTAL carries the engraved legends, the inspection date's refusal and the
+record that Mike's rewrite took the museum's half of the unattended-terminal
+disagreement with it. Rulings 18 and 19 carry the back-post, the .tif/.webp
+split and the filename; the QC101 log carries the title he ruled and why the
+attachment takes no number. The listingRows mechanism is at RecordEntry.jsx, in
+the code it describes.
+
+THREE FINDINGS IN ONE BLOCK WERE WRITTEN DOWN NOWHERE ELSE, all in "THE TWO
+ATTACHMENT ROWS ARE STRUCK".
+
+One: Manual ref to Portal IS SCAN 11 - VID-LINK, which Record 003 had already
+delivered. A plate-less row resolves to held and draws "not here yet", so
+Thursday's Record would have said the museum does not have a thing it showed on
+Wednesday. That is Ruling 10 failing in a direction its own examples do not
+cover - not a number overstating the wall, but a row DENYING something already
+on it. Carried to Ruling 10 with the test that catches it: before a Record says
+it does not have a thing, ask whether an earlier Record has already delivered
+it.
+
+Two: held is a fall-through that claims a provenance. Its declared meaning is
+"its provenance IS recorded", and anything not imaged and not quoted lands
+there. Both struck rows recorded none, so attachmentsOf built a meta line
+reading "not here yet" and nothing else - empty-and-unsourced rather than
+empty-and-honest, and the reader cannot tell the two apart. Carried to
+src/lib/record-model.js beside docState.
+
+Three: the strike cost no prose and that was measured - six search terms, zero
+hits, and the one backward reference still lands on 003's delivered scan through
+Mike's rewrite. Carried to 09-PUBLISHED, Record 004.
+
+STALENESS: every claim re-measured and none stale. The deck line is now
+"> /Robots ZIP File Cracked", the password is in the DETAILED REPORT, 002's
+manifest still names both PORTAL channels, the listing carries ROOT and
+PORTAL_2v16.CFG and QC_101.TIF, "not meant to seen" is still his as typed, 004
+has two sections and no OTHER or ADDENDUM, and the one attachment is QC_101 with
+its source, page and plate.
+
+AND NOTHING RESTED ON A REASON THAT EXPIRES. 004 is the entry that gained an
+attachment after publication on "we have had no visitors", a licence that ends
+when an audience arrives - and Ruling 18 records the licence AND its expiry in
+those words, so deleting the comment loses neither half. 004 also holds the last
+{pre}, the case 005's carried paragraph names; nothing in these seven touches
+the folder tree's content.
+
+P6 CAUGHT A FIFTH PHRASE, AGAIN MY OWN PROSE. Eighteen candidates run through
+the present-and-on-one-line check first, and "in the harder direction" crossed a
+wrap in the Ruling 10 text I had just written. Replaced. Five catches across
+four rounds, three of them in prose written that same hour. The manifest is now
+17 blocks, 64 claims, 10 files, green on all 64.
+
+PROOF. draftEntries() deep-equal: all five entries identical to the committed
+draft. In-span comment characters 11,592 to 0; preamble 24,204 to 27,365 for the
+audit block, outside every span. P1.3 now reads all five landing. A no-op
+landing is byte-identical. record:land --verify 51 of 51.
+
+ONE OF MY OWN CHECKS WENT RED, CORRECTLY. P1.3 asserted that some entry was
+still walled - true while C-day2 was open and red the moment the last one was
+emptied. A check that outlives its subject. Rewritten to assert the finished
+state, and the table is what is kept: an entry that gains a comment block again
+falls out of it on the next run, which is the only warning anybody gets.
+
+C-day2 IS CLOSED and moved to OPEN_ACTIONS_CLOSED.md, and closing it orphaned
+six links - section 9's prune hazard firing exactly as written. All six
+repointed at the closed register, and dead links to #c-day2 are now zero. One
+stale sentence went with them: day.mjs's header said C-day2 was "the one thing
+still between this page and an ordinary writing day", true this morning and
+false now.
+
+WHAT IS LEFT is C-day3, raised this round: two defects in record:land's refusal
+path, flagged and unfixed. emit-record-entries.mjs:747 compares body items by
+reference - right for a string, always false for a {pre} object - so guard 8's
+diff reports 004's listing as changed on every stale-draft refusal with both
+sides byte-identical; it is the exact pattern the round-trip repair fixed once
+in record-edit.mjs, and this line was missed. And the same refusal points at
+"npm run record", the retired editor, where it should say "npm run day:serve".
+Neither causes a wrong refusal. The lander is a MIKE command behind eight guards
+and deserves its own round and its own proof. Also still carried: day.html is
+not reproducible because SOURCE_STATE bakes the source's mtime and day:proof
+moves it; provenance/assets.json's scan-31-a row names a master path that does
+not exist; STAGE_PREFIX is imported by day.mjs and used by nothing.
+
+WHAT THE FOUR ENTRIES TAUGHT. 002 was duplicate throughout, 003 kept one
+sentence, 005 one paragraph, 004 three findings - and every single survivor was
+a fact about a mechanism's reason to exist: why there are two renders, how many
+cases a shape has left, what a fall-through state actually claims, what a strike
+cost. Rulings had a rulings file, strikes had round logs, his words had canon
+pages. What had no home was why a thing works the way it does, and that is the
+one class worth reading a comment block for before deleting it.
+
+src/ changed in two files and the museum lap was not driven: both changes are
+comments, one in a data file and one above docState, comments do not ship, the
+parsed entries are deep-equal, and reveal:check and the build are green.
+
+Gates: lint 1 (baseline 9/8, zero new) · build 0 · provenance:gate 0 ·
+reveal:check 0 · instory:gate 0 · parity:gate 0 · arc:check 0 · ops:size 0 ·
+docs:numbers:gate 0 · record:land --verify 0 (51/51) · day:proof 0 (49/49,
+10 shown losing first) · reveal:day nothing to move · lap:clean nothing left.
+
+The round log is at C:\AI\_night-20260826\COMMIT4_RECORD004-20260826.md and
+nothing was deployed.

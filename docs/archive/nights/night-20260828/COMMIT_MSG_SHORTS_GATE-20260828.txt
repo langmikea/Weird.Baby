@@ -1,0 +1,100 @@
+shorts: the compiler asks the shelf before it encodes
+
+THE LEAK WAS ONE FILE OVER FROM WHERE IT WAS REPORTED, AND THAT IS THE
+FINDING. The round was opened on "tools/shorts.mjs reads the asset table
+directly with no held check, no ruled-out check, no burp check". It does
+not read the asset table at all: it imports buildShelf() and has carried
+the ruled-out bar and the never-published bar since the day each was
+written. Adding "the same three protections" there would have been a
+second copy of a filter it already runs, which is the exact failure
+shelf.mjs's own header exists to prevent.
+
+THE THREE FILES THAT DO OPEN provenance/asset-table.json are
+shorts-compile.mjs, shorts-verify.mjs and shelf.mjs. The first resolves a
+uid, reads the file off disk and encodes it; the second resolves a uid and
+decodes it; only the third asked anything of the row. And a recipe need
+never have been near the bench, because --recipe <path> takes a file from
+anywhere, so "the bench already filtered it" was a habit of where the
+input came from and never a property of the input.
+
+THE COUNT WAS NOT SIX EITHER. Measured: three RULED_OUT rows and one
+signage row, which is why drop.ruled reads 4. "The six photographs" is
+OPERATIONS section 8's RULING A of 2026-08-25 and it names six that
+STAND, published rather than barred. Two readings one word apart pointing
+opposite ways, recorded so the next round does not inherit the wrong one.
+
+THE BARS ARE NOT NEW AND THIS ADDS NONE. shelf.mjs gains ruledOut() and
+publishRefusal() so the two existing bars can be asked about ONE row
+instead of only about the whole table at once, which is why no downstream
+tool had ever asked. buildShelf() now calls those same primitives rather
+than inlining the tests, so "the compiler asks the same question as the
+bench" is provable and not asserted. The order is copied rather than
+chosen, ruled-out before never-published, so a row that ever matched both
+could not change drop bucket by this refactor existing. Proved identical
+across the move the same way shelf.mjs itself was proved when it came out
+of assign.mjs: 138 rows before and after, every drop count unchanged, and
+the row fingerprint sha256 a72dc5eb63e31b75e3395ff63bde7d92 both times.
+
+THE GATE IS ITS OWN MODULE FOR shorts-pad.mjs's REASON, quoted in that
+file: the pad rule is its own module so the compiler and the verifier
+cannot answer the question differently. Two implementations of "may this
+be published" is two answers on the day one of them is edited. The gate
+declares no rules; the judgement stays shelf.mjs's and the gate walks a
+recipe and asks it.
+
+HELD IS A DECLARATION AND NOT A BAR, AND THAT IS THE LOAD-BEARING CHOICE.
+Six of the eight shelf SECTIONS match public/held/robots/ only: the shelf
+is 132 held rows out of 138 and the 1965 manual IS the ingredients, so a
+held bar would refuse every real recipe in the tree including the
+flashbang as it stood eight days ago. Held is a TIMING state, the door
+changes and not the payload, and 137 of these are scheduled to come out.
+So the gate refuses by default, names every held asset with its address,
+and proceeds on an explicit --held-is-intended, the shape
+export-artifacts.mjs already uses in this repository for the same reason.
+Nobody compiles held material by accident; it is not forbidden to.
+
+THE TWO HARD BARS HAVE NO FLAG AND MUST NEVER GAIN ONE. Each is a ruling
+somebody made about the content, carried with its reason and its
+citation, and a bar with a documented way around it is a bar that gets
+walked around on a deadline.
+
+EACH PROVED BY TRIPPING IT, TEN TIMES. Ruled-out refused with Mike's
+2026-08-13 reason printed. A burp WAV refused with ruling 2026-08-03(a)
+and its citation. The real teaser-30s stopped at 19 held blocks of 27,
+every one named, which is the 20.6 MB file that has been sitting
+compiled and uploadable since 2026-08-13 carrying five held manual pages
+and the held MGK-VIIIp cover with nothing ever having said so. The flag
+tried against both hard bars refused anyway and reported BOTH offending
+blocks rather than the first. A uid the table does not hold refused and
+pointed at assets:scan. One held page with the flag compiled. The
+verifier refused and stopped on the same two.
+
+AND THE WORKING PATH IS BYTE-FOR-BYTE UNCHANGED. flashbang.mp4 rendered
+763eb4a3d79f6d40bf36958f219e67f275b9b539cf47cdb32ea0e9b27e3567ea on
+2026-08-25 before the gate existed and renders the same sha256 through
+it, with the second render inside --verify identical again. The gate
+changes what is refused and nothing about what is rendered.
+
+ONE REAL DEFECT FIXED ON THE WAY. shorts-verify.mjs built its source path
+as join(REPO, row.path) while the compiler builds it as
+join(ROOT[row.repo], row.path), so a robots-repo asset resolved to a
+museum-repo address and the two tools disagreed about which file they
+were measuring. No recipe in the tree names one, which is why it has
+never fired. Corrected rather than left as a trap.
+
+WHAT THIS DELIBERATELY DOES NOT DO IS SAID IN THE FILE AND SAID HERE. It
+does not enforce the obfuscation law: articles 1 to 5 govern every clip,
+still, thumbnail, share card and preview the museum publishes of a
+physical unit, and no mechanical check for any of them exists anywhere in
+either repository. It cannot stop an upload either, because the output is
+gitignored and served by nothing and the only thing between a compiled
+MP4 and a platform is a person. It stops a barred file being made, never
+one being sent.
+
+Gates: lint 9 errors 7 warnings at baseline with zero new, build green,
+provenance:gate PASS, reveal:check PASS, parity:gate PASS, instory:gate
+PASS, docs:numbers:gate PASS, reveal:day nothing to move. Nothing under
+src/ changed and no visible string, ledger row, asset row or register row
+moved with it. The round log is in docs/ under the shorts-gate name and
+carries the ten trips in full, and the leak it closes is the one the
+survey found sitting on disk.

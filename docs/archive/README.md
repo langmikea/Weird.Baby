@@ -14,6 +14,7 @@ Everything in here is a record of what happened or what was once planned. Nothin
 | `CLAUDE-FULL-a507ef4.md` | the 152 KB boot file before it was cut to one page (pass 2) | the root |
 | `VISION.md`, `VISION_LOCK_v0.3.md`, `UX_SPEC_v0.3.md`, `UX_CONTROLS_SPEC_v0.4.md`, `UX_LIFECYCLE_SPEC_v0.5.md`, `B1_IMPLEMENTATION_PLAN.md`, `DATA_WORKFLOW_SPEC_v0.2.md` | the April and May design documents, retired by Mike's ruling A of 2026-09-02 | `docs/canonical/` |
 | `MUSEUM_OPS.md`, `OPS-CHARTER.md`, `START_HERE-20260612.md`, `MUSEUM_UX.md`, `NAVIGATION.md`, `RESET_PROTOCOL.md`, `BACKLOG-root-20260706.md` | superseded orientation | `docs/` and the root |
+| `nights/` | fourteen overnight-report folders that lived at `C:\AI\_night-*` and belonged to no repo; the museum's old boot file cited them by absolute path. The 3,128-frame portal capture from 08-20 went to quarantine instead. | `C:\AI` root |
 
 **A citation of `docs/MUSEUM_X_LOG-YYYYMMDD.md` in a comment or a finding resolves at `docs/archive/logs/MUSEUM_X_LOG-YYYYMMDD.md`.** The same for a report or a handoff, one folder down. Citations were not rewritten; the files were moved, and a moved file with its name intact is easier to find than a rewritten sentence.
 

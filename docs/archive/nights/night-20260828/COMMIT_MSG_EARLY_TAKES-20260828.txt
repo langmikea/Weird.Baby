@@ -1,0 +1,89 @@
+wb: the two early takes land, and the chips are the labels
+
+MIKE RULED THE CHIPS — E.D. Yahdah EARLY INSTRUMENTAL, Coconuts EARLY —
+AND THE CHIP TURNS OUT TO BE THE LABEL RATHER THAN THE TYPE. tidyDesc at
+Exhibit.jsx:643 is (v.label || typeLabel(v.type)) uppercased, so the label
+wins wherever both exist. Measured before anything moved: "Early
+Instrumental" renders EARLY INSTRUMENTAL and was already exact, and
+"Early" renders EARLY. So exactly one string moved. His supplied line of
+2026-08-28 called the Coconuts take Early Front Porch; the chip he ruled
+on 2026-08-29 is shorter, so the LABEL changed and nothing else did. Two
+different chips, one shared type, and still no fifth type. Early Front
+Porch is now absent from the built bundle, confirmed at zero files, and
+its register row was retired with it.
+
+BOTH VIDEOS LAND AS WRITTEN. Coconuts YibpBtf9IU8 and E.D. Yahdah
+WOWS-RWywgA, each as the middle of three renditions — the only slot that
+leaves both existing rulings' ends where they were, video FIRST from
+2026-08-20 and first pass beneath it. Verified in the built bundle rather
+than only in source.
+
+THE FIFTH TYPE IS REPORTED AND NOT TAKEN, AND THE ANCHOR IN THE BRIEF WAS
+WRONG. RENDITION_TYPES does not exist in the tree and never has on any
+ref; the real declaration is TYPE_META at Exhibit.jsx:52, holding eight
+keys of which two normalise, so six distinct chips, read in exactly two
+functions. Nothing anywhere validates a rendition type — checked across
+tools, reveal and provenance — which is why a fifth type could have
+arrived unseen and why it is named instead. Measured at the render seam:
+"early" renders a grey EARLY and does not throw, while undefined and null
+both THROW in toUpperCase, so omitting the field is not available. A value
+in the data is not a fifth type: the vocabulary lives in one place and a
+type is created only by a TYPE_META row, which is a routing file, a label
+and a colour that are visitor-facing, and an amendment to the Official /
+Live / Lyrics / Cover taxonomy settled in May 2026. Exhibit.jsx is
+untouched and no row was added.
+
+AND ONE CORRECTION OPS OWES BACK: MIKE IS A REAL CLASS AND OPS DID NOT
+INVENT IT. This was checked before four rows were moved off it. The
+register holds 205 MIKE rows against 933 HOUSE, 840 VERIFIED, 106
+RESTATED and 16 DERIVED; ORIGIN_CLASSES in tools/provenance-sweep.mjs:92
+lists it first; and provenance/README.md:40 defines it as "supplied by the
+operator — his words, his facts, his rulings", against VERIFIED meaning
+"external and sourced".
+
+So the four rows split the way those definitions require. The two ytIds
+are VERIFIED exactly as ruled, and each source field says what the
+citation is: VERIFIED ON MIKE'S ATTESTATION. Section 8 makes SEEN PLAYING
+the only probe it accepts for an embed and Ops could not run it — the
+Browser pane measured hidden and zero by zero, and the control
+c1vODrVXOg0, already adopted and live, read unstarted with currentTime
+flat for fourteen seconds in the same harness — so Mike saw it play and
+ruled it landed, and the observation is his and not Ops'. The two LABELS
+stayed MIKE, and that is a flag rather than a refusal: marking a word Mike
+chose as external and sourced would be false by the register's own table,
+because there is no external source for a name he picked. If he wants them
+VERIFIED anyway it is two lines, and Ops did not make that call silently.
+
+THE GUESTBOOK IS OPS' JOB AND THE ABDICATION IS NAMED. Ops wrote that the
+Cloudflare console was the only path and filed it under Mike's errands,
+which was worse than incomplete because tools/backup-guestbook.ps1 already
+exists, Ops built it, it is read-only, it runs wrangler against the same
+remote D1 and it has a scheduled sibling. Reported only this round:
+nothing built, nothing deleted, no database command run. A read tool is
+that script minus the writing, printing id first because the site prints
+positions and the real ids have gaps. A delete tool needs a backup taken
+in the same command first, because the newest backup holding the table is
+2026-07-01 with three rows against seven live and four live signatures are
+in no backup at all. Nothing records a removal today — no audit table, no
+deleted_at, no hidden column, and the worker selects unfiltered — so a
+deleted row would leave no trace and nobody could later tell a deletion
+from a signature never made. Hiding beats deleting for that reason rather
+than out of caution, and an UPDATE to the note may be the real answer,
+since the entry is his own dated signature and only the sentence inside it
+is what Ruling D made false.
+
+THE SEARCH RECORD IS THREE MISSES AND ONE HIT, and the hit is the half
+that matters: the pickaxe over all refs on CONTENT returned the Lobby
+wording in one command, which is step 2 of the list section 8 already
+prescribes. He was right four times out of four; what changed on the
+fourth is that Ops asked what the tree has been rather than what it is.
+Mike ruled the Lobby stays, so WbHome.jsx is untouched and .wb-whisper
+remains an orphan rule rather than a change he did not ask for.
+
+Gates: lint 9 errors 7 warnings at baseline with zero new, build green,
+build:launch green, provenance:gate PASS with UNDECLARED zero and zero
+stale rows, reveal:check PASS, parity:gate PASS, instory:gate PASS,
+release:check PASS, docs:numbers:gate PASS. The register stands at 2,100
+entries. This commit touches src and the bundle, so it is the first in a
+while that needs a deploy to reach anybody. The four modified files under
+release/ are the handles correction carried from a commit never run.
