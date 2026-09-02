@@ -55,3 +55,14 @@ Ruled by Mike, by number (his answers were by position in the fifteen-item list;
 | 25 | who the manual is written to | **A** — the technician |
 
 Open after this pass: 10 (counts of detectors and games, asked again in plain words), 19 (the Portal's three senses, asked again), 24 (the seven first-boot questions, to be listed), 26 (the serials; Mike asks why the Everyday is −02 and not −01).
+
+Second pass, same evening:
+
+| # | question | ruling |
+|---|---|---|
+| 10 | counts of detectors and games on the page | **C** — never a number; each named where it is described |
+| 17 | which glass wakes first | **A** — the front; the twin's race is fixed (two awaits), on the branch after Sunday |
+| 19 | the Portal's three senses | **A** — one word, one glossary entry, three senses |
+| 26 | the serials | **"move Everyday to −01."** The Housewife Nano row holds −01 today (Patient Zero, HELD). The registry law allows the change until first physical ship. To do after Sunday: the Everyday takes −01 in `robots:robots/mgk-viiip/content/tables/unit_registry.csv` and the STATE registry; the Housewife's destination is Mike's one word (the vacated −02, or collapse); the built content directory `units/02` follows; the museum's zip tree and schedule notes follow. Nothing published names a serial (Record 003 names the four by name only), so nothing on the glass changes. |
+
+Still open from the sitting: 24 (the seven first-boot questions, listed next) and the Housewife's destination.
