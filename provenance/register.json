@@ -11985,7 +11985,7 @@
    "t": "Money given for a cost is spent promptly on that cost, or it goes back. Nothing is pooled and there is no slush fund.",
    "p": "LEDGER[].law",
    "c": "MIKE",
-   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/archive/logs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
   },
   "d812db22fb561818": {
    "f": "src/data/artists/foundation.js",
@@ -12137,7 +12137,7 @@
    "t": "Figures are published as they settle; the lines without one are not public yet. A cost carried by somebody other than the keeper takes its own line here, in the name of whoever carried it. This is not a tax document and is not filed anywhere — it exists so the ledger is honest and public.",
    "p": "INVOICE.note",
    "c": "MIKE",
-   "s": "Mike's E1 dictation of the contributions model, quoted verbatim in the file header (Foundation.jsx) and recorded in STATE.md; the carried-cost sentence is Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+   "s": "Mike's E1 dictation of the contributions model, quoted verbatim in the file header (Foundation.jsx) and recorded in STATE.md; the carried-cost sentence is Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/archive/logs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
   },
   "69417501bacfa3be": {
    "f": "src/data/artists/foundation.js",
@@ -12174,7 +12174,7 @@
    "t": "Consistently get into the public eye for doing good. We'll spot you.",
    "p": "FAQ[].a[]",
    "c": "MIKE",
-   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/archive/logs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
   },
   "8d4544600e2030a6": {
    "f": "src/data/artists/foundation.js",
@@ -12182,7 +12182,7 @@
    "t": "Pro-Tip: direct inquiry and petitioning hurt your chances.",
    "p": "FAQ[].a[]",
    "c": "MIKE",
-   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/archive/logs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
   },
   "739bf1e9a6ab9e80": {
    "f": "src/data/artists/foundation.js",
@@ -12197,7 +12197,7 @@
    "t": "Can I donate?",
    "p": "FAQ[].q",
    "c": "MIKE",
-   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/archive/logs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
   },
   "6323f06630031f11": {
    "f": "src/data/artists/foundation.js",
@@ -12215,7 +12215,7 @@
    "t": "Can I send you something?",
    "p": "FAQ[].q",
    "c": "MIKE",
-   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/archive/logs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
   },
   "f1fc753b010aafc6": {
    "f": "src/data/artists/foundation.js",
@@ -13175,84 +13175,84 @@
    "l": 213,
    "t": "Transmission",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "dc73d39aa40bf25b": {
    "f": "src/lib/record-model.js",
    "l": 214,
    "t": " line",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "308fa1373b5f5c58": {
    "f": "src/lib/record-model.js",
    "l": 214,
    "t": " lines",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "64d85164875214e2": {
    "f": "src/lib/record-model.js",
    "l": 227,
    "t": "Photograph",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "6afd1cce5ab7fd11": {
    "f": "src/lib/record-model.js",
    "l": 246,
    "t": " page",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "d051c9b628feba03": {
    "f": "src/lib/record-model.js",
    "l": 246,
    "t": " pages",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "786b9600ab925363": {
    "f": "src/lib/record-model.js",
    "l": 250,
    "t": "not here yet",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "fb4677aa02ec54c6": {
    "f": "src/lib/record-model.js",
    "l": 253,
    "t": "Document",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "01874a587ca649f5": {
    "f": "src/lib/record-model.js",
    "l": 254,
    "t": " · ",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "ff18204046c6d4cb": {
    "f": "src/routes/exhibit/RecordAttachments.jsx",
    "l": 113,
    "t": "Attachments",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "403911bc0720dc0f": {
    "f": "src/routes/exhibit/RecordAttachments.jsx",
    "l": 119,
    "t": "open {} in the reader",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "8d73a659b2467ce1": {
    "f": "src/routes/exhibit/RecordAttachments.jsx",
    "l": 131,
    "t": " · {}",
    "c": "HOUSE",
-   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/archive/logs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "6f7b27b613a63062": {
    "f": "src/routes/exhibit/RecordNav.jsx",
@@ -13328,7 +13328,7 @@
    "p": "RECORD_EPOCH — the day the five entries count from, and the face's `recordEpoch`",
    "c": "MIKE",
    "s": "Mike's RULING D, 2026-08-28: move the epoch BEFORE deploying, and day one is Monday 7 September 2026 — his dad's birthday and Labor Day, and the relaunch date he named. He ruled B then A on the two questions the catch-up deploy raised, and the ORDER is the ruling: the museum reads its clock at request time, so a deploy neither asks this constant nor needs anybody to type anything for the day it names to arrive. The standing rule above the date is unchanged and is D1's: an entry's date is the actual calendar day it is published, not a fictional offset. It supersedes RULING C, 2026-08-24, which put day one on Monday 31 August; C in turn superseded Mike 2026-08-08 dating Record 001 to 17 August pending a launch that day. The ruling record itself lands in docs/MUSEUM_RULINGS-20260817.md and docs/canon/09-PUBLISHED.md as its own step and is not written by this packet.",
-   "n": "IT IS THE DATE ITSELF AND NOT A STRING ON THE GLASS. Nothing prints these ten characters: the register stamp derives 07 SEP 26 and the dateline derives Week 1 · Monday, both by arithmetic in src/lib/record-model.js. It is declared MIKE because it is his fact, and it is the one field a launch slip moves. [2026-08-24] IT MOVED, AND THE MOVE IS THE PROOF OF THE CLAIM: this row and one literal were the whole edit; no entry date, no stamp and no dateline was touched. Its prior key was 70c2e7724abf2808 at t=2026-08-17, sourced to docs/MUSEUM_DATE_PREVIEW_LOG-20260808.md §0 — that citation dated Record 001 to 17 August pending a launch that day, and Ruling C is what supersedes it. Nothing RESTATED the old key, so no chain broke. [2026-08-28] IT MOVED A SECOND TIME, ON RULING D, AND THE SECOND MOVE COST THE SAME ONE LITERAL AND THIS ONE ROW. Its prior key was 40201658f6504625 at t=2026-08-31, sourced to Ruling C above; nothing RESTATED that key either, checked the same way, so again no chain broke. THE KEY IS DERIVED FROM THE TEXT — sha256(file NUL text) truncated to 16 — which is why a date change is a re-key and not an edit in place, and why a re-key is the only honest record of one."
+   "n": "IT IS THE DATE ITSELF AND NOT A STRING ON THE GLASS. Nothing prints these ten characters: the register stamp derives 07 SEP 26 and the dateline derives Week 1 · Monday, both by arithmetic in src/lib/record-model.js. It is declared MIKE because it is his fact, and it is the one field a launch slip moves. [2026-08-24] IT MOVED, AND THE MOVE IS THE PROOF OF THE CLAIM: this row and one literal were the whole edit; no entry date, no stamp and no dateline was touched. Its prior key was 70c2e7724abf2808 at t=2026-08-17, sourced to docs/archive/logs/MUSEUM_DATE_PREVIEW_LOG-20260808.md §0 — that citation dated Record 001 to 17 August pending a launch that day, and Ruling C is what supersedes it. Nothing RESTATED the old key, so no chain broke. [2026-08-28] IT MOVED A SECOND TIME, ON RULING D, AND THE SECOND MOVE COST THE SAME ONE LITERAL AND THIS ONE ROW. Its prior key was 40201658f6504625 at t=2026-08-31, sourced to Ruling C above; nothing RESTATED that key either, checked the same way, so again no chain broke. THE KEY IS DERIVED FROM THE TEXT — sha256(file NUL text) truncated to 16 — which is why a date change is a re-key and not an edit in place, and why a re-key is the only honest record of one."
   },
   "21e0467885e5b524": {
    "f": "src/data/artists/robots-record.js",
@@ -13336,7 +13336,7 @@
    "t": "EXECUTIVE SUMMARY",
    "p": "spine[].tracks[].face.entries[].sections[].label",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+   "s": "docs/archive/logs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
   "e4d0a6f2bfadefb0": {
    "f": "src/data/artists/robots-record.js",
@@ -13344,7 +13344,7 @@
    "t": "DETAILED REPORT",
    "p": "spine[].tracks[].face.entries[].sections[].label",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+   "s": "docs/archive/logs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
   "fa5be351128c1eff": {
    "f": "src/data/artists/robots-record.js",
@@ -13358,7 +13358,7 @@
    "l": 227,
    "t": "GENERAL STATUS UPDATE",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+   "s": "docs/archive/logs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
   },
   "b099d985d0592248": {
    "f": "src/data/artists/foundation.js",
@@ -13423,7 +13423,7 @@
    "l": 845,
    "t": "You're in the book.",
    "c": "HOUSE",
-   "s": "the guest book's confirmation, on the page since the first build. The clause that followed it — “Welcome, Founding Visitor.” — was struck 2026-08-11 on Mike's ruling as the last not-open-yet framing on the lobby; nothing replaced it. docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
+   "s": "the guest book's confirmation, on the page since the first build. The clause that followed it — “Welcome, Founding Visitor.” — was struck 2026-08-11 on Mike's ruling as the last not-open-yet framing on the lobby; nothing replaced it. docs/archive/logs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
   },
   "027bb7106b406961": {
    "f": "src/data/artists/robots.js",
@@ -13583,35 +13583,35 @@
    "l": 833,
    "t": "100% of Weird.Baby profits and royalties goes directly to Coalition for the Homeless.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+   "s": "docs/archive/logs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
   },
   "c11379d18fccffc3": {
    "f": "src/data/artists/foundation.js",
    "l": 859,
    "t": "Weird.Baby is dedicated to preventing the soul-sucker that is Homelessness.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+   "s": "docs/archive/logs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
   },
   "3461c669c5dfbb29": {
    "f": "src/data/artists/foundation.js",
    "l": 860,
    "t": "What's your purpose in life? Wanna pitch in?",
    "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+   "s": "docs/archive/logs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
   },
   "dfc7692466a0e5f7": {
    "f": "src/data/artists/weird-baby.js",
    "l": 39,
    "t": "first pass",
    "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
+   "s": "docs/archive/logs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
   },
   "16258a25c0fff31f": {
    "f": "src/data/artists/weird-baby.js",
    "l": 255,
    "t": "The Best of Weird.Baby Vol. 1",
    "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
+   "s": "docs/archive/logs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
   },
   "1b830f0b9a68f1d5": {
    "f": "src/data/artists/weird-baby.js",
@@ -13632,35 +13632,35 @@
    "l": 895,
    "t": "Welcome.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full: \"LAUNCH copy swaps Sunday night: 'Welcome. The first 100 people who sign the guest book will be remembered differently than the ones who come later.'\""
+   "s": "docs/archive/logs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full: \"LAUNCH copy swaps Sunday night: 'Welcome. The first 100 people who sign the guest book will be remembered differently than the ones who come later.'\""
   },
   "c4e4f58bde492092": {
    "f": "src/routes/WbHome.jsx",
    "l": 896,
    "t": "The first 100 people who sign the guest book",
    "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full: \"LAUNCH copy swaps Sunday night: 'Welcome. The first 100 people who sign the guest book will be remembered differently than the ones who come later.'\""
+   "s": "docs/archive/logs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full: \"LAUNCH copy swaps Sunday night: 'Welcome. The first 100 people who sign the guest book will be remembered differently than the ones who come later.'\""
   },
   "6370f2b104291b97": {
    "f": "src/data/artists/weird-baby.js",
    "l": 253,
    "t": "FAQ",
    "c": "HOUSE",
-   "s": "the standard FAQ row label, the same literal every wing's FAQ track carries. Mike named the row: \"track 2 -> FAQ\", docs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
+   "s": "the standard FAQ row label, the same literal every wing's FAQ track carries. Mike named the row: \"track 2 -> FAQ\", docs/archive/logs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
   },
   "ff825ce35a00597e": {
    "f": "src/data/artists/weird-baby.js",
    "l": 256,
    "t": "Who is Weird.Baby?",
    "c": "MIKE",
-   "s": "his seed question, verbatim: \"FAQ from the standard template, seeded with Who is Weird.Baby? and How to contact?\", docs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
+   "s": "his seed question, verbatim: \"FAQ from the standard template, seeded with Who is Weird.Baby? and How to contact?\", docs/archive/logs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
   },
   "f4b5ab84484cd5fe": {
    "f": "src/data/artists/weird-baby.js",
    "l": 263,
    "t": "How to contact?",
    "c": "MIKE",
-   "s": "his seed question, verbatim — same instruction as above. docs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
+   "s": "his seed question, verbatim — same instruction as above. docs/archive/logs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
   },
   "5262794659ebe743": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -13688,7 +13688,7 @@
    "l": 1732,
    "t": "Meet the Artists",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0 — his site-changes instruction of 2026-08-15, quoted in full. Section 2 names this row: \"Meet the Artists (shows the four big tiles)\"."
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0 — his site-changes instruction of 2026-08-15, quoted in full. Section 2 names this row: \"Meet the Artists (shows the four big tiles)\"."
   },
   "2d73a37349baa2c2": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -13701,7 +13701,7 @@
    "l": 79,
    "t": "Coalition for the Homeless",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0 — his site-changes instruction of 2026-08-15, quoted in full. Section 3: \"Coalition for the Homeless is the first, linking to coalitionforthehomeless.org/donate.\" The organisation's own name, as he wrote it; the same name is already carried on /foundation from his 2026-08-13 packet."
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0 — his site-changes instruction of 2026-08-15, quoted in full. Section 3: \"Coalition for the Homeless is the first, linking to coalitionforthehomeless.org/donate.\" The organisation's own name, as he wrote it; the same name is already carried on /foundation from his 2026-08-13 packet."
   },
   "bf32ab405ec28dd8": {
    "f": "src/routes/shop/GiftShop.jsx",
@@ -13714,35 +13714,35 @@
    "l": 121,
    "t": "Yes — no accounts or logins. Nothing behind a wall.\nThat's not an introductory offer. It's the arrangement.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
   "eabac282019ee93e": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 147,
    "t": "How do I contact Weird.Baby?",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
   "68357870f9123a91": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 148,
    "t": "Papa@Weird.Baby",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
   "0e43604839fb3d41": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 169,
    "t": "Does Weird.Baby 'take a cut' of the Artists' proceeds?",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
   "1076bd919e94c1c5": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 175,
    "t": "Is The Museum finished?",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
   "0a1dd5ed2ecfb837": {
    "f": "src/routes/WbHome.jsx",
@@ -13755,28 +13755,28 @@
    "l": 115,
    "t": "days",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
   },
   "b65dd2e7b9ee146c": {
    "f": "src/routes/WbHome.jsx",
    "l": 116,
    "t": "hours",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
   },
   "6b923108ebb2941b": {
    "f": "src/routes/WbHome.jsx",
    "l": 117,
    "t": "minutes",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
   },
   "9d403b8498e1c552": {
    "f": "src/routes/WbHome.jsx",
    "l": 118,
    "t": "seconds",
    "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
+   "s": "docs/archive/logs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
   },
   "f84628f25d25d956": {
    "f": "src/worker.js",
@@ -13901,84 +13901,84 @@
    "l": 587,
    "t": "What is this all about?",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "0e766c636dbfa0dc": {
    "f": "src/data/artists/foundation.js",
    "l": 590,
    "t": "Read 'The Short Story'",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "27785230ed648e52": {
    "f": "src/data/artists/foundation.js",
    "l": 598,
    "t": "Not the kind with a building and an endowment.",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "fc252ba7dc4f2197": {
    "f": "src/data/artists/foundation.js",
    "l": 599,
    "t": "There is no fund here, no account, and nothing set aside.",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "5da4b3a3074f3526": {
    "f": "src/data/artists/foundation.js",
    "l": 600,
    "t": "What the word means here is the set of rules the place is built on, written down and kept.",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "b6ff32743619af5c": {
    "f": "src/data/artists/foundation.js",
    "l": 610,
    "t": "Where do the Music and Merch proceeds go?",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "ac181ba45179873b": {
    "f": "src/data/artists/foundation.js",
    "l": 615,
    "t": "100% of the Artists' profits and royalties are handled by them, on their sites.",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "7e475d9183f140e8": {
    "f": "src/data/artists/foundation.js",
    "l": 620,
    "t": "Who pays to keep the lights on?",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "2c9debe6573e3750": {
    "f": "src/data/artists/foundation.js",
    "l": 623,
    "t": "Mike and Mo pay all the bills (Internet, robot parts, pens and pencils, etc.)",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "88ccd56b346adf88": {
    "f": "src/data/artists/foundation.js",
    "l": 625,
    "t": "We intend to keep it that until it is time to pass it on; time will tell.",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "08d31ffe2bed5ed7": {
    "f": "src/data/artists/foundation.js",
    "l": 630,
    "t": "Why are you giving away your money?",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
   "98e5c0f18a107618": {
    "f": "src/data/artists/foundation.js",
    "l": 1040,
    "t": "The Short Story",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3b, \"ADD tracks 1, 2, 3: 'The Short Story', 'The Long Story', 'The Blog'.\" — the track names as he named them. The tracks themselves are unwritten by his instruction: \"Do NOT write these yourself; they are Mike's voice.\""
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3b, \"ADD tracks 1, 2, 3: 'The Short Story', 'The Long Story', 'The Blog'.\" — the track names as he named them. The tracks themselves are unwritten by his instruction: \"Do NOT write these yourself; they are Mike's voice.\""
   },
   "ee00914e280645c1": {
    "f": "src/data/artists/foundation.js",
@@ -13992,7 +13992,7 @@
    "l": 1060,
    "t": "The Long Story",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3b, \"ADD tracks 1, 2, 3: 'The Short Story', 'The Long Story', 'The Blog'.\" — the track names as he named them. The tracks themselves are unwritten by his instruction: \"Do NOT write these yourself; they are Mike's voice.\""
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3b, \"ADD tracks 1, 2, 3: 'The Short Story', 'The Long Story', 'The Blog'.\" — the track names as he named them. The tracks themselves are unwritten by his instruction: \"Do NOT write these yourself; they are Mike's voice.\""
   },
   "102edf7a4d9e8486": {
    "f": "src/data/artists/foundation.js",
@@ -14006,7 +14006,7 @@
    "l": 1074,
    "t": "The Blog",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3b, \"ADD tracks 1, 2, 3: 'The Short Story', 'The Long Story', 'The Blog'.\" — the track names as he named them. The tracks themselves are unwritten by his instruction: \"Do NOT write these yourself; they are Mike's voice.\""
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3b, \"ADD tracks 1, 2, 3: 'The Short Story', 'The Long Story', 'The Blog'.\" — the track names as he named them. The tracks themselves are unwritten by his instruction: \"Do NOT write these yourself; they are Mike's voice.\""
   },
   "d8659aebba9f6fe1": {
    "f": "src/data/artists/foundation.js",
@@ -14020,42 +14020,42 @@
    "l": 293,
    "t": "CURRENT PROJECTS",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
   },
   "704bc93c8a7a954a": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 139,
    "t": "A museum, of sorts.\nA place to freely share my stuff with others.",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
   },
   "acd2ab60cd20e6c0": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 176,
    "t": "How do things get in the museum?",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
   },
   "c871ba5ebca91785": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 177,
    "t": "It gets discovered organically and fits the suit.\nPRO-TIP: Just go out and do some good. We're watching.",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
   },
   "16d8a812b83ccc41": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 194,
    "t": "No — a museum that stops accessioning is a storage unit.\nIf you come back, there will be more to see.",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
   },
   "0aeeb4759fe63488": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 330,
    "t": "Return to the lobby",
    "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/archive/logs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
   },
   "b24eca4de20274d9": {
    "f": "src/data/artists/robots-record.js",
@@ -14069,7 +14069,7 @@
    "l": 593,
    "t": "If you want to know more, read 'The Long Story'.",
    "c": "MIKE",
-   "s": "Mike's live-site walkthrough of 2026-08-17, area 1 (/foundation FAQ), quoted in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md. His replacement lines, carried exactly as supplied."
+   "s": "Mike's live-site walkthrough of 2026-08-17, area 1 (/foundation FAQ), quoted in docs/archive/logs/MUSEUM_WALKTHROUGH_LOG-20260817.md. His replacement lines, carried exactly as supplied."
   },
   "24a72571d0683aef": {
    "f": "src/data/artists/foundation.js",
@@ -14174,42 +14174,42 @@
    "l": 680,
    "t": "We are not giving away anything. We have what we need, plus a cushion; so we don't need to keep more for ourselves at this point.",
    "c": "MIKE",
-   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/archive/logs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
   },
   "dce829d110bc6bf2": {
    "f": "src/data/artists/foundation.js",
    "l": 692,
    "t": "Can I donate something besides money?",
    "c": "MIKE",
-   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/archive/logs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
   },
   "3ba82e0508bf3834": {
    "f": "src/data/artists/weird-baby.js",
    "l": 420,
    "t": "Papa Weird.Baby is learning to play acoustic guitar and sing, in order to record the songs he just wrote, so he can release the album he announced. And Robots.",
    "c": "MIKE",
-   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/archive/logs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
   },
   "f37f4b57ac732af0": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 167,
    "t": "No — Weird.Baby uses no logins, no cookies, hosts no ads.\nNOTE: We do not speak for Social Media or Artists' policies.",
    "c": "MIKE",
-   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/archive/logs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
   },
   "cbb39dab28624612": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 186,
    "t": "One person — The current Papa Weird.Baby.\nThe job pays nothing. That's the deal, and it never changes.",
    "c": "MIKE",
-   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/archive/logs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
   },
   "1a664e0ceb318c11": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 229,
    "t": "No — never.\nEvery door in the Gift Shop leads to the Artists' own sites and stores.",
    "c": "MIKE",
-   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/archive/logs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
   },
   "59e01e0b8dacecf6": {
    "f": "src/data/artists/robots-units.js",
@@ -14226,7 +14226,7 @@
    "c": "RESTATED",
    "r": [
     "e4b28e2c21cb0a6d",
-    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
+    "docs/archive/logs/MUSEUM_RED_NOTES_LOG-20260811.md"
    ]
   },
   "38b16caf61c45b97": {
@@ -14237,7 +14237,7 @@
    "c": "RESTATED",
    "r": [
     "e4b28e2c21cb0a6d",
-    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
+    "docs/archive/logs/MUSEUM_RED_NOTES_LOG-20260811.md"
    ]
   },
   "e0e37b9530db051b": {
@@ -14396,7 +14396,7 @@
    "t": "Everything the unit knows how to do is in here — not a description of the machine's behaviour but the behaviour itself, in the form the machine reads it.",
    "r": [
     "e4b28e2c21cb0a6d",
-    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
+    "docs/archive/logs/MUSEUM_RED_NOTES_LOG-20260811.md"
    ]
   },
   "ae10e2462df4cc40": {
@@ -14624,63 +14624,63 @@
    "l": 705,
    "t": "Yes, and very soon.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The donate answer, line 1 of 2."
+   "s": "docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The donate answer, line 1 of 2."
   },
   "2a9d71206833d187": {
    "f": "src/data/artists/foundation.js",
    "l": 706,
    "t": "We will speak up when we have a specific need to fill.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The donate answer, line 2 of 2. It replaces \"Yes. We will speak up when we have a need to fill.\" and narrows the promise to a SPECIFIC need."
+   "s": "docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The donate answer, line 2 of 2. It replaces \"Yes. We will speak up when we have a need to fill.\" and narrows the promise to a SPECIFIC need."
   },
   "1cd5304e9907e854": {
    "f": "src/data/artists/robots.js",
    "l": 570,
    "t": "The hardware is; I mean you can hold it at least.\nAnd it's heavier than you might expect.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The /robots FAQ answer to \"Is this stuff real?\", replacing \"The hardware is — you can hold it at least, and it is heavier than you expect.\" The newline is his line break, typed."
+   "s": "docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The /robots FAQ answer to \"Is this stuff real?\", replacing \"The hardware is — you can hold it at least, and it is heavier than you expect.\" The newline is his line break, typed."
   },
   "9f916464658edff9": {
    "f": "src/data/artists/weird-baby.js",
    "l": 386,
    "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic‑Talker who relies on Sloppy-Guitar and Mournful Lyrics to decry the plight of the masses. And some funny stuff, too. And Robots!",
    "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The ABOUT THE ARTIST blurb. Three changes against the 08-16 text, all his: Sloppy-Guitar and Mournful Lyrics take capitals, and \"the plight of the homeless\" becomes \"the plight of the masses\". The hyphen in Melodic‑Talker is U+2011 and is untouched."
+   "s": "docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The ABOUT THE ARTIST blurb. Three changes against the 08-16 text, all his: Sloppy-Guitar and Mournful Lyrics take capitals, and \"the plight of the homeless\" becomes \"the plight of the masses\". The hyphen in Melodic‑Talker is U+2011 and is untouched."
   },
   "6dcbc1ccdba39d7e": {
    "f": "src/data/artists/weird-baby.js",
    "l": 416,
    "t": "Stevens Institute of Technology - Hoboken, NJ - 1985 BSME",
    "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE. Replaces \"Stevens Institute of Technology - Hoboken NJ - 1985 Mech Eng\": he added the comma and named the degree. Ruled, not flagged."
+   "s": "docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE. Replaces \"Stevens Institute of Technology - Hoboken NJ - 1985 Mech Eng\": he added the comma and named the degree. Ruled, not flagged."
   },
   "c5fd6683c33245ad": {
    "f": "src/data/artists/weird-baby.js",
    "l": 417,
    "t": "New Jersey Institute of Technology - Newark, NJ - 2000 MS Eng Mgmt",
    "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE. Replaces \"NJIT Newark, NJ - 2000 Eng Management\": he spelled the institution out and named the degree. Ruled, not flagged."
+   "s": "docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE. Replaces \"NJIT Newark, NJ - 2000 Eng Management\": he spelled the institution out and named the degree. Ruled, not flagged."
   },
   "898e4b7365688821": {
    "f": "src/data/artists/weird-baby.js",
    "l": 418,
    "t": "Founder",
    "c": "HOUSE",
-   "s": "HOUSE label on the fact grid, the same rule the other four labels carry: every value in the grid is his line, every label is Ops' word for it, on his own instruction to propose the label set from his facts and invent none of them. The VALUE beside this label is his to the character. See docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md."
+   "s": "HOUSE label on the fact grid, the same rule the other four labels carry: every value in the grid is his line, every label is Ops' word for it, on his own instruction to propose the label set from his facts and invent none of them. The VALUE beside this label is his to the character. See docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md."
   },
   "0bbcec92db55976d": {
    "f": "src/data/house-copy.js",
    "l": 115,
    "t": "No — Those exhibited on Weird.Baby are not partners, clients, or signings.\nThey are people we feel are Worth a Listen.\nWe show their public content, and we direct Gift Shop traffic directly to their site.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" AFFILIATION gains a third line — \"We show their public content, and we direct Gift Shop traffic directly to their site.\" It is hoisted in house-copy.js, so the booth's sheet and /wal's FAQ both draw it and cannot fork."
+   "s": "docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" AFFILIATION gains a third line — \"We show their public content, and we direct Gift Shop traffic directly to their site.\" It is hoisted in house-copy.js, so the booth's sheet and /wal's FAQ both draw it and cannot fork."
   },
   "a82f8150ef157102": {
    "f": "src/data/artists/weird-baby.js",
    "l": 427,
    "t": "July 3, 1963",
    "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST fact grid, supplied 2026-08-16 and refreshed 2026-08-17; the DATE is his to the character. ONE WORD WAS REMOVED BY OPS AND IT IS NAMED HERE RATHER THAN ABSORBED: the value he supplied was \"Born July 3, 1963\" against a label that already reads BORN, so the grid printed the word twice. It was raised to him twice and carried as typed both times; it is cut on an OPS RULING (see docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md), and Mike can revert it with one word. Nothing else in the value changed — same month, day, year and punctuation. Register row Q-c keeps the question open."
+   "s": "Mike's ABOUT THE ARTIST fact grid, supplied 2026-08-16 and refreshed 2026-08-17; the DATE is his to the character. ONE WORD WAS REMOVED BY OPS AND IT IS NAMED HERE RATHER THAN ABSORBED: the value he supplied was \"Born July 3, 1963\" against a label that already reads BORN, so the grid printed the word twice. It was raised to him twice and carried as typed both times; it is cut on an OPS RULING (see docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md), and Mike can revert it with one word. Nothing else in the value changed — same month, day, year and punctuation. Register row Q-c keeps the question open."
   },
   "27b7bdefc73ad241": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -14701,7 +14701,7 @@
    "l": 1425,
    "t": "Sources: Faded Glamour's 2017 piece on “Doin' Me” (the Canon sync, the Rick Rubin involvement, the Rihanna and Universal credits); Apple Music and Deezer for the discography and the Salisbury origin; a 2020 Titusville interview for the 2019 European run.",
    "c": "VERIFIED",
-   "s": "the artist's own `aboutNote` Sources line, printed on the same card. [2026-08-17] ITS LAST SENTENCE WAS CUT ON MIKE'S RULING - 'His own domain is deliberately not linked - see the ledger.' The museum does not name that address anywhere a visitor can read, and DORMANT IS NOT GONE: the SOURCES row that printed this field was struck on 2026-08-17 and could return. The three citations are unchanged to the character; the provenance for why that door is shut is the [R-a 2026-08-02] comment block above `site`, which is untouched. See docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md."
+   "s": "the artist's own `aboutNote` Sources line, printed on the same card. [2026-08-17] ITS LAST SENTENCE WAS CUT ON MIKE'S RULING - 'His own domain is deliberately not linked - see the ledger.' The museum does not name that address anywhere a visitor can read, and DORMANT IS NOT GONE: the SOURCES row that printed this field was struck on 2026-08-17 and could return. The three citations are unchanged to the character; the provenance for why that door is shut is the [R-a 2026-08-02] comment block above `site`, which is untouched. See docs/archive/logs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md."
   },
   "1d244590a7709d82": {
    "f": "index.html",
@@ -15121,7 +15121,7 @@
    "l": 506,
    "t": "  > ZIP Password Cracked: [355113]",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
+   "s": "docs/archive/logs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
   },
   "ddcd409d2a0ea958": {
    "f": "src/data/artists/robots-record.js",
@@ -15134,28 +15134,28 @@
    "l": 649,
    "t": "  > APPROVED - Req 0628 - Internal Transfer - No net increase in head count",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
+   "s": "docs/archive/logs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written brief of 2026-08-20, carried verbatim"
   },
   "f6dc42112dcd4056": {
    "f": "src/data/artists/robots-record.js",
    "l": 484,
    "t": "> Weird.Baby Website - All Systems Favorable\n> /Robots ZIP File Cracked",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
+   "s": "docs/archive/logs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
   },
   "c77a5b64188a8d40": {
    "f": "src/data/artists/robots-record.js",
    "l": 619,
    "t": "> Portal Data Link - Connection Achieved\n> ZIP Extraction - Outer Layers Complete / Stopped",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
+   "s": "docs/archive/logs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
   },
   "1c92289a7e3c89da": {
    "f": "src/data/artists/robots-record.js",
    "l": 626,
    "t": "  > Portal appears to function. Intended purpose unknown.\n  > ZIP - We have reached the capability limit of brute force.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
+   "s": "docs/archive/logs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — his written record edits of 2026-08-20, carried verbatim"
   },
   "b079815427ad4c0e": {
    "f": "src/data/artists/robots-record.js",
@@ -15174,7 +15174,7 @@
    "l": 738,
    "t": "Official Music Video",
    "c": "HOUSE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike ruled the concept (\"Official Music Video, or whatever we use for that\"); the string is the museum's existing rendition term, the same one /hr's eleven video rows carry, mapped to OFFICIAL VIDEO on the glass by tidyDesc()"
+   "s": "docs/archive/logs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike ruled the concept (\"Official Music Video, or whatever we use for that\"); the string is the museum's existing rendition term, the same one /hr's eleven video rows carry, mapped to OFFICIAL VIDEO on the glass by tidyDesc()"
   },
   "c5aa41830f35f059": {
    "f": "src/data/artists/weird-baby.js",
@@ -15195,21 +15195,21 @@
    "l": 566,
    "t": "Honkin' on Bobo in Macungie\nSpring of 2020: Mike journaled that when Steven Tyler comes to honk out 'Amazing Grace' with Mike on his front porch, it signifies the Weird.Baby Foundation is making a difference.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — the caption \"Honkin' on Bobo in Macungie\" is his, verbatim, ruled 2026-08-20; the paragraph under it is his 2026-08-17 journal copy, unchanged to the character and only re-hashed because the caption joined its string."
+   "s": "docs/archive/logs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — the caption \"Honkin' on Bobo in Macungie\" is his, verbatim, ruled 2026-08-20; the paragraph under it is his 2026-08-17 journal copy, unchanged to the character and only re-hashed because the caption joined its string."
   },
   "9cce9185b3ed5869": {
    "f": "src/data/artists/robots-record.js",
    "l": 523,
    "t": "    ROOT\n     /(many pwd protected folders)\n     /PORTAL\n       TERMINAL.EXE\n       PORTAL_2v16.CFG\n       /ANTENNA (PWD)\n       /CHANNEL_SELECT(PWD)\n       /INSTALL\n          QC_101.TIF (hand written notes on form)",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike's rewritten Record 004 detailed report, 2026-08-21, carried verbatim. \"not meant to seen\" is his, as typed, and is flagged rather than corrected (Doctrine 21)."
+   "s": "docs/archive/logs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike's rewritten Record 004 detailed report, 2026-08-21, carried verbatim. \"not meant to seen\" is his, as typed, and is flagged rather than corrected (Doctrine 21)."
   },
   "ee8fd808dacaa206": {
    "f": "src/data/artists/robots-record.js",
    "l": 546,
    "t": "  > Install document looks proprietary. Probably not meant to seen.\n  > QC RULE: Unsafe to run in any sandbox; permanently quarantined.",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike's rewritten Record 004 detailed report, 2026-08-21, carried verbatim. \"not meant to seen\" is his, as typed, and is flagged rather than corrected (Doctrine 21)."
+   "s": "docs/archive/logs/MUSEUM_RULINGS_APPLIED_LOG-20260820.md — Mike's rewritten Record 004 detailed report, 2026-08-21, carried verbatim. \"not meant to seen\" is his, as typed, and is flagged rather than corrected (Doctrine 21)."
   },
   "3a15a6b7cfcfa0cf": {
    "f": "src/data/artists/portal.js",
@@ -15577,49 +15577,49 @@
    "t": "WEIRD.BABY \\FOUNDATION",
    "l": 1237,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "389942f53ee998e4": {
    "f": "src/data/artists/foundation.js",
    "t": "\\Foundation",
    "l": 1270,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "48bcbc32ec8bebe7": {
    "f": "src/data/artists/robots.js",
    "t": "WEIRD.BABY \\ROBOTS",
    "l": 535,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "cd4764feefdd69f4": {
    "f": "src/data/artists/robots.js",
    "t": "Weird.Baby \\Robots",
    "l": 758,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "02c1db2238f2a0a1": {
    "f": "src/data/artists/robots.js",
    "t": "\\Robots",
    "l": 829,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "7dc65afb56fbbf13": {
    "f": "src/data/artists/weird-baby.js",
    "t": "WEIRD.BABY \\MUSIC",
    "l": 686,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "0365f54ae7983847": {
    "f": "src/data/artists/weird-baby.js",
    "t": "Weird.Baby \\Foundation \\Robots \\Music - August 16, 2026",
    "l": 457,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "b60610c256308d47": {
    "f": "src/data/artists/weird-baby.js",
@@ -15633,7 +15633,7 @@
    "t": "\\Music",
    "l": 1009,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "ce0b17d9c856a448": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -15647,14 +15647,14 @@
    "t": "WEIRD.BABY \\WORTH A LISTEN",
    "l": 2334,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "2509db45a5ca0bc7": {
    "f": "src/data/artists/worth-a-listen.js",
    "t": "\\Worth a Listen",
    "l": 2413,
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_WING_NAMES_LOG-20260826.md."
+   "s": "Mike's ruling of 2026-08-26, given verbatim as the museum's own naming form: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" Ruled the same day on this round's wing-name census: (1) the full form is `Weird.Baby \\Wing` and the short form is `\\Wing`; (2) \"THE TITLE BARS CARRY IT TOO. \\ROBOTS, \\MUSIC, \\FOUNDATION, and the rest\"; (3) \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", his lowercase `a`. THIS IS HIS AUTHORSHIP, NOT OPS RESTYLING HIS WORDS - his own instruction on the one string of his the census surfaced: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_WING_NAMES_LOG-20260826.md."
   },
   "37f626fb08688214": {
    "f": "src/routes/exhibit/instrument-panel.jsx",
@@ -15886,35 +15886,35 @@
    "l": 996,
    "t": "\\Robots",
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Robots' to '\\Robots'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Robots is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
+   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Robots' to '\\Robots'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Robots is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
   },
   "2b6526a2010d5ea4": {
    "f": "src/routes/WbHome.jsx",
    "l": 1012,
    "t": "\\Music",
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Music' to '\\Music'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Music is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
+   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Music' to '\\Music'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Music is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
   },
   "4660e85315ae2175": {
    "f": "src/routes/WbHome.jsx",
    "l": 1068,
    "t": "\\Worth a Listen",
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Worth a Listen' to '\\Worth a Listen'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Worth a Listen is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
+   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Worth a Listen' to '\\Worth a Listen'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Worth a Listen is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
   },
   "351385bda6da67c6": {
    "f": "src/routes/WbHome.jsx",
    "l": 1100,
    "t": "\\Foundation",
    "c": "MIKE",
-   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Foundation' to '\\Foundation'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Foundation is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
+   "s": "Mike's ruling of 2026-08-27, REVERSING the board's half of his ruling of 2026-08-26 and leaving the rest of it standing. TODAY: \"RENAME 'Weird.Baby \\Foundation' to '\\Foundation'. In the directory, all of the '\\' should line up vertically.\" His reasoning, which is the substance: \"\\Foundation is parallel to \\Music in this context.\" WHAT IT REVERSES: on 2026-08-26 he ruled \"/wal TAKES THE HOUSE NAME. 'Weird.Baby \\Worth a Listen.' Every wing takes it\", and f366d37 put the full form `Weird.Baby \\Wing` on all four board rows. THE FULL FORM IS NOT RETIRED - his 08-26 point 1 stands whole, that the two forms are `Weird.Baby \\Wing` and `\\Wing` and both are his; what moved is which form the DIRECTORY takes. The short form is his own, given verbatim in the same 08-26 dictation: \"Lobby Directory (and everywhere) - this is how to refer to Weird.Baby: Weird.Baby / Weird.Baby \\Robots / Weird.Baby \\Music / Weird.Baby \\Foundation / etc. / \\Robots / \\Music / \\Foundation / etc.\" RECORDED AS A REVERSAL AND NOT A CORRECTION, on his own standing instruction about strings of his: \"RECORD IT AS HIS RULING, NOT A HOUSE EDIT.\" Round log: docs/archive/logs/MUSEUM_CHANNELS_AND_TEARS_LOG-20260827.md."
   },
   "9fc14119360b5771": {
    "f": "src/data/artists/portal.js",
    "l": 558,
    "t": "> Closing......",
    "c": "HOUSE",
-   "s": "Ops' word, in Mike's shape, and filed HOUSE rather than MIKE ON PURPOSE. He ruled the ACT - \"X RUNS A VISIBLE CLEAN SHUTDOWN - quick, but it happens - then lands back on the ALBUM\" - and the halt is his own boot played backwards so that it names no noun the museum has not already published: `TERMINAL.EXE` and `PORTAL_2v16.CFG` are Record 004's cracked-ZIP listing and `UNIX-6x Emulator` is Record 005's line, all three already declared MIKE. **THE ONE WORD THAT IS NOT HIS IS `Closing`**, which Ops substituted for his `Loading`. The six dots ARE his punctuation, carried from `> Loading......` as typed. A word Ops chose must not sit in his class: a paraphrase filed as MIKE is indistinguishable from his own sentence a week later, which is the whole reason the three-mark scheme exists. Round log: docs/MUSEUM_TERMINAL_AND_CONTROLS_LOG-20260827.md."
+   "s": "Ops' word, in Mike's shape, and filed HOUSE rather than MIKE ON PURPOSE. He ruled the ACT - \"X RUNS A VISIBLE CLEAN SHUTDOWN - quick, but it happens - then lands back on the ALBUM\" - and the halt is his own boot played backwards so that it names no noun the museum has not already published: `TERMINAL.EXE` and `PORTAL_2v16.CFG` are Record 004's cracked-ZIP listing and `UNIX-6x Emulator` is Record 005's line, all three already declared MIKE. **THE ONE WORD THAT IS NOT HIS IS `Closing`**, which Ops substituted for his `Loading`. The six dots ARE his punctuation, carried from `> Loading......` as typed. A word Ops chose must not sit in his class: a paraphrase filed as MIKE is indistinguishable from his own sentence a week later, which is the whole reason the three-mark scheme exists. Round log: docs/archive/logs/MUSEUM_TERMINAL_AND_CONTROLS_LOG-20260827.md."
   },
   "c8a8d930a6cba239": {
    "f": "src/routes/robots/PortalConsole.jsx",
@@ -16026,7 +16026,7 @@
    "l": 363,
    "t": "MGK-VIIIp - the close-up",
    "c": "HOUSE",
-   "s": "Ops' own words - the accessible name of channel 4, which is the same machine as channel 3 at a closer framing. It names the FRAMING because that is the only thing that distinguishes the two channels; a screen reader told 'MGK-VIIIp' twice would be told nothing. **IT WAS PRUNED AND RESTORED ON 2026-08-27.** Ops read Mike's *\"should show EXACTLY what CH3 shows\"* as IDENTICAL and deleted the channel's own framing with the static photograph it was attached to; he corrected it the same day - *\"Channel 4 is showing me the content that is to live on channel 3 (unzoomed front and top views) instead of the zoomed version\"* - and the words are the words they were. The row is filed HOUSE as it was before: it is assistive text, not a legend on the glass. Round log: docs/MUSEUM_FOUR_RULINGS_LOG-20260827.md."
+   "s": "Ops' own words - the accessible name of channel 4, which is the same machine as channel 3 at a closer framing. It names the FRAMING because that is the only thing that distinguishes the two channels; a screen reader told 'MGK-VIIIp' twice would be told nothing. **IT WAS PRUNED AND RESTORED ON 2026-08-27.** Ops read Mike's *\"should show EXACTLY what CH3 shows\"* as IDENTICAL and deleted the channel's own framing with the static photograph it was attached to; he corrected it the same day - *\"Channel 4 is showing me the content that is to live on channel 3 (unzoomed front and top views) instead of the zoomed version\"* - and the words are the words they were. The row is filed HOUSE as it was before: it is assistive text, not a legend on the glass. Round log: docs/archive/logs/MUSEUM_FOUR_RULINGS_LOG-20260827.md."
   },
   "bb575d73c9be65d4": {
    "f": "src/routes/robots/PortalScreen.jsx",
@@ -16161,14 +16161,14 @@
    "l": 867,
    "t": "YibpBtf9IU8",
    "c": "VERIFIED",
-   "s": "the video Mike supplied on 2026-08-28 as `Coconuts - Weird.Baby - Early Front Porch`, https://youtu.be/YibpBtf9IU8. **VERIFIED ON MIKE'S ATTESTATION, WHICH IS WHAT THE CITATION IS.** OPERATIONS §8 makes SEEN PLAYING the only probe it accepts for an embed, and Ops could not run it: the Browser pane measured `document.hidden true`, `visibilityState hidden`, `innerWidth 0`, `innerHeight 0`, and the control `c1vODrVXOg0` — already adopted and live — read `unstarted` with `currentTime` flat for 14s in the same harness, so Ops could not tell a playing video from a refusing one. **MIKE SAW IT PLAY AND RULED IT LANDED on 2026-08-29; the observation is his and not Ops'.** Harness `docs/shorts/out/adopt.html`; log docs/MUSEUM_EARLY_TAKES_LOG-20260828.md."
+   "s": "the video Mike supplied on 2026-08-28 as `Coconuts - Weird.Baby - Early Front Porch`, https://youtu.be/YibpBtf9IU8. **VERIFIED ON MIKE'S ATTESTATION, WHICH IS WHAT THE CITATION IS.** OPERATIONS §8 makes SEEN PLAYING the only probe it accepts for an embed, and Ops could not run it: the Browser pane measured `document.hidden true`, `visibilityState hidden`, `innerWidth 0`, `innerHeight 0`, and the control `c1vODrVXOg0` — already adopted and live — read `unstarted` with `currentTime` flat for 14s in the same harness, so Ops could not tell a playing video from a refusing one. **MIKE SAW IT PLAY AND RULED IT LANDED on 2026-08-29; the observation is his and not Ops'.** Harness `docs/shorts/out/adopt.html`; log docs/archive/logs/MUSEUM_EARLY_TAKES_LOG-20260828.md."
   },
   "9efa1d612b98476c": {
    "f": "src/data/artists/weird-baby.js",
    "l": 973,
    "t": "WOWS-RWywgA",
    "c": "VERIFIED",
-   "s": "the video Mike supplied on 2026-08-28 as `E.D. Yahdah - Weird.Baby - Early Instrumental`, https://youtu.be/WOWS-RWywgA. **VERIFIED ON MIKE'S ATTESTATION, WHICH IS WHAT THE CITATION IS.** OPERATIONS §8 makes SEEN PLAYING the only probe it accepts for an embed, and Ops could not run it: the Browser pane measured `document.hidden true`, `visibilityState hidden`, `innerWidth 0`, `innerHeight 0`, and the control `c1vODrVXOg0` — already adopted and live — read `unstarted` with `currentTime` flat for 14s in the same harness, so Ops could not tell a playing video from a refusing one. **MIKE SAW IT PLAY AND RULED IT LANDED on 2026-08-29; the observation is his and not Ops'.** Harness `docs/shorts/out/adopt.html`; log docs/MUSEUM_EARLY_TAKES_LOG-20260828.md."
+   "s": "the video Mike supplied on 2026-08-28 as `E.D. Yahdah - Weird.Baby - Early Instrumental`, https://youtu.be/WOWS-RWywgA. **VERIFIED ON MIKE'S ATTESTATION, WHICH IS WHAT THE CITATION IS.** OPERATIONS §8 makes SEEN PLAYING the only probe it accepts for an embed, and Ops could not run it: the Browser pane measured `document.hidden true`, `visibilityState hidden`, `innerWidth 0`, `innerHeight 0`, and the control `c1vODrVXOg0` — already adopted and live — read `unstarted` with `currentTime` flat for 14s in the same harness, so Ops could not tell a playing video from a refusing one. **MIKE SAW IT PLAY AND RULED IT LANDED on 2026-08-29; the observation is his and not Ops'.** Harness `docs/shorts/out/adopt.html`; log docs/archive/logs/MUSEUM_EARLY_TAKES_LOG-20260828.md."
   },
   "2ad4eb2c6f07c7bc": {
    "f": "src/data/artists/weird-baby.js",
