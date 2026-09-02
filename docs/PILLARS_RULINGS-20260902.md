@@ -31,3 +31,27 @@ Mike's rulings on the pillar briefs served from `C:\AI\REVIEW-20260902` (the pil
 - **5A.** The machines are not for sale during the story. The robots FAQ's "Can I buy one? Monitor the website" becomes a plain statement, in Mike's words, after Sunday. Count, price and edition are not decided until there is something to count. Bench trip, flashing, cases and the flagship are off-camera work with no date. Still to ask: whether the twin comes out from behind the door during the story; which twin copy is the master.
 - **5bA.** Ops drafts the manual by whole sections from the canon; provenance files it as house prose Mike approved, never as MIKE. First: two complete pages in two candidate registers, served side by side, for Mike to pick one or neither. Then one facts sitting (the counts, the conflicts, whether the manual may invent in-story numbers as story). Then sections, rendered, marked up out loud, approved by section. The per-paragraph ritual in `robots:docs/MANUAL_WRITING_BOOT.md` is retired for drafting; the frozen page masters are regenerated to the live layout after the six pages publish on 09-09.
 - **6C.** The Hunter Root wing stays locked and unasked. Nothing about it, its pipeline, the vault or the fan-group tooling changes. It is not on any list; it is a standing state, revisited only if Mike raises it.
+
+## The manual's facts sitting — rulings (2026-09-02, evening)
+
+**Standing rule for the sitting (Mike): "the firmware rules."** Where the firmware and any document disagree about the machine, the firmware wins. This reverses the direction Doctrine 18 gave these questions (the in-story manual as authority, the firmware as no evidence) for facts about the machine; the in-story frame (1965, ABEAL, no real part numbers or dates) is untouched.
+
+Decided by that rule alone: **2** display 128 × 32 · **3** two lamps (the page may still say "the lamp") · **6** polarity has five values; the menu loses Affirmative · **8** Inclination is not fitted · **11** three engines fitted; the four hidden names are reserved positions · **12** eleven voice slots · **14** the engine is self-contained · **16** the record does not survive a power interruption · **17** the front wakes first once the race is fixed · **22** the character sets are system: classic, density: TomThumb, ceremony: FreeSansBold · **23** there is no shutting-down procedure.
+
+Ruled by Mike, by number (his answers were by position in the fifteen-item list; mapped here to the sitting's numbers):
+
+| # | question | ruling |
+|---|---|---|
+| 1 | what it runs on | **A** — PHVDC |
+| 4 | the cell's numbers | **B now, A after the bench trip** — "not stated in this issue" until measured |
+| 5 | temperature and humidity | same as 4 |
+| 7 | polarity's two scales | **A** — the manual prints the setting names only |
+| 9 | print the redaction | **A** — ▓▓▓ as the source does |
+| 13 | which access codes print | **"all are to be 'handwritten' if at all"** — the printed page carries no codes; any code that appears is a handwritten mark, as on the marked copy |
+| 15 | the response curve | **B** — loaded at first run, not an adjustment, figure struck |
+| 18 | the Everyday or the Everyman | **Everyday** |
+| 20 | "determination" | **keep** |
+| 21 | AMMMS and PHVDC | **B** — printed as abbreviations used without expansion in this issue |
+| 25 | who the manual is written to | **A** — the technician |
+
+Open after this pass: 10 (counts of detectors and games, asked again in plain words), 19 (the Portal's three senses, asked again), 24 (the seven first-boot questions, to be listed), 26 (the serials; Mike asks why the Everyday is −02 and not −01).
