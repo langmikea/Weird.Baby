@@ -81,3 +81,5 @@ Third pass, same evening — the seven first-boot questions (24) and the Housewi
 | 26b | the Housewife Nano's destination when the Everyday takes −01 | **−02** (a swap) |
 
 **The sitting is closed.** Every fact the manual needs is ruled: the firmware rules for the machine's facts; 26 questions answered; the seven first-boot questions answered. What remains before writing: Mike's pick from the register test. Then Sections IV, VI, VIII and Appendix B are rewritten in that voice and the unwritten sections drafted against this table, section by section, served as rendered pages.
+
+**The register test (2026-09-02, evening): Mike picks A — Voice one, plain, to you.** The manual talks to the person holding the instrument, in the voice of paragraph 9-1 and the two test pages (`C:\AI\REVIEW-20260902\register-test.html`). The period lives in the typed page, the numbering and the vocabulary, not in the grammar. Writing starts: Sections IV, VI, VIII and Appendix B first (the old voice), then the unwritten sections against the sitting's rulings.
