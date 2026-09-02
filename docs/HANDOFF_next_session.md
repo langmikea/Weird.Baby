@@ -38,6 +38,12 @@ nothing served has changed. Nothing waits on a deploy.
   day. Ops owes: once the manual is written, a pass that uses it as the
   publishing guide for the device Records, and a first fill of the ledger's
   `when` column by that rule.
+- The reveal choreography is ruled (A, third cut): `reveal/schedule.json`
+  is the ruling; after Sunday, fill the ledger's `when` (story week numbers)
+  in `reveal/ledger-declare.mjs` from it and rebuild; then brief the ZIP
+  browser (a new in-story surface: the Record's ZIP, browsable, entries
+  readable on the schedule; no download). The calendar's Record lane
+  carries the headlines through week 8.
 - The manual: Mike's ruling A (Ops drafts by section). The register test is
   served (`C:\AI\REVIEW-20260902\register-test.html`); his pick is pending.
   Then one facts sitting, then Sections IV, VI, VIII and Appendix B rewritten

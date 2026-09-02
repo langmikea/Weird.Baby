@@ -15,6 +15,7 @@
 
 ## Rulings against this file
 
+- **2026-09-02, the front-door rule, struck.** "At one time I made a rule that people could only enter the museum through the front door. I don't know if I ever struck that rule, but it needs to be struck because it prevents people from sharing useful links. Once inside the museum, the route through the gift shop as well defined and still holds." Any page may be linked to directly. The one-exit-through-the-gift-shop law stands. (The code never enforced a front-door redirect; the ruling is on the record so nobody builds one.)
 - **2026-09-02, the five April laws** (one exit through the shop; no share buttons; no cross-promotion between rooms; the contributor machinery; the spine). Asked A retire all / B keep the shape, retire the posture / C keep all until each is reviewed on its own. **Mike: C.** All five stand until reviewed one at a time, after Sunday 2026-09-06. Nothing on the site changes on their account before then.
 
 Source for the 2026-09-01 lines: `docs/FINDING-the-draw-20260901.md`. The April documents this replaces: `docs/archive/VISION.md`, `docs/archive/VISION_LOCK_v0.3.md`, `docs/archive/UX_SPEC_v0.3.md`.
