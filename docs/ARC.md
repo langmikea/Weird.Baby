@@ -232,3 +232,9 @@ Said while writing week two. Verbatim, casing and dictation as given. This is th
 > "I'd like you to take the time to go through the manual once it is created and use that as a guide for publishing each device related record."
 
 **What this changes (Ops).** The reveal ledger's `when` column, null on every row by Doctrine 12, now has a rule to fill it by: one feature, program, adjustment, manual portion or artifact per day, the Record as the manifest. A day may carry a manual dump and a headline both. The manual, once written in the chosen register, is the publishing guide for the device-related Records (Ops owes that pass).
+
+**Mike, 2026-09-02, on the first pass of the choreography (verbatim, dictated):**
+
+> "Instead of introducing all the characters in one fell swoop and focusing on them I think it would be more fun to introduce the first character in week two even if that just means Friday of week two. I would see each of these character drops getting a full day within their week so there's four more days covered. I also expect to be dressing up other days with micro drops from the characters. That is a general statement applies to everything everywhere. Just because something is the feature for the day does not mean that nothing else may be done that day nor does it mean that thing may not be done more in the future."
+
+**What this changes (Ops).** One character a week, weeks two to five, each with a full day; the first on the Friday of week two. A day's feature excludes nothing else that day and returns later as it likes. Micro-drops from the characters dress other days.
