@@ -33,6 +33,11 @@ nothing served has changed. Nothing waits on a deploy.
   source-file comments quoting old numbers (after the 7th). Done 09-02: the
   robots round documents (53 archived, `robots:docs/archive/README.md`), the
   album mirror.
+- The arc, Mike 09-02 (`docs/ARC.md` §6): the story explains the device;
+  every feature, program, adjustment, manual portion and artifact can be a
+  day. Ops owes: once the manual is written, a pass that uses it as the
+  publishing guide for the device Records, and a first fill of the ledger's
+  `when` column by that rule.
 - The manual: Mike's ruling A (Ops drafts by section). The register test is
   served (`C:\AI\REVIEW-20260902\register-test.html`); his pick is pending.
   Then one facts sitting, then Sections IV, VI, VIII and Appendix B rewritten
