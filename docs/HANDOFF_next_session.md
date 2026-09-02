@@ -37,7 +37,12 @@ nothing served has changed. Nothing waits on a deploy.
   or drop.
 - Guard 6 blocks four of five Record entries from landing; ruled a bug or a rule (Sunday).
 - The week-two calendar: two rows, five columns, conversational; buildable now.
-- The National Coalition for the Homeless research (the August round did New York).
+- Repoint the Foundation's roster entry and held donate link from the New
+  York coalition to the National one (`nationalhomeless.org`; details in
+  PILLARS_RULINGS 4bB). Src; after Sunday.
+- `C:\AI\mirror_vol1_backup.ps1` mirrors the album folder to OneDrive with a
+  manifest (first run 2026-09-02, 45 files, deposit set verified). Re-run after
+  any change to the album folder; it is not scheduled.
 - Later briefs, one each: the five April laws; the twin behind the door and
   which twin copy is master; the 489 asset verdict fields.
 - `docs/ARC.md` prints MON for Record 001 whatever the epoch says (archive row D-a).
