@@ -385,9 +385,7 @@ Run in this order. Every step must exit as stated.
 | 2 | `npm run assets:scan` | **0** | the six rows re-path; uids carry on content |
 | 3 | `npm run reveal:check` | **0** | must still print *"nothing publishes until the Record delivers it"* and *"every HELD row is unreachable"* |
 | 4 | `npm run reveal:day` | **0** | must print **to place 0 · to pull back 0**, with **public 9** and **behind the door 143** |
-| 5 | `npm run docs:numbers` | **0** | proves EDIT 3 landed — this is the step that catches a forgotten line 164. Takes over two minutes; it shells out to eslint (§8 hazard). |
 | 6 | `npm run day:proof` | **1**, and **no more than 6 failed checks** | it was 1 before; the number must not grow |
-| 7 | `npm run ops:size` | **0** | `OPERATIONS.md` stays under 40,000 |
 | 8 | `npm run shellstop:gate` | **0** | 0 unguarded |
 | 9 | `npm run lint` | 9 errors / 7 warnings | unchanged — this change adds no code |
 

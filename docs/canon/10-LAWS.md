@@ -284,8 +284,8 @@ it is re-derived under the law or it does not ship.**
 
 # PART TWO · THE OPS DOCTRINES
 
-**`OPS` register throughout. Canonical text: `museum:docs/canonical/OPERATIONS.md`
-§7. Numbered as they are numbered there.**
+**`OPS` register throughout. Canonical text: `museum:docs/canonical/OPERATIONS_ARCHIVE/OPERATIONS-FULL-b9517e6.md`
+§7 (the manual was collapsed 2026-09-01). Numbered as they are numbered there.**
 
 ## Doctrine 11 · THE LAW OF THE VISIBLE LINE
 <a id="doctrine-11"></a>
@@ -484,3 +484,21 @@ later from something he said, and his own sentence left in blue gets quietly
 "improved" by the next round.*
 
 **OPS DIVIDES AND DOES NOT INVENT.**
+
+---
+
+## DOCTRINES 13 · 14 · 15 · 17 · 19 · 27 — lead lines, carried 2026-09-01
+<a id="doctrine-13"></a><a id="doctrine-14"></a><a id="doctrine-15"></a><a id="doctrine-17"></a><a id="doctrine-19"></a><a id="doctrine-27"></a>
+
+**Carried verbatim from `OPERATIONS.md` §7 when the manual was collapsed.** Bodies:
+`museum:docs/canonical/OPERATIONS_ARCHIVE/07-WORKING-DOCTRINE.md` (cut `b3812cc`)
+and `OPERATIONS-FULL-b9517e6.md` (the sixth cut).
+
+13. **EVERY VISIBLE STRING CARRIES ITS ORIGIN (v48, 2026-08-04 — STANDING).**
+14. **THE OPEN-ACTION REGISTER IS MAINTAINED BY EVERY ROUND (Mike,
+    2026-08-04 — STANDING).**
+15. **THE RECORD APPROVAL GATE (Mike, 2026-08-04 — STANDING).**
+17. **ONE PASSAGE, ONE DECLARATION (Mike, 2026-08-06 — STANDING, site-wide).**
+19. **THE EXPANDER RULE (Mike, 2026-08-06 — STANDING, site-wide).**
+27. **AN ASSET CULL ASKS WHAT BUILDS FROM A FILE, NOT ONLY WHAT DISPLAYS IT
+    (Mike, 2026-08-20 — STANDING).**

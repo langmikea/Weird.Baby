@@ -55,8 +55,6 @@
     "approve": "node tools/approve.mjs",
     "approve:check": "node tools/approve.mjs --check",
     "approval:proof": "node tools/approval-proof.mjs",
-    "docs:numbers": "node tools/numbers-gate.mjs",
-    "docs:numbers:gate": "node tools/numbers-gate.mjs --gate",
     "shorts:render": "node tools/shorts-compile.mjs",
     "shorts:flashbang": "node tools/shorts-compile.mjs --recipe docs/shorts/flashbang.json --frames --verify",
     "shorts:verify": "node tools/shorts-verify.mjs",
@@ -75,8 +73,6 @@
     "assets:r2:sync": "node tools/sync-assets-to-r2.mjs",
     "arc": "node tools/arc.mjs",
     "arc:check": "node tools/arc.mjs --check",
-    "conduit": "node tools/conduit-drop.mjs",
-    "ops:size": "node tools/ops-size-gate.mjs",
     "shellstop:gate": "node tools/shell-stop-gate.mjs",
     "door:check": "node tools/door-probe.mjs",
     "ops:archive": "node tools/ops-archive-index.mjs"

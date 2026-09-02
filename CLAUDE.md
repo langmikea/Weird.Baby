@@ -1,4 +1,9 @@
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
+
+**BOOT — Code is its own boot (2026-09-01).** Read, in order: `docs/canonical/OPERATIONS.md`, then `docs/HANDOFF_next_session.md`, then `git log --oneline -10` and `git status --short`. Believe the tree over both files.
+
+**House rule for commits:** every commit uses `git commit -F` with a message file. Subject under 72 characters, imperative, ends on prose. NO trailers — no Co-Authored-By.
+
 # Claude session notes
 
 **READ FIRST: docs/canonical/OPERATIONS.md — the operating manual. It governs process; this file is reference.**

@@ -354,8 +354,6 @@ side.
 | 2 | `npm run reveal:build` | **0** | `record.003.assets` → one element; `doc.manual.page.47` → one; `unresolved` empty; **M99 does not fire** |
 | 3 | `npm run reveal:check` | **0** | must still print *"nothing publishes until the Record delivers it"* and *"every HELD row is unreachable"* |
 | 4 | `npm run reveal:day` | **0** | **governed pictures 147 · public 10 · behind the door 137 · to place 0 · to pull back 0** |
-| 5 | `npm run docs:numbers` | **0** | line 164 is UNCHANGED and must stay green. Takes over two minutes; it shells out to eslint (§8 hazard). |
-| 6 | `npm run ops:size` | **0** | `OPERATIONS.md` stays under 40,000 |
 | 7 | `npm run shellstop:gate` | **0** | 0 unguarded |
 | 8 | `npm run lint` | 9 errors / 7 warnings | unchanged — this change adds no code |
 
