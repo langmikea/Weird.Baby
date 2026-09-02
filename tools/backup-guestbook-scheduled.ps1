@@ -90,7 +90,7 @@ try {
     # Recover any index lock / partial state that may bleed in from other tooling.
     if (Test-Path .git\index.lock) { Remove-Item .git\index.lock -Force }
 
-    $null = Invoke-Git add backups/
+    $null = Invoke-Git add -f backups/   # -f: backups/ has been gitignored since 2026-06-02, so a plain add staged nothing and every run since then would have ended "nothing to commit"
 
     # Anything staged under backups/?
     $staged = Invoke-Git diff --cached --quiet -- backups/
