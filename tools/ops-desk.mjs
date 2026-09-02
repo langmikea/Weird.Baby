@@ -221,10 +221,6 @@ const INSTRUMENTS = [
     file: "dictation-20260807/reference.html",
     what: "What explains the machine. Read it when you want it, not to get started.",
     rebuild: "npm run dictation" },
-  { name: "The contact sheet",
-    file: "CONTACT_SHEET.html",
-    what: "Every image in both repos, with a ✗ on each tile for marking a cull.",
-    rebuild: "npm run contact-sheet" },
   /* [2026-08-16] MIKE: "That is where I always look for whatever I need, so
      treat it like that please." A list he has to remember a path to is a list
      he does not read. It is HTML, so the desk can link it straight — the
@@ -259,11 +255,8 @@ const INSTRUMENTS = [
     what: "Canon that is true in the story and has not been said in a Record yet. Mike's words, verbatim.",
     rebuild: "npm run desk",
     source: "THREADS.md" },
-  { name: "The open-actions register",
-    file: "OPEN_ACTIONS.html",
-    what: "Everything open, one place. THE SHORT LIST at the top is what is waiting on you.",
-    rebuild: "npm run desk",
-    source: "OPEN_ACTIONS.md" },
+  /* [2026-09-02] The open-actions register was retired on 2026-09-01 and the
+     contact sheet on 2026-09-02 (pass 5 of the System work); neither has a card. */
 ];
 
 /* ── the escaper. Same one the dictation shell uses; copied rather than
@@ -561,24 +554,9 @@ ${body}
 
 /* ═══ RUN ═══════════════════════════════════════════════════════════════════ */
 
-/* the register's rendering FIRST, so its own card can stat the file this run
-   has just written rather than the one the last run left */
-const oaMd = path.join(DOCS, "OPEN_ACTIONS.md");
-let oaWrote = false;
-if (fs.existsSync(oaMd)) {
-  const md = fs.readFileSync(oaMd, "utf8");
-  const src = stamp(fs.statSync(oaMd).mtime);
-  const body = `<div class="wrap">
-<p class="sub"><a href="OPS_DESK.html">&larr; the Ops desk</a></p>
-${renderMarkdown(md)}
-<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/OPEN_ACTIONS.md</code>,
-which is the source and was last written <b>${esc(src)}</b>. Rebuild with <code>npm run desk</code>.
-Ops instrument &mdash; not part of the museum, and never at a live address.</p>
-</div>`;
-  fs.writeFileSync(path.join(DOCS, "OPEN_ACTIONS.html"),
-    page({ title: "OPEN ACTIONS — the standing register", css: DOC_CSS, body, favi: "📋" }));
-  oaWrote = true;
-}
+/* [2026-09-02] The register (OPEN_ACTIONS.md) was retired 2026-09-01; the desk
+   no longer renders it or checks links against it. The frozen register is
+   docs/canonical/OPERATIONS_ARCHIVE/OPEN_ACTIONS-b9517e6.md. */
 
 /* ═══ [2026-08-16 / 2026-08-17] THE SIDE PAGES, AND THEY ARE CHECKED AGAINST
        THE REGISTER RATHER THAN TRUSTED ═══════════════════════════════════
@@ -650,23 +628,11 @@ const SIDE_PAGES = [
   })),
 ];
 const sideWrote = [];
-const sideBroken = [];
 for (const pg of SIDE_PAGES) {
   const srcPath = path.join(DOCS, pg.md);
   if (!fs.existsSync(srcPath)) continue;
   const md = fs.readFileSync(srcPath, "utf8");
   const when = stamp(fs.statSync(srcPath).mtime);
-  const known = new Set(
-    (fs.existsSync(oaMd) ? fs.readFileSync(oaMd, "utf8") : "")
-      .match(/<a id="([a-z0-9-]+)"><\/a>/g)?.map(m => m.slice(7, -6)) || []);
-  const broken = [...new Set(
-    (md.match(/OPEN_ACTIONS\.md#([a-z0-9-]+)/g) || [])
-      .map(m => m.split("#")[1]).filter(id => !known.has(id)))];
-  if (broken.length) sideBroken.push({ page: pg.md, ids: broken });
-  const warn = broken.length
-    ? `<p class="foot" style="color:#9c2b1e"><b>${broken.length} link(s) point at register rows that no longer exist:</b>
-       ${broken.map(esc).join(", ")}. Either the row closed and this page did not follow, or the id is a typo.</p>`
-    : "";
   const up = pg.up || "";
   /* SIBLING REPOINTING: `Foo.md#anchor` -> `Foo.html#anchor` for any page this
      run is writing beside it. Scoped to the known set on purpose — a blanket
@@ -675,17 +641,15 @@ for (const pg of SIDE_PAGES) {
      to draw. */
   const siblings = new Set(SIDE_PAGES.map(p => p.md.split("/").pop()));
   let html = renderMarkdown(md)
-    .replace(/href="OPEN_ACTIONS\.md(#|")/g, `href="${up}OPEN_ACTIONS.html$1`)
+    .replace(/href="OPEN_ACTIONS\.md(#|")/g, `href="${up}canonical/OPERATIONS_ARCHIVE/OPEN_ACTIONS-b9517e6.md$1`)
     .replace(/href="([A-Za-z0-9._-]+)\.md(#[^"]*)?"/g,
              (m, name, frag) => siblings.has(name + ".md")
                ? `href="${name}.html${frag || ""}"` : m);
   const body = `<div class="wrap">
-<p class="sub"><a href="${up}OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="${up}OPEN_ACTIONS.html">the full register</a></p>
-${warn}
+<p class="sub"><a href="${up}OPS_DESK.html">&larr; the Ops desk</a></p>
 ${html}
 <p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/${esc(pg.md)}</code>,
-last written <b>${esc(when)}</b>. Every register link on this page is checked against
-<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+last written <b>${esc(when)}</b>. Rebuild with <code>npm run desk</code>.</p>
 </div>`;
   const out = path.join(DOCS, pg.html);
   fs.mkdirSync(path.dirname(out), { recursive: true });
@@ -826,19 +790,8 @@ fs.writeFileSync(path.join(DOCS, "OPS_DESK.html"),
   page({ title: "Weird.Baby — the Ops desk", css: CSS, body, favi: "🗂" }));
 
 console.log(`wrote docs/OPS_DESK.html — ${INSTRUMENTS.length} instruments, ${INSTRUMENTS.length - missing.length} on disk`);
-if (oaWrote) console.log("wrote docs/OPEN_ACTIONS.html — rendered from docs/OPEN_ACTIONS.md");
 for (const html of sideWrote) {
   console.log(`wrote docs/${html} — rendered from docs/${html.replace(".html", ".md")}`);
-}
-if (sideWrote.length) {
-  if (sideBroken.length) {
-    for (const b of sideBroken) {
-      console.log(`\n${b.ids.length} link(s) in ${b.page} point at register rows that do not exist:`);
-      for (const id of b.ids) console.log(`  OPEN_ACTIONS.md#${id}`);
-    }
-  } else {
-    console.log("  every register link on the side pages resolves to a live row");
-  }
 }
 if (missing.length) {
   console.log(`\n${missing.length} instrument(s) NOT on disk — the desk says so on the card rather than linking past it:`);

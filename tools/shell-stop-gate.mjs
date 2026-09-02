@@ -88,8 +88,14 @@ const REPOS = [
    becomes a list of paths it has stopped being a principle, and the next round
    will add the fourth entry without asking what the first three had in common.
    If a sealed archive ever does become a packet's input, this skip is wrong and
-   goes — not the file. */
-const SKIP_DIR = "docs/canonical/OPERATIONS_ARCHIVE/";
+   goes — not the file.
+
+   [2026-09-02] `docs/archive/` joined under the SAME principle, not as a second
+   entry on a list: pass 4 of the System work moved every round log, report,
+   old handoff and overnight folder there, its README says nothing reads it,
+   and the overnight folders had lived outside every repository (never a
+   packet's input) until they were landed. Two directories, one reason. */
+const SKIP_DIRS = ["docs/canonical/OPERATIONS_ARCHIVE/", "docs/archive/"];
 
 const DEPLOY = /deploy:launch|deploy:relaunch|wrangler\s+deploy|npm\s+run\s+deploy|npx\s+wrangler/i;
 
@@ -155,7 +161,7 @@ for (const repo of REPOS) {
   }
   named += candidates.length;
   for (const rel of candidates) {
-    if (repo.root === MUSEUM && rel.startsWith(SKIP_DIR)) { skipped++; continue; }
+    if (repo.root === MUSEUM && SKIP_DIRS.some(d => rel.startsWith(d))) { skipped++; continue; }
     let text;
     try { text = fs.readFileSync(path.join(repo.root, rel), "utf8"); } catch { continue; }
     if (!executablePosition(text)) continue;
@@ -168,7 +174,7 @@ console.log("");
 console.log("  SHELL-STOP GATE   (" + REPOS.map(r => r.label).join(" + ") + ")");
 console.log("");
 console.log(`    ${named} file(s) name a deploy · ${live} in a position a shell would run · ${offenders.length} unguarded`);
-if (skipped) console.log(`    ${skipped} skipped in ${SKIP_DIR} — sealed archive snapshots, never a packet's input`);
+if (skipped) console.log(`    ${skipped} skipped in ${SKIP_DIRS.join(" and ")} — sealed archives, never a packet's input`);
 console.log("");
 
 if (offenders.length) {

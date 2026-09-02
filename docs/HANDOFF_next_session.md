@@ -18,19 +18,19 @@ nothing served has changed. Nothing waits on a deploy.
 ## MIKE OWES
 - Record 001 edits in the day editor, unlanded and expected; leave
   `docs/dictation-20260807/` alone and do not run `record:land` or `day:proof`.
-- Which paperwork instruments he never reads (desk pages, asset checklist,
-  reveal cue cards, approval mark, surfacing log, contact sheet). Pass 5 waits.
 - One `wrangler login` at the PC: the guest book backup has failed since July
   on an authentication error (code 10000) at the D1 export.
 - The paragraph that replaces the April vision; his words stand meanwhile in
   `docs/canonical/WHAT_WEIRD_BABY_IS.md`.
 
 ## OPS OWES
-- The System, passes 5 and 6: narrow the provenance gate to Mike's words and
-  the scroller; retire the 34 unwired tools; the robots repo's round documents
-  and 600 KB ledger (17 robots docs are read by museum tools, map first); a
-  proven backup for `weird_baby_vol1`; source-file comments quoting old numbers
-  (after the 7th).
+- The System, what remains: narrow the provenance gate to Mike's words and
+  the scroller (after the 7th); the robots repo's round documents and 600 KB
+  ledger (17 robots docs are read by museum tools, map first); a proven backup
+  for `weird_baby_vol1`; source-file comments quoting old numbers (after the
+  7th). Pass 5 ruling (Mike, 2026-09-02): the desk stays for the Record editor;
+  the light table stays; facts, assets and reveal instruments are Ops' to keep
+  or drop.
 - Guard 6 blocks four of five Record entries from landing; ruled a bug or a rule.
 - `docs/ARC.md` prints MON for Record 001 whatever the epoch says (archive row D-a).
 - `npm run desk` still renders the retired register.
