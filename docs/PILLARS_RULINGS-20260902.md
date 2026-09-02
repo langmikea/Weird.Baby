@@ -66,3 +66,18 @@ Second pass, same evening:
 | 26 | the serials | **"move Everyday to −01."** The Housewife Nano row holds −01 today (Patient Zero, HELD). The registry law allows the change until first physical ship. To do after Sunday: the Everyday takes −01 in `robots:robots/mgk-viiip/content/tables/unit_registry.csv` and the STATE registry; the Housewife's destination is Mike's one word (the vacated −02, or collapse); the built content directory `units/02` follows; the museum's zip tree and schedule notes follow. Nothing published names a serial (Record 003 names the four by name only), so nothing on the glass changes. |
 
 Still open from the sitting: 24 (the seven first-boot questions, listed next) and the Housewife's destination.
+
+Third pass, same evening — the seven first-boot questions (24) and the Housewife:
+
+| # | question | ruling |
+|---|---|---|
+| 24·F1 | is the first power-on different from every later one | **A** — yes; the first run is longer and shows things once |
+| 24·F2 | after SYSTEM OK, menu or unread-mail first; ask first or read first | **A** — the menu; the manual says ask first |
+| 24·F3 | when the personality download happens in the first session | **C** — whenever the owner likes |
+| 24·F4 | when the code-entry ceremony happens on numbered units | **B** — at the download |
+| 24·F5 | audio at first switch-on | **A** — volume fixed, the voice on by default |
+| 24·F6 | does the manual describe sleep and waking from sleep | **A** — yes, once, generically, in the starting section |
+| 24·F7 | the start-up procedure printed and as inbox item two | **A** — one text, two homes, identical by design |
+| 26b | the Housewife Nano's destination when the Everyday takes −01 | **−02** (a swap) |
+
+**The sitting is closed.** Every fact the manual needs is ruled: the firmware rules for the machine's facts; 26 questions answered; the seven first-boot questions answered. What remains before writing: Mike's pick from the register test. Then Sections IV, VI, VIII and Appendix B are rewritten in that voice and the unwritten sections drafted against this table, section by section, served as rendered pages.
