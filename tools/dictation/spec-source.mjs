@@ -72,7 +72,7 @@ export const SOURCES = {
   P22: "weird-baby-robots/robots/mgk-viiip/sources/2022-proto-docs/MGKVIIIp User Manual new.docx — the proto-manual",
   REC: "weird-baby-robots/robots/mgk-viiip/sources/the-record/THE_RECORD.md — the 2024 blog, 436 entries",
   M1: "the in-story manual's own drafted prose — weird-baby-robots/docs/drafts/MANUAL_PROSE_SALVAGE-20260805.md (the generator that held it is retired)",
-  SI: "weird-baby-robots/tools/manual_structure_build.py — the STRUCTURE ISSUE, 61 pages, 12 sections, 8 appendices",
+  SI: "weird-baby-robots/tools/manual_structure_build.py — the STRUCTURE ISSUE, 12 sections, 8 appendices (the page count has moved; read the tree)",
   FIT: "weird-baby-robots/docs/MANUAL_STRUCTURE_FIT-20260805.md — the fit table, 100 fact families",
   HOLES: "weird-baby-robots/docs/MANUAL_STRUCTURE_HOLES-20260805.md — A-1…A-17 · B · C-1…C-11 · D",
   TYPED: "weird-baby-robots/docs/MANUAL_TYPED_PAGE-20260805.md — the typed-page register this sheet is set in",

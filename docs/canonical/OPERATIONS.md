@@ -48,7 +48,7 @@ deliberately does not print that form.
 
 #### THE DEPLOY ARMS A DATE, AND NOBODY RUNS ANYTHING ON IT (2026-08-28)
 
-**`RECORD_EPOCH` IS `2026-09-07`, A MONDAY, AND THE MUSEUM OPENS ITSELF AT 17:00
+**`RECORD_EPOCH` IS ONE CONSTANT (`src/data/artists/record-epoch.js`, never typed anywhere else), A MONDAY BY RULE, AND THE MUSEUM OPENS ITSELF AT 17:00
 AMERICA/NEW_YORK ON IT.** There is **no cron, no queue, no scheduled job and no
 person in the loop.** The worker plays the deployed bundle against **request
 time**, so the day arrives on its own: Record 001 posts, `wing-open.js` opens
@@ -73,7 +73,7 @@ epoch's weekday disagrees with the outline's ten declared `MON…FRI` rows — b
 
 **THE COST — TWO NUMBERS, BOTH TRUE.**
 
-- **137 files (186,888,028 bytes)** become publicly readable.
+- **Every file under `public/held`** becomes publicly readable. The count is what `npm run reveal:day` prints as *behind the door*; the bytes are that folder's size. Measure them; do not type them.
 - **0 additional files are uploaded.** Held files have shipped in both stages
   since the ruling of 2026-08-20; **the door changes, not the payload.**
 
@@ -109,10 +109,8 @@ returned 200 in that browser and 404 to a cookie-free client in the same minute.
 **Check the door with `npm run door:check`, which sends no cookie and needs no
 key** — it is not a gate and is not in §9; its home is after a deploy.
 
-Counted **2026-08-22** at HEAD **`ee94ee0`**. Definition: files behind the door
-as reported by `reveal:day` and present under `public/held`.
-
-Re-measured 2026-09-01 at `b9517e6`: unchanged; now prose.
+Definition: files behind the door as reported by `reveal:day` and present under
+`public/held`.
 
 ## VERBATIM
 
@@ -147,7 +145,7 @@ Ops controls the flow. He gets the next brief when the current one is done
 
 ## CLOSE RITUAL
 
-Gates, in order: `npm run lint` (baseline 9 errors / 7 warnings, zero new) →
+Gates, in order: `npm run lint` (at the baseline `CLAUDE.md` states, zero new) →
 `npm run build` → `npm run provenance:gate` → `npm run reveal:check` if the
 ledger or a Record changed → `npm run parity:gate` if an album changed →
 `npm run instory:gate` → `npm run shellstop:gate`. Then commit with
