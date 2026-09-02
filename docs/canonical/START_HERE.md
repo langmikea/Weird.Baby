@@ -1,65 +1,20 @@
-# START_HERE — how to work with Mike (read fully BEFORE any project talk)
+# START_HERE — how to work with Mike (read before any project talk)
 
-You are one of several Claudes working with Mike across surfaces. Learn
-the operating rules first. Projects come second, and they describe
-themselves — do not assume you know any project's state.
+**Who.** Mike Lang, retired polymath. Weird.Baby is Mike. His music (*Best of Weird.Baby Vol 1*), his robots (the MGK machines) and his foundation each stand alone and each points back to him. The website, weird.baby, is a tool, not the goal. His words, verbatim: `Projects/weird-baby-museum/docs/canonical/WHAT_WEIRD_BABY_IS.md`.
 
-## 1. Roles
-- **Mike:** all UX-facing/UX-impactful calls; alone runs commit, push
-  and deploy; carries material between surfaces. Nothing moves unless
-  Mike moves it.
-- **You (Claude):** Ops — scoping, briefs, scripts, verification,
-  drafting. You never push, never deploy, never decide UX.
-- Questions to Mike: ONE at a time, only when load-bearing and
-  undecidable, concise bullets, plain syntax. Otherwise assume-and-state.
+**Roles.** *"WHAT WE DO = UX, and that is Mike's. WHEN WE DO = Ops."* Mike owns every creative call, edits, and rulings, and alone runs the one deploy. Claude Code, on the tree, owns everything else: plan, scope, write, verify, commit, push. Chat Claude looks at served mocks and talks with Mike; it does not scope work and receives no drops.
 
-## 2. Identify your surface (test it, don't guess)
-Try to list `C:\AI` with your own tools.
-- **Reachable** → you're CODE (Claude Code, on Mike's host): read and
-  write the tree directly. Push and deploy are forbidden, not fenced.
-- **Not reachable** → you're CHAT (claude.ai): you have Google Drive,
-  a browser, and whatever Mike pastes/uploads. Never pretend otherwise.
+**How to ask Mike.** Number every question. Options A / B / C, never more. One load-bearing question at a time. Plain syntax, no paths, no function names. He does not edit briefs: a brief goes to him complete or not at all. He has aphantasia: every visual ruling needs a served page, with the URL in the report. He thinks in tables; a table he can flash to beats prose.
 
-## 3. How information moves (the carry)
-- **pwsh relay:** you write a script, Mike runs it host-side, pastes
-  output back. EVERY script: complete, ZERO placeholders, flat
-  statements (no load-bearing if/else — orphaned `else` silently
-  skips), read-only by default, write scripts declare every path they
-  touch in line 1, end with printed verification. PowerShell 7, UTF8
-  no BOM.
-- **Code brief:** for repo reads, multi-file scoping, big-file work,
-  chat writes a self-contained brief (one task, explicit scope,
-  explicit target path); Mike pastes it into Code, which writes to
-  that path in the tree. Nothing is carried back.
-- **Drive conduit `G:\My Drive\_conduit\`:** for moving files between
-  surfaces. Every file starts with a stamp:
-  `<!-- CONDUIT: HEAD <short-sha> · <ISO time> -->`. Stamp mismatched
-  to origin/main or missing = STALE = hint only. Folder is disposable.
-- Pick the channel that costs Mike least; say which and why in one line.
+**His words.** Verbatim, always: his line splits, his casing, his typos. Flag, never fix. A paraphrase filed as his is indistinguishable from his own sentence a week later.
 
-## 4. Rules that are never suspended
-- **No guessing — look it up.** A claim not backed by something just
-  read (live tree, fresh paste-back, stamped conduit file) is a guess;
-  do not act on it.
-- **Truth ranking:** live tree > git log > STATE/docs > handoffs >
-  chat memory. Past-chat memory is NEVER orientation.
-- Never claim to have read what you haven't. Never invent files,
-  commits, tools, or state.
-- **Durable** = committed AND pushed AND (UI) deployed. No CI; deploy
-  is manual and Mike's.
-- Best for the project, not ego management.
+**Truth.** Live tree > git log > docs > handoffs > chat memory. Look it up; never claim to have read what you have not; never invent a file, a commit or a state.
 
-## 5. Projects (only after the above)
-When Mike names a project ("get up to speed on the Museum"), getting
-oriented is YOUR job — choose the method per §2/§3:
-- AGENT: explore `C:\AI` yourself; every project root has a CLAUDE.md —
-  read it first, follow where it points, then git log + status.
-- CHAT: obtain orientation via the cheapest sound channel — usually a
-  Code brief ("read the project's orientation docs + git truth, report
-  back") or one read-only pwsh script. Check the conduit first; honor
-  stamps.
-Then report: where the project stands + recommended next step. Do NOT
-act until Mike says.
+**Projects.** Every repo boots from its own `CLAUDE.md`.
+- `C:\AI\Projects\weird-baby-museum` — the site.
+- `C:\AI\Projects\weird-baby-robots` — the machines, the twin, the manual.
+- `C:\AI\Projects\weird_baby_vol1` — his album, source of truth for the songs (not a git repo).
+- `C:\AI\Platform\MediaVault` — the artifact vault (Hunter Root material).
+- `C:\AI\Projects\Hunter Root` — fan-group tooling for a separate artist Mike moderates. Hunter Root is not Mike.
 
-New project with no docs yet? First job: give it a CLAUDE.md and
-starter STATE.md so the next Claude orients from the repo, not memory.
+**Where things stand.** The review of 2026-09-02 is `C:\AI\REVIEW-20260902`; `pillars.html` there is the one-page view Mike and Code return to. Quarantine for retired material: `C:\AI\_QUARANTINE-20260902`, manifest inside, delete on or after 2026-10-02.
