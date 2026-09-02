@@ -216,3 +216,19 @@ the same reason as the first.
   re-ruled it since the hardware hold.
 
 **Mike defines the arc this weekend. This is the file he writes into.**
+
+---
+
+## 6 · WHAT THE ARC IS FOR — Mike, 2026-09-02, unprompted, dictated
+
+Said while writing week two. Verbatim, casing and dictation as given. This is the rule the weeks are cut against from here.
+
+> "The purpose of the story is to explain the device. The story is not the main event. It's a weird variant of an infomercial."
+
+> "The device has many features games programs adjustments. Most of these can land as a day and give a real purpose for someone to come and look at the device. We have as many days as we have programs and features. Major crops and major portions. There of also can constitute entire days the manual is worth at least a day and could easily be broken up. And just because something is disclosed on a day does not mean it needs to be in the main event. We may get to the point where we're just dumping the rest of the manual Out because it's gotta come out at some point, but we also put something else on the day. Maybe we're flexible like that."
+
+> "Very soon I'm going to start shooting photographs of the hardware artifacts that come with the device. For instance we have a gambler and he gets casino chips and half dollars and more cards and other gambling type stuff along with his unit. and can each be a day."
+
+> "I'd like you to take the time to go through the manual once it is created and use that as a guide for publishing each device related record."
+
+**What this changes (Ops).** The reveal ledger's `when` column, null on every row by Doctrine 12, now has a rule to fill it by: one feature, program, adjustment, manual portion or artifact per day, the Record as the manifest. A day may carry a manual dump and a headline both. The manual, once written in the chosen register, is the publishing guide for the device-related Records (Ops owes that pass).
