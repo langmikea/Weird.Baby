@@ -15,7 +15,9 @@ npm run reels -- --week 3   a named week
 | file | what it is |
 |---|---|
 | `reels/determinations.json` | the ledger: date, what the story reveals that day, the question, engine, persona, answer, status, one posting slot per surface, the numbers |
-| `tools/reels.mjs` | the report |
+| `reels/numbers.json` | the musical number's ledger (Mike's rulings of 2026-09-03, `C:\AI\MUSIC-20260903\MUSIC.md`): one live performance a weekday from 2026-09-07, its own post, independent of the determination; one song at a time in pieces; a song runs a floor of two weeks and a ceiling of four while its sends and saves climb; Ops calls the week on Sundays; Coconuts first. Rows carry date, song, piece, status, postings, numbers |
+| `tools/reels.mjs` | the report (the determination) |
+| `tools/calendar.mjs` | reads both ledgers into the calendar's Determination and Number lanes |
 
 ## How this relates to `release/`
 

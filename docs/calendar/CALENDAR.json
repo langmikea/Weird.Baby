@@ -1,5 +1,5 @@
 {
-  "_": "THE CALENDAR. Two lanes: the Record (Mike's ruling A, 2026-09-02), posted by the site at 17:00 New York; the Determination (Mike's ruling, 2026-09-03), posted by Mike from the phone, one reel a weekday from the day the machine is shown. Rows are lanes, columns are weekdays. Ops keeps this file current from what Mike says; Mike never edits it. He asks, Ops answers: `npm run calendar`. The rule of preparation is the week before: what posts in week N is prepared by the Friday of week N-1. Record headlines from week 2 follow the reveal choreography Mike approved 2026-09-02 (reveal/schedule.json); the Determination lane is read from reels/determinations.json at render time.",
+  "_": "THE CALENDAR. Three lanes: the Record (Mike's ruling A, 2026-09-02), posted by the site at 17:00 New York; the Determination (Mike's ruling, 2026-09-03), posted by Mike from the phone, one reel a weekday from the day the machine is shown; the Number (Mike's ruling, 2026-09-03), a live musical number a weekday from 2026-09-07, posted by Mike. Rows are lanes, columns are weekdays. Ops keeps this file current from what Mike says; Mike never edits it. He asks, Ops answers: `npm run calendar`. The rule of preparation is the week before: what posts in week N is prepared by the Friday of week N-1. Record headlines from week 2 follow the reveal choreography Mike approved 2026-09-02 (reveal/schedule.json); the Determination lane is read from reels/determinations.json at render time.",
   "post_time": "17:00 America/New_York",
   "prepared_by": "Friday of the week before",
   "lanes": [
@@ -19,6 +19,16 @@
       "starts_week": 2,
       "source": "reels",
       "_": "Filled from reels/determinations.json when the calendar renders; do not put cells here. One reel a weekday from the day the machine is shown: a question put to the instrument, the display answers, Mike silent in frame, Weird.Baby pops up at the end."
+    },
+    {
+      "id": "number",
+      "name": "The Number",
+      "writes": "Mike",
+      "posts": "Mike, from the phone",
+      "per_week": 5,
+      "starts_week": 1,
+      "source": "numbers",
+      "_": "Filled from reels/numbers.json when the calendar renders. Mike's rulings of 2026-09-03 (C:/AI/MUSIC-20260903/MUSIC.md): a live performance a weekday, its own post, independent of the determination; one song at a time in pieces; floor two weeks, ceiling four while it climbs; Coconuts first."
     }
   ],
   "weeks": [

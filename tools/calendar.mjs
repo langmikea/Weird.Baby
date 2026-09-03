@@ -30,20 +30,31 @@ const DAYS = ["MON", "TUE", "WED", "THU", "FRI"];
    CALENDAR.json; it is read from reels/determinations.json, the one place the
    day's question and its state live. A lane with `source: "reels"` is filled
    here, one cell per weekday row of the ledger, numbered from its first week. */
-const REELS = path.join(REPO, "reels", "determinations.json");
-if (fs.existsSync(REELS)) {
-  const led = JSON.parse(fs.readFileSync(REELS, "utf8"));
-  const STATE = { open: "question not written", written: "question written · not shot", shot: "shot · scheduled", posted: "posted" };
-  for (const lane of cal.lanes.filter(l => l.source === "reels")) {
-    let n = 0;
-    for (const w of cal.weeks) {
-      if (lane.starts_week && w.n < lane.starts_week) continue;
-      w[lane.id] = led.rows.filter(r => r.week === w.n).map(r => {
-        n += 1;
-        const q = r.question ? `“${r.question}”` : "the question of the day";
-        return { day: r.day, piece: `Determination ${String(n).padStart(2, "0")} — ${q}`, state: STATE[r.status] || r.status };
-      });
-    }
+const SOURCES = {
+  reels: {   // the determination
+    file: "determinations.json",
+    state: { open: "question not written", written: "question written · not shot", shot: "shot · scheduled", posted: "posted" },
+    cell: (r, n) => `Determination ${String(n).padStart(2, "0")} — ${r.question ? `“${r.question}”` : "the question of the day"}`,
+  },
+  numbers: { // the musical number [2026-09-03, MUSIC.md Q1-Q6]
+    file: "numbers.json",
+    state: { open: "not shot", planned: "planned · not shot", shot: "shot · scheduled", posted: "posted" },
+    cell: (r) => r.song ? `${r.song} — ${r.piece}` : "next song, by the numbers",
+  },
+};
+for (const lane of cal.lanes.filter(l => SOURCES[l.source])) {
+  const src = SOURCES[lane.source];
+  const file = path.join(REPO, "reels", src.file);
+  if (!fs.existsSync(file)) continue;
+  const led = JSON.parse(fs.readFileSync(file, "utf8"));
+  let n = 0;
+  for (const w of cal.weeks) {
+    if (lane.starts_week && w.n < lane.starts_week) continue;
+    w[lane.id] = led.rows.filter(r => r.week === w.n).map(r => {
+      n += 1;
+      const open = lane.source === "numbers" && !r.song;
+      return { day: r.day, piece: src.cell(r, n), state: open ? (r.note || "open") : (src.state[r.status] || r.status) };
+    });
   }
 }
 
@@ -125,7 +136,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 <!-- the served copy for Mike is published from this same file; the wrapper tags above are for a local open -->
 <div class="wrap">
 <div class="eyebrow">Weird.Baby · what is due, by lane and weekday</div><h1>The Calendar</h1>
-<p class="sub">Two lanes: the Record, which the site posts, and the Determination, which you post, one reel a weekday from the day the machine is shown. Your rulings of 2026-09-02 and 2026-09-03. Posts go at ${esc(cal.post_time)}. What posts in a week is prepared by the Friday before. Ask and it answers: <code>npm run calendar</code>. Ops keeps it current; you never edit it.</p>
+<p class="sub">Three lanes: the Record, which the site posts; the Determination, which you post, one reel a weekday from the day the machine is shown; and the Number, a live musical number a weekday from the first Monday, its own post. Your rulings of 2026-09-02 and 2026-09-03. Posts go at ${esc(cal.post_time)}. What posts in a week is prepared by the Friday before. Ask and it answers: <code>npm run calendar</code>. Ops keeps it current; you never edit it.</p>
 ${cal.weeks.map(weekTable).join("\n")}
 <footer>Generated from docs/calendar/CALENDAR.json by tools/calendar.mjs · today ${todayNY} New York · Ops instrument, never at a live address</footer>
 </div></body></html>`;
