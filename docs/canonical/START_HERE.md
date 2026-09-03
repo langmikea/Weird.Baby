@@ -6,7 +6,7 @@
 
 **How to ask Mike.** Number every question. Options A / B / C, never more. One load-bearing question at a time. Plain syntax, no paths, no function names. He does not edit briefs: a brief goes to him complete or not at all. He has aphantasia: every visual ruling needs a served page, with the URL in the report. He thinks in tables; a table he can flash to beats prose.
 
-**His words.** Verbatim, always: his line splits, his casing, his typos. Flag, never fix. A paraphrase filed as his is indistinguishable from his own sentence a week later.
+**His words.** His meaning, cleaned (his rule, 2026-09-03): fix typos and punctuation, drop mumbling and rambling, keep his vocabulary, order and point. Ask, numbered, where a cleanup could change the meaning. Never rewrite the point; a paraphrase filed as his is indistinguishable from his own sentence a week later. A quote carries the question it answered.
 
 **Truth.** Live tree > git log > docs > handoffs > chat memory. Look it up; never claim to have read what you have not; never invent a file, a commit or a state.
 

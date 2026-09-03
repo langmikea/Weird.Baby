@@ -112,18 +112,21 @@ key** — it is not a gate and is not in §9; its home is after a deploy.
 Definition: files behind the door as reported by `reveal:day` and present under
 `public/held`.
 
-## VERBATIM
+## HIS WORDS, CLEANED (Mike, 2026-09-03; replaces VERBATIM)
 
-**Mike's words are verbatim.** His line splits and his casing are the
-instruction, not incidental. Do not join his lines, correct his casing, or smooth his
-writing. Typos are carried unless he asks otherwise — Record
-001 ships `was made made` and `=  86%` on purpose.
+**Mike's words are his meaning, cleaned.** Fix typos, spelling and
+punctuation; drop mumbling and rambling; keep his vocabulary, his order and
+his point. Where a cleanup could change what he meant, ask, numbered, before
+touching it. Confidence is earned edit by edit. What he has already shipped
+stands as shipped (Record 001's `was made made` and `=  86%` are his) until
+he says otherwise. A quote still carries the question it answered; his
+answers to different questions are never stitched into one line.
 
-## FLAG, NEVER FIX
+## FLAG STALE, DO NOT REWRITE
 
-When his words have gone stale, say so and leave them. A paraphrase filed in
-his class is indistinguishable from his own sentence a week later; a `beat`
-may be deleted but never reworded.
+When his words have gone stale, say so and leave them. Cleaning is spelling
+and noise; it is never a rewrite of the point. A `beat` may be deleted but
+never reworded.
 
 ## ONE THING AT A TIME
 
