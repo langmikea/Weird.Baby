@@ -127,7 +127,7 @@
    "day": "MON",
    "song": "Coconuts",
    "piece": "part 1 of 4",
-   "status": "planned",
+   "status": "shot",
    "postings": {
     "tiktok": null,
     "instagram": null,
@@ -140,7 +140,10 @@
     "saves": null
    },
    "note": "the four existing clips; the pop is appended by reels/build.py",
-   "source": "coconuts-q1: Mike's clip, on YouTube private, without the pop; original file wanted"
+   "source": "coconuts-q1: Mike's clip, on YouTube private, without the pop; original file wanted",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-14_numbers_coconuts-part-1-of-4.mp4",
+   "length_s": 29.1,
+   "built": "2026-09-03"
   },
   {
    "date": "2026-09-15",
@@ -148,7 +151,7 @@
    "day": "TUE",
    "song": "Coconuts",
    "piece": "part 2 of 4",
-   "status": "planned",
+   "status": "shot",
    "postings": {
     "tiktok": null,
     "instagram": null,
@@ -161,7 +164,10 @@
     "saves": null
    },
    "note": "the four existing clips; the pop is appended by reels/build.py",
-   "source": "coconuts-q2: Mike's clip, on YouTube private, without the pop; original file wanted"
+   "source": "coconuts-q2: Mike's clip, on YouTube private, without the pop; original file wanted",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-15_numbers_coconuts-part-2-of-4.mp4",
+   "length_s": 28.9,
+   "built": "2026-09-03"
   },
   {
    "date": "2026-09-16",
@@ -169,7 +175,7 @@
    "day": "WED",
    "song": "Coconuts",
    "piece": "part 3 of 4",
-   "status": "planned",
+   "status": "shot",
    "postings": {
     "tiktok": null,
     "instagram": null,
@@ -182,7 +188,10 @@
     "saves": null
    },
    "note": "the four existing clips; the pop is appended by reels/build.py",
-   "source": "coconuts-q3: Mike's clip, on YouTube private, without the pop; original file wanted"
+   "source": "coconuts-q3: Mike's clip, on YouTube private, without the pop; original file wanted",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-16_numbers_coconuts-part-3-of-4.mp4",
+   "length_s": 28.7,
+   "built": "2026-09-03"
   },
   {
    "date": "2026-09-17",
@@ -190,7 +199,7 @@
    "day": "THU",
    "song": "Coconuts",
    "piece": "part 4 of 4",
-   "status": "planned",
+   "status": "shot",
    "postings": {
     "tiktok": null,
     "instagram": null,
@@ -203,7 +212,10 @@
     "saves": null
    },
    "note": "the four existing clips; the pop is appended by reels/build.py",
-   "source": "coconuts-q4: Mike's clip, on YouTube private, without the pop; original file wanted"
+   "source": "coconuts-q4: Mike's clip, on YouTube private, without the pop; original file wanted",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-17_numbers_coconuts-part-4-of-4.mp4",
+   "length_s": 28.7,
+   "built": "2026-09-03"
   },
   {
    "date": "2026-09-18",
