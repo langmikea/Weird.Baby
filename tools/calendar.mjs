@@ -26,11 +26,32 @@ const OUT = path.join(REPO, "docs", "calendar", "CALENDAR.html");
 const cal = JSON.parse(fs.readFileSync(SRC, "utf8"));
 const DAYS = ["MON", "TUE", "WED", "THU", "FRI"];
 
+/* [2026-09-03, Mike's ruling] The Determination lane is not typed into
+   CALENDAR.json; it is read from reels/determinations.json, the one place the
+   day's question and its state live. A lane with `source: "reels"` is filled
+   here, one cell per weekday row of the ledger, numbered from its first week. */
+const REELS = path.join(REPO, "reels", "determinations.json");
+if (fs.existsSync(REELS)) {
+  const led = JSON.parse(fs.readFileSync(REELS, "utf8"));
+  const STATE = { open: "question not written", written: "question written · not shot", shot: "shot · scheduled", posted: "posted" };
+  for (const lane of cal.lanes.filter(l => l.source === "reels")) {
+    let n = 0;
+    for (const w of cal.weeks) {
+      if (lane.starts_week && w.n < lane.starts_week) continue;
+      w[lane.id] = led.rows.filter(r => r.week === w.n).map(r => {
+        n += 1;
+        const q = r.question ? `“${r.question}”` : "the question of the day";
+        return { day: r.day, piece: `Determination ${String(n).padStart(2, "0")} — ${q}`, state: STATE[r.status] || r.status };
+      });
+    }
+  }
+}
+
 const argWeek = (() => { const i = process.argv.indexOf("--week"); return i > -1 ? Number(process.argv[i + 1]) : null; })();
 const todayNY = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }); // YYYY-MM-DD
 const addDays = (iso, n) => { const d = new Date(iso + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
 const dateOf = (week, day) => addDays(week.monday, DAYS.indexOf(day));
-const READY = /^(in the site|posted|recorded|written|ready)/i;
+const READY = /^(in the site|posted|recorded|written|ready|shot)/i;
 const isReady = s => READY.test(s) && !/not landed|unwritten|not chosen|undecided/i.test(s);
 
 const weekOf = iso => cal.weeks.find(w => iso >= w.monday && iso <= addDays(w.monday, 6));
@@ -104,7 +125,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 <!-- the served copy for Mike is published from this same file; the wrapper tags above are for a local open -->
 <div class="wrap">
 <div class="eyebrow">Weird.Baby · what is due, by lane and weekday</div><h1>The Calendar</h1>
-<p class="sub">Two lanes from week two, your ruling of 2026-09-02. Posts go at ${esc(cal.post_time)}. What posts in a week is prepared by the Friday before. Ask and it answers: <code>npm run calendar</code>. Ops keeps it current; you never edit it.</p>
+<p class="sub">Two lanes: the Record, which the site posts, and the Determination, which you post, one reel a weekday from the day the machine is shown. Your rulings of 2026-09-02 and 2026-09-03. Posts go at ${esc(cal.post_time)}. What posts in a week is prepared by the Friday before. Ask and it answers: <code>npm run calendar</code>. Ops keeps it current; you never edit it.</p>
 ${cal.weeks.map(weekTable).join("\n")}
 <footer>Generated from docs/calendar/CALENDAR.json by tools/calendar.mjs · today ${todayNY} New York · Ops instrument, never at a live address</footer>
 </div></body></html>`;

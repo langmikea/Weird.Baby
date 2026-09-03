@@ -1,121 +1,487 @@
 {
-  "_": "THE CALENDAR. Two lanes (Mike's ruling A, 2026-09-02): the Record, posted by the site at 17:00 New York; Mike playing, posted by Mike. Rows are lanes, columns are weekdays. Ops keeps this file current from what Mike says; Mike never edits it. He asks, Ops answers: `npm run calendar`. The rule of preparation is the week before: what posts in week N is prepared by the Friday of week N-1. Record headlines from week 2 follow the reveal choreography Mike approved 2026-09-02 (reveal/schedule.json).",
+  "_": "THE CALENDAR. Two lanes: the Record (Mike's ruling A, 2026-09-02), posted by the site at 17:00 New York; the Determination (Mike's ruling, 2026-09-03), posted by Mike from the phone, one reel a weekday from the day the machine is shown. Rows are lanes, columns are weekdays. Ops keeps this file current from what Mike says; Mike never edits it. He asks, Ops answers: `npm run calendar`. The rule of preparation is the week before: what posts in week N is prepared by the Friday of week N-1. Record headlines from week 2 follow the reveal choreography Mike approved 2026-09-02 (reveal/schedule.json); the Determination lane is read from reels/determinations.json at render time.",
   "post_time": "17:00 America/New_York",
   "prepared_by": "Friday of the week before",
   "lanes": [
-    { "id": "record",  "name": "The Record",   "writes": "Mike", "posts": "the site, on the clock", "per_week": 5 },
-    { "id": "playing", "name": "Mike playing", "writes": "Mike", "posts": "Mike, from the phone", "per_week": 5, "starts_week": 2 }
+    {
+      "id": "record",
+      "name": "The Record",
+      "writes": "Mike",
+      "posts": "the site, on the clock",
+      "per_week": 5
+    },
+    {
+      "id": "determination",
+      "name": "The Determination",
+      "writes": "Mike",
+      "posts": "Mike, from the phone",
+      "per_week": 5,
+      "starts_week": 2,
+      "source": "reels",
+      "_": "Filled from reels/determinations.json when the calendar renders; do not put cells here. One reel a weekday from the day the machine is shown: a question put to the instrument, the display answers, Mike silent in frame, Weird.Baby pops up at the end."
+    }
   ],
   "weeks": [
     {
-      "n": 1, "monday": "2026-09-07", "note": "The wing opens itself at the first Record. No advertising yet.",
+      "n": 1,
+      "monday": "2026-09-07",
+      "note": "The wing opens itself at the first Record. No advertising yet.",
       "record": [
-        { "day": "MON", "piece": "Record 001 — INITIAL LAUNCH", "state": "in the site · Mike's rewrite saved, not landed" },
-        { "day": "TUE", "piece": "Record 002 — GENERAL STATUS UPDATE", "state": "in the site" },
-        { "day": "WED", "piece": "Record 003 — DATA RECOVERY", "state": "in the site · five manual scans came off it; nothing replaces them yet" },
-        { "day": "THU", "piece": "Record 004 — GENERAL STATUS UPDATE", "state": "in the site" },
-        { "day": "FRI", "piece": "Record 005 — PORTAL CONNECTION ONLINE", "state": "in the site" }
-      ],
-      "playing": []
-    },
-    {
-      "n": 2, "monday": "2026-09-14", "note": "Advertising starts. The machine, hands on; the Everyman unboxed Friday.",
-      "record": [
-        { "day": "MON", "piece": "Record 006 — MGK-NIAC, the twenty (+ manual IV, VI)", "state": "not written" },
-        { "day": "TUE", "piece": "Record 007 — Starting (+ manual V)", "state": "not written" },
-        { "day": "WED", "piece": "Record 008 — Probabilities", "state": "not written" },
-        { "day": "THU", "piece": "Record 009 — Messages, the inbox", "state": "not written · inbox words are Mike's" },
-        { "day": "FRI", "piece": "Record 010 — The Everyman, the unboxing", "state": "not written · unboxing shoot needed" }
-      ],
-      "playing": [
-        { "day": "MON", "piece": "Reel 1 — Coconuts, quarter 1", "state": "video exists, private on YouTube · caption unwritten · door not chosen" },
-        { "day": "TUE", "piece": "Reel 2 — Coconuts, quarter 2", "state": "video exists, private · caption unwritten" },
-        { "day": "WED", "piece": "Reel 3 — Coconuts, quarter 3", "state": "video exists, private · caption unwritten" },
-        { "day": "THU", "piece": "Reel 4 — Coconuts, quarter 4", "state": "video exists, private · caption unwritten" },
-        { "day": "FRI", "piece": "Reel 5 — Coconuts, full (or a new take)", "state": "video exists, private · Mike undecided whether the full cut posts" }
+        {
+          "day": "MON",
+          "piece": "Record 001 — INITIAL LAUNCH",
+          "state": "in the site · Mike's rewrite saved, not landed"
+        },
+        {
+          "day": "TUE",
+          "piece": "Record 002 — GENERAL STATUS UPDATE",
+          "state": "in the site"
+        },
+        {
+          "day": "WED",
+          "piece": "Record 003 — DATA RECOVERY",
+          "state": "in the site · five manual scans came off it; nothing replaces them yet"
+        },
+        {
+          "day": "THU",
+          "piece": "Record 004 — GENERAL STATUS UPDATE",
+          "state": "in the site"
+        },
+        {
+          "day": "FRI",
+          "piece": "Record 005 — PORTAL CONNECTION ONLINE",
+          "state": "in the site"
+        }
       ]
     },
     {
-      "n": 3, "monday": "2026-09-21", "note": "The Gambler's week.",
+      "n": 2,
+      "monday": "2026-09-14",
+      "note": "Advertising starts. The machine, hands on; the Everyman unboxed Friday.",
       "record": [
-        { "day": "MON", "piece": "Record 011 — Games: Snow Globe, Tic-Tac-Toe", "state": "not written" },
-        { "day": "TUE", "piece": "Record 012 — The Gambler (the case)", "state": "not written · case photographs needed" },
-        { "day": "WED", "piece": "Record 013 — The Casino opens", "state": "not written · chips and half dollars close" },
-        { "day": "THU", "piece": "Record 014 — The Bullshit Detector", "state": "not written" },
-        { "day": "FRI", "piece": "Record 015 — Wild speculation", "state": "not written" }
-      ],
-      "playing": [
-        { "day": "MON", "piece": "Reel 6", "state": "not recorded" },
-        { "day": "TUE", "piece": "Reel 7", "state": "not recorded" },
-        { "day": "WED", "piece": "Reel 8", "state": "not recorded" },
-        { "day": "THU", "piece": "Reel 9", "state": "not recorded" },
-        { "day": "FRI", "piece": "Reel 10", "state": "not recorded" }
+        {
+          "day": "MON",
+          "piece": "Record 006 — MGK-NIAC, the twenty (+ manual IV, VI)",
+          "state": "not written"
+        },
+        {
+          "day": "TUE",
+          "piece": "Record 007 — Starting (+ manual V)",
+          "state": "not written"
+        },
+        {
+          "day": "WED",
+          "piece": "Record 008 — Probabilities",
+          "state": "not written"
+        },
+        {
+          "day": "THU",
+          "piece": "Record 009 — Messages, the inbox",
+          "state": "not written · inbox words are Mike's"
+        },
+        {
+          "day": "FRI",
+          "piece": "Record 010 — The Everyman, the unboxing",
+          "state": "not written · unboxing shoot needed"
+        }
       ]
     },
     {
-      "n": 4, "monday": "2026-09-28", "note": "Stable VIIIp and personality; the CEO's week.",
+      "n": 3,
+      "monday": "2026-09-21",
+      "note": "The Gambler's week.",
       "record": [
-        { "day": "MON", "piece": "Record 016 — Polarity", "state": "not written" },
-        { "day": "TUE", "piece": "Record 017 — Clarity", "state": "not written" },
-        { "day": "WED", "piece": "Record 018 — MGK-v2.0 arrives", "state": "not written" },
-        { "day": "THU", "piece": "Record 019 — The CEO (the attaché)", "state": "not written · photographs needed" },
-        { "day": "FRI", "piece": "Record 020 — User, your name", "state": "not written" }
-      ],
-      "playing": [
-        { "day": "MON", "piece": "Reel 11", "state": "not recorded" }, { "day": "TUE", "piece": "Reel 12", "state": "not recorded" }, { "day": "WED", "piece": "Reel 13", "state": "not recorded" }, { "day": "THU", "piece": "Reel 14", "state": "not recorded" }, { "day": "FRI", "piece": "Reel 15", "state": "not recorded" }
+        {
+          "day": "MON",
+          "piece": "Record 011 — Games: Snow Globe, Tic-Tac-Toe",
+          "state": "not written"
+        },
+        {
+          "day": "TUE",
+          "piece": "Record 012 — The Gambler (the case)",
+          "state": "not written · case photographs needed"
+        },
+        {
+          "day": "WED",
+          "piece": "Record 013 — The Casino opens",
+          "state": "not written · chips and half dollars close"
+        },
+        {
+          "day": "THU",
+          "piece": "Record 014 — The Bullshit Detector",
+          "state": "not written"
+        },
+        {
+          "day": "FRI",
+          "piece": "Record 015 — Wild speculation",
+          "state": "not written"
+        }
       ]
     },
     {
-      "n": 5, "monday": "2026-10-05", "note": "The Informer's week.",
+      "n": 4,
+      "monday": "2026-09-28",
+      "note": "Stable VIIIp and personality; the CEO's week.",
       "record": [
-        { "day": "MON", "piece": "Record 021 — More detectors", "state": "not written" },
-        { "day": "TUE", "piece": "Record 022 — The Informer (the spy kit)", "state": "not written · photographs needed" },
-        { "day": "WED", "piece": "Record 023 — Excuses and Lines", "state": "not written" },
-        { "day": "THU", "piece": "Record 024 — Fortune", "state": "not written" },
-        { "day": "FRI", "piece": "Record 025 — Maintenance (+ manual VIII, IX)", "state": "not written" }
-      ],
-      "playing": [
-        { "day": "MON", "piece": "Reel 16", "state": "not recorded" }, { "day": "TUE", "piece": "Reel 17", "state": "not recorded" }, { "day": "WED", "piece": "Reel 18", "state": "not recorded" }, { "day": "THU", "piece": "Reel 19", "state": "not recorded" }, { "day": "FRI", "piece": "Reel 20", "state": "not recorded" }
+        {
+          "day": "MON",
+          "piece": "Record 016 — Polarity",
+          "state": "not written"
+        },
+        {
+          "day": "TUE",
+          "piece": "Record 017 — Clarity",
+          "state": "not written"
+        },
+        {
+          "day": "WED",
+          "piece": "Record 018 — MGK-v2.0 arrives",
+          "state": "not written"
+        },
+        {
+          "day": "THU",
+          "piece": "Record 019 — The CEO (the attaché)",
+          "state": "not written · photographs needed"
+        },
+        {
+          "day": "FRI",
+          "piece": "Record 020 — User, your name",
+          "state": "not written"
+        }
       ]
     },
     {
-      "n": 6, "monday": "2026-10-12", "note": "The rest of the games.",
+      "n": 5,
+      "monday": "2026-10-05",
+      "note": "The Informer's week.",
       "record": [
-        { "day": "MON", "piece": "Record 026 — Tilt Drive, Gobble Don't Fall", "state": "not written" },
-        { "day": "TUE", "piece": "Record 027 — AvoidSteroids, Mail Run", "state": "not written" },
-        { "day": "WED", "piece": "Record 028 — Sniper, Stop On A Number", "state": "not written" },
-        { "day": "THU", "piece": "Record 029 — Advice: Everyday, Career", "state": "not written" },
-        { "day": "FRI", "piece": "Record 030 — Calculator and Notepad (not installed)", "state": "not written" }
-      ],
-      "playing": [
-        { "day": "MON", "piece": "Reel 21", "state": "not recorded" }, { "day": "TUE", "piece": "Reel 22", "state": "not recorded" }, { "day": "WED", "piece": "Reel 23", "state": "not recorded" }, { "day": "THU", "piece": "Reel 24", "state": "not recorded" }, { "day": "FRI", "piece": "Reel 25", "state": "not recorded" }
+        {
+          "day": "MON",
+          "piece": "Record 021 — More detectors",
+          "state": "not written"
+        },
+        {
+          "day": "TUE",
+          "piece": "Record 022 — The Informer (the spy kit)",
+          "state": "not written · photographs needed"
+        },
+        {
+          "day": "WED",
+          "piece": "Record 023 — Excuses and Lines",
+          "state": "not written"
+        },
+        {
+          "day": "THU",
+          "piece": "Record 024 — Fortune",
+          "state": "not written"
+        },
+        {
+          "day": "FRI",
+          "piece": "Record 025 — Maintenance (+ manual VIII, IX)",
+          "state": "not written"
+        }
       ]
     },
     {
-      "n": 7, "monday": "2026-10-19", "note": "The third engine, the sound.",
+      "n": 6,
+      "monday": "2026-10-12",
+      "note": "The rest of the games.",
       "record": [
-        { "day": "MON", "piece": "Record 031 — MGK-65 arrives", "state": "not written" },
-        { "day": "TUE", "piece": "Record 032 — The sound", "state": "not written" },
-        { "day": "WED", "piece": "Record 033 — Voices", "state": "not written" },
-        { "day": "THU", "piece": "Record 034 — The user record", "state": "not written" },
-        { "day": "FRI", "piece": "Record 035 — The manual, the rest of it", "state": "not written · depends on the manual work" }
-      ],
-      "playing": [
-        { "day": "MON", "piece": "Reel 26", "state": "not recorded" }, { "day": "TUE", "piece": "Reel 27", "state": "not recorded" }, { "day": "WED", "piece": "Reel 28", "state": "not recorded" }, { "day": "THU", "piece": "Reel 29", "state": "not recorded" }, { "day": "FRI", "piece": "Reel 30", "state": "not recorded" }
+        {
+          "day": "MON",
+          "piece": "Record 026 — Tilt Drive, Gobble Don't Fall",
+          "state": "not written"
+        },
+        {
+          "day": "TUE",
+          "piece": "Record 027 — AvoidSteroids, Mail Run",
+          "state": "not written"
+        },
+        {
+          "day": "WED",
+          "piece": "Record 028 — Sniper, Stop On A Number",
+          "state": "not written"
+        },
+        {
+          "day": "THU",
+          "piece": "Record 029 — Advice: Everyday, Career",
+          "state": "not written"
+        },
+        {
+          "day": "FRI",
+          "piece": "Record 030 — Calculator and Notepad (not installed)",
+          "state": "not written"
+        }
       ]
     },
     {
-      "n": 8, "monday": "2026-10-26", "note": "The objects.",
+      "n": 7,
+      "monday": "2026-10-19",
+      "note": "The third engine, the sound.",
       "record": [
-        { "day": "MON", "piece": "Record 036 — The original manuals", "state": "not written · photograph needed" },
-        { "day": "TUE", "piece": "Record 037 — The Gambler's table", "state": "not written · photographs needed" },
-        { "day": "WED", "piece": "Record 038 — The CEO's desk", "state": "not written · photographs needed" },
-        { "day": "THU", "piece": "Record 039 — The Informer's tools", "state": "not written · photographs; add lock picks first" },
-        { "day": "FRI", "piece": "Record 040 — The antenna selector", "state": "not written" }
-      ],
-      "playing": [
-        { "day": "MON", "piece": "Reel 31", "state": "not recorded" }, { "day": "TUE", "piece": "Reel 32", "state": "not recorded" }, { "day": "WED", "piece": "Reel 33", "state": "not recorded" }, { "day": "THU", "piece": "Reel 34", "state": "not recorded" }, { "day": "FRI", "piece": "Reel 35", "state": "not recorded" }
+        {
+          "day": "MON",
+          "piece": "Record 031 — MGK-65 arrives",
+          "state": "not written"
+        },
+        {
+          "day": "TUE",
+          "piece": "Record 032 — The sound",
+          "state": "not written"
+        },
+        {
+          "day": "WED",
+          "piece": "Record 033 — Voices",
+          "state": "not written"
+        },
+        {
+          "day": "THU",
+          "piece": "Record 034 — The user record",
+          "state": "not written"
+        },
+        {
+          "day": "FRI",
+          "piece": "Record 035 — The manual, the rest of it",
+          "state": "not written · depends on the manual work"
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "monday": "2026-10-26",
+      "note": "The objects.",
+      "record": [
+        {
+          "day": "MON",
+          "piece": "Record 036 — The original manuals",
+          "state": "not written · photograph needed"
+        },
+        {
+          "day": "TUE",
+          "piece": "Record 037 — The Gambler's table",
+          "state": "not written · photographs needed"
+        },
+        {
+          "day": "WED",
+          "piece": "Record 038 — The CEO's desk",
+          "state": "not written · photographs needed"
+        },
+        {
+          "day": "THU",
+          "piece": "Record 039 — The Informer's tools",
+          "state": "not written · photographs; add lock picks first"
+        },
+        {
+          "day": "FRI",
+          "piece": "Record 040 — The antenna selector",
+          "state": "not written"
+        }
       ]
     }
-  ]
+  ],
+  "retired": {
+    "playing": {
+      "lane": {
+        "id": "playing",
+        "name": "Mike playing",
+        "writes": "Mike",
+        "posts": "Mike, from the phone",
+        "per_week": 5,
+        "starts_week": 2
+      },
+      "why": "Mike, 2026-09-03: the album is not out and the daily determination is the spine; the music reels leave the calendar until there is a song to release.",
+      "weeks": {
+        "1": [],
+        "2": [
+          {
+            "day": "MON",
+            "piece": "Reel 1 — Coconuts, quarter 1",
+            "state": "video exists, private on YouTube · caption unwritten · door not chosen"
+          },
+          {
+            "day": "TUE",
+            "piece": "Reel 2 — Coconuts, quarter 2",
+            "state": "video exists, private · caption unwritten"
+          },
+          {
+            "day": "WED",
+            "piece": "Reel 3 — Coconuts, quarter 3",
+            "state": "video exists, private · caption unwritten"
+          },
+          {
+            "day": "THU",
+            "piece": "Reel 4 — Coconuts, quarter 4",
+            "state": "video exists, private · caption unwritten"
+          },
+          {
+            "day": "FRI",
+            "piece": "Reel 5 — Coconuts, full (or a new take)",
+            "state": "video exists, private · Mike undecided whether the full cut posts"
+          }
+        ],
+        "3": [
+          {
+            "day": "MON",
+            "piece": "Reel 6",
+            "state": "not recorded"
+          },
+          {
+            "day": "TUE",
+            "piece": "Reel 7",
+            "state": "not recorded"
+          },
+          {
+            "day": "WED",
+            "piece": "Reel 8",
+            "state": "not recorded"
+          },
+          {
+            "day": "THU",
+            "piece": "Reel 9",
+            "state": "not recorded"
+          },
+          {
+            "day": "FRI",
+            "piece": "Reel 10",
+            "state": "not recorded"
+          }
+        ],
+        "4": [
+          {
+            "day": "MON",
+            "piece": "Reel 11",
+            "state": "not recorded"
+          },
+          {
+            "day": "TUE",
+            "piece": "Reel 12",
+            "state": "not recorded"
+          },
+          {
+            "day": "WED",
+            "piece": "Reel 13",
+            "state": "not recorded"
+          },
+          {
+            "day": "THU",
+            "piece": "Reel 14",
+            "state": "not recorded"
+          },
+          {
+            "day": "FRI",
+            "piece": "Reel 15",
+            "state": "not recorded"
+          }
+        ],
+        "5": [
+          {
+            "day": "MON",
+            "piece": "Reel 16",
+            "state": "not recorded"
+          },
+          {
+            "day": "TUE",
+            "piece": "Reel 17",
+            "state": "not recorded"
+          },
+          {
+            "day": "WED",
+            "piece": "Reel 18",
+            "state": "not recorded"
+          },
+          {
+            "day": "THU",
+            "piece": "Reel 19",
+            "state": "not recorded"
+          },
+          {
+            "day": "FRI",
+            "piece": "Reel 20",
+            "state": "not recorded"
+          }
+        ],
+        "6": [
+          {
+            "day": "MON",
+            "piece": "Reel 21",
+            "state": "not recorded"
+          },
+          {
+            "day": "TUE",
+            "piece": "Reel 22",
+            "state": "not recorded"
+          },
+          {
+            "day": "WED",
+            "piece": "Reel 23",
+            "state": "not recorded"
+          },
+          {
+            "day": "THU",
+            "piece": "Reel 24",
+            "state": "not recorded"
+          },
+          {
+            "day": "FRI",
+            "piece": "Reel 25",
+            "state": "not recorded"
+          }
+        ],
+        "7": [
+          {
+            "day": "MON",
+            "piece": "Reel 26",
+            "state": "not recorded"
+          },
+          {
+            "day": "TUE",
+            "piece": "Reel 27",
+            "state": "not recorded"
+          },
+          {
+            "day": "WED",
+            "piece": "Reel 28",
+            "state": "not recorded"
+          },
+          {
+            "day": "THU",
+            "piece": "Reel 29",
+            "state": "not recorded"
+          },
+          {
+            "day": "FRI",
+            "piece": "Reel 30",
+            "state": "not recorded"
+          }
+        ],
+        "8": [
+          {
+            "day": "MON",
+            "piece": "Reel 31",
+            "state": "not recorded"
+          },
+          {
+            "day": "TUE",
+            "piece": "Reel 32",
+            "state": "not recorded"
+          },
+          {
+            "day": "WED",
+            "piece": "Reel 33",
+            "state": "not recorded"
+          },
+          {
+            "day": "THU",
+            "piece": "Reel 34",
+            "state": "not recorded"
+          },
+          {
+            "day": "FRI",
+            "piece": "Reel 35",
+            "state": "not recorded"
+          }
+        ]
+      }
+    }
+  }
 }
