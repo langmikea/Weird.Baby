@@ -28,6 +28,7 @@
     "record:land": "node tools/dictation/emit-record-entries.mjs",
     "desk": "node tools/ops-desk.mjs",
     "calendar": "node tools/calendar.mjs",
+    "reels": "node tools/reels.mjs",
     "reveal": "node tools/reveal-ledger.mjs",
     "reveal:check": "node tools/reveal-ledger.mjs --check",
     "reveal:eggs": "node tools/reveal-ledger.mjs --eggs",

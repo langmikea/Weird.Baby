@@ -1,0 +1,1063 @@
+{
+ "_": "THE DAILY DETERMINATION — one row per weekday of the story. Read reels/README.md before editing. Mike writes the question (the Word page or in chat); Ops carries it here and keeps status, postings and numbers. Nothing in src/ reads this file.",
+ "version": 1,
+ "ruled": "2026-09-03",
+ "epoch": "2026-09-07",
+ "statuses": [
+  "open",
+  "written",
+  "shot",
+  "posted"
+ ],
+ "surfaces": [
+  "tiktok",
+  "instagram",
+  "youtube",
+  "facebook"
+ ],
+ "rows": [
+  {
+   "date": "2026-09-07",
+   "week": 1,
+   "day": "MON",
+   "scheduled": "Record week; the machine is not yet shown",
+   "reveal_ids": [],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-08",
+   "week": 1,
+   "day": "TUE",
+   "scheduled": "Record week; the machine is not yet shown",
+   "reveal_ids": [],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-09",
+   "week": 1,
+   "day": "WED",
+   "scheduled": "Record week; the machine is not yet shown",
+   "reveal_ids": [],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-10",
+   "week": 1,
+   "day": "THU",
+   "scheduled": "Record week; the machine is not yet shown",
+   "reveal_ids": [],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-11",
+   "week": 1,
+   "day": "FRI",
+   "scheduled": "Record week; the machine is not yet shown",
+   "reveal_ids": [],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-14",
+   "week": 2,
+   "day": "MON",
+   "scheduled": "MGK-NIAC — the twenty",
+   "reveal_ids": [
+    "twin.app.answers"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-15",
+   "week": 2,
+   "day": "TUE",
+   "scheduled": "Starting; Starting (the monitor at rest)",
+   "reveal_ids": [
+    "twin.boot",
+    "twin.monitor"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-16",
+   "week": 2,
+   "day": "WED",
+   "scheduled": "Probabilities",
+   "reveal_ids": [
+    "twin.app.probabilities"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-17",
+   "week": 2,
+   "day": "THU",
+   "scheduled": "Messages — the inbox",
+   "reveal_ids": [
+    "twin.app.messages"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-18",
+   "week": 2,
+   "day": "FRI",
+   "scheduled": "The Everyman — the unboxing; with the Everyman",
+   "reveal_ids": [
+    "persona.everyman",
+    "twin.app.eliza",
+    "twin.app.brain",
+    "twin.app.ink"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-21",
+   "week": 3,
+   "day": "MON",
+   "scheduled": "Games — Snow Globe and Tic-Tac-Toe",
+   "reveal_ids": [
+    "twin.game.snowglobe",
+    "twin.game.tictactoe"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-22",
+   "week": 3,
+   "day": "TUE",
+   "scheduled": "The Gambler; The Gambler's case (first of the cases)",
+   "reveal_ids": [
+    "persona.gambler",
+    "phys.cases"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-23",
+   "week": 3,
+   "day": "WED",
+   "scheduled": "The Casino opens",
+   "reveal_ids": [
+    "twin.game.slots",
+    "twin.game.craps",
+    "twin.game.blackjack",
+    "twin.game.roulette"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-24",
+   "week": 3,
+   "day": "THU",
+   "scheduled": "The Bullshit Detector",
+   "reveal_ids": [
+    "twin.app.detectors",
+    "twin.app.bs"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-25",
+   "week": 3,
+   "day": "FRI",
+   "scheduled": "",
+   "reveal_ids": [],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-28",
+   "week": 4,
+   "day": "MON",
+   "scheduled": "Polarity",
+   "reveal_ids": [
+    "twin.app.polarity"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-29",
+   "week": 4,
+   "day": "TUE",
+   "scheduled": "Clarity",
+   "reveal_ids": [
+    "twin.app.clarity"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-09-30",
+   "week": 4,
+   "day": "WED",
+   "scheduled": "MGK-v2.0 arrives",
+   "reveal_ids": [
+    "engine.v2"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-01",
+   "week": 4,
+   "day": "THU",
+   "scheduled": "The CEO; the Career Chooser, with the CEO",
+   "reveal_ids": [
+    "persona.ceo",
+    "twin.app.advice.panel"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-02",
+   "week": 4,
+   "day": "FRI",
+   "scheduled": "User — your name",
+   "reveal_ids": [
+    "twin.app.user.name"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-05",
+   "week": 5,
+   "day": "MON",
+   "scheduled": "",
+   "reveal_ids": [],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-06",
+   "week": 5,
+   "day": "TUE",
+   "scheduled": "The Informer; with the Informer",
+   "reveal_ids": [
+    "persona.informer",
+    "twin.app.radio",
+    "twin.app.tap"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-07",
+   "week": 5,
+   "day": "WED",
+   "scheduled": "Excuses and Lines",
+   "reveal_ids": [
+    "twin.app.appp"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-08",
+   "week": 5,
+   "day": "THU",
+   "scheduled": "Fortune",
+   "reveal_ids": [
+    "twin.app.fortune"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-09",
+   "week": 5,
+   "day": "FRI",
+   "scheduled": "Maintenance",
+   "reveal_ids": [
+    "twin.app.maint"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-12",
+   "week": 6,
+   "day": "MON",
+   "scheduled": "Tilt Drive and Gobble Don't Fall",
+   "reveal_ids": [
+    "twin.game.tilt-drive",
+    "twin.game.gobble"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-13",
+   "week": 6,
+   "day": "TUE",
+   "scheduled": "AvoidSteroids and Mail Run",
+   "reveal_ids": [
+    "twin.game.avoidsteroids",
+    "twin.game.mailrun"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-14",
+   "week": 6,
+   "day": "WED",
+   "scheduled": "Sniper and Stop On A Number",
+   "reveal_ids": [
+    "twin.game.sniper",
+    "twin.game.stopnum"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-15",
+   "week": 6,
+   "day": "THU",
+   "scheduled": "",
+   "reveal_ids": [],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-16",
+   "week": 6,
+   "day": "FRI",
+   "scheduled": "Calculator and Notepad — (not installed)",
+   "reveal_ids": [
+    "twin.app.calc",
+    "twin.app.note"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-19",
+   "week": 7,
+   "day": "MON",
+   "scheduled": "MGK-65 arrives",
+   "reveal_ids": [
+    "engine.65"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-20",
+   "week": 7,
+   "day": "TUE",
+   "scheduled": "The sound",
+   "reveal_ids": [
+    "sound.slosh",
+    "sound.electrical-short",
+    "sound.datatransfer"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-21",
+   "week": 7,
+   "day": "WED",
+   "scheduled": "Voices",
+   "reveal_ids": [
+    "twin.app.voice"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-22",
+   "week": 7,
+   "day": "THU",
+   "scheduled": "The user record",
+   "reveal_ids": [
+    "twin.userrecord"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-23",
+   "week": 7,
+   "day": "FRI",
+   "scheduled": "The manual, the rest of it",
+   "reveal_ids": [
+    "doc.manual"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-26",
+   "week": 8,
+   "day": "MON",
+   "scheduled": "The original manuals",
+   "reveal_ids": [
+    "phys.manual.original"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-27",
+   "week": 8,
+   "day": "TUE",
+   "scheduled": "The Gambler's table",
+   "reveal_ids": [
+    "objects.gambler"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-28",
+   "week": 8,
+   "day": "WED",
+   "scheduled": "The CEO's desk",
+   "reveal_ids": [
+    "objects.ceo"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-29",
+   "week": 8,
+   "day": "THU",
+   "scheduled": "The Informer's tools",
+   "reveal_ids": [
+    "objects.informer"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-10-30",
+   "week": 8,
+   "day": "FRI",
+   "scheduled": "The antenna selector",
+   "reveal_ids": [
+    "portal.antenna"
+   ],
+   "question": "",
+   "engine": "",
+   "persona": "",
+   "answer": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "replies": null
+   },
+   "note": ""
+  }
+ ]
+}
