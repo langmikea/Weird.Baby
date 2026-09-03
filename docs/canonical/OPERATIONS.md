@@ -112,19 +112,13 @@ key** — it is not a gate and is not in §9; its home is after a deploy.
 Definition: files behind the door as reported by `reveal:day` and present under
 `public/held`.
 
-## HIS WORDS, CLEANED (Mike, 2026-09-03)
+## HIS WORDS (Mike, 2026-09-03)
 
-Fix typos, spelling, punctuation and rambling; keep his vocabulary, order
-and point. Ask, numbered, where a cleanup could change meaning. What he has
-shipped stands as shipped (Record 001's `was made made` is his). A quote
-carries the question it answered; answers to different questions are never
-stitched.
-
-## FLAG STALE, DO NOT REWRITE
-
-When his words have gone stale, say so and leave them. Cleaning is spelling
-and noise, never a rewrite of the point. A `beat` may be deleted but never
-reworded.
+Cleaned, not verbatim: fix typos, punctuation and rambling; keep his
+vocabulary, order and point; ask, numbered, where meaning could shift.
+Shipped words stand as shipped. A quote carries its question; answers to
+different questions are never stitched. Stale words: say so, leave them.
+A `beat` may be deleted, never reworded.
 
 ## ONE THING AT A TIME
 
