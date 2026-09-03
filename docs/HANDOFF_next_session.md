@@ -29,9 +29,11 @@ nothing served has changed. Nothing waits on a deploy.
 
 ## OPS OWES
 - The System, what remains: narrow the provenance gate to Mike's words and
-  the scroller (after the 7th); the museum's own 196 KB STATE.md (its laws
-  to canon verbatim, rounds to archive); source-file comments quoting old
-  numbers (after the 7th). Done 09-02: the robots round documents (53
+  the scroller (after the 7th); source-file comments quoting old numbers
+  (after the 7th). Done 09-02 late: the museum's STATE.md cut from 196 KB to
+  7 KB; Mike's 23 unique standing rulings carried whole into
+  `docs/canon/11-STANDING-RULINGS.md`; the ledger archived at
+  `docs/archive/STATE-FULL-b0525f0.md`. Done 09-02: the robots round documents (53
   archived), the album mirror, the robots STATE.md cut from 608 KB to 11 KB
   (`robots:docs/archive/STATE-FULL-9655fa5.md`, Mike's words re-quoted in
   `STATE-mike-verbatim.md`).

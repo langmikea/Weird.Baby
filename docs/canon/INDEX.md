@@ -41,6 +41,7 @@ the twin's own machinery, costed).
 | **[08-PEOPLE](08-PEOPLE.md)** | X · the first five · the Release-1 four · the held units · McKenna · **the sealed rooms** |
 | **[09-PUBLISHED](09-PUBLISHED.md)** | **the three states** · the clock · Records 001–005 · Record 013 · the rules that govern what a Record may say |
 | **[10-LAWS](10-LAWS.md)** | the story laws · the Ops doctrines · the provenance gate · the three marks |
+| **[11-STANDING-RULINGS](11-STANDING-RULINGS.md)** | Mike's laws that lived only in the ledger, carried whole 2026-09-02 · the identity · the personality map · no hidden information · the release doctrines · the palette · the spotlight · the gift shop billing law · the contributions model · parity is absolute · the Foundation's tone |
 | **[CONFLICTS](CONFLICTS.md)** | K-01 … K-24 |
 | **[HOLES](HOLES.md)** | H-01 … H-28 |
 | **[BELL-103](BELL-103.md)** | the integration, recorded as canon |

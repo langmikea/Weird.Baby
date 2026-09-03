@@ -491,8 +491,8 @@ later from something he said, and his own sentence left in blue gets quietly
 <a id="doctrine-13"></a><a id="doctrine-14"></a><a id="doctrine-15"></a><a id="doctrine-17"></a><a id="doctrine-19"></a><a id="doctrine-27"></a>
 
 **Carried verbatim from `OPERATIONS.md` §7 when the manual was collapsed.** Bodies:
-`museum:docs/canonical/OPERATIONS_ARCHIVE/07-WORKING-DOCTRINE.md` (cut `b3812cc`)
-and `OPERATIONS-FULL-b9517e6.md` (the sixth cut).
+**[11-STANDING-RULINGS](11-STANDING-RULINGS.md)** (Mike's words, whole, carried from
+the ledger 2026-09-02) and, older, `museum:docs/canonical/OPERATIONS_ARCHIVE/07-WORKING-DOCTRINE.md`.
 
 13. **EVERY VISIBLE STRING CARRIES ITS ORIGIN (v48, 2026-08-04 — STANDING).**
 14. **THE OPEN-ACTION REGISTER IS MAINTAINED BY EVERY ROUND (Mike,

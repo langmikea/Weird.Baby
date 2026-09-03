@@ -625,6 +625,7 @@ const CANON = [
   ["08-PEOPLE",      "THE CANON — the people"],
   ["09-PUBLISHED",   "THE CANON — what is published"],
   ["10-LAWS",        "THE CANON — the laws"],
+  ["11-STANDING-RULINGS", "THE CANON — Mike's standing rulings, carried from the ledger"],
 ];
 
 const SIDE_PAGES = [
