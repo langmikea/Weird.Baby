@@ -29,10 +29,12 @@ nothing served has changed. Nothing waits on a deploy.
 
 ## OPS OWES
 - The System, what remains: narrow the provenance gate to Mike's words and
-  the scroller (after the 7th); the robots repo's 600 KB STATE.md ledger;
-  source-file comments quoting old numbers (after the 7th). Done 09-02: the
-  robots round documents (53 archived, `robots:docs/archive/README.md`), the
-  album mirror.
+  the scroller (after the 7th); the museum's own 196 KB STATE.md (its laws
+  to canon verbatim, rounds to archive); source-file comments quoting old
+  numbers (after the 7th). Done 09-02: the robots round documents (53
+  archived), the album mirror, the robots STATE.md cut from 608 KB to 11 KB
+  (`robots:docs/archive/STATE-FULL-9655fa5.md`, Mike's words re-quoted in
+  `STATE-mike-verbatim.md`).
 - The arc, Mike 09-02 (`docs/ARC.md` §6): the story explains the device;
   every feature, program, adjustment, manual portion and artifact can be a
   day. Ops owes: once the manual is written, a pass that uses it as the
