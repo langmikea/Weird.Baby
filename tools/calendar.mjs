@@ -136,7 +136,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 <!-- the served copy for Mike is published from this same file; the wrapper tags above are for a local open -->
 <div class="wrap">
 <div class="eyebrow">Weird.Baby · what is due, by lane and weekday</div><h1>The Calendar</h1>
-<p class="sub">Three lanes: the Record, which the site posts; the Determination, which you post, one reel a weekday from the day the machine is shown; and the Number, a live musical number a weekday from the first Monday, its own post. Your rulings of 2026-09-02 and 2026-09-03. Posts go at ${esc(cal.post_time)}. What posts in a week is prepared by the Friday before. Ask and it answers: <code>npm run calendar</code>. Ops keeps it current; you never edit it.</p>
+<p class="sub">Three lanes: the Record, which the site posts; the Determination, which you post, one reel a weekday from the day the machine is shown; and the Number, a live musical number a weekday from week two, its own post. Your rulings of 2026-09-02 and 2026-09-03. Posts go at ${esc(cal.post_time)}. What posts in a week is prepared by the Friday before. Ask and it answers: <code>npm run calendar</code>. Ops keeps it current; you never edit it.</p>
 ${cal.weeks.map(weekTable).join("\n")}
 <footer>Generated from docs/calendar/CALENDAR.json by tools/calendar.mjs · today ${todayNY} New York · Ops instrument, never at a live address</footer>
 </div></body></html>`;

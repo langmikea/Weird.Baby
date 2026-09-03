@@ -1,5 +1,5 @@
 {
- "_": "THE NUMBER — the musical number, one live performance a weekday, its own post, independent of the determination. Read reels/README.md. One song at a time, in pieces; a song runs a floor of two weeks and a ceiling of four while its sends and saves climb; Ops calls the week on Sundays. Songs after the first are filled in as the numbers decide. Nothing in src/ reads this file.",
+ "_": "THE NUMBER — the musical number, one live performance a weekday from 2026-09-14 (Mike, 2026-09-03: music starts week two) from 2026-09-14 (Mike, 2026-09-03: music starts week two), its own post, independent of the determination. Read reels/README.md. One song at a time, in pieces; a song runs a floor of two weeks and a ceiling of four while its sends and saves climb; Ops calls the week on Sundays. Songs after the first are filled in as the numbers decide. Nothing in src/ reads this file.",
  "version": 1,
  "ruled": "2026-09-03",
  "epoch": "2026-09-07",
@@ -25,8 +25,8 @@
    "date": "2026-09-07",
    "week": 1,
    "day": "MON",
-   "song": "Coconuts",
-   "piece": "the hook",
+   "song": "",
+   "piece": "",
    "status": "open",
    "postings": {
     "tiktok": null,
@@ -39,14 +39,14 @@
     "sends": null,
     "saves": null
    },
-   "note": ""
+   "note": "music starts week two (Mike, 2026-09-03)"
   },
   {
    "date": "2026-09-08",
    "week": 1,
    "day": "TUE",
-   "song": "Coconuts",
-   "piece": "a verse",
+   "song": "",
+   "piece": "",
    "status": "open",
    "postings": {
     "tiktok": null,
@@ -59,14 +59,14 @@
     "sends": null,
     "saves": null
    },
-   "note": ""
+   "note": "music starts week two (Mike, 2026-09-03)"
   },
   {
    "date": "2026-09-09",
    "week": 1,
    "day": "WED",
-   "song": "Coconuts",
-   "piece": "the bridge",
+   "song": "",
+   "piece": "",
    "status": "open",
    "postings": {
     "tiktok": null,
@@ -79,14 +79,14 @@
     "sends": null,
     "saves": null
    },
-   "note": ""
+   "note": "music starts week two (Mike, 2026-09-03)"
   },
   {
    "date": "2026-09-10",
    "week": 1,
    "day": "THU",
-   "song": "Coconuts",
-   "piece": "the story of the song",
+   "song": "",
+   "piece": "",
    "status": "open",
    "postings": {
     "tiktok": null,
@@ -99,11 +99,115 @@
     "sends": null,
     "saves": null
    },
-   "note": ""
+   "note": "music starts week two (Mike, 2026-09-03)"
   },
   {
    "date": "2026-09-11",
    "week": 1,
+   "day": "FRI",
+   "song": "",
+   "piece": "",
+   "status": "open",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "saves": null
+   },
+   "note": "music starts week two (Mike, 2026-09-03)"
+  },
+  {
+   "date": "2026-09-14",
+   "week": 2,
+   "day": "MON",
+   "song": "Coconuts",
+   "piece": "part 1 of 4",
+   "status": "planned",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "saves": null
+   },
+   "note": "the four existing clips; the pop is appended by reels/build.py",
+   "source": "coconuts-q1: Mike's clip, on YouTube private, without the pop; original file wanted"
+  },
+  {
+   "date": "2026-09-15",
+   "week": 2,
+   "day": "TUE",
+   "song": "Coconuts",
+   "piece": "part 2 of 4",
+   "status": "planned",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "saves": null
+   },
+   "note": "the four existing clips; the pop is appended by reels/build.py",
+   "source": "coconuts-q2: Mike's clip, on YouTube private, without the pop; original file wanted"
+  },
+  {
+   "date": "2026-09-16",
+   "week": 2,
+   "day": "WED",
+   "song": "Coconuts",
+   "piece": "part 3 of 4",
+   "status": "planned",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "saves": null
+   },
+   "note": "the four existing clips; the pop is appended by reels/build.py",
+   "source": "coconuts-q3: Mike's clip, on YouTube private, without the pop; original file wanted"
+  },
+  {
+   "date": "2026-09-17",
+   "week": 2,
+   "day": "THU",
+   "song": "Coconuts",
+   "piece": "part 4 of 4",
+   "status": "planned",
+   "postings": {
+    "tiktok": null,
+    "instagram": null,
+    "youtube": null,
+    "facebook": null
+   },
+   "numbers": {
+    "views": null,
+    "sends": null,
+    "saves": null
+   },
+   "note": "the four existing clips; the pop is appended by reels/build.py",
+   "source": "coconuts-q4: Mike's clip, on YouTube private, without the pop; original file wanted"
+  },
+  {
+   "date": "2026-09-18",
+   "week": 2,
    "day": "FRI",
    "song": "Coconuts",
    "piece": "the hook again",
@@ -119,107 +223,7 @@
     "sends": null,
     "saves": null
    },
-   "note": ""
-  },
-  {
-   "date": "2026-09-14",
-   "week": 2,
-   "day": "MON",
-   "song": "Coconuts",
-   "piece": "the hook, another room",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "week two of the run; the floor"
-  },
-  {
-   "date": "2026-09-15",
-   "week": 2,
-   "day": "TUE",
-   "song": "Coconuts",
-   "piece": "the chorus, whole",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "week two of the run; the floor"
-  },
-  {
-   "date": "2026-09-16",
-   "week": 2,
-   "day": "WED",
-   "song": "Coconuts",
-   "piece": "a verse, a cappella",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "week two of the run; the floor"
-  },
-  {
-   "date": "2026-09-17",
-   "week": 2,
-   "day": "THU",
-   "song": "Coconuts",
-   "piece": "the hook, at the instrument",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "week two of the run; the floor"
-  },
-  {
-   "date": "2026-09-18",
-   "week": 2,
-   "day": "FRI",
-   "song": "Coconuts",
-   "piece": "the hook, one more",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "week two of the run; the floor"
+   "note": "to shoot; or the fifth clip if one exists"
   },
   {
    "date": "2026-09-21",
@@ -239,7 +243,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
   },
   {
    "date": "2026-09-22",
@@ -259,7 +263,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
   },
   {
    "date": "2026-09-23",
@@ -279,7 +283,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
   },
   {
    "date": "2026-09-24",
@@ -299,7 +303,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
   },
   {
    "date": "2026-09-25",
@@ -319,7 +323,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
   },
   {
    "date": "2026-09-28",
@@ -339,7 +343,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts continues if climbing; ceiling is week 5"
   },
   {
    "date": "2026-09-29",
@@ -359,7 +363,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts continues if climbing; ceiling is week 5"
   },
   {
    "date": "2026-09-30",
@@ -379,7 +383,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts continues if climbing; ceiling is week 5"
   },
   {
    "date": "2026-10-01",
@@ -399,7 +403,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts continues if climbing; ceiling is week 5"
   },
   {
    "date": "2026-10-02",
@@ -419,7 +423,7 @@
     "sends": null,
     "saves": null
    },
-   "note": "Coconuts continues if it is climbing (ceiling week 4); otherwise the next song"
+   "note": "Coconuts continues if climbing; ceiling is week 5"
   },
   {
    "date": "2026-10-05",
@@ -821,5 +825,6 @@
    },
    "note": "open; the numbers call it"
   }
- ]
+ ],
+ "epoch_lane": "2026-09-14"
 }
