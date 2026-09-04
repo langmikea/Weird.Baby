@@ -73,7 +73,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"><style>${css}</style></head><body>
 <div class="wrap">
 <p class="eyebrow">Weird.Baby · the desk · ${todayNY}</p><h1>The Desk</h1>
-<p class="sub">Where things stand against the six pillars, the instruments you use, and what is yours to do. Everything on this page works; nothing on it is a draft. Ops keeps it current; ask and it is regenerated.</p>
+<p class="sub">Where things stand against the seven pillars, the instruments you use, and what is yours to do. Everything on this page works; nothing on it is a draft. Ops keeps it current; ask and it is regenerated.</p>
 <h2>The pillars</h2>
 <table class="pill"><thead><tr><th>Pillar</th><th>Where it stands</th><th>State</th><th>Next</th></tr></thead><tbody>${pillars}</tbody></table>
 <h2>What you owe</h2>
@@ -86,6 +86,23 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 </div></body></html>`;
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, html);
+
+/* the pillars page: the same seven lines, short, for the pillars link Mike keeps */
+const pillarCards = D.pillars.map(p => `<li><div class="k">${esc(p.name)}<small>${esc(p.sub || "")}</small></div><span class="state ${stateClass(p.state)}">${esc(p.state)}</span><p>${esc(p.line)}</p><p class="nx">${esc(p.next)}</p></li>`).join("");
+const pillarsHtml = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Pillars</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"><style>${css}
+.cards{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.cards li{border:1px solid var(--rule);background:var(--card);border-radius:4px;padding:14px 16px}
+.cards .k{font-family:Fraunces,Georgia,serif;font-size:20px;font-weight:600;margin-bottom:6px}.cards .k small{display:block;font-family:Geist,system-ui,sans-serif;font-weight:400;font-size:12.5px;color:var(--ink-3)}
+.cards p{margin:8px 0 0;font-size:14px}.cards .nx{color:var(--ink-2);font-size:13px}
+.centre{font-family:Fraunces,Georgia,serif;font-size:20px;margin:0 0 20px}
+</style></head><body><div class="wrap">
+<p class="eyebrow">Weird.Baby · the pillars · ${todayNY}</p><h1>The Pillars</h1>
+<p class="centre">${esc(D.centre || "")}</p>
+<ul class="cards">${pillarCards}</ul>
+<footer>The same seven lines as <a href="https://claude.ai/code/artifact/cb3cf772-4d9e-4ed2-83c1-f65599c0b6b8">the desk</a>; one source, docs/desk/DESK.json. The long review page of 2026-09-02 is archived in C:\\AI\\REVIEW-20260902.</footer>
+</div></body></html>`;
+fs.writeFileSync(path.join(path.dirname(OUT), "PILLARS.html"), pillarsHtml);
 console.log(`THE DESK — ${todayNY}`);
 for (const p of D.pillars) console.log(`  ${p.name.padEnd(16)} ${p.state.padEnd(30)} ${p.next}`);
 console.log(`  you owe: ${owes.length} item(s) · week ${wk}: determinations ${count(laneRows("determinations", wk))}; numbers ${count(laneRows("numbers", wk))}${costs ? ` · costs $${costs.recurring_per_month_known}/mo known` : ""}`);
