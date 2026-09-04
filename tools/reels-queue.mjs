@@ -63,15 +63,16 @@ async function gql(query, variables = {}) {
 /* New York wall time → UTC ISO for a given date, DST-correct. */
 function nyToUtcIso(date, hhmm) {
   const [h, m] = hhmm.split(":").map(Number);
-  let guess = new Date(`${date}T${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:00Z`);
-  for (let i = 0; i < 2; i++) {
-    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).formatToParts(guess);
+  const [Y, M, D] = date.split("-").map(Number);
+  const target = Date.UTC(Y, M - 1, D, h, m);      // the wall time, read as if it were UTC
+  const wallAsUtc = ms => {
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).formatToParts(new Date(ms));
     const get = k => Number(parts.find(p => p.type === k).value);
-    const asUtc = Date.UTC(get("year"), get("month") - 1, get("day"), get("hour") % 24, get("minute"));
-    const diff = asUtc - guess.getTime();          // how far NY wall time sits from UTC at that instant
-    guess = new Date(guess.getTime() - diff);
-  }
-  return guess.toISOString();
+    return Date.UTC(get("year"), get("month") - 1, get("day"), get("hour") % 24, get("minute"));
+  };
+  let x = target;
+  for (let i = 0; i < 2; i++) x = target - (wallAsUtc(x) - x);   // offset at that instant; twice, for the DST edges
+  return new Date(x).toISOString();
 }
 
 function r2Put(file, key) {
