@@ -33,6 +33,16 @@ nothing served has changed. Nothing waits on a deploy.
   pipes; National Coalition), the robots FAQ's buying line (not for sale
   during the story), the About-the-Artist words on `/wb`.
 
+## THE REEL LINE AND THE DESK (built 09-03 evening, all committed)
+- `reels/README.md` is the manual: questions → build → queue (Buffer) →
+  pull. Week two's four Coconuts reels are built and in the OneDrive packet;
+  the queue waits on Mike's Buffer key (his weekend). Cut-over steps are in
+  the README. Post times: Number 12:00 NY, Determination 17:00 NY.
+- `npm run costs` (ledger `ops/costs.json`); a scheduled task
+  `weird-baby-monthly-costs` runs the review on the first of each month at
+  09:00 and sends Mike the report. `npm run desk` is the clean desk
+  (`docs/desk/DESK.json` holds the pillar lines; keep them current).
+
 ## OPS OWES
 - The System, what remains: narrow the provenance gate to Mike's words and
   the scroller (after the 7th); source-file comments quoting old numbers
