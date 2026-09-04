@@ -19,6 +19,12 @@ nothing served has changed. Nothing waits on a deploy.
   what each changes are in `docs/PILLARS_RULINGS-20260902.md`.
 
 ## MIKE OWES
+- **This weekend (his word, 09-03): the Buffer setup**, six clicks in
+  `C:\AI\PERSONA-20260903\BUFFER-SETUP.md`: Instagram to Creator, TikTok
+  Creator and public, a Facebook Page, connect four channels in Buffer
+  Essentials, an API key into `C:\AI\PERSONA-20260903\.secrets\buffer.token`.
+  The queue (`tools/reels-queue.mjs`) is built and waits on the key; week
+  two's four Coconuts reels are in the packet.
 - Record 001 edits in the day editor, unlanded and expected; leave
   `docs/dictation-20260807/` alone and do not run `record:land` or `day:proof`.
 - The paragraph that replaces the April vision; his words stand meanwhile in
