@@ -18,6 +18,15 @@ npm run reels -- --week 3   a named week
 | `reels/numbers.json` | the musical number's ledger (Mike's rulings of 2026-09-03, `C:\AI\MUSIC-20260903\MUSIC.md`): one live performance a weekday from 2026-09-07, its own post, independent of the determination; one song at a time in pieces; a song runs a floor of two weeks and a ceiling of four while its sends and saves climb; Ops calls the week on Sundays; Coconuts first. Rows carry date, song, piece, status, postings, numbers |
 | `tools/reels.mjs` | the report (the determination) |
 | `tools/calendar.mjs` | reads both ledgers into the calendar's Determination and Number lanes |
+| `tools/reels-build.py` | the reel line: intake clip → normalised, the pop appended → packet in OneDrive → row `shot` |
+| `tools/reels-queue.mjs` | the queue (Mike's ruling 2026-09-03: Buffer): packet file → R2 at assets.weird.baby → Buffer createPost per channel at the lane's time → row `queued` with Buffer post ids |
+| `reels/buffer-channels.json` | Buffer's channel ids, written by `reels-queue.mjs --channels`; not secret |
+
+**Post times (Ops' call, 2026-09-03):** the Number at 12:00 New York; the
+Determination at 17:00 New York, with the Record. **The Buffer key** lives
+outside every repo at `C:\AI\PERSONA-20260903\.secrets\buffer.token`; Mike
+makes and revokes it in Buffer (Settings → API). Public copies of the reels
+sit in the R2 bucket under `reels/`; nothing links to them.
 
 ## How this relates to `release/`
 

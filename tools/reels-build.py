@@ -26,7 +26,8 @@ ONE = pathlib.Path("C:/Users/macun/OneDrive/WeirdBaby/reels")
 POP = pathlib.Path("C:/AI/Projects/weird-baby-robots/assets/video/WB_pop_v1.mp4")
 LEDGER = {"numbers": REPO / "reels/numbers.json", "determinations": REPO / "reels/determinations.json"}
 DAYS = ["mon", "tue", "wed", "thu", "fri"]
-POST_TIME = "17:00 America/New_York"
+# Ops' call, 2026-09-03: the Number at noon New York, the Determination at five with the Record.
+POST_TIMES = {"numbers": "12:00 America/New_York", "determinations": "17:00 America/New_York"}
 
 def probe(p):
     out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type,width,height,duration", "-of", "json", str(p)], capture_output=True, text=True, check=True).stdout
@@ -88,7 +89,7 @@ def main():
         _, _, total = probe(dest)
         row["status"] = "shot"; row["file"] = str(dest); row["length_s"] = round(total, 1); row["built"] = datetime.date.today().isoformat()
         caps.append(f"{row['date']} {day.upper()}  ({total:.1f}s)\n{caption(a.lane, row)}\n")
-        sched.append(f"{row['date']}  {POST_TIME}  {dest.name}  TikTok → Instagram → YouTube Shorts → Facebook")
+        sched.append(f"{row['date']}  {POST_TIMES[a.lane]}  {dest.name}  TikTok → Instagram → YouTube Shorts → Facebook")
         print(f"        built {total:.1f}s")
     if a.dry: print("  dry run; nothing written"); return
     if caps:
