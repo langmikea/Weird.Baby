@@ -1,0 +1,21 @@
+{
+ "_": "THE COST LEDGER — every subscription, fee and purchase behind Weird.Baby, in one place. Mike asked for it on 2026-09-03: report on demand and in a monthly review. Ops keeps it; Mike confirms amounts he alone knows. `npm run costs` prints the report and writes docs/ops/COSTS.md. Amounts are USD. `amount: null` means unknown to Ops; `confirmed: false` means a list price or an estimate, not a bill Mike has shown. Nothing here is a payment instruction.",
+ "version": 1,
+ "as_of": "2026-09-03",
+ "categories": ["platform", "tools", "rights", "hardware", "merch", "giving"],
+ "items": [
+  { "id": "domain-weird-baby", "name": "weird.baby domain", "vendor": "registrar (GoDaddy per LINEAGE; confirm)", "category": "platform", "cadence": "yearly", "amount": null, "confirmed": false, "since": null, "note": "renewal date and price unknown to Ops; the site runs on it" },
+  { "id": "cloudflare", "name": "Cloudflare: Workers, R2 (weird-baby-assets), DNS", "vendor": "Cloudflare", "category": "platform", "cadence": "monthly", "amount": 0, "confirmed": false, "since": "2026-05", "note": "assumed free tier; Workers paid plan is $5/mo if ever enabled; R2 free to 10 GB. Confirm on the Cloudflare billing page" },
+  { "id": "buffer", "name": "Buffer Essentials, four channels", "vendor": "Buffer", "category": "tools", "cadence": "monthly", "amount": 20, "confirmed": false, "since": null, "note": "ruled 2026-09-03; starts when Mike connects the channels (weekend of 09-05). $5 a channel a month; cheaper billed yearly" },
+  { "id": "claude", "name": "Claude subscription (Ops runs on it)", "vendor": "Anthropic", "category": "tools", "cadence": "monthly", "amount": null, "confirmed": false, "since": null, "note": "plan and price known to Mike" },
+  { "id": "microsoft-365", "name": "Microsoft 365 / OneDrive storage", "vendor": "Microsoft", "category": "tools", "cadence": "yearly", "amount": null, "confirmed": false, "since": null, "note": "OneDrive holds the mirrors and the reel intake; plan unknown to Ops" },
+  { "id": "premiere-elements", "name": "Adobe Premiere Elements", "vendor": "Adobe", "category": "tools", "cadence": "one-time", "amount": null, "confirmed": false, "since": null, "note": "on the Windows PC (Mike, 2026-09-03)" },
+  { "id": "lumafusion", "name": "LumaFusion (iPhone, iPad)", "vendor": "Luma Touch", "category": "tools", "cadence": "one-time", "amount": null, "confirmed": false, "since": null, "note": "Mike, 2026-09-03" },
+  { "id": "ascap", "name": "ASCAP membership (writer)", "vendor": "ASCAP", "category": "rights", "cadence": "one-time", "amount": 50, "confirmed": false, "since": "2026-05-26", "note": "five of six songs registered 2026-05-26; $50 is ASCAP's published one-time fee, not a bill seen" },
+  { "id": "copyright-office", "name": "Copyright Office GRUW filing, six songs", "vendor": "US Copyright Office", "category": "rights", "cadence": "one-time", "amount": 85, "confirmed": true, "since": "2026-06-18", "note": "from the album repo's filing note" },
+  { "id": "printful", "name": "Printful Quick Store", "vendor": "Printful", "category": "merch", "cadence": "monthly", "amount": 0, "confirmed": true, "since": "2026-05-30", "note": "no subscription; per-order cost only. shop.weird.baby deferred ($15/mo option, not taken)" },
+  { "id": "audigo", "name": "Audigo microphone", "vendor": "Audigo", "category": "hardware", "cadence": "one-time", "amount": null, "confirmed": false, "since": null, "note": "Mike, 2026-09-03" },
+  { "id": "dji-mics", "name": "DJI wireless microphone pair", "vendor": "DJI", "category": "hardware", "cadence": "one-time", "amount": null, "confirmed": false, "since": null, "note": "Mike, 2026-09-03" },
+  { "id": "sticker-giveaway", "name": "Sticker giveaway (WeeBee_Happy)", "vendor": "—", "category": "giving", "cadence": "yearly", "amount": 50, "confirmed": false, "since": "2026-07", "note": "from CHARTER_RAW_LEDS-20260707; a pledge, not a bill" }
+ ]
+}

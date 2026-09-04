@@ -51,6 +51,28 @@ Facebook last. One video, 9:16, all four uncut.
   (pulled by hand on Fridays), `note` (one line of what worked, for the
   recipe).
 
+## The week, in order
+
+| when | who | what | command |
+|---|---|---|---|
+| Sunday | Mike | five questions for next week (the Word page, a text file, or chat) | — |
+| Sunday | Ops | carry them into the ledger | `npm run reels:questions -- --week N --file reels/questions/wN.txt` |
+| any day, one sitting | Mike | shoot next week's ten clips, 9:16, phone; drop them in `OneDrive\WeirdBaby\reels\intake\<lane>\wN-mon.mp4` … | — |
+| the day they land | Ops | build: normalise, append the pop, packet | `npm run reels:build -- --lane numbers --week N` (and `determinations`) |
+| same day | Ops | queue: R2, then Buffer at each day's time; post ids into the ledger | `npm run reels:queue -- --lane numbers --week N` |
+| Mon–Fri | Buffer | posts at 12:00 (Number) and 17:00 (Determination) New York | — |
+| Sunday | Ops | pull the numbers, mark posted, read the recipe, call the song's week | `npm run reels:pull -- --lane numbers --week N` |
+| any time | Mike | the calendar | `npm run calendar` or the served page |
+
+**Cut-over, the weekend of 2026-09-05.** Mike: the six clicks in
+`C:\AI\PERSONA-20260903\BUFFER-SETUP.md`. Then Ops, in order:
+`npm run reels:channels` (records the channel ids) → `node tools/reels-queue.mjs --schema`
+(checks Buffer's live field names against the metadata the queue sends) →
+`npm run reels:queue -- --lane numbers --week 2 --dry` → the real queue →
+Buffer's queue page shows four scheduled posts per channel → done. If a
+channel refuses (TikTok privacy, YouTube title), the refusal is printed per
+channel and recorded in the row; fix the metadata, re-queue that row.
+
 ## Rules
 
 1. Nothing in `src/` reads this file and no string in it appears there. The

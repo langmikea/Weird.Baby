@@ -90,15 +90,6 @@ Portal ruling moved out of held. It therefore reports `served:false` on a
 healthy deployment, and a 200 on that address is the shell, not a leak. **Do not
 use it to check the door.** Flagged 2026-08-22, not fixed.
 
-> **[FLAG 2026-08-23 · verified probe, placed not fixed]**
-> `/held/robots/art/mgk-niac-cover.png` returns 404 `Not found`, 9 bytes, from
-> `src/worker.js:625–630`, refusal at `:627`. The moved file serves at
-> `/robots/art/portal-cover.png`, 200 `image/png`, 641,677 bytes.
-> **[2026-08-29] THE MEASUREMENT REPRODUCED AND ONLY ITS CITATION WAS STALE** —
-> it read `:284–288`, refusal at `:286`, which is now the as-of clock note. Line
-> numbers in a citation rot; the measurement did not. `npm run door:check` took
-> the same reading cookie-free and got the same 404 at 9 bytes.
-
 **`/api/held` REPORTS `stage` WITHOUT THE KEY. Only `commit`, `served` and
 `probe` are gated on `open`, so the live stage is publicly measurable** —
 `stage: __WB_STAGE__` is unconditional in the GET branch.
@@ -119,6 +110,16 @@ vocabulary, order and point; ask, numbered, where meaning could shift.
 Shipped words stand as shipped. A quote carries its question; answers to
 different questions are never stitched. Stale words: say so, leave them.
 A `beat` may be deleted, never reworded.
+
+## THE REEL LINE (Mike's rulings, 2026-09-03)
+
+Two reels a weekday from week two: the Determination (17:00 NY) and the
+Number (12:00 NY). Mike writes the question and shoots; Ops carries:
+`reels:questions` → `reels:build` (the pop appended, packet to OneDrive) →
+`reels:queue` (R2, then Buffer, scheduled) → `reels:pull` (Sundays, the
+numbers into the ledger). `reels/README.md` is the manual. Media and the
+Buffer key never enter the repo; Ops never holds a password or posts around
+a hold. Costs: `npm run costs`. The desk: `npm run desk`.
 
 ## ONE THING AT A TIME
 

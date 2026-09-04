@@ -33,12 +33,12 @@ const DAYS = ["MON", "TUE", "WED", "THU", "FRI"];
 const SOURCES = {
   reels: {   // the determination
     file: "determinations.json",
-    state: { open: "question not written", written: "question written · not shot", shot: "shot · scheduled", posted: "posted" },
+    state: { open: "question not written", written: "question written · not shot", shot: "shot · in the packet", queued: "queued in Buffer", posted: "posted" },
     cell: (r, n) => `Determination ${String(n).padStart(2, "0")} — ${r.question ? `“${r.question}”` : "the question of the day"}`,
   },
   numbers: { // the musical number [2026-09-03, MUSIC.md Q1-Q6]
     file: "numbers.json",
-    state: { open: "not shot", planned: "planned · not shot", shot: "shot · scheduled", posted: "posted" },
+    state: { open: "not shot", planned: "planned · not shot", shot: "shot · in the packet", queued: "queued in Buffer", posted: "posted" },
     cell: (r) => r.song ? `${r.song} — ${r.piece}` : "next song, by the numbers",
   },
 };
@@ -62,7 +62,7 @@ const argWeek = (() => { const i = process.argv.indexOf("--week"); return i > -1
 const todayNY = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }); // YYYY-MM-DD
 const addDays = (iso, n) => { const d = new Date(iso + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
 const dateOf = (week, day) => addDays(week.monday, DAYS.indexOf(day));
-const READY = /^(in the site|posted|recorded|written|ready|shot)/i;
+const READY = /^(in the site|posted|recorded|written|ready|shot|queued)/i;
 const isReady = s => READY.test(s) && !/not landed|unwritten|not chosen|undecided/i.test(s);
 
 const weekOf = iso => cal.weeks.find(w => iso >= w.monday && iso <= addDays(w.monday, 6));
