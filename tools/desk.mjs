@@ -61,9 +61,11 @@ a{color:var(--gold-ink);text-decoration:none;border-bottom:1px solid var(--rule)
 .line{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:0;padding:0;list-style:none}
 .line li{border:1px solid var(--rule);background:var(--card);border-radius:4px;padding:12px 14px}.line b{display:block;font-weight:600;margin-bottom:2px}.line span{color:var(--ink-2);font-size:13.5px}
 footer{margin-top:34px;border-top:1px solid var(--rule);padding-top:12px;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-3)}
+.links{margin-top:6px;font-size:13px}.links a{margin-right:2px}
 `;
 const stateClass = s => /ruled|working|standing|built/.test(s) ? "ok" : /waits|held|clock/.test(s) ? "no" : "";
-const pillars = D.pillars.map(p => `<tr><td>${esc(p.name)}</td><td>${esc(p.line)}</td><td><span class="state ${stateClass(p.state)}">${esc(p.state)}</span></td><td>${esc(p.next)}</td></tr>`).join("");
+const linksOf = p => (p.links || []).map(l => `<a href="${esc(l.url)}">${esc(l.label)}</a>`).join(" · ");
+const pillars = D.pillars.map(p => `<tr><td>${esc(p.name)}</td><td>${esc(p.line)}${p.links?.length ? `<div class="links">${linksOf(p)}</div>` : ""}</td><td><span class="state ${stateClass(p.state)}">${esc(p.state)}</span></td><td>${esc(p.next)}</td></tr>`).join("");
 const insts = D.instruments.map(i => `<tr><td>${i.url ? `<a href="${esc(i.url)}">${esc(i.name)}</a>` : esc(i.name)}</td><td>${esc(i.what)}</td><td>${esc(i.how)}</td></tr>`).join("");
 const owesHtml = owes.length ? owes.map(o => `<li>${esc(o)}</li>`).join("") : "<li>nothing on the list</li>";
 const week = (w) => `<li><b>Week ${w}</b><span>Determination: ${esc(count(laneRows("determinations", w)))}<br>Number: ${esc(count(laneRows("numbers", w)))}</span></li>`;
@@ -88,7 +90,7 @@ fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, html);
 
 /* the pillars page: the same seven lines, short, for the pillars link Mike keeps */
-const pillarCards = D.pillars.map(p => `<li><div class="k">${esc(p.name)}<small>${esc(p.sub || "")}</small></div><span class="state ${stateClass(p.state)}">${esc(p.state)}</span><p>${esc(p.line)}</p><p class="nx">${esc(p.next)}</p></li>`).join("");
+const pillarCards = D.pillars.map(p => `<li><div class="k">${esc(p.name)}<small>${esc(p.sub || "")}</small></div><span class="state ${stateClass(p.state)}">${esc(p.state)}</span><p>${esc(p.line)}</p><p class="nx">${esc(p.next)}</p>${p.links?.length ? `<p class="links">${linksOf(p)}</p>` : ""}</li>`).join("");
 const pillarsHtml = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Pillars</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"><style>${css}
 .cards{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
