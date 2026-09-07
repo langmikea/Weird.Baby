@@ -34,7 +34,7 @@ const SOURCES = {
   reels: {   // the determination
     file: "determinations.json",
     state: { open: "question not written", written: "question written · not shot", shot: "shot · in the packet", queued: "queued in Buffer", posted: "posted" },
-    cell: (r, n) => `Determination ${String(n).padStart(2, "0")} — ${r.question ? `“${r.question}”` : "the question of the day"}`,
+    cell: (r, n) => `Determination ${String(n).padStart(2, "0")} — ${r.question ? `“${r.question}”` : "the question of the day"}${r.frame ? ` · on camera: ${r.frame}` : ""}`,
   },
   numbers: { // the musical number [2026-09-03, MUSIC.md Q1-Q6]
     file: "numbers.json",

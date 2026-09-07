@@ -60,11 +60,13 @@ launch, open false. Nothing waits on a deploy.
   publishing guide for the device Records, and a first fill of the ledger's
   `when` column by that rule.
 - The reveal choreography is ruled (A, third cut): `reveal/schedule.json`
-  is the ruling; after Sunday, fill the ledger's `when` (story week numbers)
-  in `reveal/ledger-declare.mjs` from it and rebuild; then brief the ZIP
-  browser (a new in-story surface: the Record's ZIP, browsable, entries
-  readable on the schedule; no download). The calendar's Record lane
-  carries the headlines through week 8.
+  is the ruling. Done 09-06: the ledger's `when` is filled from it; every
+  schedule row is tagged `reel: feature | site` under Mike's ruling B on
+  the Never-Advertised law (canon 11, ruling 24); the determination ledger
+  carries each day's `frame` (on camera) and `site_only`; the TikTok
+  operating definition is rewritten whole
+  (`release/specs/SPEC-tiktok-operating-definition-20260906.md`). Still to
+  brief: the ZIP browser (in-story surface, no download).
 - The manual: Mike's ruling A (Ops drafts by section). The register test is
   served (`C:\AI\REVIEW-20260902\register-test.html`); his pick is pending.
   The facts sitting is CLOSED (rulings in `docs/PILLARS_RULINGS-20260902.md`,
@@ -83,11 +85,9 @@ launch, open false. Nothing waits on a deploy.
   and `src/lib/twin-keys.js`, unwired, lint clean. Next on it, after Sunday:
   per-row parcel keys in the twin, the query parameter, the ZIP browser route.
   Main carries none of it.
-- Sunday, after the Record lands: one edit in `reveal/ledger-declare.mjs` so
-  `R()` takes `when` from `reveal/schedule.json` by id when `extra.when` is
-  absent; rebuild the ledger; run `reveal:check` (transfers.mjs compares
-  `when` against class arrival weeks and may fault; read each fault before
-  moving a date). Pass 5 ruling (Mike, 2026-09-02): the desk stays for the Record editor;
+- Done 09-06: `R()` takes `when` from `reveal/schedule.json` by id; 47 rows
+  carry a week; reveal:check passes. The 13 schedule entries with no ledger
+  row (personas, engines, objects, appendices) are schedule-only. Pass 5 ruling (Mike, 2026-09-02): the desk stays for the Record editor;
   the light table stays; facts, assets and reveal instruments are Ops' to keep
   or drop.
 - Guard 6 blocks four of five Record entries from landing; ruled a bug or a rule (Sunday).

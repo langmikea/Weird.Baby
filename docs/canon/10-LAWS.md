@@ -31,6 +31,13 @@ device earns its keep as a genuinely fun useless thing. **Discovery of the
 story's EXISTENCE is part of the story. The deep game must never leak into the
 shallow one.**
 
+**Reading of 2026-09-06 (Mike, ruling B, clock day), for the reels.** A reel
+may show the day's device feature, a game, a persona, a program, a sound, as
+the machine's own content. A reel never shows a Record, the ZIP, an artifact,
+the portal, or the word chapter. The Determination reel is framed by the day's
+feature; the story stays on the site. `reveal/schedule.json` tags every row
+`reel: feature` or `reel: site` under this reading.
+
 ## THE EXPERIENCE LAW
 <a id="experience-law"></a>
 **THERE IS NO GAME.** No win state, no right way. *"The experience is finding a

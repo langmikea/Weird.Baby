@@ -649,3 +649,16 @@ arrival. Implemented in `src/routes/shop/GiftShop.jsx` (`billing()`), driven by
    sends `owner=` — but a stale link in the wild would land on it. Open for
    Mike (review J3).
 
+## 24. The reels under the Never-Advertised law (2026-09-06, clock day)
+
+Asked what the daily reels may carry: A, the law as written, the machine and
+its determinations and never the story; B, the device's features and never
+the story's frame; C, strike the law. **Mike: "B."**
+
+What it settles: a reel may show the day's feature, a game, a persona, a
+program, a sound, as the machine's own content. A reel never shows a Record,
+the ZIP, an artifact, the portal, or the word chapter. The Determination reel
+is framed by the day's feature; the story stays on the site. The reveal
+schedule tags every row `reel: feature` or `reel: site`; the determination
+ledger carries each day's `frame` and `site_only`. The law itself is unchanged.
+

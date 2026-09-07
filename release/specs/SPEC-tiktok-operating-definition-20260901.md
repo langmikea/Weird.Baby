@@ -1,5 +1,9 @@
 # SPEC — TIKTOK, THE OPERATING DEFINITION
 
+> **SUPERSEDED 2026-09-06, rewritten whole** as
+> `SPEC-tiktok-operating-definition-20260906.md`, by the brief rule. This
+> file stays as the record of the 09-01 readings; nothing below is current.
+
 **Handed to Mike 2026-09-01. Ops writes it; Mike makes and posts.**
 
 **THIS IS A BRIEF AND IT INHERITS THE BRIEF RULE WHOLE: Mike does not edit

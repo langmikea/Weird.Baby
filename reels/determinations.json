@@ -1,5 +1,5 @@
 {
- "_": "THE DAILY DETERMINATION — one row per weekday of the story. Read reels/README.md before editing. Mike writes the question (the Word page or in chat); Ops carries it here and keeps status, postings and numbers. Nothing in src/ reads this file.",
+ "_": "THE DAILY DETERMINATION — one row per weekday of the story. Read reels/README.md before editing. Mike writes the question (the Word page or in chat); Ops carries it here and keeps status, postings and numbers. `frame` is the day's device feature the reel may show (Mike's ruling B on Never-Advertised, 2026-09-06); `site_only` is the day's story, which never appears on camera. Nothing in src/ reads this file.",
  "version": 1,
  "ruled": "2026-09-03",
  "epoch": "2026-09-07",
@@ -38,7 +38,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": ""
   },
   {
    "date": "2026-09-08",
@@ -62,7 +64,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": ""
   },
   {
    "date": "2026-09-09",
@@ -86,7 +90,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": ""
   },
   {
    "date": "2026-09-10",
@@ -110,7 +116,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": ""
   },
   {
    "date": "2026-09-11",
@@ -134,7 +142,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": ""
   },
   {
    "date": "2026-09-14",
@@ -160,7 +170,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "MGK-NIAC — the twenty",
+   "site_only": ""
   },
   {
    "date": "2026-09-15",
@@ -187,7 +199,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Starting; Starting (the monitor at rest)",
+   "site_only": ""
   },
   {
    "date": "2026-09-16",
@@ -213,7 +227,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Probabilities",
+   "site_only": ""
   },
   {
    "date": "2026-09-17",
@@ -239,7 +255,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Messages — the inbox",
+   "site_only": ""
   },
   {
    "date": "2026-09-18",
@@ -268,7 +286,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "The Everyman — the unboxing; with the Everyman",
+   "site_only": ""
   },
   {
    "date": "2026-09-21",
@@ -295,7 +315,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Games — Snow Globe and Tic-Tac-Toe",
+   "site_only": ""
   },
   {
    "date": "2026-09-22",
@@ -322,7 +344,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "The Gambler",
+   "site_only": "The Gambler's case (first of the cases)"
   },
   {
    "date": "2026-09-23",
@@ -351,7 +375,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "The Casino opens",
+   "site_only": ""
   },
   {
    "date": "2026-09-24",
@@ -378,7 +404,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "The Bullshit Detector",
+   "site_only": ""
   },
   {
    "date": "2026-09-25",
@@ -402,7 +430,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": ""
   },
   {
    "date": "2026-09-28",
@@ -428,7 +458,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Polarity",
+   "site_only": ""
   },
   {
    "date": "2026-09-29",
@@ -454,7 +486,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Clarity",
+   "site_only": ""
   },
   {
    "date": "2026-09-30",
@@ -480,7 +514,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "MGK-v2.0 arrives",
+   "site_only": ""
   },
   {
    "date": "2026-10-01",
@@ -507,7 +543,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "The CEO; the Career Chooser, with the CEO",
+   "site_only": ""
   },
   {
    "date": "2026-10-02",
@@ -533,7 +571,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "User — your name",
+   "site_only": ""
   },
   {
    "date": "2026-10-05",
@@ -557,7 +597,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": ""
   },
   {
    "date": "2026-10-06",
@@ -585,7 +627,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "The Informer; with the Informer",
+   "site_only": ""
   },
   {
    "date": "2026-10-07",
@@ -611,7 +655,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Excuses and Lines",
+   "site_only": ""
   },
   {
    "date": "2026-10-08",
@@ -637,7 +683,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Fortune",
+   "site_only": ""
   },
   {
    "date": "2026-10-09",
@@ -663,7 +711,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Maintenance",
+   "site_only": ""
   },
   {
    "date": "2026-10-12",
@@ -690,7 +740,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Tilt Drive and Gobble Don't Fall",
+   "site_only": ""
   },
   {
    "date": "2026-10-13",
@@ -717,7 +769,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "AvoidSteroids and Mail Run",
+   "site_only": ""
   },
   {
    "date": "2026-10-14",
@@ -744,7 +798,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Sniper and Stop On A Number",
+   "site_only": ""
   },
   {
    "date": "2026-10-15",
@@ -768,7 +824,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": ""
   },
   {
    "date": "2026-10-16",
@@ -795,7 +853,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Calculator and Notepad — (not installed)",
+   "site_only": ""
   },
   {
    "date": "2026-10-19",
@@ -821,7 +881,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "MGK-65 arrives",
+   "site_only": ""
   },
   {
    "date": "2026-10-20",
@@ -849,7 +911,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "The sound",
+   "site_only": ""
   },
   {
    "date": "2026-10-21",
@@ -875,7 +939,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "Voices",
+   "site_only": ""
   },
   {
    "date": "2026-10-22",
@@ -901,7 +967,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "The user record",
+   "site_only": ""
   },
   {
    "date": "2026-10-23",
@@ -927,7 +995,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": "The manual, the rest of it"
   },
   {
    "date": "2026-10-26",
@@ -953,7 +1023,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": "The original manuals"
   },
   {
    "date": "2026-10-27",
@@ -979,7 +1051,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": "The Gambler's table"
   },
   {
    "date": "2026-10-28",
@@ -1005,7 +1079,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": "The CEO's desk"
   },
   {
    "date": "2026-10-29",
@@ -1031,7 +1107,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": "The Informer's tools"
   },
   {
    "date": "2026-10-30",
@@ -1057,7 +1135,9 @@
     "sends": null,
     "replies": null
    },
-   "note": ""
+   "note": "",
+   "frame": "",
+   "site_only": "The antenna selector"
   }
  ]
 }
