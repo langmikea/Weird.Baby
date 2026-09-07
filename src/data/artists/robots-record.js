@@ -427,8 +427,8 @@ export const RECORD_ENTRIES = [
             { no: 1,
               date: recordDay(1),
               title: "INITIAL LAUNCH - Weird.Baby Website",
-              line: "> Weird.Baby website went live\n> Alert - Incoming "
-                    + "Server Load  (contained)",
+              line: "> Weird.Baby website went live!\n> Alert! Incoming "
+                    + "Server Load (contained)",
               sections: [
                 { label: "EXECUTIVE SUMMARY",
                   body: [
@@ -438,27 +438,22 @@ export const RECORD_ENTRIES = [
                   ] },
                 { label: "DETAILED REPORT",
                   body: [
-                    "  > ALARM - Incoming Server Load >1000x nominal\n  > "
-                    + "Operations remains unaffected.\n  > Multi-source swarm "
-                    + "payloads precludes IP/Domain blocking\n  ? RX ended "
-                    + "abruptly and coincident with Weird.Baby launch",
+                    "  As soon as online testing began the incoming server "
+                    + "spiked to 1K x nominal, consuming the full bandwidth "
+                    + "of the system and triggering the Server Auto Shutdown."
+                    + " REACT determined that multi-source swarm payloads "
+                    + "precluded IP/Domain blocking, and opted to jack ISBW "
+                    + "to 5K/25K. RX ended abruptly and coincident with "
+                    + "Weird.Baby launch",
                   ] },
                 { label: "ADDENDUM 01 - Event Log - Friday (Launch - 2)",
                   body: [
-                    "    15:00 - Weird.Baby Incoming Server - Scheduled "
-                    + "Early Auto Start (Retired)\n    15:01 - Weird.Baby "
-                    + "System BIST - No deviations; f(Ump) = 100%\n    15:04 -"
-                    + " First data packet received\n    15:58 - Second data "
-                    + "packet received\n    16:00 - Instantaneous - RX "
-                    + "sustained FULL LOAD - Packet Rejects = n!\n    16:10 - "
-                    + "Server auto-shutdown, auto-containment, and "
-                    + "auto-alerts\n    16:13 - REACT - Team is convened\n    "
-                    + "23:30 - REACT RULING - Restart with 5Kx Incoming "
-                    + "Server Resources",
-                    "    > The decision to resume was determined to be low "
-                    + "risk, reversible, and a real-world stress test.\n    > "
-                    + "The engineering team was more intrigued than "
-                    + "concerned, and not involved in the determination.",
+                    "    15:00 - Scheduled Early Auto Start\n    15:04 - "
+                    + "First data packet received\n    15:06 - Instantaneous "
+                    + "full load\n    15:10 - Server auto-shutdown\n    16:13 -"
+                    + " REACT - Team Convened\n    23:30 - REACT restart 5K x "
+                    + "nominal\n    23:55 - RX ceased\n    00:00 - Weird.Baby "
+                    + "launches",
                   ] },
                 { label: "ADDENDUM 02 - Weekend Summary",
                   body: [
@@ -483,24 +478,25 @@ export const RECORD_ENTRIES = [
             { no: 2,
               date: recordDay(2),
               title: "GENERAL STATUS UPDATE",
-              line: "> Weird.Baby Integrity Management Plan remains "
-                    + "on-track without anomalies.\n> Incoming Server Data "
-                    + "Assault has ceased; no impact.",
+              line: "> Weird.Baby Integrity Mgmt Plan on-track without "
+                    + "anomalies.\n> Incoming Server Data Assault has ceased; "
+                    + "no impact.",
               sections: [
                 { label: "EXECUTIVE SUMMARY",
                   body: [
-                    "  > Weird.Baby uptime: 100%, no anomalies - f(Ump) = "
-                    + "100%\n  > Blockers - Nothing to Report",
+                    "  > Weird.Baby uptime: 100%, no anomalies\n  > Blockers"
+                    + " - Nothing to Report",
                   ] },
                 { label: "DETAILED REPORT",
                   body: [
-                    "  > METRIC SUMMARY -All processes 6+ sigma.\n"
-                    + "  > Incoming Data: ZIP file (31.4 GB) Password "
-                    + "Protected\n"
-                    + "  > Manifest extraction attempted against the stream "
-                    + "still in flight - Appendix 01",
+                    "  Weird.Baby is running without issues.\n  Metrics: All"
+                    + " processes are 6+ sigma.",
+                    "  The data file from Sunday night (MGK-VIIIp.zip 31.4 "
+                    + "GB) is password encrypted. We're unable to extract "
+                    + "anything from it, except for a few file names (see "
+                    + "below).\n",
                   ] },
-                { label: "ADDENDUM 01 - Partial Manifest (names only, no contents)",
+                { label: "A-01- Filenames Only",
                   body: [
                     "    MGK-VIIIp/MANUAL/00-FRONTMATTER.tif\n    "
                     + "MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif\n    "

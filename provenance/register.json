@@ -16183,6 +16183,62 @@
    "l": 894,
    "t": "Early",
    "s": "Mike's ruling of 2026-08-29 on the chip: **Coconuts — EARLY**, against E.D. Yahdah's **EARLY INSTRUMENTAL**. It replaces the label from his own supplied line of 2026-08-28 (`Coconuts - Weird.Baby - Early Front Porch`), which is why the longer string is no longer in `src/` and its row was retired with it. **FILED MIKE BECAUSE THE CLASS IS `supplied by the operator — his words, his facts, his rulings` (provenance/README.md) and this is a ruling of his.** It is not VERIFIED: that class is `external and sourced`, and a word Mike chose is neither."
+  },
+  "852109112203f620": {
+   "c": "MIKE",
+   "f": "src/data/artists/robots-record.js",
+   "l": 430,
+   "t": "> Weird.Baby website went live!\n> Alert! Incoming Server Load (contained)",
+   "s": "Mike, the day editor, docs/dictation-20260807/record-draft.json, saved 2026-09-06 evening New York"
+  },
+  "44e8e9df3d8e5c63": {
+   "c": "MIKE",
+   "f": "src/data/artists/robots-record.js",
+   "l": 441,
+   "t": "  As soon as online testing began the incoming server spiked to 1K x nominal, consuming the full bandwidth of the system and triggering the Server Auto Shutdown. REACT determined that multi-source swarm payloads precluded IP/Domain blocking, and opted to jack ISBW to 5K/25K. RX ended abruptly and coincident with Weird.Baby launch",
+   "s": "Mike, the day editor, docs/dictation-20260807/record-draft.json, saved 2026-09-06 evening New York"
+  },
+  "0281598c0378186f": {
+   "c": "MIKE",
+   "f": "src/data/artists/robots-record.js",
+   "l": 451,
+   "t": "    15:00 - Scheduled Early Auto Start\n    15:04 - First data packet received\n    15:06 - Instantaneous full load\n    15:10 - Server auto-shutdown\n    16:13 - REACT - Team Convened\n    23:30 - REACT restart 5K x nominal\n    23:55 - RX ceased\n    00:00 - Weird.Baby launches",
+   "s": "Mike, the day editor, docs/dictation-20260807/record-draft.json, saved 2026-09-06 evening New York"
+  },
+  "fe5dfd101716bd04": {
+   "c": "MIKE",
+   "f": "src/data/artists/robots-record.js",
+   "l": 481,
+   "t": "> Weird.Baby Integrity Mgmt Plan on-track without anomalies.\n> Incoming Server Data Assault has ceased; no impact.",
+   "s": "Mike, the day editor, docs/dictation-20260807/record-draft.json, saved 2026-09-06 evening New York"
+  },
+  "4270b93faf4aec1e": {
+   "c": "MIKE",
+   "f": "src/data/artists/robots-record.js",
+   "l": 487,
+   "t": "  > Weird.Baby uptime: 100%, no anomalies\n  > Blockers - Nothing to Report",
+   "s": "Mike, the day editor, docs/dictation-20260807/record-draft.json, saved 2026-09-06 evening New York"
+  },
+  "e8eeda175afc2748": {
+   "c": "MIKE",
+   "f": "src/data/artists/robots-record.js",
+   "l": 492,
+   "t": "  Weird.Baby is running without issues.\n  Metrics: All processes are 6+ sigma.",
+   "s": "Mike, the day editor, docs/dictation-20260807/record-draft.json, saved 2026-09-06 evening New York"
+  },
+  "97af4aae567e06d8": {
+   "c": "MIKE",
+   "f": "src/data/artists/robots-record.js",
+   "l": 494,
+   "t": "  The data file from Sunday night (MGK-VIIIp.zip 31.4 GB) is password encrypted. We're unable to extract anything from it, except for a few file names (see below).\n",
+   "s": "Mike, the day editor, docs/dictation-20260807/record-draft.json, saved 2026-09-06 evening New York"
+  },
+  "6bd674a71140be35": {
+   "c": "MIKE",
+   "f": "src/data/artists/robots-record.js",
+   "l": 499,
+   "t": "A-01- Filenames Only",
+   "s": "Mike, the day editor, docs/dictation-20260807/record-draft.json, saved 2026-09-06 evening New York"
   }
  }
 }
