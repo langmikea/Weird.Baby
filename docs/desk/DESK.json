@@ -6,9 +6,9 @@
    "id": "record",
    "name": "The Record",
    "sub": "the story, told one entry a day",
-   "line": "Five entries in the site for week one; week two's five unwritten.",
-   "state": "on the clock",
-   "next": "Sunday: Record 001 lands; week two written by Fri 09-11.",
+   "line": "Your rewrite of 001 and 002 landed and deployed Sunday night; five entries armed for week one. Week two's five unwritten.",
+   "state": "armed; posts Monday at five",
+   "next": "Week two's five entries written by Fri 09-11.",
    "links": [
     {
      "label": "the calendar",
@@ -100,9 +100,9 @@
    "id": "site",
    "name": "The Site",
    "sub": "weird.baby, the tool",
-   "line": "Live, stage launch, nothing waits on a deploy. The reel is the front door now; the site is the depth.",
-   "state": "holding; it works",
-   "next": "Sunday: your deploy after Record 001.",
+   "line": "Live at launch stage, deployed by you Sunday night; the door checked from outside and holding. The reel is the front door now; the site is the depth.",
+   "state": "deployed; holding",
+   "next": "Nothing waits on a deploy. The wing opens itself Monday at five.",
    "links": [
     {
      "label": "weird.baby",

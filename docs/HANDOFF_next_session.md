@@ -2,9 +2,10 @@
 # HANDOFF — 2026-09-02
 
 ## LIVE
-Museum `8f5888d`, stage `launch`, deployed 2026-09-01T15:50:41.318Z
-(`docs/DEPLOYED.md`). Every commit since it is docs, tools or package.json;
-nothing served has changed. Nothing waits on a deploy.
+Museum `318cd81`, stage `launch`, deployed 2026-09-07T00:11:41.984Z by Mike
+on clock day (`docs/DEPLOYED.md`). It carries his rewrite of Records 001
+and 002. Door checked cookie-free after the deploy: held sample 404, stage
+launch, open false. Nothing waits on a deploy.
 
 ## NEXT ON THE CLOCK
 - **2026-09-07 17:00 America/New_York:** Record 001 posts and the wing opens

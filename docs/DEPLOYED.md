@@ -18,18 +18,19 @@ form). Ask the wire.
 
 | field | value |
 |---|---|
-| commit | `8f5888d` **— DIRTY TREE** |
-| full sha | `8f5888df066fe017a2917a4d006dbf144259f204` |
-| subject | fix(lobby): the note follows the live day — Mike supersedes §14.3 option 3 |
+| commit | `318cd81` |
+| full sha | `318cd81ac4d943e1e033343e3cc18394a7abb1d3` |
+| subject | Record 001 and 002: Mike's rewrite lands |
 | stage | **launch** |
-| deployed at | 2026-09-01T15:50:41.318Z |
-| worker sha256 | `cd5958c18986ddd4` (first 16) |
-| tree clean | **NO** — 3 path(s): `docs/dictation-20260807/day.html`, `docs/dictation-20260807/readiness.json`, `docs/dictation-20260807/record-draft.json` |
+| deployed at | 2026-09-07T00:11:41.984Z |
+| worker sha256 | `0eaef3d96ffb9ba3` (first 16) |
+| tree clean | yes |
 
 ## History
 
 | commit | stage | deployed at | worker sha256 | subject |
 |---|---|---|---|---|
+| `318cd81` | launch | 2026-09-07T00:11:41.984Z | `0eaef3d96ffb9ba3` | Record 001 and 002: Mike's rewrite lands |
 | `8f5888d` (dirty) | launch | 2026-09-01T15:50:41.318Z | `cd5958c18986ddd4` | fix(lobby): the note follows the live day — Mike supersedes §14.3 option 3 |
 | `3ccbad9` | launch | 2026-08-29T21:36:59.254Z | `5a767b8ac5145f7b` | handoff: the shell-stop count is 61, not 57 |
 | `83f06a0` (dirty) | launch | 2026-08-29T14:03:26.328Z | `85ac466ac948642c` | ops: one summary, one exit — the response shape lands as doctrine 28 |
