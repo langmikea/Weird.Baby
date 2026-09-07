@@ -109,11 +109,16 @@ function resolve(refs) {
 }
 
 const ROWS = [];
+/* [2026-09-06, clock day] `when` comes from reveal/schedule.json — Mike's
+   ruling A on the third cut of the choreography (2026-09-02) — by row id,
+   unless a row says otherwise. Rows the schedule does not name stay null:
+   nothing here invents a week (Doctrine 12). */
+const SCHEDULE = JSON.parse(fs.readFileSync(path.join(REPO, "reveal", "schedule.json"), "utf8")).rows;
 /* R(id, name, cls, where, build, reach, state, extra) */
 function R(id, name, cls, where, build, reach, state, extra = {}) {
   ROWS.push({
     id, name, cls, where, build, reach, state,
-    when: extra.when ?? null,
+    when: extra.when ?? SCHEDULE[id]?.week ?? null,
     deps: extra.deps || [],
     arc: extra.arc ?? null,
     shown: extra.shown === true,
@@ -1115,7 +1120,7 @@ const out = {
   _: "THE REVEAL LEDGER. One row per revealable thing across both repos: what it is, where it lives, what is TRUE TODAY about the build, whether a visitor can reach it, whether it should be reachable yet, when the story lets it out, and what has to happen first. Authored in reveal/ledger-declare.mjs — edit there, never here.",
   _states: "state: HELD (built or part-built and deliberately not reachable) · REVEALED (a visitor can get to it today) · RETIRED (was here, struck, named so nobody rebuilds it). NOT the same axis as `build`.",
   _build: "build: LIVE · PARTIAL · STUB · NOT_BUILT — what is true today, never what is planned.",
-  _when: "when: the story day or week a row becomes REVEALED. NULL ON EVERY ROW, by Doctrine 12 — Mike has supplied the arc (twelve weeks; month 1 the arrival, month 2 the turn, month 3 the reckoning) but no reveal dates, and this file does not invent them. NOT the same field as `transferWeek`: that is when the material ARRIVED, this is when a visitor gets it.",
+  _when: "when: the story week a row becomes REVEALED. Filled from reveal/schedule.json by row id (Mike's ruling A on the choreography, 2026-09-02; wired 2026-09-06); a row the schedule does not name stays null, because this file does not invent a week (Doctrine 12). NOT the same field as `transferWeek`: that is when the material ARRIVED, this is when a visitor gets it.",
   _transfer: "transfer: [T1] WHICH OF THE FOUR TRANSFERS BROUGHT THE MATERIAL INTO THE HOUSE — BLAST (Friday–Sunday pre-launch; everything the site already shows, and deliberately more) · PACKAGE (weeks 3–7, physical, four Fridays; earns its photographs) · UNLOCK (in hand from the start, could not be opened; no arrival needed) · TRANSMISSION (months 2–3, because they never stopped). THE RULE: an asset may only be SHOWN after it has been TRANSFERRED, and every row belongs to exactly one class or is exempted IN WRITING with a reason. Null here means exempted, and an exempt row may not be REVEALED. Classes, assignment, exemptions and the three checks: reveal/transfers.mjs. The timeline Mike reads: docs/ASSET_TIMELINE.md.",
   _transferWeek: "transferWeek: the week the material ARRIVED. 0 for BLAST (stated: pre-launch) and 0 for UNLOCK (derived by necessity — an unlock is of a thing already in hand, and it is in hand because the blast brought it). NULL for PACKAGE and TRANSMISSION, because the arc gives windows (weeks 3–7 on four Fridays; weeks 5–12) and names no week inside them — five weeks and four packages, and which one goes empty nobody has said. A null here means EXACTLY ONE THING: no named arrival, therefore not showable.",
   _arc: "arc: THE REVEAL ARC (Mike, 2026-08-04) — arrived · understood · partial · online · null. Same field, same values, as provenance/asset-table.json. `null` is UNSET and is not a stage.",
