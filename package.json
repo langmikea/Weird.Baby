@@ -26,7 +26,7 @@
     "record": "node tools/dictation/record-edit.mjs",
     "record:report": "node tools/dictation/record-edit.mjs --report",
     "record:land": "node tools/dictation/emit-record-entries.mjs",
-    "desk": "node tools/desk.mjs && node tools/days.mjs",
+    "desk": "node tools/desk.mjs && node tools/days.mjs && node tools/days-publish.mjs",
     "desk:full": "node tools/ops-desk.mjs",
     "costs": "node tools/costs.mjs",
     "calendar": "node tools/calendar.mjs",

@@ -147,6 +147,12 @@
    "url": "https://claude.ai/code/artifact/207ed53f-1abf-4667-82e5-92e3259f4233"
   },
   {
+   "name": "The Days in Google Calendar",
+   "what": "the same days as two calendar feeds you subscribe to once: yours and Ops’; every event carries the literal steps",
+   "how": "Google Calendar › Other calendars › + › From URL: https://assets.weird.baby/desk/days-mike.ics and https://assets.weird.baby/desk/days-ops.ics",
+   "url": "https://assets.weird.baby/desk/days-mike.ics"
+  },
+  {
    "name": "The plan to the door",
    "what": "Opening Day 10-30: the picture, seven weekly milestones, your blocks",
    "how": "served page",

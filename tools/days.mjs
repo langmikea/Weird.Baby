@@ -151,4 +151,29 @@ ${cards}
 </script>
 </body></html>`;
 fs.writeFileSync(OUT, html);
-console.log(`THE DAYS — ${todayNY}: ${tasks.length} tasks (you ${mikeDone}/${mikeAll}, ops ${opsDone}/${opsAll}), ${daysLeft} days to the door · wrote docs/desk/DAYS.html`);
+
+/* ── the same days as two calendar feeds (Mike's and Ops'), for Google
+   Calendar "From URL". One all-day event per task; the literal steps in the
+   description; a done task keeps its place with a tick in front. UIDs are
+   stable per task and SEQUENCE rises on every run so subscribers update. */
+const icsEsc = s => String(s ?? "").replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/,/g, "\\,").replace(/;/g, "\\;");
+const fold = line => { const out = []; let s = line; while (s.length > 72) { out.push(s.slice(0, 72)); s = " " + s.slice(72); } out.push(s); return out.join("\r\n"); };
+const stampNow = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+const seq = Math.floor(Date.now() / 60000);
+const ymd = iso => iso.replace(/-/g, "");
+function ics(name, list) {
+  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Weird.Baby//The Days//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", `X-WR-CALNAME:${icsEsc(name)}`, "X-WR-TIMEZONE:America/New_York", "REFRESH-INTERVAL;VALUE=DURATION:PT6H", "X-PUBLISHED-TTL:PT6H"];
+  for (const t of list) {
+    const desc = [(t.owner === "mike" ? "YOU" : "OPS") + (t.done ? " · DONE" : t.late ? " · LATE" : ""), "", ...(t.do || []).map((s, i) => `${i + 1}. ${s}`), "", "The Days: https://claude.ai/code/artifact/207ed53f-1abf-4667-82e5-92e3259f4233"].join("\n");
+    lines.push("BEGIN:VEVENT", `UID:${t.id}@weird.baby`, `DTSTAMP:${stampNow}`, `LAST-MODIFIED:${stampNow}`, `SEQUENCE:${seq}`,
+      `DTSTART;VALUE=DATE:${ymd(t.date)}`, `DTEND;VALUE=DATE:${ymd(addDays(t.date, 1))}`,
+      fold(`SUMMARY:${icsEsc((t.done ? "✓ " : "") + t.title)}`), fold(`DESCRIPTION:${icsEsc(desc)}`),
+      `CATEGORIES:${t.owner === "mike" ? "Weird.Baby You" : "Weird.Baby Ops"}`, `STATUS:${t.done ? "COMPLETED" : "CONFIRMED"}`, "TRANSP:TRANSPARENT", "END:VEVENT");
+  }
+  lines.push("END:VCALENDAR");
+  return lines.join("\r\n") + "\r\n";
+}
+const openDay = { id: "opening-day", date: T.opening_day, owner: "ops", title: "OPENING DAY — the door opens at five", do: ["Mike deploys; Ops checks the door from outside.", "Halloween, and the cat's birthday."], done: false, late: false };
+fs.writeFileSync(path.join(REPO, "docs/desk/days-mike.ics"), ics("Weird.Baby · You", [...tasks.filter(t => t.owner === "mike"), openDay]));
+fs.writeFileSync(path.join(REPO, "docs/desk/days-ops.ics"), ics("Weird.Baby · Ops", tasks.filter(t => t.owner === "ops")));
+console.log(`THE DAYS — ${todayNY}: ${tasks.length} tasks (you ${mikeDone}/${mikeAll}, ops ${opsDone}/${opsAll}), ${daysLeft} days to the door · wrote docs/desk/DAYS.html, days-mike.ics, days-ops.ics`);
