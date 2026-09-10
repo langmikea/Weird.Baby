@@ -36,6 +36,33 @@ const wk = weekOf();
 const laneRows = (lane, w) => led[lane].rows.filter(r => r.week === w);
 const count = rows => { const c = {}; for (const r of rows) c[r.status] = (c[r.status] || 0) + 1; return Object.entries(c).map(([k, v]) => `${v} ${k}`).join(", ") || "—"; };
 
+/* Mike's blocks (SED), counted live where the tree can be read */
+const ONE = "C:/Users/macun/OneDrive/WeirdBaby";
+const countFiles = (dir, re = /\.(mp4|mov|m4v)$/i) => { try { return fs.readdirSync(dir).filter(f => re.test(f)).length; } catch { return 0; } };
+const countPhotoSets = () => { try { return fs.readdirSync(path.join(ONE, "photos"), { withFileTypes: true }).filter(d => d.isDirectory() && countFiles(path.join(ONE, "photos", d.name), /\.(jpe?g|png|heic|webp)$/i) >= 4).length; } catch { return 0; } };
+const BLOCKS = JSON.parse(fs.readFileSync(path.join(REPO, "docs/desk/BLOCKS.json"), "utf8"));
+const launchWeekStart = "2026-10-26";
+function measure(b) {
+  switch (b.measure) {
+    case "determinations:question": return led.determinations.rows.filter(r => r.date >= launchWeekStart && r.question).length;
+    case "intake:determinations": return countFiles(path.join(ONE, "reels/intake/determinations"));
+    case "intake:numbers": return countFiles(path.join(ONE, "reels/intake/numbers"));
+    case "intake:practice": return countFiles(path.join(ONE, "reels/intake/practice"));
+    case "photos:sets": return countPhotoSets();
+    case "clicks": return (fs.existsSync("C:/AI/PERSONA-20260903/.secrets/buffer.token") ? 1 : 0) + (b.done || 0);
+    default: return b.done || 0;
+  }
+}
+const blockRows = BLOCKS.blocks.map(b => {
+  const done = Math.min(measure(b), b.count);
+  const late = done < b.count && todayNY > b.due;
+  const cls = done >= b.count ? "ok" : late ? "no" : "";
+  return `<tr><td>${esc(b.name)}</td><td>${esc(b.one)}</td><td><span class="state ${cls}">${done} of ${b.count}</span></td><td>${esc(b.cadence)}<br><small>${esc(b.how)}</small></td></tr>`;
+}).join("");
+const blocksDone = BLOCKS.blocks.reduce((s, b) => s + Math.min(measure(b), b.count), 0);
+const blocksTotal = BLOCKS.blocks.reduce((s, b) => s + b.count, 0);
+const daysLeft = Math.round((Date.parse(BLOCKS.opening_day) - Date.parse(todayNY)) / 86400000);
+
 /* costs */
 let costs = null;
 try { costs = JSON.parse(execFileSync("node", [path.join(HERE, "costs.mjs"), "--json"], { encoding: "utf8" })); } catch {}
@@ -62,6 +89,7 @@ a{color:var(--gold-ink);text-decoration:none;border-bottom:1px solid var(--rule)
 .line li{border:1px solid var(--rule);background:var(--card);border-radius:4px;padding:12px 14px}.line b{display:block;font-weight:600;margin-bottom:2px}.line span{color:var(--ink-2);font-size:13.5px}
 footer{margin-top:34px;border-top:1px solid var(--rule);padding-top:12px;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-3)}
 .links{margin-top:6px;font-size:13px}.links a{margin-right:2px}
+.blk td:first-child{width:18%;font-weight:600}.blk td:nth-child(2){width:40%}.blk td:nth-child(3){width:10%;white-space:nowrap}.blk td:nth-child(4){width:32%;color:var(--ink-2)}.blk small{color:var(--ink-3)}
 `;
 const stateClass = s => /ruled|working|standing|built/.test(s) ? "ok" : /waits|held|clock/.test(s) ? "no" : "";
 const linksOf = p => (p.links || []).map(l => `<a href="${esc(l.url)}">${esc(l.label)}</a>`).join(" · ");
@@ -78,7 +106,9 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 <p class="sub">Where things stand against the seven pillars, the instruments you use, and what is yours to do. Everything on this page works; nothing on it is a draft. Ops keeps it current; ask and it is regenerated.</p>
 <h2>The pillars</h2>
 <table class="pill"><thead><tr><th>Pillar</th><th>Where it stands</th><th>State</th><th>Next</th></tr></thead><tbody>${pillars}</tbody></table>
-<h2>What you owe</h2>
+<h2>What you deliver before the door <small style="font-family:var(--mono,ui-monospace);font-size:12px;color:var(--ink-3);font-weight:400;margin-left:10px">${blocksDone} of ${blocksTotal} · ${daysLeft} days to ${BLOCKS.opening_day}</small></h2>
+<table class="blk"><thead><tr><th>Block</th><th>One is</th><th>Done</th><th>When · how it reaches Ops</th></tr></thead><tbody>${blockRows}</tbody></table>
+<h2>What you owe besides</h2>
 <ul class="owes">${owesHtml}</ul>
 <h2>The reel line and the money</h2>
 <ul class="line">${week(wk)}${week(wk + 1)}${costLine}</ul>
