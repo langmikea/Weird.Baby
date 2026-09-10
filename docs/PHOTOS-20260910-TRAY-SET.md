@@ -9,16 +9,18 @@ Mike's rulings, in order, cleaned.
    the artifact and character pages, the reels (including a fast fly-by),
    and uses not yet thought of.
 2. **The treatment.** Strength 3, "the handled print", of the served sample (Mike from the PC, 2026-09-10: "I like the handled version"; supersedes the strength 2 he chose from the phone) (`C:\AI\PERSONA-20260903\sample-scans.html`):
-   grey scale, blacks lifted, a warmer silver, medium grain, a faint
-   vignette, a hair of softness, a white print border with its edge line, on
+   grey scale, faded and warm, visible grain, a soft vignette, corner wear,
+   a hair of softness, a yellowed white print border with its edge line, on
    an off-white scanner bed. Ruled from the PC; nothing committed as an image yet.
 3. **The crop.** Always inside the tray, never a sliver of table; extend the
    tray's radius in retouch if a tight crop needs it. Big and enclosed things
    keep the full tray; individual items are cropped close, centred, the rule
    kept or dropped deliberately, never half.
 4. **The re-shoot.** Mike re-shoots the whole set rather than patch it. One
-   rig, top-down, main lens, tripod, two marked heights (tray-full and
-   single-item), the tray taped in place, even soft light, exposure locked
+   rig, top-down, main lens, tripod, one height for the tray and the camera
+   brought down for a single small thing until it and the rule fill about
+   half the frame (no marked heights, no pre-cropping; Mike, later the same
+   day), the tray taped in place, even soft light, exposure locked
    per item, 24 MP JPEG. The rule bottom centre and fully in on every frame.
    Every enclosed thing closed, open, and contents laid out; every unit's
    back and underside; a group frame per character; singles for chips,
