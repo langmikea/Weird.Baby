@@ -69,6 +69,10 @@
    "next": "Week 1: the catalogue and the twin audit. Week 2: the mocks.",
    "links": [
     {
+     "label": "the catalogue",
+     "url": "https://claude.ai/code/artifact/9ce6fac0-17fd-416b-a02a-bec67b8436c6"
+    },
+    {
      "label": "the spine",
      "url": "https://claude.ai/code/artifact/446eb084-801f-47dd-af9b-4429fe598f76"
     },
@@ -151,6 +155,12 @@
    "what": "the same days as two calendar feeds you subscribe to once: yours and Ops’; every event carries the literal steps",
    "how": "Google Calendar › Other calendars › + › From URL: https://assets.weird.baby/desk/days-mike.ics and https://assets.weird.baby/desk/days-ops.ics",
    "url": "https://assets.weird.baby/desk/days-mike.ics"
+  },
+  {
+   "name": "The Catalogue",
+   "what": "every feature, game, setting, character and artifact with a pitch and a launch day; the 09-20 sitting rules it A/B/C",
+   "how": "served page; node tools/catalogue.mjs",
+   "url": "https://claude.ai/code/artifact/9ce6fac0-17fd-416b-a02a-bec67b8436c6"
   },
   {
    "name": "The plan to the door",

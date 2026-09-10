@@ -74,7 +74,8 @@
     "arc": "node tools/arc.mjs",
     "arc:check": "node tools/arc.mjs --check",
     "shellstop:gate": "node tools/shell-stop-gate.mjs",
-    "door:check": "node tools/door-probe.mjs"
+    "door:check": "node tools/door-probe.mjs",
+    "catalogue": "node tools/catalogue.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",

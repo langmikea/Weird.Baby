@@ -230,9 +230,9 @@
    "block": "rulings",
    "title": "Sitting: the catalogue's pitches",
    "do": [
-    "Thirty minutes, Sunday, with the served page Code sends that morning.",
-    "Every feature, game, setting, character and artifact, one line each. You read the page and answer the numbered A/B/C questions in chat; anything you do not like, say so in one line and it is rewritten.",
-    "Nothing is due from you before the page arrives."
+    "Thirty minutes, Sunday. Open the catalogue: https://claude.ai/code/artifact/9ce6fac0-17fd-416b-a02a-bec67b8436c6",
+    "Read down. For each row say the number and a letter: A the pitch stands, B rewrite (say the line or the gist), C cut the row. Rows you say nothing about stand as A.",
+    "Anything missing from the machine, name it and it gets a row."
    ]
   },
   {
@@ -488,7 +488,9 @@
    "do": [
     "Served for Mike's Sunday sitting."
    ],
-   "long": "The catalogue: every feature, game, setting, character and artifact with a pitch and a day (≥50 rows)"
+   "long": "The catalogue: every feature, game, setting, character and artifact with a pitch and a day (≥50 rows)",
+   "done": true,
+   "done_on": "2026-09-10"
   },
   {
    "id": "music-page",
