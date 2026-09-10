@@ -162,6 +162,14 @@ for t in tasks: by_date.setdefault(t["_d"], []).append(t)
 row = 4
 months = [(2026, 9), (2026, 10), (2026, 11)]
 calendar.setfirstweekday(calendar.SUNDAY)
+# every day the same size: one number row plus DEPTH item rows, boxed on all
+# four sides; a day that has passed is greyed whole; a day outside the month
+# is blank and greyed too. [Mike, 2026-09-10]
+DEPTH = max(6, max((len(v) for v in by_date.values()), default=1))
+mid = Side(style="thin", color="BFBFBF")
+fill_past = PatternFill("solid", fgColor="EDEDED"); fill_off = PatternFill("solid", fgColor="F7F7F7")
+def day_border(k):  # k = -1 number row, 0..DEPTH-1 item rows
+    return Border(left=mid, right=mid, top=(mid if k == -1 else Side(style=None)), bottom=(mid if k == DEPTH - 1 else Side(style=None)))
 for (y, m) in months:
     ws_c.cell(row=row, column=1, value=datetime.date(y, m, 1).strftime("%B %Y")).font = Font(name=F, size=13, bold=True, color=INK)
     row += 1
@@ -171,25 +179,32 @@ for (y, m) in months:
     for week in calendar.monthcalendar(y, m):
         ws_c.row_dimensions[row].height = 16
         for i, dnum in enumerate(week, 1):
-            c = ws_c.cell(row=row, column=i, value=(dnum or None)); c.font = Font(name=F, size=9, color=GREY); c.border = Border(left=thin, right=thin, top=thin); c.alignment = Alignment(horizontal="right")
+            c = ws_c.cell(row=row, column=i, value=(dnum or None)); c.font = Font(name=F, size=9, color=GREY); c.border = day_border(-1); c.alignment = Alignment(horizontal="right")
             if dnum:
                 d = datetime.date(y, m, dnum)
-                if d == TODAY: c.fill = fill_today
+                if d < TODAY: c.fill = fill_past
+                if d == TODAY: c.fill = fill_today; c.font = Font(name=F, size=9, bold=True, color=INK)
                 if d == OPEN: c.fill = fill_open; c.value = f"{dnum}  OPENING DAY"; c.alignment = Alignment(horizontal="left"); c.font = Font(name=F, size=9, bold=True, color="3F7A4F")
-        # item lines under the day number: as many rows as the busiest day in the week
+            else:
+                c.fill = fill_off
         items = {i: by_date.get(datetime.date(y, m, dnum), []) if dnum else [] for i, dnum in enumerate(week, 1)}
-        depth = max([len(v) for v in items.values()] + [1])
-        for k in range(depth):
+        for k in range(DEPTH):
             row += 1; ws_c.row_dimensions[row].height = 14
-            for i in range(1, 8):
-                c = ws_c.cell(row=row, column=i); c.border = Border(left=thin, right=thin, bottom=(thin if k == depth - 1 else Side(style=None)))
+            for i, dnum in enumerate(week, 1):
+                c = ws_c.cell(row=row, column=i); c.border = day_border(k)
                 c.alignment = Alignment(vertical="top", wrap_text=False, shrink_to_fit=True)
+                if not dnum: c.fill = fill_off; continue
+                d = datetime.date(y, m, dnum)
+                if d < TODAY: c.fill = fill_past
+                elif d == TODAY: c.fill = fill_today
+                elif d == OPEN: c.fill = fill_open
                 lst = items[i]
                 if k < len(lst):
                     t = lst[k]
                     c.value = t["title"] if len(t["title"]) <= 34 else t["title"][:33] + "…"
                     c.font = f_done if t["_done"] else (f_mike if t["owner"] == "mike" else f_ops)
-                    if t["_late"]: c.font = Font(name=F, size=9, bold=True, color=RED, underline="single")
+                    if d < TODAY and not t["_done"]: c.font = Font(name=F, size=9, bold=True, color=RED, underline="single")  # late
+                    if d < TODAY and t["_done"]: c.font = Font(name=F, size=9, color="9A9A9A", strike=True, underline="single")
                     c.hyperlink = f"#'Tasks'!D{row_of[t['id']]}"
         row += 1
     row += 1
