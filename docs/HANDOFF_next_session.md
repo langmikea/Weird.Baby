@@ -1,5 +1,15 @@
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
-# HANDOFF — 2026-09-02
+# HANDOFF — 2026-09-10
+
+## THE RESET (Mike, 2026-09-10) — read before anything below
+Opening Day is **2026-10-30**. The site goes back to "not open yet" until
+then (low priority; when the site is next touched). The robots wing becomes
+an infomercial for the device; the story is a prologue. Ops writes the
+Records and runs the calendar. Nothing built on the 60-day story is sacred:
+a burn list, ruled in batches. The plan, with seven weekly milestones and
+counted deliverables, is `docs/PLAN-20260910-OPENING-DAY.md` (served:
+`docs/desk/PLAN.html`). Everything below that assumes week two starts 09-14
+is superseded by it.
 
 ## LIVE
 Museum `318cd81`, stage `launch`, deployed 2026-09-07T00:11:41.984Z by Mike
