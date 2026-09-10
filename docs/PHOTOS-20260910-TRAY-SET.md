@@ -8,11 +8,10 @@ Mike's rulings, in order, cleaned.
    white border. Every original is open game for every use: the prologue,
    the artifact and character pages, the reels (including a fast fly-by),
    and uses not yet thought of.
-2. **The treatment.** Strength 2 of the served sample (`C:\AI\PERSONA-20260903\sample-scans.html`):
+2. **The treatment.** Strength 3, "the handled print", of the served sample (Mike from the PC, 2026-09-10: "I like the handled version"; supersedes the strength 2 he chose from the phone) (`C:\AI\PERSONA-20260903\sample-scans.html`):
    grey scale, blacks lifted, a warmer silver, medium grain, a faint
    vignette, a hair of softness, a white print border with its edge line, on
-   an off-white scanner bed. Ruled from the phone; confirmation from the PC
-   pending before anything is committed.
+   an off-white scanner bed. Ruled from the PC; nothing committed as an image yet.
 3. **The crop.** Always inside the tray, never a sliver of table; extend the
    tray's radius in retouch if a tight crop needs it. Big and enclosed things
    keep the full tray; individual items are cropped close, centred, the rule
