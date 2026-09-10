@@ -1,0 +1,485 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Days</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"><style>
+:root{--paper:#f3f4f1;--paper-2:#e9ebe6;--card:#fbfbf9;--ink:#1c2026;--ink-2:#4a515a;--ink-3:#7a828c;--rule:#cfd3cc;--gold:#b8974a;--gold-ink:#7a6122;--gold-bg:#f4ecd9;--you:#6a4c93;--you-bg:#ebe4f3;--late:#9a3b2e;--open:#3f7a4f;--open-bg:#e3efe4;--now:#fff8dc}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#171a1e;--paper-2:#1f2328;--card:#1c2025;--ink:#e6e8e4;--ink-2:#b4bac1;--ink-3:#7f878f;--rule:#343a41;--gold:#cdae63;--gold-ink:#dcc27f;--gold-bg:#33291a;--you:#c2a8e6;--you-bg:#2e2440;--late:#e39a8c;--open:#8fcb9c;--open-bg:#213827;--now:#2a2a1a}}
+:root[data-theme="dark"]{--paper:#171a1e;--paper-2:#1f2328;--card:#1c2025;--ink:#e6e8e4;--ink-2:#b4bac1;--ink-3:#7f878f;--rule:#343a41;--gold:#cdae63;--gold-ink:#dcc27f;--gold-bg:#33291a;--you:#c2a8e6;--you-bg:#2e2440;--late:#e39a8c;--open:#8fcb9c;--open-bg:#213827;--now:#2a2a1a}
+html{color-scheme:light dark}body{margin:0;background:var(--paper);color:var(--ink);font-family:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.4}
+.wrap{max-width:1400px;margin:0 auto;padding:24px 18px 60px}
+.eyebrow{font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+h1{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:34px;line-height:1.05;margin:0 0 4px;letter-spacing:-.01em}
+.sub{color:var(--ink-2);margin:0 0 14px;max-width:80ch}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:12.5px;color:var(--ink-2);margin:0 0 14px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+.legend i.mike{background:var(--you)}.legend i.ops{background:var(--gold)}.legend i.done{background:var(--paper-2);border:1px solid var(--rule)}.legend i.late{background:transparent;border:2px solid var(--late)}
+.ms{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin:0 0 16px}
+.ms a{display:block;border:1px solid var(--rule);border-radius:4px;padding:6px 8px;text-decoration:none;color:var(--ink);font-size:12px;background:var(--card)}
+.ms a b{display:block;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--gold-ink);letter-spacing:.08em}
+.ms a.now{border-color:var(--gold);background:var(--gold-bg)}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.day{background:var(--card);border:1px solid var(--rule);border-radius:4px;min-height:96px;padding:6px 7px;display:flex;flex-direction:column;gap:6px}
+.day.past{opacity:.75}.day.today{background:var(--now);border-color:var(--gold)}.day.open{border:2px solid var(--open);background:var(--open-bg)}
+.dh{display:flex;justify-content:space-between;align-items:baseline;gap:6px;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink-3)}
+.dh em{font-style:normal;color:var(--gold-ink);font-size:10px;letter-spacing:.06em;text-transform:uppercase;text-align:right}.dh em.door{color:var(--open);font-weight:600}
+.pills{display:flex;flex-direction:column;gap:4px}
+.pill{text-align:left;font:inherit;font-size:12px;line-height:1.25;border:0;border-radius:3px;padding:4px 7px;cursor:pointer;color:#fff;width:100%}
+.pill.mike{background:var(--you)}.pill.ops{background:var(--gold);color:#1c2026}
+.pill.done{background:var(--paper-2);color:var(--ink-3);text-decoration:line-through}
+.pill.late{box-shadow:0 0 0 2px var(--late)}
+.pill:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+dialog{border:1px solid var(--rule);border-radius:6px;padding:0;max-width:560px;width:calc(100% - 32px);background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.35)}
+.card{padding:20px 22px 18px;border-top:6px solid var(--gold)}.card.mike{border-top-color:var(--you)}
+.card h3{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:22px;margin:0 0 10px;line-height:1.15}
+.card ol{margin:0 0 12px;padding-left:1.3em;font-size:15px}.card li{margin:6px 0}
+.tick{display:flex;gap:10px;align-items:center;font-size:16px;font-weight:600;margin:10px 0 4px}.tick input{width:22px;height:22px}
+.fine{font-size:12px;color:var(--ink-3);margin:6px 0 0}
+.close{position:absolute;right:10px;top:8px;border:0;background:transparent;font-size:22px;cursor:pointer;color:var(--ink-3)}
+footer{margin-top:22px;border-top:1px solid var(--rule);padding-top:10px;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-3)}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.day.empty{display:none}.ms{grid-template-columns:repeat(4,1fr)}.day{min-height:0}}
+</style></head><body>
+<div class="wrap">
+<p class="eyebrow">Weird.Baby · the days to the door · 2026-09-10</p><h1>The Days</h1>
+<p class="sub">Every day to Opening Day, and what is due on it. Purple is you, gold is Ops. Dim is done. A red ring is late. Tap a pill for what to do, literally; tick it when it is done. 50 days to 2026-10-30. You: 0 of 31. Ops: 0 of 29.</p>
+<div class="legend"><span><i class="mike"></i>you</span><span><i class="ops"></i>Ops</span><span><i class="done"></i>done</span><span><i class="late"></i>late</span><span>today is outlined in gold; the door in green</span></div>
+<div class="ms"><a href="#d-2026-09-07" class="now"><b>WEEK 0 · 09-07</b>alignment, the burn list</a><a href="#d-2026-09-14" class=""><b>WEEK 1 · 09-14</b>the catalogue</a><a href="#d-2026-09-21" class=""><b>WEEK 2 · 09-21</b>the wing's shape</a><a href="#d-2026-09-28" class=""><b>WEEK 3 · 09-28</b>the wing built, the twin current</a><a href="#d-2026-10-05" class=""><b>WEEK 4 · 10-05</b>content lock</a><a href="#d-2026-10-12" class=""><b>WEEK 5 · 10-12</b>in the can</a><a href="#d-2026-10-19" class=""><b>WEEK 6 · 10-19</b>teasers, rehearsal</a><a href="#d-2026-10-26" class=""><b>WEEK 7 · 10-26</b>open</a></div>
+<div class="grid"><div class="day   past empty" id="d-2026-09-07" data-date="2026-09-07">
+    <div class="dh"><span>Mon Sep 7</span><em>wk 0 · alignment, the burn list</em></div>
+    <div class="pills"></div></div><div class="day   past empty" id="d-2026-09-08" data-date="2026-09-08">
+    <div class="dh"><span>Tue Sep 8</span></div>
+    <div class="pills"></div></div><div class="day   past empty" id="d-2026-09-09" data-date="2026-09-09">
+    <div class="dh"><span>Wed Sep 9</span></div>
+    <div class="pills"></div></div><div class="day today   empty" id="d-2026-09-10" data-date="2026-09-10">
+    <div class="dh"><span>Thu Sep 10</span></div>
+    <div class="pills"></div></div><div class="day    empty" id="d-2026-09-11" data-date="2026-09-11">
+    <div class="dh"><span>Fri Sep 11</span></div>
+    <div class="pills"></div></div><div class="day    empty" id="d-2026-09-12" data-date="2026-09-12">
+    <div class="dh"><span>Sat Sep 12</span></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-09-13" data-date="2026-09-13">
+    <div class="dh"><span>Sun Sep 13</span></div>
+    <div class="pills"><button class="pill ops  " data-id="burn-list" aria-pressed="false">The burn list: every story-first page, doc, tool and rule marked keep / re-cut / burn</button><button class="pill ops  " data-id="grade-2026-09-13" aria-pressed="false">Sunday grade on the desk: done over total for the week</button></div></div><div class="day    empty" id="d-2026-09-14" data-date="2026-09-14">
+    <div class="dh"><span>Mon Sep 14</span><em>wk 1 · the catalogue</em></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-09-15" data-date="2026-09-15">
+    <div class="dh"><span>Tue Sep 15</span></div>
+    <div class="pills"><button class="pill mike  " data-id="practice-2026-09-15" aria-pressed="false">Practice reel 1 of 9</button></div></div><div class="day    empty" id="d-2026-09-16" data-date="2026-09-16">
+    <div class="dh"><span>Wed Sep 16</span></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-09-17" data-date="2026-09-17">
+    <div class="dh"><span>Thu Sep 17</span></div>
+    <div class="pills"><button class="pill mike  " data-id="practice-2026-09-17" aria-pressed="false">Practice reel 2 of 9</button><button class="pill ops  " data-id="twin-audit" aria-pressed="false">Twin software audit: what the site runs against the full set</button></div></div><div class="day    " id="d-2026-09-18" data-date="2026-09-18">
+    <div class="dh"><span>Fri Sep 18</span></div>
+    <div class="pills"><button class="pill ops  " data-id="catalogue" aria-pressed="false">The catalogue: every feature, game, setting, character and artifact with a pitch and a day (≥50 rows)</button></div></div><div class="day    " id="d-2026-09-19" data-date="2026-09-19">
+    <div class="dh"><span>Sat Sep 19</span></div>
+    <div class="pills"><button class="pill mike  " data-id="practice-2026-09-19" aria-pressed="false">Practice reel 3 of 9</button><button class="pill ops  " data-id="music-page" aria-pressed="false">The music launch on one page</button></div></div><div class="day    " id="d-2026-09-20" data-date="2026-09-20">
+    <div class="dh"><span>Sun Sep 20</span></div>
+    <div class="pills"><button class="pill mike  " data-id="photos-everyman" aria-pressed="false">Photographs: the Everyman unboxing</button><button class="pill mike  " data-id="ruling-1" aria-pressed="false">Ruling sitting: the catalogue's pitches</button><button class="pill ops  " data-id="grade-2026-09-20" aria-pressed="false">Sunday grade on the desk: done over total for the week</button></div></div><div class="day    empty" id="d-2026-09-21" data-date="2026-09-21">
+    <div class="dh"><span>Mon Sep 21</span><em>wk 2 · the wing's shape</em></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-09-22" data-date="2026-09-22">
+    <div class="dh"><span>Tue Sep 22</span></div>
+    <div class="pills"><button class="pill mike  " data-id="practice-2026-09-22" aria-pressed="false">Practice reel 4 of 9</button></div></div><div class="day    empty" id="d-2026-09-23" data-date="2026-09-23">
+    <div class="dh"><span>Wed Sep 23</span></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-09-24" data-date="2026-09-24">
+    <div class="dh"><span>Thu Sep 24</span></div>
+    <div class="pills"><button class="pill mike  " data-id="practice-2026-09-24" aria-pressed="false">Practice reel 5 of 9</button></div></div><div class="day    " id="d-2026-09-25" data-date="2026-09-25">
+    <div class="dh"><span>Fri Sep 25</span></div>
+    <div class="pills"><button class="pill ops  " data-id="mocks" aria-pressed="false">Five wing mocks served: feature page, day's landing, prologue, character page, the front</button></div></div><div class="day    " id="d-2026-09-26" data-date="2026-09-26">
+    <div class="dh"><span>Sat Sep 26</span></div>
+    <div class="pills"><button class="pill mike  " data-id="practice-2026-09-26" aria-pressed="false">Practice reel 6 of 9</button><button class="pill ops  " data-id="burn-down" aria-pressed="false">Burn-down executed: rows marked burn archived or deleted</button></div></div><div class="day    " id="d-2026-09-27" data-date="2026-09-27">
+    <div class="dh"><span>Sun Sep 27</span></div>
+    <div class="pills"><button class="pill mike  " data-id="photos-gambler" aria-pressed="false">Photographs: the Gambler</button><button class="pill mike  " data-id="ruling-2" aria-pressed="false">Ruling sitting: the five wing mocks</button><button class="pill ops  " data-id="grade-2026-09-27" aria-pressed="false">Sunday grade on the desk: done over total for the week</button></div></div><div class="day    empty" id="d-2026-09-28" data-date="2026-09-28">
+    <div class="dh"><span>Mon Sep 28</span><em>wk 3 · the wing built, the twin current</em></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-09-29" data-date="2026-09-29">
+    <div class="dh"><span>Tue Sep 29</span></div>
+    <div class="pills"><button class="pill mike  " data-id="practice-2026-09-29" aria-pressed="false">Practice reel 7 of 9</button></div></div><div class="day    empty" id="d-2026-09-30" data-date="2026-09-30">
+    <div class="dh"><span>Wed Sep 30</span></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-10-01" data-date="2026-10-01">
+    <div class="dh"><span>Thu Oct 1</span></div>
+    <div class="pills"><button class="pill mike  " data-id="practice-2026-10-01" aria-pressed="false">Practice reel 8 of 9</button><button class="pill ops  " data-id="prologue" aria-pressed="false">The prologue page built</button></div></div><div class="day    " id="d-2026-10-02" data-date="2026-10-02">
+    <div class="dh"><span>Fri Oct 2</span></div>
+    <div class="pills"><button class="pill ops  " data-id="pages" aria-pressed="false">Feature pages built from the catalogue (≥25, development stage)</button><button class="pill ops  " data-id="twin-update" aria-pressed="false">The twin on the site at the full software, verified against the audit</button></div></div><div class="day    " id="d-2026-10-03" data-date="2026-10-03">
+    <div class="dh"><span>Sat Oct 3</span></div>
+    <div class="pills"><button class="pill mike  " data-id="practice-2026-10-03" aria-pressed="false">Practice reel 9 of 9</button><button class="pill ops  " data-id="landing" aria-pressed="false">The day's landing wired to the calendar</button><button class="pill ops  " data-id="bench-plan" aria-pressed="false">The real unit's flash plan and bench date</button></div></div><div class="day    " id="d-2026-10-04" data-date="2026-10-04">
+    <div class="dh"><span>Sun Oct 4</span></div>
+    <div class="pills"><button class="pill mike  " data-id="photos-ceo" aria-pressed="false">Photographs: the CEO</button><button class="pill mike  " data-id="ruling-3" aria-pressed="false">Ruling sitting: the room and the framing</button><button class="pill mike  " data-id="questions-2026-10-04" aria-pressed="false">Five questions for the week of 10-05</button><button class="pill ops  " data-id="grade-2026-10-04" aria-pressed="false">Sunday grade on the desk: done over total for the week</button></div></div><div class="day    empty" id="d-2026-10-05" data-date="2026-10-05">
+    <div class="dh"><span>Mon Oct 5</span><em>wk 4 · content lock</em></div>
+    <div class="pills"></div></div><div class="day    empty" id="d-2026-10-06" data-date="2026-10-06">
+    <div class="dh"><span>Tue Oct 6</span></div>
+    <div class="pills"></div></div><div class="day    empty" id="d-2026-10-07" data-date="2026-10-07">
+    <div class="dh"><span>Wed Oct 7</span></div>
+    <div class="pills"></div></div><div class="day    empty" id="d-2026-10-08" data-date="2026-10-08">
+    <div class="dh"><span>Thu Oct 8</span></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-10-09" data-date="2026-10-09">
+    <div class="dh"><span>Fri Oct 9</span></div>
+    <div class="pills"><button class="pill mike  " data-id="words-1" aria-pressed="false">Your words: the prologue's opening</button><button class="pill ops  " data-id="launch-days" aria-pressed="false">Fifteen launch-run days written: question slot, feature page, promotion copy</button><button class="pill ops  " data-id="number-pieces" aria-pressed="false">Fifteen Number pieces defined for the first song</button></div></div><div class="day    " id="d-2026-10-10" data-date="2026-10-10">
+    <div class="dh"><span>Sat Oct 10</span></div>
+    <div class="pills"><button class="pill mike  " data-id="words-2" aria-pressed="false">Your words: About the Artist</button><button class="pill mike  " data-id="clicks-buffer" aria-pressed="false">Buffer: the six clicks</button></div></div><div class="day    " id="d-2026-10-11" data-date="2026-10-11">
+    <div class="dh"><span>Sun Oct 11</span></div>
+    <div class="pills"><button class="pill mike  " data-id="photos-informer" aria-pressed="false">Photographs: the Informer</button><button class="pill mike  " data-id="ruling-4" aria-pressed="false">Ruling sitting: song two</button><button class="pill mike  " data-id="words-3" aria-pressed="false">Your words: the Foundation's posture</button><button class="pill mike  " data-id="questions-2026-10-11" aria-pressed="false">Five questions for the week of 10-12</button><button class="pill ops  " data-id="channels" aria-pressed="false">Buffer channels recorded; the queue's schema checked live</button><button class="pill ops  " data-id="grade-2026-10-11" aria-pressed="false">Sunday grade on the desk: done over total for the week</button></div></div><div class="day    empty" id="d-2026-10-12" data-date="2026-10-12">
+    <div class="dh"><span>Mon Oct 12</span><em>wk 5 · in the can</em></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-10-13" data-date="2026-10-13">
+    <div class="dh"><span>Tue Oct 13</span></div>
+    <div class="pills"><button class="pill mike  " data-id="shoot-w6" aria-pressed="false">Shooting sitting: ten clips for the first teaser week</button></div></div><div class="day    empty" id="d-2026-10-14" data-date="2026-10-14">
+    <div class="dh"><span>Wed Oct 14</span></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-10-15" data-date="2026-10-15">
+    <div class="dh"><span>Thu Oct 15</span></div>
+    <div class="pills"><button class="pill mike  " data-id="bench" aria-pressed="false">The unit on the bench</button><button class="pill ops  " data-id="flash" aria-pressed="false">The real unit flashed and verified</button></div></div><div class="day    " id="d-2026-10-16" data-date="2026-10-16">
+    <div class="dh"><span>Fri Oct 16</span></div>
+    <div class="pills"><button class="pill ops  " data-id="teasers-built" aria-pressed="false">Teaser week one built and queued (10), if ruled; else the shelf</button></div></div><div class="day    " id="d-2026-10-17" data-date="2026-10-17">
+    <div class="dh"><span>Sat Oct 17</span></div>
+    <div class="pills"><button class="pill mike  " data-id="clicks-distributor" aria-pressed="false">Distributor account</button></div></div><div class="day    " id="d-2026-10-18" data-date="2026-10-18">
+    <div class="dh"><span>Sun Oct 18</span></div>
+    <div class="pills"><button class="pill mike  " data-id="clicks-google" aria-pressed="false">Google: read-only consent for YouTube</button><button class="pill mike  " data-id="questions-2026-10-18" aria-pressed="false">Five questions for the week of 10-19</button><button class="pill ops  " data-id="grade-2026-10-18" aria-pressed="false">Sunday grade on the desk: done over total for the week</button></div></div><div class="day    empty" id="d-2026-10-19" data-date="2026-10-19">
+    <div class="dh"><span>Mon Oct 19</span><em>wk 6 · teasers, rehearsal</em></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-10-20" data-date="2026-10-20">
+    <div class="dh"><span>Tue Oct 20</span></div>
+    <div class="pills"><button class="pill mike  " data-id="shoot-w7" aria-pressed="false">Shooting sitting: ten clips for the second teaser week or the shelf</button></div></div><div class="day    empty" id="d-2026-10-21" data-date="2026-10-21">
+    <div class="dh"><span>Wed Oct 21</span></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-10-22" data-date="2026-10-22">
+    <div class="dh"><span>Thu Oct 22</span></div>
+    <div class="pills"><button class="pill ops  " data-id="rehearsal" aria-pressed="false">Opening-day run-through on a staging as-of; faults listed and fixed</button></div></div><div class="day    " id="d-2026-10-23" data-date="2026-10-23">
+    <div class="dh"><span>Fri Oct 23</span></div>
+    <div class="pills"><button class="pill ops  " data-id="teasers-2" aria-pressed="false">Teaser week two built and queued (10), if ruled</button></div></div><div class="day    empty" id="d-2026-10-24" data-date="2026-10-24">
+    <div class="dh"><span>Sat Oct 24</span></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-10-25" data-date="2026-10-25">
+    <div class="dh"><span>Sun Oct 25</span></div>
+    <div class="pills"><button class="pill mike  " data-id="questions-2026-10-25" aria-pressed="false">Five questions for the week of 10-26</button><button class="pill ops  " data-id="grade-2026-10-25" aria-pressed="false">Sunday grade on the desk: done over total for the week</button></div></div><div class="day    " id="d-2026-10-26" data-date="2026-10-26">
+    <div class="dh"><span>Mon Oct 26</span><em>wk 7 · open</em></div>
+    <div class="pills"><button class="pill ops  " data-id="freeze" aria-pressed="false">Freeze</button></div></div><div class="day    " id="d-2026-10-27" data-date="2026-10-27">
+    <div class="dh"><span>Tue Oct 27</span></div>
+    <div class="pills"><button class="pill mike  " data-id="shoot-w8" aria-pressed="false">Shooting sitting: ten clips for the launch week</button><button class="pill ops  " data-id="launch-queued" aria-pressed="false">Launch week queued (10 reels)</button></div></div><div class="day    empty" id="d-2026-10-28" data-date="2026-10-28">
+    <div class="dh"><span>Wed Oct 28</span></div>
+    <div class="pills"></div></div><div class="day    empty" id="d-2026-10-29" data-date="2026-10-29">
+    <div class="dh"><span>Thu Oct 29</span></div>
+    <div class="pills"></div></div><div class="day  open  " id="d-2026-10-30" data-date="2026-10-30">
+    <div class="dh"><span>Fri Oct 30</span><em class=door>OPENING DAY</em></div>
+    <div class="pills"><button class="pill ops  " data-id="open" aria-pressed="false">Opening Day: the door flips at five; the first promotion lands; the door checked from outside</button></div></div><div class="day    empty" id="d-2026-10-31" data-date="2026-10-31">
+    <div class="dh"><span>Sat Oct 31</span></div>
+    <div class="pills"></div></div><div class="day    " id="d-2026-11-01" data-date="2026-11-01">
+    <div class="dh"><span>Sun Nov 1</span></div>
+    <div class="pills"><button class="pill ops  " data-id="grade-2026-11-01" aria-pressed="false">Sunday grade on the desk: done over total for the week</button></div></div></div>
+<footer>From docs/desk/TASKS.json and the tree · what you tick is kept in this page's store and read by Ops · regenerated by npm run desk</footer>
+</div>
+<template id="card-practice-2026-09-15"><div class="card mike">
+  <p class="eyebrow">You · due Tue Sep 15 · practice</p>
+  <h3>Practice reel 1 of 9</h3>
+  <ol><li>Shoot one clip, 20 to 40 seconds, in the room you will use, phone on the tripod, the mic you are testing. Any subject: talk, play, shake the machine.</li><li>Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-15.mp4 (mov is fine).</li><li>Tell Code: &quot;practice in&quot;. One line of notes comes back within a day: framing, sound, delivery.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="practice-2026-09-15" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-practice-2026-09-17"><div class="card mike">
+  <p class="eyebrow">You · due Thu Sep 17 · practice</p>
+  <h3>Practice reel 2 of 9</h3>
+  <ol><li>Shoot one clip, 20 to 40 seconds, in the room you will use, phone on the tripod, the mic you are testing. Any subject: talk, play, shake the machine.</li><li>Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-17.mp4 (mov is fine).</li><li>Tell Code: &quot;practice in&quot;. One line of notes comes back within a day: framing, sound, delivery.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="practice-2026-09-17" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-practice-2026-09-19"><div class="card mike">
+  <p class="eyebrow">You · due Sat Sep 19 · practice</p>
+  <h3>Practice reel 3 of 9</h3>
+  <ol><li>Shoot one clip, 20 to 40 seconds, in the room you will use, phone on the tripod, the mic you are testing. Any subject: talk, play, shake the machine.</li><li>Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-19.mp4 (mov is fine).</li><li>Tell Code: &quot;practice in&quot;. One line of notes comes back within a day: framing, sound, delivery.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="practice-2026-09-19" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-practice-2026-09-22"><div class="card mike">
+  <p class="eyebrow">You · due Tue Sep 22 · practice</p>
+  <h3>Practice reel 4 of 9</h3>
+  <ol><li>Shoot one clip, 20 to 40 seconds, in the room you will use, phone on the tripod, the mic you are testing. Any subject: talk, play, shake the machine.</li><li>Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-22.mp4 (mov is fine).</li><li>Tell Code: &quot;practice in&quot;. One line of notes comes back within a day: framing, sound, delivery.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="practice-2026-09-22" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-practice-2026-09-24"><div class="card mike">
+  <p class="eyebrow">You · due Thu Sep 24 · practice</p>
+  <h3>Practice reel 5 of 9</h3>
+  <ol><li>Shoot one clip, 20 to 40 seconds, in the room you will use, phone on the tripod, the mic you are testing. Any subject: talk, play, shake the machine.</li><li>Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-24.mp4 (mov is fine).</li><li>Tell Code: &quot;practice in&quot;. One line of notes comes back within a day: framing, sound, delivery.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="practice-2026-09-24" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-practice-2026-09-26"><div class="card mike">
+  <p class="eyebrow">You · due Sat Sep 26 · practice</p>
+  <h3>Practice reel 6 of 9</h3>
+  <ol><li>Shoot one clip, 20 to 40 seconds, in the room you will use, phone on the tripod, the mic you are testing. Any subject: talk, play, shake the machine.</li><li>Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-26.mp4 (mov is fine).</li><li>Tell Code: &quot;practice in&quot;. One line of notes comes back within a day: framing, sound, delivery.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="practice-2026-09-26" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-practice-2026-09-29"><div class="card mike">
+  <p class="eyebrow">You · due Tue Sep 29 · practice</p>
+  <h3>Practice reel 7 of 9</h3>
+  <ol><li>Shoot one clip, 20 to 40 seconds, in the room you will use, phone on the tripod, the mic you are testing. Any subject: talk, play, shake the machine.</li><li>Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-29.mp4 (mov is fine).</li><li>Tell Code: &quot;practice in&quot;. One line of notes comes back within a day: framing, sound, delivery.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="practice-2026-09-29" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-practice-2026-10-01"><div class="card mike">
+  <p class="eyebrow">You · due Thu Oct 1 · practice</p>
+  <h3>Practice reel 8 of 9</h3>
+  <ol><li>Shoot one clip, 20 to 40 seconds, in the room you will use, phone on the tripod, the mic you are testing. Any subject: talk, play, shake the machine.</li><li>Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-10-01.mp4 (mov is fine).</li><li>Tell Code: &quot;practice in&quot;. One line of notes comes back within a day: framing, sound, delivery.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="practice-2026-10-01" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-practice-2026-10-03"><div class="card mike">
+  <p class="eyebrow">You · due Sat Oct 3 · practice</p>
+  <h3>Practice reel 9 of 9</h3>
+  <ol><li>Shoot one clip, 20 to 40 seconds, in the room you will use, phone on the tripod, the mic you are testing. Any subject: talk, play, shake the machine.</li><li>Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-10-03.mp4 (mov is fine).</li><li>Tell Code: &quot;practice in&quot;. One line of notes comes back within a day: framing, sound, delivery.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="practice-2026-10-03" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-photos-everyman"><div class="card mike">
+  <p class="eyebrow">You · due Sun Sep 20 · photos</p>
+  <h3>Photographs: the Everyman unboxing</h3>
+  <ol><li>Edit the set for the Everyman unboxing: three angles and one hero shot at least, JPG or HEIC, full size.</li><li>Drop them in OneDrive › WeirdBaby › photos › everyman (the folder exists).</li><li>Tell Code: &quot;photos in&quot;. They are placed on the wing's pages within two days.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="photos-everyman" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-photos-gambler"><div class="card mike">
+  <p class="eyebrow">You · due Sun Sep 27 · photos</p>
+  <h3>Photographs: the Gambler</h3>
+  <ol><li>Edit the set for the Gambler, with the chips and the half dollars: three angles and one hero shot at least, JPG or HEIC, full size.</li><li>Drop them in OneDrive › WeirdBaby › photos › gambler (the folder exists).</li><li>Tell Code: &quot;photos in&quot;. They are placed on the wing's pages within two days.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="photos-gambler" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-photos-ceo"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 4 · photos</p>
+  <h3>Photographs: the CEO</h3>
+  <ol><li>Edit the set for the CEO: three angles and one hero shot at least, JPG or HEIC, full size.</li><li>Drop them in OneDrive › WeirdBaby › photos › ceo (the folder exists).</li><li>Tell Code: &quot;photos in&quot;. They are placed on the wing's pages within two days.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="photos-ceo" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-photos-informer"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 11 · photos</p>
+  <h3>Photographs: the Informer</h3>
+  <ol><li>Edit the set for the Informer, the man on the inside: three angles and one hero shot at least, JPG or HEIC, full size.</li><li>Drop them in OneDrive › WeirdBaby › photos › informer (the folder exists).</li><li>Tell Code: &quot;photos in&quot;. They are placed on the wing's pages within two days.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="photos-informer" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-ruling-1"><div class="card mike">
+  <p class="eyebrow">You · due Sun Sep 20 · rulings</p>
+  <h3>Ruling sitting: the catalogue's pitches</h3>
+  <ol><li>Thirty minutes, Sunday, with the served page Code sends that morning.</li><li>Every feature, game, setting, character and artifact, one line each. You read the page and answer the numbered A/B/C questions in chat; anything you do not like, say so in one line and it is rewritten.</li><li>Nothing is due from you before the page arrives.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="ruling-1" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-ruling-2"><div class="card mike">
+  <p class="eyebrow">You · due Sun Sep 27 · rulings</p>
+  <h3>Ruling sitting: the five wing mocks</h3>
+  <ol><li>Thirty minutes, Sunday, with the served page Code sends that morning.</li><li>The feature page, the day's landing, the prologue, a character page, the wing's front. Served pages; A/B/C in chat.</li><li>Nothing is due from you before the page arrives.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="ruling-2" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-ruling-3"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 4 · rulings</p>
+  <h3>Ruling sitting: the room and the framing</h3>
+  <ol><li>Thirty minutes, Sunday, with the served page Code sends that morning.</li><li>Three practice reels side by side on a page; you pick the room, the framing and the mic that stay fixed from then on.</li><li>Nothing is due from you before the page arrives.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="ruling-3" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-ruling-4"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 11 · rulings</p>
+  <h3>Ruling sitting: song two</h3>
+  <ol><li>Thirty minutes, Sunday, with the served page Code sends that morning.</li><li>Which song runs after Coconuts, and the first piece of it.</li><li>Nothing is due from you before the page arrives.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="ruling-4" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-words-1"><div class="card mike">
+  <p class="eyebrow">You · due Fri Oct 9 · words</p>
+  <h3>Your words: the prologue's opening</h3>
+  <ol><li>The paragraph that opens the story page: what this is, for the people who want more. Any length.</li><li>Write it in the manual's Word file at the end, or type it here. Code cleans typos and never the point.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="words-1" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-words-2"><div class="card mike">
+  <p class="eyebrow">You · due Sat Oct 10 · words</p>
+  <h3>Your words: About the Artist</h3>
+  <ol><li>The words for the slot on the music wing that renders blank today.</li><li>Write it in the manual's Word file at the end, or type it here. Code cleans typos and never the point.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="words-2" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-words-3"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 11 · words</p>
+  <h3>Your words: the Foundation's posture</h3>
+  <ol><li>The room's words: we give to the National Coalition for the Homeless, and you can too. No pipes.</li><li>Write it in the manual's Word file at the end, or type it here. Code cleans typos and never the point.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="words-3" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-clicks-buffer"><div class="card mike">
+  <p class="eyebrow">You · due Sat Oct 10 · clicks</p>
+  <h3>Buffer: the six clicks</h3>
+  <ol><li>Instagram to a Creator account. TikTok a Creator account, public. A Facebook Page.</li><li>buffer.com: sign up with email; connect TikTok, Instagram, YouTube, the Facebook Page; Essentials plan.</li><li>Settings › API › create a key. Paste it here or save it as C:\AI\PERSONA-20260903\.secrets\buffer.token.</li><li>The whole list with the exact taps is BUFFER-SETUP.md in the persona folder.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="clicks-buffer" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-clicks-distributor"><div class="card mike">
+  <p class="eyebrow">You · due Sat Oct 17 · clicks</p>
+  <h3>Distributor account</h3>
+  <ol><li>Create the account at the distributor Code names that week (DistroKid unless ruled otherwise), with your email. No release is created; the account only has to exist so the first live single can go up within days.</li><li>Tell Code: &quot;distributor done&quot;.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="clicks-distributor" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-clicks-google"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 18 · clicks</p>
+  <h3>Google: read-only consent for YouTube</h3>
+  <ol><li>Code sends one link that morning. It opens Google's consent screen for read-only access to the channel's comments and analytics. Approve, done.</li><li>Nothing is uploaded through it; it only reads.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="clicks-google" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-questions-2026-10-04"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 4 · question</p>
+  <h3>Five questions for the week of 10-05</h3>
+  <ol><li>Five questions, one per weekday, on anything, for the instrument to answer. The frame for each day (the feature on camera) is on the calendar.</li><li>Write them on the Question of the Day page at the end of the manual's Word file, or type them here, Monday to Friday.</li><li>Code carries them into the ledger the same day.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="questions-2026-10-04" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-questions-2026-10-11"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 11 · question</p>
+  <h3>Five questions for the week of 10-12</h3>
+  <ol><li>Five questions, one per weekday, on anything, for the instrument to answer. The frame for each day (the feature on camera) is on the calendar.</li><li>Write them on the Question of the Day page at the end of the manual's Word file, or type them here, Monday to Friday.</li><li>Code carries them into the ledger the same day.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="questions-2026-10-11" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-questions-2026-10-18"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 18 · question</p>
+  <h3>Five questions for the week of 10-19</h3>
+  <ol><li>Five questions, one per weekday, on anything, for the instrument to answer. The frame for each day (the feature on camera) is on the calendar.</li><li>Write them on the Question of the Day page at the end of the manual's Word file, or type them here, Monday to Friday.</li><li>Code carries them into the ledger the same day.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="questions-2026-10-18" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-questions-2026-10-25"><div class="card mike">
+  <p class="eyebrow">You · due Sun Oct 25 · question</p>
+  <h3>Five questions for the week of 10-26</h3>
+  <ol><li>Five questions, one per weekday, on anything, for the instrument to answer. The frame for each day (the feature on camera) is on the calendar.</li><li>Write them on the Question of the Day page at the end of the manual's Word file, or type them here, Monday to Friday.</li><li>Code carries them into the ledger the same day.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="questions-2026-10-25" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-shoot-w6"><div class="card mike">
+  <p class="eyebrow">You · due Tue Oct 13 · det-clip</p>
+  <h3>Shooting sitting: ten clips for the first teaser week</h3>
+  <ol><li>One sitting, about two hours, in the fixed room. Five Determination clips: you shake, the display answers, the machine's sound, you silent, 10 to 15 seconds each. Five Number clips: one piece of the song, live, about 30 seconds each.</li><li>Drop the Determinations in OneDrive › WeirdBaby › reels › intake › determinations as w6-mon.mp4 … w6-fri.mp4, and the Numbers in … › intake › numbers with the same names.</li><li>Tell Code: &quot;week 6 in&quot;. The line appends the pop, writes the captions and queues them the same day.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="shoot-w6" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-shoot-w7"><div class="card mike">
+  <p class="eyebrow">You · due Tue Oct 20 · det-clip</p>
+  <h3>Shooting sitting: ten clips for the second teaser week or the shelf</h3>
+  <ol><li>One sitting, about two hours, in the fixed room. Five Determination clips: you shake, the display answers, the machine's sound, you silent, 10 to 15 seconds each. Five Number clips: one piece of the song, live, about 30 seconds each.</li><li>Drop the Determinations in OneDrive › WeirdBaby › reels › intake › determinations as w7-mon.mp4 … w7-fri.mp4, and the Numbers in … › intake › numbers with the same names.</li><li>Tell Code: &quot;week 7 in&quot;. The line appends the pop, writes the captions and queues them the same day.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="shoot-w7" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-shoot-w8"><div class="card mike">
+  <p class="eyebrow">You · due Tue Oct 27 · det-clip</p>
+  <h3>Shooting sitting: ten clips for the launch week</h3>
+  <ol><li>One sitting, about two hours, in the fixed room. Five Determination clips: you shake, the display answers, the machine's sound, you silent, 10 to 15 seconds each. Five Number clips: one piece of the song, live, about 30 seconds each.</li><li>Drop the Determinations in OneDrive › WeirdBaby › reels › intake › determinations as w8-mon.mp4 … w8-fri.mp4, and the Numbers in … › intake › numbers with the same names.</li><li>Tell Code: &quot;week 8 in&quot;. The line appends the pop, writes the captions and queues them the same day.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="shoot-w8" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-bench"><div class="card mike">
+  <p class="eyebrow">You · due Thu Oct 15 · bench</p>
+  <h3>The unit on the bench</h3>
+  <ol><li>Ninety minutes at the PC with the real machine, its USB cable and the SD card, Code on the line.</li><li>Code drives the flash and the checks; you press what only hands can press and read the glass back.</li><li>Pick the day and say so; the 15th is a placeholder.</li></ol>
+  <label class="tick"><input type="checkbox" data-tick="bench" > <span>Mark it done</span></label><p class="fine">Ticking it here is enough; Code sees it. Files count themselves the moment they land.</p>
+</div></template><template id="card-burn-list"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Sep 13</p>
+  <h3>The burn list: every story-first page, doc, tool and rule marked keep / re-cut / burn</h3>
+  <ol><li>Ops decides; Mike sees the result on the desk, not the list.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-twin-audit"><div class="card ops">
+  <p class="eyebrow">Ops · due Thu Sep 17</p>
+  <h3>Twin software audit: what the site runs against the full set</h3>
+  <ol><li>One table; the update plan follows from it.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-catalogue"><div class="card ops">
+  <p class="eyebrow">Ops · due Fri Sep 18</p>
+  <h3>The catalogue: every feature, game, setting, character and artifact with a pitch and a day (≥50 rows)</h3>
+  <ol><li>Served for Mike's Sunday sitting.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-music-page"><div class="card ops">
+  <p class="eyebrow">Ops · due Sat Sep 19</p>
+  <h3>The music launch on one page</h3>
+  <ol><li>Schedule, requirements, the first song's run, the live-single path.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-mocks"><div class="card ops">
+  <p class="eyebrow">Ops · due Fri Sep 25</p>
+  <h3>Five wing mocks served: feature page, day's landing, prologue, character page, the front</h3>
+  <ol><li>For the 09-27 sitting.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-burn-down"><div class="card ops">
+  <p class="eyebrow">Ops · due Sat Sep 26</p>
+  <h3>Burn-down executed: rows marked burn archived or deleted</h3>
+  <ol><li>Count equals the list.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-prologue"><div class="card ops">
+  <p class="eyebrow">Ops · due Thu Oct 1</p>
+  <h3>The prologue page built</h3>
+  <ol><li>Mike's opening paragraph lands when it comes.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-pages"><div class="card ops">
+  <p class="eyebrow">Ops · due Fri Oct 2</p>
+  <h3>Feature pages built from the catalogue (≥25, development stage)</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-twin-update"><div class="card ops">
+  <p class="eyebrow">Ops · due Fri Oct 2</p>
+  <h3>The twin on the site at the full software, verified against the audit</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-landing"><div class="card ops">
+  <p class="eyebrow">Ops · due Sat Oct 3</p>
+  <h3>The day's landing wired to the calendar</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-bench-plan"><div class="card ops">
+  <p class="eyebrow">Ops · due Sat Oct 3</p>
+  <h3>The real unit's flash plan and bench date</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-launch-days"><div class="card ops">
+  <p class="eyebrow">Ops · due Fri Oct 9</p>
+  <h3>Fifteen launch-run days written: question slot, feature page, promotion copy</h3>
+  <ol><li>Mike rules the questions; the copy is Ops'.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-number-pieces"><div class="card ops">
+  <p class="eyebrow">Ops · due Fri Oct 9</p>
+  <h3>Fifteen Number pieces defined for the first song</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-channels"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Oct 11</p>
+  <h3>Buffer channels recorded; the queue's schema checked live</h3>
+  <ol><li>Needs Mike's key of 10-10.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-teasers-built"><div class="card ops">
+  <p class="eyebrow">Ops · due Fri Oct 16</p>
+  <h3>Teaser week one built and queued (10), if ruled; else the shelf</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-flash"><div class="card ops">
+  <p class="eyebrow">Ops · due Thu Oct 15</p>
+  <h3>The real unit flashed and verified</h3>
+  <ol><li>With Mike at the bench.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-rehearsal"><div class="card ops">
+  <p class="eyebrow">Ops · due Thu Oct 22</p>
+  <h3>Opening-day run-through on a staging as-of; faults listed and fixed</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-teasers-2"><div class="card ops">
+  <p class="eyebrow">Ops · due Fri Oct 23</p>
+  <h3>Teaser week two built and queued (10), if ruled</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-freeze"><div class="card ops">
+  <p class="eyebrow">Ops · due Mon Oct 26</p>
+  <h3>Freeze</h3>
+  <ol><li>No change to the wing after today but a fault.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-launch-queued"><div class="card ops">
+  <p class="eyebrow">Ops · due Tue Oct 27</p>
+  <h3>Launch week queued (10 reels)</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-open"><div class="card ops">
+  <p class="eyebrow">Ops · due Fri Oct 30</p>
+  <h3>Opening Day: the door flips at five; the first promotion lands; the door checked from outside</h3>
+  <ol><li>Mike deploys; Ops checks.</li></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-grade-2026-09-13"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Sep 13</p>
+  <h3>Sunday grade on the desk: done over total for the week</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-grade-2026-09-20"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Sep 20</p>
+  <h3>Sunday grade on the desk: done over total for the week</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-grade-2026-09-27"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Sep 27</p>
+  <h3>Sunday grade on the desk: done over total for the week</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-grade-2026-10-04"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Oct 4</p>
+  <h3>Sunday grade on the desk: done over total for the week</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-grade-2026-10-11"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Oct 11</p>
+  <h3>Sunday grade on the desk: done over total for the week</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-grade-2026-10-18"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Oct 18</p>
+  <h3>Sunday grade on the desk: done over total for the week</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-grade-2026-10-25"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Oct 25</p>
+  <h3>Sunday grade on the desk: done over total for the week</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template><template id="card-grade-2026-11-01"><div class="card ops">
+  <p class="eyebrow">Ops · due Sun Nov 1</p>
+  <h3>Sunday grade on the desk: done over total for the week</h3>
+  <ol></ol>
+  <p class="fine">Ops' task. It turns dim when Ops marks it done on the next desk run.</p>
+</div></template>
+<dialog id="dlg"><button class="close" aria-label="close" onclick="document.getElementById('dlg').close()">×</button><div id="dlg-body"></div></dialog>
+<script>
+(function(){
+  var dlg=document.getElementById('dlg'), body=document.getElementById('dlg-body'), db=null;
+  var state={};
+  function paint(id,done){ var p=document.querySelector('.pill[data-id="'+id+'"]'); if(!p) return; p.classList.toggle('done',!!done); p.setAttribute('aria-pressed',!!done); if(done) p.classList.remove('late'); }
+  document.querySelectorAll('.pill').forEach(function(p){ p.addEventListener('click',function(){
+    var id=p.dataset.id, tpl=document.getElementById('card-'+id); if(!tpl) return;
+    body.innerHTML=''; body.appendChild(tpl.content.cloneNode(true));
+    var cb=body.querySelector('input[data-tick]');
+    if(cb){ if(id in state) cb.checked=!!state[id]; cb.addEventListener('change',function(){
+      var done=cb.checked; state[id]=done; paint(id,done); cb.nextElementSibling.textContent=done?'Done':'Mark it done';
+      if(db){ db.doc('tasks/'+id).set({done:done,at:new Date().toISOString(),by:'mike'}).catch(function(){}); }
+      else { try{ localStorage.setItem('wb-days-'+id, done?'1':'0'); }catch(e){} }
+    }); }
+    if(typeof dlg.showModal==='function') dlg.showModal(); else dlg.setAttribute('open','');
+  }); });
+  try{ document.querySelectorAll('.pill.mike').forEach(function(p){ var v=localStorage.getItem('wb-days-'+p.dataset.id); if(v==='1'){ state[p.dataset.id]=true; paint(p.dataset.id,true);} }); }catch(e){}
+  if(window.claude && typeof window.claude.use==='function'){ window.claude.use('db').then(function(d){ if(!d) return; db=d;
+    d.collection('tasks').onSnapshot(function(snap){ snap.docs.forEach(function(doc){ var v=doc.data(); if(v&&typeof v.done==='boolean'){ state[doc.id]=v.done; paint(doc.id,v.done);} }); }, function(){});
+  }).catch(function(){}); }
+  var t=document.querySelector('.day.today'); if(t && window.innerWidth<820) t.scrollIntoView({block:'start'});
+})();
+</script>
+</body></html>
