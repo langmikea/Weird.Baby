@@ -464,7 +464,9 @@
    "do": [
     "Ops decides; Mike sees the result on the desk, not the list."
    ],
-   "long": "The burn list: every story-first page, doc, tool and rule marked keep / re-cut / burn"
+   "long": "The burn list: every story-first page, doc, tool and rule marked keep / re-cut / burn",
+   "done": true,
+   "done_on": "2026-09-10"
   },
   {
    "id": "twin-audit",
@@ -474,7 +476,9 @@
    "do": [
     "One table; the update plan follows from it."
    ],
-   "long": "Twin software audit: what the site runs against the full set"
+   "long": "Twin software audit: what the site runs against the full set",
+   "done": true,
+   "done_on": "2026-09-10"
   },
   {
    "id": "catalogue",
