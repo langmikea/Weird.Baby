@@ -46,9 +46,9 @@
    "id": "music",
    "name": "Music",
    "sub": "Best of Weird.Baby, Vol 1",
-   "line": "A live number a weekday from the launch run, one song at a time; four Coconuts clips exist; the launch schedule is defined in week 1.",
-   "state": "defining",
-   "next": "The music launch on one page, week 1; song two ruled by week 3.",
+   "line": "A live number a weekday from the door, one song at a time, Coconuts first; the launch schedule to 10-30 is on one page (09-10).",
+   "state": "scheduled to the door",
+   "next": "Practice weeks 1 to 3; the fifteen Coconuts pieces by 10-09; song two ruled 10-11.",
    "links": [
     {
      "label": "the music plan",
@@ -200,7 +200,7 @@
   },
   {
    "name": "The music plan",
-   "what": "the number, the path of a song, the first eight weeks",
+   "what": "the number, the path of a song, the schedule to the door and past it, what each song needs",
    "how": "served page",
    "url": "https://claude.ai/code/artifact/c921c950-f2ac-401f-b526-29160502586e"
   },

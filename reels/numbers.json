@@ -1,842 +1,864 @@
 {
- "_": "THE NUMBER — the musical number, one live performance a weekday from 2026-09-14 (Mike, 2026-09-03: music starts week two) from 2026-09-14 (Mike, 2026-09-03: music starts week two), its own post, independent of the determination. Read reels/README.md. One song at a time, in pieces; a song runs a floor of two weeks and a ceiling of four while its sends and saves climb; Ops calls the week on Sundays. Songs after the first are filled in as the numbers decide. Nothing in src/ reads this file.",
- "version": 1,
- "ruled": "2026-09-03",
- "epoch": "2026-09-07",
- "songs": [
-  "Weird Baby Blues",
-  "Pull Me In Closer Blues",
-  "Breakup Breakdown Blues",
-  "How I Saved The World Blues",
-  "E.D. Yahdah",
-  "Coconuts"
- ],
- "order_so_far": [
-  "Coconuts"
- ],
- "statuses": [
-  "open",
-  "planned",
-  "shot",
-  "posted"
- ],
- "rows": [
-  {
-   "date": "2026-09-07",
-   "week": 1,
-   "day": "MON",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "music starts week two (Mike, 2026-09-03)"
-  },
-  {
-   "date": "2026-09-08",
-   "week": 1,
-   "day": "TUE",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "music starts week two (Mike, 2026-09-03)"
-  },
-  {
-   "date": "2026-09-09",
-   "week": 1,
-   "day": "WED",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "music starts week two (Mike, 2026-09-03)"
-  },
-  {
-   "date": "2026-09-10",
-   "week": 1,
-   "day": "THU",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "music starts week two (Mike, 2026-09-03)"
-  },
-  {
-   "date": "2026-09-11",
-   "week": 1,
-   "day": "FRI",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "music starts week two (Mike, 2026-09-03)"
-  },
-  {
-   "date": "2026-09-14",
-   "week": 2,
-   "day": "MON",
-   "song": "Coconuts",
-   "piece": "part 1 of 4",
-   "status": "shot",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "the four existing clips; the pop is appended by reels/build.py",
-   "source": "coconuts-q1: Mike's clip, on YouTube private, without the pop; original file wanted",
-   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-14_numbers_coconuts-part-1-of-4.mp4",
-   "length_s": 29.1,
-   "built": "2026-09-03"
-  },
-  {
-   "date": "2026-09-15",
-   "week": 2,
-   "day": "TUE",
-   "song": "Coconuts",
-   "piece": "part 2 of 4",
-   "status": "shot",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "the four existing clips; the pop is appended by reels/build.py",
-   "source": "coconuts-q2: Mike's clip, on YouTube private, without the pop; original file wanted",
-   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-15_numbers_coconuts-part-2-of-4.mp4",
-   "length_s": 28.9,
-   "built": "2026-09-03"
-  },
-  {
-   "date": "2026-09-16",
-   "week": 2,
-   "day": "WED",
-   "song": "Coconuts",
-   "piece": "part 3 of 4",
-   "status": "shot",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "the four existing clips; the pop is appended by reels/build.py",
-   "source": "coconuts-q3: Mike's clip, on YouTube private, without the pop; original file wanted",
-   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-16_numbers_coconuts-part-3-of-4.mp4",
-   "length_s": 28.7,
-   "built": "2026-09-03"
-  },
-  {
-   "date": "2026-09-17",
-   "week": 2,
-   "day": "THU",
-   "song": "Coconuts",
-   "piece": "part 4 of 4",
-   "status": "shot",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "the four existing clips; the pop is appended by reels/build.py",
-   "source": "coconuts-q4: Mike's clip, on YouTube private, without the pop; original file wanted",
-   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-17_numbers_coconuts-part-4-of-4.mp4",
-   "length_s": 28.7,
-   "built": "2026-09-03"
-  },
-  {
-   "date": "2026-09-18",
-   "week": 2,
-   "day": "FRI",
-   "song": "Coconuts",
-   "piece": "the hook again",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "to shoot; or the fifth clip if one exists"
-  },
-  {
-   "date": "2026-09-21",
-   "week": 3,
-   "day": "MON",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
-  },
-  {
-   "date": "2026-09-22",
-   "week": 3,
-   "day": "TUE",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
-  },
-  {
-   "date": "2026-09-23",
-   "week": 3,
-   "day": "WED",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
-  },
-  {
-   "date": "2026-09-24",
-   "week": 3,
-   "day": "THU",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
-  },
-  {
-   "date": "2026-09-25",
-   "week": 3,
-   "day": "FRI",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts week two of its run (the floor): other rooms and takes; or the next song if week two flattened"
-  },
-  {
-   "date": "2026-09-28",
-   "week": 4,
-   "day": "MON",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts continues if climbing; ceiling is week 5"
-  },
-  {
-   "date": "2026-09-29",
-   "week": 4,
-   "day": "TUE",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts continues if climbing; ceiling is week 5"
-  },
-  {
-   "date": "2026-09-30",
-   "week": 4,
-   "day": "WED",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts continues if climbing; ceiling is week 5"
-  },
-  {
-   "date": "2026-10-01",
-   "week": 4,
-   "day": "THU",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts continues if climbing; ceiling is week 5"
-  },
-  {
-   "date": "2026-10-02",
-   "week": 4,
-   "day": "FRI",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "Coconuts continues if climbing; ceiling is week 5"
-  },
-  {
-   "date": "2026-10-05",
-   "week": 5,
-   "day": "MON",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-06",
-   "week": 5,
-   "day": "TUE",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-07",
-   "week": 5,
-   "day": "WED",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-08",
-   "week": 5,
-   "day": "THU",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-09",
-   "week": 5,
-   "day": "FRI",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-12",
-   "week": 6,
-   "day": "MON",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-13",
-   "week": 6,
-   "day": "TUE",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-14",
-   "week": 6,
-   "day": "WED",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-15",
-   "week": 6,
-   "day": "THU",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-16",
-   "week": 6,
-   "day": "FRI",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-19",
-   "week": 7,
-   "day": "MON",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-20",
-   "week": 7,
-   "day": "TUE",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-21",
-   "week": 7,
-   "day": "WED",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-22",
-   "week": 7,
-   "day": "THU",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-23",
-   "week": 7,
-   "day": "FRI",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-26",
-   "week": 8,
-   "day": "MON",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-27",
-   "week": 8,
-   "day": "TUE",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-28",
-   "week": 8,
-   "day": "WED",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-29",
-   "week": 8,
-   "day": "THU",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
-  },
-  {
-   "date": "2026-10-30",
-   "week": 8,
-   "day": "FRI",
-   "song": "",
-   "piece": "",
-   "status": "open",
-   "postings": {
-    "tiktok": null,
-    "instagram": null,
-    "youtube": null,
-    "facebook": null
-   },
-   "numbers": {
-    "views": null,
-    "sends": null,
-    "saves": null
-   },
-   "note": "open; the numbers call it"
+  "_": "THE NUMBER — the musical number, one live performance a weekday, its own post, independent of the determination. Reset 2026-09-10: nothing posts before the launch run (week of 2026-10-26, the door flips Friday 10-30 at five) unless teasers are ruled; rows before it are held. One song at a time, in pieces; a song runs a floor of two weeks and a ceiling of four while sends and saves climb; Coconuts first. Read reels/README.md. C:/AI/MUSIC-20260903/MUSIC.md is the record.",
+  "version": 1,
+  "ruled": "2026-09-03",
+  "epoch": "2026-09-07",
+  "songs": [
+    "Weird Baby Blues",
+    "Pull Me In Closer Blues",
+    "Breakup Breakdown Blues",
+    "How I Saved The World Blues",
+    "E.D. Yahdah",
+    "Coconuts"
+  ],
+  "order_so_far": [
+    "Coconuts"
+  ],
+  "statuses": [
+    "held",
+    "open",
+    "planned",
+    "shot",
+    "posted"
+  ],
+  "rows": [
+    {
+      "date": "2026-09-07",
+      "week": 1,
+      "day": "MON",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-08",
+      "week": 1,
+      "day": "TUE",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-09",
+      "week": 1,
+      "day": "WED",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-10",
+      "week": 1,
+      "day": "THU",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-11",
+      "week": 1,
+      "day": "FRI",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-14",
+      "week": 2,
+      "day": "MON",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-15",
+      "week": 2,
+      "day": "TUE",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-16",
+      "week": 2,
+      "day": "WED",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-17",
+      "week": 2,
+      "day": "THU",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-18",
+      "week": 2,
+      "day": "FRI",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-21",
+      "week": 3,
+      "day": "MON",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-22",
+      "week": 3,
+      "day": "TUE",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-23",
+      "week": 3,
+      "day": "WED",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-24",
+      "week": 3,
+      "day": "THU",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-25",
+      "week": 3,
+      "day": "FRI",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-28",
+      "week": 4,
+      "day": "MON",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-29",
+      "week": 4,
+      "day": "TUE",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-09-30",
+      "week": 4,
+      "day": "WED",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-01",
+      "week": 4,
+      "day": "THU",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-02",
+      "week": 4,
+      "day": "FRI",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-05",
+      "week": 5,
+      "day": "MON",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-06",
+      "week": 5,
+      "day": "TUE",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-07",
+      "week": 5,
+      "day": "WED",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-08",
+      "week": 5,
+      "day": "THU",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-09",
+      "week": 5,
+      "day": "FRI",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-12",
+      "week": 6,
+      "day": "MON",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-13",
+      "week": 6,
+      "day": "TUE",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-14",
+      "week": 6,
+      "day": "WED",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-15",
+      "week": 6,
+      "day": "THU",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-16",
+      "week": 6,
+      "day": "FRI",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-19",
+      "week": 7,
+      "day": "MON",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-20",
+      "week": 7,
+      "day": "TUE",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-21",
+      "week": 7,
+      "day": "WED",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-22",
+      "week": 7,
+      "day": "THU",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-23",
+      "week": 7,
+      "day": "FRI",
+      "song": "",
+      "piece": "",
+      "status": "held",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "held: nothing posts before the launch run (reset 2026-09-10)"
+    },
+    {
+      "date": "2026-10-26",
+      "week": 8,
+      "day": "MON",
+      "song": "Coconuts",
+      "piece": "the hook",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+    },
+    {
+      "date": "2026-10-27",
+      "week": 8,
+      "day": "TUE",
+      "song": "Coconuts",
+      "piece": "a verse",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+    },
+    {
+      "date": "2026-10-28",
+      "week": 8,
+      "day": "WED",
+      "song": "Coconuts",
+      "piece": "the bridge",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+    },
+    {
+      "date": "2026-10-29",
+      "week": 8,
+      "day": "THU",
+      "song": "Coconuts",
+      "piece": "the story of the song",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+    },
+    {
+      "date": "2026-10-30",
+      "week": 8,
+      "day": "FRI",
+      "song": "Coconuts",
+      "piece": "the hook again",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+    }
+  ],
+  "epoch_lane": "2026-10-26",
+  "shelf": {
+    "_": "Built reels kept for the launch run; the four Coconuts parts of 09-03 (720x1280 originals, pop appended). Reuse or re-cut when the fifteen pieces are ruled.",
+    "reels": [
+      {
+        "song": "Coconuts",
+        "piece": "part 1 of 4",
+        "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-14_numbers_coconuts-part-1-of-4.mp4",
+        "length_s": 29.1,
+        "built": "2026-09-03",
+        "source": "coconuts-q1: Mike's clip, on YouTube private, without the pop; original file wanted"
+      },
+      {
+        "song": "Coconuts",
+        "piece": "part 2 of 4",
+        "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-15_numbers_coconuts-part-2-of-4.mp4",
+        "length_s": 28.9,
+        "built": "2026-09-03",
+        "source": "coconuts-q2: Mike's clip, on YouTube private, without the pop; original file wanted"
+      },
+      {
+        "song": "Coconuts",
+        "piece": "part 3 of 4",
+        "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-16_numbers_coconuts-part-3-of-4.mp4",
+        "length_s": 28.7,
+        "built": "2026-09-03",
+        "source": "coconuts-q3: Mike's clip, on YouTube private, without the pop; original file wanted"
+      },
+      {
+        "song": "Coconuts",
+        "piece": "part 4 of 4",
+        "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-w2\\2026-09-17_numbers_coconuts-part-4-of-4.mp4",
+        "length_s": 28.7,
+        "built": "2026-09-03",
+        "source": "coconuts-q4: Mike's clip, on YouTube private, without the pop; original file wanted"
+      }
+    ]
   }
- ],
- "epoch_lane": "2026-09-14"
 }

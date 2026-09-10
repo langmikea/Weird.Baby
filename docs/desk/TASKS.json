@@ -498,9 +498,11 @@
    "owner": "ops",
    "title": "Music launch, one page",
    "do": [
-    "Schedule, requirements, the first song's run, the live-single path."
+    "Schedule, requirements, the first song's run, the live-single path: https://claude.ai/code/artifact/c921c950-f2ac-401f-b526-29160502586e"
    ],
-   "long": "The music launch on one page"
+   "long": "The music launch on one page",
+   "done": true,
+   "done_on": "2026-09-10"
   },
   {
    "id": "mocks",
