@@ -69,11 +69,42 @@ daily voice (it becomes the daily promotion's copy, written by Ops). The
 held-door machinery stays for opening day and is re-read for the wing. The
 manual stays a feature of the device, no longer a gate on any day.
 
-## Open questions for Mike (asked one at a time, in order)
+## Answered 2026-09-10
 
-1. **SED mode.** Ops does not know the term; one line from you and it goes in
-   the record.
-2. **Teasers before the door.** The plan posts two weeks of reels before
-   10-30 pointing only at "weird.baby · October 30". Yes, or hold all posting
-   for opening day.
-3. **The burn list**, in batches, from week 0.
+1. **SED = Same Except Data.** Mike: "This is how I like to approach all
+   problems: structured elemental building blocks used to create scalable,
+   sustainable, ever-changing content." Everything below is written that
+   way: a block is a template; Mike delivers the data; Ops renders.
+2. **Teasers: TBD.** Mike: "I would love it, but I keep over-promising and
+   not delivering. I am looking for a ground-up revamp of the entire project,
+   so it is a possibility either way." The plan carries them as optional
+   until week 4; nothing depends on them.
+3. **The burn list is Ops' call.** Mike: "Work with me on what I need to
+   deliver, then on how to deliver, and deal with the tools and processes
+   behind the scenes."
+
+## STEP 3 — What Mike delivers, as SED blocks
+
+Each row is one kind of thing. "One" says what a single block is made of.
+The count is what the door needs on 10-30; teasers add to it only if ruled.
+
+| block | one is | count by 10-30 | when | how it reaches Ops |
+|---|---|---|---|---|
+| **A question** | one line, on anything, put to the instrument | 5 for launch week (+10 if teasers) | 5 each Sunday from 10-04 | the Word page, a text file, or chat |
+| **A Determination clip** | 10 to 15 s: the question card is added later; you shake, the display answers, the machine's sound; you silent, same room, same framing | 5 (+10) | one sitting a week from 10-12 | the OneDrive intake, named by week and day |
+| **A Number clip** | about 30 s live to camera, one piece of one song, same room | 5 (+10); four Coconuts clips exist | same sitting | the intake |
+| **A practice reel** | any clip shot to learn the room, the audio, the delivery; reviewed, never posted | 9 (3 a week, weeks 1 to 3) | weeks 1 to 3 | the intake's practice folder; Ops returns one line of notes each |
+| **A photograph set** | one subject, three angles and a hero shot, edited by you | 4 sets: Everyman, Gambler (shot), CEO, Informer | 2 by 09-27, 2 by 10-11 | OneDrive › WeirdBaby › photos › ‹subject› |
+| **A ruling** | A/B/C on a served page: the catalogue's pitches (one sitting), the five wing mocks, the room and framing, song two | 4 sittings | weeks 1 to 3 | chat |
+| **A paragraph in your words** | the prologue's opening; About the Artist; the Foundation room's posture | 3 | by 10-11 | chat or the Word file |
+| **A click set** | Buffer's six; the distributor account; the read-only Google consent | 3 | Buffer by 10-11; the rest by 10-18 | your own screens; Ops supplies every field |
+| **The unit on the bench** | the real machine in your hands for one flash-and-verify session with Ops on the line | 1 | week 5 | a date |
+
+Everything else, the catalogue, the pages, the Records as promotion copy,
+the calendar, the queue, the numbers, the grade, is Ops'. Mike's weekly
+rhythm from week 3: one ruling sitting on Sunday (thirty minutes), one
+shooting sitting when it suits (two hours), photographs as they come.
+
+Step 4, how each block is delivered (the room, the shot list, the
+naming, the review), follows once the catalogue exists, because the shot
+list comes from it.
