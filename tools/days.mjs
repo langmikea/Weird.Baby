@@ -25,6 +25,11 @@ const ONE = "C:/Users/macun/OneDrive/WeirdBaby";
 const T = JSON.parse(fs.readFileSync(path.join(REPO, "docs/desk/TASKS.json"), "utf8"));
 const DBF = path.join(REPO, "docs/desk/TASKS.db.json");
 const ticked = fs.existsSync(DBF) ? JSON.parse(fs.readFileSync(DBF, "utf8")) : {};
+/* [2026-09-10, ruled] the workbook is the surface: Mike's x in its Done
+   column, read by tools/days-xlsx.py into TASKS.marks.json, counts as done. */
+const MARKSF = path.join(REPO, "docs/desk/TASKS.marks.json");
+const marks = fs.existsSync(MARKSF) ? JSON.parse(fs.readFileSync(MARKSF, "utf8")) : {};
+for (const id of Object.keys(marks)) ticked[id] = { done: true, by: "mike", via: "workbook" };
 const OUT = path.join(REPO, "docs/desk/DAYS.html");
 const todayNY = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
