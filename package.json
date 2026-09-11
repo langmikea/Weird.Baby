@@ -67,7 +67,8 @@
     "assets:r2:sync": "node tools/sync-assets-to-r2.mjs",
     "shellstop:gate": "node tools/shell-stop-gate.mjs",
     "door:check": "node tools/door-probe.mjs",
-    "catalogue": "node tools/catalogue.mjs"
+    "catalogue": "node tools/catalogue.mjs",
+    "mocks": "node tools/mocks.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",

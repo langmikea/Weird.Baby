@@ -510,9 +510,12 @@
    "owner": "ops",
    "title": "Five wing mocks served",
    "do": [
-    "For the 09-27 sitting."
+    "For the 09-27 sitting: https://claude.ai/code/artifact/abc1ed65-64cf-447e-92c2-fe379c863aba",
+    "Served 09-11; rule each section A/B/C by number."
    ],
-   "long": "Five wing mocks served: feature page, day's landing, prologue, character page, the front"
+   "long": "Five wing mocks served: feature page, day's landing, prologue, character page, the front",
+   "done": true,
+   "done_on": "2026-09-11"
   },
   {
    "id": "burn-down",

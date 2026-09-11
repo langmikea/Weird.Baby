@@ -1,0 +1,68 @@
+{
+ "_": "THE FIVE WING MOCKS — data for tools/mocks.mjs (same except data). Everything the catalogue does not already hold: the shelf's four frames, the Everyday album's plates, kit and papers, the feature page's operating steps, the day's landing. Pitches come from docs/CATALOGUE-20260918.json at render. HOUSE drafts throughout; Mike rules each mock A keep / B change / C cut at the sitting of 2026-09-27. Photographs are frames with labels; the served copy with sample scans is built with --photos and never committed.",
+ "sitting": "2026-09-27",
+ "shelf": [
+  {"album": "everyman", "name": "The Everyday", "character": "the Everyman", "serial": "01", "line": "The unit for the rest of us."},
+  {"album": "gambler", "name": "The Gambler", "character": "the Gambler", "serial": "21", "line": "Comes in a case. Never asks what you can afford."},
+  {"album": "ceo", "name": "The CEO", "character": "the CEO", "serial": "09", "line": "The attaché. Decides, then explains."},
+  {"album": "informer", "name": "The Informer", "character": "the Informer", "serial": "07", "line": "The spy kit. Hears everything, repeats some of it."}
+ ],
+ "album": {
+  "id": "everyman",
+  "name": "The Everyday",
+  "character": "the Everyman",
+  "serial": "01",
+  "key": "TT5S-X2GT",
+  "for": "The unit for the rest of us: the one that was sold in the magazines, in the box, with the copy.",
+  "cover": "colour hero of the unit on white, eye level, three-quarter",
+  "plates": [
+   "closed, from above", "open, the glass lit", "the back, the plate and the serial", "the underside", "the case, closed", "the case, open, the unit in it", "the cable", "the box, with its copy"
+  ],
+  "kit": [
+   {"name": "The MGK-PHVDC", "line": "A bracket, a cable and a bulb. Super-charging the most powerful portable prediction system, ever."},
+   {"name": "The oxblood case", "line": "Leather, a strap, worn at one corner."},
+   {"name": "The box", "line": "Designed with Space Age Technology."}
+  ],
+  "papers": [
+   {"name": "The box copy", "line": "Outperforms other methods by up to 100%, and more."},
+   {"name": "The magazine advertisements", "line": "Two full pages, the man in the suit, the machine in his hand."},
+   {"name": "The engineering notebook", "line": "Spiral bound, dated, the kiosk and the coin slot sketched before either existed."},
+   {"name": "The operator's manual, the pages that concern it", "line": "Sections IV, V and VI."}
+  ],
+  "record": [
+   "[HOUSE DRAFT — two paragraphs, Ops writes, Mike rules] Where it was found, in what state, and what the catalogue said about it. The only story on the page.",
+   "[HOUSE DRAFT] What was done to it, and what was left alone. Dated, plain, no adjectives it did not earn."
+  ]
+ },
+ "feature": {
+  "id": "twin.app.probabilities",
+  "name": "Probabilities",
+  "kind": "feature",
+  "day": 3,
+  "operate": [
+   "Turn the scroll knob to PROBABILITIES and click the igniter.",
+   "Choose: a coin, a number, a card, dice, or a lottery line.",
+   "Shake. The glass answers. The answer is final until you shake again."
+  ],
+  "glass": ["PROBABILITIES", "COIN · NUMBER · CARD", "DICE · LOTTERY", "SHAKE TO ANSWER"],
+  "units": ["The Everyday", "The Gambler", "The CEO", "The Informer"],
+  "manual": "Section V, Operation, page 23.",
+  "settings": ["Polarity leans it.", "Clarity decides how plainly it says so."]
+ },
+ "landing": {
+  "date": "2026-10-28",
+  "weekday": "Wednesday",
+  "day": 3,
+  "feature": "twin.app.probabilities",
+  "question": "[MIKE'S QUESTION OF THE DAY — one line, put to the instrument]",
+  "reel": "the day's Determination, 15 seconds, the machine answering",
+  "tomorrow": "Messages, the inbox",
+  "yesterday": "Starting"
+ },
+ "prologue": {
+  "title": "How the machine got here",
+  "mark": "Prologue. Read it if you want the story; the machine does not need it.",
+  "opening": "[MIKE'S OPENING PARAGRAPH — lands when it comes; a HOUSE line holds the place until then]",
+  "index_note": "The Record, one entry a day since 2026-09-07, is the story's own index. The entries stay readable here; the wing does not repeat them."
+ }
+}

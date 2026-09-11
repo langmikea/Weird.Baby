@@ -66,11 +66,15 @@
    "sub": "the machines",
    "line": "The wing becomes an infomercial for the machine: features, games, artifacts, characters, each with a page. The twin and the real unit go to the full software.",
    "state": "re-cut ahead",
-   "next": "Week 1: the catalogue and the twin audit. Week 2: the mocks.",
+   "next": "Week 2: the mocks are served early; ruled 09-27. Week 3: the wing built from them.",
    "links": [
     {
      "label": "the catalogue",
      "url": "https://claude.ai/code/artifact/9ce6fac0-17fd-416b-a02a-bec67b8436c6"
+    },
+    {
+     "label": "the wing mocks",
+     "url": "https://claude.ai/code/artifact/abc1ed65-64cf-447e-92c2-fe379c863aba"
     },
     {
      "label": "the spine",
@@ -161,6 +165,12 @@
    "what": "every feature, game, setting, character and artifact with a pitch and a launch day; the 09-20 sitting rules it A/B/C",
    "how": "served page; node tools/catalogue.mjs",
    "url": "https://claude.ai/code/artifact/9ce6fac0-17fd-416b-a02a-bec67b8436c6"
+  },
+  {
+   "name": "The wing mocks",
+   "what": "five pages drawn before they are built: the front, the album, the feature page, the prologue, the day's landing; ruled A/B/C per section at the 09-27 sitting",
+   "how": "served page; npm run mocks (the served copy carries sample scans and is built outside the repo)",
+   "url": "https://claude.ai/code/artifact/abc1ed65-64cf-447e-92c2-fe379c863aba"
   },
   {
    "name": "The Gambler's voice",
