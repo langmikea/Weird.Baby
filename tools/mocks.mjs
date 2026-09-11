@@ -34,7 +34,8 @@ const plate = (label, kind = "plate", ratio = "4/5") => {
   return `<figure class="print"><div class="paper">${inner}</div><figcaption>${esc(label)}</figcaption></figure>`;
 };
 /* the cover stays a marked frame until the colour shoot exists; no B&W stand-in pretends to be it */
-const hero = () => `<div class="hero"><div class="white"><div class="ph hero-ph"></div><span class="tag">colour hero on white · to be shot</span></div></div>`;
+/* Mike, 09-11: the cover is the unit's full artifact photograph (the box for 01), never the bare unit */
+const hero = () => `<div class="hero"><div class="white">${SAMPLE.tray ? `<img src="${SAMPLE.tray}" alt="">` : `<div class="ph hero-ph"></div>`}<span class="tag">${esc(M.album.cover)} · colour, to be shot</span></div></div>`;
 
 const rows = C.rows;
 const byId = Object.fromEntries(rows.map(r => [r.id, r]));
@@ -50,17 +51,27 @@ const wingbar = (crumb) => `<header class="bar"><a class="home" href="#front">We
 
 /* ---------- 1. the front: the shelf ---------- */
 function front() {
-  const shelf = M.shelf.map((u, i) => `<a class="frame" href="#album"><div class="paper">${SAMPLE.plate && i === 0 ? `<img src="${SAMPLE.plate}" alt="">` : `<div class="ph" style="aspect-ratio:4/5"></div>`}</div><b>${esc(u.name)}</b><small>${esc(u.character)} · serial ${esc(u.serial)}</small><span>${esc(u.line)}</span></a>`).join("");
+  /* Mike, 09-11: "each robot as an album in the carousel on /robots" — the same carousel and deck the music
+     wing uses: covers in a row, the active one centred and named, its contents as the deck below. */
+  const covers = M.shelf.map((u, i) => `<div class="cover ${i === 0 ? "on" : ""}"><div class="paper">${SAMPLE.tray && i === 0 ? `<img src="${SAMPLE.tray}" alt="">` : `<div class="ph" style="aspect-ratio:1"></div>`}</div><small>${esc(u.cover)}</small></div>`).join("");
+  const A = M.shelf[0];
+  const tracks = [
+    ["01", "The cover", "the box, colour"], ["02", "The plates", "8 prints"], ["03", "The kit", "3 pieces"], ["04", "The papers", "4, readable"],
+    ["05", "What it does", `${rows.filter(r => r.page === "feature" && (r.album === "everyman" || r.album === "machine")).length} pages`], ["06", "The record", "two paragraphs"], ["07", "The door", "run it in the twin"],
+  ];
   const today = byId[M.landing.feature];
   const index = KIND_ORDER.map(k => {
     const list = featureRows.filter(r => r.kind === k);
     if (!list.length) return "";
     return `<div class="col"><h3>${KIND_NAME[k]}</h3><ul>${list.map(r => `<li><a href="#feature">${esc(r.name)}</a><em>${dayLabel(r.day)}</em></li>`).join("")}</ul></div>`;
   }).join("");
-  return `${strip(1, "the front", "The shelf: four machines, one frame each. Below it, everything the machine does, one line each. The story is one link, marked.")}
+  return `${strip(1, "the front", "The carousel /robots already has, one album per robot: covers in a row, the active album named, its contents as the deck below. Then Today, what the machine does, and the doors.")}
 ${wingbar("the shelf")}
 <div class="page">
-${sec("1.1", "The shelf", `<div class="shelf">${shelf}</div><p class="note">Pick one up and you are in its album. The Housewife Nano stays behind the door.</p>`, "four albums on 10-30")}
+${sec("1.1", "The carousel", `<div class="carousel"><span class="arrow">‹</span><div class="covers">${covers}</div><span class="arrow">›</span></div>
+<p class="albumname">${esc(A.name)} · ${esc(A.character)} · serial ${esc(A.serial)}</p>
+<div class="deck"><ol class="tracks">${tracks.map(([n, t, tag]) => `<li${n === "01" ? ' class="on"' : ""}><span class="tn">${n}</span><span class="tt">${esc(t)}</span><span class="tag">${esc(tag)}</span></li>`).join("")}</ol><div class="panel">${SAMPLE.tray ? `<img src="${SAMPLE.tray}" alt="">` : `<div class="ph" style="aspect-ratio:4/3"></div>`}<p>${esc(A.line)} The cover is the box, in colour, on white; the rest of the album is the record.</p></div></div>
+<p class="note">Four albums on 10-30: the Everyday in spot one, then the Gambler, the CEO, the Informer. The Housewife Nano stays behind the door. Pick a track and the panel shows it; mock 2 is the album at full length.</p>`, "one album per robot, the deck below")}
 ${sec("1.2", "Today", `<div class="today"><span class="k">${esc(M.landing.weekday)} ${esc(M.landing.date)}</span><b>${esc(today.name)}</b><p>${esc(today.pitch)}</p><a class="btn" href="#landing">Today's page</a></div>`, "what the day's reel points at")}
 ${sec("1.3", "What it does", `<div class="index">${index}</div>`, `${featureRows.length} pages, shared by every unit`)}
 ${sec("1.4", "The doors", `<div class="doors"><a class="door" href="#"><b>Run it</b><span>the twin, in the browser, the full software</span></a><a class="door" href="#prologue"><b>The prologue</b><span>how the machine got here, if you want it</span></a><a class="door" href="#"><b>The manual</b><span>sixty-three pages, the corrections left in</span></a></div>`)}
@@ -156,6 +167,14 @@ h3{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:up
 .paper img{display:block;width:100%;height:auto;filter:grayscale(1)}
 .ph{background:repeating-linear-gradient(135deg,#bdb9ae 0 6px,#c9c5ba 6px 12px);width:100%}
 .print{margin:0}.print figcaption{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:8px}
+.carousel{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px 0 0}.arrow{font-family:var(--serif);font-size:34px;color:var(--lo);padding:0 8px}
+.covers{display:flex;justify-content:center;align-items:flex-end;gap:26px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.cover{width:120px;flex:0 0 auto;opacity:.55;transition:none}.cover.on{width:220px;opacity:1}.cover .paper{padding:5%}.cover small{display:block;text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--mute);margin-top:8px}
+.albumname{text-align:center;font-family:var(--sans);font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin:16px 0 14px}
+.deck{display:grid;grid-template-columns:minmax(240px,1fr) minmax(280px,1.3fr);gap:0;border:1px solid var(--border);background:var(--card)}
+.tracks{list-style:none;margin:0;padding:8px 0;border-right:1px solid var(--border);font-family:var(--mono);font-size:13px}.tracks li{display:grid;grid-template-columns:2.4em 1fr auto;gap:8px;padding:9px 14px;border-bottom:1px dotted var(--border);align-items:baseline}.tracks li.on{background:var(--soft)}.tracks .tn{color:var(--mute)}.tracks .tag{font-size:10.5px;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+.panel{padding:16px}.panel img{display:block;width:100%;height:auto;filter:grayscale(1)}.panel p{margin:12px 0 0;color:var(--dim);font-size:15px}
+@media(max-width:640px){.deck{grid-template-columns:1fr}.tracks{border-right:0;border-bottom:1px solid var(--border)}.cover{width:80px}.cover.on{width:160px}}
 .shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:22px}
 .frame{text-decoration:none;display:block}.frame b{display:block;font-family:var(--serif);font-size:24px;margin-top:12px}.frame small{display:block;font-family:var(--mono);font-size:11px;color:var(--mute)}.frame span{display:block;margin-top:4px;color:var(--dim)}
 .note{color:var(--lo);font-size:14px;margin:12px 0 0;max-width:60ch}
