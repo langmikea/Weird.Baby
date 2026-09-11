@@ -1,0 +1,65 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ADOPTION HARNESS</title>
+<!-- SCRATCH, gitignored, deleted after the round. Served over http by
+     `npm run mock` — §8: Ops cannot see file://, and a source is not adopted
+     until it has been seen PLAYING in a real iframe on a real origin, READ
+     AFTER IT SETTLES.
+
+     ONE PLAYER PER LOAD, and that is a correction to this harness's own first
+     cut. It built BOTH players on one page; the browser gave the media slot to
+     one of them, so E.D. Yahdah sat at `unstarted` and Coconuts played for
+     90ms and paused. Neither reading was about the video. §8: SUSPECT THE
+     PROBE BEFORE THE SITE.
+
+     ?v=<id> selects the video. Muted, because unmuted autoplay is refused on
+     this host (§8) and muted playback still proves the embed is permitted and
+     the stream arrives. playVideo() is called explicitly on ready rather than
+     relying on the autoplay flag alone. -->
+<style>body{font:13px monospace;background:#111;color:#ddd;padding:12px}
+pre{white-space:pre-wrap}</style>
+<h2 id="h"></h2>
+<div id="p"></div>
+<pre id="o">waiting…</pre>
+<script>
+const VID = new URLSearchParams(location.search).get("v");
+const NAMES = {"-1":"unstarted",0:"ended",1:"PLAYING",2:"paused",3:"buffering",5:"cued"};
+document.getElementById("h").textContent = VID;
+const L = { states: [], errors: [], times: [] };
+let player = null;
+window.onYouTubeIframeAPIReady = () => {
+  player = new YT.Player("p", {
+    videoId: VID, width: 480, height: 270,
+    host: "https://www.youtube-nocookie.com",
+    playerVars: { autoplay: 1, mute: 1, controls: 1, playsinline: 1, rel: 0 },
+    events: {
+      onReady: (e) => { try { e.target.mute(); e.target.playVideo(); } catch (x) {} },
+      onStateChange: e => L.states.push(NAMES[e.data] ?? e.data),
+      onError: e => L.errors.push(e.data),
+    },
+  });
+  let n = 0;
+  const iv = setInterval(() => {
+    n++;
+    let t = null, dur = null, q = null, url = null;
+    try { t = player.getCurrentTime(); } catch (e) {}
+    try { dur = player.getDuration(); } catch (e) {}
+    try { q = player.getPlaybackQuality(); } catch (e) {}
+    try { url = player.getVideoUrl(); } catch (e) {}
+    if (typeof t === "number") L.times.push(Number(t.toFixed(2)));
+    const adv = L.times.length > 3 && L.times[L.times.length - 1] > L.times[2] + 0.5;
+    document.getElementById("o").textContent =
+      `states:   ${L.states.join(" > ") || "(none)"}\n` +
+      `errors:   ${L.errors.length ? L.errors.join(",") : "none"}\n` +
+      `duration: ${dur ?? "?"}\n` +
+      `quality:  ${q ?? "?"}\n` +
+      `videoUrl: ${url ?? "?"}\n` +
+      `times:    ${L.times.join(" ")}\n` +
+      `ADVANCING: ${adv ? "YES" : "no"}`;
+    if (n >= 14) { clearInterval(iv); window.__ADOPT_DONE__ = true; }
+  }, 1000);
+};
+const s = document.createElement("script");
+s.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(s);
+</script>

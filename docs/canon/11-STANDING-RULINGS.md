@@ -662,3 +662,6 @@ is framed by the day's feature; the story stays on the site. The reveal
 schedule tags every row `reel: feature` or `reel: site`; the determination
 ledger carries each day's `frame` and `site_only`. The law itself is unchanged.
 
+---
+
+**Pointer, 2026-09-11.** The open-actions registers (`OPEN_ACTIONS.md`, `OPEN_ACTIONS_CLOSED.md`) were archived whole at `docs/archive/burn-20260911/registers/` in the burn-down. Every ruling of Mike's recorded in them stands as written there; cite the file and the row id. Nothing was rewritten or carried out of them.

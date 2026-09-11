@@ -91,7 +91,7 @@ launch, open false. Nothing waits on a deploy.
   the front glass wakes first as canon says; the canon catalogue's CONFLICTS
   and HOLES entries touched by the sitting are marked ruled.
 - Branch `zip-and-parcels` (pushed) holds the first two modules of the build
-  brief (`docs/BUILD-BRIEF-day-gating-and-zip-20260902.md`): `src/lib/schedule.js`
+  brief (`docs/archive/burn-20260911/briefs/BUILD-BRIEF-day-gating-and-zip-20260902.md` (archived 09-11; the mechanism is burned)): `src/lib/schedule.js`
   and `src/lib/twin-keys.js`, unwired, lint clean. Next on it, after Sunday:
   per-row parcel keys in the twin, the query parameter, the ZIP browser route.
   Main carries none of it.

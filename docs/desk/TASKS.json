@@ -520,7 +520,9 @@
    "owner": "ops",
    "title": "Burn-down executed",
    "do": [
-    "Count equals the list."
+    "Count equals the list.",
+    "Done 09-11: tools, reveal and documents groups (three commits, docs/archive/burn-20260911/).",
+    "Left for 09-26: ops-desk after week 2; BACKLOG/THREADS re-cut; the src rows after the mocks ruling of 09-27."
    ],
    "long": "Burn-down executed: rows marked burn archived or deleted"
   },
