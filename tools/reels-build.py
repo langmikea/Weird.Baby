@@ -70,6 +70,7 @@ def build(clip, dest, question=None, hold=6.0):
                   "fps=30,format=yuv420p,setsar=1")
         achain = "[0:a]aformat=sample_rates=48000:channel_layouts=stereo[a0]"
         if question:
+            import shutil; shutil.copy(FONT_SRC, pathlib.Path(td) / "font.ttf")
             names = question_lines(question, td)
             nlines = len(names)
             size = 76 if nlines <= 3 else 64
