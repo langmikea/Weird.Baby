@@ -771,10 +771,11 @@
    "title": "Reel line takes practice clips and burns in the question",
    "long": "tools/reels-build.py: a practice lane (no ledger; practice-<date>.mp4 in, built reel with the pop out) and a burned-in question line on every Determination and practice reel (Mike's ruling A, 09-12)",
    "do": [
-    "Add --lane practice reading intake/practice/practice-*.mp4, writing out/practice/<date>_practice.mp4 with the pop.",
-    "Add the question overlay (ffmpeg drawtext, house type, top third, on for the first beat) from the ledger's question or --question.",
-    "Dry-run on a synthetic clip; then reel 1 on 09-15."
-   ]
+    "Done 09-12: --lane practice builds every practice-*.mp4 with the question burned in (Georgia Bold, top third, white on a soft box), the adult's voice under it (tools/reels-voice.py) and the pop.",
+    "Sample served to Mike the same day."
+   ],
+   "done": true,
+   "done_on": "2026-09-12"
   },
   {
    "id": "glass-composite",

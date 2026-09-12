@@ -99,3 +99,14 @@ machine is heard; the beat is there; one line of notes (room, light, time,
 distance, the annoyance) comes with it; it goes back the same day, built,
 with a three-line read. Nine of them, Tue/Thu/Sat, weeks 1 to 3; the room
 and the framing are ruled on 10-04 from them.
+
+## The question layer, built 2026-09-12
+
+`python tools/reels-build.py --lane practice` builds every
+`intake/practice/practice-*.mp4` into `out/practice/<name>_reel.mp4`: the
+question burned in as large text over the opening beat (Georgia Bold, white
+on a soft black box, top third, up for `--hold` seconds, default six), THE
+ADULT speaking under it (`tools/reels-voice.py`: a muted mumble generated
+from the sentence's syllables, rising at the end; never the machine's
+voice), and the pop. `--question` sets the text; a Determination row's own
+`question` is used on that lane. Nothing is posted from the practice lane.

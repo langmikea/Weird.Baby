@@ -2,6 +2,16 @@
 
     python tools/reels-build.py --lane numbers --week 2
     python tools/reels-build.py --lane numbers --week 2 --dry
+    python tools/reels-build.py --lane practice                      # every practice-*.mp4 in the intake
+    python tools/reels-build.py --lane practice --question "Will it rain on the parade?" --hold 6
+
+THE QUESTION LAYER [Mike, 2026-09-12]: the question is burned in as large,
+readable text over the opening beat (sound-off viewers lose nothing) and is
+voiced by THE ADULT (tools/reels-voice.py), a muted mumble generated from the
+sentence, never the machine's voice. A Determination row's `question` is used
+when it has one; `--question` overrides; the practice lane uses `--question`
+or a stand-in line. `--hold` is how long the text stays (seconds; the ruled
+shape keeps it up until the answer).
 
 Reads clips from the intake folder, one per weekday, named by week and day:
 
@@ -19,7 +29,10 @@ Intake and packets live in OneDrive so the phone can drop and pick up:
     C:/Users/macun/OneDrive/WeirdBaby/reels/out/<lane>-w<week>/
 The ledger is reels/<lane>.json in this repo. Media never enters the repo.
 """
-import argparse, json, pathlib, re, subprocess, sys, datetime
+import argparse, json, pathlib, re, subprocess, sys, datetime, tempfile, textwrap
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import importlib
+VOICE = importlib.import_module("reels-voice")
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
 ONE = pathlib.Path("C:/Users/macun/OneDrive/WeirdBaby/reels")
@@ -34,17 +47,66 @@ def probe(p):
     j = json.loads(out); v = next((s for s in j["streams"] if s["codec_type"] == "video"), {})
     return int(v.get("width", 0)), int(v.get("height", 0)), float(v.get("duration") or 0)
 
-def build(clip, dest):
-    """normalise the clip, append the pop, one pass"""
-    vf = ("[0:v]scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=black,"
-          "fps=30,format=yuv420p,setsar=1[v0];"
-          "[0:a]aformat=sample_rates=48000:channel_layouts=stereo[a0];"
-          "[1:v]fps=30,format=yuv420p,setsar=1[v1];"
-          "[1:a]aformat=sample_rates=48000:channel_layouts=stereo[a1];"
-          "[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]")
-    cmd = ["ffmpeg", "-v", "error", "-y", "-i", str(clip), "-i", str(POP), "-filter_complex", vf,
-           "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(dest)]
-    subprocess.run(cmd, check=True)
+FONT_SRC = pathlib.Path("C:/Windows/Fonts/georgiab.ttf")   # copied beside the text file at build time; drawtext then sees plain relative names and no drive colon to escape
+TEXT_LINE_CHARS = 18                      # Georgia Bold 76px on 1080 wide, with margins
+VOICE_AT = 0.5                            # seconds in before the adult starts
+
+def question_text_file(q, tmpdir):
+    lines = textwrap.wrap(q.strip(), TEXT_LINE_CHARS) or [q.strip()]
+    f = pathlib.Path(tmpdir) / "question.txt"
+    f.write_text("\n".join(lines), encoding="utf-8", newline="\n")   # LF only: drawtext draws a CR as a box
+    return f, len(lines)
+
+def build(clip, dest, question=None, hold=6.0):
+    """normalise the clip; burn the question in and lay the adult under it when there is one; append the pop"""
+    with tempfile.TemporaryDirectory() as td:
+        inputs = ["-i", str(clip), "-i", str(POP)]
+        vchain = ("scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=black,"
+                  "fps=30,format=yuv420p,setsar=1")
+        achain = "[0:a]aformat=sample_rates=48000:channel_layouts=stereo[a0]"
+        if question:
+            tf, nlines = question_text_file(question, td)
+            import shutil; shutil.copy(FONT_SRC, pathlib.Path(td) / "font.ttf")
+            size = 76 if nlines <= 3 else 64
+            # the text sits in the top third, white on a soft black box, centred; up for `hold` seconds
+            vchain += (f",drawtext=fontfile=font.ttf:textfile=question.txt:fontsize={size}:fontcolor=white:line_spacing=10:"
+                       f"x=(w-text_w)/2:y=200:box=1:boxcolor=black@0.55:boxborderw=28:enable='between(t,0,{hold})'")
+            voice = pathlib.Path(td) / "adult.wav"
+            VOICE.write_wav(voice, VOICE.render(question))
+            inputs += ["-i", str(voice)]
+            achain = ("[0:a]aformat=sample_rates=48000:channel_layouts=stereo[c0];"
+                      f"[2:a]aformat=sample_rates=48000:channel_layouts=stereo,adelay={int(VOICE_AT*1000)}|{int(VOICE_AT*1000)},volume=0.9[q0];"
+                      "[c0][q0]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[a0]")
+        vf = (f"[0:v]{vchain}[v0];{achain};"
+              "[1:v]fps=30,format=yuv420p,setsar=1[v1];"
+              "[1:a]aformat=sample_rates=48000:channel_layouts=stereo[a1];"
+              "[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]")
+        cmd = ["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", vf,
+               "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(dest)]
+        subprocess.run(cmd, check=True, cwd=td)
+
+PRACTICE_QUESTION = "Is this the right room for the machine?"
+
+def practice(a):
+    """the practice lane: no ledger, nothing posted. Every practice-*.mp4 in the intake becomes a
+    reel in out/practice/ with the question layer and the pop, so Mike sees the whole shape."""
+    intake = pathlib.Path(a.intake) if a.intake else ONE / "intake" / "practice"
+    out = ONE / "out" / "practice"
+    clips = sorted(f for f in intake.glob("*") if re.fullmatch(r"practice-.*\.(mp4|mov|m4v)", f.name.lower()))
+    print(f"THE REEL LINE — practice. intake {intake}")
+    if not clips: print("  nothing to build. Drop practice-<date>-N.mp4 into the intake folder."); return
+    out.mkdir(parents=True, exist_ok=True)
+    q = a.question or PRACTICE_QUESTION
+    for c in clips:
+        dest = out / (c.stem + "_reel.mp4")
+        if dest.exists() and not a.force and dest.stat().st_mtime >= c.stat().st_mtime:
+            print(f"  {c.name}  already built -> {dest.name}"); continue
+        w, h, dur = probe(c)
+        print(f"  {c.name}  {w}x{h} {dur:.1f}s  ->  {dest.name}")
+        if a.dry: continue
+        build(c, dest, question=q, hold=a.hold)
+        _, _, total = probe(dest); print(f"        built {total:.1f}s")
+    if a.dry: print("  dry run; nothing written")
 
 def caption(lane, row):
     if lane == "numbers":
@@ -55,11 +117,16 @@ def caption(lane, row):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--lane", choices=list(LEDGER), required=True)
-    ap.add_argument("--week", type=int, required=True)
+    ap.add_argument("--lane", choices=list(LEDGER) + ["practice"], required=True)
+    ap.add_argument("--week", type=int, default=None)
+    ap.add_argument("--question", default=None, help="burn this question in (overrides the ledger row's)")
+    ap.add_argument("--hold", type=float, default=6.0, help="seconds the question text stays up")
+    ap.add_argument("--force", action="store_true", help="practice lane: rebuild even if the reel is newer than the clip")
     ap.add_argument("--intake", default=None, help="override the intake folder (default OneDrive/…/intake/<lane>)")
     ap.add_argument("--dry", action="store_true", help="say what would happen; touch nothing")
     a = ap.parse_args()
+    if a.lane == "practice": return practice(a)
+    if a.week is None: sys.exit("--week is required for a ledger lane")
     intake = pathlib.Path(a.intake) if a.intake else ONE / "intake" / a.lane
     out = ONE / "out" / f"{a.lane}-w{a.week}"
     led_path = LEDGER[a.lane]; led = json.loads(led_path.read_text(encoding="utf-8"))
@@ -85,7 +152,8 @@ def main():
         dest = out / f"{row['date']}_{a.lane}_{slug}.mp4"
         print(f"  {day.upper()}  {clips[day].name}  {w}x{h} {dur:.1f}s  ->  {dest.name}")
         if a.dry: continue
-        build(clips[day], dest)
+        q = a.question or (row.get("question") if a.lane == "determinations" else None)
+        build(clips[day], dest, question=q, hold=a.hold)
         _, _, total = probe(dest)
         row["status"] = "shot"; row["file"] = str(dest); row["length_s"] = round(total, 1); row["built"] = datetime.date.today().isoformat()
         caps.append(f"{row['date']} {day.upper()}  ({total:.1f}s)\n{caption(a.lane, row)}\n")
