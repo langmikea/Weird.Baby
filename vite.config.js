@@ -353,6 +353,11 @@ const HELD_PATHS = [
      there is no door. Parked here anyway, so that the day one is wired back for
      development it is already behind the right one. */
   "/src/data/artists/robots-units.js",
+  /* [2026-09-11] the four character albums, one per robot, in the carousel
+     from Opening Day. Same posture as the Portal had before 08-22: parked
+     here, asked for by `Robots.jsx`, open in development, refused at LAUNCH.
+     On 10-30 this line goes and the covers move out of `public/held/`. */
+  "/src/data/artists/robots-albums.js",
 ];
 /* THE COMPANIONS ARE NAMED RATHER THAN INFERRED — the museum's own generic
    machinery that nothing but a shut wing happens to import today. They ride
@@ -360,6 +365,9 @@ const HELD_PATHS = [
    lifts it into a shared chunk on its own and the shut chunk simply gets
    smaller — no build breaks and nothing leaks. */
 const HELD_COMPANIONS = [
+  /* [2026-09-11] the catalogue the character albums read; it rides in their held
+     chunk. If a public route ever imports it, rolldown lifts it out on its own. */
+  "/docs/CATALOGUE-20260918.json",
   "/src/lib/use-overlay.js",
   "/src/data/vocabulary.json",
   "/src/data/era-buckets.json",

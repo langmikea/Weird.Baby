@@ -168,7 +168,7 @@
   },
   {
    "name": "The wing mocks",
-   "what": "five pages drawn before they are built: the front, the album, the feature page, the prologue, the day's landing; ruled A/B/C per section at the 09-27 sitting",
+   "what": "mocks 3 to 5 (feature page, prologue, day's landing) for the 09-27 sitting; the shelf and the album are the real /robots page, seen on the PC with npm run dev",
    "how": "served page; npm run mocks (the served copy carries sample scans and is built outside the repo)",
    "url": "https://claude.ai/code/artifact/abc1ed65-64cf-447e-92c2-fe379c863aba"
   },

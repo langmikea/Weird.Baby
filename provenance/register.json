@@ -16239,6 +16239,654 @@
    "l": 499,
    "t": "A-01- Filenames Only",
    "s": "Mike, the day editor, docs/dictation-20260807/record-draft.json, saved 2026-09-06 evening New York"
+  },
+  "22504418fde42d11": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 39,
+   "t": "ENGINE",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "85414668cbbce09c": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 39,
+   "t": "FEATURE",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "74c507134f6f893c": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 39,
+   "t": "GAME",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "e8801758b4d35e6b": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 39,
+   "t": "SETTING",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "bee7e4c9452b1d8f": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 39,
+   "t": "SOUND",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "1d6c9158145d00be": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 39,
+   "t": "PAPER",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "fb9a6659aa953bdd": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 39,
+   "t": "OBJECT",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "ad3dbb9d1975aaea": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 39,
+   "t": "CHARACTER",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "9208564e505e3185": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 40,
+   "t": "later",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "71f4ac01feb27238": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 40,
+   "t": "launch run, day {}",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "e8e905d36274ec9b": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 47,
+   "t": "this unit",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "68c2e7a60513a445": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 57,
+   "t": "this unit's",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "0ac839d26c313713": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 57,
+   "t": "the machine's",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "54a272923ea1556c": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 60,
+   "t": "Pitches are the house's drafts until the sitting of 2026-09-20 rules them.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "76761e98117c4fdd": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 64,
+   "t": "{} · {}",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "91c50f14338772ca": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 70,
+   "t": "/robots/art/{}",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "cc440e1932c75a29": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 74,
+   "t": "{}-spec",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "ce829874f0a699d5": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 80,
+   "t": "Technical Specifications",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "fb29ee689bd7709a": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 84,
+   "t": "SERIAL",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "086e7e0ea1ac6a31": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 84,
+   "t": "MGK-VIIIp −{}",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "11c555fa659ced99": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 84,
+   "t": "Key code {}.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "6227c6398d5937f0": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 85,
+   "t": "CASE",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "f2c3899e809f298e": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 85,
+   "t": "Release 1.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "331e7c779447f4c0": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 86,
+   "t": "VOICE",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "610dad13fa99cc05": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 86,
+   "t": "The persona's cast voice, one of the eleven in the list.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "2ae032197335abc1": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 87,
+   "t": "ENGINES",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "4f1c9c7fbacf63fc": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 87,
+   "t": "MGK-NIAC · MGK-v2.0 · MGK-65",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "b7e90edd675baea2": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 87,
+   "t": "Three engines; the twenty, the second voice, the sixty-five.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "ef1436c1e8cf03cd": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 89,
+   "t": "{} · SPECIFICATIONS",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "af2507b88bd8039c": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 93,
+   "t": "{}-does",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "ca56c4f83570a2d5": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 99,
+   "t": "What It Does",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "218568a7e915f238": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 103,
+   "t": "{} · WHAT IT DOES",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "d3b54df6cfe32fc2": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 107,
+   "t": "{}-kit",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "8d6730688f3e322f": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 113,
+   "t": "The Kit",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "bce8d4bb4be3963a": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 115,
+   "t": "What came with it and what was made for it. Each piece is photographed on the tray; the prints land here.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "2fb4cc8b192f1f28": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 117,
+   "t": "{} · THE KIT",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "0108ef303b560c39": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 121,
+   "t": "{}-papers",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "6bd89b14284641f5": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 127,
+   "t": "The Papers",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "f305d6ae547a8e5a": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 130,
+   "t": "{} · THE PAPERS",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "196dbfe2124a5b47": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 134,
+   "t": "{}-plates",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "3685bfc9fd5166d9": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 140,
+   "t": "Image Archive",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "fb8b394c3ba9cc39": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 142,
+   "t": "photograph",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "9d4609ad31f9e689": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 142,
+   "t": "photographs",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "679cbf2c45c6beeb": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 143,
+   "t": "Black and white prints from the tray: closed, open, the back, the underside, the case, the cable, the box. They land with the manifest.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "3bf5b5c1996d5b99": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 144,
+   "t": "{} · IMAGE ARCHIVE",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "5cd43d9a3a768c7d": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 148,
+   "t": "{}-record",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "3489451da0058eb1": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 154,
+   "t": "The Record",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "ed5b5cb64caede93": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 156,
+   "t": "Two paragraphs: where it was found, in what state, what the catalogue said. Ops writes, Mike rules.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "9a456ae6a77b4f03": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 157,
+   "t": "{} · THE RECORD",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "1f689f03bde365ec": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 161,
+   "t": "{}-faq",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "ea0284c67954609b": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 162,
+   "t": "FAQ",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "e260b1cc7e1f2191": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 166,
+   "t": "Does it still work?",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "cb4efb2306c49db8": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 166,
+   "t": "Yes. It powers on and runs its own firmware.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "d4ee54ba783e60dc": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 167,
+   "t": "Can I try it?",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "1d23bb8ff98768b1": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 167,
+   "t": "Yes. The twin runs the same software in the browser; the door is on the front of the wing.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "1c8a0d3eab0313df": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 168,
+   "t": "Can I buy one?",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "635d0ab94e44d527": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 168,
+   "t": "No. The shop carries what the shop carries; the machines are not stock.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "685a344324c4d6a7": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 176,
+   "t": "The Everyday",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "a71093f426511749": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 176,
+   "t": "the Everyman",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "f6314138c56619b5": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 176,
+   "t": "TT5S-X2GT",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "2ed5c6af5dd5aac3": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 177,
+   "t": "The oxblood case, the strap, the cable",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "577f8efc567fa479": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 177,
+   "t": "Joey",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "2e881da270f87a8b": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 178,
+   "t": "The unit for the rest of us: the one that was sold in the magazines, in the box, with the copy.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "fb84d05317b01b2d": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 179,
+   "t": "The Gambler",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "220e59b22e196557": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 179,
+   "t": "the Gambler",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "b04936425d26b77c": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 179,
+   "t": "HGMM-HGPK",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "e43d4e9988cab3b0": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 180,
+   "t": "The Deluxe case, with chips, cards and dice",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "6af081764cde84ef": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 180,
+   "t": "Miguel",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "1ecbdc19e900f33a": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 181,
+   "t": "Comes in a case. Never asks what you can afford.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "ec40d356305771a4": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 182,
+   "t": "The CEO",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "15e741a11c10a665": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 182,
+   "t": "the CEO",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "eb88fb1eccd9c8fc": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 182,
+   "t": "4KAQ-CNSE",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "b6f673e4e1def766": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 183,
+   "t": "The attaché",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "90a2bce601f349ee": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 183,
+   "t": "Matthew",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "3353aa7813b58e78": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 184,
+   "t": "The attaché. Decides, then explains.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "1e9a54ba59eabab6": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 185,
+   "t": "The Informer",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "334b90fd43716848": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 185,
+   "t": "the Informer",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "9a8bc3a29e046041": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 185,
+   "t": "7SVQ-8KBW",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "288681ff9de095df": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 186,
+   "t": "The spy kit",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "f000d94345f8766e": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 186,
+   "t": "Brian",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "5d384a0b899279d6": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 187,
+   "t": "The spy kit. Hears everything, repeats some of it.",
+   "p": "",
+   "c": "HOUSE",
+   "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
   }
  }
 }

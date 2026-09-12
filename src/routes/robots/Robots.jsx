@@ -49,6 +49,20 @@ import { useMuseumDay } from "../../lib/use-museum-day.js";
    of four public albums, which is the same place a flat tyre lands. */
 export default function Robots({ open = null }) {
   const [portal, setPortal] = useState(null);
+  /* [2026-09-11] THE CHARACTER ALBUMS, asked for exactly as the Portal is: a
+     dynamic import of a module parked in `HELD_PATHS`, so the four albums and
+     their covers stay behind the stage door until Opening Day and are open in
+     development. The `catch` is the whole error path, as it is for the Portal:
+     no module, no albums, the deck as it was. Mike, 2026-09-11: "each robot as
+     an album in the carousel on /robots". */
+  const [albums, setAlbums] = useState(null);
+  useEffect(() => {
+    let live = true;
+    import("../../data/artists/robots-albums.js")
+      .then(m => { if (live) setAlbums(m); })
+      .catch(() => {});
+    return () => { live = false; };
+  }, []);
 
   useEffect(() => {
     /* === [2026-08-22] THE GATE IS OFF — MIKE RULED THE PORTAL PUBLIC ======
@@ -118,11 +132,13 @@ export default function Robots({ open = null }) {
        means the Portal is never copied twice. `robotsExhibitOn` returns the
        module-load object unchanged when the day has not moved. */
     const base = robotsExhibitOn(day);
-    if (!portal) return base;
+    if (!portal && !albums) return base;
     const spine = [...base.spine];
-    spine.splice(Math.min(portal.PORTAL_AT, spine.length), 0, portal.PORTAL_ALBUM);
+    if (portal) spine.splice(Math.min(portal.PORTAL_AT, spine.length), 0, portal.PORTAL_ALBUM);
+    /* the four land after the sleeve and the Portal, the Everyday first (Mike: "spot one") */
+    if (albums) spine.splice(Math.min(albums.ALBUMS_AT, spine.length), 0, ...albums.CHARACTER_ALBUMS);
     return { ...base, spine };
-  }, [portal, day]);
+  }, [portal, albums, day]);
 
   return <Exhibit artist={artist} open={open} />;
 }

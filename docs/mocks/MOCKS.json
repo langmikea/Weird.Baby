@@ -1,5 +1,5 @@
 {
- "_": "THE FIVE WING MOCKS — data for tools/mocks.mjs (same except data). Everything the catalogue does not already hold: the shelf's four frames, the Everyday album's plates, kit and papers, the feature page's operating steps, the day's landing. Pitches come from docs/CATALOGUE-20260918.json at render. HOUSE drafts throughout; Mike rules each mock A keep / B change / C cut at the sitting of 2026-09-27. Photographs are frames with labels; the served copy with sample scans is built with --photos and never committed.",
+ "_": "THE FIVE WING MOCKS — data for tools/mocks.mjs (same except data). Everything the catalogue does not already hold: the shelf's four frames, the Everyday album's plates, kit and papers, the feature page's operating steps, the day's landing. Pitches come from docs/CATALOGUE-20260918.json at render. HOUSE drafts throughout; Mike rules each mock A keep / B change / C cut at the sitting of 2026-09-27. Photographs are frames with labels; the served copy with sample scans is built with --photos and never committed. [09-11] Mocks 1 and 2 are retired by Mike's ruling: the shelf and the album are the real exhibit page, filled with data. Mocks 3 to 5 (the feature page, the prologue, the day's landing) still stand for the sitting.",
  "sitting": "2026-09-27",
  "shelf": [
   {
@@ -150,6 +150,14 @@
    "ruling": "B",
    "mike": "There is no benefit in showing the bare unit as the album cover; they all look the same. Use the full artifact photo (the box for 01).",
    "applied": "the cover is the unit's full artifact photograph: the box for the Everyday; the case for the Gambler; the attaché for the CEO; the spy kit for the Informer"
+  },
+  {
+   "date": "2026-09-11",
+   "mock": "1 and 2",
+   "section": "whole",
+   "ruling": "C",
+   "mike": "We already have a page that does all the stuff I'm asking for; you should not be creating a new one. An album cover for each robot type in the carousel; the tracks lay out specifications and other interesting items; below, the artifact field for photo albums, videos and additional content.",
+   "applied": "mocks 1 and 2 retired; the four character albums are built into the real /robots exhibit (src/data/artists/robots-albums.js, held until Opening Day, open in development). Ruling A the same day: the current tray photographs as stand-in covers; 42 of 49 were gone from the PC, so the Everyday carries the B&W box sample and the other three the ring empty."
   }
  ]
 }

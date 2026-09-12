@@ -510,8 +510,9 @@
    "owner": "ops",
    "title": "Five wing mocks served",
    "do": [
-    "For the 09-27 sitting: https://claude.ai/code/artifact/abc1ed65-64cf-447e-92c2-fe379c863aba",
-    "Served 09-11; rule each section A/B/C by number."
+    "The shelf and the album are the real page now: on the PC, in C:\\AI\\Projects\\weird-baby-museum, run npm run dev, then open http://localhost:5173/robots and click an album cover.",
+    "Mocks 3 to 5 (feature page, prologue, day's landing): https://claude.ai/code/artifact/abc1ed65-64cf-447e-92c2-fe379c863aba",
+    "Rule each section A/B/C by number."
    ],
    "long": "Five wing mocks served: feature page, day's landing, prologue, character page, the front",
    "done": true,
