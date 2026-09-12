@@ -133,9 +133,12 @@ def main():
     ap.add_argument("--question", default=None, help="burn this question in (overrides the ledger row's)")
     ap.add_argument("--hold", type=float, default=6.0, help="seconds the question text stays up")
     ap.add_argument("--force", action="store_true", help="practice lane: rebuild even if the reel is newer than the clip")
+    ap.add_argument("--pop", default=None, help="a different pop file, for comparisons")
     ap.add_argument("--intake", default=None, help="override the intake folder (default OneDrive/…/intake/<lane>)")
     ap.add_argument("--dry", action="store_true", help="say what would happen; touch nothing")
     a = ap.parse_args()
+    if a.pop:
+        global POP; POP = pathlib.Path(a.pop)
     if a.lane == "practice": return practice(a)
     if a.week is None: sys.exit("--week is required for a ledger lane")
     intake = pathlib.Path(a.intake) if a.intake else ONE / "intake" / a.lane
