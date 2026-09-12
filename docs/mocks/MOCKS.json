@@ -158,6 +158,14 @@
    "ruling": "C",
    "mike": "We already have a page that does all the stuff I'm asking for; you should not be creating a new one. An album cover for each robot type in the carousel; the tracks lay out specifications and other interesting items; below, the artifact field for photo albums, videos and additional content.",
    "applied": "mocks 1 and 2 retired; the four character albums are built into the real /robots exhibit (src/data/artists/robots-albums.js, held until Opening Day, open in development). Ruling A the same day: the current tray photographs as stand-in covers; 42 of 49 were gone from the PC, so the Everyday carries the B&W box sample and the other three the ring empty."
+  },
+  {
+   "date": "2026-09-11",
+   "mock": "the album (real page)",
+   "section": "tracks",
+   "ruling": "A",
+   "mike": "A",
+   "applied": "the seven tracks stand: Technical Specifications, What It Does, The Kit, The Papers, Image Archive, The Record, FAQ"
   }
  ]
 }
