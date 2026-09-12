@@ -1,0 +1,78 @@
+<title>The Elements</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#f3f4f1;--card:#fbfbf9;--ink:#1c2026;--ink-2:#4a515a;--ink-3:#7a828c;--rule:#cfd3cc;--gold:#b8974a;--gold-ink:#7a6122;--gold-bg:#f4ecd9;--you:#6a4c93;--you-bg:#ebe4f3;--ok:#3f7a4f;--ok-bg:#e3efe4;--no:#9a3b2e;--no-bg:#f3dfd9;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#171a1e;--card:#1c2025;--ink:#e6e8e4;--ink-2:#b4bac1;--ink-3:#7f878f;--rule:#343a41;--gold:#cdae63;--gold-ink:#dcc27f;--gold-bg:#33291a;--you:#c2a8e6;--you-bg:#2e2440;--ok:#8fcb9c;--ok-bg:#213827;--no:#e39a8c;--no-bg:#3f231f;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#171a1e;--card:#1c2025;--ink:#e6e8e4;--ink-2:#b4bac1;--ink-3:#7f878f;--rule:#343a41;--gold:#cdae63;--gold-ink:#dcc27f;--gold-bg:#33291a;--you:#c2a8e6;--you-bg:#2e2440;--ok:#8fcb9c;--ok-bg:#213827;--no:#e39a8c;--no-bg:#3f231f;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Geist,system-ui,sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:880px;margin:0 auto;padding:40px 24px 72px}
+.eyebrow{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+h1{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:40px;line-height:1.05;margin:0 0 12px;letter-spacing:-.01em}
+.lede{color:var(--ink-2);max-width:62ch;margin:0 0 6px}.you{border-left:3px solid var(--you);background:var(--you-bg);padding:12px 16px;margin:18px 0 0;color:var(--ink-2);font-style:italic;max-width:70ch}
+h2{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:24px;margin:38px 0 8px}h2 small{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;color:var(--ink-3);margin-left:10px;letter-spacing:.06em}
+p{max-width:70ch}ul{max-width:72ch;padding-left:1.2em}li{margin:6px 0}
+.ways{display:grid;gap:12px;margin:8px 0 0}.way{border:1px solid var(--rule);background:var(--card);border-radius:5px;padding:14px 18px;display:grid;grid-template-columns:2em 1fr;gap:10px}.way .l{font-family:"Geist Mono",ui-monospace,monospace;font-size:20px;color:var(--gold-ink)}.way b{display:block;margin-bottom:2px}.way p{margin:0;color:var(--ink-2);font-size:15px}
+.way.rec{border-color:var(--ok);background:var(--ok-bg)}.way.no{border-color:var(--no);background:var(--no-bg)}.way.no .l{color:var(--no)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.cell{border:1px solid var(--rule);background:var(--card);border-radius:5px;padding:12px 14px;font-size:15px}.cell b{display:block;margin-bottom:3px}.cell span{color:var(--ink-2)}
+.qs{border:1px solid var(--you);border-radius:6px;padding:16px 20px;margin-top:38px}.qs .eyebrow{color:var(--you)}.qs ol{margin:0;padding-left:1.3em}.qs li{margin:8px 0}
+.fine{margin-top:30px;font-size:13px;color:var(--ink-3)}.fine a{color:var(--gold-ink)}
+</style>
+<div class="wrap">
+<p class="eyebrow">50,000 feet · a discussion, not a plan · 2026-09-12</p>
+<h1>The Elements</h1>
+<p class="lede">Reels assembled from building blocks: a library of fixed shots of each unit, plus one line of data a day. Your idea, read against what we own and what exists. Nothing here is built until it is ruled.</p>
+<div class="you">Photos and videos of elements: a front view, an isometric view, a back view, the unit in the hand, a finger on the scroll knob and on the button. Remove the friction from making a video once a question and an answer are chosen. A simulated screen might be acceptable, or the VIIIp flashing generic imagery. Planned well, it looks like a multi-camera shoot. Think broadly: the music videos too. Do not reinvent the wheel.</div>
+
+<h2>The read</h2>
+<p>It is SED applied to video. The reel line is already the assembly half: normalise, add the question line, add the pop, caption, schedule. What it lacks is the middle: the machine, and the answer on its glass. The elements fill exactly that hole. Good direction; it removes the friction that broke the first plan.</p>
+
+<h2>What we already own<small>no wheel to reinvent</small></h2>
+<div class="grid">
+<div class="cell"><b>The twin</b><span>The machine's full software in the browser. It draws the display itself, any feature, any state, any answer, in a second. It is the same software the unit runs.</span></div>
+<div class="cell"><b>A composite precedent</b><span>The VIIIp cover's BIOS beat: the twin's framebuffer composited into the front-view photograph at the measured aperture. Done and passed.</span></div>
+<div class="cell"><b>The display emulator</b><span>Renders the display from the content tables in the machine's own font.</span></div>
+<div class="cell"><b>The reel line</b><span>ffmpeg: 1080x1920, the pop, captions, schedule, Buffer. The sounds: the short, the pop, the machine's set.</span></div>
+<div class="cell"><b>The tray setup</b><span>The album plates' shoot is the same afternoon and the same positions as the elements.</span></div>
+<div class="cell"><b>The catalogue</b><span>The feature per launch day, so the line knows which glass each day needs.</span></div>
+</div>
+
+<h2>The glass<small>three ways, and one not to take</small></h2>
+<div class="ways">
+<div class="way rec"><span class="l">A</span><div><b>The twin's display, composited into a real plate.</b><p>One static close-up plate of each unit's glass, shot once. The twin renders the answer; the line composites it at the measured aperture with the CRT's own bloom. Honest by construction: the machine's own software showing the machine's own answer. Forcing an answer is a setting, never a shoot. Recommended.</p></div></div>
+<div class="way"><span class="l">B</span><div><b>The real unit in attract mode, the twin for the close-up.</b><p>Flash the unit with a generic moving pattern so the hand and knob elements have a live glass; use A for the answer shot. Needs the firmware flash, on the calendar for 10-15 with you at the bench.</p></div></div>
+<div class="way"><span class="l">C</span><div><b>The real unit, every day.</b><p>The current plan and the friction you are escaping. Keep it for the occasional true one-take.</p></div></div>
+<div class="way no"><span class="l">×</span><div><b>Not the AI-simulated screen.</b><p>It would invent what the machine says on the glass, the one thing the house never does. And it is unnecessary: the twin is the real screen.</p></div></div>
+</div>
+
+<h2>The multi-camera look</h2>
+<p>Shoot once per unit, one afternoon: front, isometric, back, in hand, finger on the scroll knob, finger on the igniter, the shake, and the static glass plate. Each as a photograph and as three to five seconds of video with a little life in it. Then three or four cut lists, not one, so no two days are the same cut: wide, insert, knob, glass with the answer, hold, pop. Fifteen seconds. The trade's own rule is the same: a tagged library of a handful of angles per subject, two or three takes each, turns an hour's edit into minutes.</p>
+
+<h2>The engine</h2>
+<div class="ways">
+<div class="way rec"><span class="l">A</span><div><b>Ours.</b><p>ffmpeg, already in the line, plus a headless browser to render the twin's glass. No vendor, no fee, no new format.</p></div></div>
+<div class="way"><span class="l">B</span><div><b>Remotion.</b><p>Video from React, the museum's own stack; the twin's display could sit inside a composition directly. Free for individuals. More work, more motion.</p></div></div>
+<div class="way"><span class="l">C</span><div><b>A hosted template API.</b><p>Creatomate or Shotstack: JSON timelines rendered in the cloud. Clean, paid, a vendor between us and the file; nothing here needs one yet. Phone template apps are hand work every day, which is the friction being removed.</p></div></div>
+</div>
+
+<h2>The risk to name</h2>
+<p>Both platforms now throttle repetitive, templated patterns and reward original footage. So the elements are real footage of the real object and the real hands; several cut lists; one fresh shot a week; clean files, never a cross-posted watermark. The Determination stays a real question with a real answer. Only the pictures around it are assembled.</p>
+
+<h2>Where else it pays</h2>
+<ul>
+<li><b>The music videos.</b> One audio master, four or five performance angles, cut lists: the produced version's video without a crew. The live Number stays live.</li>
+<li><b>The album plates.</b> Same shoot day.</li>
+<li><b>The wing.</b> The twin's rendered glass as the live picture on every What It Does entry, per feature.</li>
+<li><b>The fan-question segment.</b> Batch-rendered from the same elements.</li>
+<li><b>The manual.</b> Display states as illustrations, from the emulator.</li>
+</ul>
+
+<div class="qs"><p class="eyebrow">The questions, one at a time in chat</p>
+<ol>
+<li><b>The glass:</b> A the twin composite · B attract mode plus the twin · C the real unit every day.</li>
+<li><b>The engine:</b> A ours · B Remotion · C a hosted API.</li>
+<li><b>The element list per unit:</b> A the eight above · B add or drop, say which · C a different list.</li>
+<li><b>The music videos:</b> A the same method for the produced versions · B live only · C later.</li>
+</ol></div>
+
+<p class="fine">Read for this page: <a href="https://rendercomp.com/blog/best-programmatic-video-tools-2026/">programmatic video tools, 2026</a> · <a href="https://www.wireflow.ai/blog/creatomate-vs-shotstack">Creatomate vs Shotstack</a> · <a href="https://storyflow.so/blog/how-to-plan-b-roll">planning b-roll shot lists</a> · <a href="https://www.influencers-time.com/ai-multi-angle-shot-generation-for-catalogue-scale-video-bri/">multi-angle shot lists for catalogue video</a> · <a href="https://velreel.com/blog/instagram-tiktok-algorithm-shifts-2026">the 2026 algorithm shifts</a> · <a href="https://crossglobemarketing.com/blogs/instagram-original-content-algorithm-2026/">Instagram's originality score</a>. The record is docs/ELEMENTS-20260912.md.</p>
+</div>
