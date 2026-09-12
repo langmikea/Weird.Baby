@@ -7,20 +7,23 @@
    "date": "2026-09-15",
    "owner": "mike",
    "block": "practice",
-   "title": "Practice reel 1 of 9",
+   "title": "Element takes 1: the Everyday",
    "do": [
-    "Shoot ONE clip, vertical, raw, under 30 seconds: any question, the machine answering. You silent. The Audigo on, so the machine's own sounds carry. Phone on the tripod in the room you mean to use.",
-    "The beat: shake or click, the answer on the glass, hold two seconds. Nothing else. The question is burned in as text by the reel line (ruled 09-12); do not show it on camera.",
-    "Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-15.mp4 (mov is fine).",
-    "With it, one line of notes in chat or a text file beside it: room, light, time of day, distance from the lens, and the thing that annoyed you most.",
-    "Success = the file lands, the glass reads at phone size, the machine is heard, the beat is there, the notes line exists, and it comes back to you the same day built with the pop and a three-line read.",
-    "Practice 1 of 9. Not posted, not final, not a real question."
+    "The Everyday, plate on. Gloves, white coat. iPhone on the tripod, 4K, landscape, 30 fps. Audigo on for the machine's sounds.",
+    "Take 1: sixty seconds scrolling the knob and clicking the igniter, the glass in frame.",
+    "Take 2: sixty seconds turning the unit from the top to the back to the front.",
+    "Take 3: sixty seconds handheld, you moving around the device.",
+    "Take 4: the glass plate. Static, close, square on, sharp, the display lit, ten seconds. This is what the twin's answer gets composited into.",
+    "Slate each take (a card in frame for two seconds: EVERYDAY · 09-15 · take N · the room).",
+    "Drop them in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-15-1.mp4 to -4.mp4, plus one line of notes: room, light, time, distance, the annoyance.",
+    "Back to you by Friday: a cut from the takes and the first composite on the glass plate."
    ],
    "check": {
     "type": "file",
     "dir": "reels/intake/practice",
     "prefix": "practice-2026-09-15"
-   }
+   },
+   "long": "The first element takes on the Everyday (ruled 09-12): knob, turn, handheld, plus the static glass plate"
   },
   {
    "id": "practice-2026-09-17",
@@ -29,12 +32,7 @@
    "block": "practice",
    "title": "Practice reel 2 of 9",
    "do": [
-    "Shoot ONE clip, vertical, raw, under 30 seconds: any question, the machine answering. You silent. The Audigo on, so the machine's own sounds carry. Phone on the tripod in the room you mean to use.",
-    "The beat: shake or click, the answer on the glass, hold two seconds. Nothing else. The question is burned in as text by the reel line (ruled 09-12); do not show it on camera.",
-    "Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-17.mp4 (mov is fine).",
-    "With it, one line of notes in chat or a text file beside it: room, light, time of day, distance from the lens, and the thing that annoyed you most.",
-    "Success = the file lands, the glass reads at phone size, the machine is heard, the beat is there, the notes line exists, and it comes back to you the same day built with the pop and a three-line read.",
-    "Practice 2 of 9. Not posted, not final, not a real question."
+    "Not yet ruled: another setting for the element takes, or a Number practice at the instrument. Ops asks on Tuesday when the first takes are in."
    ],
    "check": {
     "type": "file",
@@ -49,12 +47,7 @@
    "block": "practice",
    "title": "Practice reel 3 of 9",
    "do": [
-    "Shoot ONE clip, vertical, raw, under 30 seconds: any question, the machine answering. You silent. The Audigo on, so the machine's own sounds carry. Phone on the tripod in the room you mean to use.",
-    "The beat: shake or click, the answer on the glass, hold two seconds. Nothing else. The question is burned in as text by the reel line (ruled 09-12); do not show it on camera.",
-    "Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-19.mp4 (mov is fine).",
-    "With it, one line of notes in chat or a text file beside it: room, light, time of day, distance from the lens, and the thing that annoyed you most.",
-    "Success = the file lands, the glass reads at phone size, the machine is heard, the beat is there, the notes line exists, and it comes back to you the same day built with the pop and a three-line read.",
-    "Practice 3 of 9. Not posted, not final, not a real question."
+    "Not yet ruled: another setting for the element takes, or a Number practice at the instrument. Ops asks on Tuesday when the first takes are in."
    ],
    "check": {
     "type": "file",
@@ -767,6 +760,29 @@
     "Add --lane practice reading intake/practice/practice-*.mp4, writing out/practice/<date>_practice.mp4 with the pop.",
     "Add the question overlay (ffmpeg drawtext, house type, top third, on for the first beat) from the ledger's question or --question.",
     "Dry-run on a synthetic clip; then reel 1 on 09-15."
+   ]
+  },
+  {
+   "id": "glass-composite",
+   "date": "2026-09-18",
+   "owner": "ops",
+   "title": "The glass composite proven",
+   "long": "The twin's display rendered headless and composited into the Everyday's glass plate at the measured aperture (ruled 09-12): one answer, one reel, served",
+   "do": [
+    "Render the twin's front display for one answer state with a headless browser.",
+    "Composite into take 4's plate at the measured aperture with the CRT bloom.",
+    "Cut one fifteen-second reel from the takes with the question line and the pop; serve it for Mike."
+   ]
+  },
+  {
+   "id": "element-line",
+   "date": "2026-09-25",
+   "owner": "ops",
+   "title": "Element cut lists in the reel line",
+   "long": "The reel line assembles a Determination from the element library, a cut list and one line of data (question, answer, feature)",
+   "do": [
+    "Tag the element takes; three or four cut lists; the line picks one per day.",
+    "Dry-run five days from the catalogue's launch-run features."
    ]
   }
  ]
