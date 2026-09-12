@@ -41,6 +41,9 @@ MILESTONES = [("0", "2026-09-07", "alignment and the burn list", "this plan rule
 
 # ── done: Mike's x, then the tree ──────────────────────────────────────────
 def read_marks():
+    """Mike's x's. A task is a header row (id = the task id) with one row per step
+    under it (id = task#n). An x on a step marks that step; an x on the header
+    marks the whole task. [2026-09-12, Mike's ruling A: one row per step.]"""
     marks = {}
     if XLSX.exists():
         try:
@@ -52,7 +55,12 @@ def read_marks():
                         head = [str(c).strip().lower() if c else "" for c in row]; continue
                     d = dict(zip(head, row))
                     tid = d.get("id"); done = str(d.get("done") or "").strip().lower()
-                    if tid and done in ("x", "✓", "done", "yes", "y"): marks[str(tid)] = "x"
+                    if not tid or done not in ("x", "\u2713", "done", "yes", "y"): continue
+                    tid = str(tid)
+                    base, _, n = tid.partition("#")
+                    m = marks.setdefault(base, {"all": False, "steps": []})
+                    if n.isdigit(): m["steps"].append(int(n))
+                    else: m["all"] = True
             wb.close()
         except Exception as e:
             print("could not read the existing workbook's marks:", e, file=sys.stderr)
@@ -72,13 +80,22 @@ def checked(t):
     return False
 
 marks = read_marks()
-MARKS.write_text(json.dumps(marks, indent=1) + "\n", encoding="utf-8")
+STEPS_OF = {t["id"]: len(t.get("do") or []) for t in TASKS["tasks"]}
+def marked_done(tid):
+    m = marks.get(tid)
+    if not m: return False
+    if m["all"]: return True
+    n = STEPS_OF.get(tid, 0)
+    return n > 0 and all(i in m["steps"] for i in range(1, n + 1))
+def step_marked(tid, i):
+    m = marks.get(tid); return bool(m and (m["all"] or i in m["steps"]))
+MARKS.write_text(json.dumps({k: {"done": marked_done(k), "steps": sorted(set(v["steps"]))} for k, v in marks.items()}, indent=1) + "\n", encoding="utf-8")
 if "--marks" in sys.argv:
-    print(f"marks: {len(marks)} x's read from the workbook -> docs/desk/TASKS.marks.json"); sys.exit(0)
+    print(f"marks: {len(marks)} task(s) with x's read from the workbook -> docs/desk/TASKS.marks.json"); sys.exit(0)
 
 tasks = []
 for t in TASKS["tasks"]:
-    done = t.get("done") is True or checked(t) or t["id"] in marks
+    done = t.get("done") is True or checked(t) or marked_done(t["id"])
     d = datetime.date.fromisoformat(t["date"])
     tasks.append({**t, "_done": done, "_late": (not done and d < TODAY), "_d": d})
 tasks.sort(key=lambda t: (t["_d"], 0 if t["owner"] == "mike" else 1))
@@ -106,24 +123,40 @@ for i, w in enumerate(widths, 1): ws_t.column_dimensions[get_column_letter(i)].w
 ws_t.freeze_panes = "A2"
 row_of = {}
 SPEC_ROW = {}
-for r, t in enumerate(tasks, 2):
+f_step = Font(name=F, size=10, color=INK); f_found = Font(name=F, size=9, color="2F5597", italic=True)
+r = 2
+for t in tasks:
     row_of[t["id"]] = r
-    do = " ".join(f"{i+1}. {s}" for i, s in enumerate(t.get("do", []))) if t.get("do") else ""
-    vals = [t["_d"], t["_d"].strftime("%a"), "Mike" if t["owner"] == "mike" else "Ops", t["title"], do, t.get("block", "ops") , ("x" if t["_done"] else ""), t["id"]]
+    vals = [t["_d"], t["_d"].strftime("%a"), "Mike" if t["owner"] == "mike" else "Ops", t["title"], "", t.get("block", "ops"), ("x" if t["_done"] else ""), t["id"]]
     for c, v in enumerate(vals, 1):
-        cell = ws_t.cell(row=r, column=c, value=v); cell.font = f_body; cell.border = box; cell.alignment = wrap
+        cell = ws_t.cell(row=r, column=c, value=v); cell.font = f_head if c == 4 else f_body; cell.border = box; cell.alignment = wrap
+        cell.fill = fill_head
     ws_t.cell(row=r, column=1).number_format = "yyyy-mm-dd"
     who = ws_t.cell(row=r, column=3); who.font = Font(name=F, size=10, bold=True, color=(RED if t["owner"] == "mike" else GREY))
     if t["_done"]:
-        for c in range(1, 9): ws_t.cell(row=r, column=c).font = Font(name=F, size=10, color=DIM, strike=(c in (4, 5)))
+        for c in range(1, 9): ws_t.cell(row=r, column=c).font = Font(name=F, size=10, color=DIM, strike=(c == 4))
     elif t["_late"]:
         ws_t.cell(row=r, column=4).font = Font(name=F, size=10, bold=True, color=RED)
     ws_t.cell(row=r, column=7).alignment = center
     ws_t.cell(row=r, column=7).fill = PatternFill("solid", fgColor="FFFFFF")
-last_task_row = len(tasks) + 1
+    r += 1
+    # one row per step; Done is per step. A step the tree can see is written "found".
+    cs = t.get("check_step")
+    for i, step in enumerate(t.get("do") or [], 1):
+        found = (cs == i - 1) and checked(t)
+        sdone = t["_done"] or step_marked(t["id"], i)
+        vals = ["", "", "", "", f"{i}. {step}", "", ("x" if sdone else ("found" if found else "")), f"{t['id']}#{i}"]
+        for c, v in enumerate(vals, 1):
+            cell = ws_t.cell(row=r, column=c, value=v); cell.border = box; cell.alignment = wrap
+            cell.font = Font(name=F, size=10, color=DIM, strike=(c == 5)) if sdone else (f_found if (c == 7 and found) else f_step)
+        ws_t.cell(row=r, column=7).alignment = center
+        ws_t.cell(row=r, column=7).fill = PatternFill("solid", fgColor="FFFFFF")
+        ws_t.cell(row=r, column=8).font = Font(name=F, size=8, color=DIM)
+        r += 1
+last_task_row = r - 1
 n = last_task_row + 2
 ws_t.cell(row=n, column=1, value="Legend").font = f_head
-ws_t.cell(row=n + 1, column=1, value="Done is yours: type x in the Done column when a thing is done. Files in the intake folders get their x from Ops. Everything else on a row is Ops' and is rewritten when the plan moves; nothing breaks if you edit it.").font = f_sub
+ws_t.cell(row=n + 1, column=1, value="Done is yours: type x on a step's row when that step is done, in any order. A task turns done when every step is; an x on the grey header row marks the whole task. A step the process can see for itself (a file that landed) says found. Everything else is Ops' and is rewritten when the plan moves; your x's survive.").font = f_sub
 ws_t.cell(row=n + 2, column=1, value="Red item = needs Mike; grey = Ops; struck = done; bold red = late. Spec links to the sheet that says what one of these is.").font = f_sub
 
 # ── Specs ──────────────────────────────────────────────────────────────────

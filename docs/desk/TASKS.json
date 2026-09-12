@@ -23,7 +23,8 @@
     "dir": "reels/intake/practice",
     "prefix": "practice-2026-09-15"
    },
-   "long": "The first element takes on the Everyday (ruled 09-12): knob, turn, handheld, plus the static glass plate"
+   "long": "The first element takes on the Everyday (ruled 09-12): knob, turn, handheld, plus the static glass plate",
+   "check_step": 6
   },
   {
    "id": "practice-2026-09-17",
@@ -73,7 +74,8 @@
     "type": "file",
     "dir": "reels/intake/practice",
     "prefix": "practice-2026-09-22"
-   }
+   },
+   "check_step": 2
   },
   {
    "id": "practice-2026-09-24",
@@ -93,7 +95,8 @@
     "type": "file",
     "dir": "reels/intake/practice",
     "prefix": "practice-2026-09-24"
-   }
+   },
+   "check_step": 2
   },
   {
    "id": "practice-2026-09-26",
@@ -113,7 +116,8 @@
     "type": "file",
     "dir": "reels/intake/practice",
     "prefix": "practice-2026-09-26"
-   }
+   },
+   "check_step": 2
   },
   {
    "id": "practice-2026-09-29",
@@ -133,7 +137,8 @@
     "type": "file",
     "dir": "reels/intake/practice",
     "prefix": "practice-2026-09-29"
-   }
+   },
+   "check_step": 2
   },
   {
    "id": "practice-2026-10-01",
@@ -153,7 +158,8 @@
     "type": "file",
     "dir": "reels/intake/practice",
     "prefix": "practice-2026-10-01"
-   }
+   },
+   "check_step": 2
   },
   {
    "id": "practice-2026-10-03",
@@ -173,7 +179,8 @@
     "type": "file",
     "dir": "reels/intake/practice",
     "prefix": "practice-2026-10-03"
-   }
+   },
+   "check_step": 2
   },
   {
    "id": "photos-everyman",
@@ -190,7 +197,8 @@
     "type": "photos",
     "dir": "photos/everyman",
     "min": 4
-   }
+   },
+   "check_step": 1
   },
   {
    "id": "photos-gambler",
@@ -207,7 +215,8 @@
     "type": "photos",
     "dir": "photos/gambler",
     "min": 4
-   }
+   },
+   "check_step": 1
   },
   {
    "id": "photos-ceo",
@@ -224,7 +233,8 @@
     "type": "photos",
     "dir": "photos/ceo",
     "min": 4
-   }
+   },
+   "check_step": 1
   },
   {
    "id": "photos-informer",
@@ -241,7 +251,8 @@
     "type": "photos",
     "dir": "photos/informer",
     "min": 4
-   }
+   },
+   "check_step": 1
   },
   {
    "id": "ruling-1",
@@ -426,7 +437,8 @@
     "dir": "reels/intake/determinations",
     "prefix": "w6-",
     "min": 5
-   }
+   },
+   "check_step": 1
   },
   {
    "id": "shoot-w7",
@@ -444,7 +456,8 @@
     "dir": "reels/intake/determinations",
     "prefix": "w7-",
     "min": 5
-   }
+   },
+   "check_step": 1
   },
   {
    "id": "shoot-w8",
@@ -462,7 +475,8 @@
     "dir": "reels/intake/determinations",
     "prefix": "w8-",
     "min": 5
-   }
+   },
+   "check_step": 1
   },
   {
    "id": "bench",
