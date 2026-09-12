@@ -1,5 +1,5 @@
 {
- "_": "THE FIVE WING MOCKS — data for tools/mocks.mjs (same except data). Everything the catalogue does not already hold: the shelf's four frames, the Everyday album's plates, kit and papers, the feature page's operating steps, the day's landing. Pitches come from docs/CATALOGUE-20260918.json at render. HOUSE drafts throughout; Mike rules each mock A keep / B change / C cut at the sitting of 2026-09-27. Photographs are frames with labels; the served copy with sample scans is built with --photos and never committed. [09-11] Mocks 1 and 2 are retired by Mike's ruling: the shelf and the album are the real exhibit page, filled with data. Mocks 3 to 5 (the feature page, the prologue, the day's landing) still stand for the sitting. [09-11, Q5 A] Mock 3 retired: a feature lives on the albums' What It Does track. Mock 5 is a deep link into the exhibit, not a page. Only mock 4, the prologue, is still open.",
+ "_": "THE FIVE WING MOCKS — data for tools/mocks.mjs (same except data). Everything the catalogue does not already hold: the shelf's four frames, the Everyday album's plates, kit and papers, the feature page's operating steps, the day's landing. Pitches come from docs/CATALOGUE-20260918.json at render. HOUSE drafts throughout; Mike rules each mock A keep / B change / C cut at the sitting of 2026-09-27. Photographs are frames with labels; the served copy with sample scans is built with --photos and never committed. [09-11] Mocks 1 and 2 are retired by Mike's ruling: the shelf and the album are the real exhibit page, filled with data. Mocks 3 to 5 (the feature page, the prologue, the day's landing) still stand for the sitting. [09-11, Q5 A] Mock 3 retired: a feature lives on the albums' What It Does track. Mock 5 is a deep link into the exhibit, not a page. Only mock 4, the prologue, is still open. [09-11, Q6 A] The prologue is a track on the house sleeve above The Record. All five drawn mocks are resolved; this file is the record of the rulings.",
  "sitting": "2026-09-27",
  "shelf": [
   {
@@ -174,6 +174,14 @@
    "ruling": "A",
    "mike": "A",
    "applied": "a feature lives on every album's What It Does track; no feature page. The day's landing is the album of the day with that track open (a deep link into the exhibit); mock 3 retired, mock 5 becomes a link, not a page."
+  },
+  {
+   "date": "2026-09-11",
+   "mock": 4,
+   "section": "whole",
+   "ruling": "A",
+   "mike": "A",
+   "applied": "the prologue is a track on the house sleeve, the first album, above The Record. Mock 4 retired. All five drawn mocks are now resolved into the exhibit."
   }
  ]
 }

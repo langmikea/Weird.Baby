@@ -534,19 +534,21 @@
    "id": "prologue",
    "date": "2026-10-01",
    "owner": "ops",
-   "title": "Prologue page built",
+   "title": "Prologue track on the house sleeve",
    "do": [
-    "Mike's opening paragraph lands when it comes."
+    "A Prologue track above The Record on the first album; Mike's opening paragraph lands when it comes; the Record's index stays where it is."
    ],
-   "long": "The prologue page built"
+   "long": "The prologue built as a track on the house sleeve, above The Record (ruled 09-11)"
   },
   {
    "id": "pages",
    "date": "2026-10-02",
    "owner": "ops",
-   "title": "Feature pages built (≥25)",
-   "do": [],
-   "long": "Feature pages built from the catalogue (≥25, development stage)"
+   "title": "Albums filled from the ruled catalogue",
+   "do": [
+    "Apply the 09-20 rulings to docs/CATALOGUE-20260918.json; the albums read it; check every row lands on a track."
+   ],
+   "long": "The four albums' What It Does, Kit and Papers tracks complete from the catalogue as ruled 09-20 (features live on the albums, ruled 09-11)"
   },
   {
    "id": "twin-update",
@@ -560,9 +562,11 @@
    "id": "landing",
    "date": "2026-10-03",
    "owner": "ops",
-   "title": "Day landing wired",
-   "do": [],
-   "long": "The day's landing wired to the calendar"
+   "title": "Reel deep link into the album of the day",
+   "do": [
+    "A route that opens an album and a track by id; the reel line writes that link into CAPTIONS.txt from the calendar."
+   ],
+   "long": "The day's reel lands on the album of the day with the track open (ruled 09-11): the route and the link in every caption"
   },
   {
    "id": "bench-plan",
