@@ -19,7 +19,7 @@ Reads clips from the intake folder, one per weekday, named by week and day:
     <intake>/numbers/w2-tue.mp4   ...
 
 For each clip: normalise to 1080x1920 at 30 fps with stereo 48 kHz sound,
-append the pop (the ruled Weird.Baby ending, robots assets/video), write
+put the pop in front (Mike, 2026-09-12: the pop opens every reel; one second says who we are, the next says which lane), write
 the finished file to the week's packet folder, mark the ledger row `shot`
 with the file and its length, and write the packet's captions and schedule.
 Mike posts from the phone; nothing here touches an account.
@@ -63,7 +63,7 @@ def question_lines(q, tmpdir):
     return files
 
 def build(clip, dest, question=None, hold=6.0):
-    """normalise the clip; burn the question in and lay the adult under it when there is one; append the pop"""
+    """the pop first, then the clip with the question burned in and the adult under it when there is one"""
     with tempfile.TemporaryDirectory() as td:
         inputs = ["-i", str(clip), "-i", str(POP)]
         vchain = ("scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=black,"
@@ -91,7 +91,7 @@ def build(clip, dest, question=None, hold=6.0):
         vf = (f"[0:v]{vchain}[v0];{achain};"
               "[1:v]fps=30,format=yuv420p,setsar=1[v1];"
               "[1:a]aformat=sample_rates=48000:channel_layouts=stereo[a1];"
-              "[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]")
+              "[v1][a1][v0][a0]concat=n=2:v=1:a=1[v][a]")   # the pop FIRST (Mike, 2026-09-12): one second says who we are, the next says which lane
         cmd = ["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", vf,
                "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(dest)]
         subprocess.run(cmd, check=True, cwd=td)

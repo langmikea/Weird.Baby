@@ -110,3 +110,8 @@ ADULT speaking under it (`tools/reels-voice.py`: a muted mumble generated
 from the sentence's syllables, rising at the end; never the machine's
 voice), and the pop. `--question` sets the text; a Determination row's own
 `question` is used on that lane. Nothing is posted from the practice lane.
+
+**Ruled 2026-09-12: the pop opens the reel.** Mike: "In one second people
+know exactly who we are, and one second later they know which lane of
+Weird.Baby content they are in." The line puts the pop first, then the clip
+with the question; nothing is appended at the end.
