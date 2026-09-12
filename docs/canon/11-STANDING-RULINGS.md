@@ -662,6 +662,38 @@ is framed by the day's feature; the story stays on the site. The reveal
 schedule tags every row `reel: feature` or `reel: site`; the determination
 ledger carries each day's `frame` and `site_only`. The law itself is unchanged.
 
+## 25. Finish what we touch (2026-09-12)
+
+Mike, at 50,000 feet (cleaned): "From this point forward I would like to
+agree the finished state of what we are going to create, and achieve that
+state before moving on to something else. Finish anything we touch
+completely. For the photo shoot that means every piece I have been ignoring
+gets polished, the leather badges made, the cases touched up; everything
+except the faceplate complete when it is photographed, so it can be put away
+and not touched again until it ships. The faceplate is outside that scope: it
+is attached to the hardware, which needs its own complete going-over, and it
+is a different technology that would delay the task when an alternative
+exists: delete the wrong unit names, touch them up, or write the proper name
+in. A minor preference; it must never be the cause of us coming up short."
+
+Ops' wording, put as A/B/C. **Mike: "A."** The rule:
+
+1. Before work starts on a thing, its finished state is written down in one
+   paragraph, and Mike agrees to it.
+2. Nothing is marked done short of that state.
+3. If reaching it threatens a date, Ops says so and Mike rules. Never short
+   silently; never a finished state quietly widened either.
+
+What it settles: the calendar's rows carry their finished state in the `long`
+field and are marked done against it. The photo shoot's finished state is
+Mike's paragraph above. Tuesday's element takes are footage of one unit with
+no kit in frame and are unaffected. Also recorded the same day, as standing
+principles under the same ruling: every asset the house owns is eligible for
+the reels (the asset table is the inventory); music, Mike's own or made for
+the purpose, is an element type and is not discounted; the elements method
+serves the robots wing (the daily reel, the albums' glass, the fan segment,
+the manual) before it serves the music, on Ops' call.
+
 ---
 
 **Pointer, 2026-09-11.** The open-actions registers (`OPEN_ACTIONS.md`, `OPEN_ACTIONS_CLOSED.md`) were archived whole at `docs/archive/burn-20260911/registers/` in the burn-down. Every ruling of Mike's recorded in them stands as written there; cite the file and the row id. Nothing was rewritten or carried out of them.
