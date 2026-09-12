@@ -51,11 +51,16 @@ FONT_SRC = pathlib.Path("C:/Windows/Fonts/georgiab.ttf")   # copied beside the t
 TEXT_LINE_CHARS = 18                      # Georgia Bold 76px on 1080 wide, with margins
 VOICE_AT = 0.5                            # seconds in before the adult starts
 
-def question_text_file(q, tmpdir):
+def question_lines(q, tmpdir):
+    """one text file per line: drawtext in this ffmpeg draws a line break as a box glyph,
+    so each line is its own drawtext at its own y, over one shared box."""
     lines = textwrap.wrap(q.strip(), TEXT_LINE_CHARS) or [q.strip()]
-    f = pathlib.Path(tmpdir) / "question.txt"
-    f.write_text("\n".join(lines), encoding="utf-8", newline="\n")   # LF only: drawtext draws a CR as a box
-    return f, len(lines)
+    files = []
+    for i, ln in enumerate(lines):
+        f = pathlib.Path(tmpdir) / f"q{i}.txt"
+        f.write_bytes(ln.encode("utf-8"))
+        files.append(f.name)
+    return files
 
 def build(clip, dest, question=None, hold=6.0):
     """normalise the clip; burn the question in and lay the adult under it when there is one; append the pop"""
@@ -65,12 +70,17 @@ def build(clip, dest, question=None, hold=6.0):
                   "fps=30,format=yuv420p,setsar=1")
         achain = "[0:a]aformat=sample_rates=48000:channel_layouts=stereo[a0]"
         if question:
-            tf, nlines = question_text_file(question, td)
-            import shutil; shutil.copy(FONT_SRC, pathlib.Path(td) / "font.ttf")
+            names = question_lines(question, td)
+            nlines = len(names)
             size = 76 if nlines <= 3 else 64
-            # the text sits in the top third, white on a soft black box, centred; up for `hold` seconds
-            vchain += (f",drawtext=fontfile=font.ttf:textfile=question.txt:fontsize={size}:fontcolor=white:line_spacing=10:"
-                       f"x=(w-text_w)/2:y=200:box=1:boxcolor=black@0.55:boxborderw=28:enable='between(t,0,{hold})'")
+            lead = size + 16
+            box_x, box_y, box_w = 90, 170, 900
+            box_h = nlines * lead + 44
+            # one soft black box in the top third, then each line left-aligned inside it; up for `hold` seconds
+            vchain += f",drawbox=x={box_x}:y={box_y}:w={box_w}:h={box_h}:color=black@0.55:t=fill:enable='between(t,0,{hold})'"
+            for i, name in enumerate(names):
+                vchain += (f",drawtext=fontfile=font.ttf:textfile={name}:fontsize={size}:fontcolor=white:"
+                           f"x={box_x + 30}:y={box_y + 22 + i * lead}:enable='between(t,0,{hold})'")
             voice = pathlib.Path(td) / "adult.wav"
             VOICE.write_wav(voice, VOICE.render(question))
             inputs += ["-i", str(voice)]
