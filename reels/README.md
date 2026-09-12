@@ -83,3 +83,19 @@ channel and recorded in the row; fix the metadata, re-queue that row.
    seeding questions only.
 4. Numbers are recorded, never typed into a standing document. The recipe is
    read off the rows on Sundays.
+
+## Ruled 2026-09-12 — the question is burned in
+
+Mike, on the first practice reel (A of A/B/C): **the question appears as
+on-screen text, burned in by the reel line.** He shoots only the machine
+answering: the shake or click, the answer on the glass, a two-second hold,
+himself silent, the machine's own sounds on the Audigo. The line adds the
+question line at the top and the pop at the end, identically every time.
+Practice clips go to `intake/practice/practice-<date>.mp4`; the line builds
+them like a Determination with no ledger row and nothing is posted.
+
+What a practice reel is for, in order: the glass reads at phone size; the
+machine is heard; the beat is there; one line of notes (room, light, time,
+distance, the annoyance) comes with it; it goes back the same day, built,
+with a three-line read. Nine of them, Tue/Thu/Sat, weeks 1 to 3; the room
+and the framing are ruled on 10-04 from them.
