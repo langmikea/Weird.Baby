@@ -115,3 +115,11 @@ voice), and the pop. `--question` sets the text; a Determination row's own
 know exactly who we are, and one second later they know which lane of
 Weird.Baby content they are in." The line puts the pop first, then the clip
 with the question; nothing is appended at the end.
+
+**The adult, second cut (2026-09-13, Mike's ruling A).** Not a mimic: a real
+voice reads the actual question, then the line cuts the sound into short
+grains and plays each backwards, band-limits it to the telephone range and
+lays a light sweep over it. The cadence and the rising end survive; no word
+does. The voice family is not the machine's. Readings are cached under
+`OneDrive/WeirdBaby/reels/.adult-cache`; if the read cannot be made, the
+09-12 trumpet stands in and the line says so.
