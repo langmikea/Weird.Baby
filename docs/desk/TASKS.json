@@ -614,12 +614,13 @@
   {
    "id": "launch-days",
    "date": "2026-10-09",
-   "owner": "ops",
-   "title": "15 launch days written",
+   "owner": "mike",
+   "title": "15 launch Q&As approved",
    "do": [
-    "Mike rules the questions; the copy is Ops'."
+    "Fifteen rows in the workbook's Questions sheet: date, question, answer. The Everyday answers; you force the answer; nobody sees which.",
+    "Then five a week, each Sunday."
    ],
-   "long": "Fifteen launch-run days written: question slot, feature page, promotion copy"
+   "long": "Fifteen approved question-and-answer rows for 10-31 to 11-14 in the Questions sheet (Mike writes, forces the answer)"
   },
   {
    "id": "number-pieces",
@@ -803,6 +804,20 @@
    "do": [
     "Tag the element takes; three or four cut lists; the line picks one per day.",
     "Dry-run five days from the catalogue's launch-run features."
+   ]
+  },
+  {
+   "id": "qa-line",
+   "date": "2026-09-19",
+   "owner": "ops",
+   "title": "The Q&A line: list in, reels and packets out",
+   "long": "The template (tools/reels-qa.py) driven by the workbook's Questions sheet: one reel a day, seven days, seeded so no two cut alike; caption per Q2; the packet the posting line queues at 17:00 NY from 10-31; the hot lane from chat; the 06:08 run builds seven days ahead. Proven in dry run on five dummy rows.",
+   "do": [
+    "Questions sheet in the workbook (date, question, answer, posted), Ops-kept.",
+    "reels-qa.py takes rows and a seed; variety from the seed across takes, timings and the monitor.",
+    "Packet + caption per Q2; reels-queue.mjs schedules daily at 17:00 NY, seven days, from 10-31.",
+    "Hot lane: chat -> reel -> queued within the hour.",
+    "Morning run builds the week ahead; dry run on five rows."
    ]
   }
  ]
