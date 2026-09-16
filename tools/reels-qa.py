@@ -37,11 +37,20 @@ VOICE = importlib.import_module("reels-voice")
 SRC = pathlib.Path(r"C:\Users\macun\OneDrive\Desktop - Laptop\Weird.Baby\New folder")
 OUT = pathlib.Path(r"C:\Users\macun\OneDrive\WeirdBaby\reels\out\qa")
 POP = pathlib.Path(r"C:\AI\Projects\weird-baby-robots\assets\video\WB_pop_v1.mp4")
+POP_LAST = pathlib.Path(r"C:\Users\macun\OneDrive\WeirdBaby\reels\.pop-last.png")
 SHORT = pathlib.Path(r"C:\AI\Projects\weird-baby-robots\assets\audio\WB_electrical-short_v1.wav")
 EMU = pathlib.Path(r"C:\AI\Projects\weird-baby-robots\tools\viiip_display_emulator.html")
 FONT_Q = r"C:\Windows\Fonts\georgiab.ttf"
 FONT_CARD = r"C:\Windows\Fonts\arialbd.ttf"
 W, H, FPS = 1080, 1920, 30
+# the question's colour trials (Mike, 09-16: white is boring; yellow, blue, the actual screen colour, others).
+# "screen" is the pixel the emulator lights: #e6f2ff, the cool OLED white.
+COLOURS = {"white": (255, 255, 255), "screen": (230, 242, 255), "yellow": (255, 214, 0), "blue": (90, 170, 255),
+           "amber": (255, 176, 0), "green": (130, 255, 150), "cyan": (110, 240, 255)}
+_ca = [a for a in sys.argv if a.startswith("--color=")]
+TEXT_NAME = _ca[0].split("=", 1)[1] if _ca else "screen"
+TEXT_RGB = COLOURS.get(TEXT_NAME, COLOURS["screen"])
+PREVIEW = "--preview" in sys.argv
 
 # ── the data of this reel ───────────────────────────────────────────────────
 QUESTION = "Should I bet on the home team tonight?"
@@ -53,8 +62,9 @@ SEGMENTS = [
     ("0247", 81.0, 0.5, (1656, 932, 312), "shake"),
     ("0247", 50.0, 0.1, (2104, 1176, 448), "ecu"),
 ]
-CARD_S, GLITCH_S, BLACK_S = 2.6, 0.2, 0.3
-THEATRE_S, REDIRECT_S, TRI_S, ANSWER_S = 1.5, 0.5, 0.8, 2.6   # the machine works, redirects, reveals, holds
+BLACK_S = 0.2
+SLIDE_S = 0.4          # the signature move: the logo slides off, the machine slides in
+THEATRE_S, REDIRECT_S, TRI_S, ANSWER_S = 1.5, 0.5, 0.8, 3.4   # the machine works, redirects, reveals, holds
 VOICE_AT = 0.3                                            # into the first hold
 
 # ── the machine's font, from the emulator ───────────────────────────────────
@@ -190,11 +200,12 @@ def fb_image(fb, diameter):
     mask = mask.filter(ImageFilter.GaussianBlur(diameter * 0.01))
     return lit, mask
 
-def composite_glass(frame, circle, fb):
+def composite_glass(frame, circle, fb, angle=0.0):
     """darken the window, lay the lit screen in, keep a little of the real reflection"""
     cx, cy, r = circle; d = int(r * 2 * 0.96)
     if d < 8: return frame
     lit, mask = fb_image(fb, d)
+    if abs(angle) > 0.2: lit = lit.rotate(-angle, resample=Image.BICUBIC)   # the screen lies on the unit's plane
     box = (int(cx - d / 2), int(cy - d / 2))
     region = frame.crop((box[0], box[1], box[0] + d, box[1] + d))
     dark = Image.eval(region, lambda v: int(v * 0.22))
@@ -225,6 +236,35 @@ def extract(clip, start, secs, seed, td, tag):
     frames = sorted(d.glob("*.png"))
     seed_out = ((seed[0] - x0) * k, seed[1] * k, seed[2] * k)
     return frames, seed_out
+
+def lens_below(g, c):
+    """the lower lens: a smaller circle roughly 1.7 radii below the glass; None if not seen"""
+    import cv2
+    cx, cy, r = c
+    small = cv2.resize(g, (W // 2, H // 2)); small = cv2.medianBlur(small, 5)
+    cs = cv2.HoughCircles(small, cv2.HOUGH_GRADIENT, dp=1.2, minDist=20, param1=110, param2=26, minRadius=int(r * 0.32 / 2), maxRadius=int(r * 0.62 / 2))
+    if cs is None: return None
+    best = None
+    for x, y, rr in cs[0]:
+        X, Y = x * 2, y * 2
+        d = math.hypot(X - cx, Y - (cy + 1.7 * r))
+        if d < r * 0.7 and (best is None or d < best[0]): best = (d, (X, Y, rr * 2))
+    return best[1] if best else None
+
+def axis_angles(frames, circles):
+    """degrees the unit leans, per frame, from the line glass -> lens; smoothed; 0 when the lens is not seen"""
+    import cv2
+    out = []; last = 0.0
+    for f, c in zip(frames, circles):
+        g = cv2.imread(str(f), cv2.IMREAD_GRAYSCALE)
+        l = lens_below(g, c)
+        if l is not None:
+            last = math.degrees(math.atan2(l[0] - c[0], l[1] - c[1]))
+        out.append(last)
+    arr = np.array(out); sm = []
+    for i in range(len(arr)):
+        lo, hi = max(0, i - 3), min(len(arr), i + 4); sm.append(float(np.median(arr[lo:hi])))
+    return sm
 
 def track(frames, seed):
     import cv2
@@ -273,20 +313,45 @@ def question_lines(words, maxw_fb=150):
         else: lines.append(cur); cur = [w]
     if cur: lines.append(cur)
     return lines
-def draw_question_machine(frame, words, shown, y_top):
-    """the words spoken so far, in the machine's pixel font, white with a dark shadow, centred, no box"""
-    if shown == 0: return frame
-    out = frame.copy(); k = 0; y = y_top
+def question_block(words, shown):
+    """the words spoken so far as one mask image (L), lines stacked and centred, in the machine's font"""
+    strips = []; k = 0
     for line in question_lines(words):
         take = [w for w in line if k < shown and not (k := k + 1) < 0]
         if not take: break
-        strip = glyph_line(" ".join(take))
-        img = Image.fromarray((strip * 255).astype(np.uint8), "L").resize((strip.shape[1] * QSCALE, 18 * QSCALE), Image.NEAREST)
-        x = (W - img.width) // 2
-        shadow = Image.new("L", img.size, 0)
-        out.paste(shadow, (x + 4, y + 4), img)            # a dark drop shadow, then the white
-        out.paste(Image.new("L", img.size, 255), (x, y), img)
-        y += 18 * QSCALE - 24
+        strips.append(glyph_line(" ".join(take)))
+    if not strips: return None
+    lh = 18 * QSCALE - 24
+    bw = max(st.shape[1] for st in strips) * QSCALE
+    block = Image.new("L", (bw, lh * (len(strips) - 1) + 18 * QSCALE), 0)
+    for i, st in enumerate(strips):
+        img = Image.fromarray((st * 255).astype(np.uint8), "L").resize((st.shape[1] * QSCALE, 18 * QSCALE), Image.NEAREST)
+        block.paste(img, ((bw - img.width) // 2, i * lh))
+    return block
+
+def draw_question_machine(frame, words, shown, centre, angle_deg, rgb=None):
+    """the question in colour with a CRT edge, centred on `centre`, rotated to the unit's plane. The frame is
+    greyscale; the text is the one coloured thing. A dark halo under it separates it from the picture."""
+    rgb = rgb or TEXT_RGB
+    if shown == 0: return frame.convert("RGB")
+    mask = question_block(words, shown)
+    if mask is None: return frame.convert("RGB")
+    pad = 60
+    m = Image.new("L", (mask.width + 2 * pad, mask.height + 2 * pad), 0); m.paste(mask, (pad, pad))
+    soft = m.filter(ImageFilter.GaussianBlur(2.0))                       # the CRT edge: no hard pixel
+    glow = m.filter(ImageFilter.GaussianBlur(10))                         # the phosphor bloom
+    halo = Image.fromarray(np.clip(np.asarray(m.filter(ImageFilter.GaussianBlur(30)), dtype=np.float32) * 2.2
+                                   + np.asarray(m.filter(ImageFilter.GaussianBlur(5)), dtype=np.float32) * 1.2, 0, 255).astype(np.uint8), "L")   # a deep, wide, feathered dark under it: not a box
+    soft = soft.rotate(-angle_deg, resample=Image.BICUBIC, expand=True)
+    glow = glow.rotate(-angle_deg, resample=Image.BICUBIC, expand=True)
+    halo = halo.rotate(-angle_deg, resample=Image.BICUBIC, expand=True)
+    out = frame.convert("RGB")
+    x = int(centre[0] - soft.width / 2); y = int(centre[1] - soft.height / 2)
+    dark = Image.new("RGB", soft.size, (0, 0, 0))
+    out.paste(dark, (x, y), halo.point(lambda v: int(min(255, v) * 0.92)))
+    col = Image.new("RGB", soft.size, rgb)
+    out.paste(col, (x, y), glow.point(lambda v: int(v * 0.6)))
+    out.paste(col, (x, y), soft)
     return out
 
 def layout_words(words, font, maxw=880):
@@ -330,7 +395,9 @@ def main():
     review = "--review" in sys.argv
     OUT.mkdir(parents=True, exist_ok=True)
     slug = re.sub(r"[^a-z0-9]+", "-", QUESTION.lower()).strip("-")[:40]
-    dest = OUT / f"qa_{slug}.mp4"
+    dest = OUT / f"qa_{slug}_{TEXT_NAME}.mp4"
+    if not POP_LAST.exists():
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-sseof", "-0.05", "-i", str(POP), "-frames:v", "1", "-vf", "format=gray", str(POP_LAST)], check=True)
     with tempfile.TemporaryDirectory() as td:
         td = pathlib.Path(td)
         # the voice and its word timings
@@ -353,10 +420,16 @@ def main():
         first_frame = None; last_ecu = None
         def emit(im):
             nonlocal n
-            im.convert("L").save(outdir / f"{n:05d}.png"); n += 1
+            im.convert("RGB").save(outdir / f"{n:05d}.png"); n += 1
         # 1+2: the holds — idle glass, then the oscilloscope while the voice speaks; words appear as spoken
         hold_frames = [(f, c) for role, fr, cs in segs[:2] if role == "hold" for f, c in zip(fr, cs)]
+        hold_angles = []
+        for role, fr, cs in segs[:2]:
+            if role == "hold": hold_angles += axis_angles(fr, cs)
+        print(f"  plane: the unit leans {min(hold_angles):.1f} to {max(hold_angles):.1f} degrees through the holds")
         tri_total = int(0.8 * FPS)
+        pop_last = Image.open(POP_LAST).convert("L").resize((W, H)) if POP_LAST.exists() else None
+        n_slide = int(SLIDE_S * FPS)
         for k, (f, c) in enumerate(hold_frames):
             t = k / FPS
             speaking = VOICE_AT <= t < VOICE_AT + voice_len
@@ -368,9 +441,21 @@ def main():
             im = Image.open(f).convert("L")
             im = composite_glass(im, c, fb)
             shown = sum(1 for o in onsets if t >= VOICE_AT + o)
-            if k == 0: q_y = int(min(H - 3 * 18 * QSCALE - 80, hold_frames[0][1][1] + hold_frames[0][1][2] * 1.05))   # just under the glass, fixed for the hold
-            im = draw_question_machine(im, qwords, shown, q_y)
+            a = hold_angles[k]; ar = math.radians(a)
+            dist = c[2] * 1.05 + 1.5 * 18 * QSCALE / 2 + 30                  # from the glass centre down the unit's axis to the block's centre
+            centre = (c[0] + dist * math.sin(ar), c[1] + dist * math.cos(ar))
+            im = draw_question_machine(im, qwords, shown, centre, a)
+            # the signature move: the logo slides off left as the machine slides in from the right, easing; then a soft push settles
+            if pop_last is not None and k < n_slide:
+                e = 1 - (1 - k / n_slide) ** 3
+                canvas = Image.new("RGB", (W, H), (0, 0, 0))
+                canvas.paste(pop_last.convert("RGB"), (int(-W * e), 0)); canvas.paste(im, (int(W * (1 - e)), 0)); im = canvas
+            elif k < n_slide + int(1.0 * FPS):
+                z = 1.0 + 0.05 * (1 - (k - n_slide) / (1.0 * FPS))
+                cw, ch = int(W / z), int(H / z); im = im.crop(((W - cw) // 2, (H - ch) // 2, (W - cw) // 2 + cw, (H - ch) // 2 + ch)).resize((W, H), Image.LANCZOS)
             if first_frame is None: first_frame = im.copy()
+            if PREVIEW and k == len(hold_frames) - 1:
+                pv = OUT / f"preview_{TEXT_NAME}.png"; im.save(pv); print(f"  preview {pv}"); return
             emit(im)
         # 3: the shake — the suspension agitated, the short on the sound track
         t_shake = n / FPS
@@ -383,6 +468,10 @@ def main():
         # 4: the reveal on the glass, extreme close-up: the triangle fast, then the answer, with a slow push in
         ecu = [(f, c) for role, fr, cs in segs if role == "ecu" for f, c in zip(fr, cs)]
         f0, c0 = ecu[0]
+        import cv2 as _cv
+        _l = lens_below(_cv.imread(str(f0), _cv.IMREAD_GRAYSCALE), c0)
+        ecu_angle = math.degrees(math.atan2(_l[0] - c0[0], _l[1] - c0[1])) if _l is not None else 0.0
+        print(f"  plane: the close-up leans {ecu_angle:.1f} degrees")
         n_theatre, n_redirect, n_tri, n_answer = int(THEATRE_S * FPS), int(REDIRECT_S * FPS), int(TRI_S * FPS), int(ANSWER_S * FPS)
         ecu = [ecu[0]] * (n_theatre + n_redirect + n_tri + n_answer)
         t_theatre = n / FPS                                   # one frame, pushed in digitally: no tracking to lose
@@ -395,17 +484,13 @@ def main():
             elif k < n_theatre + n_redirect: fb = screen_redirect()
             elif k < n_theatre + n_redirect + n_tri: fb = screen_triangle(k - n_theatre - n_redirect, n_tri)
             else: fb = screen_answer(ANSWER)
-            im = composite_glass(plate, c0, fb)
+            im = composite_glass(plate, c0, fb, angle=ecu_angle)
             z = 1.0 + (zmax - 1.0) * (k / max(1, n_ecu - 1)) ** 0.7
             cw, ch = int(W / z), int(H / z); cx, cy = int(c0[0]), int(c0[1])
             x0 = max(0, min(W - cw, cx - cw // 2)); y0 = max(0, min(H - ch, cy - ch // 2))
             im = im.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.LANCZOS)
             last_ecu = im; emit(im)
-        # 5: from the glass to the card with two glitches (Mike, 09-16), then the card to the end, then one black frame so the loop closes clean
-        cd = card(ANSWER)
-        for k in range(int(GLITCH_S * FPS)): emit(glitch(last_ecu if k % 2 else cd, k))
-        for k in range(int(CARD_S * FPS)): emit(cd)
-        t_glitch = None
+        # 5: stay on the VIIIp (Mike, 09-16: kill the card); the black beat closes the loop
         for k in range(int(BLACK_S * FPS)): emit(Image.new("L", (W, H), 0))
         middle_s = n / FPS
         print(f"  middle {middle_s:.2f}s, {n} frames; voice at {VOICE_AT}s for {voice_len:.2f}s; shake at {t_shake:.2f}s")
@@ -427,8 +512,6 @@ def main():
         for q in range(n_tri // 4): add(t_theatre + THEATRE_S + REDIRECT_S + q * 4 / FPS, tick(0.3, 18, 1200 + 40 * q))   # the triangle blips
         n_th = int(0.16 * SRv); e = np.exp(-np.arange(n_th) / (n_th / 4))
         add(t_answer, 0.7 * e * np.sin(2 * np.pi * 85 * np.arange(n_th) / SRv) + 0.15 * e * rng.standard_normal(n_th))   # the thunk
-        t_card = t_answer + ANSWER_S + GLITCH_S
-        n_h = int(CARD_S * SRv); add(t_card, 0.012 * rng.standard_normal(n_h))                        # the hiss under the card
         sfxwav = td / "sfx.wav"; VOICE.write_wav(sfxwav, np.clip(sfx, -1, 1))
         middle = td / "middle.mp4"
         fc = (f"[1:a]aformat=sample_rates=48000:channel_layouts=stereo,adelay={int(VOICE_AT*1000)}|{int(VOICE_AT*1000)},volume=1.0[v];"
@@ -440,6 +523,7 @@ def main():
         # the pop first (its own sound), then the middle
         vf = ("[0:v]scale=1080:1920,fps=30,format=gray,format=yuv420p,setsar=1[v0];[0:a]aformat=sample_rates=48000:channel_layouts=stereo[a0];"
               "[1:v]fps=30,format=yuv420p,setsar=1[v1];[1:a]aformat=sample_rates=48000:channel_layouts=stereo[a1];[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]")
+        # the pop is greyscale; the middle is colour only where the question is
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(POP), "-i", str(middle), "-filter_complex", vf, "-map", "[v]", "-map", "[a]",
                         "-c:v", "libx264", "-preset", "medium", "-crf", "17", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(dest)], check=True)
         dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(dest)], capture_output=True, text=True).stdout)
