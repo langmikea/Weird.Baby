@@ -16,7 +16,8 @@
     "Take 4: the glass plate. Static, close, square on, sharp, the display lit, ten seconds. This is what the twin's answer gets composited into.",
     "Slate each take: an index card held in front of the lens for two seconds at the start, written on it EVERYDAY · 09-15 · take N · the room. So every file says what it is in its own first frame.",
     "Drop them in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-15-1.mp4 to -4.mp4, plus one line of notes: room, light, time, distance, the annoyance.",
-    "Back to you by Friday: a cut from the takes and the first composite on the glass plate."
+    "Back to you by Friday: a cut from the takes and the first composite on the glass plate.",
+    "09-16: not landed. What arrived instead is the Gambler tray set and a 4K turn of the Everyday on white (docs/desk/GAMBLER-SET.html). The row stays open until the four takes exist."
    ],
    "check": {
     "type": "file",
@@ -705,8 +706,12 @@
    "date": "2026-09-13",
    "owner": "ops",
    "title": "Sunday grade",
-   "do": [],
-   "long": "Sunday grade on the desk: done over total for the week"
+   "do": [
+    "Week 1 (09-07 to 09-13), graded 09-16, late: Ops 5 of 5 dated items done (burn list, twin audit, catalogue, music page, mocks); Mike 0 of 0 dated. Nothing of Mike's was due."
+   ],
+   "long": "Sunday grade on the desk: done over total for the week",
+   "done": true,
+   "done_on": "2026-09-16"
   },
   {
    "id": "grade-2026-09-20",
