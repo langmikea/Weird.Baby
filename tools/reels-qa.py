@@ -449,7 +449,7 @@ def main():
             if pop_last is not None and k < n_slide:
                 e = 1 - (1 - k / n_slide) ** 3
                 canvas = Image.new("RGB", (W, H), (0, 0, 0))
-                canvas.paste(pop_last.convert("RGB"), (int(-W * e), 0)); canvas.paste(im, (int(W * (1 - e)), 0)); im = canvas
+                xin = int(W * (1 - e)); canvas.paste(pop_last.convert("RGB"), (xin - W, 0)); canvas.paste(im, (xin, 0)); im = canvas   # the two halves share one edge: no seam
             elif k < n_slide + int(1.0 * FPS):
                 z = 1.0 + 0.05 * (1 - (k - n_slide) / (1.0 * FPS))
                 cw, ch = int(W / z), int(H / z); im = im.crop(((W - cw) // 2, (H - ch) // 2, (W - cw) // 2 + cw, (H - ch) // 2 + ch)).resize((W, H), Image.LANCZOS)
