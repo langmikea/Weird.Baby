@@ -789,10 +789,10 @@
    "title": "The glass composite proven",
    "long": "The twin's display rendered headless and composited into the Everyday's glass plate at the measured aperture (ruled 09-12): one answer, one reel, served",
    "do": [
-    "Ruled C on 09-12: built once, against Tuesday's real plate (practice-2026-09-15-4).",
-    "Render the twin's top screen: the hearing trace, the triangle, the answer in the machine's font; composite at the measured aperture with the CRT bloom.",
-    "One fifteen-second reel: the pop, the question over the takes with the adult under it, the glass answering, held two seconds. Served as a file."
-   ]
+    "Done 09-16 on Mike's own footage (IMG_0247): the machine's screen rendered from the emulator's glyph data and composited into the tracked glass; one Q&A reel reviewed and sent. tools/reels-qa.py."
+   ],
+   "done": true,
+   "done_on": "2026-09-16"
   },
   {
    "id": "element-line",

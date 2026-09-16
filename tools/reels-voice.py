@@ -26,8 +26,8 @@ import asyncio, hashlib, math, pathlib, re, subprocess, sys, tempfile, wave, zli
 import numpy as np
 
 SR = 48000
-VOICE = "en-US-AriaNeural"          # a woman, American, warm: not one of the machine's voices
-RATE, PITCH = "-4%", "-2Hz"
+VOICE = "en-US-AvaMultilingualNeural"   # lowered and slowed toward androgynous (Mike, 09-16: slower, not nasal, aim androgynous)
+RATE, PITCH = "-14%", "-28Hz"
 GRAIN = (0.085, 0.14)                # seconds; each grain is reversed in place
 XFADE = 0.012                        # seconds of crossfade between grains
 BAND = (320.0, 3400.0)               # the telephone: bright, no bass
@@ -35,20 +35,25 @@ CACHE = pathlib.Path("C:/Users/macun/OneDrive/WeirdBaby/reels/.adult-cache")
 
 # ── the read ────────────────────────────────────────────────────────────────
 def read_aloud(text, tmpdir):
-    """the real voice reading the actual question -> mono float32 at SR"""
+    """the real voice reading the actual question -> (mono float64 at SR, [(onset_s, dur_s, word)])"""
     import edge_tts
-    mp3 = pathlib.Path(tmpdir) / "read.mp3"
+    mp3 = pathlib.Path(tmpdir) / "read.mp3"; words = []
     async def go():
-        await edge_tts.Communicate(text, VOICE, rate=RATE, pitch=PITCH).save(str(mp3))
+        c = edge_tts.Communicate(text, VOICE, rate=RATE, pitch=PITCH, boundary="WordBoundary")
+        with open(mp3, "wb") as f:
+            async for ch in c.stream():
+                if ch["type"] == "audio": f.write(ch["data"])
+                elif ch["type"] == "WordBoundary": words.append((ch["offset"] / 1e7, ch["duration"] / 1e7, ch["text"]))
     asyncio.run(go())
     raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(mp3), "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"],
                          capture_output=True, check=True).stdout
-    return np.frombuffer(raw, dtype="<f4").astype(np.float64)
+    return np.frombuffer(raw, dtype="<f4").astype(np.float64), words
 
 # ── the processing ──────────────────────────────────────────────────────────
 def trim(y, thresh=0.01):
+    """tail only: the head is kept so the reader's word timings stay true to the sample"""
     idx = np.where(np.abs(y) > thresh)[0]
-    return y[max(0, idx[0] - int(0.05 * SR)): idx[-1] + int(0.12 * SR)] if len(idx) else y
+    return y[: idx[-1] + int(0.12 * SR)] if len(idx) else y
 
 def reverse_grains(y, seed):
     rng = np.random.default_rng(seed)
@@ -87,7 +92,7 @@ def process(y, text):
     y = band(y)
     y = sweep(y)
     y = np.tanh(1.4 * y / (np.max(np.abs(y)) or 1.0))
-    y = np.concatenate([np.zeros(int(0.1 * SR)), y, np.zeros(int(0.25 * SR))])
+    y = np.concatenate([y, np.zeros(int(0.25 * SR))])          # no head padding: timings hold
     return y / (np.max(np.abs(y)) or 1.0) * 0.8
 
 # ── the fallback: the trumpet of 09-12, kept so the line never goes silent ──
@@ -112,19 +117,26 @@ def trumpet(text):
     y = np.concatenate(parts); return y / (np.max(np.abs(y)) or 1.0) * 0.7
 
 # ── the front door ──────────────────────────────────────────────────────────
-def render(text):
-    key = hashlib.sha256((VOICE + RATE + PITCH + text.strip().lower()).encode("utf8")).hexdigest()[:16]
-    cached = CACHE / f"{key}.npy"
-    if cached.exists():
-        return np.load(cached)
+def render_timed(text):
+    """(samples, [(onset_s, dur_s, word)]) — the processed line and the reader's own word timings"""
+    key = hashlib.sha256((VOICE + RATE + PITCH + "v2" + text.strip().lower()).encode("utf8")).hexdigest()[:16]
+    cached = CACHE / f"{key}.npy"; cached_w = CACHE / f"{key}.json"
+    if cached.exists() and cached_w.exists():
+        import json; return np.load(cached), json.load(open(cached_w, encoding="utf-8"))
     try:
         with tempfile.TemporaryDirectory() as td:
-            y = process(read_aloud(text, td), text)
+            raw, words = read_aloud(text, td)
+        y = process(raw, text)
         CACHE.mkdir(parents=True, exist_ok=True); np.save(cached, y)
-        return y
+        import json; json.dump(words, open(cached_w, "w", encoding="utf-8"))
+        return y, words
     except Exception as e:
         print(f"  the adult could not read (\"{e}\"); the trumpet stands in", file=sys.stderr)
-        return trumpet(text)
+        y = trumpet(text); n = len(text.split()); step = len(y) / SR / max(1, n)
+        return y, [(i * step, step, w) for i, w in enumerate(text.split())]
+
+def render(text):
+    return render_timed(text)[0]
 
 def write_wav(path, y):
     pcm = (np.clip(y, -1, 1) * 32767).astype("<i2").tobytes()
