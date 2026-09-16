@@ -167,6 +167,18 @@
    "url": "https://claude.ai/code/artifact/9ce6fac0-17fd-416b-a02a-bec67b8436c6"
   },
   {
+   "name": "The Gambler set",
+   "what": "the 09-16 tray shoot sorted: subjects by frame, contact sheets, three questions",
+   "how": "served page; the files stay in Desktop › Weird.Baby › New folder",
+   "url": "https://claude.ai/artifact/VwKsLaWnK3k6ZfV7i8gSof"
+  },
+  {
+   "name": "The portfolio",
+   "what": "six flavor reels cut from the Gambler test set; what the set can do and the must-have shots",
+   "how": "python tools/reels-portfolio.py; files in Finished reels › portfolio",
+   "url": "https://claude.ai/artifact/PdnvgVN42kVNfb7UYQcvso"
+  },
+  {
    "name": "The wing mocks",
    "what": "mocks 3 to 5 (feature page, prologue, day's landing) for the 09-27 sitting; the shelf and the album are the real /robots page, seen on the PC with npm run dev",
    "how": "served page; npm run mocks (the served copy carries sample scans and is built outside the repo)",
