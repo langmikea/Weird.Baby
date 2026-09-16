@@ -53,7 +53,8 @@ SEGMENTS = [
     ("0247", 81.0, 0.5, (1656, 932, 312), "shake"),
     ("0247", 50.0, 0.1, (2104, 1176, 448), "ecu"),
 ]
-CARD_S, GLITCH_S = 1.3, 0.2
+CARD_S, GLITCH_S, BLACK_S = 2.6, 0.2, 0.3
+THEATRE_S, REDIRECT_S, TRI_S, ANSWER_S = 1.5, 0.5, 0.8, 2.6   # the machine works, redirects, reveals, holds
 VOICE_AT = 0.3                                            # into the first hold
 
 # ── the machine's font, from the emulator ───────────────────────────────────
@@ -116,6 +117,28 @@ def screen_scope(wave):
         else: fb[y, x] = 1
         prev = y
     return fb
+OPCODES = ["dex","jmp","jsr","lda","ldx","ora","orx","rts","sta","stx","bne","beq","bcs","cmp","inx","inc","dec"]
+OPERANDS = ["$00","$01","$07","$0A","$23","$24","$2A","$3B","$44","$4C","$5D","$68","$7F","$80","$A3","$A5","$A6","$A8","$B6","$B8","$C0","$C9","$D1","$D9","$F2","$FA","$FE","$FF","#00","#01","#02","#04","#08","#09","#16","#32","#64","#99","#FF"]
+_mon = np.random.default_rng(11)
+_mon_lines = [f"{_mon.choice(OPCODES)} {_mon.choice(OPERANDS)}" for _ in range(64)]
+def screen_monitor(k, total):
+    """the machine at work on the front glass: the twin's own faux-assembly scroller (opcodes and operands
+    from viiip_twin.html) rolling one line every four frames, a load bar filling along the bottom"""
+    fb = fb_new()
+    step = k // 4
+    for row in range(3):
+        ln = _mon_lines[(step + row) % len(_mon_lines)].upper()
+        x = 4
+        for ch in ln:
+            fb_char(fb, x, 14 + row * 17, ch); x += GLYPHS[ord(ch) - 0x20][3]
+    fill = int(FW * min(1.0, k / max(1, total)))
+    fb[60:63, 0:fill] = 1
+    return fb
+def screen_redirect():
+    fb = fb_new()
+    fb_centered(fb, 18, "REDIRECT"); fb_centered(fb, 38, "FLUIDIC"); fb_centered(fb, 58, "SUSPENSION")
+    return fb
+
 def screen_triangle(frame_i, total):
     """firmware 4_GRAPHICS.ino 92-111: stage 1 zoom 0->128 with rotation over 31 frames, stage 2 150->165 over 16"""
     fb = fb_new()
@@ -226,6 +249,46 @@ def track(frames, seed):
     return out
 
 # ── the question, word by word ──────────────────────────────────────────────
+QSCALE = 6   # the 9-pt face at six times: 13-px caps become 78 px
+def glyph_line(text):
+    """one line of text as a framebuffer strip in the machine's font"""
+    w = text_w(text) + 2; fb = np.zeros((18, max(1, w)), dtype=np.uint8); x = 1
+    for ch in text:
+        i = ord(ch) - 0x20
+        if i < 0 or i >= len(GLYPHS): continue
+        off, gw, gh, xa, xo, yo = GLYPHS[i]; bit = 0
+        for yy in range(gh):
+            for xx in range(gw):
+                if BITMAPS[off + (bit >> 3)] & (0x80 >> (bit & 7)):
+                    px, py = x + xo + xx, 14 + yo + yy
+                    if 0 <= px < fb.shape[1] and 0 <= py < 18: fb[py, px] = 1
+                bit += 1
+        x += xa
+    return fb
+def question_lines(words, maxw_fb=150):
+    lines, cur = [], []
+    for w in words:
+        t = " ".join(cur + [w])
+        if text_w(t) <= maxw_fb or not cur: cur.append(w)
+        else: lines.append(cur); cur = [w]
+    if cur: lines.append(cur)
+    return lines
+def draw_question_machine(frame, words, shown, y_top):
+    """the words spoken so far, in the machine's pixel font, white with a dark shadow, centred, no box"""
+    if shown == 0: return frame
+    out = frame.copy(); k = 0; y = y_top
+    for line in question_lines(words):
+        take = [w for w in line if k < shown and not (k := k + 1) < 0]
+        if not take: break
+        strip = glyph_line(" ".join(take))
+        img = Image.fromarray((strip * 255).astype(np.uint8), "L").resize((strip.shape[1] * QSCALE, 18 * QSCALE), Image.NEAREST)
+        x = (W - img.width) // 2
+        shadow = Image.new("L", img.size, 0)
+        out.paste(shadow, (x + 4, y + 4), img)            # a dark drop shadow, then the white
+        out.paste(Image.new("L", img.size, 255), (x, y), img)
+        y += 18 * QSCALE - 24
+    return out
+
 def layout_words(words, font, maxw=880):
     """(word, x, y) positions, wrapped, for a block whose top-left is (0,0)"""
     pos = []; x = 0; y = 0; lh = int(font.size * 1.22); sp = font.getlength(" ")
@@ -305,8 +368,8 @@ def main():
             im = Image.open(f).convert("L")
             im = composite_glass(im, c, fb)
             shown = sum(1 for o in onsets if t >= VOICE_AT + o)
-            if k == 0: q_y = int(min(H - block_h - 120, hold_frames[0][1][1] + hold_frames[0][1][2] * 1.12))   # just under the glass, fixed for the hold
-            im = draw_question(im, pos, block_h, shown, fontq, by=q_y)
+            if k == 0: q_y = int(min(H - 3 * 18 * QSCALE - 80, hold_frames[0][1][1] + hold_frames[0][1][2] * 1.05))   # just under the glass, fixed for the hold
+            im = draw_question_machine(im, qwords, shown, q_y)
             if first_frame is None: first_frame = im.copy()
             emit(im)
         # 3: the shake — the suspension agitated, the short on the sound track
@@ -320,12 +383,18 @@ def main():
         # 4: the reveal on the glass, extreme close-up: the triangle fast, then the answer, with a slow push in
         ecu = [(f, c) for role, fr, cs in segs if role == "ecu" for f, c in zip(fr, cs)]
         f0, c0 = ecu[0]
-        ecu = ecu * (int(2.0 * FPS) // max(1, len(ecu)) + 1)                                   # one frame, pushed in digitally: no tracking to lose
+        n_theatre, n_redirect, n_tri, n_answer = int(THEATRE_S * FPS), int(REDIRECT_S * FPS), int(TRI_S * FPS), int(ANSWER_S * FPS)
+        ecu = [ecu[0]] * (n_theatre + n_redirect + n_tri + n_answer)
+        t_theatre = n / FPS                                   # one frame, pushed in digitally: no tracking to lose
         plate = Image.open(f0).convert("L")
         n_ecu = len(ecu)
         zmax = min(1.6, 0.86 * W / (2 * c0[2]))          # the whole glass stays inside the frame
+        t_answer = t_theatre + (n_theatre + n_redirect + n_tri) / FPS
         for k in range(n_ecu):
-            fb = screen_triangle(k, tri_total) if k < tri_total else screen_answer(ANSWER)
+            if k < n_theatre: fb = screen_monitor(k, n_theatre)
+            elif k < n_theatre + n_redirect: fb = screen_redirect()
+            elif k < n_theatre + n_redirect + n_tri: fb = screen_triangle(k - n_theatre - n_redirect, n_tri)
+            else: fb = screen_answer(ANSWER)
             im = composite_glass(plate, c0, fb)
             z = 1.0 + (zmax - 1.0) * (k / max(1, n_ecu - 1)) ** 0.7
             cw, ch = int(W / z), int(H / z); cx, cy = int(c0[0]), int(c0[1])
@@ -337,14 +406,35 @@ def main():
         for k in range(int(GLITCH_S * FPS)): emit(glitch(last_ecu if k % 2 else cd, k))
         for k in range(int(CARD_S * FPS)): emit(cd)
         t_glitch = None
-        for k in range(3): emit(Image.new("L", (W, H), 0))
+        for k in range(int(BLACK_S * FPS)): emit(Image.new("L", (W, H), 0))
         middle_s = n / FPS
         print(f"  middle {middle_s:.2f}s, {n} frames; voice at {VOICE_AT}s for {voice_len:.2f}s; shake at {t_shake:.2f}s")
-        # the sound: silence + the adult + the short twice
+        # the sound: a hum under everything, a rattle at the shake, relays while it works, blips for the triangle,
+        # a thunk at the answer, a hiss under the card, then silence for the black (the jump on the loop)
+        sfx = np.zeros(int(middle_s * VOICE.SR) + 1)
+        def add(t0, sig):
+            i = int(t0 * VOICE.SR); j = min(len(sfx), i + len(sig)); sfx[i:j] += sig[:j - i]
+        SRv = VOICE.SR; rng = np.random.default_rng(5)
+        tt = np.arange(int((middle_s - BLACK_S) * SRv)) / SRv
+        add(0, 0.018 * (np.sin(2 * np.pi * 55 * tt) + 0.5 * np.sin(2 * np.pi * 110 * tt)))          # the hum
+        def tick(amp=0.35, ms=4, hz=2200):
+            n = int(ms * SRv / 1000); e = np.exp(-np.arange(n) / (n / 3)); return amp * e * np.sin(2 * np.pi * hz * np.arange(n) / SRv)
+        for m in range(3): add(t_shake + 0.06 * m, tick(0.5, 6, 900 + 300 * m))                        # the rattle
+        tk = t_theatre
+        while tk < t_theatre + THEATRE_S:
+            add(tk, tick(0.22 + 0.2 * rng.random(), 3, 1800 + 900 * rng.random())); tk += 0.045 + 0.05 * rng.random()   # relays
+        add(t_theatre + THEATRE_S, tick(0.5, 40, 1400))                                              # the redirect chime
+        for q in range(n_tri // 4): add(t_theatre + THEATRE_S + REDIRECT_S + q * 4 / FPS, tick(0.3, 18, 1200 + 40 * q))   # the triangle blips
+        n_th = int(0.16 * SRv); e = np.exp(-np.arange(n_th) / (n_th / 4))
+        add(t_answer, 0.7 * e * np.sin(2 * np.pi * 85 * np.arange(n_th) / SRv) + 0.15 * e * rng.standard_normal(n_th))   # the thunk
+        t_card = t_answer + ANSWER_S + GLITCH_S
+        n_h = int(CARD_S * SRv); add(t_card, 0.012 * rng.standard_normal(n_h))                        # the hiss under the card
+        sfxwav = td / "sfx.wav"; VOICE.write_wav(sfxwav, np.clip(sfx, -1, 1))
         middle = td / "middle.mp4"
         fc = (f"[1:a]aformat=sample_rates=48000:channel_layouts=stereo,adelay={int(VOICE_AT*1000)}|{int(VOICE_AT*1000)},volume=1.0[v];"
-              f"[3:a][v]amix=inputs=2:duration=first:normalize=0[a]")
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(FPS), "-i", str(outdir / "%05d.png"), "-i", str(vwav), "-i", str(SHORT),
+              f"[2:a]aformat=sample_rates=48000:channel_layouts=stereo[x];"
+              f"[3:a][v][x]amix=inputs=3:duration=first:normalize=0[a]")
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(FPS), "-i", str(outdir / "%05d.png"), "-i", str(vwav), "-i", str(sfxwav),
                         "-f", "lavfi", "-t", f"{middle_s:.3f}", "-i", "anullsrc=r=48000:cl=stereo",
                         "-filter_complex", fc, "-map", "0:v", "-map", "[a]", "-shortest", "-c:v", "libx264", "-preset", "medium", "-crf", "17", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", str(middle)], check=True)
         # the pop first (its own sound), then the middle

@@ -26,8 +26,8 @@ import asyncio, hashlib, math, pathlib, re, subprocess, sys, tempfile, wave, zli
 import numpy as np
 
 SR = 48000
-VOICE = "en-US-ChristopherNeural"       # American, deep, unhurried (Mike, 09-16: American English, slower, lower octave, phrasing kept)
-RATE, PITCH = "-22%", "-18Hz"
+VOICE = "en-US-GuyNeural"               # American, with some life in him: "one of our viewers" (Mike, 09-16)
+RATE, PITCH = "-6%", "-6Hz"
 GRAIN = (0.085, 0.14)                # seconds; each grain is reversed in place
 XFADE = 0.012                        # seconds of crossfade between grains
 BAND = (320.0, 3400.0)               # the telephone: bright, no bass
@@ -99,10 +99,20 @@ def behind_the_wall(y):
     hp = butter(2, 140 / (SR / 2), btype="high", output="sos")
     return sosfilt(hp, out)
 
+def scrambler(y, fc=2300.0):
+    """the telephone scrambler: the spectrum inverted about fc. Human, expressive, and no word survives;
+    nothing moves in time. Mike, 09-16: the wall alone left it understandable, and understandable fails."""
+    from scipy.signal import butter, sosfilt
+    t = np.arange(len(y)) / SR
+    inv = y * np.cos(2 * np.pi * fc * t)
+    inv = sosfilt(butter(8, (fc - 60) / (SR / 2), btype="low", output="sos"), inv)
+    inv = sosfilt(butter(4, [220 / (SR / 2), 1900 / (SR / 2)], btype="band", output="sos"), inv)
+    return inv
+
 def process(y, text):
     y = trim(y)
-    y = behind_the_wall(y)
-    y = np.tanh(1.6 * y / (np.max(np.abs(y)) or 1.0))
+    y = scrambler(y)
+    y = np.tanh(1.7 * y / (np.max(np.abs(y)) or 1.0))
     y = np.concatenate([y, np.zeros(int(0.25 * SR))])          # no head padding: timings hold
     return y / (np.max(np.abs(y)) or 1.0) * 0.8
 
@@ -130,7 +140,7 @@ def trumpet(text):
 # ── the front door ──────────────────────────────────────────────────────────
 def render_timed(text):
     """(samples, [(onset_s, dur_s, word)]) — the processed line and the reader's own word timings"""
-    key = hashlib.sha256((VOICE + RATE + PITCH + "v3" + text.strip().lower()).encode("utf8")).hexdigest()[:16]
+    key = hashlib.sha256((VOICE + RATE + PITCH + "v4" + text.strip().lower()).encode("utf8")).hexdigest()[:16]
     cached = CACHE / f"{key}.npy"; cached_w = CACHE / f"{key}.json"
     if cached.exists() and cached_w.exists():
         import json; return np.load(cached), json.load(open(cached_w, encoding="utf-8"))
