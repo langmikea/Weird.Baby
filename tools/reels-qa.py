@@ -251,19 +251,40 @@ def lens_below(g, c):
         if d < r * 0.7 and (best is None or d < best[0]): best = (d, (X, Y, rr * 2))
     return best[1] if best else None
 
+def plate_angle(g, c, prev=0.0):
+    """degrees the unit leans, from the faceplate's own near-vertical edges around the glass (Hough lines,
+    weighted by length); the lens-circle method was unreliable (Mike, 09-16: the text leaned when the unit did not)"""
+    import cv2
+    cx, cy, r = c
+    x0, x1 = int(max(0, cx - 2.4 * r)), int(min(W, cx + 2.4 * r)); y0, y1 = int(max(0, cy - 2.2 * r)), int(min(H, cy + 3.2 * r))
+    roi = g[y0:y1, x0:x1]
+    edges = cv2.Canny(cv2.GaussianBlur(roi, (5, 5), 0), 60, 160)
+    lines = cv2.HoughLinesP(edges, 1, np.pi / 360, threshold=60, minLineLength=int(r * 0.9), maxLineGap=12)
+    if lines is None: return prev
+    angs, wts = [], []
+    for x_a, y_a, x_b, y_b in np.asarray(lines).reshape(-1, 4):
+        dx, dy = x_b - x_a, y_b - y_a
+        if abs(dy) < abs(dx): continue                       # near-vertical only
+        a = math.degrees(math.atan2(dx if dy > 0 else -dx, abs(dy)))
+        if abs(a) > 18: continue
+        angs.append(a); wts.append(math.hypot(dx, dy))
+    if not angs: return prev
+    order = np.argsort(angs); angs = np.array(angs)[order]; wts = np.array(wts)[order]
+    cum = np.cumsum(wts); med = float(angs[np.searchsorted(cum, cum[-1] / 2)])
+    return med
+
 def axis_angles(frames, circles):
-    """degrees the unit leans, per frame, from the line glass -> lens; smoothed; 0 when the lens is not seen"""
+    """per frame, the plate's lean in degrees; smoothed, and never more than 1.2 degrees of change a frame"""
     import cv2
     out = []; last = 0.0
     for f, c in zip(frames, circles):
         g = cv2.imread(str(f), cv2.IMREAD_GRAYSCALE)
-        l = lens_below(g, c)
-        if l is not None:
-            last = math.degrees(math.atan2(l[0] - c[0], l[1] - c[1]))
-        out.append(last)
+        a = plate_angle(g, c, last)
+        a = max(last - 1.2, min(last + 1.2, a)); last = a
+        out.append(a)
     arr = np.array(out); sm = []
     for i in range(len(arr)):
-        lo, hi = max(0, i - 3), min(len(arr), i + 4); sm.append(float(np.median(arr[lo:hi])))
+        lo, hi = max(0, i - 4), min(len(arr), i + 5); sm.append(float(np.median(arr[lo:hi])))
     return sm
 
 def track(frames, seed):
@@ -321,7 +342,7 @@ def question_block(words, shown):
         if not take: break
         strips.append(glyph_line(" ".join(take)))
     if not strips: return None
-    lh = 18 * QSCALE - 24
+    lh = 18 * QSCALE - 6
     bw = max(st.shape[1] for st in strips) * QSCALE
     block = Image.new("L", (bw, lh * (len(strips) - 1) + 18 * QSCALE), 0)
     for i, st in enumerate(strips):
@@ -442,7 +463,7 @@ def main():
             im = composite_glass(im, c, fb)
             shown = sum(1 for o in onsets if t >= VOICE_AT + o)
             a = hold_angles[k]; ar = math.radians(a)
-            dist = c[2] * 1.05 + 1.5 * 18 * QSCALE / 2 + 30                  # from the glass centre down the unit's axis to the block's centre
+            dist = c[2] * 1.05 + (18 * QSCALE - 6) * 1.5 / 2 + 60                  # from the glass centre down the unit's axis to the block's centre
             centre = (c[0] + dist * math.sin(ar), c[1] + dist * math.cos(ar))
             im = draw_question_machine(im, qwords, shown, centre, a)
             # the signature move: the logo slides off left as the machine slides in from the right, easing; then a soft push settles
@@ -469,8 +490,7 @@ def main():
         ecu = [(f, c) for role, fr, cs in segs if role == "ecu" for f, c in zip(fr, cs)]
         f0, c0 = ecu[0]
         import cv2 as _cv
-        _l = lens_below(_cv.imread(str(f0), _cv.IMREAD_GRAYSCALE), c0)
-        ecu_angle = math.degrees(math.atan2(_l[0] - c0[0], _l[1] - c0[1])) if _l is not None else 0.0
+        ecu_angle = plate_angle(_cv.imread(str(f0), _cv.IMREAD_GRAYSCALE), c0, 0.0)
         print(f"  plane: the close-up leans {ecu_angle:.1f} degrees")
         n_theatre, n_redirect, n_tri, n_answer = int(THEATRE_S * FPS), int(REDIRECT_S * FPS), int(TRI_S * FPS), int(ANSWER_S * FPS)
         ecu = [ecu[0]] * (n_theatre + n_redirect + n_tri + n_answer)
