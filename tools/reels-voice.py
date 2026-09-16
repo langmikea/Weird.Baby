@@ -26,8 +26,8 @@ import asyncio, hashlib, math, pathlib, re, subprocess, sys, tempfile, wave, zli
 import numpy as np
 
 SR = 48000
-VOICE = "en-US-AvaMultilingualNeural"   # lowered and slowed toward androgynous (Mike, 09-16: slower, not nasal, aim androgynous)
-RATE, PITCH = "-14%", "-28Hz"
+VOICE = "en-US-ChristopherNeural"       # American, deep, unhurried (Mike, 09-16: American English, slower, lower octave, phrasing kept)
+RATE, PITCH = "-22%", "-18Hz"
 GRAIN = (0.085, 0.14)                # seconds; each grain is reversed in place
 XFADE = 0.012                        # seconds of crossfade between grains
 BAND = (320.0, 3400.0)               # the telephone: bright, no bass
@@ -85,13 +85,24 @@ def sweep(y):
         out[s:s + block] = sosfilt(tf2sos(b, a), y[s:s + block])
     return 0.55 * y + 0.45 * out
 
+def behind_the_wall(y):
+    """the adult in the next room: a steep low-pass takes the consonants, a cluster of very short
+    echoes smears what is left, a soft clip rounds it. Nothing moves in time, so the reader's
+    word onsets stay true and the phrasing and inflection survive. [Mike, 09-16: the reversed
+    grains read as a foreign accent and lost the pacing.]"""
+    from scipy.signal import butter, sosfilt
+    sos = butter(6, 1050 / (SR / 2), btype="low", output="sos")
+    lo = sosfilt(sos, y)
+    out = lo.copy()
+    for ms, g in ((11, 0.55), (19, 0.42), (29, 0.33), (41, 0.22)):
+        d = int(ms * SR / 1000); out[d:] += g * lo[:-d]
+    hp = butter(2, 140 / (SR / 2), btype="high", output="sos")
+    return sosfilt(hp, out)
+
 def process(y, text):
-    seed = zlib.crc32(text.strip().lower().encode("utf8"))
     y = trim(y)
-    y = reverse_grains(y, seed)
-    y = band(y)
-    y = sweep(y)
-    y = np.tanh(1.4 * y / (np.max(np.abs(y)) or 1.0))
+    y = behind_the_wall(y)
+    y = np.tanh(1.6 * y / (np.max(np.abs(y)) or 1.0))
     y = np.concatenate([y, np.zeros(int(0.25 * SR))])          # no head padding: timings hold
     return y / (np.max(np.abs(y)) or 1.0) * 0.8
 
@@ -119,7 +130,7 @@ def trumpet(text):
 # ── the front door ──────────────────────────────────────────────────────────
 def render_timed(text):
     """(samples, [(onset_s, dur_s, word)]) — the processed line and the reader's own word timings"""
-    key = hashlib.sha256((VOICE + RATE + PITCH + "v2" + text.strip().lower()).encode("utf8")).hexdigest()[:16]
+    key = hashlib.sha256((VOICE + RATE + PITCH + "v3" + text.strip().lower()).encode("utf8")).hexdigest()[:16]
     cached = CACHE / f"{key}.npy"; cached_w = CACHE / f"{key}.json"
     if cached.exists() and cached_w.exists():
         import json; return np.load(cached), json.load(open(cached_w, encoding="utf-8"))

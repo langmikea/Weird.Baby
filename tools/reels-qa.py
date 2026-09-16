@@ -53,7 +53,7 @@ SEGMENTS = [
     ("0247", 81.0, 0.5, (1656, 932, 312), "shake"),
     ("0247", 50.0, 0.1, (2104, 1176, 448), "ecu"),
 ]
-FLASH_S, CARD_S, GLITCH_S, LOOP_S = 1.2, 0.9, 0.25, 0.3
+CARD_S, GLITCH_S = 1.3, 0.2
 VOICE_AT = 0.3                                            # into the first hold
 
 # ── the machine's font, from the emulator ───────────────────────────────────
@@ -235,11 +235,11 @@ def layout_words(words, font, maxw=880):
         pos.append((w, x, y)); x += ww + sp
     return pos, y + lh
 
-def draw_question(frame, pos, block_h, shown, font):
-    """words shown so far, on one soft box in the top third"""
+def draw_question(frame, pos, block_h, shown, font, by=1130):
+    """words shown so far, on one soft box BELOW the glass (Mike, 09-16: covering the shutter is fine)"""
     if shown == 0: return frame
     out = frame.convert("RGBA"); ov = Image.new("RGBA", out.size, (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
-    bx, by = 90, 170; pad = 28
+    bx = 90; pad = 28
     d.rectangle([bx, by, bx + 900, by + block_h + pad * 2], fill=(0, 0, 0, 150))
     for w, x, y in pos[:shown]:
         d.text((bx + pad + x, by + pad + y), w, font=font, fill=(255, 255, 255, 255))
@@ -305,7 +305,8 @@ def main():
             im = Image.open(f).convert("L")
             im = composite_glass(im, c, fb)
             shown = sum(1 for o in onsets if t >= VOICE_AT + o)
-            im = draw_question(im, pos, block_h, shown, fontq)
+            if k == 0: q_y = int(min(H - block_h - 120, hold_frames[0][1][1] + hold_frames[0][1][2] * 1.12))   # just under the glass, fixed for the hold
+            im = draw_question(im, pos, block_h, shown, fontq, by=q_y)
             if first_frame is None: first_frame = im.copy()
             emit(im)
         # 3: the shake — the suspension agitated, the short on the sound track
@@ -331,22 +332,18 @@ def main():
             x0 = max(0, min(W - cw, cx - cw // 2)); y0 = max(0, min(H - ch, cy - ch // 2))
             im = im.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.LANCZOS)
             last_ecu = im; emit(im)
-        # 5: the staccato flash between the glass and the card; 6: the card holds
-        cd = card(ANSWER); per = 3
-        for k in range(int(FLASH_S * FPS)): emit(cd if (k // per) % 2 == 0 else last_ecu)
+        # 5: from the glass to the card with two glitches (Mike, 09-16), then the card to the end, then one black frame so the loop closes clean
+        cd = card(ANSWER)
+        for k in range(int(GLITCH_S * FPS)): emit(glitch(last_ecu if k % 2 else cd, k))
         for k in range(int(CARD_S * FPS)): emit(cd)
-        # 7: the glitch back; 8: the first frame, so it loops clean
-        t_glitch = n / FPS
-        for k in range(int(GLITCH_S * FPS)): emit(glitch(first_frame if k % 3 else cd, k))
-        for k in range(int(LOOP_S * FPS)): emit(first_frame)
+        t_glitch = None
+        for k in range(3): emit(Image.new("L", (W, H), 0))
         middle_s = n / FPS
-        print(f"  middle {middle_s:.2f}s, {n} frames; voice at {VOICE_AT}s for {voice_len:.2f}s; shake at {t_shake:.2f}s; glitch at {t_glitch:.2f}s")
+        print(f"  middle {middle_s:.2f}s, {n} frames; voice at {VOICE_AT}s for {voice_len:.2f}s; shake at {t_shake:.2f}s")
         # the sound: silence + the adult + the short twice
         middle = td / "middle.mp4"
         fc = (f"[1:a]aformat=sample_rates=48000:channel_layouts=stereo,adelay={int(VOICE_AT*1000)}|{int(VOICE_AT*1000)},volume=1.0[v];"
-              f"[2:a]aformat=sample_rates=48000:channel_layouts=stereo,adelay={int(t_shake*1000)}|{int(t_shake*1000)},volume=0.7[s1];"
-              f"[2:a]aformat=sample_rates=48000:channel_layouts=stereo,adelay={int(t_glitch*1000)}|{int(t_glitch*1000)},volume=0.8[s2];"
-              f"[3:a][v][s1][s2]amix=inputs=4:duration=first:normalize=0[a]")
+              f"[3:a][v]amix=inputs=2:duration=first:normalize=0[a]")
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(FPS), "-i", str(outdir / "%05d.png"), "-i", str(vwav), "-i", str(SHORT),
                         "-f", "lavfi", "-t", f"{middle_s:.3f}", "-i", "anullsrc=r=48000:cl=stereo",
                         "-filter_complex", fc, "-map", "0:v", "-map", "[a]", "-shortest", "-c:v", "libx264", "-preset", "medium", "-crf", "17", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", str(middle)], check=True)
