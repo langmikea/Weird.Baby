@@ -48,7 +48,7 @@ FLAVORS = {
     "catalogue": dict(
         line="the catalogue page: clean colour, one object at a time, the slow push of a product still",
         look="colour", zoom=True, xfade=0.0,
-        shots=[("still", "0197", 3.0), ("still", "0203", 2.6), ("still", "0211", 2.6), ("still", "0241", 2.4), ("still", "0199", 2.2)],
+        shots=[("still", "0197", 2.4), ("still", "0203", 2.1), ("still", "0211", 2.1), ("still", "0241", 2.1), ("still", "0199", 2.0)],
         question="Should I buy the extended warranty?", answer="THE ODDS FAVOR\nTHE HOUSE.\nTHEY ALWAYS DO."),
     "newsreel": dict(
         line="the newsreel: black and white, the handled print, hard cuts, no shot longer than a breath",
@@ -56,9 +56,9 @@ FLAVORS = {
         shots=[("still", "0198", 1.4), ("still", "0205", 1.3), ("still", "0213", 1.3), ("still", "0208", 1.2), ("still", "0227", 1.4), ("still", "0236", 1.3), ("still", "0221", 1.4), ("still", "0217", 1.5)],
         question="Is my neighbor telling the truth about the fence?", answer="MY SOURCES SAY NO.\nMY SOURCES\nKNOW THE ODDS."),
     "demonstration": dict(
-        line="the demonstration: hands in frame, the Live Photo's three seconds of motion, unhurried",
+        line="the demonstration: hands in frame, the Live Photo's eleven frames stretched into slow motion, unhurried",
         look="colour", zoom=False, xfade=0.0,
-        shots=[("live", "0234", 3.0), ("live", "0219", 2.6), ("live", "0225", 2.6), ("live", "0243", 2.6)],
+        shots=[("live", "0234", 3.0), ("live", "0219", 2.7), ("live", "0225", 2.7), ("live", "0243", 2.7)],
         question="Will the check clear?", answer="NOT YET.\nTHE HAND IS STILL\nBEING DEALT."),
     "glitch": dict(
         line="the glitch: the electrical short as a rhythm, inversions and colour splits, the turn breaking in",
@@ -74,7 +74,7 @@ FLAVORS = {
         line="the gnashing cut: the 4K turn in bursts, forward and back, coins and chips jammed between",
         look="gnash", zoom=False, xfade=0.0,
         shots=[("turn", 0.5, 0.5, 2.0, False), ("still", "0216", 0.35), ("turn", 3.0, 0.5, 2.0, True), ("still", "0207", 0.35), ("turn", 5.5, 0.6, 2.0, False), ("still", "0217", 0.35),
-               ("turn", 7.5, 0.6, 2.0, True), ("still", "0218", 0.35), ("turn", 2.0, 0.7, 1.5, False), ("still", "0203", 0.4), ("turn", 6.0, 0.9, 1.0, False), ("still", "0211", 0.5), ("turn", 8.2, 1.0, 1.0, True)],
+               ("turn", 7.5, 0.6, 2.0, True), ("still", "0218", 0.35), ("turn", 2.0, 0.7, 1.5, False), ("still", "0203", 0.4), ("turn", 6.0, 0.9, 1.0, False), ("still", "0211", 0.5), ("turn", 8.2, 1.0, 1.0, True), ("still", "0205", 0.4), ("turn", 1.5, 0.8, 2.0, False), ("still", "0209", 0.4), ("turn", 4.5, 1.2, 1.0, True), ("still", "0212", 0.4)],
         question="Should I bet on the home team tonight?", answer="THE SMART MONEY\nLEFT AN HOUR AGO."),
 }
 
@@ -96,10 +96,15 @@ def still_clip(frame, secs, look, zoom, td, i):
     vf = (f"zoompan=z='min(zoom+0.0009,1.14)':d={n}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={W}x{H}:fps={FPS}," if zoom else f"fps={FPS},") + LOOK[look] + ",format=yuv420p,setsar=1"
     run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-t", str(secs), "-i", str(png), "-vf", vf, "-t", str(secs), "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", str(out)]); return out
 
+LIVE_FRAMES_S = 11 / 30.0   # measured 09-16: each Live Photo movie holds eleven video frames, not three seconds
+
 def live_clip(frame, secs, look, td, i):
+    """the Live Photo's eleven frames, stretched to the shot with motion interpolation: the slow hand"""
     src = SRC / f"IMG_{frame}.MOV"; out = pathlib.Path(td) / f"s{i:02d}.mp4"
-    vf = f"crop=ih*9/16:ih,scale={W}:{H},fps={FPS}," + LOOK[look] + ",format=yuv420p,setsar=1"
-    run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-t", str(secs), "-vf", vf, "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", str(out)]); return out
+    stretch = secs / LIVE_FRAMES_S
+    vf = (f"crop=ih*9/16:ih,scale={W}:{H},setpts={stretch:.3f}*PTS,minterpolate=fps={FPS}:mi_mode=mci:mc_mode=aobmc:vsbmc=1,"
+          + LOOK[look] + ",format=yuv420p,setsar=1")
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", vf, "-t", str(secs), "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", str(out)]); return out
 
 def turn_clip(start, secs, speed, rev, look, td, i):
     src = SRC / "IMG_0249.MOV"; out = pathlib.Path(td) / f"s{i:02d}.mp4"
