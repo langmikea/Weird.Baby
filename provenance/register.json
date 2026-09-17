@@ -16887,6 +16887,254 @@
    "p": "",
    "c": "HOUSE",
    "s": "house draft for the character albums, 2026-09-11; the catalogue's pitches are ruled at the sitting of 09-20"
+  },
+  "1460ad3c3e864f86": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 67,
+   "t": "case",
+   "p": "",
+   "c": "HOUSE",
+   "s": "grouping id of photos/manifest.json (the Image Archive's presets), 09-17; an id, not printed as prose"
+  },
+  "2c46064d6e97d5f7": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 54,
+   "t": "The case",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Image Archive's grouping labels, from photos/manifest.json `groups`, 09-17 (ruling C of the calendar re-cut: the 09-16 set stands in)"
+  },
+  "72bc1bc70713aa6d": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 54,
+   "t": "kit",
+   "p": "",
+   "c": "HOUSE",
+   "s": "grouping id of photos/manifest.json (the Image Archive's presets), 09-17; an id, not printed as prose"
+  },
+  "2c8c9f8408e723a3": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 54,
+   "t": "The kit",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Image Archive's grouping labels, from photos/manifest.json `groups`, 09-17 (ruling C of the calendar re-cut: the 09-16 set stands in)"
+  },
+  "976d5bd1261c8e0c": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 67,
+   "t": "chips",
+   "p": "",
+   "c": "HOUSE",
+   "s": "grouping id of photos/manifest.json (the Image Archive's presets), 09-17; an id, not printed as prose"
+  },
+  "db20fb5fcc9ec846": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 54,
+   "t": "The chips",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Image Archive's grouping labels, from photos/manifest.json `groups`, 09-17 (ruling C of the calendar re-cut: the 09-16 set stands in)"
+  },
+  "88b46b8d883092b4": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 54,
+   "t": "coins",
+   "p": "",
+   "c": "HOUSE",
+   "s": "grouping id of photos/manifest.json (the Image Archive's presets), 09-17; an id, not printed as prose"
+  },
+  "3758fcd60c4d3cb4": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 54,
+   "t": "The half dollars",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Image Archive's grouping labels, from photos/manifest.json `groups`, 09-17 (ruling C of the calendar re-cut: the 09-16 set stands in)"
+  },
+  "1d62be537875946f": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 55,
+   "t": "library",
+   "p": "",
+   "c": "HOUSE",
+   "s": "grouping id of photos/manifest.json (the Image Archive's presets), 09-17; an id, not printed as prose"
+  },
+  "8ee282f0ecd1eb62": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 55,
+   "t": "The library",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Image Archive's grouping labels, from photos/manifest.json `groups`, 09-17 (ruling C of the calendar re-cut: the 09-16 set stands in)"
+  },
+  "e585e1b930c0dd4f": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 55,
+   "t": "slate",
+   "p": "",
+   "c": "HOUSE",
+   "s": "grouping id of photos/manifest.json (the Image Archive's presets), 09-17; an id, not printed as prose"
+  },
+  "af58d31c0671168f": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 55,
+   "t": "The slate",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Image Archive's grouping labels, from photos/manifest.json `groups`, 09-17 (ruling C of the calendar re-cut: the 09-16 set stands in)"
+  },
+  "629d87b4c344db91": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 63,
+   "t": "Every photograph",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Image Archive's grouping labels, from photos/manifest.json `groups`, 09-17 (ruling C of the calendar re-cut: the 09-16 set stands in)"
+  },
+  "7628151ce0546beb": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 77,
+   "t": "Marked Cards and Loaded Dice",
+   "p": "",
+   "c": "MIKE",
+   "s": "Mike's 09-16 Gambler set, sorted in docs/PHOTOS-20260916-GAMBLER-SET.md: Garcia's 'Marked Cards and Loaded Dice' and the K.C. Card Co. 'Blue Book', frames 0226-0245"
+  },
+  "07765545e8693fd1": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 77,
+   "t": "Garcia",
+   "p": "",
+   "c": "MIKE",
+   "s": "Mike's 09-16 Gambler set, sorted in docs/PHOTOS-20260916-GAMBLER-SET.md: Garcia's 'Marked Cards and Loaded Dice' and the K.C. Card Co. 'Blue Book', frames 0226-0245"
+  },
+  "67ce78b6ff1986c7": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 78,
+   "t": "From the Gambler's library, photographed on the tray: the cover, the spine, and the book open.",
+   "p": "",
+   "c": "RESTATED",
+   "r": "docs/PHOTOS-20260916-GAMBLER-SET.md"
+  },
+  "970410bc250494e3": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 79,
+   "t": "The Blue Book",
+   "p": "",
+   "c": "MIKE",
+   "s": "Mike's 09-16 Gambler set, sorted in docs/PHOTOS-20260916-GAMBLER-SET.md: Garcia's 'Marked Cards and Loaded Dice' and the K.C. Card Co. 'Blue Book', frames 0226-0245"
+  },
+  "04491ba59465435d": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 79,
+   "t": "K.C. Card Co.",
+   "p": "",
+   "c": "MIKE",
+   "s": "Mike's 09-16 Gambler set, sorted in docs/PHOTOS-20260916-GAMBLER-SET.md: Garcia's 'Marked Cards and Loaded Dice' and the K.C. Card Co. 'Blue Book', frames 0226-0245"
+  },
+  "ec5024142f2801e6": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 80,
+   "t": "From the Gambler's library, photographed on the tray: the cover, the back, and nine spreads held open.",
+   "p": "",
+   "c": "RESTATED",
+   "r": "docs/PHOTOS-20260916-GAMBLER-SET.md"
+  },
+  "b5de9d2a48f654ec": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 197,
+   "t": "Prints from the tray, the handled print, from the set of 16 September 2026. The tray re-shoot replaces them plate by plate.",
+   "p": "",
+   "c": "RESTATED",
+   "r": "docs/PHOTOS-20260916-GAMBLER-SET.md"
+  },
+  "643f6e5953e9b55c": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 198,
+   "t": "▲",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "19782567ddac094a": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 198,
+   "t": "up",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "3b04f64e3bc616da": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 199,
+   "t": "◀",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "e4aab8ee615db8e1": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 199,
+   "t": "left",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "ee958af04bf4c122": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 200,
+   "t": "▼",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "7f7bdbf1bc298fb1": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 200,
+   "t": "down",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "d3d46ca060251c37": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 201,
+   "t": "▶",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "24faaceb907818dc": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 201,
+   "t": "right",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "b103ff5e4abe2de0": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 892,
+   "t": "tilt",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "b256c03a81879f95": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 897,
+   "t": "tilt {}",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
+  },
+  "3b96df6ecf3479cb": {
+   "f": "src/routes/robots/PortalScreen.jsx",
+   "l": 897,
+   "t": " (gas)",
+   "p": "",
+   "c": "HOUSE",
+   "s": "the Portal's tilt chyrons (four-way, lit from the twin's state; Up = gas), museum 1df69fc, 2026-09-17: UI chrome, arrows and their names"
   }
  }
 }

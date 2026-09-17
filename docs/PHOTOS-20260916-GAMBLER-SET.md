@@ -69,3 +69,33 @@ edited. Served page with the contact sheets: docs/desk/GAMBLER-SET.html.
 3. **The two books** (Garcia; the Blue Book): A two new catalogue rows under
    the Gambler's papers, for the 09-20 sitting · B one row, "the Gambler's
    library" · C not on the wing.
+
+## 2026-09-17, late: the set stands in (ruling C of the calendar re-cut)
+
+Mike ruled the photo-set fork **C: both, Gambler first** — the 09-16 set
+stands in on the Gambler's page now so the wing can be built and judged; the
+tray re-shoot (B&W plates, a colour hero on white) replaces the plates album
+by album, the Everyman's first. Questions 1 to 3 above are not otherwise
+answered; the set is placed as the before-record it is.
+
+**What was built (tools/photos-build.py, photos/manifest.json):**
+
+- One manifest row per original, fifty rows, the originals untouched where
+  Mike put them (New folder). The crop rule of 09-17 applied: at least the
+  tray's floor, usually far beyond it, down to one element; the tool finds
+  the subject, pads it, squares it to 4:5 or 5:4, and drops the steel rule
+  whole when the subject stands clear of it (kept whole when it does not).
+  A row can carry a hand-set box instead (the slate does).
+- The treatment: strength 3, the handled print, on every frame; the annotation
+  layer is reserved and empty.
+- The prints land under `public/held/robots/photos/gambler/` (the stage hold)
+  as a 1600 px print and a 640 px tile each, and `src/data/photos/gambler.json`
+  lists them by their public address. `robots-albums.js` reads that file:
+  the Image Archive gets six groupings (the case, the kit, the chips, the
+  half dollars, the library, the slate) and "Every photograph"; the Kit's two
+  catalogue rows carry a print each; the two books sit on The Papers as
+  imaged documents (cover, spine, spreads) until question 3 rules their
+  catalogue rows; the cover ring carries the case open (0197), a stand-in
+  until the colour shoot.
+- Six small pieces (0220–0225) are labelled "A small piece from the kit"
+  until the re-shoot's slate cards name them.

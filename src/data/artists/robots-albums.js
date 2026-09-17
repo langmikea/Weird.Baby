@@ -27,8 +27,20 @@
 
    COVERS ARE STAND-INS (Mike, 09-11, ruling A): the box for the Everyday from
    the one black-and-white sample that survived; the other three carry the ring
-   empty until the colour shoot. Built by `tools/make_album_covers.py`. */
-import { placed } from "../../lib/placement.js";
+   empty until the colour shoot. Built by `tools/make_album_covers.py`.
+
+   THE PRINTS ARE THE MANIFEST'S (09-17, ruling C of the calendar re-cut: "both,
+   Gambler first" — the 09-16 set stands in on the Gambler's page so the wing
+   can be built and judged; the tray re-shoot replaces the plates album by
+   album). `photos/manifest.json` holds one row per original; `tools/
+   photos-build.py` renders the handled print and writes `src/data/photos/
+   <character>.json`, which this module reads: the Image Archive's groupings,
+   the Kit's plates and the library's pages all come from that file, so a
+   changed crop or a new frame is a re-run, never an edit here. The data
+   declares the PUBLIC address (`/robots/photos/...`); `placed()` finds the
+   held one. */
+import { placed, placedPresets, placedTiles } from "../../lib/placement.js";
+import GAMBLER_PHOTOS from "../photos/gambler.json";
 import { faqFace } from "../faq-face.js";
 import CATALOGUE from "../../../docs/CATALOGUE-20260918.json";
 
@@ -36,6 +48,45 @@ import CATALOGUE from "../../../docs/CATALOGUE-20260918.json";
 export const ALBUMS_AT = 2;
 
 const ROWS = CATALOGUE.rows;
+
+/* the prints, per album key; an album with no set yet reads an empty list */
+const PHOTOS = { gambler: GAMBLER_PHOTOS.rows };
+const GROUPS = [["case", "The case"], ["kit", "The kit"], ["chips", "The chips"], ["coins", "The half dollars"],
+                ["library", "The library"], ["slate", "The slate"]];
+const tileOf = (p) => ({ img: p.img, href: p.href, label: p.label, date: p.date });
+function photoPresets(albumKey) {
+  const rows = PHOTOS[albumKey] || [];
+  if (!rows.length) return undefined;
+  const sets = GROUPS
+    .map(([id, label]) => ({ id, label, tiles: rows.filter((p) => p.group === id).map(tileOf) }))
+    .filter((g) => g.tiles.length);
+  sets.push({ id: "all", label: "Every photograph", tiles: rows.map(tileOf) });
+  return placedPresets(sets);
+}
+/* the print that stands for a catalogue row on the Kit track: the first of its group */
+const KIT_PLATE = { "phys.cases": "case", "objects.gambler": "chips" };
+function kitPlate(albumKey, rowId) {
+  const group = KIT_PLATE[rowId];
+  const p = group && (PHOTOS[albumKey] || []).find((r) => r.group === group);
+  return p ? placed(p.img) : undefined;
+}
+/* the library: the documents the set photographed that the catalogue does not
+   yet list (question 3 of docs/PHOTOS-20260916-GAMBLER-SET.md waits on Mike) */
+const LIBRARY = {
+  gambler: [
+    { title: "Marked Cards and Loaded Dice", source: "Garcia", ids: ["0226", "0227", "0228", "0229", "0230", "0231", "0232", "0233", "0234"],
+      note: "From the Gambler's library, photographed on the tray: the cover, the spine, and the book open." },
+    { title: "The Blue Book", source: "K.C. Card Co.", ids: ["0235", "0236", "0237", "0238", "0239", "0240", "0241", "0242", "0243", "0244", "0245"],
+      note: "From the Gambler's library, photographed on the tray: the cover, the back, and nine spreads held open." },
+  ],
+};
+function libraryDocs(albumKey) {
+  const rows = PHOTOS[albumKey] || [];
+  return (LIBRARY[albumKey] || []).map((d) => ({
+    title: d.title, source: d.source, note: d.note,
+    plates: placedTiles(d.ids.map((suffix) => rows.find((r) => r.id.endsWith(suffix))).filter(Boolean).map(tileOf)),
+  }));
+}
 const KIND_STAMP = { engine: "ENGINE", feature: "FEATURE", game: "GAME", setting: "SETTING", sound: "SOUND", document: "PAPER", artifact: "OBJECT", character: "CHARACTER" };
 const dayLine = (d) => (d === "later" ? "later" : `launch run, day ${d}`);
 
@@ -49,12 +100,14 @@ function doesEntries(albumKey) {
 function kitEntries(albumKey) {
   return ROWS
     .filter((r) => r.album === albumKey && (r.page === "album:kit" || r.page === "album:plates"))
-    .map((r) => ({ stamp: KIND_STAMP[r.kind] || r.kind.toUpperCase(), title: r.name, line: r.pitch, note: "" }));
+    .map((r) => ({ stamp: KIND_STAMP[r.kind] || r.kind.toUpperCase(), title: r.name, line: r.pitch, note: "",
+                   img: kitPlate(albumKey, r.id) }));
 }
 function paperDocs(albumKey) {
   return ROWS
     .filter((r) => r.page === "album:papers" && (r.album === albumKey || r.album === "machine"))
-    .map((r) => ({ title: r.name, source: r.album === albumKey ? "this unit's" : "the machine's", note: r.pitch, plates: [] }));
+    .map((r) => ({ title: r.name, source: r.album === albumKey ? "this unit's" : "the machine's", note: r.pitch, plates: [] }))
+    .concat(libraryDocs(albumKey));
 }
 
 const DRAFT_NOTE = "Pitches are the house's drafts until the sitting of 2026-09-20 rules them.";
@@ -140,7 +193,10 @@ function album({ id, key, title, character, serial, keyCode, caseLine, voice, co
           title: "Image Archive",
           subtitle: sub,
           archiveUnit: { one: "photograph", many: "photographs" },
-          blurb: "Black and white prints from the tray: closed, open, the back, the underside, the case, the cable, the box. They land with the manifest.",
+          blurb: photoPresets(key)
+            ? "Prints from the tray, the handled print, from the set of 16 September 2026. The tray re-shoot replaces them plate by plate."
+            : "Black and white prints from the tray: closed, open, the back, the underside, the case, the cable, the box. They land with the manifest.",
+          presets: photoPresets(key),
           footer: `${title.toUpperCase()} · IMAGE ARCHIVE`,
         },
       },

@@ -32,11 +32,15 @@ from PIL import Image, ImageDraw  # noqa: E402
 REPO = os.path.dirname(HERE)
 OUT = os.path.join(REPO, "public", "held", "robots", "art")
 BOX_SAMPLE = r"C:\AI\PERSONA-20260903\scans\sample-tray-box.jpg"
+# the Gambler's case, the plain grey crop of the frame the manifest marks
+# `cover`, written by tools/photos-build.py (ruling C of 09-17: the 09-16 set
+# stands in until the colour shoot on white)
+GAMBLER_CASE = os.path.join(REPO, "public", "held", "robots", "photos", "gambler", "cover-source.jpg")
 
 ALBUMS = [
     # (word on the cover, output file, badge source or None, strapline)
     ("THE EVERYDAY", "album-everyday-cover.png", BOX_SAMPLE, "THE BOX  ·  STAND-IN UNTIL THE COLOUR SHOOT"),
-    ("THE GAMBLER",  "album-gambler-cover.png",  None,       "THE CASE  ·  PHOTOGRAPH TO COME"),
+    ("THE GAMBLER",  "album-gambler-cover.png",  GAMBLER_CASE, "THE CASE  ·  STAND-IN UNTIL THE COLOUR SHOOT"),
     ("THE CEO",      "album-ceo-cover.png",      None,       "THE ATTACHÉ  ·  PHOTOGRAPH TO COME"),
     ("THE INFORMER", "album-informer-cover.png", None,       "THE SPY KIT  ·  PHOTOGRAPH TO COME"),
 ]

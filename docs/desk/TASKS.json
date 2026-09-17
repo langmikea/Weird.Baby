@@ -172,7 +172,9 @@
    "owner": "ops",
    "title": "The 09-16 Gambler set stands in on the album's page",
    "do": [],
-   "long": "The 09-16 landscape set, treated as the handled print, placed on the Gambler's album as the stand-in plates (ruling C of 09-17) until the re-shoot replaces them"
+   "long": "The 09-16 landscape set, treated as the handled print, placed on the Gambler's album as the stand-in plates (ruling C of 09-17) until the re-shoot replaces them",
+   "done": true,
+   "note": "Done 2026-09-17: fifty prints from the 09-16 set on the album (photos/manifest.json, tools/photos-build.py); the cover carries the case."
   },
   {
    "id": "photos-everyman",

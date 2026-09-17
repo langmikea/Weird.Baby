@@ -1,0 +1,956 @@
+{
+ "_": "WRITTEN BY tools/photos-build.py FROM photos/manifest.json — do not edit; change the manifest and re-run.",
+ "character": "gambler",
+ "rows": [
+  {
+   "id": "gambler-0196",
+   "file": "IMG_0196.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0196-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0196.jpg",
+   "label": "The slate: the Gambler's to-do card, in Mike's hand",
+   "item": "The slate: the Gambler's to-do card, in Mike's hand",
+   "group": "slate",
+   "page": "plates",
+   "state": "slate",
+   "date": "SEP 2026",
+   "crop": [
+    90,
+    620,
+    2960,
+    3340
+   ]
+  },
+  {
+   "id": "gambler-0197",
+   "file": "IMG_0197.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0197-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0197.jpg",
+   "label": "The Gambler's case, open: the unit above, cards and chips below, the strap",
+   "item": "The Gambler's case, open: the unit above, cards and chips below, the strap",
+   "group": "case",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    477,
+    700,
+    2507,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0198",
+   "file": "IMG_0198.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0198-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0198.jpg",
+   "label": "The Gambler's case, open, the second frame",
+   "item": "The Gambler's case, open, the second frame",
+   "group": "case",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    477,
+    700,
+    2507,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0199",
+   "file": "IMG_0199.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0199-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0199.jpg",
+   "label": "The MGK-PHVDC, the cable coiled",
+   "item": "The MGK-PHVDC, the cable coiled",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    408,
+    1048,
+    2008,
+    3048
+   ]
+  },
+  {
+   "id": "gambler-0200",
+   "file": "IMG_0200.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0200-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0200.jpg",
+   "label": "The MGK-PHVDC, the cable coiled, the second frame",
+   "item": "The MGK-PHVDC, the cable coiled, the second frame",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    408,
+    1048,
+    2008,
+    3048
+   ]
+  },
+  {
+   "id": "gambler-0201",
+   "file": "IMG_0201.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0201-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0201.jpg",
+   "label": "The MGK-PHVDC, turned",
+   "item": "The MGK-PHVDC, turned",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    397,
+    1232,
+    2357,
+    2800
+   ]
+  },
+  {
+   "id": "gambler-0202",
+   "file": "IMG_0202.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0202-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0202.jpg",
+   "label": "The MGK-PHVDC, turned, the second frame",
+   "item": "The MGK-PHVDC, turned, the second frame",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    397,
+    1232,
+    2357,
+    2800
+   ]
+  },
+  {
+   "id": "gambler-0203",
+   "file": "IMG_0203.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0203-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0203.jpg",
+   "label": "The casino chips, fifteen, in three columns",
+   "item": "The casino chips, fifteen, in three columns",
+   "group": "chips",
+   "page": "plates",
+   "state": "laid out",
+   "date": "SEP 2026",
+   "crop": [
+    408,
+    915,
+    2048,
+    2965
+   ]
+  },
+  {
+   "id": "gambler-0204",
+   "file": "IMG_0204.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0204-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0204.jpg",
+   "label": "The casino chips, fifteen, in three columns, frame 2",
+   "item": "The casino chips, fifteen, in three columns, frame 2",
+   "group": "chips",
+   "page": "plates",
+   "state": "laid out",
+   "date": "SEP 2026",
+   "crop": [
+    400,
+    901,
+    2056,
+    2971
+   ]
+  },
+  {
+   "id": "gambler-0205",
+   "file": "IMG_0205.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0205-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0205.jpg",
+   "label": "The casino chips, fifteen, in three columns, frame 3",
+   "item": "The casino chips, fifteen, in three columns, frame 3",
+   "group": "chips",
+   "page": "plates",
+   "state": "laid out",
+   "date": "SEP 2026",
+   "crop": [
+    400,
+    884,
+    2064,
+    2964
+   ]
+  },
+  {
+   "id": "gambler-0206",
+   "file": "IMG_0206.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0206-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0206.jpg",
+   "label": "The casino chips, fifteen, in three columns, frame 4",
+   "item": "The casino chips, fifteen, in three columns, frame 4",
+   "group": "chips",
+   "page": "plates",
+   "state": "laid out",
+   "date": "SEP 2026",
+   "crop": [
+    397,
+    883,
+    2069,
+    2973
+   ]
+  },
+  {
+   "id": "gambler-0207",
+   "file": "IMG_0207.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0207-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0207.jpg",
+   "label": "A single chip",
+   "item": "A single chip",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    972,
+    1431,
+    1972,
+    2681
+   ]
+  },
+  {
+   "id": "gambler-0208",
+   "file": "IMG_0208.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0208-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0208.jpg",
+   "label": "A dice cup, on its side",
+   "item": "A dice cup, on its side",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    972,
+    1552,
+    2222,
+    2552
+   ]
+  },
+  {
+   "id": "gambler-0209",
+   "file": "IMG_0209.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0209-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0209.jpg",
+   "label": "A dice cup, upright",
+   "item": "A dice cup, upright",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    972,
+    1512,
+    2222,
+    2512
+   ]
+  },
+  {
+   "id": "gambler-0210",
+   "file": "IMG_0210.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0210-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0210.jpg",
+   "label": "Two dice cups",
+   "item": "Two dice cups",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    972,
+    1415,
+    1972,
+    2665
+   ]
+  },
+  {
+   "id": "gambler-0211",
+   "file": "IMG_0211.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0211-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0211.jpg",
+   "label": "The half dollars, in three columns, one gold-toned",
+   "item": "The half dollars, in three columns, one gold-toned",
+   "group": "coins",
+   "page": "plates",
+   "state": "laid out",
+   "date": "SEP 2026",
+   "crop": [
+    1042,
+    1098,
+    2958,
+    2630
+   ]
+  },
+  {
+   "id": "gambler-0212",
+   "file": "IMG_0212.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0212-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0212.jpg",
+   "label": "The half dollars, in three columns, one gold-toned, frame 2",
+   "item": "The half dollars, in three columns, one gold-toned, frame 2",
+   "group": "coins",
+   "page": "plates",
+   "state": "laid out",
+   "date": "SEP 2026",
+   "crop": [
+    397,
+    1224,
+    1690,
+    2840
+   ]
+  },
+  {
+   "id": "gambler-0213",
+   "file": "IMG_0213.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0213-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0213.jpg",
+   "label": "The half dollars, in three columns, one gold-toned, frame 3",
+   "item": "The half dollars, in three columns, one gold-toned, frame 3",
+   "group": "coins",
+   "page": "plates",
+   "state": "laid out",
+   "date": "SEP 2026",
+   "crop": [
+    397,
+    1224,
+    1690,
+    2840
+   ]
+  },
+  {
+   "id": "gambler-0214",
+   "file": "IMG_0214.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0214-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0214.jpg",
+   "label": "The half dollars, in three columns, one gold-toned, frame 4",
+   "item": "The half dollars, in three columns, one gold-toned, frame 4",
+   "group": "coins",
+   "page": "plates",
+   "state": "laid out",
+   "date": "SEP 2026",
+   "crop": [
+    397,
+    1192,
+    1735,
+    2864
+   ]
+  },
+  {
+   "id": "gambler-0215",
+   "file": "IMG_0215.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0215-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0215.jpg",
+   "label": "The half dollars, in three columns, one gold-toned, frame 5",
+   "item": "The half dollars, in three columns, one gold-toned, frame 5",
+   "group": "coins",
+   "page": "plates",
+   "state": "laid out",
+   "date": "SEP 2026",
+   "crop": [
+    398,
+    1191,
+    1737,
+    2865
+   ]
+  },
+  {
+   "id": "gambler-0216",
+   "file": "IMG_0216.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0216-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0216.jpg",
+   "label": "A single half dollar",
+   "item": "A single half dollar",
+   "group": "coins",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    964,
+    1423,
+    1964,
+    2673
+   ]
+  },
+  {
+   "id": "gambler-0217",
+   "file": "IMG_0217.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0217-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0217.jpg",
+   "label": "A single half dollar, frame 2",
+   "item": "A single half dollar, frame 2",
+   "group": "coins",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    948,
+    1387,
+    1948,
+    2637
+   ]
+  },
+  {
+   "id": "gambler-0218",
+   "file": "IMG_0218.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0218-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0218.jpg",
+   "label": "A single half dollar, frame 3",
+   "item": "A single half dollar, frame 3",
+   "group": "coins",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    964,
+    1375,
+    1964,
+    2625
+   ]
+  },
+  {
+   "id": "gambler-0219",
+   "file": "IMG_0219.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0219-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0219.jpg",
+   "label": "A hand places a small boxed item on the tray",
+   "item": "A hand places a small boxed item on the tray",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    391,
+    685,
+    2441,
+    3347
+   ]
+  },
+  {
+   "id": "gambler-0220",
+   "file": "IMG_0220.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0220-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0220.jpg",
+   "label": "A small piece from the kit",
+   "item": "A small piece from the kit",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    400,
+    1240,
+    1648,
+    2800
+   ]
+  },
+  {
+   "id": "gambler-0221",
+   "file": "IMG_0221.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0221-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0221.jpg",
+   "label": "A small piece from the kit",
+   "item": "A small piece from the kit",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    397,
+    1240,
+    1645,
+    2800
+   ]
+  },
+  {
+   "id": "gambler-0222",
+   "file": "IMG_0222.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0222-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0222.jpg",
+   "label": "A small piece from the kit",
+   "item": "A small piece from the kit",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    980,
+    1431,
+    1993,
+    2697
+   ]
+  },
+  {
+   "id": "gambler-0223",
+   "file": "IMG_0223.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0223-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0223.jpg",
+   "label": "A small piece from the kit",
+   "item": "A small piece from the kit",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    438,
+    692,
+    2474,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0224",
+   "file": "IMG_0224.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0224-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0224.jpg",
+   "label": "A small piece from the kit",
+   "item": "A small piece from the kit",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    996,
+    1347,
+    1996,
+    2597
+   ]
+  },
+  {
+   "id": "gambler-0225",
+   "file": "IMG_0225.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0225-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0225.jpg",
+   "label": "A small piece from the kit",
+   "item": "A small piece from the kit",
+   "group": "kit",
+   "page": "plates",
+   "state": "single",
+   "date": "SEP 2026",
+   "crop": [
+    996,
+    1363,
+    1996,
+    2613
+   ]
+  },
+  {
+   "id": "gambler-0226",
+   "file": "IMG_0226.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0226-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0226.jpg",
+   "label": "Marked Cards and Loaded Dice (Garcia): the cover",
+   "item": "Marked Cards and Loaded Dice (Garcia): the cover",
+   "group": "library",
+   "page": "plates",
+   "state": "closed",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0227",
+   "file": "IMG_0227.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0227-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0227.jpg",
+   "label": "Marked Cards and Loaded Dice: the spine",
+   "item": "Marked Cards and Loaded Dice: the spine",
+   "group": "library",
+   "page": "plates",
+   "state": "closed",
+   "date": "SEP 2026",
+   "crop": [
+    988,
+    798,
+    2482,
+    3218
+   ]
+  },
+  {
+   "id": "gambler-0228",
+   "file": "IMG_0228.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0228-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0228.jpg",
+   "label": "Marked Cards and Loaded Dice: open",
+   "item": "Marked Cards and Loaded Dice: open",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0229",
+   "file": "IMG_0229.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0229-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0229.jpg",
+   "label": "Marked Cards and Loaded Dice: open, the second frame",
+   "item": "Marked Cards and Loaded Dice: open, the second frame",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0230",
+   "file": "IMG_0230.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0230-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0230.jpg",
+   "label": "Marked Cards and Loaded Dice: open, a dice cup on the page",
+   "item": "Marked Cards and Loaded Dice: open, a dice cup on the page",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    760,
+    2475,
+    3336
+   ]
+  },
+  {
+   "id": "gambler-0231",
+   "file": "IMG_0231.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0231-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0231.jpg",
+   "label": "Marked Cards and Loaded Dice: open, a dice cup on the page, the second frame",
+   "item": "Marked Cards and Loaded Dice: open, a dice cup on the page, the second frame",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0232",
+   "file": "IMG_0232.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0232-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0232.jpg",
+   "label": "Marked Cards and Loaded Dice: the cover, the second frame",
+   "item": "Marked Cards and Loaded Dice: the cover, the second frame",
+   "group": "library",
+   "page": "plates",
+   "state": "closed",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0233",
+   "file": "IMG_0233.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0233-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0233.jpg",
+   "label": "Marked Cards and Loaded Dice: the spine, the second frame",
+   "item": "Marked Cards and Loaded Dice: the spine, the second frame",
+   "group": "library",
+   "page": "plates",
+   "state": "closed",
+   "date": "SEP 2026",
+   "crop": [
+    988,
+    774,
+    2482,
+    3178
+   ]
+  },
+  {
+   "id": "gambler-0234",
+   "file": "IMG_0234.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0234-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0234.jpg",
+   "label": "Marked Cards and Loaded Dice: open, the third frame",
+   "item": "Marked Cards and Loaded Dice: open, the third frame",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0235",
+   "file": "IMG_0235.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0235-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0235.jpg",
+   "label": "The Blue Book (K.C. Card Co.): the cover",
+   "item": "The Blue Book (K.C. Card Co.): the cover",
+   "group": "library",
+   "page": "plates",
+   "state": "closed",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0236",
+   "file": "IMG_0236.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0236-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0236.jpg",
+   "label": "The Blue Book: the back",
+   "item": "The Blue Book: the back",
+   "group": "library",
+   "page": "plates",
+   "state": "closed",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0237",
+   "file": "IMG_0237.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0237-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0237.jpg",
+   "label": "The Blue Book: the first opening",
+   "item": "The Blue Book: the first opening",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0238",
+   "file": "IMG_0238.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0238-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0238.jpg",
+   "label": "The Blue Book: spread 1, held open",
+   "item": "The Blue Book: spread 1, held open",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0239",
+   "file": "IMG_0239.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0239-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0239.jpg",
+   "label": "The Blue Book: spread 2, held open",
+   "item": "The Blue Book: spread 2, held open",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0240",
+   "file": "IMG_0240.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0240-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0240.jpg",
+   "label": "The Blue Book: spread 3, held open",
+   "item": "The Blue Book: spread 3, held open",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0241",
+   "file": "IMG_0241.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0241-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0241.jpg",
+   "label": "The Blue Book: spread 4, held open",
+   "item": "The Blue Book: spread 4, held open",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0242",
+   "file": "IMG_0242.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0242-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0242.jpg",
+   "label": "The Blue Book: spread 5, held open",
+   "item": "The Blue Book: spread 5, held open",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0243",
+   "file": "IMG_0243.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0243-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0243.jpg",
+   "label": "The Blue Book: spread 6, held open",
+   "item": "The Blue Book: spread 6, held open",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0244",
+   "file": "IMG_0244.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0244-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0244.jpg",
+   "label": "The Blue Book: spread 7, held open",
+   "item": "The Blue Book: spread 7, held open",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  },
+  {
+   "id": "gambler-0245",
+   "file": "IMG_0245.JPG",
+   "shoot": "2026-09-16",
+   "img": "/robots/photos/gambler/gambler-0245-tile.jpg",
+   "href": "/robots/photos/gambler/gambler-0245.jpg",
+   "label": "The Blue Book: spread 8, held open",
+   "item": "The Blue Book: spread 8, held open",
+   "group": "library",
+   "page": "plates",
+   "state": "open",
+   "date": "SEP 2026",
+   "crop": [
+    445,
+    700,
+    2475,
+    3332
+   ]
+  }
+ ]
+}
