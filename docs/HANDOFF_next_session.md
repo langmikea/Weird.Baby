@@ -44,6 +44,17 @@ lifts both; Sunday question 2 asks what the site does on a feature's day.
 Needs the dev server running (`museum` in launch.json) and `pip install
 playwright` (done on this PC). Open: the beat.
 
+**2026-09-17, small hours (the second story).** Mike's eleven notes on the
+first feature reel are the second story (`docs/FEATURE-REEL-20260916.md` §7)
+and are built: no console, no cursor, boot into the noise, the walk at a
+third of a second a press with the chyron blinking, the payload's pop and
+sting, 1x then 2x then the crash into decelerating slow motion, the blinking
+card, the loop; the zoom-in is channel 4's plate with the glass lit in its
+aperture under the closed-circuit read; `\ROBOTS` small at the top. Second
+cut 17 s, reviewed on its sheet, in OneDrive reels/out/features. His two
+standing rules and the reel house rules are in memory. Open: the beat; the
+branch indicator on the Q&A reel; chords on the music reels (logged).
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 

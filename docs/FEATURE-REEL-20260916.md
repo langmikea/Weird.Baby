@@ -99,3 +99,68 @@ The first cut is reviewed on a contact sheet (one frame per beat) and by
 playing it once at speed, against the beat table: every beat present, every
 press readable, the close-up on the right glass, nothing rushed, nothing
 idle. Only then does it go on the desk.
+
+## 7. The second story, after Mike's notes (2026-09-16, late)
+
+Mike on the first cut: "This is incredible. You understood exactly." Then
+eleven notes, cleaned: boot directly into the monitor and its noise; the menu
+is walked by someone who knows where they are going, not shown as a path;
+no mouse cursor; each button blinks when it is activated; no slow fade from
+the noise to the menu and no other transition the machine does not make;
+the zoom-in carries the VIIIp image, split from the monitor by a line like
+the ones inside the monitor, the yellow over an unused part of the image at
+the top; the zoom-in gets every bit of post-processing the monitor gets;
+a signature moment when the payload arrives, audio and a visual pop or
+flicker; the ending must satisfy: hard cuts of the action, 2x gameplay that
+looks 2x, then the crash slams into slow motion and decelerates to zero,
+loop; a small, innocuous indicator at the top of every reel naming the
+branch (Museum, Music, Robots); his music will want the same treatment for
+the chord he is playing, in time, like captions. Story first, review first,
+always.
+
+### The frame, revised
+
+- **Top: the monitor**, as the site draws it, 1080 wide. Over its black
+  surround, top left, the branch: `\ROBOTS` in the museum bar's own small
+  type, grey, there if you look for it.
+- **The split**: one horizontal line in the monitor's own style, the soft
+  light rule that divides the front view from the top view inside the
+  picture.
+- **Bottom: the zoom-in**, which is channel 4 of the Portal: the close-up
+  plate of the machine with the live glass drawn into its aperture, cropped
+  to the screen the story is on (the front glass during the menu, the top
+  window once the machine hands off), the plate's own divider in shot. The
+  glass is drawn the way the site draws it: the twin's framebuffer at an
+  integer scale with its scanline gap baked into every row (the top window
+  progressive, the front interlaced), bloomed, and the whole half under the
+  same closed-circuit read the monitor wears: scanlines, a slow roll, a
+  breath of flicker, the vignette. The feature's name in yellow, in the
+  machine's font, over the dark bezel band at the top of the plate.
+
+### The beats, revised (target 17 to 19 seconds)
+
+| # | what the monitor shows | what the zoom-in shows | sound |
+|---|---|---|---|
+| 0 | the pop | | its own |
+| 1 | noise: the set is on channel 3 and the machine has not answered yet (about 1 s) | the plate, its glass dark | hum, hiss |
+| 2 | the twin lands: BIOS on the front glass, POST on the top (1.6 s, the machine's own) | the front glass, BIOS | relays |
+| 3 | hard cut: the idle menu. SCROLL, CLICK, CLICK, CLICK: each chyron blinks white as it is pressed, one press every third of a second, the rows change under it (about 2.5 s) | the front glass, row by row | a tick per press |
+| 4 | the payload: the front glass says OUTPUT REDIRECTED TO AUX DISPLAY; the name arrives in yellow; the picture pops, one frame white, one frame torn, and settles (the signature moment) | the front glass, then a cut to the top window as the machine hands off | the sting: two notes and a thunk |
+| 5 | the action at 1x, 2.4 s | the top window: the road, the car, the score climbing | the machine's blips |
+| 6 | hard cut: the action at 2x, 2.5 s, driving that looks better than it is | the same, at 2x | the blips at 2x |
+| 7 | the crash: the frame slams into slow motion, each frame held longer than the last, decelerating to a stop; a flicker on the frozen frame | the same | a thud, the hum falls away |
+| 8 | the machine's own GAME OVER card, score and best, the picture blinking as the card blinks | the top window | silence |
+| 9 | one black beat, then the loop | | |
+
+What is not in it any more: the console, the antenna, the cursor, the fold.
+What stays the machine's: every screen, every card, every transition on the
+glass. What is the reel's: the cuts, the speed, the slow motion, the blink on
+the chyrons, the pop at the payload, the closed-circuit read on the zoom-in.
+
+### For the reel line as a whole
+
+- Every reel of the house gets the branch indicator; the Q&A reel takes it
+  next.
+- The music reels will carry the chord being played the same way the
+  feature reels carry the name: small, in time, ignorable. Logged for the
+  music leg.

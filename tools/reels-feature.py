@@ -5,7 +5,7 @@ of reels/features.json (date, feature, path, play). Two halves:
 
   capture   drives the museum site headless (Playwright + the installed Chrome): opens the Portal's
             TERMINAL.EXE, switches ANTENNA channel 3 to CAB, RUNs, waits for the twin to settle, walks
-            the menu path by pressing the Portal's own SCROLL and CLICK chyrons with a drawn cursor,
+            the menu path by pressing the Portal's own SCROLL and CLICK chyrons (each blinks as it is pressed),
             runs the named demo script, and records three things on one clock: the monitor (CDP
             screencast frames), the front and top glass (the twin's canvases), and every press.
   assemble  cuts the reel from the capture by the story's beat table: 1080x1920, the monitor cropped
@@ -29,8 +29,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 # ── the demo scripts: what is done once the feature is reached. Inputs are the unit's own. ─────────
 # each step: (seconds to wait after, action); actions: click | shake | tilt:x | tilt:0 | wait
 PLAYS = {
-    "tilt-drive": [(1.2, "wait"), (0.0, "click"), (2.0, "tilt:0.35"), (1.6, "tilt:-0.35"), (1.6, "tilt:0.35"), (1.2, "tilt:0"),
-                   (0.0, "click"), (1.5, "tilt:-0.35"), (2.0, "tilt:0.35"), (1.5, "tilt:0"), (2.5, "wait")],
+    "tilt-drive": [(1.0, "wait"), (0.0, "click"), (9.0, "drive"), (6.0, "crash"), (3.0, "wait")],
     "gobble": [(1.2, "wait"), (0.0, "click"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.0, "tilt:0"), (2.5, "wait")],
     "avoidsteroids": [(1.2, "wait"), (0.0, "click"), (1.2, "tilt:0.35"), (0.0, "click"), (1.2, "tilt:-0.35"), (0.0, "click"), (1.2, "tilt:0.35"),
                       (0.0, "click"), (1.2, "tilt:-0.35"), (0.0, "click"), (1.0, "tilt:0"), (2.5, "wait")],
@@ -48,27 +47,13 @@ INIT_JS = r"""
 })();
 """
 
-CURSOR_JS = r"""
+PAGE_JS = r"""
 () => {
   if (window.__wb) return;
-  const el = document.createElement('div');
-  el.id = '__wbcursor';
-  el.style.cssText = 'position:fixed;left:0;top:0;width:34px;height:44px;z-index:2147483647;pointer-events:none;transform:translate(-4px,-2px);filter:drop-shadow(0 2px 3px rgba(0,0,0,.7));opacity:0;transition:opacity .25s';
-  el.innerHTML = '<svg viewBox="0 0 34 44" width="34" height="44"><path d="M4 2 L4 34 L12 27 L18 41 L24 38 L18 25 L28 25 Z" fill="#fff" stroke="#111" stroke-width="2.2" stroke-linejoin="round"/></svg>';
-  document.body.appendChild(el);
-  const S = { x: 1180, y: 860, el };
-  function put(x, y) { S.x = x; S.y = y; el.style.left = x + 'px'; el.style.top = y + 'px'; }
-  put(S.x, S.y);
-  window.__wb = {
-    show() { el.style.opacity = '1'; }, hide() { el.style.opacity = '0'; },
-    moveTo(x, y, ms) { return new Promise(res => {
-      const x0 = S.x, y0 = S.y, t0 = performance.now();
-      (function step(t) { let k = Math.min(1, (t - t0) / ms); k = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2) / 2;
-        put(x0 + (x - x0) * k, y0 + (y - y0) * k); if (k < 1) requestAnimationFrame(step); else res(); })(t0);
-    }); },
-    press() { el.style.transform = 'translate(-4px,-2px) scale(.86)'; setTimeout(() => el.style.transform = 'translate(-4px,-2px)', 120); },
-    now() { return performance.now(); }, origin: performance.timeOrigin,
-  };
+  const st = document.createElement('style');
+  st.textContent = '.wb-on{background:#fff!important;color:#000!important;border-color:#fff!important} .wb-on *{color:#000!important}';
+  document.head.appendChild(st);
+  window.__wb = { blink(el, ms) { el.classList.add('wb-on'); setTimeout(() => el.classList.remove('wb-on'), ms); }, now() { return performance.now(); } };
 }
 """
 
@@ -76,7 +61,7 @@ class Capture:
     """one session folder: shots/NNNNN.jpg (+ times), glass/NNNNN_{front,top}.png (+ times), events.json"""
     def __init__(self, folder):
         self.dir = pathlib.Path(folder); (self.dir / "shots").mkdir(parents=True, exist_ok=True); (self.dir / "glass").mkdir(exist_ok=True)
-        self.shots, self.glass, self.events = [], [], []; self.n_shot = 0; self.n_glass = 0; self.origin = None; self.goff = 0.0; self.fr = None; self.pg = None
+        self.shots, self.glass, self.events = [], [], []; self.n_shot = 0; self.n_glass = 0; self.origin = None; self.goff = 0.0; self.fr = None; self.pg = None; self.game_state = -1
     def on_frame(self, cdp):
         def h(p):
             try: cdp.send("Page.screencastFrameAck", {"sessionId": p["sessionId"]})
@@ -87,9 +72,13 @@ class Capture:
     def snap_glass(self):
         if self.fr is None: return
         try:
-            t, a, b = self.fr.evaluate("() => [performance.now(), document.getElementById('cvFront').toDataURL('image/png'), document.getElementById('cvTop').toDataURL('image/png')]")
+            t, a, b, gs, sc = self.fr.evaluate("() => [performance.now(), document.getElementById('cvFront').toDataURL('image/png'), document.getElementById('cvTop').toDataURL('image/png'), (typeof gameState_FSM==='undefined'?-1:gameState_FSM), (typeof gameScore==='undefined'?0:gameScore)]")
         except Exception: return
         n = self.n_glass; self.n_glass += 1
+        if gs != self.game_state:
+            if gs == 2: self.events.append({"t": t + self.goff, "name": "gameover", "score": sc}); print(f"  {(t + self.goff)/1000:7.2f}s  gameover score {sc}", flush=True)
+            if gs == 1 and self.game_state != 1: self.events.append({"t": t + self.goff, "name": "gamerun"})
+            self.game_state = gs
         (self.dir / "glass" / f"{n:05d}_front.png").write_bytes(base64.b64decode(a.split(",", 1)[1]))
         (self.dir / "glass" / f"{n:05d}_top.png").write_bytes(base64.b64decode(b.split(",", 1)[1]))
         self.glass.append((t + self.goff, n))
@@ -116,7 +105,7 @@ def capture(feature, path, play, folder):
         pg = ctx.new_page(); C.pg = pg
         pg.goto(SITE + "/robots", wait_until="networkidle", timeout=60000); time.sleep(1.0)
         pg.click(".cf-album:has(img[alt='The Portal'])", force=True); time.sleep(1.0)
-        pg.evaluate(CURSOR_JS); C.origin = pg.evaluate("() => performance.timeOrigin")
+        pg.evaluate(PAGE_JS); C.origin = pg.evaluate("() => performance.timeOrigin")
         cdp = ctx.new_cdp_session(pg); cdp.on("Page.screencastFrame", C.on_frame(cdp))
         cdp.send("Page.startScreencast", {"format": "jpeg", "quality": 88, "maxWidth": VIEW[0], "maxHeight": VIEW[1], "everyNthFrame": 1})
         C.mark("start")
@@ -125,35 +114,26 @@ def capture(feature, path, play, folder):
             C.wait(0.25)
             if pg.query_selector(".pc-panel"): break
         C.mark("console"); C.wait(1.2)
-        def rect(sel):
-            r = pg.evaluate(f"() => {{ const e = document.querySelector({json.dumps(sel)}); if(!e) return null; const r = e.getBoundingClientRect(); return [r.x + r.width/2, r.y + r.height/2]; }}")
-            if r is None: raise SystemExit(f"no element {sel}")
-            return r
-        def rect_text(text):
-            r = pg.evaluate(f"() => {{ const e = [...document.querySelectorAll('button')].find(b => b.innerText.trim() === {json.dumps(text)} && b.offsetParent); if(!e) return null; const r = e.getBoundingClientRect(); return [r.x + r.width/2, r.y + r.height/2]; }}")
-            if r is None: raise SystemExit(f"no button {text}")
-            return r
-        def go(xy, ms):
-            pg.evaluate(f"() => window.__wb.moveTo({xy[0]:.1f}, {xy[1]:.1f}, {ms})")
-            C.wait(ms / 1000 + 0.05)
-        def press(xy, name, **kw):
-            pg.evaluate("() => window.__wb.press()"); pg.mouse.click(xy[0], xy[1]); C.mark(name, **kw)
-        pg.evaluate("() => window.__wb.show()"); C.wait(0.3)
-        ch3 = rect("button[aria-label='channel 3']"); go(ch3, 900); C.wait(0.25); press(ch3, "ch3"); C.wait(0.9)
-        scroll = rect_text("SCROLL"); click = rect_text("CLICK")
-        go(scroll, 650)
+        def btn(text):
+            h = pg.evaluate(f"() => {{ const e = [...document.querySelectorAll('button')].find(b => b.innerText.trim() === {json.dumps(text)} && b.offsetParent); if(!e) return null; e.id = e.id || ('wb_' + {json.dumps(text)}); return e.id; }}")
+            if h is None: raise SystemExit(f"no button {text}")
+            return "#" + h
+        def press(sel, name, **kw):
+            pg.evaluate(f"() => window.__wb.blink(document.querySelector({json.dumps(sel)}), 140)")
+            pg.click(sel); C.mark(name, **kw)
+        # the console (not in the reel): channel 3 to CAB, then RUN
+        press("button[aria-label='channel 3']", "ch3"); C.wait(0.5)
         for i in range(6):
             live = pg.evaluate(r"() => { const r=[...document.querySelectorAll('.pc-row')].find(e=>e.className.includes('live')); return r? r.innerText : '' }")
             if "RUN" in live: break
-            press(scroll, "console-scroll"); C.wait(0.55)
-        go(click, 450); press(click, "run")
+            press(btn("SCROLL"), "console-scroll"); C.wait(0.45)
+        press(btn("CLICK"), "run")
         fr = None
         for i in range(40):
             C.wait(0.25); fr = next((f for f in pg.frames if "twin.html" in f.url), None)
             if fr: break
         C.goff = fr.evaluate("() => performance.timeOrigin") - C.origin   # the iframe's clock, on the page's
         C.fr = fr; C.mark("twin")
-        # the twin's boot: level 2 takes ~45 s to settle (currentState 1)
         for i in range(400):
             C.wait(0.25)
             try:
@@ -161,30 +141,37 @@ def capture(feature, path, play, folder):
             except Exception: pass
         fr.evaluate("() => { REFUSED = {}; }")   # the demo machine: the 08-20 refusal set lifted (Sunday question 2 decides the site)
         C.mark("idle"); C.wait(0.8)
-        # the chyrons moved when the twin landed (SHAKE joined them): re-measure
-        scroll = rect_text("SCROLL"); click = rect_text("CLICK"); shake = rect_text("SHAKE")
-        go(scroll, 700)
-        # the walk: the idle menu is the leaf list; each folder's rows follow the twin's own order
+        scroll, click, shake = btn("SCROLL"), btn("CLICK"), btn("SHAKE")
+        # the walk: someone who knows where they are going (Mike, note 2): a press every third of a second
         order = ["Answers", "Programs", "Messages", "Preferences"]
-        def walk_to(rows, target, seg):
-            i = 0
-            for r in rows:
-                if r == target: break
-                press(scroll, "scroll", seg=seg, row=r); C.wait(0.8); i += 1
-            press(click, "click", seg=seg, row=target); C.wait(1.0)
-        pos = scroll
         for k, node in enumerate(path):
             rows = order if k == 0 else FOLDERS.get(path[k - 1], [node])
             if node not in rows: rows = rows + [node]
-            if k > 0: go(scroll, 300)
-            walk_to(rows, node, k)
+            for r in rows:
+                if r == node: break
+                press(scroll, "scroll", seg=k, row=r); C.wait(0.32)
+            press(click, "click", seg=k, row=node); C.wait(0.36 if k < len(path) - 1 else 0.2)
         C.mark("reached", feature=feature); C.wait(1.4)
         C.mark("play")
         for secs, act in PLAYS[play]:
-            if act == "click": go(click, 260); press(click, "play-click")
-            elif act == "shake": go(shake, 260); press(shake, "play-shake")
+            if act == "click": press(click, "play-click")
+            elif act == "shake": press(shake, "play-shake")
             elif act.startswith("tilt:"):
                 v = float(act.split(":")[1]); fr.evaluate(f"() => {{ tiltX = {v}; }}"); C.mark("tilt", x=v)
+            elif act == "drive":
+                # good driving for `secs` seconds: weave between lanes, restart at once if the road wins early
+                t_end = time.time() + secs; k = 0
+                while time.time() < t_end:
+                    v = 0.32 if k % 2 == 0 else -0.32; fr.evaluate(f"() => {{ tiltX = {v}; }}"); C.wait(0.42); k += 1
+                    if fr.evaluate("() => gameState_FSM") == 2: C.wait(1.2); press(click, "play-click"); C.wait(0.6)
+                fr.evaluate("() => { tiltX = 0; }"); continue
+            elif act == "crash":
+                # hold the wheel over until the road ends it
+                fr.evaluate("() => { tiltX = 0.4; }"); C.mark("tilt", x=0.4)
+                for i in range(int(secs / 0.1)):
+                    C.wait(0.1)
+                    if fr.evaluate("() => gameState_FSM") == 2: break
+                fr.evaluate("() => { tiltX = 0; }"); continue
             C.wait(secs)
         fr.evaluate("() => { tiltX = 0; }")
         C.mark("end"); C.wait(0.6)
