@@ -346,3 +346,33 @@ give depth, and its whole perimeter should blend.
 - The drawn front glass is clipped to the round window (a disc a little
   inside the bezel, feathered), so the corners fall away behind the rim and
   the whole edge blends into the glass.
+
+## 14. Ninety percent (2026-09-17, fourth round)
+
+Mike: inside the top view, the blobs are hot glue painted black; fine in the
+unit, here they break the immersion between the drawn screen and the VIIIp.
+Make our own inside view: the LCD set off the background by its thickness,
+or bevelled, inset; texture as a tool; or hide detail in darkness. Clean,
+simple; oversize the drawn screen if it helps, it is not a spec. Dampen the
+steering view: nobody tilts that fast; average it, throw in no-gas and brake
+taps. The real LCDs sit behind lenses that distort, barrel and fringe, worst
+at the edges: use that for the text and the top image. And at 25,000 feet:
+working SED, shift to another program or game; expect it to go up easily
+and reveal problems. Ops' call.
+
+- **The inside view** is drawn, not photographed: the hood's interior in
+  darkness with a faint grain, the screen a recessed slab a quarter larger
+  than the aperture, a thin bevel catching light on its upper edges and
+  shadow on the lower, the face near black with the module's own pixel
+  pitch just visible, the lit pixels on it, feathered into the photograph
+  around the hood.
+- **The lens**: both drawn screens pass through a barrel warp with a soft
+  fringe that grows toward the edges, as the glass does to the real LCDs.
+- **Damped steering**: the autopilot holds any steering decision for at
+  least a quarter second, eases off the gas for half a second every few
+  seconds and taps the brake now and then; the chyrons show exactly that,
+  and the machine's Down is now a brake (the road slows).
+- **25,000 feet**: the second feature is AvoidSteroids, the same shape (a
+  score, a crash) with different inputs (a shot on CLICK). The reel is cut
+  from the same template with a new row and a new demo script; what breaks
+  is the finding.

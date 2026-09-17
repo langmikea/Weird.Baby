@@ -1757,7 +1757,7 @@ function Portal_Tilt_Set(dirs){
  try{window.parent&&window.parent!==window&&window.parent.postMessage({wb:"tilt-state",dirs:tiltDirs},"*");}catch(e){}
 }
 function Portal_Tilt_Toggle(dir){const d=Object.assign({},tiltDirs);d[dir]=!d[dir];Portal_Tilt_Set(d);}
-function Portal_Gas(){return tiltDirs.up?1.8:1;}   /* Up is gas: the road and the traffic come faster */
+function Portal_Gas(){return tiltDirs.up?1.8:(tiltDirs.down?0.7:1);}   /* Up is gas, Down is a brake: the road and the traffic come faster or slower */
 const IMU={
  accelerationAvailable:function(){return true;},
  readAcceleration:function(){

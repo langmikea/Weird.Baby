@@ -93,6 +93,14 @@ front glass follows the picture's jitter by phase correlation against a
 reference frame and is clipped to the round window (disc r=70 view px,
 feathered). Reviewed at 0.1 s over the walk and at full size on the glass.
 
+**2026-09-17 (§14, ninety percent).** The top window's inside view is drawn
+(darkness, grain, a recessed slab 1.25x the aperture, bevel, pixel pitch);
+both drawn screens pass a barrel warp with a fringe (`lens()`); the autopilot
+holds steering decisions 250 ms, eases off gas every few seconds and taps the
+brake (the twin's Down is now a brake, robots 5548eb8). SED test: a second
+feature, AvoidSteroids, captured and cut from the same template; findings in
+the story's §14 follow-up.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 

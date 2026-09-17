@@ -145,6 +145,44 @@ def overlay(rq, fb, mode, score):
         a[22:62, :] = np.maximum(a[22:62, :], big[:, 64:192])
     return Image.fromarray(a * 255, "L")
 
+def lens(im, k1=0.10, fringe=1.4):
+    """the glass over the LCD: a barrel warp and a soft fringe, both growing toward the edges"""
+    import cv2
+    a = np.asarray(im, dtype=np.float32); h, w = a.shape
+    yy, xx = np.mgrid[:h, :w].astype(np.float32)
+    nx, ny = (xx - w / 2) / (w / 2), (yy - h / 2) / (h / 2); r2 = nx * nx + ny * ny
+    f = 1 + k1 * r2
+    mx, my = (w / 2 + nx * f * (w / 2)).astype(np.float32), (h / 2 + ny * f * (h / 2)).astype(np.float32)
+    warped = cv2.remap(a, mx, my, cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=0)
+    g = fringe * r2
+    fx, fy = (w / 2 + nx * (f + 0.012) * (w / 2)).astype(np.float32), (h / 2 + ny * (f + 0.012) * (h / 2)).astype(np.float32)
+    ghost = cv2.GaussianBlur(cv2.remap(a, fx, fy, cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=0), (0, 0), 1.2)
+    out = warped * (1 - 0.35 * np.clip(g, 0, 1)) + ghost * 0.35 * np.clip(g, 0, 1)
+    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "L")
+
+def inside_view(region, rw, rh, bx, by, lit, rng):
+    """the top window's interior, drawn: darkness with a grain, a recessed slab a quarter larger than the aperture,
+    a bevel lit on its upper edges and shadowed below, the module's face near black with its pixel pitch, the lit
+    pixels through the lens, the whole feathered into the photograph"""
+    W_, H_ = region.size
+    a = np.full((H_, W_), 22, dtype=np.float32) + rng.normal(0, 2.5, (H_, W_))
+    a *= np.linspace(1.15, 0.85, H_)[:, None]
+    ow, oh = int(rw * 1.25), int(rh * 1.25); ox, oy = bx + rw // 2 - ow // 2, by + rh // 2 - oh // 2
+    bev = 6
+    a[oy - bev:oy + oh + bev, ox - bev:ox + ow + bev] = 34                       # the slab's rim
+    a[oy - bev:oy, ox - bev:ox + ow + bev] = 96                                  # light on the top edge
+    a[oy - bev:oy + oh + bev, ox - bev:ox] = 72                                  # and the left
+    a[oy + oh:oy + oh + bev, ox - bev:ox + ow + bev] = 8                         # shadow below
+    a[oy - bev:oy + oh + bev, ox + ow:ox + ow + bev] = 12                        # and right
+    face = np.full((oh, ow), 10, dtype=np.float32)
+    pitch = max(2, ow // 128); face[::pitch, :] += 4; face[:, ::pitch] += 4       # the module's pixel pitch, barely
+    a[oy:oy + oh, ox:ox + ow] = face
+    base = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8), "L")
+    screen = lens(lit.resize((ow, oh), Image.LANCZOS), 0.10, 1.4)
+    slab = base.crop((ox, oy, ox + ow, oy + oh)); base.paste(ImageChops.lighter(slab, screen), (ox, oy))
+    m = Image.new("L", region.size, 0); ImageDraw.Draw(m).rectangle([18, 18, W_ - 18, H_ - 18], fill=255)
+    return Image.composite(base, region, m.filter(ImageFilter.GaussianBlur(14)))
+
 def glass_lit(fb):
     """the front glass as the site draws it: an integer scale with the interlace gap baked in, then bloom"""
     Z = 5
@@ -177,15 +215,11 @@ def render_zoom(S, t, which, level, box_h, frame_i, rng, fb_override=None):
         r = S.top; rw, rh = int(round(r[2] * k)), int(round(r[3] * k)); bx, by = int(round((r[0] - x0) * k)), int(round((r[1] - y0) * k))
         Z = 4; g = fbi.resize((128 * Z, 64 * Z), Image.NEAREST); a = np.asarray(g, dtype=np.float32)
         mask = np.ones(64 * Z, dtype=np.float32); mask[3::4] = 0.55                       # a fine row gap, the OLED's own
-        lit = Image.fromarray(np.clip(a * mask[:, None] * 0.78, 0, 255).astype(np.uint8), "L")   # cyan reads mid-bright in grey
-        lit = lit.resize((rw, rh), Image.LANCZOS)
-        pad = 10; box = (bx - pad, by - pad, bx + rw + pad, by + rh + pad + 12)   # the aperture runs a little below the canvas
-        region = base.crop(box); ra = np.asarray(region, dtype=np.float32)
-        ring = np.concatenate([ra[:pad].ravel(), ra[-pad:].ravel(), ra[:, :pad].ravel(), ra[:, -pad:].ravel()])
-        m = Image.new("L", region.size, 0); ImageDraw.Draw(m).rectangle([pad // 2, pad // 2, region.width - pad // 2, region.height - pad // 2], fill=255)
-        flat = Image.composite(Image.new("L", region.size, int(np.median(ring))), region, m.filter(ImageFilter.GaussianBlur(pad / 2)))
-        full = Image.new("L", region.size, 0); full.paste(lit, (pad, pad))
-        base.paste(ImageChops.lighter(flat, full), box[:2])                                    # the aperture flattened, the glass's reflections outside it kept
+        lit = Image.fromarray(np.clip(a * mask[:, None] * 0.82, 0, 255).astype(np.uint8), "L")
+        lit = Image.fromarray(np.clip(np.asarray(lit, dtype=np.float32) + np.asarray(lit.filter(ImageFilter.GaussianBlur(3)), dtype=np.float32) * 0.25, 0, 255).astype(np.uint8), "L")
+        pad = int(rw * 0.25) + 60; box = (max(0, bx - pad), max(0, by - pad), min(W, bx + rw + pad), min(box_h, by + rh + pad))
+        region = base.crop(box)
+        base.paste(inside_view(region, rw, rh, bx - box[0], by - box[1], lit, rng), box[:2])   # our own inside view
         return secmon(base, frame_i, rng)
     if t >= S.gt[0]:
         r = S.top if LEVELS[level].get("canvas") == "cvTop" else S.front
@@ -200,7 +234,7 @@ def render_zoom(S, t, which, level, box_h, frame_i, rng, fb_override=None):
         m = Image.new("L", region.size, 0); ImageDraw.Draw(m).rectangle([pad // 2, pad // 2, region.width - pad // 2, region.height - pad // 2], fill=255)
         m = m.filter(ImageFilter.GaussianBlur(pad / 2))
         flat = Image.composite(fill, region, m)
-        lit = glass_lit(fbi).resize((rw + 2 * pad, rh + 2 * pad), Image.LANCZOS)
+        lit = lens(glass_lit(fbi).resize((rw + 2 * pad, rh + 2 * pad), Image.LANCZOS), 0.08, 1.2)
         drawn = ImageChops.lighter(flat, lit)
         # clipped to the round window: a disc a little inside the bezel, feathered, so the corners fall away and the edge blends
         cx_, cy_ = region.width / 2, region.height / 2; rad = 70 * k

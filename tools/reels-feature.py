@@ -32,8 +32,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 PLAYS = {
     "tilt-drive": [(1.0, "wait"), (0.0, "click"), (48.0, "autopilot"), (9.0, "collide"), (2.5, "wait")],
     "gobble": [(1.2, "wait"), (0.0, "click"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.0, "tilt:0"), (2.5, "wait")],
-    "avoidsteroids": [(1.2, "wait"), (0.0, "click"), (1.2, "tilt:0.35"), (0.0, "click"), (1.2, "tilt:-0.35"), (0.0, "click"), (1.2, "tilt:0.35"),
-                      (0.0, "click"), (1.2, "tilt:-0.35"), (0.0, "click"), (1.0, "tilt:0"), (2.5, "wait")],
+    "avoidsteroids": [(1.2, "wait"), (0.0, "click")] + [(0.9, "tilt:0.35"), (0.0, "click"), (0.9, "tilt:-0.35"), (0.0, "click")] * 14 + [(0.0, "tilt:0"), (8.0, "wait")],
     "snow-globe": [(1.2, "wait"), (0.0, "shake"), (2.5, "wait"), (0.0, "shake"), (3.0, "wait"), (0.0, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.5, "tilt:0"), (2.0, "wait")],
     "ask": [(1.0, "wait"), (0.0, "shake"), (6.0, "wait")],
 }
@@ -174,7 +173,7 @@ def capture(feature, path, play, folder):
             if act == "click": press(click, "play-click")
             elif act == "shake": press(shake, "play-shake")
             elif act.startswith("tilt:"):
-                v = float(act.split(":")[1]); fr.evaluate(f"() => {{ tiltX = {v}; }}"); C.mark("tilt", x=v)
+                v = float(act.split(":")[1]); fr.evaluate(f"() => Portal_Tilt_Set({{up: true, left: {str(v < 0).lower()}, right: {str(v > 0).lower()}}})"); C.mark("tilt", x=v)
             elif act == "drive":
                 # good driving for `secs` seconds: weave between lanes, restart at once if the road wins early
                 t_end = time.time() + secs; k = 0
@@ -186,10 +185,12 @@ def capture(feature, path, play, folder):
                 # the car reads the road: the free lane ahead of every car, steered against the curve; a run that
                 # ends early is restarted, so the reel gets one long run before the mistake
                 fr.evaluate("""() => { if (window.__ap) clearInterval(window.__ap);
-                  window.__passed = 0; window.__seen = new Set(); let cur = {up: true, left: false, right: false};
+                  window.__passed = 0; window.__seen = new Set(); let cur = {up: true, down: false, left: false, right: false};
+                  let heldSince = performance.now(), gasOffUntil = 0, nextGasOff = performance.now() + 4000 + Math.random() * 3000, brakeUntil = 0;
                   Portal_Tilt_Set(cur);
                   window.__ap = setInterval(() => {
                     if (typeof TD === 'undefined' || !TD || gameState_FSM !== 1) return;
+                    const now = performance.now();
                     for (const o of TD.obs) window.__seen.add(o);
                     for (const o of Array.from(window.__seen)) if (!TD.obs.includes(o)) { window.__seen.delete(o); window.__passed++; }
                     const lanes = [-1, 0, 1]; const busy = new Set();
@@ -198,8 +199,13 @@ def capture(feature, path, play, folder):
                     let target = lane;
                     if (busy.has(lane)) { const free = lanes.filter(l => !busy.has(l)).sort((a, b) => Math.abs(a - lane) - Math.abs(b - lane)); target = free.length ? free[0] : lane; }
                     const err = target * 0.912 - TD.x + TD.curve * 0.18;
-                    const want = {up: true, left: err < -0.05, right: err > 0.05};
-                    if (want.left !== cur.left || want.right !== cur.right) { cur = want; Portal_Tilt_Set(cur); }
+                    // damped: a steering decision holds at least a quarter second; the gas eases off now and then; a brake tap
+                    if (now > nextGasOff) { gasOffUntil = now + 500; nextGasOff = now + 4500 + Math.random() * 3000; if (Math.random() < 0.5) brakeUntil = now + 250; }
+                    const want = {up: now > gasOffUntil, down: now < brakeUntil, left: err < -0.05, right: err > 0.05};
+                    const steerChanged = want.left !== cur.left || want.right !== cur.right;
+                    if (steerChanged && now - heldSince < 250) { want.left = cur.left; want.right = cur.right; }
+                    if (want.left !== cur.left || want.right !== cur.right) heldSince = now;
+                    if (want.up !== cur.up || want.down !== cur.down || want.left !== cur.left || want.right !== cur.right) { cur = want; Portal_Tilt_Set(cur); }
                   }, 30); }""")
                 C.mark("autopilot"); t_end = time.time() + secs
                 while time.time() < t_end:
