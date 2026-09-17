@@ -67,6 +67,7 @@ class Src:
         self.shots = sorted(ix["shots"]); self.glass = sorted(ix["glass"]); self.events = ix["events"]
         self.st = np.array([s[0] for s in self.shots]); self.gt = np.array([g[0] for g in self.glass])
         r = ix.get("rects", {}).get("cvFront", [314.5, 387, 131, 64]); self.front = r
+        self.top = ix.get("rects", {}).get("cvTop", [814.3, 273.8, 131, 64])
         cx, cy = r[0] + r[2] / 2, r[1] + r[3] / 2
         self.unit = (int(cx + UNIT[0]), int(cy + UNIT[1]), int(cx + UNIT[2]), int(cy + UNIT[3]))
         self.k = W / (self.unit[2] - self.unit[0])
@@ -104,13 +105,14 @@ def glass_lit(fb):
     return Image.fromarray(np.clip(np.asarray(lit, dtype=np.float32) * 0.92 + np.asarray(glow, dtype=np.float32) * 0.5, 0, 255).astype(np.uint8), "L")
 
 # the zoom levels: crops of the monitor's picture, in view px around the front glass canvas centre (cx, cy)
-LEVELS = {"unit": dict(left=-202, right=232, top=-241), "mid": dict(left=-165, right=165, top=-241), "glass": dict(left=-95, right=95, centre=True)}
+LEVELS = {"unit": dict(left=-202, right=232, top=-241), "mid": dict(left=-165, right=165, top=-241), "glass": dict(left=-95, right=95, centre=True),
+          "topglass": dict(left=-95, right=95, centre=True, canvas="cvTop")}
 CAP = dict(left=-202, right=232, top=-241, height=44)          # the ridged cap: the band the name sits on
 BAND_H = 110
 
 def view_crop(S, level, box_h):
     """the crop rectangle in view px for a level filling W x box_h"""
-    L = LEVELS[level]; r = S.front; cx, cy = r[0] + r[2] / 2, r[1] + r[3] / 2
+    L = LEVELS[level]; r = S.top if L.get("canvas") == "cvTop" else S.front; cx, cy = r[0] + r[2] / 2, r[1] + r[3] / 2
     x0, x1 = cx + L["left"], cx + L["right"]; k = W / (x1 - x0); h = box_h / k
     y0 = cy - h / 2 if L.get("centre") else cy + L["top"]
     return (x0, y0, x1, y0 + h), k
@@ -120,9 +122,19 @@ def render_zoom(S, t, which, level, box_h, frame_i, rng):
     (x0, y0, x1, y1), k = view_crop(S, level, box_h)
     base = S.raw(t).crop((int(x0), int(y0), int(x1), int(y1))).resize((W, box_h), Image.LANCZOS)
     if t >= S.gt[0]:
-        r = S.front
-        lit = glass_lit(S.fb(t, which)).resize((int(round(r[2] * k)) + 4, int(round(r[3] * k)) + 4), Image.LANCZOS)
-        base.paste(lit, (int(round((r[0] - x0) * k)) - 2, int(round((r[1] - y0) * k)) - 2))   # replaced, not lit over
+        r = S.top if LEVELS[level].get("canvas") == "cvTop" else S.front
+        pad = 14   # the site's canvas edge shows as a faint line in the photo of the glass: the patch is blended
+        # into the glass around it (the ring's own grey), then only the lit pixels are added
+        rw, rh = int(round(r[2] * k)), int(round(r[3] * k)); bx, by = int(round((r[0] - x0) * k)), int(round((r[1] - y0) * k))
+        box = (bx - pad, by - pad, bx + rw + pad, by + rh + pad)
+        region = base.crop(box); a = np.asarray(region, dtype=np.float32)
+        ring = np.concatenate([a[:pad].ravel(), a[-pad:].ravel(), a[:, :pad].ravel(), a[:, -pad:].ravel()])
+        fill = Image.new("L", region.size, int(np.median(ring)))
+        m = Image.new("L", region.size, 0); ImageDraw.Draw(m).rectangle([pad // 2, pad // 2, region.width - pad // 2, region.height - pad // 2], fill=255)
+        m = m.filter(ImageFilter.GaussianBlur(pad / 2))
+        flat = Image.composite(fill, region, m)
+        lit = glass_lit(S.fb(t, which)).resize((rw + 2 * pad, rh + 2 * pad), Image.LANCZOS)
+        base.paste(ImageChops.lighter(flat, lit), box[:2])
     return secmon(base, frame_i, rng)
 
 def cap_band(S, t):
@@ -167,7 +179,7 @@ def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, lay
         f.paste(S.shot(t), (0, MON_Y)); lv = layout[4:]
         if lv == "glass":
             f.paste(cap_band(S, t), (0, ZOOM_Y)); name_at = ZOOM_Y + 8
-            f.paste(render_zoom(S, t, which, "glass", H - ZOOM_Y - BAND_H, frame_i, rng), (0, ZOOM_Y + BAND_H))
+            f.paste(render_zoom(S, t, which, "topglass" if which == "top" else "glass", H - ZOOM_Y - BAND_H, frame_i, rng), (0, ZOOM_Y + BAND_H))
         else:
             f.paste(render_zoom(S, t, which, lv, H - ZOOM_Y, frame_i, rng), (0, ZOOM_Y)); name_at = ZOOM_Y + 14
     else:                                   # the unit alone: a level per beat
@@ -194,16 +206,13 @@ def clips(S):
     t_go = S.ev("gameover", last=True) or (t_end - 1500)
     runs = [t for t in S.evs("gamerun") if t < t_go]; t_run0 = (runs[-1] if runs else t_play) + 400
     c = []
-    c.append(dict(t0=t_run + 200, t1=t_run + 1150, speed=1, glass="front", name=False, level="unit"))   # 1 noise
+    t_n0, t_n1 = t_run + 150, min(t_twin + 120, t_run + 1150)                                          # 1 noise: a full second of static,
+    c.append(dict(t0=t_n0, t1=t_n1, speed=min(1.0, (t_n1 - t_n0) / 950.0), glass="front", name=False, level="unit"))   # stretched if the machine lands sooner
     c.append(dict(t0=t_twin + 700, t1=t_twin + 2300, speed=1, glass="front", name=False, level="unit"))   # 2 the twin lands
     c.append(dict(t0=t_walk - 450, t1=t_reach - 40, speed=1, glass="front", name=False, level="mid"))   # 3 the walk
     c.append(dict(t0=t_reach - 40, t1=t_reach + 850, speed=1, glass="front", name=True, fx={0: "white", 1: "tear", 3: "tear"}))   # 4 the payload
     c.append(dict(t0=t_reach + 850, t1=t_reach + 1300, speed=1, glass="top", name=True))              #   the hand-off: the game comes through the front glass
-    if t_go - 40 - (t_run0 + 2000) > 1500:
-        c.append(dict(t0=t_run0, t1=t_run0 + 2000, speed=1, glass="top", name=True))                  # 5 the race at 1x
-        c.append(dict(t0=t_run0 + 2000, t1=t_go - 40, ramp=(1.0, 3.2), glass="top", name=True))       #   faster and faster
-    else:
-        c.append(dict(t0=t_run0, t1=t_go - 40, ramp=(1.0, 3.2), glass="top", name=True))
+    c.append(dict(t0=t_run0, t1=t_go - 40, ramp=(5.0, 10.0), glass="top", name=True))                # 5 the race: five times, climbing to ten
     c.append(dict(t0=t_go - 480, t1=t_go - 30, hold=(56, 14), glass="top", name=True, boom=True))      # 6 WHAM: the crash into slow motion
     c.append(dict(t0=t_go + 300, t1=t_go + 1300, speed=1, glass="top", name=True))                    # 7 GAME OVER pops on, a beat
     return c
@@ -240,9 +249,10 @@ def sound(S, cl, total_s, black_s, td):
             if c["t0"] <= t <= c["t1"]: return s0 + (t - c["t0"]) / 1000 / c["speed"]
         return None
     i_boom = next(i for i, c in enumerate(cl) if c.get("boom")); t_crash = starts[i_boom]; t_card = starts[i_boom + 1]
-    tt = np.arange(int(t_crash * SR)) / SR
-    add(0, 0.016 * (np.sin(2 * np.pi * 55 * tt) + 0.5 * np.sin(2 * np.pi * 110 * tt)))                # the hum, until the crash
-    n = int(lens[0] * SR); add(starts[0], 0.05 * rng.standard_normal(n) * np.linspace(1, 0.3, n))     # the hiss under the noise
+    tt = np.arange(int((t_crash - starts[1]) * SR)) / SR
+    add(starts[1], 0.016 * (np.sin(2 * np.pi * 55 * tt) + 0.5 * np.sin(2 * np.pi * 110 * tt)))       # the hum, from the landing to the crash
+    n = int(lens[0] * SR); st = np.convolve(rng.standard_normal(n), np.ones(6) / 6, mode="same")      # static, nothing else, under the noise
+    add(starts[0], 0.22 * st * np.concatenate([np.linspace(0, 1, 600), np.ones(n - 1200), np.linspace(1, 0, 600)]))
     tk = starts[1] + 0.1
     while tk < starts[2] - 0.1: add(tk, tick(0.18 + 0.15 * rng.random(), 3, 1800 + 900 * rng.random())); tk += 0.05 + 0.06 * rng.random()   # relays
     for e in S.events:
@@ -252,11 +262,12 @@ def sound(S, cl, total_s, black_s, td):
     r = starts[3]; add(r, tone(0.35, 120, 660)); add(r + 0.11, tone(0.35, 220, 990))                    # the sting
     n_th = int(0.16 * SR); e = np.exp(-np.arange(n_th) / (n_th / 4)); add(r + 0.02, 0.5 * e * np.sin(2 * np.pi * 85 * np.arange(n_th) / SR))
     for i, c in enumerate(cl):                                                                           # the engine, climbing with the speed
-        if c["glass"] == "top" and not c.get("boom") and 4 < i < i_boom:
-            s0, L = starts[i], lens[i]; tk = s0
-            while tk < s0 + L:
-                u = (tk - s0) / L; sp = 1 + (c["ramp"][1] - 1) * u ** 2 if "ramp" in c else c["speed"]
-                add(tk, tick(0.16, 6, 1000 + 300 * sp + 200 * rng.random())); tk += 0.3 / sp
+        if "ramp" in c and i < i_boom:
+            s0, L = starts[i], lens[i]; n = int(L * SR); u = np.arange(n) / n
+            sp = c["ramp"][0] + (c["ramp"][1] - c["ramp"][0]) * u ** 2
+            ph = 2 * np.pi * np.cumsum(60 + 26 * sp) / SR
+            drone = 0.07 * (np.sin(ph) + 0.5 * np.sin(2 * ph) + 0.25 * np.sin(3 * ph)) * (0.8 + 0.2 * np.sin(2 * np.pi * 7 * u * L))
+            add(s0, drone * np.minimum(1, np.arange(n) / 2000))
     n_th = int(0.45 * SR); e = np.exp(-np.arange(n_th) / (n_th / 5))                                     # WHAM
     add(t_crash, 0.9 * e * np.sin(2 * np.pi * 55 * np.arange(n_th) / SR) + 0.5 * e * rng.standard_normal(n_th))
     n_f = int((t_card - t_crash) * SR); k = np.arange(n_f) / SR                                          # the low tone dying through the slow motion
@@ -284,7 +295,7 @@ def assemble(folder, row, out_dir, layout="mon-unit"):
     sfx = sound(S, cl, total_s, BLACK_S, td)
     middle = td / "middle.mp4"
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(FPS), "-i", str(frames / "%05d.png"), "-i", str(sfx),
-                    "-filter_complex", "[1:a]aformat=sample_rates=48000:channel_layouts=stereo[a]", "-map", "0:v", "-map", "[a]", "-shortest",
+                    "-filter_complex", "[1:a]aformat=sample_rates=48000:channel_layouts=stereo,afade=t=in:d=0.03[a]", "-map", "0:v", "-map", "[a]", "-shortest",
                     "-c:v", "libx264", "-preset", "medium", "-crf", "17", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", str(middle)], check=True)
     out_dir.mkdir(parents=True, exist_ok=True)
     slug = re.sub(r"[^a-z0-9]+", "-", row["feature"].lower()).strip("-")

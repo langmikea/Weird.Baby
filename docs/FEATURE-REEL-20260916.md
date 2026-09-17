@@ -235,3 +235,24 @@ Three variants: **A** monitor over the glass level (Mike's mock); **B** monitor
 over the mid level; **C** the unit alone, no monitor: full shot for the noise
 and the landing, mid for the walk, glass for the payload, the race, the crash
 and the card. The beats, the sound and the ending are the third story's.
+
+## 10. A is it (2026-09-17): four notes
+
+Mike chose A, the monitor over the glass, and gave four notes: a faint grey
+line at the bottom of the front glass distracts before the screen is on; when
+the machine switches to its top screen, cut to a close-up of the VIIIp and
+its top glass; there is clicking where there should be static; and the drive:
+around other cars, at five to ten times, long enough to gain on a lot of cars
+before one mistake, starting fast and going faster, WHAM.
+
+- The line was the edge of the site's own canvas showing through the photo of
+  the glass; the drawn glass now covers it with a feathered edge.
+- The zoom-in follows the machine: the front glass close-up until the
+  hand-off, then a cut to the top-window close-up, the name band unchanged.
+- Under the noise: static, nothing else. The hum arrives with the machine.
+  The join after the pop is faded in so it cannot click.
+- The car is driven by an autopilot reading the road: it takes the free lane
+  ahead of every car for as long as the run is asked to last, then stops
+  steering, holds the lane, and the traffic ends it. The reel opens the race
+  at five times and climbs to ten with no cut, an engine drone climbing with
+  it, then WHAM, the slow motion, the card, the beat, the loop.

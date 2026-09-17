@@ -29,7 +29,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 # ── the demo scripts: what is done once the feature is reached. Inputs are the unit's own. ─────────
 # each step: (seconds to wait after, action); actions: click | shake | tilt:x | tilt:0 | wait
 PLAYS = {
-    "tilt-drive": [(1.0, "wait"), (0.0, "click"), (5.5, "drive"), (9.0, "collide"), (2.5, "wait")],
+    "tilt-drive": [(1.0, "wait"), (0.0, "click"), (48.0, "autopilot"), (9.0, "collide"), (2.5, "wait")],
     "gobble": [(1.2, "wait"), (0.0, "click"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.0, "tilt:0"), (2.5, "wait")],
     "avoidsteroids": [(1.2, "wait"), (0.0, "click"), (1.2, "tilt:0.35"), (0.0, "click"), (1.2, "tilt:-0.35"), (0.0, "click"), (1.2, "tilt:0.35"),
                       (0.0, "click"), (1.2, "tilt:-0.35"), (0.0, "click"), (1.0, "tilt:0"), (2.5, "wait")],
@@ -171,7 +171,27 @@ def capture(feature, path, play, folder):
                     v = 0.32 if k % 2 == 0 else -0.32; fr.evaluate(f"() => {{ tiltX = {v}; }}"); C.wait(0.42); k += 1
                     if fr.evaluate("() => gameState_FSM") == 2: C.wait(1.2); press(click, "play-click"); C.wait(0.6)
                 fr.evaluate("() => { tiltX = 0; }"); continue
+            elif act == "autopilot":
+                # the car reads the road: the free lane ahead of every car, steered against the curve; a run that
+                # ends early is restarted, so the reel gets one long run before the mistake
+                fr.evaluate("""() => { if (window.__ap) clearInterval(window.__ap);
+                  window.__ap = setInterval(() => {
+                    if (typeof TD === 'undefined' || !TD || gameState_FSM !== 1) return;
+                    const lanes = [-1, 0, 1]; const busy = new Set();
+                    for (const o of TD.obs) if (o.t > 0.18 && o.t < 1.08) busy.add(o.lane);
+                    let cur = Math.round(TD.x / 0.912); cur = Math.max(-1, Math.min(1, cur));
+                    let target = cur;
+                    if (busy.has(cur)) { const free = lanes.filter(l => !busy.has(l)).sort((a, b) => Math.abs(a - cur) - Math.abs(b - cur)); target = free.length ? free[0] : cur; }
+                    const want = target * 0.912; const err = want - TD.x;
+                    tiltX = Math.max(-0.45, Math.min(0.45, err / 0.10 + TD.curve * 0.18));
+                  }, 30); }""")
+                C.mark("autopilot"); t_end = time.time() + secs
+                while time.time() < t_end:
+                    C.wait(0.4)
+                    if fr.evaluate("() => gameState_FSM") == 2: C.mark("early-end"); C.wait(1.0); press(click, "play-click"); C.wait(0.5)
+                continue
             elif act == "collide":
+                fr.evaluate("() => { if (window.__ap) { clearInterval(window.__ap); window.__ap = null; } tiltX = 0; }"); C.mark("mistake")
                 # hold the lane and let the traffic come; if the run had ended early, start again first
                 for attempt in range(3):
                     if fr.evaluate("() => gameState_FSM") == 2: C.wait(1.0); press(click, "play-click"); C.wait(0.5)
