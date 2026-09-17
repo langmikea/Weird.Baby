@@ -56,8 +56,10 @@ time. Ops clears a question the day it is answered.
 4. **The artifact reels' broadcast look: one style per story, or a blend?**
    A. Per story (business, automobiles, insurance, fun girls, gambling,
    gaming), each artifact in its own period style. B. One house blend.
-   C. A blend with one story note per artifact. Three samples come first
-   (docs/NEXT-20260917.md, A2); rule on them.
+   C. A blend with one story note per artifact. The three samples are built
+   (the late show, the showroom, the boardroom, on the Gambler set) with a
+   frame strip each and the letter: https://claude.ai/artifact/DPMgazcJHDQK94RN8o5SYk
+   Ops recommends A, with the television and film layers shared.
 
 5. **The calendar re-cut.** The plan of 09-10 holds in shape; the task rows
    are the story era's. A. Re-cut at this sitting, one sheet (what you shoot,
