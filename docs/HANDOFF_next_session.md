@@ -108,6 +108,11 @@ gameplay per story shape, gas display, the slab through the lens, slower
 steering display). Suggested next: the `ask` story shape on MGK-NIAC (a
 finished feature), which is also the mashup with the Q&A line.
 
+**RESUME RULE (Mike, 2026-09-17):** on "Ops, resume", open with what Ops
+suggests starting, from the standing queue in memory `ops-resume.md`; one
+start per session, in a fresh session; update the queue before ending. The
+Gambler's OPA issue: LIFE, April 15, 1966.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 
