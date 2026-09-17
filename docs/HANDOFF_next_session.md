@@ -1,3 +1,17 @@
+# HANDOFF — read this first
+
+**2026-09-16, end of session (context full).** The Q&A template is ruled and
+the Q&A line is built and dry-run proven. Read the memory file
+`opening-day-20261030.md` first, then `docs/ELEMENTS-20260912.md` §13–§15.
+State: `tools/reels-qa.py` (template; yellow; `--ahead`, `--date`, `--hot`),
+`tools/reels-hot.py`, `tools/reels-queue.mjs --lane qa`, `reels/qa.json`
+(five `test` rows), the workbook's Questions sheet (Mike types Q&A), the
+06:08 run builds and queues a week ahead. Waiting on Mike: the approved Q&As
+(fifteen by 10-09), the Buffer key. Open Ops: a glass finder the black body
+cannot fool (then the top-down clip IMG_0250 joins the library); the beat
+(music as element, separate); Sunday 09-20 sitting: the catalogue and the
+Gambler-answers-too-wide question. Nothing is late.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 
