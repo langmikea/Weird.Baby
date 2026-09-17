@@ -78,6 +78,15 @@ monotonic) and a NEW HIGH SCORE card; the race runs 5x to 10x from a
 52-second run. Sunday question 2 still open. Open: the beat; the Q&A reel's
 branch label.
 
+**2026-09-17 (the click choreography, §12).** The twin (both copies) carries
+a demo hook `Demo_Flash(y0,y1,ms,ph)` that inverts the selected front-glass
+row and repaints while it lasts (robots 0c90db7, 194f140); the capture runs
+Mike's choreography (arrive, beat, chyron lit + row inverted, silent click,
+beat; the payload row flashes three times). The glass close-up is back to the
+window filling the width; the cut picks the game over with the longest run;
+the card's title is half size, the figure twice. Reviewed at 0.1 s over the
+walk. Open: the beat; the Q&A reel's branch label; Sunday question 2.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 

@@ -101,9 +101,19 @@ class Src:
         return im.resize((128, 64), Image.NEAREST) if im.width != 128 else im
 
 def fb_text(rq, fb, x, y, text):
+    """the machine's font into any framebuffer width (the template's own writer stops at the glass's 128 px)"""
+    H_, W_ = fb.shape
     for ch in text:
         i = ord(ch) - 0x20
-        if 0 <= i < len(rq.GLYPHS): rq.fb_char(fb, x, y, ch); x += rq.GLYPHS[i][3]
+        if 0 <= i < len(rq.GLYPHS):
+            off, w, h, xa, xo, yo = rq.GLYPHS[i]; bit = 0
+            for yy in range(h):
+                for xx in range(w):
+                    if rq.BITMAPS[off + (bit >> 3)] & (0x80 >> (bit & 7)):
+                        px, py = x + xo + xx, y + yo + yy
+                        if 0 <= px < W_ and 0 <= py < H_: fb[py, px] = 1
+                    bit += 1
+            x += xa
 def fb_centered(rq, fb, y, text): fb_text(rq, fb, (128 - rq.text_w(text)) // 2, y, text)
 
 def overlay(rq, fb, mode, score):
@@ -115,7 +125,12 @@ def overlay(rq, fb, mode, score):
     elif mode == "select":
         a[38:58, :] = 1 - a[38:58, :]
     elif mode == "highscore":
-        a[:, :] = 0; fb_centered(rq, a, 20, "NEW HIGH"); fb_centered(rq, a, 38, "SCORE"); fb_centered(rq, a, 58, str(score))
+        a[:, :] = 0
+        title = np.zeros((32, 256), dtype=np.uint8); fb_text(rq, title, (256 - rq.text_w("NEW HIGH SCORE")) // 2, 14, "NEW HIGH SCORE")
+        a[2:18, :] = (title.reshape(16, 2, 128, 2).sum(axis=(1, 3)) >= 2).astype(np.uint8)   # the title at half size, strokes kept thin
+        num = np.zeros((20, 128), dtype=np.uint8); s_ = str(score); fb_text(rq, num, (128 - rq.text_w(s_)) // 2, 15, s_)
+        big = np.kron(num, np.ones((2, 2), dtype=np.uint8))                       # the figure at twice: 40 x 256, centred
+        a[22:62, :] = np.maximum(a[22:62, :], big[:, 64:192])
     return Image.fromarray(a * 255, "L")
 
 def glass_lit(fb):
@@ -129,7 +144,7 @@ def glass_lit(fb):
     return Image.fromarray(np.clip(np.asarray(lit, dtype=np.float32) * 0.92 + np.asarray(glow, dtype=np.float32) * 0.5, 0, 255).astype(np.uint8), "L")
 
 # the zoom levels: crops of the monitor's picture, in view px around the front glass canvas centre (cx, cy)
-LEVELS = {"unit": dict(left=-202, right=232, top=-241), "mid": dict(left=-165, right=165, top=-241), "glass": dict(left=-128, right=128, top=-171),
+LEVELS = {"unit": dict(left=-202, right=232, top=-241), "mid": dict(left=-165, right=165, top=-241), "glass": dict(left=-95, right=95, centre=True),
           "topglass": dict(left=-95, right=95, centre=True, canvas="cvTop")}
 CAP = dict(left=-202, right=232, top=-241, height=44)          # the ridged cap: the band the name sits on
 BAND_H = 110
@@ -220,7 +235,7 @@ def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, lay
     f.paste(render_zoom(S, t, which, "topglass" if which == "top" else "glass", H - ZOOM_Y, frame_i, rng, fbo), (0, ZOOM_Y))
     out = f.convert("RGB")
     if name_on and plate is not None:
-        col, alpha = plate; out.paste(col, ((W - col.width) // 2, ZOOM_Y + 10), alpha)
+        col, alpha = plate; out.paste(col, ((W - col.width) // 2, ZOOM_Y + 4), alpha)
     ImageDraw.Draw(out).text((26, 6), BRANCH, fill=(112, 112, 112), font=font)
     if fx == "white": out = Image.blend(out, Image.new("RGB", (W, H), (255, 255, 255)), 0.75)
     elif fx == "tear": out = tear(out, rng)
@@ -231,15 +246,18 @@ def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, lay
 def clips(S):
     t_twin = S.ev("twin"); t_reach, t_end = S.ev("reached"), S.ev("end")
     presses = sorted(S.evs("scroll") + S.evs("click")); t_walk = presses[0] if presses else S.ev("idle") + 800
-    t_sel = S.ev("click", last=True)                                                                   # the click that selects the feature
-    t_go = S.ev("gameover", last=True) or (t_end - 1500)
-    runs = [t for t in S.evs("gamerun") if t < t_go]; t_run0 = (runs[-1] if runs else S.ev("play")) + 300
+    sels = [e["t"] for e in S.events if e["name"] == "click" and e.get("row") == "enter"]
+    t_sel = sels[-1] if sels else S.ev("click", last=True)                                              # the click that enters the feature
+    # the run: the game over with the longest run before it (a short restart after the mistake never wins)
+    gos = S.evs("gameover") or [t_end - 1500]; runs_all = S.evs("gamerun") or [S.ev("play")]
+    def run_len(g): return g - max([r for r in runs_all if r < g] or [S.ev("play")])
+    t_go = max(gos, key=run_len)
+    runs = [t for t in runs_all if t < t_go]; t_run0 = (runs[-1] if runs else S.ev("play")) + 300
     first_run = (S.evs("gamerun") or [S.ev("play") + 1200])[0]
     c = []
     c.append(dict(t0=t_twin + 1500, t1=t_twin + 2300, speed=1, glass="front", name=False))             # 1 the monitor booted; the glass's own noise, half a beat
-    c.append(dict(t0=t_walk - 600, t1=t_sel - 30, speed=1, glass="front", name=False))                 # 2 the walk, deliberate
-    c.append(dict(t0=t_sel - 30, t1=t_sel - 29, speed=1, glass="front", name=False, still=15, mode="select"))   # 3 the selection: the row in inverse video, half a second
-    c.append(dict(t0=t_sel + 420, t1=t_sel + 1250, speed=1, glass="front", name=True, fx={0: "white", 1: "tear"}))   # 4 OUTPUT REDIRECTED, a beat, the name arrives
+    c.append(dict(t0=t_walk - 600, t1=t_sel + 420, speed=1, glass="front", name=False))               # 2 the walk, choreographed by the machine
+    c.append(dict(t0=t_sel + 420, t1=t_sel + 1250, speed=1, glass="front", name=True, fx={0: "white", 1: "tear"}))   # 3 OUTPUT REDIRECTED, a beat, the name arrives
     c.append(dict(t0=first_run + 150, t1=first_run + 950, speed=1, glass="top", name=True, mode="score"))   # 5 the top window: the game, a beat to land
     c.append(dict(t0=t_run0, t1=t_go - 40, ramp=(5.0, 10.0), glass="top", name=True, mode="score"))    # 6 the race: five times, climbing to ten
     c.append(dict(t0=t_go - 480, t1=t_go - 30, hold=(56, 14), glass="top", name=True, boom=True, mode="score"))   # 7 WHAM: slow motion to a stop
@@ -279,7 +297,7 @@ def sound(S, cl, total_s, black_s, td):
             if c["t0"] <= t <= c["t1"]: return s0 + (t - c["t0"]) / 1000 / c["speed"]
         return None
     i_boom = next(i for i, c in enumerate(cl) if c.get("boom")); t_crash = starts[i_boom]; t_card = starts[i_boom + 1]
-    def reel_t(t):
+    def reel_t(t):   # page time -> reel time through the clips (the ramp and the hold are not linear and are skipped)
         for c, s0 in zip(cl, starts):
             if "hold" in c or "ramp" in c or "still" in c: continue
             if c["t0"] <= t <= c["t1"]: return s0 + (t - c["t0"]) / 1000 / c["speed"]
@@ -287,7 +305,12 @@ def sound(S, cl, total_s, black_s, td):
     tt = np.arange(int(t_crash * SR)) / SR
     add(0, 0.016 * (np.sin(2 * np.pi * 55 * tt) + 0.5 * np.sin(2 * np.pi * 110 * tt)))                # the hum, until the crash
     n = int(lens[0] * SR); add(starts[0], 0.06 * np.convolve(rng.standard_normal(n), np.ones(4) / 4, mode="same"))   # the glass's own noise, half a beat
-    add(starts[2], tone(0.3, 90, 880)); add(starts[2] + 0.09, tone(0.3, 160, 1320))                     # the selection, recognised
+    for e in S.events:                                                                                    # the clicks, recognised
+        if e["name"].startswith("flash-"):
+            r = reel_t(e["t"])
+            if r is None: continue
+            times = 3 if e["name"] == "flash-%d" % (len([x for x in S.events if x["name"].startswith("flash-")]) - 1) else 1
+            for k in range(times): add(r + k * 0.34, tone(0.3, 90, 880)); add(r + k * 0.34 + 0.09, tone(0.3, 160, 1320))
     for e in S.events:
         if e["name"] in ("scroll", "click", "play-click", "play-shake"):
             r = reel_t(e["t"])
@@ -313,7 +336,7 @@ def sound(S, cl, total_s, black_s, td):
 
 def assemble(folder, row, out_dir, layout="mon-unit"):
     S = Src(folder); rq = load_font()
-    plate = name_plate(rq, row["feature"].upper()); font = small_font(21)
+    plate = name_plate(rq, row["feature"].upper(), 4); font = small_font(21)
     cl = clips(S); BLACK_S = 0.3; rng = np.random.default_rng(11)
     td = pathlib.Path(tempfile.mkdtemp()); frames = td / "frames"; frames.mkdir()
     n = 0

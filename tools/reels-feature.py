@@ -23,6 +23,7 @@ SITE = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--site=")), "
 OUT = ROOT / "reels" / "out" / "features"
 POP = pathlib.Path(r"C:\AI\Projects\weird-baby-robots\assets\video\WB_pop_v1.mp4")
 W, H, FPS = 1080, 1920, 30
+ROW_Y0, ROW_Y1 = 24, 32      # the selected menu row on the front glass, in the driver's 32 rows (measured from a capture)
 VIEW = (1280, 900)          # the browser; the CRT sits inside it
 sys.path.insert(0, str(ROOT / "tools"))
 
@@ -150,13 +151,23 @@ def capture(feature, path, play, folder):
         scroll, click, shake = btn("SCROLL"), btn("CLICK"), btn("SHAKE")
         # the walk: someone who knows where they are going (Mike, note 2): a press every third of a second
         order = ["Answers", "Programs", "Messages", "Preferences"]
+        BEAT = 0.6
+        def flash(sel, times, mark):
+            """the click as Mike choreographed it: the chyron lit and the row in reverse video together, a beat; the
+            silent click enters. On the payload the flash repeats."""
+            ms = 420 if times == 1 else 170
+            pg.evaluate(f"() => window.__wb.blink(document.querySelector({json.dumps(sel)}), {ms * (2 * times - 1)})")
+            fr.evaluate(f"() => Demo_Flash({ROW_Y0}, {ROW_Y1}, {ms * (2 * times - 1)}, {ms})")
+            C.mark(mark); C.wait(ms * (2 * times - 1) / 1000 + 0.05)
+            pg.click(sel); C.mark("click", **{"seg": mark, "row": "enter"}); C.wait(BEAT)
         for k, node in enumerate(path):
             rows = order if k == 0 else FOLDERS.get(path[k - 1], [node])
             if node not in rows: rows = rows + [node]
             for r in rows:
                 if r == node: break
                 press(scroll, "scroll", seg=k, row=r); C.wait(0.7)
-            press(click, "click", seg=k, row=node); C.wait(0.8 if k < len(path) - 1 else 0.2)
+            C.wait(BEAT)                                                    # arrive at the row, a beat
+            flash(click, 3 if k == len(path) - 1 else 1, f"flash-{k}")     # the click, as choreographed
         C.mark("reached", feature=feature); C.wait(1.4)
         C.mark("play")
         for secs, act in PLAYS[play]:

@@ -307,3 +307,24 @@ landed. It gives us the comfort to look around.** His script, kept whole:
 - The site itself gains the tilt chyrons (PortalScreen, the twin): a cross
   beside SHAKE, lit from the machine's own state, Up as gas; the autopilot
   steers through them, so the reel shows them lighting.
+
+## 12. The click choreography (2026-09-17, second round)
+
+Mike: the portal moved, put it back; the clicks do not align with the
+visuals. His choreography: arrive at `> Programs <`, beat; the click lights
+the chyron and the row goes to reverse video on every screen at once, beat;
+`> Games <` the same; `> Tilt Drive <` the same, except the row flashes a
+couple of times: it is the payload. Review frame by frame; the reverse video
+was misaligned and screens overlapped, obvious at the start of the driving.
+The final card: NEW HIGH SCORE at half size, the number stays large.
+
+- The front glass close-up goes back to the window filling the width,
+  centred, as in the mock; the name rides the plate strip above the window.
+- The reverse video is now the machine's: a demo hook in the twin inverts the
+  selected row on its own front glass for the beat, so the monitor's glass,
+  the zoom-in and the chyron agree because they are one event. The capture
+  runs the choreography in real time: arrive, beat, the flash with the
+  chyron lit, the silent click that enters, beat. On the feature's row the
+  flash repeats three times.
+- The card: the title in the small face, the figure at twice the reveal
+  font.

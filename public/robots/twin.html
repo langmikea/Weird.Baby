@@ -1567,7 +1567,7 @@ Screen.prototype.display=function(){
   if(dy<0)continue;
   for(let x=0;x<this.w;x++){
    let sx=x,sy=dy;if(this.flip){sx=this.w-1-x;sy=this.h-1-dy;}
-   let v=this.fb[sy*this.w+sx];if(this.inverted)v=1-v;
+   let v=this.fb[sy*this.w+sx];if(this.inverted)v=1-v;if(this.h!==this.glassH&&Demo_FlashOn(sy))v=1-v;
    if(v)ctx.fillRect(x*z,gy*z,z,rowH);
   }
  }
@@ -1737,6 +1737,15 @@ const pixels={raw:[[0,0,0],[0,0,0]],
 /* [SHIM] IMU: synthetic accel vector in g. Idle = (0,0,1). Tilt keys (WASD) bend x/y; Space/SHAKE spikes
    magnitude past the 1.3 threshold [M8BALL:31]. Firmware readAcceleration(x,y,z) is by-ref; JS returns [x,y,z]. */
 let tiltX=0,tiltY=0,shakeUntil=0;
+/* [2026-09-17 DEMO HOOK, the feature reel] the selected menu row in reverse video for a beat, drawn by the
+   machine itself so every view of the glass agrees. Inert unless window.__flashRow is set:
+   {until: performance.now()+ms, y0, y1 (driver rows), ph: ms per phase}. */
+function Demo_Flash(y0,y1,ms,ph){window.__flashRow={until:performance.now()+ms,y0:y0,y1:y1,ph:ph||ms};
+ /* the glass only repaints when the machine draws; the flash has to ask for repaints while it lasts */
+ const iv=setInterval(function(){try{frontOLED.display();}catch(e){} if(!window.__flashRow){clearInterval(iv);}},33);}
+function Demo_FlashOn(sy){const f=window.__flashRow;if(!f)return false;const now=performance.now();
+ if(now>f.until){window.__flashRow=null;return false;}
+ return sy>=f.y0&&sy<f.y1&&((((now-(f.until))/f.ph)|0)%2===0);}
 /* [2026-09-17 THE TILT CHYRONS, Mike] four-way, non-exclusive, lit while on; Up is gas. The museum's
    chyrons ask (`portal-control` ids tilt-up/down/left/right); the state lives HERE and is posted back
    as `tilt-state` so the chyrons light from the machine's own truth. WASD still works standalone. */
