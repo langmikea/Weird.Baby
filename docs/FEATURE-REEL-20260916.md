@@ -376,3 +376,28 @@ and reveal problems. Ops' call.
   score, a crash) with different inputs (a shot on CLICK). The reel is cut
   from the same template with a new row and a new demo script; what breaks
   is the finding.
+
+### The 25,000-foot finding (AvoidSteroids, same template)
+
+It went up in one pass: the row and a demo script were the only new data.
+The walk found its row three deep in Games with Tilt Drive and Gobble
+passing by (the familiarity the brief asked for), the flashes, the name, the
+inside view, the WHAM and the card all held. What broke is exactly the
+payload's own drama:
+
+- **The score is Tilt Drive's.** The overlay counts distance and cars
+  passed; AvoidSteroids scores hits, so the figure sat at 2800 the whole
+  run and the card lied. The score model is per-feature data: what counts,
+  how much, from which of the machine's own numbers.
+- **The race is Tilt Drive's.** Five to ten times on a field of slow
+  asteroids reads as an empty screen with dots. AvoidSteroids wants dodge and
+  shoot at one to three times, the hit as the WHAM. Snow Globe has no ending
+  at all: it is a toy, and its story is shake, watch, and done.
+- **The autopilot is Tilt Drive's.** AvoidSteroids ran on the scripted
+  weave and still lasted seventeen seconds; a per-game driver is data too.
+
+So the row grows two fields: `story` (race, survive, toy) and `score` (the
+machine's figure and the jumps that count), and the demo script stays the
+third. The frame is one template; the payload's drama is three shapes, not
+one. Ops' call: build `survive` next on AvoidSteroids, then `toy` on Snow
+Globe, before the row count grows.
