@@ -27,6 +27,7 @@
     "record:report": "node tools/dictation/record-edit.mjs --report",
     "record:land": "node tools/dictation/emit-record-entries.mjs",
     "desk": "node tools/desk.mjs && python tools/days-xlsx.py && node tools/days.mjs",
+    "morning": "node tools/morning.mjs",
     "desk:full": "node tools/ops-desk.mjs",
     "costs": "node tools/costs.mjs",
     "calendar": "node tools/calendar.mjs",

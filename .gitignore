@@ -91,3 +91,6 @@ docs/dictation-20260807/_preview/preview.js
 # serves. The recipes themselves ARE committed.
 docs/shorts/out/
 reels/out/
+
+# python bytecode (was tracked until 2026-09-17; it dirtied every morning run)
+__pycache__/
