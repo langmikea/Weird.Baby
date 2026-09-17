@@ -66,13 +66,16 @@ PREVIEW = "--preview" in sys.argv
 LEDGER = pathlib.Path(r"C:\AI\Projects\weird-baby-museum\reels\qa.json")
 TAGS = "#weirdbaby #mgkviiip #thedetermination"
 # the library of takes: every window is a start time in one of Mike's clips; the glass is found in the
-# first frame by auto_seed (the big dark circle with a lens under it) and tracked from there.
+# first frame by auto_seed (the bezel-and-plate test: dark inner edge all round, silver rim all round) and tracked from there.
 LIBRARY = {
     # (clip, start_s, seed circle in the clip's full 4K frame). Seeds verified on 09-16; the tracker adapts from them.
-    # The top-down clip (0250) waits for a glass finder that the black body cannot fool.
-    "hold":  [("0247", t, (1964, 1028, 204)) for t in (20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 36.0, 40.0, 44.0)],
+    "hold":  [("0247", t, (1964, 1028, 204)) for t in (20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 36.0, 40.0, 44.0)]
+           # the top-down clip on white, scanned 09-16 evening every two seconds with the finder: steady windows only
+           # (its push-ins at 20 and 24 s and the turn from 44 s are left out; a three-quarter glass is an ellipse)
+           + [("0250", t, c) for t, c in ((0.0, (1064, 1620, 276)), (2.0, (1256, 1630, 266)), (8.0, (1116, 1682, 272)), (10.0, (1126, 1726, 266)), (12.0, (1164, 1648, 264)),
+                                          (14.0, (1102, 1600, 266)), (30.0, (1322, 1798, 232)), (32.0, (1192, 1548, 300)), (34.0, (1144, 1568, 272)), (40.0, (1112, 1630, 284)))],
     "shake": [("0247", t, (1656, 932, 312)) for t in (81.0, 82.0, 84.0)],
-    "ecu":   [("0247", t, (2104, 1176, 448)) for t in (50.0, 50.4, 51.0)],
+    "ecu":   [("0247", t, (2104, 1176, 448)) for t in (50.0, 50.4)],   # 51.0 dropped 09-16: the glass leaves the frame, the finder cannot test it
 }
 QUESTION, ANSWER, SEGMENTS = "Should I bet on the home team tonight?", ("THE SMART MONEY", "LEFT AN HOUR AGO."), []
 
@@ -93,29 +96,61 @@ def choose(seed):
         "mon_offset": int(rng.integers(0, 40)),
     }
 
-RADIUS = {"hold": (140, 260), "shake": (200, 360), "ecu": (300, 620)}   # the glass's radius at 1080 wide, per role
+RADIUS = {"hold": (110, 260), "shake": (200, 360), "ecu": (300, 620)}   # the glass's radius at 1080 wide, per role
+
+def _sectors(g, c, r0, r1):
+    """mean grey in eight angular sectors of the annulus r0..r1 (in radii) round circle c; None if it leaves the frame"""
+    cx, cy, r = c
+    y0, y1 = int(max(0, cy - r * r1 - 2)), int(min(g.shape[0], cy + r * r1 + 2))
+    x0, x1 = int(max(0, cx - r * r1 - 2)), int(min(g.shape[1], cx + r * r1 + 2))
+    if y1 - y0 < 4 or x1 - x0 < 4: return None
+    sub = g[y0:y1, x0:x1].astype(np.float32)
+    yy, xx = np.mgrid[y0:y1, x0:x1]
+    d = np.hypot(xx - cx, yy - cy); band = (d >= r * r0) & (d < r * r1)
+    ang = (np.arctan2(yy - cy, xx - cx) + math.pi) / (2 * math.pi) * 8
+    out = []
+    for k in range(8):
+        m = band & (ang >= k) & (ang < k + 1)
+        if m.sum() < 8: return None
+        out.append(float(sub[m].mean()))
+    return out
+
+def _glass_test(small, c):
+    """the glass has a black bezel all the way round (dark inner edge, one sector may carry a reflection)
+    and sits in the silver plate (bright outer rim, never dark in any sector). A circle drawn round the
+    black body fails: its edge crosses gloves, plate corners or background somewhere. c is at full scale."""
+    h = (c[0] / 2, c[1] / 2, c[2] / 2)
+    inner = _sectors(small, h, 0.86, 0.98); outer = _sectors(small, h, 1.08, 1.28)
+    if inner is None or outer is None: return None
+    si = sorted(inner)
+    if np.mean(inner) > 60 or si[-2] > 90 or si[-1] > 130: return None
+    if np.mean(outer) < 130 or min(outer) < 90: return None
+    return float(np.mean(inner)), float(np.mean(outer))
+
 def auto_seed(g, role="hold"):
-    """the glass in a first frame: a circle of the role's size, DARK inside (it is black glass), with a lens under it;
-    the biggest such. Rings and plates are bright inside and fail the darkness test."""
+    """the glass in a first frame (09-16 evening, the finder the black body cannot fool): every Hough circle of
+    the role's size is put to the bezel-and-plate test; among those that pass, one with the lens below it wins,
+    then the strongest contrast. Proven on both clips' probe frames; a three-quarter view (the glass an ellipse)
+    is rightly not found."""
     import cv2
     lo, hi = RADIUS.get(role, (110, 620))
     small = cv2.medianBlur(cv2.resize(g, (W // 2, H // 2)), 5)
-    cs = cv2.HoughCircles(small, cv2.HOUGH_GRADIENT, dp=1.2, minDist=25, param1=110, param2=26, minRadius=int(lo * 0.45 / 2), maxRadius=int(hi / 2) + 2)
+    cs = cv2.HoughCircles(small, cv2.HOUGH_GRADIENT, dp=1.2, minDist=16, param1=110, param2=18, minRadius=int(lo * 0.28 / 2), maxRadius=int(hi / 2) + 2)
     if cs is None: return None
-    cands = [(x * 2, y * 2, r * 2) for x, y, r in cs[0] if 150 < x * 2 < W - 150 and 150 < y * 2 < H - 400]
-    def dark(c):
-        cx, cy, r = int(c[0]), int(c[1]), int(c[2] * 0.6)
-        y0, y1, x0, x1 = max(0, cy - r), min(H, cy + r), max(0, cx - r), min(W, cx + r)
-        if y1 <= y0 or x1 <= x0: return 255
-        return float(np.mean(g[y0:y1, x0:x1]))
-    best = None
+    cands = [(float(x) * 2, float(y) * 2, float(r) * 2) for x, y, r in cs[0][:80]]
+    scored = []
     for c in cands:
-        if not (lo <= c[2] <= hi) or dark(c) > 90: continue
+        if not (lo <= c[2] <= hi): continue
+        st = _glass_test(small, c)
+        if st is None: continue
+        lens = None
         for l in cands:
-            if l is c: continue
-            d = math.hypot(l[0] - c[0], l[1] - (c[1] + 1.7 * c[2]))
-            if 0.28 * c[2] < l[2] < 0.7 * c[2] and d < 0.7 * c[2] and (best is None or c[2] > best[2]): best = c
-    return best
+            if l is c or not (0.3 * c[2] < l[2] < 0.95 * c[2]) or abs(l[0] - c[0]) > 0.2 * c[2]: continue
+            if 1.4 < (l[1] - c[1]) / c[2] < 2.0: lens = l; break
+        scored.append(((1 if lens else 0, st[1] - st[0]), c))
+    if not scored: return None
+    scored.sort(key=lambda s: s[0], reverse=True)
+    return scored[0][1]
 BLACK_S = 0.2
 SLIDE_S = 0.4          # the signature move: the logo slides off, the machine slides in
 THEATRE_S, REDIRECT_S, TRI_S, ANSWER_S = 1.5, 0.5, 0.8, 3.4   # the machine works, redirects, reveals, holds
@@ -278,7 +313,7 @@ def composite_glass(frame, circle, fb, angle=0.0):
 def probe_size(clip):
     o = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height:stream_side_data=rotation", "-of", "json", str(SRC / f"IMG_{clip}.MOV")], capture_output=True, text=True).stdout
     j = json.loads(o)["streams"][0]; w, h = j["width"], j["height"]
-    rot = next((sd.get("rotation", 0) for sd in j.get("side_data_list", [])), 0)
+    rot = next((sd["rotation"] for sd in j.get("side_data_list", []) if "rotation" in sd), 0)   # 09-16: the first side-data entry is empty; the old line read it and saw no rotation
     return (h, w) if abs(int(rot)) % 180 == 90 else (w, h)
 
 def extract(clip, start, secs, seed, td, tag):
@@ -300,6 +335,11 @@ def extract(clip, start, secs, seed, td, tag):
                     "-vf", f"crop={cw}:{fh}:{x0}:0,scale={W}:{H},fps={FPS},format=gray", str(d / "%04d.png")], check=True)
     frames = sorted(f for f in d.glob("*.png") if f.name != "probe.png")
     seed_out = ((seed[0] - x0) * k, seed[1] * k, seed[2] * k)
+    # the library seed only centres the crop; the glass itself is found in the first frame by the finder
+    # (09-16 evening: the 0247 hold seed sat on the black body at 20.0 s and the tracker never left it).
+    # If the finder sees no glass, the seed stands.
+    found = auto_seed(cv2.imread(str(frames[0]), cv2.IMREAD_GRAYSCALE), role=ROLE_OF.get(tag, "hold"))
+    if found is not None: seed_out = found
     return frames, seed_out
 
 def lens_below(g, c):

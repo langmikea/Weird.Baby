@@ -22,6 +22,11 @@ on the desk and on the 09-20 sitting's steps. Nothing changed in robots. Ops
 recommends A (the glass rules the words). Still open: the glass finder for
 IMG_0250; the beat.
 
+**2026-09-16, later still (the finder).** The glass finder is rewritten
+(bezel-and-plate sector test, ELEMENTS §16); three of sixteen library seeds
+were sitting on the black body. IMG_0250 (top-down on white) joins the hold
+library with ten windows. Open Ops: the beat.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 
