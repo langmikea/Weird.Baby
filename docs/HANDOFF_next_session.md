@@ -55,6 +55,17 @@ cut 17 s, reviewed on its sheet, in OneDrive reels/out/features. His two
 standing rules and the reel house rules are in memory. Open: the beat; the
 branch indicator on the Q&A reel; chords on the music reels (logged).
 
+**2026-09-17 (the third form).** Mike on the second cut: everything through
+the front glass (inaccurate, not deceitful); the zoom-in is a zoom of the
+monitor cropped to the unit alone, one position, no line; the end is a race
+that accelerates into a car collision, WHAM, slow motion to a stop, GAME
+OVER pops on, a beat, loop. Story §8, built, reviewed (a ghost of the
+monitor's own glass under the drawn one was found on a full frame and
+fixed: the glass is replaced, not lit over). Third cut 17 s in OneDrive
+reels/out/features. The capture now drives the run to a collision (weave,
+then hold the lane; restart if the road wins) and records the glass canvases'
+page rects in index.json.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 

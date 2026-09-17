@@ -29,7 +29,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 # ── the demo scripts: what is done once the feature is reached. Inputs are the unit's own. ─────────
 # each step: (seconds to wait after, action); actions: click | shake | tilt:x | tilt:0 | wait
 PLAYS = {
-    "tilt-drive": [(1.0, "wait"), (0.0, "click"), (9.0, "drive"), (6.0, "crash"), (3.0, "wait")],
+    "tilt-drive": [(1.0, "wait"), (0.0, "click"), (5.5, "drive"), (9.0, "collide"), (2.5, "wait")],
     "gobble": [(1.2, "wait"), (0.0, "click"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.0, "tilt:0"), (2.5, "wait")],
     "avoidsteroids": [(1.2, "wait"), (0.0, "click"), (1.2, "tilt:0.35"), (0.0, "click"), (1.2, "tilt:-0.35"), (0.0, "click"), (1.2, "tilt:0.35"),
                       (0.0, "click"), (1.2, "tilt:-0.35"), (0.0, "click"), (1.0, "tilt:0"), (2.5, "wait")],
@@ -93,7 +93,7 @@ class Capture:
             if left <= 0: break
             time.sleep(min(0.04, left))
     def save(self):
-        json.dump({"shots": self.shots, "glass": self.glass, "events": self.events, "view": VIEW}, open(self.dir / "index.json", "w"), indent=0)
+        json.dump({"shots": self.shots, "glass": self.glass, "events": self.events, "view": VIEW, "rects": getattr(self, "rects", {})}, open(self.dir / "index.json", "w"), indent=0)
 
 def capture(feature, path, play, folder):
     from playwright.sync_api import sync_playwright
@@ -134,11 +134,17 @@ def capture(feature, path, play, folder):
             if fr: break
         C.goff = fr.evaluate("() => performance.timeOrigin") - C.origin   # the iframe's clock, on the page's
         C.fr = fr; C.mark("twin")
+        C.rects = {}
         for i in range(400):
             C.wait(0.25)
             try:
                 if fr.evaluate("() => String(currentState)") == "1": break
             except Exception: pass
+        off = pg.evaluate("() => { const r = document.querySelector('iframe').getBoundingClientRect(); return [r.x, r.y]; }")
+        for cid in ("cvFront", "cvTop"):
+            r = fr.evaluate(f"() => {{ const r = document.getElementById('{cid}').getBoundingClientRect(); return [r.x, r.y, r.width, r.height]; }}")
+            C.rects[cid] = [r[0] + off[0], r[1] + off[1], r[2], r[3]]
+        print("  glass on the page:", C.rects, flush=True)
         fr.evaluate("() => { REFUSED = {}; }")   # the demo machine: the 08-20 refusal set lifted (Sunday question 2 decides the site)
         C.mark("idle"); C.wait(0.8)
         scroll, click, shake = btn("SCROLL"), btn("CLICK"), btn("SHAKE")
@@ -165,6 +171,18 @@ def capture(feature, path, play, folder):
                     v = 0.32 if k % 2 == 0 else -0.32; fr.evaluate(f"() => {{ tiltX = {v}; }}"); C.wait(0.42); k += 1
                     if fr.evaluate("() => gameState_FSM") == 2: C.wait(1.2); press(click, "play-click"); C.wait(0.6)
                 fr.evaluate("() => { tiltX = 0; }"); continue
+            elif act == "collide":
+                # hold the lane and let the traffic come; if the run had ended early, start again first
+                for attempt in range(3):
+                    if fr.evaluate("() => gameState_FSM") == 2: C.wait(1.0); press(click, "play-click"); C.wait(0.5)
+                    fr.evaluate("() => { tiltX = 0; }"); C.mark("hold-lane")
+                    for i in range(int(secs / 0.1)):
+                        C.wait(0.1)
+                        if fr.evaluate("() => gameState_FSM") == 2: break
+                    x = fr.evaluate("() => (typeof TD!=='undefined' && TD) ? TD.x : null")
+                    C.mark("collision" if x is not None and abs(x) < 1.3 else "off-road", x=x)
+                    if x is not None and abs(x) < 1.3: break
+                continue
             elif act == "crash":
                 # hold the wheel over until the road ends it
                 fr.evaluate("() => { tiltX = 0.4; }"); C.mark("tilt", x=0.4)

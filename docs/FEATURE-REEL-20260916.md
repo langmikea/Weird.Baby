@@ -164,3 +164,51 @@ the chyrons, the pop at the payload, the closed-circuit read on the zoom-in.
 - The music reels will carry the chord being played the same way the
   feature reels carry the name: small, in time, ignorable. Logged for the
   music leg.
+
+## 8. The third story, after Mike's notes on the second cut (2026-09-17)
+
+Mike, cleaned: everything displayed comes through the front glass; it is
+inaccurate, but not deceitful. The zoom-in is simply a zoom-in of the
+monitor, cropped to only the image of the VIIIp: no background, no lines,
+no features of the monitor. The split line was only one suggestion for a
+transition. On the second cut: the front glass sat too high and left, then
+the zoom-in became a close-up of the close-up and things grew misaligned; a
+mess. The slow-motion end is boring: race faster and faster until WHAM, a
+collision with another car, an immediate drop to slow motion to see the
+crash and the explosion grind to a stop, then GAME OVER pops on at full, a
+beat, loop.
+
+### The frame, third form
+
+- **Top: the monitor**, unchanged, with `\ROBOTS` small over the black
+  band above it.
+- **Below it, with no line: the zoom-in.** The monitor's own picture of the
+  machine, the front view, cropped to the unit and nothing else, scaled so
+  the unit fills the width; the unit runs off the bottom of the frame below
+  its lens ring. One picture, one position, from the first frame to the
+  last. The front glass is in the lower third of the frame.
+- **Everything comes through the front glass.** The framebuffer the story
+  is on (the menu; then, once the machine hands off, the game) is drawn into
+  the front glass of the zoom-in at the picture's own scale, with the
+  screen treatment the site gives the glass. On the monitor above, the
+  machine stays accurate: the game plays on its top window there.
+- The feature's name, yellow, over the ridged cap at the top of the unit.
+- The zoom-in wears the closed-circuit read the monitor wears.
+
+### The beats, third form (target 17 to 19 seconds)
+
+| # | the monitor | the zoom-in | sound |
+|---|---|---|---|
+| 0 | the pop | | |
+| 1 | noise, about 1 s | the unit, its glass dark | hum, hiss |
+| 2 | the twin lands: BIOS and POST, 1.6 s | the front glass: BIOS | relays |
+| 3 | hard cut: the idle menu; SCROLL, CLICK, CLICK, CLICK, each chyron blinking, a press every third of a second | the front glass, row by row | a tick a press |
+| 4 | the payload: OUTPUT REDIRECTED TO AUX DISPLAY; the name arrives; the picture pops (a white frame, two torn frames) | the same, through the front glass | the sting |
+| 5 | the race: 2 s at 1x, then faster and faster, the speed climbing without a cut to about three times, the car threading traffic | the game through the front glass, at the same climbing speed | the engine blips climbing with it |
+| 6 | WHAM: the collision with another car. A white burst, the picture torn and shaken, and at once slow motion: the crash frames, each held longer than the last, the burst decaying, grinding to a stop on the two cars together | the same | the thud, the hum gone, a low tone dying |
+| 7 | GAME OVER pops on, full, no blink: the machine's card, score and best. One beat, about a second | the card through the front glass | a click as it lands |
+| 8 | black, a short beat, loop | | |
+
+The run is driven so it ends in a car: weave for the first stretch, then hold
+the lane and let the traffic come. If the road ends a run early it is
+restarted; the reel uses the last run.
