@@ -401,3 +401,34 @@ machine's figure and the jumps that count), and the demo script stays the
 third. The frame is one template; the payload's drama is three shapes, not
 one. Ops' call: build `survive` next on AvoidSteroids, then `toy` on Snow
 Globe, before the row count grows.
+
+## 15. Parked (2026-09-17, evening)
+
+Mike: nice; both good enough to park until the game is finalised. His punch
+list for when it is, kept whole so nothing is re-found:
+
+1. Barrel distortion at a quarter to a half of what it is now (k1 0.10 →
+   0.03 to 0.05 on the front, likewise the top).
+2. AvoidSteroids: when the monitor glitches, the drawn screen must move with
+   it. The twitch tracking is bounded at six pixels; the glitch's tear is
+   larger. Raise the bound, or read the shift from the site's own glitch
+   state.
+3. The top view rides higher in the reel frame.
+4. NEW HIGH SCORE has jaggies: the title is a bitmap face halved and the
+   figure a bitmap doubled. Set the title in a face made for the size and
+   the figure in the reveal font at a real 2x, not a pixel double.
+5. Gameplay is rushed and uninteresting: script it per story shape. No high
+   speed unless the story supports it, or use it properly.
+6. TILT UP reads as stuck on. It is the gas, held by the autopilot except
+   for the gas-off moments; on the reel that reads as stuck. Ease off more
+   often, or show gas differently.
+7. The rectangle around the top screen must distort with the screen: put the
+   slab and its bevel through the same lens as the pixels.
+8. Tilt Drive's steering display is still far too rapid: hold decisions
+   longer (600 ms or more) and show a smoothed state.
+
+The twin's games are not finished (Tilt Drive rebuilt 07-2x, AvoidSteroids
+respecced 07-18, no firmware games handler, the bench trip undated), so the
+feature reels of games wait. What is finished on the machine, and can be
+featured now, is the ask itself (Answers, the three engines, the reveal on
+the top window), Detectors, and Preferences.

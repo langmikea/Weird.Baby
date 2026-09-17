@@ -101,6 +101,13 @@ brake (the twin's Down is now a brake, robots 5548eb8). SED test: a second
 feature, AvoidSteroids, captured and cut from the same template; findings in
 the story's §14 follow-up.
 
+**2026-09-17 evening: the game feature reels are PARKED** until the twin's
+games are finalised (Mike). Punch list in the story §15 (barrel to a quarter,
+glitch tracking on AvoidSteroids, top view higher, card jaggies, scripted
+gameplay per story shape, gas display, the slab through the lens, slower
+steering display). Suggested next: the `ask` story shape on MGK-NIAC (a
+finished feature), which is also the mashup with the Q&A line.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 

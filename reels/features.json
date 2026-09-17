@@ -1,5 +1,5 @@
 {
- "_": "THE FEATURE OF THE DAY — one row a day; the template is tools/reels-feature.py; the story is docs/FEATURE-REEL-20260916.md. date: the posting day (Mike sets the start; null until then). path: the menu walk from the idle list. play: a named demo script in the tool. status: open | built | posted.",
+ "_": "THE FEATURE OF THE DAY — one row a day; the template is tools/reels-feature.py; the story is docs/FEATURE-REEL-20260916.md. date: the posting day (Mike sets the start; null until then). path: the menu walk from the idle list. play: a named demo script in the tool. status: open | built | posted. story: race | survive | toy | ask (the payload's drama; the frame is one template). parked-until-final: the twin's games are not finished (story §15).",
  "rows": [
   {
    "date": null,
@@ -10,8 +10,9 @@
     "Tilt Drive"
    ],
    "play": "tilt-drive",
-   "status": "open",
-   "file": null
+   "status": "parked-until-final",
+   "file": null,
+   "story": "race"
   },
   {
    "date": null,
@@ -22,8 +23,9 @@
     "Gobble Don't Fall"
    ],
    "play": "gobble",
-   "status": "open",
-   "file": null
+   "status": "parked-until-final",
+   "file": null,
+   "story": "survive"
   },
   {
    "date": null,
@@ -34,8 +36,9 @@
     "AvoidSteroids"
    ],
    "play": "avoidsteroids",
-   "status": "open",
-   "file": null
+   "status": "parked-until-final",
+   "file": null,
+   "story": "survive"
   },
   {
    "date": null,
@@ -46,8 +49,9 @@
     "Snow Globe"
    ],
    "play": "snow-globe",
-   "status": "open",
-   "file": null
+   "status": "parked-until-final",
+   "file": null,
+   "story": "toy"
   },
   {
    "date": null,
@@ -58,7 +62,8 @@
    ],
    "play": "ask",
    "status": "open",
-   "file": null
+   "file": null,
+   "story": "ask"
   }
  ]
 }
