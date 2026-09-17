@@ -33,7 +33,7 @@ Every sample runs the same stack; a style is one row of settings.
 | television | what a colour set did to a picture: chroma bleeding past the edges, a soft horizontal resolution, the raster's lines, the frame breathing (gate weave) and the brightness flickering | bleed, weave, flicker, line strength |
 | film | what the kinescope's film added: grain, a vignette, a warm-up at the top of the reel | grain |
 | titles | the album's name in the period's type, once over a plate and once on the end card | typeface, case, placement |
-| sound | a music bed with wow and flutter, band-limited, hiss under it; the sample beds are Mike's own June demo of Coconuts, treated (original audio pays; a period library is a licensing question, not a look question) | pitch, low-pass, wow depth |
+| sound | a music bed with wow and flutter, band-limited; **ruled 09-17 (Q2, A): public-domain 78s from the Internet Archive's 78rpm collection, recordings of 1925 or earlier, one a style, logged in `reels/beds.json` with year and source** (the first cut used Mike's own Coconuts demo; his music is not applicable at present) | the record, low-pass, wow depth |
 | the pop | first, as ruled 09-12 | none |
 
 ## 3. The three styles
@@ -66,7 +66,7 @@ Every sample runs the same stack; a style is one row of settings.
 - The film layer reads as film (grain, breathing), and neither layer hides
   the objects.
 - The type places each style in its story without a word of copy.
-- The bed is unmistakably lo-fi and warbly, and it is his own song.
+- The bed is unmistakably lo-fi and warbly, a record of the period, and costs nothing.
 
 ## 6. Built
 
@@ -74,3 +74,34 @@ Every sample runs the same stack; a style is one row of settings.
 `OneDrive › WeirdBaby › reels › out › broadcast`, a review strip per sample,
 and the served sheet `docs/desk/BROADCAST.html` (the letter). Same engine as
 the portfolio's (the pop and the normalise from `tools/reels-build.py`).
+
+## 7. Mike's first reading (09-17, late) and what changed
+
+- **"Showroom is best."** Noted; not yet the Q4 ruling (asked next).
+- **"All tray content was shot in landscape, and you are showing it rotated
+  90 degrees."** True: the phone tagged every frame of the 09-16 set as
+  portrait (EXIF orientation 6) and the tool righted them by the tag. Every
+  plate is now righted by the tag and turned back: the rule at the bottom,
+  the objects upright, 4032 x 3024. The Live Photo movies are read without
+  the tag for the same reason.
+- **"The zoom needs improvement; look at the images."** Looked: on the tray
+  the objects are small (the case a quarter of it, a bolt a speck). The
+  push now goes into the object: **ruling C** (09-17): each shot opens on
+  the whole tray as a 4:3 raster inside the tall frame and the push lands
+  inside the object in 9:16, eased, one move. The object is found on the
+  plate (the tray's extent first, then what is clearly darker or coloured
+  inside it, the rule's band out).
+- **"It sounds like a portrait reshoot is needed."** On the shot list: the
+  kit shot in portrait, tripod, top-down, one object filling the frame,
+  for the reels; the landscape tray set stays the album's record.
+- **"My music is not readily applicable at the present time. Is there free
+  audio to match our dashing gambler?"** Yes. **Question 2, ruled A:**
+  public-domain 78s from the Internet Archive (recordings first published
+  in 1925 or earlier are public domain in the US as of 2026). The beds:
+  The Gold Digger (Missouri Jazz Band, 1923, a fox trot from the Scandals
+  of 1923) under the late show; Shake It and Break It (Lanin's Southern
+  Serenaders, 1921) under the showroom; Moon River (the Bar Harbor Society
+  Orchestra, 1922, a waltz) under the boardroom. Ledger `reels/beds.json`;
+  files in OneDrive › WeirdBaby › reels › library › beds. B (Creative
+  Commons libraries, a credit line each) and C (the platforms' own sound at
+  posting time) were declined; C stays open for the Q&A line.

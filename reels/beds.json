@@ -1,0 +1,49 @@
+{
+ "_": "THE BEDS — music under the artifact reels. Mike, 2026-09-17 (question 2, A): public-domain 78s from the Internet Archive's 78rpm collection (George Blood transfers). A recording first published in the US in 1925 or earlier is public domain there as of 2026-01-01 (the Music Modernization Act schedule: pre-1923 in 2022, then a year a year); the compositions are older than 1931 and public domain too. The files live outside the repo in OneDrive/WeirdBaby/reels/library/beds/; this ledger names each one, its year, its source and which style uses it. No credit line is owed; the row keeps the provenance anyway.",
+ "ruled": "2026-09-17",
+ "library": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\library\\beds",
+ "rows": [
+  {
+   "id": "gold-digger-1923",
+   "title": "The Gold Digger",
+   "performer": "Missouri Jazz Band, vocal chorus Arthur Hall",
+   "writer": "James F. Hanley",
+   "year": 1923,
+   "kind": "fox trot, from George White's Scandals of 1923",
+   "item": "78_the-gold-digger_missouri-jazz-band-james-f.-hanley-arthur-hall_gbia0001046a",
+   "source": "https://archive.org/details/78_the-gold-digger_missouri-jazz-band-james-f.-hanley-arthur-hall_gbia0001046a",
+   "file": "1923_the-gold-digger_missouri-jazz-band.mp3",
+   "status": "public domain (US, recording 1923; composition 1923)",
+   "style": "lateshow",
+   "in_s": 1.0
+  },
+  {
+   "id": "shake-it-1921",
+   "title": "Shake It and Break It",
+   "performer": "Lanin's Southern Serenaders",
+   "writer": "Friscoe; Chiha & Clark",
+   "year": 1921,
+   "kind": "jazz fox trot",
+   "item": "78_shake-it-and-break-it_lanins-southern-serenaders-friscoe-chiha-clark_gbia0101530a",
+   "source": "https://archive.org/details/78_shake-it-and-break-it_lanins-southern-serenaders-friscoe-chiha-clark_gbia0101530a",
+   "file": "1921_shake-it-and-break-it_lanins-southern-serenaders.mp3",
+   "status": "public domain (US, recording 1921; composition 1920)",
+   "style": "showroom",
+   "in_s": 1.0
+  },
+  {
+   "id": "moon-river-1922",
+   "title": "Moon River",
+   "performer": "The Bar Harbor Society Orchestra",
+   "writer": "Lee David",
+   "year": 1922,
+   "kind": "waltz",
+   "item": "78_moon-river_david--the-bar-harbor-society-orchestra_gbia0000636a",
+   "source": "https://archive.org/details/78_moon-river_david--the-bar-harbor-society-orchestra_gbia0000636a",
+   "file": "1922_moon-river_bar-harbor-society-orchestra.mp3",
+   "status": "public domain (US, recording 1922; composition 1922)",
+   "style": "boardroom",
+   "in_s": 1.0
+  }
+ ]
+}

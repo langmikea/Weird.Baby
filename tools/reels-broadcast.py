@@ -17,7 +17,8 @@ RB = importlib.import_module("reels-build")
 REPO = pathlib.Path(__file__).resolve().parents[1]
 SRC = pathlib.Path(r"C:\Users\macun\OneDrive\Desktop - Laptop\Weird.Baby\New folder")
 OUT = pathlib.Path(r"C:\Users\macun\OneDrive\WeirdBaby\reels\out\broadcast")
-BED = REPO / "public/audio/wb/06_coconuts_2026-06-17.mp3"     # his own song; a stand-in bed, marked in the story
+BEDS = json.loads((REPO / "reels/beds.json").read_text(encoding="utf-8"))   # Mike, 09-17 (Q2, A): public-domain 78s, one a style; the files live in OneDrive
+BED_DIR = pathlib.Path(BEDS["library"])
 SHEET = REPO / "docs/desk/BROADCAST.html"
 FONTS = pathlib.Path(r"C:\Windows\Fonts")
 W, H, FPS = 1080, 1920, 30
@@ -32,9 +33,9 @@ STYLES = {
         tv=dict(bleed=6, weave=2.6, flicker=0.035, scan=0.20, fringe=3),
         grain=24, tint="0x1a120c",
         font="COOPBL.TTF", title="THE GAMBLER", title_size=112, card_size=128, spacing=2,
-        bed=dict(rate=0.93, lp=2600, hp=160, wow=0.22, flutter=0.025, hiss=0.030, gain=0.55),
+        bed=dict(rate=1.00, lp=3000, hp=140, wow=0.14, flutter=0.020, hiss=0.0, gain=0.70),
         card_first=False, xfade=0.5,
-        shots=[("still", "0197", 3.4, (0.50, 0.50, 0.80)), ("still", "0203", 2.8, "auto"), ("still", "0216", 2.4, "auto"),
+        shots=[("still", "0197", 3.4, "auto"), ("still", "0203", 2.8, "auto"), ("still", "0216", 2.4, "auto"),
                ("live", "0234", 2.2, None), ("still", "0208", 1.8, "auto")]),
     "showroom": dict(
         line="the showroom: automobiles, fun girls. Bright, saturated then faded to magenta, high key; Brush Script; the bed bright with a light wow.",
@@ -43,9 +44,9 @@ STYLES = {
         tv=dict(bleed=8, weave=1.6, flicker=0.022, scan=0.13, fringe=5),
         grain=14, tint="0x1c1018",
         font="BRUSHSCI.TTF", title="the Gambler", title_size=168, card_size=184, spacing=0,
-        bed=dict(rate=1.00, lp=4200, hp=140, wow=0.10, flutter=0.018, hiss=0.018, gain=0.60),
+        bed=dict(rate=1.00, lp=4200, hp=120, wow=0.08, flutter=0.015, hiss=0.0, gain=0.72),
         card_first=False, xfade=0.0,
-        shots=[("still", "0197", 2.6, (0.50, 0.50, 0.78)), ("still", "0204", 2.0, "auto"), ("still", "0212", 2.0, "auto"),
+        shots=[("still", "0197", 2.6, "auto"), ("still", "0204", 2.0, "auto"), ("still", "0212", 2.0, "auto"),
                ("live", "0225", 2.0, None), ("still", "0235", 1.6, "auto"), ("still", "0199", 1.8, "auto")]),
     "boardroom": dict(
         line="the boardroom: business, insurance. Cool, flat, desaturated; the industrial film; Gill Sans in spaced capitals; a title card first; a sober bed.",
@@ -54,9 +55,9 @@ STYLES = {
         tv=dict(bleed=4, weave=1.0, flicker=0.014, scan=0.24, fringe=2),
         grain=18, tint="0x0e1216",
         font="GillSansBoNova.ttf", title="THE GAMBLER", title_size=104, card_size=112, spacing=14,
-        bed=dict(rate=0.97, lp=3200, hp=220, wow=0.06, flutter=0.012, hiss=0.022, gain=0.50),
+        bed=dict(rate=1.00, lp=3400, hp=160, wow=0.05, flutter=0.010, hiss=0.0, gain=0.62),
         card_first=True, xfade=0.0,
-        shots=[("still", "0197", 3.0, (0.50, 0.50, 0.82)), ("still", "0199", 2.4, "auto"), ("still", "0203", 2.2, "auto"),
+        shots=[("still", "0197", 3.0, "auto"), ("still", "0199", 2.4, "auto"), ("still", "0203", 2.2, "auto"),
                ("still", "0211", 2.2, "auto"), ("still", "0236", 2.0, "auto")]),
 }
 CARD_S = 1.8
@@ -65,48 +66,79 @@ def run(cmd, cwd=None): subprocess.run(cmd, check=True, cwd=cwd)
 def probe_dur(p): return float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(p)], capture_output=True, text=True).stdout)
 
 # ── plates ──────────────────────────────────────────────────────────────────
-def frame_png(frame, crop, td):
-    """a tray frame, EXIF-righted, cropped to 9:16 around (cx, cy) keeping `frac` of the height (A3: no artificial limit)"""
+# Mike, 09-17: the tray was shot in landscape; the phone's tag says portrait. The tag is wrong for this
+# set, so every plate is righted by the tag and then turned back: the rule at the bottom, the objects
+# upright. Ruling C (09-17): each shot opens on the whole tray as a 4:3 raster inside the tall frame
+# and the push lands inside the object in 9:16. A portrait re-shoot of the kit is on the shot list.
+def plate(frame):
     from PIL import Image, ImageOps
-    im = ImageOps.exif_transpose(Image.open(SRC / f"IMG_{frame}.JPG")); w, h = im.size
-    if crop == "auto": crop = find_object(im)
-    cx, cy, frac = crop
-    ch = int(h * frac); cw = int(ch * 9 / 16)
-    if cw > w: cw = w; ch = int(cw * 16 / 9)
-    x0 = min(max(int(w * cx) - cw // 2, 0), w - cw); y0 = min(max(int(h * cy) - ch // 2, 0), h - ch)
-    out = pathlib.Path(td) / f"f{frame}.png"
-    im.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.LANCZOS).save(out); return out
+    return ImageOps.exif_transpose(Image.open(SRC / f"IMG_{frame}.JPG")).rotate(90, expand=True)
 
-def find_object(im, margin=1.5):
-    """the object on the white tray: what is clearly darker than the tray's own level, or coloured, inside the tray's
-    interior (the rim and the steel rule along the left edge are outside the window), boxed, then framed with a margin;
-    returns (cx, cy, frac) for frame_png"""
+def find_object(im, margin=1.35):
+    """the object on the white tray (landscape). The tray's interior is found first (the longest bright run of
+    columns and of rows, shrunk a little so the rim's shadow is out); inside it, what is clearly darker than the
+    tray's level or coloured, eroded once so the tray's dimples and the rule's edge do not count, boxed with a
+    margin; returns (cx, cy, bw, bh) as fractions of the plate"""
     import numpy as np
     w, h = im.size; small = im.convert("RGB").resize((w // 8, h // 8)); a = np.asarray(small).astype(int)
     lum = a.mean(axis=2); sat = a.max(axis=2) - a.min(axis=2); sh, sw = lum.shape
-    win = (slice(int(sh * 0.16), int(sh * 0.84)), slice(int(sw * 0.26), int(sw * 0.80)))
-    tray = np.median(lum[win])
-    mask = np.zeros_like(lum, dtype=bool); mask[win] = (lum[win] < tray - 55) | (sat[win] > 70)
-    ys, xs = np.where(mask)
-    if len(xs) < 20: return (0.5, 0.5, 0.6)
-    x0, x1 = np.percentile(xs, [2, 98]); y0, y1 = np.percentile(ys, [2, 98])
-    cx, cy = (x0 + x1) / 2 / sw, (y0 + y1) / 2 / sh
-    bh = max((y1 - y0) / sh, (x1 - x0) / sw * 16 / 9) * margin
-    return (float(cx), float(cy), float(min(max(bh, 0.22), 0.9)))
+    tray = np.percentile(lum, 80)     # the tray is the brightest large thing in the frame; a central median fails when the object fills the centre (the case)
+    bright = lum > tray * 0.72
+    def run_of(frac):
+        """the tray's extent: the first and last column (row) that is mostly tray; an object across the middle
+        does not break it (the case fills rows to a tenth bright)"""
+        idx = np.where(frac > 0.08)[0]
+        return (int(idx[0]), int(idx[-1]) + 1) if len(idx) else (0, len(frac))
+    x0, x1 = run_of(bright.mean(axis=0)); y0, y1 = run_of(bright.mean(axis=1))
+    px, py = int((x1 - x0) * 0.10), int((y1 - y0) * 0.10)
+    win = (slice(y0 + py, int(y1 - (y1 - y0) * 0.22)), slice(x0 + px, x1 - px))      # the rule's band along the bottom is out
+    m = np.zeros_like(lum, dtype=bool); m[win] = (lum[win] < tray * 0.66) | (sat[win] > 55)   # proportional: the tray's own shading stays out, the objects come in
+    e = m.copy()
+    for dy in (-1, 0, 1):
+        for dx in (-1, 0, 1): e &= np.roll(np.roll(m, dy, 0), dx, 1)
+    ys, xs = np.where(e)
+    if len(xs) < 6: return (0.5, 0.45, 0.4, 0.4)
+    bx0, bx1 = np.percentile(xs, [4, 96]); by0, by1 = np.percentile(ys, [4, 96])
+    return (float((bx0 + bx1) / 2 / sw), float((by0 + by1) / 2 / sh), float(max((bx1 - bx0) / sw, 0.05) * margin), float(max((by1 - by0) / sh, 0.05) * margin))
+
+def raster_canvas(im, S, td, name):
+    """the landscape plate as a 4:3 screen inside the tall frame, the style's tint above and below"""
+    from PIL import Image
+    pw, ph = im.size; CW, CH = pw, int(pw * 16 / 9)
+    t = S["tint"]; tint = tuple(int(t[2 + k * 2:4 + k * 2], 16) for k in range(3))
+    canvas = Image.new("RGB", (CW, CH), tint); canvas.paste(im, (0, (CH - ph) // 2))
+    out = pathlib.Path(td) / f"{name}.png"; canvas.save(out); return out, CW, CH, (CH - ph) // 2
+
+def push(cx, cy, bw, bh, pw, ph, CW, CH, top, n, zmax=6.0):
+    """the zoompan expression for ruling C: from the whole raster (z=1) into the object's 9:16 window, eased"""
+    ox = cx * pw; oy = top + cy * ph
+    win_h = max(bh * ph, bw * pw * 16 / 9); z_end = min(max(CH / win_h, 1.4), zmax)
+    z = f"1+({z_end:.4f}-1)*(1-cos(PI*on/{n}))/2"
+    return f"zoompan=z='{z}':x='{ox:.1f}-iw/zoom/2':y='{oy:.1f}-ih/zoom/2':d={n}:s={W}x{H}:fps={FPS}"
 
 def still_clip(frame, secs, crop, S, td, i):
-    png = frame_png(frame, crop, td); out = pathlib.Path(td) / f"s{i:02d}.mp4"; n = int(secs * FPS)
-    vf = (f"zoompan=z='min(zoom+0.0010,1.16)':d={n}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={W}x{H}:fps={FPS},"
-          + S["grade"] + ",format=yuv420p,setsar=1")
-    run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-t", str(secs), "-i", str(png), "-vf", vf, "-t", str(secs), "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", str(out)]); return out
+    im = plate(frame); pw, ph = im.size
+    cx, cy, bw, bh = find_object(im) if crop == "auto" else crop
+    png, CW, CH, top = raster_canvas(im, S, td, f"c{frame}")
+    out = pathlib.Path(td) / f"s{i:02d}.mp4"; n = int(secs * FPS)
+    vf = push(cx, cy, bw, bh, pw, ph, CW, CH, top, n) + "," + S["grade"] + ",format=yuv420p,setsar=1"
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(png), "-vf", vf, "-frames:v", str(n), "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", str(out)]); return out
 
 def live_clip(frame, secs, S, td, i):
-    """the Live Photo's eleven frames stretched: the hand. Copied beside first: OneDrive's cloud files do not decode in place."""
+    """the Live Photo's eleven frames stretched (the hand), read without the phone's rotation tag (landscape, as shot),
+    on the same raster with the same push; the object is found on the photograph of the same frame.
+    Copied beside first: OneDrive's cloud files do not decode in place."""
     src = pathlib.Path(td) / f"IMG_{frame}.MOV"; shutil.copy(SRC / f"IMG_{frame}.MOV", src)
-    out = pathlib.Path(td) / f"s{i:02d}.mp4"; stretch = secs / LIVE_FRAMES_S
-    vf = (f"crop=ih*9/16:ih,scale={W}:{H},setpts={stretch:.3f}*PTS,minterpolate=fps={FPS}:mi_mode=mci:mc_mode=aobmc:vsbmc=1,"
+    im = plate(frame); pw, ph = im.size; cx, cy, bw, bh = find_object(im)
+    out = pathlib.Path(td) / f"s{i:02d}.mp4"; stretch = secs / LIVE_FRAMES_S; n = int(secs * FPS)
+    t = S["tint"]
+    # the movie is 1744x1308 (4:3); the canvas is its width by 16:9 of it, the plate centred, the tint around
+    mw, mh = 1744, 1308; CW, CH = mw, int(mw * 16 / 9); top = (CH - mh) // 2
+    vf = (f"setpts={stretch:.3f}*PTS,minterpolate=fps={FPS}:mi_mode=mci:mc_mode=aobmc:vsbmc=1,"
+          f"scale={mw}:{mh},pad={CW}:{CH}:0:{top}:color={t},"
+          + push(cx, cy, bw, bh, mw, mh, CW, CH, top, n).replace(f":d={n}", ":d=1").replace("on/", "in/") + ","
           + S["grade"] + ",format=yuv420p,setsar=1")
-    run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", vf, "-t", str(secs), "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", str(out)]); return out
+    run(["ffmpeg", "-v", "error", "-y", "-noautorotate", "-i", str(src), "-vf", vf, "-frames:v", str(n), "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", str(out)]); return out
 
 
 def title_png(text, S, size, td, name, y_frac, color=(244, 234, 217, 240), tag=None):
@@ -157,14 +189,18 @@ def television_and_film(middle, S, td, title_at):
     run(["ffmpeg", "-v", "error", "-y", "-i", str(middle), "-loop", "1", "-t", f"{dur:.3f}", "-i", str(scan), "-loop", "1", "-t", f"{dur:.3f}", "-i", str(title),
          "-filter_complex", chain, "-map", "[v]", "-an", "-t", f"{dur:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "17", str(out)], cwd=td); return out
 
-def bed(S, secs, td):
-    """his own song through the period's radio: pitched, band-limited, wow and flutter, hiss under it"""
-    b = S["bed"]; out = pathlib.Path(td) / "bed.wav"
-    chain = (f"[0:a]atrim=0:{secs+2},asetrate=48000*{b['rate']},aresample=48000,aformat=channel_layouts=stereo,"
+def bed_row(name):
+    return next(r for r in BEDS["rows"] if r["style"] == name)
+
+def bed(S, secs, td, name):
+    """the style's 78 through the period's set: band-limited, wow and flutter (the shellac brings its own crackle;
+    hiss is off unless a style asks), faded in and out"""
+    b = S["bed"]; row = bed_row(name); src = BED_DIR / row["file"]; out = pathlib.Path(td) / "bed.wav"
+    chain = (f"[0:a]atrim={row.get('in_s', 0)}:{row.get('in_s', 0)+secs+2},asetpts=PTS-STARTPTS,asetrate=48000*{b['rate']},aresample=48000,aformat=channel_layouts=stereo,"
              f"vibrato=f=0.55:d={b['wow']},vibrato=f=6.5:d={b['flutter']},lowpass=f={b['lp']},highpass=f={b['hp']},tremolo=f=0.35:d=0.10,"
              f"acompressor=threshold=-18dB:ratio=3,volume={b['gain']},afade=t=in:st=0:d=0.6,afade=t=out:st={secs-1.2}:d=1.2[m];"
              f"[1:a]volume={b['hiss']}[n];[m][n]amix=inputs=2:duration=first:normalize=0[a]")
-    run(["ffmpeg", "-v", "error", "-y", "-i", str(BED), "-f", "lavfi", "-i", "anoisesrc=c=pink:r=48000:a=1", "-filter_complex", chain, "-map", "[a]", "-t", str(secs), "-c:a", "pcm_s16le", str(out)]); return out
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-f", "lavfi", "-i", "anoisesrc=c=pink:r=48000:a=1", "-filter_complex", chain, "-map", "[a]", "-t", str(secs), "-c:a", "pcm_s16le", str(out)]); return out
 
 def build_style(name, S, td):
     clips = []; t = 0.0; title_at = None
@@ -187,7 +223,7 @@ def build_style(name, S, td):
         fc = "".join(f"[{k}:v]" for k in range(n)) + f"concat=n={n}:v=1:a=0,format=yuv420p[v]"
     run(["ffmpeg", "-v", "error", "-y", *ins, "-filter_complex", fc, "-map", "[v]", "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", str(middle)])
     look = television_and_film(middle, S, td, title_at or (0, 0))
-    secs = probe_dur(look); wav = bed(S, secs, td)
+    secs = probe_dur(look); wav = bed(S, secs, td, name)
     with_sound = pathlib.Path(td) / "with_sound.mp4"
     run(["ffmpeg", "-v", "error", "-y", "-i", str(look), "-i", str(wav), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "pcm_s16le", "-shortest", str(with_sound)])
     OUT.mkdir(parents=True, exist_ok=True); dest = OUT / f"broadcast_{name}.mp4"
@@ -212,8 +248,9 @@ def sheet(report):
     blocks = ""
     for name, r in report.items():
         S = STYLES[name]
+        br = bed_row(name)
         blocks += f"""<section><h2>{esc(name)}<small>{esc(S['story'])} · {r['seconds']} s · {esc(pathlib.Path(r['file']).name)}</small></h2>
-<p class="line">{esc(S['line'])}</p>
+<p class="line">{esc(S['line'])} Bed: <a href="{esc(br['source'])}">{esc(br['title'])}</a>, {esc(br['performer'])}, {br['year']}, public domain.</p>
 <div class="strip"><img src="data:image/jpeg;base64,{b64(r['strip'])}" alt="frames of the {esc(name)} sample, every half second"></div>
 <p class="dec"><span class="opt">A this is the {esc(name)}: keep the style as it stands for its stories</span><span class="opt">B keep the style, turn the knobs: say which layer (grade, television, film, type, bed) and which way</span><span class="opt">C drop this style</span></p></section>"""
     html = f"""<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Broadcast Look</title>
@@ -237,20 +274,20 @@ footer{{margin-top:30px;border-top:1px solid var(--rule);padding-top:12px;font-f
 </style></head><body><div class="wrap">
 <p class="eyebrow">Weird.Baby · Ops · the artifact reels · 2026-09-17</p>
 <h1>The Broadcast Look</h1>
-<p class="lede">1960s colour television captured to film, as a template: one stack of layers, a style per row. Three samples on the Gambler set of 09-16, fifteen seconds each, in the Finished reels folder under <b>broadcast</b>. The strips below are every half second of each sample. Story: docs/BROADCAST-LOOK-20260917.md.</p>
+<p class="lede">1960s colour television captured to film, as a template: one stack of layers, a style per row. Three samples on the Gambler set of 09-16, fifteen seconds each, in the Finished reels folder under <b>broadcast</b>. Second cut (09-17, late): the plates landscape as shot, each shot opening on the whole tray as a 4:3 raster and pushing into the object (ruling C), public-domain 78s for beds. The strips below are every half second of each sample. Story: docs/BROADCAST-LOOK-20260917.md.</p>
 <div class="letter"><p><b>Mike,</b></p>
 <p>Three styles on the same five or six plates, so the grade and the type carry the difference, not the objects. Each runs the same stack: plate, motion, grade, television (chroma bleed and fringing, a soft horizontal resolution, the frame breathing, flicker, the raster), film (grain, vignette, the warm-up at the top), the title in the period's type, a bed with wow and flutter, the pop first.</p>
-<p>The bed under all three is your June demo of Coconuts put through the period's radio. Original audio pays and a period library is a licensing question, so the sample says "his own song, treated" rather than guessing at a library. If the reels want a bed that is not a song of yours, that is its own question.</p>
+<p>The beds are public-domain 78s from the Internet Archive, one a style, as you ruled (question 2, A): a 1923 fox trot called The Gold Digger under the late show, a 1921 jazz fox trot under the showroom, a 1922 waltz under the boardroom. Each is logged in reels/beds.json with its year and source; nothing is owed on them.</p>
 <p>Sunday question 4 stands: one style per story, or a blend. My read after building them: the <b>late show</b> is the Gambler's and would be the Everyday's; the <b>showroom</b> is the CEO's automobiles and fun girls; the <b>boardroom</b> is the Informer's insurance and business. Per story, then, with the television and film layers shared so the wing reads as one broadcast. The knobs are all in one file; a fourth style is one more row.</p>
 <p>One law to name: the never-advertised reading of 09-06 says a reel never shows an artifact. The 09-10 reset made the artifacts a thing to sell, so these show the kit and the album's name and nothing of the Record, the ZIP or the portal. If you read it the other way, say so and the artifact reels stop here.</p>
 <p>— Ops</p></div>
 <table><thead><tr><th>style</th><th>story</th><th>grade</th><th>television</th><th>type</th><th>bed</th></tr></thead><tbody>
-<tr><td>the late show</td><td>gambling, gaming</td><td>warm, brown, faded, dark</td><td>heavy bleed, the frame breathes, strong lines</td><td>Cooper Black, capitals</td><td>pitched down, dull, deep wow</td></tr>
-<tr><td>the showroom</td><td>automobiles, fun girls</td><td>bright, saturated then faded to magenta, high key</td><td>strong bleed and fringing, quick flicker</td><td>Brush Script, lower case</td><td>bright, light wow</td></tr>
-<tr><td>the boardroom</td><td>business, insurance</td><td>cool, flat, desaturated</td><td>mild bleed, fine lines, steady</td><td>Gill Sans, spaced capitals, a title card first</td><td>sober, narrow band</td></tr>
+<tr><td>the late show</td><td>gambling, gaming</td><td>warm, brown, faded, dark</td><td>heavy bleed, the frame breathes, strong lines</td><td>Cooper Black, capitals</td><td>The Gold Digger, 1923, dull, deep wow</td></tr>
+<tr><td>the showroom</td><td>automobiles, fun girls</td><td>bright, saturated then faded to magenta, high key</td><td>strong bleed and fringing, quick flicker</td><td>Brush Script, lower case</td><td>Shake It and Break It, 1921, light wow</td></tr>
+<tr><td>the boardroom</td><td>business, insurance</td><td>cool, flat, desaturated</td><td>mild bleed, fine lines, steady</td><td>Gill Sans, spaced capitals, a title card first</td><td>Moon River, 1922, a waltz, narrow band</td></tr>
 </tbody></table>
 {blocks}
-<footer>tools/reels-broadcast.py · the plates are the 09-16 Gambler set · the beds are public/audio/wb/06_coconuts, treated · nothing here is a posting</footer>
+<footer>tools/reels-broadcast.py · the plates are the 09-16 Gambler set, landscape as shot, ruling C (the raster, then the push) · the beds are reels/beds.json · nothing here is a posting</footer>
 </div></body></html>"""
     SHEET.write_text(html, encoding="utf-8")
 
