@@ -42,12 +42,24 @@
    1
   ]
  },
+ "qa-line": {
+  "done": true,
+  "steps": [
+   1
+  ]
+ },
  "mocks": {
   "done": true,
   "steps": [
    1,
    2,
    3
+  ]
+ },
+ "element-line": {
+  "done": true,
+  "steps": [
+   1
   ]
  }
 }

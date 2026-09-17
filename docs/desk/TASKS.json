@@ -264,7 +264,8 @@
    "do": [
     "Thirty minutes, Sunday. Open the catalogue: https://claude.ai/code/artifact/9ce6fac0-17fd-416b-a02a-bec67b8436c6",
     "Read down. For each row say the number and a letter: A the pitch stands, B rewrite (say the line or the gist), C cut the row. Rows you say nothing about stand as A.",
-    "Anything missing from the machine, name it and it gets a row."
+    "Anything missing from the machine, name it and it gets a row.",
+    "Then the glass: open https://claude.ai/artifact/DfpetqdZQxXoNF16ccpj9g and say one letter, A, B or C (question 1 in QUESTIONS-for-Sunday). Ten minutes."
    ]
   },
   {

@@ -10,12 +10,25 @@ time. Ops clears a question the day it is answered.
   **A Miguel, slot 2** from the three on the voice page. Written into the
   robots registry the same evening.
 
-1. **The Gambler's answers do not fit the glass.** Measured 09-16 in the
-   machine's own font (FreeSansBold9pt7b on the 128x64 screen): none of the
-   twenty answers fits the firmware's two lines of 128 px; "THE SMART MONEY"
-   alone is 181 px. The other three personas' tables were built for that
-   limit. A. Re-cut the Gambler's twenty to the two-line limit (Ops drafts,
-   you rule). B. The Gambler's answers wrap to three short lines on the glass
-   (the reels already do this under your "we control the screen" ruling), and
-   the firmware follows. C. Leave the table; the reels wrap, the unit clips.
+1. **The answer tables do not fit the glass, and it is not only the
+   Gambler.** Re-measured 09-16 evening in the reveal font
+   (FreeSansBold9pt7b on the 128x64 top screen; three rows at most since
+   the firmware's B2 ruling of 07-30, so the "two lines" of the morning
+   was wrong): a row holds about ten capitals or fourteen small letters.
+   The four Release-1 tables were fitted to a 32-character rule written
+   for the small font. As marked, 31 of 281 cells fit; re-broken by the
+   font, 182; in sentence case, 197; 84 need words cut. The Gambler's
+   twenty: none fit as marked, seven in sentence case. The Glass Fit page
+   draws each of his twenty on the glass as the firmware would draw it
+   today, beside Ops' re-cut (sentence case, three rows, every row
+   measured; nine give up a word or phrase, named in red):
+   https://claude.ai/artifact/DfpetqdZQxXoNF16ccpj9g
+   A. The glass rules the words: the Gambler re-cut goes in, as is or with
+   your changes, and Ops re-breaks the other three tables by the font and
+   drafts the 84 cells that need a cut; the reels show exactly what the
+   unit shows. B. The words rule the glass: the reveal font becomes the
+   small face (about twenty-one characters a row); everything fits as
+   written; the reviewed reveal look changes on the unit and in the reels.
+   C. Two screens: the reels wrap freely, as now, up to four lines; the
+   unit keeps the tables and clips until the bench trip. Ops recommends A.
 

@@ -12,6 +12,16 @@ cannot fool (then the top-down clip IMG_0250 joins the library); the beat
 (music as element, separate); Sunday 09-20 sitting: the catalogue and the
 Gambler-answers-too-wide question. Nothing is late.
 
+**2026-09-16, later (the glass fit).** Sunday question 1 was re-measured and
+reframed: the reveal font holds ~10 capitals / ~14 small letters a row, three
+rows since B2; only 31 of 281 Release-1 cells fit as marked, 197 in sentence
+case, 84 need a cut. `tools/glass-fit.py` renders the Gambler's twenty on the
+glass (today vs Ops' re-cut, `docs/desk/GLASS-FIT-gambler.csv`) and writes
+`docs/desk/GLASS-FIT.html`, served https://claude.ai/artifact/DfpetqdZQxXoNF16ccpj9g,
+on the desk and on the 09-20 sitting's steps. Nothing changed in robots. Ops
+recommends A (the glass rules the words). Still open: the glass finder for
+IMG_0250; the beat.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 
