@@ -77,6 +77,18 @@ class Src:
         ts = [e["t"] for e in self.events if e["name"] == name]
         return (ts[-1] if last else ts[0]) if ts else None
     def evs(self, name): return [e["t"] for e in self.events if e["name"] == name]
+    def shift(self, t):
+        """the picture's jitter: the unit region's offset against a reference frame, in view px"""
+        import cv2
+        i = int(np.searchsorted(self.st, t, side="right")) - 1; i = max(0, min(len(self.shots) - 1, i))
+        if not hasattr(self, "_ref"):
+            t0 = (self.ev("idle") or self.st[0]) + 500; j = max(0, int(np.searchsorted(self.st, t0, side="right")) - 1)
+            self._ref = np.float32(np.asarray(Image.open(self.dir / "shots" / self.shots[j][1]).convert("L").crop(self.unit))); self._shifts = {}
+        if i not in self._shifts:
+            cur = np.float32(np.asarray(Image.open(self.dir / "shots" / self.shots[i][1]).convert("L").crop(self.unit)))
+            (dx, dy), _ = cv2.phaseCorrelate(self._ref, cur)
+            self._shifts[i] = (dx, dy) if abs(dx) < 6 and abs(dy) < 6 else (0.0, 0.0)
+        return self._shifts[i]
     def raw(self, t):
         i = int(np.searchsorted(self.st, t, side="right")) - 1; i = max(0, min(len(self.shots) - 1, i))
         k = ("r", i)
@@ -179,7 +191,8 @@ def render_zoom(S, t, which, level, box_h, frame_i, rng, fb_override=None):
         r = S.top if LEVELS[level].get("canvas") == "cvTop" else S.front
         pad = 14   # the site's canvas edge shows as a faint line in the photo of the glass: the patch is blended
         # into the glass around it (the ring's own grey), then only the lit pixels are added
-        rw, rh = int(round(r[2] * k)), int(round(r[3] * k)); bx, by = int(round((r[0] - x0) * k)), int(round((r[1] - y0) * k))
+        sx, sy = S.shift(t)                                                                       # the picture's own twitch
+        rw, rh = int(round(r[2] * k)), int(round(r[3] * k)); bx, by = int(round((r[0] - x0 + sx) * k)), int(round((r[1] - y0 + sy) * k))
         box = (bx - pad, by - pad, bx + rw + pad, by + rh + pad)
         region = base.crop(box); a = np.asarray(region, dtype=np.float32)
         ring = np.concatenate([a[:pad].ravel(), a[-pad:].ravel(), a[:, :pad].ravel(), a[:, -pad:].ravel()])
@@ -188,7 +201,12 @@ def render_zoom(S, t, which, level, box_h, frame_i, rng, fb_override=None):
         m = m.filter(ImageFilter.GaussianBlur(pad / 2))
         flat = Image.composite(fill, region, m)
         lit = glass_lit(fbi).resize((rw + 2 * pad, rh + 2 * pad), Image.LANCZOS)
-        base.paste(ImageChops.lighter(flat, lit), box[:2])
+        drawn = ImageChops.lighter(flat, lit)
+        # clipped to the round window: a disc a little inside the bezel, feathered, so the corners fall away and the edge blends
+        cx_, cy_ = region.width / 2, region.height / 2; rad = 70 * k
+        disc = Image.new("L", region.size, 0); ImageDraw.Draw(disc).ellipse([cx_ - rad, cy_ - rad, cx_ + rad, cy_ + rad], fill=255)
+        disc = disc.filter(ImageFilter.GaussianBlur(6))
+        base.paste(Image.composite(drawn, region, disc), box[:2])
     return secmon(base, frame_i, rng)
 
 def cap_band(S, t):
@@ -256,9 +274,8 @@ def clips(S):
     first_run = (S.evs("gamerun") or [S.ev("play") + 1200])[0]
     c = []
     c.append(dict(t0=t_twin + 1500, t1=t_twin + 2300, speed=1, glass="front", name=False))             # 1 the monitor booted; the glass's own noise, half a beat
-    c.append(dict(t0=t_walk - 600, t1=t_sel + 420, speed=1, glass="front", name=False))               # 2 the walk, choreographed by the machine
-    c.append(dict(t0=t_sel + 420, t1=t_sel + 1250, speed=1, glass="front", name=True, fx={0: "white", 1: "tear"}))   # 3 OUTPUT REDIRECTED, a beat, the name arrives
-    c.append(dict(t0=first_run + 150, t1=first_run + 950, speed=1, glass="top", name=True, mode="score"))   # 5 the top window: the game, a beat to land
+    c.append(dict(t0=t_walk - 600, t1=t_sel + 200, speed=1, glass="front", name=False))               # 2 the walk, choreographed by the machine
+    c.append(dict(t0=first_run + 150, t1=first_run + 1100, speed=1, glass="top", name=True, mode="score", fx={0: "white", 1: "tear"}))   # 3 the top window: the game lands, the name and the pop
     c.append(dict(t0=t_run0, t1=t_go - 40, ramp=(5.0, 10.0), glass="top", name=True, mode="score"))    # 6 the race: five times, climbing to ten
     c.append(dict(t0=t_go - 480, t1=t_go - 30, hold=(56, 14), glass="top", name=True, boom=True, mode="score"))   # 7 WHAM: slow motion to a stop
     c.append(dict(t0=t_go + 300, t1=t_go + 1400, speed=1, glass="top", name=True, mode="highscore"))   # 8 NEW HIGH SCORE, a beat
@@ -315,7 +332,7 @@ def sound(S, cl, total_s, black_s, td):
         if e["name"] in ("scroll", "click", "play-click", "play-shake"):
             r = reel_t(e["t"])
             if r is not None: add(r, tick(0.45 if "click" in e["name"] else 0.3, 5, 1500 if "click" in e["name"] else 2400))
-    r = starts[3]; add(r, tone(0.35, 120, 660)); add(r + 0.11, tone(0.35, 220, 990))                    # the sting: the payload
+    r = starts[2]; add(r, tone(0.35, 120, 660)); add(r + 0.11, tone(0.35, 220, 990))                    # the sting: the payload lands
     n_th = int(0.16 * SR); e = np.exp(-np.arange(n_th) / (n_th / 4)); add(r + 0.02, 0.5 * e * np.sin(2 * np.pi * 85 * np.arange(n_th) / SR))
     for i, c in enumerate(cl):                                                                           # the engine, climbing with the speed
         if "ramp" in c and i < i_boom:

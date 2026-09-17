@@ -328,3 +328,21 @@ The final card: NEW HIGH SCORE at half size, the number stays large.
   flash repeats three times.
 - The card: the title in the small face, the figure at twice the reveal
   font.
+
+## 13. Four notes (2026-09-17, third round)
+
+Mike: remove "redirected"; SCROLL should light when scrolling; while viewing
+`> Programs <` the VIIIp twitches but the drawn screen stays put; the front
+view's drawn screen must be cropped at the corners to remove the overlap and
+give depth, and its whole perimeter should blend.
+
+- The OUTPUT REDIRECTED card is gone: the payload's flashes cut straight to
+  the top window with the game landing, and the name and the pop arrive
+  there.
+- SCROLL lights for a third of a second on every scroll, as CLICK does.
+- The site's picture twitches by a pixel now and then (its own jitter); the
+  drawn glass now measures the picture's shift against a reference frame and
+  moves with it.
+- The drawn front glass is clipped to the round window (a disc a little
+  inside the bezel, feathered), so the corners fall away behind the rim and
+  the whole edge blends into the glass.

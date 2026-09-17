@@ -120,7 +120,7 @@ def capture(feature, path, play, folder):
             if h is None: raise SystemExit(f"no button {text}")
             return "#" + h
         def press(sel, name, **kw):
-            pg.evaluate(f"() => window.__wb.blink(document.querySelector({json.dumps(sel)}), 140)")
+            pg.evaluate(f"() => window.__wb.blink(document.querySelector({json.dumps(sel)}), {320 if name == 'scroll' else 140})")
             pg.click(sel); C.mark(name, **kw)
         # the console (not in the reel): channel 3 to CAB, then RUN
         press("button[aria-label='channel 3']", "ch3"); C.wait(0.5)

@@ -87,6 +87,12 @@ window filling the width; the cut picks the game over with the longest run;
 the card's title is half size, the figure twice. Reviewed at 0.1 s over the
 walk. Open: the beat; the Q&A reel's branch label; Sunday question 2.
 
+**2026-09-17 (§13, four notes).** No redirect card (the payload's flashes cut
+to the top window, name and pop land there); SCROLL lights 320 ms; the drawn
+front glass follows the picture's jitter by phase correlation against a
+reference frame and is clipped to the round window (disc r=70 view px,
+feathered). Reviewed at 0.1 s over the walk and at full size on the glass.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 
