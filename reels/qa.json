@@ -11,17 +11,32 @@
  ],
  "rows": [
   {
+   "date": "2026-09-16",
+   "question": "Did the market just do what I think it did?",
+   "answer": "COUNT YOUR MONEY WHILE IT'S STILL YOURS.",
+   "seed": 4064476156,
+   "hot": true,
+   "status": "built",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\qa\\2026-09-16_qa_hot1.mp4",
+   "caption": "Did the market just do what I think it did?\nweird.baby\n#weirdbaby #mgkviiip #thedetermination",
+   "postings": {},
+   "numbers": {},
+   "built_on": "2026-09-16",
+   "test": true
+  },
+  {
    "date": "2026-10-31",
    "question": "Is it too late to start over?",
    "answer": "NOT YET. THE HAND IS STILL BEING DEALT.",
    "seed": 544810978,
    "test": true,
    "hot": false,
-   "status": "open",
-   "file": null,
-   "caption": null,
+   "status": "built",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\qa\\2026-10-31_qa.mp4",
+   "caption": "Is it too late to start over?\nweird.baby\n#weirdbaby #mgkviiip #thedetermination",
    "postings": {},
-   "numbers": {}
+   "numbers": {},
+   "built_on": "2026-09-16"
   },
   {
    "date": "2026-11-01",
@@ -30,11 +45,12 @@
    "seed": 1305509475,
    "test": true,
    "hot": false,
-   "status": "open",
-   "file": null,
-   "caption": null,
+   "status": "built",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\qa\\2026-11-01_qa.mp4",
+   "caption": "Will my team cover the spread?\nweird.baby\n#weirdbaby #mgkviiip #thedetermination",
    "postings": {},
-   "numbers": {}
+   "numbers": {},
+   "built_on": "2026-09-16"
   },
   {
    "date": "2026-11-02",
@@ -43,11 +59,12 @@
    "seed": 2301203916,
    "test": true,
    "hot": false,
-   "status": "open",
-   "file": null,
-   "caption": null,
+   "status": "built",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\qa\\2026-11-02_qa.mp4",
+   "caption": "Should I answer that email today?\nweird.baby\n#weirdbaby #mgkviiip #thedetermination",
    "postings": {},
-   "numbers": {}
+   "numbers": {},
+   "built_on": "2026-09-16"
   },
   {
    "date": "2026-11-03",
@@ -56,11 +73,12 @@
    "seed": 1414273841,
    "test": true,
    "hot": false,
-   "status": "open",
-   "file": null,
-   "caption": null,
+   "status": "built",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\qa\\2026-11-03_qa.mp4",
+   "caption": "Does the cat actually like me?\nweird.baby\n#weirdbaby #mgkviiip #thedetermination",
    "postings": {},
-   "numbers": {}
+   "numbers": {},
+   "built_on": "2026-09-16"
   },
   {
    "date": "2026-11-04",
@@ -69,11 +87,12 @@
    "seed": 246791751,
    "test": true,
    "hot": false,
-   "status": "open",
-   "file": null,
-   "caption": null,
+   "status": "built",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\qa\\2026-11-04_qa.mp4",
+   "caption": "Is this the year I fix the porch?\nweird.baby\n#weirdbaby #mgkviiip #thedetermination",
    "postings": {},
-   "numbers": {}
+   "numbers": {},
+   "built_on": "2026-09-16"
   }
  ]
 }

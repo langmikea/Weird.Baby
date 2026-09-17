@@ -802,9 +802,10 @@
    "title": "Element cut lists in the reel line",
    "long": "The reel line assembles a Determination from the element library, a cut list and one line of data (question, answer, feature)",
    "do": [
-    "Tag the element takes; three or four cut lists; the line picks one per day.",
-    "Dry-run five days from the catalogue's launch-run features."
-   ]
+    "Folded into the Q&A line: the seed picks the takes from the library (ten holds, three shakes, three close-ups of IMG_0247); the library grows with each shoot."
+   ],
+   "done": true,
+   "done_on": "2026-09-16"
   },
   {
    "id": "qa-line",
@@ -813,12 +814,10 @@
    "title": "The Q&A line: list in, reels and packets out",
    "long": "The template (tools/reels-qa.py) driven by the workbook's Questions sheet: one reel a day, seven days, seeded so no two cut alike; caption per Q2; the packet the posting line queues at 17:00 NY from 10-31; the hot lane from chat; the 06:08 run builds seven days ahead. Proven in dry run on five dummy rows.",
    "do": [
-    "Questions sheet in the workbook (date, question, answer, posted), Ops-kept.",
-    "reels-qa.py takes rows and a seed; variety from the seed across takes, timings and the monitor.",
-    "Packet + caption per Q2; reels-queue.mjs schedules daily at 17:00 NY, seven days, from 10-31.",
-    "Hot lane: chat -> reel -> queued within the hour.",
-    "Morning run builds the week ahead; dry run on five rows."
-   ]
+    "Done 09-16, three days early. Proven in dry run: five dummy rows built from the Questions sheet, each a different cut; the queue lists them for 17:00 NY on the four surfaces; the hot lane built and dry-queued an extra reel from a chat question. The 06:08 run builds and queues a week ahead. Posting for real starts the day the Buffer key lands."
+   ],
+   "done": true,
+   "done_on": "2026-09-16"
   }
  ]
 }

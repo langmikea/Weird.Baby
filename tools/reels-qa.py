@@ -68,24 +68,24 @@ TAGS = "#weirdbaby #mgkviiip #thedetermination"
 # the library of takes: every window is a start time in one of Mike's clips; the glass is found in the
 # first frame by auto_seed (the big dark circle with a lens under it) and tracked from there.
 LIBRARY = {
-    "hold":  [("0247", 20.0), ("0247", 24.0), ("0247", 28.0), ("0247", 32.0), ("0247", 40.0), ("0247", 44.0), ("0247", 56.0),
-              ("0250", 2.0), ("0250", 6.0), ("0250", 10.0), ("0250", 14.0), ("0250", 30.0), ("0250", 34.0)],
-    "shake": [("0247", 81.0), ("0247", 82.0), ("0247", 84.0)],
-    "ecu":   [("0247", 50.0), ("0247", 50.4), ("0247", 51.0)],
+    # (clip, start_s, seed circle in the clip's full 4K frame). Seeds verified on 09-16; the tracker adapts from them.
+    # The top-down clip (0250) waits for a glass finder that the black body cannot fool.
+    "hold":  [("0247", t, (1964, 1028, 204)) for t in (20.0, 22.0, 24.0, 26.0, 28.0, 30.0, 32.0, 36.0, 40.0, 44.0)],
+    "shake": [("0247", t, (1656, 932, 312)) for t in (81.0, 82.0, 84.0)],
+    "ecu":   [("0247", t, (2104, 1176, 448)) for t in (50.0, 50.4, 51.0)],
 }
 QUESTION, ANSWER, SEGMENTS = "Should I bet on the home team tonight?", ("THE SMART MONEY", "LEFT AN HOUR AGO."), []
 
 def choose(seed):
     """the seed's cut: two holds from one clip, a shake, a close-up, the slide's side, the push, the theatre's length"""
     rng = np.random.default_rng(seed)
-    clip = rng.choice(["0247", "0247", "0250"])                  # the gloved hands twice as often
-    holds = [h for h in LIBRARY["hold"] if h[0] == clip]
+    holds = LIBRARY["hold"]
     picks = rng.choice(len(holds), size=2, replace=False)
     h1, h2 = holds[picks[0]], holds[picks[1]]
     shake = LIBRARY["shake"][rng.integers(len(LIBRARY["shake"]))]
     ecu = LIBRARY["ecu"][rng.integers(len(LIBRARY["ecu"]))]
     return {
-        "segments": [(h1[0], h1[1], 1.7, None, "hold"), (h2[0], h2[1], 1.7, None, "hold"), (shake[0], shake[1], 0.5, None, "shake"), (ecu[0], ecu[1], 0.1, None, "ecu")],
+        "segments": [(h1[0], h1[1], 1.7, h1[2], "hold"), (h2[0], h2[1], 1.7, h2[2], "hold"), (shake[0], shake[1], 0.5, shake[2], "shake"), (ecu[0], ecu[1], 0.1, ecu[2], "ecu")],
         "slide_from": "right" if rng.random() < 0.6 else "left",
         "push": float(rng.uniform(0.03, 0.07)),
         "theatre_s": float(rng.uniform(1.2, 1.8)),
@@ -93,19 +93,28 @@ def choose(seed):
         "mon_offset": int(rng.integers(0, 40)),
     }
 
-def auto_seed(g):
-    """the glass in a first frame: the biggest dark circle in the middle of the frame with a lens under it"""
+RADIUS = {"hold": (140, 260), "shake": (200, 360), "ecu": (300, 620)}   # the glass's radius at 1080 wide, per role
+def auto_seed(g, role="hold"):
+    """the glass in a first frame: a circle of the role's size, DARK inside (it is black glass), with a lens under it;
+    the biggest such. Rings and plates are bright inside and fail the darkness test."""
     import cv2
+    lo, hi = RADIUS.get(role, (110, 620))
     small = cv2.medianBlur(cv2.resize(g, (W // 2, H // 2)), 5)
-    cs = cv2.HoughCircles(small, cv2.HOUGH_GRADIENT, dp=1.2, minDist=30, param1=110, param2=30, minRadius=40, maxRadius=260)
+    cs = cv2.HoughCircles(small, cv2.HOUGH_GRADIENT, dp=1.2, minDist=25, param1=110, param2=26, minRadius=int(lo * 0.45 / 2), maxRadius=int(hi / 2) + 2)
     if cs is None: return None
-    cands = [(x * 2, y * 2, r * 2) for x, y, r in cs[0] if 200 < x * 2 < W - 200 and 250 < y * 2 < 1250]
+    cands = [(x * 2, y * 2, r * 2) for x, y, r in cs[0] if 150 < x * 2 < W - 150 and 150 < y * 2 < H - 400]
+    def dark(c):
+        cx, cy, r = int(c[0]), int(c[1]), int(c[2] * 0.6)
+        y0, y1, x0, x1 = max(0, cy - r), min(H, cy + r), max(0, cx - r), min(W, cx + r)
+        if y1 <= y0 or x1 <= x0: return 255
+        return float(np.mean(g[y0:y1, x0:x1]))
     best = None
     for c in cands:
+        if not (lo <= c[2] <= hi) or dark(c) > 90: continue
         for l in cands:
             if l is c: continue
             d = math.hypot(l[0] - c[0], l[1] - (c[1] + 1.7 * c[2]))
-            if 0.3 * c[2] < l[2] < 0.65 * c[2] and d < 0.6 * c[2] and (best is None or c[2] > best[2]): best = c
+            if 0.28 * c[2] < l[2] < 0.7 * c[2] and d < 0.7 * c[2] and (best is None or c[2] > best[2]): best = c
     return best
 BLACK_S = 0.2
 SLIDE_S = 0.4          # the signature move: the logo slides off, the machine slides in
@@ -177,6 +186,7 @@ OPERANDS = ["$00","$01","$07","$0A","$23","$24","$2A","$3B","$44","$4C","$5D","$
 _mon = np.random.default_rng(11)
 _mon_lines = [f"{_mon.choice(OPCODES)} {_mon.choice(OPERANDS)}" for _ in range(64)]
 MON_OFFSET = [0]
+ROLE_OF = {}
 def screen_monitor(k, total):
     """the machine at work on the front glass: the twin's own faux-assembly scroller (opcodes and operands
     from viiip_twin.html) rolling one line every four frames, a load bar filling along the bottom"""
@@ -282,7 +292,7 @@ def extract(clip, start, secs, seed, td, tag):
         x0 = max(0, (fw - cw) // 2)
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(start), "-i", str(SRC / f"IMG_{clip}.MOV"), "-frames:v", "1",
                         "-vf", f"crop={cw}:{fh}:{x0}:0,scale={W}:{H},format=gray", str(d / "probe.png")], check=True)
-        c = auto_seed(cv2.imread(str(d / "probe.png"), cv2.IMREAD_GRAYSCALE))
+        c = auto_seed(cv2.imread(str(d / "probe.png"), cv2.IMREAD_GRAYSCALE), role=tag.split("_")[0].rstrip("0123456789") if False else ROLE_OF.get(tag, "hold"))
         if c is None: return None, None
         seed = (c[0] / k + x0, c[1] / k, c[2] / k)
     x0 = max(0, min(fw - cw, int(seed[0] - cw / 2)))
@@ -349,7 +359,7 @@ def track(frames, seed):
         g = cv2.imread(str(f), cv2.IMREAD_GRAYSCALE)
         small = cv2.resize(g, (W // 2, H // 2)); small = cv2.medianBlur(small, 5)
         r0 = prev[2] / 2
-        cs = cv2.HoughCircles(small, cv2.HOUGH_GRADIENT, dp=1.2, minDist=20, param1=110, param2=28, minRadius=int(r0 * 0.75), maxRadius=int(r0 * 1.3))
+        cs = cv2.HoughCircles(small, cv2.HOUGH_GRADIENT, dp=1.2, minDist=20, param1=110, param2=28, minRadius=int(r0 * 0.9), maxRadius=int(r0 * 1.1) + 1)
         best = None
         if cs is not None:
             for x, y, r in cs[0]:
@@ -535,14 +545,26 @@ def _build(dest, review, cut):
         # frames per segment, tracked
         segs = []
         for i, (clip, start, secs, seed, role) in enumerate(SEGMENTS):
+            ROLE_OF[f"seg{i}"] = role
             frames, seed_out = extract(clip, start, secs, seed, td, f"seg{i}")
             if frames is None:
                 # the glass was not found in that take: fall back to the first take of the role that works
                 for alt in LIBRARY[role]:
-                    frames, seed_out = extract(alt[0], alt[1], secs, None, td, f"seg{i}_{alt[0]}_{int(alt[1]*10)}")
+                    ROLE_OF[f"seg{i}_{alt[0]}_{int(alt[1]*10)}"] = role
+                    frames, seed_out = extract(alt[0], alt[1], secs, alt[2], td, f"seg{i}_{alt[0]}_{int(alt[1]*10)}")
                     if frames is not None: clip, start = alt; break
             if frames is None: raise SystemExit(f"no take of role {role} yields a glass")
             circles = track(frames, seed_out)
+            lo, hi = RADIUS[role]; rs = [c[2] for c in circles]
+            if not (lo * 0.8 <= min(rs) and max(rs) <= hi * 1.1):
+                print(f"  seg{i} {role}: glass radius {min(rs):.0f}..{max(rs):.0f} outside {lo}..{hi}; trying another take")
+                used = {(sg[0], sg[1]) for sg in SEGMENTS if sg[4] == role}
+                for alt in LIBRARY[role]:
+                    if (alt[0], alt[1]) in used: continue
+                    fr2, so2 = extract(alt[0], alt[1], secs, alt[2], td, f"seg{i}_{alt[0]}_{int(alt[1]*10)}")
+                    if fr2 is None: continue
+                    c2 = track(fr2, so2); r2 = [c[2] for c in c2]
+                    if lo * 0.8 <= min(r2) and max(r2) <= hi * 1.1: frames, circles, clip, start = fr2, c2, alt[0], alt[1]; break
             segs.append((role, frames, circles))
             print(f"  seg{i} {role:5s} {clip} {start:>5}s {len(frames)} frames  glass r {circles[0][2]:.0f}->{circles[-1][2]:.0f}")
         fontq = ImageFont.truetype(FONT_Q, 72)
@@ -665,10 +687,12 @@ def _build(dest, review, cut):
                         "-c:v", "libx264", "-preset", "medium", "-crf", "17", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(dest)], check=True)
         dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(dest)], capture_output=True, text=True).stdout)
         print(f"  wrote {dest}  {dur:.1f}s")
+        result = dest
         if review:
             sheet = dest.with_name(dest.stem + "_review.jpg")
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(dest), "-vf", "fps=4,scale=216:-1,tile=10x5", "-frames:v", "1", str(sheet)], check=True)
             print(f"  review sheet {sheet}")
+    return result
 
 if __name__ == "__main__":
     main()
