@@ -103,15 +103,31 @@ def glass_lit(fb):
     glow = lit.filter(ImageFilter.GaussianBlur(Z * 0.8))
     return Image.fromarray(np.clip(np.asarray(lit, dtype=np.float32) * 0.92 + np.asarray(glow, dtype=np.float32) * 0.5, 0, 255).astype(np.uint8), "L")
 
-def zoom_in(S, t, which):
-    """the unit, its front glass carrying the screen the story is on"""
-    base = S.zoom(t); r = S.front; u = S.unit; k = S.k
-    if t < S.gt[0]: return base                      # before the twin lands the zoom-in is the monitor's noise, nothing else
-    x0, y0 = (r[0] - u[0]) * k, (r[1] - u[1]) * k; w, h = r[2] * k, r[3] * k
-    lit = glass_lit(S.fb(t, which)).resize((int(round(w)) + 4, int(round(h)) + 4), Image.LANCZOS)
-    # the glass is REPLACED, not lit over: the monitor's own tiny rendering must not ghost through
-    base.paste(lit, (int(round(x0)) - 2, int(round(y0)) - 2))
-    return base
+# the zoom levels: crops of the monitor's picture, in view px around the front glass canvas centre (cx, cy)
+LEVELS = {"unit": dict(left=-202, right=232, top=-241), "mid": dict(left=-165, right=165, top=-241), "glass": dict(left=-95, right=95, centre=True)}
+CAP = dict(left=-202, right=232, top=-241, height=44)          # the ridged cap: the band the name sits on
+BAND_H = 110
+
+def view_crop(S, level, box_h):
+    """the crop rectangle in view px for a level filling W x box_h"""
+    L = LEVELS[level]; r = S.front; cx, cy = r[0] + r[2] / 2, r[1] + r[3] / 2
+    x0, x1 = cx + L["left"], cx + L["right"]; k = W / (x1 - x0); h = box_h / k
+    y0 = cy - h / 2 if L.get("centre") else cy + L["top"]
+    return (x0, y0, x1, y0 + h), k
+
+def render_zoom(S, t, which, level, box_h, frame_i, rng):
+    """the monitor's picture cropped to a level, the story's screen drawn into the front glass, the read over it"""
+    (x0, y0, x1, y1), k = view_crop(S, level, box_h)
+    base = S.raw(t).crop((int(x0), int(y0), int(x1), int(y1))).resize((W, box_h), Image.LANCZOS)
+    if t >= S.gt[0]:
+        r = S.front
+        lit = glass_lit(S.fb(t, which)).resize((int(round(r[2] * k)) + 4, int(round(r[3] * k)) + 4), Image.LANCZOS)
+        base.paste(lit, (int(round((r[0] - x0) * k)) - 2, int(round((r[1] - y0) * k)) - 2))   # replaced, not lit over
+    return secmon(base, frame_i, rng)
+
+def cap_band(S, t):
+    r = S.front; cx, cy = r[0] + r[2] / 2, r[1] + r[3] / 2
+    return S.raw(t).crop((int(cx + CAP["left"]), int(cy + CAP["top"]), int(cx + CAP["right"]), int(cy + CAP["top"] + CAP["height"]))).resize((W, BAND_H), Image.LANCZOS)
 
 _scan = None
 def secmon(im, frame_i, rng):
@@ -145,14 +161,25 @@ def boom(im, k, rng):
     out = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
     return tear(out, rng, 1.0) if (k < 0.35 and rng.random() < 0.5) else out
 
-def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0):
-    f = Image.new("L", (W, H), 0)
-    f.paste(S.shot(t), (0, MON_Y))
-    z = secmon(zoom_in(S, t, which), frame_i, rng)
-    f.paste(z.crop((0, 0, W, min(z.height, ZOOM_H))), (0, ZOOM_Y))
+def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, layout="mon-unit", level="glass"):
+    f = Image.new("L", (W, H), 0); name_at = None
+    if layout.startswith("mon-"):
+        f.paste(S.shot(t), (0, MON_Y)); lv = layout[4:]
+        if lv == "glass":
+            f.paste(cap_band(S, t), (0, ZOOM_Y)); name_at = ZOOM_Y + 8
+            f.paste(render_zoom(S, t, which, "glass", H - ZOOM_Y - BAND_H, frame_i, rng), (0, ZOOM_Y + BAND_H))
+        else:
+            f.paste(render_zoom(S, t, which, lv, H - ZOOM_Y, frame_i, rng), (0, ZOOM_Y)); name_at = ZOOM_Y + 14
+    else:                                   # the unit alone: a level per beat
+        top = MON_Y
+        if level == "glass":
+            f.paste(cap_band(S, t), (0, top)); name_at = top + 8
+            f.paste(render_zoom(S, t, which, "glass", H - top - BAND_H, frame_i, rng), (0, top + BAND_H))
+        else:
+            f.paste(render_zoom(S, t, which, level, H - top, frame_i, rng), (0, top)); name_at = top + 14
     out = f.convert("RGB")
     if name_on and plate is not None:
-        col, alpha = plate; out.paste(col, ((W - col.width) // 2, ZOOM_Y + 14), alpha)
+        col, alpha = plate; out.paste(col, ((W - col.width) // 2, name_at), alpha)
     ImageDraw.Draw(out).text((26, 6), BRANCH, fill=(112, 112, 112), font=font)
     if fx == "white": out = Image.blend(out, Image.new("RGB", (W, H), (255, 255, 255)), 0.75)
     elif fx == "tear": out = tear(out, rng)
@@ -167,9 +194,9 @@ def clips(S):
     t_go = S.ev("gameover", last=True) or (t_end - 1500)
     runs = [t for t in S.evs("gamerun") if t < t_go]; t_run0 = (runs[-1] if runs else t_play) + 400
     c = []
-    c.append(dict(t0=t_run + 200, t1=t_run + 1150, speed=1, glass="front", name=False))               # 1 noise
-    c.append(dict(t0=t_twin + 700, t1=t_twin + 2300, speed=1, glass="front", name=False))             # 2 the twin lands
-    c.append(dict(t0=t_walk - 450, t1=t_reach - 40, speed=1, glass="front", name=False))              # 3 the walk
+    c.append(dict(t0=t_run + 200, t1=t_run + 1150, speed=1, glass="front", name=False, level="unit"))   # 1 noise
+    c.append(dict(t0=t_twin + 700, t1=t_twin + 2300, speed=1, glass="front", name=False, level="unit"))   # 2 the twin lands
+    c.append(dict(t0=t_walk - 450, t1=t_reach - 40, speed=1, glass="front", name=False, level="mid"))   # 3 the walk
     c.append(dict(t0=t_reach - 40, t1=t_reach + 850, speed=1, glass="front", name=True, fx={0: "white", 1: "tear", 3: "tear"}))   # 4 the payload
     c.append(dict(t0=t_reach + 850, t1=t_reach + 1300, speed=1, glass="top", name=True))              #   the hand-off: the game comes through the front glass
     if t_go - 40 - (t_run0 + 2000) > 1500:
@@ -240,7 +267,7 @@ def sound(S, cl, total_s, black_s, td):
         wv.setnchannels(1); wv.setsampwidth(2); wv.setframerate(SR); wv.writeframes((np.clip(sfx, -1, 1) * 32767).astype("<i2").tobytes())
     return f
 
-def assemble(folder, row, out_dir):
+def assemble(folder, row, out_dir, layout="mon-unit"):
     S = Src(folder); rq = load_font()
     plate = name_plate(rq, row["feature"].upper()); font = small_font(21)
     cl = clips(S); BLACK_S = 0.3; rng = np.random.default_rng(11)
@@ -251,7 +278,7 @@ def assemble(folder, row, out_dir):
         for k, t in enumerate(ts):
             e = fx.get(k); kk = 0.0
             if c.get("boom"): e = "boom"; kk = k / max(1, len(ts) - 1)
-            compose(S, t, c["glass"], plate, c["name"], font, n, rng, e, kk).save(frames / f"{n:05d}.png"); n += 1
+            compose(S, t, c["glass"], plate, c["name"], font, n, rng, e, kk, layout, c.get("level", "glass")).save(frames / f"{n:05d}.png"); n += 1
     for k in range(int(BLACK_S * FPS)): Image.new("RGB", (W, H), (0, 0, 0)).save(frames / f"{n:05d}.png"); n += 1
     total_s = n / FPS; print(f"  {len(cl)} clips, {n} frames, {total_s:.1f}s + the pop")
     sfx = sound(S, cl, total_s, BLACK_S, td)
@@ -261,7 +288,7 @@ def assemble(folder, row, out_dir):
                     "-c:v", "libx264", "-preset", "medium", "-crf", "17", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", str(middle)], check=True)
     out_dir.mkdir(parents=True, exist_ok=True)
     slug = re.sub(r"[^a-z0-9]+", "-", row["feature"].lower()).strip("-")
-    dest = out_dir / f"feature_{slug}.mp4"
+    dest = out_dir / f"feature_{slug}_{layout}.mp4"
     vf = ("[0:v]scale=1080:1920,fps=30,format=gray,format=yuv420p,setsar=1[v0];[0:a]aformat=sample_rates=48000:channel_layouts=stereo[a0];"
           "[1:v]fps=30,format=yuv420p,setsar=1[v1];[1:a]aformat=sample_rates=48000:channel_layouts=stereo[a1];[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(POP), "-i", str(middle), "-filter_complex", vf, "-map", "[v]", "-map", "[a]",
@@ -271,4 +298,5 @@ def assemble(folder, row, out_dir):
 
 if __name__ == "__main__":
     folder = sys.argv[1]; feat = sys.argv[2] if len(sys.argv) > 2 else "Tilt Drive"
-    assemble(pathlib.Path(folder), {"feature": feat}, ROOT / "reels" / "out" / "features")
+    for layout in (sys.argv[3] if len(sys.argv) > 3 else "mon-unit").split(","):
+        print(f"layout {layout}"); assemble(pathlib.Path(folder), {"feature": feat}, ROOT / "reels" / "out" / "features", layout)

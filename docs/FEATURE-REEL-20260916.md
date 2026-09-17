@@ -212,3 +212,26 @@ beat, loop.
 The run is driven so it ends in a car: weave for the first stretch, then hold
 the lane and let the traffic come. If the road ends a run early it is
 restarted; the reel uses the last run.
+
+## 9. Zoom levels, quick iteration (2026-09-17)
+
+Mike, with a mock: try the zoom-in with the front glass filling the width,
+the name on a slim band of the cap above it; then something between that and
+the unit-wide crop; then a version that is only the unit, no monitor, opening
+on a full shot and cutting in to varying levels of close-up. Mashups between
+the sets may follow, as in the Q&A reel. The artifact reels, when they come,
+are presented as 1960s CRT broadcast television.
+
+The levels, all cut from the same capture, all measured from the front glass
+canvas on the page:
+
+| level | what the crop holds | scale of the monitor's picture |
+|---|---|---|
+| unit | the whole unit, cap to lens ring, edge to edge | 2.5x |
+| mid | cap, the plate's lettering, the glass, the top of the lens ring | 3.6x |
+| glass | the front window filling the width, the cap on a slim band above with the name | 5.7x |
+
+Three variants: **A** monitor over the glass level (Mike's mock); **B** monitor
+over the mid level; **C** the unit alone, no monitor: full shot for the noise
+and the landing, mid for the walk, glass for the payload, the race, the crash
+and the card. The beats, the sound and the ending are the third story's.
