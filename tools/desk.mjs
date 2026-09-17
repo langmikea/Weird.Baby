@@ -46,6 +46,7 @@ const launchWeekStart = "2026-10-26";
 function measure(b) {
   switch (b.measure) {
     case "determinations:question": return led.determinations.rows.filter(r => r.date >= launchWeekStart && r.question).length;
+    case "qa:questions": { try { const qa = JSON.parse(fs.readFileSync(path.join(REPO, "reels/qa.json"), "utf8")); return qa.rows.filter(r => r.date >= "2026-10-31" && r.question && !r.test && !r.hot).length; } catch { return 0; } }   // the Q&A line's approved rows (re-cut 09-17)
     case "intake:determinations": return countFiles(path.join(ONE, "reels/intake/determinations"));
     case "intake:numbers": return countFiles(path.join(ONE, "reels/intake/numbers"));
     case "intake:practice": return countFiles(path.join(ONE, "reels/intake/practice"));

@@ -33,7 +33,7 @@ STYLES = {
         tv=dict(bleed=6, weave=2.6, flicker=0.035, scan=0.20, fringe=3),
         grain=24, tint="0x1a120c",
         font="COOPBL.TTF", title="THE GAMBLER", title_size=112, card_size=128, spacing=2,
-        bed=dict(rate=1.00, lp=3000, hp=140, wow=0.14, flutter=0.020, hiss=0.0, gain=0.70),
+        bed=dict(rate=1.00, lp=3000, hp=140, wow=0.14, flutter=0.020, hiss=0.0, gain=0.90),
         card_first=False, xfade=0.5,
         shots=[("still", "0197", 3.4, "auto"), ("still", "0203", 2.8, "auto"), ("still", "0216", 2.4, "auto"),
                ("live", "0234", 2.2, None), ("still", "0208", 1.8, "auto")]),
@@ -44,7 +44,7 @@ STYLES = {
         tv=dict(bleed=8, weave=1.6, flicker=0.022, scan=0.13, fringe=5),
         grain=14, tint="0x1c1018",
         font="BRUSHSCI.TTF", title="the Gambler", title_size=168, card_size=184, spacing=0,
-        bed=dict(rate=1.00, lp=4200, hp=120, wow=0.08, flutter=0.015, hiss=0.0, gain=0.72),
+        bed=dict(rate=1.00, lp=4200, hp=120, wow=0.08, flutter=0.015, hiss=0.0, gain=0.95),
         card_first=False, xfade=0.0,
         shots=[("still", "0197", 2.6, "auto"), ("still", "0204", 2.0, "auto"), ("still", "0212", 2.0, "auto"),
                ("live", "0225", 2.0, None), ("still", "0235", 1.6, "auto"), ("still", "0199", 1.8, "auto")]),
@@ -55,7 +55,7 @@ STYLES = {
         tv=dict(bleed=4, weave=1.0, flicker=0.014, scan=0.24, fringe=2),
         grain=18, tint="0x0e1216",
         font="GillSansBoNova.ttf", title="THE GAMBLER", title_size=104, card_size=112, spacing=14,
-        bed=dict(rate=1.00, lp=3400, hp=160, wow=0.05, flutter=0.010, hiss=0.0, gain=0.62),
+        bed=dict(rate=1.00, lp=3400, hp=160, wow=0.05, flutter=0.010, hiss=0.0, gain=0.85),
         card_first=True, xfade=0.0,
         shots=[("still", "0197", 3.0, "auto"), ("still", "0199", 2.4, "auto"), ("still", "0203", 2.2, "auto"),
                ("still", "0211", 2.2, "auto"), ("still", "0236", 2.0, "auto")]),
@@ -198,7 +198,7 @@ def bed(S, secs, td, name):
     b = S["bed"]; row = bed_row(name); src = BED_DIR / row["file"]; out = pathlib.Path(td) / "bed.wav"
     chain = (f"[0:a]atrim={row.get('in_s', 0)}:{row.get('in_s', 0)+secs+2},asetpts=PTS-STARTPTS,asetrate=48000*{b['rate']},aresample=48000,aformat=channel_layouts=stereo,"
              f"vibrato=f=0.55:d={b['wow']},vibrato=f=6.5:d={b['flutter']},lowpass=f={b['lp']},highpass=f={b['hp']},tremolo=f=0.35:d=0.10,"
-             f"acompressor=threshold=-18dB:ratio=3,volume={b['gain']},afade=t=in:st=0:d=0.6,afade=t=out:st={secs-1.2}:d=1.2[m];"
+             f"loudnorm=I=-16:TP=-1.5:LRA=9,volume={b['gain']},afade=t=in:st=0:d=0.6,afade=t=out:st={secs-1.2}:d=1.2[m];"   # the transfers sit around -26 dB RMS; brought to reel level first (Mike, 09-17: 'no music came through')
              f"[1:a]volume={b['hiss']}[n];[m][n]amix=inputs=2:duration=first:normalize=0[a]")
     run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-f", "lavfi", "-i", "anoisesrc=c=pink:r=48000:a=1", "-filter_complex", chain, "-map", "[a]", "-t", str(secs), "-c:a", "pcm_s16le", str(out)]); return out
 

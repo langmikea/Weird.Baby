@@ -3,496 +3,6 @@
  "opening_day": "2026-10-30",
  "tasks": [
   {
-   "id": "practice-2026-09-15",
-   "date": "2026-09-15",
-   "owner": "mike",
-   "block": "practice",
-   "title": "Element takes 1: the Everyday",
-   "do": [
-    "The Everyday, plate on. Gloves, white coat. iPhone on the tripod, 4K, landscape, 30 fps. No microphone: the sound is laid in afterwards from the machine's own recordings; the phone's mic is enough as a reference.",
-    "Take 1: sixty seconds scrolling the knob and clicking the igniter, the glass in frame.",
-    "Take 2: sixty seconds turning the unit from the top to the back to the front.",
-    "Take 3: sixty seconds handheld, you moving around the device.",
-    "Take 4: the glass plate. Static, close, square on, sharp, the display lit, ten seconds. This is what the twin's answer gets composited into.",
-    "Slate each take: an index card held in front of the lens for two seconds at the start, written on it EVERYDAY · 09-15 · take N · the room. So every file says what it is in its own first frame.",
-    "Drop them in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-15-1.mp4 to -4.mp4, plus one line of notes: room, light, time, distance, the annoyance.",
-    "Back to you by Friday: a cut from the takes and the first composite on the glass plate.",
-    "09-16: not landed. What arrived instead is the Gambler tray set and a 4K turn of the Everyday on white (docs/desk/GAMBLER-SET.html). The row stays open until the four takes exist."
-   ],
-   "check": {
-    "type": "file",
-    "dir": "reels/intake/practice",
-    "prefix": "practice-2026-09-15"
-   },
-   "long": "The first element takes on the Everyday (ruled 09-12): knob, turn, handheld, plus the static glass plate",
-   "check_step": 6
-  },
-  {
-   "id": "practice-2026-09-17",
-   "date": "2026-09-17",
-   "owner": "mike",
-   "block": "practice",
-   "title": "Practice reel 2 of 9",
-   "do": [
-    "Not yet ruled: another setting for the element takes, or a Number practice at the instrument. Ops asks on Tuesday when the first takes are in."
-   ],
-   "check": {
-    "type": "file",
-    "dir": "reels/intake/practice",
-    "prefix": "practice-2026-09-17"
-   }
-  },
-  {
-   "id": "practice-2026-09-19",
-   "date": "2026-09-19",
-   "owner": "mike",
-   "block": "practice",
-   "title": "Practice reel 3 of 9",
-   "do": [
-    "Not yet ruled: another setting for the element takes, or a Number practice at the instrument. Ops asks on Tuesday when the first takes are in."
-   ],
-   "check": {
-    "type": "file",
-    "dir": "reels/intake/practice",
-    "prefix": "practice-2026-09-19"
-   }
-  },
-  {
-   "id": "practice-2026-09-22",
-   "date": "2026-09-22",
-   "owner": "mike",
-   "block": "practice",
-   "title": "Practice reel 4 of 9",
-   "do": [
-    "Shoot ONE clip, vertical, raw, under 30 seconds: any question, the machine answering. You silent. The Audigo on, so the machine's own sounds carry. Phone on the tripod in the room you mean to use.",
-    "The beat: shake or click, the answer on the glass, hold two seconds. Nothing else. The question is burned in as text by the reel line (ruled 09-12); do not show it on camera.",
-    "Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-22.mp4 (mov is fine).",
-    "With it, one line of notes in chat or a text file beside it: room, light, time of day, distance from the lens, and the thing that annoyed you most.",
-    "Success = the file lands, the glass reads at phone size, the machine is heard, the beat is there, the notes line exists, and it comes back to you the same day built with the pop and a three-line read.",
-    "Practice 4 of 9. Not posted, not final, not a real question."
-   ],
-   "check": {
-    "type": "file",
-    "dir": "reels/intake/practice",
-    "prefix": "practice-2026-09-22"
-   },
-   "check_step": 2
-  },
-  {
-   "id": "practice-2026-09-24",
-   "date": "2026-09-24",
-   "owner": "mike",
-   "block": "practice",
-   "title": "Practice reel 5 of 9",
-   "do": [
-    "Shoot ONE clip, vertical, raw, under 30 seconds: any question, the machine answering. You silent. The Audigo on, so the machine's own sounds carry. Phone on the tripod in the room you mean to use.",
-    "The beat: shake or click, the answer on the glass, hold two seconds. Nothing else. The question is burned in as text by the reel line (ruled 09-12); do not show it on camera.",
-    "Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-24.mp4 (mov is fine).",
-    "With it, one line of notes in chat or a text file beside it: room, light, time of day, distance from the lens, and the thing that annoyed you most.",
-    "Success = the file lands, the glass reads at phone size, the machine is heard, the beat is there, the notes line exists, and it comes back to you the same day built with the pop and a three-line read.",
-    "Practice 5 of 9. Not posted, not final, not a real question."
-   ],
-   "check": {
-    "type": "file",
-    "dir": "reels/intake/practice",
-    "prefix": "practice-2026-09-24"
-   },
-   "check_step": 2
-  },
-  {
-   "id": "practice-2026-09-26",
-   "date": "2026-09-26",
-   "owner": "mike",
-   "block": "practice",
-   "title": "Practice reel 6 of 9",
-   "do": [
-    "Shoot ONE clip, vertical, raw, under 30 seconds: any question, the machine answering. You silent. The Audigo on, so the machine's own sounds carry. Phone on the tripod in the room you mean to use.",
-    "The beat: shake or click, the answer on the glass, hold two seconds. Nothing else. The question is burned in as text by the reel line (ruled 09-12); do not show it on camera.",
-    "Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-26.mp4 (mov is fine).",
-    "With it, one line of notes in chat or a text file beside it: room, light, time of day, distance from the lens, and the thing that annoyed you most.",
-    "Success = the file lands, the glass reads at phone size, the machine is heard, the beat is there, the notes line exists, and it comes back to you the same day built with the pop and a three-line read.",
-    "Practice 6 of 9. Not posted, not final, not a real question."
-   ],
-   "check": {
-    "type": "file",
-    "dir": "reels/intake/practice",
-    "prefix": "practice-2026-09-26"
-   },
-   "check_step": 2
-  },
-  {
-   "id": "practice-2026-09-29",
-   "date": "2026-09-29",
-   "owner": "mike",
-   "block": "practice",
-   "title": "Practice reel 7 of 9",
-   "do": [
-    "Shoot ONE clip, vertical, raw, under 30 seconds: any question, the machine answering. You silent. The Audigo on, so the machine's own sounds carry. Phone on the tripod in the room you mean to use.",
-    "The beat: shake or click, the answer on the glass, hold two seconds. Nothing else. The question is burned in as text by the reel line (ruled 09-12); do not show it on camera.",
-    "Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-09-29.mp4 (mov is fine).",
-    "With it, one line of notes in chat or a text file beside it: room, light, time of day, distance from the lens, and the thing that annoyed you most.",
-    "Success = the file lands, the glass reads at phone size, the machine is heard, the beat is there, the notes line exists, and it comes back to you the same day built with the pop and a three-line read.",
-    "Practice 7 of 9. Not posted, not final, not a real question."
-   ],
-   "check": {
-    "type": "file",
-    "dir": "reels/intake/practice",
-    "prefix": "practice-2026-09-29"
-   },
-   "check_step": 2
-  },
-  {
-   "id": "practice-2026-10-01",
-   "date": "2026-10-01",
-   "owner": "mike",
-   "block": "practice",
-   "title": "Practice reel 8 of 9",
-   "do": [
-    "Shoot ONE clip, vertical, raw, under 30 seconds: any question, the machine answering. You silent. The Audigo on, so the machine's own sounds carry. Phone on the tripod in the room you mean to use.",
-    "The beat: shake or click, the answer on the glass, hold two seconds. Nothing else. The question is burned in as text by the reel line (ruled 09-12); do not show it on camera.",
-    "Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-10-01.mp4 (mov is fine).",
-    "With it, one line of notes in chat or a text file beside it: room, light, time of day, distance from the lens, and the thing that annoyed you most.",
-    "Success = the file lands, the glass reads at phone size, the machine is heard, the beat is there, the notes line exists, and it comes back to you the same day built with the pop and a three-line read.",
-    "Practice 8 of 9. Not posted, not final, not a real question."
-   ],
-   "check": {
-    "type": "file",
-    "dir": "reels/intake/practice",
-    "prefix": "practice-2026-10-01"
-   },
-   "check_step": 2
-  },
-  {
-   "id": "practice-2026-10-03",
-   "date": "2026-10-03",
-   "owner": "mike",
-   "block": "practice",
-   "title": "Practice reel 9 of 9",
-   "do": [
-    "Shoot ONE clip, vertical, raw, under 30 seconds: any question, the machine answering. You silent. The Audigo on, so the machine's own sounds carry. Phone on the tripod in the room you mean to use.",
-    "The beat: shake or click, the answer on the glass, hold two seconds. Nothing else. The question is burned in as text by the reel line (ruled 09-12); do not show it on camera.",
-    "Drop it in OneDrive › WeirdBaby › reels › intake › practice as practice-2026-10-03.mp4 (mov is fine).",
-    "With it, one line of notes in chat or a text file beside it: room, light, time of day, distance from the lens, and the thing that annoyed you most.",
-    "Success = the file lands, the glass reads at phone size, the machine is heard, the beat is there, the notes line exists, and it comes back to you the same day built with the pop and a three-line read.",
-    "Practice 9 of 9. Not posted, not final, not a real question."
-   ],
-   "check": {
-    "type": "file",
-    "dir": "reels/intake/practice",
-    "prefix": "practice-2026-10-03"
-   },
-   "check_step": 2
-  },
-  {
-   "id": "photos-everyman",
-   "date": "2026-09-20",
-   "owner": "mike",
-   "block": "photos",
-   "title": "Photos: the Everyman unboxing",
-   "do": [
-    "Edit the set for the Everyman unboxing: three angles and one hero shot at least, JPG or HEIC, full size.",
-    "Drop them in OneDrive › WeirdBaby › photos › everyman (the folder exists).",
-    "Tell Code: \"photos in\". They are placed on the wing's pages within two days."
-   ],
-   "check": {
-    "type": "photos",
-    "dir": "photos/everyman",
-    "min": 4
-   },
-   "check_step": 1
-  },
-  {
-   "id": "photos-gambler",
-   "date": "2026-09-27",
-   "owner": "mike",
-   "block": "photos",
-   "title": "Photos: the Gambler",
-   "do": [
-    "Edit the set for the Gambler, with the chips and the half dollars: three angles and one hero shot at least, JPG or HEIC, full size.",
-    "Drop them in OneDrive › WeirdBaby › photos › gambler (the folder exists).",
-    "Tell Code: \"photos in\". They are placed on the wing's pages within two days."
-   ],
-   "check": {
-    "type": "photos",
-    "dir": "photos/gambler",
-    "min": 4
-   },
-   "check_step": 1
-  },
-  {
-   "id": "photos-ceo",
-   "date": "2026-10-04",
-   "owner": "mike",
-   "block": "photos",
-   "title": "Photos: the CEO",
-   "do": [
-    "Edit the set for the CEO: three angles and one hero shot at least, JPG or HEIC, full size.",
-    "Drop them in OneDrive › WeirdBaby › photos › ceo (the folder exists).",
-    "Tell Code: \"photos in\". They are placed on the wing's pages within two days."
-   ],
-   "check": {
-    "type": "photos",
-    "dir": "photos/ceo",
-    "min": 4
-   },
-   "check_step": 1
-  },
-  {
-   "id": "photos-informer",
-   "date": "2026-10-11",
-   "owner": "mike",
-   "block": "photos",
-   "title": "Photos: the Informer",
-   "do": [
-    "Edit the set for the Informer, the man on the inside: three angles and one hero shot at least, JPG or HEIC, full size.",
-    "Drop them in OneDrive › WeirdBaby › photos › informer (the folder exists).",
-    "Tell Code: \"photos in\". They are placed on the wing's pages within two days."
-   ],
-   "check": {
-    "type": "photos",
-    "dir": "photos/informer",
-    "min": 4
-   },
-   "check_step": 1
-  },
-  {
-   "id": "ruling-1",
-   "date": "2026-09-20",
-   "owner": "mike",
-   "block": "rulings",
-   "title": "Sitting: the catalogue's pitches",
-   "do": [
-    "Thirty minutes, Sunday. Open the catalogue: https://claude.ai/code/artifact/9ce6fac0-17fd-416b-a02a-bec67b8436c6",
-    "Read down. For each row say the number and a letter: A the pitch stands, B rewrite (say the line or the gist), C cut the row. Rows you say nothing about stand as A.",
-    "Anything missing from the machine, name it and it gets a row.",
-    "Then the glass: open https://claude.ai/artifact/DfpetqdZQxXoNF16ccpj9g and say one letter, A, B or C (question 1 in QUESTIONS-for-Sunday). Ten minutes."
-   ]
-  },
-  {
-   "id": "ruling-2",
-   "date": "2026-09-27",
-   "owner": "mike",
-   "block": "rulings",
-   "title": "Sitting: the five wing mocks",
-   "do": [
-    "Thirty minutes, Sunday, with the served page Code sends that morning.",
-    "The feature page, the day's landing, the prologue, a character page, the wing's front. Served pages; A/B/C in chat.",
-    "Nothing is due from you before the page arrives."
-   ]
-  },
-  {
-   "id": "ruling-3",
-   "date": "2026-10-04",
-   "owner": "mike",
-   "block": "rulings",
-   "title": "Sitting: the room and the framing",
-   "do": [
-    "Thirty minutes, Sunday, with the served page Code sends that morning.",
-    "Three practice reels side by side on a page; you pick the room, the framing and the mic that stay fixed from then on.",
-    "Nothing is due from you before the page arrives."
-   ]
-  },
-  {
-   "id": "ruling-4",
-   "date": "2026-10-11",
-   "owner": "mike",
-   "block": "rulings",
-   "title": "Sitting: song two",
-   "do": [
-    "Thirty minutes, Sunday, with the served page Code sends that morning.",
-    "Which song runs after Coconuts, and the first piece of it.",
-    "Nothing is due from you before the page arrives."
-   ]
-  },
-  {
-   "id": "words-1",
-   "date": "2026-10-09",
-   "owner": "mike",
-   "block": "words",
-   "title": "Words: the prologue's opening",
-   "do": [
-    "The paragraph that opens the story page: what this is, for the people who want more. Any length.",
-    "Write it in the manual's Word file at the end, or type it here. Code cleans typos and never the point."
-   ]
-  },
-  {
-   "id": "words-2",
-   "date": "2026-10-10",
-   "owner": "mike",
-   "block": "words",
-   "title": "Words: About the Artist",
-   "do": [
-    "The words for the slot on the music wing that renders blank today.",
-    "Write it in the manual's Word file at the end, or type it here. Code cleans typos and never the point."
-   ]
-  },
-  {
-   "id": "words-3",
-   "date": "2026-10-11",
-   "owner": "mike",
-   "block": "words",
-   "title": "Words: the Foundation's posture",
-   "do": [
-    "The room's words: we give to the National Coalition for the Homeless, and you can too. No pipes.",
-    "Write it in the manual's Word file at the end, or type it here. Code cleans typos and never the point."
-   ]
-  },
-  {
-   "id": "clicks-buffer",
-   "date": "2026-10-10",
-   "owner": "mike",
-   "block": "clicks",
-   "title": "Buffer: the six clicks",
-   "do": [
-    "Instagram to a Creator account. TikTok a Creator account, public. A Facebook Page.",
-    "buffer.com: sign up with email; connect TikTok, Instagram, YouTube, the Facebook Page; Essentials plan.",
-    "Settings › API › create a key. Paste it here or save it as C:\\AI\\PERSONA-20260903\\.secrets\\buffer.token.",
-    "The whole list with the exact taps is BUFFER-SETUP.md in the persona folder."
-   ],
-   "check": {
-    "type": "buffer-token"
-   }
-  },
-  {
-   "id": "clicks-distributor",
-   "date": "2026-10-17",
-   "owner": "mike",
-   "block": "clicks",
-   "title": "Distributor account",
-   "do": [
-    "Create the account at the distributor Code names that week (DistroKid unless ruled otherwise), with your email. No release is created; the account only has to exist so the first live single can go up within days.",
-    "Tell Code: \"distributor done\"."
-   ]
-  },
-  {
-   "id": "clicks-google",
-   "date": "2026-10-18",
-   "owner": "mike",
-   "block": "clicks",
-   "title": "Google: read-only consent for YouTube",
-   "do": [
-    "Code sends one link that morning. It opens Google's consent screen for read-only access to the channel's comments and analytics. Approve, done.",
-    "Nothing is uploaded through it; it only reads."
-   ]
-  },
-  {
-   "id": "questions-2026-10-04",
-   "date": "2026-10-04",
-   "owner": "mike",
-   "block": "question",
-   "title": "5 questions, week of 10-05",
-   "do": [
-    "Five questions, one per weekday, on anything, for the instrument to answer. The frame for each day (the feature on camera) is on the calendar.",
-    "Write them on the Question of the Day page at the end of the manual's Word file, or type them here, Monday to Friday.",
-    "Code carries them into the ledger the same day."
-   ]
-  },
-  {
-   "id": "questions-2026-10-11",
-   "date": "2026-10-11",
-   "owner": "mike",
-   "block": "question",
-   "title": "5 questions, week of 10-12",
-   "do": [
-    "Five questions, one per weekday, on anything, for the instrument to answer. The frame for each day (the feature on camera) is on the calendar.",
-    "Write them on the Question of the Day page at the end of the manual's Word file, or type them here, Monday to Friday.",
-    "Code carries them into the ledger the same day."
-   ]
-  },
-  {
-   "id": "questions-2026-10-18",
-   "date": "2026-10-18",
-   "owner": "mike",
-   "block": "question",
-   "title": "5 questions, week of 10-19",
-   "do": [
-    "Five questions, one per weekday, on anything, for the instrument to answer. The frame for each day (the feature on camera) is on the calendar.",
-    "Write them on the Question of the Day page at the end of the manual's Word file, or type them here, Monday to Friday.",
-    "Code carries them into the ledger the same day."
-   ]
-  },
-  {
-   "id": "questions-2026-10-25",
-   "date": "2026-10-25",
-   "owner": "mike",
-   "block": "question",
-   "title": "5 questions, week of 10-26",
-   "do": [
-    "Five questions, one per weekday, on anything, for the instrument to answer. The frame for each day (the feature on camera) is on the calendar.",
-    "Write them on the Question of the Day page at the end of the manual's Word file, or type them here, Monday to Friday.",
-    "Code carries them into the ledger the same day."
-   ]
-  },
-  {
-   "id": "shoot-w6",
-   "date": "2026-10-13",
-   "owner": "mike",
-   "block": "det-clip",
-   "title": "Shoot 10 clips: the first teaser week",
-   "do": [
-    "One sitting, about two hours, in the fixed room. Five Determination clips: you shake, the display answers, the machine's sound, you silent, 10 to 15 seconds each. Five Number clips: one piece of the song, live, about 30 seconds each.",
-    "Drop the Determinations in OneDrive › WeirdBaby › reels › intake › determinations as w6-mon.mp4 … w6-fri.mp4, and the Numbers in … › intake › numbers with the same names.",
-    "Tell Code: \"week 6 in\". The line appends the pop, writes the captions and queues them the same day."
-   ],
-   "check": {
-    "type": "files",
-    "dir": "reels/intake/determinations",
-    "prefix": "w6-",
-    "min": 5
-   },
-   "check_step": 1
-  },
-  {
-   "id": "shoot-w7",
-   "date": "2026-10-20",
-   "owner": "mike",
-   "block": "det-clip",
-   "title": "Shoot 10 clips: the second teaser week or the shelf",
-   "do": [
-    "One sitting, about two hours, in the fixed room. Five Determination clips: you shake, the display answers, the machine's sound, you silent, 10 to 15 seconds each. Five Number clips: one piece of the song, live, about 30 seconds each.",
-    "Drop the Determinations in OneDrive › WeirdBaby › reels › intake › determinations as w7-mon.mp4 … w7-fri.mp4, and the Numbers in … › intake › numbers with the same names.",
-    "Tell Code: \"week 7 in\". The line appends the pop, writes the captions and queues them the same day."
-   ],
-   "check": {
-    "type": "files",
-    "dir": "reels/intake/determinations",
-    "prefix": "w7-",
-    "min": 5
-   },
-   "check_step": 1
-  },
-  {
-   "id": "shoot-w8",
-   "date": "2026-10-27",
-   "owner": "mike",
-   "block": "det-clip",
-   "title": "Shoot 10 clips: the launch week",
-   "do": [
-    "One sitting, about two hours, in the fixed room. Five Determination clips: you shake, the display answers, the machine's sound, you silent, 10 to 15 seconds each. Five Number clips: one piece of the song, live, about 30 seconds each.",
-    "Drop the Determinations in OneDrive › WeirdBaby › reels › intake › determinations as w8-mon.mp4 … w8-fri.mp4, and the Numbers in … › intake › numbers with the same names.",
-    "Tell Code: \"week 8 in\". The line appends the pop, writes the captions and queues them the same day."
-   ],
-   "check": {
-    "type": "files",
-    "dir": "reels/intake/determinations",
-    "prefix": "w8-",
-    "min": 5
-   },
-   "check_step": 1
-  },
-  {
-   "id": "bench",
-   "date": "2026-10-15",
-   "owner": "mike",
-   "block": "bench",
-   "title": "The unit on the bench",
-   "do": [
-    "Ninety minutes at the PC with the real machine, its USB cable and the SD card, Code on the line.",
-    "Code drives the flash and the checks; you press what only hands can press and read the glass back.",
-    "Pick the day and say so; the 15th is a placeholder."
-   ]
-  },
-  {
    "id": "burn-list",
    "date": "2026-09-13",
    "owner": "ops",
@@ -503,6 +13,31 @@
    "long": "The burn list: every story-first page, doc, tool and rule marked keep / re-cut / burn",
    "done": true,
    "done_on": "2026-09-10"
+  },
+  {
+   "id": "grade-2026-09-13",
+   "date": "2026-09-13",
+   "owner": "ops",
+   "title": "Sunday grade",
+   "do": [
+    "Week 1 (09-07 to 09-13), graded 09-16, late: Ops 5 of 5 dated items done (burn list, twin audit, catalogue, music page, mocks); Mike 0 of 0 dated. Nothing of Mike's was due."
+   ],
+   "long": "Sunday grade on the desk: done over total for the week",
+   "done": true,
+   "done_on": "2026-09-16"
+  },
+  {
+   "id": "practice-line",
+   "date": "2026-09-14",
+   "owner": "ops",
+   "title": "Reel line takes practice clips and burns in the question",
+   "long": "tools/reels-build.py: a practice lane (no ledger; practice-<date>.mp4 in, built reel with the pop out) and a burned-in question line on every Determination and practice reel (Mike's ruling A, 09-12)",
+   "do": [
+    "Done 09-12: --lane practice builds every practice-*.mp4 with the question burned in (Georgia Bold, top third, white on a soft box), the adult's voice under it (tools/reels-voice.py) and the pop.",
+    "Sample served to Mike the same day."
+   ],
+   "done": true,
+   "done_on": "2026-09-12"
   },
   {
    "id": "twin-audit",
@@ -529,6 +64,18 @@
    "done_on": "2026-09-10"
   },
   {
+   "id": "glass-composite",
+   "date": "2026-09-18",
+   "owner": "ops",
+   "title": "The glass composite proven",
+   "long": "The twin's display rendered headless and composited into the Everyday's glass plate at the measured aperture (ruled 09-12): one answer, one reel, served",
+   "do": [
+    "Done 09-16 on Mike's own footage (IMG_0247): the machine's screen rendered from the emulator's glyph data and composited into the tracked glass; one Q&A reel reviewed and sent. tools/reels-qa.py."
+   ],
+   "done": true,
+   "done_on": "2026-09-16"
+  },
+  {
    "id": "music-page",
    "date": "2026-09-19",
    "owner": "ops",
@@ -539,6 +86,47 @@
    "long": "The music launch on one page",
    "done": true,
    "done_on": "2026-09-10"
+  },
+  {
+   "id": "qa-line",
+   "date": "2026-09-19",
+   "owner": "ops",
+   "title": "The Q&A line: list in, reels and packets out",
+   "long": "The template (tools/reels-qa.py) driven by the workbook's Questions sheet: one reel a day, seven days, seeded so no two cut alike; caption per Q2; the packet the posting line queues at 17:00 NY from 10-31; the hot lane from chat; the 06:08 run builds seven days ahead. Proven in dry run on five dummy rows.",
+   "do": [
+    "Done 09-16, three days early. Proven in dry run: five dummy rows built from the Questions sheet, each a different cut; the queue lists them for 17:00 NY on the four surfaces; the hot lane built and dry-queued an extra reel from a chat question. The 06:08 run builds and queues a week ahead. Posting for real starts the day the Buffer key lands."
+   ],
+   "done": true,
+   "done_on": "2026-09-16"
+  },
+  {
+   "id": "ruling-1",
+   "date": "2026-09-20",
+   "owner": "mike",
+   "block": "rulings",
+   "title": "Sitting: the catalogue's pitches",
+   "do": [
+    "Thirty minutes, Sunday. Open the catalogue: https://claude.ai/code/artifact/9ce6fac0-17fd-416b-a02a-bec67b8436c6",
+    "Read down. For each row say the number and a letter: A the pitch stands, B rewrite (say the line or the gist), C cut the row. Rows you say nothing about stand as A.",
+    "Anything missing from the machine, name it and it gets a row.",
+    "Then the glass: open https://claude.ai/artifact/DfpetqdZQxXoNF16ccpj9g and say one letter, A, B or C (question 1 in QUESTIONS-for-Sunday). Ten minutes."
+   ]
+  },
+  {
+   "id": "grade-2026-09-20",
+   "date": "2026-09-20",
+   "owner": "ops",
+   "title": "Sunday grade",
+   "do": [],
+   "long": "Sunday grade on the desk: done over total for the week"
+  },
+  {
+   "id": "material-rulings",
+   "date": "2026-09-21",
+   "owner": "ops",
+   "title": "Material rulings written back; the porch pieces into the Number ledger",
+   "do": [],
+   "long": "Sunday question 6's rulings written into docs/MATERIAL-20260917.json and the page regenerated; the porch pieces ruled A into reels/numbers.json for the launch run"
   },
   {
    "id": "mocks",
@@ -555,6 +143,18 @@
    "done_on": "2026-09-11"
   },
   {
+   "id": "element-line",
+   "date": "2026-09-25",
+   "owner": "ops",
+   "title": "Element cut lists in the reel line",
+   "long": "The reel line assembles a Determination from the element library, a cut list and one line of data (question, answer, feature)",
+   "do": [
+    "Folded into the Q&A line: the seed picks the takes from the library (ten holds, three shakes, three close-ups of IMG_0247); the library grows with each shoot."
+   ],
+   "done": true,
+   "done_on": "2026-09-16"
+  },
+  {
    "id": "burn-down",
    "date": "2026-09-26",
    "owner": "ops",
@@ -565,6 +165,52 @@
     "Left for 09-26: ops-desk after week 2; BACKLOG/THREADS re-cut; the src rows after the mocks ruling of 09-27."
    ],
    "long": "Burn-down executed: rows marked burn archived or deleted"
+  },
+  {
+   "id": "gambler-standin",
+   "date": "2026-09-26",
+   "owner": "ops",
+   "title": "The 09-16 Gambler set stands in on the album's page",
+   "do": [],
+   "long": "The 09-16 landscape set, treated as the handled print, placed on the Gambler's album as the stand-in plates (ruling C of 09-17) until the re-shoot replaces them"
+  },
+  {
+   "id": "photos-everyman",
+   "date": "2026-09-27",
+   "owner": "mike",
+   "block": "photos",
+   "title": "Tray re-shoot: the Everyman",
+   "do": [
+    "The rig of 09-10: the tray taped down, top-down, tripod, main lens, even soft light, exposure locked per item, 24 MP JPEG, the rule bottom centre, a slate card in the first frame of each item. The unit, its plate, the box and everything in it; the back and the underside; a group frame.",
+    "Plus one colour hero of the unit on white, for the cover.",
+    "Drop the originals in OneDrive › WeirdBaby › photos › everyman. Tell Code: \"photos in\". The plates (B&W, the handled print) and the hero land on the album within two days."
+   ],
+   "check": {
+    "type": "photos",
+    "dir": "photos/everyman",
+    "min": 4
+   },
+   "check_step": 2
+  },
+  {
+   "id": "ruling-2",
+   "date": "2026-09-27",
+   "owner": "mike",
+   "block": "rulings",
+   "title": "Sitting: the five wing mocks",
+   "do": [
+    "Thirty minutes, Sunday, with the served page Code sends that morning.",
+    "The feature page, the day's landing, the prologue, a character page, the wing's front. Served pages; A/B/C in chat.",
+    "Nothing is due from you before the page arrives."
+   ]
+  },
+  {
+   "id": "grade-2026-09-27",
+   "date": "2026-09-27",
+   "owner": "ops",
+   "title": "Sunday grade",
+   "do": [],
+   "long": "Sunday grade on the desk: done over total for the week"
   },
   {
    "id": "prologue",
@@ -613,6 +259,43 @@
    "long": "The real unit's flash plan and bench date"
   },
   {
+   "id": "photos-gambler",
+   "date": "2026-10-04",
+   "owner": "mike",
+   "block": "photos",
+   "title": "Tray re-shoot: the Gambler",
+   "do": [
+    "The rig of 09-10: the tray taped down, top-down, tripod, main lens, even soft light, exposure locked per item, 24 MP JPEG, the rule bottom centre, a slate card in the first frame of each item. After the finishing work on the case (label, hold-downs, glue blocks, touch-up): the case closed, open and laid out; the chips, the half dollars, the cups, the two books, the PHVDC; a group frame.",
+    "Plus one colour hero of the unit on white, for the cover.",
+    "Drop the originals in OneDrive › WeirdBaby › photos › gambler. Tell Code: \"photos in\". The plates (B&W, the handled print) and the hero land on the album within two days."
+   ],
+   "check": {
+    "type": "photos",
+    "dir": "photos/gambler",
+    "min": 4
+   },
+   "check_step": 2
+  },
+  {
+   "id": "grade-2026-10-04",
+   "date": "2026-10-04",
+   "owner": "ops",
+   "title": "Sunday grade",
+   "do": [],
+   "long": "Sunday grade on the desk: done over total for the week"
+  },
+  {
+   "id": "words-1",
+   "date": "2026-10-09",
+   "owner": "mike",
+   "block": "words",
+   "title": "Words: the prologue's opening",
+   "do": [
+    "The paragraph that opens the story page: what this is, for the people who want more. Any length.",
+    "Write it in the manual's Word file at the end, or type it here. Code cleans typos and never the point."
+   ]
+  },
+  {
    "id": "launch-days",
    "date": "2026-10-09",
    "owner": "mike",
@@ -621,15 +304,92 @@
     "Fifteen rows in the workbook's Questions sheet: date, question, answer. The Everyday answers; you force the answer; nobody sees which.",
     "Then five a week, each Sunday."
    ],
-   "long": "Fifteen approved question-and-answer rows for 10-31 to 11-14 in the Questions sheet (Mike writes, forces the answer)"
+   "long": "Fifteen approved question-and-answer rows for 10-31 to 11-14 in the Questions sheet (Mike writes, forces the answer)",
+   "block": "question"
   },
   {
    "id": "number-pieces",
    "date": "2026-10-09",
    "owner": "ops",
-   "title": "15 Number pieces defined",
+   "title": "15 Number pieces cut from the porch tape",
    "do": [],
-   "long": "Fifteen Number pieces defined for the first song"
+   "long": "Fifteen Coconuts pieces cut from the 08-24 porch tape by the ruled piece list (hook, verse, bridge, the story, hook again), through the line, on the shelf; the pieces the tape lacks named for the 10-20 sitting"
+  },
+  {
+   "id": "words-2",
+   "date": "2026-10-10",
+   "owner": "mike",
+   "block": "words",
+   "title": "Words: About the Artist",
+   "do": [
+    "The words for the slot on the music wing that renders blank today.",
+    "Write it in the manual's Word file at the end, or type it here. Code cleans typos and never the point."
+   ]
+  },
+  {
+   "id": "clicks-buffer",
+   "date": "2026-10-10",
+   "owner": "mike",
+   "block": "clicks",
+   "title": "Buffer: the six clicks",
+   "do": [
+    "Instagram to a Creator account. TikTok a Creator account, public. A Facebook Page.",
+    "buffer.com: sign up with email; connect TikTok, Instagram, YouTube, the Facebook Page; Essentials plan.",
+    "Settings › API › create a key. Paste it here or save it as C:\\AI\\PERSONA-20260903\\.secrets\\buffer.token.",
+    "The whole list with the exact taps is BUFFER-SETUP.md in the persona folder."
+   ],
+   "check": {
+    "type": "buffer-token"
+   }
+  },
+  {
+   "id": "qa-list-in",
+   "date": "2026-10-10",
+   "owner": "ops",
+   "title": "Q&A list into the ledger; first week built",
+   "do": [],
+   "long": "The fifteen approved rows read from the Questions sheet into reels/qa.json; the first week built dry and reviewed on its sheet"
+  },
+  {
+   "id": "photos-ceo",
+   "date": "2026-10-11",
+   "owner": "mike",
+   "block": "photos",
+   "title": "Tray re-shoot: the CEO",
+   "do": [
+    "The rig of 09-10: the tray taped down, top-down, tripod, main lens, even soft light, exposure locked per item, 24 MP JPEG, the rule bottom centre, a slate card in the first frame of each item. The unit and its kit, closed, open and laid out; the back and the underside; a group frame.",
+    "Plus one colour hero of the unit on white, for the cover.",
+    "Drop the originals in OneDrive › WeirdBaby › photos › ceo. Tell Code: \"photos in\". The plates (B&W, the handled print) and the hero land on the album within two days."
+   ],
+   "check": {
+    "type": "photos",
+    "dir": "photos/ceo",
+    "min": 4
+   },
+   "check_step": 2
+  },
+  {
+   "id": "ruling-4",
+   "date": "2026-10-11",
+   "owner": "mike",
+   "block": "rulings",
+   "title": "Sitting: song two",
+   "do": [
+    "Thirty minutes, Sunday, with the served page Code sends that morning.",
+    "Which song runs after Coconuts, and the first piece of it.",
+    "Nothing is due from you before the page arrives."
+   ]
+  },
+  {
+   "id": "words-3",
+   "date": "2026-10-11",
+   "owner": "mike",
+   "block": "words",
+   "title": "Words: the Foundation's posture",
+   "do": [
+    "The room's words: we give to the National Coalition for the Homeless, and you can too. No pipes.",
+    "Write it in the manual's Word file at the end, or type it here. Code cleans typos and never the point."
+   ]
   },
   {
    "id": "channels",
@@ -642,12 +402,24 @@
    "long": "Buffer channels recorded; the queue's schema checked live"
   },
   {
-   "id": "teasers-built",
-   "date": "2026-10-16",
+   "id": "grade-2026-10-11",
+   "date": "2026-10-11",
    "owner": "ops",
-   "title": "Teaser week 1 queued (10)",
+   "title": "Sunday grade",
    "do": [],
-   "long": "Teaser week one built and queued (10), if ruled; else the shelf"
+   "long": "Sunday grade on the desk: done over total for the week"
+  },
+  {
+   "id": "bench",
+   "date": "2026-10-15",
+   "owner": "mike",
+   "block": "bench",
+   "title": "The unit on the bench",
+   "do": [
+    "Ninety minutes at the PC with the real machine, its USB cable and the SD card, Code on the line.",
+    "Code drives the flash and the checks; you press what only hands can press and read the glass back.",
+    "Pick the day and say so; the 15th is a placeholder."
+   ]
   },
   {
    "id": "flash",
@@ -660,6 +432,51 @@
    "long": "The real unit flashed and verified"
   },
   {
+   "id": "photos-informer",
+   "date": "2026-10-18",
+   "owner": "mike",
+   "block": "photos",
+   "title": "Tray re-shoot: the Informer",
+   "do": [
+    "The rig of 09-10: the tray taped down, top-down, tripod, main lens, even soft light, exposure locked per item, 24 MP JPEG, the rule bottom centre, a slate card in the first frame of each item. The unit and its kit, closed, open and laid out; the back and the underside; a group frame.",
+    "Plus one colour hero of the unit on white, for the cover.",
+    "Drop the originals in OneDrive › WeirdBaby › photos › informer. Tell Code: \"photos in\". The plates (B&W, the handled print) and the hero land on the album within two days."
+   ],
+   "check": {
+    "type": "photos",
+    "dir": "photos/informer",
+    "min": 4
+   },
+   "check_step": 2
+  },
+  {
+   "id": "grade-2026-10-18",
+   "date": "2026-10-18",
+   "owner": "ops",
+   "title": "Sunday grade",
+   "do": [],
+   "long": "Sunday grade on the desk: done over total for the week"
+  },
+  {
+   "id": "number-sitting",
+   "date": "2026-10-20",
+   "owner": "mike",
+   "block": "num-clip",
+   "title": "Number sitting: what the porch tape lacks",
+   "do": [
+    "One sitting: the DJI pair on the voice and the guitar, the iPhone on the tripod, the porch or the room. The Coconuts pieces the 08-24 tape does not cover cleanly; Ops names them from the piece list by 10-09. About 30 seconds each, five at most.",
+    "Drop them in OneDrive › WeirdBaby › reels › intake › numbers as w8-mon.mp4 … w8-fri.mp4.",
+    "Tell Code: \"numbers in\". The line appends the pop and queues the launch week."
+   ],
+   "check": {
+    "type": "files",
+    "dir": "reels/intake/numbers",
+    "prefix": "w8",
+    "min": 1
+   },
+   "check_step": 1
+  },
+  {
    "id": "rehearsal",
    "date": "2026-10-22",
    "owner": "ops",
@@ -668,12 +485,12 @@
    "long": "Opening-day run-through on a staging as-of; faults listed and fixed"
   },
   {
-   "id": "teasers-2",
-   "date": "2026-10-23",
+   "id": "grade-2026-10-25",
+   "date": "2026-10-25",
    "owner": "ops",
-   "title": "Teaser week 2 queued (10)",
+   "title": "Sunday grade",
    "do": [],
-   "long": "Teaser week two built and queued (10), if ruled"
+   "long": "Sunday grade on the desk: done over total for the week"
   },
   {
    "id": "freeze",
@@ -689,9 +506,9 @@
    "id": "launch-queued",
    "date": "2026-10-27",
    "owner": "ops",
-   "title": "Launch week queued (10)",
+   "title": "Launch week queued: five Numbers; the Q&A line from 10-31",
    "do": [],
-   "long": "Launch week queued (10 reels)"
+   "long": "The launch week queued: the five Number pieces for 10-26 to 10-30 at noon New York; the Q&A line's first week for 10-31 on, at five"
   },
   {
    "id": "open",
@@ -704,121 +521,13 @@
    "long": "Opening Day: the door flips at five; the first promotion lands; the door checked from outside"
   },
   {
-   "id": "grade-2026-09-13",
-   "date": "2026-09-13",
-   "owner": "ops",
-   "title": "Sunday grade",
-   "do": [
-    "Week 1 (09-07 to 09-13), graded 09-16, late: Ops 5 of 5 dated items done (burn list, twin audit, catalogue, music page, mocks); Mike 0 of 0 dated. Nothing of Mike's was due."
-   ],
-   "long": "Sunday grade on the desk: done over total for the week",
-   "done": true,
-   "done_on": "2026-09-16"
-  },
-  {
-   "id": "grade-2026-09-20",
-   "date": "2026-09-20",
-   "owner": "ops",
-   "title": "Sunday grade",
-   "do": [],
-   "long": "Sunday grade on the desk: done over total for the week"
-  },
-  {
-   "id": "grade-2026-09-27",
-   "date": "2026-09-27",
-   "owner": "ops",
-   "title": "Sunday grade",
-   "do": [],
-   "long": "Sunday grade on the desk: done over total for the week"
-  },
-  {
-   "id": "grade-2026-10-04",
-   "date": "2026-10-04",
-   "owner": "ops",
-   "title": "Sunday grade",
-   "do": [],
-   "long": "Sunday grade on the desk: done over total for the week"
-  },
-  {
-   "id": "grade-2026-10-11",
-   "date": "2026-10-11",
-   "owner": "ops",
-   "title": "Sunday grade",
-   "do": [],
-   "long": "Sunday grade on the desk: done over total for the week"
-  },
-  {
-   "id": "grade-2026-10-18",
-   "date": "2026-10-18",
-   "owner": "ops",
-   "title": "Sunday grade",
-   "do": [],
-   "long": "Sunday grade on the desk: done over total for the week"
-  },
-  {
-   "id": "grade-2026-10-25",
-   "date": "2026-10-25",
-   "owner": "ops",
-   "title": "Sunday grade",
-   "do": [],
-   "long": "Sunday grade on the desk: done over total for the week"
-  },
-  {
    "id": "grade-2026-11-01",
    "date": "2026-11-01",
    "owner": "ops",
    "title": "Sunday grade",
    "do": [],
    "long": "Sunday grade on the desk: done over total for the week"
-  },
-  {
-   "id": "practice-line",
-   "date": "2026-09-14",
-   "owner": "ops",
-   "title": "Reel line takes practice clips and burns in the question",
-   "long": "tools/reels-build.py: a practice lane (no ledger; practice-<date>.mp4 in, built reel with the pop out) and a burned-in question line on every Determination and practice reel (Mike's ruling A, 09-12)",
-   "do": [
-    "Done 09-12: --lane practice builds every practice-*.mp4 with the question burned in (Georgia Bold, top third, white on a soft box), the adult's voice under it (tools/reels-voice.py) and the pop.",
-    "Sample served to Mike the same day."
-   ],
-   "done": true,
-   "done_on": "2026-09-12"
-  },
-  {
-   "id": "glass-composite",
-   "date": "2026-09-18",
-   "owner": "ops",
-   "title": "The glass composite proven",
-   "long": "The twin's display rendered headless and composited into the Everyday's glass plate at the measured aperture (ruled 09-12): one answer, one reel, served",
-   "do": [
-    "Done 09-16 on Mike's own footage (IMG_0247): the machine's screen rendered from the emulator's glyph data and composited into the tracked glass; one Q&A reel reviewed and sent. tools/reels-qa.py."
-   ],
-   "done": true,
-   "done_on": "2026-09-16"
-  },
-  {
-   "id": "element-line",
-   "date": "2026-09-25",
-   "owner": "ops",
-   "title": "Element cut lists in the reel line",
-   "long": "The reel line assembles a Determination from the element library, a cut list and one line of data (question, answer, feature)",
-   "do": [
-    "Folded into the Q&A line: the seed picks the takes from the library (ten holds, three shakes, three close-ups of IMG_0247); the library grows with each shoot."
-   ],
-   "done": true,
-   "done_on": "2026-09-16"
-  },
-  {
-   "id": "qa-line",
-   "date": "2026-09-19",
-   "owner": "ops",
-   "title": "The Q&A line: list in, reels and packets out",
-   "long": "The template (tools/reels-qa.py) driven by the workbook's Questions sheet: one reel a day, seven days, seeded so no two cut alike; caption per Q2; the packet the posting line queues at 17:00 NY from 10-31; the hot lane from chat; the 06:08 run builds seven days ahead. Proven in dry run on five dummy rows.",
-   "do": [
-    "Done 09-16, three days early. Proven in dry run: five dummy rows built from the Questions sheet, each a different cut; the queue lists them for 17:00 NY on the four surfaces; the hot lane built and dry-queued an extra reel from a chat question. The 06:08 run builds and queues a week ahead. Posting for real starts the day the Buffer key lands."
-   ],
-   "done": true,
-   "done_on": "2026-09-16"
   }
- ]
+ ],
+ "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md."
 }

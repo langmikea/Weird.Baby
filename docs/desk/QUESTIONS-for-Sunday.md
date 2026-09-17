@@ -53,19 +53,19 @@ time. Ops clears a question the day it is answered.
    with the chord captions on the reels). B. Ultimate Guitar only (reach).
    C. Both, the site first, Ultimate Guitar pointing home. Ops recommends C.
 
-4. **The artifact reels' broadcast look: one style per story, or a blend?**
-   A. Per story (business, automobiles, insurance, fun girls, gambling,
-   gaming), each artifact in its own period style. B. One house blend.
-   C. A blend with one story note per artifact. The three samples are built
-   (the late show, the showroom, the boardroom, on the Gambler set) with a
-   frame strip each and the letter: https://claude.ai/artifact/DPMgazcJHDQK94RN8o5SYk
-   Ops recommends A, with the television and film layers shared.
+4. **The artifact reels' broadcast look.** Answered 09-17 in session:
+   showroom is best; C, the showroom as the base with one dial per story;
+   then SHELVED: the artifact reels need Mike's script and a portrait
+   reshoot, and the frame is a modern product teaser with a "what is this"
+   turn, not a period commercial. The look stays a template
+   (docs/BROADCAST-LOOK-20260917.md §8).
 
-5. **The calendar re-cut.** The plan of 09-10 holds in shape; the task rows
-   are the story era's. A. Re-cut at this sitting, one sheet (what you shoot,
-   what Ops builds, what is parked). B. Keep the rows, mark the parked ones.
-   C. Drop the calendar; the desk and the Sunday grade carry it. Ops
-   recommends A.
+5. **The calendar re-cut.** Answered 09-17 in session, four rulings: the
+   Number launches 10-26 with the porch pieces (A); no teasers, nothing
+   posts before 10-26 (A); the tray re-shoot replaces the plates album by
+   album with the 09-16 Gambler set standing in, the Everyman's first (C);
+   the bench stays 10-15 (A). Applied: 47 rows, Mike's 32 to 14
+   (docs/desk/CALENDAR-RECUT-20260917.md; the workbook rewritten, x's kept).
 
 6. **The material in hand, ruled row by row.** The survey of 09-17 found
    174 files in nine places (docs/MATERIAL-20260917.json, served as The

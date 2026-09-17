@@ -3,14 +3,99 @@
  "ruled": "2026-09-10",
  "opening_day": "2026-10-30",
  "blocks": [
-  { "id": "question", "name": "a question", "one": "one line, on anything, put to the instrument", "count": 5, "measure": "determinations:question", "due": "2026-10-04", "cadence": "five each Sunday from 10-04", "how": "the Word page, a text file, or chat", "done": 0 },
-  { "id": "det-clip", "name": "a Determination clip", "one": "10 to 15 seconds: you shake, the display answers, the machine's sound; you silent; same room, same framing", "count": 5, "measure": "intake:determinations", "due": "2026-10-16", "cadence": "one sitting a week from 10-12", "how": "OneDrive › WeirdBaby › reels › intake › determinations, named wN-day", "done": 0 },
-  { "id": "num-clip", "name": "a Number clip", "one": "about 30 seconds live to camera, one piece of one song, same room", "count": 5, "measure": "intake:numbers", "due": "2026-10-16", "cadence": "the same sitting", "how": "OneDrive › WeirdBaby › reels › intake › numbers", "done": 0 },
-  { "id": "practice", "name": "a practice reel", "one": "any clip shot to learn the room, the audio, the delivery; reviewed, never posted", "count": 9, "measure": "intake:practice", "due": "2026-10-04", "cadence": "three a week, weeks 1 to 3", "how": "OneDrive › WeirdBaby › reels › intake › practice; one line of notes back each", "done": 0 },
-  { "id": "photos", "name": "a photograph set", "one": "one subject, three angles and a hero shot, edited by you", "count": 4, "measure": "photos:sets", "due": "2026-10-11", "cadence": "Everyman and Gambler by 09-27; CEO and Informer by 10-11", "how": "OneDrive › WeirdBaby › photos › subject", "done": 0 },
-  { "id": "rulings", "name": "a ruling sitting", "one": "A/B/C on a served page: the catalogue's pitches, the five wing mocks, the room and framing, song two", "count": 4, "measure": "manual", "due": "2026-10-04", "cadence": "weeks 1 to 3, thirty minutes each", "how": "chat", "done": 0, "items": ["the catalogue's pitches", "the five wing mocks", "the room and framing", "song two"] },
-  { "id": "words", "name": "a paragraph in your words", "one": "the prologue's opening; About the Artist; the Foundation's posture", "count": 3, "measure": "manual", "due": "2026-10-11", "cadence": "when they come", "how": "chat or the Word file", "done": 0, "items": ["the prologue's opening", "About the Artist", "the Foundation's posture"] },
-  { "id": "clicks", "name": "a click set", "one": "Buffer's six; the distributor account; the read-only Google consent", "count": 3, "measure": "clicks", "due": "2026-10-18", "cadence": "Buffer by 10-11; the rest by 10-18", "how": "your own screens; Ops supplies every field", "done": 0, "items": ["Buffer's six clicks", "the distributor account", "the read-only Google consent"] },
-  { "id": "bench", "name": "the unit on the bench", "one": "the real machine in your hands for one flash-and-verify session with Ops on the line", "count": 1, "measure": "manual", "due": "2026-10-18", "cadence": "week 5, a date", "how": "a date", "done": 0 }
- ]
+  {
+   "id": "question",
+   "name": "a question",
+   "one": "one line, on anything, put to the instrument",
+   "count": 15,
+   "measure": "qa:questions",
+   "due": "2026-10-09",
+   "cadence": "fifteen by 10-09 for 10-31 to 11-14, then seven a week",
+   "how": "the workbook's Questions sheet (date, question, answer)",
+   "done": 0
+  },
+  {
+   "id": "num-clip",
+   "name": "a Number clip",
+   "one": "about 30 seconds live to camera, one piece of one song; the DJI pair, the iPhone on the tripod",
+   "count": 5,
+   "measure": "intake:numbers",
+   "due": "2026-10-20",
+   "cadence": "one sitting by 10-20: what the porch tape lacks",
+   "how": "OneDrive › WeirdBaby › reels › intake › numbers",
+   "done": 0
+  },
+  {
+   "id": "photos",
+   "name": "a photograph set",
+   "one": "the tray re-shoot of 09-10 for one album: plates and a colour hero on white",
+   "count": 4,
+   "measure": "photos:sets",
+   "due": "2026-10-18",
+   "cadence": "the tray re-shoot: the Everyman 09-27, the Gambler 10-04, the CEO 10-11, the Informer 10-18",
+   "how": "OneDrive › WeirdBaby › photos › subject",
+   "done": 0
+  },
+  {
+   "id": "rulings",
+   "name": "a ruling sitting",
+   "one": "A/B/C on a served page: the catalogue's pitches, the five wing mocks, the room and framing, song two",
+   "count": 3,
+   "measure": "manual",
+   "due": "2026-10-11",
+   "cadence": "09-20, 09-27, 10-11; thirty minutes each",
+   "how": "chat",
+   "done": 0,
+   "items": [
+    "the catalogue's pitches",
+    "the five wing mocks",
+    "the room and framing",
+    "song two"
+   ]
+  },
+  {
+   "id": "words",
+   "name": "a paragraph in your words",
+   "one": "the prologue's opening; About the Artist; the Foundation's posture",
+   "count": 3,
+   "measure": "manual",
+   "due": "2026-10-11",
+   "cadence": "when they come",
+   "how": "chat or the Word file",
+   "done": 0,
+   "items": [
+    "the prologue's opening",
+    "About the Artist",
+    "the Foundation's posture"
+   ]
+  },
+  {
+   "id": "clicks",
+   "name": "a click set",
+   "one": "Buffer's six; the distributor account; the read-only Google consent",
+   "count": 1,
+   "measure": "clicks",
+   "due": "2026-10-10",
+   "cadence": "Buffer by 10-10; the distributor and Google consent when a song catches",
+   "how": "your own screens; Ops supplies every field",
+   "done": 0,
+   "items": [
+    "Buffer's six clicks",
+    "the distributor account",
+    "the read-only Google consent"
+   ]
+  },
+  {
+   "id": "bench",
+   "name": "the unit on the bench",
+   "one": "the real machine in your hands for one flash-and-verify session with Ops on the line",
+   "count": 1,
+   "measure": "manual",
+   "due": "2026-10-15",
+   "cadence": "10-15, with Ops on the line",
+   "how": "a date",
+   "done": 0
+  }
+ ],
+ "_recut": "2026-09-17: re-cut with the calendar (docs/desk/CALENDAR-RECUT-20260917.md); the Determination clip and the practice reel blocks are gone with the Determination."
 }

@@ -105,3 +105,22 @@ the portfolio's (the pop and the normalise from `tools/reels-build.py`).
   files in OneDrive › WeirdBaby › reels › library › beds. B (Creative
   Commons libraries, a credit line each) and C (the platforms' own sound at
   posting time) were declined; C stays open for the Q&A line.
+
+## 8. Shelved (Mike, 09-17, late; cleaned)
+
+**Question 3, ruled C:** the showroom as the base, one dial per story. Then:
+*"The artifact reels need scripting and a reshoot. Zooming in over and over
+is not theatre. This can shelf for now until I decide what I am producing.
+A 1960s commercial? No, that does not make sense. A modern commercial or
+product teaser, probably, but more of a 'WTF is this'. The silver half
+dollars and the casino chips are awesome vintage stuff, valuable; the case
+is snazzy. I have to write the script. Not a priority."*
+
+So: the look stays as a template (the television and film layers, the
+raster push, the 78s in `reels/beds.json`); the samples are a study; the
+artifact reels wait for Mike's script and the portrait reshoot; the frame
+they will take is a modern product teaser with a "what is this" turn, not a
+period commercial. Sunday question 4 is answered by question 3 (C) and is
+moot until the script exists. Second cut's one defect, no music coming
+through, was the 78 transfers sitting twenty decibels under the pop: the
+bed is now brought to reel level first.
