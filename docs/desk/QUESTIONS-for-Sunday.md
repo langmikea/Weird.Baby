@@ -64,3 +64,15 @@ time. Ops clears a question the day it is answered.
    what Ops builds, what is parked). B. Keep the rows, mark the parked ones.
    C. Drop the calendar; the desk and the Sunday grade carry it. Ops
    recommends A.
+
+6. **The material in hand, ruled row by row.** The survey of 09-17 found
+   174 files in nine places (docs/MATERIAL-20260917.json, served as The
+   Material, https://claude.ai/artifact/UXUfm68tfsaxosyyxzEUXi); one of them was on no ledger: the front-porch session of
+   08-24 from the Audigo (22 minutes, three full takes of Coconuts, an
+   abandoned E.D. Yahdah), which is the Number's own material. Six pieces
+   are cut from it through the reel line and sit in Finished reels ›
+   material. A. Rule the page by group (one letter per group, rows that
+   differ called out) and the porch takes go into the Number ledger for
+   the launch run. B. Rule the porch rows only today; the rest at the
+   09-27 sitting. C. The porch session is rehearsal, not material; the
+   Number is shot fresh with the DJI pair in week 6. Ops recommends A.
