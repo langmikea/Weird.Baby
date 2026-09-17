@@ -1737,6 +1737,18 @@ const pixels={raw:[[0,0,0],[0,0,0]],
 /* [SHIM] IMU: synthetic accel vector in g. Idle = (0,0,1). Tilt keys (WASD) bend x/y; Space/SHAKE spikes
    magnitude past the 1.3 threshold [M8BALL:31]. Firmware readAcceleration(x,y,z) is by-ref; JS returns [x,y,z]. */
 let tiltX=0,tiltY=0,shakeUntil=0;
+/* [2026-09-17 THE TILT CHYRONS, Mike] four-way, non-exclusive, lit while on; Up is gas. The museum's
+   chyrons ask (`portal-control` ids tilt-up/down/left/right); the state lives HERE and is posted back
+   as `tilt-state` so the chyrons light from the machine's own truth. WASD still works standalone. */
+let tiltDirs={up:false,down:false,left:false,right:false};
+function Portal_Tilt_Set(dirs){
+ tiltDirs={up:!!dirs.up,down:!!dirs.down,left:!!dirs.left,right:!!dirs.right};
+ tiltX=(tiltDirs.right?0.35:0)-(tiltDirs.left?0.35:0);
+ tiltY=(tiltDirs.down?0.35:0)-(tiltDirs.up?0.35:0);
+ try{window.parent&&window.parent!==window&&window.parent.postMessage({wb:"tilt-state",dirs:tiltDirs},"*");}catch(e){}
+}
+function Portal_Tilt_Toggle(dir){const d=Object.assign({},tiltDirs);d[dir]=!d[dir];Portal_Tilt_Set(d);}
+function Portal_Gas(){return tiltDirs.up?1.8:1;}   /* Up is gas: the road and the traffic come faster */
 const IMU={
  accelerationAvailable:function(){return true;},
  readAcceleration:function(){
@@ -5360,8 +5372,9 @@ function TD_step(){
  if(random(0,90)===0)TD.curveTgt=(random(0,3)-1)*0.9;
  TD.curve+=(TD.curveTgt-TD.curve)*0.02;
  TD.x=constrain(TD.x+tiltX*0.10-TD.curve*0.018,-1.6,1.6); /* the road pushes; you steer against it */
- TD.phase=(TD.phase+3)%16;
- TD.dist+=1;
+ const gas=(typeof Portal_Gas==="function")?Portal_Gas():1;   /* [2026-09-17] Up is gas */
+ TD.phase=(TD.phase+3*gas)%16;
+ TD.dist+=gas;
  OLED.clearDisplay();
  OLED.drawLine(0,HZN,127,HZN,WHITE);                      /* the horizon */
  for(let y=HZN+2;y<64;y+=2){                              /* road edges + scrolling dashes */
@@ -5373,7 +5386,7 @@ function TD_step(){
   if(((y+TD.phase)%16)<8)OLED.drawPixel(Math.round(cx),y,WHITE);
  }
  for(const o of TD.obs){                                  /* traffic, growing as it comes */
-  o.t+=0.016+o.t*0.02;
+  o.t+=(0.016+o.t*0.02)*gas;
   const t=Math.min(o.t,1),y=HZN+t*(63-HZN),w=3+t*54;
   const cx=64+TD.curve*Math.pow(1-t,2)*46-TD.x*t*34;
   const ox=cx+o.lane*w*0.55,r=Math.max(1,Math.round(t*6));
@@ -10507,6 +10520,7 @@ window.addEventListener("message",function(e){
      four voices are at the `portalAudioOff` block. */
   if(d.wb==="portal-audio"){ Portal_Audio_Set(d.on!==false); return; }
   if(d.wb!=="portal-control")return;
+  if(typeof d.id==="string"&&d.id.indexOf("tilt-")===0){Portal_Tilt_Toggle(d.id.slice(5));return;}
   const fn=PORTAL_CONTROL[d.id];
   if(typeof fn==="function")fn();
  }catch(err){}

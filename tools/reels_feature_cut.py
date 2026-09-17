@@ -66,6 +66,7 @@ class Src:
         self.dir = pathlib.Path(folder); ix = json.load(open(self.dir / "index.json"))
         self.shots = sorted(ix["shots"]); self.glass = sorted(ix["glass"]); self.events = ix["events"]
         self.st = np.array([s[0] for s in self.shots]); self.gt = np.array([g[0] for g in self.glass])
+        self.gsc = np.array([(g[2] if len(g) > 2 else 0) for g in self.glass]); self.gpass = np.array([(g[3] if len(g) > 3 else 0) for g in self.glass])
         r = ix.get("rects", {}).get("cvFront", [314.5, 387, 131, 64]); self.front = r
         self.top = ix.get("rects", {}).get("cvTop", [814.3, 273.8, 131, 64])
         cx, cy = r[0] + r[2] / 2, r[1] + r[3] / 2
@@ -87,12 +88,35 @@ class Src:
     def zoom(self, t):
         u = self.unit; im = self.raw(t).crop(u)
         return im.resize((W, int((u[3] - u[1]) * self.k)), Image.LANCZOS)
+    def gi(self, t):
+        i = int(np.searchsorted(self.gt, t, side="right")) - 1; return max(0, min(len(self.glass) - 1, i))
+    def score_at(self, t):
+        """the reel's score: high to begin with, the game's own distance under it, a jump for every car passed"""
+        i = self.gi(t); return int(2740 + (self.gsc[:i + 1].max() * 3 + self.gpass[:i + 1].max() * 45 if i >= 0 else 0))   # never falls: the run's best so far
     def fb(self, t, which):
         if t < self.gt[0]: return Image.new("L", (128, 64), 0)
-        i = int(np.searchsorted(self.gt, t, side="right")) - 1; i = max(0, min(len(self.glass) - 1, i))
+        i = self.gi(t)
         n = self.glass[i][1]
         im = Image.open(self.dir / "glass" / f"{n:05d}_{which}.png").convert("L")
         return im.resize((128, 64), Image.NEAREST) if im.width != 128 else im
+
+def fb_text(rq, fb, x, y, text):
+    for ch in text:
+        i = ord(ch) - 0x20
+        if 0 <= i < len(rq.GLYPHS): rq.fb_char(fb, x, y, ch); x += rq.GLYPHS[i][3]
+def fb_centered(rq, fb, y, text): fb_text(rq, fb, (128 - rq.text_w(text)) // 2, y, text)
+
+def overlay(rq, fb, mode, score):
+    """the reel's own marks on the drawn glass (inaccurate, not deceitful): the big score over the game's small one,
+    the selected row in inverse video, the NEW HIGH SCORE card"""
+    a = (np.asarray(fb, dtype=np.uint8) > 127).astype(np.uint8)
+    if mode == "score":
+        a[0:15, 78:128] = 0; s = str(score); fb_text(rq, a, 127 - rq.text_w(s), 13, s)
+    elif mode == "select":
+        a[38:58, :] = 1 - a[38:58, :]
+    elif mode == "highscore":
+        a[:, :] = 0; fb_centered(rq, a, 20, "NEW HIGH"); fb_centered(rq, a, 38, "SCORE"); fb_centered(rq, a, 58, str(score))
+    return Image.fromarray(a * 255, "L")
 
 def glass_lit(fb):
     """the front glass as the site draws it: an integer scale with the interlace gap baked in, then bloom"""
@@ -105,7 +129,7 @@ def glass_lit(fb):
     return Image.fromarray(np.clip(np.asarray(lit, dtype=np.float32) * 0.92 + np.asarray(glow, dtype=np.float32) * 0.5, 0, 255).astype(np.uint8), "L")
 
 # the zoom levels: crops of the monitor's picture, in view px around the front glass canvas centre (cx, cy)
-LEVELS = {"unit": dict(left=-202, right=232, top=-241), "mid": dict(left=-165, right=165, top=-241), "glass": dict(left=-95, right=95, centre=True),
+LEVELS = {"unit": dict(left=-202, right=232, top=-241), "mid": dict(left=-165, right=165, top=-241), "glass": dict(left=-128, right=128, top=-171),
           "topglass": dict(left=-95, right=95, centre=True, canvas="cvTop")}
 CAP = dict(left=-202, right=232, top=-241, height=44)          # the ridged cap: the band the name sits on
 BAND_H = 110
@@ -117,10 +141,25 @@ def view_crop(S, level, box_h):
     y0 = cy - h / 2 if L.get("centre") else cy + L["top"]
     return (x0, y0, x1, y0 + h), k
 
-def render_zoom(S, t, which, level, box_h, frame_i, rng):
-    """the monitor's picture cropped to a level, the story's screen drawn into the front glass, the read over it"""
+def render_zoom(S, t, which, level, box_h, frame_i, rng, fb_override=None):
+    """the monitor's picture cropped to a level, the story's screen drawn into the glass, the read over it"""
     (x0, y0, x1, y1), k = view_crop(S, level, box_h)
     base = S.raw(t).crop((int(x0), int(y0), int(x1), int(y1))).resize((W, box_h), Image.LANCZOS)
+    fbi = fb_override if fb_override is not None else S.fb(t, which)
+    if t >= S.gt[0] and level == "topglass":
+        r = S.top; rw, rh = int(round(r[2] * k)), int(round(r[3] * k)); bx, by = int(round((r[0] - x0) * k)), int(round((r[1] - y0) * k))
+        Z = 4; g = fbi.resize((128 * Z, 64 * Z), Image.NEAREST); a = np.asarray(g, dtype=np.float32)
+        mask = np.ones(64 * Z, dtype=np.float32); mask[3::4] = 0.55                       # a fine row gap, the OLED's own
+        lit = Image.fromarray(np.clip(a * mask[:, None] * 0.78, 0, 255).astype(np.uint8), "L")   # cyan reads mid-bright in grey
+        lit = lit.resize((rw, rh), Image.LANCZOS)
+        pad = 10; box = (bx - pad, by - pad, bx + rw + pad, by + rh + pad + 12)   # the aperture runs a little below the canvas
+        region = base.crop(box); ra = np.asarray(region, dtype=np.float32)
+        ring = np.concatenate([ra[:pad].ravel(), ra[-pad:].ravel(), ra[:, :pad].ravel(), ra[:, -pad:].ravel()])
+        m = Image.new("L", region.size, 0); ImageDraw.Draw(m).rectangle([pad // 2, pad // 2, region.width - pad // 2, region.height - pad // 2], fill=255)
+        flat = Image.composite(Image.new("L", region.size, int(np.median(ring))), region, m.filter(ImageFilter.GaussianBlur(pad / 2)))
+        full = Image.new("L", region.size, 0); full.paste(lit, (pad, pad))
+        base.paste(ImageChops.lighter(flat, full), box[:2])                                    # the aperture flattened, the glass's reflections outside it kept
+        return secmon(base, frame_i, rng)
     if t >= S.gt[0]:
         r = S.top if LEVELS[level].get("canvas") == "cvTop" else S.front
         pad = 14   # the site's canvas edge shows as a faint line in the photo of the glass: the patch is blended
@@ -133,7 +172,7 @@ def render_zoom(S, t, which, level, box_h, frame_i, rng):
         m = Image.new("L", region.size, 0); ImageDraw.Draw(m).rectangle([pad // 2, pad // 2, region.width - pad // 2, region.height - pad // 2], fill=255)
         m = m.filter(ImageFilter.GaussianBlur(pad / 2))
         flat = Image.composite(fill, region, m)
-        lit = glass_lit(S.fb(t, which)).resize((rw + 2 * pad, rh + 2 * pad), Image.LANCZOS)
+        lit = glass_lit(fbi).resize((rw + 2 * pad, rh + 2 * pad), Image.LANCZOS)
         base.paste(ImageChops.lighter(flat, lit), box[:2])
     return secmon(base, frame_i, rng)
 
@@ -173,25 +212,15 @@ def boom(im, k, rng):
     out = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
     return tear(out, rng, 1.0) if (k < 0.35 and rng.random() < 0.5) else out
 
-def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, layout="mon-unit", level="glass"):
-    f = Image.new("L", (W, H), 0); name_at = None
-    if layout.startswith("mon-"):
-        f.paste(S.shot(t), (0, MON_Y)); lv = layout[4:]
-        if lv == "glass":
-            f.paste(cap_band(S, t), (0, ZOOM_Y)); name_at = ZOOM_Y + 8
-            f.paste(render_zoom(S, t, which, "topglass" if which == "top" else "glass", H - ZOOM_Y - BAND_H, frame_i, rng), (0, ZOOM_Y + BAND_H))
-        else:
-            f.paste(render_zoom(S, t, which, lv, H - ZOOM_Y, frame_i, rng), (0, ZOOM_Y)); name_at = ZOOM_Y + 14
-    else:                                   # the unit alone: a level per beat
-        top = MON_Y
-        if level == "glass":
-            f.paste(cap_band(S, t), (0, top)); name_at = top + 8
-            f.paste(render_zoom(S, t, which, "glass", H - top - BAND_H, frame_i, rng), (0, top + BAND_H))
-        else:
-            f.paste(render_zoom(S, t, which, level, H - top, frame_i, rng), (0, top)); name_at = top + 14
+def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, layout="mon-glass", level="glass", rq=None, mode=None, fb_override=None):
+    f = Image.new("L", (W, H), 0)
+    f.paste(S.shot(t), (0, MON_Y))
+    fbo = fb_override
+    if mode and rq is not None: fbo = overlay(rq, fbo if fbo is not None else S.fb(t, which), mode, S.score_at(t))
+    f.paste(render_zoom(S, t, which, "topglass" if which == "top" else "glass", H - ZOOM_Y, frame_i, rng, fbo), (0, ZOOM_Y))
     out = f.convert("RGB")
     if name_on and plate is not None:
-        col, alpha = plate; out.paste(col, ((W - col.width) // 2, name_at), alpha)
+        col, alpha = plate; out.paste(col, ((W - col.width) // 2, ZOOM_Y + 10), alpha)
     ImageDraw.Draw(out).text((26, 6), BRANCH, fill=(112, 112, 112), font=font)
     if fx == "white": out = Image.blend(out, Image.new("RGB", (W, H), (255, 255, 255)), 0.75)
     elif fx == "tear": out = tear(out, rng)
@@ -200,25 +229,26 @@ def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, lay
 
 # ── the beat table as clips ─────────────────────────────────────────────────
 def clips(S):
-    t_run, t_twin = S.ev("run"), S.ev("twin")
-    t_reach, t_play, t_end = S.ev("reached"), S.ev("play"), S.ev("end")
+    t_twin = S.ev("twin"); t_reach, t_end = S.ev("reached"), S.ev("end")
     presses = sorted(S.evs("scroll") + S.evs("click")); t_walk = presses[0] if presses else S.ev("idle") + 800
+    t_sel = S.ev("click", last=True)                                                                   # the click that selects the feature
     t_go = S.ev("gameover", last=True) or (t_end - 1500)
-    runs = [t for t in S.evs("gamerun") if t < t_go]; t_run0 = (runs[-1] if runs else t_play) + 400
+    runs = [t for t in S.evs("gamerun") if t < t_go]; t_run0 = (runs[-1] if runs else S.ev("play")) + 300
+    first_run = (S.evs("gamerun") or [S.ev("play") + 1200])[0]
     c = []
-    t_n0, t_n1 = t_run + 150, min(t_twin + 120, t_run + 1150)                                          # 1 noise: a full second of static,
-    c.append(dict(t0=t_n0, t1=t_n1, speed=min(1.0, (t_n1 - t_n0) / 950.0), glass="front", name=False, level="unit"))   # stretched if the machine lands sooner
-    c.append(dict(t0=t_twin + 700, t1=t_twin + 2300, speed=1, glass="front", name=False, level="unit"))   # 2 the twin lands
-    c.append(dict(t0=t_walk - 450, t1=t_reach - 40, speed=1, glass="front", name=False, level="mid"))   # 3 the walk
-    c.append(dict(t0=t_reach - 40, t1=t_reach + 850, speed=1, glass="front", name=True, fx={0: "white", 1: "tear", 3: "tear"}))   # 4 the payload
-    c.append(dict(t0=t_reach + 850, t1=t_reach + 1300, speed=1, glass="top", name=True))              #   the hand-off: the game comes through the front glass
-    c.append(dict(t0=t_run0, t1=t_go - 40, ramp=(5.0, 10.0), glass="top", name=True))                # 5 the race: five times, climbing to ten
-    c.append(dict(t0=t_go - 480, t1=t_go - 30, hold=(56, 14), glass="top", name=True, boom=True))      # 6 WHAM: the crash into slow motion
-    c.append(dict(t0=t_go + 300, t1=t_go + 1300, speed=1, glass="top", name=True))                    # 7 GAME OVER pops on, a beat
+    c.append(dict(t0=t_twin + 1500, t1=t_twin + 2300, speed=1, glass="front", name=False))             # 1 the monitor booted; the glass's own noise, half a beat
+    c.append(dict(t0=t_walk - 600, t1=t_sel - 30, speed=1, glass="front", name=False))                 # 2 the walk, deliberate
+    c.append(dict(t0=t_sel - 30, t1=t_sel - 29, speed=1, glass="front", name=False, still=15, mode="select"))   # 3 the selection: the row in inverse video, half a second
+    c.append(dict(t0=t_sel + 420, t1=t_sel + 1250, speed=1, glass="front", name=True, fx={0: "white", 1: "tear"}))   # 4 OUTPUT REDIRECTED, a beat, the name arrives
+    c.append(dict(t0=first_run + 150, t1=first_run + 950, speed=1, glass="top", name=True, mode="score"))   # 5 the top window: the game, a beat to land
+    c.append(dict(t0=t_run0, t1=t_go - 40, ramp=(5.0, 10.0), glass="top", name=True, mode="score"))    # 6 the race: five times, climbing to ten
+    c.append(dict(t0=t_go - 480, t1=t_go - 30, hold=(56, 14), glass="top", name=True, boom=True, mode="score"))   # 7 WHAM: slow motion to a stop
+    c.append(dict(t0=t_go + 300, t1=t_go + 1400, speed=1, glass="top", name=True, mode="highscore"))   # 8 NEW HIGH SCORE, a beat
     return c
 
 def frames_of(c):
     """the page times this clip samples, one per output frame"""
+    if "still" in c: return [c["t0"]] * c["still"]
     if "hold" in c:
         n, freeze = c["hold"]; span = c["t1"] - c["t0"]
         w = np.array([(1 - k / n) ** 2 for k in range(n)]); w = w / w.sum() * span
@@ -249,17 +279,20 @@ def sound(S, cl, total_s, black_s, td):
             if c["t0"] <= t <= c["t1"]: return s0 + (t - c["t0"]) / 1000 / c["speed"]
         return None
     i_boom = next(i for i, c in enumerate(cl) if c.get("boom")); t_crash = starts[i_boom]; t_card = starts[i_boom + 1]
-    tt = np.arange(int((t_crash - starts[1]) * SR)) / SR
-    add(starts[1], 0.016 * (np.sin(2 * np.pi * 55 * tt) + 0.5 * np.sin(2 * np.pi * 110 * tt)))       # the hum, from the landing to the crash
-    n = int(lens[0] * SR); st = np.convolve(rng.standard_normal(n), np.ones(6) / 6, mode="same")      # static, nothing else, under the noise
-    add(starts[0], 0.22 * st * np.concatenate([np.linspace(0, 1, 600), np.ones(n - 1200), np.linspace(1, 0, 600)]))
-    tk = starts[1] + 0.1
-    while tk < starts[2] - 0.1: add(tk, tick(0.18 + 0.15 * rng.random(), 3, 1800 + 900 * rng.random())); tk += 0.05 + 0.06 * rng.random()   # relays
+    def reel_t(t):
+        for c, s0 in zip(cl, starts):
+            if "hold" in c or "ramp" in c or "still" in c: continue
+            if c["t0"] <= t <= c["t1"]: return s0 + (t - c["t0"]) / 1000 / c["speed"]
+        return None
+    tt = np.arange(int(t_crash * SR)) / SR
+    add(0, 0.016 * (np.sin(2 * np.pi * 55 * tt) + 0.5 * np.sin(2 * np.pi * 110 * tt)))                # the hum, until the crash
+    n = int(lens[0] * SR); add(starts[0], 0.06 * np.convolve(rng.standard_normal(n), np.ones(4) / 4, mode="same"))   # the glass's own noise, half a beat
+    add(starts[2], tone(0.3, 90, 880)); add(starts[2] + 0.09, tone(0.3, 160, 1320))                     # the selection, recognised
     for e in S.events:
         if e["name"] in ("scroll", "click", "play-click", "play-shake"):
             r = reel_t(e["t"])
             if r is not None: add(r, tick(0.45 if "click" in e["name"] else 0.3, 5, 1500 if "click" in e["name"] else 2400))
-    r = starts[3]; add(r, tone(0.35, 120, 660)); add(r + 0.11, tone(0.35, 220, 990))                    # the sting
+    r = starts[3]; add(r, tone(0.35, 120, 660)); add(r + 0.11, tone(0.35, 220, 990))                    # the sting: the payload
     n_th = int(0.16 * SR); e = np.exp(-np.arange(n_th) / (n_th / 4)); add(r + 0.02, 0.5 * e * np.sin(2 * np.pi * 85 * np.arange(n_th) / SR))
     for i, c in enumerate(cl):                                                                           # the engine, climbing with the speed
         if "ramp" in c and i < i_boom:
@@ -289,7 +322,7 @@ def assemble(folder, row, out_dir, layout="mon-unit"):
         for k, t in enumerate(ts):
             e = fx.get(k); kk = 0.0
             if c.get("boom"): e = "boom"; kk = k / max(1, len(ts) - 1)
-            compose(S, t, c["glass"], plate, c["name"], font, n, rng, e, kk, layout, c.get("level", "glass")).save(frames / f"{n:05d}.png"); n += 1
+            compose(S, t, c["glass"], plate, c["name"], font, n, rng, e, kk, layout, c.get("level", "glass"), rq, c.get("mode")).save(frames / f"{n:05d}.png"); n += 1
     for k in range(int(BLACK_S * FPS)): Image.new("RGB", (W, H), (0, 0, 0)).save(frames / f"{n:05d}.png"); n += 1
     total_s = n / FPS; print(f"  {len(cl)} clips, {n} frames, {total_s:.1f}s + the pop")
     sfx = sound(S, cl, total_s, BLACK_S, td)

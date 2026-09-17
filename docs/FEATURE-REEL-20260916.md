@@ -256,3 +256,54 @@ before one mistake, starting fast and going faster, WHAM.
   steering, holds the lane, and the traffic ends it. The reel opens the race
   at five times and climbs to ten with no cut, an engine drone climbing with
   it, then WHAM, the slow motion, the card, the beat, the loop.
+
+## 11. Mike's script (2026-09-17, after the driving landed)
+
+Mike: the driving is excellent; the start has many errors, audio and visual;
+review it frame by frame. The pacing and the visuals are off: a lot goes on
+and the eyes dart around without satisfaction. **The zoomed screen must
+always take centre stage and remain the anchor; we gaze away from it to
+observe the bigger view of the machine, but always come back completely
+landed. It gives us the comfort to look around.** His script, kept whole:
+
+1. Start with the monitor booted, not noise.
+2. Half a beat: noise on the VIIIp in the monitor.
+3. Menu selection at a more relaxed pace, deliberate, so a viewer can follow
+   in real time even if they need to watch twice.
+4. The selection of the payload is a beat point: recognise it. The selected
+   row turns on in inverse video.
+5. A beat to redirect the output, a beat to land. Not long pauses; pacing
+   that satisfies the flow.
+6. Kill AUX DISPLAY.
+7. The score: readable, bigger, starting high (we are mid-game), big jumps
+   for passing others, no dollar sign, ending on NEW HIGH SCORE.
+8. The front zoom wrongly showed the top of the unit above the round portal.
+9. The top screen and the drawn screen inside it match poorly: look at the
+   real photographs and size and blend it properly.
+10. The chyron needs four-way, non-exclusive tilt buttons that light to show
+    the steering; Up is gas.
+
+### What each becomes
+
+- The reel opens on the monitor with the machine already on it; the front
+  glass carries the machine's own boot noise for half a beat; the menu.
+- Presses every 0.7 s on the walk. On the click that selects the feature the
+  row is held in inverse video for half a second, with a note of its own,
+  before the machine's own OUTPUT REDIRECTED card, which holds a beat. Then
+  the cut to the top window with the game running, a beat to land, then the
+  race. AUX DISPLAY is cut out.
+- The score is the reel's overlay on the drawn glass (inaccurate, not
+  deceitful): the game's own small figure is erased; a large figure in the
+  reveal font starts near three thousand and jumps as each car is passed,
+  counted by the autopilot; the game-over card reads NEW HIGH SCORE with
+  the figure.
+- The front glass level now crops from the plate's top edge through the
+  lettering to the window, so what sits above the portal is what sits above
+  it on the machine; the name rides the plate's blank top.
+- The top window: the real one (top_monitor.png) is a small cyan OLED behind
+  a viewfinder glass with reflections, thin strokes, no bloom. The drawn
+  screen is now dimmer, thinner, added over the photograph so the glass's
+  reflections stay, at the aperture the site measured.
+- The site itself gains the tilt chyrons (PortalScreen, the twin): a cross
+  beside SHAKE, lit from the machine's own state, Up as gas; the autopilot
+  steers through them, so the reel shows them lighting.

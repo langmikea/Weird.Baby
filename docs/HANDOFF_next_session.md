@@ -66,6 +66,18 @@ reels/out/features. The capture now drives the run to a collision (weave,
 then hold the lane; restart if the road wins) and records the glass canvases'
 page rects in index.json.
 
+**2026-09-17 (A chosen; Mike's script, §10-§11).** The feature reel is now
+the A layout only: monitor over the front-glass close-up (plate top through
+the lettering to the window, the name on the plate's blank top), cutting to
+the top-window close-up at the hand-off. The site gained the TILT CHYRONS
+(PortalScreen.jsx/.css + both twin copies, robots 1df69fc): a cross beside
+SHAKE, non-exclusive, lit from the twin's `tilt-state`, Up is gas (Tilt
+Drive runs 1.8x). The capture's autopilot steers through them and counts the
+cars passed; the reel overlays its own score (2740 + distance + 45 a car,
+monotonic) and a NEW HIGH SCORE card; the race runs 5x to 10x from a
+52-second run. Sunday question 2 still open. Open: the beat; the Q&A reel's
+branch label.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 

@@ -85,7 +85,7 @@
    has since been ruled away; the argument's subject was the 2x2 and it survives
    its example.
    ═══════════════════════════════════════════════════════════════════════════ */
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "./PortalScreen.css";
 
 /* ═══ THE SHIPPED CHYRON METRICS, MIRRORING `CHY_M` IN `twin.html` ══════════
@@ -188,6 +188,17 @@ const MON_CTL = [
   { id: "scroll", label: "SCROLL" },
   { id: "click",  label: "CLICK"  },
   { id: "shake",  label: "SHAKE"  },
+];
+/* [2026-09-17 THE TILT CHYRONS, Mike] "directional tilt buttons (four-way non
+   exclusive) that light to show the steering. Up = gas." A cross beside SHAKE.
+   Each press ASKS the machine to toggle that direction; the lit state comes
+   back from the machine (`tilt-state`), never from the button, so an autopilot
+   inside the twin lights them exactly as a finger would. */
+const TILT_CTL = [
+  { id: "tilt-up",    label: "\u25B2", cell: "up" },
+  { id: "tilt-left",  label: "\u25C0", cell: "left" },
+  { id: "tilt-down",  label: "\u25BC", cell: "down" },
+  { id: "tilt-right", label: "\u25B6", cell: "right" },
 ];
 
 /* ═══ [2026-08-27] THE BARREL, ON THE CONTROLS ONLY ════════════════════════
@@ -416,6 +427,15 @@ export default function PortalScreen({ bezel, note, place,
   const B = bezel || null;
   const list = Array.isArray(channels) ? channels : [];
   const wordSet = MON_CTL.filter(c => words.includes(c.id));
+  const [tilt, setTilt] = useState({ up: false, down: false, left: false, right: false });
+  useEffect(() => {
+    function onMsg(e) {
+      const d = e && e.data;
+      if (d && d.wb === "tilt-state" && d.dirs) setTilt({ up: !!d.dirs.up, down: !!d.dirs.down, left: !!d.dirs.left, right: !!d.dirs.right });
+    }
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
 
   /* the bend, applied to whatever buttons this screen happens to be drawing.
      One pass over `.ps-chy` inside this frame; see BARREL_CONTROLS above for
@@ -868,6 +888,19 @@ export default function PortalScreen({ bezel, note, place,
             <span className="ps-chytxt">{c.label}</span>
           </button>
         ))}
+        {wordSet.some(c => c.id === "shake") && (
+        <div className="ps-tilt" role="group" aria-label="tilt">
+          {TILT_CTL.map(c => (
+            <button key={c.id}
+                    className={"ps-chy ps-chy-t ps-tilt-" + c.cell + (tilt[c.cell] ? " ps-lit" : "")}
+                    aria-pressed={tilt[c.cell]}
+                    aria-label={"tilt " + c.cell + (c.cell === "up" ? " (gas)" : "")}
+                    onClick={() => sendControl(c.id)}>
+              <span className="ps-chytxt">{c.label}</span>
+            </button>
+          ))}
+        </div>
+        )}
       </div>
       )}
 

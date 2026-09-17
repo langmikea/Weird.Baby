@@ -333,3 +333,16 @@
    `.ps-strip` itself and the class is deleted rather than left as a no-op
    selector — **the [X] still lands on the same pixel, which is the only thing
    the modifier was ever protecting.** */
+
+/* [2026-09-17 THE TILT CHYRONS] a cross in the second grid cell of the second
+   row, beside SHAKE: up over left-down-right, each a third of a chyron wide. Lit
+   (`ps-lit`) is a filled slug with the arrow knocked out in ink, because these
+   read as STATE, not as a press: the machine says which way it is being
+   tilted and the chyron shows it for as long as it is true. */
+.ps-tilt{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:calc(var(--chy-h) / 2 - .2cqw);gap:.4cqw;
+  width:var(--chy-w);height:var(--chy-h)}
+.ps-chy-t{font-size:calc(var(--chy-text) * .75);border-width:calc(var(--chy-line) * .8)}
+.ps-tilt-up{grid-column:2;grid-row:1}.ps-tilt-left{grid-column:1;grid-row:2}
+.ps-tilt-down{grid-column:2;grid-row:2}.ps-tilt-right{grid-column:3;grid-row:2}
+.ps-chy.ps-lit{background-color:#fff;color:#111}
+.ps-chy.ps-lit:hover{background-color:#fff;color:#111}

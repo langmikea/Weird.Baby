@@ -72,7 +72,7 @@ class Capture:
     def snap_glass(self):
         if self.fr is None: return
         try:
-            t, a, b, gs, sc = self.fr.evaluate("() => [performance.now(), document.getElementById('cvFront').toDataURL('image/png'), document.getElementById('cvTop').toDataURL('image/png'), (typeof gameState_FSM==='undefined'?-1:gameState_FSM), (typeof gameScore==='undefined'?0:gameScore)]")
+            t, a, b, gs, sc, passed = self.fr.evaluate("() => [performance.now(), document.getElementById('cvFront').toDataURL('image/png'), document.getElementById('cvTop').toDataURL('image/png'), (typeof gameState_FSM==='undefined'?-1:gameState_FSM), (typeof gameScore==='undefined'?0:gameScore), (window.__passed||0)]")
         except Exception: return
         n = self.n_glass; self.n_glass += 1
         if gs != self.game_state:
@@ -81,7 +81,7 @@ class Capture:
             self.game_state = gs
         (self.dir / "glass" / f"{n:05d}_front.png").write_bytes(base64.b64decode(a.split(",", 1)[1]))
         (self.dir / "glass" / f"{n:05d}_top.png").write_bytes(base64.b64decode(b.split(",", 1)[1]))
-        self.glass.append((t + self.goff, n))
+        self.glass.append((t + self.goff, n, sc, passed))
     def mark(self, name, **kw):
         t = self.pg.evaluate("() => performance.now()"); self.events.append({"t": t, "name": name, **kw}); print(f"  {t/1000:7.2f}s  {name} {kw if kw else ''}", flush=True); return t
     def wait(self, secs):
@@ -155,8 +155,8 @@ def capture(feature, path, play, folder):
             if node not in rows: rows = rows + [node]
             for r in rows:
                 if r == node: break
-                press(scroll, "scroll", seg=k, row=r); C.wait(0.32)
-            press(click, "click", seg=k, row=node); C.wait(0.36 if k < len(path) - 1 else 0.2)
+                press(scroll, "scroll", seg=k, row=r); C.wait(0.7)
+            press(click, "click", seg=k, row=node); C.wait(0.8 if k < len(path) - 1 else 0.2)
         C.mark("reached", feature=feature); C.wait(1.4)
         C.mark("play")
         for secs, act in PLAYS[play]:
@@ -175,15 +175,20 @@ def capture(feature, path, play, folder):
                 # the car reads the road: the free lane ahead of every car, steered against the curve; a run that
                 # ends early is restarted, so the reel gets one long run before the mistake
                 fr.evaluate("""() => { if (window.__ap) clearInterval(window.__ap);
+                  window.__passed = 0; window.__seen = new Set(); let cur = {up: true, left: false, right: false};
+                  Portal_Tilt_Set(cur);
                   window.__ap = setInterval(() => {
                     if (typeof TD === 'undefined' || !TD || gameState_FSM !== 1) return;
+                    for (const o of TD.obs) window.__seen.add(o);
+                    for (const o of Array.from(window.__seen)) if (!TD.obs.includes(o)) { window.__seen.delete(o); window.__passed++; }
                     const lanes = [-1, 0, 1]; const busy = new Set();
-                    for (const o of TD.obs) if (o.t > 0.18 && o.t < 1.08) busy.add(o.lane);
-                    let cur = Math.round(TD.x / 0.912); cur = Math.max(-1, Math.min(1, cur));
-                    let target = cur;
-                    if (busy.has(cur)) { const free = lanes.filter(l => !busy.has(l)).sort((a, b) => Math.abs(a - cur) - Math.abs(b - cur)); target = free.length ? free[0] : cur; }
-                    const want = target * 0.912; const err = want - TD.x;
-                    tiltX = Math.max(-0.45, Math.min(0.45, err / 0.10 + TD.curve * 0.18));
+                    for (const o of TD.obs) if (o.t > 0.12 && o.t < 1.08) busy.add(o.lane);
+                    let lane = Math.round(TD.x / 0.912); lane = Math.max(-1, Math.min(1, lane));
+                    let target = lane;
+                    if (busy.has(lane)) { const free = lanes.filter(l => !busy.has(l)).sort((a, b) => Math.abs(a - lane) - Math.abs(b - lane)); target = free.length ? free[0] : lane; }
+                    const err = target * 0.912 - TD.x + TD.curve * 0.18;
+                    const want = {up: true, left: err < -0.05, right: err > 0.05};
+                    if (want.left !== cur.left || want.right !== cur.right) { cur = want; Portal_Tilt_Set(cur); }
                   }, 30); }""")
                 C.mark("autopilot"); t_end = time.time() + secs
                 while time.time() < t_end:
@@ -191,11 +196,11 @@ def capture(feature, path, play, folder):
                     if fr.evaluate("() => gameState_FSM") == 2: C.mark("early-end"); C.wait(1.0); press(click, "play-click"); C.wait(0.5)
                 continue
             elif act == "collide":
-                fr.evaluate("() => { if (window.__ap) { clearInterval(window.__ap); window.__ap = null; } tiltX = 0; }"); C.mark("mistake")
+                fr.evaluate("() => { if (window.__ap) { clearInterval(window.__ap); window.__ap = null; } Portal_Tilt_Set({up: true}); }"); C.mark("mistake")
                 # hold the lane and let the traffic come; if the run had ended early, start again first
                 for attempt in range(3):
                     if fr.evaluate("() => gameState_FSM") == 2: C.wait(1.0); press(click, "play-click"); C.wait(0.5)
-                    fr.evaluate("() => { tiltX = 0; }"); C.mark("hold-lane")
+                    C.mark("hold-lane")
                     for i in range(int(secs / 0.1)):
                         C.wait(0.1)
                         if fr.evaluate("() => gameState_FSM") == 2: break
@@ -211,7 +216,7 @@ def capture(feature, path, play, folder):
                     if fr.evaluate("() => gameState_FSM") == 2: break
                 fr.evaluate("() => { tiltX = 0; }"); continue
             C.wait(secs)
-        fr.evaluate("() => { tiltX = 0; }")
+        fr.evaluate("() => { Portal_Tilt_Set({}); }")
         C.mark("end"); C.wait(0.6)
         cdp.send("Page.stopScreencast"); C.save(); b.close()
     return C
