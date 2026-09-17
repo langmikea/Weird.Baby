@@ -1,0 +1,64 @@
+{
+ "_": "THE FEATURE OF THE DAY — one row a day; the template is tools/reels-feature.py; the story is docs/FEATURE-REEL-20260916.md. date: the posting day (Mike sets the start; null until then). path: the menu walk from the idle list. play: a named demo script in the tool. status: open | built | posted.",
+ "rows": [
+  {
+   "date": null,
+   "feature": "Tilt Drive",
+   "path": [
+    "Programs",
+    "Games",
+    "Tilt Drive"
+   ],
+   "play": "tilt-drive",
+   "status": "open",
+   "file": null
+  },
+  {
+   "date": null,
+   "feature": "Gobble Don't Fall",
+   "path": [
+    "Programs",
+    "Games",
+    "Gobble Don't Fall"
+   ],
+   "play": "gobble",
+   "status": "open",
+   "file": null
+  },
+  {
+   "date": null,
+   "feature": "AvoidSteroids",
+   "path": [
+    "Programs",
+    "Games",
+    "AvoidSteroids"
+   ],
+   "play": "avoidsteroids",
+   "status": "open",
+   "file": null
+  },
+  {
+   "date": null,
+   "feature": "Snow Globe",
+   "path": [
+    "Programs",
+    "Games",
+    "Snow Globe"
+   ],
+   "play": "snow-globe",
+   "status": "open",
+   "file": null
+  },
+  {
+   "date": null,
+   "feature": "MGK-NIAC",
+   "path": [
+    "Answers",
+    "MGK-NIAC"
+   ],
+   "play": "ask",
+   "status": "open",
+   "file": null
+  }
+ ]
+}

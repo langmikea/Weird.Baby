@@ -27,6 +27,23 @@ IMG_0250; the beat.
 were sitting on the black body. IMG_0250 (top-down on white) joins the hold
 library with ten windows. Open Ops: the beat.
 
+**2026-09-16, night (the Feature of the Day reel).** Mike's brief (monitor,
+channel 3 by cursor, the twin, the menu walk, the demo, game cuts, story
+first, review first) is scripted in `docs/FEATURE-REEL-20260916.md` and built:
+`tools/reels-feature.py` (Playwright + the installed Chrome drives the live
+site's Portal headless: TERMINAL.EXE, ANTENNA 3 to CAB, RUN, the walk by the
+Portal's own SCROLL/CLICK with a drawn cursor, the demo script; records the
+monitor by CDP screencast and both glasses from the twin's canvases on one
+clock) and `tools/reels_feature_cut.py` (the beat table → 1080x1920, monitor
+on top, glass at 8x below, the name in the machine's font, the house sound,
+the pop first). Data: `reels/features.json` (five rows, dates unset). First
+cut reviewed: `OneDrive/WeirdBaby/reels/out/features/feature_tilt-drive.mp4`
+(29 s) + its review sheet. Finding: the site's twin refuses Games (Mike's
+08-20 "very limited" set) and the game pack is a parcel; the demo machine
+lifts both; Sunday question 2 asks what the site does on a feature's day.
+Needs the dev server running (`museum` in launch.json) and `pip install
+playwright` (done on this PC). Open: the beat.
+
 <!-- ) SHELL-STOP. Do not remove: the unbalanced parenthesis makes bash abort if this file is ever executed, which is how a deploy published on 2026-08-29. §8. -->
 # HANDOFF — 2026-09-10
 

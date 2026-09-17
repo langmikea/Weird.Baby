@@ -32,3 +32,19 @@ time. Ops clears a question the day it is answered.
    C. Two screens: the reels wrap freely, as now, up to four lines; the
    unit keeps the tables and clips until the bench trip. Ops recommends A.
 
+2. **The Feature of the Day reel shows things the site's machine refuses.**
+   Your brief of 09-16 (monitor, channel 3, the walk, the demo) is built:
+   docs/FEATURE-REEL-20260916.md, tools/reels-feature.py. On the site, your
+   08-20 ruling keeps the twin "very limited": Games, Advice, Predictions and
+   Probabilities answer NOT FITTED, Messages NO RECORD; the game pack is also
+   a parcel that arrives after ten asks. So a visitor who follows the reel to
+   /robots today reaches "Games — NOT FITTED". The first cut lifts the refusal
+   on the demo machine only. A. The reel shows the machine as it will ship;
+   the site catches up when the parcel and refusal laws say so (the visitor
+   meets the refusal, which is the fiction). B. On the feature's day the site
+   lifts that one refusal, so the daily promotion lands on a page where the
+   feature works (the plan's "each daily promotion lands on the site's page
+   for that day's feature"); the refusal returns the next day or stays lifted,
+   your call. C. The reels only feature what the site does today: the ask
+   (the three engines), Detectors, Codes, Preferences; games wait for the
+   bench. Ops recommends B.
