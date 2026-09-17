@@ -1,0 +1,79 @@
+{
+ "_": "THE Q&A LEDGER — one row a day from 2026-10-31, seven days a week (ruled 2026-09-16). question and answer come from the workbook's Questions sheet; seed, file, status and postings are the line's. Hot rows are the rapid ones from chat. Rows marked test are the dry run's dummies and are replaced by Mike's list.",
+ "ruled": "2026-09-16",
+ "start": "2026-10-31",
+ "time": "17:00 America/New_York",
+ "statuses": [
+  "open",
+  "built",
+  "queued",
+  "posted"
+ ],
+ "rows": [
+  {
+   "date": "2026-10-31",
+   "question": "Is it too late to start over?",
+   "answer": "NOT YET. THE HAND IS STILL BEING DEALT.",
+   "seed": 544810978,
+   "test": true,
+   "hot": false,
+   "status": "open",
+   "file": null,
+   "caption": null,
+   "postings": {},
+   "numbers": {}
+  },
+  {
+   "date": "2026-11-01",
+   "question": "Will my team cover the spread?",
+   "answer": "THE ODDS FAVOR THE HOUSE. THEY ALWAYS DO.",
+   "seed": 1305509475,
+   "test": true,
+   "hot": false,
+   "status": "open",
+   "file": null,
+   "caption": null,
+   "postings": {},
+   "numbers": {}
+  },
+  {
+   "date": "2026-11-02",
+   "question": "Should I answer that email today?",
+   "answer": "THE SMART MONEY LEFT AN HOUR AGO.",
+   "seed": 2301203916,
+   "test": true,
+   "hot": false,
+   "status": "open",
+   "file": null,
+   "caption": null,
+   "postings": {},
+   "numbers": {}
+  },
+  {
+   "date": "2026-11-03",
+   "question": "Does the cat actually like me?",
+   "answer": "AS I SEE IT, YES. AND I SEE PLENTY IN THIS CASE.",
+   "seed": 1414273841,
+   "test": true,
+   "hot": false,
+   "status": "open",
+   "file": null,
+   "caption": null,
+   "postings": {},
+   "numbers": {}
+  },
+  {
+   "date": "2026-11-04",
+   "question": "Is this the year I fix the porch?",
+   "answer": "MOST LIKELY, YES. THE TABLE LEANS YOUR WAY TONIGHT.",
+   "seed": 246791751,
+   "test": true,
+   "hot": false,
+   "status": "open",
+   "file": null,
+   "caption": null,
+   "postings": {},
+   "numbers": {}
+  }
+ ]
+}

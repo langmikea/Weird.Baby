@@ -39,7 +39,10 @@ const CHANNELS_FILE = path.join(REPO, "reels", "buffer-channels.json");
 const LANES = {
   numbers: { file: "numbers.json", time: "12:00" },
   determinations: { file: "determinations.json", time: "17:00" },
+  qa: { file: "qa.json", time: "17:00" },   // the Q&A line (ruled 2026-09-16): one a day, seven days, from 10-31; rows by date, not week
 };
+/* qa lane selection: --date YYYY-MM-DD (one row, hot rows included), --ahead N (built rows from today through N days),
+   --now (hot: due ten minutes from now instead of 17:00). Without a Buffer key the queue prints what it would do and exits 0. */
 const ORDER = ["tiktok", "instagram", "youtube", "facebook"]; // release/README.md: door, brand, archive, last
 
 const args = process.argv.slice(2);
@@ -86,6 +89,7 @@ function metadataFor(service, row, lane) {
   return undefined;
 }
 function textFor(lane, row) {
+  if (lane === "qa") return row.caption || `${row.question}\nweird.baby\n#weirdbaby #mgkviiip #thedetermination`;   // Q2, ruled 09-16
   if (lane === "numbers") return `${row.song} — ${row.piece}. Papa Weird.Baby, live. The rest is at weird.baby\n#weirdbaby #originalsong #livemusic #blues #indie`;
   const q = row.question || "the question of the day";
   return `The Determination. ${q}\nweird.baby\n#weirdbaby #mgk #fortune`;
@@ -115,17 +119,30 @@ async function schema() {
   }
 }
 
+function nyToday() {
+  const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+  const get = k => parts.find(p => p.type === k).value; return `${get("year")}-${get("month")}-${get("day")}`;
+}
 async function queue() {
-  const lane = opt("lane"), week = Number(opt("week")), dry = flag("dry");
-  if (!LANES[lane] || !week) throw new Error("need --lane numbers|determinations and --week N");
+  const lane = opt("lane"), week = Number(opt("week")); let dry = flag("dry");
+  if (!LANES[lane]) throw new Error("need --lane numbers|determinations|qa");
+  if (lane !== "qa" && !week) throw new Error("need --week N for that lane");
+  if (!token()) { dry = true; console.log("  no Buffer key on this PC (Mike's clicks): dry run, nothing queued"); }
   const ledPath = path.join(REPO, "reels", LANES[lane].file);
   const led = JSON.parse(fs.readFileSync(ledPath, "utf8"));
-  const rows = led.rows.filter(r => r.week === week && r.status === "shot" && r.file && fs.existsSync(r.file));
+  let rows;
+  if (lane === "qa") {
+    const built = r => (r.status === "built") && r.file && fs.existsSync(r.file);
+    if (opt("date")) rows = led.rows.filter(r => r.date === opt("date") && built(r));
+    else { const n = Number(opt("ahead") || 7); const t0 = nyToday(); const t1 = new Date(Date.parse(t0) + n * 86400000).toISOString().slice(0, 10); rows = led.rows.filter(r => r.date >= t0 && r.date <= t1 && built(r)); }
+  } else rows = led.rows.filter(r => r.week === week && r.status === "shot" && r.file && fs.existsSync(r.file));
   const channels = fs.existsSync(CHANNELS_FILE) ? JSON.parse(fs.readFileSync(CHANNELS_FILE, "utf8")).channels : [];
   const byService = Object.fromEntries(channels.map(c => [c.service, c]));
-  console.log(`THE QUEUE — ${lane}, week ${week}${dry ? " (dry)" : ""}. ${rows.length} built row(s); channels: ${channels.map(c => c.service).join(", ") || "none on file (run --channels)"}`);
+  console.log(`THE QUEUE — ${lane}${lane === "qa" ? "" : `, week ${week}`}${dry ? " (dry)" : ""}. ${rows.length} built row(s); channels: ${channels.map(c => c.service).join(", ") || "none on file (run --channels)"}`);
   for (const r of rows) {
-    const due = nyToUtcIso(r.date, LANES[lane].time);
+    const due = (lane === "qa" && flag("now")) ? new Date(Date.now() + 10 * 60000).toISOString() : nyToUtcIso(r.date, LANES[lane].time);
+    if (!r.postings) r.postings = {};
+    if (!r.day) r.day = new Date(r.date + "T12:00:00Z").toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
     const key = `reels/${lane}/${r.date}/${crypto.randomBytes(4).toString("hex")}/${path.basename(r.file)}`;
     console.log(`  ${r.day} ${r.date}  ${path.basename(r.file)}  due ${due}  →  ${PUBLIC}/${key}`);
     if (dry) continue;

@@ -9,8 +9,18 @@ black big-text card and a glitch back to the first frame; black and white
 throughout; short, close, iPod pace; the words appear as they are spoken; the
 voice slower and androgynous; Ops reviews continuity before it is sent.
 
-    python tools/reels-qa.py                      one reel -> OneDrive/WeirdBaby/reels/out/qa/qa_<slug>.mp4
-    python tools/reels-qa.py --review             also writes a frame sheet beside it (every 0.25 s)
+    python tools/reels-qa.py --date 2026-10-31        one ledger row -> OneDrive/WeirdBaby/reels/out/qa/<date>_qa.mp4
+    python tools/reels-qa.py --ahead 7                every open row with a question and answer in the next 7 days
+    python tools/reels-qa.py --hot "Question?" "ANSWER."   the hot lane: today's extra row, built now (then queue --now)
+    python tools/reels-qa.py --review --date ...      also a frame sheet beside the reel (every 0.25 s)
+    python tools/reels-qa.py --preview --color=yellow one still of the question, for tuning
+
+THE LINE (ruled 2026-09-16). One template, one row of data per reel: date, question, answer,
+and a seed the line assigns. The seed chooses the takes from the library below, the direction
+of the slide, the push, the theatre's lines and lengths, so no two reels cut alike. The ledger
+is reels/qa.json (one row a day, seven days a week, from 2026-10-31); Mike's questions and
+answers reach it through the workbook's Questions sheet (tools/days-xlsx.py). The posting line
+(tools/reels-queue.mjs --lane qa) takes the built rows at 17:00 New York.
 
 How it is made. Segments are cut from the 4K clips (frames extracted at 30 fps,
 cropped 9:16 around the unit, greyscale). The glass, the upper round window of
@@ -48,20 +58,55 @@ W, H, FPS = 1080, 1920, 30
 COLOURS = {"white": (255, 255, 255), "screen": (230, 242, 255), "yellow": (255, 214, 0), "blue": (90, 170, 255),
            "amber": (255, 176, 0), "green": (130, 255, 150), "cyan": (110, 240, 255)}
 _ca = [a for a in sys.argv if a.startswith("--color=")]
-TEXT_NAME = _ca[0].split("=", 1)[1] if _ca else "screen"
-TEXT_RGB = COLOURS.get(TEXT_NAME, COLOURS["screen"])
+TEXT_NAME = _ca[0].split("=", 1)[1] if _ca else "yellow"   # ruled 09-16
+TEXT_RGB = COLOURS.get(TEXT_NAME, COLOURS["yellow"])
 PREVIEW = "--preview" in sys.argv
 
-# ── the data of this reel ───────────────────────────────────────────────────
-QUESTION = "Should I bet on the home team tonight?"
-ANSWER = ("THE SMART MONEY", "LEFT AN HOUR AGO.")        # the Gambler, answer 9, as split in the table
-# segments: (clip, start_s, seconds, seed circle in the clip's full frame (cx, cy, r), role)
-SEGMENTS = [
-    ("0247", 22.0, 1.7, (1964, 1028, 204), "hold"),
-    ("0247", 25.0, 1.7, (1964, 1028, 204), "hold"),
-    ("0247", 81.0, 0.5, (1656, 932, 312), "shake"),
-    ("0247", 50.0, 0.1, (2104, 1176, 448), "ecu"),
-]
+# ── the ledger and the library ──────────────────────────────────────────────
+LEDGER = pathlib.Path(r"C:\AI\Projects\weird-baby-museum\reels\qa.json")
+TAGS = "#weirdbaby #mgkviiip #thedetermination"
+# the library of takes: every window is a start time in one of Mike's clips; the glass is found in the
+# first frame by auto_seed (the big dark circle with a lens under it) and tracked from there.
+LIBRARY = {
+    "hold":  [("0247", 20.0), ("0247", 24.0), ("0247", 28.0), ("0247", 32.0), ("0247", 40.0), ("0247", 44.0), ("0247", 56.0),
+              ("0250", 2.0), ("0250", 6.0), ("0250", 10.0), ("0250", 14.0), ("0250", 30.0), ("0250", 34.0)],
+    "shake": [("0247", 81.0), ("0247", 82.0), ("0247", 84.0)],
+    "ecu":   [("0247", 50.0), ("0247", 50.4), ("0247", 51.0)],
+}
+QUESTION, ANSWER, SEGMENTS = "Should I bet on the home team tonight?", ("THE SMART MONEY", "LEFT AN HOUR AGO."), []
+
+def choose(seed):
+    """the seed's cut: two holds from one clip, a shake, a close-up, the slide's side, the push, the theatre's length"""
+    rng = np.random.default_rng(seed)
+    clip = rng.choice(["0247", "0247", "0250"])                  # the gloved hands twice as often
+    holds = [h for h in LIBRARY["hold"] if h[0] == clip]
+    picks = rng.choice(len(holds), size=2, replace=False)
+    h1, h2 = holds[picks[0]], holds[picks[1]]
+    shake = LIBRARY["shake"][rng.integers(len(LIBRARY["shake"]))]
+    ecu = LIBRARY["ecu"][rng.integers(len(LIBRARY["ecu"]))]
+    return {
+        "segments": [(h1[0], h1[1], 1.7, None, "hold"), (h2[0], h2[1], 1.7, None, "hold"), (shake[0], shake[1], 0.5, None, "shake"), (ecu[0], ecu[1], 0.1, None, "ecu")],
+        "slide_from": "right" if rng.random() < 0.6 else "left",
+        "push": float(rng.uniform(0.03, 0.07)),
+        "theatre_s": float(rng.uniform(1.2, 1.8)),
+        "hum_hz": float(rng.uniform(50, 60)),
+        "mon_offset": int(rng.integers(0, 40)),
+    }
+
+def auto_seed(g):
+    """the glass in a first frame: the biggest dark circle in the middle of the frame with a lens under it"""
+    import cv2
+    small = cv2.medianBlur(cv2.resize(g, (W // 2, H // 2)), 5)
+    cs = cv2.HoughCircles(small, cv2.HOUGH_GRADIENT, dp=1.2, minDist=30, param1=110, param2=30, minRadius=40, maxRadius=260)
+    if cs is None: return None
+    cands = [(x * 2, y * 2, r * 2) for x, y, r in cs[0] if 200 < x * 2 < W - 200 and 250 < y * 2 < 1250]
+    best = None
+    for c in cands:
+        for l in cands:
+            if l is c: continue
+            d = math.hypot(l[0] - c[0], l[1] - (c[1] + 1.7 * c[2]))
+            if 0.3 * c[2] < l[2] < 0.65 * c[2] and d < 0.6 * c[2] and (best is None or c[2] > best[2]): best = c
+    return best
 BLACK_S = 0.2
 SLIDE_S = 0.4          # the signature move: the logo slides off, the machine slides in
 THEATRE_S, REDIRECT_S, TRI_S, ANSWER_S = 1.5, 0.5, 0.8, 3.4   # the machine works, redirects, reveals, holds
@@ -131,11 +176,12 @@ OPCODES = ["dex","jmp","jsr","lda","ldx","ora","orx","rts","sta","stx","bne","be
 OPERANDS = ["$00","$01","$07","$0A","$23","$24","$2A","$3B","$44","$4C","$5D","$68","$7F","$80","$A3","$A5","$A6","$A8","$B6","$B8","$C0","$C9","$D1","$D9","$F2","$FA","$FE","$FF","#00","#01","#02","#04","#08","#09","#16","#32","#64","#99","#FF"]
 _mon = np.random.default_rng(11)
 _mon_lines = [f"{_mon.choice(OPCODES)} {_mon.choice(OPERANDS)}" for _ in range(64)]
+MON_OFFSET = [0]
 def screen_monitor(k, total):
     """the machine at work on the front glass: the twin's own faux-assembly scroller (opcodes and operands
     from viiip_twin.html) rolling one line every four frames, a load bar filling along the bottom"""
     fb = fb_new()
-    step = k // 4
+    step = k // 4 + MON_OFFSET[0]
     for row in range(3):
         ln = _mon_lines[(step + row) % len(_mon_lines)].upper()
         x = 4
@@ -226,14 +272,23 @@ def probe_size(clip):
     return (h, w) if abs(int(rot)) % 180 == 90 else (w, h)
 
 def extract(clip, start, secs, seed, td, tag):
-    """9:16 crop centred on the seed circle, scaled to 1080x1920, greyscale, 30 fps; returns frame paths and the crop transform"""
+    """9:16 crop around the unit, scaled to 1080x1920, greyscale, 30 fps; returns frame paths and the glass in the first frame.
+    With no seed, the crop is centred and the glass is found by auto_seed; None if it is not found (the caller picks another take)."""
+    import cv2
     fw, fh = probe_size(clip)
-    cw = int(fh * 9 / 16); x0 = max(0, min(fw - cw, int(seed[0] - cw / 2)))
-    k = W / cw
+    cw = int(fh * 9 / 16); k = W / cw
     d = pathlib.Path(td) / tag; d.mkdir()
+    if seed is None:
+        x0 = max(0, (fw - cw) // 2)
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(start), "-i", str(SRC / f"IMG_{clip}.MOV"), "-frames:v", "1",
+                        "-vf", f"crop={cw}:{fh}:{x0}:0,scale={W}:{H},format=gray", str(d / "probe.png")], check=True)
+        c = auto_seed(cv2.imread(str(d / "probe.png"), cv2.IMREAD_GRAYSCALE))
+        if c is None: return None, None
+        seed = (c[0] / k + x0, c[1] / k, c[2] / k)
+    x0 = max(0, min(fw - cw, int(seed[0] - cw / 2)))
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(start), "-t", str(secs), "-i", str(SRC / f"IMG_{clip}.MOV"),
                     "-vf", f"crop={cw}:{fh}:{x0}:0,scale={W}:{H},fps={FPS},format=gray", str(d / "%04d.png")], check=True)
-    frames = sorted(d.glob("*.png"))
+    frames = sorted(f for f in d.glob("*.png") if f.name != "probe.png")
     seed_out = ((seed[0] - x0) * k, seed[1] * k, seed[2] * k)
     return frames, seed_out
 
@@ -412,11 +467,63 @@ def glitch(frame, k):
     return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8), "L")
 
 # ── the build ───────────────────────────────────────────────────────────────
+def build_row(date, question, answer, seed, review=False, tag=None):
+    """one reel from one row; returns the file. The cut is the seed's."""
+    global QUESTION, ANSWER, SEGMENTS, THEATRE_S
+    QUESTION, ANSWER = question, tuple(answer.split("\n")) if "\n" in answer else (answer,)
+    cut = choose(seed); SEGMENTS = cut["segments"]; THEATRE_S = cut["theatre_s"]; MON_OFFSET[0] = cut["mon_offset"]
+    OUT.mkdir(parents=True, exist_ok=True)
+    dest = OUT / f"{date}_qa{('_' + tag) if tag else ''}.mp4"
+    return _build(dest, review, cut)
+
 def main():
     review = "--review" in sys.argv
+    argv = [a for a in sys.argv[1:] if not a.startswith("--color=")]
+    if "--hot" in argv:
+        i = argv.index("--hot"); q, a = argv[i + 1], argv[i + 2]
+        led = ledger(); today = ny_today()
+        n_hot = sum(1 for r in led["rows"] if r["date"] == today and r.get("hot"))
+        row = {"date": today, "question": q, "answer": a, "seed": int(zlib_seed(f"{today}-hot-{n_hot}-{q}")), "hot": True,
+               "status": "open", "file": None, "caption": None, "postings": {}, "numbers": {}}
+        led["rows"].append(row); f = build_row(row["date"], q, a, row["seed"], review, tag=f"hot{n_hot + 1}")
+        finish_row(led, row, f); return
+    if "--ahead" in argv or "--date" in argv:
+        led = ledger(); today = ny_today()
+        if "--date" in argv:
+            want = argv[argv.index("--date") + 1]; rows = [r for r in led["rows"] if r["date"] == want]
+        else:
+            n = int(argv[argv.index("--ahead") + 1]); end = (datetime.date.fromisoformat(today) + datetime.timedelta(days=n)).isoformat()
+            rows = [r for r in led["rows"] if today <= r["date"] <= end and r["status"] == "open" and r.get("question") and r.get("answer") and not r.get("hot")]
+        if not rows: print("  nothing to build: no open row with a question and an answer in range"); return
+        for r in rows:
+            if not r.get("question") or not r.get("answer"): print(f"  {r['date']}: no question and answer yet"); continue
+            if not r.get("seed"): r["seed"] = int(zlib_seed(f"{r['date']}-{r['question']}"))
+            f = build_row(r["date"], r["question"], r["answer"], r["seed"], review); finish_row(led, r, f)
+        return
+    # no lane flag: the one sample question, as before, for tuning
     OUT.mkdir(parents=True, exist_ok=True)
     slug = re.sub(r"[^a-z0-9]+", "-", QUESTION.lower()).strip("-")[:40]
     dest = OUT / f"qa_{slug}_{TEXT_NAME}.mp4"
+    cut = choose(1); SEGMENTS[:] = cut["segments"]
+    _build(dest, review, cut)
+
+import datetime, zlib
+def zlib_seed(s): return zlib.crc32(s.encode("utf8")) & 0xffffffff
+def ny_today():
+    from zoneinfo import ZoneInfo
+    return datetime.datetime.now(ZoneInfo("America/New_York")).date().isoformat()
+def ledger():
+    if LEDGER.exists(): return json.loads(LEDGER.read_text(encoding="utf-8"))
+    return {"_": "THE Q&A LEDGER — one row a day from 2026-10-31, seven days a week (ruled 2026-09-16). question and answer come from the workbook's Questions sheet; seed, file, status and postings are the line's. Hot rows are the rapid ones from chat.",
+            "ruled": "2026-09-16", "start": "2026-10-31", "time": "17:00 America/New_York", "statuses": ["open", "built", "queued", "posted"], "rows": []}
+def finish_row(led, row, f):
+    row["file"] = str(f); row["status"] = "built"; row["built_on"] = datetime.date.today().isoformat()
+    row["caption"] = f"{row['question']}\nweird.baby\n{TAGS}"
+    led["rows"].sort(key=lambda r: (r["date"], bool(r.get("hot"))))
+    LEDGER.write_text(json.dumps(led, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"  ledger: {row['date']}{' hot' if row.get('hot') else ''} built -> {pathlib.Path(f).name}")
+
+def _build(dest, review, cut):
     if not POP_LAST.exists():
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-sseof", "-0.05", "-i", str(POP), "-frames:v", "1", "-vf", "format=gray", str(POP_LAST)], check=True)
     with tempfile.TemporaryDirectory() as td:
@@ -429,6 +536,12 @@ def main():
         segs = []
         for i, (clip, start, secs, seed, role) in enumerate(SEGMENTS):
             frames, seed_out = extract(clip, start, secs, seed, td, f"seg{i}")
+            if frames is None:
+                # the glass was not found in that take: fall back to the first take of the role that works
+                for alt in LIBRARY[role]:
+                    frames, seed_out = extract(alt[0], alt[1], secs, None, td, f"seg{i}_{alt[0]}_{int(alt[1]*10)}")
+                    if frames is not None: clip, start = alt; break
+            if frames is None: raise SystemExit(f"no take of role {role} yields a glass")
             circles = track(frames, seed_out)
             segs.append((role, frames, circles))
             print(f"  seg{i} {role:5s} {clip} {start:>5}s {len(frames)} frames  glass r {circles[0][2]:.0f}->{circles[-1][2]:.0f}")
@@ -470,9 +583,13 @@ def main():
             if pop_last is not None and k < n_slide:
                 e = 1 - (1 - k / n_slide) ** 3
                 canvas = Image.new("RGB", (W, H), (0, 0, 0))
-                xin = int(W * (1 - e)); canvas.paste(pop_last.convert("RGB"), (xin - W, 0)); canvas.paste(im, (xin, 0)); im = canvas   # the two halves share one edge: no seam
+                if cut["slide_from"] == "right":
+                    xin = int(W * (1 - e)); canvas.paste(pop_last.convert("RGB"), (xin - W, 0)); canvas.paste(im, (xin, 0))
+                else:
+                    xin = int(-W * (1 - e)); canvas.paste(pop_last.convert("RGB"), (xin + W, 0)); canvas.paste(im, (xin, 0))
+                im = canvas   # the two halves share one edge: no seam
             elif k < n_slide + int(1.0 * FPS):
-                z = 1.0 + 0.05 * (1 - (k - n_slide) / (1.0 * FPS))
+                z = 1.0 + cut["push"] * (1 - (k - n_slide) / (1.0 * FPS))
                 cw, ch = int(W / z), int(H / z); im = im.crop(((W - cw) // 2, (H - ch) // 2, (W - cw) // 2 + cw, (H - ch) // 2 + ch)).resize((W, H), Image.LANCZOS)
             if first_frame is None: first_frame = im.copy()
             if PREVIEW and k == len(hold_frames) - 1:
@@ -521,7 +638,7 @@ def main():
             i = int(t0 * VOICE.SR); j = min(len(sfx), i + len(sig)); sfx[i:j] += sig[:j - i]
         SRv = VOICE.SR; rng = np.random.default_rng(5)
         tt = np.arange(int((middle_s - BLACK_S) * SRv)) / SRv
-        add(0, 0.018 * (np.sin(2 * np.pi * 55 * tt) + 0.5 * np.sin(2 * np.pi * 110 * tt)))          # the hum
+        hz = cut["hum_hz"]; add(0, 0.018 * (np.sin(2 * np.pi * hz * tt) + 0.5 * np.sin(2 * np.pi * 2 * hz * tt)))   # the hum
         def tick(amp=0.35, ms=4, hz=2200):
             n = int(ms * SRv / 1000); e = np.exp(-np.arange(n) / (n / 3)); return amp * e * np.sin(2 * np.pi * hz * np.arange(n) / SRv)
         for m in range(3): add(t_shake + 0.06 * m, tick(0.5, 6, 900 + 300 * m))                        # the rattle
@@ -549,7 +666,7 @@ def main():
         dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(dest)], capture_output=True, text=True).stdout)
         print(f"  wrote {dest}  {dur:.1f}s")
         if review:
-            sheet = OUT / f"qa_{slug}_review.jpg"
+            sheet = dest.with_name(dest.stem + "_review.jpg")
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(dest), "-vf", "fps=4,scale=216:-1,tile=10x5", "-frames:v", "1", str(sheet)], check=True)
             print(f"  review sheet {sheet}")
 

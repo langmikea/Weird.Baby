@@ -159,6 +159,68 @@ ws_t.cell(row=n, column=1, value="Legend").font = f_head
 ws_t.cell(row=n + 1, column=1, value="Done is yours: type x on a step's row when that step is done, in any order. A task turns done when every step is; an x on the grey header row marks the whole task. A step the process can see for itself (a file that landed) says found. Everything else is Ops' and is rewritten when the plan moves; your x's survive.").font = f_sub
 ws_t.cell(row=n + 2, column=1, value="Red item = needs Mike; grey = Ops; struck = done; bold red = late. Spec links to the sheet that says what one of these is.").font = f_sub
 
+# ── Questions (the Q&A line, ruled 2026-09-16) ─────────────────────────────
+# Mike types date, question and answer; the line owns seed, status, file and posted. Read back first, then rewritten.
+QA = REPO / "reels/qa.json"
+def read_questions():
+    got = {}
+    if XLSX.exists():
+        try:
+            wb0 = load_workbook(XLSX, read_only=True, data_only=True)
+            if "Questions" in wb0.sheetnames:
+                head = None
+                for row in wb0["Questions"].iter_rows(values_only=True):
+                    if head is None: head = [str(c).strip().lower() if c else "" for c in row]; continue
+                    d = dict(zip(head, row)); dt = d.get("date"); q = (d.get("question") or "").strip() if isinstance(d.get("question"), str) else d.get("question"); a = (d.get("answer") or "").strip() if isinstance(d.get("answer"), str) else d.get("answer")
+                    if not dt: continue
+                    if hasattr(dt, "date"): dt = dt.date().isoformat()
+                    elif hasattr(dt, "isoformat"): dt = dt.isoformat()
+                    dt = str(dt)[:10]
+                    if q or a: got[dt] = (q or "", a or "")
+            wb0.close()
+        except Exception as e:
+            print("could not read the Questions sheet:", e, file=sys.stderr)
+    return got
+qa = json.loads(QA.read_text(encoding="utf-8")) if QA.exists() else {"rows": []}
+typed = read_questions()
+for dt, (q, a) in typed.items():
+    row = next((r for r in qa["rows"] if r["date"] == dt and not r.get("hot")), None)
+    if row is None:
+        row = {"date": dt, "question": "", "answer": "", "seed": None, "hot": False, "status": "open", "file": None, "caption": None, "postings": {}, "numbers": {}}
+        qa["rows"].append(row)
+    if row["status"] == "open" and (row.get("question") != q or row.get("answer") != a):
+        row["question"], row["answer"] = q, a; row.pop("test", None)
+qa["rows"].sort(key=lambda r: (r["date"], bool(r.get("hot"))))
+if QA.exists() or typed: QA.write_text(json.dumps(qa, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+ws_q = wb.create_sheet("Questions")
+qcols = ["Date", "Day", "Question", "Answer", "Status", "Posted", "Seed"]
+ws_q.append(qcols)
+for i, c in enumerate(qcols, 1):
+    cell = ws_q.cell(row=1, column=i); cell.font = f_head; cell.fill = fill_head; cell.border = box
+for i, w in enumerate([11, 5, 60, 48, 9, 22, 12], 1): ws_q.column_dimensions[get_column_letter(i)].width = w
+ws_q.freeze_panes = "A2"
+qr = 2
+for row in qa["rows"]:
+    d = datetime.date.fromisoformat(row["date"])
+    posted = ", ".join(k for k, v in (row.get("postings") or {}).items() if isinstance(v, dict) and v.get("buffer_post_id"))
+    vals = [d, d.strftime("%a"), row.get("question") or "", row.get("answer") or "", row.get("status", "open") + (" · hot" if row.get("hot") else "") + (" · test" if row.get("test") else ""), posted, row.get("seed") or ""]
+    for c, v in enumerate(vals, 1):
+        cell = ws_q.cell(row=qr, column=c, value=v); cell.font = f_body; cell.border = box; cell.alignment = wrap
+        if c in (3, 4): cell.fill = PatternFill("solid", fgColor="FFFFFF")
+        else: cell.fill = fill_head
+    ws_q.cell(row=qr, column=1).number_format = "yyyy-mm-dd"; qr += 1
+# blank rows ahead for Mike to type into: every day for 60 days from the start that has no row yet
+start = datetime.date(2026, 10, 31); have = {r["date"] for r in qa["rows"] if not r.get("hot")}
+for k in range(60):
+    d = start + datetime.timedelta(days=k)
+    if d.isoformat() in have: continue
+    vals = [d, d.strftime("%a"), "", "", "open", "", ""]
+    for c, v in enumerate(vals, 1):
+        cell = ws_q.cell(row=qr, column=c, value=v); cell.font = f_body; cell.border = box; cell.alignment = wrap
+        cell.fill = PatternFill("solid", fgColor="FFFFFF") if c in (3, 4) else fill_head
+    ws_q.cell(row=qr, column=1).number_format = "yyyy-mm-dd"; qr += 1
+ws_q.cell(row=qr + 1, column=1, value="Yours: Question and Answer, one row a day (the white cells). The answer is the one you force; nobody sees which. Ops owns the rest of the row; a row marked test is the dry run's dummy and yours replaces it.").font = f_sub
+
 # ── Specs ──────────────────────────────────────────────────────────────────
 ws_s = wb.create_sheet("Specs")
 ws_s.column_dimensions["A"].width = 24; ws_s.column_dimensions["B"].width = 100
