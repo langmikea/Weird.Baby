@@ -42,7 +42,7 @@ That a scheduled post publishes. It cannot be proven before the door without pos
 ## Left behind
 
 - Nothing in Buffer. The three drafts were removed the same evening on Mike's word ("Remove the three drafts") with `--remove-drafts`, which asks Buffer what each post is and removes only a draft; `--posts` then read 0 held.
-- The stand-in reel is at an unlisted address on `assets.weird.baby/reels/qa/2026-10-31/…` (one copy, named by the row's `asset_url`; the later runs uploaded nothing, checked). Nothing links to it.
+- Nothing in the bucket. The stand-in reel's one copy on `assets.weird.baby` was deleted the same evening (Mike: an Ops call, remove it); the address answers 404 and the row's `asset_url` is cleared.
 - The morning run (`--lane qa --ahead 7`, no `--test`) now has a key. It queues nothing until a real built row falls inside its seven days; the first such day is 10-24.
 
 ## Also fixed on the way
