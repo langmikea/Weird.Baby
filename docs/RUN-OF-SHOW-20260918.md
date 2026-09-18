@@ -17,6 +17,8 @@ it: each day a new row appears on its menu, the day's reel features it, the
 caption lands on it. Nothing unreleased is shown. Each thing is made for its
 own day, not for the door.
 
+**Ruled later the same day:** the site goes live **Saturday 10-31 at the stroke of midnight**; the answer of the day goes out that Saturday and daily forever; the other reels first go out **Monday 11-02**; the Number opens Monday 11-09. The dates below are as drafted before that ruling (each is one day later now); docs/desk/DROPS.json and the workbook's Calendar carry the current ones.
+
 ## The drops (Ops' draft of the order, for pointing at)
 
 ```

@@ -9,7 +9,7 @@
   "pilot_rule": "2026-09-18: Mike, Yes to the re-plan on the pilot rule"
  },
  "baseline": {
-  "version": 4,
+  "version": 5,
   "set": "2026-09-18",
   "state": "draft until the 09-20 sitting rules the must-have list; after that a wall, a duration, a predecessor or a must-have entry changes only by a ruling logged in docs/desk/BOARD-DECISIONS.md"
  },
@@ -22,8 +22,8 @@
   {
    "id": "R",
    "name": "/R the door",
-   "date": "2026-10-30",
-   "at": "five"
+   "date": "2026-10-31",
+   "at": "the stroke of midnight, Saturday"
   },
   {
    "id": "M",
@@ -34,7 +34,7 @@
  ],
  "freeze": "2026-10-26",
  "walls": {
-  "_": "The latest any gate of a launch may finish. 2026-09-18, Mike: the Number moves to Monday 11-09, so it follows the door; its wall is the Friday before. Things that serve both launches are walled by the door.",
+  "_": "The latest any gate of a launch may finish. 2026-09-18, Mike: the site goes live Saturday 10-31 at the stroke of midnight (a Saturday, so the team can work through problems); the answer of the day goes out that Saturday and daily forever; the other reels first go out Monday 11-02; the Number opens Monday 11-09.",
   "M": "2026-11-06",
   "R": "2026-10-25",
   "both": "2026-10-25"
@@ -905,9 +905,10 @@
   {
    "id": "door",
    "col": "site",
-   "name": "The door: not open yet, then it opens itself",
+   "name": "The door: the lobby announces 10-31; the robots wing is shut until the stroke of midnight, then opens itself",
    "owner": "Ops",
    "tasks": [
+    "door-ruling-e",
     "open"
    ],
    "gates": {
@@ -915,7 +916,8 @@
      "done": "2026-09-10",
      "ev": "PLAN-20260910: ruled"
     }
-   }
+   },
+   "note": "FOUND 2026-09-18: the LIVE site's robots wing is OPEN and running the retired 60-day story's Record, because RECORD_EPOCH is still 2026-09-07 and the wing opens when the Record has a visible entry (src/lib/wing-open.js). Moving the epoch is the designed fix (Rulings C and D did it) but day one becomes a SATURDAY (reveal/week-one.mjs and week-two.mjs rows are MON..FRI; tools/arc.mjs derives its day column from the entry number: both noted in record-epoch.js as luck) and the Record day turns at 17:00 by Mike's ruling of 08-17 while the door is now midnight. A careful session with every gate, not a tail-of-day edit."
   },
   {
    "id": "song-page",
@@ -1099,7 +1101,7 @@
   {
    "id": "deploy-door",
    "col": "system",
-   "name": "The deploy for the door (it carries the song's page too)",
+   "name": "The deploy for the door: Friday 10-30, before the stroke of midnight (it carries the song's page too)",
    "owner": "Mike",
    "ladder": "event",
    "tasks": [
@@ -1108,9 +1110,9 @@
    ],
    "gates": {},
    "on": {
-    "held": "2026-10-29"
+    "held": "2026-10-30"
    },
-   "wall": "2026-10-29",
+   "wall": "2026-10-30",
    "after": {
     "held": [
      "song-page.rehearsed"

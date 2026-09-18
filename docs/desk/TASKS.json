@@ -1,6 +1,6 @@
 {
  "_": "THE DAYS — every dated task between the reset and Opening Day, Mike's and Ops'. Each carries the literal instruction for the moment it is done. `check` lets the desk read done from the tree; TASKS.db.json (synced from the served page's store) carries what Mike ticked; `done: true` here is Ops' hand. Edited by Ops; rendered by tools/days.mjs into docs/desk/DAYS.html.",
- "opening_day": "2026-10-30",
+ "opening_day": "2026-10-31",
  "tasks": [
   {
    "id": "burn-list",
@@ -175,6 +175,16 @@
     "Read tools/reels-queue.mjs against Buffer's current API before it runs live; send one stand-in as a DRAFT (nothing public), check it in Buffer, remove it; then queue the first real row when there is one. Keep within the free plan: 10 queued posts a channel, so the morning run queues five days ahead, not seven, once the Number joins."
    ],
    "long": "No line has ever posted for real; the first live run must not be able to publish a stand-in before the door"
+  },
+  {
+   "id": "door-ruling-e",
+   "date": "2026-09-22",
+   "owner": "ops",
+   "title": "The door in the code: shut the wing until 10-31, announce it in the lobby",
+   "do": [
+    "Read docs/canonical/OPERATIONS.md and src/data/artists/record-epoch.js first. The live wing is open on the retired story. Make the smallest change that shuts it until Sat 10-31 00:00 New York and puts one line in the lobby; name what a Saturday day one and a midnight door do to the Record's weekday rows and its 17:00 turnover; run every gate (lint baseline, provenance:gate, reveal:check, parity:gate, instory:gate, shellstop:gate); build:launch; look at it as-of 10-30 and 10-31; then hand Mike the one deploy command. Do not run record:land or day:proof."
+   ],
+   "long": "Mike, 09-18: announce 10/31 in the lobby and put things right. The accounts are public and point at the site now."
   },
   {
    "id": "take-stock",
@@ -697,17 +707,17 @@
   },
   {
    "id": "launch-queued",
-   "date": "2026-10-27",
+   "date": "2026-10-28",
    "owner": "ops",
-   "title": "Launch week queued: the Q&A line from 10-31",
+   "title": "Launch queued: the answer of the day from Sat 10-31; the other reels from Mon 11-02",
    "do": [],
    "long": "The first week of the Q&A line queued through Buffer (the Number's queue is its own row, 11-06)"
   },
   {
    "id": "open",
-   "date": "2026-10-30",
+   "date": "2026-10-31",
    "owner": "ops",
-   "title": "OPENING DAY: door at five",
+   "title": "OPENING DAY: the door at the stroke of midnight; the first answer of the day",
    "do": [
     "Mike deploys; Ops checks."
    ],
@@ -732,5 +742,5 @@
    "long": "The Number opens Monday 11-09 (moved from 10-26 by Mike, 09-18)"
   }
  ],
- "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md. 2026-09-18: the four tray re-shoot rows became the sexy shoot (docs/SEXY-SHOOT-20260918.md); two Ops rows added (photos-white 09-26, shoot-reel-story 09-29). 2026-09-18 (the board): four Ops rows added (board-morning 09-25, song-page-shape 10-02, song-page 10-16, whole-front 10-09) so every must-have deliverable has work scheduled; twin-update moved 10-02 to 09-24 and bench-plan 10-03 to 09-25 to level Ops' week of 09-28 (docs/PLAN-20260918-LAUNCH.md). 2026-09-18 (the pilot re-plan): three Ops rows added (shoot-pilot-script 09-22, music-palette 09-24, ask-range 09-25); none of Mike’s rows touched. 2026-09-18: the Number moved to Mon 11-09 (Mike); launch-queued re-titled to the Q&A line only, number-queued added 11-06. 2026-09-18: clicks-buffer 10-10 to 09-17 by Mike's word (the critical path's worst item is due yesterday). 2026-09-18 (evening): clicks-buffer to 09-18 (Mike: by end of day today); no-dead-ends added 10-09."
+ "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md. 2026-09-18: the four tray re-shoot rows became the sexy shoot (docs/SEXY-SHOOT-20260918.md); two Ops rows added (photos-white 09-26, shoot-reel-story 09-29). 2026-09-18 (the board): four Ops rows added (board-morning 09-25, song-page-shape 10-02, song-page 10-16, whole-front 10-09) so every must-have deliverable has work scheduled; twin-update moved 10-02 to 09-24 and bench-plan 10-03 to 09-25 to level Ops' week of 09-28 (docs/PLAN-20260918-LAUNCH.md). 2026-09-18 (the pilot re-plan): three Ops rows added (shoot-pilot-script 09-22, music-palette 09-24, ask-range 09-25); none of Mike’s rows touched. 2026-09-18: the Number moved to Mon 11-09 (Mike); launch-queued re-titled to the Q&A line only, number-queued added 11-06. 2026-09-18: clicks-buffer 10-10 to 09-17 by Mike's word (the critical path's worst item is due yesterday). 2026-09-18 (evening): clicks-buffer to 09-18 (Mike: by end of day today); no-dead-ends added 10-09. 2026-09-18 (night): the door moved to Sat 10-31 at midnight (Mike); `open` re-dated; door-ruling-e added 09-22."
 }

@@ -24,6 +24,15 @@
    1
   ]
  },
+ "clicks-buffer": {
+  "done": true,
+  "steps": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
  "catalogue": {
   "done": true,
   "steps": [
@@ -79,6 +88,12 @@
   ]
  },
  "number-pieces": {
+  "done": true,
+  "steps": [
+   1
+  ]
+ },
+ "channels": {
   "done": true,
   "steps": [
    1

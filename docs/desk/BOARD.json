@@ -323,7 +323,7 @@
   {
    "id": "door",
    "col": "site",
-   "name": "The door: not open yet, then it opens itself",
+   "name": "The door: the lobby announces 10-31; the robots wing is shut until the stroke of midnight, then opens itself",
    "owner": "Ops",
    "pct": 20,
    "status": "on",
@@ -443,11 +443,11 @@
   {
    "id": "deploy-door",
    "col": "system",
-   "name": "The deploy for the door (it carries the song's page too)",
+   "name": "The deploy for the door: Friday 10-30, before the stroke of midnight (it carries the song's page too)",
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-29",
+   "next": "2026-10-30",
    "reasons": []
   },
   {
@@ -517,7 +517,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-18",
+   "next": "2026-10-25",
    "reasons": []
   },
   {
@@ -537,7 +537,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-25",
+   "next": "2026-11-01",
    "reasons": []
   },
   {
@@ -607,7 +607,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-18",
    "reasons": []
   },
   {

@@ -1,7 +1,7 @@
 {
  "_": "MIKE'S BLOCKS — what he delivers before Opening Day 2026-10-30, as SED blocks (Same Except Data: a block is a template, he supplies the data, Ops renders). Ruled 2026-09-10 ('Holds.'). The desk renders this as a live table. `count` is what the door needs; `done` is read from the tree where `measure` says how, otherwise kept here by Ops. Teasers (TBD) would add to the counts; they are not in them.",
  "ruled": "2026-09-10",
- "opening_day": "2026-10-30",
+ "opening_day": "2026-10-31",
  "blocks": [
   {
    "id": "question",
