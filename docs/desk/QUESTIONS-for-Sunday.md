@@ -124,3 +124,6 @@ Standing from 09-18: the Sunday sitting is two things only, **point** (the
 ranges that are ready: on 09-20 the Number's frame; on 09-27 the beat's
 palette, the run of show, the shoot reel's look, the ask reel's variants,
 the song's page, the wing's shapes) and **rule the reds**.
+
+Ready to point at now (made 09-18): **the run of show**, three rough shapes,
+quiet, steady, loud: docs/RUN-OF-SHOW-20260918.md. Ops leans B, steady.

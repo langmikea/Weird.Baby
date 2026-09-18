@@ -1126,9 +1126,14 @@
    "owner": "Ops",
    "ladder": "choice",
    "tasks": [
-    "run-of-show"
+    "run-of-show",
+    "run-of-show-exact"
    ],
-   "gates": {}
+   "gates": {},
+   "dur": {
+    "look": 0
+   },
+   "range": "docs/RUN-OF-SHOW-20260918.md (three shapes: quiet, steady, loud), made 2026-09-18"
   }
  ],
  "later_by_draft": {

@@ -252,7 +252,9 @@
    "do": [
     "One page, three weeks (10-26 to 11-13), a row a day: what posts (the Number, the Q&A, the ask reel, the shoot reel), at what hour, and the room it lands in. Two or three shapes at the limits (sparse, daily, heavy first week) on stand-ins. He points."
    ],
-   "long": "The thing every production line exists to fill; without it the ask reel and the shoot reel have no slot (docs/PLAN-20260918-LAUNCH.md section 3)"
+   "long": "The thing every production line exists to fill; without it the ask reel and the shoot reel have no slot (docs/PLAN-20260918-LAUNCH.md section 3)",
+   "done": true,
+   "done_on": "2026-09-18"
   },
   {
    "id": "photos-everyman",
@@ -332,6 +334,16 @@
     "One mock of a song's page on /wb: the song, the demo, the run so far; and the caption line the Number carries."
    ],
    "long": "Where the Number lands (LAUNCH-20260918 section 4, /M backfill); ruled at the 10-04 sitting"
+  },
+  {
+   "id": "run-of-show-exact",
+   "date": "2026-10-02",
+   "owner": "ops",
+   "title": "The run of show made exact, from the shape he pointed at",
+   "do": [
+    "The chosen shape as a dated table in the plan; every reel line's volume sized to it; the product rows walled by their own day."
+   ],
+   "long": "After the 09-27 sitting points at A, B or C (docs/RUN-OF-SHOW-20260918.md)"
   },
   {
    "id": "landing",
