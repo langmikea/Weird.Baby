@@ -1,8 +1,8 @@
 {
  "as_of": "2026-09-18",
  "must_have_ruled": null,
- "deliverables": 54,
- "not_on_track": 13,
+ "deliverables": 53,
+ "not_on_track": 12,
  "columns": [
   {
    "id": "qa",
@@ -60,7 +60,7 @@
     {
      "what": "waits on: Buffer connected (the key, the channels)",
      "owner": "Mike",
-     "need": "2026-10-20",
+     "need": "2026-11-03",
      "rule": 4,
      "names": [
       "Coconuts, the first run"
@@ -233,11 +233,11 @@
    "group": "System",
    "name": "The system",
    "outcome": "O5",
-   "count": 8,
-   "red": 2,
-   "done": 0.2,
-   "on": 0.55,
-   "off": 0.25,
+   "count": 7,
+   "red": 1,
+   "done": 0.2285714285714286,
+   "on": 0.6285714285714286,
+   "off": 0.14285714285714285,
    "later": [],
    "lines": [
     {
@@ -247,24 +247,6 @@
      "rule": 1,
      "names": [
       "Buffer connected (the key, the channels)"
-     ]
-    },
-    {
-     "what": "no deploy date is set before 10-26 noon; the song's page needs one: no date",
-     "owner": "Mike",
-     "need": "2026-10-25",
-     "rule": 2,
-     "names": [
-      "The deploy before the Number"
-     ]
-    },
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops to schedule, Mike",
-     "need": "2026-10-25",
-     "rule": 5,
-     "names": [
-      "The deploy before the Number"
      ]
     }
    ]
@@ -328,12 +310,12 @@
    "owner": "Ops",
    "pct": 15,
    "status": "off",
-   "next": "2026-10-18",
+   "next": "2026-11-01",
    "reasons": [
     {
      "what": "waits on: Buffer connected (the key, the channels)",
      "owner": "Mike",
-     "need": "2026-10-20",
+     "need": "2026-11-03",
      "rule": 4
     }
    ]
@@ -479,7 +461,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -566,7 +548,7 @@
    "owner": "Ops",
    "pct": 80,
    "status": "on",
-   "next": "2026-10-23",
+   "next": "2026-10-25",
    "reasons": []
   },
   {
@@ -576,7 +558,7 @@
    "owner": "Ops",
    "pct": 80,
    "status": "on",
-   "next": "2026-10-23",
+   "next": "2026-10-25",
    "reasons": []
   },
   {
@@ -590,32 +572,9 @@
    "reasons": []
   },
   {
-   "id": "deploy-number",
-   "col": "system",
-   "name": "The deploy before the Number",
-   "owner": "Mike",
-   "pct": 0,
-   "status": "off",
-   "next": "2026-10-25",
-   "reasons": [
-    {
-     "what": "no deploy date is set before 10-26 noon; the song's page needs one: no date",
-     "owner": "Mike",
-     "need": "2026-10-25",
-     "rule": 2
-    },
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops to schedule, Mike",
-     "need": "2026-10-25",
-     "rule": 5
-    }
-   ]
-  },
-  {
    "id": "deploy-door",
    "col": "system",
-   "name": "The deploy for the door",
+   "name": "The deploy for the door (it carries the song's page too)",
    "owner": "Mike",
    "pct": 0,
    "status": "on",
@@ -625,7 +584,7 @@
   {
    "id": "run-of-show",
    "col": "system",
-   "name": "The launch run of show: what posts each day 10-26 to 11-13, and where each lands",
+   "name": "The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands",
    "owner": "Ops",
    "pct": 0,
    "status": "on",

@@ -9,7 +9,7 @@
   "pilot_rule": "2026-09-18: Mike, Yes to the re-plan on the pilot rule"
  },
  "baseline": {
-  "version": 2,
+  "version": 3,
   "set": "2026-09-18",
   "state": "draft until the 09-20 sitting rules the must-have list; after that a wall, a duration, a predecessor or a must-have entry changes only by a ruling logged in docs/desk/BOARD-DECISIONS.md"
  },
@@ -20,24 +20,24 @@
  },
  "launches": [
   {
-   "id": "M",
-   "name": "/M the Number",
-   "date": "2026-10-26",
-   "at": "noon"
-  },
-  {
    "id": "R",
    "name": "/R the door",
    "date": "2026-10-30",
    "at": "five"
+  },
+  {
+   "id": "M",
+   "name": "/M the Number",
+   "date": "2026-11-09",
+   "at": "noon"
   }
  ],
  "freeze": "2026-10-26",
  "walls": {
-  "_": "The latest any gate of a launch may finish.",
-  "M": "2026-10-23",
+  "_": "The latest any gate of a launch may finish. 2026-09-18, Mike: the Number moves to Monday 11-09, so it follows the door; its wall is the Friday before. Things that serve both launches are walled by the door.",
+  "M": "2026-11-06",
   "R": "2026-10-25",
-  "both": "2026-10-23"
+  "both": "2026-10-25"
  },
  "outcomes": [
   {
@@ -631,7 +631,7 @@
    "tasks": [
     "material-rulings",
     "number-sitting",
-    "launch-queued"
+    "number-queued"
    ],
    "gates": {
     "real": {
@@ -929,8 +929,7 @@
     "song-page-shape",
     "song-page"
    ],
-   "gates": {},
-   "wall": "2026-10-23"
+   "gates": {}
   },
   {
    "id": "whole",
@@ -1100,35 +1099,9 @@
    }
   },
   {
-   "id": "deploy-number",
-   "col": "system",
-   "name": "The deploy before the Number",
-   "owner": "Mike",
-   "ladder": "event",
-   "tasks": [],
-   "gates": {},
-   "on": {
-    "held": "2026-10-25"
-   },
-   "wall": "2026-10-25",
-   "after": {
-    "held": [
-     "song-page.rehearsed"
-    ]
-   },
-   "blocked": [
-    {
-     "gate": "planned",
-     "what": "no deploy date is set before 10-26 noon; the song's page needs one",
-     "owner": "Mike",
-     "by": null
-    }
-   ]
-  },
-  {
    "id": "deploy-door",
    "col": "system",
-   "name": "The deploy for the door",
+   "name": "The deploy for the door (it carries the song's page too)",
    "owner": "Mike",
    "ladder": "event",
    "tasks": [
@@ -1139,12 +1112,17 @@
    "on": {
     "held": "2026-10-29"
    },
-   "wall": "2026-10-29"
+   "wall": "2026-10-29",
+   "after": {
+    "held": [
+     "song-page.rehearsed"
+    ]
+   }
   },
   {
    "id": "run-of-show",
    "col": "system",
-   "name": "The launch run of show: what posts each day 10-26 to 11-13, and where each lands",
+   "name": "The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands",
    "owner": "Ops",
    "ladder": "choice",
    "tasks": [

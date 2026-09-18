@@ -1,6 +1,6 @@
 # THE BOARD'S GRADE — 2026-09-18
 
-38 days to the Number (10-26), 42 to the door (10-30). 54 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **13 not on track**.
+42 days to the door (10-30), 52 to the Number (11-09). 53 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **12 not on track**.
 Written by tools/board.mjs from docs/desk/BOARD-PLAN.json. Rules: docs/BOARD-PLAN-20260918.md.
 
 ```
@@ -15,7 +15,7 @@ Engines and settings     7%      93%          0%      (5, 0)
 Albums                   0%     100%          0%      (5, 0)
 The site                11%      89%          0%      (9, 0)
 The machine             10%      90%          0%      (2, 0)
-The system              20%      55%         25%      (8, 2)
+The system              23%      63%         14%      (7, 1)
 ```
 
 ## Not on track
@@ -31,7 +31,7 @@ The hot Q&A lane - waits on: Buffer connected (the key, the channels) (Mike) - n
 **Number reel**
 
 ```
-Coconuts, the first run - waits on: Buffer connected (the key, the channels) (Mike) - needed by 10-20
+Coconuts, the first run - waits on: Buffer connected (the key, the channels) (Mike) - needed by 11-03
 ```
 
 **Ask reel**
@@ -56,8 +56,6 @@ Snow Globe, Tic-Tac-Toe, Blackjack, Craps, Roulette, Slots - the games are not f
 
 ```
 Buffer connected (the key, the channels) - built: forecast 10-12, 3 days past its need (Mike) - needed by 10-09
-The deploy before the Number - no deploy date is set before 10-26 noon; the song's page needs one: no date (Mike) - needed by 10-25
-The deploy before the Number - no work is scheduled for it (Ops to schedule, Mike) - needed by 10-25
 ```
 
 ## Tasks that serve no deliverable (challenge them, or name what they serve)

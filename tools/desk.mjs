@@ -33,7 +33,7 @@ const owes = owesBlock.split(/\n(?=- )/).map(s => s.replace(/^- /, "").replace(/
 const led = { determinations: JSON.parse(fs.readFileSync(path.join(REPO, "reels/determinations.json"), "utf8")), numbers: JSON.parse(fs.readFileSync(path.join(REPO, "reels/numbers.json"), "utf8")) };
 const weekOf = () => { const r = led.numbers.rows.find(x => x.date >= todayNY); return r ? r.week : 8; };
 const wk = weekOf();
-const launchWk = (led.numbers.rows.find(x => x.date >= "2026-10-26") || { week: 8 }).week;
+const launchWk = (led.numbers.rows.find(x => x.date >= (led.numbers.epoch_lane || "2026-10-26")) || { week: 8 }).week;   // the Number opens on its own day
 const laneRows = (lane, w) => led[lane].rows.filter(r => r.week === w);
 const count = rows => { const c = {}; for (const r of rows) c[r.status] = (c[r.status] || 0) + 1; return Object.entries(c).map(([k, v]) => `${v} ${k}`).join(", ") || "—"; };
 

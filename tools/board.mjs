@@ -195,7 +195,8 @@ const orphanTasks = TASKS.filter(t => !named.has(t.id) && !taskDone(t));
 const ghostTasks = [...named].filter(id => !taskById[id]);
 
 const redCount = deliverables.filter(d => d._g.status === "off").length;
-const toM = days(today, P.launches[0].date), toR = days(today, P.launches[1].date);
+const LM = P.launches.find(l => l.id === "M"), LR = P.launches.find(l => l.id === "R");
+const toM = days(today, LM.date), toR = days(today, LR.date);
 const out = { as_of: today, must_have_ruled: P.ruled.must_have, deliverables: deliverables.length, not_on_track: redCount, columns,
   detail: deliverables.map(d => ({ id: d.id, col: d.col, name: d.name, owner: d.owner, pct: Math.round(d._g.pct * 100), status: d._g.status, next: d._g.next, reasons: d._g.reasons })) };
 fs.writeFileSync(path.join(REPO, "docs/desk/BOARD.json"), JSON.stringify(out, null, 1) + "\n");
@@ -205,7 +206,7 @@ const lineOf = l => `${l.names.join(", ")} - ${l.what} (${l.owner}) - needed by 
 const pc = x => `${Math.round(x * 100)}`.padStart(3);
 const gradeMd = `# THE BOARD'S GRADE — ${today}
 
-${toM} days to the Number (10-26), ${toR} to the door (10-30). ${deliverables.length} must-have deliverables${P.ruled.must_have ? "" : " (the must-have list is Ops' DRAFT until ruled)"}; **${redCount} not on track**.
+${toR} days to the door (${md(LR.date)}), ${toM} to the Number (${md(LM.date)}). ${deliverables.length} must-have deliverables${P.ruled.must_have ? "" : " (the must-have list is Ops' DRAFT until ruled)"}; **${redCount} not on track**.
 Written by tools/board.mjs from docs/desk/BOARD-PLAN.json. Rules: docs/BOARD-PLAN-20260918.md.
 
 \`\`\`
@@ -345,7 +346,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 <div class="wrap">
 <div class="top"><div><p class="eyebrow">Weird.Baby · launch readiness · ${today}</p><h1>The Board</h1>
 <p class="sub">Where we are not on track. Red is the only thing to read; click it for what holds it and who.</p></div>
-<div class="clock"><div><b>${toM}</b>days to the Number</div><div><b>${toR}</b>days to the door</div><div class="red"><b>${redCount}</b>of ${deliverables.length} not on track</div></div></div>
+<div class="clock"><div><b>${toR}</b>days to the door</div><div><b>${toM}</b>days to the Number</div><div class="red"><b>${redCount}</b>of ${deliverables.length} not on track</div></div></div>
 <div class="scroll"><div class="board" role="group" aria-label="Launch readiness by column">
 <div class="axis">${[0, 25, 50, 75, 100].map(v => `<span style="bottom:${v}%">${v}</span>`).join("")}</div>
 ${columns.map((c, i) => `<div class="col" style="grid-column:${i + 2}">${seg(c)}</div><div class="name" style="grid-column:${i + 2}">${esc(c.name)}</div>`).join("")}

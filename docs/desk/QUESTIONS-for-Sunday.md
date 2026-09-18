@@ -103,14 +103,14 @@ time. Ops clears a question the day it is answered.
    runs to 11-13. A. The draft with both cuts. B. The draft, the unit proofs
    kept. C. Your own list. Ops recommends A.
 
-9. **Three dates only you can give; the first is the critical path of the
+9. **Two dates only you can give; the first is the critical path of the
    whole launch.** (a) Buffer's six clicks. Every reel line ends at the
    queue, none has ever posted for real, and nothing is asked of you in
    volume until one has. Promised 10-10, the key leaves the Q&A line three
    days short; any ten minutes before 10-07 clears five columns of the
    board. (b) The games final on the twin: a date, or "later" (the door
-   opens without games). (c) A deploy before the Number: the song's page
-   must be live before Monday 10-26 at noon; Ops proposes Sunday 10-25.
+   opens without games). (c) Settled 09-18: the Number moved to Mon 11-09, so the song's page
+   rides the door's deploy (10-29) and no separate deploy is needed.
 
 10. **The raised hand.** /R's purpose is robot sales (your reason three),
     and at the door a stranger who wants one can do nothing, not even say

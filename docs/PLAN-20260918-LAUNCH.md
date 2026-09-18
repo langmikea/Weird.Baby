@@ -1,4 +1,4 @@
-# THE LAUNCH PLAN — the plan of record (baseline v2, 2026-09-18)
+# THE LAUNCH PLAN — the plan of record (baseline v3, 2026-09-18)
 
 Ops as project manager. Supersedes PLAN-20260910-OPENING-DAY.md (kept as
 history). The plan itself is data: `docs/desk/BOARD-PLAN.json`. This page is
@@ -24,7 +24,7 @@ drafts, ruled to stand 09-18 (LAUNCH-20260918, 1A).
 | | intent | purpose | the day |
 |---|---|---|---|
 | The whole | everything points back to Mike; each piece stands alone | a stranger from "weird.baby?" to "Weird.Baby!" in sixty seconds (why does the site exist, reason one, 09-01) | none |
-| /M the Number | one live performance a weekday; the show is the audition | promote his music (reason four, 09-01) | Mon 10-26, noon |
+| /M the Number | one live performance a weekday; the show is the audition | promote his music (reason four, 09-01) | Mon 11-09, noon (moved from 10-26 by Mike, 09-18; the door now comes first) |
 | /R the door | sell the machine: an infomercial wing, the story a prologue (the reset, 09-10) | robot sales (reason three, 09-01) | Fri 10-30, five |
 
 The plan is built from one walk, and a thing is in the plan only if the
@@ -84,8 +84,8 @@ themes. Tested against the walk above, four things do not hold:
    unit, so it is his to rule.
 2. **Two reel lines have no slot.** The ask reel and the shoot reel are
    being built with no day to post on and no room to land in. What every
-   line exists to fill is a **run of show** (what posts each day 10-26 to
-   11-13, and where it lands), and the plan had none. Added, range first.
+   line exists to fill is a **run of show** (what posts each day from the door on,
+   and where it lands), and the plan had none. Added, range first.
 3. **The walk ends at step 4.** /R's purpose is robot sales, and at the
    door a stranger who wants one can do nothing, not even say so. The shop
    is ruled out until after the door (2A), rightly; a line and a "tell me
@@ -117,8 +117,8 @@ From `docs/desk/BOARD-SCHEDULE.md` (regenerated at every grade):
 ```
 BUFFER        the key promised 10-10 > proven 10-13 > one real Q&A post 10-14 > the fifteen Q&As (14 days) 10-28     3 DAYS PAST the wall (10-25)
 THE BENCH     fixed 10-15 > verified > 24 unit proofs by 10-25                                                          zero float (see 3.1)
-THE NUMBER    the 10-20 sitting > three story pieces cut and queued by 10-23                                            zero float
-THE DEPLOYS   10-25 before the Number (no date set), 10-29 for the door                                                 zero float, fixed
+THE NUMBER    moved to Mon 11-09: the 10-20 sitting > three story pieces cut and queued by 11-06                            two weeks of float
+THE DEPLOY    10-29 for the door; it carries the song's page, so no separate deploy before the Number                   zero float, fixed
 THE REHEARSAL fixed 10-22; seven site pieces pass it with three days in hand
 ```
 
