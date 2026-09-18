@@ -108,18 +108,22 @@ gameplay per story shape, gas display, the slab through the lens, slower
 steering display). Suggested next: the `ask` story shape on MGK-NIAC (a
 finished feature), which is also the mashup with the Q&A line.
 
-**2026-09-18 (Ruling E, the door).** `RECORD_EPOCH` is 2026-10-31 and
-`RECORD_HOUR` is 0: the wing is shut and opens itself Sat 10-31 00:00 New
-York; the lobby reads "We open 10/31", then "We are open!" on the same live
-value as the note (bdd989a, pushed; gates pass, both stages build). NOT LIVE
-until Mike runs the one deploy; after it, `npm run door:check`. Day one is a
-Saturday: `npm run dictation` refuses and `docs/ARC.md` is wrong, both on the
-retired story, neither on the build's path. The build had been failing since
-879c635 (the Gambler photo rows were outside the stage door); fixed b2afc95.
-`tools/dev-launch.mjs` serves the launch stage locally for a look. Still owed
-on row `door-ruling-e`: the "We open 10/31" post (a draft first) and "We are
-open!" queued in Buffer for 10-31; both need a picture or a clip, since none
-of the three channels posts bare text.
+**2026-09-18 (Ruling E, the door; corrected the same afternoon).** TWO
+CLOCKS. The door: `DOOR_DAY` 2026-10-31 (beside the epoch), 00:00 New York;
+the wing, the lobby line ("We open 10/31", then "We are open!") and the
+countdown read it. The Record: `RECORD_EPOCH` Monday 2026-11-02, `RECORD_HOUR`
+17, Mike: "Recs always go up MTWTF at 5pm" (Ops' first cut, bdd989a, had moved
+the hour to midnight; withdrawn). Gates pass, both stages build, pushed. NOT
+LIVE until Mike runs the one deploy; after it, `npm run door:check`. Mike's
+rulings: the announcement is LOBBY ONLY, nothing on the channels; "We are
+open!" on the channels for 10-31 is an Ops call; what the wing opens on is an
+Ops call. OWED BEFORE THE DOOR: from Sat 00:00 to Mon 17:00 the wing opens on
+an empty Record ("Nothing has been entered in the Record yet."), a dead end
+on the first screen. The build had been failing since 879c635 (the Gambler
+photo rows outside the stage door); fixed b2afc95. `npm run dictation` is
+dead since the 09-11 burn (`reveal/focus.mjs` is gone), not from the epoch.
+`tools/dev-launch.mjs` serves the launch stage locally for a look; its
+`/api/visits` 500s are the local database, not the site.
 
 **RESUME RULE (Mike, 2026-09-17):** on "Ops, resume", open with what Ops
 suggests starting, from the standing queue in memory `ops-resume.md`; one

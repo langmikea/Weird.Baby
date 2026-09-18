@@ -41,9 +41,24 @@
 // itself on his own machine five days before launch is the defect the stage
 // rule exists to prevent.
 
+// ═══ [2026-09-18] RULING E: THE WING NOW HAS A DOOR OF ITS OWN ══════════════
+// MIKE: *"Site goes live on the 31st, stroke of midnight"*, and *"Recs always go
+// up MTWTF at 5pm."* A Saturday midnight cannot be a Record's hour, so the rule
+// above ("the wing opens when the Record has an entry") can no longer be the
+// only way in. Asked about it the same afternoon: *"The Robots wing should not
+// exist to the user until Record 01 goes up (ideally). But it is theatre to an
+// empty hall, so I do not care."* So the wing opens at the DOOR — `DOOR_DAY`,
+// declared beside `RECORD_EPOCH` and nowhere else — or when the Record has an
+// entry, whichever comes first. THIS FILE STILL HAS NO DATE IN IT.
+
 import { RECORD_ENTRIES } from "../data/artists/robots-record.js";
-import { recordEntriesForToday } from "./record-clock.js";
+import { DOOR_DAY } from "../data/artists/record-epoch.js";
+import { dayStartInRecordTz } from "../../reveal/record-clock.mjs";
+import { recordEntriesForToday, museumNow } from "./record-clock.js";
 import { launched } from "./placement.js";
+
+/** the instant the door opens: 00:00 on `DOOR_DAY`, on the museum's wall clock */
+export const DOOR_AT = dayStartInRecordTz(DOOR_DAY);
 
 /* Read once at module load. `recordEntriesForToday` already folds in the
    worker's injected date, the admin preview code and the stage, so the wing
@@ -77,8 +92,10 @@ export const ROBOTS_OPEN = robotsOpenOn();
    SITES AND NOT ALONE: opening the route in that tab without also re-filtering
    the Record's own entry list would have opened the wing onto *"Nothing has
    been entered in the Record yet."* — a worse page than the shut route. */
-/** has the Record announced the wing, as of `day`? */
-export function robotsOpenOn(day) {
+/** is the wing open — the door has passed at `nowMs`, or the Record has
+    announced it as of `day`? `nowMs` is the museum's instant, never the device's. */
+export function robotsOpenOn(day, nowMs = museumNow()) {
   return !launched()
+    || nowMs >= DOOR_AT
     || recordEntriesForToday(RECORD_ENTRIES, day).length > 0;
 }

@@ -84,23 +84,18 @@ export const PREVIEW_COOKIE = "wb_record";
    `% 24` is here — the same guard `zoneOffsetMs` below already carries, for the
    same reason.
 
-   ═══ [2026-09-18] THE HOUR IS MIDNIGHT AGAIN, BY MIKE'S LATER RULING ═════════
-   MIKE, 2026-09-18: *"Site goes live on the 31st, stroke of midnight."* The
-   17:00 ruling above was made for the daily Records of the 60-day story, which
-   the reset of 2026-09-10 retired; the door he has now ruled is 00:00
-   America/New_York on day one (`RECORD_EPOCH`, Ruling E). The later ruling wins
-   where the two meet, and they meet at this constant and nowhere else: the
-   wing, the lobby countdown, the lobby line, the asset withholding and
-   `/api/record` all read it through the functions below, so the whole museum
-   turns at midnight and no reader learned an hour.
-   THE MECHANISM IS UNCHANGED AND STILL WALL-CLOCK. At 0 the comparison in
-   `todayInRecordTz` is always true and the roll-back branch is never taken;
-   `recordVisibleAt(day)` and `dayStartInRecordTz(day)` become the same instant.
-   Nothing was deleted, so a later hour is still one number.
+   ═══ [2026-09-18] IT WAS MOVED TO MIDNIGHT FOR AN HOUR, AND MIKE PUT IT BACK ═
+   Ops read his *"stroke of midnight"* (the DOOR, Sat 10-31) as a ruling on this
+   constant and set it to 0 (bdd989a). MIKE, the same afternoon: **"No. Recs
+   always go up MTWTF at 5pm."** The 17:00 ruling above stands, untouched by
+   the reset of 2026-09-10. The door is a different clock with its own
+   declaration: `DOOR_DAY` in `src/data/artists/record-epoch.js`, resolved to
+   an instant by `dayStartInRecordTz` below and read by `src/lib/wing-open.js`.
+   Two questions, two functions, as the countdown's own note already said.
    =========================================================================== */
 
 /** the hour, on the Record's own wall clock, at which day N becomes visible */
-export const RECORD_HOUR = 0;
+export const RECORD_HOUR = 17;
 
 /* `en-CA` formats as YYYY-MM-DD, which is the shape `recordDay()` emits and the
    shape an entry's `date` is written in, so the comparison below is a string

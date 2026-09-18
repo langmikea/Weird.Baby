@@ -46,6 +46,34 @@
 import { useEffect, useState } from "react";
 import { TODAY, museumNow } from "./record-clock.js";
 import { todayInRecordTz } from "../../reveal/record-clock.mjs";
+import { robotsOpenOn } from "./wing-open.js";
+
+/* [2026-09-18] THE WING'S DOOR, LIVE. Ruling E gave the wing a door at midnight
+   as well as the Record's five o'clock, and the day string below does not change
+   at midnight, so a tab held open across the door would never re-render on it.
+   Same poll, same clock, same recompute-never-decrement as the hook beneath;
+   the answer is `robotsOpenOn`'s and nothing is decided here. */
+/** is the robots wing open, recomputed while the page is open */
+export function useRobotsOpen() {
+  const [open, setOpen] = useState(() => robotsOpenOn(TODAY));
+
+  useEffect(() => {
+    const tick = () => {
+      const now = museumNow();
+      setOpen(robotsOpenOn(todayInRecordTz(new Date(now)), now));
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    const onShow = () => { if (!document.hidden) tick(); };
+    document.addEventListener("visibilitychange", onShow);
+    return () => {
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", onShow);
+    };
+  }, []);
+
+  return open;
+}
 
 /** the museum's day, recomputed while the page is open */
 export function useMuseumDay() {

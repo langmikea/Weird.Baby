@@ -114,32 +114,39 @@
    §0, VERBATIM — a paraphrase filed in his class is indistinguishable from his
    own sentence a week later).
 
-   ═══ [2026-09-18] RULING E — THE DATE MOVED A THIRD TIME, TO 2026-10-31, AND
-       THIS TIME IT MOVED AFTER THE DAY HAD ALREADY COME ═══════════════════════
+   ═══ [2026-09-18] RULING E — TWO CLOCKS: THE DOOR IS SAT 2026-10-31 AT
+       MIDNIGHT, AND THE RECORD'S DAY ONE IS THE MONDAY AFTER IT ═══════════════
    MIKE, 2026-09-18: *"Site goes live on the 31st, stroke of midnight. It's a
-   Saturday so the team can work through problems."* And the same day: *"Make the
+   Saturday so the team can work through problems."* The same day: *"Make the
    official birthday of the site 10/31 in lore. TODAY: post 'We open 10/31',
-   close robots."*
+   close robots."* And, correcting Ops' first cut of this ruling (bdd989a, which
+   put day one on the Saturday and the Record's hour at midnight): **"No. Recs
+   always go up MTWTF at 5pm."**
+
+   SO THE DOOR LEFT THIS CONSTANT AND GOT ITS OWN. Until today the wing opened
+   when Record 001 posted, so day one WAS the door and one line held both. His
+   door is now a Saturday midnight and his Records are weekdays at five; one
+   date cannot be both. `DOOR_DAY` below is the door; this line stays what its
+   name says, the Record's epoch, **a Monday by rule** (OPERATIONS), the first
+   Record day after the door. The `MON…FRI` rows, `npm run dictation` and
+   `tools/arc.mjs` hold without luck being asked a third time.
 
    WHAT RULING D'S COROLLARY WARNED ABOUT IS WHAT HAPPENED. The reset of
    2026-09-10 retired the 60-day story and nobody moved this line, so the wing
-   opened itself on 7 September and stood open on a story that was no longer the
-   plan. This move is what shuts it: with day one ahead of the clock again the
-   Record has no visible entry, `wing-open.js` closes `/robots`, and the lobby
-   countdown re-arms. One line, the third proof.
+   opened itself on 7 September and stood open on a story that was no longer
+   the plan. Moving it shuts the wing: both clocks are ahead of today.
 
-   DAY ONE IS A SATURDAY, AND THE MONDAY RULE IS KNOWINGLY BROKEN. The ten
-   `MON…FRI` rows in `reveal/week-one.mjs` and `reveal/week-two.mjs` and the day
-   column of `tools/arc.mjs` belong to the retired story; `npm run dictation`
-   will refuse to build against this epoch and `docs/ARC.md` is wrong under it.
-   Neither is on the build's path and neither is run. The entries in
-   `robots-record.js` re-date themselves from this line and are NOT what opens on
-   the 31st; what the wing carries that day is the launch plan's work, deployed
-   before it (`docs/PLAN-20260918-LAUNCH.md`).
+   ON THE WING AND RECORD 001, his words the same afternoon: *"The Robots wing
+   should not exist to the user until Record 01 goes up (ideally). But it is
+   theatre to an empty hall, so I do not care."* The door opens the wing; the
+   Record joins it at five on the Monday. */
+export const RECORD_EPOCH = "2026-11-02";
 
-   THE STROKE OF MIDNIGHT IS NOT THIS LINE. It is `RECORD_HOUR` in
-   `reveal/record-clock.mjs`, moved the same day for the same ruling. */
-export const RECORD_EPOCH = "2026-10-31";
+/* [2026-09-18] THE DOOR. The calendar day the museum opens, at 00:00 in
+   `RECORD_TZ` (`dayStartInRecordTz`). The lobby line, the countdown and the
+   wing read it; the Record does not. The launch date lives in this file and
+   nowhere else, and it is now two dates because it is two events. */
+export const DOOR_DAY = "2026-10-31";
 
 /* [L4 2026-08-09] EVERY OTHER ENTRY'S DATE IS COUNTED FROM IT, NOT TYPED.
    Mike: "DATES from the epoch: D1 = 2026-08-17 Monday, D2 = 08-18, D3 = 08-19,

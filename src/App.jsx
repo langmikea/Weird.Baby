@@ -14,9 +14,10 @@ import WbAdmin    from "./routes/WbAdmin.jsx";
    Read src/routes/HeldWing.jsx before changing either line. */
 import HeldWing   from "./routes/HeldWing.jsx";
 /* [CH6 2026-08-12] has the Robots wing arrived? — src/lib/wing-open.js */
-import { robotsOpenOn } from "./lib/wing-open.js";
-/* [L-e 2026-08-30] the museum's day, live — src/lib/use-museum-day.js */
-import { useMuseumDay } from "./lib/use-museum-day.js";
+/* [L-e 2026-08-30] the museum's day, live — src/lib/use-museum-day.js
+   [2026-09-18] the wing's switch is `useRobotsOpen` now: Ruling E gave the wing
+   a door at midnight, which the day string does not turn on. */
+import { useRobotsOpen } from "./lib/use-museum-day.js";
 const HrSpine   = lazy(() => import("./routes/hr/HrSpine.jsx"));
 const HrArchive = lazy(() => import("./routes/hr/HrArchive.jsx"));
 import WbSpine    from "./routes/wb/WbSpine.jsx";
@@ -73,7 +74,7 @@ export default function App() {
      tab that was already open when the museum's day turned: it now gets a door.
      `robotsOpenOn` is the same derivation `ROBOTS_OPEN` is; only the day it is
      asked about moves. See src/lib/wing-open.js and L-e. */
-  const robotsOpen = robotsOpenOn(useMuseumDay());
+  const robotsOpen = useRobotsOpen();
   return (
     <BrowserRouter>
       <KeyWatcher />

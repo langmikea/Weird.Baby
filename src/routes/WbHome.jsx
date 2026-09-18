@@ -36,13 +36,17 @@ import { useArrival } from "../lib/use-arrival.js";
    a page that is LOADED, it is still what `useMuseumDay()` seeds from, and its
    own header carries the reasoning. **It now has zero consumers anywhere in
    `src/`** — flagged, not swept. */
-import { robotsOpenOn } from "../lib/wing-open.js";
-import { useMuseumDay } from "../lib/use-museum-day.js";
+/* [2026-09-18] Ruling E: the wing has a door of its own (`DOOR_DAY`, midnight),
+   so this page asks `useRobotsOpen` and counts down to `DOOR_AT`, not to Record
+   001's five o'clock. The countdown's long note below is the history of the
+   target while the door WAS Record 001; it is kept and no longer describes
+   `DOORS_OPEN_AT`. */
+import { DOOR_AT } from "../lib/wing-open.js";
+import { useRobotsOpen } from "../lib/use-museum-day.js";
 /* [2026-08-16] the countdown's clock — the server's instant, and the moment the
    doors open, both from the museum's own declarations. */
 import { museumNow, SERVER_NOW } from "../lib/record-clock.js";
-import { recordVisibleAt } from "../../reveal/record-clock.mjs";
-import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
+import { DOOR_DAY } from "../data/artists/record-epoch.js";
 
 /* ═══ [2026-08-16] THE COUNTDOWN TO THE DOORS ═══════════════════════════════
    MIKE: "a visible countdown to the opening of Weird.Baby… Big and obvious.
@@ -138,10 +142,10 @@ import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
    seconds-resolution readout needs; `requestAnimationFrame` would tick 60x for
    one visible change and, per §8's hazard, does not fire at all in a background
    tab — which is exactly the tab this has to be correct in. */
-const DOORS_OPEN_AT = recordVisibleAt(RECORD_EPOCH);
+const DOORS_OPEN_AT = DOOR_AT;
 
-/* [2026-09-18] day one as the lobby line says it: "10/31". Derived, never typed. */
-const DOOR_MD = RECORD_EPOCH.slice(5).split("-").map(Number).join("/");
+/* [2026-09-18] the door as the lobby line says it: "10/31". Derived, never typed. */
+const DOOR_MD = DOOR_DAY.slice(5).split("-").map(Number).join("/");
 
 function remainingAt(ms) {
   const left = DOORS_OPEN_AT - ms;
@@ -870,7 +874,7 @@ export default function WbHome() {
   useRoom("lobby");
   /* [L-e 2026-08-30] the museum's day, live — so the board grows its door at
      17:00 in a tab that was already open, rather than at the next reload. */
-  const robotsOpen = robotsOpenOn(useMuseumDay());
+  const robotsOpen = useRobotsOpen();
   /* [M2 2026-08-03] MIKE: "THE HOMEPAGE ALWAYS starts clean at the top, every
      time — that's our space and we keep it neat." `always`, where every other
      room in the museum resets only on the first visit of a session. */
@@ -1301,7 +1305,7 @@ export default function WbHome() {
               same live value as the note beneath it, so the line, the note, the
               countdown and the board's `\Robots` row cannot disagree and nobody
               touches anything on the day. THE DATE IS NOT TYPED: `DOOR_MD` is
-              `RECORD_EPOCH` read as month/day, so a slip still moves one field.
+              `DOOR_DAY` read as month/day, so a slip still moves one field.
               The notes beneath are his shipped words and stand as shipped. */}
           <p className="wb-open-line">
             {robotsOpen ? "We are open!" : <>We open {DOOR_MD}</>}
