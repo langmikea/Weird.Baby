@@ -1,0 +1,868 @@
+{
+ "as_of": "2026-09-18",
+ "must_have_ruled": null,
+ "deliverables": 51,
+ "not_on_track": 10,
+ "columns": [
+  {
+   "id": "qa",
+   "group": "Promotion",
+   "name": "Q&A reel",
+   "outcome": "O3",
+   "count": 2,
+   "red": 0,
+   "done": 0.5678571428571428,
+   "on": 0.43214285714285716,
+   "off": 0,
+   "later": [],
+   "lines": []
+  },
+  {
+   "id": "number",
+   "group": "Promotion",
+   "name": "Number reel",
+   "outcome": "O1",
+   "count": 2,
+   "red": 0,
+   "done": 0.15,
+   "on": 0.85,
+   "off": 0,
+   "later": [],
+   "lines": []
+  },
+  {
+   "id": "ask",
+   "group": "Promotion",
+   "name": "Ask reel",
+   "outcome": "O3",
+   "count": 1,
+   "red": 1,
+   "done": 0.3,
+   "on": 0,
+   "off": 0.7,
+   "later": [],
+   "lines": [
+    {
+     "what": "his notes on the first cut: no date",
+     "owner": "Mike",
+     "need": "2026-10-04",
+     "rule": 2,
+     "names": [
+      "The ask reel on MGK-NIAC"
+     ]
+    },
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops",
+     "need": "2026-10-04",
+     "rule": 5,
+     "names": [
+      "The ask reel on MGK-NIAC"
+     ]
+    },
+    {
+     "what": "his real question, and a posting date: no date",
+     "owner": "Mike",
+     "need": "2026-10-09",
+     "rule": 2,
+     "names": [
+      "The ask reel on MGK-NIAC"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shoot",
+   "group": "Promotion",
+   "name": "Shoot reel",
+   "outcome": "O2",
+   "count": 1,
+   "red": 0,
+   "done": 0,
+   "on": 1,
+   "off": 0,
+   "later": [],
+   "lines": []
+  },
+  {
+   "id": "programs",
+   "group": "Product",
+   "name": "Programs",
+   "outcome": "O4",
+   "count": 13,
+   "red": 0,
+   "done": 0,
+   "on": 1,
+   "off": 0,
+   "later": [
+    "Excuses and Lines",
+    "Fortune",
+    "Maintenance",
+    "Calculator (not installed)",
+    "Notepad (not installed)",
+    "The user record",
+    "The antenna selector",
+    "Predictions",
+    "Advice"
+   ],
+   "lines": []
+  },
+  {
+   "id": "games",
+   "group": "Product",
+   "name": "Games",
+   "outcome": "O4",
+   "count": 6,
+   "red": 6,
+   "done": 0,
+   "on": 0,
+   "off": 1,
+   "later": [
+    "Tilt Drive",
+    "Gobble Don't Fall",
+    "AvoidSteroids",
+    "Mail Run",
+    "Sniper",
+    "Stop On A Number"
+   ],
+   "lines": [
+    {
+     "what": "the games are not final: no date",
+     "owner": "Mike",
+     "need": "2026-10-02",
+     "rule": 2,
+     "names": [
+      "Snow Globe",
+      "Tic-Tac-Toe",
+      "Blackjack",
+      "Craps",
+      "Roulette",
+      "Slots"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "engines",
+   "group": "Product",
+   "name": "Engines and settings",
+   "outcome": "O4",
+   "count": 5,
+   "red": 0,
+   "done": 0.08,
+   "on": 0.92,
+   "off": 0,
+   "later": [
+    "MGK-65 arrives",
+    "Voices",
+    "Codes"
+   ],
+   "lines": []
+  },
+  {
+   "id": "albums",
+   "group": "Product",
+   "name": "Albums",
+   "outcome": "O2",
+   "count": 4,
+   "red": 0,
+   "done": 0,
+   "on": 1,
+   "off": 0,
+   "later": [],
+   "lines": []
+  },
+  {
+   "id": "site",
+   "group": "Place",
+   "name": "The site",
+   "outcome": "O2",
+   "count": 8,
+   "red": 2,
+   "done": 0.05,
+   "on": 0.725,
+   "off": 0.225,
+   "later": [],
+   "lines": [
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops",
+     "need": "2026-10-04",
+     "rule": 5,
+     "names": [
+      "The song's page on /wb (where the Number lands)"
+     ]
+    },
+    {
+     "what": "waits on: The deploy before the Number",
+     "owner": "Mike",
+     "need": "2026-10-04",
+     "rule": 4,
+     "names": [
+      "The song's page on /wb (where the Number lands)"
+     ]
+    },
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops",
+     "need": "2026-10-09",
+     "rule": 5,
+     "names": [
+      "The statement of the whole, on the front"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "machine",
+   "group": "Machine",
+   "name": "The machine",
+   "outcome": "O4",
+   "count": 2,
+   "red": 0,
+   "done": 0.1,
+   "on": 0.9,
+   "off": 0,
+   "later": [],
+   "lines": []
+  },
+  {
+   "id": "system",
+   "group": "System",
+   "name": "The system",
+   "outcome": "O5",
+   "count": 7,
+   "red": 1,
+   "done": 0.1142857142857143,
+   "on": 0.7428571428571429,
+   "off": 0.14285714285714285,
+   "later": [],
+   "lines": [
+    {
+     "what": "no deploy date is set before 10-26 noon; the song's page needs one: no date",
+     "owner": "Mike",
+     "need": "2026-10-16",
+     "rule": 2,
+     "names": [
+      "The deploy before the Number"
+     ]
+    },
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops to schedule, Mike",
+     "need": "2026-10-16",
+     "rule": 5,
+     "names": [
+      "The deploy before the Number"
+     ]
+    }
+   ]
+  }
+ ],
+ "detail": [
+  {
+   "id": "qa-daily",
+   "col": "qa",
+   "name": "The daily Q&A line",
+   "owner": "Ops",
+   "pct": 35,
+   "status": "on",
+   "next": "2026-10-02",
+   "reasons": []
+  },
+  {
+   "id": "qa-hot",
+   "col": "qa",
+   "name": "The hot Q&A lane",
+   "owner": "Ops",
+   "pct": 79,
+   "status": "on",
+   "next": "2026-10-16",
+   "reasons": []
+  },
+  {
+   "id": "number-coconuts",
+   "col": "number",
+   "name": "Coconuts, the first run",
+   "owner": "Ops",
+   "pct": 30,
+   "status": "on",
+   "next": "2026-09-27",
+   "reasons": []
+  },
+  {
+   "id": "song-two",
+   "col": "number",
+   "name": "Song two, chosen",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-11",
+   "reasons": []
+  },
+  {
+   "id": "ask-niac",
+   "col": "ask",
+   "name": "The ask reel on MGK-NIAC",
+   "owner": "Ops",
+   "pct": 30,
+   "status": "off",
+   "next": "2026-10-04",
+   "reasons": [
+    {
+     "what": "his notes on the first cut: no date",
+     "owner": "Mike",
+     "need": "2026-10-04",
+     "rule": 2
+    },
+    {
+     "what": "his real question, and a posting date: no date",
+     "owner": "Mike",
+     "need": "2026-10-09",
+     "rule": 2
+    },
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops",
+     "need": "2026-10-04",
+     "rule": 5
+    }
+   ]
+  },
+  {
+   "id": "shoot-reel",
+   "col": "shoot",
+   "name": "The sexy-shoot reel",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-29",
+   "reasons": []
+  },
+  {
+   "id": "album-everyman",
+   "col": "albums",
+   "name": "The Everyman",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-27",
+   "reasons": []
+  },
+  {
+   "id": "album-gambler",
+   "col": "albums",
+   "name": "The Gambler",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-04",
+   "reasons": []
+  },
+  {
+   "id": "album-ceo",
+   "col": "albums",
+   "name": "The CEO",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-11",
+   "reasons": []
+  },
+  {
+   "id": "album-informer",
+   "col": "albums",
+   "name": "The Informer",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-18",
+   "reasons": []
+  },
+  {
+   "id": "prologue",
+   "col": "site",
+   "name": "The prologue",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-27",
+   "reasons": []
+  },
+  {
+   "id": "feature-page",
+   "col": "site",
+   "name": "The feature-page template",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-27",
+   "reasons": []
+  },
+  {
+   "id": "landing",
+   "col": "site",
+   "name": "The reel's landing (deep link to the day's room)",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-27",
+   "reasons": []
+  },
+  {
+   "id": "door",
+   "col": "site",
+   "name": "The door: 'not open yet', then it opens itself",
+   "owner": "Ops",
+   "pct": 20,
+   "status": "on",
+   "next": "2026-10-09",
+   "reasons": []
+  },
+  {
+   "id": "song-page",
+   "col": "site",
+   "name": "The song's page on /wb (where the Number lands)",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "off",
+   "next": "2026-10-04",
+   "reasons": [
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops",
+     "need": "2026-10-04",
+     "rule": 5
+    },
+    {
+     "what": "waits on: The deploy before the Number",
+     "owner": "Mike",
+     "need": "2026-10-04",
+     "rule": 4
+    }
+   ]
+  },
+  {
+   "id": "whole",
+   "col": "site",
+   "name": "The statement of the whole, on the front",
+   "owner": "Ops",
+   "pct": 20,
+   "status": "off",
+   "next": "2026-10-09",
+   "reasons": [
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops",
+     "need": "2026-10-09",
+     "rule": 5
+    }
+   ]
+  },
+  {
+   "id": "words-prologue",
+   "col": "site",
+   "name": "Words: the prologue's opening",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-09",
+   "reasons": []
+  },
+  {
+   "id": "words-artist",
+   "col": "site",
+   "name": "Words: About the Artist",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-10",
+   "reasons": []
+  },
+  {
+   "id": "twin-full",
+   "col": "machine",
+   "name": "The twin at full software, served",
+   "owner": "Ops",
+   "pct": 10,
+   "status": "on",
+   "next": "2026-10-02",
+   "reasons": []
+  },
+  {
+   "id": "real-unit",
+   "col": "machine",
+   "name": "The real unit flashed and verified",
+   "owner": "Mike",
+   "pct": 10,
+   "status": "on",
+   "next": "2026-10-15",
+   "reasons": []
+  },
+  {
+   "id": "buffer",
+   "col": "system",
+   "name": "Buffer connected (the key, the channels)",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-11",
+   "reasons": []
+  },
+  {
+   "id": "photos-white",
+   "col": "system",
+   "name": "The photo line's white treatment",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-26",
+   "reasons": []
+  },
+  {
+   "id": "morning",
+   "col": "system",
+   "name": "The morning run",
+   "owner": "Ops",
+   "pct": 80,
+   "status": "on",
+   "next": "2026-10-09",
+   "reasons": []
+  },
+  {
+   "id": "board",
+   "col": "system",
+   "name": "The board and the Sunday exception sitting",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-25",
+   "reasons": []
+  },
+  {
+   "id": "rehearsal",
+   "col": "system",
+   "name": "The opening-day rehearsal",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-16",
+   "reasons": []
+  },
+  {
+   "id": "deploy-number",
+   "col": "system",
+   "name": "The deploy before the Number",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "off",
+   "next": "2026-10-16",
+   "reasons": [
+    {
+     "what": "no deploy date is set before 10-26 noon; the song's page needs one: no date",
+     "owner": "Mike",
+     "need": "2026-10-16",
+     "rule": 2
+    },
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops to schedule, Mike",
+     "need": "2026-10-16",
+     "rule": 5
+    }
+   ]
+  },
+  {
+   "id": "deploy-door",
+   "col": "system",
+   "name": "The deploy for the door",
+   "owner": "Mike",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-22",
+   "reasons": []
+  },
+  {
+   "id": "twin.boot",
+   "col": "programs",
+   "name": "Starting",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.monitor",
+   "col": "programs",
+   "name": "The monitor at rest",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.probabilities",
+   "col": "programs",
+   "name": "Probabilities",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.messages",
+   "col": "programs",
+   "name": "Messages, the inbox",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.eliza",
+   "col": "programs",
+   "name": "ELIZ",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.brain",
+   "col": "programs",
+   "name": "Brain Training",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.ink",
+   "col": "programs",
+   "name": "Inkblots",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.bs",
+   "col": "programs",
+   "name": "The Bullshit Detector",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.detectors",
+   "col": "programs",
+   "name": "Detectors",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.advice.panel",
+   "col": "programs",
+   "name": "The Career Chooser",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.radio",
+   "col": "programs",
+   "name": "Radio",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.tap",
+   "col": "programs",
+   "name": "Phone Tap",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.answers",
+   "col": "programs",
+   "name": "Answers, the door",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.game.snowglobe",
+   "col": "games",
+   "name": "Snow Globe",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "off",
+   "next": "2026-09-20",
+   "reasons": [
+    {
+     "what": "the games are not final: no date",
+     "owner": "Mike",
+     "need": "2026-10-02",
+     "rule": 2
+    }
+   ]
+  },
+  {
+   "id": "twin.game.tictactoe",
+   "col": "games",
+   "name": "Tic-Tac-Toe",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "off",
+   "next": "2026-09-20",
+   "reasons": [
+    {
+     "what": "the games are not final: no date",
+     "owner": "Mike",
+     "need": "2026-10-02",
+     "rule": 2
+    }
+   ]
+  },
+  {
+   "id": "twin.game.blackjack",
+   "col": "games",
+   "name": "Blackjack",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "off",
+   "next": "2026-09-20",
+   "reasons": [
+    {
+     "what": "the games are not final: no date",
+     "owner": "Mike",
+     "need": "2026-10-02",
+     "rule": 2
+    }
+   ]
+  },
+  {
+   "id": "twin.game.craps",
+   "col": "games",
+   "name": "Craps",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "off",
+   "next": "2026-09-20",
+   "reasons": [
+    {
+     "what": "the games are not final: no date",
+     "owner": "Mike",
+     "need": "2026-10-02",
+     "rule": 2
+    }
+   ]
+  },
+  {
+   "id": "twin.game.roulette",
+   "col": "games",
+   "name": "Roulette",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "off",
+   "next": "2026-09-20",
+   "reasons": [
+    {
+     "what": "the games are not final: no date",
+     "owner": "Mike",
+     "need": "2026-10-02",
+     "rule": 2
+    }
+   ]
+  },
+  {
+   "id": "twin.game.slots",
+   "col": "games",
+   "name": "Slots",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "off",
+   "next": "2026-09-20",
+   "reasons": [
+    {
+     "what": "the games are not final: no date",
+     "owner": "Mike",
+     "need": "2026-10-02",
+     "rule": 2
+    }
+   ]
+  },
+  {
+   "id": "engine.niac",
+   "col": "engines",
+   "name": "MGK-NIAC, the twenty",
+   "owner": "Ops",
+   "pct": 40,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.polarity",
+   "col": "engines",
+   "name": "Polarity",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.clarity",
+   "col": "engines",
+   "name": "Clarity",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "engine.v2",
+   "col": "engines",
+   "name": "MGK-v2.0 arrives",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  },
+  {
+   "id": "twin.app.user.name",
+   "col": "engines",
+   "name": "User, your name",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-09-20",
+   "reasons": []
+  }
+ ]
+}

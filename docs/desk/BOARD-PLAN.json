@@ -1,0 +1,1070 @@
+{
+ "_": "THE PLAN UNDER THE BOARD. Launch > outcome > column > deliverable; tasks (docs/desk/TASKS.json) sit below and name nothing here: a deliverable names its tasks. Ruled 2026-09-18: 1A launch readiness only, 2A must-have only, 3C slips ruled case by case. Shape: docs/BOARD-PLAN-20260918.md. Graded by tools/board.mjs. A gate is earned only with evidence (`done` = the date, `ev` = where to look); nobody types a percentage. `must` is Ops' DRAFT until the 09-20 sitting rules it.",
+ "ruled": {
+  "measure": "1A",
+  "denominator": "2A",
+  "slip": "3C",
+  "on": "2026-09-18",
+  "must_have": null
+ },
+ "launches": [
+  {
+   "id": "M",
+   "name": "/M the Number",
+   "date": "2026-10-26",
+   "at": "noon"
+  },
+  {
+   "id": "R",
+   "name": "/R the door",
+   "date": "2026-10-30",
+   "at": "five"
+  }
+ ],
+ "freeze": "2026-10-26",
+ "outcomes": [
+  {
+   "id": "O1",
+   "launch": "M",
+   "line": "The Number posts one piece a weekday with no hand, and lands the viewer on the song."
+  },
+  {
+   "id": "O2",
+   "launch": "R",
+   "line": "The wing sells the machine: four albums on the shelf, a page per must-have program and game, the prologue, the door opens itself."
+  },
+  {
+   "id": "O3",
+   "launch": "R",
+   "line": "The daily Q&A posts with no hand, fifteen days in hand, and lands the viewer in a room."
+  },
+  {
+   "id": "O4",
+   "launch": "R",
+   "line": "The machine matches its promotion: everything shown works on the twin at full software and on the real unit."
+  },
+  {
+   "id": "O5",
+   "launch": "both",
+   "line": "The week runs without Mike: queue, desk, board, Sunday grade."
+  }
+ ],
+ "ladders": {
+  "reel": [
+   {
+    "id": "story",
+    "name": "story ruled",
+    "w": 10
+   },
+   {
+    "id": "template",
+    "name": "template ruled",
+    "w": 25
+   },
+   {
+    "id": "builds",
+    "name": "line builds unattended",
+    "w": 20
+   },
+   {
+    "id": "post",
+    "name": "queued through Buffer for real",
+    "w": 15
+   },
+   {
+    "id": "content",
+    "name": "launch content in hand",
+    "w": 30
+   }
+  ],
+  "product": [
+   {
+    "id": "pitch",
+    "name": "pitch ruled",
+    "w": 10
+   },
+   {
+    "id": "twin",
+    "name": "final on the twin",
+    "w": 40
+   },
+   {
+    "id": "page",
+    "name": "page live in development",
+    "w": 30
+   },
+   {
+    "id": "unit",
+    "name": "proven on the real unit",
+    "w": 20
+   }
+  ],
+  "album": [
+   {
+    "id": "shot",
+    "name": "shot",
+    "w": 30
+   },
+   {
+    "id": "line",
+    "name": "photographs through the line",
+    "w": 20
+   },
+   {
+    "id": "filled",
+    "name": "album filled",
+    "w": 35
+   },
+   {
+    "id": "ruled",
+    "name": "ruled",
+    "w": 15
+   }
+  ],
+  "site": [
+   {
+    "id": "shape",
+    "name": "shape ruled",
+    "w": 20
+   },
+   {
+    "id": "built",
+    "name": "built",
+    "w": 40
+   },
+   {
+    "id": "launch",
+    "name": "in the launch build",
+    "w": 20
+   },
+   {
+    "id": "rehearsed",
+    "name": "passed the rehearsal",
+    "w": 20
+   }
+  ],
+  "machine": [
+   {
+    "id": "plan",
+    "name": "plan and date",
+    "w": 10
+   },
+   {
+    "id": "done",
+    "name": "done",
+    "w": 60
+   },
+   {
+    "id": "verified",
+    "name": "verified against the audit",
+    "w": 30
+   }
+  ],
+  "system": [
+   {
+    "id": "built",
+    "name": "built",
+    "w": 40
+   },
+   {
+    "id": "proven",
+    "name": "proven once for real",
+    "w": 40
+   },
+   {
+    "id": "week",
+    "name": "ran unattended a week",
+    "w": 20
+   }
+  ],
+  "words": [
+   {
+    "id": "delivered",
+    "name": "delivered",
+    "w": 70
+   },
+   {
+    "id": "placed",
+    "name": "placed",
+    "w": 30
+   }
+  ],
+  "event": [
+   {
+    "id": "planned",
+    "name": "planned on paper",
+    "w": 30
+   },
+   {
+    "id": "held",
+    "name": "held",
+    "w": 70
+   }
+  ]
+ },
+ "columns": [
+  {
+   "id": "qa",
+   "group": "Promotion",
+   "name": "Q&A reel",
+   "ladder": "reel",
+   "outcome": "O3"
+  },
+  {
+   "id": "number",
+   "group": "Promotion",
+   "name": "Number reel",
+   "ladder": "reel",
+   "outcome": "O1"
+  },
+  {
+   "id": "ask",
+   "group": "Promotion",
+   "name": "Ask reel",
+   "ladder": "reel",
+   "outcome": "O3"
+  },
+  {
+   "id": "shoot",
+   "group": "Promotion",
+   "name": "Shoot reel",
+   "ladder": "reel",
+   "outcome": "O2"
+  },
+  {
+   "id": "programs",
+   "group": "Product",
+   "name": "Programs",
+   "ladder": "product",
+   "outcome": "O4",
+   "catalogue": {
+    "kinds": [
+     "feature"
+    ]
+   },
+   "owner": "Ops",
+   "tasks": [
+    "ruling-1",
+    "twin-update",
+    "pages",
+    "flash"
+   ],
+   "need_by": {
+    "pitch": "2026-09-20",
+    "twin": "2026-10-02",
+    "page": "2026-10-04",
+    "unit": "2026-10-22"
+   }
+  },
+  {
+   "id": "games",
+   "group": "Product",
+   "name": "Games",
+   "ladder": "product",
+   "outcome": "O4",
+   "catalogue": {
+    "kinds": [
+     "game"
+    ]
+   },
+   "owner": "Ops",
+   "tasks": [
+    "ruling-1",
+    "twin-update",
+    "pages",
+    "flash"
+   ],
+   "need_by": {
+    "pitch": "2026-09-20",
+    "twin": "2026-10-02",
+    "page": "2026-10-04",
+    "unit": "2026-10-22"
+   },
+   "blocked": [
+    {
+     "gate": "twin",
+     "what": "the games are not final",
+     "owner": "Mike",
+     "by": null
+    },
+    {
+     "gate": "page",
+     "what": "the site's machine refuses Games: NOT FITTED (Sunday Q2)",
+     "owner": "Mike",
+     "by": "2026-09-20"
+    }
+   ]
+  },
+  {
+   "id": "engines",
+   "group": "Product",
+   "name": "Engines and settings",
+   "ladder": "product",
+   "outcome": "O4",
+   "catalogue": {
+    "kinds": [
+     "engine",
+     "setting"
+    ]
+   },
+   "owner": "Ops",
+   "tasks": [
+    "ruling-1",
+    "twin-update",
+    "pages",
+    "flash"
+   ],
+   "need_by": {
+    "pitch": "2026-09-20",
+    "twin": "2026-10-02",
+    "page": "2026-10-04",
+    "unit": "2026-10-22"
+   }
+  },
+  {
+   "id": "albums",
+   "group": "Product",
+   "name": "Albums",
+   "ladder": "album",
+   "outcome": "O2"
+  },
+  {
+   "id": "site",
+   "group": "Place",
+   "name": "The site",
+   "ladder": "site",
+   "outcome": "O2"
+  },
+  {
+   "id": "machine",
+   "group": "Machine",
+   "name": "The machine",
+   "ladder": "machine",
+   "outcome": "O4"
+  },
+  {
+   "id": "system",
+   "group": "System",
+   "name": "The system",
+   "ladder": "system",
+   "outcome": "O5"
+  }
+ ],
+ "catalogue_overrides": {
+  "_": "Per catalogue row id: gates earned, blockers, or later:true. A row with no launch-run day is later by the draft rule.",
+  "engine.niac": {
+   "gates": {
+    "twin": {
+     "done": "2026-09-18",
+     "ev": "LAUNCH-20260918 section 2: the feature is finished; the ask reel runs it"
+    }
+   }
+  }
+ },
+ "catalogue_blocked_by_name": [
+  {
+   "match": "^(Probabilities)$",
+   "gate": "page",
+   "what": "the site's machine refuses it: NOT FITTED (Sunday Q2)",
+   "owner": "Mike",
+   "by": "2026-09-20"
+  },
+  {
+   "match": "^Messages",
+   "gate": "page",
+   "what": "the site's machine answers NO RECORD (Sunday Q2)",
+   "owner": "Mike",
+   "by": "2026-09-20"
+  }
+ ],
+ "deliverables": [
+  {
+   "id": "qa-daily",
+   "col": "qa",
+   "name": "The daily Q&A line",
+   "owner": "Ops",
+   "tasks": [
+    "qa-line",
+    "launch-days",
+    "qa-list-in",
+    "launch-queued"
+   ],
+   "need_by": {
+    "builds": "2026-10-02",
+    "post": "2026-10-16",
+    "content": "2026-10-09"
+   },
+   "gates": {
+    "story": {
+     "done": "2026-09-16",
+     "ev": "ELEMENTS-20260912.md"
+    },
+    "template": {
+     "done": "2026-09-16",
+     "ev": "Mike: 'This is it'; tools/reels-qa.py, fifth cut"
+    },
+    "content": {
+     "count": [
+      0,
+      15
+     ],
+     "start": "2026-09-21",
+     "measure": "qa:questions"
+    }
+   },
+   "blocked": [
+    {
+     "gate": "builds",
+     "what": "answer length: the glass fit is unruled (Sunday Q1)",
+     "owner": "Mike",
+     "by": "2026-09-20"
+    },
+    {
+     "gate": "post",
+     "what": "the Buffer key",
+     "owner": "Mike",
+     "by": "2026-10-10"
+    },
+    {
+     "gate": "content",
+     "what": "the fifteen Q&As",
+     "owner": "Mike",
+     "by": "2026-10-09"
+    }
+   ],
+   "depends": [
+    "buffer"
+   ]
+  },
+  {
+   "id": "qa-hot",
+   "col": "qa",
+   "name": "The hot Q&A lane",
+   "owner": "Ops",
+   "tasks": [
+    "qa-line",
+    "channels"
+   ],
+   "skip": [
+    "content"
+   ],
+   "need_by": {
+    "post": "2026-10-16"
+   },
+   "gates": {
+    "story": {
+     "done": "2026-09-16",
+     "ev": "reels/README.md, the hot lane"
+    },
+    "template": {
+     "done": "2026-09-16",
+     "ev": "the Q&A template"
+    },
+    "builds": {
+     "done": "2026-09-16",
+     "ev": "tools/reels-hot.py, dry run proven"
+    }
+   },
+   "blocked": [
+    {
+     "gate": "post",
+     "what": "the Buffer key",
+     "owner": "Mike",
+     "by": "2026-10-10"
+    }
+   ],
+   "depends": [
+    "buffer"
+   ]
+  },
+  {
+   "id": "number-coconuts",
+   "col": "number",
+   "name": "Coconuts, the first run",
+   "owner": "Ops",
+   "tasks": [
+    "number-pieces",
+    "material-rulings",
+    "number-sitting",
+    "launch-queued"
+   ],
+   "need_by": {
+    "template": "2026-09-27",
+    "post": "2026-10-23",
+    "content": "2026-10-23"
+   },
+   "gates": {
+    "story": {
+     "done": "2026-09-10",
+     "ev": "the music launch page, ruled; NUMBER-PIECES-20260917.md"
+    },
+    "builds": {
+     "done": "2026-09-18",
+     "ev": "tools/numbers-template.py; museum 1d2cab3, sixteen re-cut"
+    },
+    "content": {
+     "count": [
+      12,
+      15
+     ],
+     "start": "2026-10-20",
+     "measure": "numbers:pieces"
+    }
+   },
+   "blocked": [
+    {
+     "gate": "template",
+     "what": "the frame is unruled (Sunday Q7)",
+     "owner": "Mike",
+     "by": "2026-09-20"
+    },
+    {
+     "gate": "post",
+     "what": "the Buffer key",
+     "owner": "Mike",
+     "by": "2026-10-10"
+    },
+    {
+     "gate": "content",
+     "what": "three story pieces, the 10-20 sitting; the fifteen ruled 10-11",
+     "owner": "Mike",
+     "by": "2026-10-20"
+    }
+   ],
+   "depends": [
+    "buffer"
+   ]
+  },
+  {
+   "id": "song-two",
+   "col": "number",
+   "name": "Song two, chosen",
+   "owner": "Mike",
+   "ladder": "words",
+   "tasks": [
+    "ruling-4"
+   ],
+   "skip": [
+    "placed"
+   ],
+   "need_by": {
+    "delivered": "2026-10-11"
+   },
+   "gates": {}
+  },
+  {
+   "id": "ask-niac",
+   "col": "ask",
+   "name": "The ask reel on MGK-NIAC",
+   "owner": "Ops",
+   "tasks": [],
+   "need_by": {
+    "template": "2026-10-04",
+    "post": "2026-10-16",
+    "content": "2026-10-09"
+   },
+   "gates": {
+    "story": {
+     "done": "2026-09-18",
+     "ev": "FEATURE-REEL-20260916.md section 16"
+    },
+    "builds": {
+     "done": "2026-09-18",
+     "ev": "museum b418b7c; Finished reels, features, feature_mgk-niac.mp4"
+    },
+    "content": {
+     "count": [
+      0,
+      1
+     ],
+     "start": "2026-09-18"
+    }
+   },
+   "blocked": [
+    {
+     "gate": "template",
+     "what": "his notes on the first cut",
+     "owner": "Mike",
+     "by": null
+    },
+    {
+     "gate": "content",
+     "what": "his real question, and a posting date",
+     "owner": "Mike",
+     "by": null
+    },
+    {
+     "gate": "post",
+     "what": "the Buffer key",
+     "owner": "Mike",
+     "by": "2026-10-10"
+    }
+   ],
+   "depends": [
+    "buffer"
+   ]
+  },
+  {
+   "id": "shoot-reel",
+   "col": "shoot",
+   "name": "The sexy-shoot reel",
+   "owner": "Ops",
+   "tasks": [
+    "shoot-reel-story"
+   ],
+   "need_by": {
+    "story": "2026-09-29",
+    "template": "2026-10-06",
+    "builds": "2026-10-13",
+    "post": "2026-10-16",
+    "content": "2026-10-21"
+   },
+   "gates": {
+    "content": {
+     "count": [
+      0,
+      4
+     ],
+     "start": "2026-09-27",
+     "measure": "albums:shot"
+    }
+   },
+   "blocked": [
+    {
+     "gate": "post",
+     "what": "the Buffer key",
+     "owner": "Mike",
+     "by": "2026-10-10"
+    }
+   ],
+   "depends": [
+    "buffer",
+    "album-everyman"
+   ]
+  },
+  {
+   "id": "album-everyman",
+   "col": "albums",
+   "name": "The Everyman",
+   "owner": "Mike",
+   "tasks": [
+    "photos-everyman",
+    "pages"
+   ],
+   "need_by": {
+    "shot": "2026-09-27",
+    "line": "2026-09-30",
+    "filled": "2026-10-05",
+    "ruled": "2026-10-11"
+   },
+   "gates": {},
+   "depends": [
+    "photos-white"
+   ]
+  },
+  {
+   "id": "album-gambler",
+   "col": "albums",
+   "name": "The Gambler",
+   "owner": "Mike",
+   "tasks": [
+    "photos-gambler",
+    "gambler-standin",
+    "pages"
+   ],
+   "need_by": {
+    "shot": "2026-10-04",
+    "line": "2026-10-07",
+    "filled": "2026-10-12",
+    "ruled": "2026-10-18"
+   },
+   "gates": {},
+   "blocked": [
+    {
+     "gate": "shot",
+     "what": "the Gambler's finishing work (case label, hold-downs, glue blocks, touch-up)",
+     "owner": "Mike",
+     "by": "2026-10-04"
+    }
+   ],
+   "depends": [
+    "photos-white"
+   ]
+  },
+  {
+   "id": "album-ceo",
+   "col": "albums",
+   "name": "The CEO",
+   "owner": "Mike",
+   "tasks": [
+    "photos-ceo",
+    "pages"
+   ],
+   "need_by": {
+    "shot": "2026-10-11",
+    "line": "2026-10-14",
+    "filled": "2026-10-19",
+    "ruled": "2026-10-25"
+   },
+   "gates": {},
+   "depends": [
+    "photos-white"
+   ]
+  },
+  {
+   "id": "album-informer",
+   "col": "albums",
+   "name": "The Informer",
+   "owner": "Mike",
+   "tasks": [
+    "photos-informer",
+    "pages"
+   ],
+   "need_by": {
+    "shot": "2026-10-18",
+    "line": "2026-10-21",
+    "filled": "2026-10-23",
+    "ruled": "2026-10-25"
+   },
+   "gates": {},
+   "depends": [
+    "photos-white"
+   ]
+  },
+  {
+   "id": "prologue",
+   "col": "site",
+   "name": "The prologue",
+   "owner": "Ops",
+   "tasks": [
+    "mocks",
+    "ruling-2",
+    "prologue"
+   ],
+   "need_by": {
+    "shape": "2026-09-27",
+    "built": "2026-10-01",
+    "launch": "2026-10-20",
+    "rehearsed": "2026-10-22"
+   },
+   "gates": {},
+   "depends": [
+    "words-prologue"
+   ]
+  },
+  {
+   "id": "feature-page",
+   "col": "site",
+   "name": "The feature-page template",
+   "owner": "Ops",
+   "tasks": [
+    "mocks",
+    "ruling-2",
+    "pages"
+   ],
+   "need_by": {
+    "shape": "2026-09-27",
+    "built": "2026-10-02",
+    "launch": "2026-10-20",
+    "rehearsed": "2026-10-22"
+   },
+   "gates": {}
+  },
+  {
+   "id": "landing",
+   "col": "site",
+   "name": "The reel's landing (deep link to the day's room)",
+   "owner": "Ops",
+   "tasks": [
+    "mocks",
+    "ruling-2",
+    "landing"
+   ],
+   "need_by": {
+    "shape": "2026-09-27",
+    "built": "2026-10-03",
+    "launch": "2026-10-20",
+    "rehearsed": "2026-10-22"
+   },
+   "gates": {}
+  },
+  {
+   "id": "door",
+   "col": "site",
+   "name": "The door: 'not open yet', then it opens itself",
+   "owner": "Ops",
+   "tasks": [
+    "open"
+   ],
+   "need_by": {
+    "built": "2026-10-09",
+    "launch": "2026-10-20",
+    "rehearsed": "2026-10-22"
+   },
+   "gates": {
+    "shape": {
+     "done": "2026-09-10",
+     "ev": "PLAN-20260910: ruled, low priority"
+    }
+   },
+   "depends": [
+    "deploy-door"
+   ]
+  },
+  {
+   "id": "song-page",
+   "col": "site",
+   "name": "The song's page on /wb (where the Number lands)",
+   "owner": "Ops",
+   "tasks": [],
+   "need_by": {
+    "shape": "2026-10-04",
+    "built": "2026-10-16",
+    "launch": "2026-10-23",
+    "rehearsed": "2026-10-23"
+   },
+   "gates": {},
+   "depends": [
+    "deploy-number"
+   ]
+  },
+  {
+   "id": "whole",
+   "col": "site",
+   "name": "The statement of the whole, on the front",
+   "owner": "Ops",
+   "tasks": [],
+   "need_by": {
+    "built": "2026-10-09",
+    "launch": "2026-10-20",
+    "rehearsed": "2026-10-22"
+   },
+   "gates": {
+    "shape": {
+     "done": "2026-09-18",
+     "ev": "LAUNCH-20260918, ruled 1A: the draft lines stand"
+    }
+   }
+  },
+  {
+   "id": "words-prologue",
+   "col": "site",
+   "name": "Words: the prologue's opening",
+   "owner": "Mike",
+   "ladder": "words",
+   "tasks": [
+    "words-1"
+   ],
+   "need_by": {
+    "delivered": "2026-10-09",
+    "placed": "2026-10-16"
+   },
+   "gates": {}
+  },
+  {
+   "id": "words-artist",
+   "col": "site",
+   "name": "Words: About the Artist",
+   "owner": "Mike",
+   "ladder": "words",
+   "tasks": [
+    "words-2"
+   ],
+   "need_by": {
+    "delivered": "2026-10-10",
+    "placed": "2026-10-16"
+   },
+   "gates": {}
+  },
+  {
+   "id": "twin-full",
+   "col": "machine",
+   "name": "The twin at full software, served",
+   "owner": "Ops",
+   "tasks": [
+    "twin-audit",
+    "twin-update"
+   ],
+   "need_by": {
+    "done": "2026-10-02",
+    "verified": "2026-10-03"
+   },
+   "gates": {
+    "plan": {
+     "done": "2026-09-10",
+     "ev": "robots docs/TWIN_AUDIT-20260910.md"
+    }
+   }
+  },
+  {
+   "id": "real-unit",
+   "col": "machine",
+   "name": "The real unit flashed and verified",
+   "owner": "Mike",
+   "tasks": [
+    "bench-plan",
+    "bench",
+    "flash"
+   ],
+   "need_by": {
+    "done": "2026-10-15",
+    "verified": "2026-10-22"
+   },
+   "gates": {
+    "plan": {
+     "done": "2026-09-17",
+     "ev": "CALENDAR-RECUT fork 4: the bench stays 10-15"
+    }
+   }
+  },
+  {
+   "id": "buffer",
+   "col": "system",
+   "name": "Buffer connected (the key, the channels)",
+   "owner": "Mike",
+   "tasks": [
+    "clicks-buffer",
+    "channels"
+   ],
+   "skip": [
+    "week"
+   ],
+   "need_by": {
+    "built": "2026-10-11",
+    "proven": "2026-10-16"
+   },
+   "gates": {},
+   "blocked": [
+    {
+     "gate": "built",
+     "what": "the six clicks and the key",
+     "owner": "Mike",
+     "by": "2026-10-10"
+    }
+   ]
+  },
+  {
+   "id": "photos-white",
+   "col": "system",
+   "name": "The photo line's white treatment",
+   "owner": "Ops",
+   "tasks": [
+    "photos-white"
+   ],
+   "skip": [
+    "week"
+   ],
+   "need_by": {
+    "built": "2026-09-26",
+    "proven": "2026-09-30"
+   },
+   "gates": {}
+  },
+  {
+   "id": "morning",
+   "col": "system",
+   "name": "The morning run",
+   "owner": "Ops",
+   "tasks": [],
+   "need_by": {
+    "week": "2026-10-09"
+   },
+   "gates": {
+    "built": {
+     "done": "2026-09-17",
+     "ev": "tools/morning.mjs; npm run morning"
+    },
+    "proven": {
+     "done": "2026-09-18",
+     "ev": "docs/desk/MORNING.md; museum 2952b49"
+    }
+   },
+   "scheduled": "the 06:08 scheduled task, weird-baby-morning-desk"
+  },
+  {
+   "id": "board",
+   "col": "system",
+   "name": "The board and the Sunday exception sitting",
+   "owner": "Ops",
+   "tasks": [
+    "grade-2026-09-20",
+    "grade-2026-09-27",
+    "grade-2026-10-04",
+    "grade-2026-10-11",
+    "grade-2026-10-18",
+    "grade-2026-10-25",
+    "grade-2026-11-01"
+   ],
+   "need_by": {
+    "built": "2026-09-25",
+    "proven": "2026-09-27",
+    "week": "2026-10-04"
+   },
+   "gates": {}
+  },
+  {
+   "id": "rehearsal",
+   "col": "system",
+   "name": "The opening-day rehearsal",
+   "owner": "Ops",
+   "ladder": "event",
+   "tasks": [
+    "rehearsal"
+   ],
+   "need_by": {
+    "planned": "2026-10-16",
+    "held": "2026-10-22"
+   },
+   "gates": {}
+  },
+  {
+   "id": "deploy-number",
+   "col": "system",
+   "name": "The deploy before the Number",
+   "owner": "Mike",
+   "ladder": "event",
+   "tasks": [],
+   "need_by": {
+    "planned": "2026-10-16",
+    "held": "2026-10-25"
+   },
+   "gates": {},
+   "blocked": [
+    {
+     "gate": "planned",
+     "what": "no deploy date is set before 10-26 noon; the song's page needs one",
+     "owner": "Mike",
+     "by": null
+    }
+   ]
+  },
+  {
+   "id": "deploy-door",
+   "col": "system",
+   "name": "The deploy for the door",
+   "owner": "Mike",
+   "ladder": "event",
+   "tasks": [
+    "freeze",
+    "open"
+   ],
+   "need_by": {
+    "planned": "2026-10-22",
+    "held": "2026-10-29"
+   },
+   "gates": {}
+  }
+ ],
+ "tasks_without_a_deliverable": {
+  "_": "Known and accepted: done housekeeping and the dead. Anything else the grader lists is challenged at the Sunday sitting.",
+  "accepted": [
+   "burn-list",
+   "grade-2026-09-13",
+   "practice-line",
+   "catalogue",
+   "glass-composite",
+   "music-page",
+   "element-line"
+  ]
+ }
+}
