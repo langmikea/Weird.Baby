@@ -65,7 +65,9 @@
    ],
    "check": {
     "type": "buffer-token"
-   }
+   },
+   "done": true,
+   "done_on": "2026-09-18"
   },
   {
    "id": "catalogue",
@@ -163,6 +165,16 @@
     "One page: the rig, one item through S0 to S8, then E1 to E6 (the static glass plate, the hold, the shake, the controls, the turntable turn, the clean plate). Fifteen minutes of Mike, whenever it suits him."
    ],
    "long": "The smallest real shoot that exercises the whole photo and footage line (docs/SED-AUDIT-20260918.md section 4)"
+  },
+  {
+   "id": "buffer-proof",
+   "date": "2026-09-22",
+   "owner": "ops",
+   "title": "The queue proven: one post through Buffer as a draft, then one queued for 10-31",
+   "do": [
+    "Read tools/reels-queue.mjs against Buffer's current API before it runs live; send one stand-in as a DRAFT (nothing public), check it in Buffer, remove it; then queue the first real row when there is one. Keep within the free plan: 10 queued posts a channel, so the morning run queues five days ahead, not seven, once the Number joins."
+   ],
+   "long": "No line has ever posted for real; the first live run must not be able to publish a stand-in before the door"
   },
   {
    "id": "take-stock",
@@ -562,7 +574,9 @@
    "do": [
     "Needs Mike's key of 10-10."
    ],
-   "long": "Buffer channels recorded; the queue's schema checked live"
+   "long": "Buffer channels recorded; the queue's schema checked live",
+   "done": true,
+   "done_on": "2026-09-18"
   },
   {
    "id": "grade-2026-10-11",

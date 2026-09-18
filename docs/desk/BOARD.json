@@ -2,7 +2,7 @@
  "as_of": "2026-09-18",
  "must_have_ruled": null,
  "deliverables": 55,
- "not_on_track": 0,
+ "not_on_track": 1,
  "columns": [
   {
    "id": "qa",
@@ -10,12 +10,22 @@
    "name": "Q&A reel",
    "outcome": "O3",
    "count": 3,
-   "red": 0,
+   "red": 1,
    "done": 0.3757575757575758,
-   "on": 0.6242424242424243,
-   "off": 0,
+   "on": 0.5333333333333333,
+   "off": 0.0909090909090909,
    "later": [],
-   "lines": []
+   "lines": [
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops",
+     "need": "2026-10-25",
+     "rule": 5,
+     "names": [
+      "The hot Q&A lane"
+     ]
+    }
+   ]
   },
   {
    "id": "number",
@@ -162,8 +172,8 @@
    "outcome": "O5",
    "count": 7,
    "red": 0,
-   "done": 0.2285714285714286,
-   "on": 0.7714285714285714,
+   "done": 0.3,
+   "on": 0.7,
    "off": 0,
    "later": [],
    "lines": []
@@ -186,9 +196,16 @@
    "name": "The hot Q&A lane",
    "owner": "Ops",
    "pct": 73,
-   "status": "on",
+   "status": "off",
    "next": "2026-10-25",
-   "reasons": []
+   "reasons": [
+    {
+     "what": "no work is scheduled for it",
+     "owner": "Ops",
+     "need": "2026-10-25",
+     "rule": 5
+    }
+   ]
   },
   {
    "id": "beat",
@@ -393,11 +410,11 @@
   {
    "id": "buffer",
    "col": "system",
-   "name": "Buffer connected (the key, the channels)",
+   "name": "Buffer connected (the key, three channels; Facebook left out, the free plan holds three)",
    "owner": "Mike",
-   "pct": 0,
+   "pct": 50,
    "status": "on",
-   "next": "2026-10-09",
+   "next": "2026-10-10",
    "reasons": []
   },
   {
@@ -723,14 +740,6 @@
  ],
  "yours_now": [
   {
-   "what": "Buffer: the accounts, the four channels, the key",
-   "need": "2026-09-18",
-   "red": false,
-   "ruling": true,
-   "ask": false,
-   "frees": 6
-  },
-  {
    "what": "answer length: the glass fit is unruled (Sunday Q1)",
    "need": "2026-09-20",
    "red": false,
@@ -744,6 +753,14 @@
    "red": false,
    "ruling": true,
    "ask": true,
+   "frees": 1
+  },
+  {
+   "what": "the Gambler's finishing work (case label, hold-downs, glue blocks, touch-up)",
+   "need": "2026-10-04",
+   "red": false,
+   "ruling": true,
+   "ask": false,
    "frees": 1
   }
  ]

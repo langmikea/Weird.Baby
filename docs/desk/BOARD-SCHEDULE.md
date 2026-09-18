@@ -7,7 +7,6 @@ Written by tools/board.mjs from docs/desk/BOARD-PLAN.json, baseline v4. Every da
 Nothing is wanted from him before "can start" (the pilot on stand-ins comes first) and nothing is late until "needed by". An ask is one sitting's worth.
 
 ```
-can start 09-18  needed by 10-09   19d float   built: Buffer connected (the key, the channels)
 can start 09-18  needed by 10-11   14d float   pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out
 can start 09-20  needed by 10-11   20d float   his real material in: The daily Q&A line
 can start 09-20  needed by 10-11   21d float   pitch ruled: Answers, the door
@@ -23,7 +22,7 @@ can start 09-18  needed by 10-24   35d float   delivered: Words: About the Artis
 can start 09-18  needed by 10-25   28d float   the look pointed at, from a range: The ask reel on MGK-NIAC
 can start 09-18  needed by 10-25   36d float   his real material in: The ask reel on MGK-NIAC
 can start 09-20  needed by 10-25   35d float   pitch ruled: 7 things (ELIZ, Brain Training, ...)
-can start 09-22  needed by 10-25   19d float   launch volume in hand: The daily Q&A line
+can start 09-21  needed by 10-25   20d float   launch volume in hand: The daily Q&A line
 can start 09-28  needed by 10-25   21d float   ruled: The Everyman
 can start 10-22  needed by 10-29    0d float   held: The deploy for the door (it carries the song's page too)
 can start 09-20  needed by 11-01   42d float   the look pointed at, from a range: Coconuts, the first run
@@ -52,8 +51,8 @@ WEEK OF 09-14
     - the look pointed at, from a range: Coconuts, the first run
     - pitch ruled: 5 things (Inkblots, Blackjack, ...)
     - pitch ruled: The Career Chooser, Radio, Phone Tap
-  built: Buffer connected (the key, the channels)   (any day to 10-09)
   his real material in: The daily Q&A line   (any day to 10-11)
+  done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes   (any day to 10-18)
 WEEK OF 09-21
   the Sunday sitting, 09-27: point at or rule
     - pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out
@@ -62,27 +61,26 @@ WEEK OF 09-21
     - the shape pointed at, from a range: The song's page on /wb, and the caption line that points at it
     - the look pointed at, from a range: The ask reel on MGK-NIAC
     - the look pointed at, from a range: The sexy-shoot reel
-  done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes   (any day to 10-18)
   shot: The Everyman   (any day to 10-21)
+  delivered: Words: the prologue's opening   (any day to 10-23)
   launch volume in hand: The daily Q&A line   (a run, from here to 10-25)
 WEEK OF 09-28
   the Sunday sitting, 10-04: point at or rule
     - ruled: The Everyman
     - ruled: The CEO, The Informer
-  delivered: Words: the prologue's opening   (any day to 10-23)
   delivered: Words: About the Artist   (any day to 10-24)
+  his real material in: The ask reel on MGK-NIAC   (any day to 10-25)
 WEEK OF 10-05
   the Sunday sitting, 10-11: point at or rule
     - ruled: The Gambler
-  his real material in: The ask reel on MGK-NIAC   (any day to 10-25)
   shot: The Gambler   (any day to 11-04)
+  shot: The CEO   (any day to 11-11)
 WEEK OF 10-12
   done: The real unit flashed and verified   (fixed, 10-15)
-  shot: The CEO   (any day to 11-11)
   shot: The Informer   (any day to 11-11)
+  his real material in: The sexy-shoot reel   (any day to 11-15)
 WEEK OF 10-19
   launch volume in hand: Coconuts, the first run   (a run, from here to 11-06)
-  his real material in: The sexy-shoot reel   (any day to 11-15)
 WEEK OF 10-26
   held: The deploy for the door (it carries the song's page too)   (fixed, 10-29)
 ```
@@ -98,16 +96,15 @@ forecast 10-29  needed 10-29    0d  Mike  held: The deploy for the door (it carr
 
 ## Every open gate, by the week it is needed
 
-### Week of 10-05: Mike 5 asks · Ops 2
+### Week of 10-05: Mike 4 asks · Ops 2
 
 ```
-10-09  Mike  built: Buffer connected (the key, the channels)   [can start 09-18, float 19d]
-10-10  Ops   proven once for real: Buffer connected (the key, the channels)   [can start 09-20, float 19d]
+10-10  Ops   proven once for real: Buffer connected (the key, three channels; Facebook left out, the free plan holds three)   [can start 09-18, float 21d]
 10-11  Mike  his real material in: The daily Q&A line   [can start 09-20, float 20d]
 10-11  Mike  the shape pointed at, from a range: The feature-page template, The prologue, The reel's landing (deep link to the day's room)   [can start 09-27, float 14d]
 10-11  Mike  pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out   [can start 09-18, float 14d]
 10-11  Mike  pitch ruled: Answers, the door   [can start 09-20, float 21d]
-10-11  Ops   one real post through the queue: The daily Q&A line   [can start 09-21, float 19d]
+10-11  Ops   one real post through the queue: The daily Q&A line   [can start 09-19, float 21d]
 ```
 
 ### Week of 10-12: Mike 5 asks · Ops 4
@@ -143,12 +140,12 @@ forecast 10-29  needed 10-29    0d  Mike  held: The deploy for the door (it carr
 10-24  Ops   one built on stand-ins: The song's page on /wb, and the caption line that points at it   [can start 09-27, float 24d]
 10-24  Ops   placed: Words: the prologue's opening   [can start 09-19, float 34d]
 10-24  Ops   final on the twin: The monitor at rest   [can start 09-29, float 20d]
-10-25  Mike  launch volume in hand: The daily Q&A line   [can start 09-22, float 19d]
+10-25  Mike  launch volume in hand: The daily Q&A line   [can start 09-21, float 20d]
 10-25  Mike  the look pointed at, from a range: The ask reel on MGK-NIAC   [can start 09-18, float 28d]
 10-25  Mike  his real material in: The ask reel on MGK-NIAC   [can start 09-18, float 36d]
 10-25  Mike  ruled: The Everyman   [can start 09-28, float 21d]
 10-25  Mike  pitch ruled: 7 things (ELIZ, Brain Training, ...)   [can start 09-20, float 35d]
-10-25  Ops   one real post through the queue: The hot Q&A lane, The ask reel on MGK-NIAC   [can start 09-21, float 33d]
+10-25  Ops   one real post through the queue: The hot Q&A lane, The ask reel on MGK-NIAC   [can start 09-19, float 35d]
 10-25  Ops   built in: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands   [can start 09-27, float 26d]
 10-25  Ops   the real photographs in the album: The Everyman   [can start 09-26, float 27d]
 10-25  Ops   in the launch build: 6 things (The album template, proven on stand-ins, The feature-page template, ...)   [can start 09-22, float 32d]

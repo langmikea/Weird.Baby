@@ -1,0 +1,29 @@
+{
+ "account": "papa@weird.baby",
+ "organizations": [
+  {
+   "id": "6aad53a8c39a0735133387d4",
+   "name": "My organization"
+  }
+ ],
+ "channels": [
+  {
+   "organizationId": "6aad53a8c39a0735133387d4",
+   "id": "6aad5737ea19ca0bde79d2b3",
+   "name": "WeirdBaby",
+   "service": "youtube"
+  },
+  {
+   "organizationId": "6aad53a8c39a0735133387d4",
+   "id": "6aad550eea19ca0bde79b972",
+   "name": "user7317057223447",
+   "service": "tiktok"
+  },
+  {
+   "organizationId": "6aad53a8c39a0735133387d4",
+   "id": "6aad5467ea19ca0bde79b0a0",
+   "name": "papa_weird.baby",
+   "service": "instagram"
+  }
+ ]
+}

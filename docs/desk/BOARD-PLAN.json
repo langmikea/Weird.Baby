@@ -1001,24 +1001,24 @@
   {
    "id": "buffer",
    "col": "system",
-   "name": "Buffer connected (the key, the channels)",
+   "name": "Buffer connected (the key, three channels; Facebook left out, the free plan holds three)",
    "owner": "Mike",
    "tasks": [
     "clicks-buffer",
-    "channels"
+    "channels",
+    "buffer-proof"
    ],
    "skip": [
     "week"
    ],
-   "gates": {},
-   "blocked": [
-    {
-     "gate": "built",
-     "what": "Buffer: the accounts, the four channels, the key",
-     "owner": "Mike",
-     "by": "2026-09-18"
+   "gates": {
+    "built": {
+     "done": "2026-09-18",
+     "ev": "Mike at the PC: Buffer account papa@weird.baby, three channels (instagram papa_weird.baby, tiktok, youtube WeirdBaby), key ops3 (expires 2027-09-18); node tools/reels-queue.mjs --channels read them; reels/buffer-channels.json"
     }
-   ]
+   },
+   "blocked": [],
+   "note": "Free plan: 3 channels, 10 queued posts a channel, one key, API 100 calls / 15 min. The key expires 2027-09-18. The TikTok account is new and unnamed (user7317057223447): Mike names it in the app. PROVEN is Ops': first as a DRAFT, never a scheduled stand-in, because the queue has never run live and nothing may post before the door."
   },
   {
    "id": "photos-white",
