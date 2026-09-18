@@ -18,18 +18,19 @@ form). Ask the wire.
 
 | field | value |
 |---|---|
-| commit | `318cd81` |
-| full sha | `318cd81ac4d943e1e033343e3cc18394a7abb1d3` |
-| subject | Record 001 and 002: Mike's rewrite lands |
+| commit | `b8f4730` |
+| full sha | `b8f47309190c55fb242d1ff95e1db73addaf9748` |
+| subject | Log the rethink: the machine arrives awake; slow-reveal rulings get one sweep |
 | stage | **launch** |
-| deployed at | 2026-09-07T00:11:41.984Z |
-| worker sha256 | `0eaef3d96ffb9ba3` (first 16) |
+| deployed at | 2026-09-18T19:27:37.675Z |
+| worker sha256 | `cbe23765e478df84` (first 16) |
 | tree clean | yes |
 
 ## History
 
 | commit | stage | deployed at | worker sha256 | subject |
 |---|---|---|---|---|
+| `b8f4730` | launch | 2026-09-18T19:27:37.675Z | `cbe23765e478df84` | Log the rethink: the machine arrives awake; slow-reveal rulings get one sweep |
 | `318cd81` | launch | 2026-09-07T00:11:41.984Z | `0eaef3d96ffb9ba3` | Record 001 and 002: Mike's rewrite lands |
 | `8f5888d` (dirty) | launch | 2026-09-01T15:50:41.318Z | `cd5958c18986ddd4` | fix(lobby): the note follows the live day — Mike supersedes §14.3 option 3 |
 | `3ccbad9` | launch | 2026-08-29T21:36:59.254Z | `5a767b8ac5145f7b` | handoff: the shell-stop count is 61, not 57 |

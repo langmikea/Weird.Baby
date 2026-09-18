@@ -128,7 +128,9 @@
     "Read docs/canonical/OPERATIONS.md, src/data/artists/record-epoch.js and src/lib/wing-open.js first. Moving RECORD_EPOCH is the designed fix, but day one becomes a SATURDAY (reveal/week-one.mjs and week-two.mjs rows are MON..FRI; tools/arc.mjs is right only while day one is a Monday) and the Record day turns at 17:00 (his 08-17 ruling) while the door is midnight. Smallest change; every gate (lint baseline, provenance:gate, reveal:check, parity:gate, instory:gate, shellstop:gate); build:launch; look as-of 10-30 and 10-31; hand Mike the deploy. Do not run record:land or day:proof.",
     "Lore: the birthday is 10/31. The guest book's entry 07 (\"My birthday, I guess! Weird.Baby is open for business!\") and any page that states a birthday or an opening are checked against it; his words are flagged, never edited."
    ],
-   "long": "The live wing is open on the retired story and the accounts now point at the site"
+   "long": "The live wing is open on the retired story and the accounts now point at the site. DONE 09-18: deployed by Mike at b8f4730 (launch, 2026-09-18T19:27Z); door:check PASS cookie-free; live lobby reads \"We open 10/31\" with the countdown to Sat 10-31 00:00 New York, no Robots row, /robots renders the lobby. As ruled the same day: the announcement is lobby only (no channel post); Records stay weekdays at five from Mon 11-02; \"We are open!\" on the channels for 10-31 is an Ops call, still open.",
+   "done": true,
+   "done_on": "2026-09-18"
   },
   {
    "id": "ruling-1",
