@@ -534,7 +534,8 @@
     "qa-list-in",
     "launch-queued",
     "buffer-proof",
-    "first-real-queue"
+    "first-real-queue",
+    "glass-fit-recut"
    ],
    "gates": {
     "look": {
@@ -562,14 +563,7 @@
    "dur": {
     "volume": 14
    },
-   "blocked": [
-    {
-     "gate": "real",
-     "what": "answer length: the glass fit is unruled (Sunday Q1)",
-     "owner": "Mike",
-     "by": "2026-09-20"
-    }
-   ]
+   "blocked": []
   },
   {
    "id": "qa-hot",
@@ -637,6 +631,10 @@
      ],
      "start": "2026-10-20",
      "measure": "numbers:pieces"
+    },
+    "look": {
+     "done": "2026-09-18",
+     "ev": "Mike, Q7: A, 1.6x, pointed at from FRAME-AB.png; reels/numbers.json template.ruled; all sixteen pieces already carry it"
     }
    },
    "dur": {
@@ -650,12 +648,6 @@
     ]
    },
    "blocked": [
-    {
-     "gate": "look",
-     "what": "the frame, from the A/B already cut (Sunday Q7)",
-     "owner": "Mike",
-     "by": "2026-09-20"
-    },
     {
      "gate": "volume",
      "what": "three story pieces, the 10-20 sitting",

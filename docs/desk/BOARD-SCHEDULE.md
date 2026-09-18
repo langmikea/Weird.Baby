@@ -7,8 +7,8 @@ Written by tools/board.mjs from docs/desk/BOARD-PLAN.json, baseline v5. Every da
 Nothing is wanted from him before "can start" (the pilot on stand-ins comes first) and nothing is late until "needed by". An ask is one sitting's worth.
 
 ```
+can start 09-18  needed by 10-11   22d float   his real material in: The daily Q&A line
 can start 09-18  needed by 10-11   14d float   pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out
-can start 09-20  needed by 10-11   20d float   his real material in: The daily Q&A line
 can start 09-27  needed by 10-11   14d float   the shape pointed at, from a range: The feature-page template, The prologue, The reel's landing (deep link to the day's room)
 can start 09-18  needed by 10-15    0d float   done: The real unit flashed and verified
 can start 09-18  needed by 10-18   21d float   pointed at, from a palette: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands
@@ -20,11 +20,10 @@ can start 09-18  needed by 10-23   34d float   delivered: Words: the prologue's 
 can start 09-18  needed by 10-24   35d float   delivered: Words: About the Artist
 can start 09-18  needed by 10-25   28d float   the look pointed at, from a range: The ask reel on MGK-NIAC
 can start 09-18  needed by 10-25   36d float   his real material in: The ask reel on MGK-NIAC
+can start 09-19  needed by 10-25   22d float   launch volume in hand: The daily Q&A line
 can start 09-20  needed by 10-25   35d float   pitch ruled: 7 things (Messages, the inbox, ELIZ, ...)
-can start 09-21  needed by 10-25   20d float   launch volume in hand: The daily Q&A line
 can start 09-28  needed by 10-25   21d float   ruled: The Everyman
 can start 10-22  needed by 10-30    0d float   held: The deploy for the door: Friday 10-30, before the stroke of midnight (it carries the song's page too)
-can start 09-20  needed by 11-01   42d float   the look pointed at, from a range: Coconuts, the first run
 can start 09-20  needed by 11-01   42d float   pitch ruled: 6 things (Brain Training, Inkblots, ...)
 can start 10-04  needed by 11-04   30d float   shot: The Gambler
 can start 10-20  needed by 11-06   14d float   launch volume in hand: Coconuts, the first run
@@ -46,11 +45,11 @@ WEEK OF 09-14
   the Sunday sitting, 09-20: point at or rule
     - pitch ruled: 8 things (Starting, The monitor at rest, ...)
     - pitch ruled: 7 things (Messages, the inbox, ELIZ, ...)
-    - the look pointed at, from a range: Coconuts, the first run
     - pitch ruled: 6 things (Brain Training, Inkblots, ...)
     - pitch ruled: The Career Chooser, Radio, Phone Tap
   his real material in: The daily Q&A line   (any day to 10-11)
   done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes   (any day to 10-18)
+  launch volume in hand: The daily Q&A line   (a run, from here to 10-25)
 WEEK OF 09-21
   the Sunday sitting, 09-27: point at or rule
     - pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out
@@ -61,7 +60,6 @@ WEEK OF 09-21
     - the look pointed at, from a range: The sexy-shoot reel
   shot: The Everyman   (any day to 10-21)
   delivered: Words: the prologue's opening   (any day to 10-23)
-  launch volume in hand: The daily Q&A line   (a run, from here to 10-25)
 WEEK OF 09-28
   the Sunday sitting, 10-04: point at or rule
     - ruled: The Everyman
@@ -97,7 +95,7 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 ### Week of 10-05: Mike 3 asks · Ops 1
 
 ```
-10-11  Mike  his real material in: The daily Q&A line   [can start 09-20, float 20d]
+10-11  Mike  his real material in: The daily Q&A line   [can start 09-18, float 22d]
 10-11  Mike  the shape pointed at, from a range: The feature-page template, The prologue, The reel's landing (deep link to the day's room)   [can start 09-27, float 14d]
 10-11  Mike  pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out   [can start 09-18, float 14d]
 10-11  Ops   one real post through the queue: The daily Q&A line   [can start 09-18, float 22d]
@@ -134,7 +132,7 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 10-24  Ops   built for real: 5 things (The feature-page template, The prologue, ...)   [can start 09-30, float 20d]
 10-24  Ops   placed: Words: the prologue's opening   [can start 09-19, float 34d]
 10-24  Ops   final on the twin: Starting   [can start 09-29, float 20d]
-10-25  Mike  launch volume in hand: The daily Q&A line   [can start 09-21, float 20d]
+10-25  Mike  launch volume in hand: The daily Q&A line   [can start 09-19, float 22d]
 10-25  Mike  the look pointed at, from a range: The ask reel on MGK-NIAC   [can start 09-18, float 28d]
 10-25  Mike  his real material in: The ask reel on MGK-NIAC   [can start 09-18, float 36d]
 10-25  Mike  ruled: The Everyman   [can start 09-28, float 21d]
@@ -151,7 +149,7 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 10-25  Ops   final on the twin: The monitor at rest   [can start 09-29, float 21d]
 ```
 
-### Week of 10-26: Mike 3 asks · Ops 23
+### Week of 10-26: Mike 2 asks · Ops 23
 
 ```
 10-26  Ops   final on the twin: User, your name   [can start 09-29, float 22d]
@@ -175,7 +173,6 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 10-31  Ops   final on the twin: Detectors   [can start 09-29, float 27d]
 10-31  Ops   its page live in development: Polarity   [can start 09-30, float 28d]
 10-31  Ops   proven on the real unit: Polarity   [can start 10-15, float 12d]
-11-01  Mike  the look pointed at, from a range: Coconuts, the first run   [can start 09-20, float 42d]
 11-01  Mike  pitch ruled: 6 things (Brain Training, Inkblots, ...)   [can start 09-20, float 42d]
 11-01  Ops   final on the twin: The Bullshit Detector   [can start 09-29, float 28d]
 11-01  Ops   its page live in development: Clarity   [can start 09-30, float 29d]
@@ -185,11 +182,11 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 ### Week of 11-02: Mike 5 asks · Ops 24
 
 ```
-11-02  Ops   one through the whole pipe on stand-ins: Coconuts, the first run   [can start 09-20, float 42d]
+11-02  Ops   one through the whole pipe on stand-ins: Coconuts, the first run   [can start 09-18, float 44d]
 11-02  Ops   its page live in development: Probabilities   [can start 09-30, float 30d]
 11-02  Ops   proven on the real unit: Probabilities   [can start 10-15, float 14d]
 11-02  Ops   final on the twin: Tic-Tac-Toe   [can start 09-29, float 29d]
-11-03  Ops   one real post through the queue: Coconuts, the first run   [can start 09-21, float 42d]
+11-03  Ops   one real post through the queue: Coconuts, the first run   [can start 09-19, float 44d]
 11-03  Ops   its page live in development: Messages, the inbox   [can start 09-30, float 31d]
 11-03  Ops   proven on the real unit: Messages, the inbox   [can start 10-15, float 15d]
 11-03  Ops   final on the twin: Snow Globe   [can start 09-29, float 30d]

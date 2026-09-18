@@ -24,8 +24,8 @@
    "outcome": "O1",
    "count": 1,
    "red": 0,
-   "done": 0.15,
-   "on": 0.85,
+   "done": 0.3,
+   "on": 0.7,
    "off": 0,
    "later": [],
    "lines": []
@@ -205,9 +205,9 @@
    "col": "number",
    "name": "Coconuts, the first run",
    "owner": "Ops",
-   "pct": 15,
+   "pct": 30,
    "status": "on",
-   "next": "2026-11-01",
+   "next": "2026-11-02",
    "reasons": []
   },
   {
@@ -723,28 +723,28 @@
  ],
  "yours_now": [
   {
-   "what": "answer length: the glass fit is unruled (Sunday Q1)",
-   "need": "2026-09-20",
-   "red": false,
-   "ruling": true,
-   "ask": true,
-   "frees": 1
-  },
-  {
-   "what": "the frame, from the A/B already cut (Sunday Q7)",
-   "need": "2026-09-20",
-   "red": false,
-   "ruling": true,
-   "ask": true,
-   "frees": 1
-  },
-  {
    "what": "the Gambler's finishing work (case label, hold-downs, glue blocks, touch-up)",
    "need": "2026-10-04",
    "red": false,
    "ruling": true,
    "ask": false,
    "frees": 1
+  },
+  {
+   "what": "three story pieces, the 10-20 sitting",
+   "need": "2026-10-20",
+   "red": false,
+   "ruling": true,
+   "ask": false,
+   "frees": 1
+  },
+  {
+   "what": "his real material in: The daily Q&A line",
+   "need": "2026-10-11",
+   "red": false,
+   "ruling": false,
+   "ask": false,
+   "frees": 0
   }
  ]
 }

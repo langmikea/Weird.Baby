@@ -1695,12 +1695,13 @@
     "cy": 1210
    },
    "words": "as coconuts-w1-hook",
-   "words_found": "37 of 38 words found on the tape"
+   "words_found": "37 of 38 words found on the tape",
+   "ruled": "not chosen: Q7 = A, 2026-09-18; kept as the record of the A/B"
   }
  ],
  "template": {
   "_": "THE NUMBER'S TEMPLATE (Mike's note of 09-17: tighter crop, logo, chords, lyrics; built 09-18, tools/numbers-template.py). frame: the crop in the turned 1080x1920 source frame; zoom 1.6 is the tightest that keeps him whole (head to sandals) with the lyric under his feet. A piece may carry its own `frame` for a sample.",
-  "ruled": null,
+  "ruled": "2026-09-18, Mike, Sunday Q7: A, 1.6x (whole, head to sandals, the lyric under his feet)",
   "frame": {
    "zoom": 1.6,
    "cx": 550,

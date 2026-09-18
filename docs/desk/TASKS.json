@@ -196,6 +196,16 @@
    "done": true
   },
   {
+   "id": "glass-fit-recut",
+   "date": "2026-09-30",
+   "owner": "ops",
+   "title": "The glass rules the words: three tables re-broken by the font, the 84 cuts drafted",
+   "do": [
+    "Q1 ruled A on 09-18. The Gambler's re-cut goes in (docs/desk/GLASS-FIT-gambler.csv). Re-break the other three Release-1 tables by the reveal font (tools/glass-fit.py measures), draft the 84 cells that need a cut, give the Questions sheet the same fit check. One page per table, drawn on the glass, for Mike to review by family in one sitting. His words are cut only with his yes."
+   ],
+   "long": "As marked, 31 of 281 answers fit the unit's top screen; the reels must show exactly what the unit shows"
+  },
+  {
    "id": "first-real-queue",
    "date": "2026-10-13",
    "owner": "ops",

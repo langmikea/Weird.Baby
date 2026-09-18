@@ -6,7 +6,7 @@ Written by tools/board.mjs from docs/desk/BOARD-PLAN.json. Rules: docs/BOARD-PLA
 ```
 COLUMN                  done  on track  NOT on track   (things, red)
 Q&A reel                38%      62%          0%      (3, 0)
-Number reel             15%      85%          0%      (1, 0)
+Number reel             30%      70%          0%      (1, 0)
 Ask reel                36%      64%          0%      (1, 0)
 Shoot reel               0%     100%          0%      (1, 0)
 Programs                 0%     100%          0%      (13, 0)
@@ -21,9 +21,9 @@ The system              37%      63%          0%      (7, 0)
 ## Yours, now (three at most)
 
 ```
-1. answer length: the glass fit is unruled (Sunday Q1) - one answer, holds 1; promised 09-20
-2. the frame, from the A/B already cut (Sunday Q7) - one answer, holds 1; promised 09-20
-3. the Gambler's finishing work (case label, hold-downs, glue blocks, touch-up) - yours to do, holds 1; promised 10-04
+1. the Gambler's finishing work (case label, hold-downs, glue blocks, touch-up) - yours to do, holds 1; promised 10-04
+2. three story pieces, the 10-20 sitting - yours to do, holds 1; promised 10-20
+3. his real material in: The daily Q&A line - open now, needed by 10-11
 ```
 
 ## Not on track

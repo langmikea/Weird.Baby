@@ -6,6 +6,10 @@ moment. Mike takes them at the Sunday sitting, numbered, A/B/C, one at a
 time. Ops clears a question the day it is answered.
 
 ## Answered
+- 2026-09-18 · Q7 the Number's frame: **A**, 1.6x. `template.ruled` set; nothing to re-cut.
+- 2026-09-18 · Q1 the glass fit: **A**, the glass rules the words (pointed at from
+  docs/desk/sunday-q1/Q1-one-answer.png). Ops owes the three other tables re-broken by
+  the font and the 84 cuts drafted, reviewed by family.
 - 2026-09-18 · Q2 the refusals: **C**, and wider: "I don't want there to be dead
   ends. If a thing is not available, it should not be displayed. Except for very
   specific cases where we will get some benefit through the story, or if there's
@@ -21,28 +25,6 @@ time. Ops clears a question the day it is answered.
 - 2026-09-10 · Q1 the Gambler's voice: **A** (cast from the registry), then
   **A Miguel, slot 2** from the three on the voice page. Written into the
   robots registry the same evening.
-
-1. **The answer tables do not fit the glass, and it is not only the
-   Gambler.** Re-measured 09-16 evening in the reveal font
-   (FreeSansBold9pt7b on the 128x64 top screen; three rows at most since
-   the firmware's B2 ruling of 07-30, so the "two lines" of the morning
-   was wrong): a row holds about ten capitals or fourteen small letters.
-   The four Release-1 tables were fitted to a 32-character rule written
-   for the small font. As marked, 31 of 281 cells fit; re-broken by the
-   font, 182; in sentence case, 197; 84 need words cut. The Gambler's
-   twenty: none fit as marked, seven in sentence case. The Glass Fit page
-   draws each of his twenty on the glass as the firmware would draw it
-   today, beside Ops' re-cut (sentence case, three rows, every row
-   measured; nine give up a word or phrase, named in red):
-   https://claude.ai/artifact/DfpetqdZQxXoNF16ccpj9g
-   A. The glass rules the words: the Gambler re-cut goes in, as is or with
-   your changes, and Ops re-breaks the other three tables by the font and
-   drafts the 84 cells that need a cut; the reels show exactly what the
-   unit shows. B. The words rule the glass: the reveal font becomes the
-   small face (about twenty-one characters a row); everything fits as
-   written; the reviewed reveal look changes on the unit and in the reels.
-   C. Two screens: the reels wrap freely, as now, up to four lines; the
-   unit keeps the tables and clips until the bench trip. Ops recommends A.
 
 2. **The Feature of the Day reel shows things the site's machine refuses.**
    Your brief of 09-16 (monitor, channel 3, the walk, the demo) is built:
@@ -90,18 +72,6 @@ time. Ops clears a question the day it is answered.
    the launch run. B. Rule the porch rows only today; the rest at the
    09-27 sitting. C. The porch session is rehearsal, not material; the
    Number is shot fresh with the DJI pair in week 6. Ops recommends A.
-
-7. **The Number's frame, with the template on it.** Your note of 09-17
-   (tighter crop, logo, chords, lyrics) is built on all sixteen pieces
-   (docs/NUMBER-TEMPLATE-20260918.md; Finished reels › numbers-coconuts,
-   with REVIEW-SHEET.png). Two files to look at: coconuts-w1-hook.mp4 (A)
-   and coconuts-w1-hook-tight.mp4 (B).
-   A. 1.6x on you: whole, head to sandals, the lyric under your feet; the
-   tightest the porch allows without covering you. B. 2.0x: as tight as the
-   tape allows, the lyric rides over your shins; a softer picture. C. As
-   shot, the marks and words on it. Ops recommends A, and the 10-20 sitting
-   shoots the hook close for the later weeks either way.
-   The pieces themselves are ruled 10-11 with song two; this is the frame only.
 
 8. **The must-have list, ruled once, by column.** The board
    (https://claude.ai/artifact/WwWHsXRaN5RCVWW7QCytw5) grades only what the
