@@ -314,8 +314,12 @@
    "date": "2026-10-09",
    "owner": "ops",
    "title": "15 Number pieces cut from the porch tape",
-   "do": [],
-   "long": "Fifteen Coconuts pieces cut from the 08-24 porch tape by the ruled piece list (hook, verse, bridge, the story, hook again), through the line, on the shelf; the pieces the tape lacks named for the 10-20 sitting"
+   "do": [
+    "The fifteen and the list of what the sitting shoots: docs/NUMBER-PIECES-20260917.md. The files: Finished reels > numbers-coconuts, with REVIEW-SHEET.png."
+   ],
+   "long": "Fifteen Coconuts pieces cut from the 08-24 porch tape by the ruled piece list (hook, verse, bridge, the story, hook again), through the line, on the shelf; the pieces the tape lacks named for the 10-20 sitting",
+   "done": true,
+   "done_at": "2026-09-17"
   },
   {
    "id": "words-2",
@@ -466,9 +470,13 @@
    "block": "num-clip",
    "title": "Number sitting: what the porch tape lacks",
    "do": [
-    "One sitting: the DJI pair on the voice and the guitar, the iPhone on the tripod, the porch or the room. The Coconuts pieces the 08-24 tape does not cover cleanly; Ops names them from the piece list by 10-09. About 30 seconds each, five at most.",
-    "Drop them in OneDrive › WeirdBaby › reels › intake › numbers as w8-mon.mp4 … w8-fri.mp4.",
-    "Tell Code: \"numbers in\". The line appends the pop and queues the launch week."
+    "One sitting: the DJI pair on the voice, the iPhone on the tripod, the porch or the room. About 30 seconds each, to camera. The list is docs/NUMBER-PIECES-20260917.md, section 4.",
+    "1. Who the song was written for: Coconuts, 2025-03-13, for Carina; who she is to you and where the word came from.",
+    "2. The chair, the egg, the bread: what the line means.",
+    "3. You are enough: the last verse, and who it is said to.",
+    "4 and 5, if there is room: the hook shot close (the phone at half the distance), twice, so the weeks of 11-02 and 11-09 open on a fresh frame.",
+    "Drop them in OneDrive > WeirdBaby > reels > intake > numbers as story-1.mp4, story-2.mp4, story-3.mp4 (hook-close-1.mp4, hook-close-2.mp4).",
+    "Tell Code: \"numbers in\". The line levels them, appends the pop and queues the launch week."
    ],
    "check": {
     "type": "files",
@@ -476,7 +484,8 @@
     "prefix": "w8",
     "min": 1
    },
-   "check_step": 1
+   "check_step": 1,
+   "long": "The three story pieces the 08-24 tape has no telling of (the fifteen are otherwise cut from it), and two close hooks if there is room"
   },
   {
    "id": "rehearsal",

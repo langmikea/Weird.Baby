@@ -78,3 +78,12 @@ time. Ops clears a question the day it is answered.
    the launch run. B. Rule the porch rows only today; the rest at the
    09-27 sitting. C. The porch session is rehearsal, not material; the
    Number is shot fresh with the DJI pair in week 6. Ops recommends A.
+
+7. **The Number's frame.** The fifteen Coconuts pieces are cut from the
+   porch tape (docs/NUMBER-PIECES-20260917.md; Finished reels ›
+   numbers-coconuts, with REVIEW-SHEET.png). The tape is wide and you are
+   small in it. Two files to look at: coconuts-w1-hook.mp4 (as shot) and
+   coconuts-w1-hook-push.mp4 (pushed in 1.5x on you, a phone upscale).
+   A. As shot, every piece. B. Pushed in, every piece. C. As shot, and the
+   10-20 sitting shoots the hook close for the later weeks. Ops recommends C.
+   The pieces themselves are ruled 10-11 with song two; this is the frame only.

@@ -1,0 +1,51 @@
+THE FIFTEEN AGAINST THE TAPE'S WORDS (Ops, 2026-09-17; faster-whisper medium, word timings)
+piece                       length  first word after in  last word before out  gap to phrase before  gap to phrase after
+
+coconuts-w1-hook             26.8s  +1.7s                0.6s               10.2s                0.3s
+                            in:    614.8  first phrase: Coconuts, and coconuts.
+                            out:   641.6  last phrase:  I'd go coconuts with you.
+coconuts-w1-verse            26.1s  +0.5s                0.3s               0.4s                0.3s
+                            in:    641.4  first phrase: I'd even get the chair so I could get the egg.
+                            out:   667.5  last phrase:  I'd go coconuts with you.
+coconuts-w1-bridge           26.3s  +0.4s                0.1s               0.2s                0.2s
+                            in:    667.4  first phrase: You know as we get older, so I'm told.
+                            out:   693.7  last phrase:  I'd go coconuts with you.
+coconuts-w1-story           (the 10-20 sitting: The story of the song: who it was written for)
+coconuts-w1-hook-again       32.8s  +0.2s                1.6s               0.1s                3.4s
+                            in:    693.7  first phrase: When things get tough, when times get rough.
+                            out:   726.5  last phrase:  Peace.
+coconuts-w2-hook             27.2s  +1.3s                -0.1s               13.3s                0.1s
+                            in:   1095.5  first phrase: Coconuts, coconuts
+                            out:  1122.7  last phrase:  Go coconuts with you
+coconuts-w2-verse            26.2s  +0.0s                0.0s               -0.0s                0.0s
+                            in:   1122.8  first phrase: And even get the chair so I could get the egg
+                            out:  1148.9  last phrase:  Go coconuts with you
+coconuts-w2-bridge           26.6s  +0.1s                -0.0s               -0.1s                0.0s
+                            in:   1148.8  first phrase: You know as we get old, so I'm told
+                            out:  1175.4  last phrase:  Go coconuts with you
+coconuts-w2-story           (the 10-20 sitting: The story of the song: the chair, the egg, the bread)
+coconuts-w2-hook-again       32.8s  +0.2s                1.8s               3.3s                1.8s
+                            in:   1175.2  first phrase: Now when things get tough, when times get rough
+                            out:  1208.0  last phrase:  Peace
+coconuts-w2-story-alt        12.2s  +0.5s                0.8s               3.1s                1.3s
+                            in:   1209.3  first phrase: Alright, so we got another coconut in there
+                            out:  1221.5  last phrase:  That's how I am, I leave right now
+coconuts-w3-hook             27.6s  +1.2s                0.5s               54.0s                0.2s
+                            in:    816.5  first phrase: Coconuts, and coconuts.
+                            out:   844.1  last phrase:  I'd go coconuts with you.
+coconuts-w3-verse            34.0s  +0.3s                1.0s               0.4s                4.2s
+                            in:    844.0  first phrase: I'd even get the chair so I could get the egg.
+                            out:   878.0  last phrase:  We're still good, we're still good.
+coconuts-w3-bridge           26.3s  +0.3s                0.5s               0.2s                0.6s
+                            in:    916.9  first phrase: You know as we get old, or so I'm told.
+                            out:   943.2  last phrase:  I'd go coconuts with you.
+coconuts-w3-story           (the 10-20 sitting: The story of the song: you are enough)
+coconuts-w3-hook-again       27.4s  +0.2s                1.3s               0.9s                6.4s
+                            in:    943.6  first phrase: When things get tough, and times get rough.
+                            out:   971.0  last phrase:  I'd go coconuts with you.
+coconuts-w3-story-alt        19.7s  +0.6s                0.7s               7.1s                7.9s
+                            in:    976.8  first phrase: Jesse does it under the power lines.
+                            out:   996.5  last phrase:  On coconuts on the front porch.
+coconuts-w1-hook-push        26.8s  +1.7s                0.6s               10.2s                0.3s
+                            in:    614.8  first phrase: Coconuts, and coconuts.
+                            out:   641.6  last phrase:  I'd go coconuts with you.

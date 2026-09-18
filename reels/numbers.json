@@ -740,7 +740,8 @@
         "sends": null,
         "saves": null
       },
-      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11",
+      "piece_id": "coconuts-w1-hook"
     },
     {
       "date": "2026-10-27",
@@ -760,7 +761,8 @@
         "sends": null,
         "saves": null
       },
-      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11",
+      "piece_id": "coconuts-w1-verse"
     },
     {
       "date": "2026-10-28",
@@ -780,7 +782,8 @@
         "sends": null,
         "saves": null
       },
-      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11",
+      "piece_id": "coconuts-w1-bridge"
     },
     {
       "date": "2026-10-29",
@@ -800,7 +803,8 @@
         "sends": null,
         "saves": null
       },
-      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11",
+      "piece_id": "coconuts-w1-story"
     },
     {
       "date": "2026-10-30",
@@ -820,7 +824,218 @@
         "sends": null,
         "saves": null
       },
-      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11"
+      "note": "Coconuts, week one of its run; the fifteen pieces are defined by 10-09 and ruled 10-11",
+      "piece_id": "coconuts-w1-hook-again"
+    },
+    {
+      "date": "2026-11-02",
+      "week": 9,
+      "day": "MON",
+      "song": "Coconuts",
+      "piece": "the hook",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week two of its run; the floor is two weeks",
+      "piece_id": "coconuts-w2-hook"
+    },
+    {
+      "date": "2026-11-03",
+      "week": 9,
+      "day": "TUE",
+      "song": "Coconuts",
+      "piece": "a verse",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week two of its run; the floor is two weeks",
+      "piece_id": "coconuts-w2-verse"
+    },
+    {
+      "date": "2026-11-04",
+      "week": 9,
+      "day": "WED",
+      "song": "Coconuts",
+      "piece": "the bridge",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week two of its run; the floor is two weeks",
+      "piece_id": "coconuts-w2-bridge"
+    },
+    {
+      "date": "2026-11-05",
+      "week": 9,
+      "day": "THU",
+      "song": "Coconuts",
+      "piece": "the story of the song",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week two of its run; the floor is two weeks",
+      "piece_id": "coconuts-w2-story"
+    },
+    {
+      "date": "2026-11-06",
+      "week": 9,
+      "day": "FRI",
+      "song": "Coconuts",
+      "piece": "the hook again",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week two of its run; the floor is two weeks",
+      "piece_id": "coconuts-w2-hook-again"
+    },
+    {
+      "date": "2026-11-09",
+      "week": 10,
+      "day": "MON",
+      "song": "Coconuts",
+      "piece": "the hook",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week three of its run; runs only if the Sunday numbers climb (ceiling four)",
+      "piece_id": "coconuts-w3-hook"
+    },
+    {
+      "date": "2026-11-10",
+      "week": 10,
+      "day": "TUE",
+      "song": "Coconuts",
+      "piece": "a verse",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week three of its run; runs only if the Sunday numbers climb (ceiling four)",
+      "piece_id": "coconuts-w3-verse"
+    },
+    {
+      "date": "2026-11-11",
+      "week": 10,
+      "day": "WED",
+      "song": "Coconuts",
+      "piece": "the bridge",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week three of its run; runs only if the Sunday numbers climb (ceiling four)",
+      "piece_id": "coconuts-w3-bridge"
+    },
+    {
+      "date": "2026-11-12",
+      "week": 10,
+      "day": "THU",
+      "song": "Coconuts",
+      "piece": "the story of the song",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week three of its run; runs only if the Sunday numbers climb (ceiling four)",
+      "piece_id": "coconuts-w3-story"
+    },
+    {
+      "date": "2026-11-13",
+      "week": 10,
+      "day": "FRI",
+      "song": "Coconuts",
+      "piece": "the hook again",
+      "status": "planned",
+      "postings": {
+        "tiktok": null,
+        "instagram": null,
+        "youtube": null,
+        "facebook": null
+      },
+      "numbers": {
+        "views": null,
+        "sends": null,
+        "saves": null
+      },
+      "note": "Coconuts, week three of its run; runs only if the Sunday numbers climb (ceiling four)",
+      "piece_id": "coconuts-w3-hook-again"
     }
   ],
   "epoch_lane": "2026-10-26",
@@ -860,5 +1075,351 @@
         "source": "coconuts-q4: Mike's clip, on YouTube private, without the pop; original file wanted"
       }
     ]
-  }
+  },
+  "pieces_": "THE FIFTEEN (Ops, 2026-09-17, for the 10-11 sitting with song two): Coconuts in the ruled pieces, five a week for three weeks (hook, verse, bridge, the story, hook again). Twelve are cut from the 08-24 porch tape (week one take 1, week two take 3, week three take 2); the three story pieces the tape lacks are the 10-20 sitting's, with a B for two of them from the tape's own talk (alt_for). One A/B on the frame (coconuts-w1-hook-push). Cut by tools/numbers-pieces.py; the files sit in OneDrive/WeirdBaby/reels/out/numbers-coconuts. Week three runs only if the Sunday numbers climb (floor two weeks, ceiling four).",
+  "pieces": [
+    {
+      "id": "coconuts-w1-hook",
+      "week": 1,
+      "slot": "hook",
+      "day": "2026-10-26",
+      "title": "The hook: verse one and the chorus, take 1",
+      "take": 1,
+      "words": "Coconuts, coconuts, this whole world is going coconuts ... but I can't think of anything I'd rather do than go coconuts with you",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 614.8,
+        "end": 641.6,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-hook.mp4",
+      "length_s": 28.5,
+      "gain_db": 9.5
+    },
+    {
+      "id": "coconuts-w1-verse",
+      "week": 1,
+      "slot": "verse",
+      "day": "2026-10-27",
+      "title": "A verse: the chair, the egg, the bread, and the chorus, take 1",
+      "take": 1,
+      "words": "I'd even get the chair so I could get the egg ...",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 641.4,
+        "end": 667.5,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-verse.mp4",
+      "length_s": 27.8,
+      "gain_db": 8.0
+    },
+    {
+      "id": "coconuts-w1-bridge",
+      "week": 1,
+      "slot": "bridge",
+      "day": "2026-10-28",
+      "title": "The bridge: as we get old, so I'm told, and the chorus, take 1",
+      "take": 1,
+      "words": "As we get older, so I'm told, the bonds of love remain in our control ...",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 667.4,
+        "end": 693.7,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-bridge.mp4",
+      "length_s": 28.0,
+      "gain_db": 7.5
+    },
+    {
+      "id": "coconuts-w1-story",
+      "week": 1,
+      "slot": "story",
+      "day": "2026-10-29",
+      "title": "The story of the song: who it was written for",
+      "take": null,
+      "sitting": "2026-10-20",
+      "brief": "To camera, the guitar in the lap or not: Coconuts was written 2025-03-13 for Carina (the song file calls it A Song for Carina). Who she is to you and where the word came from. About 30 seconds. The tape has no telling of it.",
+      "song": "Coconuts",
+      "source": "the 10-20 sitting (the tape lacks it)"
+    },
+    {
+      "id": "coconuts-w1-hook-again",
+      "week": 1,
+      "slot": "hook-again",
+      "day": "2026-10-30",
+      "title": "The hook again: you are enough, the last chorus, and the wave, take 1",
+      "take": 1,
+      "words": "When things get tough, when times get rough, remember that you are enough ... Peace.",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 693.7,
+        "end": 726.5,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-hook-again.mp4",
+      "length_s": 34.5,
+      "gain_db": 6.9
+    },
+    {
+      "id": "coconuts-w2-hook",
+      "week": 2,
+      "slot": "hook",
+      "day": "2026-11-02",
+      "title": "The hook: verse one and the chorus, take 3",
+      "take": 3,
+      "words": "Coconuts, coconuts, this whole world is going coconuts ...",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 1095.5,
+        "end": 1122.7,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-hook.mp4",
+      "length_s": 28.9,
+      "gain_db": 8.1
+    },
+    {
+      "id": "coconuts-w2-verse",
+      "week": 2,
+      "slot": "verse",
+      "day": "2026-11-03",
+      "title": "A verse: the chair, the egg, the bread, and the chorus, take 3",
+      "take": 3,
+      "words": "And even get the chair so I could get the egg ...",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 1122.75,
+        "end": 1148.9,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-verse.mp4",
+      "length_s": 27.9,
+      "gain_db": 6.3
+    },
+    {
+      "id": "coconuts-w2-bridge",
+      "week": 2,
+      "slot": "bridge",
+      "day": "2026-11-04",
+      "title": "The bridge: as we get old, so I'm told, and the chorus, take 3",
+      "take": 3,
+      "words": "You know as we get old, so I'm told ...",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 1148.85,
+        "end": 1175.4,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-bridge.mp4",
+      "length_s": 28.3,
+      "gain_db": 6.2
+    },
+    {
+      "id": "coconuts-w2-story",
+      "week": 2,
+      "slot": "story",
+      "day": "2026-11-05",
+      "title": "The story of the song: the chair, the egg, the bread",
+      "take": null,
+      "sitting": "2026-10-20",
+      "brief": "To camera: what the line means (I'll even get the chair, so I can get the egg, so I can cook it up, so I can getcha bread): the small chain of doing things for someone. About 30 seconds. The tape has no telling of it. B on the reel: the tape's own words after take 3 (coconuts-w2-story-alt).",
+      "song": "Coconuts",
+      "source": "the 10-20 sitting (the tape lacks it)"
+    },
+    {
+      "id": "coconuts-w2-hook-again",
+      "week": 2,
+      "slot": "hook-again",
+      "day": "2026-11-06",
+      "title": "The hook again: you are enough, the last chorus, and the wave, take 3",
+      "take": 3,
+      "words": "Now when things get tough, when times get rough ... Peace.",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 1175.2,
+        "end": 1208.0,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-hook-again.mp4",
+      "length_s": 34.5,
+      "gain_db": 6.3
+    },
+    {
+      "id": "coconuts-w2-story-alt",
+      "week": 2,
+      "slot": "story",
+      "day": null,
+      "alt_for": "coconuts-w2-story",
+      "title": "B for the story slot: the tape's own words after take 3",
+      "take": 3,
+      "words": "Alright, so we got another Coconuts in there. Couple of screw-ups, but that's for reals, man. So we'll find something good in there. That's how we play. That's how I am.",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 1209.3,
+        "end": 1221.5,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-story-alt.mp4",
+      "length_s": 13.9,
+      "gain_db": 23.4
+    },
+    {
+      "id": "coconuts-w3-hook",
+      "week": 3,
+      "slot": "hook",
+      "day": "2026-11-09",
+      "title": "The hook: verse one and the chorus, take 2",
+      "take": 2,
+      "words": "Coconuts, coconuts, this whole world is going coconuts ...",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 816.5,
+        "end": 844.1,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-hook.mp4",
+      "length_s": 29.3,
+      "gain_db": 8.9
+    },
+    {
+      "id": "coconuts-w3-verse",
+      "week": 3,
+      "slot": "verse",
+      "day": "2026-11-10",
+      "title": "A verse that breaks: the chair, the egg, the bread, the chorus lost, and the honest word, take 2",
+      "take": 2,
+      "words": "I'd even get the chair ... But I can't think... I opened my eyes and I lost it. We're just gonna go from there because we're trying to make reels. We're still good, we're still good.",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 844.0,
+        "end": 878.0,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-verse.mp4",
+      "length_s": 35.7,
+      "gain_db": 7.7
+    },
+    {
+      "id": "coconuts-w3-bridge",
+      "week": 3,
+      "slot": "bridge",
+      "day": "2026-11-11",
+      "title": "The bridge: as we get old, so I'm told, and the chorus, take 2",
+      "take": 2,
+      "words": "You know as we get old, or so I'm told ...",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 916.9,
+        "end": 943.2,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-bridge.mp4",
+      "length_s": 28.0,
+      "gain_db": 6.3
+    },
+    {
+      "id": "coconuts-w3-story",
+      "week": 3,
+      "slot": "story",
+      "day": "2026-11-12",
+      "title": "The story of the song: you are enough",
+      "take": null,
+      "sitting": "2026-10-20",
+      "brief": "To camera: the last verse (when things get rough, or times get tough, remember that you are enough) and who it is said to. About 30 seconds. The tape has no telling of it. B on the reel: the tape's own words after take 2, the porch and the power lines (coconuts-w3-story-alt).",
+      "song": "Coconuts",
+      "source": "the 10-20 sitting (the tape lacks it)"
+    },
+    {
+      "id": "coconuts-w3-hook-again",
+      "week": 3,
+      "slot": "hook-again",
+      "day": "2026-11-13",
+      "title": "The hook again: you are enough and the last chorus, take 2",
+      "take": 2,
+      "words": "When things get tough, and times get rough ... I'd go coconuts with you.",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 943.6,
+        "end": 971.0,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-hook-again.mp4",
+      "length_s": 29.1,
+      "gain_db": 6.4
+    },
+    {
+      "id": "coconuts-w3-story-alt",
+      "week": 3,
+      "slot": "story",
+      "day": null,
+      "alt_for": "coconuts-w3-story",
+      "title": "B for the story slot: the tape's own words after take 2, the porch and the power lines",
+      "take": 2,
+      "words": "Jesse does it under the power lines. I love that guy. I'd do it on the front porch, with the landscaping trucks and the cicadas. Okay, I think we've got enough to make some reels on Coconuts on the front porch.",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 976.8,
+        "end": 996.5,
+        "push": null
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-story-alt.mp4",
+      "length_s": 21.4,
+      "gain_db": 16.4
+    },
+    {
+      "id": "coconuts-w1-hook-push",
+      "week": 1,
+      "slot": "hook",
+      "day": null,
+      "alt_for": "coconuts-w1-hook",
+      "title": "B for the frame: the same hook pushed in 1.5x on Mike (a sample, not the ruled shape)",
+      "take": 1,
+      "words": "as coconuts-w1-hook",
+      "cut": {
+        "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
+        "start": 614.8,
+        "end": 641.6,
+        "push": {
+          "cx": 470,
+          "cy": 1080,
+          "zoom": 1.5
+        }
+      },
+      "song": "Coconuts",
+      "source": "cut 2026-09-17 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-hook-push.mp4",
+      "length_s": 28.5,
+      "gain_db": 9.5
+    }
+  ]
 }
