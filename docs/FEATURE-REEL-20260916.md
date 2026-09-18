@@ -432,3 +432,73 @@ respecced 07-18, no firmware games handler, the bench trip undated), so the
 feature reels of games wait. What is finished on the machine, and can be
 featured now, is the ask itself (Answers, the three engines, the reveal on
 the top window), Detectors, and Preferences.
+
+## 16. The ask (2026-09-18, small hours): the story before the build
+
+Queue item 3 of the 50,000 ft page, ruled 3A: the one finished feature, the
+reel that answers "what is this" beside the Q&A line. Same template, a
+fourth story shape, `ask`: no race, no crash; the drama is a question put to
+the machine and the answer rising out of the murk. The row is MGK-NIAC
+(Answers, the first engine, the Magic 8-Ball itself: shake-only, the die
+floats up to the window with the words already on it).
+
+### The beats (target 15 to 17 seconds with the pop)
+
+| # | the monitor | the zoom-in | sound |
+|---|---|---|---|
+| 0 | the pop | | |
+| 1 | the monitor booted, the machine on it; the front glass's own noise, half a beat | the front glass | the hum arrives, the glass's noise |
+| 2 | the walk, as choreographed: arrive at `> Answers <`, a beat, the click lights and the row inverts, the silent click enters; arrive at `> MGK-NIAC <`, a beat, the triple flash (the payload), the click | the front glass, row by row | a tick a press; the flash's two notes, three times on the payload |
+| 3 | the machine's own card on the front glass: MGK-NIAC, OUTPUT REDIRECTED, FLUIDIC SUSPENSION; the tube changes hands | the front glass, the card | the sting |
+| 4 | cut to the top window: ASK A QUESTION. The name arrives in yellow. The adult asks, off screen, the words drawn as spoken in the house's question type over the black band under the monitor | the top window, the card, the bubbles behind it | the adult |
+| 5 | SHAKE: the chyron lights; the suspension is agitated | the top window: the murk | the rattle |
+| 6 | the die rises through the murk with the answer on it, a second, and settles | the same, the answer landing | the relays, then a click as it lands |
+| 7 | the answer holds on its slow creep, two and a half seconds; the question stays under the monitor so the two read together | the answer | the hum |
+| 8 | black, a short beat, loop | | |
+
+What is the reel's and what is the machine's: the question and its voice
+are the reel's (the visitor asks silently on the site, so the reel says the
+question out loud for them; the words on screen are for sound-off viewers,
+as the Q&A reel's are); everything on the glass is the twin's own frames.
+The question is data on the row (`question`); the one here is a stand-in
+that Mike replaces, as every question is his.
+
+### Data
+
+The row grows `question`; the capture's ask script waits the length of the
+adult's read before the shake, so the answer never cuts the question off.
+The cut gains `clips_ask` and `sound_ask`; `assemble` picks the shape by the
+row's `story`. Nothing in the race shape moves.
+
+### Built (2026-09-18, small hours): what the ask taught the template
+
+Two cuts; the second passes the beat table on the sheet. The reel is
+Finished reels › features › feature_mgk-niac.mp4 (15.7 s with the pop), the
+sheet beside it. Found on the way, all of it the machine's, none of it
+guessed:
+
+- **Three clicks reach an engine, not two.** The twin's Answers row opens a
+  list headed ASK MGK, and the engines live under that. The walk's map now
+  says so; the path on the row is Answers, ASK MGK, MGK-NIAC.
+- **The ASK level draws its selection one row higher** (its own layout:
+  header, the row, Back), so the payload's flash was inverting Back. The
+  flash now asks the twin which level it is on.
+- **The machine paces the ask.** After the click: the redirect card on the
+  front glass, the top window's static, the bubbles, then "Ask question,
+  then shake" about two seconds later; the shake, the die rising for a
+  second, the answer; two and a half seconds later the machine's own
+  "shake to continue" hint. The capture records the ask's state machine as
+  events (ask-card, reveal, answer) and the play waits on them instead of
+  on a clock, so a slower machine still gives the same reel. The hold ends
+  before the hint, on the clean answer.
+- **SHAKE stays lit for the shake's own length** (about nine tenths of a
+  second); at the click's 140 ms it was four frames and read as nothing.
+- **The question sits low in the zoom-in**, in the house's question type,
+  the words arriving as the adult says them, and stays through the answer
+  so the two read together. Everything on the glass is the twin's frames;
+  the answer is whatever the machine gives (the first cut got "It is
+  certain", the second "Definitely No").
+
+The row's question is a stand-in ("Will it rain on the parade?", the house
+demo line); every question is Mike's. The template did not change for the
+race shape; the ask is a fourth shape beside race, survive and toy.

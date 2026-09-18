@@ -14,7 +14,7 @@ of reels/features.json (date, feature, path, play). Two halves:
 
   python tools/reels-feature.py --feature "Tilt Drive" [--capture-only | --assemble DIR] [--site URL]
 """
-import sys, os, re, json, time, math, base64, pathlib, subprocess, tempfile, shutil
+import sys, os, re, json, time, math, base64, pathlib, subprocess, tempfile, shutil, importlib
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
@@ -29,12 +29,13 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 # ── the demo scripts: what is done once the feature is reached. Inputs are the unit's own. ─────────
 # each step: (seconds to wait after, action); actions: click | shake | tilt:x | tilt:0 | wait
+QUESTION_S = 3.0      # how long the adult takes to ask (set by main from the row's question before the capture)
 PLAYS = {
     "tilt-drive": [(1.0, "wait"), (0.0, "click"), (48.0, "autopilot"), (9.0, "collide"), (2.5, "wait")],
     "gobble": [(1.2, "wait"), (0.0, "click"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.5, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.0, "tilt:0"), (2.5, "wait")],
     "avoidsteroids": [(1.2, "wait"), (0.0, "click")] + [(0.9, "tilt:0.35"), (0.0, "click"), (0.9, "tilt:-0.35"), (0.0, "click")] * 14 + [(0.0, "tilt:0"), (8.0, "wait")],
     "snow-globe": [(1.2, "wait"), (0.0, "shake"), (2.5, "wait"), (0.0, "shake"), (3.0, "wait"), (0.0, "tilt:0.35"), (1.5, "tilt:-0.35"), (1.5, "tilt:0"), (2.0, "wait")],
-    "ask": [(1.0, "wait"), (0.0, "shake"), (6.0, "wait")],
+    "ask": [(0.0, "ask")],      # the whole ask is one act, paced by the machine's own states (below)
 }
 
 INIT_JS = r"""
@@ -72,9 +73,14 @@ class Capture:
     def snap_glass(self):
         if self.fr is None: return
         try:
-            t, a, b, gs, sc, passed = self.fr.evaluate("() => [performance.now(), document.getElementById('cvFront').toDataURL('image/png'), document.getElementById('cvTop').toDataURL('image/png'), (typeof gameState_FSM==='undefined'?-1:gameState_FSM), (typeof gameScore==='undefined'?0:gameScore), (window.__passed||0)]")
+            t, a, b, gs, sc, passed, m8b = self.fr.evaluate("() => [performance.now(), document.getElementById('cvFront').toDataURL('image/png'), document.getElementById('cvTop').toDataURL('image/png'), (typeof gameState_FSM==='undefined'?-1:gameState_FSM), (typeof gameScore==='undefined'?0:gameScore), (window.__passed||0), (typeof M8B_currentState==='undefined'?-1:M8B_currentState)]")
         except Exception: return
         n = self.n_glass; self.n_glass += 1
+        if m8b != getattr(self, "m8b_state", -1):
+            # the ask's own states (twin.html M8B_Answers_EXE): 2 = the ask card is up, waiting for the shake; 3 = revealing; 5 = the answer holds
+            name = {2: "ask-card", 3: "reveal", 5: "answer"}.get(m8b)
+            if name: self.events.append({"t": t + self.goff, "name": name}); print(f"  {(t + self.goff)/1000:7.2f}s  {name}", flush=True)
+            self.m8b_state = m8b
         if gs != self.game_state:
             if gs == 2: self.events.append({"t": t + self.goff, "name": "gameover", "score": sc}); print(f"  {(t + self.goff)/1000:7.2f}s  gameover score {sc}", flush=True)
             if gs == 1 and self.game_state != 1: self.events.append({"t": t + self.goff, "name": "gamerun"})
@@ -119,7 +125,7 @@ def capture(feature, path, play, folder):
             if h is None: raise SystemExit(f"no button {text}")
             return "#" + h
         def press(sel, name, **kw):
-            pg.evaluate(f"() => window.__wb.blink(document.querySelector({json.dumps(sel)}), {320 if name == 'scroll' else 140})")
+            pg.evaluate(f"() => window.__wb.blink(document.querySelector({json.dumps(sel)}), {320 if name == 'scroll' else (900 if name == 'play-shake' else 140)})")   # SHAKE stays lit for the shake's own length
             pg.click(sel); C.mark(name, **kw)
         # the console (not in the reel): channel 3 to CAB, then RUN
         press("button[aria-label='channel 3']", "ch3"); C.wait(0.5)
@@ -155,8 +161,10 @@ def capture(feature, path, play, folder):
             """the click as Mike choreographed it: the chyron lit and the row in reverse video together, a beat; the
             silent click enters. On the payload the flash repeats."""
             ms = 420 if times == 1 else 170
+            # the selected row sits one row higher on the ASK level (the twin's Draw_the_Menu_Line: Row_02 there, Row_03 elsewhere)
+            y0 = 13 if fr.evaluate("() => (typeof ANSWERS!=='undefined' && menuNum_PTR===ANSWERS)") else ROW_Y0
             pg.evaluate(f"() => window.__wb.blink(document.querySelector({json.dumps(sel)}), {ms * (2 * times - 1)})")
-            fr.evaluate(f"() => Demo_Flash({ROW_Y0}, {ROW_Y1}, {ms * (2 * times - 1)}, {ms})")
+            fr.evaluate(f"() => Demo_Flash({y0}, {y0 + (ROW_Y1 - ROW_Y0)}, {ms * (2 * times - 1)}, {ms})")
             C.mark(mark); C.wait(ms * (2 * times - 1) / 1000 + 0.05)
             pg.click(sel); C.mark("click", **{"seg": mark, "row": "enter"}); C.wait(BEAT)
         for k, node in enumerate(path):
@@ -225,6 +233,19 @@ def capture(feature, path, play, folder):
                     C.mark("collision" if x is not None and abs(x) < 1.3 else "off-road", x=x)
                     if x is not None and abs(x) < 1.3: break
                 continue
+            elif act == "ask":
+                # the machine's card (Ask question, then shake) arrives after its own redirect, static and bubbles; wait for it
+                def until(state, limit):
+                    t_end = time.time() + limit
+                    while time.time() < t_end:
+                        C.wait(0.1)
+                        if fr.evaluate("() => (typeof M8B_currentState==='undefined'?-1:M8B_currentState)") == state: return True
+                    return False
+                if not until(2, 15): print("  the ask card never came", flush=True)
+                C.wait(0.8); C.mark("question"); C.wait(QUESTION_S + 0.6)      # the adult asks; the words are the reel's, laid on at the cut
+                press(shake, "play-shake")
+                if not until(5, 8): print("  the answer never landed", flush=True)
+                C.wait(3.2); continue
             elif act == "crash":
                 # hold the wheel over until the road ends it
                 fr.evaluate("() => { tiltX = 0.4; }"); C.mark("tilt", x=0.4)
@@ -239,7 +260,8 @@ def capture(feature, path, play, folder):
     return C
 
 FOLDERS = {"Programs": ["Games", "Codes"], "Games": ["Tilt Drive", "Gobble Don't Fall", "AvoidSteroids", "Snow Globe", "Tic-Tac-Toe"],
-           "MGK-VIIIp": ["Answers", "Predictions", "Probabilities", "Advice", "Detectors"], "Answers": ["MGK-NIAC", "MGK-v2.0", "MGK-65"],
+           "MGK-VIIIp": ["Answers", "Predictions", "Probabilities", "Advice", "Detectors"], "Answers": ["ASK MGK", "Predictions", "Probabilities", "Advice", "Detectors"],
+           "ASK MGK": ["MGK-NIAC", "MGK-v2.0", "MGK-65"],   # the twin's Answers row opens a list headed ASK MGK (probed 09-18): three clicks reach an engine
            "Predictions": ["Fortune", "Horoscope"], "Probabilities": ["Coin Flip", "Pick a number", "Pick a card", "Roll Dice", "Lottery Numbers"],
            "Detectors": ["Bullshit Detector", "Stud Detector", "Trustworthy Detector", "Attractiveness Detector"], "Codes": ["Code Runner", "BIST", "Userdata", "Checksum"]}
 
@@ -247,6 +269,10 @@ def main():
     feat = next((sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--feature"), "Tilt Drive")
     rows = json.load(open(ROOT / "reels" / "features.json", encoding="utf8"))["rows"] if (ROOT / "reels" / "features.json").exists() else []
     row = next((r for r in rows if r["feature"] == feat), None) or {"feature": feat, "path": ["Programs", "Games", feat], "play": re.sub(r"[^a-z0-9]+", "-", feat.lower()).strip("-")}
+    if row.get("story") == "ask":
+        global QUESTION_S
+        VOICE = importlib.import_module("reels-voice"); y, _ = VOICE.render_timed(row.get("question") or "Will it rain on the parade?")
+        QUESTION_S = len(y) / VOICE.SR
     folder = next((sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--assemble"), None)
     if folder is None:
         folder = pathlib.Path(tempfile.gettempdir()) / "wb-feature" / re.sub(r"[^a-z0-9]+", "-", feat.lower())

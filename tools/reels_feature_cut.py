@@ -279,7 +279,7 @@ def boom(im, k, rng):
     out = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
     return tear(out, rng, 1.0) if (k < 0.35 and rng.random() < 0.5) else out
 
-def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, layout="mon-glass", level="glass", rq=None, mode=None, fb_override=None):
+def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, layout="mon-glass", level="glass", rq=None, mode=None, fb_override=None, qlayer=None):
     f = Image.new("L", (W, H), 0)
     f.paste(S.shot(t), (0, MON_Y))
     fbo = fb_override
@@ -288,6 +288,7 @@ def compose(S, t, which, plate, name_on, font, frame_i, rng, fx=None, k=0.0, lay
     out = f.convert("RGB")
     if name_on and plate is not None:
         col, alpha = plate; out.paste(col, ((W - col.width) // 2, ZOOM_Y + 4), alpha)
+    if qlayer is not None: out = Image.alpha_composite(out.convert("RGBA"), qlayer).convert("RGB")
     ImageDraw.Draw(out).text((26, 6), BRANCH, fill=(112, 112, 112), font=font)
     if fx == "white": out = Image.blend(out, Image.new("RGB", (W, H), (255, 255, 255)), 0.75)
     elif fx == "tear": out = tear(out, rng)
@@ -314,6 +315,86 @@ def clips(S):
     c.append(dict(t0=t_go - 480, t1=t_go - 30, hold=(56, 14), glass="top", name=True, boom=True, mode="score"))   # 7 WHAM: slow motion to a stop
     c.append(dict(t0=t_go + 300, t1=t_go + 1400, speed=1, glass="top", name=True, mode="highscore"))   # 8 NEW HIGH SCORE, a beat
     return c
+
+# ── the ask (story §16): the question put to the machine, the answer rising out of the murk ──────────
+def clips_ask(S):
+    t_twin = S.ev("twin"); presses = sorted(S.evs("scroll") + S.evs("click")); t_walk = presses[0] if presses else S.ev("idle") + 800
+    sels = [e["t"] for e in S.events if e["name"] == "click" and e.get("row") == "enter"]; t_sel = sels[-1]
+    t_card, t_q, t_shake = S.ev("ask-card"), S.ev("question"), S.ev("play-shake")
+    t_ans = S.ev("answer") or (t_shake + 1600)
+    c = []
+    c.append(dict(t0=t_twin + 1500, t1=t_twin + 2300, speed=1, glass="front", name=False))                 # 1 the monitor booted; the glass's own noise, half a beat
+    c.append(dict(t0=t_walk - 600, t1=t_sel + 200, speed=1, glass="front", name=False))                   # 2 the walk: Answers, ASK MGK, MGK-NIAC (the payload's flashes)
+    c.append(dict(t0=t_sel + 200, t1=t_sel + 1300, speed=1, glass="front", name=False))                   # 3 the machine's own card: OUTPUT REDIRECTED TO FLUIDIC SUSPENSION
+    c.append(dict(t0=t_card + 80, t1=t_q, speed=1, glass="top", name=True, fx={0: "white", 1: "tear"}))   # 4 cut to the top window: Ask question, then shake; the name lands
+    c.append(dict(t0=t_q, t1=t_shake, speed=1, glass="top", name=True, question=True))                    # 5 the adult asks; the words as spoken
+    c.append(dict(t0=t_shake, t1=t_ans + 250, speed=1, glass="top", name=True, question=True))            # 6 the shake; the die rises through the murk
+    c.append(dict(t0=t_ans + 250, t1=t_ans + 2400, speed=1, glass="top", name=True, question=True))       # 7 the answer holds on its creep, before the machine's own hint; the question stays
+    return c
+
+def sound_ask(S, cl, total_s, black_s, td, voice):
+    """the hum, the glass's noise, the flashes and ticks, the sting at the hand-off, the adult, the rattle, the relays, the landing"""
+    sfx = np.zeros(int(total_s * SR) + 1); rng = np.random.default_rng(5)
+    def add(t0, sig):
+        i = int(t0 * SR); j = min(len(sfx), i + len(sig)); sfx[i:j] += sig[:j - i]
+    def tick(amp=0.35, ms=4, hz=2200):
+        n = int(ms * SR / 1000); e = np.exp(-np.arange(n) / (n / 3)); return amp * e * np.sin(2 * np.pi * hz * np.arange(n) / SR)
+    def tone(amp, ms, hz):
+        n = int(ms * SR / 1000); e = np.minimum(1, np.arange(n) / 200) * np.exp(-np.arange(n) / (n / 1.6)); return amp * e * np.sin(2 * np.pi * hz * np.arange(n) / SR)
+    starts, lens = [], []; acc = 0.0
+    for c in cl: starts.append(acc); lens.append(len(frames_of(c)) / FPS); acc += lens[-1]
+    def reel_t(t):
+        for c, s0 in zip(cl, starts):
+            if c["t0"] <= t <= c["t1"]: return s0 + (t - c["t0"]) / 1000 / c["speed"]
+        return None
+    tt = np.arange(int(total_s * SR)) / SR
+    add(0, 0.016 * (np.sin(2 * np.pi * 55 * tt) + 0.5 * np.sin(2 * np.pi * 110 * tt)) * np.minimum(1, tt / 0.3))     # the hum, faded in so the join cannot click
+    n = int(lens[0] * SR); add(starts[0], 0.06 * np.convolve(rng.standard_normal(n), np.ones(4) / 4, mode="same"))     # the glass's own noise
+    n_fl = len([x for x in S.events if x["name"].startswith("flash-")])
+    for e in S.events:
+        if e["name"].startswith("flash-"):
+            r = reel_t(e["t"])
+            if r is None: continue
+            times = 3 if e["name"] == "flash-%d" % (n_fl - 1) else 1
+            for k in range(times): add(r + k * 0.34, tone(0.3, 90, 880)); add(r + k * 0.34 + 0.09, tone(0.3, 160, 1320))
+        if e["name"] in ("scroll", "click"):
+            r = reel_t(e["t"])
+            if r is not None: add(r, tick(0.45 if "click" in e["name"] else 0.3, 5, 1500 if "click" in e["name"] else 2400))
+    r = starts[3]; add(r, tone(0.35, 120, 660)); add(r + 0.11, tone(0.35, 220, 990))                                    # the sting: the tube changes hands
+    n_th = int(0.16 * SR); e = np.exp(-np.arange(n_th) / (n_th / 4)); add(r + 0.02, 0.5 * e * np.sin(2 * np.pi * 85 * np.arange(n_th) / SR))
+    add(starts[4], voice * 0.9)                                                                                          # the adult asks
+    r = starts[5]
+    for m in range(3): add(r + 0.06 * m, tick(0.5, 6, 900 + 300 * m))                                                   # the rattle
+    n_r = int(max(0.1, lens[5] - 0.3) * SR); k = np.arange(n_r) / SR                                                    # the relays while the die rises
+    add(r + 0.3, 0.05 * np.sign(np.sin(2 * np.pi * 9 * k)) * np.exp(-k / 1.4) * rng.uniform(0.4, 1, n_r))
+    add(starts[6], tick(0.4, 8, 1300)); add(starts[6] + 0.02, tone(0.25, 260, 440))                                     # the answer lands
+    f = td / "sfx.wav"
+    with wave.open(str(f), "wb") as wv:
+        wv.setnchannels(1); wv.setsampwidth(2); wv.setframerate(SR); wv.writeframes((np.clip(sfx, -1, 1) * 32767).astype("<i2").tobytes())
+    return f
+
+QFONT = r"C:\Windows\Fonts\georgiab.ttf"     # the house's question type (the Q&A reel)
+QSIZE, QLEAD, QBOTTOM, QWIDTH = 56, 68, 1800, 960
+_qcache = {}
+def question_layer(words, shown):
+    """the question as spoken: the words said so far, white with a dark halo, centred low in the zoom-in"""
+    k = (tuple(words), shown)
+    if k in _qcache: return _qcache[k]
+    f = ImageFont.truetype(QFONT, QSIZE); rows, cur = [], []
+    for w in words:
+        if cur and f.getlength(" ".join(cur + [w])) > QWIDTH: rows.append(cur); cur = [w]
+        else: cur = cur + [w]
+    if cur: rows.append(cur)
+    L = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(L)
+    y0 = QBOTTOM - len(rows) * QLEAD; idx = 0
+    for r, row in enumerate(rows):
+        text = " ".join(row); x = (W - f.getlength(text)) / 2; y = y0 + r * QLEAD
+        for w in row:
+            if idx < shown: d.text((x, y), w, font=f, fill=(255, 255, 255, 255))
+            x += f.getlength(w + " "); idx += 1
+    halo = L.split()[3].filter(ImageFilter.GaussianBlur(10)); halo = halo.point(lambda v: min(255, int(v * 1.6)))
+    out = Image.new("RGBA", (W, H), (0, 0, 0, 0)); out.paste((0, 0, 0, 200), (0, 0), halo); out.alpha_composite(L)
+    _qcache[k] = out; return out
 
 def frames_of(c):
     """the page times this clip samples, one per output frame"""
@@ -388,18 +469,28 @@ def sound(S, cl, total_s, black_s, td):
 def assemble(folder, row, out_dir, layout="mon-unit"):
     S = Src(folder); rq = load_font()
     plate = name_plate(rq, row["feature"].upper(), 4); font = small_font(21)
-    cl = clips(S); BLACK_S = 0.3; rng = np.random.default_rng(11)
+    ask = row.get("story") == "ask"
+    voice, qwords, onsets = None, [], []
+    if ask:
+        import importlib; V = importlib.import_module("reels-voice")
+        qtext = row.get("question") or "Will it rain on the parade?"
+        voice, timed = V.render_timed(qtext); qwords = qtext.split(); onsets = [o for o, d_, w_ in timed]
+    cl = clips_ask(S) if ask else clips(S); BLACK_S = 0.3; rng = np.random.default_rng(11)
     td = pathlib.Path(tempfile.mkdtemp()); frames = td / "frames"; frames.mkdir()
-    n = 0
+    n = 0; t_q0 = None
     for c in cl:
         fx = c.get("fx", {}); ts = frames_of(c)
+        if c.get("question") and t_q0 is None: t_q0 = n / FPS
         for k, t in enumerate(ts):
             e = fx.get(k); kk = 0.0
             if c.get("boom"): e = "boom"; kk = k / max(1, len(ts) - 1)
-            compose(S, t, c["glass"], plate, c["name"], font, n, rng, e, kk, layout, c.get("level", "glass"), rq, c.get("mode")).save(frames / f"{n:05d}.png"); n += 1
+            ql = None
+            if c.get("question"):
+                shown = sum(1 for o in onsets if n / FPS - t_q0 >= o); ql = question_layer(qwords, shown)
+            compose(S, t, c["glass"], plate, c["name"], font, n, rng, e, kk, layout, c.get("level", "glass"), rq, c.get("mode"), qlayer=ql).save(frames / f"{n:05d}.png"); n += 1
     for k in range(int(BLACK_S * FPS)): Image.new("RGB", (W, H), (0, 0, 0)).save(frames / f"{n:05d}.png"); n += 1
     total_s = n / FPS; print(f"  {len(cl)} clips, {n} frames, {total_s:.1f}s + the pop")
-    sfx = sound(S, cl, total_s, BLACK_S, td)
+    sfx = sound_ask(S, cl, total_s, BLACK_S, td, voice) if ask else sound(S, cl, total_s, BLACK_S, td)
     middle = td / "middle.mp4"
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(FPS), "-i", str(frames / "%05d.png"), "-i", str(sfx),
                     "-filter_complex", "[1:a]aformat=sample_rates=48000:channel_layouts=stereo,afade=t=in:d=0.03[a]", "-map", "0:v", "-map", "[a]", "-shortest",

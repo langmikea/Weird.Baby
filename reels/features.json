@@ -1,5 +1,5 @@
 {
- "_": "THE FEATURE OF THE DAY — one row a day; the template is tools/reels-feature.py; the story is docs/FEATURE-REEL-20260916.md. date: the posting day (Mike sets the start; null until then). path: the menu walk from the idle list. play: a named demo script in the tool. status: open | built | posted. story: race | survive | toy | ask (the payload's drama; the frame is one template). parked-until-final: the twin's games are not finished (story §15).",
+ "_": "THE FEATURE OF THE DAY — one row a day; the template is tools/reels-feature.py; the story is docs/FEATURE-REEL-20260916.md. date: the posting day (Mike sets the start; null until then). path: the menu walk from the idle list. play: a named demo script in the tool. status: open | built | posted. question: the ask shape's question (Mike's; the row's is a stand-in until he writes one). story: race | survive | toy | ask (the payload's drama; the frame is one template). parked-until-final: the twin's games are not finished (story §15).",
  "rows": [
   {
    "date": null,
@@ -58,12 +58,17 @@
    "feature": "MGK-NIAC",
    "path": [
     "Answers",
+    "ASK MGK",
     "MGK-NIAC"
    ],
    "play": "ask",
-   "status": "open",
-   "file": null,
-   "story": "ask"
+   "status": "built",
+   "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\features\\feature_mgk-niac.mp4",
+   "story": "ask",
+   "question": "Will it rain on the parade?",
+   "question_note": "a stand-in; every question is Mike's",
+   "built": "2026-09-18",
+   "length_s": 15.7
   }
  ]
 }
