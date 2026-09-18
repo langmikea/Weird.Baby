@@ -358,6 +358,12 @@ const HELD_PATHS = [
      here, asked for by `Robots.jsx`, open in development, refused at LAUNCH.
      On 10-30 this line goes and the covers move out of `public/held/`. */
   "/src/data/artists/robots-albums.js",
+  /* [2026-09-18] the albums' photograph rows (`tools/photos-build.py` writes
+     them). Only `robots-albums.js` imports them, so they ride in its chunk —
+     and since 879c635 they were the one module in it that was neither held nor
+     a companion, which kept the whole chunk out of `assets/held/` and failed
+     the guard below. They are the wing's own material, not a companion. */
+  "/src/data/photos/",
 ];
 /* THE COMPANIONS ARE NAMED RATHER THAN INFERRED — the museum's own generic
    machinery that nothing but a shut wing happens to import today. They ride
