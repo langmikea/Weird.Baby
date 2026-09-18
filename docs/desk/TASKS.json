@@ -253,7 +253,9 @@
    "do": [
     "One pass, one page: each drop played as it stands today; what it shares with the others (score, text, ending, in and out, voice) and what is its own; the families that fall out, and the lead member of each."
    ],
-   "long": "Step 1 of the path, done once for everybody rather than 26 times (docs/PLAN-20260918-LAUNCH.md, Families)"
+   "long": "Step 1 of the path, done once for everybody rather than 26 times (docs/PLAN-20260918-LAUNCH.md, Families). Done 09-18: docs/TAKE-STOCK-20260918.md. 24 drops played in the twin twice (unlocked, and as a stranger gets it today); eight families, a lead each; the picture is docs/desk/take-stock/FAMILIES.png. Ten of the 24 refuse a stranger today (the list for no-dead-ends); six plain faults for Ops; six programs carry stand-in words for his pen.",
+   "done": true,
+   "done_on": "2026-09-18"
   },
   {
    "id": "twin-update",
@@ -391,7 +393,7 @@
    "do": [
     "For each shared thing (a score, a line of text, an ending, getting in and out): the limits and two or three rough examples on the twin's glass, one page. He points once; every program inherits."
    ],
-   "long": "Decided at 50,000 ft for everybody, so nothing is designed alone and cleaned up later"
+   "long": "Decided at 50,000 ft for everybody, so nothing is designed alone and cleaned up later. The brief is docs/TAKE-STOCK-20260918.md section 3 (in, out, a score, an ending, as they stand today)"
   },
   {
    "id": "photos-everyman",
@@ -572,7 +574,7 @@
    "do": [
     "The twin on the site hides every menu row whose feature has not dropped (no NOT FITTED, no NO RECORD); each day's drop adds its row, read from the catalogue's day. Exceptions only where the story gains, each one ruled."
    ],
-   "long": "Mike, 09-18: if a thing is not available it should not be displayed (Sunday Q2: C)"
+   "long": "Mike, 09-18: if a thing is not available it should not be displayed (Sunday Q2: C). The list as played 09-18: ten of 24 drops refuse a stranger today (docs/TAKE-STOCK-20260918.md section 6)"
   },
   {
    "id": "words-2",

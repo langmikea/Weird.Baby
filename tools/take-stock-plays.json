@@ -1,0 +1,7 @@
+{
+ "_": "Per drop scripts for tools/take-stock.py, where the general probe does not reach the payload. A step is [action, seconds to wait after].",
+ "twin.boot": [["wait", 3], ["wait", 4], ["wait", 5], ["wait", 5], ["wait", 5], ["wait", 5], ["wait", 5], ["wait", 5], ["wait", 5], ["wait", 5], ["wait", 5]],
+ "twin.app.advice.panel": [["click", 3.5], ["click", 0.8], ["scroll", 0.8], ["click", 0.8], ["scroll", 0.6], ["scroll", 0.6], ["scroll", 0.8], ["click", 1.0], ["wait", 2.0], ["wait", 3.0], ["wait", 4.0], ["shake", 1.5], ["wait", 4.0], ["scroll", 1.5], ["wait", 2.0]],
+ "twin.game.slots": [["click", 3.5], ["shake", 1.5], ["wait", 2.5], ["shake", 1.5], ["wait", 2.5], ["click", 2.5], ["shake", 2.5], ["shake", 2.5], ["scroll", 1.5], ["wait", 2.0]],
+ "twin.game.craps": [["click", 3.5], ["shake", 1.5], ["wait", 2.5], ["shake", 2.5], ["shake", 2.5], ["click", 1.5], ["shake", 2.5], ["shake", 2.5], ["scroll", 1.5], ["wait", 2.0]]
+}
