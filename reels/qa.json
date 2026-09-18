@@ -46,9 +46,27 @@
    "status": "built",
    "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\qa\\2026-10-31_qa.mp4",
    "caption": "Is it too late to start over?\nweird.baby\n#weirdbaby #mgkviiip #thedetermination",
-   "postings": {},
+   "postings": {
+    "tiktok": {
+     "buffer_post_id": "6aadc14b560f708e81463af6",
+     "dueAt": "2026-10-31T21:00:00.000Z",
+     "status": "draft"
+    },
+    "instagram": {
+     "buffer_post_id": "6aadc14ba4c300df32a092f9",
+     "dueAt": "2026-10-31T21:00:00.000Z",
+     "status": "draft"
+    },
+    "youtube": {
+     "buffer_post_id": "6aadc15d5fe629aa26636407",
+     "dueAt": "2026-10-31T21:00:00.000Z",
+     "status": "draft"
+    }
+   },
    "numbers": {},
-   "built_on": "2026-09-18"
+   "built_on": "2026-09-18",
+   "day": "SAT",
+   "asset_url": "https://assets.weird.baby/reels/qa/2026-10-31/52c6a09e/2026-10-31_qa.mp4"
   },
   {
    "date": "2026-11-01",

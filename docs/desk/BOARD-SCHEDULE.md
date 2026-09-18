@@ -94,14 +94,13 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 
 ## Every open gate, by the week it is needed
 
-### Week of 10-05: Mike 3 asks · Ops 2
+### Week of 10-05: Mike 3 asks · Ops 1
 
 ```
-10-10  Ops   proven once for real: Buffer connected (the key, three channels; Facebook left out, the free plan holds three)   [can start 09-18, float 21d]
 10-11  Mike  his real material in: The daily Q&A line   [can start 09-20, float 20d]
 10-11  Mike  the shape pointed at, from a range: The feature-page template, The prologue, The reel's landing (deep link to the day's room)   [can start 09-27, float 14d]
 10-11  Mike  pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out   [can start 09-18, float 14d]
-10-11  Ops   one real post through the queue: The daily Q&A line   [can start 09-19, float 21d]
+10-11  Ops   one real post through the queue: The daily Q&A line   [can start 09-18, float 22d]
 ```
 
 ### Week of 10-12: Mike 5 asks · Ops 4
@@ -140,7 +139,7 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 10-25  Mike  his real material in: The ask reel on MGK-NIAC   [can start 09-18, float 36d]
 10-25  Mike  ruled: The Everyman   [can start 09-28, float 21d]
 10-25  Mike  pitch ruled: 7 things (Messages, the inbox, ELIZ, ...)   [can start 09-20, float 35d]
-10-25  Ops   one real post through the queue: The hot Q&A lane, The ask reel on MGK-NIAC   [can start 09-19, float 35d]
+10-25  Ops   one real post through the queue: The hot Q&A lane, The ask reel on MGK-NIAC   [can start 09-18, float 36d]
 10-25  Ops   built in: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands   [can start 09-27, float 26d]
 10-25  Ops   the real photographs in the album: The Everyman   [can start 09-26, float 27d]
 10-25  Ops   in the launch build: 6 things (The album template, proven on stand-ins, The feature-page template, ...)   [can start 09-22, float 32d]

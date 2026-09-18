@@ -19,7 +19,7 @@ npm run reels -- --week 3   a named week
 | `tools/reels.mjs` | the report (the determination) |
 | `tools/calendar.mjs` | reads both ledgers into the calendar's Determination and Number lanes |
 | `tools/reels-build.py` | the reel line: intake clip → normalised, the pop appended → packet in OneDrive → row `shot` |
-| `tools/reels-queue.mjs` | the queue (Mike's ruling 2026-09-03: Buffer): packet file → R2 at assets.weird.baby → Buffer createPost per channel at the lane's time → row `queued` with Buffer post ids |
+| `tools/reels-queue.mjs` | the queue (Mike's ruling 2026-09-03: Buffer): packet file → R2 at assets.weird.baby → Buffer createPost per channel at the lane's time → row `queued` with Buffer post ids. `--draft` saves drafts instead (a `test` row goes no other way); `--posts` reads back what Buffer holds; a second run doubles nothing (proven 2026-09-18, `docs/BUFFER-PROOF-20260918.md`) |
 | `reels/buffer-channels.json` | Buffer's channel ids, written by `reels-queue.mjs --channels`; not secret |
 
 **Post times (Ops' call, 2026-09-03):** the Number at 12:00 New York; the

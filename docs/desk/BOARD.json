@@ -162,8 +162,8 @@
    "outcome": "O5",
    "count": 7,
    "red": 0,
-   "done": 0.3,
-   "on": 0.7,
+   "done": 0.37142857142857144,
+   "on": 0.6285714285714286,
    "off": 0,
    "later": [],
    "lines": []
@@ -395,9 +395,9 @@
    "col": "system",
    "name": "Buffer connected (the key, three channels; Facebook left out, the free plan holds three)",
    "owner": "Mike",
-   "pct": 50,
-   "status": "on",
-   "next": "2026-10-10",
+   "pct": 100,
+   "status": "done",
+   "next": null,
    "reasons": []
   },
   {

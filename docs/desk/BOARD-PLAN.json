@@ -533,7 +533,8 @@
     "launch-days",
     "qa-list-in",
     "launch-queued",
-    "buffer-proof"
+    "buffer-proof",
+    "first-real-queue"
    ],
    "gates": {
     "look": {
@@ -578,7 +579,8 @@
    "tasks": [
     "qa-line",
     "channels",
-    "buffer-proof"
+    "buffer-proof",
+    "first-real-queue"
    ],
    "skip": [
     "real",
@@ -620,7 +622,8 @@
     "material-rulings",
     "number-sitting",
     "number-queued",
-    "buffer-proof"
+    "buffer-proof",
+    "first-real-queue"
    ],
    "gates": {
     "real": {
@@ -668,7 +671,8 @@
    "owner": "Ops",
    "tasks": [
     "ask-range",
-    "buffer-proof"
+    "buffer-proof",
+    "first-real-queue"
    ],
    "skip": [
     "volume"
@@ -692,7 +696,8 @@
    "owner": "Ops",
    "tasks": [
     "shoot-reel-story",
-    "buffer-proof"
+    "buffer-proof",
+    "first-real-queue"
    ],
    "who": {
     "volume": "Ops"
@@ -1022,10 +1027,14 @@
     "built": {
      "done": "2026-09-18",
      "ev": "Mike at the PC: Buffer account papa@weird.baby, three channels (instagram papa_weird.baby, tiktok, youtube WeirdBaby), key ops3 (expires 2027-09-18); node tools/reels-queue.mjs --channels read them; reels/buffer-channels.json"
+    },
+    "proven": {
+     "done": "2026-09-18",
+     "ev": "The 10-31 stand-in Q&A went through the whole line as DRAFTS on all three channels (tiktok 6aadc14b560f708e81463af6, instagram 6aadc14ba4c300df32a092f9, youtube 6aadc15d5fe629aa26636407), each due 2026-10-31 17:00 New York, read back from Buffer by node tools/reels-queue.mjs --posts; nothing scheduled, nothing public; docs/BUFFER-PROOF-20260918.md. Not proven, and not provable before the door: that a scheduled post publishes. The first scheduled send is the first real Q&A row."
     }
    },
    "blocked": [],
-   "note": "Free plan: 3 channels, 10 queued posts a channel, one key, API 100 calls / 15 min. The key expires 2027-09-18. The TikTok account is new and unnamed (user7317057223447): Mike names it in the app. PROVEN is Ops': first as a DRAFT, never a scheduled stand-in, because the queue has never run live and nothing may post before the door."
+   "note": "Free plan: 3 channels, 10 queued posts a channel, one key, API 100 calls / 15 min. The key expires 2027-09-18. The TikTok account is new and unnamed (user7317057223447): Mike names it in the app. PROVEN 09-18 as drafts; a stand-in is never scheduled (the queue now refuses it), and nothing may post before the door. Three proof drafts sit in Buffer until Mike says remove them; they cannot post on their own."
   },
   {
    "id": "photos-white",

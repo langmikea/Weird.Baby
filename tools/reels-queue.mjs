@@ -6,6 +6,8 @@
      node tools/reels-queue.mjs --lane numbers --week 2           queue it
      node tools/reels-queue.mjs --channels                        list Buffer channels, write reels/buffer-channels.json
      node tools/reels-queue.mjs --schema                          print Buffer's CreatePostInput fields (to check metadata names)
+     node tools/reels-queue.mjs --lane qa --date D --draft        save to Buffer as DRAFTS: nothing posts until someone schedules it there
+     node tools/reels-queue.mjs --posts                           what Buffer holds now (drafts and scheduled), read back from Buffer
 
    For every ledger row of the week whose status is `shot` and that has a
    built file: upload the file to the museum's R2 bucket under reels/…
@@ -44,6 +46,7 @@ const LANES = {
 /* qa lane selection: --date YYYY-MM-DD (one row, hot rows included), --ahead N (built rows from today through N days),
    --now (hot: due ten minutes from now instead of 17:00). Without a Buffer key the queue prints what it would do and exits 0. */
 const ORDER = ["tiktok", "instagram", "youtube", "facebook"]; // release/README.md: door, brand, archive, last
+const CREATE_ERRORS = ["NotFoundError", "UnauthorizedError", "UnexpectedError", "RestProxyError", "LimitReachedError", "InvalidInputError"]; // PostActionPayload's other members (--schema)
 
 const args = process.argv.slice(2);
 const flag = n => args.includes(`--${n}`);
@@ -83,9 +86,16 @@ function r2Put(file, key) {
   return `${PUBLIC}/${key}`;
 }
 
+/* Read against Buffer's schema on 2026-09-18 (--schema): Instagram demands `type` and `shouldShareToFeed`;
+   YouTube demands `title` (its limit is 100 characters); TikTok demands nothing for a video. */
+function titleFor(lane, row) {
+  const t = lane === "numbers" ? `${row.song} — ${row.piece}` : (row.question || "The Determination");
+  return t.length > 100 ? t.slice(0, 99).trimEnd() + "…" : t;
+}
 function metadataFor(service, row, lane) {
-  // Only what Buffer documents. Instagram: type reel. Others: channel defaults until --schema says more.
-  if (service === "instagram") return { instagram: { type: "reel" } };
+  if (service === "instagram") return { instagram: { type: "reel", shouldShareToFeed: true } };
+  /* the schema calls categoryId optional; the send is refused without one. 10 = Music, 24 = Entertainment (Ops' call) */
+  if (service === "youtube") return { youtube: { title: titleFor(lane, row), categoryId: lane === "numbers" ? "10" : "24" } };
   return undefined;
 }
 function textFor(lane, row) {
@@ -109,13 +119,28 @@ async function listChannels() {
   console.log(`wrote ${path.relative(REPO, CHANNELS_FILE)}`);
 }
 
+const SCHEMA_TYPES = ["CreatePostInput", "PostInputMetaData", "InstagramPostMetadataInput", "TikTokPostMetadataInput", "YoutubePostMetadataInput", "VideoAssetInput", "PostActionPayload"];
 async function schema() {
-  const q = `{ input: __type(name: "CreatePostInput") { inputFields { name type { name kind ofType { name kind } } } }
-               meta: __type(name: "PostMetadataInput") { inputFields { name type { name kind ofType { name } } } } }`;
-  const d = await gql(q);
-  for (const k of ["input", "meta"]) {
-    console.log(k === "input" ? "CreatePostInput:" : "PostMetadataInput:");
-    for (const f of d[k]?.inputFields || []) console.log(`  ${f.name}: ${f.type.name || f.type.ofType?.name} (${f.type.kind})`);
+  const T = `name kind ofType { name kind ofType { name kind ofType { name kind } } }`;
+  const show = t => !t ? "?" : t.kind === "NON_NULL" ? show(t.ofType) + "!" : t.kind === "LIST" ? `[${show(t.ofType)}]` : t.name;
+  for (const n of SCHEMA_TYPES) {
+    const d = await gql(`query($n: String!) { __type(name: $n) { inputFields { name type { ${T} } } possibleTypes { name } } }`, { n });
+    console.log(`${n}:${d.__type ? "" : " NO SUCH TYPE (Buffer renamed it; read the schema again)"}`);
+    for (const f of d.__type?.inputFields || []) console.log(`  ${f.name}: ${show(f.type)}`);
+    if (d.__type?.possibleTypes) console.log(`  = ${d.__type.possibleTypes.map(p => p.name).join(" | ")}`);
+  }
+}
+
+/* What Buffer holds now, read back from Buffer: the proof that a send arrived, and as what. */
+async function posts() {
+  const file = fs.existsSync(CHANNELS_FILE) ? JSON.parse(fs.readFileSync(CHANNELS_FILE, "utf8")) : null;
+  if (!file) throw new Error("no channels on file: run --channels");
+  const name = Object.fromEntries(file.channels.map(c => [c.id, c.service]));
+  for (const org of file.organizations) {
+    const d = await gql(`query($id: OrganizationId!) { posts(first: 50, input: { organizationId: $id, filter: { status: [draft, needs_approval, scheduled, sending, error] } }) { edges { node { id status dueAt channelId shareMode via text } } } }`, { id: org.id });
+    const list = (d.posts.edges || []).map(e => e.node).sort((a, b) => String(a.dueAt).localeCompare(String(b.dueAt)));
+    console.log(`BUFFER HOLDS — ${org.name}: ${list.length} post(s) not yet sent`);
+    for (const p of list) console.log(`  ${String(p.status).padEnd(15)} ${(name[p.channelId] || p.channelId).padEnd(10)} due ${p.dueAt || "none"}  ${p.id}  ${p.text.split("\n")[0].slice(0, 50)}`);
   }
 }
 
@@ -124,7 +149,7 @@ function nyToday() {
   const get = k => parts.find(p => p.type === k).value; return `${get("year")}-${get("month")}-${get("day")}`;
 }
 async function queue() {
-  const lane = opt("lane"), week = Number(opt("week")); let dry = flag("dry");
+  const lane = opt("lane"), week = Number(opt("week")), draft = flag("draft"); let dry = flag("dry");
   if (!LANES[lane]) throw new Error("need --lane numbers|determinations|qa");
   if (lane !== "qa" && !week) throw new Error("need --week N for that lane");
   if (!token()) { dry = true; console.log("  no Buffer key on this PC (Mike's clicks): dry run, nothing queued"); }
@@ -141,28 +166,38 @@ async function queue() {
   const byService = Object.fromEntries(channels.map(c => [c.service, c]));
   console.log(`THE QUEUE — ${lane}${lane === "qa" ? "" : `, week ${week}`}${dry ? " (dry)" : ""}. ${rows.length} built row(s); channels: ${channels.map(c => c.service).join(", ") || "none on file (run --channels)"}`);
   for (const r of rows) {
+    /* a stand-in is never scheduled: a `test` row reaches Buffer as a draft or not at all [2026-09-18] */
+    if (r.test && !draft && !dry) { console.log(`  ${r.date}  ${path.basename(r.file)}  REFUSED: a test row goes to Buffer only with --draft`); continue; }
     const due = (lane === "qa" && flag("now")) ? new Date(Date.now() + 10 * 60000).toISOString() : nyToUtcIso(r.date, LANES[lane].time);
     if (!r.postings) r.postings = {};
     if (!r.day) r.day = new Date(r.date + "T12:00:00Z").toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
     const key = `reels/${lane}/${r.date}/${crypto.randomBytes(4).toString("hex")}/${path.basename(r.file)}`;
-    console.log(`  ${r.day} ${r.date}  ${path.basename(r.file)}  due ${due}  →  ${PUBLIC}/${key}`);
+    /* a row partly in Buffer keeps its first upload, so every channel carries the same file;
+       a proof draft never stands in the way of the real send: only a draft run counts a draft as held */
+    const inBuffer = s => r.postings[s]?.buffer_post_id && (draft || r.postings[s].status !== "draft");
+    const held = r.asset_url && ORDER.some(inBuffer);
+    console.log(`  ${r.day} ${r.date}  ${path.basename(r.file)}  due ${due}  →  ${held ? r.asset_url : `${PUBLIC}/${key}`}`);
     if (dry) continue;
-    const publicUrl = r2Put(r.file, key);
+    const publicUrl = held ? r.asset_url : r2Put(r.file, key);
     r.asset_url = publicUrl;
     for (const service of ORDER) {
       const ch = byService[service];
       if (!ch) { console.log(`      ${service}: no channel connected`); continue; }
+      /* a second run never doubles a post: what Buffer already holds for this row is left alone */
+      if (inBuffer(service)) { console.log(`      ${service}: already in Buffer as ${r.postings[service].status || "held"} ${r.postings[service].buffer_post_id}`); continue; }
       const input = { channelId: ch.id, text: textFor(lane, r), schedulingType: "automatic", mode: "customScheduled", dueAt: due,
+        needsApproval: false, saveToDraft: draft,
         assets: [{ video: { url: publicUrl, metadata: { thumbnailOffset: 1000 } } }] };
       const md = metadataFor(service, r, lane); if (md) input.metadata = md;
       try {
-        const d = await gql(`mutation($input: CreatePostInput!) { createPost(input: $input) { ... on PostActionSuccess { post { id dueAt } } ... on MutationError { message } } }`, { input });
+        const d = await gql(`mutation($input: CreatePostInput!) { createPost(input: $input) { __typename ... on PostActionSuccess { post { id dueAt status } } ${CREATE_ERRORS.map(t => `... on ${t} { message }`).join(" ")} } }`, { input });
         const res = d.createPost;
-        if (res.post) { r.postings[service] = { buffer_post_id: res.post.id, dueAt: res.post.dueAt }; console.log(`      ${service}: queued ${res.post.id}`); }
-        else { r.postings[service] = { error: res.message }; console.log(`      ${service}: REFUSED ${res.message}`); }
+        if (res.post) { r.postings[service] = { buffer_post_id: res.post.id, dueAt: res.post.dueAt, status: res.post.status }; console.log(`      ${service}: ${res.post.status} ${res.post.id} due ${res.post.dueAt}`); }
+        else { r.postings[service] = { error: `${res.__typename}: ${res.message}` }; console.log(`      ${service}: REFUSED ${res.__typename}: ${res.message}`); }
       } catch (e) { r.postings[service] = { error: String(e.message) }; console.log(`      ${service}: ERROR ${e.message}`); }
     }
-    if (ORDER.some(s => r.postings[s]?.buffer_post_id)) r.status = "queued";
+    /* a draft is not queued: the row stays `built` until Buffer holds it as scheduled */
+    if (ORDER.some(s => r.postings[s]?.status === "scheduled")) r.status = "queued";
   }
   if (!dry) { if (!led.statuses.includes("queued")) led.statuses.push("queued"); fs.writeFileSync(ledPath, JSON.stringify(led, null, 1) + "\n"); console.log(`ledger updated: ${path.basename(ledPath)}`); }
 }
@@ -171,6 +206,7 @@ async function queue() {
   try {
     if (flag("channels")) await listChannels();
     else if (flag("schema")) await schema();
+    else if (flag("posts")) await posts();
     else await queue();
   } catch (e) { console.error(e.message); process.exit(1); }
 })();

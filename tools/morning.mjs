@@ -35,11 +35,12 @@ import os from "node:os";
 import path from "node:path";
 import url from "node:url";
 import { spawnSync } from "node:child_process";
+import { DOOR_DAY } from "../src/data/artists/record-epoch.js";   // the door has one home
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
 const ONE = "C:/Users/macun/OneDrive/WeirdBaby";
-const OPEN = "2026-10-30";
+const OPEN = DOOR_DAY;
 const args = process.argv.slice(2);
 const NO_REELS = args.includes("--no-reels");
 const todayNY = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });

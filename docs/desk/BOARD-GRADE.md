@@ -15,7 +15,7 @@ Engines and settings     7%      93%          0%      (5, 0)
 Albums                   0%     100%          0%      (5, 0)
 The site                11%      89%          0%      (9, 0)
 The machine              8%      93%          0%      (4, 0)
-The system              30%      70%          0%      (7, 0)
+The system              37%      63%          0%      (7, 0)
 ```
 
 ## Yours, now (three at most)
