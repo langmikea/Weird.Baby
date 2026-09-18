@@ -16,7 +16,8 @@
    "album": "machine",
    "page": "feature",
    "day": 1,
-   "pitch": "Twenty answers, one shake. The original engine, exactly as it left the factory."
+   "pitch": "Twenty answers, one shake. The original engine, exactly as it left the factory.",
+   "day_0910": 1
   },
   {
    "id": "twin.boot",
@@ -25,7 +26,8 @@
    "album": "machine",
    "page": "feature",
    "day": 2,
-   "pitch": "Switch it on and watch it come up: the lamp, the glass, the test pattern, the first word."
+   "pitch": "Switch it on and watch it come up: the lamp, the glass, the test pattern, the first word.",
+   "day_0910": 2
   },
   {
    "id": "twin.monitor",
@@ -33,9 +35,10 @@
    "name": "The monitor at rest",
    "album": "machine",
    "page": "feature",
-   "day": 2,
+   "day": 3,
    "pitch": "The upper display keeps its own counsel: a diagnostic monitor that never stops reading the room.",
-   "ops_note": "Check before the sitting: the top screen is the fluidic suspension where the answer is revealed (firmware ground truth §3); the diagnostic scroller runs there at rest. The pitch may have the two screens confused."
+   "ops_note": "Check before the sitting: the top screen is the fluidic suspension where the answer is revealed (firmware ground truth §3); the diagnostic scroller runs there at rest. The pitch may have the two screens confused.",
+   "day_0910": 2
   },
   {
    "id": "twin.app.probabilities",
@@ -43,8 +46,9 @@
    "name": "Probabilities",
    "album": "machine",
    "page": "feature",
-   "day": 3,
-   "pitch": "A coin, a number, a card, dice, a lottery line. It does not guess; it draws."
+   "day": 7,
+   "pitch": "A coin, a number, a card, dice, a lottery line. It does not guess; it draws.",
+   "day_0910": 3
   },
   {
    "id": "twin.app.messages",
@@ -52,8 +56,9 @@
    "name": "Messages, the inbox",
    "album": "machine",
    "page": "feature",
-   "day": 4,
-   "pitch": "It receives. Voice, text and system messages arrive when they arrive, and the lamp tells you one is waiting."
+   "day": 8,
+   "pitch": "It receives. Voice, text and system messages arrive when they arrive, and the lamp tells you one is waiting.",
+   "day_0910": 4
   },
   {
    "id": "persona.everyman",
@@ -61,8 +66,9 @@
    "name": "The Everyman",
    "album": "everyman",
    "page": "album:plates",
-   "day": 5,
-   "pitch": "The Everyday, boxed. The unit for the rest of us, and the first voice you will hear."
+   "day": 1,
+   "pitch": "The Everyday, boxed. The unit for the rest of us, and the first voice you will hear.",
+   "day_0910": 5
   },
   {
    "id": "twin.app.eliza",
@@ -70,8 +76,9 @@
    "name": "ELIZ",
    "album": "everyman",
    "page": "feature",
-   "day": 5,
-   "pitch": "It listens. Tell it about your mother."
+   "day": 14,
+   "pitch": "It listens. Tell it about your mother.",
+   "day_0910": 5
   },
   {
    "id": "twin.app.brain",
@@ -79,8 +86,9 @@
    "name": "Brain Training",
    "album": "everyman",
    "page": "feature",
-   "day": 5,
-   "pitch": "Five minutes a day and the machine will tell you whether it is working."
+   "day": 15,
+   "pitch": "Five minutes a day and the machine will tell you whether it is working.",
+   "day_0910": 5
   },
   {
    "id": "twin.app.ink",
@@ -88,8 +96,9 @@
    "name": "Inkblots",
    "album": "everyman",
    "page": "feature",
-   "day": 5,
-   "pitch": "Ten plates. Say what you see. It writes down what that means."
+   "day": 16,
+   "pitch": "Ten plates. Say what you see. It writes down what that means.",
+   "day_0910": 5
   },
   {
    "id": "twin.game.snowglobe",
@@ -97,8 +106,9 @@
    "name": "Snow Globe",
    "album": "machine",
    "page": "feature",
-   "day": 6,
-   "pitch": "Shake it. That is the whole game, and it is enough."
+   "day": 12,
+   "pitch": "Shake it. That is the whole game, and it is enough.",
+   "day_0910": 6
   },
   {
    "id": "twin.game.tictactoe",
@@ -106,8 +116,9 @@
    "name": "Tic-Tac-Toe",
    "album": "machine",
    "page": "feature",
-   "day": 6,
-   "pitch": "The machine plays to a draw. It always has."
+   "day": 11,
+   "pitch": "The machine plays to a draw. It always has.",
+   "day_0910": 6
   },
   {
    "id": "persona.gambler",
@@ -115,9 +126,10 @@
    "name": "The Gambler",
    "album": "gambler",
    "page": "album:plates",
-   "day": 7,
+   "day": 17,
    "pitch": "Comes in a case, with chips, cards and dice. Never asks what you can afford.",
-   "ops_note": "09-16: the Gambler's twenty answers do not fit the glass's two 128-px lines in the machine's font (Sunday question 1)."
+   "ops_note": "09-16: the Gambler's twenty answers do not fit the glass's two 128-px lines in the machine's font (Sunday question 1).",
+   "day_0910": 7
   },
   {
    "id": "phys.cases",
@@ -125,8 +137,9 @@
    "name": "The Gambler's case",
    "album": "gambler",
    "page": "album:kit",
-   "day": 7,
-   "pitch": "Leather, worn where a hand carried it. The first of the cases."
+   "day": 17,
+   "pitch": "Leather, worn where a hand carried it. The first of the cases.",
+   "day_0910": 7
   },
   {
    "id": "twin.game.blackjack",
@@ -134,8 +147,9 @@
    "name": "Blackjack",
    "album": "gambler",
    "page": "feature",
-   "day": 8,
-   "pitch": "The house is a two-inch screen and it still wins."
+   "day": 18,
+   "pitch": "The house is a two-inch screen and it still wins.",
+   "day_0910": 8
   },
   {
    "id": "twin.game.craps",
@@ -143,8 +157,9 @@
    "name": "Craps",
    "album": "gambler",
    "page": "feature",
-   "day": 8,
-   "pitch": "Two dice, one shake, no table needed."
+   "day": 20,
+   "pitch": "Two dice, one shake, no table needed.",
+   "day_0910": 8
   },
   {
    "id": "twin.game.roulette",
@@ -152,8 +167,9 @@
    "name": "Roulette",
    "album": "gambler",
    "page": "feature",
-   "day": 8,
-   "pitch": "A wheel in a machine that already knows where the ball stops."
+   "day": 19,
+   "pitch": "A wheel in a machine that already knows where the ball stops.",
+   "day_0910": 8
   },
   {
    "id": "twin.game.slots",
@@ -161,8 +177,9 @@
    "name": "Slots",
    "album": "gambler",
    "page": "feature",
-   "day": 8,
-   "pitch": "Three reels behind glass. The lever is the click igniter."
+   "day": 21,
+   "pitch": "Three reels behind glass. The lever is the click igniter.",
+   "day_0910": 8
   },
   {
    "id": "twin.app.bs",
@@ -170,8 +187,9 @@
    "name": "The Bullshit Detector",
    "album": "machine",
    "page": "feature",
-   "day": 9,
-   "pitch": "Hold it up to the conversation. The needle does the rest."
+   "day": 10,
+   "pitch": "Hold it up to the conversation. The needle does the rest.",
+   "day_0910": 9
   },
   {
    "id": "twin.app.detectors",
@@ -180,7 +198,8 @@
    "album": "machine",
    "page": "feature",
    "day": 9,
-   "pitch": "The microphone is real. What it hears, it reports."
+   "pitch": "The microphone is real. What it hears, it reports.",
+   "day_0910": 9
   },
   {
    "id": "twin.app.polarity",
@@ -188,8 +207,9 @@
    "name": "Polarity",
    "album": "machine",
    "page": "feature",
-   "day": 10,
-   "pitch": "Five positions from grim to sunny. The machine's mood is a dial, and the dial is yours."
+   "day": 5,
+   "pitch": "Five positions from grim to sunny. The machine's mood is a dial, and the dial is yours.",
+   "day_0910": 10
   },
   {
    "id": "twin.app.clarity",
@@ -197,8 +217,9 @@
    "name": "Clarity",
    "album": "machine",
    "page": "feature",
-   "day": 11,
-   "pitch": "How plainly it speaks, in registers. Turn it down and it gets interesting."
+   "day": 6,
+   "pitch": "How plainly it speaks, in registers. Turn it down and it gets interesting.",
+   "day_0910": 11
   },
   {
    "id": "engine.v2",
@@ -206,8 +227,9 @@
    "name": "MGK-v2.0 arrives",
    "album": "machine",
    "page": "feature",
-   "day": 12,
-   "pitch": "The second engine. More answers, a new voice, and the twenty were never the limit."
+   "day": 13,
+   "pitch": "The second engine. More answers, a new voice, and the twenty were never the limit.",
+   "day_0910": 12
   },
   {
    "id": "persona.ceo",
@@ -215,8 +237,9 @@
    "name": "The CEO",
    "album": "ceo",
    "page": "album:plates",
-   "day": 13,
-   "pitch": "Comes in an attaché. Decides for you, then bills you for the decision."
+   "day": 22,
+   "pitch": "Comes in an attaché. Decides for you, then bills you for the decision.",
+   "day_0910": 13
   },
   {
    "id": "twin.app.advice.panel",
@@ -224,8 +247,9 @@
    "name": "The Career Chooser",
    "album": "ceo",
    "page": "feature",
-   "day": 13,
-   "pitch": "Answer a few questions. It tells you what you should have been."
+   "day": 23,
+   "pitch": "Answer a few questions. It tells you what you should have been.",
+   "day_0910": 13
   },
   {
    "id": "twin.app.user.name",
@@ -233,8 +257,9 @@
    "name": "User, your name",
    "album": "machine",
    "page": "feature",
-   "day": 14,
-   "pitch": "Tell it who you are and it will use it against you, politely."
+   "day": 4,
+   "pitch": "Tell it who you are and it will use it against you, politely.",
+   "day_0910": 14
   },
   {
    "id": "persona.informer",
@@ -242,8 +267,9 @@
    "name": "The Informer",
    "album": "informer",
    "page": "album:plates",
-   "day": 15,
-   "pitch": "The man on the inside. Comes with the tools, tells you nothing about where he got them."
+   "day": 24,
+   "pitch": "The man on the inside. Comes with the tools, tells you nothing about where he got them.",
+   "day_0910": 15
   },
   {
    "id": "twin.app.radio",
@@ -251,8 +277,9 @@
    "name": "Radio",
    "album": "informer",
    "page": "feature",
-   "day": 15,
-   "pitch": "Tune between the stations. That is where he listens."
+   "day": 25,
+   "pitch": "Tune between the stations. That is where he listens.",
+   "day_0910": 15
   },
   {
    "id": "twin.app.tap",
@@ -260,8 +287,9 @@
    "name": "Phone Tap",
    "album": "informer",
    "page": "feature",
-   "day": 15,
-   "pitch": "It is not admissible. It is very entertaining."
+   "day": 26,
+   "pitch": "It is not admissible. It is very entertaining.",
+   "day_0910": 15
   },
   {
    "id": "twin.app.appp",
@@ -432,7 +460,8 @@
    "album": "machine",
    "page": "feature",
    "day": 1,
-   "pitch": "Ask anything. Shake. The glass answers, and the answer is final until the next shake."
+   "pitch": "Ask anything. Shake. The glass answers, and the answer is final until the next shake.",
+   "day_0910": 1
   },
   {
    "id": "twin.app.predictions",
@@ -476,8 +505,9 @@
    "name": "The Everyday's box copy",
    "album": "everyman",
    "page": "album:papers",
-   "day": 5,
-   "pitch": "Designed with Space Age Technology. Outperforms other methods by up to 100%, and more."
+   "day": 1,
+   "pitch": "Designed with Space Age Technology. Outperforms other methods by up to 100%, and more.",
+   "day_0910": 5
   },
   {
    "id": "doc.ads",
@@ -548,8 +578,9 @@
    "name": "The Everyday, the unit",
    "album": "everyman",
    "page": "album:plates",
-   "day": 5,
-   "pitch": "Serial 01. Bakelite black, a silver plate, two lenses that are not lenses."
+   "day": 1,
+   "pitch": "Serial 01. Bakelite black, a silver plate, two lenses that are not lenses.",
+   "day_0910": 5
   },
   {
    "id": "phys.case.everyday",
@@ -557,8 +588,13 @@
    "name": "The Everyday's case and cable",
    "album": "everyman",
    "page": "album:plates",
-   "day": 5,
-   "pitch": "Oxblood leather, a strap, and the cable that made it portable."
+   "day": 1,
+   "pitch": "Oxblood leather, a strap, and the cable that made it portable.",
+   "day_0910": 5
   }
- ]
+ ],
+ "run": {
+  "start": "2026-10-30",
+  "_": "Day 1 is the door, Fri 2026-10-30; one drop a day, every day. Order re-cut 2026-09-18 by Mike's rule: the simple, basic, everybody-included things first (they are interesting for their originality and would be less so after flashier things), then the niceties, then the custom characters as they appear. Everything goes online, the characters' own programs included (his earlier 'not for everyone' is withdrawn). `day_0910` keeps the old order. Ops' draft of the order, for pointing at."
+ }
 }

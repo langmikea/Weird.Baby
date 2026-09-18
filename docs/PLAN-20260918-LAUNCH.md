@@ -169,9 +169,17 @@ QUESTIONS-for-Sunday.md, 8 to 10: the must-have list with two proposed
 cuts (the unit proofs, song two); three dates only he can give (the Buffer
 clicks, the games, the deploy before the Number); the raised hand.
 
-## 9. Where we stand, 09-18
+## 9. Where we stand, 09-18 (night, baseline v4)
 
-13 of 54 not on track, from three causes: the Buffer key's date (five reel
-lines and the key itself), the games with no date (six), the deploy before
-the Number with no date (one). Nothing else is red, and nothing red is
-waiting on work.
+Three rulings from the porch changed the plan's shape (BOARD-DECISIONS.md):
+the Number opens Mon 11-09; **a drop a day from the door, basics first,
+characters as they appear, everything online** (RUN-OF-SHOW-20260918.md), so
+each catalogue row is walled by its own day and the three later albums by
+their character's day; **no dead ends** (the site's machine shows only what
+is released). Section 3's finding 4 is thereby applied, and its finding 2
+resolved. Section 5's Buffer chain holds only if the key lands 09-18 as
+promised.
+
+0 of 54 not on track tonight. That is honest and it is fragile: the key is
+promised today, and the board turns six columns red tomorrow morning if it
+is not in.

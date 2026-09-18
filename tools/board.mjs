@@ -78,7 +78,11 @@ for (const c of P.columns.filter(c => c.catalogue)) {
     if (r.ruling && !gates.pitch) gates.pitch = { done: CAT.sitting, ev: `catalogue ruling ${r.ruling}` };
     const blocked = [...(o.blocked || [])];
     for (const b of P.catalogue_blocked_by_name) if (new RegExp(b.match).test(r.name)) blocked.push(b);
-    deliverables.push({ id: r.id, col: c.id, name: r.name, owner: c.owner, gates, blocked });
+    /* a row is walled by its own drop (the run's start + day - 1, less the lead), never before the door's wall:
+       what is not due for weeks is not made ahead [Mike, 2026-09-18] */
+    const drop = CAT.run?.start ? addDays(CAT.run.start, r.day - 1) : null;
+    const wall = drop ? maxD([P.walls.R, addDays(drop, -(c.catalogue.lead_days ?? 4))]) : undefined;
+    deliverables.push({ id: r.id, col: c.id, name: r.name, owner: c.owner, gates, blocked, wall, drop });
   }
 }
 const byId = Object.fromEntries(deliverables.map(d => [d.id, d]));
@@ -215,13 +219,13 @@ const openAsks = Object.values(nodes).filter(n => n.frac < 1 && n.who === "Mike"
   .sort((a, b) => a._lf.localeCompare(b._lf)).map(n => ({ what: `${n.g.name}: ${n.d.name}`, need: n._lf, red: false, frees: new Set() }));
 /* next, a ruling of his that holds a gate and has a promised day: answering it today beats waiting for the day */
 const held = {};
-for (const n of Object.values(nodes)) if (n.frac < 1) for (const b of n.blockers) if (b.by && b.by >= today && /Mike/.test(b.owner)) (held[b.what] ||= { what: b.what, need: b.by, red: false, ruling: true, frees: new Set() }).frees.add(n.d.id);
+for (const n of Object.values(nodes)) if (n.frac < 1) for (const b of n.blockers) if (b.by && b.by >= today && /Mike/.test(b.owner)) { const h = (held[b.what] ||= { what: b.what, need: b.by, red: false, ruling: true, ask: /Sunday Q/.test(b.what), frees: new Set() }); h.frees.add(n.d.id); for (const o of Object.values(nodes)) if (o.frac < 1 && o.after.some(a => a.d === n.d)) h.frees.add(o.d.id); }
 const rulings = Object.values(held).sort((a, b) => a.need.localeCompare(b.need) || b.frees.size - a.frees.size);
 const yoursNow = [...Object.values(mine).sort((a, b) => b.frees.size - a.frees.size), ...rulings, ...openAsks].slice(0, 3)
-  .map(m => ({ what: m.what, need: m.need, red: m.red, ruling: !!m.ruling, frees: m.frees.size }));
+  .map(m => ({ what: m.what, need: m.need, red: m.red, ruling: !!m.ruling, ask: !!m.ask, frees: m.frees.size }));
 out.yours_now = yoursNow;
 fs.writeFileSync(path.join(REPO, "docs/desk/BOARD.json"), JSON.stringify(out, null, 1) + "\n");
-const nowLine = m => `${m.what}${m.red ? ` - DUE NOW, clears ${m.frees} red` : m.ruling ? ` - one answer, holds ${m.frees}; promised ${md(m.need)}` : ` - open now, needed by ${md(m.need)}`}`;
+const nowLine = m => `${m.what}${m.red ? ` - DUE NOW, clears ${m.frees} red` : m.ruling ? ` - ${m.ask ? "one answer" : "yours to do"}, holds ${m.frees}; promised ${md(m.need)}` : ` - open now, needed by ${md(m.need)}`}`;
 
 /* the grade on disk, in the ruled line format */
 const lineOf = l => `${l.names.join(", ")} - ${l.what} (${l.owner}) - needed by ${md(l.need)}`;
@@ -377,7 +381,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 <div class="top"><div><p class="eyebrow">Weird.Baby · launch readiness · ${today}</p><h1>The Board</h1>
 <p class="sub">Where we are not on track. Red is the only thing to read; click it for what holds it and who.</p></div>
 <div class="clock"><div><b>${toR}</b>days to the door</div><div><b>${toM}</b>days to the Number</div><div class="red"><b>${redCount}</b>of ${deliverables.length} not on track</div></div></div>
-${yoursNow.length ? `<div class="now"><h2>Yours, now</h2><ol>${yoursNow.map(m => `<li><b>${esc(m.what)}</b><span>${m.red ? `due now · clears ${m.frees} red` : m.ruling ? `one answer · holds ${m.frees} · promised ${md(m.need)}` : `open now · needed by ${md(m.need)}`}</span></li>`).join("")}</ol></div>` : ""}
+${yoursNow.length ? `<div class="now"><h2>Yours, now</h2><ol>${yoursNow.map(m => `<li><b>${esc(m.what)}</b><span>${m.red ? `due now · clears ${m.frees} red` : m.ruling ? `${m.ask ? "one answer" : "yours to do"} · holds ${m.frees} · promised ${md(m.need)}` : `open now · needed by ${md(m.need)}`}</span></li>`).join("")}</ol></div>` : ""}
 <div class="scroll"><div class="board" role="group" aria-label="Launch readiness by column">
 <div class="axis">${[0, 25, 50, 75, 100].map(v => `<span style="bottom:${v}%">${v}</span>`).join("")}</div>
 ${columns.map((c, i) => `<div class="col" style="grid-column:${i + 2}">${seg(c)}</div><div class="name" style="grid-column:${i + 2}">${esc(c.name)}</div>`).join("")}

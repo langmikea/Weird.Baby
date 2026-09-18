@@ -6,6 +6,18 @@ moment. Mike takes them at the Sunday sitting, numbered, A/B/C, one at a
 time. Ops clears a question the day it is answered.
 
 ## Answered
+- 2026-09-18 · Q2 the refusals: **C**, and wider: "I don't want there to be dead
+  ends. If a thing is not available, it should not be displayed. Except for very
+  specific cases where we will get some benefit through the story, or if there's
+  something that I'm missing that you need to explain to me." Ops' two candidates
+  for that exception, to be ruled when the `no-dead-ends` work starts: (a) the
+  manual's own Appendix C-2 is titled ENGINE POSITIONS NOT FITTED, so an empty
+  engine position reading NOT FITTED is the machine's canon, not a dead end of
+  ours; (b) the game pack arrives as a parcel after ten asks, which hides the
+  games and then delivers them: a delay, not a dead end.
+- 2026-09-18 · Q9(b) the games' date: answered by the daily drop: a game is made
+  for its own day (Tic-Tac-Toe day 11, Snow Globe day 12, the casino days 18 to 21).
+- 2026-09-18 · Q9(a) Buffer: "before end of day today."
 - 2026-09-10 · Q1 the Gambler's voice: **A** (cast from the registry), then
   **A Miguel, slot 2** from the three on the voice page. Written into the
   robots registry the same evening.

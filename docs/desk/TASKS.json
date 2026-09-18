@@ -53,7 +53,7 @@
   },
   {
    "id": "clicks-buffer",
-   "date": "2026-09-17",
+   "date": "2026-09-18",
    "owner": "mike",
    "block": "clicks",
    "title": "Buffer: the six clicks",
@@ -444,6 +444,16 @@
    "long": "The sentence above both launches, on the site's front"
   },
   {
+   "id": "no-dead-ends",
+   "date": "2026-10-09",
+   "owner": "ops",
+   "title": "No dead ends: the site's machine shows only what is released",
+   "do": [
+    "The twin on the site hides every menu row whose feature has not dropped (no NOT FITTED, no NO RECORD); each day's drop adds its row, read from the catalogue's day. Exceptions only where the story gains, each one ruled."
+   ],
+   "long": "Mike, 09-18: if a thing is not available it should not be displayed (Sunday Q2: C)"
+  },
+  {
    "id": "words-2",
    "date": "2026-10-10",
    "owner": "mike",
@@ -668,5 +678,5 @@
    "long": "The Number opens Monday 11-09 (moved from 10-26 by Mike, 09-18)"
   }
  ],
- "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md. 2026-09-18: the four tray re-shoot rows became the sexy shoot (docs/SEXY-SHOOT-20260918.md); two Ops rows added (photos-white 09-26, shoot-reel-story 09-29). 2026-09-18 (the board): four Ops rows added (board-morning 09-25, song-page-shape 10-02, song-page 10-16, whole-front 10-09) so every must-have deliverable has work scheduled; twin-update moved 10-02 to 09-24 and bench-plan 10-03 to 09-25 to level Ops' week of 09-28 (docs/PLAN-20260918-LAUNCH.md). 2026-09-18 (the pilot re-plan): three Ops rows added (shoot-pilot-script 09-22, music-palette 09-24, ask-range 09-25); none of Mike’s rows touched. 2026-09-18: the Number moved to Mon 11-09 (Mike); launch-queued re-titled to the Q&A line only, number-queued added 11-06. 2026-09-18: clicks-buffer 10-10 to 09-17 by Mike's word (the critical path's worst item is due yesterday)."
+ "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md. 2026-09-18: the four tray re-shoot rows became the sexy shoot (docs/SEXY-SHOOT-20260918.md); two Ops rows added (photos-white 09-26, shoot-reel-story 09-29). 2026-09-18 (the board): four Ops rows added (board-morning 09-25, song-page-shape 10-02, song-page 10-16, whole-front 10-09) so every must-have deliverable has work scheduled; twin-update moved 10-02 to 09-24 and bench-plan 10-03 to 09-25 to level Ops' week of 09-28 (docs/PLAN-20260918-LAUNCH.md). 2026-09-18 (the pilot re-plan): three Ops rows added (shoot-pilot-script 09-22, music-palette 09-24, ask-range 09-25); none of Mike’s rows touched. 2026-09-18: the Number moved to Mon 11-09 (Mike); launch-queued re-titled to the Q&A line only, number-queued added 11-06. 2026-09-18: clicks-buffer 10-10 to 09-17 by Mike's word (the critical path's worst item is due yesterday). 2026-09-18 (evening): clicks-buffer to 09-18 (Mike: by end of day today); no-dead-ends added 10-09."
 }

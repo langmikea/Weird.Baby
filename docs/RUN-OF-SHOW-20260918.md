@@ -1,4 +1,66 @@
-# THE RUN OF SHOW — three rough shapes, to point at
+# THE RUN OF SHOW — a drop a day, basics first
+
+**Ruled 2026-09-18, Mike (cleaned):** "I would like to drop interesting content
+on every day of the robot launch, so schedule our content accordingly. Games
+that aren't due for weeks need not be created ahead of time. The most basic
+things should be presented first, because they will be interesting for their
+originality, and later will be less interesting if we have already deployed
+more interesting things. Start with the simple, basic, everybody-included as
+much as possible, and then add niceties and custom characters as they
+appear." And: everything goes online, the characters' own programs included
+(his earlier "not for everyone" is withdrawn). And (Sunday Q2, C): "I don't
+want there to be dead ends. If a thing is not available, it should not be
+displayed."
+
+So the run is one drop a day from the door, and the site's machine grows with
+it: each day a new row appears on its menu, the day's reel features it, the
+caption lands on it. Nothing unreleased is shown. Each thing is made for its
+own day, not for the door.
+
+## The drops (Ops' draft of the order, for pointing at)
+
+```
+ 1  Fri 10-30  MGK-NIAC, the twenty + The Everyman + Answers, the door + The Everyday's box copy + The Everyday, the unit + The Everyday's case and cable
+ 2  Sat 10-31  Starting
+ 3  Sun 11-01  The monitor at rest
+ 4  Mon 11-02  User, your name
+ 5  Tue 11-03  Polarity
+ 6  Wed 11-04  Clarity
+ 7  Thu 11-05  Probabilities
+ 8  Fri 11-06  Messages, the inbox
+ 9  Sat 11-07  Detectors
+10  Sun 11-08  The Bullshit Detector
+11  Mon 11-09  Tic-Tac-Toe
+12  Tue 11-10  Snow Globe
+13  Wed 11-11  MGK-v2.0 arrives
+14  Thu 11-12  ELIZ
+15  Fri 11-13  Brain Training
+16  Sat 11-14  Inkblots
+17  Sun 11-15  The Gambler + The Gambler's case
+18  Mon 11-16  Blackjack
+19  Tue 11-17  Roulette
+20  Wed 11-18  Craps
+21  Thu 11-19  Slots
+22  Fri 11-20  The CEO
+23  Sat 11-21  The Career Chooser
+24  Sun 11-22  The Informer
+25  Mon 11-23  Radio
+26  Tue 11-24  Phone Tap
+```
+
+Day 1 is the door: the Everyday opens the shelf (the everybody-included unit)
+with the one thing it does, answer. Then the basics, the settings, the
+detectors, two small games, the second engine, the Everyday's own programs;
+then the characters arrive with their albums, the Gambler on day 17, the CEO
+on day 22, the Informer on day 24, each followed by its programs. **This
+replaces "four albums on the shelf at the door" (09-10) unless you say
+otherwise.** The 29 catalogue rows marked later follow as they are ready.
+
+The reels on top of the drops: the ask reel at noon on day 1; the Q&A at five
+every day from day 2, landing on the day's drop; each character's shoot reel
+on its arrival day; the Number at noon on weekdays from Mon 11-09.
+
+## What was offered before the ruling (kept as the record)
 
 Ops, 2026-09-18. Range first (PLAN-20260918-LAUNCH.md section 2): these are
 the limits, drawn fast, on what is already ruled. Nothing here is built or

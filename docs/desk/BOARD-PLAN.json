@@ -9,7 +9,7 @@
   "pilot_rule": "2026-09-18: Mike, Yes to the re-plan on the pilot rule"
  },
  "baseline": {
-  "version": 3,
+  "version": 4,
   "set": "2026-09-18",
   "state": "draft until the 09-20 sitting rules the must-have list; after that a wall, a duration, a predecessor or a must-have entry changes only by a ruling logged in docs/desk/BOARD-DECISIONS.md"
  },
@@ -379,7 +379,8 @@
    "catalogue": {
     "kinds": [
      "feature"
-    ]
+    ],
+    "lead_days": 4
    },
    "owner": "Ops",
    "tasks": [
@@ -393,7 +394,8 @@
    },
    "after": {
     "page": [
-     "feature-page.pilot"
+     "feature-page.pilot",
+     "no-dead-ends.done"
     ],
     "unit": [
      "real-unit.done"
@@ -409,7 +411,8 @@
    "catalogue": {
     "kinds": [
      "game"
-    ]
+    ],
+    "lead_days": 4
    },
    "owner": "Ops",
    "tasks": [
@@ -418,26 +421,13 @@
     "pages",
     "flash"
    ],
-   "blocked": [
-    {
-     "gate": "twin",
-     "what": "the games are not final",
-     "owner": "Mike",
-     "by": null
-    },
-    {
-     "gate": "page",
-     "what": "the site's machine refuses Games: NOT FITTED (Sunday Q2)",
-     "owner": "Mike",
-     "by": "2026-09-20"
-    }
-   ],
    "not_before": {
     "pitch": "2026-09-20"
    },
    "after": {
     "page": [
-     "feature-page.pilot"
+     "feature-page.pilot",
+     "no-dead-ends.done"
     ],
     "unit": [
      "real-unit.done"
@@ -454,7 +444,8 @@
     "kinds": [
      "engine",
      "setting"
-    ]
+    ],
+    "lead_days": 4
    },
    "owner": "Ops",
    "tasks": [
@@ -468,7 +459,8 @@
    },
    "after": {
     "page": [
-     "feature-page.pilot"
+     "feature-page.pilot",
+     "no-dead-ends.done"
     ],
     "unit": [
      "real-unit.done"
@@ -520,22 +512,7 @@
    }
   }
  },
- "catalogue_blocked_by_name": [
-  {
-   "match": "^(Probabilities)$",
-   "gate": "page",
-   "what": "the site's machine refuses it: NOT FITTED (Sunday Q2)",
-   "owner": "Mike",
-   "by": "2026-09-20"
-  },
-  {
-   "match": "^Messages",
-   "gate": "page",
-   "what": "the site's machine answers NO RECORD (Sunday Q2)",
-   "owner": "Mike",
-   "by": "2026-09-20"
-  }
- ],
+ "catalogue_blocked_by_name": [],
  "deliverables": [
   {
    "id": "qa-daily",
@@ -728,7 +705,8 @@
    },
    "dur": {
     "volume": 3
-   }
+   },
+   "wall": "2026-11-18"
   },
   {
    "id": "shoot-pilot",
@@ -763,7 +741,8 @@
     "filled": [
      "album-template.built"
     ]
-   }
+   },
+   "wall": "2026-10-26"
   },
   {
    "id": "album-gambler",
@@ -790,7 +769,8 @@
      "owner": "Mike",
      "by": "2026-10-04"
     }
-   ]
+   ],
+   "wall": "2026-11-11"
   },
   {
    "id": "album-ceo",
@@ -809,7 +789,8 @@
     "filled": [
      "album-template.built"
     ]
-   }
+   },
+   "wall": "2026-11-16"
   },
   {
    "id": "album-informer",
@@ -828,7 +809,8 @@
     "filled": [
      "album-template.built"
     ]
-   }
+   },
+   "wall": "2026-11-18"
   },
   {
    "id": "album-template",
@@ -1024,7 +1006,7 @@
      "gate": "built",
      "what": "Buffer: the accounts, the four channels, the key",
      "owner": "Mike",
-     "by": "2026-09-17"
+     "by": "2026-09-18"
     }
    ]
   },
@@ -1134,6 +1116,21 @@
     "look": 0
    },
    "range": "docs/RUN-OF-SHOW-20260918.md (three shapes: quiet, steady, loud), made 2026-09-18"
+  },
+  {
+   "id": "no-dead-ends",
+   "col": "machine",
+   "name": "No dead ends: the site's machine shows only what has been released; the menu grows with each day's drop",
+   "owner": "Ops",
+   "tasks": [
+    "no-dead-ends"
+   ],
+   "gates": {
+    "plan": {
+     "done": "2026-09-18",
+     "ev": "Mike, Sunday Q2: C, and no dead ends; BOARD-DECISIONS.md"
+    }
+   }
   }
  ],
  "later_by_draft": {
@@ -1162,5 +1159,6 @@
  },
  "_prev": "A gate follows the gate before it on its ladder unless `prev` names others. Reel: the real post and his real material both follow the pilot; VOLUME follows both (nothing is asked in volume until one real unit has been through the whole pipe, the queue included). Product: the page follows the pitch, not the twin; the unit proof follows the twin.",
  "_dur": "Durations are Ops estimates in elapsed days, coarse on purpose: a range of rough examples 5, a pilot on stand-ins 3, a build 4, a volume run 7 to 14. They are the first thing to correct when a pilot teaches otherwise; correcting one re-derives every date.",
- "_due_now": "Mike, 2026-09-18: a red that names him is due from him NOW; the worst item on the critical path is dated yesterday. The grader lists at most three as `yours_now`."
+ "_due_now": "Mike, 2026-09-18: a red that names him is due from him NOW; the worst item on the critical path is dated yesterday. The grader lists at most three as `yours_now`.",
+ "_daily": "2026-09-18, Mike: interesting content drops every day of the robot launch; what is not due for weeks is not made ahead. So a catalogue row is walled by its own day (CATALOGUE run.start + day - 1, less lead_days), and an album by its character's day. The Everyday opens the shelf at the door; the Gambler, the CEO and the Informer arrive on days 17, 22 and 24."
 }

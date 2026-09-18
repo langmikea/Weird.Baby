@@ -1,8 +1,8 @@
 {
  "as_of": "2026-09-18",
  "must_have_ruled": null,
- "deliverables": 53,
- "not_on_track": 12,
+ "deliverables": 54,
+ "not_on_track": 0,
  "columns": [
   {
    "id": "qa",
@@ -10,31 +10,12 @@
    "name": "Q&A reel",
    "outcome": "O3",
    "count": 3,
-   "red": 2,
+   "red": 0,
    "done": 0.3757575757575758,
-   "on": 0.33333333333333337,
-   "off": 0.2909090909090909,
+   "on": 0.6242424242424243,
+   "off": 0,
    "later": [],
-   "lines": [
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-10-11",
-     "rule": 4,
-     "names": [
-      "The daily Q&A line"
-     ]
-    },
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-10-25",
-     "rule": 4,
-     "names": [
-      "The hot Q&A lane"
-     ]
-    }
-   ]
+   "lines": []
   },
   {
    "id": "number",
@@ -42,22 +23,12 @@
    "name": "Number reel",
    "outcome": "O1",
    "count": 1,
-   "red": 1,
+   "red": 0,
    "done": 0.15,
-   "on": 0,
-   "off": 0.85,
+   "on": 0.85,
+   "off": 0,
    "later": [],
-   "lines": [
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-11-03",
-     "rule": 4,
-     "names": [
-      "Coconuts, the first run"
-     ]
-    }
-   ]
+   "lines": []
   },
   {
    "id": "ask",
@@ -65,22 +36,12 @@
    "name": "Ask reel",
    "outcome": "O3",
    "count": 1,
-   "red": 1,
+   "red": 0,
    "done": 0.35714285714285715,
-   "on": 0,
-   "off": 0.6428571428571428,
+   "on": 0.6428571428571428,
+   "off": 0,
    "later": [],
-   "lines": [
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-10-25",
-     "rule": 4,
-     "names": [
-      "The ask reel on MGK-NIAC"
-     ]
-    }
-   ]
+   "lines": []
   },
   {
    "id": "shoot",
@@ -88,22 +49,12 @@
    "name": "Shoot reel",
    "outcome": "O2",
    "count": 1,
-   "red": 1,
+   "red": 0,
    "done": 0,
-   "on": 0,
-   "off": 1,
+   "on": 1,
+   "off": 0,
    "later": [],
-   "lines": [
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-10-22",
-     "rule": 4,
-     "names": [
-      "The sexy-shoot reel"
-     ]
-    }
-   ]
+   "lines": []
   },
   {
    "id": "programs",
@@ -134,10 +85,10 @@
    "name": "Games",
    "outcome": "O4",
    "count": 6,
-   "red": 6,
+   "red": 0,
    "done": 0,
-   "on": 0,
-   "off": 1,
+   "on": 1,
+   "off": 0,
    "later": [
     "Tilt Drive",
     "Gobble Don't Fall",
@@ -146,22 +97,7 @@
     "Sniper",
     "Stop On A Number"
    ],
-   "lines": [
-    {
-     "what": "the games are not final: no date",
-     "owner": "Mike",
-     "need": "2026-10-21",
-     "rule": 2,
-     "names": [
-      "Snow Globe",
-      "Tic-Tac-Toe",
-      "Blackjack",
-      "Craps",
-      "Roulette",
-      "Slots"
-     ]
-    }
-   ]
+   "lines": []
   },
   {
    "id": "engines",
@@ -211,9 +147,9 @@
    "group": "Machine",
    "name": "The machine",
    "outcome": "O4",
-   "count": 2,
+   "count": 3,
    "red": 0,
-   "done": 0.1,
+   "done": 0.10000000000000002,
    "on": 0.9,
    "off": 0,
    "later": [],
@@ -225,22 +161,12 @@
    "name": "The system",
    "outcome": "O5",
    "count": 7,
-   "red": 1,
+   "red": 0,
    "done": 0.2285714285714286,
-   "on": 0.6285714285714286,
-   "off": 0.14285714285714285,
+   "on": 0.7714285714285714,
+   "off": 0,
    "later": [],
-   "lines": [
-    {
-     "what": "Buffer: the accounts, the four channels, the key: was due 09-17",
-     "owner": "Mike",
-     "need": "2026-10-09",
-     "rule": 2,
-     "names": [
-      "Buffer connected (the key, the channels)"
-     ]
-    }
-   ]
+   "lines": []
   }
  ],
  "detail": [
@@ -250,16 +176,9 @@
    "name": "The daily Q&A line",
    "owner": "Ops",
    "pct": 40,
-   "status": "off",
+   "status": "on",
    "next": "2026-10-11",
-   "reasons": [
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-10-11",
-     "rule": 4
-    }
-   ]
+   "reasons": []
   },
   {
    "id": "qa-hot",
@@ -267,16 +186,9 @@
    "name": "The hot Q&A lane",
    "owner": "Ops",
    "pct": 73,
-   "status": "off",
+   "status": "on",
    "next": "2026-10-25",
-   "reasons": [
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-10-25",
-     "rule": 4
-    }
-   ]
+   "reasons": []
   },
   {
    "id": "beat",
@@ -294,16 +206,9 @@
    "name": "Coconuts, the first run",
    "owner": "Ops",
    "pct": 15,
-   "status": "off",
+   "status": "on",
    "next": "2026-11-01",
-   "reasons": [
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-11-03",
-     "rule": 4
-    }
-   ]
+   "reasons": []
   },
   {
    "id": "ask-niac",
@@ -311,16 +216,9 @@
    "name": "The ask reel on MGK-NIAC",
    "owner": "Ops",
    "pct": 36,
-   "status": "off",
+   "status": "on",
    "next": "2026-10-25",
-   "reasons": [
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-10-25",
-     "rule": 4
-    }
-   ]
+   "reasons": []
   },
   {
    "id": "shoot-reel",
@@ -328,16 +226,9 @@
    "name": "The sexy-shoot reel",
    "owner": "Ops",
    "pct": 0,
-   "status": "off",
-   "next": "2026-10-18",
-   "reasons": [
-    {
-     "what": "waits on: Buffer connected (the key, the channels)",
-     "owner": "Mike",
-     "need": "2026-10-22",
-     "rule": 4
-    }
-   ]
+   "status": "on",
+   "next": "2026-11-08",
+   "reasons": []
   },
   {
    "id": "shoot-pilot",
@@ -366,7 +257,7 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-21",
+   "next": "2026-11-04",
    "reasons": []
   },
   {
@@ -376,7 +267,7 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-21",
+   "next": "2026-11-11",
    "reasons": []
   },
   {
@@ -386,7 +277,7 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-21",
+   "next": "2026-11-11",
    "reasons": []
   },
   {
@@ -505,16 +396,9 @@
    "name": "Buffer connected (the key, the channels)",
    "owner": "Mike",
    "pct": 0,
-   "status": "off",
+   "status": "on",
    "next": "2026-10-09",
-   "reasons": [
-    {
-     "what": "Buffer: the accounts, the four channels, the key: was due 09-17",
-     "owner": "Mike",
-     "need": "2026-10-09",
-     "rule": 2
-    }
-   ]
+   "reasons": []
   },
   {
    "id": "photos-white",
@@ -577,13 +461,23 @@
    "reasons": []
   },
   {
+   "id": "no-dead-ends",
+   "col": "machine",
+   "name": "No dead ends: the site's machine shows only what has been released; the menu grows with each day's drop",
+   "owner": "Ops",
+   "pct": 10,
+   "status": "on",
+   "next": "2026-10-22",
+   "reasons": []
+  },
+  {
    "id": "twin.boot",
    "col": "programs",
    "name": "Starting",
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -593,7 +487,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -603,7 +497,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -613,7 +507,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -623,7 +517,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-25",
    "reasons": []
   },
   {
@@ -633,7 +527,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-25",
    "reasons": []
   },
   {
@@ -643,7 +537,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-11-01",
    "reasons": []
   },
   {
@@ -653,7 +547,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-25",
    "reasons": []
   },
   {
@@ -663,7 +557,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-25",
    "reasons": []
   },
   {
@@ -673,7 +567,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-11-08",
    "reasons": []
   },
   {
@@ -683,7 +577,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-11-08",
    "reasons": []
   },
   {
@@ -693,7 +587,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-11-08",
    "reasons": []
   },
   {
@@ -712,16 +606,9 @@
    "name": "Snow Globe",
    "owner": "Ops",
    "pct": 0,
-   "status": "off",
-   "next": "2026-10-11",
-   "reasons": [
-    {
-     "what": "the games are not final: no date",
-     "owner": "Mike",
-     "need": "2026-10-21",
-     "rule": 2
-    }
-   ]
+   "status": "on",
+   "next": "2026-10-25",
+   "reasons": []
   },
   {
    "id": "twin.game.tictactoe",
@@ -729,16 +616,9 @@
    "name": "Tic-Tac-Toe",
    "owner": "Ops",
    "pct": 0,
-   "status": "off",
-   "next": "2026-10-11",
-   "reasons": [
-    {
-     "what": "the games are not final: no date",
-     "owner": "Mike",
-     "need": "2026-10-21",
-     "rule": 2
-    }
-   ]
+   "status": "on",
+   "next": "2026-10-25",
+   "reasons": []
   },
   {
    "id": "twin.game.blackjack",
@@ -746,16 +626,9 @@
    "name": "Blackjack",
    "owner": "Ops",
    "pct": 0,
-   "status": "off",
-   "next": "2026-10-11",
-   "reasons": [
-    {
-     "what": "the games are not final: no date",
-     "owner": "Mike",
-     "need": "2026-10-21",
-     "rule": 2
-    }
-   ]
+   "status": "on",
+   "next": "2026-11-01",
+   "reasons": []
   },
   {
    "id": "twin.game.craps",
@@ -763,16 +636,9 @@
    "name": "Craps",
    "owner": "Ops",
    "pct": 0,
-   "status": "off",
-   "next": "2026-10-11",
-   "reasons": [
-    {
-     "what": "the games are not final: no date",
-     "owner": "Mike",
-     "need": "2026-10-21",
-     "rule": 2
-    }
-   ]
+   "status": "on",
+   "next": "2026-11-01",
+   "reasons": []
   },
   {
    "id": "twin.game.roulette",
@@ -780,16 +646,9 @@
    "name": "Roulette",
    "owner": "Ops",
    "pct": 0,
-   "status": "off",
-   "next": "2026-10-11",
-   "reasons": [
-    {
-     "what": "the games are not final: no date",
-     "owner": "Mike",
-     "need": "2026-10-21",
-     "rule": 2
-    }
-   ]
+   "status": "on",
+   "next": "2026-11-01",
+   "reasons": []
   },
   {
    "id": "twin.game.slots",
@@ -797,16 +656,9 @@
    "name": "Slots",
    "owner": "Ops",
    "pct": 0,
-   "status": "off",
-   "next": "2026-10-11",
-   "reasons": [
-    {
-     "what": "the games are not final: no date",
-     "owner": "Mike",
-     "need": "2026-10-21",
-     "rule": 2
-    }
-   ]
+   "status": "on",
+   "next": "2026-11-01",
+   "reasons": []
   },
   {
    "id": "engine.niac",
@@ -825,7 +677,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -835,7 +687,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -845,7 +697,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-25",
    "reasons": []
   },
   {
@@ -855,31 +707,34 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-18",
    "reasons": []
   }
  ],
  "yours_now": [
   {
    "what": "Buffer: the accounts, the four channels, the key",
-   "need": "2026-10-09",
-   "red": true,
-   "ruling": false,
+   "need": "2026-09-18",
+   "red": false,
+   "ruling": true,
+   "ask": false,
    "frees": 6
   },
   {
-   "what": "the games are not final",
-   "need": "2026-10-21",
-   "red": true,
-   "ruling": false,
-   "frees": 6
-  },
-  {
-   "what": "the site's machine refuses Games: NOT FITTED (Sunday Q2)",
+   "what": "answer length: the glass fit is unruled (Sunday Q1)",
    "need": "2026-09-20",
    "red": false,
    "ruling": true,
-   "frees": 6
+   "ask": true,
+   "frees": 1
+  },
+  {
+   "what": "the frame, from the A/B already cut (Sunday Q7)",
+   "need": "2026-09-20",
+   "red": false,
+   "ruling": true,
+   "ask": true,
+   "frees": 1
   }
  ]
 }
