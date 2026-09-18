@@ -84,3 +84,33 @@ ruled (09-02, 24·F3 and F4).
 Open, his to say: what the guest account lacks. Every released program must
 still run for a stranger from a reel (no dead ends), so "limited" cannot
 mean a program is missing.
+
+**Answered 09-18: "Yes"** to: the guest account runs everything and keeps
+nothing (no name, no score, no messages, generic answers); the full account
+keeps them and answers as the Prototype.
+
+## Built rough, 2026-09-18 (evening)
+
+Robots `tools/viiip_twin.html` is master; the museum's `public/robots/twin.html`
+is its copy. Seen on the dev server, `/robots/twin.html?preset=arrive&at=twin.game.blackjack`:
+
+1. Arrives awake on Blackjack, as a guest. The inbox is empty.
+2. After a minute (or two asks) the front glass reads REMAIN IN TEST MODE?
+   with YES - STAY A GUEST / NO - RESTART.
+3. NO: the machine goes dark, boots, dials, reads UNIT 0.4 / PROTOTYPE RECORD,
+   then EVERYTHING LOADED / NOTHING HELD BACK, then UNIT 0.4 / FULL ACCOUNT.
+   Back on Blackjack; two messages have arrived.
+4. POWER off and on: the boot ends on LOAD WHICH ACCOUNT, UNIT 0.4 or
+   GUEST - TEST MODE. Choosing the guest: the full account's score stays in
+   the browser, and the guest sees none of it.
+
+How it works: everything the twin holds about a person goes through
+`Kept_Get / Kept_Set / Kept_Del`; in the guest account a read finds nothing
+and a write goes nowhere. `wbr_account` is empty, "full" or "guest". A purge
+also forgets the account. The self test's notes (6, 15, 40 asks) are the only
+mail a guest gets; click restarts. `bist=off` in the address shuts the menu
+question and the notes; `tools/reels-feature.py` sends it.
+
+Every word on the glass is a stand-in for his pen. Not built: the Prototype's
+own answers (none exist); the inbox is not rebuilt when the account changes
+mid-visit; the UNIT 0.4 label strip on the plate.

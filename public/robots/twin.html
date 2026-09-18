@@ -2224,8 +2224,34 @@ FLASH_SLOT_VAR[FLASH_POLARITY_SETTING]="ps";
 FLASH_SLOT_VAR[FLASH_CLARITY_SETTING] ="cs";
 FLASH_SLOT_VAR[FLASH_POLARITY_BIAS]   ="pb";
 FLASH_SLOT_VAR[FLASH_CLARITY_BIAS]    ="cb";
+/* ============ [2026-09-18] THE GUEST ACCOUNT ===============================
+   MIKE, on the reason to boot: "we make it clear the VIIIp is in a limited
+   guest account from testing ... There is always an option to resume the guest
+   account via another reboot, so they risk nothing." And on what limited
+   means (asked with Blackjack as the example): every released program runs,
+   but THE MACHINE KEEPS NOTHING - no name, no score, no messages, no settings.
+   The full account is unit 0.4's own, and only a chosen boot loads it.
+   THE GATE IS THE STORE, NOT THE PROGRAMS. Everything the twin holds about a
+   person goes through the three functions below. In the guest account a read
+   finds nothing and a write goes nowhere, so a program runs exactly as it
+   always did and simply is not remembered. NOTHING IS DELETED BY SWITCHING:
+   the full account's keys stay where they are while the guest is in, and are
+   read again after the next reboot into it. That is the whole of "they risk
+   nothing".
+   `wbr_account` is "" (never loaded), "full", or "guest" (a full account
+   exists and is resting). The install level is the machine's, not the
+   person's, and stays outside the gate.
+   FUNCTIONS, NOT CONSTS, ON PURPOSE: these are called by loaders that run
+   thousands of lines above and below - see the temporal-dead-zone note at
+   `Rec_Keys_Local`. */
+function Account_State(){try{return localStorage.getItem("wbr_account")||"";}catch(e){return "";}}
+function Account_Full(){return Account_State()==="full";}
+function Account_Set(full){try{localStorage.setItem("wbr_account",full?"full":"guest");}catch(e){}}
+function Kept_Get(k){if(!Account_Full())return null;try{return localStorage.getItem(k);}catch(e){return null;}}
+function Kept_Set(k,v){if(!Account_Full())return;try{localStorage.setItem(k,v);}catch(e){}}
+function Kept_Del(k){if(!Account_Full())return;try{localStorage.removeItem(k);}catch(e){}}
 function Bias_Store_Read(){
- try{const v=JSON.parse(localStorage.getItem(BIAS_KEY));return (v&&typeof v==="object")?v:{};}
+ try{const v=JSON.parse(Kept_Get(BIAS_KEY));return (v&&typeof v==="object")?v:{};}
  catch(e){return {};}
 }
 function Save_To_Flash(variableID){
@@ -2234,7 +2260,7 @@ function Save_To_Flash(variableID){
  const live={ps:polaritySettingNOW,cs:claritySettingNOW,pb:polarityBiasNOW,cb:clarityBiasNOW};
  const store=Bias_Store_Read();
  store[k]=live[k];                              /* only the slot that was named */
- try{localStorage.setItem(BIAS_KEY,JSON.stringify(store));}catch(e){}
+ Kept_Set(BIAS_KEY,JSON.stringify(store));
 }
 /* read back at wake, beside the other stores. Each value is range-checked
    against its own enum: a store written by an older build, or edited by hand,
@@ -2421,6 +2447,8 @@ function Menu_System(){
    }
    currentState=CHECK_FOR_INPUT; break;
   case CHECK_FOR_INPUT:
+   /* [2026-09-18] the self test meets the guest at the menu, once a visit */
+   if(Bist_Due()){Bist_Ask();break;}
    if(Pull_From_Buffer(ROTARY_DIAL)){currentState=SCROLL_THE_MENU;}
    else if(Pull_From_Buffer(SHUTTER)){currentState=DETERMINE_IF_EXE;}
    break;
@@ -3600,6 +3628,7 @@ function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL
    M8B_busy=true;
    askCount++; Messages_Trigger("ask");    /* [TWIN DELTA] the machine notices, and delivers on a schedule */
    Sandbox_Reminder_Check();               /* [RULED] heavy usage re-surfaces the replay link */
+   Bist_Pester();                          /* [2026-09-18] the guest is nudged toward the reboot */
    Parcel_Note_Ask(M8B_ID);                /* [PARCEL] real counters; eligibility rides the same beat */
    Health_Spend(H_ASK_COST);               /* [HEALTH] real usage, real wear */
    (async()=>{await M8B_Reveals_Answer(M8B_ID);
@@ -4891,10 +4920,10 @@ const SON_SPEEDS=[{name:"GENTLE",mul:0.6},{name:"STANDARD",mul:1.0},{name:"RACIN
 function SON_Ring_Reset(){if(sonPanel){sonPanel.sel=0;sonPanel.edit=false;}}
 let son=null, sonBest=null;
 function SON_LoadBest(){
- try{sonBest=JSON.parse(localStorage.getItem("wbr_son_best"))||null;}catch(e){sonBest=null;}
+ try{sonBest=JSON.parse(Kept_Get("wbr_son_best"))||null;}catch(e){sonBest=null;}
  if(!sonBest)sonBest={wins:0,closest:0};
 }
-function SON_SaveBest(){try{localStorage.setItem("wbr_son_best",JSON.stringify(sonBest));}catch(e){}}
+function SON_SaveBest(){Kept_Set("wbr_son_best",JSON.stringify(sonBest));}
 function SON_init(){
  if(!sonBest)SON_LoadBest();
  sonPanel=null;                    /* rebuild from live state on every entry */
@@ -5042,7 +5071,7 @@ function tiltVec(){const a=IMU.readAcceleration();return [a[0],a[1]];}
 const SNOW_MAX=60;
 let snow=[];
 let SGx=null;
-function SG_Santa_Enabled(){try{return !!(JSON.parse(localStorage.getItem("wbr_santa"))||{}).on;}catch(e){return false;}}
+function SG_Santa_Enabled(){try{return !!(JSON.parse(Kept_Get("wbr_santa"))||{}).on;}catch(e){return false;}}
 function SG_init(){
  snow=[];
  for(let i=0;i<SNOW_MAX;i++)snow.push({x:random(2,MAX_SCREEN_WIDTH-2),y:random(2,MAX_SCREEN_HEIGHT-2),vx:0,vy:0,r:(i%7==0)?1:0,
@@ -5111,7 +5140,7 @@ function SG_step(){
  if(SGx.snowman===3){
   SGx.rollX+=tiltX*1.4;
   if(SGx.rollX<-14||SGx.rollX>142){
-   if(!SG_Santa_Enabled()){try{localStorage.setItem("wbr_santa",JSON.stringify({on:1}));}catch(e){}
+   if(!SG_Santa_Enabled()){Kept_Set("wbr_santa",JSON.stringify({on:1}));
     chip("ok","[B5] the snowman left the globe - Santa is EARNED for the next visits");}
    SGx.snowman=4; /* gone */
   }
@@ -5729,8 +5758,11 @@ const TYPE_ID={TXT:MSG_TXT,AUDIO:MSG_AUDIO,MORSE_CODE:MSG_MORSE};
 const MSG_LINKS={0:"sandbox"};          /* the Welcome Message carries it */
 const MSG_LINK_VERB=" click=replay  scroll=exit";
 const MSG_LINK_TARGETS={
- sandbox:function(){ if(typeof Sandbox_Replay==="function")Sandbox_Replay(); }
+ sandbox:function(){ if(typeof Sandbox_Replay==="function")Sandbox_Replay(); },
+ /* [2026-09-18] the self test's note: click restarts into unit 0.4's account */
+ account:function(){ if(typeof Account_Restart==="function")Account_Restart(true); }
 };
+const MSG_LINK_VERBS={account:" click=restart  scroll=exit"};   /* a link may name its own verb */
 function Msg_Link_Run(name){
  const f=MSG_LINK_TARGETS[name];
  if(!f){chip("miss","[LINK] no target registered: "+name);return false;}
@@ -5747,6 +5779,18 @@ function Messages_Load(){
   from:r.from, subject:r.subject, body:r.body,
   folder:r.audio_folder?+r.audio_folder:0, file:r.audio_file?+r.audio_file:0,
   trigger:r.trigger, link:MSG_LINKS[+r.msg_id]||null}));
+ /* [2026-09-18] THE GUEST HAS NO MAIL, SEEDED MAIL INCLUDED. A message the
+    table ships as already delivered is held back while the guest account is
+    in, and `seed` remembers what the table said so Messages_Account_In can put
+    it back the moment unit 0.4's account loads. */
+ const full=Account_Full();
+ for(const m of MESSAGES_INBOX){m.seed=m.status;if(!full)m.status=MSG_NOT_SENT;}
+ Messages_Sync_Menu();
+}
+function Messages_Account_In(){
+ for(const m of MESSAGES_INBOX){
+  if(m.status===MSG_NOT_SENT&&m.seed!==undefined&&m.seed!==MSG_NOT_SENT)m.status=m.seed;
+ }
  Messages_Sync_Menu();
 }
 /* [RULING 4] STATUS drives visibility: an undelivered message's row stays hidden.
@@ -5780,6 +5824,7 @@ function devSandboxThreshold(){
  chip("ok","[DEV] sandbox reminder at "+SANDBOX_REMINDER_ASKS+" asks (now "+askCount+")");
 }
 function Sandbox_Reminder_Check(){
+ if(!Account_Full())return;                 /* [2026-09-18] the guest has no install to replay */
  if(sandboxReminderSent||askCount<SANDBOX_REMINDER_ASKS)return;
  sandboxReminderSent=true;
  Unscripted_Send("MGK-Assistant","Install Replay",
@@ -5908,6 +5953,9 @@ function Tap_EXE(){
    forgets on power-cycle, exactly as settings do (Save_To_Flash is a stub). */
 let askCount=0, deliveredAnnounce=false;
 function Messages_Trigger(name){
+ /* [2026-09-18] no mail reaches the guest account; the self test's own notes
+    do not come through here (they are composed live, see Bist_Pester). */
+ if(!Account_Full())return 0;
  let fired=0;
  for(const m of MESSAGES_INBOX){
   if(m.status!==MSG_NOT_SENT)continue;
@@ -6092,11 +6140,11 @@ const DIGIT_RING="0123456789".split("").concat([SPELL_DEL,SPELL_END]);
 const BORN_MONTHS=["--","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 const MONTH_DAYS=[0,31,29,31,30,31,30,31,31,30,31,30,31];   /* FEB 29: leap birthdays are real */
 let USER_STORE=null;
-function User_Load(){try{USER_STORE=JSON.parse(localStorage.getItem("wbr_user"))||null;}catch(e){USER_STORE=null;}
+function User_Load(){try{USER_STORE=JSON.parse(Kept_Get("wbr_user"))||null;}catch(e){USER_STORE=null;}
  if(!USER_STORE)USER_STORE={name:"",mo:0,day:0,yr:""};
  /* [B7] records written before the year existed are still valid. */
  if(USER_STORE.yr===undefined)USER_STORE.yr="";}
-function User_Save(){try{localStorage.setItem("wbr_user",JSON.stringify(USER_STORE));}catch(e){}}
+function User_Save(){Kept_Set("wbr_user",JSON.stringify(USER_STORE));}
 function User_Get(){if(!USER_STORE)User_Load();return USER_STORE;}
 function User_Name(){return String(User_Get().name||"").trim();}
 /* THE ABSENT-NAME LAW, in one function. Every user-reference surface calls it. */
@@ -6310,7 +6358,7 @@ function User_Panel_Build(){
    draft standing in for Mike's. The structure is the deliverable; the voice
    is his. Marked PAPA-WORDS at each site. */
 const REC_PAGES = 5;
-function Rec_Stored(k){try{return localStorage.getItem(k)!==null;}catch(e){return false;}}
+function Rec_Stored(k){try{return Kept_Get(k)!==null;}catch(e){return false;}}
 function Rec_StoredS(k){try{return sessionStorage.getItem(k)!==null;}catch(e){return false;}}
 const REC_NONE = "NOTHING ON FILE";          /* [PAPA-WORDS] */
 /* [PAPA-WORDS] the install levels in the guest's terms, not the boot table's. */
@@ -6331,7 +6379,8 @@ function Rec_Session_Line(){
 }
 function Rec_Page(p){
  const u=User_Get(), sign=User_Sign();
- if(p===0)return {t:"YOUR RECORD",rows:[            /* [PAPA-WORDS] */
+ /* [2026-09-18] the first page says which account is in; stand-in words */
+ if(p===0)return {t:Account_Full()?"YOUR RECORD":"GUEST - NOTHING KEPT",rows:[            /* [PAPA-WORDS] */
    ["NAME",  Rec_Stored("wbr_user")&&User_Name()?User_Name_Display():REC_NONE],
    ["BORN",  Rec_Stored("wbr_user")&&User_Has_Birthdate()?User_Born_Display():REC_NONE],
    ["SIGN",  sign<0?REC_NONE:HORO_SIGNS[sign]],
@@ -6452,8 +6501,12 @@ function Rec_Keys_Local(){return ["wbr_user","wbr_health","wbr_parcel","wbr_sant
 function Rec_Keys_Session(){return [PORTAL_SIZE_KEY,FEED_WEATHER_KEY,PORTAL_SESSION_KEY];}
 function Rec_Purge(){
  const KL=Rec_Keys_Local(), KS=Rec_Keys_Session();
- for(const k of KL){try{localStorage.removeItem(k);}catch(e){}}
+ for(const k of KL){Kept_Del(k);}
  for(const k of KS){try{sessionStorage.removeItem(k);}catch(e){}}
+ /* [2026-09-18] the account goes LAST, because Kept_Del only reaches the keys
+    while the full account is in. A purged unit is a guest again, and one that
+    has never loaded anything. In the guest account there was nothing to purge. */
+ try{localStorage.removeItem("wbr_account");}catch(e){}
  USER_STORE=null;User_Load();
  health=null;Health_Load();
  parcel=null;Parcel_Load();Parcel_Sync_Menu();   /* the unlocked rows re-hide */
@@ -6586,11 +6639,11 @@ const APP_PARCELS=[
 for(const e of APP_PARCELS)PARCEL_NAMES[e.key]=e.label;
 let parcel=null, parcelPending=null, parcelParked=null, parcelState=0;
 function Parcel_Load(){
- try{parcel=JSON.parse(localStorage.getItem("wbr_parcel"))||null;}catch(e){parcel=null;}
+ try{parcel=JSON.parse(Kept_Get("wbr_parcel"))||null;}catch(e){parcel=null;}
  if(!parcel)parcel={stage:0,keys:[],firstRuns:{},engineAsks:[0,0,0],personas:false};
  if(location.search.indexOf("parcel=all")>=0)Parcel_UnlockAll(false); /* museum demo param */
 }
-function Parcel_Save(){try{localStorage.setItem("wbr_parcel",JSON.stringify(parcel));}catch(e){}}
+function Parcel_Save(){Kept_Set("wbr_parcel",JSON.stringify(parcel));}
 function Parcel_Has(k){return parcel&&(parcel.keys.indexOf(k)>=0);}
 function Parcel_SetRow(t,label,visible){
  const T=MENU_TABLE[t];if(!T)return false;
@@ -7012,7 +7065,7 @@ function Messages_Draw(m){
     26 chars (156px) on a 128px glass, and the AUDIO verb clipped too - a
     pre-existing bug this ruling surfaced. Fit_Line keeps the words and drops
     the font when it must. */
- Fit_Line(Row_03,0,m.link?MSG_LINK_VERB:
+ Fit_Line(Row_03,0,m.link?(MSG_LINK_VERBS[m.link]||MSG_LINK_VERB):
    (m.type===MSG_AUDIO)?" click=play  scroll=exit":HINT_BACK,1);
  /* top screen: the body */
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
@@ -7525,9 +7578,9 @@ let advState=ADV_COLD, advWhich=0, advBS=1, advSearch=null, advPanel=null, advNi
    or rides GLOBAL; and every such app exposes the control from within
    (the panel BS field IS the app's entry - editing it writes the store). */
 let BS_STORE=null;
-function BS_Load(){try{BS_STORE=JSON.parse(localStorage.getItem("wbr_bs"))||null;}catch(e){BS_STORE=null;}
+function BS_Load(){try{BS_STORE=JSON.parse(Kept_Get("wbr_bs"))||null;}catch(e){BS_STORE=null;}
  if(!BS_STORE)BS_STORE={global:1,apps:{advice:"G",snowglobe:"G"}};}
-function BS_Save(){try{localStorage.setItem("wbr_bs",JSON.stringify(BS_STORE));}catch(e){}}
+function BS_Save(){Kept_Set("wbr_bs",JSON.stringify(BS_STORE));}
 function BS_For(app){if(!BS_STORE)BS_Load();const e=BS_STORE.apps[app];return (e===undefined||e==="G")?BS_STORE.global:+e;}
 const BS_VALS=["GLOBAL","0","1","2","3"];
 function BS_FieldIdx(app){if(!BS_STORE)BS_Load();const e=BS_STORE.apps[app];return (e===undefined||e==="G")?0:(+e)+1;}
@@ -8606,6 +8659,143 @@ async function Boot_Offer(){
  return choice;
 }
 
+/* ============ [2026-09-18] THE SELF TEST'S QUESTION, AND THE REBOOT ========
+   THE REASON TO BOOT, as Mike ruled it: the twin arrives awake in a limited
+   GUEST ACCOUNT left over from testing; "the BIST (Built In Self Test) can
+   determine that and ask 'REMAIN IN TEST MODE' after some point, maybe quite
+   quickly. And the user can be 'pestered' over time to take the plunge already
+   and reboot! Prototype can only load into the prototype, and we let them know
+   it is the whole enchilada. There is always an option to resume the guest
+   account via another reboot, so they risk nothing."
+   THREE DOORS TO ONE QUESTION, and the question always lives in a boot:
+     1. AT THE MENU, once a visit, soon after arrival (Bist_Due): the self test
+        notices the guest account and asks. NO restarts the machine.
+     2. A NOTE FROM THE SELF TEST at a few ask counts (Bist_Pester); click
+        restarts. These are the only messages the guest account ever gets.
+     3. ANY CHOSEN BOOT (the POWER control) ends its level on the same question
+        (Boot_Account), which is also the way back to the guest.
+   `bist=off` in the address keeps doors 1 and 2 shut: the reel line drives
+   this machine on a clock and must not be asked anything.
+   ROUGH, 2026-09-18: every word on the glass below is a stand-in [PAPA-WORDS].
+   NOT YET: the Prototype's own answers (none exist); the inbox is not rebuilt
+   when the account changes mid-visit. */
+const BIST_ASK_AFTER_MS=60000, BIST_ASK_AFTER_ASKS=2, BIST_PESTER_ASKS=[6,15,40];
+let bistAwakeAt=0, bistAsked=false, bistPesterIdx=0, accountNext=null;
+function Bist_Off(){try{return new URLSearchParams(location.search).get("bist")==="off";}catch(e){return false;}}
+/* the offer's grammar, for any question: Boot_Offer is a blessed surface and is
+   not touched; this is its shape with the words passed in. Returns the index. */
+async function Glass_Offer(header,opts,idle){
+ Device_Manager[SHUTTER][BUFFER_VALUE]=EMPTY;Device_Manager[ROTARY_DIAL][BUFFER_VALUE]=EMPTY;
+ let sel=0;
+ const draw=function(){
+  Activate_the_Screen(FRONT_SCREEN,true);           /* clear before write */
+  Fit_Centered(1,header,0);
+  Fit_Centered(12,SEL_OPEN+opts[sel]+SEL_CLOSE,0);
+  Fit_Centered(23,"scroll = change    click = choose",1);
+  setFont(1);
+ };
+ await Stage_Change(FRONT_SCREEN,draw);
+ Mon_Say("F ASKS THE OWNER");
+ let choice=null;const t0=performance.now();          /* HUMAN CLOCK */
+ while(choice===null){
+  HW_Rescan_All_Input_Buffers();
+  if(Pull_From_Buffer(ROTARY_DIAL)){sel=(sel+1)%opts.length;PlaySound(Scroll);draw();}
+  else if(Pull_From_Buffer(SHUTTER)){choice=sel;PlaySound(Select);}
+  else {Heart_Tick();await sleep(60);}
+  if(performance.now()-t0>120000)choice=idle;         /* never hang the bench */
+ }
+ return choice;
+}
+/* every store the gate covers, read again - the list is Rec_Purge's own */
+function Account_Reload(){
+ try{USER_STORE=null;User_Load();}catch(e){}
+ try{health=null;Health_Load();}catch(e){}
+ try{parcel=null;Parcel_Load();Parcel_Sync_Menu();}catch(e){}
+ try{sonBest=null;SON_LoadBest();}catch(e){}
+ try{BS_STORE=null;BS_Load();}catch(e){}
+ try{Bias_Load();}catch(e){}
+ try{userPanel=User_Panel_Build();}catch(e){}
+}
+async function Boot_Load_Prototype(){
+ await Boot_Say([" DIALING"]);
+ await Dial_Handshake();
+ await Boot_Say([" UNIT 0.4"," PROTOTYPE RECORD"]);await Beat("it loads only here",1200);
+ Mon_Say("F PULLING CONTENT");
+ Mon_StartConnection(2);
+ await Boot3_Chatter(3500,true);
+ PlaySound(ConnectionSuccess);
+ await Boot_Say([" EVERYTHING LOADED"," NOTHING HELD BACK"]);await Beat("the whole of it",1300);
+}
+/* ACT 5b of any chosen boot: which account comes up. */
+async function Boot_Account(){
+ const st=Account_State(), was=(st==="full");
+ await Boot_Say([" SELF TEST"," ACCOUNT CHECK"]);await Beat("the bist looks",800);
+ let want;
+ if(accountNext!==null){want=accountNext;accountNext=null;}
+ else if(st===""){
+  await Boot_Say([" GUEST ACCOUNT"," LEFT FROM TESTING"]);await Beat("found out",1200);
+  want=(await Glass_Offer("REMAIN IN TEST MODE?",["YES - STAY A GUEST","NO - LOAD UNIT 0.4"],0))===1;
+ } else {
+  want=(await Glass_Offer("LOAD WHICH ACCOUNT",["UNIT 0.4","GUEST - TEST MODE"],was?0:1))===0;
+ }
+ if(want&&st==="")await Boot_Load_Prototype();
+ if(want!==was||st===""){
+  if(want||st!=="")Account_Set(want);        /* a guest who stays a guest writes nothing at all */
+  Account_Reload();
+  if(want){try{Messages_Account_In();Messages_Trigger("first_boot");}catch(e){}}
+ }
+ await Boot_Say(want?[" UNIT 0.4"," FULL ACCOUNT"]:[" GUEST ACCOUNT"," NOTHING IS KEPT"]);
+ await Beat("the account is in",1100);
+ bistAsked=true;                             /* asked and answered, this visit */
+}
+/* off, a breath of dark, and on again - the boot then asks nothing, because
+   the person already answered. */
+async function Account_Restart(full){
+ if(bootRunning||!unitPowered)return;
+ accountNext=!!full;
+ unitPowered=false;Visit_Mark_Write();
+ try{speechSynthesis.cancel();}catch(e){}
+ try{Radio_StopAudio();}catch(e){}
+ try{await CRT_PowerOff();}catch(e){}
+ Power_Standby();
+ await sleep(900);
+ devPower();
+}
+function Bist_Due(){
+ /* called every OS tick: the cheap tests first, the store and the address last */
+ if(bistAsked)return false;
+ if(!bistAwakeAt){bistAwakeAt=performance.now();return false;}
+ if(!((performance.now()-bistAwakeAt>BIST_ASK_AFTER_MS)||(askCount>=BIST_ASK_AFTER_ASKS)))return false;
+ if(Bist_Off()||Account_State()!==""){bistAsked=true;return false;}
+ return true;
+}
+async function Bist_Ask(){
+ if(bootRunning)return;
+ bootRunning=true;bistAsked=true;                  /* the OS holds while a person decides */
+ let stay=true;
+ try{
+  PlaySound(BeepsAndBoops);
+  await Boot_Say([" SELF TEST"," GUEST ACCOUNT"," LEFT FROM TESTING"]);await Beat("found out",1600);
+  stay=(await Glass_Offer("REMAIN IN TEST MODE?",["YES - STAY A GUEST","NO - RESTART"],0))===0;
+  if(stay){await Boot_Say([" TEST MODE"," NOTHING IS KEPT"]);await Beat("as you were",1100);}
+ }catch(e){try{chip("miss","[BIST] "+(e&&e.message?e.message:e));}catch(e2){}}
+ Activate_the_Screen(TOP_SCREEN,true);System_Monitor();
+ Activate_the_Screen(FRONT_SCREEN,true);Draw_the_Menu_Screen();Draw_the_Menu_Line();
+ currentState=MENU_SYSTEM_COLD_START;
+ bootRunning=false;
+ if(!stay)Account_Restart(true);
+}
+/* the pestering: composed live from the real count, like every unscripted note */
+function Bist_Pester(){
+ if(Bist_Off()||Account_Full()||bistPesterIdx>=BIST_PESTER_ASKS.length)return;
+ if(askCount<BIST_PESTER_ASKS[bistPesterIdx])return;
+ bistPesterIdx++;
+ Unscripted_Send("SELF TEST","Still In Test Mode",
+  "You have asked "+askCount+" questions_as a guest. None were kept._"+
+  "Unit 0.4 has an account of its own._Restart to load it. Restart again_"+
+  "to come back. Nothing is risked._[PAPA - wording slot]","account");
+}
+
 /* ---- the level branches, each its own block ----------------------------- */
 async function Boot_Level_1(){
  await Beat("the machine looks for itself",650);
@@ -8731,6 +8921,12 @@ async function Boot_Ballet(opts){
  if(lvl<=0)      outcome=await Boot_Level_1();
  else if(lvl===1)outcome=await Boot_Level_2();
  else            outcome=await Boot_Level_3();
+ /* ACT 5b - THE ACCOUNT [2026-09-18]. The reason anybody chooses a boot. Not
+    in a preview or the sandbox (nothing may be written there), not before the
+    virgin install's restart (the question belongs to the boot that finishes),
+    and not when the reel line has asked to be left alone. */
+ if(opts.account!==false&&!PREVIEW_ON&&!SANDBOX_ON&&outcome!=="restart"&&(accountNext!==null||!Bist_Off()))
+  await Boot_Account();
  /* ACT 6 - THE HANDOFF, IN TANDEM. */
  await Tandem_Finish();
  Hum_Stop();
@@ -9931,11 +10127,11 @@ async function Preview_Boot(){
 let health=null, monRetriesLast=0;
 const H_CARE_GAIN=15, H_ASK_COST=0.15, H_BOOT_COST=1.0, H_GLITCH_COST=0.2,
       H_RETRY_AT=85, H_ADVISE_AT=50;
-function Health_Load(){try{health=JSON.parse(localStorage.getItem("wbr_health"))||null;}catch(e){health=null;}
+function Health_Load(){try{health=JSON.parse(Kept_Get("wbr_health"))||null;}catch(e){health=null;}
  if(!health)health={h:100,powerOns:0,careCount:0};
  if(health.ageSessions===undefined)health.ageSessions=0; /* [C5] the clock starts at day-0; existing machines RESET to day-0 truth (walk ruling) */
  monNotOK=(health.h<H_ADVISE_AT);}
-function Health_Save(){try{localStorage.setItem("wbr_health",JSON.stringify(health));}catch(e){}}
+function Health_Save(){Kept_Set("wbr_health",JSON.stringify(health));}
 function Health_H(){return health?health.h:100;}
 function Health_Spend(cost){if(!health)return;
  health.h=Math.max(20,health.h-cost);Health_Save();

@@ -40,7 +40,7 @@ PLAYS = {
 
 INIT_JS = r"""
 (() => {
-  const fix = v => (typeof v === 'string' && v.includes('twin.html') && !v.includes('parcel=all')) ? v + (v.includes('?') ? '&' : '?') + 'parcel=all' : v;
+  const fix = v => (typeof v === 'string' && v.includes('twin.html') && !v.includes('parcel=all')) ? v + (v.includes('?') ? '&' : '?') + 'parcel=all&bist=off' : v;
   const d = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'src');
   Object.defineProperty(HTMLIFrameElement.prototype, 'src', { get() { return d.get.call(this); }, set(v) { d.set.call(this, fix(v)); }, configurable: true });
   const sa = Element.prototype.setAttribute;
