@@ -532,7 +532,8 @@
     "qa-line",
     "launch-days",
     "qa-list-in",
-    "launch-queued"
+    "launch-queued",
+    "buffer-proof"
    ],
    "gates": {
     "look": {
@@ -576,7 +577,8 @@
    "owner": "Ops",
    "tasks": [
     "qa-line",
-    "channels"
+    "channels",
+    "buffer-proof"
    ],
    "skip": [
     "real",
@@ -617,7 +619,8 @@
    "tasks": [
     "material-rulings",
     "number-sitting",
-    "number-queued"
+    "number-queued",
+    "buffer-proof"
    ],
    "gates": {
     "real": {
@@ -664,7 +667,8 @@
    "name": "The ask reel on MGK-NIAC",
    "owner": "Ops",
    "tasks": [
-    "ask-range"
+    "ask-range",
+    "buffer-proof"
    ],
    "skip": [
     "volume"
@@ -687,7 +691,8 @@
    "name": "The sexy-shoot reel",
    "owner": "Ops",
    "tasks": [
-    "shoot-reel-story"
+    "shoot-reel-story",
+    "buffer-proof"
    ],
    "who": {
     "volume": "Ops"

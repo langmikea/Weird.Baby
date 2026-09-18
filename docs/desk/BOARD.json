@@ -2,7 +2,7 @@
  "as_of": "2026-09-18",
  "must_have_ruled": null,
  "deliverables": 55,
- "not_on_track": 1,
+ "not_on_track": 0,
  "columns": [
   {
    "id": "qa",
@@ -10,22 +10,12 @@
    "name": "Q&A reel",
    "outcome": "O3",
    "count": 3,
-   "red": 1,
+   "red": 0,
    "done": 0.3757575757575758,
-   "on": 0.5333333333333333,
-   "off": 0.0909090909090909,
+   "on": 0.6242424242424243,
+   "off": 0,
    "later": [],
-   "lines": [
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops",
-     "need": "2026-10-25",
-     "rule": 5,
-     "names": [
-      "The hot Q&A lane"
-     ]
-    }
-   ]
+   "lines": []
   },
   {
    "id": "number",
@@ -196,16 +186,9 @@
    "name": "The hot Q&A lane",
    "owner": "Ops",
    "pct": 73,
-   "status": "off",
+   "status": "on",
    "next": "2026-10-25",
-   "reasons": [
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops",
-     "need": "2026-10-25",
-     "rule": 5
-    }
-   ]
+   "reasons": []
   },
   {
    "id": "beat",

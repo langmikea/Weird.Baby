@@ -1,11 +1,11 @@
 # THE BOARD'S GRADE — 2026-09-18
 
-42 days to the door (10-30), 52 to the Number (11-09). 55 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **1 not on track**.
+42 days to the door (10-30), 52 to the Number (11-09). 55 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **0 not on track**.
 Written by tools/board.mjs from docs/desk/BOARD-PLAN.json. Rules: docs/BOARD-PLAN-20260918.md.
 
 ```
 COLUMN                  done  on track  NOT on track   (things, red)
-Q&A reel                38%      53%          9%      (3, 1)
+Q&A reel                38%      62%          0%      (3, 0)
 Number reel             15%      85%          0%      (1, 0)
 Ask reel                36%      64%          0%      (1, 0)
 Shoot reel               0%     100%          0%      (1, 0)
@@ -28,11 +28,7 @@ The system              30%      70%          0%      (7, 0)
 
 ## Not on track
 
-**Q&A reel**
-
-```
-The hot Q&A lane - no work is scheduled for it (Ops) - needed by 10-25
-```
+Nothing.
 
 ## Tasks that serve no deliverable (challenge them, or name what they serve)
 
