@@ -145,6 +145,16 @@
    "long": "Sunday question 6's rulings written into docs/MATERIAL-20260917.json and the page regenerated; the porch pieces ruled A into reels/numbers.json for the launch run"
   },
   {
+   "id": "slice-day-1",
+   "date": "2026-09-21",
+   "owner": "ops",
+   "title": "The slice: day 1, end to end, on stand-ins",
+   "do": [
+    "One drop (day 1: the Everyday, Answers, MGK-NIAC) walked as a stranger in the development stage: the reel, its caption link, the landing, the album with the track open, the machine playing, nothing unreleased on its menu; a queued post if the Buffer key is in. Stand-ins everywhere. One page back: what worked, what broke, how long each step really took."
+   ],
+   "long": "Pilot before volume, applied to the whole launch: the seams are where launches break (Ops’ pick for an unattended day, 09-18)"
+  },
+  {
    "id": "shoot-pilot-script",
    "date": "2026-09-22",
    "owner": "ops",

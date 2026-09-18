@@ -886,7 +886,8 @@
    "owner": "Ops",
    "tasks": [
     "ruling-2",
-    "landing"
+    "landing",
+    "slice-day-1"
    ],
    "gates": {},
    "dur": {
