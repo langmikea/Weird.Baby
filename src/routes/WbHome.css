@@ -95,6 +95,9 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
 .wb-right { display: flex; flex-direction: column; justify-content: center; padding: 48px 52px; overflow: hidden; position: relative; }
 .wb-note { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.75; color: #2b2924; margin-bottom: 10px; }
 .wb-note em { color: #2b2924; font-style: italic; }
+/* [2026-09-18] THE LOBBY LINE ("We open 10/31", then "We are open!"). The note's
+   own face one step up, so it reads as the note's headline and not as a banner. */
+.wb-open-line { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.45rem, 2.2vw, 2rem); line-height: 1.2; color: #2b2924; margin: 0 0 14px; }
 /* [2026-08-11] THE ONE WORD THAT IS A DOOR. Mike ruled the lobby's promise
    opens the Record itself — "one word, one link", no banner and no button. It
    inherits the note's face, size and colour and takes ONLY an underline, so the

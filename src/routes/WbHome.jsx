@@ -140,6 +140,9 @@ import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
    tab — which is exactly the tab this has to be correct in. */
 const DOORS_OPEN_AT = recordVisibleAt(RECORD_EPOCH);
 
+/* [2026-09-18] day one as the lobby line says it: "10/31". Derived, never typed. */
+const DOOR_MD = RECORD_EPOCH.slice(5).split("-").map(Number).join("/");
+
 function remainingAt(ms) {
   const left = DOORS_OPEN_AT - ms;
   if (left <= 0) return null;
@@ -1292,6 +1295,17 @@ export default function WbHome() {
               IT SUPERSEDES OPTION 3, AND THE SUPERSEDED RULING IS KEPT WHERE IT
               WAS MADE — the countdown's comment block at the head of this file,
               amended rather than deleted. */}
+          {/* ═══ [2026-09-18] THE LOBBY LINE — MIKE: *"Post 'We open 10/31'…
+              10/31: Post 'We are open!', no other changes are needed by me at
+              that time."* Both sentences are his. It turns on `robotsOpen`, the
+              same live value as the note beneath it, so the line, the note, the
+              countdown and the board's `\Robots` row cannot disagree and nobody
+              touches anything on the day. THE DATE IS NOT TYPED: `DOOR_MD` is
+              `RECORD_EPOCH` read as month/day, so a slip still moves one field.
+              The notes beneath are his shipped words and stand as shipped. */}
+          <p className="wb-open-line">
+            {robotsOpen ? "We are open!" : <>We open {DOOR_MD}</>}
+          </p>
           {robotsOpen ? (
             <p className="wb-note">
               Welcome.<br /><br />

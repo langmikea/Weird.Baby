@@ -112,8 +112,34 @@
    2026-08-24 and it is accurate as history; its *"The site restarts Sunday
    30 August"* is superseded by this block and not by an edit to it (OPERATIONS
    §0, VERBATIM — a paraphrase filed in his class is indistinguishable from his
-   own sentence a week later). */
-export const RECORD_EPOCH = "2026-09-07";
+   own sentence a week later).
+
+   ═══ [2026-09-18] RULING E — THE DATE MOVED A THIRD TIME, TO 2026-10-31, AND
+       THIS TIME IT MOVED AFTER THE DAY HAD ALREADY COME ═══════════════════════
+   MIKE, 2026-09-18: *"Site goes live on the 31st, stroke of midnight. It's a
+   Saturday so the team can work through problems."* And the same day: *"Make the
+   official birthday of the site 10/31 in lore. TODAY: post 'We open 10/31',
+   close robots."*
+
+   WHAT RULING D'S COROLLARY WARNED ABOUT IS WHAT HAPPENED. The reset of
+   2026-09-10 retired the 60-day story and nobody moved this line, so the wing
+   opened itself on 7 September and stood open on a story that was no longer the
+   plan. This move is what shuts it: with day one ahead of the clock again the
+   Record has no visible entry, `wing-open.js` closes `/robots`, and the lobby
+   countdown re-arms. One line, the third proof.
+
+   DAY ONE IS A SATURDAY, AND THE MONDAY RULE IS KNOWINGLY BROKEN. The ten
+   `MON…FRI` rows in `reveal/week-one.mjs` and `reveal/week-two.mjs` and the day
+   column of `tools/arc.mjs` belong to the retired story; `npm run dictation`
+   will refuse to build against this epoch and `docs/ARC.md` is wrong under it.
+   Neither is on the build's path and neither is run. The entries in
+   `robots-record.js` re-date themselves from this line and are NOT what opens on
+   the 31st; what the wing carries that day is the launch plan's work, deployed
+   before it (`docs/PLAN-20260918-LAUNCH.md`).
+
+   THE STROKE OF MIDNIGHT IS NOT THIS LINE. It is `RECORD_HOUR` in
+   `reveal/record-clock.mjs`, moved the same day for the same ruling. */
+export const RECORD_EPOCH = "2026-10-31";
 
 /* [L4 2026-08-09] EVERY OTHER ENTRY'S DATE IS COUNTED FROM IT, NOT TYPED.
    Mike: "DATES from the epoch: D1 = 2026-08-17 Monday, D2 = 08-18, D3 = 08-19,
