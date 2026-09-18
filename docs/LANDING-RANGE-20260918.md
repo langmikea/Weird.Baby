@@ -54,3 +54,25 @@ first, or the machine first?
 ## Pointed at, 2026-09-18
 
 Mike: **"B"**. The stranger meets the machine first. Logged in `docs/desk/BOARD-DECISIONS.md`.
+
+## Arrive awake, built 2026-09-18 (evening)
+
+- The twin has a recipe `arrive`: powered, past the ceremony, an established
+  unit. `?at=<catalogue row id>` stands it on the day's feature; the map is
+  `ARRIVE_AT` in twin.html (robots `tools/viiip_twin.html` is master), written
+  as menu labels, so `Arrive_Check()` in the twin's console names any drop
+  whose path stops walking. All 23 walk today.
+- A drop track's RUN and the `/run` landing both send it. Seen on the dev
+  server, phone size, `/robots/everyman-answers/run`: lit in about four
+  seconds on ASK MGK with MGK-NIAC selected; one CLICK runs Answers; Back
+  returns through Answers to the four doors.
+- An id the twin does not know lands at the four doors, awake. Day 2
+  ("Starting") plays the boot, because the boot is that day's feature. A
+  machine the visitor switched off stays off.
+- The boot is still one press away for anyone who chooses it (POWER).
+
+**Not fixed, and not a setting:** the plate reads "The Informer" because those
+words are in the photograph the twin is drawn on
+(`MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png`). There is one such photograph.
+The right unit on the glass needs either a picture per unit or a plate that
+names no unit. His to point at.

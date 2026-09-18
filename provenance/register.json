@@ -17179,6 +17179,20 @@
    "t": "RUN",
    "c": "HOUSE",
    "n": "the button on a drop's track that opens the machine: the Portal's own word (TERMINAL.EXE carried a RUN button until 2026-08-26). A stand-in label on a rough shape, 2026-09-18; Mike points at the landing's shape before it is final."
+  },
+  "4a0f9fe6ca38032c": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 159,
+   "t": "arrive",
+   "c": "HOUSE",
+   "n": "a recipe id in twin.html's PORTAL_RECIPES, sent in the address and never printed: the machine arrives awake (Mike, 2026-09-18)."
+  },
+  "51f6f0d70070266d": {
+   "f": "src/routes/robots/RobotsExhibitFlow.jsx",
+   "l": 676,
+   "t": "at",
+   "c": "HOUSE",
+   "n": "a query-string key beside `preset` and `day`, never printed: the catalogue id of the drop the twin lands on."
   }
  }
 }

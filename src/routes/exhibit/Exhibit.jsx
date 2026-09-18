@@ -5403,6 +5403,11 @@ export default function Exhibit({ artist, open = null }) {
                                    on the served page by counting `.ps-chy-x`
                                    and reading 0. */
                                 bezel: face.action.bezel,
+                                /* [2026-09-18] an arrival recipe and the drop
+                                   it lands on ride the same way: declared
+                                   fields, copied, and nothing learned. */
+                                preset: face.action.preset,
+                                at: face.action.at,
                               } })
                             )}
                           >{face.action.label}</button>

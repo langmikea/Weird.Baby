@@ -11285,8 +11285,9 @@ function Portal_Build(st,bezSrc,artSrc){
 function Preset_Params(){
  try{
   const q=new URLSearchParams(location.search);
-  return {id:(q.get("preset")||"").trim().toLowerCase(), day:(q.get("day")||"").trim()};
- }catch(e){return {id:"",day:""};}
+  return {id:(q.get("preset")||"").trim().toLowerCase(), day:(q.get("day")||"").trim(),
+          at:(q.get("at")||"").trim().toLowerCase()};
+ }catch(e){return {id:"",day:"",at:""};}
 }
 /* A DATE IS A SEED. The Record's days must be reproducible: the same date
    must draw the same weather on every machine, forever, so the seed is a hash
@@ -11346,8 +11347,94 @@ const PORTAL_RECIPES={
  "test-bench":     {power:"on", level:2, dev:true},
  /* carried, still wired, currently unexposed */
  "clean-boot":     {power:"on", level:0},
- "record-day":     {power:"on", level:2, day:"1965-01-01"}
+ "record-day":     {power:"on", level:2, day:"1965-01-01"},
+ /* [2026-09-18] THE MACHINE ARRIVES AWAKE. MIKE: "The boot sequence should be
+    reserved for the boot process." A visitor from a reel meets an established
+    unit that is already running, standing on the day's feature (`?at=<row>`,
+    below). `awake` is the resume branch's own move - powered, past the
+    ceremony - taken WITHOUT asking for a visit mark, because the stranger has
+    none. The boot still plays whenever somebody chooses it: the POWER control
+    is untouched, and the one drop whose feature IS the boot says so in
+    `ARRIVE_AT`. This supersedes the 07-31 reading that first sight must
+    always perform the install; that ruling served the slow reveal. */
+ "arrive":         {awake:true, level:2}
 };
+/* ======== [2026-09-18] WHERE A DROP STANDS IN THE MENU ====================
+   One row per catalogue drop (museum docs/CATALOGUE, page `feature`), keyed by
+   the catalogue's own row id, so the museum sends an id and knows nothing about
+   the menu. A path is LABELS, walked from the doors root through the live
+   tables; the last label is the row the visitor finds selected, and one CLICK
+   is theirs to make. No table number is typed here, so a re-cut menu breaks a
+   path loudly (`Arrive_Check()` names it) instead of landing somewhere wrong.
+   A label matches whole, else as a prefix, so "ELIZ" finds "ELIZ [-02]".
+   AN UNKNOWN ID, OR A PATH THAT NO LONGER WALKS, LANDS AT THE ROOT: awake, no
+   dead end, chipped. `boot:true` is the drop whose feature is the boot itself:
+   there the ceremony is the point, and it plays. */
+const ARRIVE_AT={
+ "engine.niac":            {path:["Answers","ASK MGK","MGK-NIAC"]},
+ "twin.app.answers":       {path:["Answers","ASK MGK","MGK-NIAC"]},
+ "twin.boot":              {boot:true},
+ "twin.monitor":           {path:[]},
+ "twin.app.user.name":     {path:["Settings","User","Name"]},
+ "twin.app.polarity":      {path:["Settings","Preferences","Polarity"]},
+ "twin.app.clarity":       {path:["Settings","Preferences","Clarity"]},
+ "twin.app.probabilities": {path:["Answers","Probabilities"]},
+ "twin.app.messages":      {path:["Messages"]},
+ "twin.app.detectors":     {path:["Programs","Detectors"]},
+ "twin.app.bs":            {path:["Programs","Detectors","Bullshit Detector"]},
+ "twin.game.tictactoe":    {path:["Programs","Games","Tic"]},
+ "twin.game.snowglobe":    {path:["Programs","Games","Snow"]},
+ "engine.v2":              {path:["Answers","ASK MGK","MGK-v2.0"]},
+ "twin.app.eliza":         {path:["Answers","ELIZ"]},
+ "twin.app.brain":         {path:["Programs","Brain Training"]},
+ "twin.app.ink":           {path:["Programs","Inkblots"]},
+ "twin.game.blackjack":    {path:["Programs","Casino","Blackjack"]},
+ "twin.game.roulette":     {path:["Programs","Casino","Roulette"]},
+ "twin.game.craps":        {path:["Programs","Casino","Craps"]},
+ "twin.game.slots":        {path:["Programs","Casino","Slots"]},
+ "twin.app.advice.panel":  {path:["Answers","Advice","Work Advice"]},
+ "twin.app.radio":         {path:["Programs","Radio"]},
+ "twin.app.tap":           {path:["Programs","Phone Tap"]}
+};
+function Arrive_Walk(labels){
+ if(typeof DOORS_ROOT==="undefined"||DOORS_ROOT<0)return null;
+ let t=DOORS_ROOT, r=0; const trail=[];
+ for(let i=0;i<labels.length;i++){
+  const want=String(labels[i]).toLowerCase(), T=MENU_TABLE[t];
+  if(!T)return null;
+  let hit=-1, pre=-1;
+  for(let k=0;k<T.length;k++){
+   const v=String((T[k]&&T[k][lineName])||"").toLowerCase();
+   if(v===".end")break;
+   if(v===want){hit=k;break;}
+   if(pre<0&&v.indexOf(want)===0)pre=k;
+  }
+  if(hit<0)hit=pre;
+  if(hit<0)return null;
+  r=hit;
+  if(i<labels.length-1){
+   const p=MENU_PARAMETER_TABLE[t][r];
+   if(!p||p[links_to_Exe]===1)return null;   /* a program is a place to stand, not a door */
+   trail.push([t,r]);
+   t=p[linked_menuNum]; r=p[linked_lineNum];
+  }
+ }
+ return {t:t,r:r,trail:trail};
+}
+function Arrive_Stand(w){
+ menuNum_PTR=w.t; lineNum_PTR=w.r;
+ menuTrail=w.trail.slice(); menuDepth=w.trail.length;   /* Back returns the way a walk would have come */
+ currentState=MENU_SYSTEM_COLD_START;
+ try{Active_Process_Name=get_as_char(lineName);}catch(e){}
+}
+/* the bench's check, and the museum's: every row still walks, or is named */
+function Arrive_Check(){
+ const bad=[];
+ for(const id in ARRIVE_AT){const a=ARRIVE_AT[id];
+  if(a.boot)continue;
+  if(!Arrive_Walk(a.path||[]))bad.push(id);}
+ return bad;
+}
 function Preset_Day_Seed_For(day){return Preset_Day_Seed(day);}
 function Portal_Preset_Apply(){
  const p=Preset_Params();
@@ -11388,6 +11475,27 @@ function Portal_Preset_Apply(){
      did.push("resumed - left powered down, and stays down");
     }
    } else did.push("no mark this visit - the returning machine");
+  }
+  /* [2026-09-18] ARRIVE AWAKE, ON THE DAY'S FEATURE. A machine the visitor
+     switched off earlier this visit stays off: leaving it as they left it
+     outranks the landing. */
+  if(r.awake){
+   const a=p.at?ARRIVE_AT[p.at]:null;
+   const mark=Visit_Mark_Read();
+   if(mark&&!mark.powered){
+    resumed=true;did.push("left powered down this visit, and stays down");
+   } else if(a&&a.boot&&!(mark&&mark.booted)){
+    if(!unitPowered&&typeof devPower==="function"){devPower();did.push("the boot is today's feature - it plays");}
+    resumed=true;
+   } else {
+    resumed=true;
+    unitPowered=true;Visit_Mark_Write();
+    did.push("awake - powered, past the ceremony");
+    const w=Arrive_Walk(a&&a.path?a.path:[]);
+    if(p.at&&!a)did.push("unknown drop '"+p.at+"' - standing at the root");
+    else if(a&&!w)did.push("the path for '"+p.at+"' no longer walks - standing at the root");
+    if(w){Arrive_Stand(w);if(w.trail.length||w.r)did.push("standing on "+get_as_char(lineName));}
+   }
   }
   if(!resumed&&r.power!==undefined&&typeof unitPowered!=="undefined"&&typeof devPower==="function"){
    const want=(r.power==="on");

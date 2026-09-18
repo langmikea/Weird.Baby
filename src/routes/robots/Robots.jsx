@@ -192,6 +192,7 @@ export default function Robots({ open = null, run = false }) {
     if (!act || !act.event) return undefined;
     const id = setTimeout(() => window.dispatchEvent(new CustomEvent(act.event, { detail: {
       album: album.id, src: act.src, frameTitle: act.frameTitle, bezel: act.bezel,
+      preset: act.preset, at: act.at,
     } })), 0);
     return () => clearTimeout(id);
     /* once per landing: `found` and `at` are the landing; the spine's later

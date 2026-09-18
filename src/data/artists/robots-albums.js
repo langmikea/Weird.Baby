@@ -151,7 +151,12 @@ function dropTracks(albumKey, title, sub, runDay) {
         subtitle: sub,
         blurb: r.pitch,
         entries: [],
-        action: LATCH.event ? { label: "RUN", event: LATCH.event, src: LATCH.src, frameTitle: r.name, bezel: LATCH.bezel } : undefined,
+        /* [2026-09-18] the machine arrives awake, on this drop: `arrive` is a
+           recipe in twin.html and `at` is this row's own catalogue id, which
+           the twin's `ARRIVE_AT` turns into a place in its menu. An id the twin
+           does not know lands at its root, awake. */
+        action: LATCH.event ? { label: "RUN", event: LATCH.event, src: LATCH.src, frameTitle: r.name, bezel: LATCH.bezel,
+                                preset: "arrive", at: r.id } : undefined,
         footer: `${title.toUpperCase()} · ${r.name.toUpperCase()}`,
       },
     }));

@@ -671,6 +671,9 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
       const q = new URLSearchParams({ user: "1" });
       if (d.preset) q.set("preset", String(d.preset));
       if (d.day) q.set("day", String(d.day));
+      /* [2026-09-18] `at` is a drop's catalogue id, forwarded as `preset` and
+         `day` are: the twin owns what it means. */
+      if (d.at) q.set("at", String(d.at));
       /* [2026-08-27] THE VIEW IS NOT IN THE ADDRESS ANY MORE, AND THAT IS
          WHAT STOPS THE REBOOT. It was `q.set("view", ...)` here, which made
          channel 4's src differ from channel 3's by one parameter — and a
