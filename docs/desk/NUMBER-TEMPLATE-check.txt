@@ -1,0 +1,203 @@
+THE NUMBER'S TEMPLATE: every piece's lines timed against the tape's words (tools/numbers-template.py)
+A word marked ~ was not found on the tape by the aligner and takes its time from its neighbours.
+
+coconuts-w1-hook  (37 of 38 words found on the tape)
+     1.2-  8.1  Coconuts. Coconuts. This whole world is going coconuts.
+                D@1.5 A@3.2 E@4.3 A@6.1
+     8.1- 15.0  Coconuts. Coconuts. I ~wanna go coconuts with you.
+                D@8.3 A@9.7 E@11.4 A@11.7 E@12.5 A@13.0
+    15.0- 20.1  Coconuts. Coconuts. This whole world is going coconuts,
+                D@15.2 A@16.4 E@17.2 A@19.3
+    20.1- 23.5  but I can't think of anything I'd rather do,
+                D@20.8 A@22.7
+    23.5- 28.5  than go coconuts with you.
+                E@24.3 A@24.6 E@25.3 A@25.8
+
+coconuts-w1-verse  (58 of 59 words found on the tape)
+     0.2-  3.4  ~I'll even get the chair, so I could get the egg,
+                D@0.7 A@2.5
+     3.4-  7.2  so I could cook it up, so I could get your bread.
+                E@4.1 A@5.8
+     7.2- 10.0  I'll do anything that you want me to,
+                D@7.7 A@9.4
+    10.0- 14.1  just to go coconuts with you.
+                E@11.0 A@11.4 E@12.1 A@12.6
+    14.1- 19.6  Coconuts. Coconuts. This whole world is going coconuts,
+                D@14.4 A@15.2 E@16.8 A@18.8
+    19.6- 22.8  but I can't think of anything I'd rather do,
+                D@20.2 A@22.1
+    22.8- 27.7  than go coconuts with you.
+                E@23.8 A@24.0 E@24.8 A@25.3
+
+coconuts-w1-bridge  (53 of 53 words found on the tape)
+     0.2-  4.1  You know, as we get old, or so I'm told,
+                D@1.3 A@2.7
+     4.1-  7.2  the bonds of love remain in our control.
+                E@4.4 A@6.1
+     7.2- 10.2  So keep this song close to you,
+                D@7.7 A@9.0
+    10.2- 14.1  and I'll go coconuts with you.
+                E@11.2 A@11.4 E@12.2 A@12.7
+    14.1- 19.7  Coconuts. Coconuts. This whole world is going coconuts,
+                D@14.4 A@15.4 E@16.8 A@18.8
+    19.7- 22.8  but I can't think of anything I'd rather do,
+                D@20.2 A@22.0
+    22.8- 27.4  than go coconuts with you.
+                E@23.6 A@23.9 E@24.6 A@25.0
+
+coconuts-w1-hook-again  (49 of 49 words found on the tape)
+     0.0-  3.3  When things get tough, when times get rough,
+                D@0.3 A@2.0
+     3.3-  6.6  remember that you are enough.
+                E@3.6 A@5.3
+     6.6-  9.6  You will pull through, and when you do,
+                D@7.1 A@8.8
+     9.6- 12.7  I'm gonna go coconuts with you.
+                E@10.3 A@10.9 E@11.6 A@12.0
+    12.7- 19.1  Coconuts. Coconuts. This whole world is going coconuts,
+                D@12.9 A@14.9 E@16.2 A@18.2
+    19.1- 22.3  but I can't think of anything I'd rather do,
+                D@19.6 A@21.4
+    22.3- 27.9  than go coconuts with you.
+                E@23.1 A@23.3 E@24.1 A@24.5
+
+coconuts-w2-hook  (38 of 38 words found on the tape)
+     2.4-  8.1  Coconuts. Coconuts. This whole world is going coconuts.
+                D@2.7 A@3.5 E@4.6 A@6.4
+     8.1- 16.4  Coconuts. Coconuts. I wanna go coconuts with you.
+                D@8.3 A@10.1 E@11.6 A@12.2 E@13.0 A@13.3
+    16.4- 20.8  Coconuts. Coconuts. This whole world is going coconuts,
+                D@16.6 A@17.2 E@18.4 A@19.9
+    20.8- 23.9  but I can't think of anything I'd rather do,
+                D@21.4 A@23.3
+    23.9- 29.3  than go coconuts with you.
+                E@24.9 A@25.2 E@26.0 A@26.5
+
+coconuts-w2-verse  (58 of 59 words found on the tape)
+     0.0-  3.1  ~I'll even get the chair, so I could get the egg,
+                D@0.6 A@2.2
+     3.1-  7.0  so I could cook it up, so I could get your bread.
+                E@3.9 A@5.5
+     7.0-  9.9  I'll do anything that you want me to,
+                D@7.6 A@9.1
+     9.9- 14.6  just to go coconuts with you.
+                E@10.7 A@11.1 E@11.8 A@12.3
+    15.1- 19.5  Coconuts. Coconuts. This whole world is going coconuts,
+                D@15.3 A@16.0 E@16.9 A@18.6
+    19.5- 23.0  but I can't think of anything I'd rather do,
+                D@20.1 A@22.0
+    23.0- 27.7  than go coconuts with you.
+                E@23.8 A@24.0 E@24.8 A@25.3
+
+coconuts-w2-bridge  (52 of 52 words found on the tape)
+     0.1-  4.1  You know, as we get old, so I'm told,
+                D@1.4 A@2.6
+     4.1-  7.5  the bonds of love remain in our control.
+                E@4.5 A@6.3
+     7.5- 10.2  So keep this song close to you,
+                D@8.1 A@9.2
+    10.2- 13.7  and I'll go coconuts with you.
+                E@11.2 A@11.5 E@12.3 A@12.8
+    13.7- 20.0  Coconuts. Coconuts. This whole world is going coconuts,
+                D@13.9 A@15.9 E@17.6 A@19.1
+    20.0- 23.3  but I can't think of anything I'd rather do,
+                D@20.6 A@22.5
+    23.3- 28.1  than go coconuts with you.
+                E@24.1 A@24.4 E@25.1 A@25.6
+
+coconuts-w2-hook-again  (50 of 50 words found on the tape)
+     0.6-  4.1  Now when things get tough, when times get rough,
+                D@1.0 A@2.7
+     4.1-  7.5  remember that you are enough.
+                E@4.4 A@6.2
+     7.5- 10.5  You will pull through, and when you do,
+                D@7.9 A@9.7
+    10.5- 15.5  I'm gonna go coconuts with you.
+                E@11.3 A@11.8 E@12.6 A@13.0
+    15.5- 20.2  Coconuts. Coconuts. This whole world is going coconuts,
+                D@15.7 A@16.5 E@17.5 A@19.3
+    20.2- 23.6  but I can't think of anything I'd rather do,
+                D@20.8 A@22.7
+    23.6- 29.0  than go coconuts with you.
+                E@24.4 A@24.6 E@25.4 A@25.9
+
+coconuts-w2-story-alt  (4 of 31 words found on the tape; the marks only)
+
+coconuts-w3-hook  (38 of 38 words found on the tape)
+     0.6-  8.2  Coconuts. Coconuts. This whole world is going coconuts.
+                D@0.8 A@2.3 E@4.3 A@6.0
+     8.2- 14.6  Coconuts. Coconuts. I wanna go coconuts with you.
+                D@8.4 A@9.5 E@11.4 A@11.9 E@12.7 A@13.2
+    14.6- 20.8  Coconuts. Coconuts. This whole world is going coconuts,
+                D@14.8 A@16.5 E@18.1 A@19.8
+    20.8- 24.2  but I can't think of anything I'd rather do,
+                D@21.4 A@23.3
+    24.2- 29.3  than go coconuts with you.
+                E@24.9 A@25.3 E@26.1 A@26.7
+
+coconuts-w3-verse  (75 of 76 words found on the tape)
+     0.0-  3.4  ~I'll even get the chair, so I could get the egg,
+                D@0.6 A@2.4
+     3.4-  6.9  so I could cook it up, so I could get your bread.
+                E@4.0 A@5.8
+     6.9- 10.3  I'll do anything that you want me to,
+                D@7.8 A@9.6
+    10.3- 14.6  just to go coconuts with you.
+                E@11.4 A@11.7 E@12.5 A@13.0
+    14.6- 20.2  Coconuts. Coconuts. This whole world is going coconuts,
+                D@14.8 A@15.8 E@17.2 A@19.2
+    20.2- 21.6  but I can't think...
+                D@20.7
+    21.6- 27.5  Ah, I opened my eyes and I lost it.
+    28.6- 31.4  We're just gonna go from there, because we're trying to make reels.
+    31.4- 34.9  We're still good, we're still good.
+
+coconuts-w3-bridge  (53 of 53 words found on the tape)
+     0.0-  4.0  You know, as we get old, or so I'm told,
+                D@1.3 A@2.6
+     4.0-  7.2  the bonds of love remain in our control.
+                E@4.4 A@6.1
+     7.2- 10.2  So keep the song close to you,
+                D@7.7 A@9.1
+    10.2- 13.2  and I'll go coconuts with you.
+                E@11.2 A@11.4 E@12.2 A@12.6
+    13.2- 19.9  Coconuts. Coconuts. This whole world is going coconuts,
+                D@13.4 A@15.5 E@17.0 A@19.0
+    19.9- 23.1  but I can't think of anything I'd rather do,
+                D@20.5 A@22.4
+    23.1- 28.3  than go coconuts with you.
+                E@24.0 A@24.3 E@25.0 A@25.5
+
+coconuts-w3-hook-again  (48 of 48 words found on the tape)
+     0.0-  3.7  When things get tough, times get rough,
+                D@0.4 A@2.2
+     3.7-  7.1  remember that you are enough.
+                E@3.9 A@5.8
+     7.1- 10.2  You will pull through, and when you do,
+                D@7.6 A@9.5
+    10.2- 13.6  I'm gonna go coconuts with you.
+                E@11.0 A@11.5 E@12.3 A@12.7
+    13.6- 20.0  Coconuts. Coconuts. This whole world is going coconuts,
+                D@13.8 A@15.5 E@17.0 A@19.0
+    20.0- 23.0  but I can't think of anything I'd rather do,
+                D@20.5 A@22.4
+    23.0- 29.2  than go coconuts with you.
+                E@23.9 A@24.1 E@24.9 A@25.3
+
+coconuts-w3-story-alt  (41 of 41 words found on the tape)
+     0.6-  4.3  Jesse does it under the power lines. I love that guy.
+     4.3- 10.9  I'd do it on the front porch, with the landscaping trucks and the cicadas.
+    13.8- 21.3  Okay, I think we've got enough to make some reels on Coconuts on the front porch.
+
+coconuts-w1-hook-tight  (37 of 38 words found on the tape)
+     1.2-  8.1  Coconuts. Coconuts. This whole world is going coconuts.
+                D@1.5 A@3.2 E@4.3 A@6.1
+     8.1- 15.0  Coconuts. Coconuts. I ~wanna go coconuts with you.
+                D@8.3 A@9.7 E@11.4 A@11.7 E@12.5 A@13.0
+    15.0- 20.1  Coconuts. Coconuts. This whole world is going coconuts,
+                D@15.2 A@16.4 E@17.2 A@19.3
+    20.1- 23.5  but I can't think of anything I'd rather do,
+                D@20.8 A@22.7
+    23.5- 28.5  than go coconuts with you.
+                E@24.3 A@24.6 E@25.3 A@25.8
+

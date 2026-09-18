@@ -79,11 +79,14 @@ time. Ops clears a question the day it is answered.
    09-27 sitting. C. The porch session is rehearsal, not material; the
    Number is shot fresh with the DJI pair in week 6. Ops recommends A.
 
-7. **The Number's frame.** The fifteen Coconuts pieces are cut from the
-   porch tape (docs/NUMBER-PIECES-20260917.md; Finished reels ›
-   numbers-coconuts, with REVIEW-SHEET.png). The tape is wide and you are
-   small in it. Two files to look at: coconuts-w1-hook.mp4 (as shot) and
-   coconuts-w1-hook-push.mp4 (pushed in 1.5x on you, a phone upscale).
-   A. As shot, every piece. B. Pushed in, every piece. C. As shot, and the
-   10-20 sitting shoots the hook close for the later weeks. Ops recommends C.
+7. **The Number's frame, with the template on it.** Your note of 09-17
+   (tighter crop, logo, chords, lyrics) is built on all sixteen pieces
+   (docs/NUMBER-TEMPLATE-20260918.md; Finished reels › numbers-coconuts,
+   with REVIEW-SHEET.png). Two files to look at: coconuts-w1-hook.mp4 (A)
+   and coconuts-w1-hook-tight.mp4 (B).
+   A. 1.6x on you: whole, head to sandals, the lyric under your feet; the
+   tightest the porch allows without covering you. B. 2.0x: as tight as the
+   tape allows, the lyric rides over your shins; a softer picture. C. As
+   shot, the marks and words on it. Ops recommends A, and the 10-20 sitting
+   shoots the hook close for the later weeks either way.
    The pieces themselves are ruled 10-11 with song two; this is the frame only.

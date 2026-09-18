@@ -1,5 +1,10 @@
 # The Number's fifteen pieces: Coconuts from the porch tape
 
+**Superseded in part, 2026-09-18:** the pieces now carry the template (a 1.6x crop,
+the branch, the mark, the lyric and the chord: `docs/NUMBER-TEMPLATE-20260918.md`),
+so §5 (the frame A/B) and "nothing burned in" in §6 no longer describe the files.
+The cuts, the take map and the levelling stand.
+
 Ops, 2026-09-17 night. Calendar row `number-pieces` (10-09), ruled A on 09-17
 (the Number launches 10-26 with the porch pieces). Ruled with song two at the
 10-11 sitting. The ledger is `reels/numbers.json` (`pieces`); the cutter is

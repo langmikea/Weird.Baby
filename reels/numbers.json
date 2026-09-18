@@ -1085,18 +1085,23 @@
       "day": "2026-10-26",
       "title": "The hook: verse one and the chorus, take 1",
       "take": 1,
-      "words": "Coconuts, coconuts, this whole world is going coconuts ... but I can't think of anything I'd rather do than go coconuts with you",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 614.8,
-        "end": 641.6,
-        "push": null
+        "end": 641.6
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-hook.mp4",
       "length_s": 28.5,
-      "gain_db": 9.5
+      "gain_db": 9.5,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "Coconuts, coconuts, this whole world is going coconuts ... but I can't think of anything I'd rather do than go coconuts with you",
+      "words_found": "37 of 38 words found on the tape"
     },
     {
       "id": "coconuts-w1-verse",
@@ -1105,18 +1110,23 @@
       "day": "2026-10-27",
       "title": "A verse: the chair, the egg, the bread, and the chorus, take 1",
       "take": 1,
-      "words": "I'd even get the chair so I could get the egg ...",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 641.4,
-        "end": 667.5,
-        "push": null
+        "end": 667.5
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-verse.mp4",
       "length_s": 27.8,
-      "gain_db": 8.0
+      "gain_db": 8.0,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "I'd even get the chair so I could get the egg ...",
+      "words_found": "58 of 59 words found on the tape"
     },
     {
       "id": "coconuts-w1-bridge",
@@ -1125,18 +1135,23 @@
       "day": "2026-10-28",
       "title": "The bridge: as we get old, so I'm told, and the chorus, take 1",
       "take": 1,
-      "words": "As we get older, so I'm told, the bonds of love remain in our control ...",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 667.4,
-        "end": 693.7,
-        "push": null
+        "end": 693.7
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-bridge.mp4",
       "length_s": 28.0,
-      "gain_db": 7.5
+      "gain_db": 7.5,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "As we get older, so I'm told, the bonds of love remain in our control ...",
+      "words_found": "53 of 53 words found on the tape"
     },
     {
       "id": "coconuts-w1-story",
@@ -1157,18 +1172,23 @@
       "day": "2026-10-30",
       "title": "The hook again: you are enough, the last chorus, and the wave, take 1",
       "take": 1,
-      "words": "When things get tough, when times get rough, remember that you are enough ... Peace.",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 693.7,
-        "end": 726.5,
-        "push": null
+        "end": 726.5
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-hook-again.mp4",
-      "length_s": 34.5,
-      "gain_db": 6.9
+      "length_s": 34.4,
+      "gain_db": 6.9,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "When things get tough, when times get rough, remember that you are enough ... Peace.",
+      "words_found": "49 of 49 words found on the tape"
     },
     {
       "id": "coconuts-w2-hook",
@@ -1177,18 +1197,23 @@
       "day": "2026-11-02",
       "title": "The hook: verse one and the chorus, take 3",
       "take": 3,
-      "words": "Coconuts, coconuts, this whole world is going coconuts ...",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 1095.5,
-        "end": 1122.7,
-        "push": null
+        "end": 1122.7
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-hook.mp4",
-      "length_s": 28.9,
-      "gain_db": 8.1
+      "length_s": 28.8,
+      "gain_db": 8.1,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "Coconuts, coconuts, this whole world is going coconuts ...",
+      "words_found": "38 of 38 words found on the tape"
     },
     {
       "id": "coconuts-w2-verse",
@@ -1197,18 +1222,23 @@
       "day": "2026-11-03",
       "title": "A verse: the chair, the egg, the bread, and the chorus, take 3",
       "take": 3,
-      "words": "And even get the chair so I could get the egg ...",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 1122.75,
-        "end": 1148.9,
-        "push": null
+        "end": 1148.9
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-verse.mp4",
-      "length_s": 27.9,
-      "gain_db": 6.3
+      "length_s": 27.8,
+      "gain_db": 6.3,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "And even get the chair so I could get the egg ...",
+      "words_found": "58 of 59 words found on the tape"
     },
     {
       "id": "coconuts-w2-bridge",
@@ -1217,18 +1247,23 @@
       "day": "2026-11-04",
       "title": "The bridge: as we get old, so I'm told, and the chorus, take 3",
       "take": 3,
-      "words": "You know as we get old, so I'm told ...",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 1148.85,
-        "end": 1175.4,
-        "push": null
+        "end": 1175.4
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-bridge.mp4",
-      "length_s": 28.3,
-      "gain_db": 6.2
+      "length_s": 28.2,
+      "gain_db": 6.2,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "You know as we get old, so I'm told ...",
+      "words_found": "52 of 52 words found on the tape"
     },
     {
       "id": "coconuts-w2-story",
@@ -1249,18 +1284,23 @@
       "day": "2026-11-06",
       "title": "The hook again: you are enough, the last chorus, and the wave, take 3",
       "take": 3,
-      "words": "Now when things get tough, when times get rough ... Peace.",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 1175.2,
-        "end": 1208.0,
-        "push": null
+        "end": 1208.0
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-hook-again.mp4",
       "length_s": 34.5,
-      "gain_db": 6.3
+      "gain_db": 6.3,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "Now when things get tough, when times get rough ... Peace.",
+      "words_found": "50 of 50 words found on the tape"
     },
     {
       "id": "coconuts-w2-story-alt",
@@ -1270,18 +1310,23 @@
       "alt_for": "coconuts-w2-story",
       "title": "B for the story slot: the tape's own words after take 3",
       "take": 3,
-      "words": "Alright, so we got another Coconuts in there. Couple of screw-ups, but that's for reals, man. So we'll find something good in there. That's how we play. That's how I am.",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 1209.3,
-        "end": 1221.5,
-        "push": null
+        "end": 1221.5
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w2-story-alt.mp4",
       "length_s": 13.9,
-      "gain_db": 23.4
+      "gain_db": 23.4,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "Alright, so we got another Coconuts in there. Couple of screw-ups, but that's for reals, man. So we'll find something good in there. That's how we play. That's how I am.",
+      "words_found": "4 of 31 words found on the tape; the marks only"
     },
     {
       "id": "coconuts-w3-hook",
@@ -1290,18 +1335,23 @@
       "day": "2026-11-09",
       "title": "The hook: verse one and the chorus, take 2",
       "take": 2,
-      "words": "Coconuts, coconuts, this whole world is going coconuts ...",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 816.5,
-        "end": 844.1,
-        "push": null
+        "end": 844.1
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-hook.mp4",
       "length_s": 29.3,
-      "gain_db": 8.9
+      "gain_db": 8.9,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "Coconuts, coconuts, this whole world is going coconuts ...",
+      "words_found": "38 of 38 words found on the tape"
     },
     {
       "id": "coconuts-w3-verse",
@@ -1310,18 +1360,23 @@
       "day": "2026-11-10",
       "title": "A verse that breaks: the chair, the egg, the bread, the chorus lost, and the honest word, take 2",
       "take": 2,
-      "words": "I'd even get the chair ... But I can't think... I opened my eyes and I lost it. We're just gonna go from there because we're trying to make reels. We're still good, we're still good.",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 844.0,
-        "end": 878.0,
-        "push": null
+        "end": 878.0
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-verse.mp4",
       "length_s": 35.7,
-      "gain_db": 7.7
+      "gain_db": 7.7,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "I'd even get the chair ... But I can't think... I opened my eyes and I lost it. We're just gonna go from there because we're trying to make reels. We're still good, we're still good.",
+      "words_found": "75 of 76 words found on the tape"
     },
     {
       "id": "coconuts-w3-bridge",
@@ -1330,18 +1385,23 @@
       "day": "2026-11-11",
       "title": "The bridge: as we get old, so I'm told, and the chorus, take 2",
       "take": 2,
-      "words": "You know as we get old, or so I'm told ...",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 916.9,
-        "end": 943.2,
-        "push": null
+        "end": 943.2
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-bridge.mp4",
-      "length_s": 28.0,
-      "gain_db": 6.3
+      "length_s": 27.9,
+      "gain_db": 6.3,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "You know as we get old, or so I'm told ...",
+      "words_found": "53 of 53 words found on the tape"
     },
     {
       "id": "coconuts-w3-story",
@@ -1362,18 +1422,23 @@
       "day": "2026-11-13",
       "title": "The hook again: you are enough and the last chorus, take 2",
       "take": 2,
-      "words": "When things get tough, and times get rough ... I'd go coconuts with you.",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 943.6,
-        "end": 971.0,
-        "push": null
+        "end": 971.0
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-hook-again.mp4",
-      "length_s": 29.1,
-      "gain_db": 6.4
+      "length_s": 29.0,
+      "gain_db": 6.4,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "When things get tough, and times get rough ... I'd go coconuts with you.",
+      "words_found": "48 of 48 words found on the tape"
     },
     {
       "id": "coconuts-w3-story-alt",
@@ -1383,43 +1448,66 @@
       "alt_for": "coconuts-w3-story",
       "title": "B for the story slot: the tape's own words after take 2, the porch and the power lines",
       "take": 2,
-      "words": "Jesse does it under the power lines. I love that guy. I'd do it on the front porch, with the landscaping trucks and the cicadas. Okay, I think we've got enough to make some reels on Coconuts on the front porch.",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 976.8,
-        "end": 996.5,
-        "push": null
+        "end": 996.5
       },
       "song": "Coconuts",
       "source": "cut 2026-09-17 from the 08-24 porch tape",
       "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w3-story-alt.mp4",
       "length_s": 21.4,
-      "gain_db": 16.4
+      "gain_db": 16.4,
+      "frame_used": {
+        "zoom": 1.6,
+        "cx": 550,
+        "cy": 1320
+      },
+      "words": "Jesse does it under the power lines. I love that guy. I'd do it on the front porch, with the landscaping trucks and the cicadas. Okay, I think we've got enough to make some reels on Coconuts on the front porch.",
+      "words_found": "41 of 41 words found on the tape"
     },
     {
-      "id": "coconuts-w1-hook-push",
+      "id": "coconuts-w1-hook-tight",
       "week": 1,
       "slot": "hook",
       "day": null,
       "alt_for": "coconuts-w1-hook",
-      "title": "B for the frame: the same hook pushed in 1.5x on Mike (a sample, not the ruled shape)",
+      "title": "B for the frame: the same hook pushed in 2.0x, as tight as the tape allows; the lyric rides over his feet",
       "take": 1,
-      "words": "as coconuts-w1-hook",
       "cut": {
         "src": "C:\\Users\\macun\\OneDrive\\Desktop - Computer Room\\AudigoTrack1.mov",
         "start": 614.8,
-        "end": 641.6,
-        "push": {
-          "cx": 470,
-          "cy": 1080,
-          "zoom": 1.5
-        }
+        "end": 641.6
+      },
+      "frame": {
+        "zoom": 2.0,
+        "cx": 550,
+        "cy": 1210
       },
       "song": "Coconuts",
-      "source": "cut 2026-09-17 from the 08-24 porch tape",
-      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-hook-push.mp4",
+      "source": "cut 2026-09-18 from the 08-24 porch tape",
+      "file": "C:\\Users\\macun\\OneDrive\\WeirdBaby\\reels\\out\\numbers-coconuts\\coconuts-w1-hook-tight.mp4",
       "length_s": 28.5,
-      "gain_db": 9.5
+      "gain_db": 9.5,
+      "frame_used": {
+        "zoom": 2.0,
+        "cx": 550,
+        "cy": 1210
+      },
+      "words": "as coconuts-w1-hook",
+      "words_found": "37 of 38 words found on the tape"
     }
-  ]
+  ],
+  "template": {
+    "_": "THE NUMBER'S TEMPLATE (Mike's note of 09-17: tighter crop, logo, chords, lyrics; built 09-18, tools/numbers-template.py). frame: the crop in the turned 1080x1920 source frame; zoom 1.6 is the tightest that keeps him whole (head to sandals) with the lyric under his feet. A piece may carry its own `frame` for a sample.",
+    "ruled": null,
+    "frame": {
+      "zoom": 1.6,
+      "cx": 550,
+      "cy": 1320
+    },
+    "marks": "\\MUSIC top left; the Weird.Baby mark top right; both below the apps' top chrome",
+    "lyric": "the line as sung, Georgia Bold, white on a soft black box under his feet; sung words full, the rest dimmed",
+    "chord": "a chip above the lyric box, the chord under his hand, on the sheet's word"
+  }
 }
