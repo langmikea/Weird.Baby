@@ -332,6 +332,12 @@ FACE("niac.firmware", "TECHNICAL SPECIFICATIONS (MGK-NIAC) — what the machine 
   { where: "src/data/artists/robots-units.js", note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. [R4] Its still was a breadboard on a bench and is now the cabinet's own bar bank, which is both the mainframe and the literal subject of the face's 1 × 64 entry. [K1 2026-08-07] The breadboard plate `matrix_lit.jpg` was orphaned by that swap and carried as M9 for three rounds; Mike killed it with the other ten and M9's robot half closes with them." });
 FACE("viiip.plates", "IMAGE ARCHIVE (MGK-VIIIp) — nine plates, as received.", "LIVE", "HELD",
   { where: "src/data/artists/robots-units.js", note: "[H2 2026-08-06] THE WALL IS EMPTY AND THE WALL IS STILL BUILT — nine plates off under THE PULL-BACK RULE, `archiveEmpty` in their place. M7 and M25 are both moot while nothing is on the wall and both come back with the plates. One of the nine, the power switch round the back, IS delivered by Record 013 and is on that entry." });
+/* [2026-09-18] THE NEXT ROW DESCRIBES A FACE THAT IS OFF THE MENU, AND IT IS
+   FLAGGED RATHER THAN CUT. Mike: "If a thing is not available, it should not be
+   displayed." The Documentation row left both machine albums (the note is in
+   `robots-units.js` where it stood). The row stays for the MB-c reason below:
+   `--write` refuses a deleted row by design. It is true again the day the
+   manual's page photographs land. */
 FACE("viiip.manual", "THE MANUAL — the 1965 operating and maintenance manual.", "PARTIAL", "HELD",
   { where: "src/data/artists/robots-units.js", deps: ["doc.manual.plates"],
     note: "[P2] THE FACE HAS NO PICTURE, BY RULING. Its one image was a render of a page reading TEXT NOT SUPPLIED, and Mike ruled that the museum admitting it had not written the manual does not get to wear a fiction as cover: either a plate shows a page actually written, or there is no plate. M45 and M4 both close here — M4 by there being no plate left to be a render. `plates: []` is unchanged and still waits on B8's photographs (P2 in the art register)." });

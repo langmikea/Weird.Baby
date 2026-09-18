@@ -500,55 +500,19 @@ export const UNIT_ALBUMS = [
           footer: "MGK-NIAC · IMAGE ARCHIVE",
         },
       },
-      {
-        /* ═══ [P1 2026-08-05] PARITY IS ABSOLUTE, AND THIS IS THE ROW THAT
-           COSTS SOMETHING ═════════════════════════════════════════════════
-           MIKE OVERRULED THE OPS RULING OF THE PREVIOUS ROUND: the two machines
-           carry THE SAME MENU ITEMS, no more and no less; a divergence is a
-           FAILURE and a holdings gap no longer resolves one.
-           HIS REASON IS ALSO THE EXCEPTION'S REASON. NIAC will run on the Portal
-           on channels 1 and 2, and it will have documents. These rows are not
-           doors onto rooms nobody intends to build — they are the shelf the
-           material lands on. So THE STUB LAW IS OVERRIDDEN HERE AND ONLY HERE,
-           and the reason is his: A ROW IS A PROMISE ONLY WHEN NOTHING IS COMING,
-           AND THESE ARE COMING.
-           WHAT THE EXCEPTION DOES NOT LICENSE: DOCTRINE 12 STILL BINDS EVERY
-           WORD BELOW. The row says what is NOT held. It states no date, no
-           section list, no page count and no schedule.
-
-           ═══ [N3 2026-08-06] "THE MANUAL" IS NOW "DOCUMENTATION" ═════════════
-           MIKE: "a viewer free to display any document, with the manual inside
-           it as a SELECTABLE ENTITY that opens on the screen when clicked.
-           Strike everything currently on that face except what we are actually
-           holding. THE FORMAT MUST BE A TEMPLATE and every documentation page
-           must look the same — check first whether an existing template already
-           serves this; do not create new machinery we do not need."
-           IT DID, AND NOTHING NEW WAS BUILT. L6's document card — title,
-           provenance, a STATE, and a scan that opens in this wing's own reader —
-           is a documentation template with another name on it. It was LIFTED OUT
-           of the Record's renderer into `DocList` and is now called from two
-           places with one markup (Exhibit.jsx). One field was added, `plates`,
-           because a document with more than one page needs an ordered set of
-           page images and the museum already has that shape.
-           THE MAINFRAME HOLDS NO DOCUMENTS AT ALL, so this face carries no list
-           and says so in one sentence. That is the whole face, and it is the
-           honest state of a shelf with nothing on it. */
-        id: "manual",
-        title: "Documentation",
-        videos: [],
-        tags: ["manual", "documentation", "niac", "mainframe", "opa"],
-        face: {
-          kind: "plate",
-          title: "Documentation",
-          subtitle: "MGK-NIAC",
-          docsEmpty:
-            "No document for the mainframe is held here. The portable arrived " +
-            "with a manual — ABEAL 8P-OMI-1, incomplete, assembled out of " +
-            "copies caught at different stages — and nothing of the kind has " +
-            "reached this museum for the cabinet.",
-          footer: "MGK-NIAC · DOCUMENTATION",
-        },
-      },
+      /* ═══ [2026-09-18] "DOCUMENTATION" IS REMOVED, FROM BOTH MACHINES ═══════
+         MIKE, 2026-09-18: "If a thing is not available, it should not be
+         displayed." That overrules the half of P1 (2026-08-05) this row stood
+         on: it existed to say, in one sentence, that no document for the
+         mainframe is held. The portable's row held one card for the owner's
+         manual with no page on file, a card that opens nothing, so it left with
+         this one and the two menus still match (`tools/menu-parity.mjs`, which
+         now refuses a stub row as well as a divergence).
+         WHAT LEFT, NAMED RATHER THAN QUIETLY DROPPED: this face's `docsEmpty`
+         sentence and the [P1] and [N3] notes above it. All of it is in git at
+         `c6a8fc4`. `DocList` in Exhibit.jsx is untouched. THE ROW COMES BACK the day a document with pages is held for
+         BOTH machines; M61 (the manual stays offline until real pages exist) is
+         unchanged. */
       {
         /* ═══ [P1 2026-08-05] THE MAINFRAME'S OWN FAQ ══════════════════════
            The second of the two rows parity requires, and unlike Documentation
@@ -926,67 +890,17 @@ export const UNIT_ALBUMS = [
           footer: "MGK-VIIIp · IMAGE ARCHIVE",
         },
       },
-      {
-        /* ═══ [N3 2026-08-06] "THE MANUAL" IS NOW "DOCUMENTATION" ════════════
-           MIKE: "a viewer free to display any document. The manual appears
-           inside it as a SELECTABLE ENTITY that opens on the screen when
-           clicked. STRIKE EVERYTHING CURRENTLY ON THAT FACE EXCEPT WHAT WE ARE
-           ACTUALLY HOLDING."
-
-           WHAT WE ARE ACTUALLY HOLDING IS ONE DOCUMENT AND NO PAGES OF IT. So
-           the shelf has one card on it, in the state the model calls `held`:
-           title, provenance, and a note saying plainly that no page images are
-           on file. IT IS NOT A BUTTON, and that is the template working rather
-           than a limitation — a control that opens nothing is the dead control
-           Doctrine 11's corollary removes. The day the photographs land they are
-           a `plates` array on this card and the card becomes selectable; nothing
-           else moves. M61 is untouched: the manual stays offline until real
-           pages exist.
-
-           WHAT WAS STRUCK, NAMED RATHER THAN ABSORBED — this is the largest
-           deletion in the round and every item is recoverable from git:
-             · THE BLURB. "Page images, not transcription: the typography is the
-               evidence" is the museum explaining its own method, which is what
-               Doctrine 11 tests for, and it survived because it is TRUE.
-             · THE FORMAT AND NAV LINES (`MANUAL_FORMAT`, `MANUAL_NAV`). NAV
-               described THE RENDERER — "microfiche reader — page-turn, fit and
-               1:1 magnify" — which Doctrine 11 names explicitly as a failing
-               subject. Both constants are deleted; they had no third caller.
-             · THE EMPTY REEL and its note (`REEL_EMPTY_NOTE`). The document card
-               says the same holdings fact in the template's own vocabulary, and
-               two objects saying it is the thing Doctrine 16 strikes. **THE REEL
-               RENDERER IS UNTOUCHED IN `Exhibit.jsx` and now has no caller** —
-               kept for the same reason M61 kept the viewer built.
-             · THE CONTENTS PAGE — six attested sections (§1–§4, APP. 1,
-               MARGINS). Every one was real and each said "attested · no plate on
-               file". They are the biggest single loss in this round and MARGINS
-               carried one of Mike's own `[PAPA]` slots ("which hands, and what
-               they wrote"), so that slot is now recorded nowhere on the glass.
-               OPEN_ACTIONS N-g, with the git hash, because a marked slot that
-               vanishes is exactly the thing his register exists to catch. */
-        id: "manual",
-        title: "Documentation",
-        videos: [],
-        tags: ["manual", "documentation", "plate", "1965", "scan", "opa"],
-        face: {
-          kind: "plate",
-          title: "Documentation",
-          subtitle: "MGK-VIIIp",
-          docs: [
-            { title: "The owner's manual",
-              source: "ABEAL 8P-OMI-1",
-              note: "Held. Incomplete, assembled out of copies caught at " +
-                    "different stages. No page images on file — when they are " +
-                    "made they are photographs of the printed sheet, edges and " +
-                    "margins included.",
-              /* [B8 2026-08-02] THE SCANS ARRIVE FROM MIKE, ordered, reading
-                 order, one entry per page: { img, label, date }. The shape is
-                 the plate wall's shape on purpose — one reader serves both. */
-              plates: [] },
-          ],
-          footer: "MGK-VIIIp · DOCUMENTATION",
-        },
-      },
+      /* ═══ [2026-09-18] "DOCUMENTATION" IS REMOVED HERE TOO ══════════════════
+         See the note where the mainframe's row stood. This one held ONE card,
+         the owner's manual (ABEAL 8P-OMI-1), with `plates: []`: held,
+         incomplete, no page images on file. A card that opens nothing is not
+         available, so it is not displayed. The card, its note and the [N3] list
+         of what was struck from the old Manual face are in git at `c6a8fc4`.
+         THE DAY THE PHOTOGRAPHS OF THE PAGES LAND, the row returns with them as
+         a `plates` array, and the mainframe's returns when it has a document of
+         its own. The ledger row `viiip.manual` still describes this face; it is
+         flagged in `reveal/ledger-declare.mjs` rather than cut, because the
+         ledger refuses a deleted row by design. */
       /* ═══ [P2 2026-08-05] THE PORTAL LEFT THIS ALBUM ════════════════════
          MIKE: "THE PORTAL becomes ITS OWN ALBUM — it is very important and this
          keeps it top-shelf visible." It is the second album in the wing now,
