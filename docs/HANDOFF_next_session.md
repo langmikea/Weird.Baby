@@ -108,6 +108,19 @@ gameplay per story shape, gas display, the slab through the lens, slower
 steering display). Suggested next: the `ask` story shape on MGK-NIAC (a
 finished feature), which is also the mashup with the Q&A line.
 
+**2026-09-18 (Ruling E, the door).** `RECORD_EPOCH` is 2026-10-31 and
+`RECORD_HOUR` is 0: the wing is shut and opens itself Sat 10-31 00:00 New
+York; the lobby reads "We open 10/31", then "We are open!" on the same live
+value as the note (bdd989a, pushed; gates pass, both stages build). NOT LIVE
+until Mike runs the one deploy; after it, `npm run door:check`. Day one is a
+Saturday: `npm run dictation` refuses and `docs/ARC.md` is wrong, both on the
+retired story, neither on the build's path. The build had been failing since
+879c635 (the Gambler photo rows were outside the stage door); fixed b2afc95.
+`tools/dev-launch.mjs` serves the launch stage locally for a look. Still owed
+on row `door-ruling-e`: the "We open 10/31" post (a draft first) and "We are
+open!" queued in Buffer for 10-31; both need a picture or a clip, since none
+of the three channels posts bare text.
+
 **RESUME RULE (Mike, 2026-09-17):** on "Ops, resume", open with what Ops
 suggests starting, from the standing queue in memory `ops-resume.md`; one
 start per session, in a fresh session; update the queue before ending. The
