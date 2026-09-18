@@ -1,0 +1,148 @@
+<title>50,000 ft</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#f3f4f1;--paper-2:#e9ebe6;--card:#fbfbf9;--ink:#1c2026;--ink-2:#4a515a;--ink-3:#7a828c;--rule:#cfd3cc;--gold:#b8974a;--gold-ink:#7a6122;--gold-bg:#f4ecd9;--you:#6a4c93;--you-bg:#ebe4f3;--ok:#3f7a4f;--ok-bg:#e3efe4;--no:#9a3b2e;--no-bg:#f3dfd9}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#171a1e;--paper-2:#1f2328;--card:#1c2025;--ink:#e6e8e4;--ink-2:#b4bac1;--ink-3:#7f878f;--rule:#343a41;--gold:#cdae63;--gold-ink:#dcc27f;--gold-bg:#33291a;--you:#c2a8e6;--you-bg:#2e2440;--ok:#8fcb9c;--ok-bg:#213827;--no:#e39a8c;--no-bg:#3f231f}}
+:root[data-theme="dark"]{--paper:#171a1e;--paper-2:#1f2328;--card:#1c2025;--ink:#e6e8e4;--ink-2:#b4bac1;--ink-3:#7f878f;--rule:#343a41;--gold:#cdae63;--gold-ink:#dcc27f;--gold-bg:#33291a;--you:#c2a8e6;--you-bg:#2e2440;--ok:#8fcb9c;--ok-bg:#213827;--no:#e39a8c;--no-bg:#3f231f}
+html{color-scheme:light dark}body{margin:0;background:var(--paper);color:var(--ink);font-family:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding-block:36px 72px;padding-inline:20px}
+.eyebrow{font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+h1{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:40px;line-height:1.05;margin:0 0 8px;letter-spacing:-.01em;text-wrap:balance}
+.lede{color:var(--ink-2);max-width:65ch;margin:0 0 10px;font-size:16px}
+.how{border-left:3px solid var(--you);background:var(--you-bg);padding:12px 16px;max-width:65ch;margin:0 0 26px}
+h2{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:26px;margin:40px 0 12px;text-wrap:balance}
+h3{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:20px;margin:0 0 6px}
+p{max-width:65ch}
+.launches{display:grid;gap:16px}
+.launch{background:var(--card);border:1px solid var(--rule);padding:18px 20px;display:grid;gap:8px}
+.launch dl{margin:0;display:grid;grid-template-columns:8.5em 1fr;gap:6px 12px}
+.launch dt{font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
+.launch dd{margin:0;max-width:65ch}
+.pill{display:inline-block;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.pill.no{background:var(--no-bg);color:var(--no)}.pill.half{background:var(--gold-bg);color:var(--gold-ink)}.pill.dead{background:var(--paper-2);color:var(--ink-3);text-decoration:line-through}.pill.new{background:var(--you-bg);color:var(--you)}.pill.yes{background:var(--ok-bg);color:var(--ok)}
+q{font-style:italic;color:var(--you)}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}
+th{text-align:left;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:8px 10px 8px 0;border-bottom:1px solid var(--ink)}
+td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td.name{font-weight:600;white-space:nowrap}td.n{font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-3);width:2em}
+td.mono{font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:12.5px}
+tr.dead td{color:var(--ink-3)}
+.para{max-width:65ch;border-top:1px solid var(--rule);padding-top:12px}
+.qs{max-width:70ch;padding-left:1.4em}.qs li{margin:12px 0}.qs b{display:block}
+footer{margin-top:30px;border-top:1px solid var(--rule);padding-top:12px;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-3)}
+@media(max-width:520px){.launch dl{grid-template-columns:1fr}h1{font-size:32px}}
+</style>
+<div class="wrap">
+<p class="eyebrow">Weird.Baby · Ops · 2026-09-18 · the biggest picture</p>
+<h1>50,000 ft: the launches, and every reel type against them</h1>
+<p class="lede">On your five points of last night. The intent lines are Ops' drafts for you to rule; every quoted line is yours, with the question it answered. Nothing advances until you have challenged this page. Three questions at the end.</p>
+<div class="how">Read the three launches, then the sheet. Say a number and a letter for each of the three questions at the bottom. Anything you say nothing about stands as A.</div>
+
+<h2>1. The launches</h2>
+<div class="launches">
+
+<div class="launch">
+<h3>THE WHOLE: Weird.Baby, the presence <span class="pill no">no statement</span></h3>
+<dl>
+<dt>Intent, draft</dt><dd>Everything points back to Mike; each piece stands on its own. Your words: <q>They are all meant to be standalone and they all point back to me</q> (how do the pieces relate, 09-02). <q>The website is not the goal. I am the goal</q> (is the museum the goal or a tool, 09-02).</dd>
+<dt>Purpose, draft</dt><dd>Get a stranger from "weird.baby?" to "Weird.Baby!" in sixty seconds (your reason one for the site, 09-01).</dd>
+<dt>The day</dt><dd>None. The whole has no day; it is what the launches add up to.</dd>
+<dt>Stable entity?</dt><dd>No. The April vision documents were archived 09-02 and the paragraph that replaces them is unwritten. The two launches below do not name what they add up to.</dd>
+</dl>
+</div>
+
+<div class="launch">
+<h3>/R: the door, Friday 10-30 at five <span class="pill half">mostly</span></h3>
+<dl>
+<dt>Intent, draft</dt><dd>Sell the machine. An infomercial wing; the story is a prologue for those who want more (your reset, 09-10).</dd>
+<dt>Purpose, draft</dt><dd>Robot sales (your reason three, 09-01).</dd>
+<dt>The day</dt><dd>The plan's Step 1: a wing that sells the machine; a daily promotion already running; a machine that matches its promotion; a music launch on a schedule; a system that runs the week without you.</dd>
+<dt>What posts</dt><dd>The Q&amp;A line, one a day from 10-31 at five New York.</dd>
+<dt>The site shows</dt><dd>The robots wing: four albums on the shelf, the feature pages, the prologue, the landing. "Not open yet" until then.</dd>
+<dt>Stable entity?</dt><dd>Mostly. A date, a picture, milestones, ledgers, a queue. Three gaps: no intent line ruled; the plan says each daily promotion "lands on the site's page for that day's feature" and nothing built does that (the Q&amp;A caption says weird.baby and no more; the feature reels are parked); "not open yet" is still not on the site.</dd>
+<dt>Pulls you in?</dt><dd>Not yet. A Q&amp;A reel pulls to the front door. Nothing pulls to a room.</dd>
+</dl>
+</div>
+
+<div class="launch">
+<h3>/M: the Number, Monday 10-26 at noon <span class="pill half">half</span></h3>
+<dl>
+<dt>Intent, draft</dt><dd>One live performance a weekday; the show is the audition and production is the prize (your ruling, 09-03).</dd>
+<dt>Purpose, draft</dt><dd>Promote your music (your reason four, 09-01). <q>Music won't make money on the site</q> (09-01).</dd>
+<dt>The day</dt><dd>Coconuts' hook posts at noon; four more pieces through the week; the week before the door.</dd>
+<dt>What posts</dt><dd>The Number, one a weekday; a song runs a floor of two weeks and a ceiling of four.</dd>
+<dt>The site shows</dt><dd>/wb, the six demos, as today. Nothing on the site changes for the Number.</dd>
+<dt>Stable entity?</dt><dd>Half. A schedule, a ledger, fifteen pieces cut, Sunday readings. Four gaps: no intent line ruled; the template is changing (tighter crop, logo, chords and lyrics, your note of 09-17); the frame is unruled (Sunday Q7); it points nowhere: no landing on the site for a song, no line in the caption.</dd>
+<dt>Pulls you in?</dt><dd>No. It pulls to the song, which is the point of the ruling, but the song has no room to land in.</dd>
+</dl>
+</div>
+
+<div class="launch">
+<h3>In between: what has no launch</h3>
+<dl>
+<dt>/S the shop</dt><dd>Your reason three, merch and robot sales. No launch, no date, nothing in the plan beyond "one exit through the gift shop".</dd>
+<dt>/F the foundation</dt><dd>Your reason five. No launch; the posture paragraph is a block on your list, by 10-11.</dd>
+<dt>/W, /hr</dt><dd>Worth a listen and Hunter Root (held). No launch.</dd>
+<dt>The hot Q&amp;A</dt><dd>Real time, fired in chat. Belongs to the whole, not to a launch.</dd>
+</dl>
+</div>
+</div>
+
+<p class="para" style="margin-top:22px"><b>Coherence, in one paragraph.</b> Two launches four days apart, sharing one week, on two clocks (noon and five), with nothing that names what they add up to and nothing that lands a viewer in a room. Each is internally sound: the door has its picture and its milestones; the Number has its rulings and its pieces. What is missing is the sentence above both and the link below each, reel to page. That is the backfill: one statement of the whole in your words, one landing per launch, and the caption line that points at it.</p>
+
+<h2>2. Every reel type, in the line format</h2>
+<p class="lede">Launch-ready means the template is ruled and the line builds, queues and posts without a hand. DOPS is content only.</p>
+<div class="scroll"><table>
+<thead><tr><th>type</th><th>ready</th><th>blocker (owner)</th><th>DOPS</th></tr></thead>
+<tbody>
+<tr><td class="name">Q&amp;A</td><td><span class="pill no">No</span></td><td>Ops (answer length: the glass fit, Sunday Q1). Mike (Buffer key).</td><td class="mono">15 Q&amp;As by 10-09, then 7 a week</td></tr>
+<tr><td class="name">HOT Q&amp;A</td><td><span class="pill no">No</span></td><td>Mike (Buffer key).</td><td class="mono">fired in chat with "hot"</td></tr>
+<tr><td class="name">NUMBER</td><td><span class="pill no">No</span></td><td>Ops (template: crop, logo, chords, lyrics). Mike (the frame, Sunday Q7; Buffer key).</td><td class="mono">3 story pieces, the 10-20 sitting</td></tr>
+<tr><td class="name">ASK (MGK-NIAC)</td><td><span class="pill no">No</span></td><td>Ops (not built; the feature itself is finished).</td><td class="mono">—</td></tr>
+<tr><td class="name">GAME Tilt Drive</td><td><span class="pill no">No</span></td><td>Mike/twin (game not final). Ops (punch list, 8 items). Template built.</td><td class="mono">the demo script, once final</td></tr>
+<tr><td class="name">GAME AvoidSteroids</td><td><span class="pill no">No</span></td><td>Mike/twin (game not final). Ops (the survive shape not built).</td><td class="mono">—</td></tr>
+<tr><td class="name">GAME Gobble Don't Fall</td><td><span class="pill no">No</span></td><td>Same as AvoidSteroids.</td><td class="mono">—</td></tr>
+<tr><td class="name">GAME Snow Globe</td><td><span class="pill no">No</span></td><td>Mike/twin (game not final). Ops (the toy shape not built).</td><td class="mono">—</td></tr>
+<tr><td class="name">AUDIO-ONLY NUMBER</td><td><span class="pill no">No</span></td><td>Mike (Sunday Q6). Sketch only.</td><td class="mono">—</td></tr>
+<tr><td class="name">LIVE SINGLE</td><td><span class="pill half">later</span></td><td>Not a reel: a recording, week 6 rehearsal (Mike shoots, Ops records).</td><td class="mono">—</td></tr>
+<tr><td class="name">ARTIFACT reels</td><td><span class="pill half">shelved</span></td><td>Mike (the script, a portrait reshoot). Shelved 09-17; the broadcast look stays a template.</td><td class="mono">—</td></tr>
+<tr><td class="name">SEXY-SHOOT video</td><td><span class="pill new">New</span></td><td>Ops (a shape for stills, video, unboxing). Mike (the shoot). After this page.</td><td class="mono">—</td></tr>
+<tr class="dead"><td class="name">DETERMINATION</td><td><span class="pill dead">Dead</span></td><td>Superseded by the Q&amp;A line (ruled 09-17). A ledger of 40 rows to archive.</td><td class="mono">—</td></tr>
+<tr class="dead"><td class="name">PRACTICE reels</td><td><span class="pill dead">Dead</span></td><td>Dropped 09-17.</td><td class="mono">—</td></tr>
+<tr class="dead"><td class="name">TEASERS</td><td><span class="pill dead">Dead</span></td><td>Ruled none 09-17.</td><td class="mono">—</td></tr>
+</tbody></table></div>
+<p class="para" style="margin-top:14px">Fifteen names. Three dead, four parked on the games, one held on a ruling, one later, one shelved, one new. Five are live work.</p>
+
+<h2>3. Ops' priority, before anything advances</h2>
+<div class="scroll"><table>
+<thead><tr><th>#</th><th>type</th><th>serves</th><th>why this order</th><th>needs from you</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td class="name">NUMBER</td><td class="mono">/M</td><td>Launches first (10-26). The template is changing and must be ruled once, then the fifteen re-cut in one run.</td><td>Sunday Q7 (the frame); one A/B on the new template</td></tr>
+<tr><td class="n">2</td><td class="name">Q&amp;A</td><td class="mono">/R</td><td>The daily promotion. The fit rule decides how answers are written, so it comes before the fifteen Q&amp;As.</td><td>Sunday Q1 (the glass); the Q&amp;As by 10-09; the Buffer key</td></tr>
+<tr><td class="n">3</td><td class="name">ASK (MGK-NIAC)</td><td class="mono">/R</td><td>The one finished feature; the reel that answers "what is this" beside the Q&amp;A line.</td><td>nothing</td></tr>
+<tr><td class="n">4</td><td class="name">SEXY-SHOOT video</td><td class="mono">/R, /S</td><td>The albums need the photographs before the wing is built (week 3).</td><td>the shoot dates</td></tr>
+<tr><td class="n">5</td><td class="name">HOT Q&amp;A</td><td class="mono">whole</td><td>Built; waits on the key only.</td><td>the Buffer key</td></tr>
+<tr><td class="n">6</td><td class="name">GAME Tilt Drive</td><td class="mono">/R</td><td>Parked; first out when a game is final.</td><td>the game</td></tr>
+<tr class="dead"><td class="n">—</td><td class="name">the rest</td><td></td><td>Parked, held, later or dead as marked.</td><td></td></tr>
+</tbody></table></div>
+<p class="para" style="margin-top:14px"><b>Challenge invited.</b> Ops would kill the three dead rows now (archive the Determination ledger, delete the practice lane, strike the teaser rows), park the four games as one row, and carry five live rows on the desk.</p>
+
+<h2>4. What Ops would backfill, if the intents are ruled</h2>
+<div class="scroll"><table>
+<thead><tr><th>launch</th><th>design and creation tasks</th></tr></thead>
+<tbody>
+<tr><td class="name">The whole</td><td>One statement in your words on the site's front (the paragraph standing open since 09-02); the caption line every reel carries.</td></tr>
+<tr><td class="name">/R</td><td>The landing per feature (the plan's "lands on the day's page"), wired from the Q&amp;A caption; "not open yet" on the site; the intent line on the plan.</td></tr>
+<tr><td class="name">/M</td><td>A song page on /wb the Number lands on (the song, the demo, the run so far); the caption line; the template (crop, logo, chords, lyrics); the intent line on the music page.</td></tr>
+<tr><td class="name">/S</td><td>A decision whether the shop is a launch (question 2).</td></tr>
+</tbody></table></div>
+
+<h2>5. Three questions</h2>
+<ol class="qs">
+<li><b>The statement of the whole.</b> A. Rule Ops' draft intent and purpose as the standing lines until you write the paragraph. B. Write the paragraph now; three sentences is enough. C. The whole has no statement; only the launches do.</li>
+<li><b>The launch set.</b> A. Two launches, /R and /M, and the rest have none until after the door. B. Add /S the shop as a third launch with its own date. C. One launch, the door, with the Number inside it as its music.</li>
+<li><b>The reel priority.</b> A. The order in section 3 stands. B. Reorder; say the order. C. Fewer; name the rows to kill.</li>
+</ol>
+<p class="para">Nothing is built off this page until the three are answered.</p>
+<footer>docs/LAUNCH-20260918.md · the sheet's sources: reels/qa.json, reels/features.json, reels/numbers.json, reels/determinations.json, docs/PLAN-20260910-OPENING-DAY.md, docs/canonical/WHAT_WEIRD_BABY_IS.md</footer>
+</div>
