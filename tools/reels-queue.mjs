@@ -132,7 +132,8 @@ async function queue() {
   const led = JSON.parse(fs.readFileSync(ledPath, "utf8"));
   let rows;
   if (lane === "qa") {
-    const built = r => (r.status === "built") && r.file && fs.existsSync(r.file);
+    /* a stand-in never ships: a `test` row is queued only on purpose (--test), never by the morning run [2026-09-18] */
+    const built = r => (r.status === "built") && r.file && fs.existsSync(r.file) && (!r.test || flag("test"));
     if (opt("date")) rows = led.rows.filter(r => r.date === opt("date") && built(r));
     else { const n = Number(opt("ahead") || 7); const t0 = nyToday(); const t1 = new Date(Date.parse(t0) + n * 86400000).toISOString().slice(0, 10); rows = led.rows.filter(r => r.date >= t0 && r.date <= t1 && built(r)); }
   } else rows = led.rows.filter(r => r.week === week && r.status === "shot" && r.file && fs.existsSync(r.file));
