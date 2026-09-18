@@ -167,7 +167,9 @@
    "do": [
     "One drop (day 1: the Everyday, Answers, MGK-NIAC) walked as a stranger in the development stage: the reel, its caption link, the landing, the album with the track open, the machine playing, nothing unreleased on its menu; a queued post if the Buffer key is in. Stand-ins everywhere. One page back: what worked, what broke, how long each step really took."
    ],
-   "long": "Pilot before volume, applied to the whole launch: the seams are where launches break (Ops’ pick for an unattended day, 09-18)"
+   "long": "Pilot before volume, applied to the whole launch: the seams are where launches break (Ops’ pick for an unattended day, 09-18). Done 09-18: docs/SLICE-DAY1-20260918.md. The reel and the queue hold; the walk breaks the moment the stranger leaves the reel (no landing, no Answers track, the machine not reachable, the wing opens on the retired Record).",
+   "done": true,
+   "done_on": "2026-09-18"
   },
   {
    "id": "shoot-pilot-script",
