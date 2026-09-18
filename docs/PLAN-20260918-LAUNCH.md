@@ -68,6 +68,27 @@ ten minutes of Buffer clicks; the shoots, the words and the fifteen Q&As
 follow their pilots, inside windows that run to mid and late October
 (`docs/desk/BOARD-SCHEDULE.md`, "What is asked of Mike").
 
+## 2b. Families, not items (Mike, 09-18)
+
+The path to an approved program (take stock, name the limits, a rough range,
+he points, one playable end to end, he plays it and the punch list is ruled,
+final on the twin, then its page and its reel) is right, and walking it 26
+times is not: it is not in the calendar at that level, and it should not be.
+
+- **Take stock once.** All 26 drops played in the twin in one pass, sorted
+  into families, the lead member of each named (Ops, 09-23).
+- **Decide the shared things once, for everybody.** How a score shows, how
+  text shows, how a thing ends, how you get in and out: a range, he points
+  once, every program inherits (the conventions; Sunday Q1, the glass, is the
+  first of them).
+- **The full path once per family**, on its lead member. The members after it
+  take the short path: finished against the conventions, checked, done.
+- **Reviewed by family, at one sitting**, never item by item, and never the
+  same question twice.
+
+This is as much project management as the job needs. The plan keeps one row
+per drop because each has its own day; it does not plan the inside of each.
+
 ## 3. 50,000 ft: is it purpose built, or an assembly of tasks?
 
 v1 was an assembly: its columns came from the description of the board, its

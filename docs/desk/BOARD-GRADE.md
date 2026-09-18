@@ -1,6 +1,6 @@
 # THE BOARD'S GRADE — 2026-09-18
 
-42 days to the door (10-30), 52 to the Number (11-09). 54 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **0 not on track**.
+42 days to the door (10-30), 52 to the Number (11-09). 55 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **0 not on track**.
 Written by tools/board.mjs from docs/desk/BOARD-PLAN.json. Rules: docs/BOARD-PLAN-20260918.md.
 
 ```
@@ -14,7 +14,7 @@ Games                    0%     100%          0%      (6, 0)
 Engines and settings     7%      93%          0%      (5, 0)
 Albums                   0%     100%          0%      (5, 0)
 The site                11%      89%          0%      (9, 0)
-The machine             10%      90%          0%      (3, 0)
+The machine              8%      93%          0%      (4, 0)
 The system              23%      77%          0%      (7, 0)
 ```
 

@@ -155,6 +155,16 @@
    "long": "The smallest real shoot that exercises the whole photo and footage line (docs/SED-AUDIT-20260918.md section 4)"
   },
   {
+   "id": "take-stock",
+   "date": "2026-09-23",
+   "owner": "ops",
+   "title": "Take stock: play all 26 drops in the twin, sort them into families",
+   "do": [
+    "One pass, one page: each drop played as it stands today; what it shares with the others (score, text, ending, in and out, voice) and what is its own; the families that fall out, and the lead member of each."
+   ],
+   "long": "Step 1 of the path, done once for everybody rather than 26 times (docs/PLAN-20260918-LAUNCH.md, Families)"
+  },
+  {
    "id": "twin-update",
    "date": "2026-09-24",
    "owner": "ops",
@@ -281,6 +291,16 @@
    "long": "The thing every production line exists to fill; without it the ask reel and the shoot reel have no slot (docs/PLAN-20260918-LAUNCH.md section 3)",
    "done": true,
    "done_on": "2026-09-18"
+  },
+  {
+   "id": "conventions-range",
+   "date": "2026-09-26",
+   "owner": "ops",
+   "title": "The house conventions, as a range to point at",
+   "do": [
+    "For each shared thing (a score, a line of text, an ending, getting in and out): the limits and two or three rough examples on the twin's glass, one page. He points once; every program inherits."
+   ],
+   "long": "Decided at 50,000 ft for everybody, so nothing is designed alone and cleaned up later"
   },
   {
    "id": "photos-everyman",

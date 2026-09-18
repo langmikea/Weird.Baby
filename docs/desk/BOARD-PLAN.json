@@ -399,6 +399,9 @@
     ],
     "unit": [
      "real-unit.done"
+    ],
+    "twin": [
+     "conventions.built"
     ]
    }
   },
@@ -431,6 +434,9 @@
     ],
     "unit": [
      "real-unit.done"
+    ],
+    "twin": [
+     "conventions.built"
     ]
    }
   },
@@ -464,6 +470,9 @@
     ],
     "unit": [
      "real-unit.done"
+    ],
+    "twin": [
+     "conventions.built"
     ]
    }
   },
@@ -1132,6 +1141,21 @@
      "ev": "Mike, Sunday Q2: C, and no dead ends; BOARD-DECISIONS.md"
     }
    }
+  },
+  {
+   "id": "conventions",
+   "col": "machine",
+   "name": "The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out",
+   "owner": "Ops",
+   "ladder": "choice",
+   "tasks": [
+    "take-stock",
+    "conventions-range"
+   ],
+   "gates": {},
+   "after": {
+    "look": []
+   }
   }
  ],
  "later_by_draft": {
@@ -1161,5 +1185,6 @@
  "_prev": "A gate follows the gate before it on its ladder unless `prev` names others. Reel: the real post and his real material both follow the pilot; VOLUME follows both (nothing is asked in volume until one real unit has been through the whole pipe, the queue included). Product: the page follows the pitch, not the twin; the unit proof follows the twin.",
  "_dur": "Durations are Ops estimates in elapsed days, coarse on purpose: a range of rough examples 5, a pilot on stand-ins 3, a build 4, a volume run 7 to 14. They are the first thing to correct when a pilot teaches otherwise; correcting one re-derives every date.",
  "_due_now": "Mike, 2026-09-18: a red that names him is due from him NOW; the worst item on the critical path is dated yesterday. The grader lists at most three as `yours_now`.",
- "_daily": "2026-09-18, Mike: interesting content drops every day of the robot launch; what is not due for weeks is not made ahead. So a catalogue row is walled by its own day (CATALOGUE run.start + day - 1, less lead_days), and an album by its character's day. The Everyday opens the shelf at the door; the Gambler, the CEO and the Informer arrive on days 17, 22 and 24."
+ "_daily": "2026-09-18, Mike: interesting content drops every day of the robot launch; what is not due for weeks is not made ahead. So a catalogue row is walled by its own day (CATALOGUE run.start + day - 1, less lead_days), and an album by its character's day. The Everyday opens the shelf at the door; the Gambler, the CEO and the Informer arrive on days 17, 22 and 24.",
+ "_families": "2026-09-18, Mike: look for the crossover (SED). Score, text, endings, in and out are the same except data: decide them once at 50,000 ft for everybody, then each program is a member of a family, finished against the conventions and reviewed with its family at one sitting, never item by item. The full path (take stock, limits, range, point, pilot, punch list, final) is walked once per family on its lead member; the members after it take the short path."
 }
