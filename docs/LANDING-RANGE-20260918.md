@@ -50,3 +50,7 @@ On your PC: `npm run dev`, then the two addresses above on localhost:5173.
 
 A or B, or "something between": on a phone, does the stranger meet the album
 first, or the machine first?
+
+## Pointed at, 2026-09-18
+
+Mike: **"B"**. The stranger meets the machine first. Logged in `docs/desk/BOARD-DECISIONS.md`.
