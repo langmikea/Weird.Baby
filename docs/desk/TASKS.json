@@ -118,6 +118,19 @@
    "done_on": "2026-09-16"
   },
   {
+   "id": "door-ruling-e",
+   "date": "2026-09-19",
+   "owner": "ops",
+   "title": "FIRST: post \"We open 10/31\", close robots; program \"We are open!\" for 10-31",
+   "do": [
+    "Mike, 09-18: TODAY post \"We open 10/31\" and close robots. On 10/31 post \"We are open!\" with nothing needed from him then. The site's official birthday is 10/31 in lore. Ops decides what is manual and what is programmed.",
+    "Ops' split: PROGRAMMED by the site's own clock: the robots wing shut until Sat 10-31 00:00 New York and open after; the lobby line reading \"We open 10/31\" before that moment and \"We are open!\" after. PROGRAMMED through Buffer: \"We are open!\" queued for 10-31 on the three channels. MANUAL, once: the deploy (Mike's one command); the \"We open 10/31\" post on the channels (the queue's first live send: as a draft first, then for real; this one announcement is his exception to 'nothing posts before the door').",
+    "Read docs/canonical/OPERATIONS.md, src/data/artists/record-epoch.js and src/lib/wing-open.js first. Moving RECORD_EPOCH is the designed fix, but day one becomes a SATURDAY (reveal/week-one.mjs and week-two.mjs rows are MON..FRI; tools/arc.mjs is right only while day one is a Monday) and the Record day turns at 17:00 (his 08-17 ruling) while the door is midnight. Smallest change; every gate (lint baseline, provenance:gate, reveal:check, parity:gate, instory:gate, shellstop:gate); build:launch; look as-of 10-30 and 10-31; hand Mike the deploy. Do not run record:land or day:proof.",
+    "Lore: the birthday is 10/31. The guest book's entry 07 (\"My birthday, I guess! Weird.Baby is open for business!\") and any page that states a birthday or an opening are checked against it; his words are flagged, never edited."
+   ],
+   "long": "The live wing is open on the retired story and the accounts now point at the site"
+  },
+  {
    "id": "ruling-1",
    "date": "2026-09-20",
    "owner": "mike",
@@ -175,16 +188,6 @@
     "Read tools/reels-queue.mjs against Buffer's current API before it runs live; send one stand-in as a DRAFT (nothing public), check it in Buffer, remove it; then queue the first real row when there is one. Keep within the free plan: 10 queued posts a channel, so the morning run queues five days ahead, not seven, once the Number joins."
    ],
    "long": "No line has ever posted for real; the first live run must not be able to publish a stand-in before the door"
-  },
-  {
-   "id": "door-ruling-e",
-   "date": "2026-09-22",
-   "owner": "ops",
-   "title": "The door in the code: shut the wing until 10-31, announce it in the lobby",
-   "do": [
-    "Read docs/canonical/OPERATIONS.md and src/data/artists/record-epoch.js first. The live wing is open on the retired story. Make the smallest change that shuts it until Sat 10-31 00:00 New York and puts one line in the lobby; name what a Saturday day one and a midnight door do to the Record's weekday rows and its 17:00 turnover; run every gate (lint baseline, provenance:gate, reveal:check, parity:gate, instory:gate, shellstop:gate); build:launch; look at it as-of 10-30 and 10-31; then hand Mike the one deploy command. Do not run record:land or day:proof."
-   ],
-   "long": "Mike, 09-18: announce 10/31 in the lobby and put things right. The accounts are public and point at the site now."
   },
   {
    "id": "take-stock",
