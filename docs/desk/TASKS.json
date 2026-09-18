@@ -229,6 +229,16 @@
    "long": "The look pointed at, from a range, before his real question is asked for"
   },
   {
+   "id": "pm-flyover",
+   "date": "2026-09-25",
+   "owner": "ops",
+   "title": "The flyover: are we even over the right country",
+   "do": [
+    "One page from the highest altitude down: is the purpose right, is the plan built for it, how are we handling it strategically and tactically, how is execution going; what a week on the board taught; what to change. For Mike to read, then talk."
+   ],
+   "long": "Mike, 09-18: another flyover of our project management status within the week, mostly at the very high altitude of are we even flying over the right country"
+  },
+  {
    "id": "burn-down",
    "date": "2026-09-26",
    "owner": "ops",

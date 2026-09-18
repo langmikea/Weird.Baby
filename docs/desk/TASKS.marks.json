@@ -62,9 +62,21 @@
    1
   ]
  },
+ "board-morning": {
+  "done": true,
+  "steps": [
+   1
+  ]
+ },
  "gambler-standin": {
   "done": true,
   "steps": []
+ },
+ "run-of-show": {
+  "done": true,
+  "steps": [
+   1
+  ]
  },
  "number-pieces": {
   "done": true,

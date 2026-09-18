@@ -251,16 +251,24 @@ ws_c = wb.create_sheet("Calendar", 0)
 ws_c.sheet_view.showGridLines = False
 for i in range(1, 8): ws_c.column_dimensions[get_column_letter(i)].width = 24
 ws_c["A1"] = "Weird.Baby · the days to the door"; ws_c["A1"].font = f_title
-ws_c["A2"] = f"Red needs you. Grey is Ops. Struck is done. Click a name for what to do. Opening Day {OPEN.isoformat()} · {(OPEN - TODAY).days} days from today ({TODAY.isoformat()})."; ws_c["A2"].font = f_sub
+ws_c["A2"] = f"Green is what drops that day. Red needs you. Grey is Ops. Struck is done. Click a name for what to do. Opening Day {OPEN.isoformat()} · {(OPEN - TODAY).days} days from today ({TODAY.isoformat()})."; ws_c["A2"].font = f_sub
 by_date = {}
 for t in tasks: by_date.setdefault(t["_d"], []).append(t)
+# what drops each day (docs/desk/DROPS.json, written by tools/board.mjs): the day's feature, the
+# Number, the Q&A, the reels. They sit at the top of the day, in green, above the work. [Mike, 2026-09-18]
+try:
+    _dr = json.loads((REPO / "docs/desk/DROPS.json").read_text(encoding="utf-8"))["drops"]
+except Exception:
+    _dr = {}
+drops_by_date = {datetime.date.fromisoformat(k): v for k, v in _dr.items()}
+f_drop = Font(name=F, size=9, bold=True, color="3F7A4F"); f_drop2 = Font(name=F, size=9, color="3F7A4F")
 row = 4
 months = [(2026, 9), (2026, 10), (2026, 11)]
 calendar.setfirstweekday(calendar.SUNDAY)
 # every day the same size: one number row plus DEPTH item rows, boxed on all
 # four sides; a day that has passed is greyed whole; a day outside the month
 # is blank and greyed too. [Mike, 2026-09-10]
-DEPTH = max(6, max((len(v) for v in by_date.values()), default=1))
+DEPTH = max(6, max((len(by_date.get(d, [])) + len(drops_by_date.get(d, [])) for d in set(by_date) | set(drops_by_date)), default=1))
 mid = Side(style="thin", color="BFBFBF")
 fill_past = PatternFill("solid", fgColor="EDEDED"); fill_off = PatternFill("solid", fgColor="F7F7F7")
 def day_border(k):  # k = -1 number row, 0..DEPTH-1 item rows
@@ -293,9 +301,14 @@ for (y, m) in months:
                 if d < TODAY: c.fill = fill_past
                 elif d == TODAY: c.fill = fill_today
                 elif d == OPEN: c.fill = fill_open
+                dl = drops_by_date.get(d, [])
+                if k < len(dl):
+                    c.value = ("▸ " + dl[k]["label"])[:40]
+                    c.font = f_drop if dl[k]["kind"] == "feature" else f_drop2
+                    continue
                 lst = items[i]
-                if k < len(lst):
-                    t = lst[k]
+                if k - len(dl) < len(lst):
+                    t = lst[k - len(dl)]
                     c.value = t["title"] if len(t["title"]) <= 34 else t["title"][:33] + "…"
                     c.font = f_done if t["_done"] else (f_mike if t["owner"] == "mike" else f_ops)
                     if d < TODAY and not t["_done"]: c.font = Font(name=F, size=9, bold=True, color=RED, underline="single")  # late
