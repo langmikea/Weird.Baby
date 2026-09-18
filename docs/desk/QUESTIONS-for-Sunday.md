@@ -91,31 +91,36 @@ time. Ops clears a question the day it is answered.
    shoots the hook close for the later weeks either way.
    The pieces themselves are ruled 10-11 with song two; this is the frame only.
 
-8. **The must-have list, ruled once.** The board (https://claude.ai/artifact/WwWHsXRaN5RCVWW7QCytw5)
-   grades only what the launches must have (your 2A). Ops' draft: every
-   catalogue row with a launch-run day (13 programs, 6 games, 2 engines, 3
-   settings), the four albums, four reel types (Q&A with the hot lane, the
-   Number, the ask, the shoot reel), eight pieces of the site, the twin and
-   the real unit, seven pieces of the system. 51 things
-   (docs/PLAN-20260918-LAUNCH.md section 2). Rule it by column, not by row.
-   A. The draft stands. B. The draft, with columns or rows you name moved to
-   later. C. Smaller: name what the door truly cannot open without. Ops
-   recommends A, and B for the games if question 9 has no date for them.
+8. **The must-have list, ruled once, by column.** The board
+   (https://claude.ai/artifact/WwWHsXRaN5RCVWW7QCytw5) grades only what the
+   launches must have (your 2A): 54 things in 11 columns
+   (docs/PLAN-20260918-LAUNCH.md section 4). Two cuts Ops proposes, from
+   walking a stranger through the launch (section 3): (a) "proven on the
+   real unit" leaves the 24 programs, games and settings and goes to later;
+   nobody at the door touches the real unit, the reels' glass is the twin's
+   by your 09-12 ruling, and the bench is the riskiest chain in the plan. The
+   bench itself stays, as one thing. (b) Song two goes to later: Coconuts
+   runs to 11-13. A. The draft with both cuts. B. The draft, the unit proofs
+   kept. C. Your own list. Ops recommends A.
 
-9. **Three dates the plan does not have.** Each is red on the board because
-   it has no date, and only you can give one. (a) The games final on the
-   twin: a date, or "later" (the door opens without games). (b) The ask
-   reel: your notes on the first cut and the real question it asks; Ops
-   proposes the 09-27 sitting. (c) A deploy before the Number: the song's
-   page has to be live before Monday 10-26 at noon; Ops proposes Sunday
-   10-25 with the album rulings.
+9. **Three dates only you can give; the first is the critical path of the
+   whole launch.** (a) Buffer's six clicks. Every reel line ends at the
+   queue, none has ever posted for real, and nothing is asked of you in
+   volume until one has. Promised 10-10, the key leaves the Q&A line three
+   days short; any ten minutes before 10-07 clears five columns of the
+   board. (b) The games final on the twin: a date, or "later" (the door
+   opens without games). (c) A deploy before the Number: the song's page
+   must be live before Monday 10-26 at noon; Ops proposes Sunday 10-25.
 
-10. **The week of 10-05 asks eight things of you; a week holds about
-    three.** Fifteen Q&As (10-09), the prologue's opening (10-09), About the
-    Artist (10-10), Buffer's six clicks (10-10), song two and the fifteen
-    pieces (10-11), the CEO's shoot (10-11), the Everyman's album ruled
-    (10-11). Nothing stops any of them starting sooner. A. Pull three
-    forward: Buffer's clicks to the week of 09-21 (it unblocks four lines and
-    takes ten minutes), the prologue's opening to 10-01, and the Q&As five a
-    week (09-27, 10-04, 10-09). B. Leave the dates; the board will say when
-    it breaks. C. Your own order. Ops recommends A.
+10. **The raised hand.** /R's purpose is robot sales (your reason three),
+    and at the door a stranger who wants one can do nothing, not even say
+    so. The shop is ruled out until after the door, rightly. A. Nothing
+    until the shop. B. The smallest thing: the album's last line ("the line
+    about having one") and a "tell me when" that takes an email, range
+    first like everything else. C. Something else you have in mind. Ops
+    recommends B.
+
+Standing from 09-18: the Sunday sitting is two things only, **point** (the
+ranges that are ready: on 09-20 the Number's frame; on 09-27 the beat's
+palette, the run of show, the shoot reel's look, the ask reel's variants,
+the song's page, the wing's shapes) and **rule the reds**.

@@ -1,34 +1,72 @@
 {
  "as_of": "2026-09-18",
  "must_have_ruled": null,
- "deliverables": 51,
- "not_on_track": 9,
+ "deliverables": 54,
+ "not_on_track": 13,
  "columns": [
   {
    "id": "qa",
    "group": "Promotion",
    "name": "Q&A reel",
    "outcome": "O3",
-   "count": 2,
-   "red": 0,
-   "done": 0.5678571428571428,
-   "on": 0.43214285714285716,
-   "off": 0,
+   "count": 3,
+   "red": 2,
+   "done": 0.3757575757575758,
+   "on": 0.33333333333333337,
+   "off": 0.2909090909090909,
    "later": [],
-   "lines": []
+   "lines": [
+    {
+     "what": "one real post through the queue: forecast 10-14, 3 days past its need",
+     "owner": "Ops",
+     "need": "2026-10-11",
+     "rule": 1,
+     "names": [
+      "The daily Q&A line"
+     ]
+    },
+    {
+     "what": "waits on: Buffer connected (the key, the channels)",
+     "owner": "Mike",
+     "need": "2026-10-11",
+     "rule": 4,
+     "names": [
+      "The daily Q&A line"
+     ]
+    },
+    {
+     "what": "waits on: Buffer connected (the key, the channels)",
+     "owner": "Mike",
+     "need": "2026-10-25",
+     "rule": 4,
+     "names": [
+      "The hot Q&A lane"
+     ]
+    }
+   ]
   },
   {
    "id": "number",
    "group": "Promotion",
    "name": "Number reel",
    "outcome": "O1",
-   "count": 2,
-   "red": 0,
+   "count": 1,
+   "red": 1,
    "done": 0.15,
-   "on": 0.85,
-   "off": 0,
+   "on": 0,
+   "off": 0.85,
    "later": [],
-   "lines": []
+   "lines": [
+    {
+     "what": "waits on: Buffer connected (the key, the channels)",
+     "owner": "Mike",
+     "need": "2026-10-20",
+     "rule": 4,
+     "names": [
+      "Coconuts, the first run"
+     ]
+    }
+   ]
   },
   {
    "id": "ask",
@@ -37,34 +75,16 @@
    "outcome": "O3",
    "count": 1,
    "red": 1,
-   "done": 0.3,
+   "done": 0.35714285714285715,
    "on": 0,
-   "off": 0.7,
+   "off": 0.6428571428571428,
    "later": [],
    "lines": [
     {
-     "what": "his notes on the first cut: no date",
+     "what": "waits on: Buffer connected (the key, the channels)",
      "owner": "Mike",
-     "need": "2026-10-04",
-     "rule": 2,
-     "names": [
-      "The ask reel on MGK-NIAC"
-     ]
-    },
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops",
-     "need": "2026-10-04",
-     "rule": 5,
-     "names": [
-      "The ask reel on MGK-NIAC"
-     ]
-    },
-    {
-     "what": "his real question, and a posting date: no date",
-     "owner": "Mike",
-     "need": "2026-10-09",
-     "rule": 2,
+     "need": "2026-10-25",
+     "rule": 4,
      "names": [
       "The ask reel on MGK-NIAC"
      ]
@@ -77,12 +97,22 @@
    "name": "Shoot reel",
    "outcome": "O2",
    "count": 1,
-   "red": 0,
+   "red": 1,
    "done": 0,
-   "on": 1,
-   "off": 0,
+   "on": 0,
+   "off": 1,
    "later": [],
-   "lines": []
+   "lines": [
+    {
+     "what": "waits on: Buffer connected (the key, the channels)",
+     "owner": "Mike",
+     "need": "2026-10-22",
+     "rule": 4,
+     "names": [
+      "The sexy-shoot reel"
+     ]
+    }
+   ]
   },
   {
    "id": "programs",
@@ -129,7 +159,7 @@
     {
      "what": "the games are not final: no date",
      "owner": "Mike",
-     "need": "2026-10-02",
+     "need": "2026-10-21",
      "rule": 2,
      "names": [
       "Snow Globe",
@@ -149,8 +179,8 @@
    "outcome": "O4",
    "count": 5,
    "red": 0,
-   "done": 0.08,
-   "on": 0.92,
+   "done": 0.06999999999999999,
+   "on": 0.93,
    "off": 0,
    "later": [
     "MGK-65 arrives",
@@ -164,7 +194,7 @@
    "group": "Product",
    "name": "Albums",
    "outcome": "O2",
-   "count": 4,
+   "count": 5,
    "red": 0,
    "done": 0,
    "on": 1,
@@ -177,23 +207,13 @@
    "group": "Place",
    "name": "The site",
    "outcome": "O2",
-   "count": 8,
-   "red": 1,
-   "done": 0.05,
-   "on": 0.825,
-   "off": 0.125,
+   "count": 9,
+   "red": 0,
+   "done": 0.10952380952380952,
+   "on": 0.8904761904761904,
+   "off": 0,
    "later": [],
-   "lines": [
-    {
-     "what": "waits on: The deploy before the Number",
-     "owner": "Mike",
-     "need": "2026-10-04",
-     "rule": 4,
-     "names": [
-      "The song's page on /wb, and the caption line that points at it"
-     ]
-    }
-   ]
+   "lines": []
   },
   {
    "id": "machine",
@@ -213,17 +233,26 @@
    "group": "System",
    "name": "The system",
    "outcome": "O5",
-   "count": 7,
-   "red": 1,
-   "done": 0.2285714285714286,
-   "on": 0.6285714285714286,
-   "off": 0.14285714285714285,
+   "count": 8,
+   "red": 2,
+   "done": 0.2,
+   "on": 0.55,
+   "off": 0.25,
    "later": [],
    "lines": [
     {
+     "what": "built: forecast 10-12, 3 days past its need",
+     "owner": "Mike",
+     "need": "2026-10-09",
+     "rule": 1,
+     "names": [
+      "Buffer connected (the key, the channels)"
+     ]
+    },
+    {
      "what": "no deploy date is set before 10-26 noon; the song's page needs one: no date",
      "owner": "Mike",
-     "need": "2026-10-16",
+     "need": "2026-10-25",
      "rule": 2,
      "names": [
       "The deploy before the Number"
@@ -232,7 +261,7 @@
     {
      "what": "no work is scheduled for it",
      "owner": "Ops to schedule, Mike",
-     "need": "2026-10-16",
+     "need": "2026-10-25",
      "rule": 5,
      "names": [
       "The deploy before the Number"
@@ -247,19 +276,49 @@
    "col": "qa",
    "name": "The daily Q&A line",
    "owner": "Ops",
-   "pct": 35,
-   "status": "on",
-   "next": "2026-10-02",
-   "reasons": []
+   "pct": 40,
+   "status": "off",
+   "next": "2026-10-11",
+   "reasons": [
+    {
+     "what": "one real post through the queue: forecast 10-14, 3 days past its need",
+     "owner": "Ops",
+     "need": "2026-10-11",
+     "rule": 1
+    },
+    {
+     "what": "waits on: Buffer connected (the key, the channels)",
+     "owner": "Mike",
+     "need": "2026-10-11",
+     "rule": 4
+    }
+   ]
   },
   {
    "id": "qa-hot",
    "col": "qa",
    "name": "The hot Q&A lane",
    "owner": "Ops",
-   "pct": 79,
+   "pct": 73,
+   "status": "off",
+   "next": "2026-10-25",
+   "reasons": [
+    {
+     "what": "waits on: Buffer connected (the key, the channels)",
+     "owner": "Mike",
+     "need": "2026-10-25",
+     "rule": 4
+    }
+   ]
+  },
+  {
+   "id": "beat",
+   "col": "qa",
+   "name": "The beat under the reels: a palette he can play, then one",
+   "owner": "Ops",
+   "pct": 0,
    "status": "on",
-   "next": "2026-10-16",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -267,47 +326,32 @@
    "col": "number",
    "name": "Coconuts, the first run",
    "owner": "Ops",
-   "pct": 30,
-   "status": "on",
-   "next": "2026-09-27",
-   "reasons": []
-  },
-  {
-   "id": "song-two",
-   "col": "number",
-   "name": "Song two, chosen",
-   "owner": "Mike",
-   "pct": 0,
-   "status": "on",
-   "next": "2026-10-11",
-   "reasons": []
+   "pct": 15,
+   "status": "off",
+   "next": "2026-10-18",
+   "reasons": [
+    {
+     "what": "waits on: Buffer connected (the key, the channels)",
+     "owner": "Mike",
+     "need": "2026-10-20",
+     "rule": 4
+    }
+   ]
   },
   {
    "id": "ask-niac",
    "col": "ask",
    "name": "The ask reel on MGK-NIAC",
    "owner": "Ops",
-   "pct": 30,
+   "pct": 36,
    "status": "off",
-   "next": "2026-10-04",
+   "next": "2026-10-25",
    "reasons": [
     {
-     "what": "his notes on the first cut: no date",
+     "what": "waits on: Buffer connected (the key, the channels)",
      "owner": "Mike",
-     "need": "2026-10-04",
-     "rule": 2
-    },
-    {
-     "what": "his real question, and a posting date: no date",
-     "owner": "Mike",
-     "need": "2026-10-09",
-     "rule": 2
-    },
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops",
-     "need": "2026-10-04",
-     "rule": 5
+     "need": "2026-10-25",
+     "rule": 4
     }
    ]
   },
@@ -317,8 +361,25 @@
    "name": "The sexy-shoot reel",
    "owner": "Ops",
    "pct": 0,
+   "status": "off",
+   "next": "2026-10-18",
+   "reasons": [
+    {
+     "what": "waits on: Buffer connected (the key, the channels)",
+     "owner": "Mike",
+     "need": "2026-10-22",
+     "rule": 4
+    }
+   ]
+  },
+  {
+   "id": "shoot-pilot",
+   "col": "albums",
+   "name": "The shoot's pilot: one item through the grammar and the element takes",
+   "owner": "Mike",
+   "pct": 0,
    "status": "on",
-   "next": "2026-09-29",
+   "next": "2026-10-17",
    "reasons": []
   },
   {
@@ -328,7 +389,7 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-27",
+   "next": "2026-10-21",
    "reasons": []
   },
   {
@@ -338,7 +399,7 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-04",
+   "next": "2026-10-21",
    "reasons": []
   },
   {
@@ -348,7 +409,7 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-11",
+   "next": "2026-10-21",
    "reasons": []
   },
   {
@@ -358,17 +419,17 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-18",
+   "next": "2026-10-21",
    "reasons": []
   },
   {
-   "id": "prologue",
+   "id": "album-template",
    "col": "site",
-   "name": "The prologue",
+   "name": "The album template, proven on stand-ins",
    "owner": "Ops",
-   "pct": 0,
+   "pct": 50,
    "status": "on",
-   "next": "2026-09-27",
+   "next": "2026-10-23",
    "reasons": []
   },
   {
@@ -378,7 +439,17 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-27",
+   "next": "2026-10-11",
+   "reasons": []
+  },
+  {
+   "id": "prologue",
+   "col": "site",
+   "name": "The prologue",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -388,17 +459,17 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-27",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
    "id": "door",
    "col": "site",
-   "name": "The door: 'not open yet', then it opens itself",
+   "name": "The door: not open yet, then it opens itself",
    "owner": "Ops",
    "pct": 20,
    "status": "on",
-   "next": "2026-10-09",
+   "next": "2026-10-20",
    "reasons": []
   },
   {
@@ -407,25 +478,18 @@
    "name": "The song's page on /wb, and the caption line that points at it",
    "owner": "Ops",
    "pct": 0,
-   "status": "off",
-   "next": "2026-10-04",
-   "reasons": [
-    {
-     "what": "waits on: The deploy before the Number",
-     "owner": "Mike",
-     "need": "2026-10-04",
-     "rule": 4
-    }
-   ]
+   "status": "on",
+   "next": "2026-10-11",
+   "reasons": []
   },
   {
    "id": "whole",
    "col": "site",
    "name": "The statement of the whole, on the front",
    "owner": "Ops",
-   "pct": 20,
+   "pct": 29,
    "status": "on",
-   "next": "2026-10-09",
+   "next": "2026-10-24",
    "reasons": []
   },
   {
@@ -435,7 +499,7 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-09",
+   "next": "2026-10-23",
    "reasons": []
   },
   {
@@ -445,7 +509,7 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-10",
+   "next": "2026-10-24",
    "reasons": []
   },
   {
@@ -455,7 +519,7 @@
    "owner": "Ops",
    "pct": 10,
    "status": "on",
-   "next": "2026-10-02",
+   "next": "2026-10-22",
    "reasons": []
   },
   {
@@ -474,18 +538,25 @@
    "name": "Buffer connected (the key, the channels)",
    "owner": "Mike",
    "pct": 0,
-   "status": "on",
-   "next": "2026-10-11",
-   "reasons": []
+   "status": "off",
+   "next": "2026-10-09",
+   "reasons": [
+    {
+     "what": "built: forecast 10-12, 3 days past its need",
+     "owner": "Mike",
+     "need": "2026-10-09",
+     "rule": 1
+    }
+   ]
   },
   {
    "id": "photos-white",
    "col": "system",
-   "name": "The photo line's white treatment",
+   "name": "The photo line's white treatment, proven on frames in hand",
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-26",
+   "next": "2026-10-17",
    "reasons": []
   },
   {
@@ -495,7 +566,7 @@
    "owner": "Ops",
    "pct": 80,
    "status": "on",
-   "next": "2026-10-09",
+   "next": "2026-10-23",
    "reasons": []
   },
   {
@@ -505,17 +576,17 @@
    "owner": "Ops",
    "pct": 80,
    "status": "on",
-   "next": "2026-10-04",
+   "next": "2026-10-23",
    "reasons": []
   },
   {
    "id": "rehearsal",
    "col": "system",
-   "name": "The opening-day rehearsal",
+   "name": "The opening-day rehearsal (no stand-in survives it)",
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-16",
+   "next": "2026-10-22",
    "reasons": []
   },
   {
@@ -525,18 +596,18 @@
    "owner": "Mike",
    "pct": 0,
    "status": "off",
-   "next": "2026-10-16",
+   "next": "2026-10-25",
    "reasons": [
     {
      "what": "no deploy date is set before 10-26 noon; the song's page needs one: no date",
      "owner": "Mike",
-     "need": "2026-10-16",
+     "need": "2026-10-25",
      "rule": 2
     },
     {
      "what": "no work is scheduled for it",
      "owner": "Ops to schedule, Mike",
-     "need": "2026-10-16",
+     "need": "2026-10-25",
      "rule": 5
     }
    ]
@@ -548,7 +619,17 @@
    "owner": "Mike",
    "pct": 0,
    "status": "on",
-   "next": "2026-10-22",
+   "next": "2026-10-29",
+   "reasons": []
+  },
+  {
+   "id": "run-of-show",
+   "col": "system",
+   "name": "The launch run of show: what posts each day 10-26 to 11-13, and where each lands",
+   "owner": "Ops",
+   "pct": 0,
+   "status": "on",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -558,7 +639,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -568,7 +649,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -578,7 +659,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -588,7 +669,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -598,7 +679,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -608,7 +689,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -618,7 +699,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -628,7 +709,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -638,7 +719,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -648,7 +729,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -658,7 +739,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -668,7 +749,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -678,7 +759,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -688,12 +769,12 @@
    "owner": "Ops",
    "pct": 0,
    "status": "off",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": [
     {
      "what": "the games are not final: no date",
      "owner": "Mike",
-     "need": "2026-10-02",
+     "need": "2026-10-21",
      "rule": 2
     }
    ]
@@ -705,12 +786,12 @@
    "owner": "Ops",
    "pct": 0,
    "status": "off",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": [
     {
      "what": "the games are not final: no date",
      "owner": "Mike",
-     "need": "2026-10-02",
+     "need": "2026-10-21",
      "rule": 2
     }
    ]
@@ -722,12 +803,12 @@
    "owner": "Ops",
    "pct": 0,
    "status": "off",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": [
     {
      "what": "the games are not final: no date",
      "owner": "Mike",
-     "need": "2026-10-02",
+     "need": "2026-10-21",
      "rule": 2
     }
    ]
@@ -739,12 +820,12 @@
    "owner": "Ops",
    "pct": 0,
    "status": "off",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": [
     {
      "what": "the games are not final: no date",
      "owner": "Mike",
-     "need": "2026-10-02",
+     "need": "2026-10-21",
      "rule": 2
     }
    ]
@@ -756,12 +837,12 @@
    "owner": "Ops",
    "pct": 0,
    "status": "off",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": [
     {
      "what": "the games are not final: no date",
      "owner": "Mike",
-     "need": "2026-10-02",
+     "need": "2026-10-21",
      "rule": 2
     }
    ]
@@ -773,12 +854,12 @@
    "owner": "Ops",
    "pct": 0,
    "status": "off",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": [
     {
      "what": "the games are not final: no date",
      "owner": "Mike",
-     "need": "2026-10-02",
+     "need": "2026-10-21",
      "rule": 2
     }
    ]
@@ -788,9 +869,9 @@
    "col": "engines",
    "name": "MGK-NIAC, the twenty",
    "owner": "Ops",
-   "pct": 40,
+   "pct": 35,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
@@ -800,7 +881,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -810,7 +891,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -820,7 +901,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   },
   {
@@ -830,7 +911,7 @@
    "owner": "Ops",
    "pct": 0,
    "status": "on",
-   "next": "2026-09-20",
+   "next": "2026-10-11",
    "reasons": []
   }
  ]

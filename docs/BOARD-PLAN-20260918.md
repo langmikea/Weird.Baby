@@ -166,6 +166,11 @@ redder than the desk's "nothing late"; that is the point of rules 2 to 4.
 
 ## 10. Built 2026-09-18
 
+**Baseline v2, the same day:** sections 5 and 6 above are v1. The ladders now
+open with a range and a pilot on stand-ins, no date is typed (critical path),
+and rule 1 reads "its float is gone". PLAN-20260918-LAUNCH.md section 2 and
+tools/board.mjs are current.
+
 The plan of record that came out of this page: PLAN-20260918-LAUNCH.md
 (objectives, scope, milestones, capacity, the chains with no slack, risks,
 how the plan is kept). The decision log: docs/desk/BOARD-DECISIONS.md. The

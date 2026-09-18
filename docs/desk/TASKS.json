@@ -129,12 +129,32 @@
    "long": "Sunday question 6's rulings written into docs/MATERIAL-20260917.json and the page regenerated; the porch pieces ruled A into reels/numbers.json for the launch run"
   },
   {
+   "id": "shoot-pilot-script",
+   "date": "2026-09-22",
+   "owner": "ops",
+   "title": "The shoot pilot scripted: one item, the grammar and the element takes",
+   "do": [
+    "One page: the rig, one item through S0 to S8, then E1 to E6 (the static glass plate, the hold, the shake, the controls, the turntable turn, the clean plate). Fifteen minutes of Mike, whenever it suits him."
+   ],
+   "long": "The smallest real shoot that exercises the whole photo and footage line (docs/SED-AUDIT-20260918.md section 4)"
+  },
+  {
    "id": "twin-update",
    "date": "2026-09-24",
    "owner": "ops",
    "title": "Twin at full software",
    "do": [],
    "long": "The twin on the site at the full software, verified against the audit"
+  },
+  {
+   "id": "music-palette",
+   "date": "2026-09-24",
+   "owner": "ops",
+   "title": "The music palette: a page Mike can play",
+   "do": [
+    "Name the limits (no bed at all; the machine’s own sounds as rhythm; a period library cue; a modern beat), two rough examples of each under the same ten seconds of reel, on one page with play buttons. He points."
+   ],
+   "long": "Mike, 09-18: I have never heard any of this music; present a palette for me to choose and direct from"
   },
   {
    "id": "mocks",
@@ -183,6 +203,16 @@
    "done_on": "2026-09-18"
   },
   {
+   "id": "ask-range",
+   "date": "2026-09-25",
+   "owner": "ops",
+   "title": "The ask reel: the range to point at",
+   "do": [
+    "The first cut beside two or three quick variants at the limits (shorter, closer, a different question shape) on stand-in questions; for the sitting."
+   ],
+   "long": "The look pointed at, from a range, before his real question is asked for"
+  },
+  {
    "id": "burn-down",
    "date": "2026-09-26",
    "owner": "ops",
@@ -213,6 +243,16 @@
    "do": [
     "docs/SEXY-SHOOT-20260918.md section 5. A manifest row carries treatment: white; the handled print stays the story's."
    ]
+  },
+  {
+   "id": "run-of-show",
+   "date": "2026-09-26",
+   "owner": "ops",
+   "title": "The launch run of show, as a range to point at",
+   "do": [
+    "One page, three weeks (10-26 to 11-13), a row a day: what posts (the Number, the Q&A, the ask reel, the shoot reel), at what hour, and the room it lands in. Two or three shapes at the limits (sparse, daily, heavy first week) on stand-ins. He points."
+   ],
+   "long": "The thing every production line exists to fill; without it the ask reel and the shoot reel have no slot (docs/PLAN-20260918-LAUNCH.md section 3)"
   },
   {
    "id": "photos-everyman",
@@ -606,5 +646,5 @@
    "long": "Sunday grade on the desk: done over total for the week"
   }
  ],
- "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md. 2026-09-18: the four tray re-shoot rows became the sexy shoot (docs/SEXY-SHOOT-20260918.md); two Ops rows added (photos-white 09-26, shoot-reel-story 09-29). 2026-09-18 (the board): four Ops rows added (board-morning 09-25, song-page-shape 10-02, song-page 10-16, whole-front 10-09) so every must-have deliverable has work scheduled; twin-update moved 10-02 to 09-24 and bench-plan 10-03 to 09-25 to level Ops' week of 09-28 (docs/PLAN-20260918-LAUNCH.md)."
+ "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md. 2026-09-18: the four tray re-shoot rows became the sexy shoot (docs/SEXY-SHOOT-20260918.md); two Ops rows added (photos-white 09-26, shoot-reel-story 09-29). 2026-09-18 (the board): four Ops rows added (board-morning 09-25, song-page-shape 10-02, song-page 10-16, whole-front 10-09) so every must-have deliverable has work scheduled; twin-update moved 10-02 to 09-24 and bench-plan 10-03 to 09-25 to level Ops' week of 09-28 (docs/PLAN-20260918-LAUNCH.md). 2026-09-18 (the pilot re-plan): three Ops rows added (shoot-pilot-script 09-22, music-palette 09-24, ask-range 09-25); none of Mike’s rows touched."
 }

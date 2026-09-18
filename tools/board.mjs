@@ -3,27 +3,30 @@
    [2026-09-18, Mike: "a board of lights that show where we are not on track
    for success ... It must be based on a proper plan to have meaning."]
 
-     node tools/board.mjs            grades the plan, writes the three files
+     node tools/board.mjs            grades the plan, writes the files
      node tools/board.mjs --as-of 2026-10-01    grades as if it were that day
 
    Reads: docs/desk/BOARD-PLAN.json (the plan: outcomes, columns, deliverables,
-   gates, need-by dates, blockers, depends-on, the tasks that serve each),
-   docs/CATALOGUE-20260918.json (the product columns are its rows with a
-   launch-run day; `ruling` c drops a row, a or b earns the pitch gate),
-   docs/desk/TASKS.json + TASKS.marks.json (is any work scheduled),
-   reels/qa.json and reels/numbers.json (counted content).
+   gate ladders with durations, predecessors, fixed events, walls, blockers,
+   the tasks that serve each), docs/CATALOGUE-20260918.json (the product
+   columns are its rows with a launch-run day; `ruling` c drops a row, a or b
+   earns the pitch gate), docs/desk/TASKS.json + TASKS.marks.json (is any work
+   scheduled), reels/qa.json and reels/numbers.json (counted content).
 
-   Writes: docs/desk/BOARD.json (the grade as data), docs/desk/BOARD-GRADE.md
-   (the reds in the line format, and the orphans both ways), docs/desk/BOARD.html
-   (the board). Shape and rules: docs/BOARD-PLAN-20260918.md.
+   Writes: docs/desk/BOARD.json (the grade as data), BOARD-GRADE.md (the reds
+   in the line format, the orphans both ways), BOARD-SCHEDULE.md (Mike's
+   windows, the critical path, every open gate by week), BOARD.html (the
+   board). The plan of record: docs/PLAN-20260918-LAUNCH.md.
 
+   NO DATE IS TYPED (baseline v2, the pilot re-plan). A forward pass from
+   today over gate durations and predecessors gives each gate its forecast; a
+   backward pass from the launch's wall gives its needed-by; float is the gap.
    Percent complete is gate credit earned, never typed. A deliverable that is
    not done is NOT ON TRACK if any one holds:
-     1. a gate's need-by date has passed;
-     2. it is blocked, and the unblocking has no committed date, a date after
-        the need-by, or a date that has itself passed;
-     3. counted work is behind a straight line from its start to its need-by;
-     4. something it depends on is not on track;
+     1. its float is gone: a gate's forecast falls after its needed-by;
+     2. it is blocked, and the unblocking has no date, or its date has passed;
+     3. counted work is behind a straight line from its start to its needed-by;
+     4. something it waits on is not on track;
      5. no open task serves it (nobody is scheduled to do it).
    =========================================================================== */
 import fs from "node:fs";
@@ -37,6 +40,10 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "
 const asOf = process.argv.indexOf("--as-of");
 const today = asOf > 0 ? process.argv[asOf + 1] : new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
 const days = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);
+const addDays = (d, n) => new Date(Date.parse(d + "T12:00:00Z") + n * 86400000).toISOString().slice(0, 10);
+const dow = d => new Date(d + "T12:00:00Z").getUTCDay();
+const nextSun = d => addDays(d, (7 - dow(d)) % 7), prevSun = d => addDays(d, -dow(d));
+const maxD = a => a.filter(Boolean).sort().pop(), minD = a => a.filter(Boolean).sort()[0];
 const md = d => d ? d.slice(5) : "—";
 
 const P = read("docs/desk/BOARD-PLAN.json");
@@ -58,6 +65,7 @@ function measure(name, all) {
 
 /* the product columns come from the catalogue: rows with a launch-run day */
 const colById = Object.fromEntries(P.columns.map(c => [c.id, c]));
+const outcomeById = Object.fromEntries(P.outcomes.map(o => [o.id, o]));
 const deliverables = P.deliverables.map(d => ({ ...d }));
 const later = {};
 for (const c of P.columns.filter(c => c.catalogue)) {
@@ -70,58 +78,95 @@ for (const c of P.columns.filter(c => c.catalogue)) {
     if (r.ruling && !gates.pitch) gates.pitch = { done: CAT.sitting, ev: `catalogue ruling ${r.ruling}` };
     const blocked = [...(o.blocked || [])];
     for (const b of P.catalogue_blocked_by_name) if (new RegExp(b.match).test(r.name)) blocked.push(b);
-    deliverables.push({ id: r.id, col: c.id, name: r.name, owner: c.owner, gates, blocked, depends: o.depends || [] });
+    deliverables.push({ id: r.id, col: c.id, name: r.name, owner: c.owner, gates, blocked });
   }
 }
 const byId = Object.fromEntries(deliverables.map(d => [d.id, d]));
+
+/* the network: one node per gate that is not skipped */
+const nodes = {};
+for (const d of deliverables) {
+  const c = colById[d.col], own = !d.ladder;   // the column's predecessors and sittings apply only on the column's own ladder
+  d._nodes = P.ladders[d.ladder || c.ladder].filter(g => !(d.skip || []).includes(g.id)).map(g => {
+    const s = d.gates?.[g.id]; let frac = 0;
+    if (s?.done) frac = 1;
+    else if (s?.count) { const m = s.measure ? measure(s.measure, deliverables) : null; s._n = m ?? s.count[0]; frac = Math.min(s._n / s.count[1], 1); }
+    return { key: `${d.id}.${g.id}`, d, g, state: s, frac, dur: d.dur?.[g.id] ?? g.dur ?? 1, sitting: !!g.sitting,
+      who: d.who?.[g.id] || (g.who === "owner" || !g.who ? d.owner : g.who), on: d.on?.[g.id] || null,
+      notBefore: d.not_before?.[g.id] || (own ? c.not_before?.[g.id] : null) || null,
+      afterRefs: [...(own ? c.after?.[g.id] || [] : []), ...(d.after?.[g.id] || [])],
+      blockers: [...(own ? c.blocked || [] : []), ...(d.blocked || [])].filter(b => b.gate === g.id) };
+  });
+  /* a gate follows the one before it on the ladder unless `prev` names others; a skipped gate hands down its own */
+  const full = P.ladders[d.ladder || c.ladder], at = id => d._nodes.find(n => n.g.id === id);
+  const prevOf = g => { const i = full.indexOf(g), ids = g.prev || (i > 0 ? [full[i - 1].id] : []); return ids.flatMap(id => at(id) ? [at(id)] : prevOf(full.find(x => x.id === id))); };
+  d._nodes.forEach(n => { n.prevs = prevOf(n.g); nodes[n.key] = n; });
+  d._nodes.forEach(n => { n.nexts = d._nodes.filter(m => m.prevs.includes(n)); });
+}
+const resolve = ref => nodes[ref] || byId[ref]?._nodes.at(-1) || null;
+for (const n of Object.values(nodes)) n.after = n.afterRefs.map(resolve).filter(Boolean);
+for (const n of Object.values(nodes)) for (const a of n.after) (a.succ ||= []).push(n);
+const rem = n => Math.ceil(n.dur * (1 - n.frac));
+
+/* forward pass: the forecast */
+function ef(n, seen = new Set()) {
+  if (n._ef) return n._ef;
+  if (n.frac >= 1) return (n._ef = n.state?.done || today);
+  if (seen.has(n.key)) return today; seen.add(n.key);
+  n.es = maxD([today, ...n.prevs.map(p => ef(p, seen)), ...n.after.map(a => ef(a, seen)), n.notBefore, ...n.blockers.map(b => b.by)]);
+  let f = addDays(n.es, rem(n));
+  if (n.on && f <= n.on) f = n.on;
+  if (n.sitting) f = nextSun(f);
+  return (n._ef = f);
+}
+/* backward pass: the needed-by */
+const wallOf = d => d.wall || P.walls[outcomeById[colById[d.col].outcome]?.launch] || P.walls.R;
+function lf(n, seen = new Set()) {
+  if (n._lf) return n._lf;
+  if (seen.has(n.key)) return wallOf(n.d); seen.add(n.key);
+  const succ = [...n.nexts, ...(n.succ || [])].filter(s => s && s.frac < 1);
+  let l = succ.length ? minD(succ.map(s => addDays(lf(s, seen), -rem(s)))) : wallOf(n.d);
+  if (n.on) l = minD([l, n.on]);
+  if (n.sitting) l = prevSun(l);
+  return (n._lf = l);
+}
+for (const n of Object.values(nodes)) if (n.frac < 1) { ef(n); lf(n); n.float = days(n._ef, n._lf); }
 
 /* grade one deliverable */
 function grade(d, seen = new Set()) {
   if (d._g) return d._g;
   const c = colById[d.col];
-  const ladder = P.ladders[d.ladder || c.ladder].filter(g => !(d.skip || []).includes(g.id));
-  const needOf = id => d.need_by?.[id] ?? c.need_by?.[id] ?? null;
-  let earned = 0, total = 0; const open = [];
-  for (const g of ladder) {
-    const s = d.gates?.[g.id]; let f = 0;
-    if (s?.done) f = 1;
-    else if (s?.count) { const m = s.measure ? measure(s.measure, deliverables) : null; s._n = m ?? s.count[0]; f = Math.min(s._n / s.count[1], 1); }
-    earned += g.w * f; total += g.w;
-    if (f < 1) open.push({ ...g, need: needOf(g.id), state: s });
-  }
+  const open = d._nodes.filter(n => n.frac < 1);
+  const total = d._nodes.reduce((s, n) => s + n.g.w, 0), earned = d._nodes.reduce((s, n) => s + n.g.w * n.frac, 0);
   const pct = total ? earned / total : 0;
-  const next = open.map(g => g.need).filter(Boolean).sort()[0] || null;
+  const next = open[0]?._lf || null;
   const reasons = [];
   if (pct < 1) {
-    for (const g of open) {
-      /* a named blocker on the gate says why it is late; the bare 'overdue' line is for gates with none */
-      const held = [...(c.blocked || []), ...(d.blocked || [])].some(x => x.gate === g.id);
-      if (g.need && g.need < today && !held) reasons.push({ what: `${g.name}: needed ${md(g.need)}, not there`, owner: d.owner, need: g.need, rule: 1 });
-      const s = g.state;
-      if (s?.count && s.start && g.need && today > s.start && today <= g.need) {
-        const want = Math.floor(s.count[1] * days(s.start, today) / days(s.start, g.need));
-        if (s._n < want) reasons.push({ what: `${g.name}: ${s._n} of ${s.count[1]}, the pace wants ${want} by today`, owner: d.owner, need: g.need, rule: 3 });
-      }
+    for (const n of open) for (const b of n.blockers) {
+      if (!b.by) reasons.push({ what: `${b.what}: no date`, owner: b.owner, need: n._lf, rule: 2 });
+      else if (b.by < today) reasons.push({ what: `${b.what}: was due ${md(b.by)}`, owner: b.owner, need: n._lf, rule: 2 });
     }
-    for (const b of [...(c.blocked || []), ...(d.blocked || [])]) {
-      const g = open.find(x => x.id === b.gate); if (!g) continue;
-      const need = g.need || next;
-      if (!b.by) reasons.push({ what: `${b.what}: no date`, owner: b.owner, need, rule: 2 });
-      else if (need && b.by > need) reasons.push({ what: `${b.what}: promised ${md(b.by)}, after the need`, owner: b.owner, need, rule: 2 });
-      else if (b.by < today) reasons.push({ what: `${b.what}: was due ${md(b.by)}`, owner: b.owner, need, rule: 2 });
+    const worst = open.filter(n => n.float < 0).sort((a, b) => a.float - b.float)[0];
+    if (worst) reasons.push({ what: `${worst.g.name}: forecast ${md(worst._ef)}, ${-worst.float} day${worst.float === -1 ? "" : "s"} past its need`, owner: worst.who, need: worst._lf, rule: 1 });
+    for (const n of open) {
+      const s = n.state;
+      if (s?.count && s.start && today > s.start && today <= n._lf) {
+        const want = Math.floor(s.count[1] * days(s.start, today) / Math.max(1, days(s.start, n._lf)));
+        if (s._n < want) reasons.push({ what: `${n.g.name}: ${s._n} of ${s.count[1]}, the pace wants ${want} by today`, owner: n.who, need: n._lf, rule: 3 });
+      }
     }
     const ids = [...(c.tasks || []), ...(d.tasks || [])];
     if (!d.scheduled && !ids.some(id => taskById[id] && !taskDone(taskById[id]))) reasons.push({ what: "no work is scheduled for it", owner: d.owner === "Mike" ? "Ops to schedule, Mike" : "Ops", need: next, rule: 5 });
     if (!seen.has(d.id)) {
       seen.add(d.id);
-      for (const id of d.depends || []) {
-        const dep = byId[id]; if (!dep) continue;
-        const g = grade(dep, seen);
-        if (g.status === "off") reasons.push({ what: `waits on: ${dep.name}`, owner: g.reasons[0].owner, need: next, rule: 4 });
+      for (const n of open) for (const a of n.after) {
+        if (a.frac >= 1 || a.d === d) continue;
+        const g = grade(a.d, seen);
+        if (g.status === "off" && !reasons.some(r => r.what === `waits on: ${a.d.name}`)) reasons.push({ what: `waits on: ${a.d.name}`, owner: g.reasons[0].owner, need: n._lf, rule: 4 });
       }
     }
   }
-  d._open = open.map(g => ({ id: g.id, name: g.name, need: g.need, who: d.who?.[g.id] || (g.who === "owner" || !g.who ? d.owner : g.who) }));
+  d._open = open;
   d._g = { pct, next, reasons, status: pct >= 1 ? "done" : reasons.length ? "off" : "on" };
   return d._g;
 }
@@ -178,26 +223,72 @@ ${orphanTasks.map(t => `- ${t.date} ${t.owner} \`${t.id}\` ${t.title}`).join("\n
 ${ghostTasks.length ? `\n## Tasks the plan names that the calendar does not have\n\n${ghostTasks.map(id => `- \`${id}\``).join("\n")}\n` : ""}`;
 fs.writeFileSync(path.join(REPO, "docs/desk/BOARD-GRADE.md"), gradeMd);
 
-/* the schedule: every open gate by the week it is needed, and what each week asks of Mike.
-   An ask is one sitting's worth: the same gate on the same day counts once (24 pitches = one sitting). */
-const monday = d => { const t = new Date(d + "T12:00:00Z"); t.setUTCDate(t.getUTCDate() - ((t.getUTCDay() + 6) % 7)); return t.toISOString().slice(0, 10); };
-const cap = P.capacity.mike_asks_per_week;
-const weeks = {};
-for (const d of deliverables) for (const g of d._open || []) {
-  if (!g.need) continue;
-  const w = (weeks[monday(g.need)] ||= {}), k = `${g.need}|${g.who}|${g.name}`;
-  (w[k] ||= { ...g, things: [] }).things.push(d.name);
+/* the schedule: Mike's windows, the critical path, and every open gate by the week it is needed.
+   An ask is one sitting's worth: the same gate needed the same day counts once (24 pitches = one sitting). */
+const monday = d => addDays(d, -((dow(d) + 6) % 7));
+const CAPS = P.capacity;
+const openNodes = Object.values(nodes).filter(n => n.frac < 1);
+const grouped = (list, keyOf) => { const m = {}; for (const n of list) (m[keyOf(n)] ||= { ...n, things: [] }).things.push(n.d.name); return Object.values(m); };
+const things = l => l.things.length > 3 ? `${l.things.length} things (${l.things.slice(0, 2).join(", ")}, ...)` : l.things.join(", ");
+const mikeAsks = grouped(openNodes.filter(n => n.who === "Mike"), n => n.sitting ? `${n.es}|${n._lf}|${n.g.name}` : n.key).sort((a, b) => (a._lf + a.es).localeCompare(b._lf + b.es));
+const critical = grouped(openNodes.filter(n => n.float <= 3), n => `${n._ef}|${n._lf}|${n.who}|${n.g.name}`).sort((a, b) => (a._ef + a._lf).localeCompare(b._ef + b._lf));
+/* level Mike's asks inside their windows: the earliest week with room, in needed-by order.
+   A Sunday sitting holds several items to point at or rule; the other asks are counted one by one. */
+const load = {};
+for (const l of mikeAsks) {
+  const kind = l.sitting ? "sit" : "ask", room = l.sitting ? CAPS.sitting_items : CAPS.other_asks_per_week, last = monday(l._lf);
+  let w = monday(l.sitting ? l._ef : maxD([l.es, today]));   // a sitting item is ready when its range is made: its forecast Sunday
+  if (l.on) { l.week = monday(l.on); continue; }                 // a fixed event sits in its own week
+  if (l.state?.count) { l.week = w; l.spread = true; continue; }   // a volume run is spread over its window, not one ask
+  while (w <= last && (load[w]?.[kind] || 0) >= room) w = addDays(w, 7);
+  if (w > last) { w = last; l.over = true; }
+  (load[w] ||= {})[kind] = (load[w][kind] || 0) + 1; l.week = w;
 }
-const weekBlocks = Object.keys(weeks).sort().map(w => {
-  const lines = Object.values(weeks[w]).sort((x, y) => (x.need + x.who).localeCompare(y.need + y.who));
-  const asks = lines.filter(l => l.who === "Mike").length, ops = lines.length - asks;
-  const row = l => `${md(l.need)}  ${l.who.padEnd(4)}  ${l.name}: ${l.things.length > 3 ? `${l.things.length} things (${l.things.slice(0, 2).join(", ")}, ...)` : l.things.join(", ")}${l.need < today ? "   LATE" : ""}`;
-  return { w, asks, ops, text: `## Week of ${md(w)}: Mike ${asks} ask${asks === 1 ? "" : "s"}${asks > cap ? ", OVER" : ""} · Ops ${ops}\n\n\`\`\`\n${lines.map(row).join("\n")}\n\`\`\`` };
-});
-const overWeeks = weekBlocks.filter(b => b.asks > cap);
-fs.writeFileSync(path.join(REPO, "docs/desk/BOARD-SCHEDULE.md"), `# THE SCHEDULE — every open gate, by the week it is needed (as of ${today})
+const mikeWeeks = {}; for (const l of mikeAsks) (mikeWeeks[l.week] ||= []).push(l);
+const levelled = Object.keys(mikeWeeks).sort().map(w => {
+  const sit = mikeWeeks[w].filter(l => l.sitting), oth = mikeWeeks[w].filter(l => !l.sitting);
+  const out = [`WEEK OF ${md(w)}`];
+  if (sit.length) out.push(`  the Sunday sitting, ${md(addDays(w, 6))}: point at or rule`, ...sit.map(l => `    - ${l.g.name}: ${things(l)}`));
+  for (const l of oth) out.push(`  ${l.over ? "NO ROOM: " : ""}${l.g.name}: ${things(l)}   (${l.on ? `fixed, ${md(l.on)}` : l.spread ? `a run, from here to ${md(l._lf)}` : `any day to ${md(l._lf)}`})`);
+  return out.join("\n");
+}).join("\n");
+const overWeeks = mikeAsks.filter(l => l.over);
 
-Written by tools/board.mjs from docs/desk/BOARD-PLAN.json, baseline v${P.baseline.version} (${P.baseline.set}). An "ask" is one sitting's worth of Mike: the same gate on the same day counts once. A week holds about ${cap} asks of Mike (his stated rhythm: one ruling sitting, one shoot, one desk block).
+const weeks = {};
+for (const n of openNodes) { const w = (weeks[monday(n._lf)] ||= {}), k = `${n._lf}|${n.who}|${n.g.name}`; (w[k] ||= { ...n, things: [] }).things.push(n.d.name); }
+const weekBlocks = Object.keys(weeks).sort().map(w => {
+  const lines = Object.values(weeks[w]).sort((x, y) => (x._lf + x.who).localeCompare(y._lf + y.who));
+  const asks = lines.filter(l => l.who === "Mike").length, ops = lines.length - asks;
+  const row = l => `${md(l._lf)}  ${l.who.padEnd(4)}  ${l.g.name}: ${things(l)}   [can start ${md(l.es)}, float ${l.float}d]`;
+  return { w, asks, ops, text: `### Week of ${md(w)}: Mike ${asks} ask${asks === 1 ? "" : "s"} · Ops ${ops}\n\n\`\`\`\n${lines.map(row).join("\n")}\n\`\`\`` };
+});
+fs.writeFileSync(path.join(REPO, "docs/desk/BOARD-SCHEDULE.md"), `# THE SCHEDULE — derived, not typed (as of ${today})
+
+Written by tools/board.mjs from docs/desk/BOARD-PLAN.json, baseline v${P.baseline.version}. Every date here falls out of gate durations, predecessors, the fixed events and the launch walls: a forward pass gives "can start" and the forecast, a backward pass gives "needed by", and float is the gap. Change a duration or a predecessor in the plan and the dates move; nobody edits a date.
+
+## What is asked of Mike, as windows
+
+Nothing is wanted from him before "can start" (the pilot on stand-ins comes first) and nothing is late until "needed by". An ask is one sitting's worth.
+
+\`\`\`
+${mikeAsks.map(l => `can start ${md(l.es)}  needed by ${md(l._lf)}  ${String(l.float).padStart(3)}d float   ${l.g.name}: ${things(l)}`).join("\n")}
+\`\`\`
+
+## The same, levelled: weeks that fit (one sitting of up to ${CAPS.sitting_items} items, ${CAPS.other_asks_per_week} other asks)
+
+Ops' suggestion, not a commitment: each ask sits in the earliest week with room inside its window. His own calendar rows move only by his word.
+
+\`\`\`
+${levelled}
+\`\`\`
+
+## The critical path: every open gate with three days of float or less, in forecast order
+
+\`\`\`
+${critical.map(l => `forecast ${md(l._ef)}  needed ${md(l._lf)}  ${String(l.float).padStart(3)}d  ${l.who.padEnd(4)}  ${l.g.name}: ${things(l)}`).join("\n") || "nothing within three days of its need"}
+\`\`\`
+
+## Every open gate, by the week it is needed
 
 ${weekBlocks.map(b => b.text).join("\n\n")}
 `);
@@ -282,5 +373,5 @@ fs.writeFileSync(path.join(REPO, "docs/desk/BOARD.html"), html);
 console.log(`THE BOARD ${today}: ${deliverables.length} deliverables, ${redCount} not on track`);
 for (const c of columns) console.log(`  ${c.name.padEnd(22)} done ${pc(c.done)}%  on ${pc(c.on)}%  off ${pc(c.off)}%  (${c.count} things, ${c.red} red)`);
 if (orphanTasks.length) console.log(`  tasks serving no deliverable: ${orphanTasks.map(t => t.id).join(", ")}`);
-if (overWeeks.length) console.log(`  weeks that ask more of Mike than a week holds: ${overWeeks.map(b => `${md(b.w)} (${b.asks})`).join(", ")}`);
+if (overWeeks.length) console.log(`  asks of Mike with no room inside their window: ${overWeeks.map(l => l.g.name).join(", ")}`);
 if (ghostTasks.length) console.log(`  named but not on the calendar: ${ghostTasks.join(", ")}`);

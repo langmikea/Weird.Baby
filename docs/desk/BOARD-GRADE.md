@@ -1,53 +1,65 @@
 # THE BOARD'S GRADE — 2026-09-18
 
-38 days to the Number (10-26), 42 to the door (10-30). 51 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **9 not on track**.
+38 days to the Number (10-26), 42 to the door (10-30). 54 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **13 not on track**.
 Written by tools/board.mjs from docs/desk/BOARD-PLAN.json. Rules: docs/BOARD-PLAN-20260918.md.
 
 ```
 COLUMN                  done  on track  NOT on track   (things, red)
-Q&A reel                57%      43%          0%      (2, 0)
-Number reel             15%      85%          0%      (2, 0)
-Ask reel                30%       0%         70%      (1, 1)
-Shoot reel               0%     100%          0%      (1, 0)
+Q&A reel                38%      33%         29%      (3, 2)
+Number reel             15%       0%         85%      (1, 1)
+Ask reel                36%       0%         64%      (1, 1)
+Shoot reel               0%       0%        100%      (1, 1)
 Programs                 0%     100%          0%      (13, 0)
 Games                    0%       0%        100%      (6, 6)
-Engines and settings     8%      92%          0%      (5, 0)
-Albums                   0%     100%          0%      (4, 0)
-The site                 5%      83%         13%      (8, 1)
+Engines and settings     7%      93%          0%      (5, 0)
+Albums                   0%     100%          0%      (5, 0)
+The site                11%      89%          0%      (9, 0)
 The machine             10%      90%          0%      (2, 0)
-The system              23%      63%         14%      (7, 1)
+The system              20%      55%         25%      (8, 2)
 ```
 
 ## Not on track
 
+**Q&A reel**
+
+```
+The daily Q&A line - one real post through the queue: forecast 10-14, 3 days past its need (Ops) - needed by 10-11
+The daily Q&A line - waits on: Buffer connected (the key, the channels) (Mike) - needed by 10-11
+The hot Q&A lane - waits on: Buffer connected (the key, the channels) (Mike) - needed by 10-25
+```
+
+**Number reel**
+
+```
+Coconuts, the first run - waits on: Buffer connected (the key, the channels) (Mike) - needed by 10-20
+```
+
 **Ask reel**
 
 ```
-The ask reel on MGK-NIAC - his notes on the first cut: no date (Mike) - needed by 10-04
-The ask reel on MGK-NIAC - no work is scheduled for it (Ops) - needed by 10-04
-The ask reel on MGK-NIAC - his real question, and a posting date: no date (Mike) - needed by 10-09
+The ask reel on MGK-NIAC - waits on: Buffer connected (the key, the channels) (Mike) - needed by 10-25
+```
+
+**Shoot reel**
+
+```
+The sexy-shoot reel - waits on: Buffer connected (the key, the channels) (Mike) - needed by 10-22
 ```
 
 **Games**
 
 ```
-Snow Globe, Tic-Tac-Toe, Blackjack, Craps, Roulette, Slots - the games are not final: no date (Mike) - needed by 10-02
-```
-
-**The site**
-
-```
-The song's page on /wb, and the caption line that points at it - waits on: The deploy before the Number (Mike) - needed by 10-04
+Snow Globe, Tic-Tac-Toe, Blackjack, Craps, Roulette, Slots - the games are not final: no date (Mike) - needed by 10-21
 ```
 
 **The system**
 
 ```
-The deploy before the Number - no deploy date is set before 10-26 noon; the song's page needs one: no date (Mike) - needed by 10-16
-The deploy before the Number - no work is scheduled for it (Ops to schedule, Mike) - needed by 10-16
+Buffer connected (the key, the channels) - built: forecast 10-12, 3 days past its need (Mike) - needed by 10-09
+The deploy before the Number - no deploy date is set before 10-26 noon; the song's page needs one: no date (Mike) - needed by 10-25
+The deploy before the Number - no work is scheduled for it (Ops to schedule, Mike) - needed by 10-25
 ```
 
 ## Tasks that serve no deliverable (challenge them, or name what they serve)
 
 - 2026-09-26 ops `burn-down` Burn-down executed
-- 2026-10-11 mike `words-3` Words: the Foundation's posture

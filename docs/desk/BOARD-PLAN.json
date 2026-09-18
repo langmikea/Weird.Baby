@@ -1,11 +1,22 @@
 {
- "_": "THE PLAN UNDER THE BOARD. Launch > outcome > column > deliverable; tasks (docs/desk/TASKS.json) sit below and name nothing here: a deliverable names its tasks. Ruled 2026-09-18: 1A launch readiness only, 2A must-have only, 3C slips ruled case by case. Shape: docs/BOARD-PLAN-20260918.md. Graded by tools/board.mjs. A gate is earned only with evidence (`done` = the date, `ev` = where to look); nobody types a percentage. `must` is Ops' DRAFT until the 09-20 sitting rules it.",
+ "_": "THE PLAN UNDER THE BOARD, baseline v2 (2026-09-18, the pilot re-plan). Launch > outcome > column > deliverable > gates. NO DATE IS TYPED except a fixed event (`on`), a sitting that cannot be sooner (`not_before`), a wall, and a blocker's promised date (`by`). Every other date is derived by tools/board.mjs: a forward pass from today over gate durations (`dur`, days) and predecessors (the gate before it on the ladder, plus `after`), and a backward pass from the wall. Needed-by = the latest finish; float = latest minus forecast. A gate is earned only with evidence (`done` + `ev`). Rules of the re-plan: (1) RANGE FIRST: where we do not know what we want, the first gate is a range of quick rough examples and Mike points. (2) PILOT BEFORE VOLUME: one through the whole pipe on STAND-INS (existing footage, tray photos, generated images) before anything is asked in volume. (3) MIKE'S MATERIAL AT THE LAST RESPONSIBLE MOMENT: his gates carry a window (can start .. needed by), never an early date. (4) A stand-in never ships: the provenance gate and the rehearsal catch it. Shape: docs/PLAN-20260918-LAUNCH.md.",
  "ruled": {
   "measure": "1A",
   "denominator": "2A",
   "slip": "3C",
   "on": "2026-09-18",
-  "must_have": null
+  "must_have": null,
+  "pilot_rule": "2026-09-18: Mike, Yes to the re-plan on the pilot rule"
+ },
+ "baseline": {
+  "version": 2,
+  "set": "2026-09-18",
+  "state": "draft until the 09-20 sitting rules the must-have list; after that a wall, a duration, a predecessor or a must-have entry changes only by a ruling logged in docs/desk/BOARD-DECISIONS.md"
+ },
+ "capacity": {
+  "_": "What a week can hold of Mike, from his own words (PLAN-20260910: one ruling sitting on Sunday, one shoot, his words and content as they come): one Sunday sitting of up to six items to point at or rule, plus two other asks.",
+  "sitting_items": 6,
+  "other_asks_per_week": 2
  },
  "launches": [
   {
@@ -22,6 +33,12 @@
   }
  ],
  "freeze": "2026-10-26",
+ "walls": {
+  "_": "The latest any gate of a launch may finish.",
+  "M": "2026-10-23",
+  "R": "2026-10-25",
+  "both": "2026-10-23"
+ },
  "outcomes": [
   {
    "id": "O1",
@@ -49,37 +66,54 @@
    "line": "The week runs without Mike: queue, desk, board, Sunday grade."
   }
  ],
+ "_who": "who passes the gate. `sitting: true` = it passes at a Sunday sitting (forecasts snap forward to a Sunday, needs snap back to one).",
  "ladders": {
   "reel": [
    {
-    "id": "story",
-    "name": "story ruled",
-    "w": 10,
-    "who": "Mike"
+    "id": "look",
+    "name": "the look pointed at, from a range",
+    "w": 15,
+    "dur": 5,
+    "who": "Mike",
+    "sitting": true
    },
    {
-    "id": "template",
-    "name": "template ruled",
+    "id": "pilot",
+    "name": "one through the whole pipe on stand-ins",
     "w": 25,
-    "who": "Mike"
-   },
-   {
-    "id": "builds",
-    "name": "line builds unattended",
-    "w": 20,
+    "dur": 3,
     "who": "Ops"
    },
    {
     "id": "post",
-    "name": "queued through Buffer for real",
+    "name": "one real post through the queue",
     "w": 15,
-    "who": "Ops"
+    "dur": 1,
+    "who": "Ops",
+    "prev": [
+     "pilot"
+    ]
    },
    {
-    "id": "content",
-    "name": "launch content in hand",
+    "id": "real",
+    "name": "his real material in",
+    "w": 15,
+    "dur": 1,
+    "who": "Mike",
+    "prev": [
+     "pilot"
+    ]
+   },
+   {
+    "id": "volume",
+    "name": "launch volume in hand",
     "w": 30,
-    "who": "Mike"
+    "dur": 7,
+    "who": "Mike",
+    "prev": [
+     "real",
+     "post"
+    ]
    }
   ],
   "product": [
@@ -87,25 +121,36 @@
     "id": "pitch",
     "name": "pitch ruled",
     "w": 10,
-    "who": "Mike"
+    "dur": 0,
+    "who": "Mike",
+    "sitting": true
    },
    {
     "id": "twin",
     "name": "final on the twin",
-    "w": 40,
+    "w": 35,
+    "dur": 5,
     "who": "Ops"
    },
    {
     "id": "page",
-    "name": "page live in development",
-    "w": 30,
-    "who": "Ops"
+    "name": "its page live in development",
+    "w": 35,
+    "dur": 3,
+    "who": "Ops",
+    "prev": [
+     "pitch"
+    ]
    },
    {
     "id": "unit",
     "name": "proven on the real unit",
     "w": 20,
-    "who": "Ops"
+    "dur": 4,
+    "who": "Ops",
+    "prev": [
+     "twin"
+    ]
    }
   ],
   "album": [
@@ -113,50 +158,67 @@
     "id": "shot",
     "name": "shot",
     "w": 30,
+    "dur": 1,
     "who": "Mike"
    },
    {
     "id": "line",
     "name": "photographs through the line",
     "w": 20,
+    "dur": 2,
     "who": "Ops"
    },
    {
     "id": "filled",
-    "name": "album filled",
+    "name": "the real photographs in the album",
     "w": 35,
+    "dur": 2,
     "who": "Ops"
    },
    {
     "id": "ruled",
     "name": "ruled",
     "w": 15,
-    "who": "Mike"
+    "dur": 0,
+    "who": "Mike",
+    "sitting": true
    }
   ],
   "site": [
    {
-    "id": "shape",
-    "name": "shape ruled",
+    "id": "look",
+    "name": "the shape pointed at, from a range",
     "w": 20,
-    "who": "Mike"
+    "dur": 5,
+    "who": "Mike",
+    "sitting": true
+   },
+   {
+    "id": "pilot",
+    "name": "one built on stand-ins",
+    "w": 30,
+    "dur": 3,
+    "who": "Ops"
    },
    {
     "id": "built",
-    "name": "built",
-    "w": 40,
+    "name": "built for real",
+    "w": 20,
+    "dur": 4,
     "who": "Ops"
    },
    {
     "id": "launch",
     "name": "in the launch build",
-    "w": 20,
+    "w": 15,
+    "dur": 1,
     "who": "Ops"
    },
    {
     "id": "rehearsed",
     "name": "passed the rehearsal",
-    "w": 20,
+    "w": 15,
+    "dur": 0,
     "who": "Ops"
    }
   ],
@@ -165,18 +227,21 @@
     "id": "plan",
     "name": "plan and date",
     "w": 10,
+    "dur": 1,
     "who": "Ops"
    },
    {
     "id": "done",
     "name": "done",
     "w": 60,
+    "dur": 2,
     "who": "owner"
    },
    {
     "id": "verified",
     "name": "verified against the audit",
     "w": 30,
+    "dur": 3,
     "who": "Ops"
    }
   ],
@@ -185,18 +250,21 @@
     "id": "built",
     "name": "built",
     "w": 40,
+    "dur": 2,
     "who": "owner"
    },
    {
     "id": "proven",
     "name": "proven once for real",
     "w": 40,
+    "dur": 1,
     "who": "Ops"
    },
    {
     "id": "week",
     "name": "ran unattended a week",
     "w": 20,
+    "dur": 7,
     "who": "Ops"
    }
   ],
@@ -205,12 +273,14 @@
     "id": "delivered",
     "name": "delivered",
     "w": 70,
+    "dur": 1,
     "who": "Mike"
    },
    {
     "id": "placed",
     "name": "placed",
     "w": 30,
+    "dur": 1,
     "who": "Ops"
    }
   ],
@@ -219,13 +289,55 @@
     "id": "planned",
     "name": "planned on paper",
     "w": 30,
+    "dur": 1,
     "who": "Ops"
    },
    {
     "id": "held",
     "name": "held",
     "w": 70,
+    "dur": 0,
     "who": "owner"
+   }
+  ],
+  "choice": [
+   {
+    "id": "look",
+    "name": "pointed at, from a palette",
+    "w": 50,
+    "dur": 5,
+    "who": "Mike",
+    "sitting": true
+   },
+   {
+    "id": "built",
+    "name": "built in",
+    "w": 50,
+    "dur": 2,
+    "who": "Ops"
+   }
+  ],
+  "pilot": [
+   {
+    "id": "planned",
+    "name": "scripted",
+    "w": 30,
+    "dur": 1,
+    "who": "Ops"
+   },
+   {
+    "id": "done",
+    "name": "done: fifteen minutes",
+    "w": 40,
+    "dur": 1,
+    "who": "Mike"
+   },
+   {
+    "id": "line",
+    "name": "through the line",
+    "w": 30,
+    "dur": 2,
+    "who": "Ops"
    }
   ]
  },
@@ -276,11 +388,16 @@
     "pages",
     "flash"
    ],
-   "need_by": {
-    "pitch": "2026-09-20",
-    "twin": "2026-10-02",
-    "page": "2026-10-04",
-    "unit": "2026-10-22"
+   "not_before": {
+    "pitch": "2026-09-20"
+   },
+   "after": {
+    "page": [
+     "feature-page.pilot"
+    ],
+    "unit": [
+     "real-unit.done"
+    ]
    }
   },
   {
@@ -301,12 +418,6 @@
     "pages",
     "flash"
    ],
-   "need_by": {
-    "pitch": "2026-09-20",
-    "twin": "2026-10-02",
-    "page": "2026-10-04",
-    "unit": "2026-10-22"
-   },
    "blocked": [
     {
      "gate": "twin",
@@ -320,7 +431,18 @@
      "owner": "Mike",
      "by": "2026-09-20"
     }
-   ]
+   ],
+   "not_before": {
+    "pitch": "2026-09-20"
+   },
+   "after": {
+    "page": [
+     "feature-page.pilot"
+    ],
+    "unit": [
+     "real-unit.done"
+    ]
+   }
   },
   {
    "id": "engines",
@@ -341,11 +463,16 @@
     "pages",
     "flash"
    ],
-   "need_by": {
-    "pitch": "2026-09-20",
-    "twin": "2026-10-02",
-    "page": "2026-10-04",
-    "unit": "2026-10-22"
+   "not_before": {
+    "pitch": "2026-09-20"
+   },
+   "after": {
+    "page": [
+     "feature-page.pilot"
+    ],
+    "unit": [
+     "real-unit.done"
+    ]
    }
   },
   {
@@ -360,7 +487,12 @@
    "group": "Place",
    "name": "The site",
    "ladder": "site",
-   "outcome": "O2"
+   "outcome": "O2",
+   "after": {
+    "rehearsed": [
+     "rehearsal.held"
+    ]
+   }
   },
   {
    "id": "machine",
@@ -416,21 +548,16 @@
     "qa-list-in",
     "launch-queued"
    ],
-   "need_by": {
-    "builds": "2026-10-02",
-    "post": "2026-10-16",
-    "content": "2026-10-09"
-   },
    "gates": {
-    "story": {
+    "look": {
      "done": "2026-09-16",
-     "ev": "ELEMENTS-20260912.md"
+     "ev": "Mike: This is it; tools/reels-qa.py, fifth cut"
     },
-    "template": {
+    "pilot": {
      "done": "2026-09-16",
-     "ev": "Mike: 'This is it'; tools/reels-qa.py, fifth cut"
+     "ev": "five stand-in rows built and dry-queued by the morning run; ELEMENTS section 15"
     },
-    "content": {
+    "volume": {
      "count": [
       0,
       15
@@ -439,28 +566,21 @@
      "measure": "qa:questions"
     }
    },
+   "after": {
+    "post": [
+     "buffer.proven"
+    ]
+   },
+   "dur": {
+    "volume": 14
+   },
    "blocked": [
     {
-     "gate": "builds",
+     "gate": "real",
      "what": "answer length: the glass fit is unruled (Sunday Q1)",
      "owner": "Mike",
      "by": "2026-09-20"
-    },
-    {
-     "gate": "post",
-     "what": "the Buffer key",
-     "owner": "Mike",
-     "by": "2026-10-10"
-    },
-    {
-     "gate": "content",
-     "what": "the fifteen Q&As",
-     "owner": "Mike",
-     "by": "2026-10-09"
     }
-   ],
-   "depends": [
-    "buffer"
    ]
   },
   {
@@ -473,36 +593,35 @@
     "channels"
    ],
    "skip": [
-    "content"
+    "real",
+    "volume"
    ],
-   "need_by": {
-    "post": "2026-10-16"
-   },
    "gates": {
-    "story": {
-     "done": "2026-09-16",
-     "ev": "reels/README.md, the hot lane"
-    },
-    "template": {
+    "look": {
      "done": "2026-09-16",
      "ev": "the Q&A template"
     },
-    "builds": {
+    "pilot": {
      "done": "2026-09-16",
      "ev": "tools/reels-hot.py, dry run proven"
     }
    },
-   "blocked": [
-    {
-     "gate": "post",
-     "what": "the Buffer key",
-     "owner": "Mike",
-     "by": "2026-10-10"
-    }
+   "after": {
+    "post": [
+     "buffer.proven"
+    ]
+   }
+  },
+  {
+   "id": "beat",
+   "col": "qa",
+   "name": "The beat under the reels: a palette he can play, then one",
+   "owner": "Ops",
+   "ladder": "choice",
+   "tasks": [
+    "music-palette"
    ],
-   "depends": [
-    "buffer"
-   ]
+   "gates": {}
   },
   {
    "id": "number-coconuts",
@@ -510,26 +629,16 @@
    "name": "Coconuts, the first run",
    "owner": "Ops",
    "tasks": [
-    "number-pieces",
     "material-rulings",
     "number-sitting",
     "launch-queued"
    ],
-   "need_by": {
-    "template": "2026-09-27",
-    "post": "2026-10-23",
-    "content": "2026-10-23"
-   },
    "gates": {
-    "story": {
-     "done": "2026-09-10",
-     "ev": "the music launch page, ruled; NUMBER-PIECES-20260917.md"
+    "real": {
+     "done": "2026-09-17",
+     "ev": "the 08-24 porch tape; NUMBER-PIECES-20260917.md"
     },
-    "builds": {
-     "done": "2026-09-18",
-     "ev": "tools/numbers-template.py; museum 1d2cab3, sixteen re-cut"
-    },
-    "content": {
+    "volume": {
      "count": [
       12,
       15
@@ -538,98 +647,53 @@
      "measure": "numbers:pieces"
     }
    },
+   "dur": {
+    "look": 0,
+    "pilot": 1,
+    "volume": 3
+   },
+   "after": {
+    "post": [
+     "buffer.proven"
+    ]
+   },
    "blocked": [
     {
-     "gate": "template",
-     "what": "the frame is unruled (Sunday Q7)",
+     "gate": "look",
+     "what": "the frame, from the A/B already cut (Sunday Q7)",
      "owner": "Mike",
      "by": "2026-09-20"
     },
     {
-     "gate": "post",
-     "what": "the Buffer key",
-     "owner": "Mike",
-     "by": "2026-10-10"
-    },
-    {
-     "gate": "content",
-     "what": "three story pieces, the 10-20 sitting; the fifteen ruled 10-11",
+     "gate": "volume",
+     "what": "three story pieces, the 10-20 sitting",
      "owner": "Mike",
      "by": "2026-10-20"
     }
-   ],
-   "depends": [
-    "buffer"
    ]
-  },
-  {
-   "id": "song-two",
-   "col": "number",
-   "name": "Song two, chosen",
-   "owner": "Mike",
-   "ladder": "words",
-   "tasks": [
-    "ruling-4"
-   ],
-   "skip": [
-    "placed"
-   ],
-   "need_by": {
-    "delivered": "2026-10-11"
-   },
-   "gates": {}
   },
   {
    "id": "ask-niac",
    "col": "ask",
    "name": "The ask reel on MGK-NIAC",
    "owner": "Ops",
-   "tasks": [],
-   "need_by": {
-    "template": "2026-10-04",
-    "post": "2026-10-16",
-    "content": "2026-10-09"
-   },
-   "gates": {
-    "story": {
-     "done": "2026-09-18",
-     "ev": "FEATURE-REEL-20260916.md section 16"
-    },
-    "builds": {
-     "done": "2026-09-18",
-     "ev": "museum b418b7c; Finished reels, features, feature_mgk-niac.mp4"
-    },
-    "content": {
-     "count": [
-      0,
-      1
-     ],
-     "start": "2026-09-18"
-    }
-   },
-   "blocked": [
-    {
-     "gate": "template",
-     "what": "his notes on the first cut",
-     "owner": "Mike",
-     "by": null
-    },
-    {
-     "gate": "content",
-     "what": "his real question, and a posting date",
-     "owner": "Mike",
-     "by": null
-    },
-    {
-     "gate": "post",
-     "what": "the Buffer key",
-     "owner": "Mike",
-     "by": "2026-10-10"
-    }
+   "tasks": [
+    "ask-range"
    ],
-   "depends": [
-    "buffer"
-   ]
+   "skip": [
+    "volume"
+   ],
+   "gates": {
+    "pilot": {
+     "done": "2026-09-18",
+     "ev": "museum b418b7c; feature_mgk-niac.mp4 on a stand-in question"
+    }
+   },
+   "after": {
+    "post": [
+     "buffer.proven"
+    ]
+   }
   },
   {
    "id": "shoot-reel",
@@ -639,37 +703,47 @@
    "tasks": [
     "shoot-reel-story"
    ],
-   "need_by": {
-    "story": "2026-09-29",
-    "template": "2026-10-06",
-    "builds": "2026-10-13",
-    "post": "2026-10-16",
-    "content": "2026-10-21"
+   "who": {
+    "volume": "Ops"
    },
    "gates": {
-    "content": {
+    "volume": {
      "count": [
       0,
       4
      ],
-     "start": "2026-09-27",
      "measure": "albums:shot"
     }
    },
-   "blocked": [
-    {
-     "gate": "post",
-     "what": "the Buffer key",
-     "owner": "Mike",
-     "by": "2026-10-10"
-    }
+   "after": {
+    "post": [
+     "buffer.proven"
+    ],
+    "real": [
+     "shoot-pilot.line"
+    ],
+    "volume": [
+     "album-informer.shot"
+    ]
+   },
+   "dur": {
+    "volume": 3
+   }
+  },
+  {
+   "id": "shoot-pilot",
+   "col": "albums",
+   "name": "The shoot's pilot: one item through the grammar and the element takes",
+   "owner": "Mike",
+   "ladder": "pilot",
+   "tasks": [
+    "shoot-pilot-script"
    ],
-   "depends": [
-    "buffer",
-    "album-everyman"
-   ],
-   "who": {
-    "content": "Ops"
+   "gates": {},
+   "after": {
+    "line": [
+     "photos-white.proven"
+    ]
    }
   },
   {
@@ -681,16 +755,15 @@
     "photos-everyman",
     "pages"
    ],
-   "need_by": {
-    "shot": "2026-09-27",
-    "line": "2026-09-30",
-    "filled": "2026-10-05",
-    "ruled": "2026-10-11"
-   },
    "gates": {},
-   "depends": [
-    "photos-white"
-   ]
+   "after": {
+    "shot": [
+     "shoot-pilot.line"
+    ],
+    "filled": [
+     "album-template.built"
+    ]
+   }
   },
   {
    "id": "album-gambler",
@@ -699,16 +772,17 @@
    "owner": "Mike",
    "tasks": [
     "photos-gambler",
-    "gambler-standin",
     "pages"
    ],
-   "need_by": {
-    "shot": "2026-10-04",
-    "line": "2026-10-07",
-    "filled": "2026-10-12",
-    "ruled": "2026-10-18"
-   },
    "gates": {},
+   "after": {
+    "shot": [
+     "shoot-pilot.line"
+    ],
+    "filled": [
+     "album-template.built"
+    ]
+   },
    "blocked": [
     {
      "gate": "shot",
@@ -716,9 +790,6 @@
      "owner": "Mike",
      "by": "2026-10-04"
     }
-   ],
-   "depends": [
-    "photos-white"
    ]
   },
   {
@@ -730,16 +801,15 @@
     "photos-ceo",
     "pages"
    ],
-   "need_by": {
-    "shot": "2026-10-11",
-    "line": "2026-10-14",
-    "filled": "2026-10-19",
-    "ruled": "2026-10-25"
-   },
    "gates": {},
-   "depends": [
-    "photos-white"
-   ]
+   "after": {
+    "shot": [
+     "shoot-pilot.line"
+    ],
+    "filled": [
+     "album-template.built"
+    ]
+   }
   },
   {
    "id": "album-informer",
@@ -750,37 +820,34 @@
     "photos-informer",
     "pages"
    ],
-   "need_by": {
-    "shot": "2026-10-18",
-    "line": "2026-10-21",
-    "filled": "2026-10-23",
-    "ruled": "2026-10-25"
-   },
    "gates": {},
-   "depends": [
-    "photos-white"
-   ]
+   "after": {
+    "shot": [
+     "shoot-pilot.line"
+    ],
+    "filled": [
+     "album-template.built"
+    ]
+   }
   },
   {
-   "id": "prologue",
+   "id": "album-template",
    "col": "site",
-   "name": "The prologue",
+   "name": "The album template, proven on stand-ins",
    "owner": "Ops",
    "tasks": [
-    "mocks",
-    "ruling-2",
-    "prologue"
+    "pages"
    ],
-   "need_by": {
-    "shape": "2026-09-27",
-    "built": "2026-10-01",
-    "launch": "2026-10-20",
-    "rehearsed": "2026-10-22"
-   },
-   "gates": {},
-   "depends": [
-    "words-prologue"
-   ]
+   "gates": {
+    "look": {
+     "done": "2026-09-11",
+     "ev": "Mike: the /robots exhibit IS the shape"
+    },
+    "pilot": {
+     "done": "2026-09-17",
+     "ev": "the Gambler's page from the 09-16 set; src/data/artists/robots-albums.js"
+    }
+   }
   },
   {
    "id": "feature-page",
@@ -788,17 +855,38 @@
    "name": "The feature-page template",
    "owner": "Ops",
    "tasks": [
-    "mocks",
     "ruling-2",
     "pages"
    ],
-   "need_by": {
-    "shape": "2026-09-27",
-    "built": "2026-10-02",
-    "launch": "2026-10-20",
-    "rehearsed": "2026-10-22"
+   "gates": {},
+   "dur": {
+    "look": 0
    },
-   "gates": {}
+   "not_before": {
+    "look": "2026-09-27"
+   }
+  },
+  {
+   "id": "prologue",
+   "col": "site",
+   "name": "The prologue",
+   "owner": "Ops",
+   "tasks": [
+    "ruling-2",
+    "prologue"
+   ],
+   "gates": {},
+   "dur": {
+    "look": 0
+   },
+   "not_before": {
+    "look": "2026-09-27"
+   },
+   "after": {
+    "launch": [
+     "words-prologue.placed"
+    ]
+   }
   },
   {
    "id": "landing",
@@ -806,40 +894,31 @@
    "name": "The reel's landing (deep link to the day's room)",
    "owner": "Ops",
    "tasks": [
-    "mocks",
     "ruling-2",
     "landing"
    ],
-   "need_by": {
-    "shape": "2026-09-27",
-    "built": "2026-10-03",
-    "launch": "2026-10-20",
-    "rehearsed": "2026-10-22"
+   "gates": {},
+   "dur": {
+    "look": 0
    },
-   "gates": {}
+   "not_before": {
+    "look": "2026-09-27"
+   }
   },
   {
    "id": "door",
    "col": "site",
-   "name": "The door: 'not open yet', then it opens itself",
+   "name": "The door: not open yet, then it opens itself",
    "owner": "Ops",
    "tasks": [
     "open"
    ],
-   "need_by": {
-    "built": "2026-10-09",
-    "launch": "2026-10-20",
-    "rehearsed": "2026-10-22"
-   },
    "gates": {
-    "shape": {
+    "look": {
      "done": "2026-09-10",
-     "ev": "PLAN-20260910: ruled, low priority"
+     "ev": "PLAN-20260910: ruled"
     }
-   },
-   "depends": [
-    "deploy-door"
-   ]
+   }
   },
   {
    "id": "song-page",
@@ -850,16 +929,8 @@
     "song-page-shape",
     "song-page"
    ],
-   "need_by": {
-    "shape": "2026-10-04",
-    "built": "2026-10-16",
-    "launch": "2026-10-23",
-    "rehearsed": "2026-10-23"
-   },
    "gates": {},
-   "depends": [
-    "deploy-number"
-   ]
+   "wall": "2026-10-23"
   },
   {
    "id": "whole",
@@ -869,13 +940,11 @@
    "tasks": [
     "whole-front"
    ],
-   "need_by": {
-    "built": "2026-10-09",
-    "launch": "2026-10-20",
-    "rehearsed": "2026-10-22"
-   },
+   "skip": [
+    "pilot"
+   ],
    "gates": {
-    "shape": {
+    "look": {
      "done": "2026-09-18",
      "ev": "LAUNCH-20260918, ruled 1A: the draft lines stand"
     }
@@ -890,10 +959,6 @@
    "tasks": [
     "words-1"
    ],
-   "need_by": {
-    "delivered": "2026-10-09",
-    "placed": "2026-10-16"
-   },
    "gates": {}
   },
   {
@@ -905,10 +970,6 @@
    "tasks": [
     "words-2"
    ],
-   "need_by": {
-    "delivered": "2026-10-10",
-    "placed": "2026-10-16"
-   },
    "gates": {}
   },
   {
@@ -917,13 +978,8 @@
    "name": "The twin at full software, served",
    "owner": "Ops",
    "tasks": [
-    "twin-audit",
     "twin-update"
    ],
-   "need_by": {
-    "done": "2026-10-02",
-    "verified": "2026-10-03"
-   },
    "gates": {
     "plan": {
      "done": "2026-09-10",
@@ -941,15 +997,14 @@
     "bench",
     "flash"
    ],
-   "need_by": {
-    "done": "2026-10-15",
-    "verified": "2026-10-22"
-   },
    "gates": {
     "plan": {
      "done": "2026-09-17",
      "ev": "CALENDAR-RECUT fork 4: the bench stays 10-15"
     }
+   },
+   "on": {
+    "done": "2026-10-15"
    }
   },
   {
@@ -964,10 +1019,6 @@
    "skip": [
     "week"
    ],
-   "need_by": {
-    "built": "2026-10-11",
-    "proven": "2026-10-16"
-   },
    "gates": {},
    "blocked": [
     {
@@ -981,7 +1032,7 @@
   {
    "id": "photos-white",
    "col": "system",
-   "name": "The photo line's white treatment",
+   "name": "The photo line's white treatment, proven on frames in hand",
    "owner": "Ops",
    "tasks": [
     "photos-white"
@@ -989,10 +1040,6 @@
    "skip": [
     "week"
    ],
-   "need_by": {
-    "built": "2026-09-26",
-    "proven": "2026-09-30"
-   },
    "gates": {}
   },
   {
@@ -1001,20 +1048,17 @@
    "name": "The morning run",
    "owner": "Ops",
    "tasks": [],
-   "need_by": {
-    "week": "2026-10-09"
-   },
+   "scheduled": "the 06:08 scheduled task, weird-baby-morning-desk",
    "gates": {
     "built": {
      "done": "2026-09-17",
-     "ev": "tools/morning.mjs; npm run morning"
+     "ev": "tools/morning.mjs"
     },
     "proven": {
      "done": "2026-09-18",
      "ev": "docs/desk/MORNING.md; museum 2952b49"
     }
-   },
-   "scheduled": "the 06:08 scheduled task, weird-baby-morning-desk"
+   }
   },
   {
    "id": "board",
@@ -1028,39 +1072,32 @@
     "grade-2026-10-11",
     "grade-2026-10-18",
     "grade-2026-10-25",
-    "grade-2026-11-01",
-    "board-morning"
+    "grade-2026-11-01"
    ],
-   "need_by": {
-    "built": "2026-09-25",
-    "proven": "2026-09-27",
-    "week": "2026-10-04"
-   },
    "gates": {
     "built": {
      "done": "2026-09-18",
-     "ev": "tools/board.mjs, docs/desk/BOARD-PLAN.json; museum c0853c0"
+     "ev": "tools/board.mjs; museum c0853c0"
     },
     "proven": {
      "done": "2026-09-18",
-     "ev": "first grade docs/desk/BOARD-GRADE.md; served https://claude.ai/artifact/WwWHsXRaN5RCVWW7QCytw5"
+     "ev": "docs/desk/BOARD-GRADE.md; https://claude.ai/artifact/WwWHsXRaN5RCVWW7QCytw5"
     }
    }
   },
   {
    "id": "rehearsal",
    "col": "system",
-   "name": "The opening-day rehearsal",
+   "name": "The opening-day rehearsal (no stand-in survives it)",
    "owner": "Ops",
    "ladder": "event",
    "tasks": [
     "rehearsal"
    ],
-   "need_by": {
-    "planned": "2026-10-16",
+   "gates": {},
+   "on": {
     "held": "2026-10-22"
-   },
-   "gates": {}
+   }
   },
   {
    "id": "deploy-number",
@@ -1069,11 +1106,16 @@
    "owner": "Mike",
    "ladder": "event",
    "tasks": [],
-   "need_by": {
-    "planned": "2026-10-16",
+   "gates": {},
+   "on": {
     "held": "2026-10-25"
    },
-   "gates": {},
+   "wall": "2026-10-25",
+   "after": {
+    "held": [
+     "song-page.rehearsed"
+    ]
+   },
    "blocked": [
     {
      "gate": "planned",
@@ -1093,13 +1135,29 @@
     "freeze",
     "open"
    ],
-   "need_by": {
-    "planned": "2026-10-22",
+   "gates": {},
+   "on": {
     "held": "2026-10-29"
    },
+   "wall": "2026-10-29"
+  },
+  {
+   "id": "run-of-show",
+   "col": "system",
+   "name": "The launch run of show: what posts each day 10-26 to 11-13, and where each lands",
+   "owner": "Ops",
+   "ladder": "choice",
+   "tasks": [
+    "run-of-show"
+   ],
    "gates": {}
   }
  ],
+ "later_by_draft": {
+  "_": "Moved off the must-have draft at the re-plan, each by the test: if it were missing on the day, which outcome sentence turns false?",
+  "song-two": "Coconuts runs to 11-13; song two is not needed before the door. His 10-11 sitting row stands until he rules.",
+  "words-3": "the Foundation's posture: /F has no launch (ruled 2A)"
+ },
  "tasks_without_a_deliverable": {
   "_": "Known and accepted: done housekeeping and the dead. Anything else the grader lists is challenged at the Sunday sitting.",
   "accepted": [
@@ -1109,17 +1167,16 @@
    "catalogue",
    "glass-composite",
    "music-page",
-   "element-line"
+   "element-line",
+   "twin-audit",
+   "mocks",
+   "gambler-standin",
+   "number-pieces",
+   "board-morning",
+   "ruling-4",
+   "words-3"
   ]
  },
- "_who": "Each gate names who passes it: Mike (a ruling, a shoot, his words, his content), Ops, or the deliverable's owner. The schedule counts Mike's asks per week from this.",
- "baseline": {
-  "version": 1,
-  "set": "2026-09-18",
-  "state": "draft until the 09-20 sitting rules the must-have list; after that a need-by date changes only by a ruling logged in docs/desk/BOARD-DECISIONS.md"
- },
- "capacity": {
-  "_": "What a week can hold, from Mike's own words (PLAN-20260910: one ruling sitting on Sunday, thirty minutes; one shooting sitting, two hours; photographs as they come) plus one desk block for words, content and clicks.",
-  "mike_asks_per_week": 3
- }
+ "_prev": "A gate follows the gate before it on its ladder unless `prev` names others. Reel: the real post and his real material both follow the pilot; VOLUME follows both (nothing is asked in volume until one real unit has been through the whole pipe, the queue included). Product: the page follows the pitch, not the twin; the unit proof follows the twin.",
+ "_dur": "Durations are Ops estimates in elapsed days, coarse on purpose: a range of rough examples 5, a pilot on stand-ins 3, a build 4, a volume run 7 to 14. They are the first thing to correct when a pilot teaches otherwise; correcting one re-derives every date."
 }
