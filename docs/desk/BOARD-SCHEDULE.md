@@ -12,8 +12,8 @@ can start 09-18  needed by 10-11   14d float   pointed at, from a palette: The h
 can start 09-27  needed by 10-11   14d float   the shape pointed at, from a range: The feature-page template, The prologue, The reel's landing (deep link to the day's room)
 can start 09-18  needed by 10-15    0d float   done: The real unit flashed and verified
 can start 09-18  needed by 10-18   21d float   pointed at, from a palette: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands
+can start 09-18  needed by 10-18   29d float   done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes
 can start 09-18  needed by 10-18   21d float   the shape pointed at, from a range: The song's page on /wb, and the caption line that points at it
-can start 09-19  needed by 10-18   28d float   done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes
 can start 09-20  needed by 10-18   28d float   pitch ruled: 8 things (Starting, The monitor at rest, ...)
 can start 09-23  needed by 10-21   27d float   shot: The Everyman
 can start 09-18  needed by 10-23   34d float   delivered: Words: the prologue's opening
@@ -101,14 +101,13 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 10-11  Ops   one real post through the queue: The daily Q&A line   [can start 09-18, float 22d]
 ```
 
-### Week of 10-12: Mike 5 asks · Ops 4
+### Week of 10-12: Mike 5 asks · Ops 3
 
 ```
 10-15  Mike  done: The real unit flashed and verified   [can start 09-18, float 0d]
-10-17  Ops   scripted: The shoot's pilot: one item through the grammar and the element takes   [can start 09-18, float 28d]
 10-17  Ops   built: The photo line's white treatment, proven on frames in hand   [can start 09-18, float 27d]
 10-18  Mike  pointed at, from a palette: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands   [can start 09-18, float 21d]
-10-18  Mike  done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes   [can start 09-19, float 28d]
+10-18  Mike  done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes   [can start 09-18, float 29d]
 10-18  Mike  the shape pointed at, from a range: The song's page on /wb, and the caption line that points at it   [can start 09-18, float 21d]
 10-18  Mike  pitch ruled: 8 things (Starting, The monitor at rest, ...)   [can start 09-20, float 28d]
 10-18  Ops   proven once for real: The photo line's white treatment, proven on frames in hand   [can start 09-20, float 27d]

@@ -40,7 +40,7 @@ const count = rows => { const c = {}; for (const r of rows) c[r.status] = (c[r.s
 /* Mike's blocks (SED), counted live where the tree can be read */
 const ONE = "C:/Users/macun/OneDrive/WeirdBaby";
 const countFiles = (dir, re = /\.(mp4|mov|m4v)$/i) => { try { return fs.readdirSync(dir).filter(f => re.test(f)).length; } catch { return 0; } };
-const countPhotoSets = () => { try { return fs.readdirSync(path.join(ONE, "photos"), { withFileTypes: true }).filter(d => d.isDirectory() && countFiles(path.join(ONE, "photos", d.name), /\.(jpe?g|png|heic|webp)$/i) >= 4).length; } catch { return 0; } };
+const countPhotoSets = () => { try { return fs.readdirSync(path.join(ONE, "photos"), { withFileTypes: true }).filter(d => d.isDirectory() && d.name !== "pilot" && countFiles(path.join(ONE, "photos", d.name), /\.(jpe?g|png|heic|webp)$/i) >= 4).length; } catch { return 0; } };
 const BLOCKS = JSON.parse(fs.readFileSync(path.join(REPO, "docs/desk/BLOCKS.json"), "utf8"));
 const launchWeekStart = "2026-10-26";
 function measure(b) {

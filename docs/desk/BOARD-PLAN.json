@@ -726,9 +726,16 @@
    "owner": "Mike",
    "ladder": "pilot",
    "tasks": [
-    "shoot-pilot-script"
+    "shoot-pilot-script",
+    "shoot-pilot-shoot",
+    "shoot-pilot-line"
    ],
-   "gates": {},
+   "gates": {
+    "planned": {
+     "done": "2026-09-18",
+     "ev": "docs/SHOOT-PILOT-SCRIPT-20260918.md: eleven stills, E1 to E7, the drop, what each frame proves"
+    }
+   },
    "after": {
     "line": [
      "photos-white.proven"

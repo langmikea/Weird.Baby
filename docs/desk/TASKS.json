@@ -181,7 +181,37 @@
    "do": [
     "One page: the rig, one item through S0 to S8, then E1 to E6 (the static glass plate, the hold, the shake, the controls, the turntable turn, the clean plate). Fifteen minutes of Mike, whenever it suits him."
    ],
-   "long": "The smallest real shoot that exercises the whole photo and footage line (docs/SED-AUDIT-20260918.md section 4)"
+   "long": "The smallest real shoot that exercises the whole photo and footage line (docs/SED-AUDIT-20260918.md section 4). Done 09-18: docs/SHOOT-PILOT-SCRIPT-20260918.md. Eleven stills and E1 to E7 on the Everyday; about twenty minutes of shooting once the rig is up; drop into photos › everyman, then \"pilot in\".",
+   "done": true,
+   "done_on": "2026-09-18"
+  },
+  {
+   "id": "shoot-pilot-shoot",
+   "date": "2026-09-24",
+   "owner": "mike",
+   "block": "photos",
+   "title": "The shoot pilot: the Everyday, eleven stills and eight clips",
+   "do": [
+    "The script is one page: docs/SHOOT-PILOT-SCRIPT-20260918.md. The rig up (20 to 30 minutes the first time), then about 20 minutes of shooting: the unit through the still frames, then the clips E1 to E7, phone sideways, 4K 60, HDR Video off. The unit stays off.",
+    "Drop everything, unedited, in OneDrive › WeirdBaby › photos › pilot. Tell Code: \"pilot in\". One page comes back within two days."
+   ],
+   "check": {
+    "type": "photos",
+    "dir": "photos/pilot",
+    "min": 4
+   },
+   "check_step": 1,
+   "long": "Any day suits; the board needs it by 10-18. In by Thursday 09-24, the Everyman shoot of 09-27 runs on a rig already proven. Poor frames are useful: the pilot is there to find them."
+  },
+  {
+   "id": "shoot-pilot-line",
+   "date": "2026-09-26",
+   "owner": "ops",
+   "title": "The pilot through the line: the white treatment, the plate, the mask, one page back",
+   "do": [
+    "Two days from \"pilot in\": every stage of section 5 of docs/SHOOT-PILOT-SCRIPT-20260918.md run on the real frames; one page: per stage worked or broke, the one change to the rig or the script. Then size and date the four album shoots and mark shoot-pilot.line."
+   ],
+   "long": "Dated two days after his row; it moves with his drop. Needs photos-white first."
   },
   {
    "id": "buffer-proof",
@@ -371,7 +401,7 @@
    "title": "The sexy shoot: the Everyman",
    "do": [
     "The rig of 09-18 (docs/SEXY-SHOOT-20260918.md): the white sweep, soft light from two sides, the iPhone on the tripod, main lens, 24 MP, focus and exposure locked per item, no rule, nothing else on the white; white gloves whenever a hand is in frame. A slate card with the item's name is the first frame of every item.",
-    "The first three frames (a hero, a detail, a document) are the proof. Then: the box, every side with copy, and open; the unit: three-quarter, front, back, top, underside, the plate, the front glass, the top window; the case and cable; the MGK-PHVDC and its three parts; the two ads; the notebook, cover and six spreads; the original manuals, cover and four pages; the whole kit together. Video, upright, 4K 60, HDR off: the unit turned slowly once (10 s); three close passes (5 s each); the unboxing in one take (30 to 60 s).",
+    "The first three frames (a hero, a detail, a document) are the proof. Then: the box, every side with copy, and open; the unit: three-quarter, front, back, top, underside, the plate, the front glass, the top window; the case and cable; the MGK-PHVDC and its three parts; the two ads; the notebook, cover and six spreads; the original manuals, cover and four pages; the whole kit together. Video: only what the pilot's page asks for; the pilot (docs/SHOOT-PILOT-SCRIPT-20260918.md) already shot the Everyday's clips.",
     "Drop the originals in OneDrive › WeirdBaby › photos › everyman. Tell Code: \"photos in\". The cover, the plates, the kit and the papers land on the album within two days."
    ],
    "check": {

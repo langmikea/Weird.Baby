@@ -123,8 +123,8 @@
    "outcome": "O2",
    "count": 5,
    "red": 0,
-   "done": 0,
-   "on": 1,
+   "done": 0.06,
+   "on": 0.94,
    "off": 0,
    "later": [],
    "lines": []
@@ -235,9 +235,9 @@
    "col": "albums",
    "name": "The shoot's pilot: one item through the grammar and the element takes",
    "owner": "Mike",
-   "pct": 0,
+   "pct": 30,
    "status": "on",
-   "next": "2026-10-17",
+   "next": "2026-10-18",
    "reasons": []
   },
   {
