@@ -10543,8 +10543,14 @@ function Framed(){
    The family shot's nameplate reads "The Informer", and the twin wore it inside
    every album. This is that photograph with the second line of the plate taken
    back to bare metal - derived by tools/twin_plate_no_unit.py, master untouched,
-   same canvas, same apertures, so no measurement below moves. */
-const PORTAL_PLATE_WIDE="MGK-TWIN_MONITOR_SCREENS_NO_UNIT.png";
+   same canvas, same apertures, so no measurement below moves.
+   [2026-09-18, later] AND IT WEARS A LABEL-MAKER STRIP: UNIT 0.4. Mike: "UNIT
+   0.4 is the moniker, and that can go on the twin using one of those plastic
+   label makers of the time"; of three rough strips he pointed at "A", black
+   tape on the nameplate, under the model name. Derived from the no-unit plate
+   by tools/twin_plate_unit_label.py; same canvas again. The strip gives the
+   number and nothing else: no label says what unit 0.4 is. */
+const PORTAL_PLATE_WIDE="MGK-TWIN_MONITOR_SCREENS_UNIT_04.png";
 function Portal_View(){
  try{return new URLSearchParams(location.search).get("view")||"";}catch(e){return "";}
 }

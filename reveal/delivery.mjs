@@ -125,12 +125,16 @@ export const PUBLISHED_BY_RULING = {
     "The picture the twin's monitor actually shows. It is not a photograph " +
     "the Record delivers to a reader; it is a layer the running program " +
     "composites, and without it the Portal opens to no picture at all.",
-  "reference/photos/MGK-TWIN_MONITOR_SCREENS_NO_UNIT.png":
+  "reference/photos/MGK-TWIN_MONITOR_SCREENS_UNIT_04.png":
     "The same picture with the second line of the nameplate taken back to bare " +
-    "metal, which is what the twin wears from 2026-09-18 — Mike: 'One plate " +
-    "for every album, names no unit.' Derived by the robots repo's " +
-    "tools/twin_plate_no_unit.py; same fabric, same ruling that published the " +
-    "picture it is made from.",
+    "metal — Mike, 2026-09-18: 'One plate for every album, names no unit.' — " +
+    "and then one label-maker strip drawn under the model name — Mike, the " +
+    "same day: 'UNIT 0.4 is the moniker, and that can go on the twin using one " +
+    "of those plastic label makers of the time', pointing at strip 'A'. It is " +
+    "what the twin wears. Derived by the robots repo's tools/twin_plate_no_unit.py " +
+    "and then tools/twin_plate_unit_label.py; same fabric, same ruling that " +
+    "published the picture it is made from. The plate without the strip was " +
+    "only ever a step on the way and is no longer served.",
   "reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png":
     "The other half of the same exact layer split — the CRT frame the museum " +
     "draws over every channel. Same ruling, same reason: it is fabric, not a " +
