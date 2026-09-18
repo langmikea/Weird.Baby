@@ -60,3 +60,27 @@ his pen.
 
 Which reason goes in the manual first: A, B or C? More than one is allowed.
 The hiding place is a second pointing.
+
+## Pointed at, 2026-09-18
+
+Mike: **C**, in his own shape (his words are in `docs/desk/BOARD-DECISIONS.md`).
+He asked first whether the question was about the twin or actual units: the
+twin. A shipped unit is not a launch question, and its download is already
+ruled (09-02, 24·F3 and F4).
+
+- The twin arrives awake in a **limited guest account left over from
+  testing**, and says so.
+- The **BIST** (built-in self test) notices, and asks **REMAIN IN TEST MODE**,
+  maybe quite quickly.
+- The machine may **pester** over time until the visitor takes the plunge and
+  reboots.
+- The reboot loads **the Prototype**, which only loads into the prototype, and
+  the visitor is told it is the whole thing.
+- **Another reboot returns to the guest account.** Nothing is risked.
+- **UNIT 0.4 is the moniker**, on the twin as an embossed label-maker strip of
+  the period. This settles the hiding place: the number is on the machine;
+  no label says the word Prototype.
+
+Open, his to say: what the guest account lacks. Every released program must
+still run for a stranger from a reel (no dead ends), so "limited" cannot
+mean a program is missing.
