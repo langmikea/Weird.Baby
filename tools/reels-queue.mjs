@@ -8,6 +8,7 @@
      node tools/reels-queue.mjs --schema                          print Buffer's CreatePostInput fields (to check metadata names)
      node tools/reels-queue.mjs --lane qa --date D --draft        save to Buffer as DRAFTS: nothing posts until someone schedules it there
      node tools/reels-queue.mjs --posts                           what Buffer holds now (drafts and scheduled), read back from Buffer
+     node tools/reels-queue.mjs --lane qa --date D --remove-drafts   take that row's drafts back out of Buffer (drafts only)
 
    For every ledger row of the week whose status is `shot` and that has a
    built file: upload the file to the museum's R2 bucket under reels/…
@@ -148,6 +149,28 @@ function nyToday() {
   const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
   const get = k => parts.find(p => p.type === k).value; return `${get("year")}-${get("month")}-${get("day")}`;
 }
+/* Take a row's DRAFTS back out of Buffer (Mike's word, 2026-09-18). Buffer is asked first what each post is:
+   only a post Buffer itself calls a draft is removed; a scheduled post is never touched from here. */
+async function removeDrafts() {
+  const lane = opt("lane"), date = opt("date");
+  if (!LANES[lane] || !date) throw new Error("need --lane and --date");
+  const ledPath = path.join(REPO, "reels", LANES[lane].file);
+  const led = JSON.parse(fs.readFileSync(ledPath, "utf8"));
+  for (const r of led.rows.filter(r => r.date === date && r.postings)) {
+    for (const service of ORDER) {
+      const post = r.postings[service];
+      if (!post?.buffer_post_id || post.status !== "draft") continue;
+      const now = await gql(`query($id: PostId!) { post(input: { id: $id }) { id status } }`, { id: post.buffer_post_id });
+      if (now.post.status !== "draft") { console.log(`  ${service}: LEFT ALONE, Buffer calls ${post.buffer_post_id} ${now.post.status}`); continue; }
+      const d = await gql(`mutation($id: PostId!) { deletePost(input: { id: $id }) { __typename ... on DeletePostSuccess { id } ... on VoidMutationError { message } } }`, { id: post.buffer_post_id });
+      if (d.deletePost.id) { delete r.postings[service]; console.log(`  ${service}: draft ${d.deletePost.id} removed`); }
+      else console.log(`  ${service}: REFUSED ${d.deletePost.message}`);
+    }
+  }
+  fs.writeFileSync(ledPath, JSON.stringify(led, null, 1) + "\n");
+  console.log(`ledger updated: ${path.basename(ledPath)}`);
+}
+
 async function queue() {
   const lane = opt("lane"), week = Number(opt("week")), draft = flag("draft"); let dry = flag("dry");
   if (!LANES[lane]) throw new Error("need --lane numbers|determinations|qa");
@@ -207,6 +230,7 @@ async function queue() {
     if (flag("channels")) await listChannels();
     else if (flag("schema")) await schema();
     else if (flag("posts")) await posts();
+    else if (flag("remove-drafts")) await removeDrafts();
     else await queue();
   } catch (e) { console.error(e.message); process.exit(1); }
 })();

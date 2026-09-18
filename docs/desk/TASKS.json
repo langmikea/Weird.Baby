@@ -190,7 +190,7 @@
    "title": "The queue proven: one post through Buffer as a draft, then one queued for 10-31",
    "do": [
     "Done 09-18: the queue read against Buffer's current API and corrected (four required fields it did not send, an error type Buffer no longer has); the 10-31 stand-in saved as a DRAFT on tiktok, instagram and youtube, read back from Buffer; a second run doubles nothing; the queue refuses to schedule a test row. docs/BUFFER-PROOF-20260918.md.",
-    "Left: the three proof drafts sit in Buffer until Mike says remove them. The first scheduled send is the first real Q&A row. Five days ahead, not seven, once the Number joins."
+    "The three proof drafts were removed the same evening on Mike's word; Buffer holds nothing. The first scheduled send is the first real Q&A row. Five days ahead, not seven, once the Number joins."
    ],
    "long": "No line has ever posted for real; the first live run must not be able to publish a stand-in before the door",
    "done": true
@@ -201,7 +201,7 @@
    "owner": "ops",
    "title": "The first real row queued: one Q&A scheduled in Buffer for 10-31",
    "do": [
-    "When the first real Q&A reel is built (his fifteen are due 10-09): node tools/reels-queue.mjs --lane qa --date 2026-10-31, no --draft, no --test. Read it back with --posts: three posts, status scheduled, due 10-31 17:00 New York. Mark the `post` gate on each reel deliverable. The three proof drafts of 09-18 must be gone from Buffer first (Mike's word)."
+    "When the first real Q&A reel is built (his fifteen are due 10-09): node tools/reels-queue.mjs --lane qa --date 2026-10-31, no --draft, no --test. Read it back with --posts: three posts, status scheduled, due 10-31 17:00 New York. Mark the `post` gate on each reel deliverable."
    ],
    "long": "The draft proof of 09-18 left one thing unproven: the same request with saveToDraft false, against the free plan's limit (docs/BUFFER-PROOF-20260918.md)"
   },
