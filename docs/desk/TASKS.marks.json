@@ -61,5 +61,9 @@
   "steps": [
    1
   ]
+ },
+ "gambler-standin": {
+  "done": true,
+  "steps": []
  }
 }
