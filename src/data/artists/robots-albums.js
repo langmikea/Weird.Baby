@@ -43,6 +43,9 @@ import { placed, placedPresets, placedTiles } from "../../lib/placement.js";
 import GAMBLER_PHOTOS from "../photos/gambler.json";
 import { faqFace } from "../faq-face.js";
 import CATALOGUE from "../../../docs/CATALOGUE-20260918.json";
+/* [2026-09-18] the Portal's own declaration of the machine's door; read, never
+   restated. A public module named from a held one, which is the safe direction. */
+import { PORTAL_ALBUM } from "./portal.js";
 
 /* where the four land in the deck: after the wing's own sleeve and the Portal */
 export const ALBUMS_AT = 2;
@@ -112,8 +115,57 @@ function paperDocs(albumKey) {
 
 const DRAFT_NOTE = "Pitches are the house's drafts until the sitting of 2026-09-20 rules them.";
 
+/* ═══ [2026-09-18] THE DAY'S DROP IS A TRACK — a rough shape, for pointing at ═══
+   MIKE, 09-18: "a drop a day", and "If a thing is not available, it should not
+   be displayed." The run of show lands each reel on "the album of the day, the
+   track open on the day's feature", and the slice (docs/SLICE-DAY1-20260918.md)
+   found no such track and no address for one. So each released catalogue row of
+   page `feature` becomes a track at the head of its album: the machine's rows
+   in every album, a character's own rows in its own. A row whose day has not
+   come is not a track, so the album grows by one a day and shows nothing that
+   is not here. `later` rows never become tracks.
+
+   THE ADDRESS IS THE TRACK'S ID (`/robots/everyman-answers`), through the
+   `open` mechanism Exhibit already has; `Robots.jsx` remounts once when the
+   album arrives. `today` resolves to the newest released row.
+
+   THE MACHINE IS THE PORTAL'S OWN DOOR, NOT A SECOND ONE. The button is the
+   `face.action` Exhibit already renders, and the event, the address and the
+   set's bezel are read off the Portal's declaration rather than restated. */
+const LATCH = (((PORTAL_ALBUM.tracks || []).find((t) => t && t.run && t.run.detail && t.run.detail.panel) || {}).run || {}).detail?.panel?.latch || {};
+const slugOf = (rowId) => rowId.replace(/^twin\.app\.|^twin\./, "").replace(/\./g, "-");
+const isDrop = (r, albumKey) => r.page === "feature" && typeof r.day === "number"
+  && (r.album === albumKey || r.album === "machine");
+function dropTracks(albumKey, title, sub, runDay) {
+  return ROWS
+    .filter((r) => isDrop(r, albumKey) && r.day <= runDay)
+    .sort((a, b) => a.day - b.day)
+    .map((r) => ({
+      id: `${albumKey}-${slugOf(r.id)}`,
+      title: r.name,
+      videos: [],
+      tags: ["drop", r.kind, albumKey],
+      face: {
+        kind: "text",
+        title: r.name,
+        subtitle: sub,
+        blurb: r.pitch,
+        entries: [],
+        action: LATCH.event ? { label: "RUN", event: LATCH.event, src: LATCH.src, frameTitle: r.name, bezel: LATCH.bezel } : undefined,
+        footer: `${title.toUpperCase()} · ${r.name.toUpperCase()}`,
+      },
+    }));
+}
+/** the track a reel's caption lands on today: the newest released drop */
+export function todayTrackId(runDay) {
+  const r = ROWS.filter((x) => x.page === "feature" && typeof x.day === "number" && x.day <= runDay)
+    .sort((a, b) => b.day - a.day)[0];
+  if (!r) return null;
+  return `${r.album === "machine" ? CATALOGUE.albums[0] : r.album}-${slugOf(r.id)}`;
+}
+
 /* one template, four fillings */
-function album({ id, key, title, character, serial, keyCode, caseLine, voice, cover, forLine }) {
+function album({ id, key, title, character, serial, keyCode, caseLine, voice, cover, forLine }, runDay) {
   const sub = `${title.toUpperCase()} · ${character.toUpperCase()}`;
   return {
     id,
@@ -123,6 +175,7 @@ function album({ id, key, title, character, serial, keyCode, caseLine, voice, co
     art: placed(cover),
     accent: null,
     tracks: [
+      ...dropTracks(key, title, sub, runDay),
       {
         id: `${key}-spec`,
         title: "Technical Specifications",
@@ -228,17 +281,24 @@ function album({ id, key, title, character, serial, keyCode, caseLine, voice, co
   };
 }
 
-export const CHARACTER_ALBUMS = [
-  album({ id: "album-everyday", key: "everyman", title: "The Everyday", character: "the Everyman", serial: "01", keyCode: "TT5S-X2GT",
-          caseLine: "The oxblood case, the strap, the cable", voice: "Joey", cover: "/robots/art/album-everyday-cover.png",
-          forLine: "The unit for the rest of us: the one that was sold in the magazines, in the box, with the copy." }),
-  album({ id: "album-gambler", key: "gambler", title: "The Gambler", character: "the Gambler", serial: "21", keyCode: "HGMM-HGPK",
-          caseLine: "The Deluxe case, with chips, cards and dice", voice: "Miguel", cover: "/robots/art/album-gambler-cover.png",
-          forLine: "Comes in a case. Never asks what you can afford." }),
-  album({ id: "album-ceo", key: "ceo", title: "The CEO", character: "the CEO", serial: "09", keyCode: "4KAQ-CNSE",
-          caseLine: "The attaché", voice: "Matthew", cover: "/robots/art/album-ceo-cover.png",
-          forLine: "The attaché. Decides, then explains." }),
-  album({ id: "album-informer", key: "informer", title: "The Informer", character: "the Informer", serial: "07", keyCode: "7SVQ-8KBW",
-          caseLine: "The spy kit", voice: "Brian", cover: "/robots/art/album-informer-cover.png",
-          forLine: "The spy kit. Hears everything, repeats some of it." }),
+const FILLINGS = [
+  { id: "album-everyday", key: "everyman", title: "The Everyday", character: "the Everyman", serial: "01", keyCode: "TT5S-X2GT",
+    caseLine: "The oxblood case, the strap, the cable", voice: "Joey", cover: "/robots/art/album-everyday-cover.png",
+    forLine: "The unit for the rest of us: the one that was sold in the magazines, in the box, with the copy." },
+  { id: "album-gambler", key: "gambler", title: "The Gambler", character: "the Gambler", serial: "21", keyCode: "HGMM-HGPK",
+    caseLine: "The Deluxe case, with chips, cards and dice", voice: "Miguel", cover: "/robots/art/album-gambler-cover.png",
+    forLine: "Comes in a case. Never asks what you can afford." },
+  { id: "album-ceo", key: "ceo", title: "The CEO", character: "the CEO", serial: "09", keyCode: "4KAQ-CNSE",
+    caseLine: "The attaché", voice: "Matthew", cover: "/robots/art/album-ceo-cover.png",
+    forLine: "The attaché. Decides, then explains." },
+  { id: "album-informer", key: "informer", title: "The Informer", character: "the Informer", serial: "07", keyCode: "7SVQ-8KBW",
+    caseLine: "The spy kit", voice: "Brian", cover: "/robots/art/album-informer-cover.png",
+    forLine: "The spy kit. Hears everything, repeats some of it." },
 ];
+
+/** the four albums as of day `runDay` of the launch run (1 = the door's day);
+    `Infinity` is every dated drop, which is what development shows */
+export function characterAlbumsOn(runDay = Infinity) {
+  return FILLINGS.map((f) => album(f, runDay));
+}
+export const CHARACTER_ALBUMS = characterAlbumsOn();

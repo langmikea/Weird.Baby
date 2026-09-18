@@ -17158,6 +17158,27 @@
    "t": "We open",
    "c": "MIKE",
    "s": "Mike, 2026-09-18: \"TODAY: Post 'We open 10/31', close robots.\" Logged in docs/desk/BOARD-DECISIONS.md, 2026-09-18. The lobby line before the door; the month/day after it is derived from RECORD_EPOCH, not typed."
+  },
+  "c3913962379c09da": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 136,
+   "t": "-",
+   "c": "HOUSE",
+   "n": "a track id's separator; an address, never drawn"
+  },
+  "1f3a75717a05f68b": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 164,
+   "t": "{}-{}",
+   "c": "HOUSE",
+   "n": "a track id's separator; an address, never drawn"
+  },
+  "f8abcd616c46486d": {
+   "f": "src/data/artists/robots-albums.js",
+   "l": 154,
+   "t": "RUN",
+   "c": "HOUSE",
+   "n": "the button on a drop's track that opens the machine: the Portal's own word (TERMINAL.EXE carried a RUN button until 2026-08-26). A stand-in label on a rough shape, 2026-09-18; Mike points at the landing's shape before it is final."
   }
  }
 }

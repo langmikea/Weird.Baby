@@ -4,7 +4,7 @@ import { robotsExhibitOn } from "../../data/artists/robots.js";
 /* [L-e 2026-08-30] the museum's day, live — so a tab already open when the
    day turns gains that day's Record entry without a reload. The wing's own
    door moves with it in App.jsx; the two are one repair. */
-import { useMuseumDay } from "../../lib/use-museum-day.js";
+import { useMuseumDay, useRunDay } from "../../lib/use-museum-day.js";
 
 /* /robots — walk-six structural rebuild (2026-07-25, STAGED ONLY):
    Robots IS the museum's shared exhibit machinery now — an artist config
@@ -47,7 +47,7 @@ import { useMuseumDay } from "../../lib/use-museum-day.js";
    THE `catch` IS STILL THE WHOLE ERROR PATH and it still matters more than it
    looks: a forged flag at LAUNCH buys a request the server refuses and a deck
    of four public albums, which is the same place a flat tyre lands. */
-export default function Robots({ open = null }) {
+export default function Robots({ open = null, run = false }) {
   const [portal, setPortal] = useState(null);
   /* [2026-09-11] THE CHARACTER ALBUMS, asked for exactly as the Portal is: a
      dynamic import of a module parked in `HELD_PATHS`, so the four albums and
@@ -125,20 +125,78 @@ export default function Robots({ open = null }) {
   }, [portal]);
 
   const day = useMuseumDay();
+  /* [2026-09-18] day N of the launch run: which drops are tracks yet, and what
+     `today` means. The albums module answers both; this file only asks. */
+  const runDay = useRunDay();
+  const at = open === "today"
+    ? (albums && albums.todayTrackId ? albums.todayTrackId(runDay) : null)
+    : open;
   const artist = useMemo(() => {
+    /* [2026-09-18] NO DEAD ENDS, AT THE WING'S FIRST SCREEN. Ruling E opens the
+       wing at the door (Sat 10-31, midnight) and the Records keep weekdays at
+       five, so from the door until Record 001 on the Monday the wing's front
+       track would read "Nothing has been entered in the Record yet." MIKE,
+       09-18: "If a thing is not available, it should not be displayed." An
+       empty Record is not displayed; it returns with its first entry, in an
+       open tab too, because `day` is live. `/robots/record` then degrades to
+       the wing's front page, which is `open`'s own stated fallback. */
+    const withoutEmptyRecord = (ex) => ({
+      ...ex,
+      spine: ex.spine.map((album) => {
+        const tracks = album && Array.isArray(album.tracks) ? album.tracks : null;
+        if (!tracks) return album;
+        const kept = tracks.filter((t) => !(t && t.id === "record"
+          && t.face && Array.isArray(t.face.entries) && t.face.entries.length === 0));
+        return kept.length === tracks.length ? album : { ...album, tracks: kept };
+      }),
+    });
     /* [L-e 2026-08-30] THE BASE IS ASKED ABOUT THE DAY BEFORE THE PORTAL IS
        SPLICED IN, and the order matters: the splice inserts an album, the day
        re-filters a track inside a different one, and doing the splice second
        means the Portal is never copied twice. `robotsExhibitOn` returns the
        module-load object unchanged when the day has not moved. */
-    const base = robotsExhibitOn(day);
+    const base = withoutEmptyRecord(robotsExhibitOn(day));
     if (!portal && !albums) return base;
     const spine = [...base.spine];
     if (portal) spine.splice(Math.min(portal.PORTAL_AT, spine.length), 0, portal.PORTAL_ALBUM);
     /* the four land after the sleeve and the Portal, the Everyday first (Mike: "spot one") */
-    if (albums) spine.splice(Math.min(albums.ALBUMS_AT, spine.length), 0, ...albums.CHARACTER_ALBUMS);
+    if (albums) spine.splice(Math.min(albums.ALBUMS_AT, spine.length), 0, ...albums.characterAlbumsOn(runDay));
     return { ...base, spine };
-  }, [portal, albums, day]);
+  }, [portal, albums, day, runDay]);
 
-  return <Exhibit artist={artist} open={open} />;
+  /* [2026-09-18] THE LANDING: `open` MAY NAME A TRACK IN AN ALBUM THAT ARRIVES
+     LATE. The Portal and the character albums are dynamic imports, so on the
+     first render the spine does not hold them yet, and Exhibit resolves `open`
+     ONCE, as initial state (its own R1 note says why). A reel's caption that
+     lands on `/robots/everyman-answers` would therefore open the wing's front
+     page and stay there. The key below remounts the exhibit exactly once, at
+     the moment the named track first exists in the spine; with no `open`, or
+     with one the base spine already holds (`record`), the key never changes
+     and nothing remounts. Exhibit.jsx is untouched. */
+  const found = !!at && artist.spine.some((a) =>
+    a && Array.isArray(a.tracks) && a.tracks.some((t) => t && t.id === at));
+
+  /* [2026-09-18] `/robots/<track>/run` — THE SECOND ROUGH SHAPE, FOR POINTING AT.
+     The first lands on the track and leaves RUN to the visitor; this one lands
+     with the machine already coming up, the album behind it. It presses the
+     track's own declared action, once, when the track first exists; it restates
+     nothing, and a track with no action lands as the first shape does. */
+  useEffect(() => {
+    if (!run || !found) return undefined;
+    let album = null, track = null;
+    for (const a of artist.spine) {
+      const t = a && Array.isArray(a.tracks) ? a.tracks.find((x) => x && x.id === at) : null;
+      if (t) { album = a; track = t; break; }
+    }
+    const act = track && track.face && track.face.action;
+    if (!act || !act.event) return undefined;
+    const id = setTimeout(() => window.dispatchEvent(new CustomEvent(act.event, { detail: {
+      album: album.id, src: act.src, frameTitle: act.frameTitle, bezel: act.bezel,
+    } })), 0);
+    return () => clearTimeout(id);
+    /* once per landing: `found` and `at` are the landing; the spine's later
+       re-filters (a day turning) must not press the button again */
+  }, [run, found, at]);                     // eslint-disable-line react-hooks/exhaustive-deps
+
+  return <Exhibit key={found ? `at:${at}` : "front"} artist={artist} open={at} />;
 }

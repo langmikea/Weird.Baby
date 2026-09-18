@@ -121,6 +121,24 @@ export function todayInRecordTz(now = new Date()) {
   return new Date(Date.UTC(y, m - 1, d) - 86400000).toISOString().slice(0, 10);
 }
 
+/* [2026-09-18] THE CALENDAR DAY, WITH NO RECORD HOUR IN IT. The launch run's
+   drops turn with the door's clock (midnight), not the Record's (five), so they
+   need the plain date on the museum's wall. Same formatter, same zone; the only
+   difference from `todayInRecordTz` is that nothing is rolled back. */
+/** the calendar day it is in the Record's own timezone, as `YYYY-MM-DD` */
+export function calendarDayInRecordTz(now = new Date()) {
+  const p = Object.fromEntries(
+    FMT.formatToParts(now).map((x) => [x.type, x.value]));
+  return p.year + "-" + p.month + "-" + p.day;
+}
+
+/** day N of a run that began on `startDay`: 1 on `startDay`, 0 or less before it */
+export function runDayOn(startDay, now = new Date()) {
+  const a = Date.parse(startDay + "T00:00:00Z");
+  const b = Date.parse(calendarDayInRecordTz(now) + "T00:00:00Z");
+  return Math.round((b - a) / 86400000) + 1;
+}
+
 /** epoch-ms of the instant `day`'s Record becomes visible: RECORD_HOUR on that
     calendar day, in the Record's own zone. Built from `dayStartInRecordTz`
     below so there is one zone conversion in this file and not two. */

@@ -66,6 +66,12 @@ function PresetLanding() {
   return null;
 }
 
+/* [2026-09-18] the landing's address, handed to the wing as a track id */
+function RobotsAt({ run = false }) {
+  const { open } = useParams();
+  return <Robots open={open} run={run} />;
+}
+
 export default function App() {
   /* [L-e 2026-08-30] THE WING'S SWITCH IS ASKED LIVE, NOT AT MODULE LOAD.
      `ROBOTS_OPEN` is still the right answer for a page that is loaded — and it
@@ -182,6 +188,19 @@ export default function App() {
         {/* [CH6] shut with the wing it lives in — see /robots above. */}
         <Route path="/robots/record"
                element={robotsOpen ? <Robots open="record" /> : <WbHome />} />
+        {/* [2026-09-18] THE LANDING: A REEL'S CAPTION POINTS AT ONE ROOM. The
+            same `open` the Record's address uses, read from the path instead of
+            typed here: `/robots/everyman-answers` opens the Everyday on its
+            Answers track, `/robots/today` on the newest drop (the profile link,
+            the only link Instagram and TikTok let a visitor tap). An id nothing
+            matches falls back to the wing's front page, which is `open`'s own
+            rule. Shut with the wing it lives in. */}
+        <Route path="/robots/:open"
+               element={robotsOpen ? <RobotsAt /> : <WbHome />} />
+        {/* the same landing with the machine already coming up (a rough shape,
+            for pointing at; Robots.jsx) */}
+        <Route path="/robots/:open/run"
+               element={robotsOpen ? <RobotsAt run /> : <WbHome />} />
         <Route path="/wal" element={<Wal />} />
         <Route path="/p/:id" element={<PresetLanding />} />
         {/* ==== [E2 2026-08-03] THE CATCH-ALL. MIKE'S RULING ================

@@ -44,9 +44,10 @@
 // museum's own day has actually turned.
 
 import { useEffect, useState } from "react";
-import { TODAY, museumNow } from "./record-clock.js";
-import { todayInRecordTz } from "../../reveal/record-clock.mjs";
+import { TODAY, museumNow, showingAll } from "./record-clock.js";
+import { todayInRecordTz, runDayOn } from "../../reveal/record-clock.mjs";
 import { robotsOpenOn } from "./wing-open.js";
+import { DOOR_DAY } from "../data/artists/record-epoch.js";
 
 /* [2026-09-18] THE WING'S DOOR, LIVE. Ruling E gave the wing a door at midnight
    as well as the Record's five o'clock, and the day string below does not change
@@ -73,6 +74,32 @@ export function useRobotsOpen() {
   }, []);
 
   return open;
+}
+
+/* [2026-09-18] THE DAY OF THE LAUNCH RUN, LIVE. Day 1 is the door's day and the
+   drops turn at midnight on the museum's wall (`runDayOn`). Where every Record
+   is shown (development, the admin preview) every dated drop is too, which is
+   `Infinity` here, the same fold `showingAll` already makes for the Record. */
+/** day N of the launch run, recomputed while the page is open */
+const readRunDay = () =>
+  (showingAll() ? Infinity : runDayOn(DOOR_DAY, new Date(museumNow())));
+
+export function useRunDay() {
+  const [n, setN] = useState(readRunDay);
+
+  useEffect(() => {
+    const tick = () => setN(readRunDay());
+    tick();
+    const id = setInterval(tick, 1000);
+    const onShow = () => { if (!document.hidden) tick(); };
+    document.addEventListener("visibilitychange", onShow);
+    return () => {
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", onShow);
+    };
+  }, []);
+
+  return n;
 }
 
 /** the museum's day, recomputed while the page is open */
