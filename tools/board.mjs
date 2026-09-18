@@ -201,6 +201,28 @@ const out = { as_of: today, must_have_ruled: P.ruled.must_have, deliverables: de
   detail: deliverables.map(d => ({ id: d.id, col: d.col, name: d.name, owner: d.owner, pct: Math.round(d._g.pct * 100), status: d._g.status, next: d._g.next, reasons: d._g.reasons })) };
 fs.writeFileSync(path.join(REPO, "docs/desk/BOARD.json"), JSON.stringify(out, null, 1) + "\n");
 
+/* YOURS, NOW. [Mike, 2026-09-18: "How can I have nothing due yet still be responsible for any red?"]
+   A red that names Mike is due from Mike today. At most three, the ones that free the most first;
+   if fewer than three are red, the asks whose window is already open, tightest first. */
+const mine = {};
+for (const d of deliverables.filter(d => d._g.status === "off")) for (const r of d._g.reasons) {
+  if (r.rule === 4 || !/Mike/.test(r.owner)) continue;
+  const m = (mine[r.what] ||= { what: r.what.replace(/: (no date|was due [\d-]+)$/, ""), need: r.need, red: true, frees: new Set() });
+  m.frees.add(d.id);
+  for (const o of deliverables) if (o._g.reasons.some(x => x.rule === 4 && x.what === `waits on: ${d.name}`)) m.frees.add(o.id);
+}
+const openAsks = Object.values(nodes).filter(n => n.frac < 1 && n.who === "Mike" && !n.sitting && !n.on && !n.state?.count && n.es <= today && n.d._g.status !== "off")
+  .sort((a, b) => a._lf.localeCompare(b._lf)).map(n => ({ what: `${n.g.name}: ${n.d.name}`, need: n._lf, red: false, frees: new Set() }));
+/* next, a ruling of his that holds a gate and has a promised day: answering it today beats waiting for the day */
+const held = {};
+for (const n of Object.values(nodes)) if (n.frac < 1) for (const b of n.blockers) if (b.by && b.by >= today && /Mike/.test(b.owner)) (held[b.what] ||= { what: b.what, need: b.by, red: false, ruling: true, frees: new Set() }).frees.add(n.d.id);
+const rulings = Object.values(held).sort((a, b) => a.need.localeCompare(b.need) || b.frees.size - a.frees.size);
+const yoursNow = [...Object.values(mine).sort((a, b) => b.frees.size - a.frees.size), ...rulings, ...openAsks].slice(0, 3)
+  .map(m => ({ what: m.what, need: m.need, red: m.red, ruling: !!m.ruling, frees: m.frees.size }));
+out.yours_now = yoursNow;
+fs.writeFileSync(path.join(REPO, "docs/desk/BOARD.json"), JSON.stringify(out, null, 1) + "\n");
+const nowLine = m => `${m.what}${m.red ? ` - DUE NOW, clears ${m.frees} red` : m.ruling ? ` - one answer, holds ${m.frees}; promised ${md(m.need)}` : ` - open now, needed by ${md(m.need)}`}`;
+
 /* the grade on disk, in the ruled line format */
 const lineOf = l => `${l.names.join(", ")} - ${l.what} (${l.owner}) - needed by ${md(l.need)}`;
 const pc = x => `${Math.round(x * 100)}`.padStart(3);
@@ -212,6 +234,12 @@ Written by tools/board.mjs from docs/desk/BOARD-PLAN.json. Rules: docs/BOARD-PLA
 \`\`\`
 COLUMN                  done  on track  NOT on track   (things, red)
 ${columns.map(c => `${c.name.padEnd(22)} ${pc(c.done)}%     ${pc(c.on)}%        ${pc(c.off)}%      (${c.count}, ${c.red})`).join("\n")}
+\`\`\`
+
+## Yours, now (three at most)
+
+\`\`\`
+${yoursNow.map((m, i) => `${i + 1}. ${nowLine(m)}`).join("\n") || "Nothing."}
 \`\`\`
 
 ## Not on track
@@ -307,6 +335,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:40px;line-height
 .top{display:flex;flex-wrap:wrap;gap:18px 40px;align-items:flex-end;justify-content:space-between;margin-bottom:26px}
 .clock{display:flex;gap:26px;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .clock b{display:block;font-family:Fraunces,Georgia,serif;font-weight:500;font-size:30px;line-height:1;color:var(--ink)}.clock .red b{color:var(--off)}
+.now{margin:0 0 26px;border-left:3px solid var(--off);padding:2px 0 2px 16px}.now h2{font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+.now ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}.now li b{font-weight:600}.now li span{display:inline-block;margin-left:10px;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-2)}
 .scroll{overflow-x:auto}
 .board{display:grid;grid-template-columns:34px repeat(${columns.length},minmax(64px,1fr));column-gap:10px;min-width:${34 + columns.length * 74}px}
 .axis{grid-row:1;grid-column:1;height:340px;position:relative;font-family:"Geist Mono",ui-monospace,Menlo,monospace;font-size:10px;color:var(--ink-3)}
@@ -347,6 +377,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewp
 <div class="top"><div><p class="eyebrow">Weird.Baby · launch readiness · ${today}</p><h1>The Board</h1>
 <p class="sub">Where we are not on track. Red is the only thing to read; click it for what holds it and who.</p></div>
 <div class="clock"><div><b>${toR}</b>days to the door</div><div><b>${toM}</b>days to the Number</div><div class="red"><b>${redCount}</b>of ${deliverables.length} not on track</div></div></div>
+${yoursNow.length ? `<div class="now"><h2>Yours, now</h2><ol>${yoursNow.map(m => `<li><b>${esc(m.what)}</b><span>${m.red ? `due now · clears ${m.frees} red` : m.ruling ? `one answer · holds ${m.frees} · promised ${md(m.need)}` : `open now · needed by ${md(m.need)}`}</span></li>`).join("")}</ol></div>` : ""}
 <div class="scroll"><div class="board" role="group" aria-label="Launch readiness by column">
 <div class="axis">${[0, 25, 50, 75, 100].map(v => `<span style="bottom:${v}%">${v}</span>`).join("")}</div>
 ${columns.map((c, i) => `<div class="col" style="grid-column:${i + 2}">${seg(c)}</div><div class="name" style="grid-column:${i + 2}">${esc(c.name)}</div>`).join("")}
@@ -373,6 +404,7 @@ fs.writeFileSync(path.join(REPO, "docs/desk/BOARD.html"), html);
 
 console.log(`THE BOARD ${today}: ${deliverables.length} deliverables, ${redCount} not on track`);
 for (const c of columns) console.log(`  ${c.name.padEnd(22)} done ${pc(c.done)}%  on ${pc(c.on)}%  off ${pc(c.off)}%  (${c.count} things, ${c.red} red)`);
+yoursNow.forEach((m, i) => console.log(`  yours now ${i + 1}: ${nowLine(m)}`));
 if (orphanTasks.length) console.log(`  tasks serving no deliverable: ${orphanTasks.map(t => t.id).join(", ")}`);
 if (overWeeks.length) console.log(`  asks of Mike with no room inside their window: ${overWeeks.map(l => l.g.name).join(", ")}`);
 if (ghostTasks.length) console.log(`  named but not on the calendar: ${ghostTasks.join(", ")}`);

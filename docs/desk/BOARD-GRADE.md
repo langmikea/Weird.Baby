@@ -18,12 +18,19 @@ The machine             10%      90%          0%      (2, 0)
 The system              23%      63%         14%      (7, 1)
 ```
 
+## Yours, now (three at most)
+
+```
+1. Buffer: the accounts, the four channels, the key - DUE NOW, clears 6 red
+2. the games are not final - DUE NOW, clears 6 red
+3. the site's machine refuses Games: NOT FITTED (Sunday Q2) - one answer, holds 6; promised 09-20
+```
+
 ## Not on track
 
 **Q&A reel**
 
 ```
-The daily Q&A line - one real post through the queue: forecast 10-14, 3 days past its need (Ops) - needed by 10-11
 The daily Q&A line - waits on: Buffer connected (the key, the channels) (Mike) - needed by 10-11
 The hot Q&A lane - waits on: Buffer connected (the key, the channels) (Mike) - needed by 10-25
 ```
@@ -55,7 +62,7 @@ Snow Globe, Tic-Tac-Toe, Blackjack, Craps, Roulette, Slots - the games are not f
 **The system**
 
 ```
-Buffer connected (the key, the channels) - built: forecast 10-12, 3 days past its need (Mike) - needed by 10-09
+Buffer connected (the key, the channels) - Buffer: the accounts, the four channels, the key: was due 09-17 (Mike) - needed by 10-09
 ```
 
 ## Tasks that serve no deliverable (challenge them, or name what they serve)

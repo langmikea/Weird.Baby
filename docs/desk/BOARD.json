@@ -17,15 +17,6 @@
    "later": [],
    "lines": [
     {
-     "what": "one real post through the queue: forecast 10-14, 3 days past its need",
-     "owner": "Ops",
-     "need": "2026-10-11",
-     "rule": 1,
-     "names": [
-      "The daily Q&A line"
-     ]
-    },
-    {
      "what": "waits on: Buffer connected (the key, the channels)",
      "owner": "Mike",
      "need": "2026-10-11",
@@ -241,10 +232,10 @@
    "later": [],
    "lines": [
     {
-     "what": "built: forecast 10-12, 3 days past its need",
+     "what": "Buffer: the accounts, the four channels, the key: was due 09-17",
      "owner": "Mike",
      "need": "2026-10-09",
-     "rule": 1,
+     "rule": 2,
      "names": [
       "Buffer connected (the key, the channels)"
      ]
@@ -262,12 +253,6 @@
    "status": "off",
    "next": "2026-10-11",
    "reasons": [
-    {
-     "what": "one real post through the queue: forecast 10-14, 3 days past its need",
-     "owner": "Ops",
-     "need": "2026-10-11",
-     "rule": 1
-    },
     {
      "what": "waits on: Buffer connected (the key, the channels)",
      "owner": "Mike",
@@ -524,10 +509,10 @@
    "next": "2026-10-09",
    "reasons": [
     {
-     "what": "built: forecast 10-12, 3 days past its need",
+     "what": "Buffer: the accounts, the four channels, the key: was due 09-17",
      "owner": "Mike",
      "need": "2026-10-09",
-     "rule": 1
+     "rule": 2
     }
    ]
   },
@@ -872,6 +857,29 @@
    "status": "on",
    "next": "2026-10-11",
    "reasons": []
+  }
+ ],
+ "yours_now": [
+  {
+   "what": "Buffer: the accounts, the four channels, the key",
+   "need": "2026-10-09",
+   "red": true,
+   "ruling": false,
+   "frees": 6
+  },
+  {
+   "what": "the games are not final",
+   "need": "2026-10-21",
+   "red": true,
+   "ruling": false,
+   "frees": 6
+  },
+  {
+   "what": "the site's machine refuses Games: NOT FITTED (Sunday Q2)",
+   "need": "2026-09-20",
+   "red": false,
+   "ruling": true,
+   "frees": 6
   }
  ]
 }
