@@ -177,22 +177,33 @@
    "note": "Done 2026-09-17: fifty prints from the 09-16 set on the album (photos/manifest.json, tools/photos-build.py); the cover carries the case."
   },
   {
+   "id": "photos-white",
+   "date": "2026-09-26",
+   "owner": "ops",
+   "title": "The white treatment in the photo line",
+   "long": "tools/photos-build.py gains the sexy shoot's treatment: find the subject, clean the ground to white, square the crop, colour as shot, no border, no grain; proven on the first three frames of 09-27",
+   "do": [
+    "docs/SEXY-SHOOT-20260918.md section 5. A manifest row carries treatment: white; the handled print stays the story's."
+   ]
+  },
+  {
    "id": "photos-everyman",
    "date": "2026-09-27",
    "owner": "mike",
    "block": "photos",
-   "title": "Tray re-shoot: the Everyman",
+   "title": "The sexy shoot: the Everyman",
    "do": [
-    "The rig of 09-10: the tray taped down, top-down, tripod, main lens, even soft light, exposure locked per item, 24 MP JPEG, the rule bottom centre, a slate card in the first frame of each item. The unit, its plate, the box and everything in it; the back and the underside; a group frame.",
-    "Plus one colour hero of the unit on white, for the cover.",
-    "Drop the originals in OneDrive › WeirdBaby › photos › everyman. Tell Code: \"photos in\". The plates (B&W, the handled print) and the hero land on the album within two days."
+    "The rig of 09-18 (docs/SEXY-SHOOT-20260918.md): the white sweep, soft light from two sides, the iPhone on the tripod, main lens, 24 MP, focus and exposure locked per item, no rule, nothing else on the white; white gloves whenever a hand is in frame. A slate card with the item's name is the first frame of every item.",
+    "The first three frames (a hero, a detail, a document) are the proof. Then: the box, every side with copy, and open; the unit: three-quarter, front, back, top, underside, the plate, the front glass, the top window; the case and cable; the MGK-PHVDC and its three parts; the two ads; the notebook, cover and six spreads; the original manuals, cover and four pages; the whole kit together. Video, upright, 4K 60, HDR off: the unit turned slowly once (10 s); three close passes (5 s each); the unboxing in one take (30 to 60 s).",
+    "Drop the originals in OneDrive › WeirdBaby › photos › everyman. Tell Code: \"photos in\". The cover, the plates, the kit and the papers land on the album within two days."
    ],
    "check": {
     "type": "photos",
     "dir": "photos/everyman",
     "min": 4
    },
-   "check_step": 2
+   "check_step": 2,
+   "long": "Replaces the tray re-shoot (Mike, 09-17: nice, well-lit photos of each and every item, on white, no scale; stills, video, unboxing). Shot list: docs/SEXY-SHOOT-20260918.md section 4."
   },
   {
    "id": "ruling-2",
@@ -213,6 +224,16 @@
    "title": "Sunday grade",
    "do": [],
    "long": "Sunday grade on the desk: done over total for the week"
+  },
+  {
+   "id": "shoot-reel-story",
+   "date": "2026-09-29",
+   "owner": "ops",
+   "title": "The story for the sexy-shoot reel",
+   "long": "The reel shape the turn and the unboxing feed, written as beats before anything is cut (story first, review first); from the Everyman's first footage",
+   "do": [
+    "After \"photos in\" on the Everyman: the beats in docs/, the house rules checked, then the cut."
+   ]
   },
   {
    "id": "prologue",
@@ -265,18 +286,19 @@
    "date": "2026-10-04",
    "owner": "mike",
    "block": "photos",
-   "title": "Tray re-shoot: the Gambler",
+   "title": "The sexy shoot: the Gambler",
    "do": [
-    "The rig of 09-10: the tray taped down, top-down, tripod, main lens, even soft light, exposure locked per item, 24 MP JPEG, the rule bottom centre, a slate card in the first frame of each item. After the finishing work on the case (label, hold-downs, glue blocks, touch-up): the case closed, open and laid out; the chips, the half dollars, the cups, the two books, the PHVDC; a group frame.",
-    "Plus one colour hero of the unit on white, for the cover.",
-    "Drop the originals in OneDrive › WeirdBaby › photos › gambler. Tell Code: \"photos in\". The plates (B&W, the handled print) and the hero land on the album within two days."
+    "The rig of 09-18 (docs/SEXY-SHOOT-20260918.md): the white sweep, soft light from two sides, the iPhone on the tripod, main lens, 24 MP, focus and exposure locked per item, no rule, nothing else on the white; white gloves whenever a hand is in frame. A slate card with the item's name is the first frame of every item.",
+    "After the finishing work on the case (label, hold-downs, glue blocks, touch-up). The case closed, open, and its details; the unit, all sides; the chips together and one per casino; the two decks, one fanned; the dice and cups; the half dollars together, one coin both faces, the gold one; the six small pieces, a card each so they get names; the two books: cover, back, spine, spreads held flat with a clean weight; the whole kit together. Video: the turn, three close passes, the case opened and laid out in one take.",
+    "Drop the originals in OneDrive › WeirdBaby › photos › gambler. Tell Code: \"photos in\". The cover, the plates, the kit and the papers land on the album within two days."
    ],
    "check": {
     "type": "photos",
     "dir": "photos/gambler",
     "min": 4
    },
-   "check_step": 2
+   "check_step": 2,
+   "long": "Replaces the tray re-shoot (Mike, 09-17: nice, well-lit photos of each and every item, on white, no scale; stills, video, unboxing). Shot list: docs/SEXY-SHOOT-20260918.md section 4."
   },
   {
    "id": "grade-2026-10-04",
@@ -361,18 +383,19 @@
    "date": "2026-10-11",
    "owner": "mike",
    "block": "photos",
-   "title": "Tray re-shoot: the CEO",
+   "title": "The sexy shoot: the CEO",
    "do": [
-    "The rig of 09-10: the tray taped down, top-down, tripod, main lens, even soft light, exposure locked per item, 24 MP JPEG, the rule bottom centre, a slate card in the first frame of each item. The unit and its kit, closed, open and laid out; the back and the underside; a group frame.",
-    "Plus one colour hero of the unit on white, for the cover.",
-    "Drop the originals in OneDrive › WeirdBaby › photos › ceo. Tell Code: \"photos in\". The plates (B&W, the handled print) and the hero land on the album within two days."
+    "The rig of 09-18 (docs/SEXY-SHOOT-20260918.md): the white sweep, soft light from two sides, the iPhone on the tripod, main lens, 24 MP, focus and exposure locked per item, no rule, nothing else on the white; white gloves whenever a hand is in frame. A slate card with the item's name is the first frame of every item.",
+    "The attaché closed, open, its details; the unit, all sides; everything the attaché holds, a card each (the cards write the catalogue); the whole kit together. Video: the turn, three close passes, the attaché emptied in one take.",
+    "Drop the originals in OneDrive › WeirdBaby › photos › ceo. Tell Code: \"photos in\". The cover, the plates, the kit and the papers land on the album within two days."
    ],
    "check": {
     "type": "photos",
     "dir": "photos/ceo",
     "min": 4
    },
-   "check_step": 2
+   "check_step": 2,
+   "long": "Replaces the tray re-shoot (Mike, 09-17: nice, well-lit photos of each and every item, on white, no scale; stills, video, unboxing). Shot list: docs/SEXY-SHOOT-20260918.md section 4."
   },
   {
    "id": "ruling-4",
@@ -442,18 +465,19 @@
    "date": "2026-10-18",
    "owner": "mike",
    "block": "photos",
-   "title": "Tray re-shoot: the Informer",
+   "title": "The sexy shoot: the Informer",
    "do": [
-    "The rig of 09-10: the tray taped down, top-down, tripod, main lens, even soft light, exposure locked per item, 24 MP JPEG, the rule bottom centre, a slate card in the first frame of each item. The unit and its kit, closed, open and laid out; the back and the underside; a group frame.",
-    "Plus one colour hero of the unit on white, for the cover.",
-    "Drop the originals in OneDrive › WeirdBaby › photos › informer. Tell Code: \"photos in\". The plates (B&W, the handled print) and the hero land on the album within two days."
+    "The rig of 09-18 (docs/SEXY-SHOOT-20260918.md): the white sweep, soft light from two sides, the iPhone on the tripod, main lens, 24 MP, focus and exposure locked per item, no rule, nothing else on the white; white gloves whenever a hand is in frame. A slate card with the item's name is the first frame of every item.",
+    "The tools together and each alone, the lock picks first, a card each; the unit, all sides; whatever carries the tools, closed and open; the whole kit together. Video: the turn, three close passes, the unboxing in one take.",
+    "Drop the originals in OneDrive › WeirdBaby › photos › informer. Tell Code: \"photos in\". The cover, the plates, the kit and the papers land on the album within two days."
    ],
    "check": {
     "type": "photos",
     "dir": "photos/informer",
     "min": 4
    },
-   "check_step": 2
+   "check_step": 2,
+   "long": "Replaces the tray re-shoot (Mike, 09-17: nice, well-lit photos of each and every item, on white, no scale; stills, video, unboxing). Shot list: docs/SEXY-SHOOT-20260918.md section 4."
   },
   {
    "id": "grade-2026-10-18",
@@ -540,5 +564,5 @@
    "long": "Sunday grade on the desk: done over total for the week"
   }
  ],
- "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md."
+ "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md. 2026-09-18: the four tray re-shoot rows became the sexy shoot (docs/SEXY-SHOOT-20260918.md); two Ops rows added (photos-white 09-26, shoot-reel-story 09-29)."
 }
