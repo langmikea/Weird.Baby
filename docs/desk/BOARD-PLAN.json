@@ -54,151 +54,178 @@
    {
     "id": "story",
     "name": "story ruled",
-    "w": 10
+    "w": 10,
+    "who": "Mike"
    },
    {
     "id": "template",
     "name": "template ruled",
-    "w": 25
+    "w": 25,
+    "who": "Mike"
    },
    {
     "id": "builds",
     "name": "line builds unattended",
-    "w": 20
+    "w": 20,
+    "who": "Ops"
    },
    {
     "id": "post",
     "name": "queued through Buffer for real",
-    "w": 15
+    "w": 15,
+    "who": "Ops"
    },
    {
     "id": "content",
     "name": "launch content in hand",
-    "w": 30
+    "w": 30,
+    "who": "Mike"
    }
   ],
   "product": [
    {
     "id": "pitch",
     "name": "pitch ruled",
-    "w": 10
+    "w": 10,
+    "who": "Mike"
    },
    {
     "id": "twin",
     "name": "final on the twin",
-    "w": 40
+    "w": 40,
+    "who": "Ops"
    },
    {
     "id": "page",
     "name": "page live in development",
-    "w": 30
+    "w": 30,
+    "who": "Ops"
    },
    {
     "id": "unit",
     "name": "proven on the real unit",
-    "w": 20
+    "w": 20,
+    "who": "Ops"
    }
   ],
   "album": [
    {
     "id": "shot",
     "name": "shot",
-    "w": 30
+    "w": 30,
+    "who": "Mike"
    },
    {
     "id": "line",
     "name": "photographs through the line",
-    "w": 20
+    "w": 20,
+    "who": "Ops"
    },
    {
     "id": "filled",
     "name": "album filled",
-    "w": 35
+    "w": 35,
+    "who": "Ops"
    },
    {
     "id": "ruled",
     "name": "ruled",
-    "w": 15
+    "w": 15,
+    "who": "Mike"
    }
   ],
   "site": [
    {
     "id": "shape",
     "name": "shape ruled",
-    "w": 20
+    "w": 20,
+    "who": "Mike"
    },
    {
     "id": "built",
     "name": "built",
-    "w": 40
+    "w": 40,
+    "who": "Ops"
    },
    {
     "id": "launch",
     "name": "in the launch build",
-    "w": 20
+    "w": 20,
+    "who": "Ops"
    },
    {
     "id": "rehearsed",
     "name": "passed the rehearsal",
-    "w": 20
+    "w": 20,
+    "who": "Ops"
    }
   ],
   "machine": [
    {
     "id": "plan",
     "name": "plan and date",
-    "w": 10
+    "w": 10,
+    "who": "Ops"
    },
    {
     "id": "done",
     "name": "done",
-    "w": 60
+    "w": 60,
+    "who": "owner"
    },
    {
     "id": "verified",
     "name": "verified against the audit",
-    "w": 30
+    "w": 30,
+    "who": "Ops"
    }
   ],
   "system": [
    {
     "id": "built",
     "name": "built",
-    "w": 40
+    "w": 40,
+    "who": "owner"
    },
    {
     "id": "proven",
     "name": "proven once for real",
-    "w": 40
+    "w": 40,
+    "who": "Ops"
    },
    {
     "id": "week",
     "name": "ran unattended a week",
-    "w": 20
+    "w": 20,
+    "who": "Ops"
    }
   ],
   "words": [
    {
     "id": "delivered",
     "name": "delivered",
-    "w": 70
+    "w": 70,
+    "who": "Mike"
    },
    {
     "id": "placed",
     "name": "placed",
-    "w": 30
+    "w": 30,
+    "who": "Ops"
    }
   ],
   "event": [
    {
     "id": "planned",
     "name": "planned on paper",
-    "w": 30
+    "w": 30,
+    "who": "Ops"
    },
    {
     "id": "held",
     "name": "held",
-    "w": 70
+    "w": 70,
+    "who": "owner"
    }
   ]
  },
@@ -640,7 +667,10 @@
    "depends": [
     "buffer",
     "album-everyman"
-   ]
+   ],
+   "who": {
+    "content": "Ops"
+   }
   },
   {
    "id": "album-everyman",
@@ -814,9 +844,12 @@
   {
    "id": "song-page",
    "col": "site",
-   "name": "The song's page on /wb (where the Number lands)",
+   "name": "The song's page on /wb, and the caption line that points at it",
    "owner": "Ops",
-   "tasks": [],
+   "tasks": [
+    "song-page-shape",
+    "song-page"
+   ],
    "need_by": {
     "shape": "2026-10-04",
     "built": "2026-10-16",
@@ -833,7 +866,9 @@
    "col": "site",
    "name": "The statement of the whole, on the front",
    "owner": "Ops",
-   "tasks": [],
+   "tasks": [
+    "whole-front"
+   ],
    "need_by": {
     "built": "2026-10-09",
     "launch": "2026-10-20",
@@ -993,14 +1028,24 @@
     "grade-2026-10-11",
     "grade-2026-10-18",
     "grade-2026-10-25",
-    "grade-2026-11-01"
+    "grade-2026-11-01",
+    "board-morning"
    ],
    "need_by": {
     "built": "2026-09-25",
     "proven": "2026-09-27",
     "week": "2026-10-04"
    },
-   "gates": {}
+   "gates": {
+    "built": {
+     "done": "2026-09-18",
+     "ev": "tools/board.mjs, docs/desk/BOARD-PLAN.json; museum c0853c0"
+    },
+    "proven": {
+     "done": "2026-09-18",
+     "ev": "first grade docs/desk/BOARD-GRADE.md; served https://claude.ai/artifact/WwWHsXRaN5RCVWW7QCytw5"
+    }
+   }
   },
   {
    "id": "rehearsal",
@@ -1066,5 +1111,15 @@
    "music-page",
    "element-line"
   ]
+ },
+ "_who": "Each gate names who passes it: Mike (a ruling, a shoot, his words, his content), Ops, or the deliverable's owner. The schedule counts Mike's asks per week from this.",
+ "baseline": {
+  "version": 1,
+  "set": "2026-09-18",
+  "state": "draft until the 09-20 sitting rules the must-have list; after that a need-by date changes only by a ruling logged in docs/desk/BOARD-DECISIONS.md"
+ },
+ "capacity": {
+  "_": "What a week can hold, from Mike's own words (PLAN-20260910: one ruling sitting on Sunday, thirty minutes; one shooting sitting, two hours; photographs as they come) plus one desk block for words, content and clicks.",
+  "mike_asks_per_week": 3
  }
 }

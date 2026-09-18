@@ -11,7 +11,8 @@
      1. git status, remembering what was already dirty (left alone).
      2. the desk (tools/desk.mjs), the workbook (tools/days-xlsx.py; if
         Excel holds it the script says so and the run goes on), the days
-        (tools/days.mjs), the calendar (tools/calendar.mjs).
+        (tools/days.mjs), the calendar (tools/calendar.mjs), the board
+        (tools/board.mjs: the plan graded for today).
      3. the late tasks: docs/desk/TASKS.json against done marks, the
         workbook's x's (TASKS.marks.json) and the tree, exactly as days.mjs
         counts them.
@@ -75,6 +76,11 @@ if (excelOpen) notes.push("Workbook not rebuilt: Excel has it open. The x's that
 else if (!xlsx.ok) notes.push("The workbook step failed (tools/days-xlsx.py); see the run's log.");
 if (!days.ok) notes.push("The days page did not rebuild (tools/days.mjs failed); see the run's log.");
 if (!cal.ok) notes.push("The calendar did not rebuild (tools/calendar.mjs failed); see the run's log.");
+/* 2b. the board: the plan graded for today (docs/PLAN-20260918-LAUNCH.md) */
+const board = run("the board", "node", ["tools/board.mjs"]);
+const boardLine = (board.out.match(/(\d+) deliverables, (\d+) not on track/) || []);
+const boardRed = board.out.split("\n").filter(l => /\(\d+ things, [1-9]\d* red\)/.test(l)).map(l => l.trim().split(/\s{2,}/)[0] + " " + (l.match(/, (\d+) red/) || [])[1]);
+if (!board.ok) notes.push("The board did not grade (tools/board.mjs failed); see the run's log.");
 
 /* 3. the late tasks, counted the way days.mjs counts them */
 const T = JSON.parse(fs.readFileSync(path.join(REPO, "docs/desk/TASKS.json"), "utf8"));
@@ -144,6 +150,7 @@ const lines = [
   `# Morning desk — ${todayNY} (${DOW})`,
   ``,
   `- Mike: ${count("mike")} done · Ops: ${count("ops")} done · ${daysLeft} days to the door (${OPEN})`,
+  `- The board: ${board.ok ? `${boardLine[2]} of ${boardLine[1]} not on track${boardRed.length ? ` (${boardRed.join(", ")})` : ""}` : "not graded"}`,
   `- Late: ${late.length ? late.map(lateLine).join("; ") : "nothing late"}`,
   `- Intake, ${since}: ${newIntake.length ? newIntake.join(", ") : "nothing new"} (${laneCounts})`,
   `- Photos, ${since}: ${newPhotos.length ? newPhotos.join(", ") : "nothing new"} (${photoCounts})`,

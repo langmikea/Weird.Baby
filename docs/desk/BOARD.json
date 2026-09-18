@@ -2,7 +2,7 @@
  "as_of": "2026-09-18",
  "must_have_ruled": null,
  "deliverables": 51,
- "not_on_track": 10,
+ "not_on_track": 9,
  "columns": [
   {
    "id": "qa",
@@ -178,37 +178,19 @@
    "name": "The site",
    "outcome": "O2",
    "count": 8,
-   "red": 2,
+   "red": 1,
    "done": 0.05,
-   "on": 0.725,
-   "off": 0.225,
+   "on": 0.825,
+   "off": 0.125,
    "later": [],
    "lines": [
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops",
-     "need": "2026-10-04",
-     "rule": 5,
-     "names": [
-      "The song's page on /wb (where the Number lands)"
-     ]
-    },
     {
      "what": "waits on: The deploy before the Number",
      "owner": "Mike",
      "need": "2026-10-04",
      "rule": 4,
      "names": [
-      "The song's page on /wb (where the Number lands)"
-     ]
-    },
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops",
-     "need": "2026-10-09",
-     "rule": 5,
-     "names": [
-      "The statement of the whole, on the front"
+      "The song's page on /wb, and the caption line that points at it"
      ]
     }
    ]
@@ -233,8 +215,8 @@
    "outcome": "O5",
    "count": 7,
    "red": 1,
-   "done": 0.1142857142857143,
-   "on": 0.7428571428571429,
+   "done": 0.2285714285714286,
+   "on": 0.6285714285714286,
    "off": 0.14285714285714285,
    "later": [],
    "lines": [
@@ -422,18 +404,12 @@
   {
    "id": "song-page",
    "col": "site",
-   "name": "The song's page on /wb (where the Number lands)",
+   "name": "The song's page on /wb, and the caption line that points at it",
    "owner": "Ops",
    "pct": 0,
    "status": "off",
    "next": "2026-10-04",
    "reasons": [
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops",
-     "need": "2026-10-04",
-     "rule": 5
-    },
     {
      "what": "waits on: The deploy before the Number",
      "owner": "Mike",
@@ -448,16 +424,9 @@
    "name": "The statement of the whole, on the front",
    "owner": "Ops",
    "pct": 20,
-   "status": "off",
+   "status": "on",
    "next": "2026-10-09",
-   "reasons": [
-    {
-     "what": "no work is scheduled for it",
-     "owner": "Ops",
-     "need": "2026-10-09",
-     "rule": 5
-    }
-   ]
+   "reasons": []
   },
   {
    "id": "words-prologue",
@@ -534,9 +503,9 @@
    "col": "system",
    "name": "The board and the Sunday exception sitting",
    "owner": "Ops",
-   "pct": 0,
+   "pct": 80,
    "status": "on",
-   "next": "2026-09-25",
+   "next": "2026-10-04",
    "reasons": []
   },
   {

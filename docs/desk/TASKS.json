@@ -129,6 +129,14 @@
    "long": "Sunday question 6's rulings written into docs/MATERIAL-20260917.json and the page regenerated; the porch pieces ruled A into reels/numbers.json for the launch run"
   },
   {
+   "id": "twin-update",
+   "date": "2026-09-24",
+   "owner": "ops",
+   "title": "Twin at full software",
+   "do": [],
+   "long": "The twin on the site at the full software, verified against the audit"
+  },
+  {
    "id": "mocks",
    "date": "2026-09-25",
    "owner": "ops",
@@ -153,6 +161,26 @@
    ],
    "done": true,
    "done_on": "2026-09-16"
+  },
+  {
+   "id": "bench-plan",
+   "date": "2026-09-25",
+   "owner": "ops",
+   "title": "Bench date set",
+   "do": [],
+   "long": "The real unit's flash plan and bench date"
+  },
+  {
+   "id": "board-morning",
+   "date": "2026-09-25",
+   "owner": "ops",
+   "title": "The board in the morning run",
+   "do": [
+    "tools/morning.mjs runs tools/board.mjs after the desk; MORNING.md carries one line: how many not on track, and the columns."
+   ],
+   "long": "The board graded every morning with the desk, so status is current at any point (docs/PLAN-20260918-LAUNCH.md section 8)",
+   "done": true,
+   "done_on": "2026-09-18"
   },
   {
    "id": "burn-down",
@@ -256,12 +284,14 @@
    "long": "The four albums' What It Does, Kit and Papers tracks complete from the catalogue as ruled 09-20 (features live on the albums, ruled 09-11)"
   },
   {
-   "id": "twin-update",
+   "id": "song-page-shape",
    "date": "2026-10-02",
    "owner": "ops",
-   "title": "Twin at full software",
-   "do": [],
-   "long": "The twin on the site at the full software, verified against the audit"
+   "title": "The song's page: the shape, for the 10-04 sitting",
+   "do": [
+    "One mock of a song's page on /wb: the song, the demo, the run so far; and the caption line the Number carries."
+   ],
+   "long": "Where the Number lands (LAUNCH-20260918 section 4, /M backfill); ruled at the 10-04 sitting"
   },
   {
    "id": "landing",
@@ -272,14 +302,6 @@
     "A route that opens an album and a track by id; the reel line writes that link into CAPTIONS.txt from the calendar."
    ],
    "long": "The day's reel lands on the album of the day with the track open (ruled 09-11): the route and the link in every caption"
-  },
-  {
-   "id": "bench-plan",
-   "date": "2026-10-03",
-   "owner": "ops",
-   "title": "Bench date set",
-   "do": [],
-   "long": "The real unit's flash plan and bench date"
   },
   {
    "id": "photos-gambler",
@@ -342,6 +364,16 @@
    "long": "Fifteen Coconuts pieces cut from the 08-24 porch tape by the ruled piece list (hook, verse, bridge, the story, hook again), through the line, on the shelf; the pieces the tape lacks named for the 10-20 sitting",
    "done": true,
    "done_at": "2026-09-17"
+  },
+  {
+   "id": "whole-front",
+   "date": "2026-10-09",
+   "owner": "ops",
+   "title": "The statement of the whole on the front",
+   "do": [
+    "The ruled draft lines (LAUNCH-20260918, 1A) placed on the lobby; replaced by Mike's paragraph when it comes."
+   ],
+   "long": "The sentence above both launches, on the site's front"
   },
   {
    "id": "words-2",
@@ -461,6 +493,16 @@
    "long": "The real unit flashed and verified"
   },
   {
+   "id": "song-page",
+   "date": "2026-10-16",
+   "owner": "ops",
+   "title": "The song's page built; the caption line on the Number",
+   "do": [
+    "Build the ruled page for Coconuts on /wb; the Number's captions point at it."
+   ],
+   "long": "The Number lands the viewer on the song (outcome O1)"
+  },
+  {
    "id": "photos-informer",
    "date": "2026-10-18",
    "owner": "mike",
@@ -564,5 +606,5 @@
    "long": "Sunday grade on the desk: done over total for the week"
   }
  ],
- "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md. 2026-09-18: the four tray re-shoot rows became the sexy shoot (docs/SEXY-SHOOT-20260918.md); two Ops rows added (photos-white 09-26, shoot-reel-story 09-29)."
+ "_recut": "2026-09-17: Mike's four rulings (the Number launches 10-26 with the porch pieces; no teasers; the tray re-shoot replaces the plates album by album, Gambler's 09-16 set standing in; the bench 10-15). The practice reels, the element take, the teaser and launch shoots, the weekly question rows, the framing sitting, the distributor and Google clicks came off. docs/desk/CALENDAR-RECUT-20260917.md. 2026-09-18: the four tray re-shoot rows became the sexy shoot (docs/SEXY-SHOOT-20260918.md); two Ops rows added (photos-white 09-26, shoot-reel-story 09-29). 2026-09-18 (the board): four Ops rows added (board-morning 09-25, song-page-shape 10-02, song-page 10-16, whole-front 10-09) so every must-have deliverable has work scheduled; twin-update moved 10-02 to 09-24 and bench-plan 10-03 to 09-25 to level Ops' week of 09-28 (docs/PLAN-20260918-LAUNCH.md)."
 }

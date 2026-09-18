@@ -166,6 +166,12 @@ redder than the desk's "nothing late"; that is the point of rules 2 to 4.
 
 ## 10. Built 2026-09-18
 
+The plan of record that came out of this page: PLAN-20260918-LAUNCH.md
+(objectives, scope, milestones, capacity, the chains with no slack, risks,
+how the plan is kept). The decision log: docs/desk/BOARD-DECISIONS.md. The
+schedule by week: docs/desk/BOARD-SCHEDULE.md.
+
+
 - The plan file: `docs/desk/BOARD-PLAN.json` (5 outcomes, 11 columns, 51
   must-have deliverables; the product columns are read from the catalogue,
   so Sunday's keep / rewrite / cut rulings flow straight in).

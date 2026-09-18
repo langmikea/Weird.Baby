@@ -121,6 +121,7 @@ function grade(d, seen = new Set()) {
       }
     }
   }
+  d._open = open.map(g => ({ id: g.id, name: g.name, need: g.need, who: d.who?.[g.id] || (g.who === "owner" || !g.who ? d.owner : g.who) }));
   d._g = { pct, next, reasons, status: pct >= 1 ? "done" : reasons.length ? "off" : "on" };
   return d._g;
 }
@@ -176,6 +177,30 @@ ${columns.filter(c => c.lines.length).map(c => `**${c.name}**\n\n\`\`\`\n${c.lin
 ${orphanTasks.map(t => `- ${t.date} ${t.owner} \`${t.id}\` ${t.title}`).join("\n") || "None."}
 ${ghostTasks.length ? `\n## Tasks the plan names that the calendar does not have\n\n${ghostTasks.map(id => `- \`${id}\``).join("\n")}\n` : ""}`;
 fs.writeFileSync(path.join(REPO, "docs/desk/BOARD-GRADE.md"), gradeMd);
+
+/* the schedule: every open gate by the week it is needed, and what each week asks of Mike.
+   An ask is one sitting's worth: the same gate on the same day counts once (24 pitches = one sitting). */
+const monday = d => { const t = new Date(d + "T12:00:00Z"); t.setUTCDate(t.getUTCDate() - ((t.getUTCDay() + 6) % 7)); return t.toISOString().slice(0, 10); };
+const cap = P.capacity.mike_asks_per_week;
+const weeks = {};
+for (const d of deliverables) for (const g of d._open || []) {
+  if (!g.need) continue;
+  const w = (weeks[monday(g.need)] ||= {}), k = `${g.need}|${g.who}|${g.name}`;
+  (w[k] ||= { ...g, things: [] }).things.push(d.name);
+}
+const weekBlocks = Object.keys(weeks).sort().map(w => {
+  const lines = Object.values(weeks[w]).sort((x, y) => (x.need + x.who).localeCompare(y.need + y.who));
+  const asks = lines.filter(l => l.who === "Mike").length, ops = lines.length - asks;
+  const row = l => `${md(l.need)}  ${l.who.padEnd(4)}  ${l.name}: ${l.things.length > 3 ? `${l.things.length} things (${l.things.slice(0, 2).join(", ")}, ...)` : l.things.join(", ")}${l.need < today ? "   LATE" : ""}`;
+  return { w, asks, ops, text: `## Week of ${md(w)}: Mike ${asks} ask${asks === 1 ? "" : "s"}${asks > cap ? ", OVER" : ""} · Ops ${ops}\n\n\`\`\`\n${lines.map(row).join("\n")}\n\`\`\`` };
+});
+const overWeeks = weekBlocks.filter(b => b.asks > cap);
+fs.writeFileSync(path.join(REPO, "docs/desk/BOARD-SCHEDULE.md"), `# THE SCHEDULE — every open gate, by the week it is needed (as of ${today})
+
+Written by tools/board.mjs from docs/desk/BOARD-PLAN.json, baseline v${P.baseline.version} (${P.baseline.set}). An "ask" is one sitting's worth of Mike: the same gate on the same day counts once. A week holds about ${cap} asks of Mike (his stated rhythm: one ruling sitting, one shoot, one desk block).
+
+${weekBlocks.map(b => b.text).join("\n\n")}
+`);
 
 /* the board */
 const css = `
@@ -257,4 +282,5 @@ fs.writeFileSync(path.join(REPO, "docs/desk/BOARD.html"), html);
 console.log(`THE BOARD ${today}: ${deliverables.length} deliverables, ${redCount} not on track`);
 for (const c of columns) console.log(`  ${c.name.padEnd(22)} done ${pc(c.done)}%  on ${pc(c.on)}%  off ${pc(c.off)}%  (${c.count} things, ${c.red} red)`);
 if (orphanTasks.length) console.log(`  tasks serving no deliverable: ${orphanTasks.map(t => t.id).join(", ")}`);
+if (overWeeks.length) console.log(`  weeks that ask more of Mike than a week holds: ${overWeeks.map(b => `${md(b.w)} (${b.asks})`).join(", ")}`);
 if (ghostTasks.length) console.log(`  named but not on the calendar: ${ghostTasks.join(", ")}`);

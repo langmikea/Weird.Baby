@@ -1,6 +1,6 @@
 # THE BOARD'S GRADE — 2026-09-18
 
-38 days to the Number (10-26), 42 to the door (10-30). 51 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **10 not on track**.
+38 days to the Number (10-26), 42 to the door (10-30). 51 must-have deliverables (the must-have list is Ops' DRAFT until ruled); **9 not on track**.
 Written by tools/board.mjs from docs/desk/BOARD-PLAN.json. Rules: docs/BOARD-PLAN-20260918.md.
 
 ```
@@ -13,9 +13,9 @@ Programs                 0%     100%          0%      (13, 0)
 Games                    0%       0%        100%      (6, 6)
 Engines and settings     8%      92%          0%      (5, 0)
 Albums                   0%     100%          0%      (4, 0)
-The site                 5%      73%         23%      (8, 2)
+The site                 5%      83%         13%      (8, 1)
 The machine             10%      90%          0%      (2, 0)
-The system              11%      74%         14%      (7, 1)
+The system              23%      63%         14%      (7, 1)
 ```
 
 ## Not on track
@@ -37,9 +37,7 @@ Snow Globe, Tic-Tac-Toe, Blackjack, Craps, Roulette, Slots - the games are not f
 **The site**
 
 ```
-The song's page on /wb (where the Number lands) - no work is scheduled for it (Ops) - needed by 10-04
-The song's page on /wb (where the Number lands) - waits on: The deploy before the Number (Mike) - needed by 10-04
-The statement of the whole, on the front - no work is scheduled for it (Ops) - needed by 10-09
+The song's page on /wb, and the caption line that points at it - waits on: The deploy before the Number (Mike) - needed by 10-04
 ```
 
 **The system**

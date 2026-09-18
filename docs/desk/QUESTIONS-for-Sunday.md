@@ -90,3 +90,32 @@ time. Ops clears a question the day it is answered.
    shot, the marks and words on it. Ops recommends A, and the 10-20 sitting
    shoots the hook close for the later weeks either way.
    The pieces themselves are ruled 10-11 with song two; this is the frame only.
+
+8. **The must-have list, ruled once.** The board (https://claude.ai/artifact/WwWHsXRaN5RCVWW7QCytw5)
+   grades only what the launches must have (your 2A). Ops' draft: every
+   catalogue row with a launch-run day (13 programs, 6 games, 2 engines, 3
+   settings), the four albums, four reel types (Q&A with the hot lane, the
+   Number, the ask, the shoot reel), eight pieces of the site, the twin and
+   the real unit, seven pieces of the system. 51 things
+   (docs/PLAN-20260918-LAUNCH.md section 2). Rule it by column, not by row.
+   A. The draft stands. B. The draft, with columns or rows you name moved to
+   later. C. Smaller: name what the door truly cannot open without. Ops
+   recommends A, and B for the games if question 9 has no date for them.
+
+9. **Three dates the plan does not have.** Each is red on the board because
+   it has no date, and only you can give one. (a) The games final on the
+   twin: a date, or "later" (the door opens without games). (b) The ask
+   reel: your notes on the first cut and the real question it asks; Ops
+   proposes the 09-27 sitting. (c) A deploy before the Number: the song's
+   page has to be live before Monday 10-26 at noon; Ops proposes Sunday
+   10-25 with the album rulings.
+
+10. **The week of 10-05 asks eight things of you; a week holds about
+    three.** Fifteen Q&As (10-09), the prologue's opening (10-09), About the
+    Artist (10-10), Buffer's six clicks (10-10), song two and the fifteen
+    pieces (10-11), the CEO's shoot (10-11), the Everyman's album ruled
+    (10-11). Nothing stops any of them starting sooner. A. Pull three
+    forward: Buffer's clicks to the week of 09-21 (it unblocks four lines and
+    takes ten minutes), the prologue's opening to 10-01, and the Q&As five a
+    week (09-27, 10-04, 10-09). B. Leave the dates; the board will say when
+    it breaks. C. Your own order. Ops recommends A.

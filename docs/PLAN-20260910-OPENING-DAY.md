@@ -1,5 +1,10 @@
 # OPENING DAY — 2026-10-30. The plan from 2026-09-10.
 
+**Superseded 2026-09-18 as the plan of record by PLAN-20260918-LAUNCH.md**
+(the Determination, the teasers and the practice reels below are dead; the
+picture, the SED blocks and the rulings stand where the new plan does not
+replace them). Kept whole as history.
+
 Mike, 2026-09-10 (cleaned): "We are simply not yet capable of running at
 scale. Opening Day target: October 30, Halloween, and my cat's birthday.
 The problem: I keep overdesigning the 60-day story into a 60-day story. No
