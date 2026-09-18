@@ -71,8 +71,16 @@ Mike: **"B"**. The stranger meets the machine first. Logged in `docs/desk/BOARD-
   machine the visitor switched off stays off.
 - The boot is still one press away for anyone who chooses it (POWER).
 
-**Not fixed, and not a setting:** the plate reads "The Informer" because those
+**The plate, ruled the same evening.** It read "The Informer" because those
 words are in the photograph the twin is drawn on
-(`MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png`). There is one such photograph.
-The right unit on the glass needs either a picture per unit or a plate that
-names no unit. His to point at.
+(`MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png`). Mike: **"One plate for every
+album, names no unit."** The twin now wears
+`MGK-TWIN_MONITOR_SCREENS_NO_UNIT.png`: the same photograph with the second
+line of the nameplate taken back to bare metal, derived by the robots repo's
+`tools/twin_plate_no_unit.py` (`--check` fails if it goes stale). The master
+is untouched; the museum still shows it as the Informer. Seen on the phone
+landing: MGK-VIIIp, the rule, bare plate.
+
+And, unprompted: **"For the twin, let's use unit 0.4, Prototype."** Logged in
+`docs/desk/BOARD-DECISIONS.md`; the canon pages that hold .4 "reserved" wait
+for his wording.

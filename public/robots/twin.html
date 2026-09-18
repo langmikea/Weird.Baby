@@ -10093,7 +10093,7 @@ function Unit_LoadPhotos(){
      and then drawing a 404. */
   probe.src=base+(Portal_View()==="closeup"
     ? "MGK-TWIN_MONITOR_CLOSE_UP.png"
-    : "MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png");
+    : PORTAL_PLATE_WIDE);
  }
  function tryCrtBase(){
   if(ci>=CAND.length){ci=0;tryNewBase();return;}
@@ -10343,6 +10343,12 @@ function Framed(){
    selects both together. The default is unchanged in every way, so a twin
    opened standalone or without the parameter is the machine it has always
    been. */
+/* [2026-09-18] ONE PLATE FOR EVERY ALBUM, AND IT NAMES NO UNIT (Mike's ruling).
+   The family shot's nameplate reads "The Informer", and the twin wore it inside
+   every album. This is that photograph with the second line of the plate taken
+   back to bare metal - derived by tools/twin_plate_no_unit.py, master untouched,
+   same canvas, same apertures, so no measurement below moves. */
+const PORTAL_PLATE_WIDE="MGK-TWIN_MONITOR_SCREENS_NO_UNIT.png";
 function Portal_View(){
  try{return new URLSearchParams(location.search).get("view")||"";}catch(e){return "";}
 }
@@ -10516,7 +10522,7 @@ window.addEventListener("message",function(e){
    if(im&&Portal_Art_Base()){
     im.src=Portal_Art_Base()+(want==="closeup"
      ? "MGK-TWIN_MONITOR_CLOSE_UP.png"
-     : "MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png");
+     : PORTAL_PLATE_WIDE);
    }
    return;
   }
@@ -11169,7 +11175,7 @@ function Portal_In(base){
   /* [2026-08-27] TWO PLATES, TWO MARKER SETS, ONE MACHINE - see Portal_View. */
   const artSrc=base+(Portal_View()==="closeup"
     ? "MGK-TWIN_MONITOR_CLOSE_UP.png"
-    : "MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png");
+    : PORTAL_PLATE_WIDE);
   /* ═══ [2026-08-20] THE FRAME IS OPTIONAL; THE PICTURE IS NOT ══════════════
      BOTH LAYERS USED TO BE REQUIRED, and the refusal message named a fallback
      that no longer exists ("staying on the baked monitor_base.png"). One
