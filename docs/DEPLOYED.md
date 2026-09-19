@@ -18,18 +18,19 @@ form). Ask the wire.
 
 | field | value |
 |---|---|
-| commit | `b8f4730` |
-| full sha | `b8f47309190c55fb242d1ff95e1db73addaf9748` |
-| subject | Log the rethink: the machine arrives awake; slow-reveal rulings get one sweep |
+| commit | `7184e2c` |
+| full sha | `7184e2c2061dfa1aa5ce33f9de3490f71ce7a3f3` |
+| subject | Take stock: every drop played in the twin, sorted into eight families |
 | stage | **launch** |
-| deployed at | 2026-09-18T19:27:37.675Z |
-| worker sha256 | `cbe23765e478df84` (first 16) |
+| deployed at | 2026-09-19T00:05:03.363Z |
+| worker sha256 | `fcdacfce7288088e` (first 16) |
 | tree clean | yes |
 
 ## History
 
 | commit | stage | deployed at | worker sha256 | subject |
 |---|---|---|---|---|
+| `7184e2c` | launch | 2026-09-19T00:05:03.363Z | `fcdacfce7288088e` | Take stock: every drop played in the twin, sorted into eight families |
 | `b8f4730` | launch | 2026-09-18T19:27:37.675Z | `cbe23765e478df84` | Log the rethink: the machine arrives awake; slow-reveal rulings get one sweep |
 | `318cd81` | launch | 2026-09-07T00:11:41.984Z | `0eaef3d96ffb9ba3` | Record 001 and 002: Mike's rewrite lands |
 | `8f5888d` (dirty) | launch | 2026-09-01T15:50:41.318Z | `cd5958c18986ddd4` | fix(lobby): the note follows the live day — Mike supersedes §14.3 option 3 |

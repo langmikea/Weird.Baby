@@ -258,6 +258,16 @@
    "done_on": "2026-09-18"
   },
   {
+   "id": "lobby-line-out",
+   "date": "2026-09-24",
+   "owner": "ops",
+   "title": "Take \"We open 10/31\" out of the lobby, the next time the site is touched",
+   "do": [
+    "Mike, 09-18, after the deploy: \"Next time we touch the site kill this: We open 10/31. Keeping it shortens the guestbook and adds no value; empty theatre.\" The line is in src/routes/WbHome.jsx (the lobby line, robotsOpen ? \"We are open!\" : We open DOOR_MD). Take the line and its countdown out of the lobby so the guest book has its room back; the door's clock (DOOR_DAY, wing-open.js) is not touched. Ask him once, when doing it, whether \"We are open!\" still shows from 10-31. Provenance register, every gate, build:launch; it rides with the next deploy, no deploy of its own."
+   ],
+   "long": "A ruling that amends the door deliverable's lobby announcement (BOARD-DECISIONS.md, 09-18)"
+  },
+  {
    "id": "twin-update",
    "date": "2026-09-24",
    "owner": "ops",

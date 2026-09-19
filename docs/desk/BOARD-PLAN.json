@@ -913,7 +913,8 @@
    "owner": "Ops",
    "tasks": [
     "door-ruling-e",
-    "open"
+    "open",
+    "lobby-line-out"
    ],
    "gates": {
     "look": {
