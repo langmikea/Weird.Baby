@@ -283,7 +283,19 @@
    "do": [
     "Name the limits (no bed at all; the machine’s own sounds as rhythm; a period library cue; a modern beat), two rough examples of each under the same ten seconds of reel, on one page with play buttons. He points."
    ],
-   "long": "Mike, 09-18: I have never heard any of this music; present a palette for me to choose and direct from"
+   "long": "Mike, 09-18: I have never heard any of this music; present a palette for me to choose and direct from Done 09-18: docs/MUSIC-PALETTE-20260918.md; the page he plays is https://claude.ai/artifact/NZSDXTrfkmnNNWEyduyCj7 (tools/music-palette.py). Eight samples under the day-one Q&A stand-in; waits on his pointing.",
+   "done": true,
+   "done_on": "2026-09-18"
+  },
+  {
+   "id": "beat-build",
+   "date": "2026-10-01",
+   "owner": "ops",
+   "title": "The beat, built in the direction he pointed at",
+   "do": [
+    "From his pointing at the music palette (a code such as 2B): one real bed or pattern built into the Q&A line (tools/reels-qa.py), licence and credit line settled as an Ops call, the day-one reel re-cut with it, one sample back to him. If he points at 1A, close the deliverable with no build. If he points between two, a second, narrower palette first."
+   ],
+   "long": "Two days of Ops from the pointing; dated 10-01 so the fifteen Q&As (by 10-09) are cut once, with the sound already ruled (docs/MUSIC-PALETTE-20260918.md)"
   },
   {
    "id": "mocks",

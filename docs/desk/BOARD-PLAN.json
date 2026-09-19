@@ -603,7 +603,8 @@
    "owner": "Ops",
    "ladder": "choice",
    "tasks": [
-    "music-palette"
+    "music-palette",
+    "beat-build"
    ],
    "gates": {}
   },
