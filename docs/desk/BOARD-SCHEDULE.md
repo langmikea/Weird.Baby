@@ -1,4 +1,4 @@
-# THE SCHEDULE — derived, not typed (as of 2026-09-18)
+# THE SCHEDULE — derived, not typed (as of 2026-09-19)
 
 Written by tools/board.mjs from docs/desk/BOARD-PLAN.json, baseline v5. Every date here falls out of gate durations, predecessors, the fixed events and the launch walls: a forward pass gives "can start" and the forecast, a backward pass gives "needed by", and float is the gap. Change a duration or a predecessor in the plan and the dates move; nobody edits a date.
 
@@ -7,32 +7,32 @@ Written by tools/board.mjs from docs/desk/BOARD-PLAN.json, baseline v5. Every da
 Nothing is wanted from him before "can start" (the pilot on stand-ins comes first) and nothing is late until "needed by". An ask is one sitting's worth.
 
 ```
-can start 09-18  needed by 10-11   22d float   his real material in: The daily Q&A line
-can start 09-18  needed by 10-11   14d float   pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out
+can start 09-19  needed by 10-11   21d float   his real material in: The daily Q&A line
+can start 09-19  needed by 10-11   14d float   pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out
 can start 09-27  needed by 10-11   14d float   the shape pointed at, from a range: The feature-page template, The prologue, The reel's landing (deep link to the day's room)
-can start 09-18  needed by 10-15    0d float   done: The real unit flashed and verified
-can start 09-18  needed by 10-18   21d float   pointed at, from a palette: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands
-can start 09-18  needed by 10-18   29d float   done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes
-can start 09-18  needed by 10-18   21d float   the shape pointed at, from a range: The song's page on /wb, and the caption line that points at it
+can start 09-19  needed by 10-15    0d float   done: The real unit flashed and verified
+can start 09-19  needed by 10-18   21d float   pointed at, from a palette: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands
+can start 09-19  needed by 10-18   28d float   done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes
+can start 09-19  needed by 10-18   21d float   the shape pointed at, from a range: The song's page on /wb, and the caption line that points at it
 can start 09-20  needed by 10-18   28d float   pitch ruled: 8 things (Starting, The monitor at rest, ...)
-can start 09-23  needed by 10-21   27d float   shot: The Everyman
-can start 09-18  needed by 10-23   34d float   delivered: Words: the prologue's opening
-can start 09-18  needed by 10-24   35d float   delivered: Words: About the Artist
-can start 09-18  needed by 10-25   28d float   the look pointed at, from a range: The ask reel on MGK-NIAC
-can start 09-18  needed by 10-25   36d float   his real material in: The ask reel on MGK-NIAC
-can start 09-19  needed by 10-25   22d float   launch volume in hand: The daily Q&A line
+can start 09-24  needed by 10-21   26d float   shot: The Everyman
+can start 09-19  needed by 10-23   33d float   delivered: Words: the prologue's opening
+can start 09-19  needed by 10-24   34d float   delivered: Words: About the Artist
+can start 09-19  needed by 10-25   28d float   the look pointed at, from a range: The ask reel on MGK-NIAC
+can start 09-19  needed by 10-25   35d float   his real material in: The ask reel on MGK-NIAC
+can start 09-20  needed by 10-25   21d float   launch volume in hand: The daily Q&A line
 can start 09-20  needed by 10-25   35d float   pitch ruled: 7 things (Messages, the inbox, ELIZ, ...)
-can start 09-28  needed by 10-25   21d float   ruled: The Everyman
+can start 09-29  needed by 10-25   21d float   ruled: The Everyman
 can start 10-22  needed by 10-30    0d float   held: The deploy for the door: Friday 10-30, before the stroke of midnight (it carries the song's page too)
 can start 09-20  needed by 11-01   42d float   pitch ruled: 6 things (Brain Training, Inkblots, ...)
 can start 10-04  needed by 11-04   30d float   shot: The Gambler
 can start 10-20  needed by 11-06   14d float   launch volume in hand: Coconuts, the first run
-can start 09-18  needed by 11-08   42d float   the look pointed at, from a range: The sexy-shoot reel
+can start 09-19  needed by 11-08   42d float   the look pointed at, from a range: The sexy-shoot reel
 can start 09-20  needed by 11-08   49d float   pitch ruled: The Career Chooser, Radio, Phone Tap
 can start 10-09  needed by 11-08   28d float   ruled: The Gambler
-can start 09-23  needed by 11-11   48d float   shot: The CEO
-can start 09-23  needed by 11-11   48d float   shot: The Informer
-can start 09-28  needed by 11-15   42d float   ruled: The CEO, The Informer
+can start 09-24  needed by 11-11   47d float   shot: The CEO
+can start 09-24  needed by 11-11   47d float   shot: The Informer
+can start 09-29  needed by 11-15   42d float   ruled: The CEO, The Informer
 can start 09-30  needed by 11-15   45d float   his real material in: The sexy-shoot reel
 ```
 
@@ -95,56 +95,56 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 ### Week of 10-05: Mike 3 asks · Ops 1
 
 ```
-10-11  Mike  his real material in: The daily Q&A line   [can start 09-18, float 22d]
+10-11  Mike  his real material in: The daily Q&A line   [can start 09-19, float 21d]
 10-11  Mike  the shape pointed at, from a range: The feature-page template, The prologue, The reel's landing (deep link to the day's room)   [can start 09-27, float 14d]
-10-11  Mike  pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out   [can start 09-18, float 14d]
-10-11  Ops   one real post through the queue: The daily Q&A line   [can start 09-18, float 22d]
+10-11  Mike  pointed at, from a palette: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out   [can start 09-19, float 14d]
+10-11  Ops   one real post through the queue: The daily Q&A line   [can start 09-19, float 21d]
 ```
 
 ### Week of 10-12: Mike 5 asks · Ops 3
 
 ```
-10-15  Mike  done: The real unit flashed and verified   [can start 09-18, float 0d]
-10-17  Ops   built: The photo line's white treatment, proven on frames in hand   [can start 09-18, float 27d]
-10-18  Mike  pointed at, from a palette: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands   [can start 09-18, float 21d]
-10-18  Mike  done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes   [can start 09-18, float 29d]
-10-18  Mike  the shape pointed at, from a range: The song's page on /wb, and the caption line that points at it   [can start 09-18, float 21d]
+10-15  Mike  done: The real unit flashed and verified   [can start 09-19, float 0d]
+10-17  Ops   built: The photo line's white treatment, proven on frames in hand   [can start 09-19, float 26d]
+10-18  Mike  pointed at, from a palette: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands   [can start 09-19, float 21d]
+10-18  Mike  done: fifteen minutes: The shoot's pilot: one item through the grammar and the element takes   [can start 09-19, float 28d]
+10-18  Mike  the shape pointed at, from a range: The song's page on /wb, and the caption line that points at it   [can start 09-19, float 21d]
 10-18  Mike  pitch ruled: 8 things (Starting, The monitor at rest, ...)   [can start 09-20, float 28d]
-10-18  Ops   proven once for real: The photo line's white treatment, proven on frames in hand   [can start 09-20, float 27d]
+10-18  Ops   proven once for real: The photo line's white treatment, proven on frames in hand   [can start 09-21, float 26d]
 10-18  Ops   built in: The house conventions of the glass: how a score shows, how text shows, how a thing ends, how you get in and out   [can start 09-27, float 19d]
 ```
 
 ### Week of 10-19: Mike 8 asks · Ops 21
 
 ```
-10-20  Ops   through the line: The shoot's pilot: one item through the grammar and the element takes   [can start 09-21, float 27d]
+10-20  Ops   through the line: The shoot's pilot: one item through the grammar and the element takes   [can start 09-22, float 26d]
 10-20  Ops   one built on stand-ins: 4 things (The feature-page template, The prologue, ...)   [can start 09-27, float 20d]
-10-21  Mike  shot: The Everyman   [can start 09-23, float 27d]
-10-22  Ops   done: The twin at full software, served, No dead ends: the site's machine shows only what has been released; the menu grows with each day's drop   [can start 09-18, float 32d]
-10-22  Ops   planned on paper: The opening-day rehearsal (no stand-in survives it)   [can start 09-18, float 33d]
-10-22  Ops   held: The opening-day rehearsal (no stand-in survives it)   [can start 09-19, float 0d]
-10-23  Mike  delivered: Words: the prologue's opening   [can start 09-18, float 34d]
-10-23  Ops   photographs through the line: The Everyman   [can start 09-24, float 27d]
-10-23  Ops   built for real: The album template, proven on stand-ins   [can start 09-18, float 31d]
+10-21  Mike  shot: The Everyman   [can start 09-24, float 26d]
+10-22  Ops   done: The twin at full software, served, No dead ends: the site's machine shows only what has been released; the menu grows with each day's drop   [can start 09-19, float 31d]
+10-22  Ops   planned on paper: The opening-day rehearsal (no stand-in survives it)   [can start 09-19, float 32d]
+10-22  Ops   held: The opening-day rehearsal (no stand-in survives it)   [can start 09-20, float 0d]
+10-23  Mike  delivered: Words: the prologue's opening   [can start 09-19, float 33d]
+10-23  Ops   photographs through the line: The Everyman   [can start 09-25, float 26d]
+10-23  Ops   built for real: The album template, proven on stand-ins   [can start 09-19, float 30d]
 10-23  Ops   final on the twin: Answers, the door   [can start 09-29, float 19d]
-10-24  Mike  delivered: Words: About the Artist   [can start 09-18, float 35d]
+10-24  Mike  delivered: Words: About the Artist   [can start 09-19, float 34d]
 10-24  Ops   built for real: 5 things (The feature-page template, The prologue, ...)   [can start 09-30, float 20d]
-10-24  Ops   placed: Words: the prologue's opening   [can start 09-19, float 34d]
+10-24  Ops   placed: Words: the prologue's opening   [can start 09-20, float 33d]
 10-24  Ops   final on the twin: Starting   [can start 09-29, float 20d]
-10-25  Mike  launch volume in hand: The daily Q&A line   [can start 09-19, float 22d]
-10-25  Mike  the look pointed at, from a range: The ask reel on MGK-NIAC   [can start 09-18, float 28d]
-10-25  Mike  his real material in: The ask reel on MGK-NIAC   [can start 09-18, float 36d]
-10-25  Mike  ruled: The Everyman   [can start 09-28, float 21d]
+10-25  Mike  launch volume in hand: The daily Q&A line   [can start 09-20, float 21d]
+10-25  Mike  the look pointed at, from a range: The ask reel on MGK-NIAC   [can start 09-19, float 28d]
+10-25  Mike  his real material in: The ask reel on MGK-NIAC   [can start 09-19, float 35d]
+10-25  Mike  ruled: The Everyman   [can start 09-29, float 21d]
 10-25  Mike  pitch ruled: 7 things (Messages, the inbox, ELIZ, ...)   [can start 09-20, float 35d]
-10-25  Ops   one real post through the queue: The hot Q&A lane, The ask reel on MGK-NIAC   [can start 09-18, float 36d]
+10-25  Ops   one real post through the queue: The hot Q&A lane, The ask reel on MGK-NIAC   [can start 09-19, float 35d]
 10-25  Ops   built in: The beat under the reels: a palette he can play, then one, The launch run of show: what posts each day from the door (10-30) through the Number's first run, and where each lands   [can start 09-27, float 26d]
-10-25  Ops   the real photographs in the album: The Everyman   [can start 09-26, float 27d]
-10-25  Ops   in the launch build: 6 things (The album template, proven on stand-ins, The feature-page template, ...)   [can start 09-22, float 32d]
+10-25  Ops   the real photographs in the album: The Everyman   [can start 09-27, float 26d]
+10-25  Ops   in the launch build: 6 things (The album template, proven on stand-ins, The feature-page template, ...)   [can start 09-23, float 31d]
 10-25  Ops   passed the rehearsal: 6 things (The album template, proven on stand-ins, The feature-page template, ...)   [can start 10-22, float 3d]
 10-25  Ops   one built on stand-ins: The song's page on /wb, and the caption line that points at it   [can start 09-27, float 25d]
-10-25  Ops   placed: Words: About the Artist   [can start 09-19, float 35d]
-10-25  Ops   verified against the audit: The twin at full software, served, The real unit flashed and verified, No dead ends: the site's machine shows only what has been released; the menu grows with each day's drop   [can start 09-20, float 32d]
-10-25  Ops   ran unattended a week: The morning run, The board and the Sunday exception sitting   [can start 09-18, float 30d]
+10-25  Ops   placed: Words: About the Artist   [can start 09-20, float 34d]
+10-25  Ops   verified against the audit: The twin at full software, served, The real unit flashed and verified, No dead ends: the site's machine shows only what has been released; the menu grows with each day's drop   [can start 09-21, float 31d]
+10-25  Ops   ran unattended a week: The morning run, The board and the Sunday exception sitting   [can start 09-19, float 29d]
 10-25  Ops   final on the twin: The monitor at rest   [can start 09-29, float 21d]
 ```
 
@@ -165,7 +165,7 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 10-30  Mike  held: The deploy for the door: Friday 10-30, before the stroke of midnight (it carries the song's page too)   [can start 10-22, float 0d]
 10-30  Ops   in the launch build: The song's page on /wb, and the caption line that points at it   [can start 10-04, float 25d]
 10-30  Ops   passed the rehearsal: The song's page on /wb, and the caption line that points at it   [can start 10-22, float 8d]
-10-30  Ops   planned on paper: The deploy for the door: Friday 10-30, before the stroke of midnight (it carries the song's page too)   [can start 09-18, float 41d]
+10-30  Ops   planned on paper: The deploy for the door: Friday 10-30, before the stroke of midnight (it carries the song's page too)   [can start 09-19, float 40d]
 10-30  Ops   final on the twin: Messages, the inbox   [can start 09-29, float 26d]
 10-30  Ops   its page live in development: User, your name   [can start 09-30, float 27d]
 10-30  Ops   proven on the real unit: User, your name   [can start 10-15, float 11d]
@@ -181,11 +181,11 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 ### Week of 11-02: Mike 5 asks · Ops 24
 
 ```
-11-02  Ops   one through the whole pipe on stand-ins: Coconuts, the first run   [can start 09-18, float 44d]
+11-02  Ops   one through the whole pipe on stand-ins: Coconuts, the first run   [can start 09-19, float 43d]
 11-02  Ops   its page live in development: Probabilities   [can start 09-30, float 30d]
 11-02  Ops   proven on the real unit: Probabilities   [can start 10-15, float 14d]
 11-02  Ops   final on the twin: Tic-Tac-Toe   [can start 09-29, float 29d]
-11-03  Ops   one real post through the queue: Coconuts, the first run   [can start 09-19, float 44d]
+11-03  Ops   one real post through the queue: Coconuts, the first run   [can start 09-20, float 43d]
 11-03  Ops   its page live in development: Messages, the inbox   [can start 09-30, float 31d]
 11-03  Ops   proven on the real unit: Messages, the inbox   [can start 10-15, float 15d]
 11-03  Ops   final on the twin: Snow Globe   [can start 09-29, float 30d]
@@ -204,7 +204,7 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 11-07  Ops   final on the twin: Inkblots   [can start 09-29, float 34d]
 11-07  Ops   its page live in development: Snow Globe   [can start 09-30, float 35d]
 11-07  Ops   proven on the real unit: Snow Globe   [can start 10-15, float 19d]
-11-08  Mike  the look pointed at, from a range: The sexy-shoot reel   [can start 09-18, float 42d]
+11-08  Mike  the look pointed at, from a range: The sexy-shoot reel   [can start 09-19, float 42d]
 11-08  Mike  ruled: The Gambler   [can start 10-09, float 28d]
 11-08  Mike  pitch ruled: The Career Chooser, Radio, Phone Tap   [can start 09-20, float 49d]
 11-08  Ops   the real photographs in the album: The Gambler   [can start 10-07, float 30d]
@@ -221,12 +221,12 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 11-10  Ops   its page live in development: Brain Training   [can start 09-30, float 38d]
 11-10  Ops   proven on the real unit: Brain Training   [can start 10-15, float 22d]
 11-10  Ops   final on the twin: Roulette   [can start 09-29, float 37d]
-11-11  Mike  shot: The CEO, The Informer   [can start 09-23, float 48d]
+11-11  Mike  shot: The CEO, The Informer   [can start 09-24, float 47d]
 11-11  Ops   its page live in development: Inkblots   [can start 09-30, float 39d]
 11-11  Ops   proven on the real unit: Inkblots   [can start 10-15, float 23d]
 11-11  Ops   final on the twin: Craps   [can start 09-29, float 38d]
 11-12  Ops   final on the twin: Slots   [can start 09-29, float 39d]
-11-13  Ops   photographs through the line: The CEO, The Informer   [can start 09-24, float 48d]
+11-13  Ops   photographs through the line: The CEO, The Informer   [can start 09-25, float 47d]
 11-13  Ops   its page live in development: Blackjack   [can start 09-30, float 41d]
 11-13  Ops   proven on the real unit: Blackjack   [can start 10-15, float 25d]
 11-14  Ops   one through the whole pipe on stand-ins: The sexy-shoot reel   [can start 09-27, float 45d]
@@ -234,9 +234,9 @@ forecast 10-30  needed 10-30    0d  Mike  held: The deploy for the door: Friday 
 11-14  Ops   its page live in development: Roulette   [can start 09-30, float 42d]
 11-14  Ops   proven on the real unit: Roulette   [can start 10-15, float 26d]
 11-15  Mike  his real material in: The sexy-shoot reel   [can start 09-30, float 45d]
-11-15  Mike  ruled: The CEO, The Informer   [can start 09-28, float 42d]
+11-15  Mike  ruled: The CEO, The Informer   [can start 09-29, float 42d]
 11-15  Ops   one real post through the queue: The sexy-shoot reel   [can start 09-30, float 45d]
-11-15  Ops   the real photographs in the album: The CEO, The Informer   [can start 09-26, float 48d]
+11-15  Ops   the real photographs in the album: The CEO, The Informer   [can start 09-27, float 47d]
 11-15  Ops   its page live in development: Craps   [can start 09-30, float 43d]
 11-15  Ops   proven on the real unit: Craps   [can start 10-15, float 27d]
 ```
